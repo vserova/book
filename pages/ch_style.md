@@ -115,7 +115,7 @@ Choice of Language
 
 -   **Java** -- for Eclipse programming and in-house QA and testing tools.
 
-See the "[Recommended programming and scripting languages](http://intranet.ncbi.nlm.nih.gov:6224/wiki-private/CxxToolkit/index.cgi/Recommended_programming_and_scripting_languages)" Wiki page for more information and updates to this policy. Send proposals for corrections, additions and extensions of the policy on language choice to the languages mailing list, <span class="oem_mark">languages@ncbi.nlm.nih.gov</span>.
+See the "[Recommended programming and scripting languages](http://intranet.ncbi.nlm.nih.gov:6224/wiki-private/CxxToolkit/index.cgi/Recommended_programming_and_scripting_languages)" Wiki page for more information and updates to this policy. Send proposals for corrections, additions and extensions of the policy on language choice to the languages mailing list, <span class="oem_span">shun.hnlzGujip5ust5upo5nv/</span>.
 
 Source Code Conventions
 -----------------------
@@ -194,7 +194,7 @@ All NCBI-authored C/C++ source files **must** begin with a comment containing NC
      * ===========================================================================
      */
 
-If you have questions, please email to <span class="oem_mark">cpp-core@ncbi.nlm.nih.gov</span>.
+If you have questions, please email to <span class="oem_span">jww4jvylGujip5ust5upo5nv/</span>.
 
 ### Naming Conventions
 
@@ -204,64 +204,64 @@ SYNOPSIS
 EXAMPLE
 **Type Names**
 ***C****ClassTypeName*
-<span class="nctnt ncbi-code">class CMyClass { ..... };</span>
+`class CMyClass { ..... };`
 ***I****InterfaceName*
-<span class="nctnt ncbi-code">class IMyInterface { ..... };</span>
+`class IMyInterface { ..... };`
 ***S****StructTypeName*
-<span class="nctnt ncbi-code">struct SMyStruct { ..... };</span>
+`struct SMyStruct { ..... };`
 ***U****UnionTypeName*
-<span class="nctnt ncbi-code">union UMyUnion { ..... };</span>
+`union UMyUnion { ..... };`
 ***E****EnumTypeName*
-<span class="nctnt ncbi-code">enum EMyEnum { ..... };</span>
+`enum EMyEnum { ..... };`
 ***F****FunctionTypeName*
-<span class="nctnt ncbi-code">typedef int (\*FMyFunc)(void);</span>
+`typedef int (*FMyFunc)(void);`
 ***P****PredicateName*
-<span class="nctnt ncbi-code">struct PMyPred { bool operator() (.... , ....); };</span>
+`struct PMyPred { bool operator() (.... , ....); };`
 ***T****AuxiliaryTypedef* [(\*)](#*)
-<span class="nctnt ncbi-code">typedef map\<int,string\> TMyMapIntStr;</span>
+`typedef map<int,string> TMyMapIntStr;`
 ***T****Iterator****\_I***
-<span class="nctnt ncbi-code">typedef list\<int\>::iterator TMyList\_I;</span>
+`typedef list<int>::iterator TMyList_I;`
 ***T****ConstIterator****\_CI***
-<span class="nctnt ncbi-code">typedef set\<string\>::const\_iterator TMySet\_CI;</span>
+`typedef set<string>::const_iterator TMySet_CI;`
 ***N****Namespace* [(see also)](#see-also)
-<span class="nctnt ncbi-code">namespace NMyNamespace { ..... }</span>
+`namespace NMyNamespace { ..... }`
 **Preprocessor Define/Macro**
 *MACRO\_NAME*
-<span class="nctnt ncbi-code">\#define MY\_DEFINE 12345</span>
+`#define MY_DEFINE 12345`
 *macro\_arg\_name*
-<span class="nctnt ncbi-code">\#define MY\_MACRO(x, y) (((x) + 1) \< (y))</span>
+`#define MY_MACRO(x, y) (((x) + 1) < (y))`
 **Function Arguments and Local Variables**
 *func\_local\_var\_name*
-<span class="nctnt ncbi-code">void MyFunc(int foo, const CMyClass& a\_class)</span><br/><span class="nctnt ncbi-code">{ </span><br/><span class="nctnt ncbi-code">    size\_t foo\_size;</span><br/><span class="nctnt ncbi-code">    int bar;</span>
+`void MyFunc(int foo, const CMyClass& a_class)`<br/>`{ `<br/>`    size_t  foo_size;`<br/>`    int   bar;`
 **Constants**
 ***k****ConstantName*
-<span class="nctnt ncbi-code">const int kMyConst = 123;</span>
+`const int kMyConst = 123;`
 ***e****EnumValueName*
-<span class="nctnt ncbi-code">enum EMyEnum { </span><br/><span class="nctnt ncbi-code">    eMyEnum\_1 = 11, </span><br/><span class="nctnt ncbi-code">    eMyEnum\_2 = 22, </span><br/><span class="nctnt ncbi-code">    eMyEnum\_3 = 33 </span><br/><span class="nctnt ncbi-code">};</span>
+`enum EMyEnum { `<br/>`    eMyEnum_1 = 11, `<br/>`    eMyEnum_2 = 22, `<br/>`    eMyEnum_3 = 33 `<br/>`};`
 ***f****FlagValueName*
-<span class="nctnt ncbi-code">enum EMyFlags {</span><br/><span class="nctnt ncbi-code">    fMyFlag\_1 = (1\<\<0), ///\< = 0x1 (describe)</span><br/><span class="nctnt ncbi-code">    fMyFlag\_2 = (1\<\<1), ///\< = 0x2 (describe)</span><br/><span class="nctnt ncbi-code">    fMyFlag\_3 = (1\<\<2) ///\< = 0x4 (describe)</span><br/><span class="nctnt ncbi-code">};</span> <br/><span class="nctnt ncbi-code">typedef int TMyFlags; ///\< holds bitwise OR of "EMyFlags"</span>
+`enum EMyFlags {`<br/>`    fMyFlag_1 = (1<<0),  ///< = 0x1 (describe)`<br/>`    fMyFlag_2 = (1<<1),  ///< = 0x2 (describe)`<br/>`    fMyFlag_3 = (1<<2)   ///< = 0x4 (describe)`<br/>`};` <br/>`typedef int TMyFlags; ///< holds bitwise OR of "EMyFlags"`
 **Class and Structure Data Members (Fields)**
 ***m\_****ClassMemberName*
-<span class="nctnt ncbi-code">class C { short int m\_MyClassData; };</span>
+`class C { short int m_MyClassData; };`
 *struct\_field\_name*
-<span class="nctnt ncbi-code">struct S { int my\_struct\_field; };</span>
+`struct S { int my_struct_field; };`
 ***sm\_****ClassStaticMemberName*
-<span class="nctnt ncbi-code">class C { static double sm\_MyClassStaticData; };</span>
+`class C { static double sm_MyClassStaticData; };`
 **Class Member Functions (Methods)**
 *ClassMethod*
-<span class="nctnt ncbi-code">bool MyClassMethod(void);</span>
+`bool MyClassMethod(void);`
 ***x\_****ClassPrivateMethod*
-<span class="nctnt ncbi-code">int x\_MyClassPrivateMethod(char c);</span>
+`int x_MyClassPrivateMethod(char c);`
 **Module Static Functions and Data**
 ***s\_****StaticFunc*
-<span class="nctnt ncbi-code">static char s\_MyStaticFunc(void);</span>
+`static char s_MyStaticFunc(void);`
 ***s\_****StaticVar*
-<span class="nctnt ncbi-code">static int s\_MyStaticVar;</span>
+`static int s_MyStaticVar;`
 **Global (*"extern"*) Functions and Data**
 ***g\_****GlobalFunc*
-<span class="nctnt ncbi-code">double g\_MyGlobalFunc(void);</span>
+`double g_MyGlobalFunc(void);`
 ***g\_****GlobalVar*
-<span class="nctnt ncbi-code">short g\_MyGlobalVar;</span>
+`short g_MyGlobalVar;`
 
 (\*) The auxiliary typedefs (like ***T****AuxiliaryTypedef*) are usually used for an ad-hoc type mappings (especially when using templates) and not when a real type definition takes place.
 
@@ -273,21 +273,21 @@ In addition to the above naming conventions that highlight the nature and/or the
 
 -   indicate the package that the entity belongs to
 
-For example, if you are creating a new class called "`Bar`" in package "`Foo`" then it is good practice to name it "<span class="nctnt ncbi-class">CFooBar</span>" rather than just "<span class="nctnt ncbi-class">CBar</span>". Similarly, you should name new constants like "<span class="nctnt ncbi-var">kFooSomeconst</span>", new types like "<span class="nctnt ncbi-type">TFooSometype</span>", etc.
+For example, if you are creating a new class called "`Bar`" in package "`Foo`" then it is good practice to name it "`CFooBar`" rather than just "`CBar`". Similarly, you should name new constants like "`kFooSomeconst`", new types like "`TFooSometype`", etc.
 
 ### Use of the NCBI Name Scope
 
-<span class="nctnt ncbi-code">\<ncbistl.hpp\></span>
+`<ncbistl.hpp>`
 
-All NCBI-made “core” API code must be put into the <span class="nctnt ncbi-code">"ncbi::"</span> namespace. For this purpose, there are two preprocessor macros, <span class="nctnt ncbi-macro">BEGIN\_NCBI\_SCOPE</span> and <span class="nctnt ncbi-macro">END\_NCBI\_SCOPE</span>, that must enclose **all** NCBI C++ API code -- both declarations and definitions (see [examples](ch_proj.html#ch_proj.new_modules)). Inside these "brackets", all <span class="nctnt ncbi-code">"std::"</span> and <span class="nctnt ncbi-code">"ncbi::"</span> scope prefixes can (and must!) be omitted.
+All NCBI-made “core” API code must be put into the `"ncbi::"` namespace. For this purpose, there are two preprocessor macros, `BEGIN_NCBI_SCOPE` and `END_NCBI_SCOPE`, that must enclose **all** NCBI C++ API code -- both declarations and definitions (see [examples](ch_proj.html#ch_proj.new_modules)). Inside these "brackets", all `"std::"` and `"ncbi::"` scope prefixes can (and must!) be omitted.
 
-For code that does not define a new API but merely **uses** the NCBI C++ API, there is a macro <span class="nctnt ncbi-macro">USING\_NCBI\_SCOPE;</span> (semicolon-terminated) that brings all types and prototypes from the <span class="nctnt ncbi-code">"std::"</span> and <span class="nctnt ncbi-code">"ncbi::"</span> namespaces into the current scope, eliminating the need for the <span class="nctnt ncbi-code">"std::"</span> and <span class="nctnt ncbi-code">"ncbi::"</span> prefixes.
+For code that does not define a new API but merely **uses** the NCBI C++ API, there is a macro `USING_NCBI_SCOPE;` (semicolon-terminated) that brings all types and prototypes from the `"std::"` and `"ncbi::"` namespaces into the current scope, eliminating the need for the `"std::"` and `"ncbi::"` prefixes.
 
-Use macro <span class="nctnt ncbi-macro">NCBI\_USING\_NAMESPACE\_STD;</span> (semicolon-terminated) if you want to bring all types and prototypes from the <span class="nctnt ncbi-code">"std::"</span> namespace into the current scope, without bringing in anything from the <span class="nctnt ncbi-code">"ncbi::"</span> namespace.
+Use macro `NCBI_USING_NAMESPACE_STD;` (semicolon-terminated) if you want to bring all types and prototypes from the `"std::"` namespace into the current scope, without bringing in anything from the `"ncbi::"` namespace.
 
 ### Use of Include Directives
 
-If a header file is in the local directory or not on the INCLUDE path, use quotes in the include directive (e.g. <span class="nctnt ncbi-code">\#include "foo.hpp"</span>). In all other cases use angle brackets (e.g. <span class="nctnt ncbi-code">\#include \<bar/foo.hpp\></span>).
+If a header file is in the local directory or not on the INCLUDE path, use quotes in the include directive (e.g. `#include "foo.hpp"`). In all other cases use angle brackets (e.g. `#include <bar/foo.hpp>`).
 
 In general, if a header file is commonly used, it must be on the INCLUDE path and therefore requires the bracketed form.
 
@@ -297,7 +297,7 @@ In general, if a header file is commonly used, it must be on the INCLUDE path an
 
 Try not to cross the "standard page boundary" of **80** symbols.
 
-In <span class="nctnt ncbi-code">if, for, while, do, switch, case</span>, etc. and type definition statements:
+In `if, for, while, do, switch, case`, etc. and type definition statements:
 
     if (...) {
         .....;
@@ -488,7 +488,7 @@ Class declarations should be rich in [Doxygen-style comments](#doxygen-style-com
 
 [Doxygen-style comments](#doxygen-style-comments) for functions should describe what the function does, its parameters, and what it returns.
 
-For global function declarations, put all Doxygen-style comments in the header file. Prefix global functions with <span class="nctnt ncbi-var">g\_</span>.
+For global function declarations, put all Doxygen-style comments in the header file. Prefix global functions with `g_`.
 
     /// A brief description of MyFunc2.
     ///
@@ -504,7 +504,7 @@ For global function declarations, put all Doxygen-style comments in the header f
 
 [Doxygen-style comments](#doxygen-style-comments) are not needed for member function definitions or global function definitions because their comments are put with their declarations in the header file.
 
-For static functions, put all Doxygen-style comments immediately before the function definition. Prefix static functions with <span class="nctnt ncbi-var">s\_</span>.
+For static functions, put all Doxygen-style comments immediately before the function definition. Prefix static functions with `s_`.
 
     bool g_MyFunc2
     (double  arg1,
@@ -533,19 +533,19 @@ As the above examples do not make all of our policies on whitespace clear, here 
 
 -   When reasonably possible, use spaces to align corresponding elements vertically. (This overrides most of the rules below.)
 
--   Leave one space on either side of most binary operators, and two spaces on either side of boolean <span class="nctnt ncbi-code">&&</span> and <span class="nctnt ncbi-code">\\|\\|</span>.
+-   Leave one space on either side of most binary operators, and two spaces on either side of boolean `&&` and `\|\|`.
 
 -   Put one space between the names of flow-control keywords and macros and their arguments, but no space after the names of functions except when necessary for alignment.
 
--   Leave two spaces after the semicolons in <span class="nctnt ncbi-code">for (...; ...; ...)</span>.
+-   Leave two spaces after the semicolons in `for (...;  ...;  ...)`.
 
--   Leave whitespace around negated conditions so that the <span class="nctnt ncbi-code">!</span> stands out better.
+-   Leave whitespace around negated conditions so that the `!` stands out better.
 
 -   Leave two blank lines between function definitions.
 
 ### Alternative Tokens
 
-The alternative tokens "<span class="nctnt ncbi-code">and</span>", "<span class="nctnt ncbi-code">not\_eq</span>", "<span class="nctnt ncbi-code">:\></span>", etc. should not be used in place of the primary tokens "<span class="nctnt ncbi-code">&&</span>", "<span class="nctnt ncbi-code">!=</span>", "<span class="nctnt ncbi-code">]</span>", etc. Although alternative tokens are valid in C++, the primary tokens are more familiar and conventional. Using alternative tokens would therefore make code less readable without much benefit to most C++ developers.
+The alternative tokens "`and`", "`not_eq`", "`:>`", etc. should not be used in place of the primary tokens "`&&`", "`!=`", "`]`", etc. Although alternative tokens are valid in C++, the primary tokens are more familiar and conventional. Using alternative tokens would therefore make code less readable without much benefit to most C++ developers.
 
 ### Standard Header Template
 
@@ -558,11 +558,11 @@ Doxygen Comments
 
 Doxygen documentation is a valuable tool for software developers, as it automatically creates comprehensive cross-referencing of modules, namespaces, classes, and files. It creates inheritance diagrams, collaboration diagrams, header dependency graphs, and documents each class, struct, union, interface, define, typedef, enum, function, and variable (see the NCBI C++ Toolkit [Doxygen browser](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/)). However, developers must write meaningful comments to get the most out of it.
 
-Doxygen-style comments are essentially extensions of C/C++ comments, e.g. the use of a triple-slash instead of a double-slash. Doxygen-style comments refer to the entity following them by default, but can be made to refer to the entity preceding them by appending the ‘<span class="nctnt ncbi-code">\<</span>’ symbol to the comment token (e.g. ‘<span class="nctnt ncbi-code">///\<</span>’).
+Doxygen-style comments are essentially extensions of C/C++ comments, e.g. the use of a triple-slash instead of a double-slash. Doxygen-style comments refer to the entity following them by default, but can be made to refer to the entity preceding them by appending the ‘`<`’ symbol to the comment token (e.g. ‘`///<`’).
 
-Doxygen commands are keywords within Doxygen comments that are used during the document generation process. Common commands are <span class="nctnt ncbi-code">@param</span>, <span class="nctnt ncbi-code">@return</span>, and <span class="nctnt ncbi-code">@sa</span> (i.e. ‘see also’).
+Doxygen commands are keywords within Doxygen comments that are used during the document generation process. Common commands are `@param`, `@return`, and `@sa` (i.e. ‘see also’).
 
-Please do not use superfluous comments, such as ‘<span class="nctnt ncbi-code">/// Destructor</span>’. Especially do not use the same superfluous comment multiple times, such as using the same ‘<span class="nctnt ncbi-code">/// Constructor</span>’ comment for different constructors!
+Please do not use superfluous comments, such as ‘`/// Destructor`’. Especially do not use the same superfluous comment multiple times, such as using the same ‘`/// Constructor`’ comment for different constructors!
 
 Please see the [Doxygen manual](http://www.stack.nl/~dimitri/doxygen/manual.html) for complete usage information. More information can also be found in the chapter on [Toolkit browsers](ch_browse.html).
 
@@ -648,13 +648,13 @@ Use the [Standard Template Library (STL)](#standard-template-library-stl), which
 
 -   Don't expose class member variables, rather expose member functions that manipulate the member variables. This increases reusability and flexibility. For example, this frees you from having the string in-process -- it could be in another process or even on another machine.
 
--   Don't use multiple inheritance (i.e. <span class="nctnt ncbi-code">class A: public B, public C {}</span>) unless creating interface instead of implementation. Otherwise, you'll run into all sorts of problems with conflicting members, especially if someone else owns a base class. The best time to use multiple inheritance is when a subclass multiply inherits from abstract base classes with only pure virtual functions.
+-   Don't use multiple inheritance (i.e. `class A: public B, public C {}`) unless creating interface instead of implementation. Otherwise, you'll run into all sorts of problems with conflicting members, especially if someone else owns a base class. The best time to use multiple inheritance is when a subclass multiply inherits from abstract base classes with only pure virtual functions.
 
-<span class="nctnt highlight">NOTE:</span> Some people prefer the [Unified Modelling Language](http://www.rational.com/uml/index.jtmpl) to describe the relationships between objects.
+*NOTE:* Some people prefer the [Unified Modelling Language](http://www.rational.com/uml/index.jtmpl) to describe the relationships between objects.
 
 ##### Make Your Code Readable
 
-Use <span class="nctnt ncbi-var">NULL</span> instead of <span class="nctnt ncbi-var">0</span> when passing a null pointer. For example:
+Use `NULL` instead of `0` when passing a null pointer. For example:
 
     MyFunc(0,0);    // Just looking at this call, you can’t tell which
                     // parameter might be an int and which might be
@@ -664,7 +664,7 @@ Use <span class="nctnt ncbi-var">NULL</span> instead of <span class="nctnt ncbi-
                     // that the first parameter is an int and
                     // the second is a pointer.
 
-Avoid using <span class="nctnt ncbi-var">bool</span> as a type for function arguments. For example, this might be hard to understand:
+Avoid using `bool` as a type for function arguments. For example, this might be hard to understand:
 
     // Just looking at this call, you can’t tell what
     // the third parameter means:
@@ -700,15 +700,15 @@ Instead, create a meaningful enumerated type that captures the meaning of the pa
     // is an enum constant rather than a bool constant.
     CompareStrings(s1, s2, eIgnoreCase);
 
-As an added benefit, using an enumerated type for parameters instead of <span class="nctnt ncbi-var">bool</span> gives you the ability to expand the enumerated type to include more variants in the future if necessary - without changing the parameter type.
+As an added benefit, using an enumerated type for parameters instead of `bool` gives you the ability to expand the enumerated type to include more variants in the future if necessary - without changing the parameter type.
 
 #### C++ Tips and Tricks
 
--   Writing something like <span class="nctnt ncbi-code">map\<int, int, less\<int\>\></span> will give you weird errors; instead write <span class="nctnt ncbi-code">map\<int, int, less\<int\> \></span>. This is because <span class="nctnt ncbi-code">\>\></span> is reserved word.
+-   Writing something like `map<int, int, less<int>>` will give you weird errors; instead write `map<int, int, less<int> >`. This is because `>>` is reserved word.
 
 -   Do use pass-by-reference. It'll cut down on the number of pointer related errors.
 
--   Use <span class="nctnt ncbi-code">const</span> (or <span class="nctnt ncbi-code">enum</span>) instead of <span class="nctnt ncbi-code">\#define</span> when you can. This is much easier to debug.
+-   Use `const` (or `enum`) instead of `#define` when you can. This is much easier to debug.
 
 -   Header files should contain what they contain in C along with classes, const's, and in-line functions.
 
@@ -720,21 +720,21 @@ The STL is a library included in ANSI/ISO C++ for stream, string, and container 
 
 ##### STL Tips and Tricks
 
-<span class="nctnt ncbi-func">end()</span> does not return an iterator to the last element of a container, rather it returns a iterator just beyond the last element of the container. This is so you can do constructs like
+`end()` does not return an iterator to the last element of a container, rather it returns a iterator just beyond the last element of the container. This is so you can do constructs like
 
     for (iter = container.begin();  iter != container.end();  iter++)
 
-If you want to access the last element, use "<span class="nctnt ncbi-code">--container.end()</span>". <span class="nctnt highlight">Note:</span> If you use this construct to find the last element, you must first ensure that the container is not empty, otherwise you could get corrupt data or a crash.
+If you want to access the last element, use "`--container.end()`". *Note:* If you use this construct to find the last element, you must first ensure that the container is not empty, otherwise you could get corrupt data or a crash.
 
 The C++ Toolkit includes macros that simplify iterating. For example, the above code simplifies to:
 
     ITERATE(Type, iter, container)
 
-For more info on <span class="nctnt ncbi-macro">ITERATE</span> (and related macros), see the [ITERATE macros](ch_core.html#ch_core.ITERATE_macros) section.
+For more info on `ITERATE` (and related macros), see the [ITERATE macros](ch_core.html#ch_core.ITERATE_macros) section.
 
 Iterator misuse causes the same problems as pointer misuse. There are versions of the STL that flag incorrect use of iterators.
 
-Iterators are guaranteed to remain valid after insertion and deletion from <span class="nctnt ncbi-class">list</span> containers, but not <span class="nctnt ncbi-class">vector</span> containers. Check to see if the container you are using preserves iterators.
+Iterators are guaranteed to remain valid after insertion and deletion from `list` containers, but not `vector` containers. Check to see if the container you are using preserves iterators.
 
 If you create a container of pointers to objects, the objects are not destroyed when the container is destroyed, only the pointers are. Other than maintaining the objects yourself, there are several strategies for handling this situation detailed in the [literature](app1.appendix1.html#app1.books.html).
 
@@ -762,19 +762,19 @@ If you pass a container to a function, don't add a local object to the container
 
 ##### Non-Standard STL Classes
 
--   Don't use the <span class="nctnt ncbi-class">rope</span> class from some versions of the STL. This is a non-standard addition. If you have questions about what is/isn't in the standard library, consult the [C++ standards](http://www.parashift.com/c++-faq-lite/big-picture.html#faq-6.12).
+-   Don't use the `rope` class from some versions of the STL. This is a non-standard addition. If you have questions about what is/isn't in the standard library, consult the [C++ standards](http://www.parashift.com/c++-faq-lite/big-picture.html#faq-6.12).
 
--   The NCBI C++ Toolkit includes <span class="nctnt ncbi-class">hash\_map</span>, <span class="nctnt ncbi-class">hash\_multimap</span>, <span class="nctnt ncbi-class">hash\_set</span>, and <span class="nctnt ncbi-class">hash\_multiset</span> classes (from headers [\<corelib/hash\_map.hpp\>](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/hash__map_8hpp.html) and [\<corelib/hash\_set.hpp\>](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/hash__set_8hpp.html)). These classes are more portable than, and should be used instead of, the STL's respective <span class="nctnt ncbi-class">hash\_\*</span> classes.
+-   The NCBI C++ Toolkit includes `hash_map`, `hash_multimap`, `hash_set`, and `hash_multiset` classes (from headers [\<corelib/hash\_map.hpp\>](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/hash__map_8hpp.html) and [\<corelib/hash\_set.hpp\>](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/hash__set_8hpp.html)). These classes are more portable than, and should be used instead of, the STL's respective `hash_*` classes.
 
 #### C++ Bad Guys
 
 ##### Operator Overload
 
-Do not use operator overloading for the objects where they have unnatural or ambiguous meaning. For example, the defining of <span class="nctnt ncbi-code">operator==()</span> for your class <span class="nctnt ncbi-class">"CFoo"</span> so that there exist { CFoo a,b,c; } such that <span class="nctnt ncbi-code">(a == b)</span> and <span class="nctnt ncbi-code">(b == c)</span> are `true` while <span class="nctnt ncbi-code">(a == c)</span> is `false` would be a very bad idea. It turns out that otherwise, especially in large projects, people have different ideas of what an overloaded operator means, leading to all sorts of bugs.
+Do not use operator overloading for the objects where they have unnatural or ambiguous meaning. For example, the defining of `operator==()` for your class `"CFoo"` so that there exist { CFoo a,b,c; } such that `(a == b)` and `(b == c)` are `true` while `(a == c)` is `false` would be a very bad idea. It turns out that otherwise, especially in large projects, people have different ideas of what an overloaded operator means, leading to all sorts of bugs.
 
 ##### Assignment and Copy Constructor Overload
 
-Be advised that the default initialization <span class="nctnt ncbi-code">{CFoo foo = bar;}</span> and assignment <span class="nctnt ncbi-code">{CFoo foo; ...; foo = bar;}</span> do a member-by-member copying. This is not suitable and can be dangerous sometimes. And if you decide to overwrite this default behavior by your own code like:
+Be advised that the default initialization `{CFoo foo = bar;}` and assignment `{CFoo foo; ...; foo = bar;}` do a member-by-member copying. This is not suitable and can be dangerous sometimes. And if you decide to overwrite this default behavior by your own code like:
 
     class CFoo {
         // a copy constructor for initialization
@@ -787,7 +787,7 @@ it is **extremely important** that:
 
 -   **both** copy constructor and overloaded assignment be defined
 
--   they have **just the same** meaning; that is <span class="nctnt ncbi-code">{CFoo foo = bar;}</span> is equivalent to <span class="nctnt ncbi-code">{CFoo foo; foo = bar;}</span>
+-   they have **just the same** meaning; that is `{CFoo foo = bar;}` is equivalent to `{CFoo foo; foo = bar;}`
 
 -   there is a check to prevent self-assignment in your overloaded assignment operator
 
@@ -801,9 +801,9 @@ In many cases when you don't want to have the assignment and copy constructor at
         CFooClass& operator=(const CFooClass&);
     };
 
-##### Omitting <span class="nctnt ncbi-code">"void"</span> in a No-Argument Function Prototype
+##### Omitting `"void"` in a No-Argument Function Prototype
 
-Do not omit <span class="nctnt ncbi-code">"void"</span> in the prototype of a function without arguments (e.g. always write <span class="nctnt ncbi-func">"int f(void)"</span> rather than just <span class="nctnt ncbi-func">"int f()"</span>).
+Do not omit `"void"` in the prototype of a function without arguments (e.g. always write `"int f(void)"` rather than just `"int f()"`).
 
 ##### Do Not Mix malloc and new
 
@@ -813,7 +813,7 @@ On some platforms, malloc and new may use completely different memory managers, 
 
 It is beyond the scope of this document to discuss all C++ gotchas, but this section mentions some important ones:
 
--   **Avoid** <span class="nctnt ncbi-var">std::endl</span> **when possible**.<br/><br/>Indiscriminate use of <span class="nctnt ncbi-var">ncbi::NcbiEndl</span> or <span class="nctnt ncbi-var">std::endl</span> may lead to very serious problems.<br/><br/>One problem caused by <span class="nctnt ncbi-var">std::endl</span> is a potentially huge performance hit when writing to disk or socket. Another problem is that flushing a compressed stream can short-circuit the compression algorithm, thereby resulting in decreased compression.<br/><br/>Therefore, unless there's a need to flush, just use `\n` instead of <span class="nctnt ncbi-var">ncbi::NcbiEndl</span> or <span class="nctnt ncbi-var">std::endl</span>.<br/>
+-   **Avoid** `std::endl` **when possible**.<br/><br/>Indiscriminate use of `ncbi::NcbiEndl` or `std::endl` may lead to very serious problems.<br/><br/>One problem caused by `std::endl` is a potentially huge performance hit when writing to disk or socket. Another problem is that flushing a compressed stream can short-circuit the compression algorithm, thereby resulting in decreased compression.<br/><br/>Therefore, unless there's a need to flush, just use `\n` instead of `ncbi::NcbiEndl` or `std::endl`.<br/>
 
 -   **Other topics to be aware of:**
 
@@ -823,11 +823,11 @@ It is beyond the scope of this document to discuss all C++ gotchas, but this sec
 
     -   character sets (e.g. Unicode) vs. encodings (e.g. UTF-8)
 
-    -   <span class="nctnt ncbi-type">char</span> vs. <span class="nctnt ncbi-type">w\_char</span> and `'\n'` vs. `L'\n'`
+    -   `char` vs. `w_char` and `'\n'` vs. `L'\n'`
 
-    -   flushing vs. physical writing - <span class="nctnt ncbi-var">flush</span> (manipulator), <span class="nctnt ncbi-func">fflush()</span>, <span class="nctnt ncbi-func">sync()</span>, disk write-cache, I/O performance, etc.
+    -   flushing vs. physical writing - `flush` (manipulator), `fflush()`, `sync()`, disk write-cache, I/O performance, etc.
 
-    -   <span class="nctnt ncbi-class">iostream</span> buffering (<span class="nctnt ncbi-var">cin</span>/<span class="nctnt ncbi-var">cout</span>/<span class="nctnt ncbi-var">cerr</span>/<span class="nctnt ncbi-var">clog</span> including <span class="nctnt ncbi-func">tie()</span> and <span class="nctnt ncbi-var">unitbuf</span>)<br/>
+    -   `iostream` buffering (`cin`/`cout`/`cerr`/`clog` including `tie()` and `unitbuf`)<br/>
 
 For more information, see the [C++ Draft Standard](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2011/n3242.pdf), or search related topics on the internet.
 
@@ -854,7 +854,7 @@ Note for NCBI developers: Using these repositories has the additional advantages
 Testing
 -------
 
-Unit testing using the [Boost Unit Test Framework](ch_boost.html) is strongly encouraged for libraries. Within NCBI, unit tests can be incorporated into the nightly automated testsuite by using the <span class="nctnt ncbi-macro">CHECK\_CMD</span> macro in the makefile. All testsuite results are available on the [testsuite web page](http://intranet/ieb/ToolBox/STAT/test_stat/test_stat_ext.cgi). Users can also be automatically emailed with build and/or test results by using the <span class="nctnt ncbi-macro">WATCHERS</span> macro. Please see the chapter on [Using the Boost Unit Test Framework](ch_boost.html) for more information.
+Unit testing using the [Boost Unit Test Framework](ch_boost.html) is strongly encouraged for libraries. Within NCBI, unit tests can be incorporated into the nightly automated testsuite by using the `CHECK_CMD` macro in the makefile. All testsuite results are available on the [testsuite web page](http://intranet/ieb/ToolBox/STAT/test_stat/test_stat_ext.cgi). Users can also be automatically emailed with build and/or test results by using the `WATCHERS` macro. Please see the chapter on [Using the Boost Unit Test Framework](ch_boost.html) for more information.
 
 Applications should also be tested, and shell scripts are often convenient for this purpose.
 

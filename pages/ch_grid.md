@@ -89,9 +89,9 @@ Users at NCBI have the following sources for help:
 
 -   Mailing lists:
 
-    -   The [grid](http://www.ncbi.nlm.nih.gov/mailman/listinfo/grid) mailing list (<span class="oem_mark">grid@ncbi.nlm.nih.gov</span>) for general GRID-related discussion and announcements.
+    -   The [grid](http://www.ncbi.nlm.nih.gov/mailman/listinfo/grid) mailing list (<span class="oem_span">nypkGujip5ust5upo5nv/</span>) for general GRID-related discussion and announcements.
 
-    -   The [grid-core](http://www.ncbi.nlm.nih.gov/mailman/listinfo/grid-core) mailing list (<span class="oem_mark">grid-core@ncbi.nlm.nih.gov</span>) for getting help using or trouble-shooting a GRID service.
+    -   The [grid-core](http://www.ncbi.nlm.nih.gov/mailman/listinfo/grid-core) mailing list (<span class="oem_span">nypk4jvylGujip5ust5upo5nv/</span>) for getting help using or trouble-shooting a GRID service.
 
 -   The GRID developers:
 
@@ -166,7 +166,7 @@ Client-side API
 Remote CGI -- enables moving the actual CGI execution to the grid.
 
 6  
-[GRID Utilities](#grid-utilities) for remote administration, monitoring, retrieval and submission (<span class="nctnt ncbi-app">netschedule\_control</span>, <span class="nctnt ncbi-app">netcache\_control</span>, <span class="nctnt ncbi-app">ns\_remote\_job\_control</span>, <span class="nctnt ncbi-app">ns\_submit\_remote\_job</span>, etc.)
+[GRID Utilities](#grid-utilities) for remote administration, monitoring, retrieval and submission (**netschedule\_control**, **netcache\_control**, **ns\_remote\_job\_control**, **ns\_submit\_remote\_job**, etc.)
 
 All these components are fully portable, in the sense that they can be built and then run and communicate with each other across all platforms that are supported by the NCBI C++ Toolkit (Unix, MS-Windows, MacOSX).
 
@@ -200,7 +200,7 @@ Submitter sees that the job is done and reads its result from NetCache.
 
 The following diagram illustrates this flow of control and data:
 
-<span>[![Image grid-collab.png](/book/static/img/grid-collab.png)](/book/static/img/grid-collab.png "Click to see the full-resolution image")</span>
+[![Image grid-collab.png](/book/static/img/grid-collab.png)](/book/static/img/grid-collab.png "Click to see the full-resolution image")
 
 ### The GRID Farm
 
@@ -212,7 +212,7 @@ To help developers jump-start their distributed computation projects, there is a
 
 -   A framework to run and maintain users' [Worker Nodes](#worker-nodes)
 
-<span class="nctnt highlight">NOTE:</span> Most of the GRID components can be deployed or used outside of the GRID framework (applications can communicate with the components directly via the components' own client APIs). However, in many cases it is beneficial to use the whole GRID framework from the start.
+*NOTE:* Most of the GRID components can be deployed or used outside of the GRID framework (applications can communicate with the components directly via the components' own client APIs). However, in many cases it is beneficial to use the whole GRID framework from the start.
 
 NCBI users can find more information on the [GRID farm Wiki page](http://intranet.ncbi.nlm.nih.gov:6224/wiki-private/CxxToolkit/index.cgi/GRID_Farm).
 
@@ -269,13 +269,13 @@ With a rather simple and formal conversion, a CGI's real workload can be moved f
 Modify the code of your original CGI to make it a standalone Remote-CGI server ([Worker Node](#worker-node)). The code conversion is very easy and formal:
 
 a  
-Change application's base class from <span class="nctnt ncbi-class">CCgiApplication</span> to <span class="nctnt ncbi-class">CRemoteCgiApp</span>
+Change application's base class from `CCgiApplication` to `CRemoteCgiApp`
 
 b  
-Link the application with the library <span class="nctnt ncbi-lib">xgridcgi</span> rather than with <span class="nctnt ncbi-lib">xcgi</span>
+Link the application with the library `xgridcgi` rather than with `xcgi`
 
 2  
-Replace your original CGIs by a one-line shell scripts that calls "remote CGI gateway" (<span class="nctnt ncbi-app">cgi2rcgi.cgi</span>) application.
+Replace your original CGIs by a one-line shell scripts that calls "remote CGI gateway" (**cgi2rcgi.cgi**) application.
 
 3  
 Match "remote CGI gateways" against Remote-CGI servers:
@@ -323,11 +323,11 @@ The following sections describe how to wrap an existing CGI application into a G
 
 #### Running existing CGI executable through Grid Framework
 
-In this case a real CGI does not need to be modified at all and <span class="nctnt ncbi-app">remote\_cgi</span> utility serves as an intermediate between NetSchedule service and a real CGI. The real CGI and <span class="nctnt ncbi-app">remote\_cgi</span> utility go to the server side. The <span class="nctnt ncbi-app">remote\_cgi</span> gets a job from NetSchedule service, deserializes the CGI request and <span class="nctnt ncbi-var">stdin</span> stream and runs the real CGI with this data. When the CGI finishes the <span class="nctnt ncbi-app">remote\_cgi</span> utility serializes its <span class="nctnt ncbi-var">stdout</span> stream and sends it back to the client.
+In this case a real CGI does not need to be modified at all and **remote\_cgi** utility serves as an intermediate between NetSchedule service and a real CGI. The real CGI and **remote\_cgi** utility go to the server side. The **remote\_cgi** gets a job from NetSchedule service, deserializes the CGI request and `stdin` stream and runs the real CGI with this data. When the CGI finishes the **remote\_cgi** utility serializes its `stdout` stream and sends it back to the client.
 
-On the client side (front-end) <span class="nctnt ncbi-app">cgi2rcgi</span> sees that the job’s status is changed to “done” gets the data sent by the server side (back-end), deserializes it and writes it on its <span class="nctnt ncbi-var">stdout</span>.
+On the client side (front-end) **cgi2rcgi** sees that the job’s status is changed to “done” gets the data sent by the server side (back-end), deserializes it and writes it on its `stdout`.
 
-<span class="nctnt ncbi-app">cgi2rcgi</span> utility has two html template files to define its look. The first file is [cgi2rcgi.html](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/app/grid/cgi2rcgi/cgi2rcgi.html) (can be redefined in [cgi2rcgi.ini](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/app/grid/cgi2rcgi/cgi2rcgi.ini) file) which is the main html template file and it contains all common html tags for the particular application. It also has to have two required tags.
+**cgi2rcgi** utility has two html template files to define its look. The first file is [cgi2rcgi.html](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/app/grid/cgi2rcgi/cgi2rcgi.html) (can be redefined in [cgi2rcgi.ini](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/app/grid/cgi2rcgi/cgi2rcgi.ini) file) which is the main html template file and it contains all common html tags for the particular application. It also has to have two required tags.
 
 `<@REDIRECT@>` should be inside `<head>` tag and is used to inject a page reloading code.
 
@@ -349,7 +349,7 @@ The following sections describe how to wrap an existing CGI application into a G
 
 #### Running arbitrary applications through Grid Framework
 
-The client side collects a command line, a <span class="nctnt ncbi-var">stdin</span> stream and some other parameters, serialize them and through Grid Framework to the server side. On the server side <span class="nctnt ncbi-app">remote\_app</span> utility picks up submitted job, deserializes the command line, the <span class="nctnt ncbi-var">stdin</span> and other parameters, and starts a new process with the application and the input data. Then <span class="nctnt ncbi-app">remote\_app</span> waits for the process to finish collecting its <span class="nctnt ncbi-var">stdout</span>, <span class="nctnt ncbi-var">stdin</span> and <span class="nctnt ncbi-var">errcode</span>. After that it serializes collected data and sends it back to the client side. The application for run is set in [remote\_app.ini](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/app/grid/remote_app/remote_app.ini) configuration file.
+The client side collects a command line, a `stdin` stream and some other parameters, serialize them and through Grid Framework to the server side. On the server side **remote\_app** utility picks up submitted job, deserializes the command line, the `stdin` and other parameters, and starts a new process with the application and the input data. Then **remote\_app** waits for the process to finish collecting its `stdout`, `stdin` and `errcode`. After that it serializes collected data and sends it back to the client side. The application for run is set in [remote\_app.ini](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/app/grid/remote_app/remote_app.ini) configuration file.
 
 **Source code:** [src/app/grid/remote\_app/remote\_app\_wn.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/app/grid/remote_app/remote_app_wn.cpp)
 
@@ -361,7 +361,7 @@ Classes that should be used to prepare an input data a remote application and ge
 
 **Config file:** [src/sample/app/netschedule/remote\_app\_client\_sample.ini](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/netschedule/remote_app_client_sample.ini)
 
-<span class="nctnt ncbi-app">ns\_submit\_remote\_job</span> utility allows submitting a job for a remote application from its command line or a jobs file. See <span class="nctnt ncbi-app">ns\_submit\_remote\_job –help</span>.
+**ns\_submit\_remote\_job** utility allows submitting a job for a remote application from its command line or a jobs file. See **ns\_submit\_remote\_job –help**.
 
 **Jobs file format:**
 
@@ -373,13 +373,13 @@ Each line in the file represents one job (lines starting with ‘`#`’ are igno
 
 -   `tfiles` – a list of semicolon-separated file names which will be transferred to the server side.
 
--   `jout` – a file name where the application’s output to <span class="nctnt ncbi-var">stdout</span> will be stored.
+-   `jout` – a file name where the application’s output to `stdout` will be stored.
 
--   `jerr` – a file name where the application’s output to <span class="nctnt ncbi-var">stderr</span> will be stored.
+-   `jerr` – a file name where the application’s output to `stderr` will be stored.
 
 -   `runtime` – a time in seconds of the remote application’s running time. If the application is running longer then this time it is assumed to be failed and its execution is terminated.
 
--   `exclusive` – instructs the <span class="nctnt ncbi-app">remote\_app</span> to not get any other jobs from the NetSchedule service while this job is being executed.
+-   `exclusive` – instructs the **remote\_app** to not get any other jobs from the NetSchedule service while this job is being executed.
 
 #### Diagram
 
@@ -399,17 +399,17 @@ The following sections describe the procedure for cleaning up Worker Nodes:
 
 It is necessary to provide a framework to support worker node and job cleanup. For example, a job may create temporary files that need to be deleted, or a worker node may need to clean up resources shared by multiple jobs.
 
-To receive cleanup events, the worker node must implement interface <span class="nctnt ncbi-class">IWorkerNodeCleanupEventListener</span>. The interface has a single abstract method:
+To receive cleanup events, the worker node must implement interface `IWorkerNodeCleanupEventListener`. The interface has a single abstract method:
 
-<span class="nctnt ncbi-code">void HandleEvent(EWorkerNodeCleanupEvent cleanup\_event)</span>
+`void HandleEvent(EWorkerNodeCleanupEvent cleanup_event)`
 
-At the time of the call, <span class="nctnt ncbi-var">cleanup\_event</span> will be set to either <span class="nctnt ncbi-var">eRegularCleanup</span> (for normal cleanup) or <span class="nctnt ncbi-var">eOnHardExit</span> (for an emergency shutdown).
+At the time of the call, `cleanup_event` will be set to either `eRegularCleanup` (for normal cleanup) or `eOnHardExit` (for an emergency shutdown).
 
 There are two types of listeners: those called after each job is done and those called when the worker node is shutting down.
 
 #### Job Cleanup
 
-Listeners of the first type (per-job cleanup) are installed in the <span class="nctnt ncbi-code">Do()</span> method via a call to <span class="nctnt ncbi-code">CWorkerNodeJobContext::GetCleanupEventSource()-\>AddListener()</span>:
+Listeners of the first type (per-job cleanup) are installed in the `Do()` method via a call to `CWorkerNodeJobContext::GetCleanupEventSource()->AddListener()`:
 
     class CMyWorkerNodeJob : public IWorkerNodeJob
     /* ... */
@@ -420,7 +420,7 @@ Listeners of the first type (per-job cleanup) are installed in the <span class="
 
 #### Worker Node Cleanup
 
-Listeners of the second type (worker node cleanup) are installed in the constructor of the <span class="nctnt ncbi-class">IWorkerNodeJob</span>-derived class via a call to <span class="nctnt ncbi-code">IWorkerNodeInitContext::GetCleanupEventSource()-\>AddListener()</span>:
+Listeners of the second type (worker node cleanup) are installed in the constructor of the `IWorkerNodeJob`-derived class via a call to `IWorkerNodeInitContext::GetCleanupEventSource()->AddListener()`:
 
     class CMyWorkerNodeJob : public IWorkerNodeJob
     /* ... */
@@ -429,11 +429,11 @@ Listeners of the second type (worker node cleanup) are installed in the construc
         context.GetCleanupEventSource()->AddListener( new CMyWorkerNodeCleanupListener(resources_to_free));
     }
 
-Note that depending on the current value of the `[server]/reuse_job_object` configuration parameter, this constructor of <span class="nctnt ncbi-class">CMyWorkerNodeJob</span> can be called multiple times - either once per job or once per worker thread, so additional guarding may be required.
+Note that depending on the current value of the `[server]/reuse_job_object` configuration parameter, this constructor of `CMyWorkerNodeJob` can be called multiple times - either once per job or once per worker thread, so additional guarding may be required.
 
 The approach of doing worker node cleanup described above is a newer approach, but there is an older approach which may also be used:
 
-The <span class="nctnt ncbi-class">IGridWorkerNodeApp\_Listener</span> interface has two methods, <span class="nctnt ncbi-code">OnGridWorkerStart()</span> and <span class="nctnt ncbi-code">OnGridWorkerStop()</span> which are called during worker node initialization and shutdown respectively. A handler implementing this interface can be installed using the <span class="nctnt ncbi-code">SetListener()</span> method of <span class="nctnt ncbi-class">CGridWorkerApp</span>. The code that calls the <span class="nctnt ncbi-code">OnGridWorkerStop()</span> method will run in the context of the dedicated cleanup thread and also respect the <span class="nctnt ncbi-var">force\_close</span> parameter.
+The `IGridWorkerNodeApp_Listener` interface has two methods, `OnGridWorkerStart()` and `OnGridWorkerStop()` which are called during worker node initialization and shutdown respectively. A handler implementing this interface can be installed using the `SetListener()` method of `CGridWorkerApp`. The code that calls the `OnGridWorkerStop()` method will run in the context of the dedicated cleanup thread and also respect the `force_close` parameter.
 
 The older method does not require the guarding that the new method requires.
 
@@ -445,7 +445,7 @@ An API is available to submit tasks to [Worker Nodes](#worker-nodes), and to mon
 Implementing a Network Server
 -----------------------------
 
-The [CServer](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCServer.html), [IServer\_ConnectionFactory](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIServer__ConnectionFactory.html), and [IServer\_ConnectionHandler](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIServer__ConnectionHandler.html) classes provide a framework for creating multithreaded network servers with one-thread-per-request scheduling. The server creates a pool of connection handlers for maintaining the socket connections, and a pool of threads for handling the socket events. With each socket event, <span class="nctnt ncbi-class">CServer</span> allocates a thread from the thread pool to handle the event, thereby making it possible to serve a large number of concurrent requests efficiently.
+The [CServer](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCServer.html), [IServer\_ConnectionFactory](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIServer__ConnectionFactory.html), and [IServer\_ConnectionHandler](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIServer__ConnectionHandler.html) classes provide a framework for creating multithreaded network servers with one-thread-per-request scheduling. The server creates a pool of connection handlers for maintaining the socket connections, and a pool of threads for handling the socket events. With each socket event, `CServer` allocates a thread from the thread pool to handle the event, thereby making it possible to serve a large number of concurrent requests efficiently.
 
 The following topics discuss the various aspects of implementing a network server:
 
@@ -479,7 +479,7 @@ The following topics discuss the various aspects of implementing a network serve
 
 ### Typical Client-Server Interactions
 
-The <span class="nctnt ncbi-class">CServer</span> framework is based on sockets and imposes few constraints on client-server interactions. Servers can support many concurrent connections, and the client and server can follow any protocol, provided that they handle errors. If the protocol includes a server response, then the client and server should alternate between requests and responses on a given connection.
+The `CServer` framework is based on sockets and imposes few constraints on client-server interactions. Servers can support many concurrent connections, and the client and server can follow any protocol, provided that they handle errors. If the protocol includes a server response, then the client and server should alternate between requests and responses on a given connection.
 
 Typical client-server interactions differ in the following categories:
 
@@ -535,7 +535,7 @@ NCBI servers that delay their response include:
 
 ### The CServer Framework Classes
 
-The main classes in the <span class="nctnt ncbi-class">CServer</span> framework are:
+The main classes in the `CServer` framework are:
 
 -   [CServer](#cserver)
 
@@ -545,15 +545,15 @@ The main classes in the <span class="nctnt ncbi-class">CServer</span> framework 
 
 #### CServer
 
-The <span class="nctnt ncbi-class">CServer</span> class manages connections, socket event handling for reading and writing, timer and timeout events, and error conditions. <span class="nctnt ncbi-class">CServer</span> creates a connection pool and a thread pool. When a client request arrives, a socket is established and assigned to one of the connection handler objects. For each socket event (e.g. connection opened, data arrival, client ready for data, etc.), a thread is allocated from the pool to serve that particular event and is returned to the pool when the handler finishes. You can use <span class="nctnt ncbi-class">CServer</span> directly, but typically it is subclassed.
+The `CServer` class manages connections, socket event handling for reading and writing, timer and timeout events, and error conditions. `CServer` creates a connection pool and a thread pool. When a client request arrives, a socket is established and assigned to one of the connection handler objects. For each socket event (e.g. connection opened, data arrival, client ready for data, etc.), a thread is allocated from the pool to serve that particular event and is returned to the pool when the handler finishes. You can use `CServer` directly, but typically it is subclassed.
 
-If you want to provide a gentle shutdown ability, then create a <span class="nctnt ncbi-class">CServer</span> subclass and override <span class="nctnt ncbi-func">ShutdownRequested()</span>. It should return true when the application-specific logic determines that the server is no longer needed - for example, if a shutdown command has been received; if a timeout has expired with no client communication; if a watchfile has been updated; etc. A typical subclass could also include a <span class="nctnt ncbi-func">RequestShutdown()</span> method that sets a flag that is in turn checked by <span class="nctnt ncbi-func">ShutdownRequested()</span>. This approach makes it easy to trigger a shutdown from a client.
+If you want to provide a gentle shutdown ability, then create a `CServer` subclass and override `ShutdownRequested()`. It should return true when the application-specific logic determines that the server is no longer needed - for example, if a shutdown command has been received; if a timeout has expired with no client communication; if a watchfile has been updated; etc. A typical subclass could also include a `RequestShutdown()` method that sets a flag that is in turn checked by `ShutdownRequested()`. This approach makes it easy to trigger a shutdown from a client.
 
-If you want to process data in the main thread on timeout, then create a <span class="nctnt ncbi-class">CServer</span> subclass, override <span class="nctnt ncbi-func">ProcessTimeout()</span>, and use <span class="nctnt ncbi-func">GetParameters()</span> / <span class="nctnt ncbi-func">SetParameters()</span> to replace the <span class="nctnt ncbi-var">accept\_timeout</span> parameter with the proper value for your application.
+If you want to process data in the main thread on timeout, then create a `CServer` subclass, override `ProcessTimeout()`, and use `GetParameters()` / `SetParameters()` to replace the `accept_timeout` parameter with the proper value for your application.
 
-If you don't want to provide a gentle shutdown ability and you don't want to process data in the main thread on timeout, then you can use <span class="nctnt ncbi-class">CServer</span> directly.
+If you don't want to provide a gentle shutdown ability and you don't want to process data in the main thread on timeout, then you can use `CServer` directly.
 
-Your server application will probably define, configure, start listening, and run a <span class="nctnt ncbi-class">CServer</span> object in its <span class="nctnt ncbi-func">Run()</span> method - something like:
+Your server application will probably define, configure, start listening, and run a `CServer` object in its `Run()` method - something like:
 
     CMyServer server;
     server.SetParameters(params);
@@ -564,7 +564,7 @@ Your server application will probably define, configure, start listening, and ru
 
 The connection factory simply creates connection handler objects. It is registered with the server and is called when building the connection pool.
 
-It is possible to create a server application without defining your own connection factory (the <span class="nctnt ncbi-class">CServer</span> framework has a default factory). However you must create a connection factory if you want to pass server-wide parameters to your connection handler objects - for example to implement a gentle shutdown.
+It is possible to create a server application without defining your own connection factory (the `CServer` framework has a default factory). However you must create a connection factory if you want to pass server-wide parameters to your connection handler objects - for example to implement a gentle shutdown.
 
 The connection factory class can be as simple as:
 
@@ -584,35 +584,35 @@ The connection factory class can be as simple as:
 
 #### IServer\_ConnectionHandler
 
-Classes derived from <span class="nctnt ncbi-class">IServer\_ConnectionHandler</span> do the actual work of handling requests. The primary methods are:
+Classes derived from `IServer_ConnectionHandler` do the actual work of handling requests. The primary methods are:
 
--   <span class="nctnt ncbi-func">GetEventsToPollFor()</span> - This method identifies the socket events that should be handled by this connection, and can establish a timer.
+-   `GetEventsToPollFor()` - This method identifies the socket events that should be handled by this connection, and can establish a timer.
 
--   <span class="nctnt ncbi-func">OnOpen()</span> - Indicates that a client has opened a connection. The socket can be configured here.
+-   `OnOpen()` - Indicates that a client has opened a connection. The socket can be configured here.
 
--   <span class="nctnt ncbi-func">OnClose()</span> - Indicates that a connection was closed. Note that connections can be closed by either the server or the client (the closer is indicated by a parameter).
+-   `OnClose()` - Indicates that a connection was closed. Note that connections can be closed by either the server or the client (the closer is indicated by a parameter).
 
--   <span class="nctnt ncbi-func">OnRead()</span> - Indicates that a client has sent data. This is where you should parse the data coming from the socket.
+-   `OnRead()` - Indicates that a client has sent data. This is where you should parse the data coming from the socket.
 
--   <span class="nctnt ncbi-func">OnWrite()</span> - Indicates that a client is ready to receive data. This is where you should write the response to the socket.
+-   `OnWrite()` - Indicates that a client is ready to receive data. This is where you should write the response to the socket.
 
--   <span class="nctnt ncbi-func">OnTimeout()</span> - Indicates that a client has been idle for too long. The connection will be closed synchronously after this method is called.
+-   `OnTimeout()` - Indicates that a client has been idle for too long. The connection will be closed synchronously after this method is called.
 
--   <span class="nctnt ncbi-func">OnTimer()</span> - Called when the timer established by <span class="nctnt ncbi-func">GetEventsToPollFor()</span> has expired.
+-   `OnTimer()` - Called when the timer established by `GetEventsToPollFor()` has expired.
 
--   <span class="nctnt ncbi-func">OnOverflow()</span> - Called when there's a problem with the connection - for example, the connection pool cannot accommodate another connection. <span class="nctnt highlight">Note:</span> The connection is destroyed after this call.
+-   `OnOverflow()` - Called when there's a problem with the connection - for example, the connection pool cannot accommodate another connection. *Note:* The connection is destroyed after this call.
 
-The <span class="nctnt ncbi-func">OnOpen()</span>, <span class="nctnt ncbi-func">OnRead()</span>, and <span class="nctnt ncbi-func">OnWrite()</span> methods are pure virtual and must be implemented by your server.
+The `OnOpen()`, `OnRead()`, and `OnWrite()` methods are pure virtual and must be implemented by your server.
 
-<span class="nctnt highlight">Note:</span> If your client-server protocol is line-oriented, you can use <span class="nctnt ncbi-class">IServer\_LineMessageHandler</span> instead of <span class="nctnt ncbi-class">IServer\_ConnectionHandler</span>. In this case you would implement the <span class="nctnt ncbi-func">OnMessage()</span> method instead of <span class="nctnt ncbi-func">OnRead()</span>.
+*Note:* If your client-server protocol is line-oriented, you can use `IServer_LineMessageHandler` instead of `IServer_ConnectionHandler`. In this case you would implement the `OnMessage()` method instead of `OnRead()`.
 
 ### State, Events, and Flow of Control
 
-Generally, your connection handler class should follow a state model and implement the <span class="nctnt ncbi-func">GetEventsToPollFor()</span> method, which will use the state to select the events that will be handled. This is typically how the connection state is propagated and how socket events result in the flow of control being passed to the events handlers.
+Generally, your connection handler class should follow a state model and implement the `GetEventsToPollFor()` method, which will use the state to select the events that will be handled. This is typically how the connection state is propagated and how socket events result in the flow of control being passed to the events handlers.
 
-<span class="nctnt highlight">Note:</span> You don't need to implement a state model or the <span class="nctnt ncbi-func">GetEventsToPollFor()</span> method if you immediately write any reponses in the same handler that performs the reading. For line-oriented protocols, your connection handler can inherit from <span class="nctnt ncbi-class">IServer\_LineMessageHandler</span> instead of from <span class="nctnt ncbi-class">IServer\_ConnectionHandler</span>. <span class="nctnt ncbi-class">IServer\_LineMessageHandler</span> implements <span class="nctnt ncbi-func">OnRead()</span> and parses the input into lines, calling <span class="nctnt ncbi-func">OnMessage()</span> for each line. In this case you would both read from and write to the client in the <span class="nctnt ncbi-func">OnMessage()</span> method (and implement a dummy <span class="nctnt ncbi-func">OnWrite()</span> method).
+*Note:* You don't need to implement a state model or the `GetEventsToPollFor()` method if you immediately write any reponses in the same handler that performs the reading. For line-oriented protocols, your connection handler can inherit from `IServer_LineMessageHandler` instead of from `IServer_ConnectionHandler`. `IServer_LineMessageHandler` implements `OnRead()` and parses the input into lines, calling `OnMessage()` for each line. In this case you would both read from and write to the client in the `OnMessage()` method (and implement a dummy `OnWrite()` method).
 
-For servers that implement a state model and follow a simple request / response protocol, the state variable should be initialized to "reading"; set to "writing" after the request is read in the <span class="nctnt ncbi-func">OnRead()</span> method; and set to "reading" after the response is sent in the <span class="nctnt ncbi-func">OnWrite()</span> method. This results in an orderly alternation between reading and writing. The <span class="nctnt ncbi-func">GetEventsToPollFor()</span> method uses the current connection state (the current state corresponds to the next expected event) to select the appropriate event to respond to. For example:
+For servers that implement a state model and follow a simple request / response protocol, the state variable should be initialized to "reading"; set to "writing" after the request is read in the `OnRead()` method; and set to "reading" after the response is sent in the `OnWrite()` method. This results in an orderly alternation between reading and writing. The `GetEventsToPollFor()` method uses the current connection state (the current state corresponds to the next expected event) to select the appropriate event to respond to. For example:
 
     EIO_Event CMyConnHandler::GetEventsToPollFor(const CTime** alarm_time)
     {
@@ -621,27 +621,27 @@ For servers that implement a state model and follow a simple request / response 
 
 Your state model should reflect the communication protocol and can be more complex than a simple read / write alternation. It could include acknowledgements, queuing, timed responses, etc. Of course it should include error handling.
 
-<span class="nctnt ncbi-func">GetEventsToPollFor()</span> is guaranteed to not be called at the same time as the event handling functions (<span class="nctnt ncbi-func">OnOpen()</span>, <span class="nctnt ncbi-func">OnRead()</span>, etc.), so you shouldn't guard the variables they use with mutexes.
+`GetEventsToPollFor()` is guaranteed to not be called at the same time as the event handling functions (`OnOpen()`, `OnRead()`, etc.), so you shouldn't guard the variables they use with mutexes.
 
-<span class="nctnt ncbi-func">GetEventsToPollFor()</span> is called from the main thread while the other socket event handling methods are called from various threads allocated from the thread pool.
+`GetEventsToPollFor()` is called from the main thread while the other socket event handling methods are called from various threads allocated from the thread pool.
 
 ### Socket Closure and Lifetime
 
-Nominally, sockets are owned by (and therefore closed by) the <span class="nctnt ncbi-class">CServer</span> framework. However, there may be cases where your derived class will need to manually close or take ownership of the socket.
+Nominally, sockets are owned by (and therefore closed by) the `CServer` framework. However, there may be cases where your derived class will need to manually close or take ownership of the socket.
 
--   Well-behaved clients will close a connection when they have no more outstanding requests and have completed reading the responses to all requests made on the connection. <span class="nctnt ncbi-class">CServer</span>-based applications are intended to operate in this paradigm. In this case you don't need to close or take ownership of the socket.<br/><br/><span class="nctnt highlight">Note:</span> If connections are not closed by the client after reading the response, then you may run out of file descriptors and/or available port numbers. If you have a high connection volume and try to mitigate slow connection closings by closing connections in your code, you run the risk of terminating the connection before the client has read all the data. Well-behaved clients are therefore necessary for optimum server performance.
+-   Well-behaved clients will close a connection when they have no more outstanding requests and have completed reading the responses to all requests made on the connection. `CServer`-based applications are intended to operate in this paradigm. In this case you don't need to close or take ownership of the socket.<br/><br/>*Note:* If connections are not closed by the client after reading the response, then you may run out of file descriptors and/or available port numbers. If you have a high connection volume and try to mitigate slow connection closings by closing connections in your code, you run the risk of terminating the connection before the client has read all the data. Well-behaved clients are therefore necessary for optimum server performance.
 
--   <span class="nctnt ncbi-class">CServer</span> will automatically close a connection after an inactivity timeout or if an exception occurs in an event handler. You don't need to manage sockets in these cases.
+-   `CServer` will automatically close a connection after an inactivity timeout or if an exception occurs in an event handler. You don't need to manage sockets in these cases.
 
 -   If you encounter problems such as a broken protocol or an invalid command then you should close the connection from your code.
 
--   If you need to close a connection from your code, you should do so by calling <span class="nctnt ncbi-func">CServer::CloseConnection()</span> - not by explicitly closing the socket object. The <span class="nctnt ncbi-class">CServer</span> framework generally owns the socket and therefore needs to manage it.
+-   If you need to close a connection from your code, you should do so by calling `CServer::CloseConnection()` - not by explicitly closing the socket object. The `CServer` framework generally owns the socket and therefore needs to manage it.
 
--   <span class="nctnt highlight">Note:</span> There is one case when the <span class="nctnt ncbi-class">CServer</span> framework shouldn't own the socket. If you create a <span class="nctnt ncbi-class">CConn\_SocketStream</span> on an existing socket, then you must take ownership as shown here:<br/><br/><span class="nctnt ncbi-code">SOCK sk = GetSocket().GetSOCK();</span><br/><span class="nctnt ncbi-code">GetSocket().SetOwnership(eNoOwnership);</span><br/><span class="nctnt ncbi-code">GetSocket().Reset(0, eTakeOwnership, eCopyTimeoutsToSOCK);</span><br/><span class="nctnt ncbi-code">AutoPtr\<CConn\_SocketStream\> stream = new CConn\_SocketStream(sk);</span><br/>
+-   *Note:* There is one case when the `CServer` framework shouldn't own the socket. If you create a `CConn_SocketStream` on an existing socket, then you must take ownership as shown here:<br/><br/>`SOCK sk = GetSocket().GetSOCK();`<br/>`GetSocket().SetOwnership(eNoOwnership);`<br/>`GetSocket().Reset(0, eTakeOwnership, eCopyTimeoutsToSOCK);`<br/>`AutoPtr<CConn_SocketStream> stream = new CConn_SocketStream(sk);`<br/>
 
 ### Diagnostics
 
-To facilitate logfile analysis, the more detailed "new" log posting format is recommended. To enable the new format, call <span class="nctnt ncbi-func">SetOldPostFormat()</span> before calling <span class="nctnt ncbi-func">AppMain()</span>:
+To facilitate logfile analysis, the more detailed "new" log posting format is recommended. To enable the new format, call `SetOldPostFormat()` before calling `AppMain()`:
 
     int main(int argc, const char* argv[])
     {
@@ -649,13 +649,13 @@ To facilitate logfile analysis, the more detailed "new" log posting format is re
         return CMyServerApp().AppMain(argc, argv);
     }
 
-Grouping diagnostics into request-specific blocks is very helpful for post-processing. To facilitate this, [CDiagContext](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDiagContext.html) provides the <span class="nctnt ncbi-func">PrintRequestStart()</span>, <span class="nctnt ncbi-func">PrintRequestStop()</span>, <span class="nctnt ncbi-func">Extra()</span>, and various <span class="nctnt ncbi-func">Print()</span>, methods.
+Grouping diagnostics into request-specific blocks is very helpful for post-processing. To facilitate this, [CDiagContext](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDiagContext.html) provides the `PrintRequestStart()`, `PrintRequestStop()`, `Extra()`, and various `Print()`, methods.
 
-The <span class="nctnt ncbi-func">CDiagContext::SetRequestContext()</span> method enables you to use a [CRequestContext](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCRequestContext.html) object to pass certain request-specific information - such as request ID, client IP, bytes sent, request status, etc. - to the diagnostics context. The request context information can be invaluable when analyzing logs.
+The `CDiagContext::SetRequestContext()` method enables you to use a [CRequestContext](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCRequestContext.html) object to pass certain request-specific information - such as request ID, client IP, bytes sent, request status, etc. - to the diagnostics context. The request context information can be invaluable when analyzing logs.
 
-[CRequestContext](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCRequestContext.html) objects are merely convenient packages for passing information - they can be preserved across multiple events or re-created as needed. However, as <span class="nctnt ncbi-class">CObject</span>-derived objects, they should be wrapped by <span class="nctnt ncbi-class">CRef</span> to avoid inadvertent deletion by code accepting a <span class="nctnt ncbi-class">CRef</span> parameter.
+[CRequestContext](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCRequestContext.html) objects are merely convenient packages for passing information - they can be preserved across multiple events or re-created as needed. However, as `CObject`-derived objects, they should be wrapped by `CRef` to avoid inadvertent deletion by code accepting a `CRef` parameter.
 
-The following code fragments show examples of API calls for creating request-specific blocks in the logfile. Your code will be slightly different and may make these calls in different event handlers (for example, you might call <span class="nctnt ncbi-func">PrintRequestStart()</span> in <span class="nctnt ncbi-func">OnRead()</span> and <span class="nctnt ncbi-func">PrintRequestStop()</span> in <span class="nctnt ncbi-func">OnWrite()</span>).
+The following code fragments show examples of API calls for creating request-specific blocks in the logfile. Your code will be slightly different and may make these calls in different event handlers (for example, you might call `PrintRequestStart()` in `OnRead()` and `PrintRequestStop()` in `OnWrite()`).
 
     // Set up the request context:
     CRef<CRequestContext> rqst_ctx(new CRequestContext());
@@ -684,9 +684,9 @@ The following code fragments show examples of API calls for creating request-spe
 
 Code like the above will result in [AppLog](http://mini.ncbi.nlm.nih.gov/1k2vj) entries that look similar to:
 
-<span>[![Image ch\_grid\_cserver\_applog.png](/book/static/img/ch_grid_cserver_applog.png)](/book/static/img/ch_grid_cserver_applog.png "Click to see the full-resolution image")</span>
+[![Image ch\_grid\_cserver\_applog.png](/book/static/img/ch_grid_cserver_applog.png)](/book/static/img/ch_grid_cserver_applog.png "Click to see the full-resolution image")
 
-Each thread has its own diagnostics context. Therefore, simultaneous calls to <span class="nctnt ncbi-func">GetDiagContext().SetRequestContext()</span> in multiple event handlers will not interfere with each other.
+Each thread has its own diagnostics context. Therefore, simultaneous calls to `GetDiagContext().SetRequestContext()` in multiple event handlers will not interfere with each other.
 
 The connection handler should ensure that each request-start has a corresponding request-stop - for example by writing the request-stop in a destructor if it wasn't already written.
 
@@ -694,24 +694,24 @@ The connection handler should ensure that each request-start has a corresponding
 
 There are server application-wide configuration parameters to control whether or not otherwise-unhandled exceptions will be caught by the server. See the [Server Configuration](#server-configuration) section for details.
 
-<span class="nctnt highlight">Note:</span> If your event handler catches an exception, it does **not** need to close the connection because <span class="nctnt ncbi-class">CServer</span> automatically closes connections in this case.
+*Note:* If your event handler catches an exception, it does **not** need to close the connection because `CServer` automatically closes connections in this case.
 
 See the [Socket Closure and Lifetime](#socket-closure-and-lifetime) section for related information.
 
 ### Server Configuration
 
-The following configuration parameters can be used to fine-tune <span class="nctnt ncbi-class">CServer</span>-derived server behavior:
+The following configuration parameters can be used to fine-tune `CServer`-derived server behavior:
 
-| Parameter                                                                                      | Brief Description                                                                                        | Default |
-|------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|---------|
-| <span class="nctnt ncbi-var">CSERVER\_CATCH\_UNHANDLED\_EXCEPTIONS</span>                      | Controls whether <span class="nctnt ncbi-class">CServer</span> should catch exceptions.                  | true    |
-| <span class="nctnt ncbi-var">NCBI\_CONFIG\_\_THREADPOOL\_\_CATCH\_UNHANDLED\_EXCEPTIONS</span> | Controls whether <span class="nctnt ncbi-class">CThreadInPool\_ForServer</span> should catch exceptions. | true    |
+| Parameter                                             | Brief Description                                                   | Default |
+|-------------------------------------------------------|---------------------------------------------------------------------|---------|
+| `CSERVER_CATCH_UNHANDLED_EXCEPTIONS`                  | Controls whether `CServer` should catch exceptions.                 | true    |
+| `NCBI_CONFIG__THREADPOOL__CATCH_UNHANDLED_EXCEPTIONS` | Controls whether `CThreadInPool_ForServer` should catch exceptions. | true    |
 
 See the [connection library configuration reference](ch_libconfig.html#ch_libconfig.libconfig_connect) for more information on configuration parameters.
 
 ### Other Resources
 
-Here are some places to look for reference and to see how to <span class="nctnt ncbi-class">CServer</span> is used in practice:
+Here are some places to look for reference and to see how to `CServer` is used in practice:
 
 -   [CServer Class Reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCServer.html)
 
@@ -882,19 +882,19 @@ NCBI NetSchedule control utility. This program can be used to operate NetSchedul
 </tr>
 <tr class="odd">
 <td align="left">-read &lt;BATCH_ID_OUTPUT,JOB_IDS_OUTPUT,LIMIT,TIMEOUT&gt;</td>
-<td align="left">Retrieve IDs of the completed jobs and change their state to Reading.<br/><br/>For the first two parameters, the <a href="#alternate-list-output">Alternate list output</a> format can be used.<br/><br/><strong>Parameter descriptions:</strong><br/><span class="nctnt ncbi-var">BATCH_ID_OUTPUT</span>
+<td align="left">Retrieve IDs of the completed jobs and change their state to Reading.<br/><br/>For the first two parameters, the <a href="#alternate-list-output">Alternate list output</a> format can be used.<br/><br/><strong>Parameter descriptions:</strong><br/><code>BATCH_ID_OUTPUT</code>
 <ul>
 <li><p>Defines where to send the ID of the retrieved jobs. Can be either a file name or '-'.</p></li>
 </ul>
-<span class="nctnt ncbi-var">JOB_IDS</span>
+<code>JOB_IDS</code>
 <ul>
 <li><p>Defines where to send the list of jobs that were switched to the state <code>Reading</code>. Can be either a file name or '-'.</p></li>
 </ul>
-<span class="nctnt ncbi-var">LIMIT</span>
+<code>LIMIT</code>
 <ul>
 <li><p>Maximum number of jobs retrieved.</p></li>
 </ul>
-<span class="nctnt ncbi-var">TIMEOUT</span>
+<code>TIMEOUT</code>
 <ul>
 <li><p>Timeout before jobs will be switched back to the state <code>Done</code> so that they can be returned again in response to another <code>-read</code>.</p></li>
 </ul>
@@ -1096,7 +1096,7 @@ This section describes two alternative methods of printing the results of operat
 
 #### Alternate list output
 
-The `-read` command of `netschedule_control` produces a list of job IDs as its output. This list can be sent either to a file (if a file name is specified) or to <span class="nctnt ncbi-var">stdout</span> (if a dash ('-') is specified in place of the file name).
+The `-read` command of `netschedule_control` produces a list of job IDs as its output. This list can be sent either to a file (if a file name is specified) or to `stdout` (if a dash ('-') is specified in place of the file name).
 
 **Example:**
 
@@ -1116,7 +1116,7 @@ Via a comma-separated (or a space-separated) list.
 By using a text file (one argument per line). The name of the file must be prefixed with '@' to distinguish from the explicit enumeration of the previous case.
 
 3  
-Via <span class="nctnt ncbi-var">stdin</span> (denoted by '-'). This variant does not differ from using a text file except that list items are red from the standard input - one item per line.
+Via `stdin` (denoted by '-'). This variant does not differ from using a text file except that list items are red from the standard input - one item per line.
 
 **Examples:**
 

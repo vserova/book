@@ -89,7 +89,7 @@ ID1\_FETCH - the ID1 and Entrez2 client
 
 -   Produce more information about the sequences, either as data from the ID server or as [Entrez](http://www.ncbi.nlm.nih.gov/books/NBK21081/) document summaries.
 
-This program corresponds to <span class="nctnt ncbi-app">idfetch</span> from the C Toolkit.
+This program corresponds to **idfetch** from the C Toolkit.
 
 ### Invocation
 
@@ -97,28 +97,28 @@ See [Table 1](#table-1).
 
 Table 1. Invocation flags
 
-| Argument                                       | Value                       | Effect                                                                                                                                                                                                                        |
-|------------------------------------------------|-----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <span class="nctnt ncbi-cmd">-h</span>         |         | Print usage message and exit.                                                                                                                                                                                                 |
-| <span class="nctnt ncbi-cmd">-gi N</span>      | integer                     | GenInfo ID of sequence to look up.                                                                                                                                                                                            |
-| <span class="nctnt ncbi-cmd">-fmt fmt</span>   | [format type](#format-type) | Output data format; default is `asn` (ASN.1 text).                                                                                                                                                                            |
-| <span class="nctnt ncbi-cmd">-out file</span>  | filename                    | Write output to specified file rather than stdout.                                                                                                                                                                            |
-| <span class="nctnt ncbi-cmd">-log file</span>  | filename                    | Write errors and messages to specified file rather than stderr.                                                                                                                                                               |
-| <span class="nctnt ncbi-cmd">-db str</span>    | string                      | Use specified database. **Mandatory for** [Entrez](http://www.ncbi.nlm.nih.gov/books/NBK21081/) **queries**, where it is normally either Nucleotide or Protein. Also specifies satellite database for sequence-entry lookups. |
-| <span class="nctnt ncbi-cmd">-ent N</span>     | integer                     | Dump specified subentity. Only relevant for sequence-entry lookups.                                                                                                                                                           |
-| <span class="nctnt ncbi-cmd">-lt type</span>   | [lookup type](#lookup-type) | Type of lookup; default is `entry` (sequence entry).                                                                                                                                                                          |
-| <span class="nctnt ncbi-cmd">-in file</span>   | filename                    | Read sequence IDs from file rather than command line. May contain raw GI IDs, [flattened IDs](#flattened-ids), and [FASTA-format IDs](#fasta-format-ids).                                                                     |
-| <span class="nctnt ncbi-cmd">-maxplex m</span> | [complexity](#complexity)   | Maximum output complexity level; default is `entry` (entire entry).                                                                                                                                                           |
-| <span class="nctnt ncbi-cmd">-flat id</span>   | [flat ID](#flat-id)         | Flattened ID of sequence to look up.                                                                                                                                                                                          |
-| <span class="nctnt ncbi-cmd">-fasta id</span>  | [FASTA ID](#fasta-id)       | [FASTA](http://blast.ncbi.nlm.nih.gov/blast/fasta.shtml)-style ID of sequence to look up.                                                                                                                                     |
-| <span class="nctnt ncbi-cmd">-query str</span> | string                      | Generate ID list from specified [Entrez](http://www.ncbi.nlm.nih.gov/books/NBK21081/) query.                                                                                                                                  |
-| <span class="nctnt ncbi-cmd">-qf file</span>   | file                        | Generate ID list from [Entrez](http://www.ncbi.nlm.nih.gov/books/NBK21081/) query in specified file.                                                                                                                          |
+| Argument     | Value                       | Effect                                                                                                                                                                                                                        |
+|--------------|-----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `-h`         |         | Print usage message and exit.                                                                                                                                                                                                 |
+| `-gi N`      | integer                     | GenInfo ID of sequence to look up.                                                                                                                                                                                            |
+| `-fmt fmt`   | [format type](#format-type) | Output data format; default is `asn` (ASN.1 text).                                                                                                                                                                            |
+| `-out file`  | filename                    | Write output to specified file rather than stdout.                                                                                                                                                                            |
+| `-log file`  | filename                    | Write errors and messages to specified file rather than stderr.                                                                                                                                                               |
+| `-db str`    | string                      | Use specified database. **Mandatory for** [Entrez](http://www.ncbi.nlm.nih.gov/books/NBK21081/) **queries**, where it is normally either Nucleotide or Protein. Also specifies satellite database for sequence-entry lookups. |
+| `-ent N`     | integer                     | Dump specified subentity. Only relevant for sequence-entry lookups.                                                                                                                                                           |
+| `-lt type`   | [lookup type](#lookup-type) | Type of lookup; default is `entry` (sequence entry).                                                                                                                                                                          |
+| `-in file`   | filename                    | Read sequence IDs from file rather than command line. May contain raw GI IDs, [flattened IDs](#flattened-ids), and [FASTA-format IDs](#fasta-format-ids).                                                                     |
+| `-maxplex m` | [complexity](#complexity)   | Maximum output complexity level; default is `entry` (entire entry).                                                                                                                                                           |
+| `-flat id`   | [flat ID](#flat-id)         | Flattened ID of sequence to look up.                                                                                                                                                                                          |
+| `-fasta id`  | [FASTA ID](#fasta-id)       | [FASTA](http://blast.ncbi.nlm.nih.gov/blast/fasta.shtml)-style ID of sequence to look up.                                                                                                                                     |
+| `-query str` | string                      | Generate ID list from specified [Entrez](http://www.ncbi.nlm.nih.gov/books/NBK21081/) query.                                                                                                                                  |
+| `-qf file`   | file                        | Generate ID list from [Entrez](http://www.ncbi.nlm.nih.gov/books/NBK21081/) query in specified file.                                                                                                                          |
 
-<span class="nctnt highlight">Note</span>: You must specify exactly one of the options indicating what to look up: <span class="nctnt ncbi-cmd">-gi, -in, -flat, -fasta, -query, -qf</span>.
+*Note*: You must specify exactly one of the options indicating what to look up: `-gi, -in, -flat, -fasta, -query, -qf`.
 
 #### Output Data Formats
 
-The possible values of the <span class="nctnt ncbi-cmd">-fmt</span> argument are shown in [Table 2](#table-2).
+The possible values of the `-fmt` argument are shown in [Table 2](#table-2).
 
 Table 2. Output data formats
 
@@ -135,7 +135,7 @@ Table 2. Output data formats
 
 #### Lookup Types
 
-The possible values of the <span class="nctnt ncbi-cmd">-lt</span> argument are shown in [Table 3](#table-3).
+The possible values of the `-lt` argument are shown in [Table 3](#table-3).
 
 Table 3. Lookup types
 
@@ -150,7 +150,7 @@ Table 3. Lookup types
 
 #### Output Complexity Levels
 
-The possible values of the <span class="nctnt ncbi-cmd">-maxplex</span> argument are shown in [Table 4](#table-4).
+The possible values of the `-maxplex` argument are shown in [Table 4](#table-4).
 
 Table 4. Maximum output complexity level values
 

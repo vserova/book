@@ -316,11 +316,11 @@ There are several annotation iterator classes; some specialized for particular a
 
 #### CFeatTree
 
-The <span class="nctnt ncbi-class">CFeatTree</span> class builds a parent-child feature tree in a more efficient way than repeatedly calling <span class="nctnt ncbi-func">GetParentFeature()</span> for each feature. The algorithm of a parent search is the same as the one used by <span class="nctnt ncbi-func">GetParentFeature()</span>.
+The `CFeatTree` class builds a parent-child feature tree in a more efficient way than repeatedly calling `GetParentFeature()` for each feature. The algorithm of a parent search is the same as the one used by `GetParentFeature()`.
 
-The class [CFeatTree](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCFeatTree.html) works with a set of features specified by calling <span class="nctnt ncbi-func">AddFeature()</span> or <span class="nctnt ncbi-func">AddFeatures()</span>. The actual tree is built the first time method <span class="nctnt ncbi-func">GetParent()</span> or <span class="nctnt ncbi-func">GetChildren()</span> is called after adding new features. Features can be added later, but the parent information is cached and will not change if parents were found already. However, features with no parent will be processed again in attempt to find parents from the newly added features.
+The class [CFeatTree](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCFeatTree.html) works with a set of features specified by calling `AddFeature()` or `AddFeatures()`. The actual tree is built the first time method `GetParent()` or `GetChildren()` is called after adding new features. Features can be added later, but the parent information is cached and will not change if parents were found already. However, features with no parent will be processed again in attempt to find parents from the newly added features.
 
-Here's a sample code snippet that constructs a <span class="nctnt ncbi-class">CFeatTree</span> based on selected features:
+Here's a sample code snippet that constructs a `CFeatTree` based on selected features:
 
     // Construct the Seq-loc to get features for.
     CSeq_loc seq_loc;
@@ -347,9 +347,9 @@ Here's a sample code snippet that constructs a <span class="nctnt ncbi-class">CF
     feature::CFeatTree feat_tree;
     feat_tree.AddFeatures(feat_it);
 
-The <span class="nctnt ncbi-class">CFeatTree</span> class can also improve the performance of the <span class="nctnt ncbi-func">feature::GetBestXxxForYyy()</span> functions, such as [GetBestGeneForMrna()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetBestGeneForMrna). Simply create the <span class="nctnt ncbi-class">CFeatTree</span> and pass it to the <span class="nctnt ncbi-func">GetBestXxxForYyy()</span> functions.
+The `CFeatTree` class can also improve the performance of the `feature::GetBestXxxForYyy()` functions, such as [GetBestGeneForMrna()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetBestGeneForMrna). Simply create the `CFeatTree` and pass it to the `GetBestXxxForYyy()` functions.
 
-<span class="nctnt highlight">Note:</span> There are "old" and "new" <span class="nctnt ncbi-func">GetBestXxxForYyy()</span> functions. The "new" functions are in the `feature` namespace, are located in `include/objmgr/util/feature.hpp`, and should be used for new development, as they are more efficient. The "old" functions are in the `sequence` namespace and are located in `include/objmgr/util/sequence.hpp`.
+*Note:* There are "old" and "new" `GetBestXxxForYyy()` functions. The "new" functions are in the `feature` namespace, are located in `include/objmgr/util/feature.hpp`, and should be used for new development, as they are more efficient. The "old" functions are in the `sequence` namespace and are located in `include/objmgr/util/sequence.hpp`.
 
 ### Attributes and Operations
 
@@ -413,23 +413,23 @@ The <span class="nctnt ncbi-class">CFeatTree</span> class can also improve the p
 
 Before being able to use any Scopes, a client must create and initialize the Object Manager ([CObjectManager](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CObjectManager)). Initialization functions include registration of [Data loaders](#data-loaders), some of which may be declared as default ones. All default Data loaders are added to a Scope when the latter asks for them. All Data loaders are named, so Scopes may refer to them by name. Another kind of data object is [CSeq\_entry](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_entry) - it does not require any data loader, but also may be registered with the Object Manager. Seq-entry may not be a default data object.
 
-<span class="nctnt ncbi-class">CObjectManager</span> is a multi-thread-safe singleton class, which means that only one instance of the class will be created, and it will be safely accessible from all threads. This object gets created in the first call to <span class="nctnt ncbi-func">CObjectManager::GetInstance(void)</span> and does not get destroyed until the program terminates (even if all references to it are destroyed), so all calls to <span class="nctnt ncbi-func">GetInstance()</span> will return the same object. Therefore you can either save the <span class="nctnt ncbi-class">CRef</span> returned by <span class="nctnt ncbi-func">GetInstance()</span> or call <span class="nctnt ncbi-func">GetInstance()</span> again for subsequent use.
+`CObjectManager` is a multi-thread-safe singleton class, which means that only one instance of the class will be created, and it will be safely accessible from all threads. This object gets created in the first call to `CObjectManager::GetInstance(void)` and does not get destroyed until the program terminates (even if all references to it are destroyed), so all calls to `GetInstance()` will return the same object. Therefore you can either save the `CRef` returned by `GetInstance()` or call `GetInstance()` again for subsequent use.
 
-Most other <span class="nctnt ncbi-class">CObjectManager</span> methods are used to manage Data loaders.
+Most other `CObjectManager` methods are used to manage Data loaders.
 
 #### CObjectManager important methods
 
--   <span class="nctnt ncbi-func">GetInstance</span> - returns the object manager singleton (creating it if necessary). This method can be called multiple times and/or the returned <span class="nctnt ncbi-class">CRef</span> can be saved.
+-   `GetInstance` - returns the object manager singleton (creating it if necessary). This method can be called multiple times and/or the returned `CRef` can be saved.
 
--   <span class="nctnt ncbi-func">RegisterDataLoader</span> - creates and registers data loader specified by driver name using plugin manager.
+-   `RegisterDataLoader` - creates and registers data loader specified by driver name using plugin manager.
 
--   <span class="nctnt ncbi-func">FindDataLoader</span> - finds data loader by its name. Returns pointer to the loader or null if no loader was found.
+-   `FindDataLoader` - finds data loader by its name. Returns pointer to the loader or null if no loader was found.
 
--   <span class="nctnt ncbi-func">GetRegisteredNames</span> - fills vector of strings with the names of all registered data loaders.
+-   `GetRegisteredNames` - fills vector of strings with the names of all registered data loaders.
 
--   <span class="nctnt ncbi-func">void SetLoaderOptions</span> - allows to modify options (default flag and priority) of a registered data loader.
+-   `void SetLoaderOptions` - allows to modify options (default flag and priority) of a registered data loader.
 
--   <span class="nctnt ncbi-func">bool RevokeDataLoader</span> - revokes a registered data loader by pointer or name. Returns false if the loader is still in use. Throws exception if the loader is not registered.
+-   `bool RevokeDataLoader` - revokes a registered data loader by pointer or name. Returns false if the loader is still in use. Throws exception if the loader is not registered.
 
 See the [CObjectManager API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectManager.html) for an up-to-date list of all methods.
 
@@ -437,47 +437,47 @@ See the [CObjectManager API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/C
 
 The Scope class ([CScope](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CScope)) is designed to be a lightweight object, which could be easily created and destroyed. Scope may even be created on the stack - as an automatic object. Scope is populated with data by adding data loaders or already created Seq-entry's to it. [Data loaders](#data-loaders) can only be added by name, which means it must be registered with the Object Manager beforehand. Once an externally created Seq-entry is added to a Scope, it should not be modified any more.
 
-The main task of a scope is to cache resolved data references. Any resolved data chunk will be locked by the scope through which it was fetched. For this reason retrieving a lot of unrelated data through the same scope may consume a lot of memory. To clean a scope's cache and release the memory you can use <span class="nctnt ncbi-func">ResetHistory</span> or just destroy the scope and create a new one. <span class="nctnt highlight">Note:</span> When a scope is destroyed or cleaned any handles retrieved from the scope become invalid.
+The main task of a scope is to cache resolved data references. Any resolved data chunk will be locked by the scope through which it was fetched. For this reason retrieving a lot of unrelated data through the same scope may consume a lot of memory. To clean a scope's cache and release the memory you can use `ResetHistory` or just destroy the scope and create a new one. *Note:* When a scope is destroyed or cleaned any handles retrieved from the scope become invalid.
 
 #### CScope important methods
 
--   <span class="nctnt ncbi-func">AddDefaults</span> - adds all loaders registered as default in the object manager.
+-   `AddDefaults` - adds all loaders registered as default in the object manager.
 
--   <span class="nctnt ncbi-func">AddDataLoader</span> - adds a data loader to the scope using the loader's name.
+-   `AddDataLoader` - adds a data loader to the scope using the loader's name.
 
--   <span class="nctnt ncbi-func">AddScope</span> - adds all loaders attached to another scope.
+-   `AddScope` - adds all loaders attached to another scope.
 
--   <span class="nctnt ncbi-func">AddTopLevelSeqEntry</span> - adds a TSE to the scope. If the TSE has been already added to some scope, the data and indices will be re-used.
+-   `AddTopLevelSeqEntry` - adds a TSE to the scope. If the TSE has been already added to some scope, the data and indices will be re-used.
 
--   <span class="nctnt ncbi-func">AddBioseq</span> - adds a Bioseq object wrapping it to a new Seq-entry.
+-   `AddBioseq` - adds a Bioseq object wrapping it to a new Seq-entry.
 
--   <span class="nctnt ncbi-func">AddSeq\_annot</span> - adds a Seq-annot object to the scope.
+-   `AddSeq_annot` - adds a Seq-annot object to the scope.
 
--   <span class="nctnt ncbi-func">GetBioseqHandle</span> - returns a Bioseq handle for the requested Bioseq. There are several versions of this function accepting different arguments. A bioseqs can be found by its Seq-id, Seq-id handle or Seq-loc. There are special flags which control data loading while resolving a Bioseq (e.g. you may want to check if a Bioseq has been already loaded by any scope or resolved in this particular scope).
+-   `GetBioseqHandle` - returns a Bioseq handle for the requested Bioseq. There are several versions of this function accepting different arguments. A bioseqs can be found by its Seq-id, Seq-id handle or Seq-loc. There are special flags which control data loading while resolving a Bioseq (e.g. you may want to check if a Bioseq has been already loaded by any scope or resolved in this particular scope).
 
--   <span class="nctnt ncbi-func">GetBioseqHandleFromTSE</span> - allows getting a Bioseq handle restricting the search to a single top-level Seq-entry.
+-   `GetBioseqHandleFromTSE` - allows getting a Bioseq handle restricting the search to a single top-level Seq-entry.
 
--   <span class="nctnt ncbi-func">GetSynonyms</span> - returns a set of synonyms for a given Bioseq. Synonyms returned by a scope may differ from the Seq-id set stored in Bioseq object. The returned set includes all ids which are resolved to the Bioseq in this scope. An id may be hidden if it has been resolved to another Bioseq. Several modifications of the same id may appear as synonyms (e.g. accession.version and accession-only may be synonyms).
+-   `GetSynonyms` - returns a set of synonyms for a given Bioseq. Synonyms returned by a scope may differ from the Seq-id set stored in Bioseq object. The returned set includes all ids which are resolved to the Bioseq in this scope. An id may be hidden if it has been resolved to another Bioseq. Several modifications of the same id may appear as synonyms (e.g. accession.version and accession-only may be synonyms).
 
--   <span class="nctnt ncbi-func">GetAllTSEs</span> - fills a vector of Seq-entry handles with all resolved TSEs.
+-   `GetAllTSEs` - fills a vector of Seq-entry handles with all resolved TSEs.
 
--   <span class="nctnt ncbi-func">GetIds</span> - fetches complete list of IDs for a given Seq-id without fetching the Bioseq (if supported by loader).
+-   `GetIds` - fetches complete list of IDs for a given Seq-id without fetching the Bioseq (if supported by loader).
 
 See the [CScope API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCScope.html) for an up-to-date list of all methods.
 
-All data sources (data loaders and explicitly added data) have priorities. For example, if you call <span class="nctnt ncbi-func">AddScope()</span> and specify a non-default priority, the scope scans data sources in order of increasing priority to find the sequence you've requested. By default, explicitly added data have priority 9 and data loaders have priority 99, so the scope will first look in explicit data, then in data loaders. If you have conflicting data or loaders (e.g. GenBank and BLAST), you may need different priorities to make the scope first look, for example, in BLAST, and then in GenBank if the sequence is not found.
+All data sources (data loaders and explicitly added data) have priorities. For example, if you call `AddScope()` and specify a non-default priority, the scope scans data sources in order of increasing priority to find the sequence you've requested. By default, explicitly added data have priority 9 and data loaders have priority 99, so the scope will first look in explicit data, then in data loaders. If you have conflicting data or loaders (e.g. GenBank and BLAST), you may need different priorities to make the scope first look, for example, in BLAST, and then in GenBank if the sequence is not found.
 
-<span class="nctnt highlight">Note:</span> the priority you've specified for a data loader at registration time (<span class="nctnt ncbi-func">RegisterInObjectManager()</span>) is a new default for it, and can be overridden when you add the data loader to a scope.
+*Note:* the priority you've specified for a data loader at registration time (`RegisterInObjectManager()`) is a new default for it, and can be overridden when you add the data loader to a scope.
 
 #### Data loader
 
-The Data loader base class ([CDataLoader](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDataLoader)) is almost never used by a client application directly. The specific data loaders (like GenBank data loader) have several static methods which should be used to register loaders in the Object Manager. Each of <span class="nctnt ncbi-func">RegisterInObjectManager</span> methods constructs a loader name depending on the arguments, checks if a loader with this name is already registered, creates and registers the loader if necessary. <span class="nctnt ncbi-func">GetLoaderNameFromArgs</span> methods may be used to get a potential loader's name from a set of arguments. <span class="nctnt ncbi-func">RegisterInObjectManager</span> returns a simple structure with two methods: <span class="nctnt ncbi-func">IsCreated</span>, indicating if the loader was just created or a registered loader with the same name was found, and <span class="nctnt ncbi-func">GetLoader</span>, returning pointer to the loader. The pointer may be null if the <span class="nctnt ncbi-func">RegisterInObjectManager</span> function fails or if the type of the already registered loader can not be casted to the type requested.
+The Data loader base class ([CDataLoader](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDataLoader)) is almost never used by a client application directly. The specific data loaders (like GenBank data loader) have several static methods which should be used to register loaders in the Object Manager. Each of `RegisterInObjectManager` methods constructs a loader name depending on the arguments, checks if a loader with this name is already registered, creates and registers the loader if necessary. `GetLoaderNameFromArgs` methods may be used to get a potential loader's name from a set of arguments. `RegisterInObjectManager` returns a simple structure with two methods: `IsCreated`, indicating if the loader was just created or a registered loader with the same name was found, and `GetLoader`, returning pointer to the loader. The pointer may be null if the `RegisterInObjectManager` function fails or if the type of the already registered loader can not be casted to the type requested.
 
 ##### Interaction with the Object Manager
 
-By default, the Object Manager will use registered data loaders to fetch basic information about all referenced Seq-entry's and annotations. For example, even if a Seq-entry contains no external references and is added to the scope using <span class="nctnt ncbi-func">CScope::AddTopLevelSeqEntry()</span>, the Object Manager will still use the data loader to fetch basic information about that Seq-entry and its annotations.
+By default, the Object Manager will use registered data loaders to fetch basic information about all referenced Seq-entry's and annotations. For example, even if a Seq-entry contains no external references and is added to the scope using `CScope::AddTopLevelSeqEntry()`, the Object Manager will still use the data loader to fetch basic information about that Seq-entry and its annotations.
 
-If the Object Manager finds a difference between a Seq-entry loaded by a data loader and an in-memory Seq-entry (having the same Seq-id) loaded with <span class="nctnt ncbi-func">AddTopLevelSeqEntry()</span>, the in-memory data will be used instead of the data from the data loader.
+If the Object Manager finds a difference between a Seq-entry loaded by a data loader and an in-memory Seq-entry (having the same Seq-id) loaded with `AddTopLevelSeqEntry()`, the in-memory data will be used instead of the data from the data loader.
 
 #### Bioseq handle
 
@@ -487,53 +487,53 @@ Most methods of CBioseq for checking and getting object members are mirrored in 
 
 #### CBioseq\_Handle important methods
 
--   <span class="nctnt ncbi-func">GetSeqId</span> - returns Seq-id which was used to obtain the handle or null (if the handle was obtained in a way not requiring Seq-id).
+-   `GetSeqId` - returns Seq-id which was used to obtain the handle or null (if the handle was obtained in a way not requiring Seq-id).
 
--   <span class="nctnt ncbi-func">GetSeq\_id\_Handle</span> - returns Seq-id handle corresponding to the id used to obtain the handle.
+-   `GetSeq_id_Handle` - returns Seq-id handle corresponding to the id used to obtain the handle.
 
--   <span class="nctnt ncbi-func">IsSynonym</span> - returns true if the id resolves to the same handle.
+-   `IsSynonym` - returns true if the id resolves to the same handle.
 
--   <span class="nctnt ncbi-func">GetSynonyms</span> - returns a list of all Bioseq synonyms.
+-   `GetSynonyms` - returns a list of all Bioseq synonyms.
 
--   <span class="nctnt ncbi-func">GetParentEntry</span> - returns a handle for the parent Seq-entry of the Bioseq.
+-   `GetParentEntry` - returns a handle for the parent Seq-entry of the Bioseq.
 
--   <span class="nctnt ncbi-func">GetTopLevelEntry</span> - returns a handle for the top-level Seq-entry.
+-   `GetTopLevelEntry` - returns a handle for the top-level Seq-entry.
 
--   <span class="nctnt ncbi-func">GetBioseqCore</span> - returns TBioseqCore, which is CConstRef\<CBioseq\>. The Bioseq object is guaranteed to have basic information loaded (the list of Seq-ids, Bioseq length, type etc.). Some information in the Bioseq (descriptors, annotations, sequence data) may be not loaded yet.
+-   `GetBioseqCore` - returns TBioseqCore, which is CConstRef\<CBioseq\>. The Bioseq object is guaranteed to have basic information loaded (the list of Seq-ids, Bioseq length, type etc.). Some information in the Bioseq (descriptors, annotations, sequence data) may be not loaded yet.
 
--   <span class="nctnt ncbi-func">GetCompleteBioseq</span> - returns the complete Bioseq object. Any missing data will be loaded and put in the Bioseq members.
+-   `GetCompleteBioseq` - returns the complete Bioseq object. Any missing data will be loaded and put in the Bioseq members.
 
--   <span class="nctnt ncbi-func">GetComplexityLevel</span> and <span class="nctnt ncbi-func">GetExactComplexityLeve</span>l - allow finding a parent Seq-entry of a specified class (e.g. nuc-prot). The first method is more flexible since it considers some Seq-entry classes as equivalent.
+-   `GetComplexityLevel` and `GetExactComplexityLeve`l - allow finding a parent Seq-entry of a specified class (e.g. nuc-prot). The first method is more flexible since it considers some Seq-entry classes as equivalent.
 
--   <span class="nctnt ncbi-func">GetBioseqMolType</span> - returns molecule type of the Bioseq.
+-   `GetBioseqMolType` - returns molecule type of the Bioseq.
 
--   <span class="nctnt ncbi-func">GetSeqMap</span> - returns Seq-map object for the Bioseq.
+-   `GetSeqMap` - returns Seq-map object for the Bioseq.
 
--   <span class="nctnt ncbi-func">GetSeqVector</span> - returns Seq-vector with the selected coding and strand.
+-   `GetSeqVector` - returns Seq-vector with the selected coding and strand.
 
--   <span class="nctnt ncbi-func">GetSequenceView</span> - creates a Seq-vector for a part of the Bioseq. Depending on the flags the resulting Seq-vector may show all intervals (merged or not) on the Bioseq specified by Seq-loc, or all parts of the Bioseq not included in the Seq-loc.
+-   `GetSequenceView` - creates a Seq-vector for a part of the Bioseq. Depending on the flags the resulting Seq-vector may show all intervals (merged or not) on the Bioseq specified by Seq-loc, or all parts of the Bioseq not included in the Seq-loc.
 
--   <span class="nctnt ncbi-func">GetSeqMapByLocation</span> - returns Seq-map constructed from a Seq-loc. The method uses the same flags as <span class="nctnt ncbi-func">GetSequenceView</span>.
+-   `GetSeqMapByLocation` - returns Seq-map constructed from a Seq-loc. The method uses the same flags as `GetSequenceView`.
 
--   <span class="nctnt ncbi-func">MapLocation</span> - maps a Seq-loc from the Bioseq's segment to the Bioseq.
+-   `MapLocation` - maps a Seq-loc from the Bioseq's segment to the Bioseq.
 
 See the [CBioseq\_Handle API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBioseq__Handle.html) for an up-to-date list of all methods.
 
 #### Bioseq-set handle
 
-The Bioseq-set handle class ([CBioseq\_set\_Handle](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CBioseq_set_Handle)) is a proxy class for Bioseq-set objects. Like in Bioseq handle, most of its methods allow read-only access to the members of <span class="nctnt ncbi-class">CBioseq\_set</span> object. Some other methods are similar to the Bioseq handle's interface.
+The Bioseq-set handle class ([CBioseq\_set\_Handle](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CBioseq_set_Handle)) is a proxy class for Bioseq-set objects. Like in Bioseq handle, most of its methods allow read-only access to the members of `CBioseq_set` object. Some other methods are similar to the Bioseq handle's interface.
 
 #### CBioseq\_set\_Handle important methods
 
--   <span class="nctnt ncbi-func">GetParentEntry</span> - returns a handle for the parent Seq-entry of the Bioseq.
+-   `GetParentEntry` - returns a handle for the parent Seq-entry of the Bioseq.
 
--   <span class="nctnt ncbi-func">GetTopLevelEntry</span> - returns a handle for the top-level Seq-entry.
+-   `GetTopLevelEntry` - returns a handle for the top-level Seq-entry.
 
--   <span class="nctnt ncbi-func">GetBioseq\_setCore</span> - returns core data for the Bioseq-set. The object is guaranteed to have basic information loaded. Some information may be not loaded yet.
+-   `GetBioseq_setCore` - returns core data for the Bioseq-set. The object is guaranteed to have basic information loaded. Some information may be not loaded yet.
 
--   <span class="nctnt ncbi-func">GetCompleteBioseq\_set</span> - returns the complete Bioseq-set object. Any missing data will be loaded and put in the Bioseq members.
+-   `GetCompleteBioseq_set` - returns the complete Bioseq-set object. Any missing data will be loaded and put in the Bioseq members.
 
--   <span class="nctnt ncbi-func">GetComplexityLevel</span> and <span class="nctnt ncbi-func">GetExactComplexityLevel</span> - allow finding a parent Seq-entry of a specified class (e.g. nuc-prot). The first method is more flexible since it considers some Seq-entry classes as equivalent.
+-   `GetComplexityLevel` and `GetExactComplexityLevel` - allow finding a parent Seq-entry of a specified class (e.g. nuc-prot). The first method is more flexible since it considers some Seq-entry classes as equivalent.
 
 See the [CBioseq\_set\_Handle API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBioseq__set__Handle.html) for an up-to-date list of all methods.
 
@@ -543,17 +543,17 @@ The Seq-entry handle class ([CSeq\_entry\_Handle](http://www.ncbi.nlm.nih.gov/IE
 
 #### CSeq\_entry\_Handle important methods
 
--   <span class="nctnt ncbi-func">GetParentBioseq\_set</span> - returns a handle for the parent Bioseq-set if any.
+-   `GetParentBioseq_set` - returns a handle for the parent Bioseq-set if any.
 
--   <span class="nctnt ncbi-func">GetParentEntry</span> - returns a handle for the parent Seq-entry.
+-   `GetParentEntry` - returns a handle for the parent Seq-entry.
 
--   <span class="nctnt ncbi-func">GetSingleSubEntry</span> - checks that the Seq-entry contains a Bioseq-set of just one child Seq-entry and returns a handle for this entry, otherwise throws exception.
+-   `GetSingleSubEntry` - checks that the Seq-entry contains a Bioseq-set of just one child Seq-entry and returns a handle for this entry, otherwise throws exception.
 
--   <span class="nctnt ncbi-func">GetTopLevelEntry</span> - returns a handle for the top-level Seq-entry.
+-   `GetTopLevelEntry` - returns a handle for the top-level Seq-entry.
 
--   <span class="nctnt ncbi-func">GetSeq\_entryCore</span> - returns core data for the Seq-entry. Some information may be not loaded yet.
+-   `GetSeq_entryCore` - returns core data for the Seq-entry. Some information may be not loaded yet.
 
--   <span class="nctnt ncbi-func">GetCompleteSeq\_entry</span> - returns the complete Seq-entry object. Any missing data will be loaded and put in the Bioseq members.
+-   `GetCompleteSeq_entry` - returns the complete Seq-entry object. Any missing data will be loaded and put in the Bioseq members.
 
 See the [CSeq\_entry\_Handle API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__entry__Handle.html) for an up-to-date list of all methods.
 
@@ -563,11 +563,11 @@ The Seq-annot handle class ([CSeq\_annot\_Handle](http://www.ncbi.nlm.nih.gov/IE
 
 #### CSeq\_annot\_Handle important methods
 
--   <span class="nctnt ncbi-func">GetParentEntry</span> - returns a handle for the parent Seq-entry.
+-   `GetParentEntry` - returns a handle for the parent Seq-entry.
 
--   <span class="nctnt ncbi-func">GetTopLevelEntry</span> - returns a handle for the top-level Seq-entry.
+-   `GetTopLevelEntry` - returns a handle for the top-level Seq-entry.
 
--   <span class="nctnt ncbi-func">GetCompleteSeq\_annot</span> - returns the complete Seq-annot object. Any data stubs are resolved and loaded.
+-   `GetCompleteSeq_annot` - returns the complete Seq-annot object. Any data stubs are resolved and loaded.
 
 See the [CSeq\_annot\_Handle API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__annot__Handle.html) for an up-to-date list of all methods.
 
@@ -577,11 +577,11 @@ The Seq-feat handle class ([CSeq\_feat\_Handle](http://www.ncbi.nlm.nih.gov/IEB/
 
 #### Seq-align handle
 
-The Seq-align handle class ([CSeq\_align\_Handle](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_align_Handle)) is a read-only proxy to Seq-align objects data. Most of its methods are simply mapped to the <span class="nctnt ncbi-class">CSeq\_align</span> methods.
+The Seq-align handle class ([CSeq\_align\_Handle](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_align_Handle)) is a read-only proxy to Seq-align objects data. Most of its methods are simply mapped to the `CSeq_align` methods.
 
 #### Seq-graph handle
 
-The Seq-graph handle class ([CSeq\_graph\_Handle](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_graph_Handle)) is a read-only proxy to Seq-graph objects data. Most of its methods are simply mapped to the <span class="nctnt ncbi-class">CSeq\_graph</span> methods.
+The Seq-graph handle class ([CSeq\_graph\_Handle](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_graph_Handle)) is a read-only proxy to Seq-graph objects data. Most of its methods are simply mapped to the `CSeq_graph` methods.
 
 #### Seq-map
 
@@ -589,19 +589,19 @@ The Seq-map class ([CSeqMap](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr
 
 #### CSeqMap important methods
 
--   <span class="nctnt ncbi-func">GetSegmentsCount</span> - returns the number of segments in the Seq-map.
+-   `GetSegmentsCount` - returns the number of segments in the Seq-map.
 
--   <span class="nctnt ncbi-func">GetLength</span> - returns the length of the whole Seq-map.
+-   `GetLength` - returns the length of the whole Seq-map.
 
--   <span class="nctnt ncbi-func">GetMol</span> - returns the molecule type for real bioseqs.
+-   `GetMol` - returns the molecule type for real bioseqs.
 
--   <span class="nctnt ncbi-func">begin</span>, <span class="nctnt ncbi-func">Begin</span>, <span class="nctnt ncbi-func">end</span>, <span class="nctnt ncbi-func">End</span>, <span class="nctnt ncbi-func">FindSegment</span> - methods for normal Seq-map iteration (lower case names added for compatibility with STL).
+-   `begin`, `Begin`, `end`, `End`, `FindSegment` - methods for normal Seq-map iteration (lower case names added for compatibility with STL).
 
--   <span class="nctnt ncbi-func">BeginResolved</span>, <span class="nctnt ncbi-func">FindResolved</span>, <span class="nctnt ncbi-func">EndResolved</span> - force resolving references in the Seq-map. Optional arguments allow controlling types of segments to be shown and resolution depth.
+-   `BeginResolved`, `FindResolved`, `EndResolved` - force resolving references in the Seq-map. Optional arguments allow controlling types of segments to be shown and resolution depth.
 
--   <span class="nctnt ncbi-func">ResolvedRangeIterator</span> - starts iterator over the specified range and strand only.
+-   `ResolvedRangeIterator` - starts iterator over the specified range and strand only.
 
--   <span class="nctnt ncbi-func">CanResolveRange</span> - checks if necessary data is available to resolve all segments in the specified range.
+-   `CanResolveRange` - checks if necessary data is available to resolve all segments in the specified range.
 
 See the [CSeqMap API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeqMap.html) for an up-to-date list of all methods.
 
@@ -611,23 +611,23 @@ The Seq-vector class ([CSeqVector](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_D
 
 #### CSeqVector important methods
 
--   <span class="nctnt ncbi-func">size</span> - returns length of the whole Seq-vector.
+-   `size` - returns length of the whole Seq-vector.
 
--   <span class="nctnt ncbi-func">begin</span>, <span class="nctnt ncbi-func">end</span> - STL-style methods for iterating over Seq-vector.
+-   `begin`, `end` - STL-style methods for iterating over Seq-vector.
 
--   <span class="nctnt ncbi-func">operator[]</span> - provides access to individual character at a given position.
+-   `operator[]` - provides access to individual character at a given position.
 
--   <span class="nctnt ncbi-func">GetSeqData</span> - copy characters from a specified range to a string.
+-   `GetSeqData` - copy characters from a specified range to a string.
 
--   <span class="nctnt ncbi-func">GetSequenceType</span>, <span class="nctnt ncbi-func">IsProtein</span>, <span class="nctnt ncbi-func">IsNucleotide</span> - check sequence type.
+-   `GetSequenceType`, `IsProtein`, `IsNucleotide` - check sequence type.
 
--   <span class="nctnt ncbi-func">SetCoding</span>, <span class="nctnt ncbi-func">SetIupacCoding</span>, <span class="nctnt ncbi-func">SetNcbiCoding</span> - control coding used by Seq-vector. These methods allow selecting Iupac or Ncbi coding without checking the exact sequence type - correct coding will be selected by the Seq-vector automatically.
+-   `SetCoding`, `SetIupacCoding`, `SetNcbiCoding` - control coding used by Seq-vector. These methods allow selecting Iupac or Ncbi coding without checking the exact sequence type - correct coding will be selected by the Seq-vector automatically.
 
--   <span class="nctnt ncbi-func">GetGapChar</span> - returns character used in the current coding to indicate gaps in the sequence.
+-   `GetGapChar` - returns character used in the current coding to indicate gaps in the sequence.
 
--   <span class="nctnt ncbi-func">CanGetRange</span> - check if sequence data for the specified range is available.
+-   `CanGetRange` - check if sequence data for the specified range is available.
 
--   <span class="nctnt ncbi-func">SetRandomizeAmbiguities</span>, <span class="nctnt ncbi-func">SetNoAmbiguities</span> - control randomization of ambiguities in ncbi2na coding. If set, ambiguities will be represented with random characters with distribution corresponding to the ambiguity symbol at each position. Once assigned, the same character will be returned every time for the same position.
+-   `SetRandomizeAmbiguities`, `SetNoAmbiguities` - control randomization of ambiguities in ncbi2na coding. If set, ambiguities will be represented with random characters with distribution corresponding to the ambiguity symbol at each position. Once assigned, the same character will be returned every time for the same position.
 
 See the [CSeqVector API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeqVector.html) for an up-to-date list of all methods.
 
@@ -637,29 +637,29 @@ The Seq-annot class ([CSeq\_annot](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_D
 
 #### CSeq\_annot important methods
 
--   <span class="nctnt ncbi-func">SetNameDesc</span> - set a description of type <span class="nctnt ncbi-type">name</span> for the Seq-annot.
+-   `SetNameDesc` - set a description of type `name` for the Seq-annot.
 
--   <span class="nctnt ncbi-func">SetTitleDesc</span> - set a description of type <span class="nctnt ncbi-type">title</span> for the Seq-annot.
+-   `SetTitleDesc` - set a description of type `title` for the Seq-annot.
 
--   <span class="nctnt ncbi-func">AddComment</span> - set a description of type <span class="nctnt ncbi-type">comment</span> for the Seq-annot.
+-   `AddComment` - set a description of type `comment` for the Seq-annot.
 
--   <span class="nctnt ncbi-func">SetCreateDate</span> - set the Seq-annot's time of creation.
+-   `SetCreateDate` - set the Seq-annot's time of creation.
 
--   <span class="nctnt ncbi-func">SetUpdateDate</span> - set the Seq-annot's time of last update.
+-   `SetUpdateDate` - set the Seq-annot's time of last update.
 
--   <span class="nctnt ncbi-func">AddUserObject</span> - this enables adding custom attributes to an annotation.
+-   `AddUserObject` - this enables adding custom attributes to an annotation.
 
 See the [CSeq\_annot API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__annot.html) for an up-to-date list of all methods.
 
 ##### Interaction with the Object Manager
 
-An external annotation is one residing in a TSE other than the TSE containing the Bioseq object that it annotates. This definition applies whether the TSE containing the Bioseq was loaded by a data loader or by calling <span class="nctnt ncbi-func">CScope::AddTopLevelSeqEntry()</span>.
+An external annotation is one residing in a TSE other than the TSE containing the Bioseq object that it annotates. This definition applies whether the TSE containing the Bioseq was loaded by a data loader or by calling `CScope::AddTopLevelSeqEntry()`.
 
 If a Seq-annot references external annotations, and if a data loader has been added to the scope, then by default the Object Manager will read the external annotations.
 
-This behavior can be modified by passing an appropriate [SAnnotSelector](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/structSAnnotSelector.html) to a <span class="nctnt ncbi-class">CFeat\_CI</span> feature iterator constructor. By default, <span class="nctnt ncbi-class">SAnnotSelector</span> will not exclude externals; however, calling <span class="nctnt ncbi-func">SetExcludeExternal()</span> on the selector will instruct the Object Manager to omit external annotations for this SAnnotSelector.
+This behavior can be modified by passing an appropriate [SAnnotSelector](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/structSAnnotSelector.html) to a `CFeat_CI` feature iterator constructor. By default, `SAnnotSelector` will not exclude externals; however, calling `SetExcludeExternal()` on the selector will instruct the Object Manager to omit external annotations for this SAnnotSelector.
 
-In addition you can disable/enable annotations by name or type using other methods of <span class="nctnt ncbi-class">SAnnotSelector</span>. Selection by name is useful for GenBank external annotations like SNPs because their names are fixed - "SNP", "CDD", etc.
+In addition you can disable/enable annotations by name or type using other methods of `SAnnotSelector`. Selection by name is useful for GenBank external annotations like SNPs because their names are fixed - "SNP", "CDD", etc.
 
 #### Tree structure iterators
 
@@ -693,63 +693,63 @@ Although returning [CSeq\_annot](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC
 
 ##### SAnnotSelector
 
-[SAnnotSelector](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SAnnotSelector) is a helper class which may be used to fine-tune annotation iterator's settings. It is used with [CAnnot\_CI](#cannotci), [CFeat\_CI](#cfeatci), [CAlign\_CI](#calignci) and [CGraph\_CI](#cgraphci) iterators. Below is the brief explanation of the class methods. Some methods have several modifications to simplify the selector usage. E.g. one can find <span class="nctnt ncbi-code">SetOverlapIntervals()</span> more convenient than <span class="nctnt ncbi-code">SetOverlapType(SAnnotSelector::eOverlap\_Intervals)</span>.
+[SAnnotSelector](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SAnnotSelector) is a helper class which may be used to fine-tune annotation iterator's settings. It is used with [CAnnot\_CI](#cannotci), [CFeat\_CI](#cfeatci), [CAlign\_CI](#calignci) and [CGraph\_CI](#cgraphci) iterators. Below is the brief explanation of the class methods. Some methods have several modifications to simplify the selector usage. E.g. one can find `SetOverlapIntervals()` more convenient than `SetOverlapType(SAnnotSelector::eOverlap_Intervals)`.
 
--   <span class="nctnt ncbi-func">SetAnnotType</span> - selects type of annotations to search for (features, alignments or graphs). Type-specific iterators set this type automatically.
+-   `SetAnnotType` - selects type of annotations to search for (features, alignments or graphs). Type-specific iterators set this type automatically.
 
--   <span class="nctnt ncbi-func">SetFeatType</span> - selects type of features to search for. Ignored when used with alignment or graph iterator.
+-   `SetFeatType` - selects type of features to search for. Ignored when used with alignment or graph iterator.
 
--   <span class="nctnt ncbi-func">SetFeatSubtype</span> - selects feature subtype and corresponding type.
+-   `SetFeatSubtype` - selects feature subtype and corresponding type.
 
--   <span class="nctnt ncbi-func">SetByProduct</span> - sets flag to search features by product rather than by location.
+-   `SetByProduct` - sets flag to search features by product rather than by location.
 
--   <span class="nctnt ncbi-func">SetOverlapType</span> - select type of location matching during the search. If overlap type is set to `intervals`, the annotation should have at least one interval intersecting with the requested ranges to be included in the results. If overlap type is set to `total range`, the annotation will be found even if its location has a gap intersecting with the requested range. The default value is `intervals`. Total ranges are calculated for each referenced Bioseq individually, even if an annotation is located on several bioseqs, which are segments of the same parent sequence.
+-   `SetOverlapType` - select type of location matching during the search. If overlap type is set to `intervals`, the annotation should have at least one interval intersecting with the requested ranges to be included in the results. If overlap type is set to `total range`, the annotation will be found even if its location has a gap intersecting with the requested range. The default value is `intervals`. Total ranges are calculated for each referenced Bioseq individually, even if an annotation is located on several bioseqs, which are segments of the same parent sequence.
 
--   <span class="nctnt ncbi-func">SetSortOrder</span> - selects sorting of annotations: `normal`, `reverse` or `none`. The default value is `normal`.
+-   `SetSortOrder` - selects sorting of annotations: `normal`, `reverse` or `none`. The default value is `normal`.
 
--   <span class="nctnt ncbi-func">SetResolveMethod</span> - defines method of resolving references in segmented bioseqs. Default value is `TSE`, meaning that annotations should only be searched on segments located in the same top-level Seq-entry. Other available options are `none` (to ignore annotations on segments) and `all` (to search on all segments regardless of their location). Resolving all references may produce a huge number of annotations for big bioseqs, this option should be used with care.
+-   `SetResolveMethod` - defines method of resolving references in segmented bioseqs. Default value is `TSE`, meaning that annotations should only be searched on segments located in the same top-level Seq-entry. Other available options are `none` (to ignore annotations on segments) and `all` (to search on all segments regardless of their location). Resolving all references may produce a huge number of annotations for big bioseqs, this option should be used with care.
 
--   <span class="nctnt ncbi-func">SetResolveDepth</span> - limits the depth of resolving references in segmented bioseqs. By default the search depth is not limited (set to `kMax_Int`).
+-   `SetResolveDepth` - limits the depth of resolving references in segmented bioseqs. By default the search depth is not limited (set to `kMax_Int`).
 
--   <span class="nctnt ncbi-func">SetAdaptiveDepth</span>, <span class="nctnt ncbi-func">SetAdaptiveTrigger</span> - set search depth limit using a trigger type/subtype. The search stops when an annotation of the trigger type is found on some level.
+-   `SetAdaptiveDepth`, `SetAdaptiveTrigger` - set search depth limit using a trigger type/subtype. The search stops when an annotation of the trigger type is found on some level.
 
--   <span class="nctnt ncbi-func">SetMaxSize</span> - limits total number of annotations to find.
+-   `SetMaxSize` - limits total number of annotations to find.
 
--   <span class="nctnt ncbi-func">SetLimitNone</span>, <span class="nctnt ncbi-func">SetLimitTSE</span>, <span class="nctnt ncbi-func">SetLimitSeqEntry</span>, <span class="nctnt ncbi-func">SetLimitSeqAnnot</span> - limits the search to a single TSE, Seq-entry or Seq-annot object.
+-   `SetLimitNone`, `SetLimitTSE`, `SetLimitSeqEntry`, `SetLimitSeqAnnot` - limits the search to a single TSE, Seq-entry or Seq-annot object.
 
--   <span class="nctnt ncbi-func">SetUnresolvedFlag</span>, <span class="nctnt ncbi-func">SetIgnoreUnresolved</span>, <span class="nctnt ncbi-func">SetSearchUnresolved</span>, <span class="nctnt ncbi-func">SetFailUnresolved</span> - define how the iterators should behave if a reference in a sequence can not be resolved. `Ignore` (default) will ignore missing parts, `Fail` will throw <span class="nctnt ncbi-class">CAnnotException</span>. `Search` may be used to search by known ID on missing parts, but will work only if limit object is also set, since the iterator needs to know where to look for the annotations.
+-   `SetUnresolvedFlag`, `SetIgnoreUnresolved`, `SetSearchUnresolved`, `SetFailUnresolved` - define how the iterators should behave if a reference in a sequence can not be resolved. `Ignore` (default) will ignore missing parts, `Fail` will throw `CAnnotException`. `Search` may be used to search by known ID on missing parts, but will work only if limit object is also set, since the iterator needs to know where to look for the annotations.
 
--   <span class="nctnt ncbi-func">SetSearchExternal</span> - sets all flags to search for external annotations. Such annotations are packed with special bioseqs, (e.g. gnl\\|Annot:CDD\\|6 references gi 6 and contains CDD features for the gi). If <span class="nctnt ncbi-func">SetSearchSpecial</span> is called with the Bioseq handle for this special sequence or its TSE handle, only external CDD features from this TSE will be found. The method calls <span class="nctnt ncbi-func">SetResolveTSE</span>, sets limit object to the same TSE and sets `SearchUnresolved` flag.
+-   `SetSearchExternal` - sets all flags to search for external annotations. Such annotations are packed with special bioseqs, (e.g. gnl\\|Annot:CDD\\|6 references gi 6 and contains CDD features for the gi). If `SetSearchSpecial` is called with the Bioseq handle for this special sequence or its TSE handle, only external CDD features from this TSE will be found. The method calls `SetResolveTSE`, sets limit object to the same TSE and sets `SearchUnresolved` flag.
 
--   <span class="nctnt ncbi-func">SetNoMapping</span> - prevents the iterator from mapping locations to the top-level Bioseq. This option can dramatically increase iterators' performance when searching annotations on a segmented Bioseq.
+-   `SetNoMapping` - prevents the iterator from mapping locations to the top-level Bioseq. This option can dramatically increase iterators' performance when searching annotations on a segmented Bioseq.
 
 ##### Feature iterator
 
-The Feature iterator ([CFeat\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CFeat_CI)) is a kind of annotation iterator. It enumerates [CSeq\_feat](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_feat) objects related to a Bioseq, Seq-loc, or contained in a particular Seq-entry or Seq-annot regardless of the referenced locations. The search parameters may be set using [SAnnotSelector](#sannotselector) (preferred method) or using constructors with different arguments. The iterator returns <span class="nctnt ncbi-class">CMappedFeat</span> object rather than <span class="nctnt ncbi-class">CSeq\_feat</span>. This allows accessing both the original feature (e.g. loaded from a database) and the mapped one, with its location adjusted according to the search parameters. Most methods of <span class="nctnt ncbi-class">CMappedFeat</span> are just proxies for the original feature members and are not listed here.
+The Feature iterator ([CFeat\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CFeat_CI)) is a kind of annotation iterator. It enumerates [CSeq\_feat](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_feat) objects related to a Bioseq, Seq-loc, or contained in a particular Seq-entry or Seq-annot regardless of the referenced locations. The search parameters may be set using [SAnnotSelector](#sannotselector) (preferred method) or using constructors with different arguments. The iterator returns `CMappedFeat` object rather than `CSeq_feat`. This allows accessing both the original feature (e.g. loaded from a database) and the mapped one, with its location adjusted according to the search parameters. Most methods of `CMappedFeat` are just proxies for the original feature members and are not listed here.
 
 #### CMappedFeat important methods
 
--   <span class="nctnt ncbi-func">GetOriginalFeature</span> - returns the original feature.
+-   `GetOriginalFeature` - returns the original feature.
 
--   <span class="nctnt ncbi-func">GetSeq\_feat\_Handle</span> - returns handle for the original feature object.
+-   `GetSeq_feat_Handle` - returns handle for the original feature object.
 
--   <span class="nctnt ncbi-func">GetMappedFeature</span> - returns a copy of the original feature with its location/product adjusted according to the search parameters (e.g. id and ranges changed from a segment to the parent Bioseq). The mapped feature is not created unless requested. This allows improving the iterator's performance.
+-   `GetMappedFeature` - returns a copy of the original feature with its location/product adjusted according to the search parameters (e.g. id and ranges changed from a segment to the parent Bioseq). The mapped feature is not created unless requested. This allows improving the iterator's performance.
 
--   <span class="nctnt ncbi-func">GetLocation</span> - although present in <span class="nctnt ncbi-class">CSeq\_feat</span> class, this method does not always return the original feature's location, but first checks if the feature should be mapped, creates the mapped location if necessary and returns it. To get the unmapped location use <span class="nctnt ncbi-func">GetOriginalFeature()</span>.<span class="nctnt ncbi-func">GetLocation()</span> instead.
+-   `GetLocation` - although present in `CSeq_feat` class, this method does not always return the original feature's location, but first checks if the feature should be mapped, creates the mapped location if necessary and returns it. To get the unmapped location use `GetOriginalFeature()`.`GetLocation()` instead.
 
--   <span class="nctnt ncbi-func">GetAnnot</span> - returns handle for the Seq-annot object, containing the original feature.
+-   `GetAnnot` - returns handle for the Seq-annot object, containing the original feature.
 
 See the [CMappedFeat API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCMappedFeat.html) for an up-to-date list of all methods.
 
 ##### Alignment iterator
 
-The Alignment iterator ([CAlign\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CAlign_CI)) enumerates [CSeq\_align](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_align) objects related to the specified Bioseq or Seq-loc. It behaves much like [CFeat\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CFeat_CI). <span class="nctnt ncbi-func">operator\*</span> and <span class="nctnt ncbi-func">operator-\></span> return a mapped <span class="nctnt ncbi-class">CSeq\_align</span> object. To get the original alignment you can use <span class="nctnt ncbi-func">GetOriginalSeq\_align</span> or <span class="nctnt ncbi-func">GetSeq\_align\_Handle</span> methods. The objects iterated over may be selected by using [SAnnotSelector](#sannotselector) in the constructor.
+The Alignment iterator ([CAlign\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CAlign_CI)) enumerates [CSeq\_align](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_align) objects related to the specified Bioseq or Seq-loc. It behaves much like [CFeat\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CFeat_CI). `operator*` and `operator->` return a mapped `CSeq_align` object. To get the original alignment you can use `GetOriginalSeq_align` or `GetSeq_align_Handle` methods. The objects iterated over may be selected by using [SAnnotSelector](#sannotselector) in the constructor.
 
 ##### Graph iterator
 
-The Graph iterator ([CGraph\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CGraph_CI)) enumerates [CSeq\_graph](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_graph) objects related to a specific Bioseq or Seq-loc. It behaves much like [CFeat\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CFeat_CI), returning <span class="nctnt ncbi-class">CMappedGraph</span> object which imitates the interface of <span class="nctnt ncbi-class">CSeq\_graph</span> and has additional methods to access both original and mapped graphs. The objects iterated over may be selected by using [SAnnotSelector](#sannotselector) in the constructor.
+The Graph iterator ([CGraph\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CGraph_CI)) enumerates [CSeq\_graph](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_graph) objects related to a specific Bioseq or Seq-loc. It behaves much like [CFeat\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CFeat_CI), returning `CMappedGraph` object which imitates the interface of `CSeq_graph` and has additional methods to access both original and mapped graphs. The objects iterated over may be selected by using [SAnnotSelector](#sannotselector) in the constructor.
 
-<span class="nctnt highlight">Note:</span> Quality Graphs for cSRA data are not iterated by default. To include them, set the following configuration parameter:
+*Note:* Quality Graphs for cSRA data are not iterated by default. To include them, set the following configuration parameter:
 
     [csra_loader]
     quality_graphs=true
@@ -760,45 +760,45 @@ The Seq-map iterator ([CSeqMap\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_
 
 #### CSeqMap\_CI important methods
 
--   <span class="nctnt ncbi-func">GetType</span> - returns type of the current segment. The allowed types are `eSeqGap`, `eSeqData`, `eSubMap`, `eSeqRef`, and `eSeqEnd`, and `eSeqChunk`.
+-   `GetType` - returns type of the current segment. The allowed types are `eSeqGap`, `eSeqData`, `eSubMap`, `eSeqRef`, and `eSeqEnd`, and `eSeqChunk`.
 
--   <span class="nctnt ncbi-func">GetPosition</span> - returns start position of the current segment.
+-   `GetPosition` - returns start position of the current segment.
 
--   <span class="nctnt ncbi-func">GetLength</span> - returns length of the current segment.
+-   `GetLength` - returns length of the current segment.
 
--   <span class="nctnt ncbi-func">IsUnknownLength</span> - returns whether the length of the current segment is known.
+-   `IsUnknownLength` - returns whether the length of the current segment is known.
 
--   <span class="nctnt ncbi-func">GetEndPosition</span> - returns end position (exclusive) of the current segment.
+-   `GetEndPosition` - returns end position (exclusive) of the current segment.
 
--   <span class="nctnt ncbi-func">GetData</span> - returns sequence data ([CSeq\_data](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_data)). The current segment type must be `eSeqData`.
+-   `GetData` - returns sequence data ([CSeq\_data](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_data)). The current segment type must be `eSeqData`.
 
--   <span class="nctnt ncbi-func">GetRefSeqId</span> - returns referenced Seq-id for segments of type `eSeqRef`.
+-   `GetRefSeqId` - returns referenced Seq-id for segments of type `eSeqRef`.
 
--   <span class="nctnt ncbi-func">GetRefData</span> - returns sequence data for any segment which can be resolved to a real sequence. The real position, length and strand of the data should be checked using other methods.
+-   `GetRefData` - returns sequence data for any segment which can be resolved to a real sequence. The real position, length and strand of the data should be checked using other methods.
 
--   <span class="nctnt ncbi-func">GetRefPosition</span> - returns start position on the referenced Bioseq for segments of type `eSeqRef`.
+-   `GetRefPosition` - returns start position on the referenced Bioseq for segments of type `eSeqRef`.
 
--   <span class="nctnt ncbi-func">GetRefEndPosition</span> - returns end position (exclusive) on the referenced Bioseq for segments of type `eSeqRef`.
+-   `GetRefEndPosition` - returns end position (exclusive) on the referenced Bioseq for segments of type `eSeqRef`.
 
--   <span class="nctnt ncbi-func">GetRefMinusStrand</span> - returns true if referenced Bioseq's strand should be reversed. If there are several levels of references for the current segment, the method checks strands on each level.
+-   `GetRefMinusStrand` - returns true if referenced Bioseq's strand should be reversed. If there are several levels of references for the current segment, the method checks strands on each level.
 
 See the [CSeqMap\_CI API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeqMap__CI.html) for an up-to-date list of all methods.
 
-<span class="nctnt highlight">Note:</span> Some methods will throw exceptions if called inappropriately, so you should either check for the appropriate conditions before calling these methods or catch the exceptions. The methods that throw and the appropriate conditions for calling them are:
+*Note:* Some methods will throw exceptions if called inappropriately, so you should either check for the appropriate conditions before calling these methods or catch the exceptions. The methods that throw and the appropriate conditions for calling them are:
 
-| Method                                           | Calling Condition                                                                                                                                                                                                                                                                                                                                                                                            |
-|--------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <span class="nctnt ncbi-func">GetData</span>     | Type must be `eSeqGap` or `eSeqData`. If type is `eSeqData` then <span class="nctnt ncbi-func">GetRefPosition</span> must return zero and <span class="nctnt ncbi-func">GetRefMinusStrand</span> must return false. If the data must be modified (e.g. for a delta sequence) then <span class="nctnt ncbi-func">GetRefData</span> should be called rather than <span class="nctnt ncbi-func">GetData</span>. |
-| <span class="nctnt ncbi-func">GetRefSeqid</span> | Type must be `eSeqRef`.                                                                                                                                                                                                                                                                                                                                                                                      |
-| <span class="nctnt ncbi-func">GetRefData</span>  | Type must be `eSeqGap` or `eSeqData`.                                                                                                                                                                                                                                                                                                                                                                        |
+| Method        | Calling Condition                                                                                                                                                                                                                                                |
+|---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `GetData`     | Type must be `eSeqGap` or `eSeqData`. If type is `eSeqData` then `GetRefPosition` must return zero and `GetRefMinusStrand` must return false. If the data must be modified (e.g. for a delta sequence) then `GetRefData` should be called rather than `GetData`. |
+| `GetRefSeqid` | Type must be `eSeqRef`.                                                                                                                                                                                                                                          |
+| `GetRefData`  | Type must be `eSeqGap` or `eSeqData`.                                                                                                                                                                                                                            |
 
-<span class="nctnt highlight">Note:</span> Some other methods will not throw exceptions if called inappropriately, and will instead return invalid data. Therefore you must check for the appropriate conditions before calling these methods or using their data:
+*Note:* Some other methods will not throw exceptions if called inappropriately, and will instead return invalid data. Therefore you must check for the appropriate conditions before calling these methods or using their data:
 
-| Method                                                 | Calling Condition                                                                                  |
-|--------------------------------------------------------|----------------------------------------------------------------------------------------------------|
-| <span class="nctnt ncbi-func">GetLength</span>         | <span class="nctnt ncbi-func">IsUnknownLength</span> must return false.                            |
-| <span class="nctnt ncbi-func">GetEndPosition</span>    | <span class="nctnt ncbi-func">IsUnknownLength</span> must return false.                            |
-| <span class="nctnt ncbi-func">GetRefEndPosition</span> | Type must be `eSeqRef` and <span class="nctnt ncbi-func">IsUnknownLength</span> must return false. |
+| Method              | Calling Condition                                               |
+|---------------------|-----------------------------------------------------------------|
+| `GetLength`         | `IsUnknownLength` must return false.                            |
+| `GetEndPosition`    | `IsUnknownLength` must return false.                            |
+| `GetRefEndPosition` | Type must be `eSeqRef` and `IsUnknownLength` must return false. |
 
 ##### SSeqMapSelector
 
@@ -806,21 +806,21 @@ See the [CSeqMap\_CI API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_
 
 #### SSeqMapSelector important methods
 
--   <span class="nctnt ncbi-func">SSeqMapSelector</span> - there is a constructor that takes flags ([CSeqMap::Tflags](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeqMap.html#a7aecb4aeabdd3b9e9f528693773188f5)) and a resolve count. The flags can determine which types of segments are included, while the resolve count determines how many levels over which references are resolved.
+-   `SSeqMapSelector` - there is a constructor that takes flags ([CSeqMap::Tflags](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeqMap.html#a7aecb4aeabdd3b9e9f528693773188f5)) and a resolve count. The flags can determine which types of segments are included, while the resolve count determines how many levels over which references are resolved.
 
--   <span class="nctnt ncbi-func">SetPosition</span> - selects segments containing this position.
+-   `SetPosition` - selects segments containing this position.
 
--   <span class="nctnt ncbi-func">SetRange</span> - selects segments within this range.
+-   `SetRange` - selects segments within this range.
 
--   <span class="nctnt ncbi-func">SetStrand</span> - selects segments matching a strand constraint.
+-   `SetStrand` - selects segments matching a strand constraint.
 
--   <span class="nctnt ncbi-func">SetResolveCount</span> - limits the depth of resolved references.
+-   `SetResolveCount` - limits the depth of resolved references.
 
--   <span class="nctnt ncbi-func">SetLinkUsedTSE</span> - limits the TSE to resolve references.
+-   `SetLinkUsedTSE` - limits the TSE to resolve references.
 
--   <span class="nctnt ncbi-func">SetFlags</span> - selects segments matching these flags.
+-   `SetFlags` - selects segments matching these flags.
 
--   <span class="nctnt ncbi-func">SetByFeaturePolicy</span> - a convenience method equivalent to <span class="nctnt ncbi-code">SetFlags(my\_selector.GetFlags() \\| CSeqMap::fByFeaturePolicy)</span>.
+-   `SetByFeaturePolicy` - a convenience method equivalent to `SetFlags(my_selector.GetFlags() \| CSeqMap::fByFeaturePolicy)`.
 
 See the [SSeqMapSelector API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/structSSeqMapSelector.html) for an up-to-date list of all methods.
 
@@ -905,17 +905,17 @@ Here is some code that illustrates:
 
 #### Seq-vector iterator
 
-The Seq-vector iterator ([CSeqVector\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeqVector_CI)) is used to access individual characters from a [Seq-vector](#seq-vector). It has better performance than <span class="nctnt ncbi-func">CSeqVector::operator[]</span> when used for sequential access to the data.
+The Seq-vector iterator ([CSeqVector\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeqVector_CI)) is used to access individual characters from a [Seq-vector](#seq-vector). It has better performance than `CSeqVector::operator[]` when used for sequential access to the data.
 
 #### CSeqVector\_CI important methods
 
--   <span class="nctnt ncbi-func">GetSeqData</span> - copy characters from a specified range to a string.
+-   `GetSeqData` - copy characters from a specified range to a string.
 
--   <span class="nctnt ncbi-func">GetPos</span>, <span class="nctnt ncbi-func">SetPos</span> - control current position of the iterator.
+-   `GetPos`, `SetPos` - control current position of the iterator.
 
--   <span class="nctnt ncbi-func">GetCoding</span>, <span class="nctnt ncbi-func">SetCoding</span> - control character coding.
+-   `GetCoding`, `SetCoding` - control character coding.
 
--   <span class="nctnt ncbi-func">SetRandomizeAmbiguities</span>, <span class="nctnt ncbi-func">SetNoAmbiguities</span> - control randomization of ambiguities in ncbi2na coding. If set, ambiguities will be represented with random characters with distribution corresponding to the ambiguity symbol at each position. Once assigned, the same character will be returned every time for the same position.
+-   `SetRandomizeAmbiguities`, `SetNoAmbiguities` - control randomization of ambiguities in ncbi2na coding. If set, ambiguities will be represented with random characters with distribution corresponding to the ambiguity symbol at each position. Once assigned, the same character will be returned every time for the same position.
 
 See the [CSeqVector\_CI API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeqVector__CI.html) for an up-to-date list of all methods.
 
@@ -946,7 +946,7 @@ The Object Manager's interpretation of such requests is kind of arbitrary (yet r
 
 Once the Seq-id has been resolved into a specific Seq-entry, the Object Manager keeps track of all data requests to this sequence in order to maintain consistency. That is, it is perfectly possible that few minutes later this same Seq-id could be resolved into another Seq-entry (the data in the database may change). Still, from the client point of view, as long as this is the same session, nothing should happen - the data should not change.
 
-By 'session' we mean here the same Scope of resolution. That is, as long as the data are requested through the same Scope, it is consistent. In another Scope the data could potentially be different. The Scope can be made to forget about previous requests by calling its <span class="nctnt ncbi-func">ResetHistory()</span> method.
+By 'session' we mean here the same Scope of resolution. That is, as long as the data are requested through the same Scope, it is consistent. In another Scope the data could potentially be different. The Scope can be made to forget about previous requests by calling its `ResetHistory()` method.
 
 ### Ambiguous requests
 
@@ -1101,7 +1101,7 @@ Section **[server]** describes parameters of the server not related to storage.
 
 Section **[bdb]** describes parameters of BerkeleyDB database for main NetCache storage.
 
-One or more **[icache\_???]** sections describe parameters of ICache instances used by <span class="nctnt ncbi-app">GenBank</span> loader.
+One or more **[icache\_???]** sections describe parameters of ICache instances used by **GenBank** loader.
 
 ### Server configuration<br/>section [server]
 
@@ -1265,21 +1265,21 @@ One or more **[icache\_???]** sections describe parameters of ICache instances u
 
 ### ICache instances configuration<br/>sections [icache\_\*]
 
-Each <span class="nctnt ncbi-class">ICache</span> instance has an interface name which is used by clients to select the instance.
+Each `ICache` instance has an interface name which is used by clients to select the instance.
 
-The name of the section with the <span class="nctnt ncbi-class">ICache</span> instance's configuration is a concatenation of the string **icache\_** and the name of the instance.
+The name of the section with the `ICache` instance's configuration is a concatenation of the string **icache\_** and the name of the instance.
 
-For example, the parameters of an <span class="nctnt ncbi-class">ICache</span> instance named **ids** are stored in the section **[icache\_ids]**.
+For example, the parameters of an `ICache` instance named **ids** are stored in the section **[icache\_ids]**.
 
 The parameters inside the section are the same as the parameters in the **[bdb]** section with some exceptions.
 
 If the **path** parameter has the same value as **path** in main **[bdb]** section, then both databases will be stored in the same directory and share the same BerkeleyDB environment.
 
-As a result, all parameters of the BerkeleyDB environment have no meaning in an <span class="nctnt ncbi-class">ICache</span> section and are taken from the [**bdb**] section instead. To avoid a database conflict, all sections with the same **path** parameter must have different **name** parameters.
+As a result, all parameters of the BerkeleyDB environment have no meaning in an `ICache` section and are taken from the [**bdb**] section instead. To avoid a database conflict, all sections with the same **path** parameter must have different **name** parameters.
 
 The GenBank data loader requires two cache instances with slightly different parameters. The first, named **ids** by default, is used for small Seq-id resolution information. The second, named **blobs** by default, is used for large Seq-entry information. The names of those caches can be changed in the client program configuration.
 
-Similarly, NetCached configuration should describe two instances of <span class="nctnt ncbi-class">ICache</span> with names matching to the names on client (**ids** and **blobs** by default).
+Similarly, NetCached configuration should describe two instances of `ICache` with names matching to the names on client (**ids** and **blobs** by default).
 
 For example:
 
@@ -1335,7 +1335,7 @@ A demonstration program is available: [SVN](http://www.ncbi.nlm.nih.gov/viewvc/v
 
 ### Registering the LDS loader with the Object Manager
 
-The <span class="nctnt ncbi-class">CLDS2\_Manager</span> class creates (or updates) an SQLite database at the path specified in its constructor. Data files that it should manage can be specified with the <span class="nctnt ncbi-func">AddDataFile()</span> and/or <span class="nctnt ncbi-func">AddDataDir()</span> methods. <span class="nctnt ncbi-func">AddDataFile()</span> adds a single data file; <span class="nctnt ncbi-func">AddDataDir()</span> adds all data files in the specified directory and its subdirectories (by default). Recursion into the subdirectories can be disabled by passing <span class="nctnt ncbi-var">CLDS2\_Manager::eDir\_NoRecurse</span> as the second argument to the [AddDataDir()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCLDS2__Manager.html#0e57c13801ff03a58c54ea89379a418a) call. <span class="nctnt ncbi-func">UpdateData()</span> synchronizes the database with all the added data files. Source data files can be in ASN.1 text, ASN.1 binary, XML, or FASTA format.
+The `CLDS2_Manager` class creates (or updates) an SQLite database at the path specified in its constructor. Data files that it should manage can be specified with the `AddDataFile()` and/or `AddDataDir()` methods. `AddDataFile()` adds a single data file; `AddDataDir()` adds all data files in the specified directory and its subdirectories (by default). Recursion into the subdirectories can be disabled by passing `CLDS2_Manager::eDir_NoRecurse` as the second argument to the [AddDataDir()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCLDS2__Manager.html#0e57c13801ff03a58c54ea89379a418a) call. `UpdateData()` synchronizes the database with all the added data files. Source data files can be in ASN.1 text, ASN.1 binary, XML, or FASTA format.
 
 For example, the following code creates an LDS database, populates it with data, registers it with the Object Manager, and adds the LDS data loader to the scope.
 
@@ -1375,9 +1375,9 @@ The previous example adds the LDS data loader to the scope without adding any de
 
 The scope will now include just LDS and GenBank.
 
-<span class="nctnt ncbi-var">CObjectManager::eNonDefault</span> was passed to the <span class="nctnt ncbi-func">RegisterInObjectManager()</span> method in this example simply because it is the default value for that argument, and some value was necessary so that the next argument could be specified. It could equally well have been <span class="nctnt ncbi-var">CObjectManager::eDefault</span>.
+`CObjectManager::eNonDefault` was passed to the `RegisterInObjectManager()` method in this example simply because it is the default value for that argument, and some value was necessary so that the next argument could be specified. It could equally well have been `CObjectManager::eDefault`.
 
-The last argument to <span class="nctnt ncbi-func">RegisterInObjectManager()</span> is the priority. Here it was set to 1 for LDS and 2 for GenBank so the Object Manager would attempt to load data via LDS first, and only if that failed would it resort to GenBank.
+The last argument to `RegisterInObjectManager()` is the priority. Here it was set to 1 for LDS and 2 for GenBank so the Object Manager would attempt to load data via LDS first, and only if that failed would it resort to GenBank.
 
 In the above example, the loaders were explicitly added to the scope to ensure that they were the only loaders in the scope.
 
@@ -1399,7 +1399,7 @@ To add the LDS data loader and any other default loaders to the scope:
     // Add default loaders to scope.
     scope.AddDefaults();
 
-By registering with <span class="nctnt ncbi-var">eDefault</span>, the LDS data loader will be added to the scope along with the default data loaders.
+By registering with `eDefault`, the LDS data loader will be added to the scope along with the default data loaders.
 
 ### Known gotchas
 
@@ -1427,11 +1427,11 @@ The following table summarizes the classes that perform short-term, in-memory ca
 | id, gi, label, taxid | [CGBDataLoader](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCGBDataLoader.html)   |
 | blob id              | [CGBDataLoader](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCGBDataLoader.html)   |
 
-If you want in-memory caching for objects other than those listed in the table, you can implement a cache in a [CDataLoader](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDataLoader&d=) subclass. For an example implementation, see the [CGBDataLoader](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CGBDataLoader&d=) class. <span class="nctnt ncbi-class">CGBDataLoader</span> actually has two Seq-id caches - one for blob id's and the other for the other small objects listed in the table. The size for both of these caches is controlled through the [[GENBANK] ID\_GC\_SIZE](ch_libconfig.html#ch_libconfig.Objects_Object_Manager_Obje) configuration parameter (i.e. their sizes can't be set independently). Subclasses of <span class="nctnt ncbi-class">CGBDataLoader</span> can access their configuration using the [CParam methods](ch_core.html#ch_core.Methods_for_Using_Pa).
+If you want in-memory caching for objects other than those listed in the table, you can implement a cache in a [CDataLoader](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDataLoader&d=) subclass. For an example implementation, see the [CGBDataLoader](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CGBDataLoader&d=) class. `CGBDataLoader` actually has two Seq-id caches - one for blob id's and the other for the other small objects listed in the table. The size for both of these caches is controlled through the [[GENBANK] ID\_GC\_SIZE](ch_libconfig.html#ch_libconfig.Objects_Object_Manager_Obje) configuration parameter (i.e. their sizes can't be set independently). Subclasses of `CGBDataLoader` can access their configuration using the [CParam methods](ch_core.html#ch_core.Methods_for_Using_Pa).
 
 Short-term caching, as applied to the Object Manager and Data Loaders, means keeping data for "a little while" in a FIFO before deleting. Long-term caching means keeping objects for "a long while" – i.e. longer than they would be kept using a short-term cache. Here, "a while" is relative to the rate at which objects are discarded, not relative to elapsed time. So short-term caching means keeping at most a given number of objects, rather than keeping objects for a given amount of time.
 
-A [CDataSource](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDataSource.html) object inside the Object Manager automatically performs short-term caching of blobs for master TSEs. To set the Object Manager's blob cache size, use the [[OBJMGR] BLOB\_CACHE](ch_libconfig.html#ch_libconfig.Objects_Object_Manager_Obje) configuration parameter. This configuration parameter is created by the [CParam](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCParam.html) declaration "<span class="nctnt ncbi-macro">NCBI\_PARAM\_DECL(unsigned, OBJMGR, BLOB\_CACHE)</span>" in `src/objmgr/data_source.cpp` and can be set via the environment, the registry, or manipulated via the [CParam API](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCParam.html). <span class="nctnt highlight">Note:</span> External annotation TSEs and TSEs with Delta segments are linked to one of the master TSEs.
+A [CDataSource](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDataSource.html) object inside the Object Manager automatically performs short-term caching of blobs for master TSEs. To set the Object Manager's blob cache size, use the [[OBJMGR] BLOB\_CACHE](ch_libconfig.html#ch_libconfig.Objects_Object_Manager_Obje) configuration parameter. This configuration parameter is created by the [CParam](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCParam.html) declaration "`NCBI_PARAM_DECL(unsigned, OBJMGR, BLOB_CACHE)`" in `src/objmgr/data_source.cpp` and can be set via the environment, the registry, or manipulated via the [CParam API](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCParam.html). *Note:* External annotation TSEs and TSEs with Delta segments are linked to one of the master TSEs.
 
 Short-term caching is done automatically for [CGBDataLoader](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CGBDataLoader&d=), but not for other data loaders. If you want short-term caching for some other data loader, you'll have to add it, possibly using [CGBDataLoader](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CGBDataLoader&d=) as an example.
 
@@ -1480,11 +1480,11 @@ Include the necessary headers:
     #include <objmgr/align_ci.hpp>
     #include <objmgr/graph_ci.hpp>
 
-Request an instance of the <span class="nctnt ncbi-class">CObjectManager</span> and store as CRef:
+Request an instance of the `CObjectManager` and store as CRef:
 
     CRef<CObjectManager> obj_mgr = CObjectManager::GetInstance();
 
-Create a <span class="nctnt ncbi-class">CScope</span>. The Scope may be created as an object on the stack, or on the heap:
+Create a `CScope`. The Scope may be created as an object on the stack, or on the heap:
 
     CRef<CScope> scope1 = new CScope(*obj_mgr);
     CScope scope2(*obj_mgr);
@@ -1499,13 +1499,13 @@ Once there is a Seq-entry created somehow, it can be added to the `Scope` using 
 
 ### Add a data loader to the Scope
 
-The data loader is designed to be a replaceable object. There can be a variety of data loaders, each of which would load data from different databases, flat files, etc. Each data loader must be registered with the Object Manager. One distinguishes them later by their names. One of the most popular data loaders is the one that loads data from GenBank - <span class="nctnt ncbi-class">CGBDataLoader</span>. Each loader has at least one <span class="nctnt ncbi-func">RegisterInObjectManager()</span> static method, the first argument is usually a reference to the Object Manager:
+The data loader is designed to be a replaceable object. There can be a variety of data loaders, each of which would load data from different databases, flat files, etc. Each data loader must be registered with the Object Manager. One distinguishes them later by their names. One of the most popular data loaders is the one that loads data from GenBank - `CGBDataLoader`. Each loader has at least one `RegisterInObjectManager()` static method, the first argument is usually a reference to the Object Manager:
 
     #include <objtools/data_loaders/genbank/gbloader.hpp>
     ...
     CGBDataLoader::RegisterInObjectManager(*obj_mgr);
 
-A data loader may be registered as a default or non-default loader. The GenBank loader is automatically registered as default if you don't override it explicitly. For other loaders you may need to specify additional arguments to set their priority or make them default (usually this can be done through the last two arguments of the <span class="nctnt ncbi-func">RegisterInObjectManager()</span> method). A `Scope` can request data loaders from the `Object Manager` one at a time - by name. In this case you will need to know the loader's name. You can get it from the loader using its <span class="nctnt ncbi-func">GetName()</span> method, or if you don't have a loader instance, you can use the desired loader's static method <span class="nctnt ncbi-func">GetLoaderNameFromArgs()</span>:
+A data loader may be registered as a default or non-default loader. The GenBank loader is automatically registered as default if you don't override it explicitly. For other loaders you may need to specify additional arguments to set their priority or make them default (usually this can be done through the last two arguments of the `RegisterInObjectManager()` method). A `Scope` can request data loaders from the `Object Manager` one at a time - by name. In this case you will need to know the loader's name. You can get it from the loader using its `GetName()` method, or if you don't have a loader instance, you can use the desired loader's static method `GetLoaderNameFromArgs()`:
 
     scope.AddDataLoader(my_loader.GetName());                    // with loader instance
     scope.AddDataLoader(CGBDataLoader::GetLoaderNameFromArgs()); // without a loader
@@ -1536,13 +1536,13 @@ The access to the sequence data is provided through the Seq-vector object, which
         NcbiCout << *it;
     }
 
-<br/>The <span class="nctnt ncbi-class">CSeqVector</span> class provides much more than the plain data storage - in particular, it "knows where to find" the data. As a result of a query, it may initiate a reference-resolution process, send requests to the source database for more data, etc.
+<br/>The `CSeqVector` class provides much more than the plain data storage - in particular, it "knows where to find" the data. As a result of a query, it may initiate a reference-resolution process, send requests to the source database for more data, etc.
 
 A sequence map is another useful object that describes sequence data. It is a collection of segments, which describe sequence parts in general - location and type only - without providing any real data. To obtain a sequence map from a Bioseq handle:
 
     CConstRef<CSeqMap> seqmap(&handle.GetSeqMap());
 
-It is possible then to enumerate all the segments in the map asking their type, length or position. Note that in this example the iterator is obtained using the <span class="nctnt ncbi-func">begin()</span> method and will enumerate only top level segments of the Seq-map:
+It is possible then to enumerate all the segments in the map asking their type, length or position. Note that in this example the iterator is obtained using the `begin()` method and will enumerate only top level segments of the Seq-map:
 
     int len = 0;
     for (CSeqMap::const_iterator seg = seqmap->begin() ; seg; ++seg) {
@@ -1569,7 +1569,7 @@ Top-level Seq-entry's are thus either shared and not editable or local and edita
 
     bool editable = scope.GetTSE_Handle().CanBeEdited();
 
-A TSE can be added to a scope using <span class="nctnt ncbi-func">Scope::AddTopLevelSeqEntry()</span>, passing either a const or a non-const <span class="nctnt ncbi-class">CSeq\_entry</span> reference. If a non-const reference is passed then the TSE wil be local and editable; if a const reference is passed then the TSI will be shared and not editable.
+A TSE can be added to a scope using `Scope::AddTopLevelSeqEntry()`, passing either a const or a non-const `CSeq_entry` reference. If a non-const reference is passed then the TSE wil be local and editable; if a const reference is passed then the TSI will be shared and not editable.
 
 Seq-entry's can also be added to a scope by using a data loader - such Seq-entry's are initially shared and not editable.
 
@@ -1577,13 +1577,13 @@ A shared TSE can be made editable by gettng an edit handle for any object in the
 
     CBioseq_EditHandle beh = scope.GetBioseqHandle(m_SeqId).GetEditHandle();
 
-<span class="nctnt highlight">Note:</span> A <span class="nctnt ncbi-class">CBioseq\_EditHandle</span> can also be constructed from a <span class="nctnt ncbi-class">CBioseq\_Handle</span> - but only if the TSE is already editable. If the TSE is not editable then the <span class="nctnt ncbi-class">CBioseq\_EditHandle</span> constructor will throw an exception to prevent accidental editing.
+*Note:* A `CBioseq_EditHandle` can also be constructed from a `CBioseq_Handle` - but only if the TSE is already editable. If the TSE is not editable then the `CBioseq_EditHandle` constructor will throw an exception to prevent accidental editing.
 
-Once a TSE is editable, any object within it can be edited with either a <span class="nctnt ncbi-class">CBioseq\_EditHandle</span> or a <span class="nctnt ncbi-class">CBioseq\_Handle</span>.
+Once a TSE is editable, any object within it can be edited with either a `CBioseq_EditHandle` or a `CBioseq_Handle`.
 
 ### Enumerate sequence descriptions
 
-[Descriptor iterators](#descriptor-iterators) may be initialized with a Bioseq handle or Seq-entry handle. This makes it possible to enumerate all <span class="nctnt ncbi-class">CSeqdesc</span> objects the Bioseq or the Seq-entry refers to:
+[Descriptor iterators](#descriptor-iterators) may be initialized with a Bioseq handle or Seq-entry handle. This makes it possible to enumerate all `CSeqdesc` objects the Bioseq or the Seq-entry refers to:
 
     for (CSeqdesc_CI desc_it(handle); desc_it; ++desc_it) {
         const CSeqdesc& desc = *desc_it;
@@ -1702,7 +1702,7 @@ The [CPrefetchManager](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/
             }
         }
 
-<span class="nctnt highlight">Note:</span> Error handling was removed from the above code for clarity - please see the [Object Manager test code](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objtools/test/objmgr/test_objmgr_data_mt.cpp) for examples of appropriate error handling.
+*Note:* Error handling was removed from the above code for clarity - please see the [Object Manager test code](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objtools/test/objmgr/test_objmgr_data_mt.cpp) for examples of appropriate error handling.
 
 Educational Exercises
 ---------------------
@@ -1714,10 +1714,10 @@ Educational Exercises
 To jump-start your first project utilizing the new C++ `Object Manager` in the C++ Toolkit framework on a UNIX platform, we suggest using the [new\_project](ch_proj.html#ch_proj.outside_tree) shell script, which creates a sample application and a makefile:
 
 1  
-Create a new project called `task` in the folder `task` using the [new\_project](ch_proj.html#ch_proj.outside_tree) shell script (this will create the folder, the source file and the makefile):<br/><br/><span class="nctnt ncbi-code">new\_project task app/objmgr</span><br/>
+Create a new project called `task` in the folder `task` using the [new\_project](ch_proj.html#ch_proj.outside_tree) shell script (this will create the folder, the source file and the makefile):<br/><br/>`new_project task app/objmgr`<br/>
 
 2  
-Build the sample project and run the application:<br/><br/><span class="nctnt ncbi-code">cd task</span><br/><span class="nctnt ncbi-code">make -f Makefile.task\_app</span><br/><span class="nctnt ncbi-code">./task -gi 333</span><br/><br/>The output should look like this:<br/><br/><span class="nctnt ncbi-code">First ID: emb\\|CAA23443.1\\|</span><br/><span class="nctnt ncbi-code">Sequence: length=263, data=MARFLGLCTW</span><br/><span class="nctnt ncbi-code">\# of descriptions: 6</span><br/><span class="nctnt ncbi-code">\# of features:</span><br/><span class="nctnt ncbi-code"> [whole] Any: 2</span><br/><span class="nctnt ncbi-code"> [whole] Genes: 0</span><br/><span class="nctnt ncbi-code"> [0..9] Any: 2</span><br/><span class="nctnt ncbi-code"> [0..999, TSE] Any: 1</span><br/><span class="nctnt ncbi-code">\# of alignments:</span><br/><span class="nctnt ncbi-code"> [whole] Any: 0</span><br/><span class="nctnt ncbi-code">Done</span><br/>
+Build the sample project and run the application:<br/><br/>`cd task`<br/>`make -f Makefile.task_app`<br/>`./task -gi 333`<br/><br/>The output should look like this:<br/><br/>`First ID:  emb\|CAA23443.1\|`<br/>`Sequence:  length=263,  data=MARFLGLCTW`<br/>`# of descriptions:  6`<br/>`# of features:`<br/>`   [whole]            Any:    2`<br/>`   [whole]            Genes:  0`<br/>`   [0..9]             Any:    2`<br/>`   [0..999, TSE]      Any:    1`<br/>`# of alignments:`<br/>`   [whole]            Any:    0`<br/>`Done`<br/>
 
 3  
 Now you can go ahead and convert the sample code in the `task.cpp` into the code that performs your learning task.<br/>
@@ -1729,13 +1729,13 @@ The [new\_project](ch_proj.html#ch_proj.outside_tree) script can also be used to
 In order to convert your application into CGI one:
 
 1  
-Create copy of the source (`task.cpp`) and makefile (`Makefile.task_app`)<br/><br/><span class="nctnt ncbi-code">cp task.cpp task\_cgi.cpp</span><br/><span class="nctnt ncbi-code">cp Makefile.task\_app Makefile.task\_cgiapp</span><br/>
+Create copy of the source (`task.cpp`) and makefile (`Makefile.task_app`)<br/><br/>`cp task.cpp task_cgi.cpp`<br/>`cp Makefile.task_app Makefile.task_cgiapp`<br/>
 
 2  
-Edit the makefile for the CGI application (`Makefile.task_cgiapp`): change application name, name of the source file, add cgi libraries:<br/><br/><span class="nctnt ncbi-code">APP = task.cgi</span><br/><span class="nctnt ncbi-code">SRC = task\_cgi</span><br/><br/><span class="nctnt ncbi-code">LIB = xobjmgr id1 seqset $(SEQ\_LIBS) pub medline biblio general \\</span><br/><span class="nctnt ncbi-code"> xser xhtml xcgi xutil xconnect xncbi</span><br/><span class="nctnt ncbi-code">LIBS = $(NCBI\_C\_LIBPATH) $(NCBI\_C\_ncbi) $(FASTCGI\_LIBS) \\</span><br/><span class="nctnt ncbi-code"> $(NETWORK\_LIBS) $(ORIG\_LIBS)</span><br/>
+Edit the makefile for the CGI application (`Makefile.task_cgiapp`): change application name, name of the source file, add cgi libraries:<br/><br/>`APP = task.cgi`<br/>`SRC = task_cgi`<br/><br/>`LIB = xobjmgr id1 seqset $(SEQ_LIBS) pub medline biblio general \`<br/>`    xser xhtml xcgi xutil xconnect xncbi`<br/>`LIBS = $(NCBI_C_LIBPATH) $(NCBI_C_ncbi) $(FASTCGI_LIBS) \`<br/>`    $(NETWORK_LIBS) $(ORIG_LIBS)`<br/>
 
 3  
-Build the project (at this time it is not a CGI application yet):<br/><br/><span class="nctnt ncbi-code">make -f Makefile.task\_cgiapp</span><br/>
+Build the project (at this time it is not a CGI application yet):<br/><br/>`make -f Makefile.task_cgiapp`<br/>
 
 4  
 Convert `task_cgi.cpp` into a CGI application.
@@ -1744,7 +1744,7 @@ Please also see the section on [FCGI Redirection and Debugging CGI Programs](ch_
 
 #### Convert CGI application into Fast-CGI one
 
-In the <span class="nctnt ncbi-var">LIB=...</span> section of `Makefile.task_cgiapp`, just replace <span class="nctnt ncbi-lib">xcgi</span> library by <span class="nctnt ncbi-lib">xfcgi</span>:
+In the `LIB=...` section of `Makefile.task_cgiapp`, just replace `xcgi` library by `xfcgi`:
 
     LIB = xobjmgr id1 seqset $(SEQ_LIBS) pub medline biblio general \
         xser xhtml xfcgi xutil xconnect xncbi
@@ -2169,14 +2169,14 @@ Below are shown the correct results for each of the test Bioseqs. You can use th
 
 #### How to construct Seq\_id by accession?
 
-<span class="nctnt ncbi-class">CSeq\_id</span> class has constructor, accepting a string, which may contain a Bioseq accession, or accession and version separated with dot. If no version is provided, the Object Manager will try to find and fetch the latest one.
+`CSeq_id` class has constructor, accepting a string, which may contain a Bioseq accession, or accession and version separated with dot. If no version is provided, the Object Manager will try to find and fetch the latest one.
 
 #### What is the format of data CSeqVector returns?
 
-<span class="nctnt ncbi-func">GetSeqVector</span> method of <span class="nctnt ncbi-class">CBioseq\_Handle</span> has optional argument to select data coding. One of the possible values for this argument is `CBioseq_Handle::eCoding_Iupac`. It forces the resulting Seq-vector to convert data to printable characters - either Iupac-na or Iupac-aa, depending on the sequence type. Gaps in the sequence are coded with special character, which can be received using <span class="nctnt ncbi-func">CSeqVector::GetGapChar</span>, for nucleotides in Iupac coding it will be 'N' character. Note that when calculating the percentage of 'G' /'C' in a sequence you need to ignore gaps.
+`GetSeqVector` method of `CBioseq_Handle` has optional argument to select data coding. One of the possible values for this argument is `CBioseq_Handle::eCoding_Iupac`. It forces the resulting Seq-vector to convert data to printable characters - either Iupac-na or Iupac-aa, depending on the sequence type. Gaps in the sequence are coded with special character, which can be received using `CSeqVector::GetGapChar`, for nucleotides in Iupac coding it will be 'N' character. Note that when calculating the percentage of 'G' /'C' in a sequence you need to ignore gaps.
 
 #### What to pay attention to when processing cd-regions?
 
-When looking for cd-regions on a sequence, you get a set of features, which locations describe their position on the sequence. Please note, that these locations may, and do overlap, which makes calculating percentage of 'G'/'C' in the cd-regions much more difficult. To simplify this part of the task you can merge individual cd-region locations using [CSeq\_loc](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_loc) methods (do not forget to sort the Seq-locs for correct merging) and use the resulting Seq-loc to initialize a [Seq-vector](#seq-vector). To calculate percentage of 'G'/'C' for non-cdr parts of a sequence create a new Seq-loc with <span class="nctnt ncbi-class">CSeq\_loc</span>::<span class="nctnt ncbi-func">Subtract()</span> method.
+When looking for cd-regions on a sequence, you get a set of features, which locations describe their position on the sequence. Please note, that these locations may, and do overlap, which makes calculating percentage of 'G'/'C' in the cd-regions much more difficult. To simplify this part of the task you can merge individual cd-region locations using [CSeq\_loc](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_loc) methods (do not forget to sort the Seq-locs for correct merging) and use the resulting Seq-loc to initialize a [Seq-vector](#seq-vector). To calculate percentage of 'G'/'C' for non-cdr parts of a sequence create a new Seq-loc with `CSeq_loc`::`Subtract()` method.
 
 

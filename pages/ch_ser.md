@@ -178,8 +178,8 @@ The following is an outline of the topics presented in this chapter:
 
 -   [Test Cases [src/serial/test]](#test-cases-srcserialtest)
 
-<span class="nctnt ncbi-class">CObject[IO]Streams</span>
---------------------------------------------------------
+`CObject[IO]Streams`
+--------------------
 
 The following topics are discussed in this section:
 
@@ -221,11 +221,11 @@ The following topics are discussed in this section:
 
 -   [Finding in input stream objects of a specific type](#finding-in-input-stream-objects-of-a-specific-type)
 
-### Format Specific Streams: The <span class="nctnt ncbi-class">CObject[IO]Stream</span> classes
+### Format Specific Streams: The `CObject[IO]Stream` classes
 
 The reading and writing of serialized data objects entails satisfying two independent sets of constraints and specifications: (1) `format-specific` parsing and encoding schemes, and (2) `object-specific` internal structures and rules of composition. The NCBI C++ Toolkit implements serial IO processes by combining a set of `object stream` classes with an independently defined set of `data object` classes. These classes are implemented in the `serial` and `objects` directories respectively.
 
-The base classes for the object stream classes are [CObjectIStream](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectIStream.html) and [CObjectOStream](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectOStream.html). Each of these base classes has derived subclasses which specialize in different formats, including XML, binary ASN.1, and text ASN.1. A simple example program, `xml2asn.cpp` (see [Code Sample 1](#code-sample-1)), described in [Processing serial data](#processing-serial-data), uses these object stream classes in conjunction with a <span class="nctnt ncbi-class">CBiostruct</span> object to translate a file from XML encoding to ASN.1 formats. In this chapter, we consider in more detail the class definitions for object streams, and how the [type information](#type-information) associated with the data is used to implement serial input and output.
+The base classes for the object stream classes are [CObjectIStream](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectIStream.html) and [CObjectOStream](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectOStream.html). Each of these base classes has derived subclasses which specialize in different formats, including XML, binary ASN.1, and text ASN.1. A simple example program, `xml2asn.cpp` (see [Code Sample 1](#code-sample-1)), described in [Processing serial data](#processing-serial-data), uses these object stream classes in conjunction with a `CBiostruct` object to translate a file from XML encoding to ASN.1 formats. In this chapter, we consider in more detail the class definitions for object streams, and how the [type information](#type-information) associated with the data is used to implement serial input and output.
 
 #### Code Sample 1. xml2asn.cpp
 
@@ -271,45 +271,45 @@ The base classes for the object stream classes are [CObjectIStream](http://www.n
         return theTestApp.AppMain(argc, argv);
     }
 
-Each object stream specializes in a serial data format and a direction (in/out). It is not until the input and output operators are applied to these streams, in conjunction with a specified serializable object, that the object-specific type information comes into play. For example, if <span class="nctnt ncbi-var">instr</span> is a <span class="nctnt ncbi-class">CObjectIStream</span>, the statement: <span class="nctnt ncbi-code">instr \>\> myObject</span> invokes a <span class="nctnt ncbi-func">Read()</span> method associated with the input stream, whose sole argument is a [CObjectInfo](#cobjectinfo) for <span class="nctnt ncbi-var">myObject</span>.
+Each object stream specializes in a serial data format and a direction (in/out). It is not until the input and output operators are applied to these streams, in conjunction with a specified serializable object, that the object-specific type information comes into play. For example, if `instr` is a `CObjectIStream`, the statement: `instr >> myObject` invokes a `Read()` method associated with the input stream, whose sole argument is a [CObjectInfo](#cobjectinfo) for `myObject`.
 
-Similarly, the output operators, when applied to a <span class="nctnt ncbi-class">CObjectOstream</span> in conjunction with a serializable object, will invoke a <span class="nctnt ncbi-func">Write()</span> method on the output stream which accesses the object's type information. The object's type information defines what tag names and value types should be encountered on the stream, while the <span class="nctnt ncbi-class">CObject[IO]Stream</span> subclasses specialize the data serialization format.
+Similarly, the output operators, when applied to a `CObjectOstream` in conjunction with a serializable object, will invoke a `Write()` method on the output stream which accesses the object's type information. The object's type information defines what tag names and value types should be encountered on the stream, while the `CObject[IO]Stream` subclasses specialize the data serialization format.
 
-The input and output operators (<span class="nctnt ncbi-code">\<\<</span> and <span class="nctnt ncbi-code">\>\></span>) are declared in [serial/serial.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/serial/serial.hpp) header.
+The input and output operators (`<<` and `>>`) are declared in [serial/serial.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/serial/serial.hpp) header.
 
-### The <span class="nctnt ncbi-class">CObjectIStream</span> ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectIStream.html)) classes
+### The `CObjectIStream` ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectIStream.html)) classes
 
-<span class="nctnt ncbi-class">CObjectIStream</span> is a virtual base class for the [CObjectIStreamXml](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectIStreamXml.html), [CObjectIStreamAsn](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectIStreamAsn.html), and [CObjectIStreamAsnBinary](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectIStreamAsnBinary.html) classes. As such, it has no public constructors, and its user interface includes the following methods:
+`CObjectIStream` is a virtual base class for the [CObjectIStreamXml](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectIStreamXml.html), [CObjectIStreamAsn](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectIStreamAsn.html), and [CObjectIStreamAsnBinary](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectIStreamAsnBinary.html) classes. As such, it has no public constructors, and its user interface includes the following methods:
 
--   <span class="nctnt ncbi-func">Open()</span>
+-   `Open()`
 
--   <span class="nctnt ncbi-func">Close()</span>
+-   `Close()`
 
--   <span class="nctnt ncbi-func">GetDataFormat()</span>
+-   `GetDataFormat()`
 
--   <span class="nctnt ncbi-func">ReadFileHeader()</span>
+-   `ReadFileHeader()`
 
--   <span class="nctnt ncbi-func">Read()</span>
+-   `Read()`
 
--   <span class="nctnt ncbi-func">ReadObject()</span>
+-   `ReadObject()`
 
--   <span class="nctnt ncbi-func">ReadSeparateObject()</span>
+-   `ReadSeparateObject()`
 
--   <span class="nctnt ncbi-func">Skip()</span>
+-   `Skip()`
 
--   <span class="nctnt ncbi-func">SkipObject()</span>
+-   `SkipObject()`
 
-There are several <span class="nctnt ncbi-func">Open()</span> methods; most of these are static class methods that return a pointer to a newly created <span class="nctnt ncbi-class">CObjectIStream</span>. Typically, these methods are used with an <span class="nctnt ncbi-class">auto\_ptr</span>, as in:
+There are several `Open()` methods; most of these are static class methods that return a pointer to a newly created `CObjectIStream`. Typically, these methods are used with an `auto_ptr`, as in:
 
     auto_ptr<CObjectIStream> xml_in(CObjectIStream::Open(filename, eSerial_Xml));
 
-Here, an XML format is specified by the enumerated value <span class="nctnt ncbi-var">eSerial\_Xml</span>, defined in [ESerialDataFormat](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ESerialDataFormat). Because these methods are static, they can be used to create a new instance of a <span class="nctnt ncbi-class">CObjectIStream</span> subclass, and open it with one statement. In this example, a [CObjectIStreamXml](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectIStreamXml.html) is created and opened on the file <span class="nctnt ncbi-var">filename</span>.
+Here, an XML format is specified by the enumerated value `eSerial_Xml`, defined in [ESerialDataFormat](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ESerialDataFormat). Because these methods are static, they can be used to create a new instance of a `CObjectIStream` subclass, and open it with one statement. In this example, a [CObjectIStreamXml](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectIStreamXml.html) is created and opened on the file `filename`.
 
-An additional non-static <span class="nctnt ncbi-func">Open()</span> method is provided, which can only be invoked as a member function of a previously instantiated object stream (whose format type is of course, implicit to its class). This method takes a <span class="nctnt ncbi-class">CNcbiIstream</span> and a flag indicating whether or not ownership of the <span class="nctnt ncbi-class">CNcbiIstream</span> should be transferred (so that it can be deleted automatically when the object stream is closed):
+An additional non-static `Open()` method is provided, which can only be invoked as a member function of a previously instantiated object stream (whose format type is of course, implicit to its class). This method takes a `CNcbiIstream` and a flag indicating whether or not ownership of the `CNcbiIstream` should be transferred (so that it can be deleted automatically when the object stream is closed):
 
     void Open(CNcbiIstream& inStream, EOwnership deleteInStream = eNoOwnership);
 
-The next three methods have the following definitions. <span class="nctnt ncbi-func">Close()</span> closes the stream. <span class="nctnt ncbi-func">GetDataFormat()</span> returns the enumerated <span class="nctnt ncbi-type">ESerialDataFormat</span> for the stream. <span class="nctnt ncbi-func">ReadFileHeader()</span> reads the first line from the file, and returns it in a string. This might be used for example, in the following context:
+The next three methods have the following definitions. `Close()` closes the stream. `GetDataFormat()` returns the enumerated `ESerialDataFormat` for the stream. `ReadFileHeader()` reads the first line from the file, and returns it in a string. This might be used for example, in the following context:
 
     auto_ptr<CObjectIStream> in(CObjectIStream::Open(fname, eSerial_AsnText));
     string type = in.ReadFileHeader();
@@ -324,41 +324,41 @@ The next three methods have the following definitions. <span class="nctnt ncbi-f
         // ...
     }
 
-> The <span class="nctnt ncbi-func">ReadFileHeader()</span> method for the base <span class="nctnt ncbi-class">CObjectIStream</span> class returns an empty string. Only those stream classes which specialize in ASN.1 text or XML formats have actual implementations for this method.
+> The `ReadFileHeader()` method for the base `CObjectIStream` class returns an empty string. Only those stream classes which specialize in ASN.1 text or XML formats have actual implementations for this method.
 
-Several <span class="nctnt ncbi-func">Read\*()</span> methods are provided for usage in different contexts. <span class="nctnt ncbi-func">CObjectIStream::Read()</span> should be used for reading a top-level "root" object from a data file. For convenience, the input operator <span class="nctnt ncbi-code">\>\></span>, as described above, indirectly invokes this method on the input stream, using a [CObjectTypeInfo](#cobjecttypeinfo) object derived from <span class="nctnt ncbi-var">myObject</span>. By default, the <span class="nctnt ncbi-func">Read()</span> method first calls <span class="nctnt ncbi-func">ReadFileHeader()</span>, and then calls <span class="nctnt ncbi-func">ReadObject()</span>. Accordingly, calls to <span class="nctnt ncbi-func">Read()</span> which follow the usage of <span class="nctnt ncbi-func">ReadFileHeader()</span>**must** include the optional <span class="nctnt ncbi-var">eNoFileHeader</span> argument.
+Several `Read*()` methods are provided for usage in different contexts. `CObjectIStream::Read()` should be used for reading a top-level "root" object from a data file. For convenience, the input operator `>>`, as described above, indirectly invokes this method on the input stream, using a [CObjectTypeInfo](#cobjecttypeinfo) object derived from `myObject`. By default, the `Read()` method first calls `ReadFileHeader()`, and then calls `ReadObject()`. Accordingly, calls to `Read()` which follow the usage of `ReadFileHeader()`**must** include the optional `eNoFileHeader` argument.
 
-Most data objects also contain embedded objects, and the default behavior of <span class="nctnt ncbi-func">Read()</span> is to load the top-level object, along with all of its contained subobjects into memory. In some cases this may require significant memory allocation, and it may be only the top-level object which is needed by the application. The next two methods, [ReadObject()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ReadObject) and [ReadSeparateObject()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ReadSeparateObject), can be used to load subobjects as either persistent data members of the root object or as temporary local objects. In contrast to <span class="nctnt ncbi-func">Read()</span>, these methods assume that there is no file header on the stream.
+Most data objects also contain embedded objects, and the default behavior of `Read()` is to load the top-level object, along with all of its contained subobjects into memory. In some cases this may require significant memory allocation, and it may be only the top-level object which is needed by the application. The next two methods, [ReadObject()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ReadObject) and [ReadSeparateObject()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ReadSeparateObject), can be used to load subobjects as either persistent data members of the root object or as temporary local objects. In contrast to `Read()`, these methods assume that there is no file header on the stream.
 
-As a result of executing <span class="nctnt ncbi-code">ReadObject(member)</span>, the newly created subobject will be instantiated as a member of its parent object. In contrast, <span class="nctnt ncbi-code">ReadSeparateObject(local)</span>, instantiates the subobject in the local temporary variable only, and the corresponding data member in the parent object is set to an appropriate `null` representation for that data type. In this case, an attempt to reference that subobject after exiting the scope where it was created generates an error.
+As a result of executing `ReadObject(member)`, the newly created subobject will be instantiated as a member of its parent object. In contrast, `ReadSeparateObject(local)`, instantiates the subobject in the local temporary variable only, and the corresponding data member in the parent object is set to an appropriate `null` representation for that data type. In this case, an attempt to reference that subobject after exiting the scope where it was created generates an error.
 
-The <span class="nctnt ncbi-func">Skip()</span> and <span class="nctnt ncbi-func">SkipObject()</span> methods allow entire top-level objects and subobjects to be "skipped". In this case the input is still read from the stream and validated, but no object representation for that data is generated. Instead, the data is stored in a delay buffer associated with the object input stream, where it can be accessed as needed. <span class="nctnt ncbi-func">Skip()</span> should only be applied to top-level objects. As with the <span class="nctnt ncbi-func">Read()</span> method, the optional <span class="nctnt ncbi-type">ENoFileHeader</span> argument can be included if the file header has already been extracted from the data stream. <span class="nctnt ncbi-code">SkipObject(member)</span> may be applied to subobjects of the root object.
+The `Skip()` and `SkipObject()` methods allow entire top-level objects and subobjects to be "skipped". In this case the input is still read from the stream and validated, but no object representation for that data is generated. Instead, the data is stored in a delay buffer associated with the object input stream, where it can be accessed as needed. `Skip()` should only be applied to top-level objects. As with the `Read()` method, the optional `ENoFileHeader` argument can be included if the file header has already been extracted from the data stream. `SkipObject(member)` may be applied to subobjects of the root object.
 
-All of the <span class="nctnt ncbi-func">Read</span> and <span class="nctnt ncbi-func">Skip</span> methods are like wrapper functions, which define what activities take place immediately before and after the data is actually read. How and when the data is then loaded into memory is determined by the object itself. Each of the above methods ultimately calls <span class="nctnt ncbi-code">objTypeInfo-\>ReadData()</span> or <span class="nctnt ncbi-code">objTypeInfo-\>SkipData()</span>, where <span class="nctnt ncbi-var">objTypeInfo</span> is the static type information object associated with the data object. This scheme allows the user to install type-specific read, write, and copy hooks, which are described below. For example, the default behavior of loading all subobjects of the top-level object can be modified by installing appropriate read hooks which use the <span class="nctnt ncbi-func">ReadSeparateObject()</span> and <span class="nctnt ncbi-func">SkipObject()</span> methods where needed.
+All of the `Read` and `Skip` methods are like wrapper functions, which define what activities take place immediately before and after the data is actually read. How and when the data is then loaded into memory is determined by the object itself. Each of the above methods ultimately calls `objTypeInfo->ReadData()` or `objTypeInfo->SkipData()`, where `objTypeInfo` is the static type information object associated with the data object. This scheme allows the user to install type-specific read, write, and copy hooks, which are described below. For example, the default behavior of loading all subobjects of the top-level object can be modified by installing appropriate read hooks which use the `ReadSeparateObject()` and `SkipObject()` methods where needed.
 
-### The <span class="nctnt ncbi-class">CObjectOStream</span> ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectOStream.html)) classes
+### The `CObjectOStream` ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectOStream.html)) classes
 
-The output object stream classes mirror the <span class="nctnt ncbi-class">CObjectIStream</span> classes. The <span class="nctnt ncbi-class">CObjectOStream</span> base class is used to derive the [CObjectOStreamXml](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectOStreamXml.html), [CObjectOStreamAsn](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectOStreamAsn.html), and [CObjectOStreamAsnBinary](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectOStreamAsnBinary.html) classes. There are no public constructors, and the user interface includes the following methods:
+The output object stream classes mirror the `CObjectIStream` classes. The `CObjectOStream` base class is used to derive the [CObjectOStreamXml](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectOStreamXml.html), [CObjectOStreamAsn](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectOStreamAsn.html), and [CObjectOStreamAsnBinary](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectOStreamAsnBinary.html) classes. There are no public constructors, and the user interface includes the following methods:
 
--   <span class="nctnt ncbi-func">Open()</span>
+-   `Open()`
 
--   <span class="nctnt ncbi-func">Close()</span>
+-   `Close()`
 
--   <span class="nctnt ncbi-func">GetDataFormat()</span>
+-   `GetDataFormat()`
 
--   <span class="nctnt ncbi-func">WriteFileHeader()</span>
+-   `WriteFileHeader()`
 
--   <span class="nctnt ncbi-func">Write()</span>
+-   `Write()`
 
--   <span class="nctnt ncbi-func">WriteObject()</span>
+-   `WriteObject()`
 
--   <span class="nctnt ncbi-func">WriteSeparateObject()</span>
+-   `WriteSeparateObject()`
 
--   <span class="nctnt ncbi-func">Flush()</span>
+-   `Flush()`
 
--   <span class="nctnt ncbi-func">FlushBuffer()</span>
+-   `FlushBuffer()`
 
-Again, there are several <span class="nctnt ncbi-func">Open()</span> methods, which are static class methods that return a pointer to a newly created <span class="nctnt ncbi-class">CObjectOstream</span>:
+Again, there are several `Open()` methods, which are static class methods that return a pointer to a newly created `CObjectOstream`:
 
     static CObjectOStream* Open(ESerialDataFormat format,
                                 CNcbiOstream &outStream,
@@ -374,19 +374,19 @@ Again, there are several <span class="nctnt ncbi-func">Open()</span> methods, wh
                                 ESerialDataFormat format,
                                 TSerial_Format_Flags formatFlags=0)
 
-The <span class="nctnt ncbi-func">Write\*()</span> methods correspond to the <span class="nctnt ncbi-func">Read\*()</span> methods defined for the input streams. <span class="nctnt ncbi-func">Write()</span> first calls <span class="nctnt ncbi-func">WriteFileHeader()</span>, and then calls <span class="nctnt ncbi-func">WriteObject()</span>. <span class="nctnt ncbi-func">WriteSeparateObject()</span> can be used to write a temporary object (and all of its children) to the output stream. It is also possible to install type-specific `write` hooks. Like the <span class="nctnt ncbi-func">Read()</span> methods, these <span class="nctnt ncbi-func">Write()</span> methods serve as wrapper functions that define what occurs immediately before and after the data is actually written.
+The `Write*()` methods correspond to the `Read*()` methods defined for the input streams. `Write()` first calls `WriteFileHeader()`, and then calls `WriteObject()`. `WriteSeparateObject()` can be used to write a temporary object (and all of its children) to the output stream. It is also possible to install type-specific `write` hooks. Like the `Read()` methods, these `Write()` methods serve as wrapper functions that define what occurs immediately before and after the data is actually written.
 
-### The <span class="nctnt ncbi-class">CObjectStreamCopier</span> ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectStreamCopier.html)) classes
+### The `CObjectStreamCopier` ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectStreamCopier.html)) classes
 
-The <span class="nctnt ncbi-class">CObjectStreamCopier</span> class is neither an input nor an output stream class, but a helper class, which allows one to "pass data through" without storing the intermediate objects in memory. Its sole constructor is:
+The `CObjectStreamCopier` class is neither an input nor an output stream class, but a helper class, which allows one to "pass data through" without storing the intermediate objects in memory. Its sole constructor is:
 
     CObjectStreamCopier(CObjectIStream& in, CObjectOStream& out);
 
-and its most important method is the <span class="nctnt ncbi-func">Copy(CObjectTypeInfo&)</span> method, which, given an object's description, reads that object from the input stream and writes it to the output stream. The serial formats of both the input and output object streams are implicit, and thus the translation between two different formats is performed automatically.
+and its most important method is the `Copy(CObjectTypeInfo&)` method, which, given an object's description, reads that object from the input stream and writes it to the output stream. The serial formats of both the input and output object streams are implicit, and thus the translation between two different formats is performed automatically.
 
-In keeping with the <span class="nctnt ncbi-func">Read</span> and <span class="nctnt ncbi-func">Write</span> methods of the <span class="nctnt ncbi-class">CObjectIStream</span> and <span class="nctnt ncbi-class">CObjectOStream</span> classes, the <span class="nctnt ncbi-func">Copy</span> method takes an optional <span class="nctnt ncbi-type">ENoFileHeader</span> argument, to indicate that the file header is not present in the input and should not be generated on the output. The <span class="nctnt ncbi-func">CopyObject()</span> method corresponds to the <span class="nctnt ncbi-func">ReadObject()</span> and <span class="nctnt ncbi-func">WriteObject()</span> methods.
+In keeping with the `Read` and `Write` methods of the `CObjectIStream` and `CObjectOStream` classes, the `Copy` method takes an optional `ENoFileHeader` argument, to indicate that the file header is not present in the input and should not be generated on the output. The `CopyObject()` method corresponds to the `ReadObject()` and `WriteObject()` methods.
 
-As an example, consider how the <span class="nctnt ncbi-func">Run()</span> method in [xml2asn.cpp](#xml2asncpp) might be implemented differently using the <span class="nctnt ncbi-class">CObjectStreamCopier </span>class:
+As an example, consider how the `Run()` method in [xml2asn.cpp](#xml2asncpp) might be implemented differently using the `CObjectStreamCopier `class:
 
     int CTestAsn::Run() {
     auto_ptr<CObjectIStream>
@@ -402,13 +402,13 @@ As an example, consider how the <span class="nctnt ncbi-func">Run()</span> metho
     return 0;
     }
 
-It is also possible to install type-specific <span class="nctnt ncbi-func">Copy</span> hooks. Like the <span class="nctnt ncbi-func">Read</span> and <span class="nctnt ncbi-func">Write</span> methods, the <span class="nctnt ncbi-func">Copy</span> methods serve as wrapper functions that define what occurs immediately before and after the data is actually copied.
+It is also possible to install type-specific `Copy` hooks. Like the `Read` and `Write` methods, the `Copy` methods serve as wrapper functions that define what occurs immediately before and after the data is actually copied.
 
 ### Type-specific I/O routines – the hook classes
 
 Much of the functionality needed to read and write serializable objects may be type-specific yet application-driven. Because the specializations may vary with the application, it does not make sense to implement fixed methods, yet we would like to achieve a similar kind of object-specific behavior.
 
-To address these needs, the C++ Toolkit provides hook mechanisms, whereby the needed functionality can be installed with the object's static class [type information](#type-information) object. Local hooks apply to a selected stream whereas global hooks apply to all streams. <span class="nctnt highlight">Note:</span> global skip hooks are not supported.
+To address these needs, the C++ Toolkit provides hook mechanisms, whereby the needed functionality can be installed with the object's static class [type information](#type-information) object. Local hooks apply to a selected stream whereas global hooks apply to all streams. *Note:* global skip hooks are not supported.
 
 For any given object type, stream, and processing mode (e.g. reading), at most one hook is "active". The active hook for the current processing mode will be called when objects of the given type are encountered in the stream. For example, suppose that local and global hooks have been set for a given object type. Then if a read occurs on the stream for which the local hook was set, the local hook will be called, otherwise the global hook will be called. Designating multiple read/write hooks (both local and global) for a selected object does not generate an error. Older or less specific hooks are simply overridden by the more specific or most recently installed hook.
 
@@ -420,15 +420,15 @@ Understanding and creating hooks properly relies on three distinct concepts:
 
 -   **Operation** – easily confused with processing mode, the operation is what is done inside the hook, not what is being done when the hook is called.
 
-<span class="nctnt highlight">Note:</span> The difference between processing mode and operation can be very confusing. It is natural to think, for example, "I want to read Bioseq id's" without considering how the stream is being processed. The next natural step is to conclude "I want a read hook" - but that could be incorrect. Instead, one should think "I want to *read* a Bioseq id *inside* a hook". Only then should the processing mode be chosen, and it may not match the operation performed inside the hook. The processing mode should be chosen based on what should be done with the *rest* of the stream and whether or not it's necessary to retain the data *outside* the hook. For example, if you want to read Bioseq id's and don't care about anything else, then you should probably choose the 'skip' processing mode (meaning you would use a skip hook), and *within* the skip hook you would *read* the Bioseq id. Or, if you wanted to read entire Bioseq's for later analysis while automatically building a list of Bioseq id's, you would have to use the 'read' processing mode (and therefore a read hook) to save the data for later analysis. Inside the read hook you would use a read operation (to save the data) and at the same time you would have access to the id for building the list of id's.
+*Note:* The difference between processing mode and operation can be very confusing. It is natural to think, for example, "I want to read Bioseq id's" without considering how the stream is being processed. The next natural step is to conclude "I want a read hook" - but that could be incorrect. Instead, one should think "I want to *read* a Bioseq id *inside* a hook". Only then should the processing mode be chosen, and it may not match the operation performed inside the hook. The processing mode should be chosen based on what should be done with the *rest* of the stream and whether or not it's necessary to retain the data *outside* the hook. For example, if you want to read Bioseq id's and don't care about anything else, then you should probably choose the 'skip' processing mode (meaning you would use a skip hook), and *within* the skip hook you would *read* the Bioseq id. Or, if you wanted to read entire Bioseq's for later analysis while automatically building a list of Bioseq id's, you would have to use the 'read' processing mode (and therefore a read hook) to save the data for later analysis. Inside the read hook you would use a read operation (to save the data) and at the same time you would have access to the id for building the list of id's.
 
 There are three main **structural contexts** in which an object might be encountered in a stream:
 
-| Context        | Description                                                                                                                                                                                                |
-|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Object         | When the stream object matches a specified type – for example, the <span class="nctnt ncbi-type">Bioseq</span> type.                                                                                       |
-| Class Member   | When the stream object matches a specified member of a specified `SEQUENCE` type – for example, the <span class="nctnt ncbi-var">id</span> member of the <span class="nctnt ncbi-type">Bioseq</span> type. |
-| Choice Variant | When the stream object matches a specified variant of a specified `CHOICE` type – for example, the <span class="nctnt ncbi-var">std</span> variant of the <span class="nctnt ncbi-type">Date</span> type.  |
+| Context        | Description                                                                                                                           |
+|----------------|---------------------------------------------------------------------------------------------------------------------------------------|
+| Object         | When the stream object matches a specified type – for example, the `Bioseq` type.                                                     |
+| Class Member   | When the stream object matches a specified member of a specified `SEQUENCE` type – for example, the `id` member of the `Bioseq` type. |
+| Choice Variant | When the stream object matches a specified variant of a specified `CHOICE` type – for example, the `std` variant of the `Date` type.  |
 
 Complex structural contexts can be created by nesting the main structural contexts. For example, a [stack path hook](#stack-path-hook) can apply to a specific class member, but only when it is nested inside another specified class member. Stack path hooks also make it possible to hook objects only within a limited level of nesting - for example, hooking only the highest-level Seq-entry's. For more details see the [stack path hook](#stack-path-hook) section.
 
@@ -443,7 +443,7 @@ There are four **processing modes** that can be applied to input/output streams:
 
 The **operation** is not restricted to a limited set of choices. It can be any application-specific task, as long as that task is compatible with the processing mode. For example, a skip operation can be performed inside a read hook, provided that the skipped content is optional for the object being read. Similarly, a read operation can be performed inside a skip hook. The operation performed inside a hook must preserve the integrity of the hooked object, and must advance the stream all the way through the hooked object and no farther.
 
-Hooks can be installed for all combinations of structural context and processing mode. Each combination has a base class that defines a pure virtual method that must be defined in a derived class to implement the hook – e.g. the <span class="nctnt ncbi-class">CReadObjectHook</span> class defines a pure virtual <span class="nctnt ncbi-func">ReadObject()</span> method. The definition of the overriding method in the derived class is often referred to as "the hook".
+Hooks can be installed for all combinations of structural context and processing mode. Each combination has a base class that defines a pure virtual method that must be defined in a derived class to implement the hook – e.g. the `CReadObjectHook` class defines a pure virtual `ReadObject()` method. The definition of the overriding method in the derived class is often referred to as "the hook".
 
 |  | Object                                | Class Member                                    | Choice Variant                                      |
 |----------------------|---------------------------------------|-------------------------------------------------|-----------------------------------------------------|
@@ -590,20 +590,20 @@ All of the different structural contexts in which an object might be encountered
 
 Hooks can be installed for each of the above contexts, depending on the desired level of specificity. Corresponding to these contexts, three abstract base classes provide the foundations for deriving new `Read` hooks:
 
--   <span class="nctnt ncbi-class">CReadObjectHook</span>
+-   `CReadObjectHook`
 
--   <span class="nctnt ncbi-class">CReadClassMemberHook</span>
+-   `CReadClassMemberHook`
 
--   <span class="nctnt ncbi-class">CReadChoiceVariantHook</span>
+-   `CReadChoiceVariantHook`
 
-Each of these base hook classes exists only to define a pure virtual <span class="nctnt ncbi-func">Read</span> method, which can then be implemented (in a derived subclass) to install the desired type of read hook. If the goal is to apply the new <span class="nctnt ncbi-func">Read</span> method in all contexts, then the new hook should be derived from the <span class="nctnt ncbi-class">CReadObjectHook</span> class, and registered with the object's static type information object. For example, to install a new <span class="nctnt ncbi-class">CReadObjectHook</span> for a <span class="nctnt ncbi-class">CBioseq</span>, one might use:
+Each of these base hook classes exists only to define a pure virtual `Read` method, which can then be implemented (in a derived subclass) to install the desired type of read hook. If the goal is to apply the new `Read` method in all contexts, then the new hook should be derived from the `CReadObjectHook` class, and registered with the object's static type information object. For example, to install a new `CReadObjectHook` for a `CBioseq`, one might use:
 
     CObjectTypeInfo(CBioseq::GetTypeInfo()).
         SetLocalReadHook(*in, myReadBioseqHook);
 
-Another way of installing hooks of any type (read/write/copy, object/member/variant) is provided by <span class="nctnt ncbi-class">CObjectHookGuard</span> class described below.
+Another way of installing hooks of any type (read/write/copy, object/member/variant) is provided by `CObjectHookGuard` class described below.
 
-Alternatively, if the desired behavior is to trigger the specialized <span class="nctnt ncbi-func">Read</span> method only when the object occurs as a data member of a particular containing class, then the new hook should be derived from the <span class="nctnt ncbi-class">CReadClassMemberHook</span>, and registered with that member's type information object:
+Alternatively, if the desired behavior is to trigger the specialized `Read` method only when the object occurs as a data member of a particular containing class, then the new hook should be derived from the `CReadClassMemberHook`, and registered with that member's type information object:
 
     CObjectTypeInfo(CBioseq::GetTypeInfo()).
         FindMember("Seq-inst").SetLocalReadHook(*in, myHook);
@@ -613,38 +613,38 @@ Similarly, one can install a read hook that will only be triggered when the obje
     CObjectTypeInfo(CSeq_entry::GetTypeInfo()).
         FindVariant("Bioseq").SetLocalReadHook(*in, myReadBioseqHook);
 
-The new hook classes for these examples should be derived from <span class="nctnt ncbi-class">CReadObjectHook</span>, <span class="nctnt ncbi-class">CReadClassMemberHook</span>, and <span class="nctnt ncbi-class">CReadChoiceVariantHook</span>, respectively. In the first case, all occurrences of <span class="nctnt ncbi-class">CBioseq</span> on any input stream will trigger the new <span class="nctnt ncbi-func">Read</span> method. In contrast, the third case installs this new <span class="nctnt ncbi-func">Read</span> method to be triggered only when the <span class="nctnt ncbi-class">CBioseq</span> occurs as a choice variant in a <span class="nctnt ncbi-class">CSeq\_entry</span> object.
+The new hook classes for these examples should be derived from `CReadObjectHook`, `CReadClassMemberHook`, and `CReadChoiceVariantHook`, respectively. In the first case, all occurrences of `CBioseq` on any input stream will trigger the new `Read` method. In contrast, the third case installs this new `Read` method to be triggered only when the `CBioseq` occurs as a choice variant in a `CSeq_entry` object.
 
-All of the virtual <span class="nctnt ncbi-func">Read</span> methods take two arguments: a <span class="nctnt ncbi-class">CObjectIStream</span> and a reference to a [CObjectInfo](#cobjectinfo). For example, the <span class="nctnt ncbi-class">CReadObjectHook</span> class declares the <span class="nctnt ncbi-func">ReadObject()</span> method as:
+All of the virtual `Read` methods take two arguments: a `CObjectIStream` and a reference to a [CObjectInfo](#cobjectinfo). For example, the `CReadObjectHook` class declares the `ReadObject()` method as:
 
     virtual void ReadObject(CObjectIStream& in,
                             const CObjectInfo& object) = 0;
 
-The <span class="nctnt ncbi-func">ReadClassMember</span> and <span class="nctnt ncbi-func">ReadChoiceVariant</span> hooks differ from the <span class="nctnt ncbi-func">ReadObject</span> hook class, in that the second argument to the virtual <span class="nctnt ncbi-func">Read</span> method is an iterator, pointing to the object type information for a sequence member or choice variant respectively.
+The `ReadClassMember` and `ReadChoiceVariant` hooks differ from the `ReadObject` hook class, in that the second argument to the virtual `Read` method is an iterator, pointing to the object type information for a sequence member or choice variant respectively.
 
 In summary, to install a read hook for an object type:
 
 derive a new class from the appropriate hook class:
 
--   if the hook should be called regardless of the structural context in which the target object occurs, use the <span class="nctnt ncbi-class">CReadObjectHook</span> class.
+-   if the hook should be called regardless of the structural context in which the target object occurs, use the `CReadObjectHook` class.
 
--   if the target object occurs as a sequence member, use the <span class="nctnt ncbi-class">CReadClassMemberHook</span> class.
+-   if the target object occurs as a sequence member, use the `CReadClassMemberHook` class.
 
--   if the target object occurs as a choice variant, use the <span class="nctnt ncbi-class">CReadChoiceVariant Hook</span> class.
+-   if the target object occurs as a choice variant, use the `CReadChoiceVariant Hook` class.
 
-implement the virtual <span class="nctnt ncbi-func">Read</span> method for the new class.
+implement the virtual `Read` method for the new class.
 
-install the hook, using the <span class="nctnt ncbi-func">SetLocalReadHook()</span> method defined in
+install the hook, using the `SetLocalReadHook()` method defined in
 
--   <span class="nctnt ncbi-class">CObjectTypeInfo</span> for a <span class="nctnt ncbi-class">CReadObjectHook</span>
+-   `CObjectTypeInfo` for a `CReadObjectHook`
 
--   <span class="nctnt ncbi-class">CMemberInfo</span> for a <span class="nctnt ncbi-class">CReadClassMemberHook</span>
+-   `CMemberInfo` for a `CReadClassMemberHook`
 
--   <span class="nctnt ncbi-class">CVariantInfo</span> for a <span class="nctnt ncbi-class">CReadChoiceVariantHook</span>
+-   `CVariantInfo` for a `CReadChoiceVariantHook`
 
-or use <span class="nctnt ncbi-class">CObjectHookGuard</span> class to install any of these hooks.
+or use `CObjectHookGuard` class to install any of these hooks.
 
-In many cases you will need to read the hooked object and do some special processing, or to skip the entire object. To simplify object reading or skipping all base hook classes have <span class="nctnt ncbi-func">DefaultRead()</span> and <span class="nctnt ncbi-func">DefaultSkip()</span> methods taking the same arguments as the user provided ReadXXXX() methods. Thus, to read a bioseq object from a hook:
+In many cases you will need to read the hooked object and do some special processing, or to skip the entire object. To simplify object reading or skipping all base hook classes have `DefaultRead()` and `DefaultSkip()` methods taking the same arguments as the user provided ReadXXXX() methods. Thus, to read a bioseq object from a hook:
 
     void CMyReadObjectHook::ReadObject(CObjectIStream& in,
                                        const CObjectInfo& object)
@@ -742,11 +742,11 @@ See the [class documentation](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/do
 
 The `Write` hook classes parallel the `Read` hook classes, and again, we have three base classes:
 
--   <span class="nctnt ncbi-class">CWriteObjectHook</span>
+-   `CWriteObjectHook`
 
--   <span class="nctnt ncbi-class">CWriteClassMemberHook</span>
+-   `CWriteClassMemberHook`
 
--   <span class="nctnt ncbi-class">CWriteChoiceVariantHook</span>
+-   `CWriteChoiceVariantHook`
 
 These classes define the pure virtual methods:
 
@@ -759,7 +759,7 @@ These classes define the pure virtual methods:
     CWriteChoiceVariantHook::WriteChoiceVariant(CObjectOStream&,
         const CConstObjectInfoCV& variant) = 0;
 
-Like the read hooks, your derived write hooks can be installed by invoking the <span class="nctnt ncbi-func">SetLocalWriteObjectHook()</span> methods for the appropriate type information objects. Corresponding to the examples for read hooks then, we would have:
+Like the read hooks, your derived write hooks can be installed by invoking the `SetLocalWriteObjectHook()` methods for the appropriate type information objects. Corresponding to the examples for read hooks then, we would have:
 
     CObjectTypeInfo(CBioseq::GetTypeInfo()).
         SetLocalWriteHook(*in, myWriteBioseqHook);
@@ -770,7 +770,7 @@ Like the read hooks, your derived write hooks can be installed by invoking the <
     CObjectTypeInfo(CSeq_entry::GetTypeInfo()).
         FindVariant("Bioseq").SetLocalWriteHook(*in, myWriteBioseqHook);
 
-<span class="nctnt ncbi-class">CObjectHookGuard</span> class provides is a simple way to install write hooks.
+`CObjectHookGuard` class provides is a simple way to install write hooks.
 
 ##### Write Object Hook Sample
 
@@ -912,9 +912,9 @@ As with the `Read` and `Write` hook classes, there are three base classes which 
     CCopyChoiceVariantHook::CopyChoiceVariant(CObjectStreamCopier& copier,
         const CObjectTypeInfoCV& variant) = 0;
 
-Newly derived copy hooks can be installed by invoking the <span class="nctnt ncbi-func">SetLocalCopyObjectHook()</span> method for the appropriate type information object. The other way of installing hooks is described below in the <span class="nctnt ncbi-class">CObjectHookGuard</span> section.
+Newly derived copy hooks can be installed by invoking the `SetLocalCopyObjectHook()` method for the appropriate type information object. The other way of installing hooks is described below in the `CObjectHookGuard` section.
 
-To do default copying of an object in the overloaded hook method each of the base copy hook classes has a <span class="nctnt ncbi-func">DefaultCopy()</span> method.
+To do default copying of an object in the overloaded hook method each of the base copy hook classes has a `DefaultCopy()` method.
 
 ##### Copy Object Hook Sample
 
@@ -1057,9 +1057,9 @@ As with the `Read` and `Write` hook classes, there are three base classes which 
     CSkipChoiceVariantHook::SkipChoiceVariant(CObjectIStream& in,
         const CObjectTypeInfoCV& variant) = 0;
 
-Newly derived skip hooks can be installed by invoking the <span class="nctnt ncbi-func">SetLocalSkipObjectHook()</span> method for the appropriate type information object. The other way of installing hooks is described below in the <span class="nctnt ncbi-class">CObjectHookGuard</span> section.
+Newly derived skip hooks can be installed by invoking the `SetLocalSkipObjectHook()` method for the appropriate type information object. The other way of installing hooks is described below in the `CObjectHookGuard` section.
 
-The <span class="nctnt ncbi-class">CSkipObjectHook</span> class has a <span class="nctnt ncbi-func">DefaultSkip()</span> method, like the base classes for the other processing modes, but for historical reasons <span class="nctnt ncbi-func">DefaultSkip()</span> methods were not defined for the <span class="nctnt ncbi-class">CSkipClassMemberHook</span> and <span class="nctnt ncbi-class">CSkipChoiceVaraintHook</span> classes. Nevertheless, achieving the same result is easily accomplished – for example:
+The `CSkipObjectHook` class has a `DefaultSkip()` method, like the base classes for the other processing modes, but for historical reasons `DefaultSkip()` methods were not defined for the `CSkipClassMemberHook` and `CSkipChoiceVaraintHook` classes. Nevertheless, achieving the same result is easily accomplished – for example:
 
     class CMySkipClassMemberHook : public CSkipClassMemberHook
     {
@@ -1179,19 +1179,19 @@ A skip choice variant hook can be created very much like other hooks. For exampl
 
 See the [class documentation](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSkipChoiceVariantHook.html) for more information.
 
-#### The <span class="nctnt ncbi-class">CObjectHookGuard</span> class
+#### The `CObjectHookGuard` class
 
-To simplify hooks usage <span class="nctnt ncbi-class">CObjectHookGuard</span> class may be used. It's a template class: the template parameter is the class to be hooked (in case of member or choice variant hooks it's the parent class of the member).
+To simplify hooks usage `CObjectHookGuard` class may be used. It's a template class: the template parameter is the class to be hooked (in case of member or choice variant hooks it's the parent class of the member).
 
 The CObjectHookGuard class has several constructors for installing different hook types. The last argument to all constructors is a stream pointer. By default the pointer is NULL and the hook is intalled as a global one. To make the hook stream-local pass the stream to the guard constructor.
 
--   Object read/write hooks:<br/><span class="nctnt ncbi-code">CObjectHookGuard(CReadObjectHook& hook,</span><br/><span class="nctnt ncbi-code"> CObjectIStream\* in = 0);</span><br/><span class="nctnt ncbi-code">CObjectHookGuard(CWriteObjectHook& hook,</span><br/><span class="nctnt ncbi-code"> CObjectOStream\* out = 0);</span>
+-   Object read/write hooks:<br/>`CObjectHookGuard(CReadObjectHook& hook,`<br/>`                 CObjectIStream* in = 0);`<br/>`CObjectHookGuard(CWriteObjectHook& hook,`<br/>`                 CObjectOStream* out = 0);`
 
--   Class member read/write hooks:<br/><span class="nctnt ncbi-code">CObjectHookGuard(string id,</span><br/><span class="nctnt ncbi-code"> CReadClassMemberHook& hook,</span><br/><span class="nctnt ncbi-code"> CObjectIStream\* in = 0);</span><br/><span class="nctnt ncbi-code">CObjectHookGuard(string id,</span><br/><span class="nctnt ncbi-code"> CWriteClassMemberHook& hook,</span><br/><span class="nctnt ncbi-code"> CObjectOStream\* out = 0);</span>
+-   Class member read/write hooks:<br/>`CObjectHookGuard(string id,`<br/>`                 CReadClassMemberHook& hook,`<br/>`                 CObjectIStream* in = 0);`<br/>`CObjectHookGuard(string id,`<br/>`                 CWriteClassMemberHook& hook,`<br/>`                 CObjectOStream* out = 0);`
 
 The string "id" argument is the name of the member in ASN.1 specification for generated classes.
 
--   Choice variant read/write hooks:<br/><span class="nctnt ncbi-code">CObjectHookGuard(string id,</span><br/><span class="nctnt ncbi-code"> CReadChoiceVariantHook& hook,</span><br/><span class="nctnt ncbi-code"> CObjectIStream\* in = 0);</span><br/><span class="nctnt ncbi-code">CObjectHookGuard(string id,</span><br/><span class="nctnt ncbi-code"> CWriteChoiceVariantHook& hook,</span><br/><span class="nctnt ncbi-code"> CObjectOStream\* out = 0);</span>
+-   Choice variant read/write hooks:<br/>`CObjectHookGuard(string id,`<br/>`                 CReadChoiceVariantHook& hook,`<br/>`                 CObjectIStream* in = 0);`<br/>`CObjectHookGuard(string id,`<br/>`                 CWriteChoiceVariantHook& hook,`<br/>`                 CObjectOStream* out = 0);`
 
 The string "id" argument is the name of the variant in ASN.1 specification for generated classes.
 
@@ -1227,7 +1227,7 @@ An example of a possible stack path mask is:
 
     *.article.*.authors
 
-<span class="nctnt highlight">Note:</span> The first element of the stack path mask must be either a wildcard or the type of the top-level object in the stream. Type names are not permitted anywhere but the first element, which makes stack path masks like "`*.Cit-book.*.date`" invalid (ASN.1 type names begin with uppercase while member names begin with lowercase).
+*Note:* The first element of the stack path mask must be either a wildcard or the type of the top-level object in the stream. Type names are not permitted anywhere but the first element, which makes stack path masks like "`*.Cit-book.*.date`" invalid (ASN.1 type names begin with uppercase while member names begin with lowercase).
 
 As with regular serialization hooks, it is possible to install a path hook for a specific object:
 
@@ -1244,9 +1244,9 @@ or a variant of a choice object:
     CObjectTypeInfo(CSeq_entry::GetTypeInfo()).FindVariant("seq").
         SetPathReadHook(in, path, myReadBioseqHook);
 
-Here <span class="nctnt ncbi-var">in</span> is a pointer to an input object stream. If it is equal to zero, the hook will be installed globally, otherwise - for that particular stream.
+Here `in` is a pointer to an input object stream. If it is equal to zero, the hook will be installed globally, otherwise - for that particular stream.
 
-In addition, it is possible to install path hooks directly in object streams without specifying an ASN.1 type. For example, to install a read hook on all string objects named <span class="nctnt ncbi-var">last-name</span>, one could use either this:
+In addition, it is possible to install path hooks directly in object streams without specifying an ASN.1 type. For example, to install a read hook on all string objects named `last-name`, one could use either this:
 
     CObjectTypeInfo(CStdTypeInfo<string>::GetTypeInfo()).
         SetPathReadHook(in,"*.last-name",myObjHook);
@@ -1255,7 +1255,7 @@ or this:
 
     in->SetPathReadObjectHook("*.last-name", myObjHook);
 
-Setting path hooks directly in streams also makes it possible to differentiate between <span class="nctnt ncbi-var">last-name</span> being a sequence member and choice variant. So, for example:
+Setting path hooks directly in streams also makes it possible to differentiate between `last-name` being a sequence member and choice variant. So, for example:
 
     in->SetPathReadMemberHook("*.last-name", myMemHook);
 
@@ -1265,7 +1265,7 @@ will hook sequence members and not choice variants, while:
 
 will hook choice variants and not sequence members.
 
-Stack path hooks can be removed by passing <span class="nctnt ncbi-macro">NULL</span> instead of a hook pointer to the various "SetHook" methods.
+Stack path hooks can be removed by passing `NULL` instead of a hook pointer to the various "SetHook" methods.
 
 #### Hooking anonymous objects
 
@@ -1277,7 +1277,7 @@ Certain ASN.1 constructs result in anonymous objects. For example, in this ASN.1
 
 the seq-set class member contains anonymous Seq-entry objects. You can hook the complete sequence using the name "seq-set", but there is no name to use to hook the individual Seq-entry elements of the sequence.
 
-The solution is to hook the seq-set container and iterate through the elements using the <span class="nctnt ncbi-class">CIStreamContainerIterator</span> class. For example:
+The solution is to hook the seq-set container and iterate through the elements using the `CIStreamContainerIterator` class. For example:
 
     class CSkipMemberHook__Bioseq_set : public CSkipClassMemberHook
     {
@@ -1303,13 +1303,13 @@ The solution is to hook the seq-set container and iterate through the elements u
             // Skip through the stream, triggering the hook:
             in->Skip(CType<CBioseq_set>());
 
-<span class="nctnt highlight">Note:</span> Hooking ASN.1 "SET OF" works the same way as "SEQUENCE OF".
+*Note:* Hooking ASN.1 "SET OF" works the same way as "SEQUENCE OF".
 
 ### Stream Iterators
 
 When working with a stream, it is sometimes convenient to be able to read or write data elements directly, bypassing the standard data storage mechanism. For example, when reading a large container object, the purpose could be to process its elements. It is possible to read everything at once, but this could require a lot of memory to store the data in. An alternative approach, which greatly reduces the amount of required memory, could be to read elements one by one, process them as they arrive, and then discard. Or, when writing a container, one could construct it in memory only partially, and then add missing elements 'on the fly' - where appropriate. To make it possible, the SERIAL library introduces `stream iterators`. Needless to say, the most convenient way of using this mechanism is in read/write hooks.
 
-SERIAL library defines the following stream iterator classes: <span class="nctnt ncbi-class">CIStreamClassMemberIterator</span> and <span class="nctnt ncbi-class">CIStreamContainerIterator</span> for input streams, and <span class="nctnt ncbi-class">COStreamClassMember</span> and <span class="nctnt ncbi-class">COStreamContainer</span> for output ones.
+SERIAL library defines the following stream iterator classes: `CIStreamClassMemberIterator` and `CIStreamContainerIterator` for input streams, and `COStreamClassMember` and `COStreamContainer` for output ones.
 
 Reading a container could look like this:
 
@@ -1330,9 +1330,9 @@ Writing - like this:
 
 For more examples of using stream iterators please refer to [asn2asn](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/app/asn2asn/asn2asn.cpp) sample application.
 
-### The <span class="nctnt ncbi-class">ByteBlock</span> and <span class="nctnt ncbi-class">CharBlock</span> classes
+### The `ByteBlock` and `CharBlock` classes
 
-<span class="nctnt ncbi-class">CObject[IO]Stream::ByteBlock</span> class may be used for non-standard processing of an OCTET STRING data, e.g. from a read/write hooks. The <span class="nctnt ncbi-class">CObject[IO]Stream::CharBlock</span> class has almost the same functionality, but may be used for VisibleString data processing.
+`CObject[IO]Stream::ByteBlock` class may be used for non-standard processing of an OCTET STRING data, e.g. from a read/write hooks. The `CObject[IO]Stream::CharBlock` class has almost the same functionality, but may be used for VisibleString data processing.
 
 An example of using ByteBlock or CharBlock classes is generating data on-the-fly in a write hook. To use block classes:
 
@@ -1342,9 +1342,9 @@ Use Read()/Write() functions to process block data
 
 Close the block with the End() function
 
-Below is an example of using <span class="nctnt ncbi-class">CObjectOStream::ByteBlock</span> in an object write hook for non-standard data processing. Note, that ByteBlock and CharBlock classes read/write data only. You should also provide some code for writing class' and members' tags.
+Below is an example of using `CObjectOStream::ByteBlock` in an object write hook for non-standard data processing. Note, that ByteBlock and CharBlock classes read/write data only. You should also provide some code for writing class' and members' tags.
 
-Since OCTET STRING and VisibleString in the NCBI C++ Toolkit are implemented as <span class="nctnt ncbi-class">vector\<char\></span> and <span class="nctnt ncbi-class">string</span> classes, which have no serailization type info, you can not install a read or write hook for these classes. The example also demonstrates how to process members of these types using the containing class hook. Another example of using CharBlock with write hooks can be found in [test\_serial.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/serial/test/test_serial.cpp) application.
+Since OCTET STRING and VisibleString in the NCBI C++ Toolkit are implemented as `vector<char>` and `string` classes, which have no serailization type info, you can not install a read or write hook for these classes. The example also demonstrates how to process members of these types using the containing class hook. Another example of using CharBlock with write hooks can be found in [test\_serial.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/serial/test/test_serial.cpp) application.
 
     void CWriteMyObjectHook::WriteObject(CObjectOStream& out,
                                          const CConstObjectInfo& object)
@@ -1408,30 +1408,30 @@ The C++ Toolkit now contains [datatool](ch_app.html#ch_app.datatool)-generated c
 
 -   They are designed to be thread-safe (but, at least for now, maintain only a single connection per instance, so forming pools may be appropriate).
 
-The usual interface to these classes is through a family of methods named <span class="nctnt ncbi-func">AskXxx</span>, each of which takes a request of an appropriate type and an optional pointer to an object that will receive the full reply and returns the corresponding reply choice. For example, <span class="nctnt ncbi-func">CEntrez2Client::AskEval\_boolean</span> takes a request of type <span class="nctnt ncbi-type">const CEntrez2\_eval\_boolean&</span> and an optional pointer of type <span class="nctnt ncbi-type">CEntrez2\_reply\*</span>, and returns a reply of type <span class="nctnt ncbi-type">CRef\<CEntrez2\_boolean\_reply\></span>. All of these methods automatically detect server-reported errors or unexpected reply choices, and throw appropriate exceptions when they occur. There are also lower-level methods simply named <span class="nctnt ncbi-func">Ask</span>, which may come in handy if you do not know what kind of query you will need to make.
+The usual interface to these classes is through a family of methods named `AskXxx`, each of which takes a request of an appropriate type and an optional pointer to an object that will receive the full reply and returns the corresponding reply choice. For example, `CEntrez2Client::AskEval_boolean` takes a request of type `const CEntrez2_eval_boolean&` and an optional pointer of type `CEntrez2_reply*`, and returns a reply of type `CRef<CEntrez2_boolean_reply>`. All of these methods automatically detect server-reported errors or unexpected reply choices, and throw appropriate exceptions when they occur. There are also lower-level methods simply named `Ask`, which may come in handy if you do not know what kind of query you will need to make.
 
-In addition to these standard methods, there are certain class-specific methods: <span class="nctnt ncbi-class">CEntrez2Client</span> adds <span class="nctnt ncbi-func">GetDefaultRequest</span> and <span class="nctnt ncbi-func">SetDefaultRequest</span> for dealing with those fields of <span class="nctnt ncbi-type">Entrez2-request</span> besides <span class="nctnt ncbi-var">request</span> itself, and <span class="nctnt ncbi-class">CID1Client</span> adds <span class="nctnt ncbi-func">{Get,Set}AllowDeadEntries</span> (off by default) to control how to handle the result choice <span class="nctnt ncbi-var">gotdeadseqentry</span>.
+In addition to these standard methods, there are certain class-specific methods: `CEntrez2Client` adds `GetDefaultRequest` and `SetDefaultRequest` for dealing with those fields of `Entrez2-request` besides `request` itself, and `CID1Client` adds `{Get,Set}AllowDeadEntries` (off by default) to control how to handle the result choice `gotdeadseqentry`.
 
 #### Implementation Details
 
-In order to get [datatool](ch_app.html#ch_app.datatool) to generate classes for a service, you must add some settings to the corresponding `modulename.def` file. Specifically, you must set <span class="nctnt ncbi-var">[-]clients</span> to the relevant base file name (typically `service`<span class="nctnt ncbi-code">\_client</span>), and add a correspondingly named section containing the entries listed in [Table 1](#table-1). (If a single specification defines multiple protocols for which you would like <span class="nctnt ncbi-app">datatool</span> to generate classes, you may list multiple client names, separated by spaces.)
+In order to get [datatool](ch_app.html#ch_app.datatool) to generate classes for a service, you must add some settings to the corresponding `modulename.def` file. Specifically, you must set `[-]clients` to the relevant base file name (typically `service``_client`), and add a correspondingly named section containing the entries listed in [Table 1](#table-1). (If a single specification defines multiple protocols for which you would like **datatool** to generate classes, you may list multiple client names, separated by spaces.)
 
 Table 1. Network Service Client Generation Parameters
 
-| Name                                                   | Value                                                                                                                                                                                                                                                                                                                                                                        |
-|--------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <span class="nctnt ncbi-var">class</span> (REQUIRED)   | C++ class name to use.                                                                                                                                                                                                                                                                                                                                                       |
-| <span class="nctnt ncbi-var">service</span>            | Named service to connect to; if you do not define this, you will need to override <span class="nctnt ncbi-func">x\_Connect</span> in the user class.                                                                                                                                                                                                                         |
-| <span class="nctnt ncbi-var">serialformat</span>       | Serialization format: normally `AsnBinary`, but `AsnText` and `Xml` are also legal.                                                                                                                                                                                                                                                                                          |
-| <span class="nctnt ncbi-var">request</span> (REQUIRED) | ASN.1 type for requests; may include a module name, a field name (as with `Entrez2`), or both. Must be a CHOICE.                                                                                                                                                                                                                                                             |
-| <span class="nctnt ncbi-var">reply</span> (REQUIRED)   | ASN.1 type for replies, as above.                                                                                                                                                                                                                                                                                                                                            |
-| <span class="nctnt ncbi-var">reply.choice\_name</span> | Reply choice appropriate for requests of type <span class="nctnt ncbi-var">choice\_name</span>; defaults to <span class="nctnt ncbi-var">choice\_name</span> as well, and determines the return type of <span class="nctnt ncbi-func">AskChoice\_name</span>. May be set to `special` to suppress automatic method generation and let the user class handle the whole thing. |
+| Name                 | Value                                                                                                                                                                                                                                                              |
+|----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `class` (REQUIRED)   | C++ class name to use.                                                                                                                                                                                                                                             |
+| `service`            | Named service to connect to; if you do not define this, you will need to override `x_Connect` in the user class.                                                                                                                                                   |
+| `serialformat`       | Serialization format: normally `AsnBinary`, but `AsnText` and `Xml` are also legal.                                                                                                                                                                                |
+| `request` (REQUIRED) | ASN.1 type for requests; may include a module name, a field name (as with `Entrez2`), or both. Must be a CHOICE.                                                                                                                                                   |
+| `reply` (REQUIRED)   | ASN.1 type for replies, as above.                                                                                                                                                                                                                                  |
+| `reply.choice_name`  | Reply choice appropriate for requests of type `choice_name`; defaults to `choice_name` as well, and determines the return type of `AskChoice_name`. May be set to `special` to suppress automatic method generation and let the user class handle the whole thing. |
 
 ### Verification of Class Member Initialization
 
 When serializing an object, it is important to verify that all mandatory primitive data members (e.g. strings, integers) are given a value. The NCBI C++ Toolkit implements this through a data initialization verification mechanism. In this mechanism, the value itself is not validated; that is, it still could be semantically incorrect. The purpose of the verification is only to make sure that the member has been assigned some value. The verification also provides for a possibility to check whether the object data member has been initialized or not. This could be useful when constructing such objects in memory.
 
-From this perspective, each data member (XXX) of a serial object generated by <span class="nctnt ncbi-app">DATATOOL</span> from an ASN or XML specification has the <span class="nctnt ncbi-func">IsSetXXX()</span> and <span class="nctnt ncbi-func">CanGetXXX()</span> methods. Also, input and output streams have <span class="nctnt ncbi-func">SetVerifyData()</span> and <span class="nctnt ncbi-func">GetVerifyData()</span> methods. The purpose of <span class="nctnt ncbi-func">CanGetXXX()</span> method is to answer the question whether it is safe or not to call the corresponding <span class="nctnt ncbi-func">GetXXX()</span>. The meaning of <span class="nctnt ncbi-func">IsSetXXX()</span> is whether the data member has been assigned a value explicitly (using assignment function call, or as a result of reading from a stream) or not. The stream's <span class="nctnt ncbi-func">SetVerifyData()</span> method defines a stream behavior in case it comes across an uninitialized data member.
+From this perspective, each data member (XXX) of a serial object generated by **DATATOOL** from an ASN or XML specification has the `IsSetXXX()` and `CanGetXXX()` methods. Also, input and output streams have `SetVerifyData()` and `GetVerifyData()` methods. The purpose of `CanGetXXX()` method is to answer the question whether it is safe or not to call the corresponding `GetXXX()`. The meaning of `IsSetXXX()` is whether the data member has been assigned a value explicitly (using assignment function call, or as a result of reading from a stream) or not. The stream's `SetVerifyData()` method defines a stream behavior in case it comes across an uninitialized data member.
 
 There are three kinds of object data members:
 
@@ -1441,9 +1441,9 @@ There are three kinds of object data members:
 
 -   mandatory with no default value.
 
-Optional members and mandatory ones with no default have "no value" initially. As such, they are "ungetatable"; that is, <span class="nctnt ncbi-func">GetXXX()</span> throws an exception (this is also configurable though). Mandatory members with a default are always getable, but not always set. It is possible to assign a default value to a mandatory member with a default value. In this case it becomes set, and as such will be written into an output stream.
+Optional members and mandatory ones with no default have "no value" initially. As such, they are "ungetatable"; that is, `GetXXX()` throws an exception (this is also configurable though). Mandatory members with a default are always getable, but not always set. It is possible to assign a default value to a mandatory member with a default value. In this case it becomes set, and as such will be written into an output stream.
 
-The discussion above refers only to primitive data members, such as strings, or integers. The behavior of containers is somewhat different. All containers are pre-created on the parent object construction, so for container data members <span class="nctnt ncbi-func">CanGetXXX()</span> always returns TRUE. This can be justified by the fact that containers have a sort of "natural default value" - empty. Also, <span class="nctnt ncbi-func">IsSetXXX()</span> will return TRUE if the container is either mandatory, or has been read (even if empty) from the input stream, or <span class="nctnt ncbi-func">SetXXX()</span> was called for it.
+The discussion above refers only to primitive data members, such as strings, or integers. The behavior of containers is somewhat different. All containers are pre-created on the parent object construction, so for container data members `CanGetXXX()` always returns TRUE. This can be justified by the fact that containers have a sort of "natural default value" - empty. Also, `IsSetXXX()` will return TRUE if the container is either mandatory, or has been read (even if empty) from the input stream, or `SetXXX()` was called for it.
 
 The following additional topics are discussed in this section:
 
@@ -1451,16 +1451,16 @@ The following additional topics are discussed in this section:
 
 -   [Initialization Verification in Object Streams](#initialization-verification-in-object-streams)
 
-#### Initialization Verification in <span class="nctnt ncbi-class">CSerialObject</span> Classes
+#### Initialization Verification in `CSerialObject` Classes
 
-<span class="nctnt ncbi-class">CSerialObject</span> defines two functions to manage how uninitialized data members would be treated:
+`CSerialObject` defines two functions to manage how uninitialized data members would be treated:
 
         static void SetVerifyDataThread(ESerialVerifyData verify);
         static void SetVerifyDataGlobal(ESerialVerifyData verify);
 
-The <span class="nctnt ncbi-func">SetVerifyDataThread()</span> defines the behavior of <span class="nctnt ncbi-func">GetXXX()</span> for the current thread, while the <span class="nctnt ncbi-func">SetVerifyDataGlobal()</span> for the current process. Please note, that disabling <span class="nctnt ncbi-class">CUnassignedMember</span> exceptions in <span class="nctnt ncbi-func">GetXXX()</span> function is potentially dangerous because it could silently return garbage.
+The `SetVerifyDataThread()` defines the behavior of `GetXXX()` for the current thread, while the `SetVerifyDataGlobal()` for the current process. Please note, that disabling `CUnassignedMember` exceptions in `GetXXX()` function is potentially dangerous because it could silently return garbage.
 
-The behavior of initialization verification has been designed to allow for maximum flexibility. It is possible to define it using environment variables, and then override it in a program, and vice versa. It is also possible to force a specific behavior, no matter what the program sets, or could set later on. The <span class="nctnt ncbi-type">ESerialVerifyData</span> enumerator could have the following values:
+The behavior of initialization verification has been designed to allow for maximum flexibility. It is possible to define it using environment variables, and then override it in a program, and vice versa. It is also possible to force a specific behavior, no matter what the program sets, or could set later on. The `ESerialVerifyData` enumerator could have the following values:
 
 -   `eSerialVerifyData_Default`
 
@@ -1472,11 +1472,11 @@ The behavior of initialization verification has been designed to allow for maxim
 
 -   `eSerialVerifyData_Always`
 
-Setting <span class="nctnt ncbi-type">eSerialVerifyData\_Never</span> or <span class="nctnt ncbi-type">eSerialVerifyData\_Always</span> results in a "forced" behavior: setting <span class="nctnt ncbi-type">eSerialVerifyData\_Never</span> prohibits later attempts to enable verification; setting <span class="nctnt ncbi-type">eSerialVerifyData\_Always</span> prohibits attempts to disable it. The default behavior could be defined from the outside, using the <span class="nctnt ncbi-var">SET\_VERIFY\_DATA\_GET</span> environment variable:
+Setting `eSerialVerifyData_Never` or `eSerialVerifyData_Always` results in a "forced" behavior: setting `eSerialVerifyData_Never` prohibits later attempts to enable verification; setting `eSerialVerifyData_Always` prohibits attempts to disable it. The default behavior could be defined from the outside, using the `SET_VERIFY_DATA_GET` environment variable:
 
         SET_VERIFY_DATA_GET ::= ( 'NO' \| 'NEVER' \| 'YES' \| 'ALWAYS' )
 
-Alternatively, the default behavior can also be set from a program code using <span class="nctnt ncbi-func">CSerialObject::SetVerifyDataXXX()</span> functions.
+Alternatively, the default behavior can also be set from a program code using `CSerialObject::SetVerifyDataXXX()` functions.
 
 Setting the environment variable to "Never/Always" overrides any attempt to change the verification behavior in the program. Setting "Never/Always" for the process overrides attempts to change it for a thread. "Yes/No" setting is less restrictive: the environment variable, if present, provides the default, which could then be overridden in a program, or thread. Here thread settings supersede the process ones.
 
@@ -1486,11 +1486,11 @@ Data member verification in object streams is a bit more complex.
 
 First, it is possible to set the verification behavior on three different levels:
 
--   for a specific stream (<span class="nctnt ncbi-func">SetVerifyData()</span>),
+-   for a specific stream (`SetVerifyData()`),
 
--   for all streams created by a current thread (<span class="nctnt ncbi-func">SetVerifyDataThread()</span>),
+-   for all streams created by a current thread (`SetVerifyDataThread()`),
 
--   for all stream created by the current process (<span class="nctnt ncbi-func">SetVerifyDataGlobal()</span>).
+-   for all stream created by the current process (`SetVerifyDataGlobal()`).
 
 Second, there are more options in defining what to do in case of an uninitialized data member:
 
@@ -1500,7 +1500,7 @@ Second, there are more options in defining what to do in case of an uninitialize
 
 -   write some default value on writing, and assign it on reading (even though there is no default).
 
-To accommodate these situations, the <span class="nctnt ncbi-type">ESerialVerifyData</span> enumerator has two additional values:
+To accommodate these situations, the `ESerialVerifyData` enumerator has two additional values:
 
 -   `eSerialVerifyData_DefValue`
 
@@ -1523,27 +1523,27 @@ The reading and writing of serial object requires creation of special object str
 
 The only information that is always needed is the output format. It is defined by the following stream manipulators:
 
--   <span class="nctnt ncbi-func">MSerial\_AsnText</span>
+-   `MSerial_AsnText`
 
--   <span class="nctnt ncbi-func">MSerial\_AsnBinary</span>
+-   `MSerial_AsnBinary`
 
--   <span class="nctnt ncbi-func">MSerial\_Json</span>
+-   `MSerial_Json`
 
--   <span class="nctnt ncbi-func">MSerial\_Xml</span>
+-   `MSerial_Xml`
 
 Few additional manipulators define the handling of un-initialized object data members:
 
--   <span class="nctnt ncbi-func">MSerial\_VerifyDefault</span>
+-   `MSerial_VerifyDefault`
 
--   <span class="nctnt ncbi-func">MSerial\_VerifyNo</span>
+-   `MSerial_VerifyNo`
 
--   <span class="nctnt ncbi-func">MSerial\_VerifyYes</span>
+-   `MSerial_VerifyYes`
 
--   <span class="nctnt ncbi-func">MSerial\_VerifyDefValue</span>
+-   `MSerial_VerifyDefValue`
 
 ### Finding in input stream objects of a specific type
 
-When processing serialized data, it is pretty often that one has to find all objects of a specific type, with this type not being a root one. To make it easier, serial library defines a helper template function <span class="nctnt ncbi-func">Serial\_FilterObjects</span>. The idea is to be able to define a special hook class with a single virtual function <span class="nctnt ncbi-func">Process</span> with a single parameter: object of the requested type. Input stream is being scanned then, and, when an object of the requested type is encountered, the user-supplied function is being called.
+When processing serialized data, it is pretty often that one has to find all objects of a specific type, with this type not being a root one. To make it easier, serial library defines a helper template function `Serial_FilterObjects`. The idea is to be able to define a special hook class with a single virtual function `Process` with a single parameter: object of the requested type. Input stream is being scanned then, and, when an object of the requested type is encountered, the user-supplied function is being called.
 
 For example, suppose an input stream contains Bioseq objects, and you need to find and process all Seq-inst objects in it. First, you need to define a class that will process them:
 
@@ -1559,7 +1559,7 @@ Second, you just call filtering function specifying the root object type:
     Serial_FilterObjects<CBioseq>(input_stream, new
     CProcessSeqinstHook());
 
-Another variant of this function – <span class="nctnt ncbi-func">Serial\_FilterStdObjects</span> – finds objects of standard type, not derived from <span class="nctnt ncbi-class">CSerialObject</span> – strings, for example. The usage is similar. First, define a hook class that will process data:
+Another variant of this function – `Serial_FilterStdObjects` – finds objects of standard type, not derived from `CSerialObject` – strings, for example. The usage is similar. First, define a hook class that will process data:
 
     class CProcessStringHook : public CSerial_FilterObjectsHook<string>
     {
@@ -1571,7 +1571,7 @@ Then, call the filtering function:
 
     Serial_FilterStdObjects<CBioseq>(input_stream, new CProcessStringHook());
 
-An even more sophisticated, yet easier to use mechanism relies on multi-threading. It puts data reading into a separate thread and hides synchronization issues from client application. There are two template classes, which make it possible: <span class="nctnt ncbi-class">CIStreamObjectIterator</span> and <span class="nctnt ncbi-class">CIStreamStdIterator</span>. The former finds objects of <span class="nctnt ncbi-class">CSerialObject</span> type:
+An even more sophisticated, yet easier to use mechanism relies on multi-threading. It puts data reading into a separate thread and hides synchronization issues from client application. There are two template classes, which make it possible: `CIStreamObjectIterator` and `CIStreamStdIterator`. The former finds objects of `CSerialObject` type:
 
     CIStreamObjectIterator<CBioseq,CSeq_inst> i(input_stream);
     for ( ; i.IsValid(); ++i) {
@@ -1608,19 +1608,19 @@ The following topics are discussed in this section:
 
 -   [Additional Information](#additional-information)
 
-### <span class="nctnt ncbi-lib">STL</span> generic iterators
+### `STL` generic iterators
 
 Iterators are an important cornerstone in the generic programming paradigm - they serve as intermediaries between generic containers and generic algorithms. Different containers have different access properties, and the interface to a generic algorithm must account for this.
 
-The <span class="nctnt ncbi-class">vector</span> class allows `input, output, bidirectional,` and `random access` iterators. In contrast, the <span class="nctnt ncbi-class">list</span> container class does **not** allow random access to its elements. This is depicted graphically by one less strand in the ribbon connector. In addition to the iterators, the generic algorithms may require function objects such as <span class="nctnt ncbi-code">less\<T\></span> to support the template implementations.
+The `vector` class allows `input, output, bidirectional,` and `random access` iterators. In contrast, the `list` container class does **not** allow random access to its elements. This is depicted graphically by one less strand in the ribbon connector. In addition to the iterators, the generic algorithms may require function objects such as `less<T>` to support the template implementations.
 
-The STL standard iterators are designed to iterate through any STL container of homogeneous elements, e.g., `vectors, lists, deques, stacks, maps, multimaps, sets, multisets, `etc. A prerequisite however, is that the container must have <span class="nctnt ncbi-func">begin()</span> and <span class="nctnt ncbi-func">end()</span> functions defined on it as start and end points for the iteration.
+The STL standard iterators are designed to iterate through any STL container of homogeneous elements, e.g., `vectors, lists, deques, stacks, maps, multimaps, sets, multisets, `etc. A prerequisite however, is that the container must have `begin()` and `end()` functions defined on it as start and end points for the iteration.
 
 But while these standard iterators are powerful tools for generic programming, they are of no help in iterating over the elements of `aggregate` objects - e.g., over the heterogeneous data members of a class object. As this is an essential operation in processing serialized data structures, the NCBI C++ Toolkit provides additional types of iterators for just this purpose. In the section on [Runtime object type information](#runtime-object-type-information), we described the [CMemberIterator](#cmemberiterator) and [CVariantIterator](#cvariantiterator) classes, which provide access to the instance and type information for **all** of the sequence members and choice variants of a sequence or choice object. In some cases however, we may wish to visit only those data members which are of a certain type, and do not require any type information. The iterators described in this section are of this type.
 
-### <span class="nctnt ncbi-class">CTypeIterator</span> ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCTypeIterator.html)) and <span class="nctnt ncbi-class">CTypeConstIterator</span> ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCTypeConstIterator.html))
+### `CTypeIterator` ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCTypeIterator.html)) and `CTypeConstIterator` ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCTypeConstIterator.html))
 
-The <span class="nctnt ncbi-class">CTypeIterator</span> and <span class="nctnt ncbi-class">CTypeConstIterator</span> can be used to traverse a structured object, stopping at all data members of a specified type. For example, it is very common to represent a linked list of objects by encoding a next field that embeds an object of the same type. One way to traverse the linked list then, would be to "iterate" over all objects of that type, beginning at the head of the list. For example, suppose you have a <span class="nctnt ncbi-class">CPerson</span>class defined as:
+The `CTypeIterator` and `CTypeConstIterator` can be used to traverse a structured object, stopping at all data members of a specified type. For example, it is very common to represent a linked list of objects by encoding a next field that embeds an object of the same type. One way to traverse the linked list then, would be to "iterate" over all objects of that type, beginning at the head of the list. For example, suppose you have a `CPerson`class defined as:
 
     class CPerson
     {
@@ -1633,7 +1633,7 @@ The <span class="nctnt ncbi-class">CTypeIterator</span> and <span class="nctnt n
         CPerson *m_NextDoor;
     };
 
-Given this definition, one might then define a <span class="nctnt ncbi-var">neighborhood</span> using a single <span class="nctnt ncbi-class">CPerson</span>. Assuming a function <span class="nctnt ncbi-func">FullerBrushMan(CPerson&)</span> must now be applied to each person in the neighborhood, this could be implemented using a <span class="nctnt ncbi-class">CTypeIterator</span> as follows:
+Given this definition, one might then define a `neighborhood` using a single `CPerson`. Assuming a function `FullerBrushMan(CPerson&)` must now be applied to each person in the neighborhood, this could be implemented using a `CTypeIterator` as follows:
 
     CPerson neighborhood("Moe", "123 Main St",
                          new CPerson("Larry", "127 Main St",
@@ -1642,11 +1642,11 @@ Given this definition, one might then define a <span class="nctnt ncbi-var">neig
         FullerBrushMan(*house);
     }
 
-In this example, the data members visited by the iterator are of the same type as the top-level aggregate object, since <span class="nctnt ncbi-var">neighbor</span> is an instance of <span class="nctnt ncbi-class">CPerson</span>. Thus, the first "member" visited is the top-level object itself. This is not always the case however. The top-level object is only included in the iteration when it is an instance of the type specified in the template argument (<span class="nctnt ncbi-class">CPerson</span> in this case).
+In this example, the data members visited by the iterator are of the same type as the top-level aggregate object, since `neighbor` is an instance of `CPerson`. Thus, the first "member" visited is the top-level object itself. This is not always the case however. The top-level object is only included in the iteration when it is an instance of the type specified in the template argument (`CPerson` in this case).
 
-All of the NCBI C++ Toolkit type iterators are `recursive`. Thus, since <span class="nctnt ncbi-var">neighborhood</span> has <span class="nctnt ncbi-class">CPerson</span> data members, which in turn contain objects of type <span class="nctnt ncbi-class">CPerson</span>, all of the nested data members will also be visited by the above iterator. More generally, given a hierarchically structured object containing data elements of a given type nested several levels deep, the NCBI C++ Toolkit type iterators effectively generate a "flat" list of all these elements.
+All of the NCBI C++ Toolkit type iterators are `recursive`. Thus, since `neighborhood` has `CPerson` data members, which in turn contain objects of type `CPerson`, all of the nested data members will also be visited by the above iterator. More generally, given a hierarchically structured object containing data elements of a given type nested several levels deep, the NCBI C++ Toolkit type iterators effectively generate a "flat" list of all these elements.
 
-It is not difficult to imagine situations where recursive iterators such as the <span class="nctnt ncbi-class">CTypeIterator</span> could lead to infinite loops. An obvious example of this would be a doubly-linked list. For example, suppose <span class="nctnt ncbi-class">CPerson</span> had both <span class="nctnt ncbi-var">previous</span> and <span class="nctnt ncbi-var">next</span> data members, where <span class="nctnt ncbi-code">x-\>next-\>previous == x</span>. In this case, visiting <span class="nctnt ncbi-var">x</span> followed by <span class="nctnt ncbi-var">x-\>next</span> would lead back to <span class="nctnt ncbi-var">x</span> with no terminating condition. To address this issue, the <span class="nctnt ncbi-func">Begin()</span> function accepts an optional second argument, [eDetectLoops](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=EDetectLoops). <span class="nctnt ncbi-var">eDetectLoops</span> is an <span class="nctnt ncbi-code">enum</span> value which, if included, specifies that the iterator should detect and avoid infinite loops. The resulting iterator will be somewhat slower but can be safely used on objects whose references might create loops.
+It is not difficult to imagine situations where recursive iterators such as the `CTypeIterator` could lead to infinite loops. An obvious example of this would be a doubly-linked list. For example, suppose `CPerson` had both `previous` and `next` data members, where `x->next->previous == x`. In this case, visiting `x` followed by `x->next` would lead back to `x` with no terminating condition. To address this issue, the `Begin()` function accepts an optional second argument, [eDetectLoops](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=EDetectLoops). `eDetectLoops` is an `enum` value which, if included, specifies that the iterator should detect and avoid infinite loops. The resulting iterator will be somewhat slower but can be safely used on objects whose references might create loops.
 
 Let's compare the syntax of this new iterator class to the traditional iterators:
 
@@ -1661,55 +1661,55 @@ Let's compare the syntax of this new iterator class to the traditional iterators
     // or you can use CTypeIterator:
     for (CTypeIterator<T> it(Begin(ObjectName)); it; ++it)
 
-The traditional for loop iteration begins by pointing to the first item in the container <span class="nctnt ncbi-func">x.begin()</span>, and with each iteration, visits subsequent items until the end of the container <span class="nctnt ncbi-func">x.end()</span> is reached.
+The traditional for loop iteration begins by pointing to the first item in the container `x.begin()`, and with each iteration, visits subsequent items until the end of the container `x.end()` is reached.
 
-The <span class="nctnt ncbi-macro">ITERATE</span> macro does essentially the same thing, but it saves <span class="nctnt ncbi-func">x.end()</span> instead of re-evaluating it every iteration.
+The `ITERATE` macro does essentially the same thing, but it saves `x.end()` instead of re-evaluating it every iteration.
 
-Similarly, the <span class="nctnt ncbi-class">CTypeIterator</span> begins by pointing to the first data member of <span class="nctnt ncbi-var">ObjectName</span> that is of type <span class="nctnt ncbi-type">T</span>, and with each iteration, visits subsequent data members of type <span class="nctnt ncbi-type">T</span> until the end of the top-level object is reached.
+Similarly, the `CTypeIterator` begins by pointing to the first data member of `ObjectName` that is of type `T`, and with each iteration, visits subsequent data members of type `T` until the end of the top-level object is reached.
 
-A lot of code actually uses <span class="nctnt ncbi-code">= Begin(...)</span> instead of <span class="nctnt ncbi-code">(Begin(...))</span> to initialize iterators; although the alternate syntax is somewhat more readable and often works, some compilers can mis-handle it and give you link errors. As such, direct initialization as shown above generally works better. Also, note that this issue only applies to construction; you should (and must) continue to use <span class="nctnt ncbi-code">=</span> to reset existing iterators.
+A lot of code actually uses `= Begin(...)` instead of `(Begin(...))` to initialize iterators; although the alternate syntax is somewhat more readable and often works, some compilers can mis-handle it and give you link errors. As such, direct initialization as shown above generally works better. Also, note that this issue only applies to construction; you should (and must) continue to use `=` to reset existing iterators.
 
-How are generic iterators such as these implemented? The [Begin()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Begin) expression returns an object containing a pointer to the input object <span class="nctnt ncbi-var">ObjectName</span>, as well as a pointer to a [CTypeInfo](#ctypeinfo) object containing `type information` about that object. On each iteration, the <span class="nctnt ncbi-code">++</span> operator examines the **current** type information to find the next data member which is of type <span class="nctnt ncbi-type">T</span>. The current object, its type information, and the state of iteration is pushed onto a local stack, and the iterator is then reset with a pointer to the next object found, and in turn, a pointer to its type information. Each data member of type <span class="nctnt ncbi-type">T</span> (or derived from type <span class="nctnt ncbi-type">T</span>) must be capable of providing its own type information as needed. This allows the iterator to recursively visit all data members of the specified type at all levels of nesting.
+How are generic iterators such as these implemented? The [Begin()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Begin) expression returns an object containing a pointer to the input object `ObjectName`, as well as a pointer to a [CTypeInfo](#ctypeinfo) object containing `type information` about that object. On each iteration, the `++` operator examines the **current** type information to find the next data member which is of type `T`. The current object, its type information, and the state of iteration is pushed onto a local stack, and the iterator is then reset with a pointer to the next object found, and in turn, a pointer to its type information. Each data member of type `T` (or derived from type `T`) must be capable of providing its own type information as needed. This allows the iterator to recursively visit all data members of the specified type at all levels of nesting.
 
-More specifically, each object included in the iteration, as well as the initial argument to <span class="nctnt ncbi-func">Begin()</span>, must have a statically implemented [GetTypeInfo()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetTypeInfo) class member function to provide the needed type information. For example, all of the serializable objects generated by [datatool](ch_app.html#ch_app.datatool) in the `src/objects` subtrees have <span class="nctnt ncbi-func">GetTypeInfo()</span> member functions. In order to apply type iterators to user-defined classes (as in the above example), these classes must also make their type information explicit. A set of macros described in the section on [User-defined Type Information](#user-defined-type-information) are provided to simplify the implementation of the <span class="nctnt ncbi-func">GetTypeInfo()</span> methods for user-defined classes. The example included at the end of this section (see [Additional Information](#additional-information)) uses several of the C++ Toolkit type iterators and demonstrates how to apply some of these macros.
+More specifically, each object included in the iteration, as well as the initial argument to `Begin()`, must have a statically implemented [GetTypeInfo()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetTypeInfo) class member function to provide the needed type information. For example, all of the serializable objects generated by [datatool](ch_app.html#ch_app.datatool) in the `src/objects` subtrees have `GetTypeInfo()` member functions. In order to apply type iterators to user-defined classes (as in the above example), these classes must also make their type information explicit. A set of macros described in the section on [User-defined Type Information](#user-defined-type-information) are provided to simplify the implementation of the `GetTypeInfo()` methods for user-defined classes. The example included at the end of this section (see [Additional Information](#additional-information)) uses several of the C++ Toolkit type iterators and demonstrates how to apply some of these macros.
 
-The <span class="nctnt ncbi-class">CTypeConstIterator</span> parallels the <span class="nctnt ncbi-class">CTypeIterator</span>, and is intended for use with <span class="nctnt ncbi-code">const</span> objects (i.e. when you want to prohibit modifications to the objects you are iterating over). For <span class="nctnt ncbi-code">const</span> iterators, the <span class="nctnt ncbi-func">ConstBegin()</span> function should be used in place of <span class="nctnt ncbi-func">Begin()</span>.
+The `CTypeConstIterator` parallels the `CTypeIterator`, and is intended for use with `const` objects (i.e. when you want to prohibit modifications to the objects you are iterating over). For `const` iterators, the `ConstBegin()` function should be used in place of `Begin()`.
 
 ### Class hierarchies, embedded objects, and the NCBI C++ type iterators
 
-As emphasized above, all of the objects visited by an iterator must have the <span class="nctnt ncbi-func">GetTypeInfo()</span> member function defined in order for the iterators to work properly. For an iterator that visits objects of type <span class="nctnt ncbi-type">T</span>, the type information provided by <span class="nctnt ncbi-func">GetTypeInfo()</span> is used to identify:
+As emphasized above, all of the objects visited by an iterator must have the `GetTypeInfo()` member function defined in order for the iterators to work properly. For an iterator that visits objects of type `T`, the type information provided by `GetTypeInfo()` is used to identify:
 
--   data members of type <span class="nctnt ncbi-type">T</span>
+-   data members of type `T`
 
--   data members containing objects of type <span class="nctnt ncbi-type">T</span>
+-   data members containing objects of type `T`
 
--   data members derived from type <span class="nctnt ncbi-type">T</span>
+-   data members derived from type `T`
 
--   data members containing objects derived from type <span class="nctnt ncbi-type">T</span>
+-   data members containing objects derived from type `T`
 
-Explicit encoding of the class hierarchy via the <span class="nctnt ncbi-func">GetTypeInfo()</span> methods allows the user to deploy a type iterator over a single specified type which may in practice include a set of types via inheritance. The section [Additional Information](#additional-information) includes a simple example of this feature. The preprocessor macros used in this example which support the encoding of hierarchical class relations are described in the [User-defined Type Information](#user-defined-type-information) section. A further generalization of this idea is implemented by the [CTypesIterator](#ctypesiterator) described later.
+Explicit encoding of the class hierarchy via the `GetTypeInfo()` methods allows the user to deploy a type iterator over a single specified type which may in practice include a set of types via inheritance. The section [Additional Information](#additional-information) includes a simple example of this feature. The preprocessor macros used in this example which support the encoding of hierarchical class relations are described in the [User-defined Type Information](#user-defined-type-information) section. A further generalization of this idea is implemented by the [CTypesIterator](#ctypesiterator) described later.
 
-### <span class="nctnt ncbi-class">CObjectIterator</span> ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/serial/iterator.hpp)) and <span class="nctnt ncbi-class">CObjectConstIterator</span> ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/serial/iterator.hpp))
+### `CObjectIterator` ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/serial/iterator.hpp)) and `CObjectConstIterator` ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/serial/iterator.hpp))
 
-Because the <span class="nctnt ncbi-class">CObject</span> class is so central to the Toolkit, a special iterator is also defined, which can automatically distinguish <span class="nctnt ncbi-class">CObject</span>s from other class types. The syntax of a <span class="nctnt ncbi-class">CObjectIterator</span> is:
+Because the `CObject` class is so central to the Toolkit, a special iterator is also defined, which can automatically distinguish `CObject`s from other class types. The syntax of a `CObjectIterator` is:
 
     for (CObjectIterator i(Begin(ObjectName)); i; ++i)
 
-Note that there is no need to specify the object type to iterate over, as the type <span class="nctnt ncbi-class">CObject</span> is built into the iterator itself. This iterator will recursively visit all <span class="nctnt ncbi-class">CObject</span>s contained or referenced in <span class="nctnt ncbi-var">ObjectName</span>. The <span class="nctnt ncbi-class">CObjectConstIterator</span> is identical to the <span class="nctnt ncbi-class">CObjectIterator</span> but is designed to operate on <span class="nctnt ncbi-code">const</span> elements and uses the <span class="nctnt ncbi-func">ConstBegin()</span> function.
+Note that there is no need to specify the object type to iterate over, as the type `CObject` is built into the iterator itself. This iterator will recursively visit all `CObject`s contained or referenced in `ObjectName`. The `CObjectConstIterator` is identical to the `CObjectIterator` but is designed to operate on `const` elements and uses the `ConstBegin()` function.
 
-User-defined classes that are derived from <span class="nctnt ncbi-class">CObject</span> can also be iterated over (assuming their <span class="nctnt ncbi-func">GetTypeInfo()</span> methods have been implemented). In general however, care should be used in applying this type of iterator, as not all of the NCBI C++ Toolkit classes derived from <span class="nctnt ncbi-func">CObject</span> have implementations of the <span class="nctnt ncbi-func">GetTypeInfo()</span> method. **All** of the generated serializable objects in `include/objects` **do** have a defined <span class="nctnt ncbi-func">GetTypeInfo()</span> member function however, and thus can be iterated over using either a <span class="nctnt ncbi-class">CObjectIterator</span> or a <span class="nctnt ncbi-class">CTypeIterator</span> with an appropriate template argument.
+User-defined classes that are derived from `CObject` can also be iterated over (assuming their `GetTypeInfo()` methods have been implemented). In general however, care should be used in applying this type of iterator, as not all of the NCBI C++ Toolkit classes derived from `CObject` have implementations of the `GetTypeInfo()` method. **All** of the generated serializable objects in `include/objects` **do** have a defined `GetTypeInfo()` member function however, and thus can be iterated over using either a `CObjectIterator` or a `CTypeIterator` with an appropriate template argument.
 
-### <span class="nctnt ncbi-class">CStdTypeIterator</span> ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCStdTypeIterator.html)) and <span class="nctnt ncbi-class">CStdTypeConstIterator</span> ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCStdTypeConstIterator.html))
+### `CStdTypeIterator` ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCStdTypeIterator.html)) and `CStdTypeConstIterator` ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCStdTypeConstIterator.html))
 
-All of the type iterators described thus far require that each object visited must provide its own type information. Hence, none of these can be applied to standard types such as <span class="nctnt ncbi-type">int, float, double</span> or the STL type <span class="nctnt ncbi-type">string</span>. The <span class="nctnt ncbi-class">CStdTypeIterator</span> and <span class="nctnt ncbi-class">CStdTypeConstIterator</span> classes selectively iterate over data members of a specified type. But for these iterators, the type **must** be a simple C type (<span class="nctnt ncbi-type">int, double, char\*, etc.</span>) or an STL type <span class="nctnt ncbi-type">string</span>. For example, to iterate over all the <span class="nctnt ncbi-type">string</span> data members in a <span class="nctnt ncbi-class">CPerson</span> object, we could use:
+All of the type iterators described thus far require that each object visited must provide its own type information. Hence, none of these can be applied to standard types such as `int, float, double` or the STL type `string`. The `CStdTypeIterator` and `CStdTypeConstIterator` classes selectively iterate over data members of a specified type. But for these iterators, the type **must** be a simple C type (`int, double, char*, etc.`) or an STL type `string`. For example, to iterate over all the `string` data members in a `CPerson` object, we could use:
 
     for (CStdTypeIterator<string> i(Begin(neighborhood)); i; ++i) {
         cout << *i << ' ';
     }
 
-The <span class="nctnt ncbi-class">CStdTypeConstIterator</span> is identical to the <span class="nctnt ncbi-class">CStdTypeIterator</span> but is designed to operate on <span class="nctnt ncbi-code">const</span> elements and requires the <span class="nctnt ncbi-func">ConstBegin()</span> function.
+The `CStdTypeConstIterator` is identical to the `CStdTypeIterator` but is designed to operate on `const` elements and requires the `ConstBegin()` function.
 
-For examples using <span class="nctnt ncbi-class">CTypeIterator</span> and <span class="nctnt ncbi-class">CStdTypeIterator</span>, see [Code Sample 2 (ctypeiter.cpp)](#code-sample-2-ctypeitercpp) and [Code Sample 3 (ctypeiter.hpp)](#code-sample-3-ctypeiterhpp).
+For examples using `CTypeIterator` and `CStdTypeIterator`, see [Code Sample 2 (ctypeiter.cpp)](#code-sample-2-ctypeitercpp) and [Code Sample 3 (ctypeiter.hpp)](#code-sample-3-ctypeiterhpp).
 
 #### Code Sample 2. ctypeiter.cpp
 
@@ -1819,9 +1819,9 @@ For examples using <span class="nctnt ncbi-class">CTypeIterator</span> and <span
     };
     #endif /* CTYPEITER_HPP */
 
-### <span class="nctnt ncbi-class">CTypesIterator</span> ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CTypesIterator))
+### `CTypesIterator` ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CTypesIterator))
 
-Sometimes it is necessary to iterate over a set of types contained inside an object. The <span class="nctnt ncbi-class">CTypesIterator</span>, as its name suggests, is designed for this purpose. For example, suppose you have loaded a gene sequence into memory as a <span class="nctnt ncbi-class">CBioseq</span> (named <span class="nctnt ncbi-var">seq</span>), and want to iterate over all of its references to genes and organisms. The following sequence of statements defines an iterator that will step through all of <span class="nctnt ncbi-var">seq</span>'s data members (recursively), stopping only at references to gene and organism citations:
+Sometimes it is necessary to iterate over a set of types contained inside an object. The `CTypesIterator`, as its name suggests, is designed for this purpose. For example, suppose you have loaded a gene sequence into memory as a `CBioseq` (named `seq`), and want to iterate over all of its references to genes and organisms. The following sequence of statements defines an iterator that will step through all of `seq`'s data members (recursively), stopping only at references to gene and organism citations:
 
     CTypesIterator i;
     CType<CGene_ref>::AddTo(i);    // define the types to stop at
@@ -1841,17 +1841,17 @@ Sometimes it is necessary to iterate over a set of types contained inside an obj
 
 Here, [CType](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCType.html) is a helper template class that simplifies the syntax required to use the multiple types iterator:
 
--   <span class="nctnt ncbi-code">CType\<TypeName\>::AddTo(i)</span> specifies that iterator <span class="nctnt ncbi-var">i</span> should stop at type <span class="nctnt ncbi-type">TypeName</span>.
+-   `CType<TypeName>::AddTo(i)` specifies that iterator `i` should stop at type `TypeName`.
 
--   <span class="nctnt ncbi-code">CType\<TypeName\>::Match(i)</span> returns `true` if the specified type <span class="nctnt ncbi-type">TypeName</span> is the type currently pointed to by iterator <span class="nctnt ncbi-var">i</span>.
+-   `CType<TypeName>::Match(i)` returns `true` if the specified type `TypeName` is the type currently pointed to by iterator `i`.
 
--   <span class="nctnt ncbi-code">CType\<TypeName\>::Get(i)</span> retrieves the object currently pointed to by iterator <span class="nctnt ncbi-var">i</span>**if** there is a type match to <span class="nctnt ncbi-type">TypeName</span>, and otherwise returns 0. In the event there is a type match, the retrieved object is type cast to <span class="nctnt ncbi-type">TypeName</span> before it is returned.
+-   `CType<TypeName>::Get(i)` retrieves the object currently pointed to by iterator `i`**if** there is a type match to `TypeName`, and otherwise returns 0. In the event there is a type match, the retrieved object is type cast to `TypeName` before it is returned.
 
-The <span class="nctnt ncbi-func">Begin()</span> expression is as described for the above <span class="nctnt ncbi-class">CTypeIterator</span> and <span class="nctnt ncbi-class">CTypeConstIterator</span> classes. The [CTypesConstIterator](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CTypesConstIterator) is the <span class="nctnt ncbi-code">const</span> implementation of this type of iterator, and requires the <span class="nctnt ncbi-func">ConstBegin()</span> function.
+The `Begin()` expression is as described for the above `CTypeIterator` and `CTypeConstIterator` classes. The [CTypesConstIterator](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CTypesConstIterator) is the `const` implementation of this type of iterator, and requires the `ConstBegin()` function.
 
 ### Context Filtering In Type Iterators
 
-In addition to traversing objects of a specific type one might want to specify the structural context in which such objects should appear. For example, you might want to iterate over <span class="nctnt ncbi-type">string</span> data members, but only those called `title`. This could be done using context filtering. Such a filter is a string with the format identical to the one used in [Stack Path Hooks](#stack-path-hooks) and is specified as an additional parameter of a type iterator. So, for example, the declaration of a string data member iterator with context filtering could look like this:
+In addition to traversing objects of a specific type one might want to specify the structural context in which such objects should appear. For example, you might want to iterate over `string` data members, but only those called `title`. This could be done using context filtering. Such a filter is a string with the format identical to the one used in [Stack Path Hooks](#stack-path-hooks) and is specified as an additional parameter of a type iterator. So, for example, the declaration of a string data member iterator with context filtering could look like this:
 
     CStdTypeIterator<string> i(Begin(my_obj), "*.title")
 
@@ -1859,17 +1859,17 @@ In addition to traversing objects of a specific type one might want to specify t
 
 The following example demonstrates how the class hierarchy determines which data members will be included in a type iterator. The example uses five simple classes:
 
--   Class <span class="nctnt ncbi-class">CA</span> contains a single <span class="nctnt ncbi-type">int</span> data member and is used as a target object type for the type iterators demonstrated.
+-   Class `CA` contains a single `int` data member and is used as a target object type for the type iterators demonstrated.
 
--   class <span class="nctnt ncbi-class">CB</span> contains an <span class="nctnt ncbi-class">auto\_ptr</span> to a <span class="nctnt ncbi-class">CA</span> object.
+-   class `CB` contains an `auto_ptr` to a `CA` object.
 
--   Class <span class="nctnt ncbi-class">CC</span> is derived from <span class="nctnt ncbi-class">CA</span> and is used to demonstrate the usage of class hierarchy information.
+-   Class `CC` is derived from `CA` and is used to demonstrate the usage of class hierarchy information.
 
--   Class <span class="nctnt ncbi-class">CD</span> contains an <span class="nctnt ncbi-class">auto\_ptr</span> to a <span class="nctnt ncbi-class">CC</span> object, and, since it is derived from <span class="nctnt ncbi-class">CObject</span>, can be used as the object pointed to by a [CRef](ch_core.html#ch_core.smart_ptrs).
+-   Class `CD` contains an `auto_ptr` to a `CC` object, and, since it is derived from `CObject`, can be used as the object pointed to by a [CRef](ch_core.html#ch_core.smart_ptrs).
 
--   Class <span class="nctnt ncbi-class">CX</span> contains both pointers-to and instances-of <span class="nctnt ncbi-class">CA, CB, CC</span>, and <span class="nctnt ncbi-class">CD</span> objects, and is used as the argument to <span class="nctnt ncbi-func">Begin()</span> for the demonstrated type iterators.
+-   Class `CX` contains both pointers-to and instances-of `CA, CB, CC`, and `CD` objects, and is used as the argument to `Begin()` for the demonstrated type iterators.
 
-The preprocessor macros used in this example implement the <span class="nctnt ncbi-func">GetTypeInfo()</span> methods for the classes, and are described in the section on [User-defined type information](#user-defined-type-information).
+The preprocessor macros used in this example implement the `GetTypeInfo()` methods for the classes, and are described in the section on [User-defined type information](#user-defined-type-information).
 
     // Define a simple class to use as iterator's target objects
     class CA
@@ -1990,7 +1990,7 @@ The preprocessor macros used in this example implement the <span class="nctnt nc
         return 0;
     }
 
-Figure 1 illustrates the paths traversed by <span class="nctnt ncbi-class">CTypeIterator\<CA\></span> and <span class="nctnt ncbi-class">CTypeIterator\<CC\></span>, where both iterators are initialized with <span class="nctnt ncbi-func">Begin(a)</span>. The data members visited by the iterator are indicated by enclosing boxes. See [Figure 1](#figure-1).
+Figure 1 illustrates the paths traversed by `CTypeIterator<CA>` and `CTypeIterator<CC>`, where both iterators are initialized with `Begin(a)`. The data members visited by the iterator are indicated by enclosing boxes. See [Figure 1](#figure-1).
 
 [![Figure 1. Traversal path of the CTypeIterator](/book/static/img/typeiter.gif)](/book/static/img/typeiter.gif "Click to see the full-resolution image")
 
@@ -2017,9 +2017,9 @@ The following topics are discussed in this section
 
 ### Accessing the object header files and serialization libraries
 
-Reading and writing serialized data is implemented by an integrated set of streams, filters, and object types. An application that reads encoded data files will require the object header files and libraries which define how these serial streams of data should be loaded into memory. This entails <span class="nctnt ncbi-code">\#include</span> statements in your source files, as well as the associated library specifications in your makefiles. The object header and implementation files are located in the [include/objects](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects) and [src/objects](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects) subtrees of the C++ tree, respectively. The header and implementation files for serialized streams and type information are in the [include/serial](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/serial) and [src/serial](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/serial) directories.
+Reading and writing serialized data is implemented by an integrated set of streams, filters, and object types. An application that reads encoded data files will require the object header files and libraries which define how these serial streams of data should be loaded into memory. This entails `#include` statements in your source files, as well as the associated library specifications in your makefiles. The object header and implementation files are located in the [include/objects](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects) and [src/objects](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects) subtrees of the C++ tree, respectively. The header and implementation files for serialized streams and type information are in the [include/serial](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/serial) and [src/serial](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/serial) directories.
 
-If you have checked out the `objects` directories, but not explicitly run the [datatool](ch_app.html#ch_app.datatool) code generator, then you will find that your `include/objects` subdirectories are (almost) empty, and the source subdirectories contain only makefiles and ASN.1 specifications. These makefiles and ASN.1 specifications can be used to build your own copies of the objects' header and implementation files, using <span class="nctnt ncbi-cmd">make all\_r</span> (if you configured using the <span class="nctnt ncbi-cmd">--with-objects</span> flag), or running datatool explicitly.
+If you have checked out the `objects` directories, but not explicitly run the [datatool](ch_app.html#ch_app.datatool) code generator, then you will find that your `include/objects` subdirectories are (almost) empty, and the source subdirectories contain only makefiles and ASN.1 specifications. These makefiles and ASN.1 specifications can be used to build your own copies of the objects' header and implementation files, using `make all_r` (if you configured using the `--with-objects` flag), or running datatool explicitly.
 
 However, building your own local copies of these header and implementation files is neither necessary nor recommended, as it is simpler to use the pre-generated header files and prebuilt libraries. The pre-built header and implementation files can be found in `$NCBI/c++/include/objects/` and `$NCBI/c++/src/objects/`, respectively. Assuming your makefile defines an include path to `$NCBI/c++/include`, selected object header files such as [Date.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/general/Date.hpp), can be included as:
 
@@ -2030,13 +2030,13 @@ This header file (along with its implementations in the accompanying `src` direc
     USING_NCBI_SCOPE;
     using namespace objects;
 
-All of the objects' header and implementation files are generated by <span class="nctnt ncbi-app">datatool</span>, as specified in the ASN.1 specification files. The resulting object definitions however, are not in any way dependent on ASN.1 format, as they simply specify the in-memory representation of the defined data types. Accordingly, the objects themselves can be used to read, interpret, and write any type of serialized data. Format specializations on the input stream are implemented via [CObjectIStream](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectIStream.html) objects, which extract the required tags and values from the input data according to the format specified. Similarly, Format specializations on an output stream are implemented via [CObjectOStream](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectOStream.html) objects.
+All of the objects' header and implementation files are generated by **datatool**, as specified in the ASN.1 specification files. The resulting object definitions however, are not in any way dependent on ASN.1 format, as they simply specify the in-memory representation of the defined data types. Accordingly, the objects themselves can be used to read, interpret, and write any type of serialized data. Format specializations on the input stream are implemented via [CObjectIStream](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectIStream.html) objects, which extract the required tags and values from the input data according to the format specified. Similarly, Format specializations on an output stream are implemented via [CObjectOStream](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectOStream.html) objects.
 
 ### Reading and writing serial data
 
-Let's consider a program [xml2asn.cpp](#xml2asncpp) that translates an XML data file containing an object of type [Biostruc](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/mmdb1/mmdb1.asn), to ASN.1 text and binary formats. In <span class="nctnt ncbi-func">main()</span>, we begin by initializing the diagnostic stream to write errors to a local file called `xml2asn.log`. (Exception handling, program tracing, and error logging are described in the [Diagnostic Streams](ch_core.html#ch_core.diag) section).
+Let's consider a program [xml2asn.cpp](#xml2asncpp) that translates an XML data file containing an object of type [Biostruc](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/mmdb1/mmdb1.asn), to ASN.1 text and binary formats. In `main()`, we begin by initializing the diagnostic stream to write errors to a local file called `xml2asn.log`. (Exception handling, program tracing, and error logging are described in the [Diagnostic Streams](ch_core.html#ch_core.diag) section).
 
-An instance of the <span class="nctnt ncbi-class">CTestAsn</span> class is then created, and its member function <span class="nctnt ncbi-func">AppMain()</span> is invoked. This function in turn calls <span class="nctnt ncbi-func">CTestAsn::Run()</span>. The first three lines of code there define the XML input and ASN.1 output streams, using [auto\_ptr](ch_core.html#ch_core.smart_ptrs), to ensure automatic destruction of these objects.
+An instance of the `CTestAsn` class is then created, and its member function `AppMain()` is invoked. This function in turn calls `CTestAsn::Run()`. The first three lines of code there define the XML input and ASN.1 output streams, using [auto\_ptr](ch_core.html#ch_core.smart_ptrs), to ensure automatic destruction of these objects.
 
 Each stream is associated with data serialization mechanisms appropriate to the [ESerialDataFormat](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ESerialDataFormat) provided to the constructor:
 
@@ -2048,9 +2048,9 @@ Each stream is associated with data serialization mechanisms appropriate to the 
         eSerial_Json      = 4    /// JSON
     };
 
-<span class="nctnt ncbi-class">CObjectIStream</span> and <span class="nctnt ncbi-class">CObjectOStream</span> are base classes which provide generic interfaces between the specific type information of a serializable object and an I/O stream. The object stream classes that will actually be instantiated by this application, [CObjectIStreamXml](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectIStreamXml.html), [CObjectOStreamAsn](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectOStreamAsn.html), and [CObjectOStreamAsnBinary](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectOStreamAsnBinary.html), are descendants of these base classes.
+`CObjectIStream` and `CObjectOStream` are base classes which provide generic interfaces between the specific type information of a serializable object and an I/O stream. The object stream classes that will actually be instantiated by this application, [CObjectIStreamXml](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectIStreamXml.html), [CObjectOStreamAsn](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectOStreamAsn.html), and [CObjectOStreamAsnBinary](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectOStreamAsnBinary.html), are descendants of these base classes.
 
-Finally, a variable for the object type that will be generated from the input stream (in this case a [CBiostruc](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBiostruc.html)) is defined, and the <span class="nctnt ncbi-class">CObject[I/O]Stream</span> operators "\<\<" and "\>\>" are used to read and write the serialized data to and from the object. (Note that it is **not** possible to simply "pass the data through", from the input stream to the output stream, using a construct like: <span class="nctnt ncbi-code">\*inObject \>\> \*outObject</span>). The <span class="nctnt ncbi-class">CObject[I/O]Stream</span>s know nothing about the structure of the specific object - they have knowledge only of the serialization format (text ASN, binary ASN, XML, etc.). In contrast, the [CBiostruc](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBiostruc.html) knows nothing about I/O and serialization formats, but it contains explicit type information about itself. Thus, the <span class="nctnt ncbi-class">CObject[I/O]Stream</span>s can apply their specialized serialization methods to the data members of <span class="nctnt ncbi-class">CBiostruc</span> using the [type information](#type-information) associated with that object's class.
+Finally, a variable for the object type that will be generated from the input stream (in this case a [CBiostruc](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBiostruc.html)) is defined, and the `CObject[I/O]Stream` operators "\<\<" and "\>\>" are used to read and write the serialized data to and from the object. (Note that it is **not** possible to simply "pass the data through", from the input stream to the output stream, using a construct like: `*inObject >> *outObject`). The `CObject[I/O]Stream`s know nothing about the structure of the specific object - they have knowledge only of the serialization format (text ASN, binary ASN, XML, etc.). In contrast, the [CBiostruc](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBiostruc.html) knows nothing about I/O and serialization formats, but it contains explicit type information about itself. Thus, the `CObject[I/O]Stream`s can apply their specialized serialization methods to the data members of `CBiostruc` using the [type information](#type-information) associated with that object's class.
 
 ### Reading and writing binary JSON data
 
@@ -2085,9 +2085,9 @@ The following code shows how to write binary JSON data:
 
 ### Determining Which Header Files to Include
 
-As always, we include the `corelib` header files, `ncbistd.hpp` and `ncbiapp.hpp`. In addition, the `serial` header files that define the generic <span class="nctnt ncbi-class">CObject[IO]Stream</span> objects are included, along with `serial.hpp`, which defines generalized serialization mechanisms including the insertion (<span class="nctnt ncbi-code">\<\<</span>) and extraction (<span class="nctnt ncbi-code">\>\></span>) operators. Finally, we need to include the header file for the object type we will be using.
+As always, we include the `corelib` header files, `ncbistd.hpp` and `ncbiapp.hpp`. In addition, the `serial` header files that define the generic `CObject[IO]Stream` objects are included, along with `serial.hpp`, which defines generalized serialization mechanisms including the insertion (`<<`) and extraction (`>>`) operators. Finally, we need to include the header file for the object type we will be using.
 
-There are two source browsers that can be used to locate the appropriate header file for a particular object type. Object class names in the NCBI C++ Toolkit begin with the letter "C". Using the [class hierarchy browser](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/hierarchy.html), we find <span class="nctnt ncbi-class">CBiostruc</span>, derived from <span class="nctnt ncbi-class">CBiostruc\_Base</span>, which is in turn derived from <span class="nctnt ncbi-class">CObject</span>. Following the `CBiostruc` link, we can then use the `locate` button to move to the LXR source code navigator, and there, find the name of the header file. In this case, we find [CBiostruc.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/mmdb1/Biostruc.hpp) is located in `include/objects/mmdb1`. Alternatively, if we know the name of the C++ class, the source code navigator's [identifier search](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident) tool can be used directly. In summary, the following <span class="nctnt ncbi-code">\#include</span> statements appear at the top of [xml2asn.cpp](#xml2asncpp):
+There are two source browsers that can be used to locate the appropriate header file for a particular object type. Object class names in the NCBI C++ Toolkit begin with the letter "C". Using the [class hierarchy browser](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/hierarchy.html), we find `CBiostruc`, derived from `CBiostruc_Base`, which is in turn derived from `CObject`. Following the `CBiostruc` link, we can then use the `locate` button to move to the LXR source code navigator, and there, find the name of the header file. In this case, we find [CBiostruc.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/mmdb1/Biostruc.hpp) is located in `include/objects/mmdb1`. Alternatively, if we know the name of the C++ class, the source code navigator's [identifier search](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident) tool can be used directly. In summary, the following `#include` statements appear at the top of [xml2asn.cpp](#xml2asncpp):
 
     #include <corelib/ncbiapp.hpp>
     #include <serial/serial.hpp>
@@ -2099,9 +2099,9 @@ There are two source browsers that can be used to locate the appropriate header 
 
 Determining which libraries must be linked to requires a bit more work and may involve some trial and error. The list of available libraries currently includes:
 
-<span class="nctnt ncbi-var">access biblio cdd featdef general medlars medline mmdb1 mmdb2 mmdb3 ncbimime objprt proj pub pubmed seq seqalign seqblock seqcode seqfeat seqloc seqres seqset submit xcgi xconnect xfcgi xhtml xncbi xser</span>
+`access biblio cdd featdef general medlars medline mmdb1 mmdb2 mmdb3 ncbimime objprt proj pub pubmed seq seqalign seqblock seqcode seqfeat seqloc seqres seqset submit xcgi xconnect xfcgi xhtml xncbi xser`
 
-It should be clear that we will need to link to the core library, `xncbi`, as well as to the serial library, `xser`. In addition, we will need to link to whatever object libraries are entailed by using a [CBiostruc](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBiostruc.html) object. Minimally, one would expect to link to the `mmdb` libraries. This in itself is insufficient however, as the <span class="nctnt ncbi-class">CBiostruc</span> class embeds other types of objects, including PubMed citations, features, and sequences, which in turn embed additional objects such as [Date](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDate.html). The makefile for `xml2asn.cpp`, `Makefile.xml2asn.app` lists the libraries required for linking in the make variable <span class="nctnt ncbi-var">LIB</span>.
+It should be clear that we will need to link to the core library, `xncbi`, as well as to the serial library, `xser`. In addition, we will need to link to whatever object libraries are entailed by using a [CBiostruc](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBiostruc.html) object. Minimally, one would expect to link to the `mmdb` libraries. This in itself is insufficient however, as the `CBiostruc` class embeds other types of objects, including PubMed citations, features, and sequences, which in turn embed additional objects such as [Date](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDate.html). The makefile for `xml2asn.cpp`, `Makefile.xml2asn.app` lists the libraries required for linking in the make variable `LIB`.
 
     #########################################################################
     # This file was originally generated from by shell script "new_project.sh"
@@ -2111,9 +2111,9 @@ It should be clear that we will need to link to the core library, `xncbi`, as we
     LIB = mmdb1 mmdb2 mmdb3 seqloc seqfeat pub medline biblio general xser xncbi
     LIBS = $(NCBI_C_LIBPATH) -lncbi $(ORIG_LIBS)
 
-See also the example program, [asn2asn.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/app/asn2asn/asn2asn.cpp) which demonstrates more generalized translation of <span class="nctnt ncbi-type">Seq-entry</span> and <span class="nctnt ncbi-type">Bioseq-set</span> (defined in [seqset.asn](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqset/seqset.asn)).
+See also the example program, [asn2asn.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/app/asn2asn/asn2asn.cpp) which demonstrates more generalized translation of `Seq-entry` and `Bioseq-set` (defined in [seqset.asn](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqset/seqset.asn)).
 
-<span class="nctnt highlight">Note:</span> Two online tools are available to help determine which libraries to link with. See the [FAQ](ch_faq.html#ch_faq.faq.CannotFindObjectSymbol) for details.
+*Note:* Two online tools are available to help determine which libraries to link with. See the [FAQ](ch_faq.html#ch_faq.faq.CannotFindObjectSymbol) for details.
 
 User-defined type information
 -----------------------------
@@ -2128,15 +2128,15 @@ The following topics are discussed in this section:
 
 ### Introduction
 
-Object type information, as it is used in the NCBI C++ Toolkit, is defined in the section on [Runtime Object Type Information](#runtime-object-type-information). As described there, all of the classes and constructs defined in the serial `include` and `src` directories have a static implementation of a <span class="nctnt ncbi-func">GetTypeInfo()</span> function that yields a [CTypeInfo](#ctypeinfo) for the object of interest. In this section, we describe how type information can also be generated and accessed for user-defined types. We begin with a review of some of the basic notions introduced in the previous discussion.
+Object type information, as it is used in the NCBI C++ Toolkit, is defined in the section on [Runtime Object Type Information](#runtime-object-type-information). As described there, all of the classes and constructs defined in the serial `include` and `src` directories have a static implementation of a `GetTypeInfo()` function that yields a [CTypeInfo](#ctypeinfo) for the object of interest. In this section, we describe how type information can also be generated and accessed for user-defined types. We begin with a review of some of the basic notions introduced in the previous discussion.
 
 The type information for a class is stored outside any instances of that class, in a statically created [CTypeInfo](#ctypeinfo) object. A class's type information includes the class layout, inheritance relations, external alias, and various other attributes that are independent of specific instances. In addition, the type information object provides an interface to the class's data members.
 
-Limited type information is also available for primitive data types, enumerations, containers, and pointers. The type information for a primitive type specifies that it is an <span class="nctnt ncbi-type">int, float,</span> or <span class="nctnt ncbi-type">char</span>, etc., and whether or not that element is signed. Enumerations are a special kind of primitive type, whose type information specifies its enumeration values and named elements. Type information for containers can specify both the type of container and the type of elements. The type information for a pointer provides convenient methods of access to the type information for the type pointed to.
+Limited type information is also available for primitive data types, enumerations, containers, and pointers. The type information for a primitive type specifies that it is an `int, float,` or `char`, etc., and whether or not that element is signed. Enumerations are a special kind of primitive type, whose type information specifies its enumeration values and named elements. Type information for containers can specify both the type of container and the type of elements. The type information for a pointer provides convenient methods of access to the type information for the type pointed to.
 
-For all types, the type information is encoded in a static <span class="nctnt ncbi-class">CTypeInfo</span> object, which is then accessed by all instances of a given type using a [GetTypeInfo()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetTypeInfo) function. For class types, this function is implemented as a static method for the class. For non class types, <span class="nctnt ncbi-func">GetTypeInfoXxx()</span> is implemented as a static global function, where *Xxx* is a unique suffix generated from the type's name. With the first invocation of <span class="nctnt ncbi-func">GetTypeInfo()</span> for a given type, the static <span class="nctnt ncbi-class">CTypeInfo</span> object is created, which then persists (local to the function <span class="nctnt ncbi-func">GetTypeInfo()</span>) throughout execution. Subsequent calls to <span class="nctnt ncbi-func">GetTypeInfo()</span> simply return a pointer to this statically created local object.
+For all types, the type information is encoded in a static `CTypeInfo` object, which is then accessed by all instances of a given type using a [GetTypeInfo()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetTypeInfo) function. For class types, this function is implemented as a static method for the class. For non class types, `GetTypeInfoXxx()` is implemented as a static global function, where *Xxx* is a unique suffix generated from the type's name. With the first invocation of `GetTypeInfo()` for a given type, the static `CTypeInfo` object is created, which then persists (local to the function `GetTypeInfo()`) throughout execution. Subsequent calls to `GetTypeInfo()` simply return a pointer to this statically created local object.
 
-In order to make type information about `user-defined` classes accessible to your application, the user-defined classes must also implement a static <span class="nctnt ncbi-func">GetTypeInfo()</span> method. A set of preprocessor [macros](#macros) is available, which greatly simplifies this effort. A pre-requisite to using these macros however, is that the class definition must include the following line:
+In order to make type information about `user-defined` classes accessible to your application, the user-defined classes must also implement a static `GetTypeInfo()` method. A set of preprocessor [macros](#macros) is available, which greatly simplifies this effort. A pre-requisite to using these macros however, is that the class definition must include the following line:
 
     DECLARE_INTERNAL_TYPE_INFO();
 
@@ -2144,11 +2144,11 @@ This pre-processor macro will generate the following in-line statement in the cl
 
     static const NCBI_NS_NCBI::CTypeInfo* GetTypeInfo(void);
 
-As with class objects, there must be some means of declaring the type information function for an enumeration prior to using the macros which implement that function. Given an enumeration named <span class="nctnt ncbi-type">EMyEnum</span>, <span class="nctnt ncbi-code">DECLARE\_ENUM\_INFO(EMyEnum)</span> will generate the following declaration:
+As with class objects, there must be some means of declaring the type information function for an enumeration prior to using the macros which implement that function. Given an enumeration named `EMyEnum`, `DECLARE_ENUM_INFO(EMyEnum)` will generate the following declaration:
 
     const CEnumeratedTypeValues* GetTypeInfo_enum_EMyEnum(void);
 
-The <span class="nctnt ncbi-macro">DECLARE\_ENUM\_INFO()</span> macro should appear in the header file where the enumeration is defined, immediately following the definition. The <span class="nctnt ncbi-macro">DECLARE\_INTERNAL\_ENUM\_INFO</span> macro is intended for usage with internal class definitions, as in:
+The `DECLARE_ENUM_INFO()` macro should appear in the header file where the enumeration is defined, immediately following the definition. The `DECLARE_INTERNAL_ENUM_INFO` macro is intended for usage with internal class definitions, as in:
 
     class ClassWithEnum {
         enum EMyEnum {
@@ -2159,11 +2159,11 @@ The <span class="nctnt ncbi-macro">DECLARE\_ENUM\_INFO()</span> macro should app
         ...
     };
 
-The C++ Toolkit also allows one to provide type information for legacy C style <span class="nctnt ncbi-code">struct</span> and `choice` elements defined in the C Toolkit. The mechanisms used to implement this are mentioned but not described in detail here, as it is not likely that newly-defined types will be in these categories.
+The C++ Toolkit also allows one to provide type information for legacy C style `struct` and `choice` elements defined in the C Toolkit. The mechanisms used to implement this are mentioned but not described in detail here, as it is not likely that newly-defined types will be in these categories.
 
 ### Installing a GetTypeInfo() function: the BEGIN\_/END\_macros
 
-Several pre-processor macros are available for the installation of the <span class="nctnt ncbi-func">GetTypeInfo()</span> functions for different types. [Table 2](#table-2) lists six <span class="nctnt ncbi-macro">BEGIN\_NAMED\_\*\_INFO</span> macros, along with a description of the type of object each can be applied to and its expected arguments. Each macro in Table 2 has a corresponding <span class="nctnt ncbi-macro">END\_\*\_INFO</span> macro definition.
+Several pre-processor macros are available for the installation of the `GetTypeInfo()` functions for different types. [Table 2](#table-2) lists six `BEGIN_NAMED_*_INFO` macros, along with a description of the type of object each can be applied to and its expected arguments. Each macro in Table 2 has a corresponding `END_*_INFO` macro definition.
 
 Table 2. BEGIN\_NAMED\_\* Macro names and their usage
 
@@ -2176,13 +2176,13 @@ Table 2. BEGIN\_NAMED\_\* Macro names and their usage
 | [BEGIN\_NAMED\_ENUM\_INF](#-beginnamedenuminf-)                       | Enum object               | EnumAlias, EnumName, IsInteger             |
 | [BEGIN\_NAMED\_ENUM\_IN\_INFO](#-beginnamedenumininfo-)               | internal Enum object      | EnumAlias, CppContext, EnumName, IsInteger |
 
-The first four macros in Table 2 apply to C++ objects. The <span class="nctnt ncbi-macro">DECLARE\_INTERNAL\_TYPE\_INFO()</span> macro **must** appear in the class definition's public section. These macros take two <span class="nctnt ncbi-type">string</span> arguments:
+The first four macros in Table 2 apply to C++ objects. The `DECLARE_INTERNAL_TYPE_INFO()` macro **must** appear in the class definition's public section. These macros take two `string` arguments:
 
 -   an external alias for the type, and
 
 -   the internal C++ symbolic class name
 
-The next two macros implement global, uniquely named functions which provide access to type information for C++ enumerations; the resulting functions are named <span class="nctnt ncbi-code">GetTypeInfo\_enum\_[EnumName]</span>. The <span class="nctnt ncbi-macro">DECLARE\_ENUM\_INFO()</span> or <span class="nctnt ncbi-macro">DECLARE\_ENUM\_INFO\_IN()</span> macro should be used in these cases to declare the <span class="nctnt ncbi-func">GetTypeInfo\*()</span> functions.
+The next two macros implement global, uniquely named functions which provide access to type information for C++ enumerations; the resulting functions are named `GetTypeInfo_enum_[EnumName]`. The `DECLARE_ENUM_INFO()` or `DECLARE_ENUM_INFO_IN()` macro should be used in these cases to declare the `GetTypeInfo*()` functions.
 
 The usage of these six macros generally takes the following form:
 
@@ -2194,7 +2194,7 @@ The usage of these six macros generally takes the following form:
     }
     END_*_INFO
 
-That is, the <span class="nctnt ncbi-macro">BEGIN/END</span> macros are used to generate the function's signature and enclosing block, and various <span class="nctnt ncbi-macro">ADD\_\*</span> macros are applied to add information about internal members and class relations.
+That is, the `BEGIN/END` macros are used to generate the function's signature and enclosing block, and various `ADD_*` macros are applied to add information about internal members and class relations.
 
 #### List of the BEGIN\_/END\_ macros
 
@@ -2202,7 +2202,7 @@ That is, the <span class="nctnt ncbi-macro">BEGIN/END</span> macros are used to 
 
 -   [BEGIN\_CLASS\_INFO (ClassName)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=BEGIN_CLASS_INFO)
 
-These macros should be used on classes that do not contain any pure virtual functions. For example, the <span class="nctnt ncbi-func">GetTypeInfo()</span> method for the [CPerson](#cperson) class (used in the chapter on iterators) can be implemented as:
+These macros should be used on classes that do not contain any pure virtual functions. For example, the `GetTypeInfo()` method for the [CPerson](#cperson) class (used in the chapter on iterators) can be implemented as:
 
     BEGIN_NAMED_CLASS_INFO("CPerson", CPerson)
     {
@@ -2222,37 +2222,37 @@ or, equivalently, as:
     }
     END_CLASS_INFO
 
-Here, the <span class="nctnt ncbi-class">CPerson</span> class has two <span class="nctnt ncbi-class">string</span> data members, <span class="nctnt ncbi-var">m\_Name</span> and <span class="nctnt ncbi-var">m\_Addr</span>, as well as a pointer to an object of the same type (<span class="nctnt ncbi-type">CPerson\*</span>). All built-in C++ types such as <span class="nctnt ncbi-type">int, float, string</span> etc., use the <span class="nctnt ncbi-macro">ADD\_NAMED\_STD\_MEMBER</span> or <span class="nctnt ncbi-macro">ADD\_STD\_MEMBER</span> macros. These and other macros used to add members are defined in [Specifying internal structure and class inheritance: the ADD\_ macros](#specifying-internal-structure-and-class-inheritance-the-add-macros) and [Table 3](#table-3).
+Here, the `CPerson` class has two `string` data members, `m_Name` and `m_Addr`, as well as a pointer to an object of the same type (`CPerson*`). All built-in C++ types such as `int, float, string` etc., use the `ADD_NAMED_STD_MEMBER` or `ADD_STD_MEMBER` macros. These and other macros used to add members are defined in [Specifying internal structure and class inheritance: the ADD\_ macros](#specifying-internal-structure-and-class-inheritance-the-add-macros) and [Table 3](#table-3).
 
 Table 3. ADD\_\* Macros and their usage
 
-| Macro name                            | Usage                                                                                                       | Arguments                                           |
-|---------------------------------------|-------------------------------------------------------------------------------------------------------------|-----------------------------------------------------|
-| ADD\_NAMED\_STD\_MEMBER               | Add a standard data member to a class                                                                       | MemberAlias, MemberName                             |
-| ADD\_NAMED\_CLASS\_MEMBER             | Add an internal class member to a class                                                                     | MemberAlias, MemberName                             |
-| ADD\_NAMED\_SUB\_CLASS                | Add a derived subclass to a class                                                                           | SubClassAlias, SubClassName                         |
-| ADD\_NAMED\_REF\_MEMBER               | Add a <span class="nctnt ncbi-class">CRef</span> data member to a class                                     | MemberAlias, MemberName, RefClass                   |
-| ADD\_NAMED\_ENUM\_MEMBER              | Add an enumerated data member to a class                                                                    | MemberAlias, MemberName, EnumName                   |
-| ADD\_NAMED\_ENUM\_IN\_MEMBER          | Add an externally defined enumerated data member to a class                                                 | MemberAlias, MemberName, CppContext, EnumName       |
-| ADD\_NAMED\_MEMBER                    | Add a data member of the type specified by <span class="nctnt ncbi-var">TypeMacro</span> to a class         | MemberAlias, MemberName, TypeMacro, TypeMacroArgs   |
-| ADD\_NAMED\_STD\_CHOICE\_VARIANT      | Add a standard variant type to a C++ choice object                                                          | VariantAlias, VariantName                           |
-| ADD\_NAMED\_REF\_CHOICE\_VARIANT      | Add a <span class="nctnt ncbi-class">CRef</span> variant to a C++ choice object                             | VariantAlias, VariantName, RefClass                 |
-| ADD\_NAMED\_ENUM\_CHOICE\_VARIANT     | Add an enumeration variant to a C++ choice object                                                           | VariantAlias, VariantName, EnumName                 |
-| ADD\_NAMED\_ENUM\_IN\_CHOICE\_VARIANT | Add an enumeration variant to a C++ choice object                                                           | VariantAlias, VariantName, CppContext, EnumName     |
-| ADD\_NAMED\_CHOICE\_VARIANT           | Add a variant of the type specified by <span class="nctnt ncbi-var">TypeMacro</span> to a C++ choice object | VariantAlias, VariantName, TypeMacro, TypeMacroArgs |
-| ADD\_ENUM\_VALUE                      | Add a named enumeration value to an <span class="nctnt ncbi-code">enum</span>                               | EnumValName, Value                                  |
+| Macro name                            | Usage                                                                     | Arguments                                           |
+|---------------------------------------|---------------------------------------------------------------------------|-----------------------------------------------------|
+| ADD\_NAMED\_STD\_MEMBER               | Add a standard data member to a class                                     | MemberAlias, MemberName                             |
+| ADD\_NAMED\_CLASS\_MEMBER             | Add an internal class member to a class                                   | MemberAlias, MemberName                             |
+| ADD\_NAMED\_SUB\_CLASS                | Add a derived subclass to a class                                         | SubClassAlias, SubClassName                         |
+| ADD\_NAMED\_REF\_MEMBER               | Add a `CRef` data member to a class                                       | MemberAlias, MemberName, RefClass                   |
+| ADD\_NAMED\_ENUM\_MEMBER              | Add an enumerated data member to a class                                  | MemberAlias, MemberName, EnumName                   |
+| ADD\_NAMED\_ENUM\_IN\_MEMBER          | Add an externally defined enumerated data member to a class               | MemberAlias, MemberName, CppContext, EnumName       |
+| ADD\_NAMED\_MEMBER                    | Add a data member of the type specified by `TypeMacro` to a class         | MemberAlias, MemberName, TypeMacro, TypeMacroArgs   |
+| ADD\_NAMED\_STD\_CHOICE\_VARIANT      | Add a standard variant type to a C++ choice object                        | VariantAlias, VariantName                           |
+| ADD\_NAMED\_REF\_CHOICE\_VARIANT      | Add a `CRef` variant to a C++ choice object                               | VariantAlias, VariantName, RefClass                 |
+| ADD\_NAMED\_ENUM\_CHOICE\_VARIANT     | Add an enumeration variant to a C++ choice object                         | VariantAlias, VariantName, EnumName                 |
+| ADD\_NAMED\_ENUM\_IN\_CHOICE\_VARIANT | Add an enumeration variant to a C++ choice object                         | VariantAlias, VariantName, CppContext, EnumName     |
+| ADD\_NAMED\_CHOICE\_VARIANT           | Add a variant of the type specified by `TypeMacro` to a C++ choice object | VariantAlias, VariantName, TypeMacro, TypeMacroArgs |
+| ADD\_ENUM\_VALUE                      | Add a named enumeration value to an `enum`                                | EnumValName, Value                                  |
 
 -   [BEGIN\_NAMED\_ABSTRACT\_CLASS\_INFO(ClassAlias, ClassName)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=BEGIN_NAMED_ABSTRACT_CLASS_INFO)
 
 -   [BEGIN\_ABSTRACT\_CLASS\_INFO(ClassName)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=BEGIN_ABSTRACT_CLASS_INFO)
 
-These macros must be used on abstract base classes which contain pure virtual functions. Because these abstract classes cannot be instantiated, special handling is required in order to install their static <span class="nctnt ncbi-func">GetTypeInfo()</span> methods.
+These macros must be used on abstract base classes which contain pure virtual functions. Because these abstract classes cannot be instantiated, special handling is required in order to install their static `GetTypeInfo()` methods.
 
 -   [BEGIN\_NAMED\_DERIVED\_CLASS\_INFO (ClassAlias, ClassName, BaseClassName)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=BEGIN_NAMED_DERIVED_CLASS_INFO)
 
 -   [BEGIN\_DERIVED\_CLASS\_INFO (ClassName, BaseClassName)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=BEGIN_DERIVED_CLASS_INFO)
 
-These macros should be used on derived subclasses whose parent classes also have the <span class="nctnt ncbi-func">GetTypeInfo()</span> method implemented. Data members inherited from parent classes should not be included in the derived class type information.
+These macros should be used on derived subclasses whose parent classes also have the `GetTypeInfo()` method implemented. Data members inherited from parent classes should not be included in the derived class type information.
 
     BEGIN_DERIVED_CLASS_INFO(CA, CBase)
     {
@@ -2260,35 +2260,35 @@ These macros should be used on derived subclasses whose parent classes also have
     }
     END_DERIVED_CLASS_INFO
 
-<span class="nctnt highlight">NOTE:</span>The type information for classes derived directly from <span class="nctnt ncbi-class">CObject</span> does **not** however, follow this protocol. In this special case, although the class is derived from <span class="nctnt ncbi-class">CObject</span>, you should **not** use the <span class="nctnt ncbi-macro">DERIVED\_CLASS</span> macros to implement <span class="nctnt ncbi-func">GetTypeInfo()</span>, but instead use the usual <span class="nctnt ncbi-macro">BEGIN\_CLASS\_INFO</span> macro. <span class="nctnt ncbi-class">CObject</span>'s have a slightly different interface to their type information (see [CObjectGetTypeInfo](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CObjectGetTypeInfo)), and apply these macros differently.
+*NOTE:*The type information for classes derived directly from `CObject` does **not** however, follow this protocol. In this special case, although the class is derived from `CObject`, you should **not** use the `DERIVED_CLASS` macros to implement `GetTypeInfo()`, but instead use the usual `BEGIN_CLASS_INFO` macro. `CObject`'s have a slightly different interface to their type information (see [CObjectGetTypeInfo](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CObjectGetTypeInfo)), and apply these macros differently.
 
 -   [BEGIN\_NAMED\_CHOICE\_INFO (ClassAlias, ClassName)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=BEGIN_NAMED_CHOICE_INFO)
 
 -   [BEGIN\_CHOICE\_INFO (ClassName)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=BEGIN_CHOICE_INFO)
 
-These macros install <span class="nctnt ncbi-func">GetTypeInfo()</span> for C++`choice` objects, which are implemented as C++ classes. See [Choice objects in the C++ Toolkit](#choice-objects-in-the-c++-toolkit) for a description of C++ `choice` objects. Each of the choice variants occurs as a data member in the class, and the macros used to add choice variants ([ADD\_NAMED\_\*\_CHOICE\_VARIANT](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ADD_NAMED_CHOICE_VARIANT)) are used similarly to those which add data members to classes (see discussion of the [ADD\*](#add*) macros below).
+These macros install `GetTypeInfo()` for C++`choice` objects, which are implemented as C++ classes. See [Choice objects in the C++ Toolkit](#choice-objects-in-the-c++-toolkit) for a description of C++ `choice` objects. Each of the choice variants occurs as a data member in the class, and the macros used to add choice variants ([ADD\_NAMED\_\*\_CHOICE\_VARIANT](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ADD_NAMED_CHOICE_VARIANT)) are used similarly to those which add data members to classes (see discussion of the [ADD\*](#add*) macros below).
 
 -   [BEGIN\_NAMED\_ENUM\_INFO (EnumAlias, EnumName, IsInteger)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=BEGIN_NAMED_ENUM_INFO)
 
 -   [BEGIN\_ENUM\_INFO (EnumName, IsInteger)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=BEGIN_ENUM_INFO)
 
-In addition to the two arguments used by the <span class="nctnt ncbi-macro">BEGIN\_\*\_INFO</span> macros for classes, a Boolean argument (<span class="nctnt ncbi-func">IsInteger</span>) indicates whether or not the enumeration includes arbitrary integer values or only those explicitly specified.
+In addition to the two arguments used by the `BEGIN_*_INFO` macros for classes, a Boolean argument (`IsInteger`) indicates whether or not the enumeration includes arbitrary integer values or only those explicitly specified.
 
 -   [BEGIN\_NAMED\_ENUM\_IN\_INFO (EnumAlias, CppContext, EnumName, IsInteger)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=BEGIN_NAMED_ENUM_IN_INFO)
 
 -   [BEGIN\_ENUM\_IN\_INFO (CppContext, EnumName, IsInteger)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=BEGIN_ENUM_IN_INFO)
 
-These macros also implement the type information functions for C++ enumerations --but in this case, the enumeration is defined outside the scope where the macro is applied, so a `context` argument is required. This new argument, <span class="nctnt ncbi-func">CppContext</span>, specifies the C++ class name or external namespace where the enumeration is defined.
+These macros also implement the type information functions for C++ enumerations --but in this case, the enumeration is defined outside the scope where the macro is applied, so a `context` argument is required. This new argument, `CppContext`, specifies the C++ class name or external namespace where the enumeration is defined.
 
-Again, when using the above macros to install type information, the corresponding class definitions **must** include a declaration of the static class member function <span class="nctnt ncbi-func">GetTypeInfo()</span> in the class's public section. The <span class="nctnt ncbi-macro">DECLARE\_INTERNAL\_TYPE\_INFO()</span> macro is provided to ensure that the declaration of this method is correct. Similarly, the <span class="nctnt ncbi-macro">DECLARE\_INTERNAL\_ENUM\_INFO</span> and <span class="nctnt ncbi-macro">DECLARE\_ENUM\_INFO</span> macros should be used in the header files where enumerations are defined. The <span class="nctnt ncbi-macro">DECLARE\_ASN\_TYPE\_INFO</span> and <span class="nctnt ncbi-macro">DECLARE\_ASN\_CHOICE\_INFO</span> macros can be used to declare the type information functions for C-style structs and choice nodes.
+Again, when using the above macros to install type information, the corresponding class definitions **must** include a declaration of the static class member function `GetTypeInfo()` in the class's public section. The `DECLARE_INTERNAL_TYPE_INFO()` macro is provided to ensure that the declaration of this method is correct. Similarly, the `DECLARE_INTERNAL_ENUM_INFO` and `DECLARE_ENUM_INFO` macros should be used in the header files where enumerations are defined. The `DECLARE_ASN_TYPE_INFO` and `DECLARE_ASN_CHOICE_INFO` macros can be used to declare the type information functions for C-style structs and choice nodes.
 
 ### Specifying internal structure and class inheritance: the ADD\_ macros
 
-Information about internal class structure and inheritance is specified using the <span class="nctnt ncbi-macro">ADD\_\*</span> macros (see [Table 3](#table-3)). Again, each macro has both a "named" and "unnamed" implementation. The arguments to all of the ADD\_NAMED\_\* macros begin with the external alias and C++ name of the item to be added.
+Information about internal class structure and inheritance is specified using the `ADD_*` macros (see [Table 3](#table-3)). Again, each macro has both a "named" and "unnamed" implementation. The arguments to all of the ADD\_NAMED\_\* macros begin with the external alias and C++ name of the item to be added.
 
-The ADD\_\* macros that take **only** an alias and a name require that the type being added must be either a built-in type or a type defined by the name argument. When adding a <span class="nctnt ncbi-class">CRef</span> data member to a class or choice object however, the class referenced by the <span class="nctnt ncbi-class">CRef</span> must be made explicit with the <span class="nctnt ncbi-var">RefClass</span> argument, which is the C++ class name for the type pointed to.
+The ADD\_\* macros that take **only** an alias and a name require that the type being added must be either a built-in type or a type defined by the name argument. When adding a `CRef` data member to a class or choice object however, the class referenced by the `CRef` must be made explicit with the `RefClass` argument, which is the C++ class name for the type pointed to.
 
-Similarly, when adding an enumerated data member to a class, the enumeration itself must be explicitly named. For example, if class <span class="nctnt ncbi-class">CMyClass</span> contains a data member <span class="nctnt ncbi-var">m\_MyEnumVal</span> of type <span class="nctnt ncbi-type">EMyEnum</span>, then the BEGIN\_NAMED\_CLASS\_INFO macro for <span class="nctnt ncbi-class">CMyClass</span> should contain the statement:
+Similarly, when adding an enumerated data member to a class, the enumeration itself must be explicitly named. For example, if class `CMyClass` contains a data member `m_MyEnumVal` of type `EMyEnum`, then the BEGIN\_NAMED\_CLASS\_INFO macro for `CMyClass` should contain the statement:
 
     ADD_ENUM_MEMBER (m_MyEnumVal, EMyEnum);
 
@@ -2300,25 +2300,25 @@ or, to define a "custom" (non-default) external alias:
 
     ADD_NAMED_ENUM_MEMBER ("m_CustomAlias", m_MyEnumVal, EMyEnum);
 
-Here, <span class="nctnt ncbi-type">EMyEnum</span> is defined in the same namespace and scope as <span class="nctnt ncbi-class">CMyClass</span>. Alternatively, if the enumeration is defined in a different class or namespace (and therefore, then the <span class="nctnt ncbi-macro">ADD\_ENUM\_IN\_MEMBER</span> macro must be used:
+Here, `EMyEnum` is defined in the same namespace and scope as `CMyClass`. Alternatively, if the enumeration is defined in a different class or namespace (and therefore, then the `ADD_ENUM_IN_MEMBER` macro must be used:
 
     ADD_ENUM_IN_MEMBER (m_MyEnumVal, COtherClassName::, EMyEnum);
 
-In this example, <span class="nctnt ncbi-type">EMyEnum</span> is defined in a class named <span class="nctnt ncbi-class">COtherClassName</span>. The <span class="nctnt ncbi-func">CppContext</span> argument (defined here as <span class="nctnt ncbi-class">COtherClassName::</span>) acts as a scope operator, and can also be used to specify an alternative namespace. The ADD\_NAMED\_ENUM\_CHOICE\_VARIANT and ADD\_NAMED\_ENUM\_IN\_CHOICE\_VARIANT macros are used similarly to provide information about enumerated choice options. The <span class="nctnt ncbi-macro">ADD\_ENUM\_VALUE</span> macro is used to add enumerated values to the enumeration itself, as demonstrated in the above example of the [BEGIN\_NAMED\_ENUM\_INFO](#beginnamedenuminfo-)macro.
+In this example, `EMyEnum` is defined in a class named `COtherClassName`. The `CppContext` argument (defined here as `COtherClassName::`) acts as a scope operator, and can also be used to specify an alternative namespace. The ADD\_NAMED\_ENUM\_CHOICE\_VARIANT and ADD\_NAMED\_ENUM\_IN\_CHOICE\_VARIANT macros are used similarly to provide information about enumerated choice options. The `ADD_ENUM_VALUE` macro is used to add enumerated values to the enumeration itself, as demonstrated in the above example of the [BEGIN\_NAMED\_ENUM\_INFO](#beginnamedenuminfo-)macro.
 
-The most complex macros by far are those which use the <span class="nctnt ncbi-type">TypeMacro</span> and <span class="nctnt ncbi-var">TypeMacroArgs</span> arguments: <span class="nctnt ncbi-macro">ADD(\_NAMED)\_MEMBER</span> and <span class="nctnt ncbi-macro">ADD(\_NAMED)\_CHOICE\_VARIANT</span>. These macros are more open-ended and allow for more complex specifications. We have already seen one example of using a macro of this type, in the implementation of the <span class="nctnt ncbi-func">GetTypeInfo()</span> method for <span class="nctnt ncbi-class">CPerson</span>:
+The most complex macros by far are those which use the `TypeMacro` and `TypeMacroArgs` arguments: `ADD(_NAMED)_MEMBER` and `ADD(_NAMED)_CHOICE_VARIANT`. These macros are more open-ended and allow for more complex specifications. We have already seen one example of using a macro of this type, in the implementation of the `GetTypeInfo()` method for `CPerson`:
 
     ADD_MEMBER(m_NextDoor, POINTER, (CLASS, (CPerson)));
 
-The <span class="nctnt ncbi-macro">ADD\_MEMBER</span> and <span class="nctnt ncbi-macro">ADD\_CHOICE\_VARIANT</span> macros always take at least two arguments:
+The `ADD_MEMBER` and `ADD_CHOICE_VARIANT` macros always take at least two arguments:
 
 the internal member (variant) name
 
 the definition of the member's (variant's) type
 
-Depending on the (second) <span class="nctnt ncbi-var">TypeMacro</span> argument, additional arguments may or may not be needed. In this example, the <span class="nctnt ncbi-var">TypeMacro</span> is *POINTER*, which **does require** additional arguments. The <span class="nctnt ncbi-var">TypeMacroArgs</span> here specify that <span class="nctnt ncbi-var">m\_NextDoor</span> is a pointer to a class type whose C++ name is <span class="nctnt ncbi-class">CPerson</span>.
+Depending on the (second) `TypeMacro` argument, additional arguments may or may not be needed. In this example, the `TypeMacro` is *POINTER*, which **does require** additional arguments. The `TypeMacroArgs` here specify that `m_NextDoor` is a pointer to a class type whose C++ name is `CPerson`.
 
-More generally, the remaining arguments depend on the value of <span class="nctnt ncbi-var">TypeMacro</span>, as these parameters complete the type definition. The possible strings which can occur as <span class="nctnt ncbi-var">TypeMacro</span>, along with the additional arguments required for that type, are given in [Table 4](#table-4).
+More generally, the remaining arguments depend on the value of `TypeMacro`, as these parameters complete the type definition. The possible strings which can occur as `TypeMacro`, along with the additional arguments required for that type, are given in [Table 4](#table-4).
 
 Table 4. Type macros and their arguments
 
@@ -2341,7 +2341,7 @@ Table 4. Type macros and their arguments
 | STL\_auto\_ptr    | (Type,Args)                           |
 | CHOICE            | (Type,Args)                           |
 
-The <span class="nctnt ncbi-macro">ADD\_MEMBER</span> macro generates a call to the corresponding <span class="nctnt ncbi-macro">ADD\_NAMED\_MEMBER</span> macro as follows:
+The `ADD_MEMBER` macro generates a call to the corresponding `ADD_NAMED_MEMBER` macro as follows:
 
     #define ADD_MEMBER(MemberName,TypeMacro,TypeMacroArgs) \
         ADD_NAMED_MEMBER(#MemberName,MemberName,TypeMacro,TypeMacroArgs)
@@ -2356,7 +2356,7 @@ Some examples of using the ADD\_MEMBER macro are:
     ADD_MEMBER(m_E, STL_list, (POINTER, (CLASS, (ClassName))));
     ADD_MEMBER(m_F, STL_map, (STD, (long), STD, (string)));
 
-Similarly, the <span class="nctnt ncbi-macro">ADD\_CHOICE\_VARIANT</span> macro generates a call to the corresponding <span class="nctnt ncbi-macro">ADD\_NAMED\_CHOICE\_VARIANT</span> macro. These macros add type information for the [choice object's variants.](#choice-object's-variants)
+Similarly, the `ADD_CHOICE_VARIANT` macro generates a call to the corresponding `ADD_NAMED_CHOICE_VARIANT` macro. These macros add type information for the [choice object's variants.](#choice-object's-variants)
 
 Runtime Object Type Information
 -------------------------------
@@ -2395,30 +2395,30 @@ In case (4) above, the type information is used independent of any actual object
 
 The NCBI C++ Toolkit uses two classes to support these requirements:
 
--   **Type information classes** (base class [CTypeInfo](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCTypeInfo.html)) are intended for internal usage only, and they encode information about a type, devoid of any instances of that type. This information includes the class layout, inheritance relations, external alias, and various other attributes such as size, which are independent of specific instances. Each data member of a class also has its own type information. Thus, in addition to providing information relevant to the member's occurrence in the class (e.g. the member name and offset), the type information for a `class` must also provide access to the type information for each of its `members`. Limited type information is also available for types other than classes, such as primitive data types, enumerations, containers, and pointers. For example, the type information for a primitive type specifies that it is an <span class="nctnt ncbi-type">int, float,</span> or <span class="nctnt ncbi-type">char</span>, etc., and whether or not that element is signed. Enumerations are a special kind of primitive type, whose type information specifies its enumeration values and named elements. Type information for containers specifies both the type of container and the type of elements that it holds.
+-   **Type information classes** (base class [CTypeInfo](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCTypeInfo.html)) are intended for internal usage only, and they encode information about a type, devoid of any instances of that type. This information includes the class layout, inheritance relations, external alias, and various other attributes such as size, which are independent of specific instances. Each data member of a class also has its own type information. Thus, in addition to providing information relevant to the member's occurrence in the class (e.g. the member name and offset), the type information for a `class` must also provide access to the type information for each of its `members`. Limited type information is also available for types other than classes, such as primitive data types, enumerations, containers, and pointers. For example, the type information for a primitive type specifies that it is an `int, float,` or `char`, etc., and whether or not that element is signed. Enumerations are a special kind of primitive type, whose type information specifies its enumeration values and named elements. Type information for containers specifies both the type of container and the type of elements that it holds.
 
--   [Object information classes](#object-information-classes) (base class [CObjectTypeInfo](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectTypeInfo.html)) include a pointer to the type information as well as a pointer to the object <span class="nctnt ncbi-type">instance</span>, and provide a safe interface to that object. In situations where type information is used independent of any concrete object, the object information class simply serves as a wrapper to a type information object. Where access to an object instance is required, the object pointer provides direct access to the correctly type-cast instance, and the interface provides methods to access and/or modify the object itself or members of that object.
+-   [Object information classes](#object-information-classes) (base class [CObjectTypeInfo](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectTypeInfo.html)) include a pointer to the type information as well as a pointer to the object `instance`, and provide a safe interface to that object. In situations where type information is used independent of any concrete object, the object information class simply serves as a wrapper to a type information object. Where access to an object instance is required, the object pointer provides direct access to the correctly type-cast instance, and the interface provides methods to access and/or modify the object itself or members of that object.
 
-The C++ Toolkit stores the type information outside any instances of that type, in a statically created <span class="nctnt ncbi-class">CTypeInfo</span> object. For class objects, this <span class="nctnt ncbi-class">CTypeInfo</span> object can be accessed by all instances of the class via a static [GetTypeInfo()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetTypeInfo) class method. Similarly, for primitive types and other constructs that have no way of associating methods with them per se, a static globally defined <span class="nctnt ncbi-func">GetTypeInfoXxx()</span> function is used to access a static <span class="nctnt ncbi-class">CTypeInfo</span> object. (The *Xxx* suffix is used here to indicate that a globally unique name is generated for the function).
+The C++ Toolkit stores the type information outside any instances of that type, in a statically created `CTypeInfo` object. For class objects, this `CTypeInfo` object can be accessed by all instances of the class via a static [GetTypeInfo()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetTypeInfo) class method. Similarly, for primitive types and other constructs that have no way of associating methods with them per se, a static globally defined `GetTypeInfoXxx()` function is used to access a static `CTypeInfo` object. (The *Xxx* suffix is used here to indicate that a globally unique name is generated for the function).
 
-All of the automatically generated classes and constructs defined in the C++ Toolkit's [objects/](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects) directory already have static <span class="nctnt ncbi-func">GetTypeInfo()</span> functions implemented for them. In order to make type information about `user-defined` classes and elements also accessible, you will need to implement static <span class="nctnt ncbi-func">GetTypeInfo()</span> functions for these constructs. A number of pre-processor macros are available to support this activity, and are described in the section on [User-defined Type Information](#user-defined-type-information).
+All of the automatically generated classes and constructs defined in the C++ Toolkit's [objects/](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects) directory already have static `GetTypeInfo()` functions implemented for them. In order to make type information about `user-defined` classes and elements also accessible, you will need to implement static `GetTypeInfo()` functions for these constructs. A number of pre-processor macros are available to support this activity, and are described in the section on [User-defined Type Information](#user-defined-type-information).
 
-Type information is often needed when the object itself has been passed anonymously, or as a pointer to its parent class. In this case, it is not possible to invoke the <span class="nctnt ncbi-func">GetTypeInfo()</span> method directly, as the object's exact type is unknown. Using a <span class="nctnt ncbi-code">\<static\_cast\></span> operator to enable the member function is also unsafe, as it may open the door to incorrectly associating an object's pointer with the wrong type information. For these reasons, the <span class="nctnt ncbi-class">CTypeInfo</span> class is intended for internal usage only, and it is the [CObjectTypeInfo](#cobjecttypeinfo) classes that provide a more safe and friendly user interface to type information.
+Type information is often needed when the object itself has been passed anonymously, or as a pointer to its parent class. In this case, it is not possible to invoke the `GetTypeInfo()` method directly, as the object's exact type is unknown. Using a `<static_cast>` operator to enable the member function is also unsafe, as it may open the door to incorrectly associating an object's pointer with the wrong type information. For these reasons, the `CTypeInfo` class is intended for internal usage only, and it is the [CObjectTypeInfo](#cobjecttypeinfo) classes that provide a more safe and friendly user interface to type information.
 
 ### Motivation
 
-We use a simple example to help motivate the use of this `type` and `object` information model. Let us suppose that we would like to have a generic function <span class="nctnt ncbi-func">LoadObject()</span>, which can populate an object using data read from a flat file. For example, we might like to have:
+We use a simple example to help motivate the use of this `type` and `object` information model. Let us suppose that we would like to have a generic function `LoadObject()`, which can populate an object using data read from a flat file. For example, we might like to have:
 
     bool LoadObject(Object& myObj, istream& is);
 
-where <span class="nctnt ncbi-var">myObj</span> is an instance of some subclass of <span class="nctnt ncbi-class">Object</span>. Assuming that the text in the file is of the form:
+where `myObj` is an instance of some subclass of `Object`. Assuming that the text in the file is of the form:
 
     MemberName1 value1
     MemberName5 value5
     MemberName2 value2
     :
 
-we would like to find the corresponding data member in <span class="nctnt ncbi-var">myObj</span> for each <span class="nctnt ncbi-var">MemberName</span>, and set that data member's value accordingly. Unfortunately, <span class="nctnt ncbi-var">myObj</span> cannot directly supply any useful type information, as the member names we seek are for a specific subclass of <span class="nctnt ncbi-class">Object</span>. Now suppose that we have an appropriate type information object available for <span class="nctnt ncbi-var">myObj</span>, and consider how this might be used:
+we would like to find the corresponding data member in `myObj` for each `MemberName`, and set that data member's value accordingly. Unfortunately, `myObj` cannot directly supply any useful type information, as the member names we seek are for a specific subclass of `Object`. Now suppose that we have an appropriate type information object available for `myObj`, and consider how this might be used:
 
     bool LoadObject(TypeInfo& info, Object& myObj, istream& is)
     {
@@ -2431,9 +2431,9 @@ we would like to find the corresponding data member in <span class="nctnt ncbi-v
         }
     }
 
-Here, we assume that our type information object, <span class="nctnt ncbi-var">info</span>, stores information about the memory offset of each data member in <span class="nctnt ncbi-var">myObj</span>, and that such information can be retrieved using some sort of identifying member name such as <span class="nctnt ncbi-var">myName</span>. This is not too difficult to imagine, and indeed, this is exactly the type of information and facility provided by the C++ Toolkit's type information classes. The <span class="nctnt ncbi-func">FindMember()</span> function just needs to return a <span class="nctnt ncbi-type">void</span> pointer to the appropriate location in memory. The <span class="nctnt ncbi-func">AssignValue()</span> function presents a much greater challenge however, as its two sole arguments are a <span class="nctnt ncbi-type">void</span> pointer and a <span class="nctnt ncbi-class">string</span>. This would be fine if the data member was indeed a <span class="nctnt ncbi-type">void</span> pointer, and a <span class="nctnt ncbi-class">string</span> value was acceptable. In general this is not the case, and stronger methods are clearly needed.
+Here, we assume that our type information object, `info`, stores information about the memory offset of each data member in `myObj`, and that such information can be retrieved using some sort of identifying member name such as `myName`. This is not too difficult to imagine, and indeed, this is exactly the type of information and facility provided by the C++ Toolkit's type information classes. The `FindMember()` function just needs to return a `void` pointer to the appropriate location in memory. The `AssignValue()` function presents a much greater challenge however, as its two sole arguments are a `void` pointer and a `string`. This would be fine if the data member was indeed a `void` pointer, and a `string` value was acceptable. In general this is not the case, and stronger methods are clearly needed.
 
-In particular, for each data member encountered, we need to retrieve the type of that member as well as its location in memory, so as to process <span class="nctnt ncbi-var">myValue</span> appropriately before assigning it. In addition, we need safer mechanisms for making such "untyped" assignments. Ideally, we would like a <span class="nctnt ncbi-func">FindMember()</span> function that returns a correctly cast pointer to that data member, along with its associated type information. This is what the [object information classes](#object-information-classes) provide - a pointer to the object instance as well as a pointer to its static `type` information. The interface to the <span class="nctnt ncbi-class">object</span> information class also provides a number of methods such as <span class="nctnt ncbi-func">GetClassMember(), GetTypeFamily(), SetPrimitiveValue()</span>, etc., to support the type of activity described above.
+In particular, for each data member encountered, we need to retrieve the type of that member as well as its location in memory, so as to process `myValue` appropriately before assigning it. In addition, we need safer mechanisms for making such "untyped" assignments. Ideally, we would like a `FindMember()` function that returns a correctly cast pointer to that data member, along with its associated type information. This is what the [object information classes](#object-information-classes) provide - a pointer to the object instance as well as a pointer to its static `type` information. The interface to the `object` information class also provides a number of methods such as `GetClassMember(), GetTypeFamily(), SetPrimitiveValue()`, etc., to support the type of activity described above.
 
 ### Object Information Classes
 
@@ -2445,15 +2445,15 @@ The following topics are discussed in this section:
 
 -   [CObjectInfo (\*)](#cobjectinfo-*)
 
-#### <span class="nctnt ncbi-class">CObjectTypeInfo</span> ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectTypeInfo.html))
+#### `CObjectTypeInfo` ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectTypeInfo.html))
 
-This is the base class for all `object` information classes. It is intended for usage where there is no concrete object being referenced, and all that is required is access to the type information. A <span class="nctnt ncbi-class">CObjectTypeInfo</span> contains a pointer to a low-level <span class="nctnt ncbi-class">CTypeInfo</span> object, and functions as a user-friendly wrapper class.
+This is the base class for all `object` information classes. It is intended for usage where there is no concrete object being referenced, and all that is required is access to the type information. A `CObjectTypeInfo` contains a pointer to a low-level `CTypeInfo` object, and functions as a user-friendly wrapper class.
 
-The constructor for <span class="nctnt ncbi-class">CObjectTypeInfo</span> takes a pointer to a <span class="nctnt ncbi-code">const CTypeInfo</span> object as its single argument. This is precisely what is returned by all of the static <span class="nctnt ncbi-func">GetTypeInfo()</span> functions. Thus, to create a <span class="nctnt ncbi-class">CObjectTypeInfo</span> for the <span class="nctnt ncbi-class">CBioseq</span> class - without reference to any particular instance of <span class="nctnt ncbi-class">CBioseq</span> - one might use:
+The constructor for `CObjectTypeInfo` takes a pointer to a `const CTypeInfo` object as its single argument. This is precisely what is returned by all of the static `GetTypeInfo()` functions. Thus, to create a `CObjectTypeInfo` for the `CBioseq` class - without reference to any particular instance of `CBioseq` - one might use:
 
-<span class="nctnt ncbi-code">CObjectTypeInfo objInfo( CBioseq::GetTypeInfo() );</span>
+`CObjectTypeInfo objInfo( CBioseq::GetTypeInfo() );`
 
-One of the most important methods provided by the <span class="nctnt ncbi-class">CObjectTypeInfo</span> class interface is <span class="nctnt ncbi-func">GetTypeFamily()</span>, which returns an enumerated value indicating the `type family` for the object of interest. Five type families are defined by the [ETypeFamily](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ETypeFamily) enumeration:
+One of the most important methods provided by the `CObjectTypeInfo` class interface is `GetTypeFamily()`, which returns an enumerated value indicating the `type family` for the object of interest. Five type families are defined by the [ETypeFamily](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ETypeFamily) enumeration:
 
     ETypeFamily GetTypeFamily(void) const;
         enum ETypeFamily {
@@ -2464,63 +2464,63 @@ One of the most important methods provided by the <span class="nctnt ncbi-class"
         eTypeFamilyPointer
     };
 
-Different queries become appropriate depending on the <span class="nctnt ncbi-type">ETypeFamily</span> of the object. For example, if the object is a container, one might need to determine the type of container (e.g. whether it is a <span class="nctnt ncbi-class">list</span>, <span class="nctnt ncbi-class">map</span> etc.), and the type of element. Similarly, if an object is a primitive type (e.g. <span class="nctnt ncbi-type">int, float, string, </span>etc.), an appropriate query becomes what the value type is, and in the case of integer-valued types, whether or not it is signed. Finally, in the case of more complex objects such as class and choice objects, access to the type information for the individual data members and choice variants is needed. The following methods are included in the <span class="nctnt ncbi-class">CObjectTypeInfo</span> interface for these purposes:
+Different queries become appropriate depending on the `ETypeFamily` of the object. For example, if the object is a container, one might need to determine the type of container (e.g. whether it is a `list`, `map` etc.), and the type of element. Similarly, if an object is a primitive type (e.g. `int, float, string, `etc.), an appropriate query becomes what the value type is, and in the case of integer-valued types, whether or not it is signed. Finally, in the case of more complex objects such as class and choice objects, access to the type information for the individual data members and choice variants is needed. The following methods are included in the `CObjectTypeInfo` interface for these purposes:
 
-For objects with family type <span class="nctnt ncbi-code">eTypeFamilyPrimitive</span>:
+For objects with family type `eTypeFamilyPrimitive`:
 
     EPrimitiveValueType GetPrimitiveValueType(void) const;
     bool IsPrimitiveValueSigned(void) const;
 
-For objects with family type <span class="nctnt ncbi-code">eTypeFamilyClass</span>:
+For objects with family type `eTypeFamilyClass`:
 
     CMemberIterator BeginMembers(void) const;
     CMemberIterator FindMember(const string& memberName) const;
     CMemberIterator FindMemberByTag(int memberTag) const;
 
-For objects with family type <span class="nctnt ncbi-code">eTypeFamilyChoice</span>:
+For objects with family type `eTypeFamilyChoice`:
 
     CVariantIterator BeginVariants(void) const;
     CVariantIterator FindVariant(const string& memberName) const;
     CVariantIterator FindVariantByTag(int memberTag) const;
 
-For objects with family type <span class="nctnt ncbi-code">eTypeFamilyContainer</span>:
+For objects with family type `eTypeFamilyContainer`:
 
     EContainerType GetContainerType(void) const;
     CObjectTypeInfo GetElementType(void) const;
 
-For objects with family type <span class="nctnt ncbi-code">eTypeFamilyPointer</span>:
+For objects with family type `eTypeFamilyPointer`:
 
     CObjectTypeInfo GetPointedType(void) const;
 
-The two additional enumerations referred to here, [EContainerType](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=EContainerType) and [EPrimitiveValueType](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=EPrimitiveValueType), are defined, along with <span class="nctnt ncbi-type">ETypeFamily</span>, in [include/serial/serialdef.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/serial/serialdef.hpp).
+The two additional enumerations referred to here, [EContainerType](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=EContainerType) and [EPrimitiveValueType](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=EPrimitiveValueType), are defined, along with `ETypeFamily`, in [include/serial/serialdef.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/serial/serialdef.hpp).
 
-Different iterator classes are used for iterating over class data members versus choice variant types. Thus, if the object of interest is a C++ class object, then access to the type information for its members can be gained using a <span class="nctnt ncbi-class">CObjectTypeInfo::CMemberIterator</span>. The <span class="nctnt ncbi-func">BeginMembers()</span> method returns a <span class="nctnt ncbi-class">CMemberIterator</span> pointing to the first data member in the class; the <span class="nctnt ncbi-func">FindMember\*()</span> methods return a <span class="nctnt ncbi-class">CMemberIterator</span> pointing to a data member whose name or tag matches the input argument. The <span class="nctnt ncbi-class">CMemberIterator</span> class is a forward iterator whose operators are defined as follows:
+Different iterator classes are used for iterating over class data members versus choice variant types. Thus, if the object of interest is a C++ class object, then access to the type information for its members can be gained using a `CObjectTypeInfo::CMemberIterator`. The `BeginMembers()` method returns a `CMemberIterator` pointing to the first data member in the class; the `FindMember*()` methods return a `CMemberIterator` pointing to a data member whose name or tag matches the input argument. The `CMemberIterator` class is a forward iterator whose operators are defined as follows:
 
--   the <span class="nctnt ncbi-code">++</span> operator increments the iterator (makes it point to the next class member)
+-   the `++` operator increments the iterator (makes it point to the next class member)
 
--   the <span class="nctnt ncbi-code">()</span> operator tests that the iterator has not exceeded the legitimate range
+-   the `()` operator tests that the iterator has not exceeded the legitimate range
 
--   the <span class="nctnt ncbi-code">\*</span> dereferencing operator returns a <span class="nctnt ncbi-class">CObjectTypeInfo</span> for the data member the iterator currently points to
+-   the `*` dereferencing operator returns a `CObjectTypeInfo` for the data member the iterator currently points to
 
-Similarly, the <span class="nctnt ncbi-func">BeginVariants()</span> and <span class="nctnt ncbi-func">FindVariant()</span> methods allow iteration over the choice variant data types for a choice class, and the dereferencing operation yields a <span class="nctnt ncbi-class">CObjectTypeInfo</span> object for the choice variant currently pointed to by the iterator.
+Similarly, the `BeginVariants()` and `FindVariant()` methods allow iteration over the choice variant data types for a choice class, and the dereferencing operation yields a `CObjectTypeInfo` object for the choice variant currently pointed to by the iterator.
 
 #### CConstObjectInfo ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCConstObjectInfo.html))
 
-The <span class="nctnt ncbi-class">CConstObjectInfo</span> (derived from [CObjectTypeInfo](#cobjecttypeinfo)) adds an interface to access the particular instance of an object (in addition to the interface inherited from [CObjectTypeInfo](#cobjecttypeinfo), which provides access to type information only). It is intended for usage with <span class="nctnt ncbi-code">const</span> instances of the object of interest, and therefore the interface does not permit any modifications to the object. The constructor for <span class="nctnt ncbi-class">CConstObjectInfo</span> takes two arguments:
+The `CConstObjectInfo` (derived from [CObjectTypeInfo](#cobjecttypeinfo)) adds an interface to access the particular instance of an object (in addition to the interface inherited from [CObjectTypeInfo](#cobjecttypeinfo), which provides access to type information only). It is intended for usage with `const` instances of the object of interest, and therefore the interface does not permit any modifications to the object. The constructor for `CConstObjectInfo` takes two arguments:
 
     CConstObjectInfo(const void* instancePtr, const CTypeInfo* typeinfoPtr);
 
 (Alternatively, the constructor can be invoked with a single STL pair containing these two objects.)
 
-Each <span class="nctnt ncbi-class">CConstObjectInfo</span> contains a pointer to the object's type information as well as a pointer to an instance of the object. The existence or validity of this instance can be checked using any of the following <span class="nctnt ncbi-class">CConstObjectInfo</span> methods and operators:
+Each `CConstObjectInfo` contains a pointer to the object's type information as well as a pointer to an instance of the object. The existence or validity of this instance can be checked using any of the following `CConstObjectInfo` methods and operators:
 
--   <span class="nctnt ncbi-code">bool Valid(void) const;</span>
+-   `bool Valid(void) const;`
 
--   <span class="nctnt ncbi-code">operator bool(void) const;</span>
+-   `operator bool(void) const;`
 
--   <span class="nctnt ncbi-code">bool operator!(void) const;</span>
+-   `bool operator!(void) const;`
 
-For `primitive` type objects, the <span class="nctnt ncbi-class">CConstObjectInfo</span> interface provides access to the currently assigned value using <span class="nctnt ncbi-func">GetPrimitiveValueXxx()</span>. Here, <span class="nctnt ncbi-var">Xxx</span> may be `Bool, Char, Long, ULong, Double, String, ValueString`, or `OctetString`. In general, to get a primitive value, one first applies a <span class="nctnt ncbi-code">switch</span> statement to the value returned by <span class="nctnt ncbi-func">GetPrimitiveValueType()</span>, and then calls the appropriate <span class="nctnt ncbi-func">GetPrimitiveValueXxx()</span> method depending on the branch followed, e.g.:
+For `primitive` type objects, the `CConstObjectInfo` interface provides access to the currently assigned value using `GetPrimitiveValueXxx()`. Here, `Xxx` may be `Bool, Char, Long, ULong, Double, String, ValueString`, or `OctetString`. In general, to get a primitive value, one first applies a `switch` statement to the value returned by `GetPrimitiveValueType()`, and then calls the appropriate `GetPrimitiveValueXxx()` method depending on the branch followed, e.g.:
 
     switch ( obj.GetPrimitiveValueType() ) {
     case ePrimitiveValueBool:
@@ -2537,29 +2537,29 @@ For `primitive` type objects, the <span class="nctnt ncbi-class">CConstObjectInf
         //... etc.
     }
 
-Member iterator methods are also defined in the <span class="nctnt ncbi-class">CConstObjectInfo</span> class, with a similar interface to that found in the <span class="nctnt ncbi-class">CObjectTypeInfo</span> class. In this case however, the dereferencing operators return a <span class="nctnt ncbi-class">CConstObjectInfo</span> object - not a <span class="nctnt ncbi-class">CObjectTypeInfo</span> object - for the current member. For C++<span class="nctnt ncbi-code">class</span> objects, these member functions are:
+Member iterator methods are also defined in the `CConstObjectInfo` class, with a similar interface to that found in the `CObjectTypeInfo` class. In this case however, the dereferencing operators return a `CConstObjectInfo` object - not a `CObjectTypeInfo` object - for the current member. For C++`class` objects, these member functions are:
 
--   <span class="nctnt ncbi-code">CMemberIterator BeginMembers(void) const;</span>
+-   `CMemberIterator BeginMembers(void) const;`
 
--   <span class="nctnt ncbi-code">CMemberIterator FindClassMember(const string& memberName) const;</span>
+-   `CMemberIterator FindClassMember(const string& memberName) const;`
 
--   <span class="nctnt ncbi-code">CMemberIterator FindClassMemberByTag(int memberTag) const;</span>
+-   `CMemberIterator FindClassMemberByTag(int memberTag) const;`
 
-For C++ choice objects, only one variant is ever selected, and only that choice variant is instantiated. As it does not make sense to define a <span class="nctnt ncbi-code">CConstObjectInfo iterator</span> for uninstantiated variants, the method <span class="nctnt ncbi-func">GetCurrentChoiceVariant()</span> is provided instead. The dereferencing operator (\*) can be applied to the object returned by this method to obtain a <span class="nctnt ncbi-class">CConstObjectInfo</span> for the variant. Of course, type information for unselected variants can still be accessed using the <span class="nctnt ncbi-class">CObjectTypeInfo</span> methods.
+For C++ choice objects, only one variant is ever selected, and only that choice variant is instantiated. As it does not make sense to define a `CConstObjectInfo iterator` for uninstantiated variants, the method `GetCurrentChoiceVariant()` is provided instead. The dereferencing operator (\*) can be applied to the object returned by this method to obtain a `CConstObjectInfo` for the variant. Of course, type information for unselected variants can still be accessed using the `CObjectTypeInfo` methods.
 
-The <span class="nctnt ncbi-class">CConstObjectInfo</span> class also defines an element iterator for container type objects. <span class="nctnt ncbi-class">CConstObjectInfo::CElementIterator</span> is a forward iterator whose interface includes increment and testing operators. Dereferencing is implemented by the iterator's <span class="nctnt ncbi-func">GetElement()</span> method, which returns a <span class="nctnt ncbi-class">CConstObjectInfo</span> for the element currently pointed to by the iterator.
+The `CConstObjectInfo` class also defines an element iterator for container type objects. `CConstObjectInfo::CElementIterator` is a forward iterator whose interface includes increment and testing operators. Dereferencing is implemented by the iterator's `GetElement()` method, which returns a `CConstObjectInfo` for the element currently pointed to by the iterator.
 
-Finally, for pointer type objects, the type returned by the method <span class="nctnt ncbi-func">GetPointedObject()</span> is also a <span class="nctnt ncbi-class">CConstObjectInfo</span> for the object - not just a <span class="nctnt ncbi-class">CObjectTypeInfo</span>.
+Finally, for pointer type objects, the type returned by the method `GetPointedObject()` is also a `CConstObjectInfo` for the object - not just a `CObjectTypeInfo`.
 
 #### CObjectInfo ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectInfo.html))
 
-The <span class="nctnt ncbi-class">CObjectInfo</span> class is in turn derived from <span class="nctnt ncbi-class">CConstObjectInfo</span>, and is intended for usage with <span class="nctnt ncbi-code">mutable</span> instances of the object of interest. In addition to all of the methods inherited from the parent class, the interface to this class also provides methods that allow modification of the object itself or its data members.
+The `CObjectInfo` class is in turn derived from `CConstObjectInfo`, and is intended for usage with `mutable` instances of the object of interest. In addition to all of the methods inherited from the parent class, the interface to this class also provides methods that allow modification of the object itself or its data members.
 
-For primitive type objects, a set of <span class="nctnt ncbi-func">SetPrimitiveValueXxx()</span> methods are available, complimentary to the <span class="nctnt ncbi-func">GetPrimitiveValueXxx()</span> methods described above. Methods that return member iterator objects are again reimplemented, and the de-referencing operators now return a <span class="nctnt ncbi-class">CObjectInfo</span> object for that data member. As the <span class="nctnt ncbi-class">CObjectInfo</span> now points to a <span class="nctnt ncbi-code">mutable</span> object, these iterators can be used to set values for the data member. Similarly, <span class="nctnt ncbi-func">GetCurrentChoiceVariant()</span> now returns a <span class="nctnt ncbi-class">CObjectInfo</span>, as does <span class="nctnt ncbi-code">CObjectInfo::CElementIterator::GetElement()</span>.
+For primitive type objects, a set of `SetPrimitiveValueXxx()` methods are available, complimentary to the `GetPrimitiveValueXxx()` methods described above. Methods that return member iterator objects are again reimplemented, and the de-referencing operators now return a `CObjectInfo` object for that data member. As the `CObjectInfo` now points to a `mutable` object, these iterators can be used to set values for the data member. Similarly, `GetCurrentChoiceVariant()` now returns a `CObjectInfo`, as does `CObjectInfo::CElementIterator::GetElement()`.
 
 ### Usage of object type information
 
-We can now reconsider how our LoadObject() function might be implemented using the <span class="nctnt ncbi-class">CObjectInfo</span> class:
+We can now reconsider how our LoadObject() function might be implemented using the `CObjectInfo` class:
 
     bool LoadObject(CObjectInfo& info, CNcbiIStream& is)
     {
@@ -2576,7 +2576,7 @@ We can now reconsider how our LoadObject() function might be implemented using t
         }
     }
 
-Here, <span class="nctnt ncbi-var">info</span> contains pointers to the <span class="nctnt ncbi-class">CObject</span> itself as well as to its associated <span class="nctnt ncbi-class">CTypeInfo</span> object. For each member alias read from the file, we apply <span class="nctnt ncbi-code">FindClassMember(alias)</span>, and dereference the returned iterator to retrieve a <span class="nctnt ncbi-class">CObjectInfo</span> object for that member. We then use the operator <span class="nctnt ncbi-code">()</span> to verify that the member was located, and if so, use the member's <span class="nctnt ncbi-class">CObjectInfo</span> to set a value in the function <span class="nctnt ncbi-func">SetValue()</span>:
+Here, `info` contains pointers to the `CObject` itself as well as to its associated `CTypeInfo` object. For each member alias read from the file, we apply `FindClassMember(alias)`, and dereference the returned iterator to retrieve a `CObjectInfo` object for that member. We then use the operator `()` to verify that the member was located, and if so, use the member's `CObjectInfo` to set a value in the function `SetValue()`:
 
     void SetValue(const CObjectInfo& obj, const string value)
     {
@@ -2599,20 +2599,20 @@ Here, <span class="nctnt ncbi-var">info</span> contains pointers to the <span cl
         }
     }
 
-In this example, <span class="nctnt ncbi-func">SetValue()</span> can only assign primitive types. More generally however, the <span class="nctnt ncbi-class">CObjectInfo</span> class allows the assignment of more complex types that are simply not implemented here. Note also that the arguments to <span class="nctnt ncbi-func">SetValue()</span> are <span class="nctnt ncbi-code">const</span>, even though the function **does** modify the value of the data instance pointed to. In particular, the type <span class="nctnt ncbi-code">const CObjectInfo</span> should not be confused with the type <span class="nctnt ncbi-class">CConstObjectInfo</span>. The former specifies that object information construct is non-mutable, although the instance it points to can be modified. The latter specifies that the instance itself is non-mutable.
+In this example, `SetValue()` can only assign primitive types. More generally however, the `CObjectInfo` class allows the assignment of more complex types that are simply not implemented here. Note also that the arguments to `SetValue()` are `const`, even though the function **does** modify the value of the data instance pointed to. In particular, the type `const CObjectInfo` should not be confused with the type `CConstObjectInfo`. The former specifies that object information construct is non-mutable, although the instance it points to can be modified. The latter specifies that the instance itself is non-mutable.
 
 In addition to user-specific applications of the type demonstrated in this example, the generic implementations of the [C++ type iterators](#c++-type-iterators) and the [CObject[IO]Stream](#cobjectiostream)class methods provide excellent examples of how runtime object type information can be deployed.
 
 As a final example of how type information might be used, we consider an application whose simple task is to translate a data file on an input stream to a different format on an output stream. One important use of the object classes defined in `include/objects` is the hooks and parsing mechanisms available to applications utilizing [CObject[IO]Streams](#cobjectiostreams). The stream objects specialize in different formats (such as XML or ASN.1), and must work in concert with these type-specific object classes to interpret or generate serialized data. In some cases however, the dynamic memory allocation required for large objects may be substantial, and it is preferable to avoid actually instantiating a whole object all at once.
 
-Instead, it is possible to use the [CObjectStreamCopier](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectStreamCopier.html) class, described in [CObject[IO]Streams](#cobjectiostreams). Briefly, this class holds two <span class="nctnt ncbi-class">CObject[IO]Stream</span> data members pointing to the input and output streams, and a set of <span class="nctnt ncbi-code">Copy</span> methods which take a <span class="nctnt ncbi-class">CTypeInfo</span> argument. Using this class, it is easy to translate files between different formats; for example:
+Instead, it is possible to use the [CObjectStreamCopier](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectStreamCopier.html) class, described in [CObject[IO]Streams](#cobjectiostreams). Briefly, this class holds two `CObject[IO]Stream` data members pointing to the input and output streams, and a set of `Copy` methods which take a `CTypeInfo` argument. Using this class, it is easy to translate files between different formats; for example:
 
     auto_ptr<CObjectIStream>  in(CObjectIStream::Open("mydata.xml",eSerial_Xml));
     auto_ptr<CObjectOStream> out(CObjectOStream::Open("mydata.asn",eSerial_AsnBinary));
     CObjectStreamCopier copier(*in, *out);
     copier.Copy (CBioseq_set::GetTypeInfo());
 
-copies a <span class="nctnt ncbi-class">CBioseq\_set</span> encoded in XML to a new file, reformatted in ASN.1 binary format.
+copies a `CBioseq_set` encoded in XML to a new file, reformatted in ASN.1 binary format.
 
 Choice objects in the NCBI C++ Toolkit
 --------------------------------------
@@ -2625,7 +2625,7 @@ The following topics are discussed in this section:
 
 ### Introduction
 
-The [datatool](ch_app.html#ch_app.datatool) program processes the ASN.1 specification files (`*.asn`) in the [src/objects/](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects) directories to generate the associated C++ class definitions. The corresponding program implemented in the C Toolkit, <span class="nctnt ncbi-app">asntool</span>, used the ASN.1 specifications to generate C enums, structs, and functions. In contrast, <span class="nctnt ncbi-app">datatool</span> must generate C++ enums, classes and methods. In addition, for each defined object type, <span class="nctnt ncbi-app">datatool</span> must also generate the associated [type information](#type-information) method or function.
+The [datatool](ch_app.html#ch_app.datatool) program processes the ASN.1 specification files (`*.asn`) in the [src/objects/](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects) directories to generate the associated C++ class definitions. The corresponding program implemented in the C Toolkit, **asntool**, used the ASN.1 specifications to generate C enums, structs, and functions. In contrast, **datatool** must generate C++ enums, classes and methods. In addition, for each defined object type, **datatool** must also generate the associated [type information](#type-information) method or function.
 
 There is a significant difference in how these two tools implement ASN.1 `choice` elements. As an example, consider the following ASN.1 specification:
 
@@ -2634,7 +2634,7 @@ There is a significant difference in how these two tools implement ASN.1 `choice
         str VisibleString
     }
 
-The ASN.1 `choice` element specifies that the corresponding object may be any one of the listed types. In this case, the possible types are an integer and a string. The approach used in <span class="nctnt ncbi-app">asntool</span> was to implement all choice objects as <span class="nctnt ncbi-type">ValNode</span>s, which were in turn defined as:
+The ASN.1 `choice` element specifies that the corresponding object may be any one of the listed types. In this case, the possible types are an integer and a string. The approach used in **asntool** was to implement all choice objects as `ValNode`s, which were in turn defined as:
 
     typedef struct valnode {
         unsigned choice;
@@ -2642,13 +2642,13 @@ The ASN.1 `choice` element specifies that the corresponding object may be any on
         struct valnode *next;
     } ValNode;
 
-The <span class="nctnt ncbi-type">DataVal</span> field is a <span class="nctnt ncbi-code">union</span>, which may directly store numerical values, or alternatively, hold a <span class="nctnt ncbi-type">void</span> pointer to a character string or C <span class="nctnt ncbi-code">struct</span>. Thus, to process a `choice` element in the C Toolkit, one could first retrieve the `choice` field to determine how the data should be interpreted, and subsequently, retrieve the data via the <span class="nctnt ncbi-type">DataVal</span> field. In particular, no explicit implementation of individual choice objects was used, and it was left to functions which manipulate these elements to enforce logical consistency and error checking for legitimate values. A C <span class="nctnt ncbi-code">struct</span> which included a `choice` element as one of its fields merely had to declare that element as type *ValNode*. This design was further complicated by the use of a <span class="nctnt ncbi-type">void</span> pointer to store non-primitive types such as <span class="nctnt ncbi-code">struct</span>s or character strings.
+The `DataVal` field is a `union`, which may directly store numerical values, or alternatively, hold a `void` pointer to a character string or C `struct`. Thus, to process a `choice` element in the C Toolkit, one could first retrieve the `choice` field to determine how the data should be interpreted, and subsequently, retrieve the data via the `DataVal` field. In particular, no explicit implementation of individual choice objects was used, and it was left to functions which manipulate these elements to enforce logical consistency and error checking for legitimate values. A C `struct` which included a `choice` element as one of its fields merely had to declare that element as type *ValNode*. This design was further complicated by the use of a `void` pointer to store non-primitive types such as `struct`s or character strings.
 
-In contrast, the C++ <span class="nctnt ncbi-app">datatool</span> implementation of `choice` elements defines a class with built-in, automatic error checking for each `choice` object. The usage of [CObject](ch_core.html#ch_core.CRef) class hierarchy (and the associated [type information](#type-information) methods) solves many of the problems associated with working with <span class="nctnt ncbi-type">void</span> pointers.
+In contrast, the C++ **datatool** implementation of `choice` elements defines a class with built-in, automatic error checking for each `choice` object. The usage of [CObject](ch_core.html#ch_core.CRef) class hierarchy (and the associated [type information](#type-information) methods) solves many of the problems associated with working with `void` pointers.
 
 ### C++ choice objects
 
-The classes generated by <span class="nctnt ncbi-app">datatool</span> for `choice` elements all have the following general structure:
+The classes generated by **datatool** for `choice` elements all have the following general structure:
 
     class C[AsnChoiceName] : public CObject
     {
@@ -2683,7 +2683,7 @@ The classes generated by <span class="nctnt ncbi-app">datatool</span> for `choic
         ...
     };
 
-For the above ASN.1 specification, <span class="nctnt ncbi-app">datatool</span> generates a class named <span class="nctnt ncbi-class">CObject\_id</span>, which is derived from [CObject](ch_core.html#ch_core.CObject). For each choice variant in the specification, an enumerated value (in <span class="nctnt ncbi-type">E\_Choice</span>), and an internal <span class="nctnt ncbi-code">typedef</span> are defined, and a declaration in the <span class="nctnt ncbi-code">union</span> data member is made. For this example then, we would have:
+For the above ASN.1 specification, **datatool** generates a class named `CObject_id`, which is derived from [CObject](ch_core.html#ch_core.CObject). For each choice variant in the specification, an enumerated value (in `E_Choice`), and an internal `typedef` are defined, and a declaration in the `union` data member is made. For this example then, we would have:
 
     enum E_Choice {
         e_not_set,
@@ -2701,9 +2701,9 @@ For the above ASN.1 specification, <span class="nctnt ncbi-app">datatool</span> 
 
 In this case both of the choice variants are C++ built-in types. More generally however, the choice variant types may refer to any type of object. For convenience, we refer to their C++ type names here as "CXxx",
 
-Two private data members store information about the currently selected choice variant: <span class="nctnt ncbi-var">m\_choice</span> holds the <span class="nctnt ncbi-code">enum</span> value, and <span class="nctnt ncbi-var">m\_Xxx</span> holds (or points to a <span class="nctnt ncbi-class">CObject</span> containing) the variant's data. The choice object's member functions provide access to these two data members. <span class="nctnt ncbi-func">Which()</span> returns the currently selected variant's <span class="nctnt ncbi-code">E\_Choice enum</span> value. Each choice variant has its own <span class="nctnt ncbi-func">Get()</span> and <span class="nctnt ncbi-func">Set()</span> methods. Each <span class="nctnt ncbi-func">GetXxx()</span> method throws an exception if the variant type for that method does not correspond to the current selection type. Thus, it is not possible to unknowingly retrieve the incorrect type of choice variant.
+Two private data members store information about the currently selected choice variant: `m_choice` holds the `enum` value, and `m_Xxx` holds (or points to a `CObject` containing) the variant's data. The choice object's member functions provide access to these two data members. `Which()` returns the currently selected variant's `E_Choice enum` value. Each choice variant has its own `Get()` and `Set()` methods. Each `GetXxx()` method throws an exception if the variant type for that method does not correspond to the current selection type. Thus, it is not possible to unknowingly retrieve the incorrect type of choice variant.
 
-<span class="nctnt ncbi-code">Select(e\_Xxx)</span> uses a <span class="nctnt ncbi-code">switch(e\_Xxx)</span> statement to initialize <span class="nctnt ncbi-var">m\_Xxx</span> appropriately, sets <span class="nctnt ncbi-var">m\_choice</span> to <span class="nctnt ncbi-var">e\_Xxx</span>, and returns. Two <span class="nctnt ncbi-func">SetXxx()</span> methods are defined, and both use this <span class="nctnt ncbi-func">Select()</span> method. <span class="nctnt ncbi-func">SetXxx()</span> with no arguments calls <span class="nctnt ncbi-code">Select(e\_Xxx)</span> and returns <span class="nctnt ncbi-var">m\_Xxx</span> (as initialized by <span class="nctnt ncbi-func">Select()</span>). <span class="nctnt ncbi-func">SetXxx(TXxx& value)</span> also calls <span class="nctnt ncbi-code">Select(e\_Xxx)</span> but resets <span class="nctnt ncbi-var">m\_Xxx</span> to <span class="nctnt ncbi-var">value</span> before returning.
+`Select(e_Xxx)` uses a `switch(e_Xxx)` statement to initialize `m_Xxx` appropriately, sets `m_choice` to `e_Xxx`, and returns. Two `SetXxx()` methods are defined, and both use this `Select()` method. `SetXxx()` with no arguments calls `Select(e_Xxx)` and returns `m_Xxx` (as initialized by `Select()`). `SetXxx(TXxx& value)` also calls `Select(e_Xxx)` but resets `m_Xxx` to `value` before returning.
 
 Some example choice objects in the C++ Toolkit are:
 
@@ -2734,17 +2734,17 @@ The following topics are discussed in this section:
 
 ### Locating the Class Definitions
 
-In general, traversing through a class object requires that you first become familiar with the internal class structure and member access functions for that object. In this section we consider how you can access this information in the source files, and apply it. The example provided here involves a <span class="nctnt ncbi-type">Biostruc</span> type which is implemented by class [CBiostruc](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBiostruc.html), and its base (parent) class, [CBiostruc\_Base.](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBiostruc__Base.html)
+In general, traversing through a class object requires that you first become familiar with the internal class structure and member access functions for that object. In this section we consider how you can access this information in the source files, and apply it. The example provided here involves a `Biostruc` type which is implemented by class [CBiostruc](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBiostruc.html), and its base (parent) class, [CBiostruc\_Base.](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBiostruc__Base.html)
 
 The first question is: how do I locate the class definitions implementing the object to be traversed? There are now two source browsers which you can use. To obtain a synopsis of the class, you can search the [index](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classes.html) or the [class hierarchy](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/hierarchy.html) of the *Doc++* browser and follow a link to the class. For example, a synopsis of the [CBiostruc](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBiostruc.html) class is readily available. From this page, you can also access the relevant source files archived by the*LXR* browser, by following the [Locate CBiostruc](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CBiostruc) link. Alternatively, you may want to access the *LXR* engine directly by using the [Identifier search](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CBiostruc) tool.
 
-Because we wish to determine which headers to include, the synopsis displayed by the [Identifier search](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CBiostruc) tool is most useful. There we find a single header file, [Biostruc.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/mmdb1/Biostruc.hpp), listed as defining the class. Accordingly, this is the header file we must include. The <span class="nctnt ncbi-class">CBiostruc</span> class inherits from the <span class="nctnt ncbi-class">CBiostruc\_Base</span> class however, and we will need to consult that file as well to understand the internal structure of the <span class="nctnt ncbi-class">CBiostruc</span> class. Following a link to the parent class from the class hierarchy browser, we find the definition of the [CBiostruc\_Base](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBiostruc__Base.html) class.
+Because we wish to determine which headers to include, the synopsis displayed by the [Identifier search](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CBiostruc) tool is most useful. There we find a single header file, [Biostruc.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/mmdb1/Biostruc.hpp), listed as defining the class. Accordingly, this is the header file we must include. The `CBiostruc` class inherits from the `CBiostruc_Base` class however, and we will need to consult that file as well to understand the internal structure of the `CBiostruc` class. Following a link to the parent class from the class hierarchy browser, we find the definition of the [CBiostruc\_Base](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBiostruc__Base.html) class.
 
-This is where we must look for the definitions and access functions we will be using. However, it is the `derived user class` (<span class="nctnt ncbi-class">CBiostruc</span>) whose header should be included in your source files, and which should be instantiated by your local program variable. For a more general discussion of the relationship between the base parent objects and their derived user classes, see [Working with the serializable object classes.](ch_proj.html#ch_proj.base_classes)
+This is where we must look for the definitions and access functions we will be using. However, it is the `derived user class` (`CBiostruc`) whose header should be included in your source files, and which should be instantiated by your local program variable. For a more general discussion of the relationship between the base parent objects and their derived user classes, see [Working with the serializable object classes.](ch_proj.html#ch_proj.base_classes)
 
 ### Accessing and Referencing Data Members
 
-Omitting some of the low-level details of the base class, we find the <span class="nctnt ncbi-class">CBiostruc\_Base</span> class has essentially the following structure:
+Omitting some of the low-level details of the base class, we find the `CBiostruc_Base` class has essentially the following structure:
 
     class CBiostruc_Base : public CObject
     {
@@ -2775,15 +2775,15 @@ Omitting some of the low-level details of the base class, we find the <span clas
         TModel m_Model;
     };
 
-With the exception of the structure's chemical graph, each of the class's private data members is actually a <span class="nctnt ncbi-class">list</span> of references (pointers), as specified by the type definitions. For example, <span class="nctnt ncbi-type">TId</span> is a list of [CRef](ch_core.html#ch_core.CRef) objects, where each <span class="nctnt ncbi-class">CRef</span> object points to a [CBiostruc\_id](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBiostruc__id.html). The <span class="nctnt ncbi-class">CRef</span> class is a type of smart pointer used to hold a pointer to a reference-counted object. The dereferencing operator, when applied to a (dereferenced) iterator pointing to an element of <span class="nctnt ncbi-type">CBiostruc::TId</span>, e.g. <span class="nctnt ncbi-code">\*\*CRef\_i</span>, will return a <span class="nctnt ncbi-class">CBiostruc\_id</span>. Thus, the call to <span class="nctnt ncbi-func">GetId()</span> returns a list which must then be iterated over and dereferenced to get the individual <span class="nctnt ncbi-class">CBiostruc\_id</span> objects. In contrast, the function <span class="nctnt ncbi-func">GetChemicalGraph()</span> returns the object directly, as it does not involve a <span class="nctnt ncbi-class">list</span> or a <span class="nctnt ncbi-class">CRef</span>.
+With the exception of the structure's chemical graph, each of the class's private data members is actually a `list` of references (pointers), as specified by the type definitions. For example, `TId` is a list of [CRef](ch_core.html#ch_core.CRef) objects, where each `CRef` object points to a [CBiostruc\_id](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBiostruc__id.html). The `CRef` class is a type of smart pointer used to hold a pointer to a reference-counted object. The dereferencing operator, when applied to a (dereferenced) iterator pointing to an element of `CBiostruc::TId`, e.g. `**CRef_i`, will return a `CBiostruc_id`. Thus, the call to `GetId()` returns a list which must then be iterated over and dereferenced to get the individual `CBiostruc_id` objects. In contrast, the function `GetChemicalGraph()` returns the object directly, as it does not involve a `list` or a `CRef`.
 
-NOTE: It is strongly recommended that you use type names defined in the generated classes (e.g. <span class="nctnt ncbi-type">TId</span>, <span class="nctnt ncbi-type">TDescr</span>) rather than generic container names (<span class="nctnt ncbi-class">list\< CRef\<CBiostruc\_id\> \></span> etc.). The real container class may change occasionally and you will have to modify the code using generic container types every time it happens. When iterating over a container it's recommended to use <span class="nctnt ncbi-macro">ITERATE</span> and <span class="nctnt ncbi-macro">NON\_CONST\_ITERATE</span> macros.
+NOTE: It is strongly recommended that you use type names defined in the generated classes (e.g. `TId`, `TDescr`) rather than generic container names (`list< CRef<CBiostruc_id> >` etc.). The real container class may change occasionally and you will have to modify the code using generic container types every time it happens. When iterating over a container it's recommended to use `ITERATE` and `NON_CONST_ITERATE` macros.
 
-The <span class="nctnt ncbi-func">GetXxx()</span> and <span class="nctnt ncbi-func">SetXxx()</span> member functions define the user interface to the class, providing methods to access and modify ("mutate") private data. In addition, most classes, including <span class="nctnt ncbi-class">CBiostruc</span>, have <span class="nctnt ncbi-func">IsSetXxx()</span> and <span class="nctnt ncbi-func">ResetXxx()</span> methods to validate and clear the data members, respectively.
+The `GetXxx()` and `SetXxx()` member functions define the user interface to the class, providing methods to access and modify ("mutate") private data. In addition, most classes, including `CBiostruc`, have `IsSetXxx()` and `ResetXxx()` methods to validate and clear the data members, respectively.
 
 ### Traversing a Biostruc
 
-The program `traverseBS.cpp` (see [Code Sample 4](#code-sample-4)) demonstrates how one might load a serial data file and iterate over the components of the resulting object. This example reads from a text ASN.1 Biostruc file and stores the information into a <span class="nctnt ncbi-class">CBiostruc</span> object in memory. The overloaded <span class="nctnt ncbi-func">Visit()</span> function is then used to recursively examine the object <span class="nctnt ncbi-code">CBiostruc bs</span> and its components.
+The program `traverseBS.cpp` (see [Code Sample 4](#code-sample-4)) demonstrates how one might load a serial data file and iterate over the components of the resulting object. This example reads from a text ASN.1 Biostruc file and stores the information into a `CBiostruc` object in memory. The overloaded `Visit()` function is then used to recursively examine the object `CBiostruc bs` and its components.
 
 #### Code Sample 4. traverseBS.cpp
 
@@ -3023,7 +3023,7 @@ The program `traverseBS.cpp` (see [Code Sample 4](#code-sample-4)) demonstrates 
         return theTestApp.AppMain(argc, argv);
     }
 
-<span class="nctnt ncbi-code">Visit(bs)</span> simply calls <span class="nctnt ncbi-func">Visit()</span> on each of the <span class="nctnt ncbi-class">CBiostruc</span> data members, which are accessed using <span class="nctnt ncbi-code">bs.GetXxx()</span>. The information needed to write each of these functions - the data member types and member function signatures - is contained in the respective header files. For example, looking at [Biostruc\_.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/mmdb1/Biostruc_.hpp), we learn that the structure's descriptor list can be accessed using <span class="nctnt ncbi-func">GetDescr()</span>, and that the type returned is a list of pointers to descriptors:
+`Visit(bs)` simply calls `Visit()` on each of the `CBiostruc` data members, which are accessed using `bs.GetXxx()`. The information needed to write each of these functions - the data member types and member function signatures - is contained in the respective header files. For example, looking at [Biostruc\_.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/mmdb1/Biostruc_.hpp), we learn that the structure's descriptor list can be accessed using `GetDescr()`, and that the type returned is a list of pointers to descriptors:
 
     typedef list< CRef<CBiostruc_descr> > TDescr;
     const TDescr& GetDescr(void) const;
@@ -3032,7 +3032,7 @@ Consulting the base class for [CBiostruc\_desc](http://www.ncbi.nlm.nih.gov/IEB/
 
 ### Iterating Over Containers
 
-Most of the <span class="nctnt ncbi-func">Visit()</span> functions implemented here rely on standard STL iterators to walk through a list of objects. The general syntax for using an iterator is:
+Most of the `Visit()` functions implemented here rely on standard STL iterators to walk through a list of objects. The general syntax for using an iterator is:
 
     ContainerType ContainerName;
     ITERATE(ContainerType, it, ContainerName) {
@@ -3040,14 +3040,14 @@ Most of the <span class="nctnt ncbi-func">Visit()</span> functions implemented h
         // ...
     }
 
-Dereferencing the iterator is required, as the iterator behaves like a pointer that traverses consecutive elements of the container. For example, to iterate over the list of descriptors in the *Biostruc*, we use a container of type <span class="nctnt ncbi-type">CBiostruc::TDescr</span>, and the constant version of the <span class="nctnt ncbi-macro">ITERATE</span> macro to ensure that the data is not mutated in the body of the loop. Because the descriptor list contains pointers ([CRefs](ch_core.html#ch_core.CRef)) to objects, we will actually need to dereference **twice** to get to the objects themselves.
+Dereferencing the iterator is required, as the iterator behaves like a pointer that traverses consecutive elements of the container. For example, to iterate over the list of descriptors in the *Biostruc*, we use a container of type `CBiostruc::TDescr`, and the constant version of the `ITERATE` macro to ensure that the data is not mutated in the body of the loop. Because the descriptor list contains pointers ([CRefs](ch_core.html#ch_core.CRef)) to objects, we will actually need to dereference **twice** to get to the objects themselves.
 
     ITERATE(CBiostruc::TDescr, it, descList) {
         const CBiostruc_descr& thisDescr = **it;
         // ...
     }
 
-In traversing the descriptor list in this example, we handled each type of descriptor with an explicit <span class="nctnt ncbi-code">case</span> statement. In fact, however, we really only visit those descriptors whose types have string representations: <span class="nctnt ncbi-type">TName, TPdb\_comment</span>, and <span class="nctnt ncbi-type">TOther\_comment</span>. The other two descriptor types, <span class="nctnt ncbi-type">THistory</span> and <span class="nctnt ncbi-type">TAttribute</span>, are objects that are "visited" recursively, but the associated visit functions are not actually implemented (see [Code Sample 5](#code-sample-5), `traverseBS.hpp`).
+In traversing the descriptor list in this example, we handled each type of descriptor with an explicit `case` statement. In fact, however, we really only visit those descriptors whose types have string representations: `TName, TPdb_comment`, and `TOther_comment`. The other two descriptor types, `THistory` and `TAttribute`, are objects that are "visited" recursively, but the associated visit functions are not actually implemented (see [Code Sample 5](#code-sample-5), `traverseBS.hpp`).
 
 #### Code Sample 5. traverseBS.hpp
 
@@ -3084,7 +3084,7 @@ In traversing the descriptor list in this example, we handled each type of descr
 
     #endif /* NCBI_TRAVERSEBS__HPP */
 
-The NCBI C++ Toolkit provides a rich and powerful [set of iterators](#set-of-iterators) for various application needs. An alternative to using the above <span class="nctnt ncbi-code">switch</span> statement to visit elements of the descriptor list would have been to use an NCBI [CStdTypeIterator](#cstdtypeiterator) that only visits strings. For example, we could implement the Visit function on a <span class="nctnt ncbi-type">CBiostruc::TDescr</span> as follows:
+The NCBI C++ Toolkit provides a rich and powerful [set of iterators](#set-of-iterators) for various application needs. An alternative to using the above `switch` statement to visit elements of the descriptor list would have been to use an NCBI [CStdTypeIterator](#cstdtypeiterator) that only visits strings. For example, we could implement the Visit function on a `CBiostruc::TDescr` as follows:
 
     void Visit(const CBiostruc::TDescr& descList)
     {
@@ -3097,7 +3097,7 @@ The NCBI C++ Toolkit provides a rich and powerful [set of iterators](#set-of-ite
 
 In this example, the iterator will skip over all but the string data members.
 
-The <span class="nctnt ncbi-class">CStdTypeIterator</span> is one of several iterators which makes use of an object's `type information` to implement the desired functionality. We began this section by positing that the traversal of an object requires an a priori knowledge of that object's internal structure. This is not strictly true however, if type information for the object is also available. An object's type information specifies the class layout, inheritance relations, data member names, and various other attributes such as size, which are independent of specific instances. All of the C++ type iterators described in [The NCBI C++ Toolkit Iterators](#the-ncbi-c++-toolkit-iterators) section utilize type information, which is the topic of a previous section: [Runtime Object Type Information](#runtime-object-type-information).
+The `CStdTypeIterator` is one of several iterators which makes use of an object's `type information` to implement the desired functionality. We began this section by positing that the traversal of an object requires an a priori knowledge of that object's internal structure. This is not strictly true however, if type information for the object is also available. An object's type information specifies the class layout, inheritance relations, data member names, and various other attributes such as size, which are independent of specific instances. All of the C++ type iterators described in [The NCBI C++ Toolkit Iterators](#the-ncbi-c++-toolkit-iterators) section utilize type information, which is the topic of a previous section: [Runtime Object Type Information](#runtime-object-type-information).
 
 Managing ASN.1 Specification Versions
 -------------------------------------
@@ -3118,7 +3118,7 @@ The only rule you need to follow to achieve backward compatibility is:
 
 > Only add new members to the end of a type, and always make them optional.
 
-<span class="nctnt highlight">Note:</span> In this context, "backward compatibility" means the ability for new readers to read either old or new data.
+*Note:* In this context, "backward compatibility" means the ability for new readers to read either old or new data.
 
 ### Background for the rule on adding new members
 
@@ -3169,9 +3169,9 @@ At some point, an old reader may encounter new data, in which case there will be
 
 There are two different methods because one is relatively safe and the other is not.
 
-If you call <span class="nctnt ncbi-func">SetSkipUnknownMembers()</span> then unknown members will be essentially ignored and the application can process new data in the same way it would process old data.
+If you call `SetSkipUnknownMembers()` then unknown members will be essentially ignored and the application can process new data in the same way it would process old data.
 
-If you call <span class="nctnt ncbi-func">SetSkipUnknownVariants()</span> then a lack of coding rigor may cause a problem. Specifically, a choice object won't be set if new data contains an unknown (and therefore skipped) variant. If your code expects the choice object to be set and doesn't verify that it is, then it could cause data corruption and/or crashing.
+If you call `SetSkipUnknownVariants()` then a lack of coding rigor may cause a problem. Specifically, a choice object won't be set if new data contains an unknown (and therefore skipped) variant. If your code expects the choice object to be set and doesn't verify that it is, then it could cause data corruption and/or crashing.
 
 SOAP support
 ------------
@@ -3182,11 +3182,11 @@ The NCBI C++ Toolkit SOAP server and client provide a limited level of support o
 
 The core section of the SOAP specification is the messaging framework. The client sends a request and receives a response in the form of a SOAP message. A SOAP message is a one-way transmission between SOAP nodes: from a SOAP sender to a SOAP receiver. The root element of a SOAP message is the `Envelope`. The `Envelope` contains an optional `Header` element followed by a mandatory `Body` element. The `Body` element represents the message payload - it is a generic container that can contain any number of elements from any namespace.
 
-In the Toolkit, the [CSoapMessage](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/search?string=CSoapMessage) class defines `Header` and `Body` containers. Serializable objects (derived from the [CSerialObject](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSerialObject) class) can be added into these containers using <span class="nctnt ncbi-func">AddObject()</span> method. Such a message object can then be sent to a message receiver. The response will also come in the form of an object derived from [CSoapMessage](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/search?string=CSoapMessage). At this time, it is possible to investigate its contents using <span class="nctnt ncbi-func">GetContent()</span> method; or ask directly for an object of a specific type using the [SOAP\_GetKnownObject()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/search?string=SOAP_GetKnownObject) template function.
+In the Toolkit, the [CSoapMessage](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/search?string=CSoapMessage) class defines `Header` and `Body` containers. Serializable objects (derived from the [CSerialObject](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSerialObject) class) can be added into these containers using `AddObject()` method. Such a message object can then be sent to a message receiver. The response will also come in the form of an object derived from [CSoapMessage](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/search?string=CSoapMessage). At this time, it is possible to investigate its contents using `GetContent()` method; or ask directly for an object of a specific type using the [SOAP\_GetKnownObject()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/search?string=SOAP_GetKnownObject) template function.
 
 ### SOAP client ([CSoapHttpClient](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSoapHttpClient))
 
-The SOAP client is the initial SOAP sender - a node that originates a SOAP message. Knowing the SOAP receiver's URL, it sends a SOAP request and receives a response using the <span class="nctnt ncbi-func">Invoke()</span> method.
+The SOAP client is the initial SOAP sender - a node that originates a SOAP message. Knowing the SOAP receiver's URL, it sends a SOAP request and receives a response using the `Invoke()` method.
 
 Internally, data objects in the Toolkit SOAP library are serialized and de-serialized using serializable objects streams. Since each serial data object also provides access to its type information, writing such objects is a straightforward operation. Reading the response is not that transparent. Before actually parsing incoming data, the SOAP processor should decide which object type information to use. Hence, a client application should tell the SOAP processor what types of data objects it might encounter in the incoming data. If the processor recognizes the object's type, it will parse the incoming data and store it as an instance of the recognized type. Otherwise, the processor will parse the data into an instance of the [CAnyContentObject](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CAnyContentObject) class.
 
@@ -3194,7 +3194,7 @@ So, a SOAP client must:
 
 -   Define the server's URL.
 
--   Register the object types that might be present in the incoming data (using the <span class="nctnt ncbi-func">RegisterObjectType()</span> method).
+-   Register the object types that might be present in the incoming data (using the `RegisterObjectType()` method).
 
 The [CSoapHttpClient](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSoapHttpClient) class also has methods for getting and setting the server URL and the default namespace.
 
@@ -3224,15 +3224,15 @@ The Toolkit contains a simple example of SOAP client and server in its `src/samp
 
 The sample SOAP server supports the following operations:
 
-<span class="nctnt ncbi-func">GetDescription()</span> - server receives an empty object of type Description, and it sends back a single string;
+`GetDescription()` - server receives an empty object of type Description, and it sends back a single string;
 
-<span class="nctnt ncbi-func">GetVersion()</span> - server receives a string, and it sends back two integer numbers and a string;
+`GetVersion()` - server receives a string, and it sends back two integer numbers and a string;
 
-<span class="nctnt ncbi-func">DoMath()</span> - server receives a list of Operand objects (two integers and an enumerated value), and it sends back a list of integers
+`DoMath()` - server receives a list of Operand objects (two integers and an enumerated value), and it sends back a list of integers
 
 The starting point is the WSDL specification - `src\sample\app\soap\server\soap_server_sample.wsdl`
 
-Both client and server use data objects whose types are described in the message types section of WSDL specification. So, we extract the XML schema part of the specification into a separate file, and create a static library - <span class="nctnt ncbi-lib">soap\_dataobj</span>. All code in this library is generated automatically by .
+Both client and server use data objects whose types are described in the message types section of WSDL specification. So, we extract the XML schema part of the specification into a separate file, and create a static library - `soap_dataobj`. All code in this library is generated automatically by .
 
 #### Sample server
 
@@ -3240,25 +3240,25 @@ Server is a CGI application. In its constructor we define the name of WSDL speci
 
 During initialization server should register incoming object types and message listeners:
 
-<span class="nctnt ncbi-code">// Register incoming object types, so the SOAP message parser can</span>
+`// Register incoming object types, so the SOAP message parser can`
 
-<span class="nctnt ncbi-code">// recognize these objects in incoming data and parse them correctly.</span>
+`// recognize these objects in incoming data and parse them correctly.`
 
-<span class="nctnt ncbi-code">RegisterObjectType(CVersion::GetTypeInfo);</span>
+`RegisterObjectType(CVersion::GetTypeInfo);`
 
-<span class="nctnt ncbi-code">RegisterObjectType(CMath::GetTypeInfo);</span>
+`RegisterObjectType(CMath::GetTypeInfo);`
 
-<span class="nctnt ncbi-code">// Register SOAP message processors.</span>
+`// Register SOAP message processors.`
 
-<span class="nctnt ncbi-code">// It is possible to set more than one listeners for a particular message;</span>
+`// It is possible to set more than one listeners for a particular message;`
 
-<span class="nctnt ncbi-code">// such listeners will be called in the order of registration.</span>
+`// such listeners will be called in the order of registration.`
 
-<span class="nctnt ncbi-code">AddMessageListener((TWebMethod)(&CSampleSoapServerApplication::GetDescription), "Description"); AddMessageListener((TWebMethod)(&CSampleSoapServerApplication::GetDescription2), "Description");</span>
+`AddMessageListener((TWebMethod)(&CSampleSoapServerApplication::GetDescription), "Description");    AddMessageListener((TWebMethod)(&CSampleSoapServerApplication::GetDescription2), "Description");`
 
-<span class="nctnt ncbi-code">AddMessageListener((TWebMethod)(&CSampleSoapServerApplication::GetVersion), "Version");</span>
+`AddMessageListener((TWebMethod)(&CSampleSoapServerApplication::GetVersion), "Version");`
 
-<span class="nctnt ncbi-code">AddMessageListener((TWebMethod)(&CSampleSoapServerApplication::DoMath), "Math");</span>
+`AddMessageListener((TWebMethod)(&CSampleSoapServerApplication::DoMath), "Math");`
 
 Note that while it is possible to register the `Description` type, it does not make much sense: the object has no content, so there is no difference whether it will be parsed correctly or not.
 
@@ -3268,17 +3268,17 @@ Message listeners are user-defined functions that process incoming messages. The
 
 Unlike SOAP server, SOAP client object has nothing to do with [CCgiApplication](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/search?string=CCgiApplication) class. It is "just" an object. As such, it can be created and destroyed when appropriate. Sample SOAP client constructor defines the server URL and the default namespace for the data objects. Its constructor is the proper place to register incoming object types:
 
-<span class="nctnt ncbi-code">// Register incoming object types, so the SOAP message parser can</span>
+`// Register incoming object types, so the SOAP message parser can`
 
-<span class="nctnt ncbi-code">// recognize these objects in incoming data and parse them correctly.</span>
+`// recognize these objects in incoming data and parse them correctly.`
 
-<span class="nctnt ncbi-code">RegisterObjectType(CDescriptionText::GetTypeInfo);</span>
+`RegisterObjectType(CDescriptionText::GetTypeInfo);`
 
-<span class="nctnt ncbi-code">RegisterObjectType(CVersionResponse::GetTypeInfo);</span>
+`RegisterObjectType(CVersionResponse::GetTypeInfo);`
 
-<span class="nctnt ncbi-code">RegisterObjectType(CMathResponse::GetTypeInfo);</span>
+`RegisterObjectType(CMathResponse::GetTypeInfo);`
 
-Other methods encapsulate operations supported by the SOAP server, which the client talks to. Common schema is to create two SOAP message object - request and response, populate request object, call <span class="nctnt ncbi-func">Invoke()</span> method of the base class, and extract the meaningful data from the response.
+Other methods encapsulate operations supported by the SOAP server, which the client talks to. Common schema is to create two SOAP message object - request and response, populate request object, call `Invoke()` method of the base class, and extract the meaningful data from the response.
 
 Test Cases [[src/serial/test](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/serial/test)]
 ----------------------------------------------------------------------------------------------------------

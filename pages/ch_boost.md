@@ -34,7 +34,7 @@ The NCBI extensions add the ability to:
 
 -   add initialization and finalization functions; and
 
--   use convenience macros for combining <span class="nctnt ncbi-macro">NO\_THROW</span> with other test tools.
+-   use convenience macros for combining `NO_THROW` with other test tools.
 
 While the framework may be of interest to outside organizations, this chapter is intended for NCBI C++ developers. See also the Doxygen documentation for [tests](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/group__Tests.html).
 
@@ -179,21 +179,21 @@ This section contains the following topics:
 
 The [new\_project](ch_proj.html#ch_proj.new_project_Starting) script generates a new unit test project that includes everything needed to use the Boost Unit Test Framework, but it won’t include anything specifically needed to build the library or application you are testing.
 
-Therefore, edit the unit test makefile (e.g. `Makefile.foo.app`) and add the appropriate paths and libraries needed by your library or application. Note that although the <span class="nctnt ncbi-cmd">new\_project</span> script creates five makefiles, you will generally need to edit only one. If you are using Windows, please see the FAQ on [adding libraries to Visual C++ projects](ch_faq.html#ch_faq.How_do_I_add_a_library_to_a_Visua).
+Therefore, edit the unit test makefile (e.g. `Makefile.foo.app`) and add the appropriate paths and libraries needed by your library or application. Note that although the `new_project` script creates five makefiles, you will generally need to edit only one. If you are using Windows, please see the FAQ on [adding libraries to Visual C++ projects](ch_faq.html#ch_faq.How_do_I_add_a_library_to_a_Visua).
 
 Because the unit tests are based on the Boost Unit Test Framework, the makefiles must specify:
 
     REQUIRES = Boost.Test.Included
 
-If you are using the <span class="nctnt ncbi-cmd">new\_project</span> script (recommended), this setting is included automatically. Otherwise, make sure that `Boost.Test.Included` is listed in `REQUIRES`.
+If you are using the `new_project` script (recommended), this setting is included automatically. Otherwise, make sure that `Boost.Test.Included` is listed in `REQUIRES`.
 
-<span class="nctnt highlight">Note:</span> Please also see the "[Defining and running tests](ch_proj.html#ch_proj.inside_tests)" section for unit test makefile information that isn't specific to Boost.
+*Note:* Please also see the "[Defining and running tests](ch_proj.html#ch_proj.inside_tests)" section for unit test makefile information that isn't specific to Boost.
 
 #### Modifying the Source File
 
 A unit test is simply a test of a unit of code, such as a class. Because each unit has many requirements, each unit test has many test cases. Your unit test code should therefore consist of a test case for each testable requirement. Each test case should be as small and independent of other test cases as possible. For information on how to handle dependencies between test cases, see the section on [managing dependencies](#managing-dependencies).
 
-Starting with an existing unit test source file, simply add, change, or remove test cases as appropriate for your unit test. Test cases are defined by the <span class="nctnt ncbi-macro">BOOST\_AUTO\_TEST\_CASE</span> macro, which looks similar to a function. The macro has a single argument (the test case name) and a block of code that implements the test. Test case names must be unique at each level of the test suite hierarchy (see [managing dependencies](#managing-dependencies)). Test cases should contain code that will succeed if the requirement under test is correctly implemented, and fail otherwise. Determination of success is made using Boost [testing tools](#testing-tools) such as <span class="nctnt ncbi-macro">BOOST\_REQUIRE</span> and <span class="nctnt ncbi-macro">BOOST\_CHECK</span>.
+Starting with an existing unit test source file, simply add, change, or remove test cases as appropriate for your unit test. Test cases are defined by the `BOOST_AUTO_TEST_CASE` macro, which looks similar to a function. The macro has a single argument (the test case name) and a block of code that implements the test. Test case names must be unique at each level of the test suite hierarchy (see [managing dependencies](#managing-dependencies)). Test cases should contain code that will succeed if the requirement under test is correctly implemented, and fail otherwise. Determination of success is made using Boost [testing tools](#testing-tools) such as `BOOST_REQUIRE` and `BOOST_CHECK`.
 
 The following sections discuss modifying the source file in more detail:
 
@@ -215,33 +215,33 @@ The following sections discuss modifying the source file in more detail:
 
 Testing tools are macros that are used to detect errors and determine whether a given test case passes or fails.
 
-While at a basic level test cases can pass or fail, it is useful to distinguish between those failures that make subsequent testing pointless or impossible and those that don’t. Therefore, there are two levels of testing: <span class="nctnt ncbi-macro">CHECK</span> (which upon failure generates an error but allows subsequent testing to continue), and <span class="nctnt ncbi-macro">REQUIRE</span> (which upon failure generates a fatal error and aborts the current test case). In addition, there is a warning level, <span class="nctnt ncbi-macro">WARN</span>, that can report something of interest without generating an error, although by default you will have to [set a command-line argument](#set-a-command-line-argument) to see warning messages.
+While at a basic level test cases can pass or fail, it is useful to distinguish between those failures that make subsequent testing pointless or impossible and those that don’t. Therefore, there are two levels of testing: `CHECK` (which upon failure generates an error but allows subsequent testing to continue), and `REQUIRE` (which upon failure generates a fatal error and aborts the current test case). In addition, there is a warning level, `WARN`, that can report something of interest without generating an error, although by default you will have to [set a command-line argument](#set-a-command-line-argument) to see warning messages.
 
 If the failure of one test case should result in skipping another then you should [add a dependency](#add-a-dependency) between them.
 
 Many Boost testing tools have variants for each error level. The most common Boost testing tools are:
 
-|--------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
-| **Testing Tool**                                                                     | **Purpose**                                                                                                 |
-| <span class="nctnt ncbi-macro">BOOST\_\<level\>(predicate)</span>                    | Fails if the Boolean predicate (any logical expression) is false.                                           |
-| <span class="nctnt ncbi-macro">BOOST\_\<level\>\_EQUAL(left, right)</span>           | Fails if the two values are not equal.                                                                      |
-| <span class="nctnt ncbi-macro">BOOST\_\<level\>\_THROW(expression, exception)</span> | Fails if execution of the expression doesn’t throw an exception of the given type (or one derived from it). |
-| <span class="nctnt ncbi-macro">BOOST\_\<level\>\_NO\_THROW(expression)</span>        | Fails if execution of the expression throws any exception.                                                  |
+|----------------------------------------------|-------------------------------------------------------------------------------------------------------------|
+| **Testing Tool**                             | **Purpose**                                                                                                 |
+| `BOOST_<level>(predicate)`                   | Fails if the Boolean predicate (any logical expression) is false.                                           |
+| `BOOST_<level>_EQUAL(left, right)`           | Fails if the two values are not equal.                                                                      |
+| `BOOST_<level>_THROW(expression, exception)` | Fails if execution of the expression doesn’t throw an exception of the given type (or one derived from it). |
+| `BOOST_<level>_NO_THROW(expression)`         | Fails if execution of the expression throws any exception.                                                  |
 
-Note that <span class="nctnt ncbi-macro">BOOST\_\<level\>\_EQUAL(var1,var2)</span> is equivalent to <span class="nctnt ncbi-macro">BOOST\_\<level\> (var1==var2)</span>, but in the case of failure it prints the value of each variable, which can be helpful. Also, it is not a good idea to compare floating point values directly - instead, use <span class="nctnt ncbi-macro">BOOST\_\<level\>\_CLOSE(var1,var2,tolerance)</span>.
+Note that `BOOST_<level>_EQUAL(var1,var2)` is equivalent to `BOOST_<level> (var1==var2)`, but in the case of failure it prints the value of each variable, which can be helpful. Also, it is not a good idea to compare floating point values directly - instead, use `BOOST_<level>_CLOSE(var1,var2,tolerance)`.
 
 See the Boost testing tools [reference page](http://www.boost.org/doc/libs/1_53_0/libs/test/doc/html/utf/testing-tools/reference.html) for documentation on these and other testing tools.
 
-The NCBI extensions to the Boost library add a number of convenience testing tools that enclose the similarly-named Boost testing tools in a <span class="nctnt ncbi-macro">NO\_THROW</span> test:
+The NCBI extensions to the Boost library add a number of convenience testing tools that enclose the similarly-named Boost testing tools in a `NO_THROW` test:
 
-|----------------------------------------------------------------------------|-------------------------------------------------------------------------------|
-| **Boost Testing Tool**                                                     | **NCBI "NO\_THROW " Extension**                                               |
-| <span class="nctnt ncbi-macro">BOOST\_\<level\>(predicate)</span>          | <span class="nctnt ncbi-macro">NCBITEST\_\<level\>(predicate)</span>          |
-| <span class="nctnt ncbi-macro">BOOST\_\<level\>\_EQUAL(left, right)</span> | <span class="nctnt ncbi-macro">NCBITEST\_\<level\>\_EQUAL(left, right)</span> |
-| <span class="nctnt ncbi-macro">BOOST\_\<level\>\_NE(left, right)</span>    | <span class="nctnt ncbi-macro">NCBITEST\_\<level\>\_NE(left, right)</span>    |
-| <span class="nctnt ncbi-macro">BOOST\_\<level\>\_MESSAGE(pred, msg)</span> | <span class="nctnt ncbi-macro">NCBITEST\_\<level\>\_MESSAGE(pred, msg)</span> |
+|------------------------------------|---------------------------------------|
+| **Boost Testing Tool**             | **NCBI "NO\_THROW " Extension**       |
+| `BOOST_<level>(predicate)`         | `NCBITEST_<level>(predicate)`         |
+| `BOOST_<level>_EQUAL(left, right)` | `NCBITEST_<level>_EQUAL(left, right)` |
+| `BOOST_<level>_NE(left, right)`    | `NCBITEST_<level>_NE(left, right)`    |
+| `BOOST_<level>_MESSAGE(pred, msg)` | `NCBITEST_<level>_MESSAGE(pred, msg)` |
 
-<span class="nctnt highlight">Note:</span> Testing tools are only supported within the context of test cases. That is, within functions defined by the <span class="nctnt ncbi-macro">BOOST\_AUTO\_TEST\_CASE</span> macro and within functions called by a test case. They are not supported in functions defined by the <span class="nctnt ncbi-macro">NCBITEST\_\*</span> macros.
+*Note:* Testing tools are only supported within the context of test cases. That is, within functions defined by the `BOOST_AUTO_TEST_CASE` macro and within functions called by a test case. They are not supported in functions defined by the `NCBITEST_*` macros.
 
 ##### Adding Initialization and/or Finalization
 
@@ -291,7 +291,7 @@ Next, add code like the following to access the argument from within a test case
         // do something with arg_value ...
     }
 
-Adding your own command-line arguments will not affect the application’s ability to process other command-line arguments such as <span class="nctnt ncbi-cmd">-help</span> or <span class="nctnt ncbi-cmd">-dryrun</span>.
+Adding your own command-line arguments will not affect the application’s ability to process other command-line arguments such as `-help` or `-dryrun`.
 
 ##### Creating Test Suites
 
@@ -333,11 +333,11 @@ When an independent test item (case or suite) fails, all of the test items that 
 
 ##### Unit Tests with Multiple Files
 
-The [new\_project](ch_proj.html#ch_proj.new_project_Starting) script is designed to create single-file unit tests by default, but you can add as many files as necessary to implement your unit test. Use of the <span class="nctnt ncbi-macro">BOOST\_AUTO\_TEST\_MAIN</span> macro is now deprecated.
+The [new\_project](ch_proj.html#ch_proj.new_project_Starting) script is designed to create single-file unit tests by default, but you can add as many files as necessary to implement your unit test. Use of the `BOOST_AUTO_TEST_MAIN` macro is now deprecated.
 
 #### Disabling Tests
 
-The Boost Unit Test Framework was extended by NCBI to provide several ways to disable test cases and suites. Test cases and suites are disabled based on logical expressions in the application configuration file or, less commonly, by explicitly disabling or skipping them. The logical expressions are based on unit test variables which are defined either by the library or by the user. All such variables are essentially Boolean in that they are either defined (<span class="nctnt ncbi-var">true</span>) or not defined (<span class="nctnt ncbi-var">false</span>). <span class="nctnt highlight">Note:</span> these methods of disabling tests don't apply if specific tests are [run from the command-line](#run-from-the-command-line).
+The Boost Unit Test Framework was extended by NCBI to provide several ways to disable test cases and suites. Test cases and suites are disabled based on logical expressions in the application configuration file or, less commonly, by explicitly disabling or skipping them. The logical expressions are based on unit test variables which are defined either by the library or by the user. All such variables are essentially Boolean in that they are either defined (`true`) or not defined (`false`). *Note:* these methods of disabling tests don't apply if specific tests are [run from the command-line](#run-from-the-command-line).
 
 -   [Disabling Tests with Configuration File Entries](#disabling-tests-with-configuration-file-entries)
 
@@ -349,7 +349,7 @@ The Boost Unit Test Framework was extended by NCBI to provide several ways to di
 
 ##### Disabling Tests with Configuration File Entries
 
-The <span class="nctnt ncbi-macro">[UNITTESTS\_DISABLE]</span> section of the application configuration file can be customized to disable test cases or suites. Entries in this section should specify a test case or suite name and a logical expression for disabling it (expressions that evaluate to <span class="nctnt ncbi-macro">true</span> disable the test). The logical expression can be formed from the logical constants <span class="nctnt ncbi-macro">true</span> and <span class="nctnt ncbi-macro">false</span>, numeric constants, [library-defined](#library-defined) or [user-defined](#user-defined) unit test variables, logical operators ('`!`', '`&&`', and '`\|\|`'), and parentheses.
+The `[UNITTESTS_DISABLE]` section of the application configuration file can be customized to disable test cases or suites. Entries in this section should specify a test case or suite name and a logical expression for disabling it (expressions that evaluate to `true` disable the test). The logical expression can be formed from the logical constants `true` and `false`, numeric constants, [library-defined](#library-defined) or [user-defined](#user-defined) unit test variables, logical operators ('`!`', '`&&`', and '`\|\|`'), and parentheses.
 
 To disable specific tests, use commands like:
 
@@ -362,7 +362,7 @@ There is a special entry `GLOBAL` that can be used to disable all tests. For exa
     [UNITTESTS_DISABLE]
     GLOBAL = OS_Cygwin
 
-<span class="nctnt highlight">Note</span>: If the configuration file contains either a test name or a variable name that has not been defined (e.g. due to a typo) then the test program will exit immediately with an error, without executing any tests.
+*Note*: If the configuration file contains either a test name or a variable name that has not been defined (e.g. due to a typo) then the test program will exit immediately with an error, without executing any tests.
 
 ##### Library-Defined Variables
 
@@ -370,98 +370,98 @@ When the NCBI-extended Boost Test library is built, it defines a set of unit tes
 
 Table 1. Build Generated Predefined Variables
 
-| <span class="nctnt ncbi-code">Builds</span>         | <span class="nctnt ncbi-code">Compilers</span>           | <span class="nctnt ncbi-code">Operating Systems</span> | <span class="nctnt ncbi-code">Platforms</span>              |
-|-----------------------------------------------------|----------------------------------------------------------|--------------------------------------------------------|-------------------------------------------------------------|
-| <span class="nctnt ncbi-code">BUILD\_Debug</span>   | <span class="nctnt ncbi-code">COMPILER\_Compaq</span>    | <span class="nctnt ncbi-code">OS\_AIX</span>           | <span class="nctnt ncbi-code">PLATFORM\_BigEndian</span>    |
-| <span class="nctnt ncbi-code">BUILD\_Dll</span>     | <span class="nctnt ncbi-code">COMPILER\_GCC</span>       | <span class="nctnt ncbi-code">OS\_BSD</span>           | <span class="nctnt ncbi-code">PLATFORM\_Bits32</span>       |
-| <span class="nctnt ncbi-code">BUILD\_Release</span> | <span class="nctnt ncbi-code">COMPILER\_ICC</span>       | <span class="nctnt ncbi-code">OS\_Cygwin</span>        | <span class="nctnt ncbi-code">PLATFORM\_Bits64</span>       |
-| <span class="nctnt ncbi-code">BUILD\_Static</span>  | <span class="nctnt ncbi-code">COMPILER\_KCC</span>       | <span class="nctnt ncbi-code">OS\_Irix</span>          | <span class="nctnt ncbi-code">PLATFORM\_LittleEndian</span> |
-|                                 | <span class="nctnt ncbi-code">COMPILER\_MipsPro</span>   | <span class="nctnt ncbi-code">OS\_Linux</span>         |                                         |
-|                                 | <span class="nctnt ncbi-code">COMPILER\_MSVC</span>      | <span class="nctnt ncbi-code">OS\_MacOS</span>         |                                         |
-|                                 | <span class="nctnt ncbi-code">COMPILER\_VisualAge</span> | <span class="nctnt ncbi-code">OS\_MacOSX</span>        |                                         |
-|                                 | <span class="nctnt ncbi-code">COMPILER\_WorkShop</span>  | <span class="nctnt ncbi-code">OS\_Solaris</span>       |                                         |
-|                                 |                                      | <span class="nctnt ncbi-code">OS\_Tru64</span>         |                                         |
-|                                 |                                      | <span class="nctnt ncbi-code">OS\_Unix</span>          |                                         |
-|                                 |                                      | <span class="nctnt ncbi-code">OS\_Windows</span>       |                                         |
+| `Builds`             | `Compilers`          | `Operating Systems` | `Platforms`             |
+|----------------------|----------------------|---------------------|-------------------------|
+| `BUILD_Debug`        | `COMPILER_Compaq`    | `OS_AIX`            | `PLATFORM_BigEndian`    |
+| `BUILD_Dll`          | `COMPILER_GCC`       | `OS_BSD`            | `PLATFORM_Bits32`       |
+| `BUILD_Release`      | `COMPILER_ICC`       | `OS_Cygwin`         | `PLATFORM_Bits64`       |
+| `BUILD_Static`       | `COMPILER_KCC`       | `OS_Irix`           | `PLATFORM_LittleEndian` |
+|  | `COMPILER_MipsPro`   | `OS_Linux`          |     |
+|  | `COMPILER_MSVC`      | `OS_MacOS`          |     |
+|  | `COMPILER_VisualAge` | `OS_MacOSX`         |     |
+|  | `COMPILER_WorkShop`  | `OS_Solaris`        |     |
+|  |  | `OS_Tru64`          |     |
+|  |  | `OS_Unix`           |     |
+|  |  | `OS_Windows`        |     |
 
-At run-time, the library also checks the <span class="nctnt ncbi-cmd">FEATURES</span> environment variable and creates unit test variables based on the current set of features. See [Table 2](#table-2) for a list of feature, package, and project related variables ([test\_boost.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib/test_boost.cpp) has the latest [list of features](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=s_NcbiFeatures&d=)).
+At run-time, the library also checks the `FEATURES` environment variable and creates unit test variables based on the current set of features. See [Table 2](#table-2) for a list of feature, package, and project related variables ([test\_boost.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib/test_boost.cpp) has the latest [list of features](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=s_NcbiFeatures&d=)).
 
 Table 2. Check Script Generated Predefined Variables
 
-| <span class="nctnt ncbi-code">Features</span>             | <span class="nctnt ncbi-code">Packages</span>                                                                                                 | <span class="nctnt ncbi-code">Projects</span>    |
-|-----------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------|
-| <span class="nctnt ncbi-code">AIX</span>                  | <span class="nctnt ncbi-code">BerkeleyDB</span>                                                                                               | <span class="nctnt ncbi-code">algo</span>        |
-| <span class="nctnt ncbi-code">BSD</span>                  | <span class="nctnt ncbi-code">BerkeleyDB\_\_</span><br/><span class="nctnt ncbi-code">(use for BerkeleyDB++)</span> | <span class="nctnt ncbi-code">app</span>         |
-| <span class="nctnt ncbi-code">CompaqCompiler</span>       | <span class="nctnt ncbi-code">Boost\_Regex</span>                                                                                             | <span class="nctnt ncbi-code">bdb</span>         |
-| <span class="nctnt ncbi-code">Cygwin</span>               | <span class="nctnt ncbi-code">Boost\_Spirit</span>                                                                                            | <span class="nctnt ncbi-code">cgi</span>         |
-| <span class="nctnt ncbi-code">CygwinMT</span>             | <span class="nctnt ncbi-code">Boost\_Test</span>                                                                                              | <span class="nctnt ncbi-code">connext</span>     |
-| <span class="nctnt ncbi-code">DLL</span>                  | <span class="nctnt ncbi-code">Boost\_Test\_Included</span>                                                                                    | <span class="nctnt ncbi-code">ctools</span>      |
-| <span class="nctnt ncbi-code">DLL\_BUILD</span>           | <span class="nctnt ncbi-code">Boost\_Threads</span>                                                                                           | <span class="nctnt ncbi-code">dbapi</span>       |
-| <span class="nctnt ncbi-code">Darwin</span>               | <span class="nctnt ncbi-code">BZ2</span>                                                                                                      | <span class="nctnt ncbi-code">gbench</span>      |
-| <span class="nctnt ncbi-code">GCC</span>                  | <span class="nctnt ncbi-code">C\_ncbi</span>                                                                                                  | <span class="nctnt ncbi-code">gui</span>         |
-| <span class="nctnt ncbi-code">ICC</span>                  | <span class="nctnt ncbi-code">C\_Toolkit</span>                                                                                               | <span class="nctnt ncbi-code">local\_bsm</span>  |
-| <span class="nctnt ncbi-code">in\_house\_resources</span> | <span class="nctnt ncbi-code">CPPUNIT</span>                                                                                                  | <span class="nctnt ncbi-code">ncbi\_crypt</span> |
-| <span class="nctnt ncbi-code">IRIX</span>                 | <span class="nctnt ncbi-code">EXPAT</span>                                                                                                    | <span class="nctnt ncbi-code">objects</span>     |
-| <span class="nctnt ncbi-code">KCC</span>                  | <span class="nctnt ncbi-code">Fast\_CGI</span>                                                                                                | <span class="nctnt ncbi-code">serial</span>      |
-| <span class="nctnt ncbi-code">Linux</span>                | <span class="nctnt ncbi-code">FLTK</span>                                                                                                     |                              |
-| <span class="nctnt ncbi-code">MIPSpro</span>              | <span class="nctnt ncbi-code">FreeTDS</span>                                                                                                  |                              |
-| <span class="nctnt ncbi-code">MSVC</span>                 | <span class="nctnt ncbi-code">FreeType</span>                                                                                                 |                              |
-| <span class="nctnt ncbi-code">MSWin</span>                | <span class="nctnt ncbi-code">FUSE</span>                                                                                                     |                              |
-| <span class="nctnt ncbi-code">MT</span>                   | <span class="nctnt ncbi-code">GIF</span>                                                                                                      |                              |
-| <span class="nctnt ncbi-code">MacOS</span>                | <span class="nctnt ncbi-code">GLUT</span>                                                                                                     |                              |
-| <span class="nctnt ncbi-code">Ncbi\_JNI</span>            | <span class="nctnt ncbi-code">GNUTLS</span>                                                                                                   |                              |
-| <span class="nctnt ncbi-code">OSF</span>                  | <span class="nctnt ncbi-code">HDF5</span>                                                                                                     |                              |
-| <span class="nctnt ncbi-code">PubSeqOS</span>             | <span class="nctnt ncbi-code">ICU</span>                                                                                                      |                              |
-| <span class="nctnt ncbi-code">SRAT\_internal</span>       | <span class="nctnt ncbi-code">JPEG</span>                                                                                                     |                              |
-| <span class="nctnt ncbi-code">Solaris</span>              | <span class="nctnt ncbi-code">LIBXML</span>                                                                                                   |                              |
-| <span class="nctnt ncbi-code">unix</span>                 | <span class="nctnt ncbi-code">LIBXSLT</span>                                                                                                  |                              |
-| <span class="nctnt ncbi-code">VisualAge</span>            | <span class="nctnt ncbi-code">LocalBZ2</span>                                                                                                 |                              |
-| <span class="nctnt ncbi-code">WinMain</span>              | <span class="nctnt ncbi-code">LocalMSGMAIL2</span>                                                                                            |                              |
-| <span class="nctnt ncbi-code">WorkShop</span>             | <span class="nctnt ncbi-code">LocalNCBILS</span>                                                                                              |                              |
-| <span class="nctnt ncbi-code">XCODE</span>                | <span class="nctnt ncbi-code">LocalPCRE</span>                                                                                                |                              |
-|                                       | <span class="nctnt ncbi-code">LocalSSS</span>                                                                                                 |                              |
-|                                       | <span class="nctnt ncbi-code">LocalZ</span>                                                                                                   |                              |
-|                                       | <span class="nctnt ncbi-code">LZO</span>                                                                                                      |                              |
-|                                       | <span class="nctnt ncbi-code">MAGIC</span>                                                                                                    |                              |
-|                                       | <span class="nctnt ncbi-code">MESA</span>                                                                                                     |                              |
-|                                       | <span class="nctnt ncbi-code">MUPARSER</span>                                                                                                 |                              |
-|                                       | <span class="nctnt ncbi-code">MySQL</span>                                                                                                    |                              |
-|                                       | <span class="nctnt ncbi-code">NCBILS2</span>                                                                                                  |                              |
-|                                       | <span class="nctnt ncbi-code">ODBC</span>                                                                                                     |                              |
-|                                       | <span class="nctnt ncbi-code">OECHEM</span>                                                                                                   |                              |
-|                                       | <span class="nctnt ncbi-code">OpenGL</span>                                                                                                   |                              |
-|                                       | <span class="nctnt ncbi-code">OPENSSL</span>                                                                                                  |                              |
-|                                       | <span class="nctnt ncbi-code">ORBacus</span>                                                                                                  |                              |
-|                                       | <span class="nctnt ncbi-code">PCRE</span>                                                                                                     |                              |
-|                                       | <span class="nctnt ncbi-code">PNG</span>                                                                                                      |                              |
-|                                       | <span class="nctnt ncbi-code">PYTHON</span>                                                                                                   |                              |
-|                                       | <span class="nctnt ncbi-code">PYTHON23</span>                                                                                                 |                              |
-|                                       | <span class="nctnt ncbi-code">PYTHON24</span>                                                                                                 |                              |
-|                                       | <span class="nctnt ncbi-code">PYTHON25</span>                                                                                                 |                              |
-|                                       | <span class="nctnt ncbi-code">SABLOT</span>                                                                                                   |                              |
-|                                       | <span class="nctnt ncbi-code">SGE</span>                                                                                                      |                              |
-|                                       | <span class="nctnt ncbi-code">SP</span>                                                                                                       |                              |
-|                                       | <span class="nctnt ncbi-code">SQLITE</span>                                                                                                   |                              |
-|                                       | <span class="nctnt ncbi-code">SQLITE3</span>                                                                                                  |                              |
-|                                       | <span class="nctnt ncbi-code">SQLITE3ASYNC</span>                                                                                             |                              |
-|                                       | <span class="nctnt ncbi-code">SSSDB</span>                                                                                                    |                              |
-|                                       | <span class="nctnt ncbi-code">SSSUTILS</span>                                                                                                 |                              |
-|                                       | <span class="nctnt ncbi-code">Sybase</span>                                                                                                   |                              |
-|                                       | <span class="nctnt ncbi-code">SybaseCTLIB</span>                                                                                              |                              |
-|                                       | <span class="nctnt ncbi-code">TIFF</span>                                                                                                     |                              |
-|                                       | <span class="nctnt ncbi-code">UNGIF</span>                                                                                                    |                              |
-|                                       | <span class="nctnt ncbi-code">UUID</span>                                                                                                     |                              |
-|                                       | <span class="nctnt ncbi-code">Xalan</span>                                                                                                    |                              |
-|                                       | <span class="nctnt ncbi-code">Xerces</span>                                                                                                   |                              |
-|                                       | <span class="nctnt ncbi-code">XPM</span>                                                                                                      |                              |
-|                                       | <span class="nctnt ncbi-code">Z</span>                                                                                                        |                              |
-|                                       | <span class="nctnt ncbi-code">wx2\_8</span>                                                                                                   |                              |
-|                                       | <span class="nctnt ncbi-code">wxWidgets</span>                                                                                                |                              |
-|                                       | <span class="nctnt ncbi-code">wxWindows</span>                                                                                                |                              |
+| `Features`           | `Packages`                                                            | `Projects`           |
+|----------------------|-----------------------------------------------------------------------|----------------------|
+| `AIX`                | `BerkeleyDB`                                                          | `algo`               |
+| `BSD`                | `BerkeleyDB__`<br/>`(use for BerkeleyDB++)` | `app`                |
+| `CompaqCompiler`     | `Boost_Regex`                                                         | `bdb`                |
+| `Cygwin`             | `Boost_Spirit`                                                        | `cgi`                |
+| `CygwinMT`           | `Boost_Test`                                                          | `connext`            |
+| `DLL`                | `Boost_Test_Included`                                                 | `ctools`             |
+| `DLL_BUILD`          | `Boost_Threads`                                                       | `dbapi`              |
+| `Darwin`             | `BZ2`                                                                 | `gbench`             |
+| `GCC`                | `C_ncbi`                                                              | `gui`                |
+| `ICC`                | `C_Toolkit`                                                           | `local_bsm`          |
+| `in_house_resources` | `CPPUNIT`                                                             | `ncbi_crypt`         |
+| `IRIX`               | `EXPAT`                                                               | `objects`            |
+| `KCC`                | `Fast_CGI`                                                            | `serial`             |
+| `Linux`              | `FLTK`                                                                |  |
+| `MIPSpro`            | `FreeTDS`                                                             |  |
+| `MSVC`               | `FreeType`                                                            |  |
+| `MSWin`              | `FUSE`                                                                |  |
+| `MT`                 | `GIF`                                                                 |  |
+| `MacOS`              | `GLUT`                                                                |  |
+| `Ncbi_JNI`           | `GNUTLS`                                                              |  |
+| `OSF`                | `HDF5`                                                                |  |
+| `PubSeqOS`           | `ICU`                                                                 |  |
+| `SRAT_internal`      | `JPEG`                                                                |  |
+| `Solaris`            | `LIBXML`                                                              |  |
+| `unix`               | `LIBXSLT`                                                             |  |
+| `VisualAge`          | `LocalBZ2`                                                            |  |
+| `WinMain`            | `LocalMSGMAIL2`                                                       |  |
+| `WorkShop`           | `LocalNCBILS`                                                         |  |
+| `XCODE`              | `LocalPCRE`                                                           |  |
+|  | `LocalSSS`                                                            |  |
+|  | `LocalZ`                                                              |  |
+|  | `LZO`                                                                 |  |
+|  | `MAGIC`                                                               |  |
+|  | `MESA`                                                                |  |
+|  | `MUPARSER`                                                            |  |
+|  | `MySQL`                                                               |  |
+|  | `NCBILS2`                                                             |  |
+|  | `ODBC`                                                                |  |
+|  | `OECHEM`                                                              |  |
+|  | `OpenGL`                                                              |  |
+|  | `OPENSSL`                                                             |  |
+|  | `ORBacus`                                                             |  |
+|  | `PCRE`                                                                |  |
+|  | `PNG`                                                                 |  |
+|  | `PYTHON`                                                              |  |
+|  | `PYTHON23`                                                            |  |
+|  | `PYTHON24`                                                            |  |
+|  | `PYTHON25`                                                            |  |
+|  | `SABLOT`                                                              |  |
+|  | `SGE`                                                                 |  |
+|  | `SP`                                                                  |  |
+|  | `SQLITE`                                                              |  |
+|  | `SQLITE3`                                                             |  |
+|  | `SQLITE3ASYNC`                                                        |  |
+|  | `SSSDB`                                                               |  |
+|  | `SSSUTILS`                                                            |  |
+|  | `Sybase`                                                              |  |
+|  | `SybaseCTLIB`                                                         |  |
+|  | `TIFF`                                                                |  |
+|  | `UNGIF`                                                               |  |
+|  | `UUID`                                                                |  |
+|  | `Xalan`                                                               |  |
+|  | `Xerces`                                                              |  |
+|  | `XPM`                                                                 |  |
+|  | `Z`                                                                   |  |
+|  | `wx2_8`                                                               |  |
+|  | `wxWidgets`                                                           |  |
+|  | `wxWindows`                                                           |  |
 
-The automated nightly test suite defines the <span class="nctnt ncbi-cmd">FEATURES</span> environment variable before launching the unit test applications. In this way, unit test applications can also use run-time detected features to exclude specific tests from the test suite.
+The automated nightly test suite defines the `FEATURES` environment variable before launching the unit test applications. In this way, unit test applications can also use run-time detected features to exclude specific tests from the test suite.
 
-<span class="nctnt highlight">Note:</span> The names of the features are modified slightly when creating unit test variables from names in the <span class="nctnt ncbi-cmd">FEATURES</span> environment variable. Specifically, each feature is prefixed by <span class="nctnt ncbi-cmd">FEATURE\_</span> and all non-alphanumeric characters are changed to underscores. For example, to require the feature <span class="nctnt ncbi-cmd">in-house-resources</span> for a test (i.e. to disable the test if the feature is not present), use:
+*Note:* The names of the features are modified slightly when creating unit test variables from names in the `FEATURES` environment variable. Specifically, each feature is prefixed by `FEATURE_` and all non-alphanumeric characters are changed to underscores. For example, to require the feature `in-house-resources` for a test (i.e. to disable the test if the feature is not present), use:
 
     [UNITTESTS_DISABLE]
     SomeTestCaseName = !FEATURE_in_house_resources
@@ -495,7 +495,7 @@ Then, passing the argument on the command-line controls the disabling of the tes
 
 ##### Disabling or Skipping Tests Explicitly in Code
 
-The NCBI extensions include a macro, <span class="nctnt ncbi-macro">NCBITEST\_DISABLE</span>, to unconditionally disable a test case or suite. This macro must be placed in the <span class="nctnt ncbi-macro">NCBITEST\_INIT\_TREE</span> function:
+The NCBI extensions include a macro, `NCBITEST_DISABLE`, to unconditionally disable a test case or suite. This macro must be placed in the `NCBITEST_INIT_TREE` function:
 
     NCBITEST_INIT_TREE()
     {
@@ -503,7 +503,7 @@ The NCBI extensions include a macro, <span class="nctnt ncbi-macro">NCBITEST\_DI
         NCBITEST_DISABLE(test_suite_name);
     }
 
-The extensions also include two functions for globally disabling or skipping all tests. These functions should be called only from within the <span class="nctnt ncbi-macro">NCBITEST\_AUTO\_INIT</span> or <span class="nctnt ncbi-macro">NCBITEST\_INIT\_TREE</span> functions:
+The extensions also include two functions for globally disabling or skipping all tests. These functions should be called only from within the `NCBITEST_AUTO_INIT` or `NCBITEST_INIT_TREE` functions:
 
     NCBITEST_INIT_TREE()
     {
@@ -512,7 +512,7 @@ The extensions also include two functions for globally disabling or skipping all
                                      // Most unit tests won’t use either.
     }
 
-The difference between these functions is that globally disabled unit tests will report the status <span class="nctnt ncbi-macro">DIS</span> to check scripts while skipped tests will report the status <span class="nctnt ncbi-macro">SKP</span>.
+The difference between these functions is that globally disabled unit tests will report the status `DIS` to check scripts while skipped tests will report the status `SKP`.
 
 ### Viewing Unit Tests Results from the Nightly Build
 

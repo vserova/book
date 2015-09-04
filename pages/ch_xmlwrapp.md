@@ -14,7 +14,7 @@ Overview
 
 ### Introduction
 
-The NCBI C++ Toolkit has forked and enhanced the open-source [xmlwrapp](http://vslavik.github.io/xmlwrapp/) project, which provides a simplified way for developers to work with XML. This chapter discusses the NCBI fork and how to use it. This chapter refers to NCBI's project as "XmlWrapp" and the open-source project as "xmlwrapp". Both projects produce a library named <span class="nctnt ncbi-lib">libxmlwrapp</span>.
+The NCBI C++ Toolkit has forked and enhanced the open-source [xmlwrapp](http://vslavik.github.io/xmlwrapp/) project, which provides a simplified way for developers to work with XML. This chapter discusses the NCBI fork and how to use it. This chapter refers to NCBI's project as "XmlWrapp" and the open-source project as "xmlwrapp". Both projects produce a library named `libxmlwrapp`.
 
 ### Chapter Outline
 
@@ -83,7 +83,7 @@ The following is an outline of the topics presented in this chapter:
 General Information
 -------------------
 
-Both NCBI's XmlWrapp project and the open-source [xmlwrapp](http://vslavik.github.io/xmlwrapp/) project produce the <span class="nctnt ncbi-lib">libxmlwrapp</span> library which is a generic XML handling C++ library built on top of widespread [libxml2](http://xmlsoft.org/) / [libxslt](http://xmlsoft.org/XSLT/) C libraries. The main features of <span class="nctnt ncbi-lib">libxmlwrapp</span> are:
+Both NCBI's XmlWrapp project and the open-source [xmlwrapp](http://vslavik.github.io/xmlwrapp/) project produce the `libxmlwrapp` library which is a generic XML handling C++ library built on top of widespread [libxml2](http://xmlsoft.org/) / [libxslt](http://xmlsoft.org/XSLT/) C libraries. The main features of `libxmlwrapp` are:
 
 -   Tree parser (DOM)
 
@@ -119,9 +119,9 @@ XmlWrapp was created by forking [xmlwrapp](http://vslavik.github.io/xmlwrapp/) a
 
 The figure below illustrates the relationship between your C++ application and the XML libraries:
 
-<span>[![Image Overview.png](/book/static/img/Overview.png)](/book/static/img/Overview.png "Click to see the full-resolution image")</span>
+[![Image Overview.png](/book/static/img/Overview.png)](/book/static/img/Overview.png "Click to see the full-resolution image")
 
-One goal of the <span class="nctnt ncbi-lib">libxmlwrapp</span> library is to be a very thin wrapper around <span class="nctnt ncbi-lib">libxml2</span> / <span class="nctnt ncbi-lib">libxslt</span> and to provide a simple yet powerful C++ interface without compromising speed. To achieve this goal, the library does not implement expensive run-time validity checks, and it is possible to write compilable C++ code that will cause a segmentation fault. For example, it is possible to create an unsafe XmlWrapp namespace object that points to an existing <span class="nctnt ncbi-lib">libxml2</span> namespace, then destroy the pointed-to namespace. This results in the unsafe <span class="nctnt ncbi-lib">libxmlwrapp</span> namespace object containing a dangling pointer. Subsequent access of the pointer will cause an exception or abnormal termination.
+One goal of the `libxmlwrapp` library is to be a very thin wrapper around `libxml2` / `libxslt` and to provide a simple yet powerful C++ interface without compromising speed. To achieve this goal, the library does not implement expensive run-time validity checks, and it is possible to write compilable C++ code that will cause a segmentation fault. For example, it is possible to create an unsafe XmlWrapp namespace object that points to an existing `libxml2` namespace, then destroy the pointed-to namespace. This results in the unsafe `libxmlwrapp` namespace object containing a dangling pointer. Subsequent access of the pointer will cause an exception or abnormal termination.
 
 The original open-source [libxmlwrapp](http://vslavik.github.io/xmlwrapp/) 0.6.0 was extended and modified to fit the NCBI C++ Toolkit build framework and API functionality requirements. Later, the functional changes introduced in 0.6.1 and 0.6.2 were patched into the NCBI code. Specific enhancements that NCBI incorporated into XmlWrapp include:
 
@@ -129,9 +129,9 @@ The original open-source [libxmlwrapp](http://vslavik.github.io/xmlwrapp/) 0.6.0
 
     -   XPath queries can be run based on XPath expressions. The queries return node sets which can be iterated.
 
--   A new class, <span class="nctnt ncbi-class">xml::schema</span>, was added for XSD support.
+-   A new class, `xml::schema`, was added for XSD support.
 
--   Implementing a full-featured XML namespace class, <span class="nctnt ncbi-class">xml::ns</span>, for use by both nodes and attributes, with these features:
+-   Implementing a full-featured XML namespace class, `xml::ns`, for use by both nodes and attributes, with these features:
 
     -   Each node and attribute may be assigned to a namespace, or have their assignment removed. The assigned namespace can be retrieved.
 
@@ -145,17 +145,17 @@ The original open-source [libxmlwrapp](http://vslavik.github.io/xmlwrapp/) 0.6.0
 
 -   Adapting the demo code and test cases to work within the NCBI framework.
 
--   Fixing some bugs that were in <span class="nctnt ncbi-lib">libxmlwrapp</span>:
+-   Fixing some bugs that were in `libxmlwrapp`:
 
-    -   <span class="nctnt ncbi-lib">libxmlwrapp</span> 0.6.0 did not copy the namespace when it copied an attribute. When XmlWrapp copies an attribute, it also copies the assigned namespace and all namespace definitions contained by the attribute.
+    -   `libxmlwrapp` 0.6.0 did not copy the namespace when it copied an attribute. When XmlWrapp copies an attribute, it also copies the assigned namespace and all namespace definitions contained by the attribute.
 
-    -   The Sun WorkShop compiler failed to compile <span class="nctnt ncbi-lib">libxmlwrapp</span> 0.6.0 because it was missing a definition for the STL distance algorithm. XmlWrapp conditionally defines this template for this compiler.
+    -   The Sun WorkShop compiler failed to compile `libxmlwrapp` 0.6.0 because it was missing a definition for the STL distance algorithm. XmlWrapp conditionally defines this template for this compiler.
 
-    -   The XML parser in <span class="nctnt ncbi-lib">libxmlwrapp</span> 0.6.0 failed to detect a certain form of mal-formed document. NCBI found and fixed this bug. The patch was submitted to the <span class="nctnt ncbi-lib">libxmlwrapp</span> project and was accepted.
+    -   The XML parser in `libxmlwrapp` 0.6.0 failed to detect a certain form of mal-formed document. NCBI found and fixed this bug. The patch was submitted to the `libxmlwrapp` project and was accepted.
 
-    -   In <span class="nctnt ncbi-lib">libxmlwrapp</span> 0.6.0 it was possible that using a reference to a node that was created by dereferencing an iterator could cause a core dump or unexpected data if the iterator was used after the reference was created.
+    -   In `libxmlwrapp` 0.6.0 it was possible that using a reference to a node that was created by dereferencing an iterator could cause a core dump or unexpected data if the iterator was used after the reference was created.
 
-The NCBI enhancements retain the generic nature of <span class="nctnt ncbi-lib">libxmlwrapp</span>, and are not tailored to any particular application domain.
+The NCBI enhancements retain the generic nature of `libxmlwrapp`, and are not tailored to any particular application domain.
 
 XmlWrapp demo [applications](https://svn.ncbi.nlm.nih.gov/viewvc/toolkit/trunk/internal/c++/src/internal/demo/misc/xmlwrapp) and [unit tests](https://svn.ncbi.nlm.nih.gov/viewvc/toolkit/trunk/internal/c++/src/internal/test/misc/xmlwrapp) are available inside NCBI, but the most common and basic usage examples are given in the [next section](#next-section).
 
@@ -164,21 +164,21 @@ All the XmlWrapp functionality resides in the C++ namespaces [xml::](http://www.
 XmlWrapp Classes
 ----------------
 
-<span>[![Image ch\_xmlwrapp\_classes.png](/book/static/img/ch_xmlwrapp_classes.png)](/book/static/img/ch_xmlwrapp_classes.png "Click to see the full-resolution image")</span>
+[![Image ch\_xmlwrapp\_classes.png](/book/static/img/ch_xmlwrapp_classes.png)](/book/static/img/ch_xmlwrapp_classes.png "Click to see the full-resolution image")
 
 The figure above shows the most important classes in XmlWrapp. XML can be parsed from a file, memory buffer, or stream, creating a document object. One of the most important things you can get from the document object is the document root node.
 
 Several classes in the figure are marked with the small "circled-i" symbol in the corner. This mark means that the class supports iterators and const iterators. The node class is a container of other nodes and you can iterate over immediate node children similar to how you do with STL containers.
 
-A node may have an XML namespace and also may define namespaces. To support this, XmlWrapp provides the XML namespace class, <span class="nctnt ncbi-class">xml::ns</span>.
+A node may have an XML namespace and also may define namespaces. To support this, XmlWrapp provides the XML namespace class, `xml::ns`.
 
-An XML node may have attributes as well, so XmlWrapp provides the <span class="nctnt ncbi-class">xml::attributes</span> class. This class is a container of attributes so both const and non-const iterators are provided.
+An XML node may have attributes as well, so XmlWrapp provides the `xml::attributes` class. This class is a container of attributes so both const and non-const iterators are provided.
 
-The XPath support includes the <span class="nctnt ncbi-class">xml::xpath\_expression</span> and <span class="nctnt ncbi-class">xml::node\_set</span> classes. <span class="nctnt ncbi-class">xpath\_expression</span> objects hold a single expression. <span class="nctnt ncbi-class">node\_set</span> objects are created as the result of executing an XPath query for a given node. The <span class="nctnt ncbi-class">node\_set</span> class is a container so it supports iterators.
+The XPath support includes the `xml::xpath_expression` and `xml::node_set` classes. `xpath_expression` objects hold a single expression. `node_set` objects are created as the result of executing an XPath query for a given node. The `node_set` class is a container so it supports iterators.
 
-To support XSD schema validation and DTD validation, XmlWrapp provides the <span class="nctnt ncbi-class">xml::schema</span> and <span class="nctnt ncbi-class">xml::dtd</span> classes. These classes work together with the <span class="nctnt ncbi-class">xml::document</span> class.
+To support XSD schema validation and DTD validation, XmlWrapp provides the `xml::schema` and `xml::dtd` classes. These classes work together with the `xml::document` class.
 
-Warnings, errors and fatal errors may occur during the parsing and validating. To collect them, XmlWrapp provides the <span class="nctnt ncbi-class">xml::error\_messages</span> class. The <span class="nctnt ncbi-class">error\_messages</span> class includes the <span class="nctnt ncbi-func">print()</span> method, which returns a string containing a newline-separated list of messages. It also includes the <span class="nctnt ncbi-func">has\_warnings()</span>, <span class="nctnt ncbi-func">has\_errors()</span>, and <span class="nctnt ncbi-func">has\_fatal\_errors()</span> methods in case you are interested in the presence of a specific type of message. Note that errors and fatal errors are considered separately, so <span class="nctnt ncbi-func">has\_fatal\_errors()</span> may return <span class="nctnt ncbi-code">true</span> while <span class="nctnt ncbi-func">has\_errors()</span> returns <span class="nctnt ncbi-code">false</span>.
+Warnings, errors and fatal errors may occur during the parsing and validating. To collect them, XmlWrapp provides the `xml::error_messages` class. The `error_messages` class includes the `print()` method, which returns a string containing a newline-separated list of messages. It also includes the `has_warnings()`, `has_errors()`, and `has_fatal_errors()` methods in case you are interested in the presence of a specific type of message. Note that errors and fatal errors are considered separately, so `has_fatal_errors()` may return `true` while `has_errors()` returns `false`.
 
 How To
 ------
@@ -196,7 +196,7 @@ This section includes compact code fragments that show the essence of how to ach
 
     xml::document       doc( "MyFile.xml", NULL );
 
-<span class="nctnt highlight">Note:</span> The second parameter above is a pointer to an <span class="nctnt ncbi-class">error\_messages</span> object, which stores any messages collected while parsing the XML document (a <span class="nctnt ncbi-code">NULL</span> value can be passed if you're not interested in collecting error messages). For example:
+*Note:* The second parameter above is a pointer to an `error_messages` object, which stores any messages collected while parsing the XML document (a `NULL` value can be passed if you're not interested in collecting error messages). For example:
 
     xml::error_messages msgs;
     xml::document       doc( "MyFile.xml", &msgs );
@@ -234,7 +234,7 @@ For example, if you do not want to have the XML declaration at the beginning of 
 
     doc.save_to_string( s, xml::save_op_no_decl );
 
-Note that all the <span class="nctnt ncbi-func">save\_to\_\*()</span> functions use the same underlying formatting code and therefore respond to flags in the same way.
+Note that all the `save_to_*()` functions use the same underlying formatting code and therefore respond to flags in the same way.
 
 For further discussion, see the [Formatting of Programmatically Added Content](#formatting-of-programmatically-added-content) section. For a complete list of available formatting flags, see [`enum xml::save_options`](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/namespacexml.html#8599801d006476631c27a732819b9995).
 
@@ -325,7 +325,7 @@ For those within NCBI, there is [sample code](https://svn.ncbi.nlm.nih.gov/viewv
 
 Other methods and options are available for saving the transformation result - see [save\_to\_stream()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=save_to_stream), [save\_to\_file()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=save_to_file), and [save\_options](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=save_options).
 
-<span class="nctnt highlight">Note:</span> The transformation output will be affected by a number of factors:
+*Note:* The transformation output will be affected by a number of factors:
 
 -   If there is no output method specified in the XSL, or if the specified method is not "`html`" or "`text`", then the effective output method will be "`xml`".
 
@@ -333,7 +333,7 @@ Other methods and options are available for saving the transformation result - s
 
 -   The save options are only applicable when the effective output method is "`xml`".
 
--   If the effective output method is "`xml`", an XML declaration will be prepended to the transformation result when serialized (unless suppressed by the <span class="nctnt ncbi-var">xml::save\_op\_no\_decl</span> save option).
+-   If the effective output method is "`xml`", an XML declaration will be prepended to the transformation result when serialized (unless suppressed by the `xml::save_op_no_decl` save option).
 
 -   There are three conditions for which an empty "`<blank/>`" node will be appended to the transformation output:
 
@@ -356,9 +356,9 @@ Other methods and options are available for saving the transformation result - s
         std::cout << "Node #" << nnum++ << std::endl
              << *k << std::endl;
 
-Please note that the <span class="nctnt ncbi-var">node\_set</span> object holds a set of references to the nodes from the document which is used to run the XPath query. Therefore you can change the nodes in the original document if you use a non-constant <span class="nctnt ncbi-var">node\_set</span> and non-constant iterators.
+Please note that the `node_set` object holds a set of references to the nodes from the document which is used to run the XPath query. Therefore you can change the nodes in the original document if you use a non-constant `node_set` and non-constant iterators.
 
-The <span class="nctnt ncbi-var">xpath\_expression</span> object also supports:
+The `xpath_expression` object also supports:
 
 -   pre-compilation of the XPath query string
 
@@ -447,7 +447,7 @@ The solution is to create a special namespace with the sole purpose of associati
 
         std::cout << result << std::endl; // "42"
 
-Please also see the <span class="nctnt ncbi-class">xslt::extension-function</span> [class reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classxslt_1_1extension__function.html).
+Please also see the `xslt::extension-function` [class reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classxslt_1_1extension__function.html).
 
 Users inside NCBI can view the [extension function unit tests](https://svn.ncbi.nlm.nih.gov/viewvc/toolkit/trunk/internal/c++/src/internal/test/misc/xmlwrapp/xslt_ext_func/) for more usage examples.
 
@@ -496,40 +496,40 @@ Users inside NCBI can view the [extension function unit tests](https://svn.ncbi.
         std::cout << result_root.get_name() << std::endl; // "inserted"
         std::cout << result_root.get_content() << std::endl; // "content"
 
-Please also see the <span class="nctnt ncbi-class">xslt::extension-element</span> [class reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classxslt_1_1extension__element.html).
+Please also see the `xslt::extension-element` [class reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classxslt_1_1extension__element.html).
 
 Users inside NCBI can view the [extension element unit tests](https://svn.ncbi.nlm.nih.gov/viewvc/toolkit/trunk/internal/c++/src/internal/test/misc/xmlwrapp/xslt_ext_elem/) for more usage examples.
 
 ### Use an XML Catalog
 
-The <span class="nctnt ncbi-var">XML\_CATALOG\_FILES</span> environment variable may be used in one of three ways to control the XML catalog feature of <span class="nctnt ncbi-lib">libxml2</span> – i.e. the way <span class="nctnt ncbi-lib">libxml2</span> resolves unreachable external URI's:
+The `XML_CATALOG_FILES` environment variable may be used in one of three ways to control the XML catalog feature of `libxml2` – i.e. the way `libxml2` resolves unreachable external URI's:
 
 1  
-If <span class="nctnt ncbi-var">XML\_CATALOG\_FILES</span> is not set in the process environment then the default catalog will be used.
+If `XML_CATALOG_FILES` is not set in the process environment then the default catalog will be used.
 
 2  
 If it is set to an empty value then the default catalog will be deactivated and there will be no resolution of unreachable external URI's.
 
 3  
-If it is set to a space-separated list of catalog files, then <span class="nctnt ncbi-lib">libxml2</span> will use these files to resolve external URI's. Any invalid paths will be silently ignored.
+If it is set to a space-separated list of catalog files, then `libxml2` will use these files to resolve external URI's. Any invalid paths will be silently ignored.
 
 The default catalog is `/etc/xml/catalog` for non-Windows systems. For Windows, the default catalog is `<module_path>\..\etc\catalog`, where `<module_path>` is the path to the installed `libxml2.dll`, if available, otherwise the path to the running program.
 
-The <span class="nctnt ncbi-var">XML\_CATALOG\_FILES</span> environment variable is read once before the first parsing operation, and then any specified catalogs are used globally for URI resolution in all subsequent parsing operations. Therefore, if the <span class="nctnt ncbi-var">XML\_CATALOG\_FILES</span> value is to be set programmatically, it must be done prior to the first parsing operation.
+The `XML_CATALOG_FILES` environment variable is read once before the first parsing operation, and then any specified catalogs are used globally for URI resolution in all subsequent parsing operations. Therefore, if the `XML_CATALOG_FILES` value is to be set programmatically, it must be done prior to the first parsing operation.
 
-There is another environment variable (<span class="nctnt ncbi-var">XML\_DEBUG\_CATALOG</span>) to control debug output. If it is defined, then debugging output will be enabled.
+There is another environment variable (`XML_DEBUG_CATALOG`) to control debug output. If it is defined, then debugging output will be enabled.
 
 Warning: Collaborative Use of XmlWrapp and libxml2
 --------------------------------------------------
 
-XmlWrapp uses the <span class="nctnt ncbi-var">\_private</span> field of the raw <span class="nctnt ncbi-lib">libxml2 </span><span class="nctnt ncbi-type">xmlNode</span> data structure for internal purposes. Therefore, if <span class="nctnt ncbi-lib">libxml2</span> and XmlWrapp are used collaboratively then this field must not be used in client code. If it is used, it may cause a core dump or other undefined behavior.
+XmlWrapp uses the `_private` field of the raw `libxml2 ``xmlNode` data structure for internal purposes. Therefore, if `libxml2` and XmlWrapp are used collaboratively then this field must not be used in client code. If it is used, it may cause a core dump or other undefined behavior.
 
 Implementation Details
 ----------------------
 
 ### Copying and Referencing Nodes
 
-<span class="nctnt ncbi-class">xml::node</span> objects are frequently required when working with XML documents. There are two ways to work with a given node:
+`xml::node` objects are frequently required when working with XML documents. There are two ways to work with a given node:
 
 -   by referencing it; or
 
@@ -558,29 +558,29 @@ This example shows both ways:
         delete my_copy;
     }
 
-What is the difference between the <span class="nctnt ncbi-var">node\_ref</span> and <span class="nctnt ncbi-var">my\_copy</span> variables?
+What is the difference between the `node_ref` and `my_copy` variables?
 
-The <span class="nctnt ncbi-var">node\_ref</span> variable refers to a node in the original document loaded from `example.xml`. If you change something using the <span class="nctnt ncbi-var">node\_ref</span> variable you’ll make changes in the original document object.
+The `node_ref` variable refers to a node in the original document loaded from `example.xml`. If you change something using the `node_ref` variable you’ll make changes in the original document object.
 
-The <span class="nctnt ncbi-var">my\_copy</span> variable is a recursive copy of the corresponding node together with all used namespace definitions, non-default attributes, and nested nodes. The copy has no connection to the original document. The <span class="nctnt ncbi-var">my\_copy</span> variable has no parent node and has no links to the internal and external subsets (DTDs) which the original document could have. If you change something using the <span class="nctnt ncbi-var">my\_copy</span> variable you’ll make changes in the copy but not in the original document. Obviously it takes more time to create such a recursive copy of a node.
+The `my_copy` variable is a recursive copy of the corresponding node together with all used namespace definitions, non-default attributes, and nested nodes. The copy has no connection to the original document. The `my_copy` variable has no parent node and has no links to the internal and external subsets (DTDs) which the original document could have. If you change something using the `my_copy` variable you’ll make changes in the copy but not in the original document. Obviously it takes more time to create such a recursive copy of a node.
 
-<span class="nctnt highlight">Note:</span> It is recommended to pass nodes by reference when appropriate to maximize performance and avoid modification of copies.
+*Note:* It is recommended to pass nodes by reference when appropriate to maximize performance and avoid modification of copies.
 
 ### Using Namespaces with XPath Expressions
 
-XmlWrapp provides the <span class="nctnt ncbi-class">xml::xpath\_expression</span> class for building reusable XPath expressions. If namespaces are involved then one of the constructors which accept a namespace or a list of namespaces should be used. Otherwise the XPath query results may not have the nodes you expect to get.
+XmlWrapp provides the `xml::xpath_expression` class for building reusable XPath expressions. If namespaces are involved then one of the constructors which accept a namespace or a list of namespaces should be used. Otherwise the XPath query results may not have the nodes you expect to get.
 
-XmlWrapp also provides a convenience method for the nodes: <span class="nctnt ncbi-func">xml::node::run\_xpath\_query( const char \* expr)</span>. This method builds an <span class="nctnt ncbi-class">xpath\_expression</span> internally and registers all the effective namespaces for the certain node. While it is very convenient as you don’t need to know in advance what the namespace definitions are, this method has some drawbacks:
+XmlWrapp also provides a convenience method for the nodes: `xml::node::run_xpath_query( const char * expr)`. This method builds an `xpath_expression` internally and registers all the effective namespaces for the certain node. While it is very convenient as you don’t need to know in advance what the namespace definitions are, this method has some drawbacks:
 
--   The internally built <span class="nctnt ncbi-class">xpath\_expression</span> is not reusable, so it gets rebuilt every time a query is run - even if the same expression was used before.
+-   The internally built `xpath_expression` is not reusable, so it gets rebuilt every time a query is run - even if the same expression was used before.
 
 -   The list of effective namespace definitions for a certain node can be quite long and may exceed your actual needs. It takes time to build such a list and to register them all so it affects the performance.
 
 Recommendations:
 
--   If you need the best performance then use <span class="nctnt ncbi-class">xml::xpath\_expression</span> explicitly and do not forget to provide a list of the required namespaces.
+-   If you need the best performance then use `xml::xpath_expression` explicitly and do not forget to provide a list of the required namespaces.
 
--   If you aren’t concerned about performance then use one of the <span class="nctnt ncbi-func">xml::node::run\_xpath\_query( const char \* expr)</span> methods.
+-   If you aren’t concerned about performance then use one of the `xml::node::run_xpath_query( const char * expr)` methods.
 
 ### Containers of Attributes - Iteration and Size
 
@@ -606,7 +606,7 @@ XmlWrapp provides an STL-like way of iterating over the attributes, e.g:
 
 You may notice that iterators are used here and the iterators can be incremented.
 
-<span class="nctnt highlight">Note:</span> Although iterating over attributes is STL-like, searching for an attribute is only partially STL-like. Iterators returned by the <span class="nctnt ncbi-func">find()</span> method cannot be incremented, but both operator <span class="nctnt ncbi-code">-\></span> and operator <span class="nctnt ncbi-code">\*</span> can be used. The following code will work:
+*Note:* Although iterating over attributes is STL-like, searching for an attribute is only partially STL-like. Iterators returned by the `find()` method cannot be incremented, but both operator `->` and operator `*` can be used. The following code will work:
 
     void f( const xml::node &  theNode, const char *  attrName ) {
         const xml::attributes &          attrs = theNode.get_attributes();
@@ -627,7 +627,7 @@ but this code will generate an exception:
             ++found;  // Exception is guaranteed here
     }
 
-This implementation detail is related to the limitations of <span class="nctnt ncbi-lib">libxml2</span> with respect to default attributes. Let’s take an example that has a DTD:
+This implementation detail is related to the limitations of `libxml2` with respect to default attributes. Let’s take an example that has a DTD:
 
     <?xml version="1.0"?>
     <!DOCTYPE root PUBLIC "something" "my.dtd" [
@@ -639,7 +639,7 @@ This implementation detail is related to the limitations of <span class="nctnt n
           some_ns:bar = "barVal">
     </root>
 
-This example introduces a default attribute called defaultAttr for the root node. The <span class="nctnt ncbi-lib">libxml2</span> library stores default and non-default attributes separately. The library provides very limited access the default attributes - there is no way to iterate over them and the only possible way to get a default attribute is to search for it explicitly. For example:
+This example introduces a default attribute called defaultAttr for the root node. The `libxml2` library stores default and non-default attributes separately. The library provides very limited access the default attributes - there is no way to iterate over them and the only possible way to get a default attribute is to search for it explicitly. For example:
 
     void f( const xml::node &  theNode ) {
         const xml::attributes &          attrs = theNode.get_attributes();
@@ -652,17 +652,17 @@ This example introduces a default attribute called defaultAttr for the root node
         }
     }
 
-XmlWrapp forbids incrementing iterators provided by <span class="nctnt ncbi-func">xml::attributes::find(...)</span> methods because:
+XmlWrapp forbids incrementing iterators provided by `xml::attributes::find(...)` methods because:
 
--   <span class="nctnt ncbi-lib">libxml2</span> has limited support for working with default attributes; and
+-   `libxml2` has limited support for working with default attributes; and
 
--   iterators provided by the <span class="nctnt ncbi-func">xml::attributes::find()</span> methods may point to either a default or a non-default attribute.
+-   iterators provided by the `xml::attributes::find()` methods may point to either a default or a non-default attribute.
 
-<span class="nctnt highlight">Note:</span> This <span class="nctnt ncbi-lib">libxml2</span> limitation affects the <span class="nctnt ncbi-func">xml::attributes::size()</span> method behavior. It will always provide the number of non-default attributes and will never include the number of default attributes regardless of whether or not a node has default attributes.
+*Note:* This `libxml2` limitation affects the `xml::attributes::size()` method behavior. It will always provide the number of non-default attributes and will never include the number of default attributes regardless of whether or not a node has default attributes.
 
 ### Changing Default Attributes
 
-<span class="nctnt ncbi-lib">libxml2</span> does not provide the ability to change a default attribute. XmlWrapp does provide this ability, but at the cost of implicitly converting the default attribute into a non-default attribute. Consider the following document:
+`libxml2` does not provide the ability to change a default attribute. XmlWrapp does provide this ability, but at the cost of implicitly converting the default attribute into a non-default attribute. Consider the following document:
 
     <?xml version="1.0"?>
     <!DOCTYPE root PUBLIC "something" "my.dtd" [
@@ -733,46 +733,46 @@ Figure 1. Phantom Attributes.
 
 ### Event Parser and Named Entities
 
-When using <span class="nctnt ncbi-class">xml::event\_parser</span>, three functions are involved in parsing an XML document that contains named entities:
+When using `xml::event_parser`, three functions are involved in parsing an XML document that contains named entities:
 
--   <span class="nctnt ncbi-func">xml::init::substitute\_entities()</span><br/>This method controls whether the <span class="nctnt ncbi-func">xml::event\_parser::entity\_reference()</span> callback is called or not, and must be called before the event parser is created.
+-   `xml::init::substitute_entities()`<br/>This method controls whether the `xml::event_parser::entity_reference()` callback is called or not, and must be called before the event parser is created.
 
--   <span class="nctnt ncbi-func">xml::event\_parser::text()</span><br/>This callback will be called for both text nodes and named entity nodes.
+-   `xml::event_parser::text()`<br/>This callback will be called for both text nodes and named entity nodes.
 
--   <span class="nctnt ncbi-func">xml::event\_parser::entity\_reference()</span><br/>This callback may be called for named entity nodes.
+-   `xml::event_parser::entity_reference()`<br/>This callback may be called for named entity nodes.
 
-Imagine that an event parser which implements both <span class="nctnt ncbi-func">text()</span> and <span class="nctnt ncbi-func">entity\_reference()</span> callbacks receives the following document as in input:
+Imagine that an event parser which implements both `text()` and `entity_reference()` callbacks receives the following document as in input:
 
     <?xml version="1.0"?>
     <!DOCTYPE EXAMPLE SYSTEM "example.dtd" [ <!ENTITY my "VALUE">]>
     <root><node>Super &my; oh!</node></root>
 
-Then the table below lists the callbacks that are called, depending on the value passed to <span class="nctnt ncbi-func">substitute\_entities()</span>:
+Then the table below lists the callbacks that are called, depending on the value passed to `substitute_entities()`:
 
-| Having this call before the parser is created:<br/><span class="nctnt ncbi-code">xml::init::substitute\_entities(true)</span><br/>results in the following callbacks: | Having this call before the parser is created:<br/><span class="nctnt ncbi-code">xml::init::substitute\_entities(false)</span><br/>results in the following callbacks: |
-|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <span class="nctnt ncbi-code">xml::event\_parser::text("Super ")</span>                                                                                                                                                   | <span class="nctnt ncbi-code">xml::event\_parser::text("Super ")</span>                                                                                                                                                    |
-| <span class="nctnt ncbi-code">xml::event\_parser::text("VALUE")</span>                                                                                                                                                    | <span class="nctnt ncbi-code">xml::event\_parser::text("VALUE")</span>                                                                                                                                                     |
-|                                                                                                                                                                                                       | <span class="nctnt ncbi-code">xml::event\_parser::entity\_reference("my")</span>                                                                                                                                           |
-| <span class="nctnt ncbi-code">xml::event\_parser::text(" oh!")</span>                                                                                                                                                     | <span class="nctnt ncbi-code">xml::event\_parser::text(" oh!")</span>                                                                                                                                                      |
+| Having this call before the parser is created:<br/>`xml::init::substitute_entities(true)`<br/>results in the following callbacks: | Having this call before the parser is created:<br/>`xml::init::substitute_entities(false)`<br/>results in the following callbacks: |
+|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `xml::event_parser::text("Super ")`                                                                                                                                                   | `xml::event_parser::text("Super ")`                                                                                                                                                    |
+| `xml::event_parser::text("VALUE")`                                                                                                                                                    | `xml::event_parser::text("VALUE")`                                                                                                                                                     |
+|                                                                                                                                                                   | `xml::event_parser::entity_reference("my")`                                                                                                                                            |
+| `xml::event_parser::text(" oh!")`                                                                                                                                                     | `xml::event_parser::text(" oh!")`                                                                                                                                                      |
 
-So the difference is that the <span class="nctnt ncbi-func">entity\_reference()</span> callback is never called if <span class="nctnt ncbi-func">substitute\_entities(true)</span> is called. <span class="nctnt highlight">Note:</span> The <span class="nctnt ncbi-func">entity\_reference()</span> callback is also not called if a standard entity is used (e.g. <span class="nctnt ncbi-var">&apos;</span>, <span class="nctnt ncbi-var">&amp;</span>, <span class="nctnt ncbi-var">&quot;</span>, <span class="nctnt ncbi-var">&lt;</span>, <span class="nctnt ncbi-var">&gt;</span>), regardless of any call to <span class="nctnt ncbi-func">substitute\_entities()</span>.
+So the difference is that the `entity_reference()` callback is never called if `substitute_entities(true)` is called. *Note:* The `entity_reference()` callback is also not called if a standard entity is used (e.g. `&apos;`, `&amp;`, `&quot;`, `&lt;`, `&gt;`), regardless of any call to `substitute_entities()`.
 
 Character entities are handled the same way as named entities.
 
-Generally speaking, the event parser in XmlWrapp behaves the same way as in <span class="nctnt ncbi-lib">libxml2</span> in terms of what callbacks are called - except that the callbacks in XmlWrapp are C++ methods whereas the callbacks in <span class="nctnt ncbi-lib">libxml2</span> are C functions.
+Generally speaking, the event parser in XmlWrapp behaves the same way as in `libxml2` in terms of what callbacks are called - except that the callbacks in XmlWrapp are C++ methods whereas the callbacks in `libxml2` are C functions.
 
 ### Safe and Unsafe Namespaces
 
-XmlWrapp provides a wrapper class called <span class="nctnt ncbi-class">xml::ns</span> to work with namespaces. The <span class="nctnt ncbi-class">xml::ns</span> class can be of two types: safe and unsafe.
+XmlWrapp provides a wrapper class called `xml::ns` to work with namespaces. The `xml::ns` class can be of two types: safe and unsafe.
 
-To understand the difference between them it is necessary to know how <span class="nctnt ncbi-lib">libxml2</span> works with namespaces. Namespace structures in <span class="nctnt ncbi-lib">libxml2</span> store two pointers to character strings - a namespace prefix and a namespace URI. These structures are stored in a linked list and each XML document element that might have a namespace has a pointer that points to a namespace structure. Thus, namespaces can be uniquely identified by either a namespace pointer or by a prefix / URI pair.
+To understand the difference between them it is necessary to know how `libxml2` works with namespaces. Namespace structures in `libxml2` store two pointers to character strings - a namespace prefix and a namespace URI. These structures are stored in a linked list and each XML document element that might have a namespace has a pointer that points to a namespace structure. Thus, namespaces can be uniquely identified by either a namespace pointer or by a prefix / URI pair.
 
-XmlWrapp covers both ways. The <span class="nctnt ncbi-class">xml::ns</span> can store its own copies of the namespace prefix and URI, and in this case the namespace is called safe. Or, the <span class="nctnt ncbi-class">xml::ns</span> can store just a pointer to the corresponding namespace structure, and in this case the namespace is called unsafe.
+XmlWrapp covers both ways. The `xml::ns` can store its own copies of the namespace prefix and URI, and in this case the namespace is called safe. Or, the `xml::ns` can store just a pointer to the corresponding namespace structure, and in this case the namespace is called unsafe.
 
-<span>[![Image ch\_xmlwrapp\_xmlns.png](/book/static/img/ch_xmlwrapp_xmlns.png)](/book/static/img/ch_xmlwrapp_xmlns.png "Click to see the full-resolution image")</span>
+[![Image ch\_xmlwrapp\_xmlns.png](/book/static/img/ch_xmlwrapp_xmlns.png)](/book/static/img/ch_xmlwrapp_xmlns.png "Click to see the full-resolution image")
 
-A safe namespace can be constructed based on strings provided by the user or by making copies of the prefix and URI strings extracted from the <span class="nctnt ncbi-lib">libxml2</span> low level structure. Having a copy of the strings makes it absolutely safe to manipulate namespaces - it is even possible to get a namespace from one document, destroy the document, and then apply the stored namespace to another document.
+A safe namespace can be constructed based on strings provided by the user or by making copies of the prefix and URI strings extracted from the `libxml2` low level structure. Having a copy of the strings makes it absolutely safe to manipulate namespaces - it is even possible to get a namespace from one document, destroy the document, and then apply the stored namespace to another document.
 
 When XmlWrapp receives an unsafe namespace for a namespace manipulation operation, it does not perform any checks and uses the raw pointer as-is. So there is a chance to break your document and even cause your application to core dump if an unsafe namespace is used improperly. For example the user may take an unsafe namespace from one document, destroy the document, and then apply the stored unsafe namespace to another document. At the time the original document is destroyed the low level namespace structure is destroyed as well but the pointer to the namespace is still stored so any access operation will cause problems.
 
@@ -821,36 +821,36 @@ The last case is tied to the fact that XmlWrapp is a very thin wrapper and it te
 
 *libxml2 cleanup*
 
-By default, XmlWrapp automatically initiates cleanup of <span class="nctnt ncbi-lib">libxml2</span> library data by calling <span class="nctnt ncbi-func">xmlCleanupParser()</span> (which is part of <span class="nctnt ncbi-lib">libxml2</span>). Programs that use <span class="nctnt ncbi-lib">libxml2</span> only through XmlWrapp therefore don't have to take any explicit cleanup steps for <span class="nctnt ncbi-lib">libxml2</span> data.
+By default, XmlWrapp automatically initiates cleanup of `libxml2` library data by calling `xmlCleanupParser()` (which is part of `libxml2`). Programs that use `libxml2` only through XmlWrapp therefore don't have to take any explicit cleanup steps for `libxml2` data.
 
-However, some programs use <span class="nctnt ncbi-lib">libxml2</span> outside of XmlWrapp in a way that requires explicit steps to prevent a program crash.
+However, some programs use `libxml2` outside of XmlWrapp in a way that requires explicit steps to prevent a program crash.
 
-For example, suppose your program uses both XmlWrapp and some other <span class="nctnt ncbi-lib">libxml2</span>-based library, and suppose that the other library also cleans up by calling <span class="nctnt ncbi-func">xmlCleanupParser()</span>. In this case, <span class="nctnt ncbi-func">xmlCleanupParser()</span> will be called twice. It could even be called more than twice if, for example, multiple threads use the other library.
+For example, suppose your program uses both XmlWrapp and some other `libxml2`-based library, and suppose that the other library also cleans up by calling `xmlCleanupParser()`. In this case, `xmlCleanupParser()` will be called twice. It could even be called more than twice if, for example, multiple threads use the other library.
 
-Unfortunately, <span class="nctnt ncbi-lib">libxml2</span>'s <span class="nctnt ncbi-func">xmlCleanupParser()</span> wasn't designed to be called more than once, and multiple calls can cause a crash.
+Unfortunately, `libxml2`'s `xmlCleanupParser()` wasn't designed to be called more than once, and multiple calls can cause a crash.
 
-Therefore, it is the responsibility of your program to ensure that <span class="nctnt ncbi-func">xmlCleanupParser()</span> will be called only once. How it accomplishes that in the case of multi-threaded use of third-party libraries (or any other scenario that results in multiple calls to <span class="nctnt ncbi-func">xmlCleanupParser()</span> outside of XmlWrapp), is beyond the scope of XmlWrapp and this document.
+Therefore, it is the responsibility of your program to ensure that `xmlCleanupParser()` will be called only once. How it accomplishes that in the case of multi-threaded use of third-party libraries (or any other scenario that results in multiple calls to `xmlCleanupParser()` outside of XmlWrapp), is beyond the scope of XmlWrapp and this document.
 
-However, XmlWrapp does provide a way to prevent a crash when a *single* <span class="nctnt ncbi-func">xmlCleanupParser()</span> call is made outside XmlWrapp. In this case your program can prevent XmlWrapp from calling <span class="nctnt ncbi-func">xmlCleanupParser()</span> using:
+However, XmlWrapp does provide a way to prevent a crash when a *single* `xmlCleanupParser()` call is made outside XmlWrapp. In this case your program can prevent XmlWrapp from calling `xmlCleanupParser()` using:
 
     xml::init::library_cleanup_on_exit(false);
 
-Your program should also make sure that XmlWrapp finishes all its data handling before the other part calls <span class="nctnt ncbi-func">xmlCleanupParser()</span>. This approach will prevent XmlWrapp from calling <span class="nctnt ncbi-func">xmlCleanupParser()</span>, and the other use of <span class="nctnt ncbi-func">xmlCleanupParser()</span> will be safe.
+Your program should also make sure that XmlWrapp finishes all its data handling before the other part calls `xmlCleanupParser()`. This approach will prevent XmlWrapp from calling `xmlCleanupParser()`, and the other use of `xmlCleanupParser()` will be safe.
 
 *libxslt cleanup*
 
-The situation for <span class="nctnt ncbi-lib">libxslt</span> cleanup is essentially the same as described above for <span class="nctnt ncbi-lib">libxml2</span>, except that the problem arises from <span class="nctnt ncbi-func">xsltCleanupGlobals()</span> in addition to <span class="nctnt ncbi-func">xmlCleanupParser()</span>. Therefore, if your program makes a call to <span class="nctnt ncbi-func">xsltCleanupGlobals()</span> outside XmlWrapp (either directly or through a library), then it should use:
+The situation for `libxslt` cleanup is essentially the same as described above for `libxml2`, except that the problem arises from `xsltCleanupGlobals()` in addition to `xmlCleanupParser()`. Therefore, if your program makes a call to `xsltCleanupGlobals()` outside XmlWrapp (either directly or through a library), then it should use:
 
     xml::init::library_cleanup_on_exit(false);
     xslt::init::library_cleanup_on_exit(false);
 
-Your program should also make sure that XmlWrapp finishes all its data handling before the other part calls <span class="nctnt ncbi-func">xsltCleanupGlobals()</span> and <span class="nctnt ncbi-func">xmlCleanupParser()</span>.
+Your program should also make sure that XmlWrapp finishes all its data handling before the other part calls `xsltCleanupGlobals()` and `xmlCleanupParser()`.
 
 ### Formatting of Programmatically Added Content
 
 #### How libxml2 handles formatting of programmatically added content
 
-In some cases, programmatically adding content to an <span class="nctnt ncbi-class">xml::document</span> object and subsequently serializing to a string or stream will result in unformatted output of the added content. This is due to a section of code within the <span class="nctnt ncbi-lib">libxml2</span> library that gets called when programmatically added nodes are serialized to a string or stream. As the code traverses the tree, it checks if the current node is text-like - i.e. if it's a text, CDATA, or entity reference node. If so, it turns off formatting for that node and any nested nodes. This is presumably intended to prevent the library's formatting code from overriding any formatting already contained in the node, but it has the effect of preventing automatic formatting of programmatically-added content. Because this behavior is a feature of <span class="nctnt ncbi-lib">libxml2</span>, there is no way to switch it off through XmlWrapp.
+In some cases, programmatically adding content to an `xml::document` object and subsequently serializing to a string or stream will result in unformatted output of the added content. This is due to a section of code within the `libxml2` library that gets called when programmatically added nodes are serialized to a string or stream. As the code traverses the tree, it checks if the current node is text-like - i.e. if it's a text, CDATA, or entity reference node. If so, it turns off formatting for that node and any nested nodes. This is presumably intended to prevent the library's formatting code from overriding any formatting already contained in the node, but it has the effect of preventing automatic formatting of programmatically-added content. Because this behavior is a feature of `libxml2`, there is no way to switch it off through XmlWrapp.
 
 To illustrate this, imagine that you have created an XML document from the following pretty-printed XML file:
 
@@ -863,7 +863,7 @@ Then you insert the following subtree before the child node:
 
     <new_1><new_2/></new_1>
 
-You might expect <span class="nctnt ncbi-func">save\_to\_string()</span> to produce:
+You might expect `save_to_string()` to produce:
 
     <?xml version="1.0"?>
     <root>
@@ -883,17 +883,17 @@ But instead it produces:
 This is because the original document contained a text-node (the newline and space) immediately following the opening tag of the root element, and therefore:
 
 a  
-<span class="nctnt ncbi-lib">libxml2</span> does not alter the original content - i.e. the pretty-printing of the original content is reproduced intact; and
+`libxml2` does not alter the original content - i.e. the pretty-printing of the original content is reproduced intact; and
 
 b  
-<span class="nctnt ncbi-lib">libxml2</span> does not alter the inserted content - i.e. the inserted content contained no formatting to start with, and none is added, so the new content is inserted immediately before the child node.
+`libxml2` does not alter the inserted content - i.e. the inserted content contained no formatting to start with, and none is added, so the new content is inserted immediately before the child node.
 
 However, if you start with:
 
     <?xml version="1.0"?>
     <root><child/></root>
 
-Then inserting \<new\_1\>\<new\_2/\>\</new\_1\> and calling <span class="nctnt ncbi-func">save\_to\_string()</span> will produce:
+Then inserting \<new\_1\>\<new\_2/\>\</new\_1\> and calling `save_to_string()` will produce:
 
     <?xml version="1.0"?>
     <root>
@@ -903,11 +903,11 @@ Then inserting \<new\_1\>\<new\_2/\>\</new\_1\> and calling <span class="nctnt n
       <child/>
     </root>
 
-This is because neither the original nor the modified document contains any text nodes, so <span class="nctnt ncbi-lib">libxml2</span> formats the entire thing.
+This is because neither the original nor the modified document contains any text nodes, so `libxml2` formats the entire thing.
 
-That is how <span class="nctnt ncbi-lib">libxml2</span> works.
+That is how `libxml2` works.
 
-While this may not be desirable in certain circumstances, there is no generic and reliable way to detect which text nodes are used for formatting, and which are meaningful content, so it's not feasible to make XmlWrapp adjust inserted content to make it get automatically formatted. Therefore, if the <span class="nctnt ncbi-lib">libxml2</span> formatting behavior is undesirable, either you'll have to ensure that your documents do not contain any text-like nodes prior to calling <span class="nctnt ncbi-func">save\_to\_string()</span>, or you'll have to create your own code for formatting content prior to inserting it.
+While this may not be desirable in certain circumstances, there is no generic and reliable way to detect which text nodes are used for formatting, and which are meaningful content, so it's not feasible to make XmlWrapp adjust inserted content to make it get automatically formatted. Therefore, if the `libxml2` formatting behavior is undesirable, either you'll have to ensure that your documents do not contain any text-like nodes prior to calling `save_to_string()`, or you'll have to create your own code for formatting content prior to inserting it.
 
 #### How you can influence formatting of programmatically added content
 
@@ -915,11 +915,11 @@ There are two ways that you can influence the formatting of programmatically add
 
 -   by using (or not using) text-like nodes in the added content; and
 
--   by choosing an appropriate <span class="nctnt ncbi-var">xml::save\_options</span> flag.
+-   by choosing an appropriate `xml::save_options` flag.
 
 For the purposes of this chapter, a "text-like node" is a text, CDATA, or entity reference node in the XML tree that is built when the original content is parsed. Newlines and whitespace used for indentation are parsed into text nodes. Note, however, that whitespace characters between the XML declaration and the opening tag of the root node are not treated by libxml2 as part of the node tree - i.e. whitespace characters prior to the root node do not participate in formatting of the output.
 
-The following sections illustrate how various formatting flags affect the output for both content containing text-like nodes and content not containing text-like nodes. Note that although only <span class="nctnt ncbi-func">save\_to\_string()</span> is mentioned, the discussion aplies equally to all the <span class="nctnt ncbi-func">save\_to\_\*()</span> functions because they all use the same underlying formatting code.
+The following sections illustrate how various formatting flags affect the output for both content containing text-like nodes and content not containing text-like nodes. Note that although only `save_to_string()` is mentioned, the discussion aplies equally to all the `save_to_*()` functions because they all use the same underlying formatting code.
 
 -   [Original containing text-like nodes](#original-containing-text-like-nodes)
 
@@ -938,7 +938,7 @@ Given the following original document (which contains text-like nodes for indent
         <child attr="AttrValue">content</child>
     </root>
 
-Then the <span class="nctnt ncbi-func">save\_to\_string()</span> function will produce the following outputs for the given formatting flags:
+Then the `save_to_string()` function will produce the following outputs for the given formatting flags:
 
 <table>
 <colgroup>
@@ -953,20 +953,20 @@ Then the <span class="nctnt ncbi-func">save\_to\_string()</span> function will p
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><span class="nctnt ncbi-var">xml::save_op_default</span><br/><span class="nctnt ncbi-var">xml::save_op_no_format</span><br/><span class="nctnt ncbi-var">xml::save_op_no_empty</span><br/><span class="nctnt ncbi-var">xml::save_op_no_xhtml</span><br/><span class="nctnt ncbi-var">xml::save_op_xhtml</span><br/><span class="nctnt ncbi-var">xml::save_op_not_as_xml</span><br/></td>
+<td align="left"><code>xml::save_op_default</code><br/><code>xml::save_op_no_format</code><br/><code>xml::save_op_no_empty</code><br/><code>xml::save_op_no_xhtml</code><br/><code>xml::save_op_xhtml</code><br/><code>xml::save_op_not_as_xml</code><br/></td>
 <td align="left"><pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;root&gt;
     &lt;child attr=&quot;AttrValue&quot;&gt;content&lt;/child&gt;
 &lt;/root&gt;</code></pre></td>
 </tr>
 <tr class="even">
-<td align="left"><span class="nctnt ncbi-var">xml::save_op_no_decl</span><br/><span class="nctnt ncbi-var">xml::save_op_as_html</span><br/></td>
+<td align="left"><code>xml::save_op_no_decl</code><br/><code>xml::save_op_as_html</code><br/></td>
 <td align="left"><pre><code>&lt;root&gt;
     &lt;child attr=&quot;AttrValue&quot;&gt;content&lt;/child&gt;
 &lt;/root&gt;</code></pre></td>
 </tr>
 <tr class="odd">
-<td align="left"><span class="nctnt ncbi-var">xml::save_op_with_non_significant_ws</span><br/></td>
+<td align="left"><code>xml::save_op_with_non_significant_ws</code><br/></td>
 <td align="left"><pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;root
   &gt;
@@ -997,7 +997,7 @@ And given that a node has been programmatically inserted like this:
     insert_before = root.find( "child" );
     root.insert( insert_before, xml::node("inserted") );
 
-Then the <span class="nctnt ncbi-func">save\_to\_string()</span> function will produce the following outputs for the given formatting flags:
+Then the `save_to_string()` function will produce the following outputs for the given formatting flags:
 
 <table>
 <colgroup>
@@ -1012,33 +1012,33 @@ Then the <span class="nctnt ncbi-func">save\_to\_string()</span> function will p
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><span class="nctnt ncbi-var">xml::save_op_default</span><br/><span class="nctnt ncbi-var">xml::save_op_no_format</span><br/><span class="nctnt ncbi-var">xml::save_op_no_xhtml</span><br/><span class="nctnt ncbi-var">xml::save_op_not_as_xml</span><br/></td>
+<td align="left"><code>xml::save_op_default</code><br/><code>xml::save_op_no_format</code><br/><code>xml::save_op_no_xhtml</code><br/><code>xml::save_op_not_as_xml</code><br/></td>
 <td align="left"><pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;root&gt;
     &lt;inserted/&gt;&lt;child attr=&quot;AttrValue&quot;&gt;content&lt;/child&gt;
 &lt;/root&gt;</code></pre></td>
 </tr>
 <tr class="even">
-<td align="left"><span class="nctnt ncbi-var">xml::save_op_no_decl </span><br/></td>
+<td align="left"><code>xml::save_op_no_decl </code><br/></td>
 <td align="left"><pre><code>&lt;root&gt;
     &lt;inserted/&gt;&lt;child attr=&quot;AttrValue&quot;&gt;content&lt;/child&gt;
 &lt;/root&gt;</code></pre></td>
 </tr>
 <tr class="odd">
-<td align="left"><span class="nctnt ncbi-var">xml::save_op_no_empty</span><br/><span class="nctnt ncbi-var">xml::save_op_xhtml </span><br/></td>
+<td align="left"><code>xml::save_op_no_empty</code><br/><code>xml::save_op_xhtml </code><br/></td>
 <td align="left"><pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;root&gt;
     &lt;inserted&gt;&lt;/inserted&gt;&lt;child attr=&quot;AttrValue&quot;&gt;content&lt;/child&gt;
 &lt;/root&gt;</code></pre></td>
 </tr>
 <tr class="even">
-<td align="left"><span class="nctnt ncbi-var">xml::save_op_as_html</span><br/></td>
+<td align="left"><code>xml::save_op_as_html</code><br/></td>
 <td align="left"><pre><code>&lt;root&gt;
     &lt;inserted&gt;&lt;/inserted&gt;&lt;child attr=&quot;AttrValue&quot;&gt;content&lt;/child&gt;
 &lt;/root&gt;</code></pre></td>
 </tr>
 <tr class="odd">
-<td align="left"><span class="nctnt ncbi-var">xml::save_op_with_non_significant_ws</span><br/></td>
+<td align="left"><code>xml::save_op_with_non_significant_ws</code><br/></td>
 <td align="left"><pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;root
   &gt;
@@ -1060,7 +1060,7 @@ Given the following original document (which does not contain any text-like node
     <?xml version="1.0"?>
     <root><child attr="AttrValue">content</child></root>
 
-Then the <span class="nctnt ncbi-func">save\_to\_string()</span> function will produce the following outputs for the given formatting flags:
+Then the `save_to_string()` function will produce the following outputs for the given formatting flags:
 
 <table>
 <colgroup>
@@ -1075,29 +1075,29 @@ Then the <span class="nctnt ncbi-func">save\_to\_string()</span> function will p
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><span class="nctnt ncbi-var">xml::save_op_default</span><br/><span class="nctnt ncbi-var">xml::save_op_no_empty</span><br/><span class="nctnt ncbi-var">xml::save_op_no_xhtml</span><br/><span class="nctnt ncbi-var">xml::save_op_xhtml</span><br/><span class="nctnt ncbi-var">xml::save_op_not_as_xml</span><br/></td>
+<td align="left"><code>xml::save_op_default</code><br/><code>xml::save_op_no_empty</code><br/><code>xml::save_op_no_xhtml</code><br/><code>xml::save_op_xhtml</code><br/><code>xml::save_op_not_as_xml</code><br/></td>
 <td align="left"><pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;root&gt;
   &lt;child attr=&quot;AttrValue&quot;&gt;content&lt;/child&gt;
 &lt;/root&gt;</code></pre></td>
 </tr>
 <tr class="even">
-<td align="left"><span class="nctnt ncbi-var">xml::save_op_no_format</span><br/></td>
+<td align="left"><code>xml::save_op_no_format</code><br/></td>
 <td align="left"><pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;root&gt;&lt;child attr=&quot;AttrValue&quot;&gt;content&lt;/child&gt;&lt;/root&gt;</code></pre></td>
 </tr>
 <tr class="odd">
-<td align="left"><span class="nctnt ncbi-var">xml::save_op_no_decl</span><br/></td>
+<td align="left"><code>xml::save_op_no_decl</code><br/></td>
 <td align="left"><pre><code>&lt;root&gt;
   &lt;child attr=&quot;AttrValue&quot;&gt;content&lt;/child&gt;
 &lt;/root&gt;</code></pre></td>
 </tr>
 <tr class="even">
-<td align="left"><span class="nctnt ncbi-var">xml::save_op_as_html</span><br/></td>
+<td align="left"><code>xml::save_op_as_html</code><br/></td>
 <td align="left"><pre><code>&lt;root&gt;&lt;child attr=&quot;AttrValue&quot;&gt;content&lt;/child&gt;&lt;/root&gt;</code></pre></td>
 </tr>
 <tr class="odd">
-<td align="left"><span class="nctnt ncbi-var">xml::save_op_with_non_significant_ws</span><br/></td>
+<td align="left"><code>xml::save_op_with_non_significant_ws</code><br/></td>
 <td align="left"><pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;root
   &gt;&lt;child
@@ -1124,7 +1124,7 @@ And given that a node has been programmatically inserted like this:
     insert_before = root.find( "child" );
     root.insert( insert_before, xml::node("inserted") );
 
-Then the <span class="nctnt ncbi-func">save\_to\_string()</span> function will produce the following outputs for the given formatting flags:
+Then the `save_to_string()` function will produce the following outputs for the given formatting flags:
 
 <table>
 <colgroup>
@@ -1139,7 +1139,7 @@ Then the <span class="nctnt ncbi-func">save\_to\_string()</span> function will p
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><span class="nctnt ncbi-var">xml::save_op_default</span><br/><span class="nctnt ncbi-var">xml::save_op_no_xhtml</span><br/><span class="nctnt ncbi-var">xml::save_op_not_as_xml</span><br/></td>
+<td align="left"><code>xml::save_op_default</code><br/><code>xml::save_op_no_xhtml</code><br/><code>xml::save_op_not_as_xml</code><br/></td>
 <td align="left"><pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;root&gt;
   &lt;inserted/&gt;
@@ -1147,19 +1147,19 @@ Then the <span class="nctnt ncbi-func">save\_to\_string()</span> function will p
 &lt;/root&gt;</code></pre></td>
 </tr>
 <tr class="even">
-<td align="left"><span class="nctnt ncbi-var">xml::save_op_no_format</span><br/></td>
+<td align="left"><code>xml::save_op_no_format</code><br/></td>
 <td align="left"><pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;root&gt;&lt;inserted/&gt;&lt;child attr=&quot;AttrValue&quot;&gt;content&lt;/child&gt;&lt;/root&gt;</code></pre></td>
 </tr>
 <tr class="odd">
-<td align="left"><span class="nctnt ncbi-var">xml::save_op_no_decl</span><br/></td>
+<td align="left"><code>xml::save_op_no_decl</code><br/></td>
 <td align="left"><pre><code>&lt;root&gt;
   &lt;inserted/&gt;
   &lt;child attr=&quot;AttrValue&quot;&gt;content&lt;/child&gt;
 &lt;/root&gt;</code></pre></td>
 </tr>
 <tr class="even">
-<td align="left"><span class="nctnt ncbi-var">xml::save_op_no_empty</span><br/><span class="nctnt ncbi-var">xml::save_op_xhtml</span><br/></td>
+<td align="left"><code>xml::save_op_no_empty</code><br/><code>xml::save_op_xhtml</code><br/></td>
 <td align="left"><pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;root&gt;
   &lt;inserted&gt;&lt;/inserted&gt;
@@ -1167,11 +1167,11 @@ Then the <span class="nctnt ncbi-func">save\_to\_string()</span> function will p
 &lt;/root&gt;</code></pre></td>
 </tr>
 <tr class="odd">
-<td align="left"><span class="nctnt ncbi-var">xml::save_op_as_html</span><br/></td>
+<td align="left"><code>xml::save_op_as_html</code><br/></td>
 <td align="left"><pre><code>&lt;root&gt;&lt;inserted&gt;&lt;/inserted&gt;&lt;child attr=&quot;AttrValue&quot;&gt;content&lt;/child&gt;&lt;/root&gt;</code></pre></td>
 </tr>
 <tr class="even">
-<td align="left"><span class="nctnt ncbi-var">xml::save_op_with_non_significant_ws</span><br/></td>
+<td align="left"><code>xml::save_op_with_non_significant_ws</code><br/></td>
 <td align="left"><pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;root
   &gt;&lt;inserted
@@ -1189,7 +1189,7 @@ FAQ
 
 **Q. What header files do I need to include?**
 
-A. You need <span class="nctnt ncbi-code">\<misc/xmlwrapp/xmlwrapp.hpp\></span> for functionality that resides in the<span class="nctnt ncbi-code"> xml::</span> C++ namespace, and <span class="nctnt ncbi-code">\<misc/xmlwrapp/xsltwrapp.hpp\></span> for functionality that resides in the <span class="nctnt ncbi-code">xslt::</span> C++ namespace.
+A. You need `<misc/xmlwrapp/xmlwrapp.hpp>` for functionality that resides in the` xml::` C++ namespace, and `<misc/xmlwrapp/xsltwrapp.hpp>` for functionality that resides in the `xslt::` C++ namespace.
 
 **Q. What do I need to add to my Makefile?**
 
@@ -1204,16 +1204,16 @@ A. You need to add the following:
 
 A. Please see the section on [Formatting of Programmatically Added Content](#formatting-of-programmatically-added-content).
 
-**Q. Is** <span class="nctnt ncbi-lib">libxmlwrapp</span> **thread safe?**
+**Q. Is** `libxmlwrapp` **thread safe?**
 
 A. See the [Thread Safety](#thread-safety) section for details.
 
-**Q. Does** <span class="nctnt ncbi-lib">libxmlwrapp</span> **support XML catalogs?**
+**Q. Does** `libxmlwrapp` **support XML catalogs?**
 
-A. Yes, to the extent that <span class="nctnt ncbi-lib">libxml2</span> supports them. All the <span class="nctnt ncbi-lib">libxml2</span> fuctionality is available, but there is no special support code for XML catalogs in the <span class="nctnt ncbi-lib">libxmlwrapp</span> library. See the [How to Use an XML Catalog](#how-to-use-an-xml-catalog) section for details.
+A. Yes, to the extent that `libxml2` supports them. All the `libxml2` fuctionality is available, but there is no special support code for XML catalogs in the `libxmlwrapp` library. See the [How to Use an XML Catalog](#how-to-use-an-xml-catalog) section for details.
 
 **Q. Does XmlWrapp support XPath 2.0?**
 
-A. XmlWrapp is based on <span class="nctnt ncbi-app">libxml2</span>, and <span class="nctnt ncbi-app">libxml2</span> does not now and may never support XPath 2.0.
+A. XmlWrapp is based on **libxml2**, and **libxml2** does not now and may never support XPath 2.0.
 
 
