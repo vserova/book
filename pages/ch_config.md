@@ -22,7 +22,7 @@ The overview for this chapter consists of the following topics:
 
 This chapter describes in detail how to configure, build, and use the NCBI C++ Toolkit (or selected components of it) on supported platforms. See the [Getting Started](ch_start.html#ch_start.basic_install) chapter for a general overview of the process. A list of all supported platforms can be seen [here](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/public_releases/release_notes.html#release_notes.Platforms_OSs__compi).
 
-*Note:* Users insde NCBI who just want to use the Toolkit don't need to configure and build it - there are [various configurations](ch_proj.html#ch_proj.daily_builds) of the Toolkit prebuilt and ready to use. See the [new\_project](ch_proj.html#ch_proj.new_project_Starting) script for more information.
+***Note:*** Users insde NCBI who just want to use the Toolkit don't need to configure and build it - there are [various configurations](ch_proj.html#ch_proj.daily_builds) of the Toolkit prebuilt and ready to use. See the [new\_project](ch_proj.html#ch_proj.new_project_Starting) script for more information.
 
 Configuring is the process of creating configuration files that define exactly what can be built and what options may be used in the build process. The created configuration files include C headers that define suitable preprocessor macros, as well makefiles (for Unix) or project solutions (for MS Visual C++ or for Xcode) used in the build step.
 
@@ -182,13 +182,13 @@ Path lines may have a leading "`-`". If so, it means that the selected subtree(s
 
 results in excluding the `demo` subdirectory while including all the other subdirectories of `algo/blast/blastinput`.
 
-*Note:* Path lines might not be processed in the order they appear in the project list file. For example, the **prepare\_release** framework first builds a tree formed from all the "positive" path lines (those without leading hyphens), and then removes the subtrees specified by "negative" path lines (those with leading hyphens).
+***Note:*** Path lines might not be processed in the order they appear in the project list file. For example, the **prepare\_release** framework first builds a tree formed from all the "positive" path lines (those without leading hyphens), and then removes the subtrees specified by "negative" path lines (those with leading hyphens).
 
 ##### Leading dot-slash or caret-slash
 
 Path lines may have a leading "`./`" or "`^/`". A leading "`./`" means that the given path will select only one subtree, with `trunk/c++/` prepended to the given path. A leading "`^/`" selects only one subtree, with `trunk/` prepended to the given path.
 
-*Note:* As of June, 2014, the only tool supporting this syntax feature is **prepare\_release**.
+***Note:*** As of June, 2014, the only tool supporting this syntax feature is **prepare\_release**.
 
 ##### Trailing dollar sign
 
@@ -225,7 +225,7 @@ Path components may contain limited regular-expression-like syntax. For example,
 
 selects all the sub-subdirectories beginning with `app`, `unit_test`, `demo`, or `samples` that are contained in all internal subdirectories that begin with something other than '`m`'. Different tools may support regular expressions to different degrees. The special string `c++` in a path may be interpreted literally rather than as a regular expression.
 
-*Note:* Using regular expression characters early in a path can cause significant performance problems. For example, when the **prepare\_release** framework detects a regular expression character in a path component, it performs a recursive SVN list command and applies the regular expression to the results.
+***Note:*** Using regular expression characters early in a path can cause significant performance problems. For example, when the **prepare\_release** framework detects a regular expression character in a path component, it performs a recursive SVN list command and applies the regular expression to the results.
 
 ##### Hash Lines in Project List Files
 
@@ -334,7 +334,7 @@ An important benefit of using project tags is that all dependencies for the proj
 
 All project tags must be defined in `src\build-system\project_tags.txt` prior to use. Tag names should be easily recognizable and classifiable, like ‘`proj[_subproj]`’, e.g. “`pubchem`” or “`pubchem_openeye`”.
 
-Once defined in `project_tags.txt`, project tags can then be associated with any number of projects by using the `PROJ_TAG` macro in the `Makefile.in` or `Makefile.*.{app\|lib}` for the selected projects. Project tag definitions apply recursively to subprojects and subdirectories (similar to a [`REQUIRES`](ch_proj.html#ch_proj.proj_makefiles) definition), thereby removing the need to define tags in all makefiles in a subtree. Subprojects may define additional tags, or undefine inherited tags by prefixing a hyphen '`-`' to the tag.
+Once defined in `project_tags.txt`, project tags can then be associated with any number of projects by using the **`PROJ_TAG`** macro in the `Makefile.in` or `Makefile.*.{app\|lib}` for the selected projects. Project tag definitions apply recursively to subprojects and subdirectories (similar to a [`REQUIRES`](ch_proj.html#ch_proj.proj_makefiles) definition), thereby removing the need to define tags in all makefiles in a subtree. Subprojects may define additional tags, or undefine inherited tags by prefixing a hyphen '`-`' to the tag.
 
 The syntax for defining (or undefining) a project tag is:
 
@@ -356,7 +356,7 @@ then the latter project's effective tag definition is:
 
 A tag filter can be constructed from one or more project tags – either as a single tag or as a Boolean expression of tags. Boolean expressions of tags can include grouping (parentheses) and the '`&&`' (AND), '`\|\|`" (OR), and '`!`' (NOT) operators, for example: `(core \|\| web) && !test`
 
-*Note:* An asterisk '`*`' or an empty string can be used in place of a tag filter in the "Allowed project tags" field on the [Configuration tab](#configuration-tab) of the configuration GUI. These values are not filters, but simply indicate that all projects in the build scope will be passed to the configuration process without filtering.
+***Note:*** An asterisk '`*`' or an empty string can be used in place of a tag filter in the "Allowed project tags" field on the [Configuration tab](#configuration-tab) of the configuration GUI. These values are not filters, but simply indicate that all projects in the build scope will be passed to the configuration process without filtering.
 
 The following places are searched in the order given for the tag filter to use (if any) in the configuration process:
 
@@ -376,7 +376,7 @@ c
 The syntax for the tag filter definition line in a project list file is: `#define TAGS [ tag_filter ]`
 
 3  
-For MSVC, the `-projtag` option of the `PTB_FLAGS` macro in the `compilers\msvc1000_prj\static\build\UtilityProjects\configure._` file for non-interactive configuring, or the same option in the `configure_dialog._` file for interactive configuring.
+For MSVC, the **`-projtag`** option of the **`PTB_FLAGS`** macro in the `compilers\msvc1000_prj\static\build\UtilityProjects\configure._` file for non-interactive configuring, or the same option in the `configure_dialog._` file for interactive configuring.
 
 If a significant tag filter (i.e. something besides an asterisk or empty field) is found in one of the above places, then that tag filter will be supplied to the configuration process. Otherwise, there will be no filtering of the projects.
 
@@ -398,7 +398,7 @@ Configuration can be done in one of three ways:
 
 Users outside NCBI should check the file `src/build-system/config.site` to see if it correctly specifies the paths to their third party libraries. If not, it can be edited using `src/build-system/config.site.ex` as a guide.
 
-*Note:* The `configure --with-PACKAGE` options take precedence over the `config.site` and `PACKAGE_PATH` settings.
+***Note:*** The `configure --with-PACKAGE` options take precedence over the `config.site` and **`PACKAGE_PATH`** settings.
 
 #### Using the Configuration GUI
 
@@ -426,9 +426,9 @@ To launch the configuration GUI:
 
 -   From the command-line: `./configure --with-configure-dialog`
 
--   From the MSVS IDE: build the `-CONFIGURE-DIALOG-` project
+-   From the MSVS IDE: build the **`-CONFIGURE-DIALOG-`** project
 
--   From the Xcode IDE: build the `CONFIGURE-DIALOG` target
+-   From the Xcode IDE: build the **`CONFIGURE-DIALOG`** target
 
 The configuration GUI has a "Wizard" style design – selections are made in a sequence of steps, followed by clicking the Next button. After each step additional tabs may be enabled, depending on the specific data. It opens with initial values set by the invoking program (the configure script for command-line invocation or the **project\_tree\_builder** program for IDE's).
 
@@ -537,7 +537,7 @@ The list of supported platforms may change with new releases. For the platforms 
 Unix
 ----
 
-*Note:* Please also see the [General Information for All Platforms](#general-information-for-all-platforms) section, as it contains relevant information that is not repeated here.
+***Note:*** Please also see the [General Information for All Platforms](#general-information-for-all-platforms) section, as it contains relevant information that is not repeated here.
 
 This section covers the following topics:
 
@@ -665,7 +665,7 @@ Thus, configuration is needed to use the platform- and compiler-specific feature
 
 The user performs configuration by merely running platform-independent (*sh, bash*) shell script ***configure*** (which we pre-generate in-house from the template `configure.ac` using [autoconf](http://www.gnu.org/software/autoconf)).
 
-During the configuration process, many compiler features are tested, and the results of this testing are recorded in the configuration header `ncbiconf.h` by the means of C preprocessor variables. For example, the preprocessor variable `NO_INCLASS_TMPL` indicates whether the compiler supports template class methods. Also contained in the `ncbiconf.h` file are preprocessor variables used to define [sized integer](ch_core.html#ch_core.fixed_size_integers) and [BigScalar](ch_core.html#ch_core.big_scalar) types.
+During the configuration process, many compiler features are tested, and the results of this testing are recorded in the configuration header `ncbiconf.h` by the means of C preprocessor variables. For example, the preprocessor variable **`NO_INCLASS_TMPL`** indicates whether the compiler supports template class methods. Also contained in the `ncbiconf.h` file are preprocessor variables used to define [sized integer](ch_core.html#ch_core.fixed_size_integers) and [BigScalar](ch_core.html#ch_core.big_scalar) types.
 
 The ***configure*** script will create a [build tree](ch_start.html#ch_start.F2), a hierarchy of directories where object modules, libraries, and executables are to be built. It will also configure all `*.in` template files located in the NCBI C++ source tree (`src/`) and deploy the resultant configured files in the relevant places of the build tree. This way, all platform- and compiler-specific tools and flags will be "frozen" inside the configured makefiles in the build tree. The `ncbiconf.h` (described above, also configured for the given compiler) will be put to the `inc/` sub-directory of the resultant build tree.
 
@@ -741,7 +741,7 @@ The configure script is highly customizable. The following sections describe som
 
 To get the full list of available configuration options, run `./configure --help`. The NCBI-specific options are at the end of the printout.
 
-*Note:* Do not use the "standard" configure options listed in the *"Directory and file names:"* section of the help printout (such as `--prefix= `*,* `--bindir=`, etc.) because these are usually not used by the NCBI ***configure*** script.
+***Note:*** Do not use the "standard" configure options listed in the *"Directory and file names:"* section of the help printout (such as `--prefix= `*,* `--bindir=`, etc.) because these are usually not used by the NCBI ***configure*** script.
 
 ##### Debug vs. Release Configuration
 
@@ -793,7 +793,7 @@ For instance, a file containing the lines
 
 would request a non-recursive build in `corelib` and a recursive build in `util`, and a recursive build in `serial` that skipped `serial/test`. It would also request keeping the `test` project up-to-date (for the benefit of the programs in `util/test`).
 
-*Note:* The flags listed [above](#above) still apply; for instance, you still need *--with-internal* to enable internal projects. However, [update\_projects](ch_getcode_svn.html#ch_getcode_svn.update_projects_sh) can automatically take care of these for you.
+***Note:*** The flags listed [above](#above) still apply; for instance, you still need *--with-internal* to enable internal projects. However, [update\_projects](ch_getcode_svn.html#ch_getcode_svn.update_projects_sh) can automatically take care of these for you.
 
 Project list files may also define a project tag filter, with the syntax:
 
@@ -873,7 +873,7 @@ Table 3. Derived localization variables for makefiles
 | ORBACUS\_INCLUDE   | -I$ORBACUS\_PATH/include -I$ORBACUS\_PATH/{Release\\|Debug}[MT][64]/inc                                           | \#include ORBacus CORBA headers   |
 | ORBACUS\_LIBPATH   | -L$ORBACUS\_PATH/{Release\\|Debug}[MT][64]/lib                                                                    | Link with ORBacus CORBA libs.     |
 
-*Note:* The file `src/build-system/config.site` may also be [edited](#edited) to simplify localization of third party libraries, especially for users outside NCBI.
+***Note:*** The file `src/build-system/config.site` may also be [edited](#edited) to simplify localization of third party libraries, especially for users outside NCBI.
 
 ##### Naming the Build Tree
 
@@ -903,9 +903,9 @@ To be able to run executables linked against dynamic libraries (DLLs), you have 
 
 default: if *--without-dll* flag is specified, then act as if *--without-runpath* was specified; otherwise, engage the *--with-runpath* scenario.
 
-The makefile macro `ncbi_runpath` will be set to the resulting runpath, if any.
+The makefile macro **`ncbi_runpath`** will be set to the resulting runpath, if any.
 
-*Note:* When running an executable you also can use environment variable `$LD_LIBRARY_PATH` to specify the runpath, like this:
+***Note:*** When running an executable you also can use environment variable **`$LD_LIBRARY_PATH`** to specify the runpath, like this:
 
     env LD_LIBRARY_PATH="/home/USERNAME/c++/WorkShop6-ReleaseDLL/lib" \
     /home/USERNAME/c++/WorkShop6-ReleaseDLL/bin/coretest
@@ -922,9 +922,9 @@ See [this example](ch_proj.html#ch_proj.make_proj_lib) for more information abou
 
 default: detect if the *make* command actually calls GNU *make*; if it does, then *--with-autodep*, else *--with-autodep*
 
-Also, you can always switch between these two variants "manually", after the configuration is done, by setting the value of the variable Rules in [Makefile.mk](ch_build.html#ch_build.build_make_macros) to either `rules` or `rules_with_autodep`.
+Also, you can always switch between these two variants "manually", after the configuration is done, by setting the value of the variable Rules in [Makefile.mk](ch_build.html#ch_build.build_make_macros) to either **`rules`** or **`rules_with_autodep`**.
 
-*Note:* You **must** use GNU *make* if you configured with *--with-autodep*, because in this case the makefiles would use very specific GNU *make* features!
+***Note:*** You **must** use GNU *make* if you configured with *--with-autodep*, because in this case the makefiles would use very specific GNU *make* features!
 
 ##### After-Configure User Callback Script
 
@@ -944,7 +944,7 @@ will execute (after the configuration is done):
 
 ##### Tools and Flags
 
-There is a predefined set of tools and flags used in the build process. The user can customize these tools and flags by setting the environment variables shown in [Table 1](#table-1) for the ***configure*** script. For example, if you intend to debug the Toolkit with Insure++, you should run ***configure*** with `CC` and `CXX` set to `insure`.
+There is a predefined set of tools and flags used in the build process. The user can customize these tools and flags by setting the environment variables shown in [Table 1](#table-1) for the ***configure*** script. For example, if you intend to debug the Toolkit with Insure++, you should run ***configure*** with **`CC`** and **`CXX`** set to **`insure`**.
 
 [Later](ch_build.html#ch_build.build_make_macros), these tools and flags will be engaged in the makefile build rules, such as:
 
@@ -1006,9 +1006,9 @@ You can control whether to build the following core packages using the following
 
 ##### Miscellaneous: --without-exe, --without-execopy, --with-lib-rebuilds(=ask)
 
-*--without-exe* -- do not build the executables enlisted in the `APP_PROJ`.
+*--without-exe* -- do not build the executables enlisted in the **`APP_PROJ`**.
 
-*--without-execopy* -- do not copy (yet build) the executables enlisted in the `APP_PROJ`.
+*--without-execopy* -- do not copy (yet build) the executables enlisted in the **`APP_PROJ`**.
 
 *--with-lib-rebuilds* -- when building an application, attempt to rebuild all of the libraries it uses in case they are out of date.
 
@@ -1196,7 +1196,7 @@ To build a project on Cygwin / GCC, just follow the generic [Unix guidelines](#u
 MS Windows
 ----------
 
-*Note:* Please also see the [General Information for All Platforms](#general-information-for-all-platforms) section, as it contains relevant information that is not repeated here.
+***Note:*** Please also see the [General Information for All Platforms](#general-information-for-all-platforms) section, as it contains relevant information that is not repeated here.
 
 The following topics are discussed in this section:
 
@@ -1304,7 +1304,7 @@ To configure and generate the project list, open the chosen solution, select the
 
 [![Image ch\_config\_proj\_mod\_reload.png](/book/static/img/ch_config_proj_mod_reload.png)](/book/static/img/ch_config_proj_mod_reload.png "Click to see the full-resolution image")
 
-*Note:* At least one such dialog will typically appear *before* the configuration is complete. Therefore, you need to wait until you see the message:
+***Note:*** At least one such dialog will typically appear *before* the configuration is complete. Therefore, you need to wait until you see the message:
 
     ******************************************************************************
     ==============  It is now safe to reload the solution:          ==============
@@ -1396,7 +1396,7 @@ Many of the requirements define dependency on components that are 3rd-party pack
 
 There are a few indispensable external components that have analogs in the Toolkit. If the external component is not found, the analog in the Toolkit is used. The '`LibChoices`' entry identifies such pairs, and '`LibChoiceIncludes`' provides additional include paths to the builtin headers.
 
-*Note:* There are some requirements which, when building for MS Visual Studio, are always or never met. These requirements are listed in '`ProvidedRequests`', '`StandardFeatures`', or '`NotProvidedRequests`' of the '`Configure`' section.
+***Note:*** There are some requirements which, when building for MS Visual Studio, are always or never met. These requirements are listed in '`ProvidedRequests`', '`StandardFeatures`', or '`NotProvidedRequests`' of the '`Configure`' section.
 
 ##### Fine-Tuning with MSVC Project Files
 
@@ -1431,7 +1431,7 @@ Any section name can have one or several optional suffixes, so it can take the f
 
 Settings in sections with more detailed names (ones that appear later on this list) override ones in sections with less detailed names (ones that appear earlier).
 
-*Note:* After changing settings, you will need to [reconfigure](#reconfigure) and reload the solution for the change to take effect.
+***Note:*** After changing settings, you will need to [reconfigure](#reconfigure) and reload the solution for the change to take effect.
 
 The following topics discuss further fine-tuning with MSVC project files:
 
@@ -1485,9 +1485,9 @@ By default, all header files found in the project's include and source directori
 
 means "add all files with h extension, add `file1.hpp`, and do not add `file2.h`".
 
-*Note:* A single exclamation mark with no file name means "do not add any header files".
+***Note:*** A single exclamation mark with no file name means "do not add any header files".
 
-All directories given in the '`IncludeDirs`' entry should be specified relative to the source directory. (Absolute paths aren't supported, nor are paths containing special characters such as spaces or commas.) After [reconfiguring](#reconfiguring), these directories are saved in the `AdditionalIncludeDirectories` project property - now relative to `$(ProjectDir)`. The following table illustrates this path conversion:
+All directories given in the '`IncludeDirs`' entry should be specified relative to the source directory. (Absolute paths aren't supported, nor are paths containing special characters such as spaces or commas.) After [reconfiguring](#reconfiguring), these directories are saved in the `AdditionalIncludeDirectories` project property - now relative to **`$(ProjectDir)`**. The following table illustrates this path conversion:
 
 | IncludeDirs Path -<br/>specified relative to source directory | AdditionalIncludeDirectories Path -<br/>saved relative to $(ProjectDir) |
 |-----------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
@@ -1545,9 +1545,9 @@ Here are some example settings, with some illustrating how section name suffixes
     [Linker.release]
     OutputFile = $(OutDir)\\python_ncbi_dbapi.pyd
 
-Relative paths specified in build tool settings are relative to `$(ProjectDir)`.
+Relative paths specified in build tool settings are relative to **`$(ProjectDir)`**.
 
-*Note:* '`AdditionalOptions`' entries are applied when the tool executes - they do not modify other project properties. For example, if you add an include path using '`AdditionalOptions`', it will not affect the '`AdditionalIncludeDirectories`' property, which is used by the IDE. In this case, Visual C++ will not be able to check syntax, lookup definitions, use IntelliSense, etc. for files in that location while you're editing - but they will compile normally. Therefore, use the '`AddToProject`' section (see [above](#above)) for include directories unless you must use an absolute path.
+***Note:*** '`AdditionalOptions`' entries are applied when the tool executes - they do not modify other project properties. For example, if you add an include path using '`AdditionalOptions`', it will not affect the '`AdditionalIncludeDirectories`' property, which is used by the IDE. In this case, Visual C++ will not be able to check syntax, lookup definitions, use IntelliSense, etc. for files in that location while you're editing - but they will compile normally. Therefore, use the '`AddToProject`' section (see [above](#above)) for include directories unless you must use an absolute path.
 
 See the [Makefile.mk.in.msvc](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/build-system/Makefile.mk.in.msvc) file for the default MSVS project settings.
 
@@ -1571,17 +1571,17 @@ In the Toolkit, such compound DLLs are described using a set of special makefile
 
 It is possible to fine-tune the configuration process by using the following environment variables:
 
--   `PREBUILT_PTB_EXE`
+-   **`PREBUILT_PTB_EXE`**
 
--   `PTB_PROJECT`
+-   **`PTB_PROJECT`**
 
-When the `PREBUILT_PTB_EXE` environment variable defines an existing file (e.g. `project_tree_builder.exe`), this EXE is used. Otherwise, the configuration process builds **project\_tree\_builder** using existing sources, and then uses this EXE. At NCBI, even when `PREBUILT_PTB_EXE` is not defined, the toolkit still tries to use an external **project\_tree\_builder** – to speed up the configuration. Normally, this is the most recent successfully built one. To disable such behavior, this variable should be defined and have the value `bootstrap`:
+When the **`PREBUILT_PTB_EXE`** environment variable defines an existing file (e.g. `project_tree_builder.exe`), this EXE is used. Otherwise, the configuration process builds **project\_tree\_builder** using existing sources, and then uses this EXE. At NCBI, even when **`PREBUILT_PTB_EXE`** is not defined, the toolkit still tries to use an external **project\_tree\_builder** – to speed up the configuration. Normally, this is the most recent successfully built one. To disable such behavior, this variable should be defined and have the value **`bootstrap`**:
 
-`PREBUILT_PTB_EXE=bootstrap`
+**`PREBUILT_PTB_EXE=bootstrap`**
 
-The `PTB_PROJECT` environment variable can be used to redefine the default project list. For example, it can be defined as follows:
+The **`PTB_PROJECT`** environment variable can be used to redefine the default project list. For example, it can be defined as follows:
 
-`PTB_PROJECT=scripts\projects\datatool\project.lst`
+**`PTB_PROJECT=scripts\projects\datatool\project.lst`**
 
 #### Building with Visual C++
 
@@ -1589,7 +1589,7 @@ Once you have [chosen a build scope](#chosen-a-build-scope) and have [configured
 
 To build a library, application, sample, or any other project, simply choose your configuration (e.g. ReleaseDLL), right-click on the desired project, and select "Build". To build all projects in the solution, build the -**BUILD-ALL-** project.
 
-*Note:* Do not use the 'Build Solution' command because this would include building the **–CONFIGURE-** project, which would result in: (a) reconfiguring (which may not be necessary at the time), and more importantly (b) not building the remaining projects in the solution.
+***Note:*** Do not use the 'Build Solution' command because this would include building the **–CONFIGURE-** project, which would result in: (a) reconfiguring (which may not be necessary at the time), and more importantly (b) not building the remaining projects in the solution.
 
 By the way, you can build a desired project by right-clicking on it and selecting build, but debugging applies only to the StartUp Project. To select a project for debugging, right-click the desired project and select "Set as StartUp Project".
 
@@ -1607,7 +1607,7 @@ This section deals with building a custom solution within the C++ Toolkit source
 
 There is a template solution, `compilers\msvc1000_prj\user\build\ncbi_user.sln`, that should help you build a customized solution. The project list for this solution is in `scripts\projects\ncbi_user.lst`
 
-*Note:* Do not use this solution directly. Instead, make a new solution based on the template:
+***Note:*** Do not use this solution directly. Instead, make a new solution based on the template:
 
 1  
 Make copies of the `compilers\msvc1000_prj\user\` subtree and the `scripts\projects\ncbi_user.lst` file (keep the copies in the same folders as the originals).
@@ -1661,7 +1661,7 @@ The built Toolkit applications and libraries will be put, respectively, to:
 
 Note that the project directory, `msvc1000_prj`, may be different for your version of Visual C++.
 
-*Note:* If the PTB (project tree builder) stage fails, the build may be stuck in a "locked" state. To "unlock" it, delete the file "`__configure.lock`" from the project directory.
+***Note:*** If the PTB (project tree builder) stage fails, the build may be stuck in a "locked" state. To "unlock" it, delete the file "`__configure.lock`" from the project directory.
 
 #### Using the Toolkit with Visual C++
 
@@ -1741,7 +1741,7 @@ To build the project with Cygwin / GCC, just follow the generic [Unix guidelines
 Mac OS X
 --------
 
-*Note:* Please also see the [General Information for All Platforms](#general-information-for-all-platforms) section, as it contains relevant information that is not repeated here.
+***Note:*** Please also see the [General Information for All Platforms](#general-information-for-all-platforms) section, as it contains relevant information that is not repeated here.
 
 This section covers the following topics:
 
@@ -1869,7 +1869,7 @@ Many of the requirements define dependencies on 3rd-party packages, such as Berk
 
 There are a few indispensable external components that have analogs in the Toolkit. If external libraries for these components are not available then the internal analog can be used. The '`LibChoices`' entry identifies such pairs, and '`LibChoiceIncludes`' provides additional include paths to the built-in headers.
 
-*Note:* There may be some requirements which are always or never met. These requirements are listed in the '`ProvidedRequests`', '`StandardFeatures`', or '`NotProvidedRequests`' entries of the '`Configure`' section.
+***Note:*** There may be some requirements which are always or never met. These requirements are listed in the '`ProvidedRequests`', '`StandardFeatures`', or '`NotProvidedRequests`' entries of the '`Configure`' section.
 
 ##### Dynamic Libraries Configuration
 
@@ -1937,7 +1937,7 @@ By default, all header files found in the project's include and source directori
 
 means "add all files with the `.h` extension, add `file1.hpp`, and do not add `file2.h`".
 
-*Note:* A single exclamation mark with no file name means "do not add any header files".
+***Note:*** A single exclamation mark with no file name means "do not add any header files".
 
 ##### Specifying a Custom Build Script
 
@@ -1955,7 +1955,7 @@ In the appropriate `Makefile.*.xcode` customization file, define a section calle
 
 Once you have [chosen a build scope](#chosen-a-build-scope) and have [configured](#configured), you are ready to build.
 
-*Note:* Some projects may require using [3rd-party libraries](#3rd-party-libraries).
+***Note:*** Some projects may require using [3rd-party libraries](#3rd-party-libraries).
 
 Select the desired project and build it. To build all projects, select the **BUILD-ALL** project.
 

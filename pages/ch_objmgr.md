@@ -316,11 +316,11 @@ There are several annotation iterator classes; some specialized for particular a
 
 #### CFeatTree
 
-The `CFeatTree` class builds a parent-child feature tree in a more efficient way than repeatedly calling `GetParentFeature()` for each feature. The algorithm of a parent search is the same as the one used by `GetParentFeature()`.
+The ***CFeatTree*** class builds a parent-child feature tree in a more efficient way than repeatedly calling ***GetParentFeature()*** for each feature. The algorithm of a parent search is the same as the one used by ***GetParentFeature()***.
 
-The class [CFeatTree](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCFeatTree.html) works with a set of features specified by calling `AddFeature()` or `AddFeatures()`. The actual tree is built the first time method `GetParent()` or `GetChildren()` is called after adding new features. Features can be added later, but the parent information is cached and will not change if parents were found already. However, features with no parent will be processed again in attempt to find parents from the newly added features.
+The class [CFeatTree](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCFeatTree.html) works with a set of features specified by calling ***AddFeature()*** or ***AddFeatures()***. The actual tree is built the first time method ***GetParent()*** or ***GetChildren()*** is called after adding new features. Features can be added later, but the parent information is cached and will not change if parents were found already. However, features with no parent will be processed again in attempt to find parents from the newly added features.
 
-Here's a sample code snippet that constructs a `CFeatTree` based on selected features:
+Here's a sample code snippet that constructs a ***CFeatTree*** based on selected features:
 
     // Construct the Seq-loc to get features for.
     CSeq_loc seq_loc;
@@ -347,9 +347,9 @@ Here's a sample code snippet that constructs a `CFeatTree` based on selected fea
     feature::CFeatTree feat_tree;
     feat_tree.AddFeatures(feat_it);
 
-The `CFeatTree` class can also improve the performance of the `feature::GetBestXxxForYyy()` functions, such as [GetBestGeneForMrna()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetBestGeneForMrna). Simply create the `CFeatTree` and pass it to the `GetBestXxxForYyy()` functions.
+The ***CFeatTree*** class can also improve the performance of the ***feature::GetBestXxxForYyy()*** functions, such as [GetBestGeneForMrna()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetBestGeneForMrna). Simply create the ***CFeatTree*** and pass it to the ***GetBestXxxForYyy()*** functions.
 
-*Note:* There are "old" and "new" `GetBestXxxForYyy()` functions. The "new" functions are in the `feature` namespace, are located in `include/objmgr/util/feature.hpp`, and should be used for new development, as they are more efficient. The "old" functions are in the `sequence` namespace and are located in `include/objmgr/util/sequence.hpp`.
+***Note:*** There are "old" and "new" ***GetBestXxxForYyy()*** functions. The "new" functions are in the `feature` namespace, are located in `include/objmgr/util/feature.hpp`, and should be used for new development, as they are more efficient. The "old" functions are in the `sequence` namespace and are located in `include/objmgr/util/sequence.hpp`.
 
 ### Attributes and Operations
 
@@ -413,23 +413,23 @@ The `CFeatTree` class can also improve the performance of the `feature::GetBestX
 
 Before being able to use any Scopes, a client must create and initialize the Object Manager ([CObjectManager](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CObjectManager)). Initialization functions include registration of [Data loaders](#data-loaders), some of which may be declared as default ones. All default Data loaders are added to a Scope when the latter asks for them. All Data loaders are named, so Scopes may refer to them by name. Another kind of data object is [CSeq\_entry](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_entry) - it does not require any data loader, but also may be registered with the Object Manager. Seq-entry may not be a default data object.
 
-`CObjectManager` is a multi-thread-safe singleton class, which means that only one instance of the class will be created, and it will be safely accessible from all threads. This object gets created in the first call to `CObjectManager::GetInstance(void)` and does not get destroyed until the program terminates (even if all references to it are destroyed), so all calls to `GetInstance()` will return the same object. Therefore you can either save the `CRef` returned by `GetInstance()` or call `GetInstance()` again for subsequent use.
+***CObjectManager*** is a multi-thread-safe singleton class, which means that only one instance of the class will be created, and it will be safely accessible from all threads. This object gets created in the first call to ***CObjectManager::GetInstance(void)*** and does not get destroyed until the program terminates (even if all references to it are destroyed), so all calls to ***GetInstance()*** will return the same object. Therefore you can either save the ***CRef*** returned by ***GetInstance()*** or call ***GetInstance()*** again for subsequent use.
 
-Most other `CObjectManager` methods are used to manage Data loaders.
+Most other ***CObjectManager*** methods are used to manage Data loaders.
 
 #### CObjectManager important methods
 
--   `GetInstance` - returns the object manager singleton (creating it if necessary). This method can be called multiple times and/or the returned `CRef` can be saved.
+-   ***GetInstance*** - returns the object manager singleton (creating it if necessary). This method can be called multiple times and/or the returned ***CRef*** can be saved.
 
--   `RegisterDataLoader` - creates and registers data loader specified by driver name using plugin manager.
+-   ***RegisterDataLoader*** - creates and registers data loader specified by driver name using plugin manager.
 
--   `FindDataLoader` - finds data loader by its name. Returns pointer to the loader or null if no loader was found.
+-   ***FindDataLoader*** - finds data loader by its name. Returns pointer to the loader or null if no loader was found.
 
--   `GetRegisteredNames` - fills vector of strings with the names of all registered data loaders.
+-   ***GetRegisteredNames*** - fills vector of strings with the names of all registered data loaders.
 
--   `void SetLoaderOptions` - allows to modify options (default flag and priority) of a registered data loader.
+-   ***void SetLoaderOptions*** - allows to modify options (default flag and priority) of a registered data loader.
 
--   `bool RevokeDataLoader` - revokes a registered data loader by pointer or name. Returns false if the loader is still in use. Throws exception if the loader is not registered.
+-   ***bool RevokeDataLoader*** - revokes a registered data loader by pointer or name. Returns false if the loader is still in use. Throws exception if the loader is not registered.
 
 See the [CObjectManager API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectManager.html) for an up-to-date list of all methods.
 
@@ -437,47 +437,47 @@ See the [CObjectManager API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/C
 
 The Scope class ([CScope](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CScope)) is designed to be a lightweight object, which could be easily created and destroyed. Scope may even be created on the stack - as an automatic object. Scope is populated with data by adding data loaders or already created Seq-entry's to it. [Data loaders](#data-loaders) can only be added by name, which means it must be registered with the Object Manager beforehand. Once an externally created Seq-entry is added to a Scope, it should not be modified any more.
 
-The main task of a scope is to cache resolved data references. Any resolved data chunk will be locked by the scope through which it was fetched. For this reason retrieving a lot of unrelated data through the same scope may consume a lot of memory. To clean a scope's cache and release the memory you can use `ResetHistory` or just destroy the scope and create a new one. *Note:* When a scope is destroyed or cleaned any handles retrieved from the scope become invalid.
+The main task of a scope is to cache resolved data references. Any resolved data chunk will be locked by the scope through which it was fetched. For this reason retrieving a lot of unrelated data through the same scope may consume a lot of memory. To clean a scope's cache and release the memory you can use ***ResetHistory*** or just destroy the scope and create a new one. ***Note:*** When a scope is destroyed or cleaned any handles retrieved from the scope become invalid.
 
 #### CScope important methods
 
--   `AddDefaults` - adds all loaders registered as default in the object manager.
+-   ***AddDefaults*** - adds all loaders registered as default in the object manager.
 
--   `AddDataLoader` - adds a data loader to the scope using the loader's name.
+-   ***AddDataLoader*** - adds a data loader to the scope using the loader's name.
 
--   `AddScope` - adds all loaders attached to another scope.
+-   ***AddScope*** - adds all loaders attached to another scope.
 
--   `AddTopLevelSeqEntry` - adds a TSE to the scope. If the TSE has been already added to some scope, the data and indices will be re-used.
+-   ***AddTopLevelSeqEntry*** - adds a TSE to the scope. If the TSE has been already added to some scope, the data and indices will be re-used.
 
--   `AddBioseq` - adds a Bioseq object wrapping it to a new Seq-entry.
+-   ***AddBioseq*** - adds a Bioseq object wrapping it to a new Seq-entry.
 
--   `AddSeq_annot` - adds a Seq-annot object to the scope.
+-   ***AddSeq\_annot*** - adds a Seq-annot object to the scope.
 
--   `GetBioseqHandle` - returns a Bioseq handle for the requested Bioseq. There are several versions of this function accepting different arguments. A bioseqs can be found by its Seq-id, Seq-id handle or Seq-loc. There are special flags which control data loading while resolving a Bioseq (e.g. you may want to check if a Bioseq has been already loaded by any scope or resolved in this particular scope).
+-   ***GetBioseqHandle*** - returns a Bioseq handle for the requested Bioseq. There are several versions of this function accepting different arguments. A bioseqs can be found by its Seq-id, Seq-id handle or Seq-loc. There are special flags which control data loading while resolving a Bioseq (e.g. you may want to check if a Bioseq has been already loaded by any scope or resolved in this particular scope).
 
--   `GetBioseqHandleFromTSE` - allows getting a Bioseq handle restricting the search to a single top-level Seq-entry.
+-   ***GetBioseqHandleFromTSE*** - allows getting a Bioseq handle restricting the search to a single top-level Seq-entry.
 
--   `GetSynonyms` - returns a set of synonyms for a given Bioseq. Synonyms returned by a scope may differ from the Seq-id set stored in Bioseq object. The returned set includes all ids which are resolved to the Bioseq in this scope. An id may be hidden if it has been resolved to another Bioseq. Several modifications of the same id may appear as synonyms (e.g. accession.version and accession-only may be synonyms).
+-   ***GetSynonyms*** - returns a set of synonyms for a given Bioseq. Synonyms returned by a scope may differ from the Seq-id set stored in Bioseq object. The returned set includes all ids which are resolved to the Bioseq in this scope. An id may be hidden if it has been resolved to another Bioseq. Several modifications of the same id may appear as synonyms (e.g. accession.version and accession-only may be synonyms).
 
--   `GetAllTSEs` - fills a vector of Seq-entry handles with all resolved TSEs.
+-   ***GetAllTSEs*** - fills a vector of Seq-entry handles with all resolved TSEs.
 
--   `GetIds` - fetches complete list of IDs for a given Seq-id without fetching the Bioseq (if supported by loader).
+-   ***GetIds*** - fetches complete list of IDs for a given Seq-id without fetching the Bioseq (if supported by loader).
 
 See the [CScope API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCScope.html) for an up-to-date list of all methods.
 
-All data sources (data loaders and explicitly added data) have priorities. For example, if you call `AddScope()` and specify a non-default priority, the scope scans data sources in order of increasing priority to find the sequence you've requested. By default, explicitly added data have priority 9 and data loaders have priority 99, so the scope will first look in explicit data, then in data loaders. If you have conflicting data or loaders (e.g. GenBank and BLAST), you may need different priorities to make the scope first look, for example, in BLAST, and then in GenBank if the sequence is not found.
+All data sources (data loaders and explicitly added data) have priorities. For example, if you call ***AddScope()*** and specify a non-default priority, the scope scans data sources in order of increasing priority to find the sequence you've requested. By default, explicitly added data have priority 9 and data loaders have priority 99, so the scope will first look in explicit data, then in data loaders. If you have conflicting data or loaders (e.g. GenBank and BLAST), you may need different priorities to make the scope first look, for example, in BLAST, and then in GenBank if the sequence is not found.
 
-*Note:* the priority you've specified for a data loader at registration time (`RegisterInObjectManager()`) is a new default for it, and can be overridden when you add the data loader to a scope.
+***Note:*** the priority you've specified for a data loader at registration time (***RegisterInObjectManager()***) is a new default for it, and can be overridden when you add the data loader to a scope.
 
 #### Data loader
 
-The Data loader base class ([CDataLoader](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDataLoader)) is almost never used by a client application directly. The specific data loaders (like GenBank data loader) have several static methods which should be used to register loaders in the Object Manager. Each of `RegisterInObjectManager` methods constructs a loader name depending on the arguments, checks if a loader with this name is already registered, creates and registers the loader if necessary. `GetLoaderNameFromArgs` methods may be used to get a potential loader's name from a set of arguments. `RegisterInObjectManager` returns a simple structure with two methods: `IsCreated`, indicating if the loader was just created or a registered loader with the same name was found, and `GetLoader`, returning pointer to the loader. The pointer may be null if the `RegisterInObjectManager` function fails or if the type of the already registered loader can not be casted to the type requested.
+The Data loader base class ([CDataLoader](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDataLoader)) is almost never used by a client application directly. The specific data loaders (like GenBank data loader) have several static methods which should be used to register loaders in the Object Manager. Each of ***RegisterInObjectManager*** methods constructs a loader name depending on the arguments, checks if a loader with this name is already registered, creates and registers the loader if necessary. ***GetLoaderNameFromArgs*** methods may be used to get a potential loader's name from a set of arguments. ***RegisterInObjectManager*** returns a simple structure with two methods: ***IsCreated***, indicating if the loader was just created or a registered loader with the same name was found, and ***GetLoader***, returning pointer to the loader. The pointer may be null if the ***RegisterInObjectManager*** function fails or if the type of the already registered loader can not be casted to the type requested.
 
 ##### Interaction with the Object Manager
 
-By default, the Object Manager will use registered data loaders to fetch basic information about all referenced Seq-entry's and annotations. For example, even if a Seq-entry contains no external references and is added to the scope using `CScope::AddTopLevelSeqEntry()`, the Object Manager will still use the data loader to fetch basic information about that Seq-entry and its annotations.
+By default, the Object Manager will use registered data loaders to fetch basic information about all referenced Seq-entry's and annotations. For example, even if a Seq-entry contains no external references and is added to the scope using ***CScope::AddTopLevelSeqEntry()***, the Object Manager will still use the data loader to fetch basic information about that Seq-entry and its annotations.
 
-If the Object Manager finds a difference between a Seq-entry loaded by a data loader and an in-memory Seq-entry (having the same Seq-id) loaded with `AddTopLevelSeqEntry()`, the in-memory data will be used instead of the data from the data loader.
+If the Object Manager finds a difference between a Seq-entry loaded by a data loader and an in-memory Seq-entry (having the same Seq-id) loaded with ***AddTopLevelSeqEntry()***, the in-memory data will be used instead of the data from the data loader.
 
 #### Bioseq handle
 
@@ -487,53 +487,53 @@ Most methods of CBioseq for checking and getting object members are mirrored in 
 
 #### CBioseq\_Handle important methods
 
--   `GetSeqId` - returns Seq-id which was used to obtain the handle or null (if the handle was obtained in a way not requiring Seq-id).
+-   ***GetSeqId*** - returns Seq-id which was used to obtain the handle or null (if the handle was obtained in a way not requiring Seq-id).
 
--   `GetSeq_id_Handle` - returns Seq-id handle corresponding to the id used to obtain the handle.
+-   ***GetSeq\_id\_Handle*** - returns Seq-id handle corresponding to the id used to obtain the handle.
 
--   `IsSynonym` - returns true if the id resolves to the same handle.
+-   ***IsSynonym*** - returns true if the id resolves to the same handle.
 
--   `GetSynonyms` - returns a list of all Bioseq synonyms.
+-   ***GetSynonyms*** - returns a list of all Bioseq synonyms.
 
--   `GetParentEntry` - returns a handle for the parent Seq-entry of the Bioseq.
+-   ***GetParentEntry*** - returns a handle for the parent Seq-entry of the Bioseq.
 
--   `GetTopLevelEntry` - returns a handle for the top-level Seq-entry.
+-   ***GetTopLevelEntry*** - returns a handle for the top-level Seq-entry.
 
--   `GetBioseqCore` - returns TBioseqCore, which is CConstRef\<CBioseq\>. The Bioseq object is guaranteed to have basic information loaded (the list of Seq-ids, Bioseq length, type etc.). Some information in the Bioseq (descriptors, annotations, sequence data) may be not loaded yet.
+-   ***GetBioseqCore*** - returns TBioseqCore, which is CConstRef\<CBioseq\>. The Bioseq object is guaranteed to have basic information loaded (the list of Seq-ids, Bioseq length, type etc.). Some information in the Bioseq (descriptors, annotations, sequence data) may be not loaded yet.
 
--   `GetCompleteBioseq` - returns the complete Bioseq object. Any missing data will be loaded and put in the Bioseq members.
+-   ***GetCompleteBioseq*** - returns the complete Bioseq object. Any missing data will be loaded and put in the Bioseq members.
 
--   `GetComplexityLevel` and `GetExactComplexityLeve`l - allow finding a parent Seq-entry of a specified class (e.g. nuc-prot). The first method is more flexible since it considers some Seq-entry classes as equivalent.
+-   ***GetComplexityLevel*** and ***GetExactComplexityLeve***l - allow finding a parent Seq-entry of a specified class (e.g. nuc-prot). The first method is more flexible since it considers some Seq-entry classes as equivalent.
 
--   `GetBioseqMolType` - returns molecule type of the Bioseq.
+-   ***GetBioseqMolType*** - returns molecule type of the Bioseq.
 
--   `GetSeqMap` - returns Seq-map object for the Bioseq.
+-   ***GetSeqMap*** - returns Seq-map object for the Bioseq.
 
--   `GetSeqVector` - returns Seq-vector with the selected coding and strand.
+-   ***GetSeqVector*** - returns Seq-vector with the selected coding and strand.
 
--   `GetSequenceView` - creates a Seq-vector for a part of the Bioseq. Depending on the flags the resulting Seq-vector may show all intervals (merged or not) on the Bioseq specified by Seq-loc, or all parts of the Bioseq not included in the Seq-loc.
+-   ***GetSequenceView*** - creates a Seq-vector for a part of the Bioseq. Depending on the flags the resulting Seq-vector may show all intervals (merged or not) on the Bioseq specified by Seq-loc, or all parts of the Bioseq not included in the Seq-loc.
 
--   `GetSeqMapByLocation` - returns Seq-map constructed from a Seq-loc. The method uses the same flags as `GetSequenceView`.
+-   ***GetSeqMapByLocation*** - returns Seq-map constructed from a Seq-loc. The method uses the same flags as ***GetSequenceView***.
 
--   `MapLocation` - maps a Seq-loc from the Bioseq's segment to the Bioseq.
+-   ***MapLocation*** - maps a Seq-loc from the Bioseq's segment to the Bioseq.
 
 See the [CBioseq\_Handle API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBioseq__Handle.html) for an up-to-date list of all methods.
 
 #### Bioseq-set handle
 
-The Bioseq-set handle class ([CBioseq\_set\_Handle](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CBioseq_set_Handle)) is a proxy class for Bioseq-set objects. Like in Bioseq handle, most of its methods allow read-only access to the members of `CBioseq_set` object. Some other methods are similar to the Bioseq handle's interface.
+The Bioseq-set handle class ([CBioseq\_set\_Handle](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CBioseq_set_Handle)) is a proxy class for Bioseq-set objects. Like in Bioseq handle, most of its methods allow read-only access to the members of ***CBioseq\_set*** object. Some other methods are similar to the Bioseq handle's interface.
 
 #### CBioseq\_set\_Handle important methods
 
--   `GetParentEntry` - returns a handle for the parent Seq-entry of the Bioseq.
+-   ***GetParentEntry*** - returns a handle for the parent Seq-entry of the Bioseq.
 
--   `GetTopLevelEntry` - returns a handle for the top-level Seq-entry.
+-   ***GetTopLevelEntry*** - returns a handle for the top-level Seq-entry.
 
--   `GetBioseq_setCore` - returns core data for the Bioseq-set. The object is guaranteed to have basic information loaded. Some information may be not loaded yet.
+-   ***GetBioseq\_setCore*** - returns core data for the Bioseq-set. The object is guaranteed to have basic information loaded. Some information may be not loaded yet.
 
--   `GetCompleteBioseq_set` - returns the complete Bioseq-set object. Any missing data will be loaded and put in the Bioseq members.
+-   ***GetCompleteBioseq\_set*** - returns the complete Bioseq-set object. Any missing data will be loaded and put in the Bioseq members.
 
--   `GetComplexityLevel` and `GetExactComplexityLevel` - allow finding a parent Seq-entry of a specified class (e.g. nuc-prot). The first method is more flexible since it considers some Seq-entry classes as equivalent.
+-   ***GetComplexityLevel*** and ***GetExactComplexityLevel*** - allow finding a parent Seq-entry of a specified class (e.g. nuc-prot). The first method is more flexible since it considers some Seq-entry classes as equivalent.
 
 See the [CBioseq\_set\_Handle API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBioseq__set__Handle.html) for an up-to-date list of all methods.
 
@@ -543,17 +543,17 @@ The Seq-entry handle class ([CSeq\_entry\_Handle](http://www.ncbi.nlm.nih.gov/IE
 
 #### CSeq\_entry\_Handle important methods
 
--   `GetParentBioseq_set` - returns a handle for the parent Bioseq-set if any.
+-   ***GetParentBioseq\_set*** - returns a handle for the parent Bioseq-set if any.
 
--   `GetParentEntry` - returns a handle for the parent Seq-entry.
+-   ***GetParentEntry*** - returns a handle for the parent Seq-entry.
 
--   `GetSingleSubEntry` - checks that the Seq-entry contains a Bioseq-set of just one child Seq-entry and returns a handle for this entry, otherwise throws exception.
+-   ***GetSingleSubEntry*** - checks that the Seq-entry contains a Bioseq-set of just one child Seq-entry and returns a handle for this entry, otherwise throws exception.
 
--   `GetTopLevelEntry` - returns a handle for the top-level Seq-entry.
+-   ***GetTopLevelEntry*** - returns a handle for the top-level Seq-entry.
 
--   `GetSeq_entryCore` - returns core data for the Seq-entry. Some information may be not loaded yet.
+-   ***GetSeq\_entryCore*** - returns core data for the Seq-entry. Some information may be not loaded yet.
 
--   `GetCompleteSeq_entry` - returns the complete Seq-entry object. Any missing data will be loaded and put in the Bioseq members.
+-   ***GetCompleteSeq\_entry*** - returns the complete Seq-entry object. Any missing data will be loaded and put in the Bioseq members.
 
 See the [CSeq\_entry\_Handle API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__entry__Handle.html) for an up-to-date list of all methods.
 
@@ -563,11 +563,11 @@ The Seq-annot handle class ([CSeq\_annot\_Handle](http://www.ncbi.nlm.nih.gov/IE
 
 #### CSeq\_annot\_Handle important methods
 
--   `GetParentEntry` - returns a handle for the parent Seq-entry.
+-   ***GetParentEntry*** - returns a handle for the parent Seq-entry.
 
--   `GetTopLevelEntry` - returns a handle for the top-level Seq-entry.
+-   ***GetTopLevelEntry*** - returns a handle for the top-level Seq-entry.
 
--   `GetCompleteSeq_annot` - returns the complete Seq-annot object. Any data stubs are resolved and loaded.
+-   ***GetCompleteSeq\_annot*** - returns the complete Seq-annot object. Any data stubs are resolved and loaded.
 
 See the [CSeq\_annot\_Handle API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__annot__Handle.html) for an up-to-date list of all methods.
 
@@ -577,11 +577,11 @@ The Seq-feat handle class ([CSeq\_feat\_Handle](http://www.ncbi.nlm.nih.gov/IEB/
 
 #### Seq-align handle
 
-The Seq-align handle class ([CSeq\_align\_Handle](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_align_Handle)) is a read-only proxy to Seq-align objects data. Most of its methods are simply mapped to the `CSeq_align` methods.
+The Seq-align handle class ([CSeq\_align\_Handle](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_align_Handle)) is a read-only proxy to Seq-align objects data. Most of its methods are simply mapped to the ***CSeq\_align*** methods.
 
 #### Seq-graph handle
 
-The Seq-graph handle class ([CSeq\_graph\_Handle](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_graph_Handle)) is a read-only proxy to Seq-graph objects data. Most of its methods are simply mapped to the `CSeq_graph` methods.
+The Seq-graph handle class ([CSeq\_graph\_Handle](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_graph_Handle)) is a read-only proxy to Seq-graph objects data. Most of its methods are simply mapped to the ***CSeq\_graph*** methods.
 
 #### Seq-map
 
@@ -589,19 +589,19 @@ The Seq-map class ([CSeqMap](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr
 
 #### CSeqMap important methods
 
--   `GetSegmentsCount` - returns the number of segments in the Seq-map.
+-   ***GetSegmentsCount*** - returns the number of segments in the Seq-map.
 
--   `GetLength` - returns the length of the whole Seq-map.
+-   ***GetLength*** - returns the length of the whole Seq-map.
 
--   `GetMol` - returns the molecule type for real bioseqs.
+-   ***GetMol*** - returns the molecule type for real bioseqs.
 
--   `begin`, `Begin`, `end`, `End`, `FindSegment` - methods for normal Seq-map iteration (lower case names added for compatibility with STL).
+-   ***begin***, ***Begin***, ***end***, ***End***, ***FindSegment*** - methods for normal Seq-map iteration (lower case names added for compatibility with STL).
 
--   `BeginResolved`, `FindResolved`, `EndResolved` - force resolving references in the Seq-map. Optional arguments allow controlling types of segments to be shown and resolution depth.
+-   ***BeginResolved***, ***FindResolved***, ***EndResolved*** - force resolving references in the Seq-map. Optional arguments allow controlling types of segments to be shown and resolution depth.
 
--   `ResolvedRangeIterator` - starts iterator over the specified range and strand only.
+-   ***ResolvedRangeIterator*** - starts iterator over the specified range and strand only.
 
--   `CanResolveRange` - checks if necessary data is available to resolve all segments in the specified range.
+-   ***CanResolveRange*** - checks if necessary data is available to resolve all segments in the specified range.
 
 See the [CSeqMap API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeqMap.html) for an up-to-date list of all methods.
 
@@ -611,23 +611,23 @@ The Seq-vector class ([CSeqVector](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_D
 
 #### CSeqVector important methods
 
--   `size` - returns length of the whole Seq-vector.
+-   ***size*** - returns length of the whole Seq-vector.
 
--   `begin`, `end` - STL-style methods for iterating over Seq-vector.
+-   ***begin***, ***end*** - STL-style methods for iterating over Seq-vector.
 
--   `operator[]` - provides access to individual character at a given position.
+-   ***operator[]*** - provides access to individual character at a given position.
 
--   `GetSeqData` - copy characters from a specified range to a string.
+-   ***GetSeqData*** - copy characters from a specified range to a string.
 
--   `GetSequenceType`, `IsProtein`, `IsNucleotide` - check sequence type.
+-   ***GetSequenceType***, ***IsProtein***, ***IsNucleotide*** - check sequence type.
 
--   `SetCoding`, `SetIupacCoding`, `SetNcbiCoding` - control coding used by Seq-vector. These methods allow selecting Iupac or Ncbi coding without checking the exact sequence type - correct coding will be selected by the Seq-vector automatically.
+-   ***SetCoding***, ***SetIupacCoding***, ***SetNcbiCoding*** - control coding used by Seq-vector. These methods allow selecting Iupac or Ncbi coding without checking the exact sequence type - correct coding will be selected by the Seq-vector automatically.
 
--   `GetGapChar` - returns character used in the current coding to indicate gaps in the sequence.
+-   ***GetGapChar*** - returns character used in the current coding to indicate gaps in the sequence.
 
--   `CanGetRange` - check if sequence data for the specified range is available.
+-   ***CanGetRange*** - check if sequence data for the specified range is available.
 
--   `SetRandomizeAmbiguities`, `SetNoAmbiguities` - control randomization of ambiguities in ncbi2na coding. If set, ambiguities will be represented with random characters with distribution corresponding to the ambiguity symbol at each position. Once assigned, the same character will be returned every time for the same position.
+-   ***SetRandomizeAmbiguities***, ***SetNoAmbiguities*** - control randomization of ambiguities in ncbi2na coding. If set, ambiguities will be represented with random characters with distribution corresponding to the ambiguity symbol at each position. Once assigned, the same character will be returned every time for the same position.
 
 See the [CSeqVector API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeqVector.html) for an up-to-date list of all methods.
 
@@ -637,29 +637,29 @@ The Seq-annot class ([CSeq\_annot](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_D
 
 #### CSeq\_annot important methods
 
--   `SetNameDesc` - set a description of type `name` for the Seq-annot.
+-   ***SetNameDesc*** - set a description of type ***name*** for the Seq-annot.
 
--   `SetTitleDesc` - set a description of type `title` for the Seq-annot.
+-   ***SetTitleDesc*** - set a description of type ***title*** for the Seq-annot.
 
--   `AddComment` - set a description of type `comment` for the Seq-annot.
+-   ***AddComment*** - set a description of type ***comment*** for the Seq-annot.
 
--   `SetCreateDate` - set the Seq-annot's time of creation.
+-   ***SetCreateDate*** - set the Seq-annot's time of creation.
 
--   `SetUpdateDate` - set the Seq-annot's time of last update.
+-   ***SetUpdateDate*** - set the Seq-annot's time of last update.
 
--   `AddUserObject` - this enables adding custom attributes to an annotation.
+-   ***AddUserObject*** - this enables adding custom attributes to an annotation.
 
 See the [CSeq\_annot API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__annot.html) for an up-to-date list of all methods.
 
 ##### Interaction with the Object Manager
 
-An external annotation is one residing in a TSE other than the TSE containing the Bioseq object that it annotates. This definition applies whether the TSE containing the Bioseq was loaded by a data loader or by calling `CScope::AddTopLevelSeqEntry()`.
+An external annotation is one residing in a TSE other than the TSE containing the Bioseq object that it annotates. This definition applies whether the TSE containing the Bioseq was loaded by a data loader or by calling ***CScope::AddTopLevelSeqEntry()***.
 
 If a Seq-annot references external annotations, and if a data loader has been added to the scope, then by default the Object Manager will read the external annotations.
 
-This behavior can be modified by passing an appropriate [SAnnotSelector](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/structSAnnotSelector.html) to a `CFeat_CI` feature iterator constructor. By default, `SAnnotSelector` will not exclude externals; however, calling `SetExcludeExternal()` on the selector will instruct the Object Manager to omit external annotations for this SAnnotSelector.
+This behavior can be modified by passing an appropriate [SAnnotSelector](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/structSAnnotSelector.html) to a ***CFeat\_CI*** feature iterator constructor. By default, ***SAnnotSelector*** will not exclude externals; however, calling ***SetExcludeExternal()*** on the selector will instruct the Object Manager to omit external annotations for this SAnnotSelector.
 
-In addition you can disable/enable annotations by name or type using other methods of `SAnnotSelector`. Selection by name is useful for GenBank external annotations like SNPs because their names are fixed - "SNP", "CDD", etc.
+In addition you can disable/enable annotations by name or type using other methods of ***SAnnotSelector***. Selection by name is useful for GenBank external annotations like SNPs because their names are fixed - "SNP", "CDD", etc.
 
 #### Tree structure iterators
 
@@ -695,61 +695,61 @@ Although returning [CSeq\_annot](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC
 
 [SAnnotSelector](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SAnnotSelector) is a helper class which may be used to fine-tune annotation iterator's settings. It is used with [CAnnot\_CI](#cannotci), [CFeat\_CI](#cfeatci), [CAlign\_CI](#calignci) and [CGraph\_CI](#cgraphci) iterators. Below is the brief explanation of the class methods. Some methods have several modifications to simplify the selector usage. E.g. one can find `SetOverlapIntervals()` more convenient than `SetOverlapType(SAnnotSelector::eOverlap_Intervals)`.
 
--   `SetAnnotType` - selects type of annotations to search for (features, alignments or graphs). Type-specific iterators set this type automatically.
+-   ***SetAnnotType*** - selects type of annotations to search for (features, alignments or graphs). Type-specific iterators set this type automatically.
 
--   `SetFeatType` - selects type of features to search for. Ignored when used with alignment or graph iterator.
+-   ***SetFeatType*** - selects type of features to search for. Ignored when used with alignment or graph iterator.
 
--   `SetFeatSubtype` - selects feature subtype and corresponding type.
+-   ***SetFeatSubtype*** - selects feature subtype and corresponding type.
 
--   `SetByProduct` - sets flag to search features by product rather than by location.
+-   ***SetByProduct*** - sets flag to search features by product rather than by location.
 
--   `SetOverlapType` - select type of location matching during the search. If overlap type is set to `intervals`, the annotation should have at least one interval intersecting with the requested ranges to be included in the results. If overlap type is set to `total range`, the annotation will be found even if its location has a gap intersecting with the requested range. The default value is `intervals`. Total ranges are calculated for each referenced Bioseq individually, even if an annotation is located on several bioseqs, which are segments of the same parent sequence.
+-   ***SetOverlapType*** - select type of location matching during the search. If overlap type is set to `intervals`, the annotation should have at least one interval intersecting with the requested ranges to be included in the results. If overlap type is set to `total range`, the annotation will be found even if its location has a gap intersecting with the requested range. The default value is `intervals`. Total ranges are calculated for each referenced Bioseq individually, even if an annotation is located on several bioseqs, which are segments of the same parent sequence.
 
--   `SetSortOrder` - selects sorting of annotations: `normal`, `reverse` or `none`. The default value is `normal`.
+-   ***SetSortOrder*** - selects sorting of annotations: `normal`, `reverse` or `none`. The default value is `normal`.
 
--   `SetResolveMethod` - defines method of resolving references in segmented bioseqs. Default value is `TSE`, meaning that annotations should only be searched on segments located in the same top-level Seq-entry. Other available options are `none` (to ignore annotations on segments) and `all` (to search on all segments regardless of their location). Resolving all references may produce a huge number of annotations for big bioseqs, this option should be used with care.
+-   ***SetResolveMethod*** - defines method of resolving references in segmented bioseqs. Default value is `TSE`, meaning that annotations should only be searched on segments located in the same top-level Seq-entry. Other available options are `none` (to ignore annotations on segments) and `all` (to search on all segments regardless of their location). Resolving all references may produce a huge number of annotations for big bioseqs, this option should be used with care.
 
--   `SetResolveDepth` - limits the depth of resolving references in segmented bioseqs. By default the search depth is not limited (set to `kMax_Int`).
+-   ***SetResolveDepth*** - limits the depth of resolving references in segmented bioseqs. By default the search depth is not limited (set to `kMax_Int`).
 
--   `SetAdaptiveDepth`, `SetAdaptiveTrigger` - set search depth limit using a trigger type/subtype. The search stops when an annotation of the trigger type is found on some level.
+-   ***SetAdaptiveDepth***, ***SetAdaptiveTrigger*** - set search depth limit using a trigger type/subtype. The search stops when an annotation of the trigger type is found on some level.
 
--   `SetMaxSize` - limits total number of annotations to find.
+-   ***SetMaxSize*** - limits total number of annotations to find.
 
--   `SetLimitNone`, `SetLimitTSE`, `SetLimitSeqEntry`, `SetLimitSeqAnnot` - limits the search to a single TSE, Seq-entry or Seq-annot object.
+-   ***SetLimitNone***, ***SetLimitTSE***, ***SetLimitSeqEntry***, ***SetLimitSeqAnnot*** - limits the search to a single TSE, Seq-entry or Seq-annot object.
 
--   `SetUnresolvedFlag`, `SetIgnoreUnresolved`, `SetSearchUnresolved`, `SetFailUnresolved` - define how the iterators should behave if a reference in a sequence can not be resolved. `Ignore` (default) will ignore missing parts, `Fail` will throw `CAnnotException`. `Search` may be used to search by known ID on missing parts, but will work only if limit object is also set, since the iterator needs to know where to look for the annotations.
+-   ***SetUnresolvedFlag***, ***SetIgnoreUnresolved***, ***SetSearchUnresolved***, ***SetFailUnresolved*** - define how the iterators should behave if a reference in a sequence can not be resolved. `Ignore` (default) will ignore missing parts, `Fail` will throw ***CAnnotException***. `Search` may be used to search by known ID on missing parts, but will work only if limit object is also set, since the iterator needs to know where to look for the annotations.
 
--   `SetSearchExternal` - sets all flags to search for external annotations. Such annotations are packed with special bioseqs, (e.g. gnl\\|Annot:CDD\\|6 references gi 6 and contains CDD features for the gi). If `SetSearchSpecial` is called with the Bioseq handle for this special sequence or its TSE handle, only external CDD features from this TSE will be found. The method calls `SetResolveTSE`, sets limit object to the same TSE and sets `SearchUnresolved` flag.
+-   ***SetSearchExternal*** - sets all flags to search for external annotations. Such annotations are packed with special bioseqs, (e.g. gnl\\|Annot:CDD\\|6 references gi 6 and contains CDD features for the gi). If ***SetSearchSpecial*** is called with the Bioseq handle for this special sequence or its TSE handle, only external CDD features from this TSE will be found. The method calls ***SetResolveTSE***, sets limit object to the same TSE and sets `SearchUnresolved` flag.
 
--   `SetNoMapping` - prevents the iterator from mapping locations to the top-level Bioseq. This option can dramatically increase iterators' performance when searching annotations on a segmented Bioseq.
+-   ***SetNoMapping*** - prevents the iterator from mapping locations to the top-level Bioseq. This option can dramatically increase iterators' performance when searching annotations on a segmented Bioseq.
 
 ##### Feature iterator
 
-The Feature iterator ([CFeat\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CFeat_CI)) is a kind of annotation iterator. It enumerates [CSeq\_feat](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_feat) objects related to a Bioseq, Seq-loc, or contained in a particular Seq-entry or Seq-annot regardless of the referenced locations. The search parameters may be set using [SAnnotSelector](#sannotselector) (preferred method) or using constructors with different arguments. The iterator returns `CMappedFeat` object rather than `CSeq_feat`. This allows accessing both the original feature (e.g. loaded from a database) and the mapped one, with its location adjusted according to the search parameters. Most methods of `CMappedFeat` are just proxies for the original feature members and are not listed here.
+The Feature iterator ([CFeat\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CFeat_CI)) is a kind of annotation iterator. It enumerates [CSeq\_feat](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_feat) objects related to a Bioseq, Seq-loc, or contained in a particular Seq-entry or Seq-annot regardless of the referenced locations. The search parameters may be set using [SAnnotSelector](#sannotselector) (preferred method) or using constructors with different arguments. The iterator returns ***CMappedFeat*** object rather than ***CSeq\_feat***. This allows accessing both the original feature (e.g. loaded from a database) and the mapped one, with its location adjusted according to the search parameters. Most methods of ***CMappedFeat*** are just proxies for the original feature members and are not listed here.
 
 #### CMappedFeat important methods
 
--   `GetOriginalFeature` - returns the original feature.
+-   ***GetOriginalFeature*** - returns the original feature.
 
--   `GetSeq_feat_Handle` - returns handle for the original feature object.
+-   ***GetSeq\_feat\_Handle*** - returns handle for the original feature object.
 
--   `GetMappedFeature` - returns a copy of the original feature with its location/product adjusted according to the search parameters (e.g. id and ranges changed from a segment to the parent Bioseq). The mapped feature is not created unless requested. This allows improving the iterator's performance.
+-   ***GetMappedFeature*** - returns a copy of the original feature with its location/product adjusted according to the search parameters (e.g. id and ranges changed from a segment to the parent Bioseq). The mapped feature is not created unless requested. This allows improving the iterator's performance.
 
--   `GetLocation` - although present in `CSeq_feat` class, this method does not always return the original feature's location, but first checks if the feature should be mapped, creates the mapped location if necessary and returns it. To get the unmapped location use `GetOriginalFeature()`.`GetLocation()` instead.
+-   ***GetLocation*** - although present in ***CSeq\_feat*** class, this method does not always return the original feature's location, but first checks if the feature should be mapped, creates the mapped location if necessary and returns it. To get the unmapped location use ***GetOriginalFeature()***.***GetLocation()*** instead.
 
--   `GetAnnot` - returns handle for the Seq-annot object, containing the original feature.
+-   ***GetAnnot*** - returns handle for the Seq-annot object, containing the original feature.
 
 See the [CMappedFeat API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCMappedFeat.html) for an up-to-date list of all methods.
 
 ##### Alignment iterator
 
-The Alignment iterator ([CAlign\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CAlign_CI)) enumerates [CSeq\_align](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_align) objects related to the specified Bioseq or Seq-loc. It behaves much like [CFeat\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CFeat_CI). `operator*` and `operator->` return a mapped `CSeq_align` object. To get the original alignment you can use `GetOriginalSeq_align` or `GetSeq_align_Handle` methods. The objects iterated over may be selected by using [SAnnotSelector](#sannotselector) in the constructor.
+The Alignment iterator ([CAlign\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CAlign_CI)) enumerates [CSeq\_align](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_align) objects related to the specified Bioseq or Seq-loc. It behaves much like [CFeat\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CFeat_CI). ***operator\**** and ***operator-\>*** return a mapped ***CSeq\_align*** object. To get the original alignment you can use ***GetOriginalSeq\_align*** or ***GetSeq\_align\_Handle*** methods. The objects iterated over may be selected by using [SAnnotSelector](#sannotselector) in the constructor.
 
 ##### Graph iterator
 
-The Graph iterator ([CGraph\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CGraph_CI)) enumerates [CSeq\_graph](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_graph) objects related to a specific Bioseq or Seq-loc. It behaves much like [CFeat\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CFeat_CI), returning `CMappedGraph` object which imitates the interface of `CSeq_graph` and has additional methods to access both original and mapped graphs. The objects iterated over may be selected by using [SAnnotSelector](#sannotselector) in the constructor.
+The Graph iterator ([CGraph\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CGraph_CI)) enumerates [CSeq\_graph](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_graph) objects related to a specific Bioseq or Seq-loc. It behaves much like [CFeat\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CFeat_CI), returning ***CMappedGraph*** object which imitates the interface of ***CSeq\_graph*** and has additional methods to access both original and mapped graphs. The objects iterated over may be selected by using [SAnnotSelector](#sannotselector) in the constructor.
 
-*Note:* Quality Graphs for cSRA data are not iterated by default. To include them, set the following configuration parameter:
+***Note:*** Quality Graphs for cSRA data are not iterated by default. To include them, set the following configuration parameter:
 
     [csra_loader]
     quality_graphs=true
@@ -760,45 +760,45 @@ The Seq-map iterator ([CSeqMap\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_
 
 #### CSeqMap\_CI important methods
 
--   `GetType` - returns type of the current segment. The allowed types are `eSeqGap`, `eSeqData`, `eSubMap`, `eSeqRef`, and `eSeqEnd`, and `eSeqChunk`.
+-   ***GetType*** - returns type of the current segment. The allowed types are `eSeqGap`, `eSeqData`, `eSubMap`, `eSeqRef`, and `eSeqEnd`, and `eSeqChunk`.
 
--   `GetPosition` - returns start position of the current segment.
+-   ***GetPosition*** - returns start position of the current segment.
 
--   `GetLength` - returns length of the current segment.
+-   ***GetLength*** - returns length of the current segment.
 
--   `IsUnknownLength` - returns whether the length of the current segment is known.
+-   ***IsUnknownLength*** - returns whether the length of the current segment is known.
 
--   `GetEndPosition` - returns end position (exclusive) of the current segment.
+-   ***GetEndPosition*** - returns end position (exclusive) of the current segment.
 
--   `GetData` - returns sequence data ([CSeq\_data](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_data)). The current segment type must be `eSeqData`.
+-   ***GetData*** - returns sequence data ([CSeq\_data](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_data)). The current segment type must be `eSeqData`.
 
--   `GetRefSeqId` - returns referenced Seq-id for segments of type `eSeqRef`.
+-   ***GetRefSeqId*** - returns referenced Seq-id for segments of type `eSeqRef`.
 
--   `GetRefData` - returns sequence data for any segment which can be resolved to a real sequence. The real position, length and strand of the data should be checked using other methods.
+-   ***GetRefData*** - returns sequence data for any segment which can be resolved to a real sequence. The real position, length and strand of the data should be checked using other methods.
 
--   `GetRefPosition` - returns start position on the referenced Bioseq for segments of type `eSeqRef`.
+-   ***GetRefPosition*** - returns start position on the referenced Bioseq for segments of type `eSeqRef`.
 
--   `GetRefEndPosition` - returns end position (exclusive) on the referenced Bioseq for segments of type `eSeqRef`.
+-   ***GetRefEndPosition*** - returns end position (exclusive) on the referenced Bioseq for segments of type `eSeqRef`.
 
--   `GetRefMinusStrand` - returns true if referenced Bioseq's strand should be reversed. If there are several levels of references for the current segment, the method checks strands on each level.
+-   ***GetRefMinusStrand*** - returns true if referenced Bioseq's strand should be reversed. If there are several levels of references for the current segment, the method checks strands on each level.
 
 See the [CSeqMap\_CI API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeqMap__CI.html) for an up-to-date list of all methods.
 
-*Note:* Some methods will throw exceptions if called inappropriately, so you should either check for the appropriate conditions before calling these methods or catch the exceptions. The methods that throw and the appropriate conditions for calling them are:
+***Note:*** Some methods will throw exceptions if called inappropriately, so you should either check for the appropriate conditions before calling these methods or catch the exceptions. The methods that throw and the appropriate conditions for calling them are:
 
-| Method        | Calling Condition                                                                                                                                                                                                                                                |
-|---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `GetData`     | Type must be `eSeqGap` or `eSeqData`. If type is `eSeqData` then `GetRefPosition` must return zero and `GetRefMinusStrand` must return false. If the data must be modified (e.g. for a delta sequence) then `GetRefData` should be called rather than `GetData`. |
-| `GetRefSeqid` | Type must be `eSeqRef`.                                                                                                                                                                                                                                          |
-| `GetRefData`  | Type must be `eSeqGap` or `eSeqData`.                                                                                                                                                                                                                            |
+| Method            | Calling Condition                                                                                                                                                                                                                                                                |
+|-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ***GetData***     | Type must be `eSeqGap` or `eSeqData`. If type is `eSeqData` then ***GetRefPosition*** must return zero and ***GetRefMinusStrand*** must return false. If the data must be modified (e.g. for a delta sequence) then ***GetRefData*** should be called rather than ***GetData***. |
+| ***GetRefSeqid*** | Type must be `eSeqRef`.                                                                                                                                                                                                                                                          |
+| ***GetRefData***  | Type must be `eSeqGap` or `eSeqData`.                                                                                                                                                                                                                                            |
 
-*Note:* Some other methods will not throw exceptions if called inappropriately, and will instead return invalid data. Therefore you must check for the appropriate conditions before calling these methods or using their data:
+***Note:*** Some other methods will not throw exceptions if called inappropriately, and will instead return invalid data. Therefore you must check for the appropriate conditions before calling these methods or using their data:
 
-| Method              | Calling Condition                                               |
-|---------------------|-----------------------------------------------------------------|
-| `GetLength`         | `IsUnknownLength` must return false.                            |
-| `GetEndPosition`    | `IsUnknownLength` must return false.                            |
-| `GetRefEndPosition` | Type must be `eSeqRef` and `IsUnknownLength` must return false. |
+| Method                  | Calling Condition                                                   |
+|-------------------------|---------------------------------------------------------------------|
+| ***GetLength***         | ***IsUnknownLength*** must return false.                            |
+| ***GetEndPosition***    | ***IsUnknownLength*** must return false.                            |
+| ***GetRefEndPosition*** | Type must be `eSeqRef` and ***IsUnknownLength*** must return false. |
 
 ##### SSeqMapSelector
 
@@ -806,21 +806,21 @@ See the [CSeqMap\_CI API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_
 
 #### SSeqMapSelector important methods
 
--   `SSeqMapSelector` - there is a constructor that takes flags ([CSeqMap::Tflags](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeqMap.html#a7aecb4aeabdd3b9e9f528693773188f5)) and a resolve count. The flags can determine which types of segments are included, while the resolve count determines how many levels over which references are resolved.
+-   ***SSeqMapSelector*** - there is a constructor that takes flags ([CSeqMap::Tflags](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeqMap.html#a7aecb4aeabdd3b9e9f528693773188f5)) and a resolve count. The flags can determine which types of segments are included, while the resolve count determines how many levels over which references are resolved.
 
--   `SetPosition` - selects segments containing this position.
+-   ***SetPosition*** - selects segments containing this position.
 
--   `SetRange` - selects segments within this range.
+-   ***SetRange*** - selects segments within this range.
 
--   `SetStrand` - selects segments matching a strand constraint.
+-   ***SetStrand*** - selects segments matching a strand constraint.
 
--   `SetResolveCount` - limits the depth of resolved references.
+-   ***SetResolveCount*** - limits the depth of resolved references.
 
--   `SetLinkUsedTSE` - limits the TSE to resolve references.
+-   ***SetLinkUsedTSE*** - limits the TSE to resolve references.
 
--   `SetFlags` - selects segments matching these flags.
+-   ***SetFlags*** - selects segments matching these flags.
 
--   `SetByFeaturePolicy` - a convenience method equivalent to `SetFlags(my_selector.GetFlags() \| CSeqMap::fByFeaturePolicy)`.
+-   ***SetByFeaturePolicy*** - a convenience method equivalent to `SetFlags(my_selector.GetFlags() \| CSeqMap::fByFeaturePolicy)`.
 
 See the [SSeqMapSelector API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/structSSeqMapSelector.html) for an up-to-date list of all methods.
 
@@ -905,17 +905,17 @@ Here is some code that illustrates:
 
 #### Seq-vector iterator
 
-The Seq-vector iterator ([CSeqVector\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeqVector_CI)) is used to access individual characters from a [Seq-vector](#seq-vector). It has better performance than `CSeqVector::operator[]` when used for sequential access to the data.
+The Seq-vector iterator ([CSeqVector\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeqVector_CI)) is used to access individual characters from a [Seq-vector](#seq-vector). It has better performance than ***CSeqVector::operator[]*** when used for sequential access to the data.
 
 #### CSeqVector\_CI important methods
 
--   `GetSeqData` - copy characters from a specified range to a string.
+-   ***GetSeqData*** - copy characters from a specified range to a string.
 
--   `GetPos`, `SetPos` - control current position of the iterator.
+-   ***GetPos***, ***SetPos*** - control current position of the iterator.
 
--   `GetCoding`, `SetCoding` - control character coding.
+-   ***GetCoding***, ***SetCoding*** - control character coding.
 
--   `SetRandomizeAmbiguities`, `SetNoAmbiguities` - control randomization of ambiguities in ncbi2na coding. If set, ambiguities will be represented with random characters with distribution corresponding to the ambiguity symbol at each position. Once assigned, the same character will be returned every time for the same position.
+-   ***SetRandomizeAmbiguities***, ***SetNoAmbiguities*** - control randomization of ambiguities in ncbi2na coding. If set, ambiguities will be represented with random characters with distribution corresponding to the ambiguity symbol at each position. Once assigned, the same character will be returned every time for the same position.
 
 See the [CSeqVector\_CI API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeqVector__CI.html) for an up-to-date list of all methods.
 
@@ -946,7 +946,7 @@ The Object Manager's interpretation of such requests is kind of arbitrary (yet r
 
 Once the Seq-id has been resolved into a specific Seq-entry, the Object Manager keeps track of all data requests to this sequence in order to maintain consistency. That is, it is perfectly possible that few minutes later this same Seq-id could be resolved into another Seq-entry (the data in the database may change). Still, from the client point of view, as long as this is the same session, nothing should happen - the data should not change.
 
-By 'session' we mean here the same Scope of resolution. That is, as long as the data are requested through the same Scope, it is consistent. In another Scope the data could potentially be different. The Scope can be made to forget about previous requests by calling its `ResetHistory()` method.
+By 'session' we mean here the same Scope of resolution. That is, as long as the data are requested through the same Scope, it is consistent. In another Scope the data could potentially be different. The Scope can be made to forget about previous requests by calling its ***ResetHistory()*** method.
 
 ### Ambiguous requests
 
@@ -1265,21 +1265,21 @@ One or more **[icache\_???]** sections describe parameters of ICache instances u
 
 ### ICache instances configuration<br/>sections [icache\_\*]
 
-Each `ICache` instance has an interface name which is used by clients to select the instance.
+Each ***ICache*** instance has an interface name which is used by clients to select the instance.
 
-The name of the section with the `ICache` instance's configuration is a concatenation of the string **icache\_** and the name of the instance.
+The name of the section with the ***ICache*** instance's configuration is a concatenation of the string **icache\_** and the name of the instance.
 
-For example, the parameters of an `ICache` instance named **ids** are stored in the section **[icache\_ids]**.
+For example, the parameters of an ***ICache*** instance named **ids** are stored in the section **[icache\_ids]**.
 
 The parameters inside the section are the same as the parameters in the **[bdb]** section with some exceptions.
 
 If the **path** parameter has the same value as **path** in main **[bdb]** section, then both databases will be stored in the same directory and share the same BerkeleyDB environment.
 
-As a result, all parameters of the BerkeleyDB environment have no meaning in an `ICache` section and are taken from the [**bdb**] section instead. To avoid a database conflict, all sections with the same **path** parameter must have different **name** parameters.
+As a result, all parameters of the BerkeleyDB environment have no meaning in an ***ICache*** section and are taken from the [**bdb**] section instead. To avoid a database conflict, all sections with the same **path** parameter must have different **name** parameters.
 
 The GenBank data loader requires two cache instances with slightly different parameters. The first, named **ids** by default, is used for small Seq-id resolution information. The second, named **blobs** by default, is used for large Seq-entry information. The names of those caches can be changed in the client program configuration.
 
-Similarly, NetCached configuration should describe two instances of `ICache` with names matching to the names on client (**ids** and **blobs** by default).
+Similarly, NetCached configuration should describe two instances of ***ICache*** with names matching to the names on client (**ids** and **blobs** by default).
 
 For example:
 
@@ -1335,7 +1335,7 @@ A demonstration program is available: [SVN](http://www.ncbi.nlm.nih.gov/viewvc/v
 
 ### Registering the LDS loader with the Object Manager
 
-The `CLDS2_Manager` class creates (or updates) an SQLite database at the path specified in its constructor. Data files that it should manage can be specified with the `AddDataFile()` and/or `AddDataDir()` methods. `AddDataFile()` adds a single data file; `AddDataDir()` adds all data files in the specified directory and its subdirectories (by default). Recursion into the subdirectories can be disabled by passing `CLDS2_Manager::eDir_NoRecurse` as the second argument to the [AddDataDir()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCLDS2__Manager.html#0e57c13801ff03a58c54ea89379a418a) call. `UpdateData()` synchronizes the database with all the added data files. Source data files can be in ASN.1 text, ASN.1 binary, XML, or FASTA format.
+The ***CLDS2\_Manager*** class creates (or updates) an SQLite database at the path specified in its constructor. Data files that it should manage can be specified with the ***AddDataFile()*** and/or ***AddDataDir()*** methods. ***AddDataFile()*** adds a single data file; ***AddDataDir()*** adds all data files in the specified directory and its subdirectories (by default). Recursion into the subdirectories can be disabled by passing **`CLDS2_Manager::eDir_NoRecurse`** as the second argument to the [AddDataDir()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCLDS2__Manager.html#0e57c13801ff03a58c54ea89379a418a) call. ***UpdateData()*** synchronizes the database with all the added data files. Source data files can be in ASN.1 text, ASN.1 binary, XML, or FASTA format.
 
 For example, the following code creates an LDS database, populates it with data, registers it with the Object Manager, and adds the LDS data loader to the scope.
 
@@ -1375,9 +1375,9 @@ The previous example adds the LDS data loader to the scope without adding any de
 
 The scope will now include just LDS and GenBank.
 
-`CObjectManager::eNonDefault` was passed to the `RegisterInObjectManager()` method in this example simply because it is the default value for that argument, and some value was necessary so that the next argument could be specified. It could equally well have been `CObjectManager::eDefault`.
+**`CObjectManager::eNonDefault`** was passed to the ***RegisterInObjectManager()*** method in this example simply because it is the default value for that argument, and some value was necessary so that the next argument could be specified. It could equally well have been **`CObjectManager::eDefault`**.
 
-The last argument to `RegisterInObjectManager()` is the priority. Here it was set to 1 for LDS and 2 for GenBank so the Object Manager would attempt to load data via LDS first, and only if that failed would it resort to GenBank.
+The last argument to ***RegisterInObjectManager()*** is the priority. Here it was set to 1 for LDS and 2 for GenBank so the Object Manager would attempt to load data via LDS first, and only if that failed would it resort to GenBank.
 
 In the above example, the loaders were explicitly added to the scope to ensure that they were the only loaders in the scope.
 
@@ -1399,7 +1399,7 @@ To add the LDS data loader and any other default loaders to the scope:
     // Add default loaders to scope.
     scope.AddDefaults();
 
-By registering with `eDefault`, the LDS data loader will be added to the scope along with the default data loaders.
+By registering with **`eDefault`**, the LDS data loader will be added to the scope along with the default data loaders.
 
 ### Known gotchas
 
@@ -1427,11 +1427,11 @@ The following table summarizes the classes that perform short-term, in-memory ca
 | id, gi, label, taxid | [CGBDataLoader](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCGBDataLoader.html)   |
 | blob id              | [CGBDataLoader](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCGBDataLoader.html)   |
 
-If you want in-memory caching for objects other than those listed in the table, you can implement a cache in a [CDataLoader](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDataLoader&d=) subclass. For an example implementation, see the [CGBDataLoader](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CGBDataLoader&d=) class. `CGBDataLoader` actually has two Seq-id caches - one for blob id's and the other for the other small objects listed in the table. The size for both of these caches is controlled through the [[GENBANK] ID\_GC\_SIZE](ch_libconfig.html#ch_libconfig.Objects_Object_Manager_Obje) configuration parameter (i.e. their sizes can't be set independently). Subclasses of `CGBDataLoader` can access their configuration using the [CParam methods](ch_core.html#ch_core.Methods_for_Using_Pa).
+If you want in-memory caching for objects other than those listed in the table, you can implement a cache in a [CDataLoader](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDataLoader&d=) subclass. For an example implementation, see the [CGBDataLoader](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CGBDataLoader&d=) class. ***CGBDataLoader*** actually has two Seq-id caches - one for blob id's and the other for the other small objects listed in the table. The size for both of these caches is controlled through the [[GENBANK] ID\_GC\_SIZE](ch_libconfig.html#ch_libconfig.Objects_Object_Manager_Obje) configuration parameter (i.e. their sizes can't be set independently). Subclasses of ***CGBDataLoader*** can access their configuration using the [CParam methods](ch_core.html#ch_core.Methods_for_Using_Pa).
 
 Short-term caching, as applied to the Object Manager and Data Loaders, means keeping data for "a little while" in a FIFO before deleting. Long-term caching means keeping objects for "a long while" – i.e. longer than they would be kept using a short-term cache. Here, "a while" is relative to the rate at which objects are discarded, not relative to elapsed time. So short-term caching means keeping at most a given number of objects, rather than keeping objects for a given amount of time.
 
-A [CDataSource](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDataSource.html) object inside the Object Manager automatically performs short-term caching of blobs for master TSEs. To set the Object Manager's blob cache size, use the [[OBJMGR] BLOB\_CACHE](ch_libconfig.html#ch_libconfig.Objects_Object_Manager_Obje) configuration parameter. This configuration parameter is created by the [CParam](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCParam.html) declaration "`NCBI_PARAM_DECL(unsigned, OBJMGR, BLOB_CACHE)`" in `src/objmgr/data_source.cpp` and can be set via the environment, the registry, or manipulated via the [CParam API](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCParam.html). *Note:* External annotation TSEs and TSEs with Delta segments are linked to one of the master TSEs.
+A [CDataSource](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDataSource.html) object inside the Object Manager automatically performs short-term caching of blobs for master TSEs. To set the Object Manager's blob cache size, use the [[OBJMGR] BLOB\_CACHE](ch_libconfig.html#ch_libconfig.Objects_Object_Manager_Obje) configuration parameter. This configuration parameter is created by the [CParam](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCParam.html) declaration "**`NCBI_PARAM_DECL(unsigned, OBJMGR, BLOB_CACHE)`**" in `src/objmgr/data_source.cpp` and can be set via the environment, the registry, or manipulated via the [CParam API](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCParam.html). ***Note:*** External annotation TSEs and TSEs with Delta segments are linked to one of the master TSEs.
 
 Short-term caching is done automatically for [CGBDataLoader](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CGBDataLoader&d=), but not for other data loaders. If you want short-term caching for some other data loader, you'll have to add it, possibly using [CGBDataLoader](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CGBDataLoader&d=) as an example.
 
@@ -1480,11 +1480,11 @@ Include the necessary headers:
     #include <objmgr/align_ci.hpp>
     #include <objmgr/graph_ci.hpp>
 
-Request an instance of the `CObjectManager` and store as CRef:
+Request an instance of the ***CObjectManager*** and store as CRef:
 
     CRef<CObjectManager> obj_mgr = CObjectManager::GetInstance();
 
-Create a `CScope`. The Scope may be created as an object on the stack, or on the heap:
+Create a ***CScope***. The Scope may be created as an object on the stack, or on the heap:
 
     CRef<CScope> scope1 = new CScope(*obj_mgr);
     CScope scope2(*obj_mgr);
@@ -1499,13 +1499,13 @@ Once there is a Seq-entry created somehow, it can be added to the `Scope` using 
 
 ### Add a data loader to the Scope
 
-The data loader is designed to be a replaceable object. There can be a variety of data loaders, each of which would load data from different databases, flat files, etc. Each data loader must be registered with the Object Manager. One distinguishes them later by their names. One of the most popular data loaders is the one that loads data from GenBank - `CGBDataLoader`. Each loader has at least one `RegisterInObjectManager()` static method, the first argument is usually a reference to the Object Manager:
+The data loader is designed to be a replaceable object. There can be a variety of data loaders, each of which would load data from different databases, flat files, etc. Each data loader must be registered with the Object Manager. One distinguishes them later by their names. One of the most popular data loaders is the one that loads data from GenBank - ***CGBDataLoader***. Each loader has at least one ***RegisterInObjectManager()*** static method, the first argument is usually a reference to the Object Manager:
 
     #include <objtools/data_loaders/genbank/gbloader.hpp>
     ...
     CGBDataLoader::RegisterInObjectManager(*obj_mgr);
 
-A data loader may be registered as a default or non-default loader. The GenBank loader is automatically registered as default if you don't override it explicitly. For other loaders you may need to specify additional arguments to set their priority or make them default (usually this can be done through the last two arguments of the `RegisterInObjectManager()` method). A `Scope` can request data loaders from the `Object Manager` one at a time - by name. In this case you will need to know the loader's name. You can get it from the loader using its `GetName()` method, or if you don't have a loader instance, you can use the desired loader's static method `GetLoaderNameFromArgs()`:
+A data loader may be registered as a default or non-default loader. The GenBank loader is automatically registered as default if you don't override it explicitly. For other loaders you may need to specify additional arguments to set their priority or make them default (usually this can be done through the last two arguments of the ***RegisterInObjectManager()*** method). A `Scope` can request data loaders from the `Object Manager` one at a time - by name. In this case you will need to know the loader's name. You can get it from the loader using its ***GetName()*** method, or if you don't have a loader instance, you can use the desired loader's static method ***GetLoaderNameFromArgs()***:
 
     scope.AddDataLoader(my_loader.GetName());                    // with loader instance
     scope.AddDataLoader(CGBDataLoader::GetLoaderNameFromArgs()); // without a loader
@@ -1536,13 +1536,13 @@ The access to the sequence data is provided through the Seq-vector object, which
         NcbiCout << *it;
     }
 
-<br/>The `CSeqVector` class provides much more than the plain data storage - in particular, it "knows where to find" the data. As a result of a query, it may initiate a reference-resolution process, send requests to the source database for more data, etc.
+<br/>The ***CSeqVector*** class provides much more than the plain data storage - in particular, it "knows where to find" the data. As a result of a query, it may initiate a reference-resolution process, send requests to the source database for more data, etc.
 
 A sequence map is another useful object that describes sequence data. It is a collection of segments, which describe sequence parts in general - location and type only - without providing any real data. To obtain a sequence map from a Bioseq handle:
 
     CConstRef<CSeqMap> seqmap(&handle.GetSeqMap());
 
-It is possible then to enumerate all the segments in the map asking their type, length or position. Note that in this example the iterator is obtained using the `begin()` method and will enumerate only top level segments of the Seq-map:
+It is possible then to enumerate all the segments in the map asking their type, length or position. Note that in this example the iterator is obtained using the ***begin()*** method and will enumerate only top level segments of the Seq-map:
 
     int len = 0;
     for (CSeqMap::const_iterator seg = seqmap->begin() ; seg; ++seg) {
@@ -1569,7 +1569,7 @@ Top-level Seq-entry's are thus either shared and not editable or local and edita
 
     bool editable = scope.GetTSE_Handle().CanBeEdited();
 
-A TSE can be added to a scope using `Scope::AddTopLevelSeqEntry()`, passing either a const or a non-const `CSeq_entry` reference. If a non-const reference is passed then the TSE wil be local and editable; if a const reference is passed then the TSI will be shared and not editable.
+A TSE can be added to a scope using ***Scope::AddTopLevelSeqEntry()***, passing either a const or a non-const ***CSeq\_entry*** reference. If a non-const reference is passed then the TSE wil be local and editable; if a const reference is passed then the TSI will be shared and not editable.
 
 Seq-entry's can also be added to a scope by using a data loader - such Seq-entry's are initially shared and not editable.
 
@@ -1577,13 +1577,13 @@ A shared TSE can be made editable by gettng an edit handle for any object in the
 
     CBioseq_EditHandle beh = scope.GetBioseqHandle(m_SeqId).GetEditHandle();
 
-*Note:* A `CBioseq_EditHandle` can also be constructed from a `CBioseq_Handle` - but only if the TSE is already editable. If the TSE is not editable then the `CBioseq_EditHandle` constructor will throw an exception to prevent accidental editing.
+***Note:*** A ***CBioseq\_EditHandle*** can also be constructed from a ***CBioseq\_Handle*** - but only if the TSE is already editable. If the TSE is not editable then the ***CBioseq\_EditHandle*** constructor will throw an exception to prevent accidental editing.
 
-Once a TSE is editable, any object within it can be edited with either a `CBioseq_EditHandle` or a `CBioseq_Handle`.
+Once a TSE is editable, any object within it can be edited with either a ***CBioseq\_EditHandle*** or a ***CBioseq\_Handle***.
 
 ### Enumerate sequence descriptions
 
-[Descriptor iterators](#descriptor-iterators) may be initialized with a Bioseq handle or Seq-entry handle. This makes it possible to enumerate all `CSeqdesc` objects the Bioseq or the Seq-entry refers to:
+[Descriptor iterators](#descriptor-iterators) may be initialized with a Bioseq handle or Seq-entry handle. This makes it possible to enumerate all ***CSeqdesc*** objects the Bioseq or the Seq-entry refers to:
 
     for (CSeqdesc_CI desc_it(handle); desc_it; ++desc_it) {
         const CSeqdesc& desc = *desc_it;
@@ -1702,7 +1702,7 @@ The [CPrefetchManager](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/
             }
         }
 
-*Note:* Error handling was removed from the above code for clarity - please see the [Object Manager test code](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objtools/test/objmgr/test_objmgr_data_mt.cpp) for examples of appropriate error handling.
+***Note:*** Error handling was removed from the above code for clarity - please see the [Object Manager test code](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objtools/test/objmgr/test_objmgr_data_mt.cpp) for examples of appropriate error handling.
 
 Educational Exercises
 ---------------------
@@ -1744,7 +1744,7 @@ Please also see the section on [FCGI Redirection and Debugging CGI Programs](ch_
 
 #### Convert CGI application into Fast-CGI one
 
-In the `LIB=...` section of `Makefile.task_cgiapp`, just replace `xcgi` library by `xfcgi`:
+In the **`LIB=...`** section of `Makefile.task_cgiapp`, just replace `xcgi` library by `xfcgi`:
 
     LIB = xobjmgr id1 seqset $(SEQ_LIBS) pub medline biblio general \
         xser xhtml xfcgi xutil xconnect xncbi
@@ -2169,14 +2169,14 @@ Below are shown the correct results for each of the test Bioseqs. You can use th
 
 #### How to construct Seq\_id by accession?
 
-`CSeq_id` class has constructor, accepting a string, which may contain a Bioseq accession, or accession and version separated with dot. If no version is provided, the Object Manager will try to find and fetch the latest one.
+***CSeq\_id*** class has constructor, accepting a string, which may contain a Bioseq accession, or accession and version separated with dot. If no version is provided, the Object Manager will try to find and fetch the latest one.
 
 #### What is the format of data CSeqVector returns?
 
-`GetSeqVector` method of `CBioseq_Handle` has optional argument to select data coding. One of the possible values for this argument is `CBioseq_Handle::eCoding_Iupac`. It forces the resulting Seq-vector to convert data to printable characters - either Iupac-na or Iupac-aa, depending on the sequence type. Gaps in the sequence are coded with special character, which can be received using `CSeqVector::GetGapChar`, for nucleotides in Iupac coding it will be 'N' character. Note that when calculating the percentage of 'G' /'C' in a sequence you need to ignore gaps.
+***GetSeqVector*** method of ***CBioseq\_Handle*** has optional argument to select data coding. One of the possible values for this argument is `CBioseq_Handle::eCoding_Iupac`. It forces the resulting Seq-vector to convert data to printable characters - either Iupac-na or Iupac-aa, depending on the sequence type. Gaps in the sequence are coded with special character, which can be received using ***CSeqVector::GetGapChar***, for nucleotides in Iupac coding it will be 'N' character. Note that when calculating the percentage of 'G' /'C' in a sequence you need to ignore gaps.
 
 #### What to pay attention to when processing cd-regions?
 
-When looking for cd-regions on a sequence, you get a set of features, which locations describe their position on the sequence. Please note, that these locations may, and do overlap, which makes calculating percentage of 'G'/'C' in the cd-regions much more difficult. To simplify this part of the task you can merge individual cd-region locations using [CSeq\_loc](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_loc) methods (do not forget to sort the Seq-locs for correct merging) and use the resulting Seq-loc to initialize a [Seq-vector](#seq-vector). To calculate percentage of 'G'/'C' for non-cdr parts of a sequence create a new Seq-loc with `CSeq_loc`::`Subtract()` method.
+When looking for cd-regions on a sequence, you get a set of features, which locations describe their position on the sequence. Please note, that these locations may, and do overlap, which makes calculating percentage of 'G'/'C' in the cd-regions much more difficult. To simplify this part of the task you can merge individual cd-region locations using [CSeq\_loc](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_loc) methods (do not forget to sort the Seq-locs for correct merging) and use the resulting Seq-loc to initialize a [Seq-vector](#seq-vector). To calculate percentage of 'G'/'C' for non-cdr parts of a sequence create a new Seq-loc with ***CSeq\_loc***::***Subtract()*** method.
 
 

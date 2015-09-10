@@ -57,7 +57,7 @@ The following is an outline of the topics presented in this chapter:
 Using NCBI C and C++ Toolkits together
 --------------------------------------
 
-*Note*: Due to security issues, not all links on this page are accessible by users outside NCBI.
+***Note***: Due to security issues, not all links on this page are accessible by users outside NCBI.
 
 -   [Overview](#overview)
 
@@ -117,25 +117,25 @@ However, the internal representations of ASN.1-based objects differ between the 
 
 The `CONNECT` library was written for use "as is" in the C Toolkit, but it must also be in the C++ Toolkit tree. Therefore, it cannot directly employ the utility objects offered by the C++ Toolkit such as message logging [CNcbiDiag](ch_core.html#ch_core.diag), registry [CNcbiRegistry](ch_core.html#ch_core.registry), and MT-locks [CRWLock](ch_core.html#ch_core.lock_classes). Instead, [these objects](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_core.h) were replaced with helper objects coded entirely in C (as tables of function pointers and data).
 
-On the other hand, throughout the code, the `CONNECT` library refers to predefined objects `g_CORE_Log` (so called `CORE C logger`) `g_CORE_Registry` (`CORE C registry`), and `g_CORE_Lock` (`CORE C MT-lock`), which actually are never initialized by the library, i.e. they are empty objects, which do nothing. It is an application's resposibility to replace these dummies with real working logger, registry, and MT-lock objects. There are two approaches, one for C and another for C++.
+On the other hand, throughout the code, the `CONNECT` library refers to predefined objects **`g_CORE_Log`** (so called `CORE C logger`) **`g_CORE_Registry`** (`CORE C registry`), and **`g_CORE_Lock`** (`CORE C MT-lock`), which actually are never initialized by the library, i.e. they are empty objects, which do nothing. It is an application's resposibility to replace these dummies with real working logger, registry, and MT-lock objects. There are two approaches, one for C and another for C++.
 
-C programs can call [CORE\_SetREG()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CORE_SetREG), [CORE\_SetLOG()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CORE_SetLOG), and [CORE\_SetLOCK()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CORE_SetLOCK) to set up the registry, logger, and MT-lock ([connect/ncbi\_util.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_util.h) must also be included). There are also convenience routines for `CORE logger`, like [CORE\_SetLOGFILE()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CORE_SetLOGFILE), [CORE\_SetLOGFILE\_NAME()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CORE_SetLOGFILE_NAME), which facilitate redirecting logging messages to either a C stream (`FILE*`) or a named file.
+C programs can call [CORE\_SetREG()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CORE_SetREG), [CORE\_SetLOG()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CORE_SetLOG), and [CORE\_SetLOCK()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CORE_SetLOCK) to set up the registry, logger, and MT-lock ([connect/ncbi\_util.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_util.h) must also be included). There are also convenience routines for `CORE logger`, like [CORE\_SetLOGFILE()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CORE_SetLOGFILE), [CORE\_SetLOGFILE\_NAME()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CORE_SetLOGFILE_NAME), which facilitate redirecting logging messages to either a C stream (***FILE\****) or a named file.
 
 In a C++ program, it is necessary to convert `native` C++ objects into their C equivalents, so that the C++ objects can be used where types [LOG](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=LOG), [REG](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=REG) or [MT\_LOCK](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=MT_LOCK) are expected. This is done using calls declared in [connect/ncbi\_core\_cxx.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_core_cxx.hpp), as described later in this section.
 
-#### `LOG` and `CNcbiDiag`
+#### ***LOG*** and ***CNcbiDiag***
 
-The `CONNECT` library has its own [logger](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=LOG), which has to be set by one of the routines declared in [connect/ncbi\_util.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_util.h): [CORE\_SetLOG()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CORE_SetLOG), [CORE\_SetLOGFILE()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CORE_SetLOGFILE) etc. On the other hand, the interface defined in [connect/ncbi\_core\_cxx.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_core_cxx.hpp) provides the following C++ function to convert a logging stream of the NCBI C++ Toolkit into a `LOG` object:
+The `CONNECT` library has its own [logger](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=LOG), which has to be set by one of the routines declared in [connect/ncbi\_util.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_util.h): [CORE\_SetLOG()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CORE_SetLOG), [CORE\_SetLOGFILE()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CORE_SetLOGFILE) etc. On the other hand, the interface defined in [connect/ncbi\_core\_cxx.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_core_cxx.hpp) provides the following C++ function to convert a logging stream of the NCBI C++ Toolkit into a ***LOG*** object:
 
     LOG LOG_cxx2c (void)
 
-This function creates the `LOG` object on top of the corresponding C++ `CNcbiDiag` object, and then both C and C++ objects can be manipulated interchangeably, causing exactly the same effect on the underlying logger. Then, the returned C handle `LOG` can be subsequently used as a `CORE C logger` by means of `CORE_SetLOG()`, as in the following nested calls:
+This function creates the ***LOG*** object on top of the corresponding C++ ***CNcbiDiag*** object, and then both C and C++ objects can be manipulated interchangeably, causing exactly the same effect on the underlying logger. Then, the returned C handle ***LOG*** can be subsequently used as a `CORE C logger` by means of ***CORE\_SetLOG()***, as in the following nested calls:
 
     CORE_SetLOG(LOG_cxx2c());
 
 #### REG and CNcbiRegistry
 
-[connect/ncbi\_core\_cxx.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_core_cxx.hpp) declares the following C++ function to bind C `REG` object to `CNcbiRegistry` used in C++ programs built with the use of the NCBI C++ Toolkit:
+[connect/ncbi\_core\_cxx.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_core_cxx.hpp) declares the following C++ function to bind C ***REG*** object to ***CNcbiRegistry*** used in C++ programs built with the use of the NCBI C++ Toolkit:
 
     REG REG_cxx2c (CNcbiRegistry* reg, bool pass_ownership = false)
 
@@ -147,13 +147,13 @@ There is a function
 
     MT_LOCK MT_LOCK_cxx2c (CRWLock* lock, bool pass_ownership = false)
 
-declared in [connect/ncbi\_core\_cxx.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_core_cxx.hpp), which converts an object of class `CRWLock` into a C object `MT_LOCK`. The latter can be used as an argument to [CORE\_SetLOCK()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CORE_SetLOCK) for setting the global `CORE C MT-lock`, used by a low level code, written in C. Note that passing 0 as the lock pointer will effectively create a new internal `CRWLock` object, which will then be converted into `MT_LOCK` and returned. This object gets automatically destroyed when the corresponding `MT_LOCK` is destroyed. If the pointer to `CRWLock` is passed a non `NULL` value then the second argument can specify whether the resulting `MT_LOCK` acquires the ownership of the lock, thus is able to delete the lock when destructing itself.
+declared in [connect/ncbi\_core\_cxx.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_core_cxx.hpp), which converts an object of class ***CRWLock*** into a C object ***MT\_LOCK***. The latter can be used as an argument to [CORE\_SetLOCK()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CORE_SetLOCK) for setting the global `CORE C MT-lock`, used by a low level code, written in C. Note that passing 0 as the lock pointer will effectively create a new internal ***CRWLock*** object, which will then be converted into ***MT\_LOCK*** and returned. This object gets automatically destroyed when the corresponding ***MT\_LOCK*** is destroyed. If the pointer to ***CRWLock*** is passed a non **`NULL`** value then the second argument can specify whether the resulting ***MT\_LOCK*** acquires the ownership of the lock, thus is able to delete the lock when destructing itself.
 
 #### CONNECT Library in C++ Code
 
 ##### Setting LOG
 
-To set up the `CORE C logger` to use the same logging format of messages and destination as used by `CNcbiDiag`, the following sequence of calls may be used:
+To set up the `CORE C logger` to use the same logging format of messages and destination as used by ***CNcbiDiag***, the following sequence of calls may be used:
 
     CORE_SetLOG(LOG_cxx2c());
     SetDiagTrace(eDT_Enable);
@@ -162,11 +162,11 @@ To set up the `CORE C logger` to use the same logging format of messages and des
 
 ##### Setting REG
 
-To set the `CORE C registry` be the same as C++ registry `CNcbiRegistry`, the following call is necessary:
+To set the `CORE C registry` be the same as C++ registry ***CNcbiRegistry***, the following call is necessary:
 
     CORE_SetREG(REG_cxx2c(cxxreg, true));
 
-Here `cxxreg` is a `CNcbiRegistry` registry object created and maintained by a C++ application.
+Here **`cxxreg`** is a ***CNcbiRegistry*** registry object created and maintained by a C++ application.
 
 ##### Setting MT-Locking
 
@@ -182,15 +182,15 @@ Header file [connect/ncbi\_core\_cxx.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBo
 
     void CONNECT_Init(CNcbiRegistry* reg = NULL);
 
-The call takes only one argument, an optional pointer to a registry, which is used by the application, and should also be considered by the `CONNECT` library. No registry will be used if `NULL` gets passed. The ownership of the registry is passed along. This fact should be noted by an application making extensive use of `CONNECT` in static classes, i.e. prior to or after main(), because the registry can get deleted before the `CONNECT` library stops using it. The call also ties `CORE C logger` to [CNcbiDiag](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiDiag), and privately creates a `CORE C MT-lock` object (on top of [CRWLock](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRWLock)) for internal synchronization inside the library.
+The call takes only one argument, an optional pointer to a registry, which is used by the application, and should also be considered by the `CONNECT` library. No registry will be used if **`NULL`** gets passed. The ownership of the registry is passed along. This fact should be noted by an application making extensive use of `CONNECT` in static classes, i.e. prior to or after main(), because the registry can get deleted before the `CONNECT` library stops using it. The call also ties `CORE C logger` to [CNcbiDiag](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiDiag), and privately creates a `CORE C MT-lock` object (on top of [CRWLock](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRWLock)) for internal synchronization inside the library.
 
 An example of how to use this call can be found in the test program [test\_ncbi\_conn\_stream.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/test/test_ncbi_conn_stream.cpp). It shows how to properly setup `CORE C logger`, `CORE C registry` and `CORE C MT-lock` so they will use the same data in the C and C++ parts of both the `CONNECT` library and the application code.
 
-Another good source of information is the set of working application examples in [src/app/id1\_fetch](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/app/id1_fetch). *Note:* In the examples, the convenience routine does not change logging levels or disable/enable certain logging properties. If this is desired, the application still has to use separate calls.
+Another good source of information is the set of working application examples in [src/app/id1\_fetch](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/app/id1_fetch). ***Note:*** In the examples, the convenience routine does not change logging levels or disable/enable certain logging properties. If this is desired, the application still has to use separate calls.
 
 #### C Toolkit diagnostics redirection
 
-In a C/C++ program linked against both NCBI C++ and NCBI C Toolkits the diagnostics messages (if any) generated by either Toolkit are not necessarily directed through same route, which may result in lost or garbled messages. To set the diagnostics destination be the same as `CNcbiDiag`'s one, and thus to guarantee that the messages from both Toolkits will be all stored sequentially and in the order they were generated, there is a call
+In a C/C++ program linked against both NCBI C++ and NCBI C Toolkits the diagnostics messages (if any) generated by either Toolkit are not necessarily directed through same route, which may result in lost or garbled messages. To set the diagnostics destination be the same as ***CNcbiDiag***'s one, and thus to guarantee that the messages from both Toolkits will be all stored sequentially and in the order they were generated, there is a call
 
     #include <ctools/ctools.h>
     void SetupCToolkitErrPost(void);
@@ -203,11 +203,11 @@ The `CONNECT` library in the C Toolkit has a header [connect/ncbi\_core\_c.h](ht
 
 Briefly, the calls are:
 
--   `LOG `[LOG\_c2c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/C_DOC/lxr/ident?i=LOG_c2c)` (void);` Create a logger `LOG` with all messages sent to it rerouted via the error logging facility used by the C Toolkit.
+-   `LOG `[LOG\_c2c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/C_DOC/lxr/ident?i=LOG_c2c)` (void);` Create a logger ***LOG*** with all messages sent to it rerouted via the error logging facility used by the C Toolkit.
 
--   `REG `[REG\_c2c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/C_DOC/lxr/ident?i=REG_c2c)` (const char* conf_file);` Build a registry object `REG` from a named file `conf_file`. Passing `NULL` as an argument causes the default Toolkit registry file to be searched for and used.
+-   `REG `[REG\_c2c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/C_DOC/lxr/ident?i=REG_c2c)` (const char* conf_file);` Build a registry object ***REG*** from a named file **`conf_file`**. Passing **`NULL`** as an argument causes the default Toolkit registry file to be searched for and used.
 
--   `MT_LOCK `[MT\_LOCK\_c2c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/C_DOC/lxr/ident?i=MT_LOCK_c2c)` (`[TNlmRWlock](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/C_DOC/lxr/ident?i=TNlmRWlock)` lock, int/*bool*/ pass_ownership);` Build an `MT_LOCK` object on top of `TNlmRWlock` handle. Note that passing `NULL` effectively creates an internal handle, which is used as an underlying object. Ownership of the original handle can be passed to the resulting `MT_LOCK` by setting the second argument to a non-zero value. The internally created handle always has its ownership passed along.
+-   `MT_LOCK `[MT\_LOCK\_c2c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/C_DOC/lxr/ident?i=MT_LOCK_c2c)` (`[TNlmRWlock](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/C_DOC/lxr/ident?i=TNlmRWlock)` lock, int/*bool*/ pass_ownership);` Build an ***MT\_LOCK*** object on top of ***TNlmRWlock*** handle. Note that passing **`NULL`** effectively creates an internal handle, which is used as an underlying object. Ownership of the original handle can be passed to the resulting ***MT\_LOCK*** by setting the second argument to a non-zero value. The internally created handle always has its ownership passed along.
 
 Exactly the same way as described in the previous section, all objects, resulting from the above functions, can be used to set up `CORE C logger`, `CORE C registry`, and `CORE MT-lock` of the `CONNECT` library using the API defined in [connect/ncbi\_util.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/C_DOC/lxr/source/connect/ncbi_util.h): [CORE\_SetLOG()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/C_DOC/lxr/ident?i=CORE_SetLOG), [CORE\_SetREG()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/C_DOC/lxr/ident?i=CORE_SetREG), and [CORE\_SetLOCK()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/C_DOC/lxr/ident?i=CORE_SetLOCK), respectively.
 
@@ -217,9 +217,9 @@ As an alternative to using per-object settings as shown in the previous paragrap
 
     void CONNECT_Init (const char* conf_file);
 
-This sets `CORE C logger` to go via Toolkit default logging facility, causes `CORE C registry` to be loaded from the named file (or from the Toolkit's default file if `conf_file` passed `NULL`), and creates `CORE C MT-lock` on top of internally created `TNlmRWlock` handle, the ownership of which is passed to the `MT_LOCK`.
+This sets `CORE C logger` to go via Toolkit default logging facility, causes `CORE C registry` to be loaded from the named file (or from the Toolkit's default file if **`conf_file`** passed **`NULL`**), and creates `CORE C MT-lock` on top of internally created ***TNlmRWlock*** handle, the ownership of which is passed to the ***MT\_LOCK***.
 
-*Note:* Again, properties of the logging facility are not affected by this call, i.e. the selection of what gets logged, how, and where, should be controlled by using native C Toolkit's mechanisms defined in [ncbierr.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/C_DOC/lxr/source/corelib/ncbierr.h).
+***Note:*** Again, properties of the logging facility are not affected by this call, i.e. the selection of what gets logged, how, and where, should be controlled by using native C Toolkit's mechanisms defined in [ncbierr.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/C_DOC/lxr/source/corelib/ncbierr.h).
 
 Access to the C Toolkit source tree Using CVS
 ---------------------------------------------
@@ -240,19 +240,19 @@ The C Toolkit CVS repository is available [online](http://intranet/cvsutils/inde
 
 To set up a CVS client on Unix or Mac OS X:
 
--   Set the `CVSROOT` environment variable to: `:pserver:${LOGNAME}@cvsvault:/src/NCBI/vault.ncbi`. Note that for NCBI Unix users, this may already be set if you specified `developer` for the `facilities` option in the `.ncbi_hints` file in your home directory.
+-   Set the **`CVSROOT`** environment variable to: `:pserver:${LOGNAME}@cvsvault:/src/NCBI/vault.ncbi`. Note that for NCBI Unix users, this may already be set if you specified `developer` for the `facilities` option in the `.ncbi_hints` file in your home directory.
 
--   Run the command: `cvs login` You will be asked for a password (email <span class="oem_span">z/u4hktpuGujip5ust5upo5nv/</span> if you need the password). This command will record your login info into `~/.cvspass` file so you won't have to login into CVS in the future. *Note:* You may need to create an empty `~/.cvspass` file before logging in as some CVS clients apparently just cannot create it for you. If you get an authorization error, then send e-mail with the errors to <span class="oem_span">jww4jvylGujip5ust5upo5nv/</span>.
+-   Run the command: `cvs login` You will be asked for a password (email <span class="oem_span">z/u4hktpuGujip5ust5upo5nv/</span> if you need the password). This command will record your login info into `~/.cvspass` file so you won't have to login into CVS in the future. ***Note:*** You may need to create an empty `~/.cvspass` file before logging in as some CVS clients apparently just cannot create it for you. If you get an authorization error, then send e-mail with the errors to <span class="oem_span">jww4jvylGujip5ust5upo5nv/</span>.
 
--   If you have some other CVS snapshot which was checked out with an old value of `CVSROOT`, you should commit all your changes first, then delete completely the old snapshot dir and run: `cvs checkout` to get it with new `CVSROOT` value.
+-   If you have some other CVS snapshot which was checked out with an old value of **`CVSROOT`**, you should commit all your changes first, then delete completely the old snapshot dir and run: `cvs checkout` to get it with new **`CVSROOT`** value.
 
 -   Now you are all set and can use all the usual CVS commands.
 
-*Note:* When you are in a directory that was created with `cvs checkout` by another person, a local `./CVS/` subdirectory is also created in that directory. In this case, the cvs command ignores the current value of the `CVSROOT` environment variable and picks up a value from `./CVS/Root` file. Here is an example of what this `Root` file looks like:
+***Note:*** When you are in a directory that was created with `cvs checkout` by another person, a local `./CVS/` subdirectory is also created in that directory. In this case, the cvs command ignores the current value of the **`CVSROOT`** environment variable and picks up a value from `./CVS/Root` file. Here is an example of what this `Root` file looks like:
 
     :pserver:username@cvsvault:/src/NCBI/vault.ncbi
 
-Here the *username* is the user name of the person who did the initial CVS checkout in that directory. So CVS picks up the credentials of the user who did the initial check-in and ignores the setting of the `CVSROOT` environment variable, and therefore the CVS commands that require authorization will fail. There are two possible solutions to this problem:
+Here the *username* is the user name of the person who did the initial CVS checkout in that directory. So CVS picks up the credentials of the user who did the initial check-in and ignores the setting of the **`CVSROOT`** environment variable, and therefore the CVS commands that require authorization will fail. There are two possible solutions to this problem:
 
 -   Create your own snapshot of this area using the `cvs get` command.
 
@@ -280,7 +280,7 @@ To use TortoiseCVS as integrated into Windows Explorer:
 
 For command-line use, follow the [in-house Unix / Mac OS X instructions](#in-house-unix--mac-os-x-instructions) with these exceptions:
 
--   Make sure you have your "home" directory set up -- i.e. the environment variables `HOMEDRIVE` and `HOMEPATH` should be set. In NCBI, `HOMEDRIVE` usually set to `C:`, and `HOMEPATH` is usually set to something like `\Documents and Settings\%USERNAME%` (where `%USERNAME%` is replaced with your Windows user name).
+-   Make sure you have your "home" directory set up -- i.e. the environment variables **`HOMEDRIVE`** and **`HOMEPATH`** should be set. In NCBI, **`HOMEDRIVE`** usually set to `C:`, and **`HOMEPATH`** is usually set to something like `\Documents and Settings\%USERNAME%` (where `%USERNAME%` is replaced with your Windows user name).
 
 -   Create an empty file named `.cvspass` in your "home" directory.
 

@@ -367,7 +367,7 @@ To include a time in the date:
 
 An Object-id is a simple structure used to identify a data object. It is just a CHOICE of an INTEGER or a VisibleString. It must always be used within some defining context (e.g. see Dbtag below) in order to have some global meaning. It allows flexibility in a host system's preference for identifying things by integers or strings.
 
-The Object-id type is implemented by the [CObject\_id](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObject__id.html) class. [CObject\_id](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObject__id.html) includes the `Match()`, `Compare()`, and `operator<()` methods for determining whether two Object-id's are identical.
+The Object-id type is implemented by the [CObject\_id](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObject__id.html) class. [CObject\_id](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObject__id.html) includes the ***Match()***, ***Compare()***, and ***operator\<()*** methods for determining whether two Object-id's are identical.
 
 Types that include choices, such as Object-id, retain the last CHOICE assigned to them. For example, the following results in the Object-id being a string:
 
@@ -704,17 +704,17 @@ Related classes, such as [CSeqdesc](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_
 
 The C++ Toolkit introduced some new methods for Bioseq's:
 
--   `CBioseq(CSeq_loc, string)` - constructs a new delta sequence from the Seq-loc. The string argument may be used to specify local Seq-id text for the new Bioseq.
+-   ***CBioseq(CSeq\_loc, string)*** - constructs a new delta sequence from the Seq-loc. The string argument may be used to specify local Seq-id text for the new Bioseq.
 
--   `GetParentEntry` - returns Seq-entry containing the Bioseq.
+-   ***GetParentEntry*** - returns Seq-entry containing the Bioseq.
 
--   `GetLabel` - returns the Bioseq label.
+-   ***GetLabel*** - returns the Bioseq label.
 
--   `GetFirstId` - returns the first element from the Bioseq's Id list or null.
+-   ***GetFirstId*** - returns the first element from the Bioseq's Id list or null.
 
--   `IsNa` - true if the Bioseq is a nucleotide.
+-   ***IsNa*** - true if the Bioseq is a nucleotide.
 
--   `IsAa` - true if the Bioseq is a protein.
+-   ***IsAa*** - true if the Bioseq is a protein.
 
 In addition, many utility functions for working with Bioseqs and sequence data are defined in the [CSeqportUtil](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeqportUtil.html) class.
 
@@ -732,15 +732,15 @@ A Bioseq may have many Seq-annots. This means it is possible for one Bioseq to h
 
 Some of the important methods for the [CSeq\_annot](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__annot.html) class are:
 
--   `AddName()` - adds or replaces annotation descriptor of type `name`.
+-   ***AddName()*** - adds or replaces annotation descriptor of type `name`.
 
--   `AddTitle()`, `SetTitle()` - adds or replaces annotation descriptor of type `title`.
+-   ***AddTitle()***, ***SetTitle()*** - adds or replaces annotation descriptor of type `title`.
 
--   `AddComment()` - adds annotation descriptor of type `comment`.
+-   ***AddComment()*** - adds annotation descriptor of type `comment`.
 
--   `SetCreateDate()`, `SetUpdateDate()` - add or set annotation create/update time.
+-   ***SetCreateDate()***, ***SetUpdateDate()*** - add or set annotation create/update time.
 
--   `AddUserObject()` - add a user-object descriptor.
+-   ***AddUserObject()*** - add a user-object descriptor.
 
 #### Seq-descr: Describing the Bioseq and Placing It In Context
 
@@ -823,7 +823,7 @@ The modifier concept permits a lot of flexibility. So a peptide with GIBB-mod = 
 
 ##### method: Protein Sequencing Method
 
-The method `GetMethod()` gives the method used to obtain a protein sequence. The values for a GIBB-method are stored in the object as enumerated values mapping directly from the ASN.1 ENUMERATED type. They are:
+The method ***GetMethod()*** gives the method used to obtain a protein sequence. The values for a GIBB-method are stored in the object as enumerated values mapping directly from the ASN.1 ENUMERATED type. They are:
 
 **GIBB-method**
 
@@ -934,9 +934,9 @@ The representation class to which the Bioseq belongs is encoded in Seq-inst.repr
 
 Some of the important methods for Seq-inst are:
 
--   `IsAa` - determines if the sequence type is amino acid
+-   ***IsAa*** - determines if the sequence type is amino acid
 
--   `IsNa` - determines if the sequence type is nucleic acid
+-   ***IsNa*** - determines if the sequence type is nucleic acid
 
 ##### Seq-inst: Virtual Bioseq
 
@@ -1018,7 +1018,7 @@ The ASN.1 module [seqcode.asn](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/l
 
 Some of the important methods for [CSeq\_data](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__data.html) are:
 
--   `CSeq_data()` - constructors to create objects from string or vector of char
+-   ***CSeq\_data()*** - constructors to create objects from string or vector of char
 
 ##### IUPACaa: The IUPAC-IUB Encoding of Amino Acids
 
@@ -1315,11 +1315,11 @@ Sometimes a sequence is not part of a collection (e.g. a single annotated protei
 
 Some of the important methods for [CSeq\_entry](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__entry.html) are:
 
--   `GetLabel()` - append a label based on type or content of the current Seq-entry
+-   ***GetLabel()*** - append a label based on type or content of the current Seq-entry
 
--   `GetParentEntry()` - gets the parent of the current Seq-entry
+-   ***GetParentEntry()*** - gets the parent of the current Seq-entry
 
--   `Parentize()` - recursive update of parent Seq-entries
+-   ***Parentize()*** - recursive update of parent Seq-entries
 
 #### Bioseq-set: A Set Of Seq-entry's
 
@@ -1327,9 +1327,9 @@ A Bioseq-set contains a convenient collection of Seq-entry's. It can have descri
 
 Some of the important methods for [CBioseq\_set](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBioseq__set.html) are:
 
--   `GetLabel()` - append a label based on type or content of [CBioseq\_set](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBioseq__set.html)
+-   ***GetLabel()*** - append a label based on type or content of [CBioseq\_set](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBioseq__set.html)
 
--   `GetParentSet()` - gets the parent of the current [CBioseq\_set](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBioseq__set.html)
+-   ***GetParentSet()*** - gets the parent of the current [CBioseq\_set](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBioseq__set.html)
 
 ##### id: local identifier for this set
 
@@ -1467,13 +1467,13 @@ There are no implicit Bioseq locations. All locations include a sequence identif
 
 In addition to the various sequence location and identifier classes, several convenience functions for comparing or manipulating Na-strands are defined in [Na\_strand.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/seqloc/Na_strand.hpp):
 
--   `IsForward()`
+-   ***IsForward()***
 
--   `IsReverse()`
+-   ***IsReverse()***
 
--   `Reverse()`
+-   ***Reverse()***
 
--   `SameOrientation()`
+-   ***SameOrientation()***
 
 #### Seq-id: Identifying Sequences
 
@@ -1485,23 +1485,23 @@ A Textseq-id structure is used in many Seq-ids described below. It has four poss
 
 Some important methods of the [CSeq\_id](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__id.html) class are:
 
--   `CSeq_id()` -- constructors to simplify creation of Seq-ids from primitive types (string, int). Some of these constructors auto-detect the type of the Seq-id from its string representation.
+-   ***CSeq\_id()*** -- constructors to simplify creation of Seq-ids from primitive types (string, int). Some of these constructors auto-detect the type of the Seq-id from its string representation.
 
--   `Compare()` -- compare Seq-ids.
+-   ***Compare()*** -- compare Seq-ids.
 
--   `GetTextseq_Id ()` -- checks whether the Seq-id subtype is Textseq-id compatible and returns its value.
+-   ***GetTextseq\_Id ()*** -- checks whether the Seq-id subtype is Textseq-id compatible and returns its value.
 
--   `IdentifyAccession()` -- deduces Seq-id information from a bare accession.
+-   ***IdentifyAccession()*** -- deduces Seq-id information from a bare accession.
 
--   `Match()` -- compare Seq-ids.
+-   ***Match()*** -- compare Seq-ids.
 
 Some important nonmember template functions are:
 
--   `FindGi()` -- returns gi from id list if exists, returns 0 otherwise.
+-   ***FindGi()*** -- returns gi from id list if exists, returns 0 otherwise.
 
--   `FindTextseq_id()` -- returns text seq-id from id list if exists, returns 0 otherwise.
+-   ***FindTextseq\_id()*** -- returns text seq-id from id list if exists, returns 0 otherwise.
 
--   `GetSeq_idByType()` -- search the container of [CRef](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCRef.html)\<[CSeq\_id](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__id.html)\> for the id of given type.
+-   ***GetSeq\_idByType()*** -- search the container of [CRef](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCRef.html)\<[CSeq\_id](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__id.html)\> for the id of given type.
 
 #### Seq-id: Semantics of Use
 
@@ -1619,21 +1619,21 @@ A Seq-loc is a location on a Bioseq of any representation class, nucleic acid or
 
 Some important methods of the [CSeq\_loc](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__loc.html) class and some of the subtype classes ([CSeq\_interval](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__interval.html), [CSeq\_loc\_mix](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__loc__mix.html) etc.) are:
 
--   `CSeq_loc()` -- constructors to simplify creation of simple Seq-loc objects.
+-   ***CSeq\_loc()*** -- constructors to simplify creation of simple Seq-loc objects.
 
--   `Compare()` -- compares two Seq-locs if they are defined on the same Bioseq.
+-   ***Compare()*** -- compares two Seq-locs if they are defined on the same Bioseq.
 
--   `GetTotalRange()` -- returns range, covering the whole Seq-loc. If the Seq-loc refers multiple Bioseqs, exception is thrown.
+-   ***GetTotalRange()*** -- returns range, covering the whole Seq-loc. If the Seq-loc refers multiple Bioseqs, exception is thrown.
 
--   `IsReverseStrand()` -- returns true if all ranges in the Seq-loc have reverse strand.
+-   ***IsReverseStrand()*** -- returns true if all ranges in the Seq-loc have reverse strand.
 
--   `GetStart(), GetStop()` -- return start and stop positions of the Seq-loc. This may be different from GetTotalRange if the related Bioseq is circular or if the order of ranges in the Seq-loc is non-standard.
+-   ***GetStart(), GetStop()*** -- return start and stop positions of the Seq-loc. This may be different from GetTotalRange if the related Bioseq is circular or if the order of ranges in the Seq-loc is non-standard.
 
--   `GetCircularLength()` -- returns length of the Seq-loc. If the sequence length is provided, the method checks whether the Seq-loc is circular and calculates the correct length, even if the location crosses a sequence start.
+-   ***GetCircularLength()*** -- returns length of the Seq-loc. If the sequence length is provided, the method checks whether the Seq-loc is circular and calculates the correct length, even if the location crosses a sequence start.
 
--   `CheckId()` -- checks whether the Seq-loc refers to only one Seq-id and returns it; otherwise, it sends an exception.
+-   ***CheckId()*** -- checks whether the Seq-loc refers to only one Seq-id and returns it; otherwise, it sends an exception.
 
--   `Add()` -- adds a sub-location to the existing one.
+-   ***Add()*** -- adds a sub-location to the existing one.
 
 Beside these methods, a new class [CSeq\_loc\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__loc__CI.html) is defined in Seq\_loc.hpp, which provides simplified access to individual ranges of any Seq-loc, regardless of its real type and structure.
 
@@ -2252,13 +2252,13 @@ Sequence Alignments
 
 #### Introduction
 
-A sequence alignment is a mapping of the coordinates of one `Bioseq` onto the coordinates of one or more other `Bioseq`s. Such a mapping may be associated with a score and/or a method for doing the alignment. An alignment can be generated algorithmically by software or manually by a scientist. The `Seq-align` object is designed to capture the final result of the process, not the process itself.
+A sequence alignment is a mapping of the coordinates of one ***Bioseq*** onto the coordinates of one or more other ***Bioseq***s. Such a mapping may be associated with a score and/or a method for doing the alignment. An alignment can be generated algorithmically by software or manually by a scientist. The ***Seq-align*** object is designed to capture the final result of the process, not the process itself.
 
-A `Seq-align` is one of the forms of `Seq-annot` and is as acceptable a sequence annotation as a feature table. `Seq-align`s would normally be "packaged" in a `Seq-annot` for exchange with other tools or databases so the alignments can be identified and given a title.
+A ***Seq-align*** is one of the forms of ***Seq-annot*** and is as acceptable a sequence annotation as a feature table. ***Seq-align***s would normally be "packaged" in a ***Seq-annot*** for exchange with other tools or databases so the alignments can be identified and given a title.
 
-The most common sequence alignment is from one sequence to another with a one to one relationship between the aligned residues of one sequence with the residues of the other (with allowance for gaps). Two types of `Seq-align` types, `Dense-seg` and `Dense-diag` are specifically for this type of alignment. The `Std-seg`, on the other hand, is very generic and does not assume that the length of one aligned region is necessarily the same as the other. This permits expansion and contraction of one `Bioseq` relative to another, which is necessary in the case of a physical map `Bioseq` aligned to a genetic map `Bioseq`, or a sequence `Bioseq` aligned with any map `Bioseq`.
+The most common sequence alignment is from one sequence to another with a one to one relationship between the aligned residues of one sequence with the residues of the other (with allowance for gaps). Two types of ***Seq-align*** types, ***Dense-seg*** and ***Dense-diag*** are specifically for this type of alignment. The ***Std-seg***, on the other hand, is very generic and does not assume that the length of one aligned region is necessarily the same as the other. This permits expansion and contraction of one ***Bioseq*** relative to another, which is necessary in the case of a physical map ***Bioseq*** aligned to a genetic map ***Bioseq***, or a sequence ***Bioseq*** aligned with any map ***Bioseq***.
 
-All the forms of `Seq-align` are composed of segments. Each segment is an aligned region which contains only sequence or only a gap for any sequence in the alignment. Below is a three dimensional alignment with six segments:
+All the forms of ***Seq-align*** are composed of segments. Each segment is an aligned region which contains only sequence or only a gap for any sequence in the alignment. Below is a three dimensional alignment with six segments:
 
         Seq-ids
         id=100        AAGGCCTTTTAGAGATGATGATGATGATGA
@@ -2275,11 +2275,11 @@ Taking only two of the sequences in a two way alignment, only three segments are
 
 #### Seq-align
 
-A `Seq-align` is a collection of segments representing one complete alignment. The whole `Seq-align` may have a Score representing some measure of quality or attributing the method used to build the `Seq-align`. In addition, each segment may have a score for that segment alone.
+A ***Seq-align*** is a collection of segments representing one complete alignment. The whole ***Seq-align*** may have a Score representing some measure of quality or attributing the method used to build the ***Seq-align***. In addition, each segment may have a score for that segment alone.
 
 ##### type: global
 
-A global alignment is the alignment of `Bioseq`s over their complete length. It expresses the relationship between the intact `Bioseq`s. As such it is typically used in studies of homology between closely related proteins or genomes where there is reason to believe they share a common origin over their complete lengths.
+A global alignment is the alignment of ***Bioseq***s over their complete length. It expresses the relationship between the intact ***Bioseq***s. As such it is typically used in studies of homology between closely related proteins or genomes where there is reason to believe they share a common origin over their complete lengths.
 
 The segments making up a global alignment are assumed to be connected in order from first to last to make up the alignment, and that the full lengths of all sequences will be accounted for in the alignment.
 
@@ -2289,59 +2289,59 @@ A partial alignment only defines a relationship between sequences for the length
 
 Like a global alignment, the segments making up a partial alignment are assumed to be connected in order from first to last to make up the alignment. Unlike a global alignment, it is not assumed the alignment will necessarily account for the full lengths of any or all sequences.
 
-A partial or global alignment may use either the `denseg` choice of segment (for aligned `Bioseq`s with one to one residue mappings, such as protein or nucleic acid sequences) or the `std` choice for any `Bioseq`s including maps. In both cases there is an ordered relationship between one segment and the next to make the complete alignment.
+A partial or global alignment may use either the ***denseg*** choice of segment (for aligned ***Bioseq***s with one to one residue mappings, such as protein or nucleic acid sequences) or the ***std*** choice for any ***Bioseq***s including maps. In both cases there is an ordered relationship between one segment and the next to make the complete alignment.
 
 ##### type: diags
 
-A `Seq-align` of type `diags` means that each segment is independent of the next and no claims are made about the reasonableness of connecting one segment to another. This is the kind of relationship shown by a "dot matrix" display. A series of diagonal lines in a square matrix indicate unbroken regions of similarity between the sequences. However, diagonals may overlap multiple times, or regions of the matrix may have no diagonals at all. The `diags` type of alignment captures that kind of relationship, although it is not limited to two dimensions as a dot matrix is.
+A ***Seq-align*** of type ***diags*** means that each segment is independent of the next and no claims are made about the reasonableness of connecting one segment to another. This is the kind of relationship shown by a "dot matrix" display. A series of diagonal lines in a square matrix indicate unbroken regions of similarity between the sequences. However, diagonals may overlap multiple times, or regions of the matrix may have no diagonals at all. The ***diags*** type of alignment captures that kind of relationship, although it is not limited to two dimensions as a dot matrix is.
 
-The `diags` type of `Seq-align` may use either the `dendiag` choice of segment (for aligned `Bioseq`s with one to one residue mappings, such as protein or nucleic acid sequences) or the `std` choice for any `Bioseq`s including maps. In both cases the `SEQUENCE OF` does not imply any ordered relationship between one segment and the next. Each segment is independent of any other.
+The ***diags*** type of ***Seq-align*** may use either the ***dendiag*** choice of segment (for aligned ***Bioseq***s with one to one residue mappings, such as protein or nucleic acid sequences) or the ***std*** choice for any ***Bioseq***s including maps. In both cases the ***SEQUENCE OF*** does not imply any ordered relationship between one segment and the next. Each segment is independent of any other.
 
 ##### Type:disc
 
 A discontinuous alignment is a set of alignments between two or more sequences. The alignments in the set represent the aligned chunks, broken by unaligned regions (represented by the implicit gaps in-between the alignments in the set).
 
-Each chunk is a non-recursive `Seq-align` of type ''global'' or ''partial'' and with the same dimension. `Seq-id`s in all `Seq-align`s are identical (and in the same order).
+Each chunk is a non-recursive ***Seq-align*** of type ''global'' or ''partial'' and with the same dimension. ***Seq-id***s in all ***Seq-align***s are identical (and in the same order).
 
 Examples of usage include mRNA-to-genomic alignments representing exons or genomic-to-genomic alignments containing unaligned regions.
 
 ##### dim: Dimensionality Of The Alignment
 
-Most scientists are familiar with pairwise, or two dimensional, sequence alignments. However, it is often useful to align sequences in more dimensions. The `dim` attribute of `Seq-align` indicates the number of sequences which are **simultaneously** aligned. A three dimensional alignment is a true three way alignment (ABC), not three pairwise alignments (AB, AC, BC). Three pairwise alignments are three `Seq-align` objects, each with dimension equal to two.
+Most scientists are familiar with pairwise, or two dimensional, sequence alignments. However, it is often useful to align sequences in more dimensions. The ***dim*** attribute of ***Seq-align*** indicates the number of sequences which are **simultaneously** aligned. A three dimensional alignment is a true three way alignment (ABC), not three pairwise alignments (AB, AC, BC). Three pairwise alignments are three ***Seq-align*** objects, each with dimension equal to two.
 
-Another common situation is when many sequences are aligned to one, as is the case of a merge of a number of components into a larger sequence, or the relationship of many mutant alleles to the wild type sequence. This is also a collection of two dimensional alignments, where one of the `Bioseq`s is common to all alignments. If the wild type `Bioseq` is A, and the mutants are B, C, D, then the `Seq-annot` would contain three two dimensional alignments, AB, AC, AD.
+Another common situation is when many sequences are aligned to one, as is the case of a merge of a number of components into a larger sequence, or the relationship of many mutant alleles to the wild type sequence. This is also a collection of two dimensional alignments, where one of the ***Bioseq***s is common to all alignments. If the wild type ***Bioseq*** is A, and the mutants are B, C, D, then the ***Seq-annot*** would contain three two dimensional alignments, AB, AC, AD.
 
-The `dim` attribute at the level of the `Seq-align` is **optional**, while the `dim` attribute is required on **each** segment. This is because it is convenient for a global or partial alignment to know the dimensionality for the whole alignment. It is also an integrity check that every segment in such a `Seq-align` has the same dimension. For `diags` however, the segments are independent of each other, and may even have different dimensions. This would be true for algorithms that locate the best n-way diagonals, where n can be 2 to the number of sequences. For a simple dot-matrix, all segments would be dimension two.
+The ***dim*** attribute at the level of the ***Seq-align*** is **optional**, while the ***dim*** attribute is required on **each** segment. This is because it is convenient for a global or partial alignment to know the dimensionality for the whole alignment. It is also an integrity check that every segment in such a ***Seq-align*** has the same dimension. For ***diags*** however, the segments are independent of each other, and may even have different dimensions. This would be true for algorithms that locate the best n-way diagonals, where n can be 2 to the number of sequences. For a simple dot-matrix, all segments would be dimension two.
 
 #### Score: Score Of An Alignment Or Segment
 
-A Score contains an id (of type Object-id) which is meant to identify the method used to generate the score. It could be a string (e.g. "BLAST raw score", "BLAST p value") or an integer for use by a software system planning to process a number of defined values. The value of the Score is either an integer or real number. Both `Seq-align` and segment types allow more than one Score so that a variety of measures for the same alignment can be accommodated.
+A Score contains an id (of type Object-id) which is meant to identify the method used to generate the score. It could be a string (e.g. "BLAST raw score", "BLAST p value") or an integer for use by a software system planning to process a number of defined values. The value of the Score is either an integer or real number. Both ***Seq-align*** and segment types allow more than one Score so that a variety of measures for the same alignment can be accommodated.
 
 #### Dense-diag: Segments For diags Seq-align
 
-A `Seq-align` of type `diags` represents a series of unconnected diagonals as a `SEQUENCE OF Dense-diag`. Since each `Dense-diag` is unrelated to the next the `SEQUENCE OF` just suggests a presentation order. It does not imply anything about the reasonableness of joining one `Dense-diag` to the next. In fact, for a multi-sequence comparison, each `Dense-diag` may have a different dimension and/or include `Bioseq`s not included by another `Dense-diag`.
+A ***Seq-align*** of type ***diags*** represents a series of unconnected diagonals as a ***SEQUENCE OF Dense-diag***. Since each ***Dense-diag*** is unrelated to the next the ***SEQUENCE OF*** just suggests a presentation order. It does not imply anything about the reasonableness of joining one ***Dense-diag*** to the next. In fact, for a multi-sequence comparison, each ***Dense-diag*** may have a different dimension and/or include ***Bioseq***s not included by another ***Dense-diag***.
 
-A single `Dense-diag` defines its dimension with `dim`. There should be `dim` number of `Seq-id` in `ids`, indicating the `Bioseq`s involved in the segment, in order. There should be `dim` number of integers in `starts` (offsets into the `Bioseq`s, starting with 0, as in any `Seq-loc`) indicating the first (lowest numbered) residue of each `Bioseq` involved in the segment is, in the same order as `ids`. The `len` indicates the length of all `Bioseq`s in the segment. Thus the last residue involved in the segment for every `Bioseq` will be its `start` plus `len - 1`.
+A single ***Dense-diag*** defines its dimension with ***dim***. There should be ***dim*** number of ***Seq-id*** in ***ids***, indicating the ***Bioseq***s involved in the segment, in order. There should be ***dim*** number of integers in ***starts*** (offsets into the ***Bioseq***s, starting with 0, as in any ***Seq-loc***) indicating the first (lowest numbered) residue of each ***Bioseq*** involved in the segment is, in the same order as ***ids***. The ***len*** indicates the length of all ***Bioseq***s in the segment. Thus the last residue involved in the segment for every ***Bioseq*** will be its ***start*** plus ***len - 1***.
 
-In the case of nucleic acids, if any or all of the segments are on the complement strand of the original `Bioseq`, then there should be `dim` number of Na-strand in `len` in the same order as `ids`, indicating which segments are on the plus or minus strands. The fact that a segment is on the minus strand or not does NOT affect the values chosen for `starts`. It is still the lowest numbered offset of a residue involved in the segment.
+In the case of nucleic acids, if any or all of the segments are on the complement strand of the original ***Bioseq***, then there should be ***dim*** number of Na-strand in ***len*** in the same order as ***ids***, indicating which segments are on the plus or minus strands. The fact that a segment is on the minus strand or not does NOT affect the values chosen for ***starts***. It is still the lowest numbered offset of a residue involved in the segment.
 
-Clearly all `Bioseq` regions involved in a `Dense-diag` must have the same length, so this form does not allow stretching of one `Bioseq` compared to another, as may occur when comparing a genetic map `Bioseq` to a physical map or sequence `Bioseq`. In this case one would use `Std-seg`.
+Clearly all ***Bioseq*** regions involved in a ***Dense-diag*** must have the same length, so this form does not allow stretching of one ***Bioseq*** compared to another, as may occur when comparing a genetic map ***Bioseq*** to a physical map or sequence ***Bioseq***. In this case one would use ***Std-seg***.
 
 #### Dense-seg: Segments for "global" or "partial" Seq-align
 
-A `Dense-seg` is a single entity which describes a complete global or partial alignment containing many segments. Like `Dense-diag` above, it is only appropriate when there is no stretching of the `Bioseq` coordinates relative to each other (as may happen when aligning a physical to a genetic map `Bioseq`). In that case, one would use a SEQUENCE OF `Std-seg`, described below.
+A ***Dense-seg*** is a single entity which describes a complete global or partial alignment containing many segments. Like ***Dense-diag*** above, it is only appropriate when there is no stretching of the ***Bioseq*** coordinates relative to each other (as may happen when aligning a physical to a genetic map ***Bioseq***). In that case, one would use a SEQUENCE OF ***Std-seg***, described below.
 
-A `Dense-seg` must give the dimension of the alignment in `dim` and the number of segments in the alignment in `numseg`. The `ids` slot must contain `dim` number of `Seq-id`s for the `Bioseq`s used in the alignment.
+A ***Dense-seg*** must give the dimension of the alignment in ***dim*** and the number of segments in the alignment in ***numseg***. The ***ids*** slot must contain ***dim*** number of ***Seq-id***s for the ***Bioseq***s used in the alignment.
 
-The `starts` slot contains the lowest numbered residue contained in each segment, in `ids` order. The `starts` slot should have `numseg` times `dim` integers, or the start of each `Bioseq` in the first segment in `ids` order, followed by the start of each `Bioseq` in the second segment in `ids` order and so on. A `start` of minus one indicates that the `Bioseq` is not present in the segment (i.e. a gap in a `Bioseq`).
+The ***starts*** slot contains the lowest numbered residue contained in each segment, in ***ids*** order. The ***starts*** slot should have ***numseg*** times ***dim*** integers, or the start of each ***Bioseq*** in the first segment in ***ids*** order, followed by the start of each ***Bioseq*** in the second segment in ***ids*** order and so on. A ***start*** of minus one indicates that the ***Bioseq*** is not present in the segment (i.e. a gap in a ***Bioseq***).
 
-The `lens` slot contains the length of each segment in segment order, so `lens` will contain `numseg` integers.
+The ***lens*** slot contains the length of each segment in segment order, so ***lens*** will contain ***numseg*** integers.
 
-If any or all of the sequences are on the minus strand of the original `Bioseq`, then there should be `numseg` times `dim` Na-strand values in `len` in the same order as `starts`. Whether a sequence segment is on the plus or minus strand has **no** effect on the value selected for `starts`. It is **always** the lowest numbered residue included in the segment.
+If any or all of the sequences are on the minus strand of the original ***Bioseq***, then there should be ***numseg*** times ***dim*** Na-strand values in ***len*** in the same order as ***starts***. Whether a sequence segment is on the plus or minus strand has **no** effect on the value selected for ***starts***. It is **always** the lowest numbered residue included in the segment.
 
-The `scores` is a `SEQUENCE OF Score`, one for each segment. So there should be `numseg Scores`, if `scores` is filled. A single `Score` for the whole alignment would appear in the `score` slot of the `Seq-align`.
+The ***scores*** is a ***SEQUENCE OF Score***, one for each segment. So there should be ***numseg Scores***, if ***scores*** is filled. A single ***Score*** for the whole alignment would appear in the ***score*** slot of the ***Seq-align***.
 
-The three dimensional alignment show above is repeated below, followed by its ASN.1 encoding into a `Seq-align` using `Dense-seg`. The `Seq-id`s are given in the ASN.1 as type "local".
+The three dimensional alignment show above is repeated below, followed by its ASN.1 encoding into a ***Seq-align*** using ***Dense-seg***. The ***Seq-id***s are given in the ASN.1 as type "local".
 
         Seq-ids
 
@@ -2365,9 +2365,9 @@ The three dimensional alignment show above is repeated below, followed by its AS
 
 #### Std-seg: Aligning Any Bioseq Type With Any Other
 
-A `SEQUENCE OF Std-seg` can be used to describe any `Seq-align` type on any types of `Bioseq`s. A `Std-seg` is very purely a collection of correlated `Seq-loc`s. There is no requirement that the length of each `Bioseq` in a segment be the same as the other members of the segment or that the same `Seq-loc` type be used for each member of the segment. This allows stretching of one `Bioseq` relative to the other(s) and potentially very complex descriptions of relationships between sequences.
+A ***SEQUENCE OF Std-seg*** can be used to describe any ***Seq-align*** type on any types of ***Bioseq***s. A ***Std-seg*** is very purely a collection of correlated ***Seq-loc***s. There is no requirement that the length of each ***Bioseq*** in a segment be the same as the other members of the segment or that the same ***Seq-loc*** type be used for each member of the segment. This allows stretching of one ***Bioseq*** relative to the other(s) and potentially very complex descriptions of relationships between sequences.
 
-Each `Std-seg` must give its dimension, so it can be used for `diags`. Optionally it can give the Seq-ids for the `Bioseq`s used in the segment (again a convenience for `Seq-align` of type `diags`). The `loc` slot gives the locations on the `Bioseq`s used in this segment. As usual, there is also a place for various `Score`(s) associated with the segment. The example given above is presented again, this time as a `Seq-align` using `Std-seg`s. Note the use of `Seq-loc` type "empty" to indicate a gap. Alternatively one could simply change the `dim` for each segment to exclude the `Bioseq`s not present in the segment, although this would require more interpretation by software.
+Each ***Std-seg*** must give its dimension, so it can be used for ***diags***. Optionally it can give the Seq-ids for the ***Bioseq***s used in the segment (again a convenience for ***Seq-align*** of type ***diags***). The ***loc*** slot gives the locations on the ***Bioseq***s used in this segment. As usual, there is also a place for various ***Score***(s) associated with the segment. The example given above is presented again, this time as a ***Seq-align*** using ***Std-seg***s. Note the use of ***Seq-loc*** type "empty" to indicate a gap. Alternatively one could simply change the ***dim*** for each segment to exclude the ***Bioseq***s not present in the segment, although this would require more interpretation by software.
 
         Seq-ids
         id=100          AAGGCCTTTTAGAGATGATGATGATGATGA
@@ -2490,11 +2490,11 @@ Each `Std-seg` must give its dimension, so it can be used for `diags`. Optionall
         }
     }
 
-Clearly the `Std-seg` method should only be used when its flexibility is required. Nonetheless, there is no ready substitute for `Std-seg` when flexibility is demanded.
+Clearly the ***Std-seg*** method should only be used when its flexibility is required. Nonetheless, there is no ready substitute for ***Std-seg*** when flexibility is demanded.
 
 #### C++ Implementation Notes
 
-The C++ Toolkit adds several methods to the classes generated from ASN.1 specifications to simplify alignment data access and manipulation. The [CSeq\_align](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__align.html) class has methods returning `Seq-id`, start, stop, and strand for a particular alignment row, regardless of its representation; it allows swapping alignment rows or converting the alignment from one type to another. The [CDense\_seg](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDense__seg.html) class extends the default set of alignment members with sequence character width (1 or 3, depending on molecule type).
+The C++ Toolkit adds several methods to the classes generated from ASN.1 specifications to simplify alignment data access and manipulation. The [CSeq\_align](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__align.html) class has methods returning ***Seq-id***, start, stop, and strand for a particular alignment row, regardless of its representation; it allows swapping alignment rows or converting the alignment from one type to another. The [CDense\_seg](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDense__seg.html) class extends the default set of alignment members with sequence character width (1 or 3, depending on molecule type).
 
 Sequence Graphs
 ---------------

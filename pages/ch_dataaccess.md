@@ -40,11 +40,11 @@ E-Utils: Access to Entrez Data
 
 The base class for all requests is [CEUtils\_Request](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CEUtils_Request). Derived request classes provide *Get/Set* methods to specify arguments for each request. The returned data can be read in several ways:
 
--   `Read()` - reads the data returned by the server into a string.
+-   ******Read()****** - reads the data returned by the server into a string.
 
--   `GetStream()` - allows to read plain data returned by the server.
+-   ******GetStream()****** - allows to read plain data returned by the server.
 
--   `GetObjectIStream()` - returns serial stream for reading data (in most cases it's an XML stream).
+-   ******GetObjectIStream()****** - returns serial stream for reading data (in most cases it's an XML stream).
 
 ### Connection context
 

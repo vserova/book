@@ -129,9 +129,9 @@ The original open-source [libxmlwrapp](http://vslavik.github.io/xmlwrapp/) 0.6.0
 
     -   XPath queries can be run based on XPath expressions. The queries return node sets which can be iterated.
 
--   A new class, `xml::schema`, was added for XSD support.
+-   A new class, ***xml::schema***, was added for XSD support.
 
--   Implementing a full-featured XML namespace class, `xml::ns`, for use by both nodes and attributes, with these features:
+-   Implementing a full-featured XML namespace class, ***xml::ns***, for use by both nodes and attributes, with these features:
 
     -   Each node and attribute may be assigned to a namespace, or have their assignment removed. The assigned namespace can be retrieved.
 
@@ -170,15 +170,15 @@ The figure above shows the most important classes in XmlWrapp. XML can be parsed
 
 Several classes in the figure are marked with the small "circled-i" symbol in the corner. This mark means that the class supports iterators and const iterators. The node class is a container of other nodes and you can iterate over immediate node children similar to how you do with STL containers.
 
-A node may have an XML namespace and also may define namespaces. To support this, XmlWrapp provides the XML namespace class, `xml::ns`.
+A node may have an XML namespace and also may define namespaces. To support this, XmlWrapp provides the XML namespace class, ***xml::ns***.
 
-An XML node may have attributes as well, so XmlWrapp provides the `xml::attributes` class. This class is a container of attributes so both const and non-const iterators are provided.
+An XML node may have attributes as well, so XmlWrapp provides the ***xml::attributes*** class. This class is a container of attributes so both const and non-const iterators are provided.
 
-The XPath support includes the `xml::xpath_expression` and `xml::node_set` classes. `xpath_expression` objects hold a single expression. `node_set` objects are created as the result of executing an XPath query for a given node. The `node_set` class is a container so it supports iterators.
+The XPath support includes the ***xml::xpath\_expression*** and ***xml::node\_set*** classes. ***xpath\_expression*** objects hold a single expression. ***node\_set*** objects are created as the result of executing an XPath query for a given node. The ***node\_set*** class is a container so it supports iterators.
 
-To support XSD schema validation and DTD validation, XmlWrapp provides the `xml::schema` and `xml::dtd` classes. These classes work together with the `xml::document` class.
+To support XSD schema validation and DTD validation, XmlWrapp provides the ***xml::schema*** and ***xml::dtd*** classes. These classes work together with the ***xml::document*** class.
 
-Warnings, errors and fatal errors may occur during the parsing and validating. To collect them, XmlWrapp provides the `xml::error_messages` class. The `error_messages` class includes the `print()` method, which returns a string containing a newline-separated list of messages. It also includes the `has_warnings()`, `has_errors()`, and `has_fatal_errors()` methods in case you are interested in the presence of a specific type of message. Note that errors and fatal errors are considered separately, so `has_fatal_errors()` may return `true` while `has_errors()` returns `false`.
+Warnings, errors and fatal errors may occur during the parsing and validating. To collect them, XmlWrapp provides the ***xml::error\_messages*** class. The ***error\_messages*** class includes the ***print()*** method, which returns a string containing a newline-separated list of messages. It also includes the ***has\_warnings()***, ***has\_errors()***, and ***has\_fatal\_errors()*** methods in case you are interested in the presence of a specific type of message. Note that errors and fatal errors are considered separately, so ***has\_fatal\_errors()*** may return `true` while ***has\_errors()*** returns `false`.
 
 How To
 ------
@@ -196,7 +196,7 @@ This section includes compact code fragments that show the essence of how to ach
 
     xml::document       doc( "MyFile.xml", NULL );
 
-*Note:* The second parameter above is a pointer to an `error_messages` object, which stores any messages collected while parsing the XML document (a `NULL` value can be passed if you're not interested in collecting error messages). For example:
+***Note:*** The second parameter above is a pointer to an ***error\_messages*** object, which stores any messages collected while parsing the XML document (a `NULL` value can be passed if you're not interested in collecting error messages). For example:
 
     xml::error_messages msgs;
     xml::document       doc( "MyFile.xml", &msgs );
@@ -234,7 +234,7 @@ For example, if you do not want to have the XML declaration at the beginning of 
 
     doc.save_to_string( s, xml::save_op_no_decl );
 
-Note that all the `save_to_*()` functions use the same underlying formatting code and therefore respond to flags in the same way.
+Note that all the ***save\_to\_\*()*** functions use the same underlying formatting code and therefore respond to flags in the same way.
 
 For further discussion, see the [Formatting of Programmatically Added Content](#formatting-of-programmatically-added-content) section. For a complete list of available formatting flags, see [`enum xml::save_options`](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/namespacexml.html#8599801d006476631c27a732819b9995).
 
@@ -325,7 +325,7 @@ For those within NCBI, there is [sample code](https://svn.ncbi.nlm.nih.gov/viewv
 
 Other methods and options are available for saving the transformation result - see [save\_to\_stream()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=save_to_stream), [save\_to\_file()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=save_to_file), and [save\_options](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=save_options).
 
-*Note:* The transformation output will be affected by a number of factors:
+***Note:*** The transformation output will be affected by a number of factors:
 
 -   If there is no output method specified in the XSL, or if the specified method is not "`html`" or "`text`", then the effective output method will be "`xml`".
 
@@ -333,7 +333,7 @@ Other methods and options are available for saving the transformation result - s
 
 -   The save options are only applicable when the effective output method is "`xml`".
 
--   If the effective output method is "`xml`", an XML declaration will be prepended to the transformation result when serialized (unless suppressed by the `xml::save_op_no_decl` save option).
+-   If the effective output method is "`xml`", an XML declaration will be prepended to the transformation result when serialized (unless suppressed by the **`xml::save_op_no_decl`** save option).
 
 -   There are three conditions for which an empty "`<blank/>`" node will be appended to the transformation output:
 
@@ -356,9 +356,9 @@ Other methods and options are available for saving the transformation result - s
         std::cout << "Node #" << nnum++ << std::endl
              << *k << std::endl;
 
-Please note that the `node_set` object holds a set of references to the nodes from the document which is used to run the XPath query. Therefore you can change the nodes in the original document if you use a non-constant `node_set` and non-constant iterators.
+Please note that the **`node_set`** object holds a set of references to the nodes from the document which is used to run the XPath query. Therefore you can change the nodes in the original document if you use a non-constant **`node_set`** and non-constant iterators.
 
-The `xpath_expression` object also supports:
+The **`xpath_expression`** object also supports:
 
 -   pre-compilation of the XPath query string
 
@@ -447,7 +447,7 @@ The solution is to create a special namespace with the sole purpose of associati
 
         std::cout << result << std::endl; // "42"
 
-Please also see the `xslt::extension-function` [class reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classxslt_1_1extension__function.html).
+Please also see the ***xslt::extension-function*** [class reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classxslt_1_1extension__function.html).
 
 Users inside NCBI can view the [extension function unit tests](https://svn.ncbi.nlm.nih.gov/viewvc/toolkit/trunk/internal/c++/src/internal/test/misc/xmlwrapp/xslt_ext_func/) for more usage examples.
 
@@ -496,16 +496,16 @@ Users inside NCBI can view the [extension function unit tests](https://svn.ncbi.
         std::cout << result_root.get_name() << std::endl; // "inserted"
         std::cout << result_root.get_content() << std::endl; // "content"
 
-Please also see the `xslt::extension-element` [class reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classxslt_1_1extension__element.html).
+Please also see the ***xslt::extension-element*** [class reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classxslt_1_1extension__element.html).
 
 Users inside NCBI can view the [extension element unit tests](https://svn.ncbi.nlm.nih.gov/viewvc/toolkit/trunk/internal/c++/src/internal/test/misc/xmlwrapp/xslt_ext_elem/) for more usage examples.
 
 ### Use an XML Catalog
 
-The `XML_CATALOG_FILES` environment variable may be used in one of three ways to control the XML catalog feature of `libxml2` – i.e. the way `libxml2` resolves unreachable external URI's:
+The **`XML_CATALOG_FILES`** environment variable may be used in one of three ways to control the XML catalog feature of `libxml2` – i.e. the way `libxml2` resolves unreachable external URI's:
 
 1  
-If `XML_CATALOG_FILES` is not set in the process environment then the default catalog will be used.
+If **`XML_CATALOG_FILES`** is not set in the process environment then the default catalog will be used.
 
 2  
 If it is set to an empty value then the default catalog will be deactivated and there will be no resolution of unreachable external URI's.
@@ -515,21 +515,21 @@ If it is set to a space-separated list of catalog files, then `libxml2` will use
 
 The default catalog is `/etc/xml/catalog` for non-Windows systems. For Windows, the default catalog is `<module_path>\..\etc\catalog`, where `<module_path>` is the path to the installed `libxml2.dll`, if available, otherwise the path to the running program.
 
-The `XML_CATALOG_FILES` environment variable is read once before the first parsing operation, and then any specified catalogs are used globally for URI resolution in all subsequent parsing operations. Therefore, if the `XML_CATALOG_FILES` value is to be set programmatically, it must be done prior to the first parsing operation.
+The **`XML_CATALOG_FILES`** environment variable is read once before the first parsing operation, and then any specified catalogs are used globally for URI resolution in all subsequent parsing operations. Therefore, if the **`XML_CATALOG_FILES`** value is to be set programmatically, it must be done prior to the first parsing operation.
 
-There is another environment variable (`XML_DEBUG_CATALOG`) to control debug output. If it is defined, then debugging output will be enabled.
+There is another environment variable (**`XML_DEBUG_CATALOG`**) to control debug output. If it is defined, then debugging output will be enabled.
 
 Warning: Collaborative Use of XmlWrapp and libxml2
 --------------------------------------------------
 
-XmlWrapp uses the `_private` field of the raw `libxml2 ``xmlNode` data structure for internal purposes. Therefore, if `libxml2` and XmlWrapp are used collaboratively then this field must not be used in client code. If it is used, it may cause a core dump or other undefined behavior.
+XmlWrapp uses the **`_private`** field of the raw `libxml2 `***xmlNode*** data structure for internal purposes. Therefore, if `libxml2` and XmlWrapp are used collaboratively then this field must not be used in client code. If it is used, it may cause a core dump or other undefined behavior.
 
 Implementation Details
 ----------------------
 
 ### Copying and Referencing Nodes
 
-`xml::node` objects are frequently required when working with XML documents. There are two ways to work with a given node:
+***xml::node*** objects are frequently required when working with XML documents. There are two ways to work with a given node:
 
 -   by referencing it; or
 
@@ -558,29 +558,29 @@ This example shows both ways:
         delete my_copy;
     }
 
-What is the difference between the `node_ref` and `my_copy` variables?
+What is the difference between the **`node_ref`** and **`my_copy`** variables?
 
-The `node_ref` variable refers to a node in the original document loaded from `example.xml`. If you change something using the `node_ref` variable you’ll make changes in the original document object.
+The **`node_ref`** variable refers to a node in the original document loaded from `example.xml`. If you change something using the **`node_ref`** variable you’ll make changes in the original document object.
 
-The `my_copy` variable is a recursive copy of the corresponding node together with all used namespace definitions, non-default attributes, and nested nodes. The copy has no connection to the original document. The `my_copy` variable has no parent node and has no links to the internal and external subsets (DTDs) which the original document could have. If you change something using the `my_copy` variable you’ll make changes in the copy but not in the original document. Obviously it takes more time to create such a recursive copy of a node.
+The **`my_copy`** variable is a recursive copy of the corresponding node together with all used namespace definitions, non-default attributes, and nested nodes. The copy has no connection to the original document. The **`my_copy`** variable has no parent node and has no links to the internal and external subsets (DTDs) which the original document could have. If you change something using the **`my_copy`** variable you’ll make changes in the copy but not in the original document. Obviously it takes more time to create such a recursive copy of a node.
 
-*Note:* It is recommended to pass nodes by reference when appropriate to maximize performance and avoid modification of copies.
+***Note:*** It is recommended to pass nodes by reference when appropriate to maximize performance and avoid modification of copies.
 
 ### Using Namespaces with XPath Expressions
 
-XmlWrapp provides the `xml::xpath_expression` class for building reusable XPath expressions. If namespaces are involved then one of the constructors which accept a namespace or a list of namespaces should be used. Otherwise the XPath query results may not have the nodes you expect to get.
+XmlWrapp provides the ***xml::xpath\_expression*** class for building reusable XPath expressions. If namespaces are involved then one of the constructors which accept a namespace or a list of namespaces should be used. Otherwise the XPath query results may not have the nodes you expect to get.
 
-XmlWrapp also provides a convenience method for the nodes: `xml::node::run_xpath_query( const char * expr)`. This method builds an `xpath_expression` internally and registers all the effective namespaces for the certain node. While it is very convenient as you don’t need to know in advance what the namespace definitions are, this method has some drawbacks:
+XmlWrapp also provides a convenience method for the nodes: ***xml::node::run\_xpath\_query( const char \* expr)***. This method builds an ***xpath\_expression*** internally and registers all the effective namespaces for the certain node. While it is very convenient as you don’t need to know in advance what the namespace definitions are, this method has some drawbacks:
 
--   The internally built `xpath_expression` is not reusable, so it gets rebuilt every time a query is run - even if the same expression was used before.
+-   The internally built ***xpath\_expression*** is not reusable, so it gets rebuilt every time a query is run - even if the same expression was used before.
 
 -   The list of effective namespace definitions for a certain node can be quite long and may exceed your actual needs. It takes time to build such a list and to register them all so it affects the performance.
 
 Recommendations:
 
--   If you need the best performance then use `xml::xpath_expression` explicitly and do not forget to provide a list of the required namespaces.
+-   If you need the best performance then use ***xml::xpath\_expression*** explicitly and do not forget to provide a list of the required namespaces.
 
--   If you aren’t concerned about performance then use one of the `xml::node::run_xpath_query( const char * expr)` methods.
+-   If you aren’t concerned about performance then use one of the ***xml::node::run\_xpath\_query( const char \* expr)*** methods.
 
 ### Containers of Attributes - Iteration and Size
 
@@ -606,7 +606,7 @@ XmlWrapp provides an STL-like way of iterating over the attributes, e.g:
 
 You may notice that iterators are used here and the iterators can be incremented.
 
-*Note:* Although iterating over attributes is STL-like, searching for an attribute is only partially STL-like. Iterators returned by the `find()` method cannot be incremented, but both operator `->` and operator `*` can be used. The following code will work:
+***Note:*** Although iterating over attributes is STL-like, searching for an attribute is only partially STL-like. Iterators returned by the ***find()*** method cannot be incremented, but both operator `->` and operator `*` can be used. The following code will work:
 
     void f( const xml::node &  theNode, const char *  attrName ) {
         const xml::attributes &          attrs = theNode.get_attributes();
@@ -652,13 +652,13 @@ This example introduces a default attribute called defaultAttr for the root node
         }
     }
 
-XmlWrapp forbids incrementing iterators provided by `xml::attributes::find(...)` methods because:
+XmlWrapp forbids incrementing iterators provided by ***xml::attributes::find(...)*** methods because:
 
 -   `libxml2` has limited support for working with default attributes; and
 
--   iterators provided by the `xml::attributes::find()` methods may point to either a default or a non-default attribute.
+-   iterators provided by the ***xml::attributes::find()*** methods may point to either a default or a non-default attribute.
 
-*Note:* This `libxml2` limitation affects the `xml::attributes::size()` method behavior. It will always provide the number of non-default attributes and will never include the number of default attributes regardless of whether or not a node has default attributes.
+***Note:*** This `libxml2` limitation affects the ***xml::attributes::size()*** method behavior. It will always provide the number of non-default attributes and will never include the number of default attributes regardless of whether or not a node has default attributes.
 
 ### Changing Default Attributes
 
@@ -733,21 +733,21 @@ Figure 1. Phantom Attributes.
 
 ### Event Parser and Named Entities
 
-When using `xml::event_parser`, three functions are involved in parsing an XML document that contains named entities:
+When using ***xml::event\_parser***, three functions are involved in parsing an XML document that contains named entities:
 
--   `xml::init::substitute_entities()`<br/>This method controls whether the `xml::event_parser::entity_reference()` callback is called or not, and must be called before the event parser is created.
+-   ***xml::init::substitute\_entities()***<br/>This method controls whether the ***xml::event\_parser::entity\_reference()*** callback is called or not, and must be called before the event parser is created.
 
--   `xml::event_parser::text()`<br/>This callback will be called for both text nodes and named entity nodes.
+-   ***xml::event\_parser::text()***<br/>This callback will be called for both text nodes and named entity nodes.
 
--   `xml::event_parser::entity_reference()`<br/>This callback may be called for named entity nodes.
+-   ***xml::event\_parser::entity\_reference()***<br/>This callback may be called for named entity nodes.
 
-Imagine that an event parser which implements both `text()` and `entity_reference()` callbacks receives the following document as in input:
+Imagine that an event parser which implements both ***text()*** and ***entity\_reference()*** callbacks receives the following document as in input:
 
     <?xml version="1.0"?>
     <!DOCTYPE EXAMPLE SYSTEM "example.dtd" [ <!ENTITY my "VALUE">]>
     <root><node>Super &my; oh!</node></root>
 
-Then the table below lists the callbacks that are called, depending on the value passed to `substitute_entities()`:
+Then the table below lists the callbacks that are called, depending on the value passed to ***substitute\_entities()***:
 
 | Having this call before the parser is created:<br/>`xml::init::substitute_entities(true)`<br/>results in the following callbacks: | Having this call before the parser is created:<br/>`xml::init::substitute_entities(false)`<br/>results in the following callbacks: |
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -756,7 +756,7 @@ Then the table below lists the callbacks that are called, depending on the value
 |                                                                                                                                                                   | `xml::event_parser::entity_reference("my")`                                                                                                                                            |
 | `xml::event_parser::text(" oh!")`                                                                                                                                                     | `xml::event_parser::text(" oh!")`                                                                                                                                                      |
 
-So the difference is that the `entity_reference()` callback is never called if `substitute_entities(true)` is called. *Note:* The `entity_reference()` callback is also not called if a standard entity is used (e.g. `&apos;`, `&amp;`, `&quot;`, `&lt;`, `&gt;`), regardless of any call to `substitute_entities()`.
+So the difference is that the ***entity\_reference()*** callback is never called if ***substitute\_entities(true)*** is called. ***Note:*** The ***entity\_reference()*** callback is also not called if a standard entity is used (e.g. **`&apos;`**, **`&amp;`**, **`&quot;`**, **`&lt;`**, **`&gt;`**), regardless of any call to ***substitute\_entities()***.
 
 Character entities are handled the same way as named entities.
 
@@ -764,11 +764,11 @@ Generally speaking, the event parser in XmlWrapp behaves the same way as in `lib
 
 ### Safe and Unsafe Namespaces
 
-XmlWrapp provides a wrapper class called `xml::ns` to work with namespaces. The `xml::ns` class can be of two types: safe and unsafe.
+XmlWrapp provides a wrapper class called ***xml::ns*** to work with namespaces. The ***xml::ns*** class can be of two types: safe and unsafe.
 
 To understand the difference between them it is necessary to know how `libxml2` works with namespaces. Namespace structures in `libxml2` store two pointers to character strings - a namespace prefix and a namespace URI. These structures are stored in a linked list and each XML document element that might have a namespace has a pointer that points to a namespace structure. Thus, namespaces can be uniquely identified by either a namespace pointer or by a prefix / URI pair.
 
-XmlWrapp covers both ways. The `xml::ns` can store its own copies of the namespace prefix and URI, and in this case the namespace is called safe. Or, the `xml::ns` can store just a pointer to the corresponding namespace structure, and in this case the namespace is called unsafe.
+XmlWrapp covers both ways. The ***xml::ns*** can store its own copies of the namespace prefix and URI, and in this case the namespace is called safe. Or, the ***xml::ns*** can store just a pointer to the corresponding namespace structure, and in this case the namespace is called unsafe.
 
 [![Image ch\_xmlwrapp\_xmlns.png](/book/static/img/ch_xmlwrapp_xmlns.png)](/book/static/img/ch_xmlwrapp_xmlns.png "Click to see the full-resolution image")
 
@@ -821,36 +821,36 @@ The last case is tied to the fact that XmlWrapp is a very thin wrapper and it te
 
 *libxml2 cleanup*
 
-By default, XmlWrapp automatically initiates cleanup of `libxml2` library data by calling `xmlCleanupParser()` (which is part of `libxml2`). Programs that use `libxml2` only through XmlWrapp therefore don't have to take any explicit cleanup steps for `libxml2` data.
+By default, XmlWrapp automatically initiates cleanup of `libxml2` library data by calling ***xmlCleanupParser()*** (which is part of `libxml2`). Programs that use `libxml2` only through XmlWrapp therefore don't have to take any explicit cleanup steps for `libxml2` data.
 
 However, some programs use `libxml2` outside of XmlWrapp in a way that requires explicit steps to prevent a program crash.
 
-For example, suppose your program uses both XmlWrapp and some other `libxml2`-based library, and suppose that the other library also cleans up by calling `xmlCleanupParser()`. In this case, `xmlCleanupParser()` will be called twice. It could even be called more than twice if, for example, multiple threads use the other library.
+For example, suppose your program uses both XmlWrapp and some other `libxml2`-based library, and suppose that the other library also cleans up by calling ***xmlCleanupParser()***. In this case, ***xmlCleanupParser()*** will be called twice. It could even be called more than twice if, for example, multiple threads use the other library.
 
-Unfortunately, `libxml2`'s `xmlCleanupParser()` wasn't designed to be called more than once, and multiple calls can cause a crash.
+Unfortunately, `libxml2`'s ***xmlCleanupParser()*** wasn't designed to be called more than once, and multiple calls can cause a crash.
 
-Therefore, it is the responsibility of your program to ensure that `xmlCleanupParser()` will be called only once. How it accomplishes that in the case of multi-threaded use of third-party libraries (or any other scenario that results in multiple calls to `xmlCleanupParser()` outside of XmlWrapp), is beyond the scope of XmlWrapp and this document.
+Therefore, it is the responsibility of your program to ensure that ***xmlCleanupParser()*** will be called only once. How it accomplishes that in the case of multi-threaded use of third-party libraries (or any other scenario that results in multiple calls to ***xmlCleanupParser()*** outside of XmlWrapp), is beyond the scope of XmlWrapp and this document.
 
-However, XmlWrapp does provide a way to prevent a crash when a *single* `xmlCleanupParser()` call is made outside XmlWrapp. In this case your program can prevent XmlWrapp from calling `xmlCleanupParser()` using:
+However, XmlWrapp does provide a way to prevent a crash when a *single* ***xmlCleanupParser()*** call is made outside XmlWrapp. In this case your program can prevent XmlWrapp from calling ***xmlCleanupParser()*** using:
 
     xml::init::library_cleanup_on_exit(false);
 
-Your program should also make sure that XmlWrapp finishes all its data handling before the other part calls `xmlCleanupParser()`. This approach will prevent XmlWrapp from calling `xmlCleanupParser()`, and the other use of `xmlCleanupParser()` will be safe.
+Your program should also make sure that XmlWrapp finishes all its data handling before the other part calls ***xmlCleanupParser()***. This approach will prevent XmlWrapp from calling ***xmlCleanupParser()***, and the other use of ***xmlCleanupParser()*** will be safe.
 
 *libxslt cleanup*
 
-The situation for `libxslt` cleanup is essentially the same as described above for `libxml2`, except that the problem arises from `xsltCleanupGlobals()` in addition to `xmlCleanupParser()`. Therefore, if your program makes a call to `xsltCleanupGlobals()` outside XmlWrapp (either directly or through a library), then it should use:
+The situation for `libxslt` cleanup is essentially the same as described above for `libxml2`, except that the problem arises from ***xsltCleanupGlobals()*** in addition to ***xmlCleanupParser()***. Therefore, if your program makes a call to ***xsltCleanupGlobals()*** outside XmlWrapp (either directly or through a library), then it should use:
 
     xml::init::library_cleanup_on_exit(false);
     xslt::init::library_cleanup_on_exit(false);
 
-Your program should also make sure that XmlWrapp finishes all its data handling before the other part calls `xsltCleanupGlobals()` and `xmlCleanupParser()`.
+Your program should also make sure that XmlWrapp finishes all its data handling before the other part calls ***xsltCleanupGlobals()*** and ***xmlCleanupParser()***.
 
 ### Formatting of Programmatically Added Content
 
 #### How libxml2 handles formatting of programmatically added content
 
-In some cases, programmatically adding content to an `xml::document` object and subsequently serializing to a string or stream will result in unformatted output of the added content. This is due to a section of code within the `libxml2` library that gets called when programmatically added nodes are serialized to a string or stream. As the code traverses the tree, it checks if the current node is text-like - i.e. if it's a text, CDATA, or entity reference node. If so, it turns off formatting for that node and any nested nodes. This is presumably intended to prevent the library's formatting code from overriding any formatting already contained in the node, but it has the effect of preventing automatic formatting of programmatically-added content. Because this behavior is a feature of `libxml2`, there is no way to switch it off through XmlWrapp.
+In some cases, programmatically adding content to an ***xml::document*** object and subsequently serializing to a string or stream will result in unformatted output of the added content. This is due to a section of code within the `libxml2` library that gets called when programmatically added nodes are serialized to a string or stream. As the code traverses the tree, it checks if the current node is text-like - i.e. if it's a text, CDATA, or entity reference node. If so, it turns off formatting for that node and any nested nodes. This is presumably intended to prevent the library's formatting code from overriding any formatting already contained in the node, but it has the effect of preventing automatic formatting of programmatically-added content. Because this behavior is a feature of `libxml2`, there is no way to switch it off through XmlWrapp.
 
 To illustrate this, imagine that you have created an XML document from the following pretty-printed XML file:
 
@@ -863,7 +863,7 @@ Then you insert the following subtree before the child node:
 
     <new_1><new_2/></new_1>
 
-You might expect `save_to_string()` to produce:
+You might expect ***save\_to\_string()*** to produce:
 
     <?xml version="1.0"?>
     <root>
@@ -893,7 +893,7 @@ However, if you start with:
     <?xml version="1.0"?>
     <root><child/></root>
 
-Then inserting \<new\_1\>\<new\_2/\>\</new\_1\> and calling `save_to_string()` will produce:
+Then inserting \<new\_1\>\<new\_2/\>\</new\_1\> and calling ***save\_to\_string()*** will produce:
 
     <?xml version="1.0"?>
     <root>
@@ -907,7 +907,7 @@ This is because neither the original nor the modified document contains any text
 
 That is how `libxml2` works.
 
-While this may not be desirable in certain circumstances, there is no generic and reliable way to detect which text nodes are used for formatting, and which are meaningful content, so it's not feasible to make XmlWrapp adjust inserted content to make it get automatically formatted. Therefore, if the `libxml2` formatting behavior is undesirable, either you'll have to ensure that your documents do not contain any text-like nodes prior to calling `save_to_string()`, or you'll have to create your own code for formatting content prior to inserting it.
+While this may not be desirable in certain circumstances, there is no generic and reliable way to detect which text nodes are used for formatting, and which are meaningful content, so it's not feasible to make XmlWrapp adjust inserted content to make it get automatically formatted. Therefore, if the `libxml2` formatting behavior is undesirable, either you'll have to ensure that your documents do not contain any text-like nodes prior to calling ***save\_to\_string()***, or you'll have to create your own code for formatting content prior to inserting it.
 
 #### How you can influence formatting of programmatically added content
 
@@ -915,11 +915,11 @@ There are two ways that you can influence the formatting of programmatically add
 
 -   by using (or not using) text-like nodes in the added content; and
 
--   by choosing an appropriate `xml::save_options` flag.
+-   by choosing an appropriate **`xml::save_options`** flag.
 
 For the purposes of this chapter, a "text-like node" is a text, CDATA, or entity reference node in the XML tree that is built when the original content is parsed. Newlines and whitespace used for indentation are parsed into text nodes. Note, however, that whitespace characters between the XML declaration and the opening tag of the root node are not treated by libxml2 as part of the node tree - i.e. whitespace characters prior to the root node do not participate in formatting of the output.
 
-The following sections illustrate how various formatting flags affect the output for both content containing text-like nodes and content not containing text-like nodes. Note that although only `save_to_string()` is mentioned, the discussion aplies equally to all the `save_to_*()` functions because they all use the same underlying formatting code.
+The following sections illustrate how various formatting flags affect the output for both content containing text-like nodes and content not containing text-like nodes. Note that although only ***save\_to\_string()*** is mentioned, the discussion aplies equally to all the ***save\_to\_\*()*** functions because they all use the same underlying formatting code.
 
 -   [Original containing text-like nodes](#original-containing-text-like-nodes)
 
@@ -938,7 +938,7 @@ Given the following original document (which contains text-like nodes for indent
         <child attr="AttrValue">content</child>
     </root>
 
-Then the `save_to_string()` function will produce the following outputs for the given formatting flags:
+Then the ***save\_to\_string()*** function will produce the following outputs for the given formatting flags:
 
 <table>
 <colgroup>
@@ -953,20 +953,20 @@ Then the `save_to_string()` function will produce the following outputs for the 
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code>xml::save_op_default</code><br/><code>xml::save_op_no_format</code><br/><code>xml::save_op_no_empty</code><br/><code>xml::save_op_no_xhtml</code><br/><code>xml::save_op_xhtml</code><br/><code>xml::save_op_not_as_xml</code><br/></td>
+<td align="left"><strong><code>xml::save_op_default</code></strong><br/><strong><code>xml::save_op_no_format</code></strong><br/><strong><code>xml::save_op_no_empty</code></strong><br/><strong><code>xml::save_op_no_xhtml</code></strong><br/><strong><code>xml::save_op_xhtml</code></strong><br/><strong><code>xml::save_op_not_as_xml</code></strong><br/></td>
 <td align="left"><pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;root&gt;
     &lt;child attr=&quot;AttrValue&quot;&gt;content&lt;/child&gt;
 &lt;/root&gt;</code></pre></td>
 </tr>
 <tr class="even">
-<td align="left"><code>xml::save_op_no_decl</code><br/><code>xml::save_op_as_html</code><br/></td>
+<td align="left"><strong><code>xml::save_op_no_decl</code></strong><br/><strong><code>xml::save_op_as_html</code></strong><br/></td>
 <td align="left"><pre><code>&lt;root&gt;
     &lt;child attr=&quot;AttrValue&quot;&gt;content&lt;/child&gt;
 &lt;/root&gt;</code></pre></td>
 </tr>
 <tr class="odd">
-<td align="left"><code>xml::save_op_with_non_significant_ws</code><br/></td>
+<td align="left"><strong><code>xml::save_op_with_non_significant_ws</code></strong><br/></td>
 <td align="left"><pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;root
   &gt;
@@ -997,7 +997,7 @@ And given that a node has been programmatically inserted like this:
     insert_before = root.find( "child" );
     root.insert( insert_before, xml::node("inserted") );
 
-Then the `save_to_string()` function will produce the following outputs for the given formatting flags:
+Then the ***save\_to\_string()*** function will produce the following outputs for the given formatting flags:
 
 <table>
 <colgroup>
@@ -1012,33 +1012,33 @@ Then the `save_to_string()` function will produce the following outputs for the 
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code>xml::save_op_default</code><br/><code>xml::save_op_no_format</code><br/><code>xml::save_op_no_xhtml</code><br/><code>xml::save_op_not_as_xml</code><br/></td>
+<td align="left"><strong><code>xml::save_op_default</code></strong><br/><strong><code>xml::save_op_no_format</code></strong><br/><strong><code>xml::save_op_no_xhtml</code></strong><br/><strong><code>xml::save_op_not_as_xml</code></strong><br/></td>
 <td align="left"><pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;root&gt;
     &lt;inserted/&gt;&lt;child attr=&quot;AttrValue&quot;&gt;content&lt;/child&gt;
 &lt;/root&gt;</code></pre></td>
 </tr>
 <tr class="even">
-<td align="left"><code>xml::save_op_no_decl </code><br/></td>
+<td align="left"><strong><code>xml::save_op_no_decl </code></strong><br/></td>
 <td align="left"><pre><code>&lt;root&gt;
     &lt;inserted/&gt;&lt;child attr=&quot;AttrValue&quot;&gt;content&lt;/child&gt;
 &lt;/root&gt;</code></pre></td>
 </tr>
 <tr class="odd">
-<td align="left"><code>xml::save_op_no_empty</code><br/><code>xml::save_op_xhtml </code><br/></td>
+<td align="left"><strong><code>xml::save_op_no_empty</code></strong><br/><strong><code>xml::save_op_xhtml </code></strong><br/></td>
 <td align="left"><pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;root&gt;
     &lt;inserted&gt;&lt;/inserted&gt;&lt;child attr=&quot;AttrValue&quot;&gt;content&lt;/child&gt;
 &lt;/root&gt;</code></pre></td>
 </tr>
 <tr class="even">
-<td align="left"><code>xml::save_op_as_html</code><br/></td>
+<td align="left"><strong><code>xml::save_op_as_html</code></strong><br/></td>
 <td align="left"><pre><code>&lt;root&gt;
     &lt;inserted&gt;&lt;/inserted&gt;&lt;child attr=&quot;AttrValue&quot;&gt;content&lt;/child&gt;
 &lt;/root&gt;</code></pre></td>
 </tr>
 <tr class="odd">
-<td align="left"><code>xml::save_op_with_non_significant_ws</code><br/></td>
+<td align="left"><strong><code>xml::save_op_with_non_significant_ws</code></strong><br/></td>
 <td align="left"><pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;root
   &gt;
@@ -1060,7 +1060,7 @@ Given the following original document (which does not contain any text-like node
     <?xml version="1.0"?>
     <root><child attr="AttrValue">content</child></root>
 
-Then the `save_to_string()` function will produce the following outputs for the given formatting flags:
+Then the ***save\_to\_string()*** function will produce the following outputs for the given formatting flags:
 
 <table>
 <colgroup>
@@ -1075,29 +1075,29 @@ Then the `save_to_string()` function will produce the following outputs for the 
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code>xml::save_op_default</code><br/><code>xml::save_op_no_empty</code><br/><code>xml::save_op_no_xhtml</code><br/><code>xml::save_op_xhtml</code><br/><code>xml::save_op_not_as_xml</code><br/></td>
+<td align="left"><strong><code>xml::save_op_default</code></strong><br/><strong><code>xml::save_op_no_empty</code></strong><br/><strong><code>xml::save_op_no_xhtml</code></strong><br/><strong><code>xml::save_op_xhtml</code></strong><br/><strong><code>xml::save_op_not_as_xml</code></strong><br/></td>
 <td align="left"><pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;root&gt;
   &lt;child attr=&quot;AttrValue&quot;&gt;content&lt;/child&gt;
 &lt;/root&gt;</code></pre></td>
 </tr>
 <tr class="even">
-<td align="left"><code>xml::save_op_no_format</code><br/></td>
+<td align="left"><strong><code>xml::save_op_no_format</code></strong><br/></td>
 <td align="left"><pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;root&gt;&lt;child attr=&quot;AttrValue&quot;&gt;content&lt;/child&gt;&lt;/root&gt;</code></pre></td>
 </tr>
 <tr class="odd">
-<td align="left"><code>xml::save_op_no_decl</code><br/></td>
+<td align="left"><strong><code>xml::save_op_no_decl</code></strong><br/></td>
 <td align="left"><pre><code>&lt;root&gt;
   &lt;child attr=&quot;AttrValue&quot;&gt;content&lt;/child&gt;
 &lt;/root&gt;</code></pre></td>
 </tr>
 <tr class="even">
-<td align="left"><code>xml::save_op_as_html</code><br/></td>
+<td align="left"><strong><code>xml::save_op_as_html</code></strong><br/></td>
 <td align="left"><pre><code>&lt;root&gt;&lt;child attr=&quot;AttrValue&quot;&gt;content&lt;/child&gt;&lt;/root&gt;</code></pre></td>
 </tr>
 <tr class="odd">
-<td align="left"><code>xml::save_op_with_non_significant_ws</code><br/></td>
+<td align="left"><strong><code>xml::save_op_with_non_significant_ws</code></strong><br/></td>
 <td align="left"><pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;root
   &gt;&lt;child
@@ -1124,7 +1124,7 @@ And given that a node has been programmatically inserted like this:
     insert_before = root.find( "child" );
     root.insert( insert_before, xml::node("inserted") );
 
-Then the `save_to_string()` function will produce the following outputs for the given formatting flags:
+Then the ***save\_to\_string()*** function will produce the following outputs for the given formatting flags:
 
 <table>
 <colgroup>
@@ -1139,7 +1139,7 @@ Then the `save_to_string()` function will produce the following outputs for the 
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code>xml::save_op_default</code><br/><code>xml::save_op_no_xhtml</code><br/><code>xml::save_op_not_as_xml</code><br/></td>
+<td align="left"><strong><code>xml::save_op_default</code></strong><br/><strong><code>xml::save_op_no_xhtml</code></strong><br/><strong><code>xml::save_op_not_as_xml</code></strong><br/></td>
 <td align="left"><pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;root&gt;
   &lt;inserted/&gt;
@@ -1147,19 +1147,19 @@ Then the `save_to_string()` function will produce the following outputs for the 
 &lt;/root&gt;</code></pre></td>
 </tr>
 <tr class="even">
-<td align="left"><code>xml::save_op_no_format</code><br/></td>
+<td align="left"><strong><code>xml::save_op_no_format</code></strong><br/></td>
 <td align="left"><pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;root&gt;&lt;inserted/&gt;&lt;child attr=&quot;AttrValue&quot;&gt;content&lt;/child&gt;&lt;/root&gt;</code></pre></td>
 </tr>
 <tr class="odd">
-<td align="left"><code>xml::save_op_no_decl</code><br/></td>
+<td align="left"><strong><code>xml::save_op_no_decl</code></strong><br/></td>
 <td align="left"><pre><code>&lt;root&gt;
   &lt;inserted/&gt;
   &lt;child attr=&quot;AttrValue&quot;&gt;content&lt;/child&gt;
 &lt;/root&gt;</code></pre></td>
 </tr>
 <tr class="even">
-<td align="left"><code>xml::save_op_no_empty</code><br/><code>xml::save_op_xhtml</code><br/></td>
+<td align="left"><strong><code>xml::save_op_no_empty</code></strong><br/><strong><code>xml::save_op_xhtml</code></strong><br/></td>
 <td align="left"><pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;root&gt;
   &lt;inserted&gt;&lt;/inserted&gt;
@@ -1167,11 +1167,11 @@ Then the `save_to_string()` function will produce the following outputs for the 
 &lt;/root&gt;</code></pre></td>
 </tr>
 <tr class="odd">
-<td align="left"><code>xml::save_op_as_html</code><br/></td>
+<td align="left"><strong><code>xml::save_op_as_html</code></strong><br/></td>
 <td align="left"><pre><code>&lt;root&gt;&lt;inserted&gt;&lt;/inserted&gt;&lt;child attr=&quot;AttrValue&quot;&gt;content&lt;/child&gt;&lt;/root&gt;</code></pre></td>
 </tr>
 <tr class="even">
-<td align="left"><code>xml::save_op_with_non_significant_ws</code><br/></td>
+<td align="left"><strong><code>xml::save_op_with_non_significant_ws</code></strong><br/></td>
 <td align="left"><pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;root
   &gt;&lt;inserted

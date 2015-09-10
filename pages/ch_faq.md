@@ -121,16 +121,16 @@ For more information on using a database from your application, see the "[Databa
 
 NEVER trust user-supplied strings - always sanitize them before using them.
 
-| Before including a user-supplied string in: | Sanitize the string with:  |
-|---------------------------------------------|----------------------------|
-| a URL                                       | `NStr::URLEncode()`        |
-| JavaScript                                  | `NStr::JavaScriptEncode()` |
-| XML                                         | `NStr::XmlEncode()`        |
-| HTML                                        | `NStr::HtmlEncode()`       |
-| JSON                                        | `NStr::JsonEncode()`       |
-| SQL                                         | `NStr::SQLEncode()`        |
+| Before including a user-supplied string in: | Sanitize the string with:                                                                                      |
+|---------------------------------------------|----------------------------------------------------------------------------------------------------------------|
+| a URL                                       | ***[NStr::URLEncode()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=URLEncode)***               |
+| JavaScript                                  | ***[NStr::JavaScriptEncode()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=JavaScriptEncode)*** |
+| XML                                         | ***[NStr::XmlEncode()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=XmlEncode)***               |
+| HTML                                        | ***[NStr::HtmlEncode()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=HtmlEncode)***             |
+| JSON                                        | ***[NStr::JsonEncode()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=JsonEncode)***             |
+| SQL                                         | ***[NStr::SQLEncode()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SQLEncode)***               |
 
-*Note:* In addition to sanitizing URLs with [NStr::URLEncode()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=URLEncode), the [CUrl](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCUrl.html) class can be used to take apart and reassemble a URL. If the original URL was malformed an error would be produced. At the very least, improper URL segments would be mangled.
+***Note:*** In addition to sanitizing URLs with [NStr::URLEncode()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=URLEncode), the [CUrl](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCUrl.html) class can be used to take apart and reassemble a URL. If the original URL was malformed an error would be produced. At the very least, improper URL segments would be mangled.
 
 ### General
 
@@ -156,7 +156,7 @@ All developer Unix accounts should be automatically prepared for using the C++ T
 
 ##### Unix or Mac OX X outside NCBI
 
-After [downloading the Toolkit source](ch_getcode_svn.html#ch_getcode_svn.ftp_download), set environment variable `NCBI` to `<toolkit_root>` (where `<toolkit_root>` is the top-level directory containing `configure`) and add `$NCBI/scripts/common` to your `PATH`.
+After [downloading the Toolkit source](ch_getcode_svn.html#ch_getcode_svn.ftp_download), set environment variable **`NCBI`** to `<toolkit_root>` (where `<toolkit_root>` is the top-level directory containing `configure`) and add `$NCBI/scripts/common` to your **`PATH`**.
 
 Once the Toolkit is [configured and built](ch_config.html#ch_config.UNIX), then you can use it.
 
@@ -178,9 +178,9 @@ A [supported version of MSVC](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/pu
 
 Once the Toolkit is [configured and built](ch_config.html#ch_config.MS_Windows), then you can use it.
 
-#### The `GetTypeInfo()` method is not declared or defined in any of the objects for which it is part of the interface
+#### The ***GetTypeInfo()*** method is not declared or defined in any of the objects for which it is part of the interface
 
-The macro DECLARE\_INTERNAL\_TYPE\_INFO() is used in the `*.hpp` files to declare the `GetTypeInfo()`. There are several macros that are used to implement `GetTypeInfo()` methods in `*.cpp` files. These macros are generally named and used as follows:
+The macro DECLARE\_INTERNAL\_TYPE\_INFO() is used in the `*.hpp` files to declare the ***GetTypeInfo()***. There are several macros that are used to implement ***GetTypeInfo()*** methods in `*.cpp` files. These macros are generally named and used as follows:
 
     BEGIN_*_INFO(...)
     {
@@ -210,7 +210,7 @@ Here's a code snippet that shows all combinations:
     // serialize XML without either an XML declaration or a DOCTYPE
     ostr << MSerial_Xml(fSerial_Xml_NoXmlDecl \| fSerial_Xml_NoRefDTD) << obj;
 
-*Note:* The serial library can read XML whether or not it contains the XML declaration or DOCTYPE without using special flags. For example:
+***Note:*** The serial library can read XML whether or not it contains the XML declaration or DOCTYPE without using special flags. For example:
 
     istr >> MSerial_Xml >> obj;
 
@@ -263,7 +263,7 @@ For more information, see the MSDN [page](http://msdn.microsoft.com/en-us/librar
 
 ##### Checked iterators
 
-*Note:* Parts of this section refer to Visual C++ 2008, which is no longer supported. This content is currently retained for historical reference only, and may be removed in the future.
+***Note:*** Parts of this section refer to Visual C++ 2008, which is no longer supported. This content is currently retained for historical reference only, and may be removed in the future.
 
 Microsoft Visual C++ provides the option of using "Checked Iterators" to ensure that you do not overwrite the bounds of your STL containers. Checked iterators have a different internal structure than, and are therefore incompatible with, non-checked iterators. If both are used in the same program, it will probably crash. Checked iterators also have somewhat lower performance than non-checked iterators.
 
@@ -280,7 +280,7 @@ The Visual C++ defaults for `_SECURE_SCL` are:
 
 By default, the compiler options for NCBI C++ Toolkit libraries do not specify the `_SECURE_SCL` option for debug configurations, and specify `_SECURE_SCL=0` for release configurations. Therefore they use checked iterators for debug configurations, but not for release configurations.
 
-*Note:* Your code may crash if any two libraries you link with don't use the same settings. For example:
+***Note:*** Your code may crash if any two libraries you link with don't use the same settings. For example:
 
 -   You're building a release configuration using Visual C++ 2008. You build the C++ Toolkit separately and use it as a third party package (in which case it will use `_SECURE_SCL=0`). Your other code and/or other libraries are compiled with default settings (which for release in VS2008 sets `_SECURE_SCL=1`).
 
@@ -335,15 +335,15 @@ Two tools are available to resolve the common linking questions:
 | Which libraries contain a given symbol?               | [Library search](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lib_search/libsearch.cgi?public=yes) |
 | Which other libraries does a given library depend on? | [Library dependencies](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/dglistdeps.cgi)      |
 
-For example, suppose the linker complains about the symbol `ncbi::CIStreamBuffer::FindChar(char)` being undefined. Here is how to use these tools to resolve this problem:
+For example, suppose the linker complains about the symbol ***ncbi::CIStreamBuffer::FindChar(char)*** being undefined. Here is how to use these tools to resolve this problem:
 
 1  
-To find the library(s) where the unresolved symbol is defined, use the [Library search](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lib_search/libsearch.cgi?public=yes) tool:<br/><br/>Using the example above, enter `FindChar` as a search term. The library where this symbol is defined is [libxutil.a (ncbi\_core)](http://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/CPP_DOC/depgraphs/xutil.html).<br/><br/>Now that you have the library that defines the symbol, you can proceed to find the library dependencies it introduces. *Note:* The simplest way to do this is by just clicking on the library in the search results to show its dependencies. Alternatively, you can proceed to step 2.<br/>
+To find the library(s) where the unresolved symbol is defined, use the [Library search](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lib_search/libsearch.cgi?public=yes) tool:<br/><br/>Using the example above, enter `FindChar` as a search term. The library where this symbol is defined is [libxutil.a (ncbi\_core)](http://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/CPP_DOC/depgraphs/xutil.html).<br/><br/>Now that you have the library that defines the symbol, you can proceed to find the library dependencies it introduces. ***Note:*** The simplest way to do this is by just clicking on the library in the search results to show its dependencies. Alternatively, you can proceed to step 2.<br/>
 
 2  
 The [Library dependencies](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/dglistdeps.cgi) tool finds all the other libraries that a given library depends on. This tool can also help you create the `LIB` and `LIBS` lines in your makefile. For example, enter your current `LIB` and `LIBS` lines plus the new library from step 1, and it will generate optimized `LIB` and `LIBS` lines containing the library needed for your symbol and any other needed libraries.<br/><br/>Continuing with the example above, entering `libxutil.a` (or just `xutil`) will create this result:<br/><br/>`LIB  = `[xutil](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/xutil.html) [xncbi](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/xncbi.html)<br/>`LIBS = $(ORIG_LIBS)`<br/><br/>Clicking on any of the links will show the required items for that link plus a dependency graph for the clicked item. The nodes in the diagram are also navigable.
 
-*Note:* If you are using Visual C++, please also see the question about [adding libraries to Visual C++ projects](#adding-libraries-to-visual-c++-projects).
+***Note:*** If you are using Visual C++, please also see the question about [adding libraries to Visual C++ projects](#adding-libraries-to-visual-c++-projects).
 
 To make it easier to work with the NCBI C++ Toolkit's many libraries, we have generated illustrations of their dependency relationships, available for various scopes and in various formats:
 
@@ -367,13 +367,13 @@ NCBI C++ Library Dependency Graphs (public libraries only)
 In cases where the above methods do not work, you can also search manually using the following steps:
 
 1  
-Look for the source file that defines the symbol. This can be done by going to the [LXR source browser](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDate) and doing an identifier search on the symbol (e.g., [CDate](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDate&d=) or [XmlEncode](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=XmlEncode&d=)). Look for a source file where the identifier is defined (e.g. in the "Defined as a class in" section for `CDate`, or in the "Defined as a function in" section for `XmlEncode()`). For serializable object classes (such as `CDate`) look for the base class definition. Follow a link to this source file.
+Look for the source file that defines the symbol. This can be done by going to the [LXR source browser](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDate) and doing an identifier search on the symbol (e.g., [CDate](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDate&d=) or [XmlEncode](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=XmlEncode&d=)). Look for a source file where the identifier is defined (e.g. in the "Defined as a class in" section for ***CDate***, or in the "Defined as a function in" section for ***XmlEncode()***). For serializable object classes (such as ***CDate***) look for the base class definition. Follow a link to this source file.
 
 2  
 Near the top of the LXR page for the source file is a path, and each component of the path links to another LXR page. Click the link to the last directory.
 
 3  
-The resulting LXR page for the directory should list the makefile for the library of interest (e.g. `Makefile.general.lib` for `CDate` or `Makefile.corelib.lib` for `XmlEncode()`). Click on the link to the makefile. You should see the LIB line with the name of the library that contains your symbol.
+The resulting LXR page for the directory should list the makefile for the library of interest (e.g. `Makefile.general.lib` for ***CDate*** or `Makefile.corelib.lib` for ***XmlEncode()***). Click on the link to the makefile. You should see the LIB line with the name of the library that contains your symbol.
 
 4  
 Add the library name to the list of libraries you already have and enter them into the [library dependencies tool](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/dglistdeps.cgi) to create your final LIB and LIBS lines.
@@ -507,7 +507,7 @@ Then, create and build the application:
 
 #### How to add new ASN.1 specification to the C++ Toolkit?
 
-*Caution!* If you are not in the C++ core developers group, please do not do it yourself! -- instead, just send your request to `cpp-core@ncbi.nlm.nih.gov`.
+***Caution!*** If you are not in the C++ core developers group, please do not do it yourself! -- instead, just send your request to `cpp-core@ncbi.nlm.nih.gov`.
 
 #### Converting ASN.1 object in memory from C to C++ representation (or vice versa)
 

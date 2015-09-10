@@ -63,11 +63,11 @@ Public Access to the Source Code via FTP
 
 -   [FTP Download Now](ftp://ftp.ncbi.nih.gov/toolbox/ncbi_tools++/CURRENT)
 
--   **Available FTP Archives**: Select the archive for your system. When the dialog box appears, choose the destination in your file system for the downloaded archive. *Note:* With some browsers, you may need to right-click-and-hold with your mouse and use the `'Save Link As...', 'Copy to Folder...'`, or similar options from the drop-down menu to properly save the archive. For a current list of the source code archives for different operating system/compiler combinations consult the current Release Notes available at <ftp://ftp.ncbi.nih.gov/toolbox/ncbi_tools++/CURRENT/RELEASE_NOTES.html>
+-   **Available FTP Archives**: Select the archive for your system. When the dialog box appears, choose the destination in your file system for the downloaded archive. ***Note:*** With some browsers, you may need to right-click-and-hold with your mouse and use the `'Save Link As...', 'Copy to Folder...'`, or similar options from the drop-down menu to properly save the archive. For a current list of the source code archives for different operating system/compiler combinations consult the current Release Notes available at <ftp://ftp.ncbi.nih.gov/toolbox/ncbi_tools++/CURRENT/RELEASE_NOTES.html>
 
 -   **Unpack the Source Archive**
 
-    -   *Unix and Macintosh Systems*<br/>The Unix distributions have been archived using the standard **tar** command and compressed using **gzip**. When unpacked, all files will be under the directory `ncbi_cxx--<version_number>`, which will be created in the current directory. (*Caution:* If `ncbi_cxx--<version_number>` already exists, **tar** extraction will overwrite existing files.) To unpack the archive: `gunzip -c ncbi_cxx--*.tar.gz \| tar xvf -`
+    -   *Unix and Macintosh Systems*<br/>The Unix distributions have been archived using the standard **tar** command and compressed using **gzip**. When unpacked, all files will be under the directory `ncbi_cxx--<version_number>`, which will be created in the current directory. (***Caution:*** If `ncbi_cxx--<version_number>` already exists, **tar** extraction will overwrite existing files.) To unpack the archive: `gunzip -c ncbi_cxx--*.tar.gz \| tar xvf -`
 
     -   *Windows Systems*<br/>The Microsoft Windows versions of the source distribution have been prepared as self-extracting executables. By default a sub-folder `ncbi_cxx--<version_number >` will be created in the current folder to contain the extracted source. If `ncbi_cxx--<version_number >` already exists in the folder where the executable is launched, user confirmation is required before files are overwritten. To actually perform the extraction, do one of the following:
 
@@ -91,7 +91,7 @@ The following options for read-only access to the C++ Toolkit Subversion reposit
 Read-Write Access to the Source Code via Subversion (NCBI only)
 ---------------------------------------------------------------
 
-*Note:* This section discusses read-write access to the Subversion repository, which is only available to users inside NCBI. For public access, see the section on [read-only access](#read-only-access).
+***Note:*** This section discusses read-write access to the Subversion repository, which is only available to users inside NCBI. For public access, see the section on [read-only access](#read-only-access).
 
 Subversion client installation and usage instructions are available on separate pages for [UNIX](#unix), [MS Windows](#ms-windows), and [Mac OS](#mac-os) systems.
 
@@ -129,7 +129,7 @@ The NCBI C++ Toolkit Subversion repository contains all source code, scripts, ut
 
 #### Retrieval of the C++ Toolkit Source Code Tree
 
-This section discusses the methods of checking out the entire source tree or just the necessary portions. An important point to note is that the entire NCBI C++ tree is very big because it contains a lot of internal projects. There are also numerous platform-specific files, and even platform-specific sub-trees, which you will never need unless you work on those platforms. Therefore it is frequently sufficient, and in fact, usually advisable, to retrieve only the files of interest using shell scripts. The relevant scripts are located in `/am/ncbiapdata/bin`, but the best way to get them into your `PATH` is to make sure you have `developer` in the `facilities` line of your `~/.ncbi_hints` file.
+This section discusses the methods of checking out the entire source tree or just the necessary portions. An important point to note is that the entire NCBI C++ tree is very big because it contains a lot of internal projects. There are also numerous platform-specific files, and even platform-specific sub-trees, which you will never need unless you work on those platforms. Therefore it is frequently sufficient, and in fact, usually advisable, to retrieve only the files of interest using shell scripts. The relevant scripts are located in `/am/ncbiapdata/bin`, but the best way to get them into your **`PATH`** is to make sure you have `developer` in the `facilities` line of your `~/.ncbi_hints` file.
 
 The following sections discuss the checkout process in more detail:
 
@@ -147,7 +147,7 @@ The following sections discuss the checkout process in more detail:
 
 -   [update\_projects: Check out and update Source of Selected Projects](#updateprojects-check-out-and-update-source-of-selected-projects)
 
-*Note:* To facilitate the creation of a new project, use the script [new\_project](ch_proj.html#ch_proj.new_proj_struct) which generates new directories and makefiles for the new project from templates, but does not involve checking out files.
+***Note:*** To facilitate the creation of a new project, use the script [new\_project](ch_proj.html#ch_proj.new_proj_struct) which generates new directories and makefiles for the new project from templates, but does not involve checking out files.
 
 ##### Checking Out the Development NCBI C++ Toolkit Source Tree
 
@@ -161,7 +161,7 @@ For internal projects use:
     cd foo
     svn checkout https://svn.ncbi.nlm.nih.gov/repos/toolkit/trunk/internal/c++
 
-*Caution:* Be aware that sources checked out through the development source tree have the latest sources and are different from the public release that is done at periodic intervals. These sources are relatively unstable "development" sources, so they are not guaranteed to work properly or even compile. Use these sources at your own risk (and/or to apply patches to stable releases).The sources are usually better by the end of day and especially by the end of the week (like Sunday evening).
+***Caution:*** Be aware that sources checked out through the development source tree have the latest sources and are different from the public release that is done at periodic intervals. These sources are relatively unstable "development" sources, so they are not guaranteed to work properly or even compile. Use these sources at your own risk (and/or to apply patches to stable releases).The sources are usually better by the end of day and especially by the end of the week (like Sunday evening).
 
 ##### Checking Out the Production NCBI C++ Toolkit Source Tree
 
@@ -223,7 +223,7 @@ The NCBI C++ Toolkit has many features and extensions beyond the core of portabl
 
 For usage help, run **svn\_core** without arguments.
 
-*Note:* **svn\_core** is not available on Windows.
+***Note:*** **svn\_core** is not available on Windows.
 
 [Table 1](#table-1) describes the arguments of **svn\_core**. Only the target directory and SVN branch arguments are mandatory.
 
@@ -251,13 +251,13 @@ Table 2. List of the directories that are always checked out
 
 | Checked out directories           | Recursive? |
 |-----------------------------------|------------|
-| `(include\|src)`                  | *no*       |
+| `(include\|src)`                  | ***no***   |
 | `(include\|src)/algo`             | yes        |
 | `src/app`                         | yes        |
 | `src/build-system`                | yes        |
 | `(include\|src)/cgi`              | yes        |
 | `include/common`                  | yes        |
-| `(include\|src)/connect`          | *no*       |
+| `(include\|src)/connect`          | ***no***   |
 | `(include\|src)/connect/ext`      | yes        |
 | `include/connect/impl`            | yes        |
 | `src/connect/test`                | yes        |
@@ -280,7 +280,7 @@ Table 3. Directories that may be checked out depending on branch and platform op
 | Checked out directories   | Recursive? | Options                              |
 |---------------------------|------------|--------------------------------------|
 | `compilers`               | yes        | `<platform>` = all                   |
-| `compilers`               | *no*       | `<platform>` != all                  |
+| `compilers`               | ***no***   | `<platform>` != all                  |
 | `compilers/cygwin`        | yes        | `<platform>` = cygwin                |
 | `compilers/msvc1000_prj`  | yes        | `<platform>` = msvc                  |
 | `compilers/unix`          | yes        | `<platform>` = cygwin or mac or unix |
@@ -301,24 +301,24 @@ Table 4. Directories that may be checked out depending on --with/--without optio
 |--------------------------------------------------|------------|---------------------------------------------|
 | `(include\|src)/ctools`                          | yes        | `--with-ctools` or not `--without-ctools`   |
 | `(include\|src)/gui`                             | yes        | `--with-gui` or not `--without-gui`         |
-| `(include\|src)/internal`                        | *no*       | `--with-internal`                           |
-| `(include\|src)/internal/algo`                   | *no*       | `--with-internal`                           |
+| `(include\|src)/internal`                        | ***no***   | `--with-internal`                           |
+| `(include\|src)/internal/algo`                   | ***no***   | `--with-internal`                           |
 | `(include\|src)/internal/algo/id_mapper`         | yes        | `--with-internal`                           |
 | `(include\|src)/internal/align_model`            | yes        | `--with-internal`                           |
 | `include/internal/asn_cache`                     | yes        | `--with-internal`                           |
-| `src/internal/asn_cache`                         | *no*       | `--with-internal`                           |
+| `src/internal/asn_cache`                         | ***no***   | `--with-internal`                           |
 | `src/internal/asn_cache/lib`                     | yes        | `--with-internal`                           |
-| `(include\|src)/internal/blast`                  | *no*       | `--with-internal`                           |
+| `(include\|src)/internal/blast`                  | ***no***   | `--with-internal`                           |
 | `(include\|src)/internal/blast/DistribDbSupport` | yes        | `--with-internal`                           |
-| `(include\|src)/internal/contigdb`               | *no*       | `--with-internal`                           |
+| `(include\|src)/internal/contigdb`               | ***no***   | `--with-internal`                           |
 | `src/internal/demo`                              | yes        | `--with-internal`                           |
-| `(include\|src)/internal/ID`                     | *no*       | `--with-internal`                           |
-| `(include\|src)/internal/ID/utils`               | *no*       | `--with-internal`                           |
-| `(include\|src)/internal/mapview`                | *no*       | `--with-internal`                           |
+| `(include\|src)/internal/ID`                     | ***no***   | `--with-internal`                           |
+| `(include\|src)/internal/ID/utils`               | ***no***   | `--with-internal`                           |
+| `(include\|src)/internal/mapview`                | ***no***   | `--with-internal`                           |
 | `(include\|src)/internal/mapview/objects`        | yes        | `--with-internal`                           |
 | `(include\|src)/internal/mapview/util`           | yes        | `--with-internal`                           |
 | `(include\|src)/internal/myncbi`                 | yes        | `--with-internal`                           |
-| `include/internal/objects`                       | *no*       | `--with-internal`                           |
+| `include/internal/objects`                       | ***no***   | `--with-internal`                           |
 | `(include\|src)/objects`                         | yes        | `--with-objects` or not `--without-objects` |
 | `(include\|src)/objmgr`                          | yes        | `--with-objects` or not `--without-objects` |
 | `(include\|src)/objtools`                        | yes        | `--with-objects` or not `--without-objects` |
@@ -394,7 +394,7 @@ The parameter to **update\_projects** indicates the target directory where the s
 ### Source Code Retrieval under MS Windows
 
 1  
-In NCBI, the SVN clients must be set up and ready to use. Ask Systems if you don’t have the client installed on your workstation. If you are working outside of NCBI, then you can download the latest version of Subversion from <http://subversion.tigris.org/servlets/ProjectDocumentList?folderID=91>. Run the Subversion installer and follow the instructions. The latest version may not come with an executable installer though. In this case, please unpack the `zip` archive with the latest Subversion binaries to a local directory, for example `C:\Program Files\svn-win32-1.4.2`. Change the `PATH` environment variable so that it points to the `bin` subdirectory under your Subversion installation directory, for example `set PATH=%PATH%;C:\Program Files\svn-win32-1.4.2\bin`
+In NCBI, the SVN clients must be set up and ready to use. Ask Systems if you don’t have the client installed on your workstation. If you are working outside of NCBI, then you can download the latest version of Subversion from <http://subversion.tigris.org/servlets/ProjectDocumentList?folderID=91>. Run the Subversion installer and follow the instructions. The latest version may not come with an executable installer though. In this case, please unpack the ***zip*** archive with the latest Subversion binaries to a local directory, for example `C:\Program Files\svn-win32-1.4.2`. Change the **`PATH`** environment variable so that it points to the `bin` subdirectory under your Subversion installation directory, for example `set PATH=%PATH%;C:\Program Files\svn-win32-1.4.2\bin`
 
 2  
 Start your favorite command shell. Change current directory to the designated working directory. At the command prompt, type:`svn co https://svn.ncbi.nlm.nih.gov/repos/toolkit/trunk/c++`

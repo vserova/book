@@ -213,7 +213,7 @@ DATATOOL: Code Generation and Data Serialization Utility
 
 -   Convert data between ASN.1, XML and JSON formats.
 
-*Note:* Because ASN.1, XML and JSON are, in general, incompatible, the last two functions are supported only partially.
+***Note:*** Because ASN.1, XML and JSON are, in general, incompatible, the last two functions are supported only partially.
 
 The following topics are discussed in subsections:
 
@@ -323,7 +323,7 @@ Initially, **DATATOOL** and the serial library supported serialization in ASN.1 
         std Time-std
     }
 
-Here, accidentally, element `str` is defined identically both in `Date` and `Time` productions; while the meaning of element `std` depends on the context. To avoid ambiguity, this specification translates into the following DTD:
+Here, accidentally, element ***str*** is defined identically both in ***Date*** and ***Time*** productions; while the meaning of element ***std*** depends on the context. To avoid ambiguity, this specification translates into the following DTD:
 
     <!ELEMENT Date (Date_str \| Date_std)>
     <!ELEMENT Date_str (#PCDATA)>
@@ -418,7 +418,7 @@ It is possible to tune up the C++ code generation by using a definition file, wh
 
 Parameter definitions follow a "name = value" format. The "name" part of the definition serves two functions: (1) selecting the specific element to which the definition applies, and (2) selecting the code generation parameter (such as `_class`) that will be fine-tuned for that element.
 
-To modify a top-level element, use a definition line where the name part is simply the desired code generation parameter (such as `_class`). To modify a nested element, use a definition where the code generation parameter is prefixed by a dot-separated "path" of the successive container element names from the data format specification. For path elements of type `SET OF` or `SEQUENCE OF`, use an "`E`" as the element name (which would otherwise be anonymous). *Note:* Element names will depend on whether you are using ASN.1, DTD, or Schema.
+To modify a top-level element, use a definition line where the name part is simply the desired code generation parameter (such as `_class`). To modify a nested element, use a definition where the code generation parameter is prefixed by a dot-separated "path" of the successive container element names from the data format specification. For path elements of type `SET OF` or `SEQUENCE OF`, use an "`E`" as the element name (which would otherwise be anonymous). ***Note:*** Element names will depend on whether you are using ASN.1, DTD, or Schema.
 
 For example, consider the following ASN.1 specification:
 
@@ -450,7 +450,7 @@ Code generation for the various elements can be fine-tuned as illustrated by the
     ; modify a DATATOOL-assigned class name
     points.E._class = CPoint
 
-*Note:* **DATATOOL** assigns arbitrary names to otherwise anonymous containers. In the example above, the `SEQUENCE` containing `x` and `y` has no name in the specification, so **DATATOOL** assigned the name `E`. If you want to change the name of a **DATATOOL**-assigned name, create a definition file and rename the class using the appropriate `_class` entry as shown above. To find out what the **DATATOOL**-assigned name will be, create a sample definition file using the **DATATOOL** `-ods` option. This approach will work regardless of the data specification format (ASN.1, DTD, or XSD).
+***Note:*** **DATATOOL** assigns arbitrary names to otherwise anonymous containers. In the example above, the `SEQUENCE` containing `x` and `y` has no name in the specification, so **DATATOOL** assigned the name `E`. If you want to change the name of a **DATATOOL**-assigned name, create a definition file and rename the class using the appropriate `_class` entry as shown above. To find out what the **DATATOOL**-assigned name will be, create a sample definition file using the **DATATOOL** `-ods` option. This approach will work regardless of the data specification format (ASN.1, DTD, or XSD).
 
 The following additional topics are discussed in this section:
 
@@ -478,7 +478,7 @@ Or
     [TypeName]
     _file=AnotherName
 
-would put the class `CTypeName` in files with the base name `AnotherName`, whereas these two:
+would put the class ***CTypeName*** in files with the base name `AnotherName`, whereas these two:
 
     [ModuleName]
     _file=AnotherName
@@ -519,7 +519,7 @@ Or
     [TypeName]
     _class=CAnotherName
 
-would cause the class generated for the type `TypeName` to be named `CAnotherName`, whereas these two:
+would cause the class generated for the type `TypeName` to be named ***CAnotherName***, whereas these two:
 
     [ModuleName]
     _class=CAnotherName
@@ -529,7 +529,7 @@ Or
     [-]
     _class=CAnotherName
 
-would result in **all** the generated classes having the same name `CAnotherName` (which is probably not what you want).
+would result in **all** the generated classes having the same name ***CAnotherName*** (which is probably not what you want).
 
 `_namespace`      The namespace in which the generated class (or classes) will be placed.
 
@@ -659,7 +659,7 @@ Then the following definitions will effect the generation of objects:
 | `[Int-fuzz]`<br/>`range.min._type = long` | the `min` member of the `range` member of the `Int-fuzz` structure |
 | `[Int-fuzz]`<br/>`alt.E._type = long`     | elements of the `alt` member of the `Int-fuzz` structure           |
 
-As another example, suppose you have a `CatalogEntry` type comprised of a `Summary` element and either a `RecordA` element or a `RecordB` element, as defined by the following XSD specification:
+As another example, suppose you have a ***CatalogEntry*** type comprised of a ***Summary*** element and either a ***RecordA*** element or a ***RecordB*** element, as defined by the following XSD specification:
 
     <?xml version="1.0" encoding="UTF-8"?>
 
@@ -684,7 +684,7 @@ As another example, suppose you have a `CatalogEntry` type comprised of a `Summa
 
     </schema>
 
-In this specification, the `<choice>` element in `CatalogEntryType` is anonymous, so **DATATOOL** will assign an arbitrary name to it. The assigned name will not be descriptive, but fortunately you can use a definition file to change the assigned name.
+In this specification, the `<choice>` element in ***CatalogEntryType*** is anonymous, so **DATATOOL** will assign an arbitrary name to it. The assigned name will not be descriptive, but fortunately you can use a definition file to change the assigned name.
 
 First find the **DATATOOL**-assigned name by creating a sample definition file using the `-ods` option:
 
@@ -728,12 +728,12 @@ The following additional topics are discussed in this section:
 By default, DATATOOL generates "normalized" C++ class names from ASN.1 type names using two rules:
 
 1  
-Convert any hyphens ("`-`") into underscores ("`_`"), because hyphens are not legal characters in C++ class names.
+Convert any hyphens ("***-***") into underscores ("***\_***"), because hyphens are not legal characters in C++ class names.
 
 2  
 Prepend a 'C' character.
 
-For example, the default normalized C++ class name for the ASN.1 type name "`Seq-data`" is "`CSeq_data`".
+For example, the default normalized C++ class name for the ASN.1 type name "***Seq-data***" is "***CSeq\_data***".
 
 The default C++ class name can be overridden by explicitly specifying in the definition file a name for a given ASN.1 type name. For example:
 
@@ -742,7 +742,7 @@ The default C++ class name can be overridden by explicitly specifying in the def
 
 #### ENUMERATED Types
 
-By default, for every `ENUMERATED` ASN.1 type, **DATATOOL** will produce a C++ enum type with the name `ENormalizedName`.
+By default, for every `ENUMERATED` ASN.1 type, **DATATOOL** will produce a C++ enum type with the name ***ENormalizedName***.
 
 ### Class Diagrams
 
@@ -823,7 +823,7 @@ Load Balancing
 
 -   [Quality Assurance Domain](#quality-assurance-domain)
 
-*Note:* For security reasons not all links in the public version of this document are accessible by the outside NCBI users.
+***Note:*** For security reasons not all links in the public version of this document are accessible by the outside NCBI users.
 
 The section covers the following topics:
 
@@ -947,11 +947,11 @@ A configuration line of the form
 
     %include filename
 
-causes the contents of the named file `filename` to be inserted here. The daemon always assumes that relative file names (those that do not start with the slash character, /) are based on the daemon startup directory. This is true for any level of nesting.
+causes the contents of the named file **`filename`** to be inserted here. The daemon always assumes that relative file names (those that do not start with the slash character, /) are based on the daemon startup directory. This is true for any level of nesting.
 
 Once started, the daemon first tries to read its configuration from `/etc/lbsmd/servrc.cfg`. If the file is not found (or is not readable) the daemon looks for the configuration file `servrc.cfg` in the directory from which it has been started. This fallback mechanism is not used when the configuration file name is explicitly stated in the command line. The daemon periodically checks the configuration file and all of its descendants and reloads (discards) their contents if some of the files have been either updated, (re-)moved, or added.
 
-The “`filename`” can be followed by a pipe character ( \\| ) and some text (up to the end of the line or the comment introduced by the hash character). That text is then prepended to every line (but the `%include` directives) read from the included file.
+The “**`filename`**” can be followed by a pipe character ( \\| ) and some text (up to the end of the line or the comment introduced by the hash character). That text is then prepended to every line (but the `%include` directives) read from the included file.
 
 A configuration line of the form
 
@@ -979,7 +979,7 @@ A configuration line of the form
 
 goes into the host environment. The host environment can be accessed by clients when they perform the service name resolution. The host environment is designed to help the client to know about limitations/options that the host has, and based on this additional information the client can make a decision whether the server (despite the fact that it implements the service) is suitable for carrying out the client's request. For example, the host environment can give the client an idea about what databases are available on the host. The host environment is not interpreted or used in any way by either the daemon or by the load balancing algorithm, except that the name must be a valid identifier. The value may be practically anything, even empty. It is left solely for the client to parse the environment and to look for the information of interest. The host environment can be obtained from the service iterator by a call to `SERV_GetNextInfoEx()` (<http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SERV_GetNextInfoEx>), which is documented in the [service mapping API](ch_conn.html#ch_conn.service_mapping_api)
 
-*Note*: White space characters which surround the name are not preserved but they are preserved in the value i.e. when they appear after the “=” sign.
+***Note***: White space characters which surround the name are not preserved but they are preserved in the value i.e. when they appear after the “=” sign.
 
 A configuration line of the form
 
@@ -987,25 +987,25 @@ A configuration line of the form
 
 defines a server. The detailed description of the individual fields is given below.
 
--   `service_name` specifies the service name that the server is part of, for example TaxService. The same `service_name` may be used in multiple server definition lines to add more servers implementing that service.
+-   **`service_name`** specifies the service name that the server is part of, for example TaxService. The same **`service_name`** may be used in multiple server definition lines to add more servers implementing that service.
 
--   `[check_specifier]` is an optional parameter (if omitted, the surrounding square brackets must not be used). The parameter is a comma separated list and each element in the list can be one of the following.
+-   **`[check_specifier]`** is an optional parameter (if omitted, the surrounding square brackets must not be used). The parameter is a comma separated list and each element in the list can be one of the following.
 
-    -   `[-]N[/M]` where N and M are integers. This will lead to checking every N seconds with backoff time of M seconds if failed. The “-“ character is used when it is required to check dependencies only, but not the primary connection point. "0", which stands for "no check interval", disables checks for the service.
+    -   **`[-]N[/M]`** where N and M are integers. This will lead to checking every N seconds with backoff time of M seconds if failed. The “-“ character is used when it is required to check dependencies only, but not the primary connection point. "0", which stands for "no check interval", disables checks for the service.
 
-    -   `[!][host[:port]][+[service]]` which describes a dependency. The “!” character means negation. The `service` is a service name the describing service depends on and runs on `host:port`. The pair `host:port` is required if no service is specified. The `host`, :`port`, or both can be missing if `service` is specified (in that case the missing parts are read as “any”). The “+” character alone means “this service’s name” (of the one currently being defined). Multiple dependency specifications are allowed.
+    -   **`[!][host[:port]][+[service]]`** which describes a dependency. The “!” character means negation. The **`service`** is a service name the describing service depends on and runs on **`host:port`**. The pair **`host:port`** is required if no service is specified. The **`host`**, :**`port`**, or both can be missing if **`service`** is specified (in that case the missing parts are read as “any”). The “+” character alone means “this service’s name” (of the one currently being defined). Multiple dependency specifications are allowed.
 
-    -   `[~][DOW[-DOW]][@H[-H]]` which defines a schedule. The “~” character means negation. The service runs from `DOW` to `DOW` (`DOW` is one of Su, Mo, Tu, We, Th, Fr, Sa, or Hd, which stands for a federal holiday, and cannot be used in weekday ranges) or any if not specified, and between hours `H` to `H` (9-5 means 9:00am thru 4:59pm, 18-0 means 6pm thru midnight). Single `DOW` and / or `H` are allowed and mean the exact day of week (or a holiday) and / or one exact hour. Multiple schedule specifications are allowed.
+    -   **`[~][DOW[-DOW]][@H[-H]]`** which defines a schedule. The “~” character means negation. The service runs from **`DOW`** to **`DOW`** (**`DOW`** is one of Su, Mo, Tu, We, Th, Fr, Sa, or Hd, which stands for a federal holiday, and cannot be used in weekday ranges) or any if not specified, and between hours **`H`** to **`H`** (9-5 means 9:00am thru 4:59pm, 18-0 means 6pm thru midnight). Single **`DOW`** and / or **`H`** are allowed and mean the exact day of week (or a holiday) and / or one exact hour. Multiple schedule specifications are allowed.
 
-    -   `email@ncbi.nlm.nih.gov` which makes the LBSMD daemon to send an e-mail to the specified address whenever this server changes its status (e.g. from up to down). Multiple e-mail specifications are allowed. The `ncbi.nlm.nih.gov` part is fixed and may not be changed.
+    -   **`email@ncbi.nlm.nih.gov`** which makes the LBSMD daemon to send an e-mail to the specified address whenever this server changes its status (e.g. from up to down). Multiple e-mail specifications are allowed. The **`ncbi.nlm.nih.gov`** part is fixed and may not be changed.
 
-    -   `user` or `*group` which makes the LBSMD daemon add the specified user or group of users to the list of personnel who are authorized to modify the server (e.g. post a penalty, issue a rerate command etc.). By default these actions are only allowed to the `root` and `lbsmd` users, as well as users added to the host authority. Multiple specifications are allowed.
+    -   **`user`** or **`*group`** which makes the LBSMD daemon add the specified user or group of users to the list of personnel who are authorized to modify the server (e.g. post a penalty, issue a rerate command etc.). By default these actions are only allowed to the **`root`** and **`lbsmd`** users, as well as users added to the host authority. Multiple specifications are allowed.
 
-    -   `script` which specifies a path to a local executable which checks whether the server is operational. The LBSMD daemon starts this script periodically as specified by the check time parameter(s) above. Only a single script specification is allowed. See [Check Script Specification](#check-script-specification) for more details.
+    -   **`script`** which specifies a path to a local executable which checks whether the server is operational. The LBSMD daemon starts this script periodically as specified by the check time parameter(s) above. Only a single script specification is allowed. See [Check Script Specification](#check-script-specification) for more details.
 
--   `server_descriptor` specifies the address of the server and supplies additional information. An example of the `server_descriptor`:<br/>`STANDALONE somehost:1234 R=3000 L=yes S=yes B=-20`<br/>See [Server Descriptor Specification](#server-descriptor-specification) for more details.
+-   **`server_descriptor`** specifies the address of the server and supplies additional information. An example of the **`server_descriptor`**:<br/>`STANDALONE somehost:1234 R=3000 L=yes S=yes B=-20`<br/>See [Server Descriptor Specification](#server-descriptor-specification) for more details.
 
--   `launcher_info` is basically a command line preceded by a pipe symbol ( \\| ) which plays a role of a delimiter from the `server_descriptor`. It is only required for the **NCBID** type of service which are configured on the local host.
+-   **`launcher_info`** is basically a command line preceded by a pipe symbol ( \\| ) which plays a role of a delimiter from the **`server_descriptor`**. It is only required for the **NCBID** type of service which are configured on the local host.
 
 ##### Check Script Specification
 
@@ -1017,21 +1017,21 @@ sets the period in seconds between script checks as "`5`" (the default period is
 
 The following command-line parameters are always passed to the script upon execution:
 
--   `argv[0]` = name of the executable with preceding '\\|' character if `stdin` / `stdout` are open to the server connection (/dev/null otherwise), *NB*: '\\|' is not always readily accessible from within shell scripts, so it's duplicated in `argv[2]` for convenience;
+-   **`argv[0]`** = name of the executable with preceding '\\|' character if **`stdin`** / **`stdout`** are open to the server connection (/dev/null otherwise), ***NB***: '\\|' is not always readily accessible from within shell scripts, so it's duplicated in **`argv[2]`** for convenience;
 
--   `argv[1]` = name of the service being checked;
+-   **`argv[1]`** = name of the service being checked;
 
--   `argv[2]` = if piped, "\\|host:port" of the connection point being checked, otherwise "host:port" of the server as per configuration;
+-   **`argv[2]`** = if piped, "\\|host:port" of the connection point being checked, otherwise "host:port" of the server as per configuration;
 
 The following additional command-line parameters will be passed to the script if it has been run before:
 
--   `argv[3]` = exit code obtained in the last check script run;
+-   **`argv[3]`** = exit code obtained in the last check script run;
 
--   `argv[4]` = repetition count for `argv[3]` (*NB*: 0 means this is the first occurrence of the exit code given in `argv[3]`);
+-   **`argv[4]`** = repetition count for **`argv[3]`** (***NB***: 0 means this is the first occurrence of the exit code given in **`argv[3]`**);
 
--   `argv[5]` = seconds elapsed since the last check script run.
+-   **`argv[5]`** = seconds elapsed since the last check script run.
 
-Output to `stderr` is attached to the LBSMD log file; the CPU limit is set to maximal allowed execution time. Nevertheless, the check must finish before the next invocation is due, per the server configuration.
+Output to **`stderr`** is attached to the LBSMD log file; the CPU limit is set to maximal allowed execution time. Nevertheless, the check must finish before the next invocation is due, per the server configuration.
 
 The check script is expected to produce one of the following exit codes:
 
@@ -1041,9 +1041,9 @@ The check script is expected to produce one of the following exit codes:
 | 1 - 99                      | Indicates the approximate percent of base capacity used.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | 100 - 110                   | Server state is set as RESERVED. RESERVED servers are unavailable to most clients but not considered as officially DOWN.                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | 111 - 120                   | The server is not available and must not be used, i.e. DOWN.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| 123                         | Retain the previous exit code (as supplied in `argv[3]`) and increment the repetition count. Retain the current server state, otherwise, and log a warning.                                                                                                                                                                                                                                                                                                                                                                                                            |
+| 123                         | Retain the previous exit code (as supplied in **`argv[3]`**) and increment the repetition count. Retain the current server state, otherwise, and log a warning.                                                                                                                                                                                                                                                                                                                                                                                                        |
 | 124 (*not* followed by 125) | Retain the current server state.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| 124 followed by 125         | Turn the server off, with no more checks. *Note:* This only applies when 124 is followed by 125, both without repetitions.                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| 124 followed by 125         | Turn the server off, with no more checks. ***Note:*** This only applies when 124 is followed by 125, both without repetitions.                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | 125 (*not* preceded by 124) | Retain the current server state.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | 126                         | Script was found but not executable (POSIX, script error).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | 127                         | Script was not found (POSIX, script error).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
@@ -1061,45 +1061,45 @@ If the check script crashes ungracefully (with or without the coredump) 100+ tim
 
 Servers are called SUPPRESSED when they are 100% penalized (see server penalties below); while RESERVED is a special state that LBSMD maintains. 100% penalty makes an entry not only unavailable for regular use (same as RESERVED) but also assumes some maintenance work in progress (so that any underlying state changes will not be announced immediately but only when the entry goes out of the 100% penalized state, if any state change still remains). On the other hand and from the client perspective, RESERVED and SUPPRESSED may look identical.
 
-*Note:* The check script operation is complementary to setting a penalty prior to doing any disruptive changes in production. In other words, the script is only reliable as long as the service is expected to work. If there is any scheduled maintenance, it should be communicated to LBSMD via a penalty rather than by an assumption that the failing script will do the job of bringing the service to the down state and excluding it from LB.
+***Note:*** The check script operation is complementary to setting a penalty prior to doing any disruptive changes in production. In other words, the script is only reliable as long as the service is expected to work. If there is any scheduled maintenance, it should be communicated to LBSMD via a penalty rather than by an assumption that the failing script will do the job of bringing the service to the down state and excluding it from LB.
 
 ##### Server Descriptor Specification
 
-The `server_descriptor`, also detailed in `connect/ncbi_server_info.h` (<http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_server_info.h>), consists of the following fields:
+The **`server_descriptor`**, also detailed in `connect/ncbi_server_info.h` (<http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_server_info.h>), consists of the following fields:
 
 `server_type [host][:port] [arguments] [flags]`
 
 where:
 
--   `server_type` is one of the following keywords ([more info](ch_conn.html#ch_conn.service_connector)):
+-   **`server_type`** is one of the following keywords ([more info](ch_conn.html#ch_conn.service_connector)):
 
-    -   `NCBID` for servers launched by ncbid.cgi
+    -   ***NCBID*** for servers launched by ncbid.cgi
 
-    -   `STANDALONE` for standalone servers listening to incoming connections on dedicated ports
+    -   ***STANDALONE*** for standalone servers listening to incoming connections on dedicated ports
 
-    -   `HTTP_GET` for servers, which are the CGI programs accepting only the GET request method
+    -   ***HTTP\_GET*** for servers, which are the CGI programs accepting only the GET request method
 
-    -   `HTTP_POST` for servers, which are the CGI programs accepting only the POST request method
+    -   ***HTTP\_POST*** for servers, which are the CGI programs accepting only the POST request method
 
-    -   `HTTP` for servers, which are the CGI programs accepting either GET or POST request methods
+    -   ***HTTP*** for servers, which are the CGI programs accepting either GET or POST request methods
 
-    -   `DNS` for introduction of a name (fake service), which can be used later in load-balancing for domain name resolution
+    -   ***DNS*** for introduction of a name (fake service), which can be used later in load-balancing for domain name resolution
 
-    -   `NAMEHOLD` for declaration of service names that cannot be defined in any other configuration files except for the current configuration file. *Note:* The FIREWALL server specification may not be used in a configuration file (i.e., may neither be declared as services nor as service name holders).
+    -   ***NAMEHOLD*** for declaration of service names that cannot be defined in any other configuration files except for the current configuration file. ***Note:*** The FIREWALL server specification may not be used in a configuration file (i.e., may neither be declared as services nor as service name holders).
 
--   both `host` and `port` parameters are optional. Defaults are local host and port 80, except for `STANDALONE` and `DNS` servers, which do not have a default port value. If host is specified (by either of the following: keyword localhost, localhost IP address 127.0.0.1, real host name, or IP address) then the described server is not a subject for variable load balancing but is a static server. Such server always has a constant rate, independent of any host load.
+-   both **`host`** and **`port`** parameters are optional. Defaults are local host and port 80, except for ***STANDALONE*** and ***DNS*** servers, which do not have a default port value. If host is specified (by either of the following: keyword localhost, localhost IP address 127.0.0.1, real host name, or IP address) then the described server is not a subject for variable load balancing but is a static server. Such server always has a constant rate, independent of any host load.
 
--   `arguments` are required for HTTP\* servers and must specify the local part of the URL of the CGI program and, optionally, parameters such as `/somepath/somecgi.cgi?param1&param2=value2&param3=value3`. If no parameters are to be supplied, then the question mark (?) must be omitted, too. For **NCBID** servers, arguments are parameters to pass to the server and are formed as arguments for CGI programs, i.e., param1&param2&param3=value. As a special rule, '' (two single quotes) may be used to denote an empty argument for the **NCBID** server. `STANDALONE` and `DNS` servers do not take any `arguments`.
+-   **`arguments`** are required for HTTP\* servers and must specify the local part of the URL of the CGI program and, optionally, parameters such as `/somepath/somecgi.cgi?param1&param2=value2&param3=value3`. If no parameters are to be supplied, then the question mark (?) must be omitted, too. For **NCBID** servers, arguments are parameters to pass to the server and are formed as arguments for CGI programs, i.e., param1&param2&param3=value. As a special rule, '' (two single quotes) may be used to denote an empty argument for the **NCBID** server. ***STANDALONE*** and ***DNS*** servers do not take any **`arguments`**.
 
--   `flags` can come in any order (but no more than one instance of a flag is allowed) and essentially are the optional modifiers of values used by default. The following flags are recognized (see [ncbi\_server\_info.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_server_info.h)):
+-   **`flags`** can come in any order (but no more than one instance of a flag is allowed) and essentially are the optional modifiers of values used by default. The following flags are recognized (see [ncbi\_server\_info.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_server_info.h)):
 
     -   load calculation keyword:
 
-        -   `Blast` to use special algorithm for rate calculation acceptable for BLAST (<http://www.ncbi.nlm.nih.gov/blast/Blast.cgi>) applications. The algorithm uses instant values of the host load and thus is less conservative and more reactive than the ordinary one.
+        -   ***Blast*** to use special algorithm for rate calculation acceptable for BLAST (<http://www.ncbi.nlm.nih.gov/blast/Blast.cgi>) applications. The algorithm uses instant values of the host load and thus is less conservative and more reactive than the ordinary one.
 
-        -   `Regular` to use an ordinary rate calculation (default, and the only load calculation option allowed for static servers).
+        -   ***Regular*** to use an ordinary rate calculation (default, and the only load calculation option allowed for static servers).
 
-    -   Either of these keywords may be suffixed with “Inter”, such as to form `RegularInter`, making the entry to cross the current zone boundary, and being available outside its zone.
+    -   Either of these keywords may be suffixed with “Inter”, such as to form ***RegularInter***, making the entry to cross the current zone boundary, and being available outside its zone.
 
 -   base rate:
 
@@ -1131,9 +1131,9 @@ where:
 
     -   T=integer [0 = default]<br/>specifies the time in seconds this server entry is valid without update. (If equal to 0 then defaulted by the LBSM Daemon to some reasonable value.)
 
-Server descriptors of type `NAMEHOLD` are special. As `arguments`, they have only a server type keyword. The namehold specification informs the daemon that the service of this name and type is not to be defined later in any configuration file except for the current one. Also, if the host (and/or port) is specified, then this protection works only for the service name on the particular host (and/or port).
+Server descriptors of type ***NAMEHOLD*** are special. As **`arguments`**, they have only a server type keyword. The namehold specification informs the daemon that the service of this name and type is not to be defined later in any configuration file except for the current one. Also, if the host (and/or port) is specified, then this protection works only for the service name on the particular host (and/or port).
 
-*Note:* it is recommended that a dummy port number (such as :0) is always put in the namehold specifications to avoid ambiguities with treating the server type as a host name. The following example disables `TestService` of type `DNS` from being defined in all other configuration files included later, and `TestService2` to be defined as a **NCBID** service on host foo:
+***Note:*** it is recommended that a dummy port number (such as :0) is always put in the namehold specifications to avoid ambiguities with treating the server type as a host name. The following example disables **`TestService`** of type ***DNS*** from being defined in all other configuration files included later, and **`TestService2`** to be defined as a **NCBID** service on host foo:
 
     TestService  NAMEHOLD    :0 DNS
     TestService2 NAMEHOLD foo:0 NCBID
@@ -1287,7 +1287,7 @@ Figure 12. Penalty Value Characteristics
 
 Technically, the penalty is maintained by a daemon, which has the server configured, i.e., received by a certain host, which may be different from the one where the server was put into the configuration file. The penalty first migrates to that host, and then the daemon on that host announces that the server was penalized.
 
-*Note:* Once a daemon is restarted, the penalty information is lost.
+***Note:*** Once a daemon is restarted, the penalty information is lost.
 
 [Service mapping API](ch_conn.html#ch_conn.service_mapping_api) has a call `SERV_Penalize()` (<http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SERV_Penalize>) declared in `connect/ncbi_service.h` (<http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_service.h>), which can be used to set the penalty for the last server obtained from the mapping iterator.
 
@@ -1299,7 +1299,7 @@ For script files (similar to the ones used to start/stop servers), there is a de
     > sleep 5
     now you can shutdown the server
 
-The effect of the above is to set the maximal penalty 100 for the service Servicename (of type `STANDALONE`) running on host `host` for at least 120 seconds. After 120 seconds the penalty value will start going down steadily and at some stage the penalty becomes 0. The default hold time equals 0. It takes some time to deliver the penalty value to the other hosts on the network so ‘sleep 5’ is used. Please note the single quotes surrounding the penalty specification: they are required in a command shell because **lbsm\_feedback** takes only one argument which is the entire penalty specification.
+The effect of the above is to set the maximal penalty 100 for the service Servicename (of type ***STANDALONE***) running on host **`host`** for at least 120 seconds. After 120 seconds the penalty value will start going down steadily and at some stage the penalty becomes 0. The default hold time equals 0. It takes some time to deliver the penalty value to the other hosts on the network so ‘sleep 5’ is used. Please note the single quotes surrounding the penalty specification: they are required in a command shell because **lbsm\_feedback** takes only one argument which is the entire penalty specification.
 
 As soon as the server is down, the **LBSMD** daemon detects it in a matter of several seconds (if not instructed otherwise by the configuration file) and then does not dispatch to the server until it is back up. In some circumstances, the following command may come in handy:
 
@@ -1454,9 +1454,9 @@ There are 4 predefined proxies that may be used [or operated on] without prior d
 | mapview.lb | LB-Hint-MapView | 95         | \\|       | yes      | \<none\> | \<none\> |
 | blastq.lb  | LB-Hint-Blast   | 95         | \\|       | yes      | \<none\> | \<none\> |
 
-*NOTE*: The same cookie can be used to tie up an affinity for multiple LB proxies. On the other hand, LB proxy names are all unique throughout the configuration file.
+***NOTE***: The same cookie can be used to tie up an affinity for multiple LB proxies. On the other hand, LB proxy names are all unique throughout the configuration file.
 
-*NOTE*: It is very important to keep in mind that arguments and alt-arguments are treated differently, case-wise. Alt-args are case insensitive, and are screened before the main argument (but appear as if the main argument has been found). On the other hand, main arguments are special case-sensitive, and are checked twice: "as is" first, then in all CAPs. So having both "DB" for alt-argument and "db" for the main, hides the main argument, and actually makes it case-insensitive. CAF will warn on some occurrences when it detects whether the argument overloading is about to happen (take a look at the logs).
+***NOTE***: It is very important to keep in mind that arguments and alt-arguments are treated differently, case-wise. Alt-args are case insensitive, and are screened before the main argument (but appear as if the main argument has been found). On the other hand, main arguments are special case-sensitive, and are checked twice: "as is" first, then in all CAPs. So having both "DB" for alt-argument and "db" for the main, hides the main argument, and actually makes it case-insensitive. CAF will warn on some occurrences when it detects whether the argument overloading is about to happen (take a look at the logs).
 
 The CAF module is also able to detect if a request comes from a local client. The `/etc/ncbi/local_ips` file describes the rules for making the decision.
 
@@ -1484,9 +1484,9 @@ denotes a host range from `130.14.26.0` thru `130.14.26.63` (including the ends)
 
 denotes a host range from `130.14.8.0` thru `130.14.9.255` (including the ends).
 
-*Note* that `127/8` gets automatically added, whether or not it is explicitly included into the configuration file. The file loader also warns if it encounters any specifications that overlap each other. Inexistent (or unreadable) file causes internal hardcoded defaults to be used - a warning is issued in this case.
+***Note*** that `127/8` gets automatically added, whether or not it is explicitly included into the configuration file. The file loader also warns if it encounters any specifications that overlap each other. Inexistent (or unreadable) file causes internal hardcoded defaults to be used - a warning is issued in this case.
 
-*Note* that the IP table file is read once per Apache daemon's life cycle (and it is \*not\* reloaded upon graceful restarts). The complete stop / start sequence should be performed to force the IP table be reloaded.
+***Note*** that the IP table file is read once per Apache daemon's life cycle (and it is \*not\* reloaded upon graceful restarts). The complete stop / start sequence should be performed to force the IP table be reloaded.
 
 #### Configuration Examples
 
@@ -1515,7 +1515,7 @@ The second directive in the above example sets the preference to 100% -- this is
 
 The effect of the above is that "My-Cookie" will be used in LB name searches of "myname.lb" in directory "/SomeDir", but in "/SomeDir/SubDir" and all directories of that branch, "My-Secondary-Cookie" will be used instead. If an URL referred to "/SomeDir/AnotherDir", then "My-Cookie" would still be used.
 
-*Note* that at the same time "My-Cookie" is used under "/SomeDir" everywhere else if "other.lb" is being resolved there.
+***Note*** that at the same time "My-Cookie" is used under "/SomeDir" everywhere else if "other.lb" is being resolved there.
 
 -   The following fragment disables cookie for "tpubmed.lb" [note that no "CAFProxyCookie" is to precede this directive because "tpubmed.lb" is predefined]:
 
@@ -1642,32 +1642,32 @@ The following additional HTTP tags are recognized in the client request to the D
 <td align="left"><code>Accepted-Server-Types: &lt;list&gt;</code></td>
 <td align="left">The <code>&lt;list&gt;</code> can include one or more of the following keywords separated by spaces:
 <ul>
-<li><p><code>NCBID</code></p></li>
-<li><p><code>STANDALONE</code></p></li>
-<li><p><code>HTTP</code></p></li>
-<li><p><code>HTTP_GET</code></p></li>
-<li><p><code>HTTP_POST</code></p></li>
-<li><p><code>FIREWALL</code></p></li>
+<li><p><em><strong>NCBID</strong></em></p></li>
+<li><p><em><strong>STANDALONE</strong></em></p></li>
+<li><p><em><strong>HTTP</strong></em></p></li>
+<li><p><em><strong>HTTP_GET</strong></em></p></li>
+<li><p><em><strong>HTTP_POST</strong></em></p></li>
+<li><p><em><strong>FIREWALL</strong></em></p></li>
 </ul>
-<br/>The keyword describes the server type which the client is capable to handle. The default is any (when the tag is not present in the HTTP header), and in case of a connection request, the dispatcher will accommodate an actual found server with the connection mode, which the client requested, by relaying data appropriately and in a way suitable for the server.<br/><em>Note:</em> <code>FIREWALL</code> indicates that the client chooses a firewall method of communication.<br/><em>Note:</em> Some server types can be ignored if not compatible with the current client mode</td>
+<br/>The keyword describes the server type which the client is capable to handle. The default is any (when the tag is not present in the HTTP header), and in case of a connection request, the dispatcher will accommodate an actual found server with the connection mode, which the client requested, by relaying data appropriately and in a way suitable for the server.<br/><em><strong>Note:</strong></em> <em><strong>FIREWALL</strong></em> indicates that the client chooses a firewall method of communication.<br/><em><strong>Note:</strong></em> Some server types can be ignored if not compatible with the current client mode</td>
 </tr>
 <tr class="odd">
 <td align="left"><code>Client-Mode: &lt;client-mode&gt;</code></td>
 <td align="left">The <code>&lt;client-mode&gt;</code> can be one of the following:
 <ul>
-<li><p><code>STATELESS_ONLY</code> - specifies that the client is not capable of doing full-duplex data exchange with the server in a session mode (e.g., in a dedicated connection).</p></li>
-<li><p><code>STATEFUL_CAPABLE</code> - should be used by the clients, which are capable of holding an opened connection to a server. This keyword serves as a hint to the dispatcher to try to open a direct TCP channel between the client and the server, thus reducing the network usage overhead.</p></li>
+<li><p><em><strong>STATELESS_ONLY</strong></em> - specifies that the client is not capable of doing full-duplex data exchange with the server in a session mode (e.g., in a dedicated connection).</p></li>
+<li><p><em><strong>STATEFUL_CAPABLE</strong></em> - should be used by the clients, which are capable of holding an opened connection to a server. This keyword serves as a hint to the dispatcher to try to open a direct TCP channel between the client and the server, thus reducing the network usage overhead.</p></li>
 </ul>
-<br/>The default (when the tag is not present at all) is <code>STATELESS_ONLY</code> to support Web browsers.</td>
+<br/>The default (when the tag is not present at all) is <em><strong>STATELESS_ONLY</strong></em> to support Web browsers.</td>
 </tr>
 <tr class="even">
 <td align="left"><code>Dispatch-Mode: &lt;dispatch-mode&gt;</code></td>
 <td align="left">The <code>&lt;dispatch-mode&gt;</code> can be one of the following:
 <ul>
-<li><p><code>INFORMATION_ONLY</code> - specifies that the request is a dispatching request, and no data and/or connection establishment with the server is required at this stage, i.e., the DISPD dispatcher returns only a list of available server specifications (if any) corresponding to the requested service and in accordance with client mode and server acceptance.</p></li>
-<li><p><code>NO_INFORMATION</code> - is used to disable sending the above-mentioned dispatching information back to the client. This keyword is reserved solely for internal use by the DISPD dispatcher and should <strong>not</strong> be used by applications.</p></li>
-<li><p><code>STATEFUL_INCLUSIVE</code> - informs the DISPD dispatcher that the current request is a connection request, and because it is going over HTTP it is treated as stateless, thus dispatching would supply stateless servers only. This keyword modifies the default behavior, and dispatching information sent back along with the server reply (resulting from data exchange) should include stateful servers as well, allowing the client to go to a dedicated connection later.</p></li>
-<li><p><code>OK_DOWN</code> or <code>OK_SUPPRESSED</code> or <code>PROMISCUOUS</code> - defines a dispatch only request without actual data transfer for the client to obtain a list of servers which otherwise are not included such as, currently down servers (<code>OK_DOWN</code>), currently suppressed by having 100% penalty servers (<code>OK_SUPPRESSED</code>) or both (<code>PROMISCUOUS</code>)</p></li>
+<li><p><em><strong>INFORMATION_ONLY</strong></em> - specifies that the request is a dispatching request, and no data and/or connection establishment with the server is required at this stage, i.e., the DISPD dispatcher returns only a list of available server specifications (if any) corresponding to the requested service and in accordance with client mode and server acceptance.</p></li>
+<li><p><em><strong>NO_INFORMATION</strong></em> - is used to disable sending the above-mentioned dispatching information back to the client. This keyword is reserved solely for internal use by the DISPD dispatcher and should <strong>not</strong> be used by applications.</p></li>
+<li><p><em><strong>STATEFUL_INCLUSIVE</strong></em> - informs the DISPD dispatcher that the current request is a connection request, and because it is going over HTTP it is treated as stateless, thus dispatching would supply stateless servers only. This keyword modifies the default behavior, and dispatching information sent back along with the server reply (resulting from data exchange) should include stateful servers as well, allowing the client to go to a dedicated connection later.</p></li>
+<li><p><em><strong>OK_DOWN</strong></em> or <em><strong>OK_SUPPRESSED</strong></em> or <em><strong>PROMISCUOUS</strong></em> - defines a dispatch only request without actual data transfer for the client to obtain a list of servers which otherwise are not included such as, currently down servers (<em><strong>OK_DOWN</strong></em>), currently suppressed by having 100% penalty servers (<em><strong>OK_SUPPRESSED</strong></em>) or both (<em><strong>PROMISCUOUS</strong></em>)</p></li>
 </ul>
 <br/>The default (in the absence of this tag) is a connection request, and because it is going over HTTP, it is automatically considered stateless. This is to support calls for NCBI services from Web browsers.</td>
 </tr>
@@ -1690,14 +1690,14 @@ The following additional HTTP tags are recognized in the client request to the D
 
 The DISPD dispatcher can produce the following HTTP tags in response to the client.
 
-|-------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Tag                                       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| `Relay-Path: <path>`                      | The tag shows how the information was passed along by the DISPD dispatcher and the NCBID utility. This is essential for debugging purposes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `Server-Info-<n>: <server-info>`          | The tag(s) (enumerated increasingly by suffix `<n>`, starting from 1) give a list of servers, where the requested service is available. The list can have up to five entries. However, there is only one entry generated when the service was requested either in firewall mode or by a Web browser. For a non-local client, the returned server descriptors can include `FIREWALL` server specifications. Despite preserving information about host, port, type, and other (but not all) parameters of the original servers, `FIREWALL` descriptors are not specifications of real servers, but they are created on-the-fly by the DISPD dispatcher to indicate that the connection point of the server cannot be otherwise reached without the use of either firewalling or relaying. |
-| `Connection-Info: <host> <port> <ticket>` | The tag is generated in a response to a stateful-capable client and includes a host (in a dotted notation) and a port number (decimal value) of the connection point where the server is listening (if either the server has specifically started or the FWDaemon created that connection point because of the client's request). The ticket value (hexadecimal) represents the 4-byte ticket that must be passed to the server as binary data at the very beginning of the stream. If instead of a host, a port, and ticket information there is a keyword `TRY_STATELESS`, then for some reasons (see `Dispatcher-Failures` tag below) the request failed but may succeed if the client would switch into a stateless mode.                                                           |
-| `Dispatcher-Failures: <failures>`         | The tag value lists all transient failures that the dispatcher might have experienced while processing the request. A fatal error (if any) always appears as the last failure in the list. In this case, the reply body would contain a copy of the message as well.<br/>*Note:* Fatal dispatching failure is also indicated by an unsuccessful HTTP completion code.                                                                                                                                                                                                                                                                                                                                                                                         |
-| `Used-Server-Info-n: <server_info>`       | The tag informs the client end of server infos that having been unsuccessfully used during current connection request (so that the client will be able to skip over them if needs to).<br/>`n` is an integral suffix, enumerating from 1.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `Dispatcher-Messages:`                    | The tag is used to issue a message into standard error log of a client. The message is intercepted and delivered from within Toolkit HTTP API.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+|-------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Tag                                       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `Relay-Path: <path>`                      | The tag shows how the information was passed along by the DISPD dispatcher and the NCBID utility. This is essential for debugging purposes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `Server-Info-<n>: <server-info>`          | The tag(s) (enumerated increasingly by suffix `<n>`, starting from 1) give a list of servers, where the requested service is available. The list can have up to five entries. However, there is only one entry generated when the service was requested either in firewall mode or by a Web browser. For a non-local client, the returned server descriptors can include ***FIREWALL*** server specifications. Despite preserving information about host, port, type, and other (but not all) parameters of the original servers, ***FIREWALL*** descriptors are not specifications of real servers, but they are created on-the-fly by the DISPD dispatcher to indicate that the connection point of the server cannot be otherwise reached without the use of either firewalling or relaying. |
+| `Connection-Info: <host> <port> <ticket>` | The tag is generated in a response to a stateful-capable client and includes a host (in a dotted notation) and a port number (decimal value) of the connection point where the server is listening (if either the server has specifically started or the FWDaemon created that connection point because of the client's request). The ticket value (hexadecimal) represents the 4-byte ticket that must be passed to the server as binary data at the very beginning of the stream. If instead of a host, a port, and ticket information there is a keyword ***TRY\_STATELESS***, then for some reasons (see `Dispatcher-Failures` tag below) the request failed but may succeed if the client would switch into a stateless mode.                                                              |
+| `Dispatcher-Failures: <failures>`         | The tag value lists all transient failures that the dispatcher might have experienced while processing the request. A fatal error (if any) always appears as the last failure in the list. In this case, the reply body would contain a copy of the message as well.<br/>***Note:*** Fatal dispatching failure is also indicated by an unsuccessful HTTP completion code.                                                                                                                                                                                                                                                                                                                                                                                             |
+| `Used-Server-Info-n: <server_info>`       | The tag informs the client end of server infos that having been unsuccessfully used during current connection request (so that the client will be able to skip over them if needs to).<br/>`n` is an integral suffix, enumerating from 1.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `Dispatcher-Messages:`                    | The tag is used to issue a message into standard error log of a client. The message is intercepted and delivered from within Toolkit HTTP API.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 
 ##### Communication Schemes
 
@@ -1707,9 +1707,9 @@ The figures (Figure7, Figure8) provided at the very beginning of the “Load Bal
 
 -   In the relay mode, the DISPD dispatcher passes data from the client to the server and back, playing the role of a middleman. Data relaying occurs when, for instance, a Web browser client wants to communicate with a service governed by the DISPD dispatcher itself.
 
--   In the firewall mode, DISPD sends out only the information about where the client has to connect to communicate with the server. This connection point and a verifiable ticket are specified in the `Connection-Info` tag in the reply header. *Note:* firewalling actually pertains only to the stateful-capable clients and servers.
+-   In the firewall mode, DISPD sends out only the information about where the client has to connect to communicate with the server. This connection point and a verifiable ticket are specified in the `Connection-Info` tag in the reply header. ***Note:*** firewalling actually pertains only to the stateful-capable clients and servers.
 
-The firewall mode is selected by the presence of the `FIREWALL` keyword in the `Accepted-Server-Types` tag set by the client sitting behind a firewall and not being able to connect to an arbitrary port.
+The firewall mode is selected by the presence of the ***FIREWALL*** keyword in the `Accepted-Server-Types` tag set by the client sitting behind a firewall and not being able to connect to an arbitrary port.
 
 These are scenarios of data flow between the client and the server, depending on the “stateness” of the client:
 
@@ -1727,19 +1727,19 @@ The client connects to the DISPD dispatcher with a connection request (e.g., the
 2  
 If the client chooses to use the firewall mode then the only way to communicate with the server is to connect to the DISPD dispatcher (making a connection request) and use the DISPD dispatcher as a relay.
 
-*Note:* Even if the server is stand-alone (but lacking S=yes in the configuration file of the LBSMD daemon) then the DISPD dispatcher initiates a microsession to the server and wraps its output into an HTTP/1.0-compliant reply. Data from both HTTP and NCBID servers are simply relayed one-to-one.
+***Note:*** Even if the server is stand-alone (but lacking S=yes in the configuration file of the LBSMD daemon) then the DISPD dispatcher initiates a microsession to the server and wraps its output into an HTTP/1.0-compliant reply. Data from both HTTP and NCBID servers are simply relayed one-to-one.
 
 B. Stateful-capable client
 
 1  
-A client which is **not using the firewall** mode has to connect directly to the server, using the dispatcher information obtained earlier (e.g., with the use of `INFORMATION_ONLY` in `Dispatch-Mode` tag) if local; for external clients the connection point is provided by the `Connection-Info` tag (port range 4444-4544).
+A client which is **not using the firewall** mode has to connect directly to the server, using the dispatcher information obtained earlier (e.g., with the use of ***INFORMATION\_ONLY*** in `Dispatch-Mode` tag) if local; for external clients the connection point is provided by the `Connection-Info` tag (port range 4444-4544).
 
 2  
-If the firewall mode is selected, then the client has to expect `Connection-Info` to come back from the DISPD dispatcher pointing out where to connect to the server. If `TRY_STATELESS` comes out as a value of the former tag, then the client has to switch into a stateless mode (e.g., by setting `STATELESS_ONLY` in the `Client-Mode` tag) for the request to succeed.
+If the firewall mode is selected, then the client has to expect `Connection-Info` to come back from the DISPD dispatcher pointing out where to connect to the server. If ***TRY\_STATELESS*** comes out as a value of the former tag, then the client has to switch into a stateless mode (e.g., by setting ***STATELESS\_ONLY*** in the `Client-Mode` tag) for the request to succeed.
 
-*Note:* `TRY_STATELESS` could be induced by many reasons, mainly because all servers for the service are stateless ones or because the FWDaemon is not available on the host, where the client's request was received.
+***Note:*** ***TRY\_STATELESS*** could be induced by many reasons, mainly because all servers for the service are stateless ones or because the FWDaemon is not available on the host, where the client's request was received.
 
-*Note:* Outlined scenarios show that no prior dispatching information is required for a stateless client to make a connection request, because the DISPD dispatcher can always be used as a data relay (in this way, Web browsers can access NCBI services). But for a stateful-capable client to establish a dedicated connection an additional step of obtaining dispatching information must precede the actual connection.
+***Note:*** Outlined scenarios show that no prior dispatching information is required for a stateless client to make a connection request, because the DISPD dispatcher can always be used as a data relay (in this way, Web browsers can access NCBI services). But for a stateful-capable client to establish a dedicated connection an additional step of obtaining dispatching information must precede the actual connection.
 
 To support requests from Web browsers, which are unaware of HTTP extensions comprising dispatching protocol the DISPD dispatcher considers an incoming request that does not contain input dispatching tags as a connection request from a stateless-only client.
 
@@ -1761,19 +1761,19 @@ The NCBID utility can work in either of two connection modes, stateless and stat
 
 where `<mode>` is one of the following:
 
--   `STATEFUL`
+-   ***STATEFUL***
 
--   `STATELESS`
+-   ***STATELESS***
 
-The default value (when the tag is missing) is `STATELESS` to support calls from Web browsers.
+The default value (when the tag is missing) is ***STATELESS*** to support calls from Web browsers.
 
 When the DISPD dispatcher relays data to the NCBID utility this tag is set in accordance with the current client mode.
 
-The `STATELESS` mode is almost identical to a call of a conventional CGI program with an exception that the HTTP header could hold tags pertaining to the dispatching protocol, and resulting from data relaying (if any) by the DISPD dispatcher.
+The ***STATELESS*** mode is almost identical to a call of a conventional CGI program with an exception that the HTTP header could hold tags pertaining to the dispatching protocol, and resulting from data relaying (if any) by the DISPD dispatcher.
 
-In the `STATEFUL` mode, the NCBID utility starts the program in a more tricky way, which is closer to working in a firewall mode for the DISPD dispatcher, i.e. the NCBID utility loads the program with its stdin and stdout bound to a port, which is switched to listening. The program becomes a sort of an Internet daemon (the only exception is that only one incoming connection is allowed). Then the client is sent back an HTTP reply containing the `Connection-Info` tag. The client has to use port, host, and ticket from that tag to connect to the server by creating a dedicated TCP connection.
+In the ***STATEFUL*** mode, the NCBID utility starts the program in a more tricky way, which is closer to working in a firewall mode for the DISPD dispatcher, i.e. the NCBID utility loads the program with its stdin and stdout bound to a port, which is switched to listening. The program becomes a sort of an Internet daemon (the only exception is that only one incoming connection is allowed). Then the client is sent back an HTTP reply containing the `Connection-Info` tag. The client has to use port, host, and ticket from that tag to connect to the server by creating a dedicated TCP connection.
 
-*Note*: the NCBID utility never generates `TRY_STATELESS` keyword.
+***Note***: the NCBID utility never generates ***TRY\_STATELESS*** keyword.
 
 For the sake of the backward compatibility the NCBID utility creates the following environment variables (in addition to CGI/1.0 environment variables created by the HTTP daemon when calling NCBID) before starting the service executables:
 
@@ -1794,7 +1794,7 @@ The FWDaemon allows a network client to establish a persistent TCP/IP connection
 
     ports 5860..5870 at both 130.14.29.112 and 165.112.7.12
 
-*Note:* One FWDaemon can simultaneously serve many client/server pairs.
+***Note:*** One FWDaemon can simultaneously serve many client/server pairs.
 
 ##### FWDaemon Behind a "Regular" Firewall
 
@@ -1802,7 +1802,7 @@ If a network client is behind a regular firewall, then a system administrator sh
 
 ##### FWDaemon Behind a "Non-Transparent" Firewall
 
-*Note:* If a firewall is "non-transparent" (this is an extremely rare case), then a system administrator must "map" the corresponding ports on your firewall server to the advertised FWDaemon addresses (shown above). In this case, you will have to specify the address of your firewall server in the client configuration.
+***Note:*** If a firewall is "non-transparent" (this is an extremely rare case), then a system administrator must "map" the corresponding ports on your firewall server to the advertised FWDaemon addresses (shown above). In this case, you will have to specify the address of your firewall server in the client configuration.
 
 The mapping on your non-transparent firewall server should be similar to the following:
 
@@ -1949,9 +1949,9 @@ The primary goal of Genome Workbench is to provide a flexible platform for devel
 
 The basic design of Genome Workbench follows a modified Model-View-Controller (MVC) architecture. The MVC paradigm provides a clean separation between the data being dealt with (the model), the user's perception of this data (provided in views), and the user's interaction with this data (implemented in controllers). For Genome Workbench, as with many other implementations of the MVC architecture, the View and Controller are generally combined.
 
-Central to the framework is the notion of the data being modeled. The model here encompasses the NCBI data model, with particular emphasis on sequences and annotations. The Genome Workbench framework provides a central repository for all managed data through the static class interface in `CDocManager`. `CDocManager` owns the single instance of the C++ Object Manager that is maintained by the application. `CDocManager` marshals individual `CDocument` classes to deal with data as the user requests. `CDocument`, at its core, wraps a `CScope` class and thus provides a hook to the object manager.
+Central to the framework is the notion of the data being modeled. The model here encompasses the NCBI data model, with particular emphasis on sequences and annotations. The Genome Workbench framework provides a central repository for all managed data through the static class interface in ***CDocManager***. ***CDocManager*** owns the single instance of the C++ Object Manager that is maintained by the application. ***CDocManager*** marshals individual ***CDocument*** classes to deal with data as the user requests. ***CDocument***, at its core, wraps a ***CScope*** class and thus provides a hook to the object manager.
 
-The View/Controller aspect of the architecture is implemented through the abstract class `CView`. Each `CView` class is bound to a single document. Each `CView` class, in turn, represents a view of some portion of the data model or a derived object related to the document. This definition is intentionally vague; for example, when viewing a document that represents a sequence alignment, a sequence in that alignment may not be contained in the document itself but is distinctly related to the alignment and can be presented in the context of the document. In general, the views that use the framework will define a top-level FLTK window; however, a view could be defined to be a CGI context such that its graphical component is a Web browser.
+The View/Controller aspect of the architecture is implemented through the abstract class ***CView***. Each ***CView*** class is bound to a single document. Each ***CView*** class, in turn, represents a view of some portion of the data model or a derived object related to the document. This definition is intentionally vague; for example, when viewing a document that represents a sequence alignment, a sequence in that alignment may not be contained in the document itself but is distinctly related to the alignment and can be presented in the context of the document. In general, the views that use the framework will define a top-level FLTK window; however, a view could be defined to be a CGI context such that its graphical component is a Web browser.
 
 To permit maximal extensibility, the framework delegates much of the function of creating and presenting views and analyses to a series of plugins. In fact, most of the basic components of the application itself are implemented as plugins. The Genome Workbench framework defines three classes of plugins: data loaders, views, and algorithms. Technically, a plugin is simply a shared library defining a standard entry point. These libraries are loaded on demand; the entry point returns a list of plugin factories, which are responsible for creating the actual plugin instances.
 
@@ -2069,19 +2069,19 @@ The following topics explain how to use NetCache from an application:
 
 A typical **NetCache** implementation involves a load-balanced server daemon (the "service") and one or more clients that access the service through a software interface. See [netcached.ini](http://www.ncbi.nlm.nih.gov/viewvc/v1/trunk/c++/src/app/netcache/netcached.ini?view=log) for descriptions of the **NetCache** server daemon configuration parameters.
 
-Two classes provide an interface to **NetCache** - `CNetCacheAPI` and `CNetICacheClient`. These classes share most of the basic ideas of using **NetCache**, but might be best suited for slightly different purposes. `CNetCacheAPI` might be a bit better for temporary storage in scenarios where the data is not kept elsewhere, whereas `CNetICacheClient` implements the `ICache` interface and might be a bit better for scenarios where the data still exists elsewhere but is also cached for performance reasons. `CNetCacheAPI` will probably be more commonly used because it automatically generates unique keys for you and it has a slightly simpler interface. `CNetCacheAPI` also supports stream insertion and extraction operators.
+Two classes provide an interface to **NetCache** - ***CNetCacheAPI*** and ***CNetICacheClient***. These classes share most of the basic ideas of using **NetCache**, but might be best suited for slightly different purposes. ***CNetCacheAPI*** might be a bit better for temporary storage in scenarios where the data is not kept elsewhere, whereas ***CNetICacheClient*** implements the ***ICache*** interface and might be a bit better for scenarios where the data still exists elsewhere but is also cached for performance reasons. ***CNetCacheAPI*** will probably be more commonly used because it automatically generates unique keys for you and it has a slightly simpler interface. ***CNetCacheAPI*** also supports stream insertion and extraction operators.
 
 There are multiple ways to write data to **NetCache** and read it back, but the basic ideas are:
 
--   **NetCache** stores data in blobs. There are no constraints on the format, and the size can be anything from one byte to "big" - that is, the size is specified using `size_t` and the practical size limit is the lesser of available storage and organizational policy.
+-   **NetCache** stores data in blobs. There are no constraints on the format, and the size can be anything from one byte to "big" - that is, the size is specified using ***size\_t*** and the practical size limit is the lesser of available storage and organizational policy.
 
 -   Blob identification is usually associated with a unique purpose.
 
-    -   With `CNetCacheAPI`, a blob is uniquely identified by a key that is generated by **NetCache** and returned to the calling code. Thus, the calling code can limit use of the blob to a given purpose. For example, data can be passed from one instance of a CGI to the next by storing the data in a **NetCache** blob and passing the key via cookie.
+    -   With ***CNetCacheAPI***, a blob is uniquely identified by a key that is generated by **NetCache** and returned to the calling code. Thus, the calling code can limit use of the blob to a given purpose. For example, data can be passed from one instance of a CGI to the next by storing the data in a **NetCache** blob and passing the key via cookie.
 
-    -   With `CNetICacheClient`, blobs are identified by the combination { key, version, subkey, cache name }, which isn't guaranteed to be unique. It is possible that two programs could choose the same combination and one program could change or delete the data stored by the other.
+    -   With ***CNetICacheClient***, blobs are identified by the combination { key, version, subkey, cache name }, which isn't guaranteed to be unique. It is possible that two programs could choose the same combination and one program could change or delete the data stored by the other.
 
--   With `CNetICacheClient`, the cache name can be specified in the registry and is essentially a convenient way of simulating namespaces.
+-   With ***CNetICacheClient***, the cache name can be specified in the registry and is essentially a convenient way of simulating namespaces.
 
 -   When new data is written using a key that corresponds to existing data:
 
@@ -2089,7 +2089,7 @@ There are multiple ways to write data to **NetCache** and read it back, but the 
 
     -   API calls that use a stream or writer append to the existing data.
 
--   Data written with a stream or writer won't be accessible from the **NetCache** server until the stream or writer is deleted or until the writer's `Close()` method is called.
+-   Data written with a stream or writer won't be accessible from the **NetCache** server until the stream or writer is deleted or until the writer's ***Close()*** method is called.
 
 -   A key must be supplied to retrieve data.
 
@@ -2097,7 +2097,7 @@ There are multiple ways to write data to **NetCache** and read it back, but the 
 
     -   Reading a blob won't delete it - it will be removed automatically when its TTL has expired, or it can be removed explicitly.
 
-    -   **NetCache** server daemons can specify a default TTL for their blobs using the `blob_ttl` entry in the `[netcache]` section of [netcached.ini](http://www.ncbi.nlm.nih.gov/viewvc/v1/trunk/c++/src/app/netcache/netcached.ini?view=log). There is no direct way to find the server's default TTL, but you can find it indirectly by creating a blob and calling `GetBlobInfo()` on the new blob. For an example of this, see [CSampleNetCacheClient::DemoPutRead()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/netcache/netcache_client_sample.cpp).
+    -   **NetCache** server daemons can specify a default TTL for their blobs using the `blob_ttl` entry in the `[netcache]` section of [netcached.ini](http://www.ncbi.nlm.nih.gov/viewvc/v1/trunk/c++/src/app/netcache/netcached.ini?view=log). There is no direct way to find the server's default TTL, but you can find it indirectly by creating a blob and calling ***GetBlobInfo()*** on the new blob. For an example of this, see [CSampleNetCacheClient::DemoPutRead()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/netcache/netcache_client_sample.cpp).
 
     -   Blob lifetime can be prolonged.
 
@@ -2107,11 +2107,11 @@ There are multiple ways to write data to **NetCache** and read it back, but the 
 
         -   Lifetime prolongation can be disabled by setting the `prolong_on_read` entry to `false` in [netcached.ini](http://www.ncbi.nlm.nih.gov/viewvc/v1/trunk/c++/src/app/netcache/netcached.ini?view=log).
 
-        -   *Note:* Calling `GetBlobSize()` will prolong a blob's lifetime (unless `prolong_on_read` is `false`), but calling `GetBlobInfo()` will not.
+        -   ***Note:*** Calling ***GetBlobSize()*** will prolong a blob's lifetime (unless `prolong_on_read` is `false`), but calling ***GetBlobInfo()*** will not.
 
 #### Set up your program to use NetCache
 
-To use **NetCache** from your application, you must use the [NCBI application framework](ch_core.html#ch_core.CNcbiApplication) by deriving you application class from `CNcbiApplication`. If your application is a CGI, you can derive from `CCgiApplication`.
+To use **NetCache** from your application, you must use the [NCBI application framework](ch_core.html#ch_core.CNcbiApplication) by deriving you application class from ***CNcbiApplication***. If your application is a CGI, you can derive from ***CCgiApplication***.
 
 You will need at least the following libraries in your `Makefile.<appname>.app`:
 
@@ -2151,7 +2151,7 @@ Service names are typically specified on the command line or stored in the appli
 
 #### Initialize the client API
 
-Initializing the **NetCache** API is extremely easy - simply create a `CNetCacheAPI` or `CNetICacheClient` object, selecting the constructor that automatically configures the API based on the application registry. Then, define the client name in the application registry using the `client` entry in the `[netcache_api]` section. The client name should be unique if the data is application-specific, or it can be shared by two or more applications that need to access the same data. The client name is added to AppLog entries, so it is helpful to indicate the application in this string.
+Initializing the **NetCache** API is extremely easy - simply create a ***CNetCacheAPI*** or ***CNetICacheClient*** object, selecting the constructor that automatically configures the API based on the application registry. Then, define the client name in the application registry using the `client` entry in the `[netcache_api]` section. The client name should be unique if the data is application-specific, or it can be shared by two or more applications that need to access the same data. The client name is added to AppLog entries, so it is helpful to indicate the application in this string.
 
 For example, put this in your source code:
 
@@ -2166,7 +2166,7 @@ and put this in your configuration file:
     [netcache_api]
     client=your_app_name_here
 
-If you are using `CNetICacheClient`, you either need to use API methods that take a cache name or, to take advantage of automatic configuration based on the registry, specify a cache name in the `[netcache_api]` section, for example:
+If you are using ***CNetICacheClient***, you either need to use API methods that take a cache name or, to take advantage of automatic configuration based on the registry, specify a cache name in the `[netcache_api]` section, for example:
 
     [netcache_api]
     cache_name=your_cache_name_here
@@ -2175,13 +2175,13 @@ For a complete reference of **NetCache** configuration parameters, please see th
 
 #### Store data
 
-There are ancillary multiple ways to save data, whether you're using `CNetCacheAPI` or `CNetICacheClient`.
+There are ancillary multiple ways to save data, whether you're using ***CNetCacheAPI*** or ***CNetICacheClient***.
 
 With all the storage methods, you can supply a "time-to-live" parameter, which specifies how long (in seconds) a blob will be accessible. See the [basic ideas](#basic-ideas) section for more information on time-to-live.
 
 ##### Storing data using CNetCacheAPI
 
-If you are saving a new blob using `CNetCacheAPI`, it will create a unique blob key and pass it back to you. Here are several ways to store data using `CNetCacheAPI` (see the [class reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNetCacheAPI.html) for additional methods):
+If you are saving a new blob using ***CNetCacheAPI***, it will create a unique blob key and pass it back to you. Here are several ways to store data using ***CNetCacheAPI*** (see the [class reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNetCacheAPI.html) for additional methods):
 
     CNetCacheAPI nc_api(GetConfig());
 
@@ -2205,7 +2205,7 @@ If you are saving a new blob using `CNetCacheAPI`, it will create a unique blob 
 
 ##### Storing data using CNetICacheClient
 
-If you are saving a new blob using `CNetICacheClient`, you must supply a unique { blob key / version / subkey / cache name } combination. Here are two ways (with the cache name coming from the registry) to store data using `CNetICacheClient` (see the [class reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNetICacheClient.html) for additional methods):
+If you are saving a new blob using ***CNetICacheClient***, you must supply a unique { blob key / version / subkey / cache name } combination. Here are two ways (with the cache name coming from the registry) to store data using ***CNetICacheClient*** (see the [class reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNetICacheClient.html) for additional methods):
 
     CNetICacheClient ic_client(CNetICacheClient::eAppRegistry);
 
@@ -2227,7 +2227,7 @@ If an attempt is made to retrieve a blob after its time-to-live has expired, an 
 
 ##### Retrieving data using CNetCacheAPI
 
-The following code snippet demonstrates three ways of retrieving data using `CNetCacheAPI` (see the [class reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNetCacheAPI.html) for additional methods):
+The following code snippet demonstrates three ways of retrieving data using ***CNetCacheAPI*** (see the [class reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNetCacheAPI.html) for additional methods):
 
     // Read a simple object.
     nc_api.ReadData(key, message);
@@ -2252,7 +2252,7 @@ The following code snippet demonstrates three ways of retrieving data using `CNe
 
 ##### Retrieving data using CNetICacheClient
 
-The following code snippet demonstrates two ways to retrieve data using `CNetICacheClient`, with the cache name coming from the registry (see the [class reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNetICacheClient.html) for additional methods):
+The following code snippet demonstrates two ways to retrieve data using ***CNetICacheClient***, with the cache name coming from the registry (see the [class reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNetICacheClient.html) for additional methods):
 
     // Read a simple object.
     ic_client.Read(key, version, subkey, chunk_buf, kMyBufSize);
@@ -2281,7 +2281,7 @@ Here is a sample application that uses **NetCache** from a CGI application:
 
 [src/sample/app/netcache/netcache\_cgi\_sample.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/netcache/netcache_cgi_sample.cpp)
 
-Here are test applications for `CNetCacheAPI` and `CNetICacheClient`:
+Here are test applications for ***CNetCacheAPI*** and ***CNetICacheClient***:
 
 [src/connect/services/test/test\_netcache\_api.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/services/test/test_netcache_api.cpp)
 
@@ -2324,6 +2324,6 @@ A:I have seen 400MB blobs there being written and read without an incident a tho
 
 **Q:How is the expiration of BLOBs handled by NetCache? My thinking is coming from two directions. First, I wouldn’t want BLOBs deleted out from under me, but also, if the expiration is too long, I don’t want to be littering the NetCache. That is: do I need to work hard to remove all of my BLOBs or can I just trust the automatic clean-up?**
 
-A:You can specify a "time-to-live" when you create a blob. If you don't specify a value, you can find the service's default value by calling `GetBlobInfo()`. See the [basic ideas](#basic-ideas) section for more details.
+A:You can specify a "time-to-live" when you create a blob. If you don't specify a value, you can find the service's default value by calling ***GetBlobInfo()***. See the [basic ideas](#basic-ideas) section for more details.
 
 

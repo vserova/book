@@ -273,17 +273,17 @@ In addition to the above naming conventions that highlight the nature and/or the
 
 -   indicate the package that the entity belongs to
 
-For example, if you are creating a new class called "`Bar`" in package "`Foo`" then it is good practice to name it "`CFooBar`" rather than just "`CBar`". Similarly, you should name new constants like "`kFooSomeconst`", new types like "`TFooSometype`", etc.
+For example, if you are creating a new class called "`Bar`" in package "`Foo`" then it is good practice to name it "***CFooBar***" rather than just "***CBar***". Similarly, you should name new constants like "**`kFooSomeconst`**", new types like "***TFooSometype***", etc.
 
 ### Use of the NCBI Name Scope
 
 `<ncbistl.hpp>`
 
-All NCBI-made “core” API code must be put into the `"ncbi::"` namespace. For this purpose, there are two preprocessor macros, `BEGIN_NCBI_SCOPE` and `END_NCBI_SCOPE`, that must enclose **all** NCBI C++ API code -- both declarations and definitions (see [examples](ch_proj.html#ch_proj.new_modules)). Inside these "brackets", all `"std::"` and `"ncbi::"` scope prefixes can (and must!) be omitted.
+All NCBI-made “core” API code must be put into the `"ncbi::"` namespace. For this purpose, there are two preprocessor macros, **`BEGIN_NCBI_SCOPE`** and **`END_NCBI_SCOPE`**, that must enclose **all** NCBI C++ API code -- both declarations and definitions (see [examples](ch_proj.html#ch_proj.new_modules)). Inside these "brackets", all `"std::"` and `"ncbi::"` scope prefixes can (and must!) be omitted.
 
-For code that does not define a new API but merely **uses** the NCBI C++ API, there is a macro `USING_NCBI_SCOPE;` (semicolon-terminated) that brings all types and prototypes from the `"std::"` and `"ncbi::"` namespaces into the current scope, eliminating the need for the `"std::"` and `"ncbi::"` prefixes.
+For code that does not define a new API but merely **uses** the NCBI C++ API, there is a macro **`USING_NCBI_SCOPE;`** (semicolon-terminated) that brings all types and prototypes from the `"std::"` and `"ncbi::"` namespaces into the current scope, eliminating the need for the `"std::"` and `"ncbi::"` prefixes.
 
-Use macro `NCBI_USING_NAMESPACE_STD;` (semicolon-terminated) if you want to bring all types and prototypes from the `"std::"` namespace into the current scope, without bringing in anything from the `"ncbi::"` namespace.
+Use macro **`NCBI_USING_NAMESPACE_STD;`** (semicolon-terminated) if you want to bring all types and prototypes from the `"std::"` namespace into the current scope, without bringing in anything from the `"ncbi::"` namespace.
 
 ### Use of Include Directives
 
@@ -488,7 +488,7 @@ Class declarations should be rich in [Doxygen-style comments](#doxygen-style-com
 
 [Doxygen-style comments](#doxygen-style-comments) for functions should describe what the function does, its parameters, and what it returns.
 
-For global function declarations, put all Doxygen-style comments in the header file. Prefix global functions with `g_`.
+For global function declarations, put all Doxygen-style comments in the header file. Prefix global functions with **`g_`**.
 
     /// A brief description of MyFunc2.
     ///
@@ -504,7 +504,7 @@ For global function declarations, put all Doxygen-style comments in the header f
 
 [Doxygen-style comments](#doxygen-style-comments) are not needed for member function definitions or global function definitions because their comments are put with their declarations in the header file.
 
-For static functions, put all Doxygen-style comments immediately before the function definition. Prefix static functions with `s_`.
+For static functions, put all Doxygen-style comments immediately before the function definition. Prefix static functions with **`s_`**.
 
     bool g_MyFunc2
     (double  arg1,
@@ -650,11 +650,11 @@ Use the [Standard Template Library (STL)](#standard-template-library-stl), which
 
 -   Don't use multiple inheritance (i.e. `class A: public B, public C {}`) unless creating interface instead of implementation. Otherwise, you'll run into all sorts of problems with conflicting members, especially if someone else owns a base class. The best time to use multiple inheritance is when a subclass multiply inherits from abstract base classes with only pure virtual functions.
 
-*NOTE:* Some people prefer the [Unified Modelling Language](http://www.rational.com/uml/index.jtmpl) to describe the relationships between objects.
+***NOTE:*** Some people prefer the [Unified Modelling Language](http://www.rational.com/uml/index.jtmpl) to describe the relationships between objects.
 
 ##### Make Your Code Readable
 
-Use `NULL` instead of `0` when passing a null pointer. For example:
+Use **`NULL`** instead of **`0`** when passing a null pointer. For example:
 
     MyFunc(0,0);    // Just looking at this call, you can’t tell which
                     // parameter might be an int and which might be
@@ -664,7 +664,7 @@ Use `NULL` instead of `0` when passing a null pointer. For example:
                     // that the first parameter is an int and
                     // the second is a pointer.
 
-Avoid using `bool` as a type for function arguments. For example, this might be hard to understand:
+Avoid using **`bool`** as a type for function arguments. For example, this might be hard to understand:
 
     // Just looking at this call, you can’t tell what
     // the third parameter means:
@@ -700,7 +700,7 @@ Instead, create a meaningful enumerated type that captures the meaning of the pa
     // is an enum constant rather than a bool constant.
     CompareStrings(s1, s2, eIgnoreCase);
 
-As an added benefit, using an enumerated type for parameters instead of `bool` gives you the ability to expand the enumerated type to include more variants in the future if necessary - without changing the parameter type.
+As an added benefit, using an enumerated type for parameters instead of **`bool`** gives you the ability to expand the enumerated type to include more variants in the future if necessary - without changing the parameter type.
 
 #### C++ Tips and Tricks
 
@@ -720,21 +720,21 @@ The STL is a library included in ANSI/ISO C++ for stream, string, and container 
 
 ##### STL Tips and Tricks
 
-`end()` does not return an iterator to the last element of a container, rather it returns a iterator just beyond the last element of the container. This is so you can do constructs like
+***end()*** does not return an iterator to the last element of a container, rather it returns a iterator just beyond the last element of the container. This is so you can do constructs like
 
     for (iter = container.begin();  iter != container.end();  iter++)
 
-If you want to access the last element, use "`--container.end()`". *Note:* If you use this construct to find the last element, you must first ensure that the container is not empty, otherwise you could get corrupt data or a crash.
+If you want to access the last element, use "`--container.end()`". ***Note:*** If you use this construct to find the last element, you must first ensure that the container is not empty, otherwise you could get corrupt data or a crash.
 
 The C++ Toolkit includes macros that simplify iterating. For example, the above code simplifies to:
 
     ITERATE(Type, iter, container)
 
-For more info on `ITERATE` (and related macros), see the [ITERATE macros](ch_core.html#ch_core.ITERATE_macros) section.
+For more info on **`ITERATE`** (and related macros), see the [ITERATE macros](ch_core.html#ch_core.ITERATE_macros) section.
 
 Iterator misuse causes the same problems as pointer misuse. There are versions of the STL that flag incorrect use of iterators.
 
-Iterators are guaranteed to remain valid after insertion and deletion from `list` containers, but not `vector` containers. Check to see if the container you are using preserves iterators.
+Iterators are guaranteed to remain valid after insertion and deletion from ***list*** containers, but not ***vector*** containers. Check to see if the container you are using preserves iterators.
 
 If you create a container of pointers to objects, the objects are not destroyed when the container is destroyed, only the pointers are. Other than maintaining the objects yourself, there are several strategies for handling this situation detailed in the [literature](app1.appendix1.html#app1.books.html).
 
@@ -762,15 +762,15 @@ If you pass a container to a function, don't add a local object to the container
 
 ##### Non-Standard STL Classes
 
--   Don't use the `rope` class from some versions of the STL. This is a non-standard addition. If you have questions about what is/isn't in the standard library, consult the [C++ standards](http://www.parashift.com/c++-faq-lite/big-picture.html#faq-6.12).
+-   Don't use the ***rope*** class from some versions of the STL. This is a non-standard addition. If you have questions about what is/isn't in the standard library, consult the [C++ standards](http://www.parashift.com/c++-faq-lite/big-picture.html#faq-6.12).
 
--   The NCBI C++ Toolkit includes `hash_map`, `hash_multimap`, `hash_set`, and `hash_multiset` classes (from headers [\<corelib/hash\_map.hpp\>](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/hash__map_8hpp.html) and [\<corelib/hash\_set.hpp\>](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/hash__set_8hpp.html)). These classes are more portable than, and should be used instead of, the STL's respective `hash_*` classes.
+-   The NCBI C++ Toolkit includes ***hash\_map***, ***hash\_multimap***, ***hash\_set***, and ***hash\_multiset*** classes (from headers [\<corelib/hash\_map.hpp\>](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/hash__map_8hpp.html) and [\<corelib/hash\_set.hpp\>](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/hash__set_8hpp.html)). These classes are more portable than, and should be used instead of, the STL's respective ***hash\_\**** classes.
 
 #### C++ Bad Guys
 
 ##### Operator Overload
 
-Do not use operator overloading for the objects where they have unnatural or ambiguous meaning. For example, the defining of `operator==()` for your class `"CFoo"` so that there exist { CFoo a,b,c; } such that `(a == b)` and `(b == c)` are `true` while `(a == c)` is `false` would be a very bad idea. It turns out that otherwise, especially in large projects, people have different ideas of what an overloaded operator means, leading to all sorts of bugs.
+Do not use operator overloading for the objects where they have unnatural or ambiguous meaning. For example, the defining of `operator==()` for your class ***"CFoo"*** so that there exist { CFoo a,b,c; } such that `(a == b)` and `(b == c)` are `true` while `(a == c)` is `false` would be a very bad idea. It turns out that otherwise, especially in large projects, people have different ideas of what an overloaded operator means, leading to all sorts of bugs.
 
 ##### Assignment and Copy Constructor Overload
 
@@ -803,7 +803,7 @@ In many cases when you don't want to have the assignment and copy constructor at
 
 ##### Omitting `"void"` in a No-Argument Function Prototype
 
-Do not omit `"void"` in the prototype of a function without arguments (e.g. always write `"int f(void)"` rather than just `"int f()"`).
+Do not omit `"void"` in the prototype of a function without arguments (e.g. always write ***"int f(void)"*** rather than just ***"int f()"***).
 
 ##### Do Not Mix malloc and new
 
@@ -813,7 +813,7 @@ On some platforms, malloc and new may use completely different memory managers, 
 
 It is beyond the scope of this document to discuss all C++ gotchas, but this section mentions some important ones:
 
--   **Avoid** `std::endl` **when possible**.<br/><br/>Indiscriminate use of `ncbi::NcbiEndl` or `std::endl` may lead to very serious problems.<br/><br/>One problem caused by `std::endl` is a potentially huge performance hit when writing to disk or socket. Another problem is that flushing a compressed stream can short-circuit the compression algorithm, thereby resulting in decreased compression.<br/><br/>Therefore, unless there's a need to flush, just use `\n` instead of `ncbi::NcbiEndl` or `std::endl`.<br/>
+-   **Avoid** **`std::endl`** **when possible**.<br/><br/>Indiscriminate use of **`ncbi::NcbiEndl`** or **`std::endl`** may lead to very serious problems.<br/><br/>One problem caused by **`std::endl`** is a potentially huge performance hit when writing to disk or socket. Another problem is that flushing a compressed stream can short-circuit the compression algorithm, thereby resulting in decreased compression.<br/><br/>Therefore, unless there's a need to flush, just use `\n` instead of **`ncbi::NcbiEndl`** or **`std::endl`**.<br/>
 
 -   **Other topics to be aware of:**
 
@@ -823,11 +823,11 @@ It is beyond the scope of this document to discuss all C++ gotchas, but this sec
 
     -   character sets (e.g. Unicode) vs. encodings (e.g. UTF-8)
 
-    -   `char` vs. `w_char` and `'\n'` vs. `L'\n'`
+    -   ***char*** vs. ***w\_char*** and `'\n'` vs. `L'\n'`
 
-    -   flushing vs. physical writing - `flush` (manipulator), `fflush()`, `sync()`, disk write-cache, I/O performance, etc.
+    -   flushing vs. physical writing - **`flush`** (manipulator), ***fflush()***, ***sync()***, disk write-cache, I/O performance, etc.
 
-    -   `iostream` buffering (`cin`/`cout`/`cerr`/`clog` including `tie()` and `unitbuf`)<br/>
+    -   ***iostream*** buffering (**`cin`**/**`cout`**/**`cerr`**/**`clog`** including ***tie()*** and **`unitbuf`**)<br/>
 
 For more information, see the [C++ Draft Standard](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2011/n3242.pdf), or search related topics on the internet.
 
@@ -854,7 +854,7 @@ Note for NCBI developers: Using these repositories has the additional advantages
 Testing
 -------
 
-Unit testing using the [Boost Unit Test Framework](ch_boost.html) is strongly encouraged for libraries. Within NCBI, unit tests can be incorporated into the nightly automated testsuite by using the `CHECK_CMD` macro in the makefile. All testsuite results are available on the [testsuite web page](http://intranet/ieb/ToolBox/STAT/test_stat/test_stat_ext.cgi). Users can also be automatically emailed with build and/or test results by using the `WATCHERS` macro. Please see the chapter on [Using the Boost Unit Test Framework](ch_boost.html) for more information.
+Unit testing using the [Boost Unit Test Framework](ch_boost.html) is strongly encouraged for libraries. Within NCBI, unit tests can be incorporated into the nightly automated testsuite by using the **`CHECK_CMD`** macro in the makefile. All testsuite results are available on the [testsuite web page](http://intranet/ieb/ToolBox/STAT/test_stat/test_stat_ext.cgi). Users can also be automatically emailed with build and/or test results by using the **`WATCHERS`** macro. Please see the chapter on [Using the Boost Unit Test Framework](ch_boost.html) for more information.
 
 Applications should also be tested, and shell scripts are often convenient for this purpose.
 

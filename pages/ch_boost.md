@@ -34,7 +34,7 @@ The NCBI extensions add the ability to:
 
 -   add initialization and finalization functions; and
 
--   use convenience macros for combining `NO_THROW` with other test tools.
+-   use convenience macros for combining **`NO_THROW`** with other test tools.
 
 While the framework may be of interest to outside organizations, this chapter is intended for NCBI C++ developers. See also the Doxygen documentation for [tests](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/group__Tests.html).
 
@@ -187,13 +187,13 @@ Because the unit tests are based on the Boost Unit Test Framework, the makefiles
 
 If you are using the `new_project` script (recommended), this setting is included automatically. Otherwise, make sure that `Boost.Test.Included` is listed in `REQUIRES`.
 
-*Note:* Please also see the "[Defining and running tests](ch_proj.html#ch_proj.inside_tests)" section for unit test makefile information that isn't specific to Boost.
+***Note:*** Please also see the "[Defining and running tests](ch_proj.html#ch_proj.inside_tests)" section for unit test makefile information that isn't specific to Boost.
 
 #### Modifying the Source File
 
 A unit test is simply a test of a unit of code, such as a class. Because each unit has many requirements, each unit test has many test cases. Your unit test code should therefore consist of a test case for each testable requirement. Each test case should be as small and independent of other test cases as possible. For information on how to handle dependencies between test cases, see the section on [managing dependencies](#managing-dependencies).
 
-Starting with an existing unit test source file, simply add, change, or remove test cases as appropriate for your unit test. Test cases are defined by the `BOOST_AUTO_TEST_CASE` macro, which looks similar to a function. The macro has a single argument (the test case name) and a block of code that implements the test. Test case names must be unique at each level of the test suite hierarchy (see [managing dependencies](#managing-dependencies)). Test cases should contain code that will succeed if the requirement under test is correctly implemented, and fail otherwise. Determination of success is made using Boost [testing tools](#testing-tools) such as `BOOST_REQUIRE` and `BOOST_CHECK`.
+Starting with an existing unit test source file, simply add, change, or remove test cases as appropriate for your unit test. Test cases are defined by the **`BOOST_AUTO_TEST_CASE`** macro, which looks similar to a function. The macro has a single argument (the test case name) and a block of code that implements the test. Test case names must be unique at each level of the test suite hierarchy (see [managing dependencies](#managing-dependencies)). Test cases should contain code that will succeed if the requirement under test is correctly implemented, and fail otherwise. Determination of success is made using Boost [testing tools](#testing-tools) such as **`BOOST_REQUIRE`** and **`BOOST_CHECK`**.
 
 The following sections discuss modifying the source file in more detail:
 
@@ -215,33 +215,33 @@ The following sections discuss modifying the source file in more detail:
 
 Testing tools are macros that are used to detect errors and determine whether a given test case passes or fails.
 
-While at a basic level test cases can pass or fail, it is useful to distinguish between those failures that make subsequent testing pointless or impossible and those that don’t. Therefore, there are two levels of testing: `CHECK` (which upon failure generates an error but allows subsequent testing to continue), and `REQUIRE` (which upon failure generates a fatal error and aborts the current test case). In addition, there is a warning level, `WARN`, that can report something of interest without generating an error, although by default you will have to [set a command-line argument](#set-a-command-line-argument) to see warning messages.
+While at a basic level test cases can pass or fail, it is useful to distinguish between those failures that make subsequent testing pointless or impossible and those that don’t. Therefore, there are two levels of testing: **`CHECK`** (which upon failure generates an error but allows subsequent testing to continue), and **`REQUIRE`** (which upon failure generates a fatal error and aborts the current test case). In addition, there is a warning level, **`WARN`**, that can report something of interest without generating an error, although by default you will have to [set a command-line argument](#set-a-command-line-argument) to see warning messages.
 
 If the failure of one test case should result in skipping another then you should [add a dependency](#add-a-dependency) between them.
 
 Many Boost testing tools have variants for each error level. The most common Boost testing tools are:
 
-|----------------------------------------------|-------------------------------------------------------------------------------------------------------------|
-| **Testing Tool**                             | **Purpose**                                                                                                 |
-| `BOOST_<level>(predicate)`                   | Fails if the Boolean predicate (any logical expression) is false.                                           |
-| `BOOST_<level>_EQUAL(left, right)`           | Fails if the two values are not equal.                                                                      |
-| `BOOST_<level>_THROW(expression, exception)` | Fails if execution of the expression doesn’t throw an exception of the given type (or one derived from it). |
-| `BOOST_<level>_NO_THROW(expression)`         | Fails if execution of the expression throws any exception.                                                  |
+|--------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
+| **Testing Tool**                                 | **Purpose**                                                                                                 |
+| **`BOOST_<level>(predicate)`**                   | Fails if the Boolean predicate (any logical expression) is false.                                           |
+| **`BOOST_<level>_EQUAL(left, right)`**           | Fails if the two values are not equal.                                                                      |
+| **`BOOST_<level>_THROW(expression, exception)`** | Fails if execution of the expression doesn’t throw an exception of the given type (or one derived from it). |
+| **`BOOST_<level>_NO_THROW(expression)`**         | Fails if execution of the expression throws any exception.                                                  |
 
-Note that `BOOST_<level>_EQUAL(var1,var2)` is equivalent to `BOOST_<level> (var1==var2)`, but in the case of failure it prints the value of each variable, which can be helpful. Also, it is not a good idea to compare floating point values directly - instead, use `BOOST_<level>_CLOSE(var1,var2,tolerance)`.
+Note that **`BOOST_<level>_EQUAL(var1,var2)`** is equivalent to **`BOOST_<level> (var1==var2)`**, but in the case of failure it prints the value of each variable, which can be helpful. Also, it is not a good idea to compare floating point values directly - instead, use **`BOOST_<level>_CLOSE(var1,var2,tolerance)`**.
 
 See the Boost testing tools [reference page](http://www.boost.org/doc/libs/1_53_0/libs/test/doc/html/utf/testing-tools/reference.html) for documentation on these and other testing tools.
 
-The NCBI extensions to the Boost library add a number of convenience testing tools that enclose the similarly-named Boost testing tools in a `NO_THROW` test:
+The NCBI extensions to the Boost library add a number of convenience testing tools that enclose the similarly-named Boost testing tools in a **`NO_THROW`** test:
 
-|------------------------------------|---------------------------------------|
-| **Boost Testing Tool**             | **NCBI "NO\_THROW " Extension**       |
-| `BOOST_<level>(predicate)`         | `NCBITEST_<level>(predicate)`         |
-| `BOOST_<level>_EQUAL(left, right)` | `NCBITEST_<level>_EQUAL(left, right)` |
-| `BOOST_<level>_NE(left, right)`    | `NCBITEST_<level>_NE(left, right)`    |
-| `BOOST_<level>_MESSAGE(pred, msg)` | `NCBITEST_<level>_MESSAGE(pred, msg)` |
+|----------------------------------------|-------------------------------------------|
+| **Boost Testing Tool**                 | **NCBI "NO\_THROW " Extension**           |
+| **`BOOST_<level>(predicate)`**         | **`NCBITEST_<level>(predicate)`**         |
+| **`BOOST_<level>_EQUAL(left, right)`** | **`NCBITEST_<level>_EQUAL(left, right)`** |
+| **`BOOST_<level>_NE(left, right)`**    | **`NCBITEST_<level>_NE(left, right)`**    |
+| **`BOOST_<level>_MESSAGE(pred, msg)`** | **`NCBITEST_<level>_MESSAGE(pred, msg)`** |
 
-*Note:* Testing tools are only supported within the context of test cases. That is, within functions defined by the `BOOST_AUTO_TEST_CASE` macro and within functions called by a test case. They are not supported in functions defined by the `NCBITEST_*` macros.
+***Note:*** Testing tools are only supported within the context of test cases. That is, within functions defined by the **`BOOST_AUTO_TEST_CASE`** macro and within functions called by a test case. They are not supported in functions defined by the **`NCBITEST_*`** macros.
 
 ##### Adding Initialization and/or Finalization
 
@@ -333,11 +333,11 @@ When an independent test item (case or suite) fails, all of the test items that 
 
 ##### Unit Tests with Multiple Files
 
-The [new\_project](ch_proj.html#ch_proj.new_project_Starting) script is designed to create single-file unit tests by default, but you can add as many files as necessary to implement your unit test. Use of the `BOOST_AUTO_TEST_MAIN` macro is now deprecated.
+The [new\_project](ch_proj.html#ch_proj.new_project_Starting) script is designed to create single-file unit tests by default, but you can add as many files as necessary to implement your unit test. Use of the **`BOOST_AUTO_TEST_MAIN`** macro is now deprecated.
 
 #### Disabling Tests
 
-The Boost Unit Test Framework was extended by NCBI to provide several ways to disable test cases and suites. Test cases and suites are disabled based on logical expressions in the application configuration file or, less commonly, by explicitly disabling or skipping them. The logical expressions are based on unit test variables which are defined either by the library or by the user. All such variables are essentially Boolean in that they are either defined (`true`) or not defined (`false`). *Note:* these methods of disabling tests don't apply if specific tests are [run from the command-line](#run-from-the-command-line).
+The Boost Unit Test Framework was extended by NCBI to provide several ways to disable test cases and suites. Test cases and suites are disabled based on logical expressions in the application configuration file or, less commonly, by explicitly disabling or skipping them. The logical expressions are based on unit test variables which are defined either by the library or by the user. All such variables are essentially Boolean in that they are either defined (**`true`**) or not defined (**`false`**). ***Note:*** these methods of disabling tests don't apply if specific tests are [run from the command-line](#run-from-the-command-line).
 
 -   [Disabling Tests with Configuration File Entries](#disabling-tests-with-configuration-file-entries)
 
@@ -349,7 +349,7 @@ The Boost Unit Test Framework was extended by NCBI to provide several ways to di
 
 ##### Disabling Tests with Configuration File Entries
 
-The `[UNITTESTS_DISABLE]` section of the application configuration file can be customized to disable test cases or suites. Entries in this section should specify a test case or suite name and a logical expression for disabling it (expressions that evaluate to `true` disable the test). The logical expression can be formed from the logical constants `true` and `false`, numeric constants, [library-defined](#library-defined) or [user-defined](#user-defined) unit test variables, logical operators ('`!`', '`&&`', and '`\|\|`'), and parentheses.
+The **`[UNITTESTS_DISABLE]`** section of the application configuration file can be customized to disable test cases or suites. Entries in this section should specify a test case or suite name and a logical expression for disabling it (expressions that evaluate to **`true`** disable the test). The logical expression can be formed from the logical constants **`true`** and **`false`**, numeric constants, [library-defined](#library-defined) or [user-defined](#user-defined) unit test variables, logical operators ('`!`', '`&&`', and '`\|\|`'), and parentheses.
 
 To disable specific tests, use commands like:
 
@@ -362,7 +362,7 @@ There is a special entry `GLOBAL` that can be used to disable all tests. For exa
     [UNITTESTS_DISABLE]
     GLOBAL = OS_Cygwin
 
-*Note*: If the configuration file contains either a test name or a variable name that has not been defined (e.g. due to a typo) then the test program will exit immediately with an error, without executing any tests.
+***Note***: If the configuration file contains either a test name or a variable name that has not been defined (e.g. due to a typo) then the test program will exit immediately with an error, without executing any tests.
 
 ##### Library-Defined Variables
 
@@ -461,7 +461,7 @@ Table 2. Check Script Generated Predefined Variables
 
 The automated nightly test suite defines the `FEATURES` environment variable before launching the unit test applications. In this way, unit test applications can also use run-time detected features to exclude specific tests from the test suite.
 
-*Note:* The names of the features are modified slightly when creating unit test variables from names in the `FEATURES` environment variable. Specifically, each feature is prefixed by `FEATURE_` and all non-alphanumeric characters are changed to underscores. For example, to require the feature `in-house-resources` for a test (i.e. to disable the test if the feature is not present), use:
+***Note:*** The names of the features are modified slightly when creating unit test variables from names in the `FEATURES` environment variable. Specifically, each feature is prefixed by `FEATURE_` and all non-alphanumeric characters are changed to underscores. For example, to require the feature `in-house-resources` for a test (i.e. to disable the test if the feature is not present), use:
 
     [UNITTESTS_DISABLE]
     SomeTestCaseName = !FEATURE_in_house_resources
@@ -495,7 +495,7 @@ Then, passing the argument on the command-line controls the disabling of the tes
 
 ##### Disabling or Skipping Tests Explicitly in Code
 
-The NCBI extensions include a macro, `NCBITEST_DISABLE`, to unconditionally disable a test case or suite. This macro must be placed in the `NCBITEST_INIT_TREE` function:
+The NCBI extensions include a macro, **`NCBITEST_DISABLE`**, to unconditionally disable a test case or suite. This macro must be placed in the **`NCBITEST_INIT_TREE`** function:
 
     NCBITEST_INIT_TREE()
     {
@@ -503,7 +503,7 @@ The NCBI extensions include a macro, `NCBITEST_DISABLE`, to unconditionally disa
         NCBITEST_DISABLE(test_suite_name);
     }
 
-The extensions also include two functions for globally disabling or skipping all tests. These functions should be called only from within the `NCBITEST_AUTO_INIT` or `NCBITEST_INIT_TREE` functions:
+The extensions also include two functions for globally disabling or skipping all tests. These functions should be called only from within the **`NCBITEST_AUTO_INIT`** or **`NCBITEST_INIT_TREE`** functions:
 
     NCBITEST_INIT_TREE()
     {
@@ -512,7 +512,7 @@ The extensions also include two functions for globally disabling or skipping all
                                      // Most unit tests won’t use either.
     }
 
-The difference between these functions is that globally disabled unit tests will report the status `DIS` to check scripts while skipped tests will report the status `SKP`.
+The difference between these functions is that globally disabled unit tests will report the status **`DIS`** to check scripts while skipped tests will report the status **`SKP`**.
 
 ### Viewing Unit Tests Results from the Nightly Build
 

@@ -169,7 +169,7 @@ Script usage:
 
     new_project <name> <type>[/<subtype>] [builddir]
 
-*NOTE*: in NCBI, you can (and should) invoke common scripts simply by name - i.e. without path or extension. The proper script located in the pre-built NCBI C++ toolkit directory will be invoked.
+***NOTE***: in NCBI, you can (and should) invoke common scripts simply by name - i.e. without path or extension. The proper script located in the pre-built NCBI C++ toolkit directory will be invoked.
 
 This script will create a startup makefile for a new project which uses the NCBI C++ Toolkit (and possibly the C Toolkit as well). Replace `<type>` with `lib` for libraries or `app` for applications.
 
@@ -195,15 +195,15 @@ Now, after specifying the application name, list of source files, etc., you can 
 
     make -f Makefile.foo_app
 
-You can easily change the active version of NCBI C++ Toolkit by manually setting variable `$(builddir)` in the file `Makefile.foo_app` to the desired Toolkit path, e.g.,
+You can easily change the active version of NCBI C++ Toolkit by manually setting variable **`$(builddir)`** in the file `Makefile.foo_app` to the desired Toolkit path, e.g.,
 
     builddir = $(NCBI)/c++.current/GCC-Release/build
 
-*Note:* On Unix, the default build is the production build - because `$(NCBI)/c++` is a symbolic link to `$(NCBI)/c++.production`. On Windows, the default build is the current build. Windows builds have the form: `\\snowman\win-coremake\Lib\Ncbi\CXX_Toolkit\msvc10\cxx.stable`
+***Note:*** On Unix, the default build is the production build - because `$(NCBI)/c++` is a symbolic link to `$(NCBI)/c++.production`. On Windows, the default build is the current build. Windows builds have the form: `\\snowman\win-coremake\Lib\Ncbi\CXX_Toolkit\msvc10\cxx.stable`
 
 In many cases, you work on your own project which **is a part** of the NCBI C++ tree, and you do not want to check out, update and rebuild the whole NCBI C++ tree. Instead, you just want to use headers and libraries of the pre-built NCBI C++ Toolkit to build your project. In these cases, use the [import\_project](ch_getcode_svn.html#ch_getcode_svn.import_project_sh) script instead of `new_project`.
 
-*Note for users inside NCBI:* To be able to view debug information in the Toolkit libraries for Windows builds, you will need to have the `S:` drive mapped to `\\snowman\win-coremake\Lib`. By default, `new_project` will make this mapping for you if it's not already done.
+***Note for users inside NCBI:*** To be able to view debug information in the Toolkit libraries for Windows builds, you will need to have the `S:` drive mapped to `\\snowman\win-coremake\Lib`. By default, `new_project` will make this mapping for you if it's not already done.
 
 #### Creating a New Project Inside the C++ Toolkit Tree
 
@@ -214,7 +214,7 @@ To create your new project (e.g., "bar\_proj") directories in the NCBI C++ Toolk
 
 From there, you can now [add](#add) and edit your project C++ files.
 
-NOTE: remember to add this new project directory to the `$(SUB_PROJ)` list of the upper level [meta-makefile](ch_build.html#ch_build.makefiles_meta) configurable template (e.g., for this particular case, to `foo/c++/src/Makefile.in`).
+NOTE: remember to add this new project directory to the **`$(SUB_PROJ)`** list of the upper level [meta-makefile](ch_build.html#ch_build.makefiles_meta) configurable template (e.g., for this particular case, to `foo/c++/src/Makefile.in`).
 
 ### Projects and the Toolkit's SVN Tree Structure
 
@@ -257,7 +257,7 @@ To create your new project (e.g., "bar\_proj") directories in the NCBI C++ SVN t
 
 Now you can [add](#add) and edit your project C++ files in there.
 
-*NOTE:* remember to add this new project directory to the `$(SUB_PROJ)` list of the upper level [meta-makefile](#meta-makefile) configurable template (e.g., for this particular case, to `foo/c++/src/Makefile.in`).
+***NOTE:*** remember to add this new project directory to the **`$(SUB_PROJ)`** list of the upper level [meta-makefile](#meta-makefile) configurable template (e.g., for this particular case, to `foo/c++/src/Makefile.in`).
 
 ### Starting New Modules
 
@@ -293,7 +293,7 @@ Just like the configurable template `Makefile.meta.in` is used to ease and stand
 
 In addition to the `meta-makefile` that must be defined for each project, a customized makefile `Makefile.<project_name>.[app\|lib]` must also be provided. The following three sections give examples of `customized makefiles` for a [library](#library) and an [application](#application), along with a case where a [user-defined](#user-defined) `makefile` is required.
 
-You have great latitude in specifying optional packages, features and projects in `makefiles`. The macro `REQUIRES` in the examples is one way to allows you access them. See the "`Working with Makefiles`" page for a [complete list](ch_build.html#ch_build.packages_opt); the configuration page gives the corresponding [configure options](ch_config.html#ch_config.ch_configprohibit_sy).
+You have great latitude in specifying optional packages, features and projects in `makefiles`. The macro **`REQUIRES`** in the examples is one way to allows you access them. See the "`Working with Makefiles`" page for a [complete list](ch_build.html#ch_build.packages_opt); the configuration page gives the corresponding [configure options](ch_config.html#ch_config.ch_configprohibit_sy).
 
 The following examples are discussed in this section:
 
@@ -339,17 +339,17 @@ Here are the steps the build process follows:
 
 -   Skip building this library if `xrequirement` ([an optional package or project](ch_build.html#ch_build.packages_opt)) is disabled or unavailable.
 
--   Compile `xmy_src1.cpp` using the C++ compiler `$(CXX)` with the flags `$(FAST_CXXFLAGS) -xyz $(CPPFLAGS)`, which are the C++ flags for faster code, some additional flags specified by the user, and the original preprocessor flags.
+-   Compile `xmy_src1.cpp` using the C++ compiler **`$(CXX)`** with the flags `$(FAST_CXXFLAGS) -xyz $(CPPFLAGS)`, which are the C++ flags for faster code, some additional flags specified by the user, and the original preprocessor flags.
 
--   Compile `xmy_src2.c` using the C compiler `$(CC)` with the flags `$(ORIG_CFLAGS) -abc -DFOOBAR_NOT_CPLUSPLUS $(CPPFLAGS)`, which are the original C flags, some additional flags specified by the user, and the original preprocessor flags.
+-   Compile `xmy_src2.c` using the C compiler **`$(CC)`** with the flags `$(ORIG_CFLAGS) -abc -DFOOBAR_NOT_CPLUSPLUS $(CPPFLAGS)`, which are the original C flags, some additional flags specified by the user, and the original preprocessor flags.
 
--   If building a static library: Using `$(AR)` and `$(RANLIB)`, compose the library `libxmylib.a` from the resultant object files, plus the pre-compiled object file `some_obj1.o`.
+-   If building a static library: Using **`$(AR)`** and **`$(RANLIB)`**, compose the library `libxmylib.a` from the resultant object files, plus the pre-compiled object file `some_obj1.o`.
 
--   If building a shared library: Using `$(LINK_DLL)`, compose the library `libxmylib.so` from the resultant object files, plus the pre-compiled object file `some_obj1.o`.
+-   If building a shared library: Using **`$(LINK_DLL)`**, compose the library `libxmylib.so` from the resultant object files, plus the pre-compiled object file `some_obj1.o`.
 
 -   Copy `libxmylib.*` to the top-level `lib/` directory of the `build tree` (for the later use by other projects).
 
-This `customized makefile` should be referred to as `xmylib` in the `LIB_PROJ` macro of the relevant [meta-makefile](#meta-makefile). As usual, [Makefile.mk](ch_build.html#ch_build.build_make_macros) will be implicitly included.
+This `customized makefile` should be referred to as `xmylib` in the **`LIB_PROJ`** macro of the relevant [meta-makefile](#meta-makefile). As usual, [Makefile.mk](ch_build.html#ch_build.build_make_macros) will be implicitly included.
 
 For information about run-time linking with shared libraries, see [this section](ch_config.html#ch_config.ch_configconfightml_).
 
@@ -367,23 +367,23 @@ Here is an example of a `customized makefile` to build the application **my\_exe
 
 -   Skip building this library if `xrequirement` ([an optional package or project](ch_build.html#ch_build.packages_opt)) is disabled or unavailable.
 
--   Compile `my_main.cpp` and `my_src1.cpp` using the C++ compiler `$(CXX)` with the flags `$(CXXFLAGS)` (see Note below).
+-   Compile `my_main.cpp` and `my_src1.cpp` using the C++ compiler **`$(CXX)`** with the flags **`$(CXXFLAGS)`** (see Note below).
 
--   Compile `my_src2.c` using the C compiler `$(CC)` with the flags `$(CFLAGS)` (see Note below).
+-   Compile `my_src2.c` using the C compiler **`$(CC)`** with the flags **`$(CFLAGS)`** (see Note below).
 
--   Using `$(CXX)` as a linker, build an executable **my\_exe** from the object files `my_main.o, my_src1.o, my_src2.o`, the precompiled object file `some_obj.o`, NCBI C++ Toolkit libraries [libxmylib.a](#libxmyliba) and `libxncbi.*`, and NCBI SSS DB, SYBASE, and system network libraries (see Note below).
+-   Using **`$(CXX)`** as a linker, build an executable **my\_exe** from the object files `my_main.o, my_src1.o, my_src2.o`, the precompiled object file `some_obj.o`, NCBI C++ Toolkit libraries [libxmylib.a](#libxmyliba) and `libxncbi.*`, and NCBI SSS DB, SYBASE, and system network libraries (see Note below).
 
 -   Copy the application to the top-level `bin/` directory of the `build tree` (for later use by other projects).
 
-*Note:* Since we did not redefine `CFLAGS`, `CXXFLAGS`, or `LDFLAGS`, their default values `ORIG_*FLAGS` (obtained during the `build tree `[configuration](ch_config.html#ch_config.Configuration_and_In)) will be used.
+***Note:*** Since we did not redefine **`CFLAGS`**, **`CXXFLAGS`**, or **`LDFLAGS`**, their default values **`ORIG_*FLAGS`** (obtained during the `build tree `[configuration](ch_config.html#ch_config.Configuration_and_In)) will be used.
 
-This `customized makefile` should be referred to as **my\_exe** in the `APP_PROJ` macro of the relevant [meta-makefile](#meta-makefile). Note also, that the [Makefile.mk](ch_build.html#ch_build.build_make_macros) will be implicitly included.
+This `customized makefile` should be referred to as **my\_exe** in the **`APP_PROJ`** macro of the relevant [meta-makefile](#meta-makefile). Note also, that the [Makefile.mk](ch_build.html#ch_build.build_make_macros) will be implicitly included.
 
 #### Example 3: User-defined makefile to build... whatever
 
 In some cases, we may need more functionality than the `customized makefiles` (designed to build libraries and applications) can provide.
 
-So, if you have a "regular" non-customized `user makefile`, and you want to make from it, then you must enlist this `user makefile` in the `USR_PROJ` macro of the project's [meta-makefile](#meta-makefile).
+So, if you have a "regular" non-customized `user makefile`, and you want to make from it, then you must enlist this `user makefile` in the **`USR_PROJ`** macro of the project's [meta-makefile](#meta-makefile).
 
 Now, during the project build (and before any `customized makefiles` are processed), your makefile will be called with one of the [standard make targets](ch_build.html#ch_build.build_make_proj_target) from the project's build directory. Additionally, the [builddir](ch_build.html#ch_build.T1) and [srcdir](ch_build.html#ch_build.T1) macros will be passed to your makefile (via the **make** command line).
 
@@ -587,7 +587,7 @@ In the example above, we specified the GNU compiler debug environment: `$NCBI/c+
 
 #### The Project's Makefile
 
-The file you just created with the above script will be called `Makefile.newproj_app`. In addition to other things, you will see definitions for: - `$(builddir) `- a path to the build directory specified in the last argument to the above script - `$(srcdir) `- the path to your current working directory (".") - `$(APP) `- the application name - `$(OBJ) `- the names of the object modules to build and link to the application - `$(LIB)` - specific libraries to link to in the NCBI C++ Toolkit - `$(LIBS) `- all other libraries to link to (outside the C++ Toolkit)
+The file you just created with the above script will be called `Makefile.newproj_app`. In addition to other things, you will see definitions for: - **`$(builddir) `**- a path to the build directory specified in the last argument to the above script - **`$(srcdir) `**- the path to your current working directory (".") - **`$(APP) `**- the application name - **`$(OBJ) `**- the names of the object modules to build and link to the application - **`$(LIB)`** - specific libraries to link to in the NCBI C++ Toolkit - **`$(LIBS) `**- all other libraries to link to (outside the C++ Toolkit)
 
 `$(builddir)/lib` specifies the library path (-L), which in this case points to the GNU debug versions of the NCBI C++ Toolkit libraries. $(LIB) lists the individual libraries in this path that you will be linking to. Minimally, this should include `xncbi` - the library which implements the foundational classes for the C++ tools. Additional library names (e.g. `xhtml, xcgi, `etc.) can be added here.
 
@@ -620,9 +620,9 @@ An alternative to developing a new project from scratch is to work within a subt
 
 where:
 
--   `subtree_name` is the path to a selected directory inside `[internal/]c++/src/`
+-   **`subtree_name`** is the path to a selected directory inside `[internal/]c++/src/`
 
--   `builddir` (optional) specifies what version of the pre-built NCBI C++ Toolkit libraries to link to.
+-   **`builddir`** (optional) specifies what version of the pre-built NCBI C++ Toolkit libraries to link to.
 
 As a result of executing this shell script, you will have a new directory created with the pathname `./[internal/]c++/` whose structure contains "slices" of the original SVN tree. Specifically, you will find:
 
@@ -633,7 +633,7 @@ The `src` and `include` directories will contain all of the requested subtree's 
 
 You can re-run **import\_project** to add multiple projects to your tree.
 
-*Note:* If you'd like to import both internal and public projects into a single tree, you'll need to use the `-topdir` option, which will locate the public project within the internal tree, for example:
+***Note:*** If you'd like to import both internal and public projects into a single tree, you'll need to use the `-topdir` option, which will locate the public project within the internal tree, for example:
 
     import_project internal/demo/misc/xmlwrapp
     import_project -topdir trunk/internal/c++ misc/xmlwrapp
@@ -721,13 +721,13 @@ Figure 1. Meta makefiles and the makefiles they generate
 
 The meta-makefile `myProj/Makefile.in` should define at least one of the following macros:
 
--   `USR_PROJ` (optional) - a list of names for user-defined makefiles.<br/>This macro is provided for the usage of ordinary stand-alone makefiles which do not utilize the **make** commands contained in additional makefiles in the top-level `build` directory. Each `p_i` listed in `USR_PROJ = p_1 ... p_N` must have a corresponding [Makefile.p\_i](#makefilepi) in the project's source directory. When **make** is executed, the **make** directives contained in these files will be executed directly to build the targets as specified.
+-   **`USR_PROJ`** (optional) - a list of names for user-defined makefiles.<br/>This macro is provided for the usage of ordinary stand-alone makefiles which do not utilize the **make** commands contained in additional makefiles in the top-level `build` directory. Each `p_i` listed in `USR_PROJ = p_1 ... p_N` must have a corresponding [Makefile.p\_i](#makefilepi) in the project's source directory. When **make** is executed, the **make** directives contained in these files will be executed directly to build the targets as specified.
 
--   `LIB_PROJ` (optional) - a list of names for library makefiles.<br/>For each library `l_i` listed in `LIB_PROJ = l_1 ... l_N`, you must have created a corresponding project makefile named [Makefile.l\_i.lib](#makefilelilib) in the project's source directory. When **make** is executed, these library project makefiles will be used along with `Makefile.lib` and `Makefile.lib.tmpl` (located in the top-level of the `build` tree) to build the specified libraries.
+-   **`LIB_PROJ`** (optional) - a list of names for library makefiles.<br/>For each library `l_i` listed in `LIB_PROJ = l_1 ... l_N`, you must have created a corresponding project makefile named [Makefile.l\_i.lib](#makefilelilib) in the project's source directory. When **make** is executed, these library project makefiles will be used along with `Makefile.lib` and `Makefile.lib.tmpl` (located in the top-level of the `build` tree) to build the specified libraries.
 
--   `APP_PROJ` (optional) - a list of names for application makefiles.<br/>Similarly, each application (`p1, p2, ..., pN`) listed under `APP_PROJ` must have a corresponding project makefile named [Makefile.p\*.app](#makefilep*app) in the project's source directory. When **make** is executed, these application project makefiles will be used along with `Makefile.app` and `Makefile.app.tmpl` to build the specified executables.
+-   **`APP_PROJ`** (optional) - a list of names for application makefiles.<br/>Similarly, each application (`p1, p2, ..., pN`) listed under **`APP_PROJ`** must have a corresponding project makefile named [Makefile.p\*.app](#makefilep*app) in the project's source directory. When **make** is executed, these application project makefiles will be used along with `Makefile.app` and `Makefile.app.tmpl` to build the specified executables.
 
--   `SUB_PROJ` (optional) - a list of names for subproject directories (used on recursive makes).<br/>The `SUB_PROJ` macro is used to recursively define **make** targets; items listed here define the subdirectories rooted in the project's source directory where **make** should also be executed.
+-   **`SUB_PROJ`** (optional) - a list of names for subproject directories (used on recursive makes).<br/>The **`SUB_PROJ`** macro is used to recursively define **make** targets; items listed here define the subdirectories rooted in the project's source directory where **make** should also be executed.
 
 The `Makefile.in` meta file in the project's source directory defines a kind of road map that will be used by the **configure** script to generate a makefile (`Makefile`) in the corresponding directory of the `build` tree. `Makefile.in` does *not* participate in the actual execution of **make**, but rather, defines what will happen at that time by directing the **configure** script in the creation of the `Makefile` that **will** be executed (see also the description of [Makefile targets](ch_build.html#ch_build.std_build_targets)).
 
@@ -740,7 +740,7 @@ A simple example should help to make this more concrete. Assuming that `myProj` 
     srcdir = @srcdir@
     include @builddir@/Makefile.meta
 
-The last two lines in `Makefile.in` should always be exactly as shown here. These two lines specify **make** variable templates using the `@var_name@` syntax. When generating the corresponding makefile in the `build` directory, the **configure** script will substitute each identifier name bearing that notation with full path definitions.
+The last two lines in `Makefile.in` should always be exactly as shown here. These two lines specify **make** variable templates using the **`@var_name@`** syntax. When generating the corresponding makefile in the `build` directory, the **configure** script will substitute each identifier name bearing that notation with full path definitions.
 
 The corresponding makefile in `build/myProj` generated by the **configure** script for this example will then contain:
 
@@ -750,33 +750,33 @@ The corresponding makefile in `build/myProj` generated by the **configure** scri
     srcdir = /home/zimmerma/internal/c++/src/myProj
     include /home/zimmerma/internal/c++/myBuild/build/Makefile.meta
 
-As demonstrated in this example, the `@srcdir@` and `@builddir@` aliases in the makefile template have been replaced with absolute paths in the generated makefile, while the definition of `APP_PROJ` is copied verbatim.
+As demonstrated in this example, the **`@srcdir@`** and **`@builddir@`** aliases in the makefile template have been replaced with absolute paths in the generated makefile, while the definition of **`APP_PROJ`** is copied verbatim.
 
-The only build target in this example is `myProj`. `myProj` is specified as an application - not a library - because it is listed under `APP_PROJ` rather than under `LIB_PROJ`. Accordingly, there must also be a file named `Makefile.myProj.app` in the `src/myProj` directory. A project's application makefile specifies:
+The only build target in this example is `myProj`. `myProj` is specified as an application - not a library - because it is listed under **`APP_PROJ`** rather than under **`LIB_PROJ`**. Accordingly, there must also be a file named `Makefile.myProj.app` in the `src/myProj` directory. A project's application makefile specifies:
 
--   `APP` - the name to be used for the resulting executable
+-   **`APP`** - the name to be used for the resulting executable
 
--   `OBJ` - a list of object files to use in the compilation
+-   **`OBJ`** - a list of object files to use in the compilation
 
--   `LIB` - a list of NCBI C++ Toolkit libraries to use in the linking
+-   **`LIB`** - a list of NCBI C++ Toolkit libraries to use in the linking
 
--   `LIBS` - a list of other libraries to use in the linking
+-   **`LIBS`** - a list of other libraries to use in the linking
 
-There may be any number of application or library makefiles for the project, Each application should be listed under `APP_PROJ` and each library should be listed under `LIB_PROJ` in `Makefile.in`. A suitable application makefile for this simple example might contain just the following text:
+There may be any number of application or library makefiles for the project, Each application should be listed under **`APP_PROJ`** and each library should be listed under **`LIB_PROJ`** in `Makefile.in`. A suitable application makefile for this simple example might contain just the following text:
 
     ####### Example: src/myProj/Makefile.myProj.app
     APP = myProj
     OBJ = myProj
     LIB = xncbi
 
-In this simple example, the `APP_PROJ` definition in `Makefile.in` is identical to the definitions of both `APP` and `OBJ` in `Makefile.myProj.app`. This is not always the case, however, as the `APP_PROJ` macro is used to define which makefiles in the `src` directory should be used during compilation, while `APP` defines the name of the resulting executable and `OBJ` specifies the names of object files. (Project makefiles for applications are described in more detail [below](#below).)
+In this simple example, the **`APP_PROJ`** definition in `Makefile.in` is identical to the definitions of both **`APP`** and **`OBJ`** in `Makefile.myProj.app`. This is not always the case, however, as the **`APP_PROJ`** macro is used to define which makefiles in the `src` directory should be used during compilation, while **`APP`** defines the name of the resulting executable and **`OBJ`** specifies the names of object files. (Project makefiles for applications are described in more detail [below](#below).)
 
 #### Executing make
 
 Given these makefile definitions, executing `make all_r` in the `build` project subdirectory indirectly causes `build/Makefile.meta` to be executed, which sets the following chain of events in motion:
 
 1  
-For each `proj_name` listed in [USR\_PROJ](#usrproj), `Makefile.meta` first tests to see if `Makefile.proj_name` is available in the current `build` directory, and if so, executes:<br/><br/>`make -f Makefile.proj_name builddir="$(builddir)"`<br/>`srcdir="$(srcdir)" $(MFLAGS)`<br/><br/>Otherwise, `Makefile.meta` assumes the required makefile is in the project's source directory, and executes:<br/><br/>`make -f $(srcdir)/Makefile.proj_name builddir="$(builddir)" srcdir="$(srcdir)" $(MFLAGS)`<br/><br/>In either case, the important thing to note here is that the commands contained in the project's makefiles are executed directly and are **not** combined with additional makefiles in the top-level `build` directory. The aliased `srcdir`, `builddir`, and `MFLAGS` are still available and can be referred to inside `Makefile.proj_name`. By default, the resulting libraries and executables are written to the `build` directory only.<br/>
+For each `proj_name` listed in [USR\_PROJ](#usrproj), `Makefile.meta` first tests to see if `Makefile.proj_name` is available in the current `build` directory, and if so, executes:<br/><br/>`make -f Makefile.proj_name builddir="$(builddir)"`<br/>`srcdir="$(srcdir)" $(MFLAGS)`<br/><br/>Otherwise, `Makefile.meta` assumes the required makefile is in the project's source directory, and executes:<br/><br/>`make -f $(srcdir)/Makefile.proj_name builddir="$(builddir)" srcdir="$(srcdir)" $(MFLAGS)`<br/><br/>In either case, the important thing to note here is that the commands contained in the project's makefiles are executed directly and are **not** combined with additional makefiles in the top-level `build` directory. The aliased **`srcdir`**, **`builddir`**, and **`MFLAGS`** are still available and can be referred to inside `Makefile.proj_name`. By default, the resulting libraries and executables are written to the `build` directory only.<br/>
 
 2  
 For each `lib_name` listed in [LIB\_PROJ](#libproj),<br/><br/>`make -f $(builddir)/Makefile.lib.tmpl`<br/><br/>is executed. This in turn specifies that `$(builddir)/Makefile.mk`, `$(srcdir)/Makefile.lib_name.lib`, and `$(builddir)/Makefile.lib` should be included in the generated makefile commands that actually get executed. The resulting libraries are written to the `build` subdirectory and copied to the `lib` subtree.
@@ -787,11 +787,11 @@ For each **app\_name** listed in [APP\_PROJ](#appproj),<br/><br/>`make -f $(buil
 4  
 For each `dir_name` listed in [SUB\_PROJ](#subproj) (on `make all_r`),<br/><br/>`cd dir_name`<br/>`make all_r`<br/><br/>is executed. Steps (1) - (3) are then repeated in the project subdirectory.
 
-More generally, for each subdirectory listed in `SUB_PROJ`, the **configure** script will create a relative subdirectory inside the new `build` project directory, and generate the new subdirectory's `Makefile` from the corresponding meta-makefile in the `src` subtree. Note that each subproject directory must also contain its own `Makefile.in` along with the corresponding project makefiles. The recursive make commands, `make all_r, make clean_r`, and `make purge_r` all refer to this definition of the subprojects to define what targets should be recursively built or removed.
+More generally, for each subdirectory listed in **`SUB_PROJ`**, the **configure** script will create a relative subdirectory inside the new `build` project directory, and generate the new subdirectory's `Makefile` from the corresponding meta-makefile in the `src` subtree. Note that each subproject directory must also contain its own `Makefile.in` along with the corresponding project makefiles. The recursive make commands, `make all_r, make clean_r`, and `make purge_r` all refer to this definition of the subprojects to define what targets should be recursively built or removed.
 
 #### Custom project makefile: Makefile.myProj ([\*](#*))
 
-As described, regular makefiles contained in the project's `src` directory will be invoked from the `build` directory if their suffixes are specified in the `USR_PROJ` macro. This macro is originally defined in the project's `src` directory in the `Makefile.in` meta file, and is propagated to the corresponding `Makefile` in the `build` directory by the **configure** script.
+As described, regular makefiles contained in the project's `src` directory will be invoked from the `build` directory if their suffixes are specified in the **`USR_PROJ`** macro. This macro is originally defined in the project's `src` directory in the `Makefile.in` meta file, and is propagated to the corresponding `Makefile` in the `build` directory by the **configure** script.
 
 For example, if `USR_PROJ = myProj` in the `build` directory's `Makefile`, executing **make** will cause `Makefile.myProj` (the project makefile) to be executed. This project makefile may be located in either the current `build` directory **or** the corresponding `src` directory. In either case, although the makefile is executed directly, references to the source or object files (contained in the project makefile) must give complete paths to those files. In the first case, **make** is invoked as: `make -f Makefile.myProj`, so the makefile is located in the current working (`build`) directory but the source files are not. In the second case, **make** is invoked as:
 
@@ -816,19 +816,19 @@ so both the project makefile **and** the source files are non-local. For example
     purge: clean
         -rm  $(builddir)/bin/myProj
 
-will cause the C program `myProj` to be built directly from `Makefile.myProj` using the default C compiler, library paths, include paths, and compilation flags defined in `ncbi.mk`. The executables and libraries generated from the targets specified in `USR_PROJ` are by default written to the current `build` directory only. In this example however, they are also explicitly copied to the `bin` directory, and accordingly, the `purge` directives also remove the copied executable.
+will cause the C program `myProj` to be built directly from `Makefile.myProj` using the default C compiler, library paths, include paths, and compilation flags defined in `ncbi.mk`. The executables and libraries generated from the targets specified in **`USR_PROJ`** are by default written to the current `build` directory only. In this example however, they are also explicitly copied to the `bin` directory, and accordingly, the `purge` directives also remove the copied executable.
 
 #### Library project makefile: Makefile.myProj.lib ([\*](#*))
 
 `Makefile.lib_name.lib` should contain the following macro definitions:
 
--   `$(SRC)` - the names of all source files to compile and include in the library
+-   **`$(SRC)`** - the names of all source files to compile and include in the library
 
--   `$(OBJ)` - the names of any pre-compiled object files to include in the library
+-   **`$(OBJ)`** - the names of any pre-compiled object files to include in the library
 
--   `$(LIB)` - the name of the library being built
+-   **`$(LIB)`** - the name of the library being built
 
-In addition, any of the make variables defined in `build/Makefile.mk`, such as `$CPPFLAGS`, `$LINK`, etc., can be referred to and/or redefined in the project makefile, e.g.:
+In addition, any of the make variables defined in `build/Makefile.mk`, such as **`$CPPFLAGS`**, **`$LINK`**, etc., can be referred to and/or redefined in the project makefile, e.g.:
 
     CFLAGS   = $(ORIG_CFLAGS)   -abc -DFOOBAR_NOT_CPLUSPLUS
     CXXFLAGS = $(ORIG_CXXFLAGS) -xyz
@@ -843,15 +843,15 @@ For a more detailed example, including information about shared libraries, see [
 
 `Makefile.app_name.app` should contain the following macro definitions:
 
--   `$(SRC)` - the names of the object modules to build and link to the application
+-   **`$(SRC)`** - the names of the object modules to build and link to the application
 
--   `$(OBJ)` - the names of any pre-compiled object files to include in the linking
+-   **`$(OBJ)`** - the names of any pre-compiled object files to include in the linking
 
--   `$(LIB)` - specific libraries in the NCBI C++ Toolkit to include in the linking
+-   **`$(LIB)`** - specific libraries in the NCBI C++ Toolkit to include in the linking
 
--   `$(LIBS)` - all other libraries to link to (outside the C++ Toolkit)
+-   **`$(LIBS)`** - all other libraries to link to (outside the C++ Toolkit)
 
--   `$(APP)` - the name of the application being built
+-   **`$(APP)`** - the name of the application being built
 
 For example, if C Toolkit libraries should also be included in the linking, use:
 
@@ -861,7 +861,7 @@ The project's application makefile can also redefine the compiler and linker, al
 
 #### Defining and running tests
 
-The definition and execution of unit tests is controlled by the `CHECK_CMD` macro in the test application's makefile, `Makefile.app_name.app`. If this macro is not defined (or commented out), then no test will be executed. If `CHECK_CMD` is defined, then the test it specifies will be included in the automated test suite and can also be invoked independently by running "`make check`".
+The definition and execution of unit tests is controlled by the **`CHECK_CMD`** macro in the test application's makefile, `Makefile.app_name.app`. If this macro is not defined (or commented out), then no test will be executed. If **`CHECK_CMD`** is defined, then the test it specifies will be included in the automated test suite and can also be invoked independently by running "`make check`".
 
 To include an application into the test suite it is necessary to add just one line into its makefile `Makefile.app_name.app`:
 
@@ -871,25 +871,25 @@ or
 
     CHECK_CMD = command line to run application test
 
-For the first form, where no command line is specified by the `CHECK_CMD` macro, the program specified by the makefile variable `APP` will be executed (without any parameters).
+For the first form, where no command line is specified by the **`CHECK_CMD`** macro, the program specified by the makefile variable **`APP`** will be executed (without any parameters).
 
-For the second form: If your application is executed by a script specified in a `CHECK_CMD` command line, and it doesn't read from `STDIN`, then the script should invoke it like this:
+For the second form: If your application is executed by a script specified in a **`CHECK_CMD`** command line, and it doesn't read from `STDIN`, then the script should invoke it like this:
 
     $CHECK_EXEC app_name arg1 arg2 ...
 
-If your application *does* read from `STDIN`, then `CHECK_CMD` scripts should invoke it like this:
+If your application *does* read from `STDIN`, then **`CHECK_CMD`** scripts should invoke it like this:
 
     $CHECK_EXEC_STDIN app_name arg1 arg2 ...
 
-*Note:* Applications / scripts in the `CHECK_CMD` definition should **not** use "`.`", for example:
+***Note:*** Applications / scripts in the **`CHECK_CMD`** definition should **not** use "`.`", for example:
 
     $CHECK_EXEC ./app_name arg1 arg2 ... # Do not prefix app_name with ./
 
-Scripts invoked via `CHECK_CMD` should pass an exit code to the testing framework via the `exitcode` variable, for example:
+Scripts invoked via **`CHECK_CMD`** should pass an exit code to the testing framework via the **`exitcode`** variable, for example:
 
     exitcode=$?
 
-If your test program needs additional files (for example, a configuration file, data files, or helper scripts referenced in `CHECK_CMD`), then set `CHECK_COPY` to point to them:
+If your test program needs additional files (for example, a configuration file, data files, or helper scripts referenced in **`CHECK_CMD`**), then set **`CHECK_COPY`** to point to them:
 
     CHECK_COPY = file1 file2 dir1 dir2
 
@@ -901,7 +901,7 @@ By default, the application's execution time is limited to 200 seconds. You can 
 
 If application continues execution after specified time, it will be terminated and test marked as FAILED.
 
-If you'd like to get nightly test results automatically emailed to you, add your email address to the `WATCHERS` macro in the makefile. Note that the `WATCHERS` macro has replaced the `CHECK_AUTHORS` macro which had a similar purpose.
+If you'd like to get nightly test results automatically emailed to you, add your email address to the **`WATCHERS`** macro in the makefile. Note that the **`WATCHERS`** macro has replaced the **`CHECK_AUTHORS`** macro which had a similar purpose.
 
 For information about using Boost for unit testing, see the "[Boost Unit Test Framework](ch_boost.html)" chapter.
 
@@ -943,15 +943,15 @@ The top level of the [include/objects](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/C
 
 If you checked out the entire C++ SVN tree, you may be surprised to find that initially, the `include/objects` subtrees are empty, and the subdirectories in the `src/objects` subtree contain only ASN.1 modules. This is because both the header files and source files are auto-generated from the ASN.1 specifications by the [datatool](ch_app.html#ch_app.datatool) program. As described in [Working within the C++ source tree](#working-within-the-c++-source-tree), you can build everything by running `make all_r` in the build directory.
 
-*Note:* If you would like to have the `objects` libraries built locally, you **must** use the `--with-objects` flag when running the **configure** script.
+***Note:*** If you would like to have the `objects` libraries built locally, you **must** use the `--with-objects` flag when running the **configure** script.
 
-You can also access the pre-generated serializable objects in the public area, using the source browsers to locate the objects you are particularly interested in. For example, if you are seeking the new class definition for the `Bioseq struct` defined in the C Toolkit, you can search for the `CBioseq` class, using either the [LXR](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident) identifier search tool, or the Doxygen [class hierarchy](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/hierarchy.html) browser. Starting with the name of the data object as it appears in the ASN.1 module, two simple rules apply in deriving the new C++ class name:
+You can also access the pre-generated serializable objects in the public area, using the source browsers to locate the objects you are particularly interested in. For example, if you are seeking the new class definition for the `Bioseq struct` defined in the C Toolkit, you can search for the ***CBioseq*** class, using either the [LXR](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident) identifier search tool, or the Doxygen [class hierarchy](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/hierarchy.html) browser. Starting with the name of the data object as it appears in the ASN.1 module, two simple rules apply in deriving the new C++ class name:
 
 -   The one letter 'C' (for class) prefix should precede the ASN.1 name
 
 -   All hyphens ('-') should be replaced by underscores ('\_')
 
-For example, `Seq-descr `becomes `CSeq_descr`.
+For example, `Seq-descr `becomes ***CSeq\_descr***.
 
 #### Base classes and user classes
 
@@ -959,7 +959,7 @@ The classes whose names are derived in this manner are called the `user classes`
 
 More generally, the `base classes` should *never* be instantiated or accessed directly in an application. The relation between the two source files and the classes they define reflects a general design used in developing the object libraries: the base class files are auto-generated by [datatool](ch_app.html#ch_app.datatool) according to the ASN.1 specifications in the `src/objects` directories; the inherited class files (the so-called `user classes`) are intended for developers who can extend these classes to support features above and beyond the ASN.1 specifications.
 
-Many applications will involve a "tangled hierarchy" of these objects, reflecting the complexity of the real world data that they represent. For example, a `CBioseq_set` contains a list of `CSeq_entry` objects, where each `CSeq_entry` is, in turn, a [choice](ch_ser.html#ch_ser.choice.html) between a `CBioseq` and a `CBioseq_set`.
+Many applications will involve a "tangled hierarchy" of these objects, reflecting the complexity of the real world data that they represent. For example, a ***CBioseq\_set*** contains a list of ***CSeq\_entry*** objects, where each ***CSeq\_entry*** is, in turn, a [choice](ch_ser.html#ch_ser.choice.html) between a ***CBioseq*** and a ***CBioseq\_set***.
 
 Given the potential for this complexity of interactions, a critical design issue becomes how one can ensure that methods which may have been defined only in the `user class` will be available for all instances of that class. In particular, these instances may occur as contained elements of another object which is compiled in a different library. These inter-object dependencies are the motivation for the `user classes`. As shown in [Figure 2](#figure-2), all references to external objects which occur inside the `base classes`, access external `user classes`, so as to include any methods which may be defined only in the `user classes`:
 
@@ -971,7 +971,7 @@ In most cases, adding non-virtual methods to a `user class` will **not** require
 
 #### Adding methods to the user classes
 
-*Note:* This section describes the steps currently required to add new methods to the `user classes`. It is subject to change, and there is no guarantee the material here is up-to-date. In general, it is not recommended practice to add methods to the `user classes`, unless your purpose is to extend these classes across all applications as part of a development effort.
+***Note:*** This section describes the steps currently required to add new methods to the `user classes`. It is subject to change, and there is no guarantee the material here is up-to-date. In general, it is not recommended practice to add methods to the `user classes`, unless your purpose is to extend these classes across all applications as part of a development effort.
 
 The following topics are discussed in this section:
 
@@ -1002,13 +1002,13 @@ The following topics are discussed in this section:
     cd path_to_compile_dir/build/objects
     make all_r
 
-<br/>Here `path_to_compile_dir` is set to the compile work directory which depends on the compiler settings (e.g: `~/Work/internal/GCC-Debug`). In addition to creating the header and source files, using `make all_r `(instead of just **make**) will build all the libraries. All libraries that are built are also copied to the `lib` dir, e.g.:`~/Work/internal/c++/GCC-Debug/lib`. Similarly, all executables (such as **asn2asn**) are copied to the bin dir, e.g.: `~/Work/internal/c++/GCC-Debug/bin`.
+<br/>Here **`path_to_compile_dir`** is set to the compile work directory which depends on the compiler settings (e.g: `~/Work/internal/GCC-Debug`). In addition to creating the header and source files, using `make all_r `(instead of just **make**) will build all the libraries. All libraries that are built are also copied to the `lib` dir, e.g.:`~/Work/internal/c++/GCC-Debug/lib`. Similarly, all executables (such as **asn2asn**) are copied to the bin dir, e.g.: `~/Work/internal/c++/GCC-Debug/bin`.
 
 You are now ready to edit the user class files and add methods.
 
 ##### Adding methods
 
-As an example, suppose that we would like to add a method to the `CSeq_inst` class to calculate sequence length, e.g.:`CSeq_inst::CalculateLength()`. We begin by adding a declaration of this method to the public section of the user class definition in `Seq_inst.hpp`:
+As an example, suppose that we would like to add a method to the ***CSeq\_inst*** class to calculate sequence length, e.g.:***CSeq\_inst::CalculateLength()***. We begin by adding a declaration of this method to the public section of the user class definition in `Seq_inst.hpp`:
 
     class CSeq_inst : public CSeq_inst_Base
     {
@@ -1036,7 +1036,7 @@ These files are in the [include/objects/seq](http://www.ncbi.nlm.nih.gov/IEB/Too
     cd path_to_compile_dir/GCC-Debug/build/objects/seq
     make
 
-Here `path_to_compile_dir `is set to the compile work directory which depends on the compiler settings (e.g: `~/Work/internal/GCC-Debug`). The new method can now be invoked from within a `CBioseq` object as: `myBioseq.GetInst().CalculateLength().`
+Here **`path_to_compile_dir `**is set to the compile work directory which depends on the compiler settings (e.g: `~/Work/internal/GCC-Debug`). The new method can now be invoked from within a ***CBioseq*** object as: `myBioseq.GetInst().CalculateLength().`
 
 The key issue that determines whether or not you will need to rebuild any `external` libraries that use the modified user class involves the class layout in memory. All of the external libraries which reference the object refer to the class layout that existed prior to the changes you have made. Thus, if your modifications do **not** affect the class layout, you do not have to rebuild any external libraries. Changes that *do* affect memory mapping include:
 
