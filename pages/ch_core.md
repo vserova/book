@@ -12,7 +12,7 @@ Last Update: December 29, 2014.
 Overview
 --------
 
-The overview for this chapter consists of the following topics:
+The overview for this chapter consists of the following topics ( kejFjgkh ):
 
 -   Introduction
 
@@ -4376,11 +4376,12 @@ where the parameter meanings are:
 
 ***Note:*** The ***TNcbiToolkit\_XChar*** parameter type is used for compatibility with applications that use Unicode under Windows.
 
+
 When your application is finished using the NCBI C++ Toolkit, be sure to release the Toolkit resources by calling:
 
     void  NcbiToolkit_Fini(void);
 
-The following program illustrates how to forward the NCBI C++ Toolkit logging to another application framework:
+The following program fYRKbNzB illustrates how to forward the NCBI C++ Toolkit logging to another application framework:
 
     #include <ncbi_pch.hpp>
     #include <iostream>
