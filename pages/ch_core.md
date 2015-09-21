@@ -564,7 +564,7 @@ Build the project and run the application.
 
 In the [sample application](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/basic/basic_sample.cpp) above:
 
-There is an application class derived from ***CNcbiApplication***, which overrides the purely virtual function ***Run()*** as well as the initialization (***Init()***) and cleanup (***Exit()***) functions:
+1\. There is an application class derived from ***CNcbiApplication***, which overrides the purely virtual function ***Run()*** as well as the initialization (***Init()***) and cleanup (***Exit()***) functions:
 
     class CSampleBasicApplication : public CNcbiApplication
     {
@@ -574,7 +574,7 @@ There is an application class derived from ***CNcbiApplication***, which overrid
         virtual void Exit(void);
     };
 
-The program's main function creates an object of the application class and calls its ***AppMain()*** function:
+2\.The program's main function creates an object of the application class and calls its ***AppMain()*** function:
 
     int main(int argc, const char* argv[])
     {
@@ -582,7 +582,7 @@ The program's main function creates an object of the application class and calls
         return CSampleBasicApplication().AppMain(argc, argv);
     }
 
-3. The application's initialization function creates an [argument descriptions object](#argument-descriptions-object), which describes the expected command-line arguments and the usage context:
+3\. The application's initialization function creates an [argument descriptions object](#argument-descriptions-object), which describes the expected command-line arguments and the usage context:
 
     void CSampleBasicApplication::Init(void)
     {
@@ -597,7 +597,7 @@ The program's main function creates an object of the application class and calls
         SetupArgDescriptions(arg_desc.release());
     }
 
-4. The application's ***Run()*** function prints those arguments into the standard output stream or in a file.
+4\. The application's ***Run()*** function prints those arguments into the standard output stream or in a file.
 
 More [realistic examples of applications](ch_demo.html) that use the NCBI C++ Toolkit are available.
 
