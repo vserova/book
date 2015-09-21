@@ -564,7 +564,7 @@ Build the project and run the application.
 
 In the [sample application](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/basic/basic_sample.cpp) above:
 
-1. There is an application class derived from ***CNcbiApplication***, which overrides the purely virtual function ***Run()*** as well as the initialization (***Init()***) and cleanup (***Exit()***) functions:
+There is an application class derived from ***CNcbiApplication***, which overrides the purely virtual function ***Run()*** as well as the initialization (***Init()***) and cleanup (***Exit()***) functions:
 
     class CSampleBasicApplication : public CNcbiApplication
     {
@@ -574,7 +574,7 @@ In the [sample application](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/
         virtual void Exit(void);
     };
 
-2. The program's main function creates an object of the application class and calls its ***AppMain()*** function:
+The program's main function creates an object of the application class and calls its ***AppMain()*** function:
 
     int main(int argc, const char* argv[])
     {
