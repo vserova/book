@@ -4,7 +4,8 @@ title: C++ Toolkit test
 nav: pages/ch_start
 ---
 
-2. Getting Started
+
+2\. Getting Started
 ==================
 
 Last Update: September 27, 2014.

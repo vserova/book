@@ -4,7 +4,8 @@ title: C++ Toolkit test
 nav: pages/ch_build
 ---
 
-5. Working with Makefiles
+
+5\. Working with Makefiles
 =========================
 
 Last Update: September 26, 2014.

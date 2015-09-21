@@ -4,7 +4,8 @@ title: C++ Toolkit test
 nav: pages/ch_browse
 ---
 
-27. NCBI C++ Toolkit Source Browser
+
+27\. NCBI C++ Toolkit Source Browser
 ===================================
 
 Source Browsers

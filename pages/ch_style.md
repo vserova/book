@@ -4,7 +4,8 @@ title: C++ Toolkit test
 nav: pages/ch_style
 ---
 
-7. Programming Policies and Guidelines
+
+7\. Programming Policies and Guidelines
 ======================================
 
 Last Update: September 24, 2014.

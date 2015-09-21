@@ -4,7 +4,8 @@ title: C++ Toolkit test
 nav: pages/ch_gui
 ---
 
-19. GUI and Graphics
+
+19\. GUI and Graphics
 ====================
 
 Last Update: November 13, 2013.

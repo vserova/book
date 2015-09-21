@@ -4,7 +4,8 @@ title: C++ Toolkit test
 nav: pages/ch_getcode_svn
 ---
 
-3. Retrieve the Source Code (FTP and Subversion)
+
+3\. Retrieve the Source Code (FTP and Subversion)
 ================================================
 
 Created: April 1, 2003; Last Update: October 1, 2014.

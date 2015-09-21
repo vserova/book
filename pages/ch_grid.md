@@ -4,7 +4,8 @@ title: C++ Toolkit test
 nav: pages/ch_grid
 ---
 
-23. Distributed Computing
+
+23\. Distributed Computing
 =========================
 
 Created: May 14, 2007; Last Update: November 13, 2013.

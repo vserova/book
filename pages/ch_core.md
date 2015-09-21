@@ -4,7 +4,8 @@ title: C++ Toolkit test
 nav: pages/ch_core
 ---
 
-8. Portability, Core Functionality and Application Framework
+
+8\. Portability, Core Functionality and Application Framework
 ============================================================
 
 Last Update: December 29, 2014.
@@ -12,7 +13,7 @@ Last Update: December 29, 2014.
 Overview
 --------
 
-The overview for this chapter consists of the following topics ( kejFjgkh ):
+The overview for this chapter consists of the following topics:
 
 -   Introduction
 
@@ -574,7 +575,7 @@ In the [sample application](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/
         virtual void Exit(void);
     };
 
-2\.The program's main function creates an object of the application class and calls its ***AppMain()*** function:
+2\. The program's main function creates an object of the application class and calls its ***AppMain()*** function:
 
     int main(int argc, const char* argv[])
     {
@@ -4376,12 +4377,11 @@ where the parameter meanings are:
 
 ***Note:*** The ***TNcbiToolkit\_XChar*** parameter type is used for compatibility with applications that use Unicode under Windows.
 
-
 When your application is finished using the NCBI C++ Toolkit, be sure to release the Toolkit resources by calling:
 
     void  NcbiToolkit_Fini(void);
 
-The following program fYRKbNzB illustrates how to forward the NCBI C++ Toolkit logging to another application framework:
+The following program illustrates how to forward the NCBI C++ Toolkit logging to another application framework:
 
     #include <ncbi_pch.hpp>
     #include <iostream>

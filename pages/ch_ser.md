@@ -4,7 +4,8 @@ title: C++ Toolkit test
 nav: pages/ch_ser
 ---
 
-13. Data Serialization (ASN.1, XML)
+
+13\. Data Serialization (ASN.1, XML)
 ===================================
 
 Last Update: April 7, 2015.

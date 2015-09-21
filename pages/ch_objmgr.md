@@ -4,7 +4,8 @@ title: C++ Toolkit test
 nav: pages/ch_objmgr
 ---
 
-15. Biological Object Manager
+
+15\. Biological Object Manager
 =============================
 
 Last Update: November 15, 2013.

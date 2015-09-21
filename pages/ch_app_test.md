@@ -1,7 +1,7 @@
 ---
 layout: default
 title: C++ Toolkit test
-nav: pages/ch_app
+nav: pages/ch_app_test
 ---
 
 
@@ -25,183 +25,183 @@ Most of the applications discussed in this chapter are built on a regular basis,
 
 The following is an outline of the topics presented in this chapter:
 
--   [DATATOOL: code generation and data serialization utility](#datatool-code-generation-and-data-serialization-utility)
+-   [DATATOOL: code generation and data serialization utility](ch_app.html#ch_app.datatool)
 
-    -   [Invocation](#invocation)
+    -   [Invocation](ch_app.html#ch_app.datatool.html_refArgs)
 
-        -   [Main arguments](#main-arguments)
+        -   [Main arguments](ch_app.html#ch_app.datatool.html_refMainArgs)
 
-        -   [Code generation arguments](#code-generation-arguments)
+        -   [Code generation arguments](ch_app.html#ch_app.datatool.html_refCodeGenerationAr)
 
-    -   [Data specification conversion](#data-specification-conversion)
+    -   [Data specification conversion](ch_app.html#ch_app.Data_Specification_C)
 
-        -   [Scope prefixes](#scope-prefixes)
+        -   [Scope prefixes](ch_app.html#ch_app.Scope_Prefixes)
 
-        -   [Modular DTD and Schemata](#modular-dtd-and-schemata)
+        -   [Modular DTD and Schemata](ch_app.html#ch_app.Modular_DTD_and_Sche)
 
-        -   [Converting XML Schema into ASN.1](#converting-xml-schema-into-asn1)
+        -   [Converting XML Schema into ASN.1](ch_app.html#ch_app.Converting_XML_Schem)
 
-    -   [Definition file](#definition-file)
+    -   [Definition file](ch_app.html#ch_app.datatool.html_refDefFile)
 
-        -   [Common definitions](#common-definitions)
+        -   [Common definitions](ch_app.html#ch_app.datatool.html_refDefCommon)
 
-        -   [Definitions that affect specific types](#definitions-that-affect-specific-types)
+        -   [Definitions that affect specific types](ch_app.html#ch_app.datatool.html_refDefSpecific)
 
-            -   [INTEGER, REAL, BOOLEAN, NULL](#integer-real-boolean-null)
+            -   [INTEGER, REAL, BOOLEAN, NULL](ch_app.html#ch_app.datatool.html_refDefINT)
 
-            -   [ENUMERATED](#enumerated)
+            -   [ENUMERATED](ch_app.html#ch_app.datatool.html_refDefENUM)
 
-            -   [OCTET STRING](#octet-string)
+            -   [OCTET STRING](ch_app.html#ch_app.datatool.html_refDefOCTETS)
 
-            -   [SEQUENCE OF, SET OF](#sequence-of-set-of)
+            -   [SEQUENCE OF, SET OF](ch_app.html#ch_app.datatool.html_refDefArray)
 
-            -   [SEQUENCE, SET](#sequence-set)
+            -   [SEQUENCE, SET](ch_app.html#ch_app.datatool.html_refDefClass)
 
-            -   [CHOICE](#choice)
+            -   [CHOICE](ch_app.html#ch_app.datatool.html_refDefChoice)
 
-        -   [The Special [-] Section](#the-special---section)
+        -   [The Special [-] Section](ch_app.html#ch_app.The_Special__Section)
 
-        -   [Examples](#examples)
+        -   [Examples](ch_app.html#ch_app.datatool.html_refDefExample)
 
-    -   [Module file](#module-file)
+    -   [Module file](ch_app.html#ch_app.ch_app_datatool_html_refModFile)
 
-    -   [Generated code](#generated-code)
+    -   [Generated code](ch_app.html#ch_app.datatool.html_refCode)
 
-        -   [Normalized name](#normalized-name)
+        -   [Normalized name](ch_app.html#ch_app.datatool.html_refNormalizedName)
 
-        -   [ENUMERATED types](#enumerated-types)
+        -   [ENUMERATED types](ch_app.html#ch_app.datatool.html_refCodeEnum)
 
-    -   [Class diagrams](#class-diagrams)
+    -   [Class diagrams](ch_app.html#ch_app.dt_inside.html)
 
-        -   [Specification analysis](#specification-analysis)
+        -   [Specification analysis](ch_app.html#ch_app.dt_inside.html_specs)
 
-            -   [ASN.1 specification analysis](#asn1-specification-analysis)
+            -   [ASN.1 specification analysis](ch_app.html#ch_app.dt_inside.html_specs_asn)
 
-            -   [DTD specification analysis](#dtd-specification-analysis)
+            -   [DTD specification analysis](ch_app.html#ch_app.dt_inside.html_specs_dtd)
 
-        -   [Data types](#data-types)
+        -   [Data types](ch_app.html#ch_app.dt_inside.html_data_types)
 
-        -   [Data values](#data-values)
+        -   [Data values](ch_app.html#ch_app.dt_inside.html_data_values)
 
-        -   [Code generation](#code-generation)
+        -   [Code generation](ch_app.html#ch_app.dt_inside.html_code_gen)
 
--   [Load Balancing](#load-balancing)
+-   [Load Balancing](ch_app.html#ch_app.Load_Balancing)
 
-    -   [Overview](#overview)
+    -   [Overview](ch_app.html#ch_app._Overview)
 
-    -   [Load Balancing Service Mapping Daemon (LBSMD)](#load-balancing-service-mapping-daemon-lbsmd)
+    -   [Load Balancing Service Mapping Daemon (LBSMD)](ch_app.html#ch_app.Load_Balancing_Servi)
 
-        -   [Overview](#overview)
+        -   [Overview](ch_app.html#ch_app._Overview_1)
 
-        -   [Configuration](#configuration)
+        -   [Configuration](ch_app.html#ch_app._Configuration)
 
-            -   [Check Script Specification](#check-script-specification)
+            -   [Check Script Specification](ch_app.html#ch_app.Check_Script_Specification)
 
-            -   [Server Descriptor Specification](#server-descriptor-specification)
+            -   [Server Descriptor Specification](ch_app.html#ch_app.Server_Descriptor_Specification)
 
-        -   [Signals](#signals)
+        -   [Signals](ch_app.html#ch_app.Signals)
 
-        -   [Automatic Configuration Distribution](#automatic-configuration-distribution)
+        -   [Automatic Configuration Distribution](ch_app.html#ch_app.Automatic_Configurat)
 
-        -   [Monitoring and Control](#monitoring-and-control)
+        -   [Monitoring and Control](ch_app.html#ch_app.Monitoring_and_Contr)
 
-            -   [Service Search](#service-search)
+            -   [Service Search](ch_app.html#ch_app.Service_Search)
 
-            -   [lbsmc Utility](#lbsmc-utility)
+            -   [lbsmc Utility](ch_app.html#ch_app.lbsmc_Utility)
 
-            -   [NCBI Intranet Web Utilities](#ncbi-intranet-web-utilities)
+            -   [NCBI Intranet Web Utilities](ch_app.html#ch_app.NCBI_Intranet_Web_Ut)
 
-            -   [Server Penalizer API and Utility](#server-penalizer-api-and-utility)
+            -   [Server Penalizer API and Utility](ch_app.html#ch_app.Server_Penalizer_API)
 
-        -   [SVN Repository](#svn-repository)
+        -   [SVN Repository](ch_app.html#ch_app.SVN_Repository)
 
-        -   [Log Files](#log-files)
+        -   [Log Files](ch_app.html#ch_app._Log_Files)
 
-        -   [Configuration Examples](#configuration-examples)
+        -   [Configuration Examples](ch_app.html#ch_app._Configuration_Exampl)
 
-    -   [Database Load Balancing](#database-load-balancing)
+    -   [Database Load Balancing](ch_app.html#ch_app.Database_Load_Balancing)
 
-    -   [Cookie / Argument Affinity Module (MOD\_CAF)](#cookie--argument-affinity-module-modcaf)
+    -   [Cookie / Argument Affinity Module (MOD\_CAF)](ch_app.html#ch_app.Cookie___Argument_Af)
 
-        -   [Overview](#overview)
+        -   [Overview](ch_app.html#ch_app._Overview_2)
 
-        -   [Configuration](#configuration)
+        -   [Configuration](ch_app.html#ch_app._Configuration_1)
 
-        -   [Configuration Examples](#configuration-examples)
+        -   [Configuration Examples](ch_app.html#ch_app._Configuration_Exampl)
 
-        -   [Arguments Matching](#arguments-matching)
+        -   [Arguments Matching](ch_app.html#ch_app.Arguments_Matching)
 
-            -   [Argument Matching Examples](#argument-matching-examples)
+            -   [Argument Matching Examples](ch_app.html#ch_app.Argument_Matching_Ex)
 
-        -   [Log File](#log-file)
+        -   [Log File](ch_app.html#ch_app.Log_File)
 
-        -   [Monitoring](#monitoring)
+        -   [Monitoring](ch_app.html#ch_app._Monitoring)
 
-    -   [DISPD Network Dispatcher](#dispd-network-dispatcher)
+    -   [DISPD Network Dispatcher](ch_app.html#ch_app.DISPD_Network_Dispat)
 
-        -   [Overview](#overview)
+        -   [Overview](ch_app.html#ch_app._Overview_3)
 
-        -   [Protocol Description](#protocol-description)
+        -   [Protocol Description](ch_app.html#ch_app.Protocol_Description)
 
-            -   [Client Request to DISPD](#client-request-to-dispd)
+            -   [Client Request to DISPD](ch_app.html#ch_app.Client_Request_to_DI)
 
-            -   [DISPD Client Response](#dispd-client-response)
+            -   [DISPD Client Response](ch_app.html#ch_app.DISPD_Client_Respons)
 
-            -   [Communication Schemes](#communication-schemes)
+            -   [Communication Schemes](ch_app.html#ch_app.Communication_Scheme)
 
-    -   [NCBID Server Launcher](#ncbid-server-launcher)
+    -   [NCBID Server Launcher](ch_app.html#ch_app.NCBID_Server_Launche)
 
-        -   [Overview](#overview)
+        -   [Overview](ch_app.html#ch_app._Overview_4)
 
-    -   [Firewall Daemon (FWDaemon)](#firewall-daemon-fwdaemon)
+    -   [Firewall Daemon (FWDaemon)](ch_app.html#ch_app.Firewall_Daemon_FWDa)
 
-        -   [Overview](#overview)
+        -   [Overview](ch_app.html#ch_app._Overview_5)
 
-            -   [FWDaemon Behind a "Regular" Firewall](#fwdaemon-behind-a-regular-firewall)
+            -   [FWDaemon Behind a "Regular" Firewall](ch_app.html#ch_app.FWDaemon_Behind_a__R)
 
-            -   [FWDaemon Behind a "Non-Transparent" Firewall](#fwdaemon-behind-a-non-transparent-firewall)
+            -   [FWDaemon Behind a "Non-Transparent" Firewall](ch_app.html#ch_app.FWDaemon_Behind_a__N)
 
-        -   [Monitoring](#monitoring)
+        -   [Monitoring](ch_app.html#ch_app._Monitoring_1)
 
-        -   [Log Files](#log-files)
+        -   [Log Files](ch_app.html#ch_app._Log_Files_1)
 
-        -   [FWDaemon and NCBID Dispatcher Data Exchange](#fwdaemon-and-ncbid-dispatcher-data-exchange)
+        -   [FWDaemon and NCBID Dispatcher Data Exchange](ch_app.html#ch_app.FWDaemon_and_NCBID_D)
 
-    -   [Launcherd Utility](#launcherd-utility)
+    -   [Launcherd Utility](ch_app.html#ch_app.Launcherd_Utility)
 
-    -   [Monitoring Tools](#monitoring-tools)
+    -   [Monitoring Tools](ch_app.html#ch_app.Monitoring_Tools)
 
-    -   [Quality Assurance Domain](#quality-assurance-domain)
+    -   [Quality Assurance Domain](ch_app.html#ch_app.Quality_Assurance_Do)
 
--   [NCBI Genome Workbench](#ncbi-genome-workbench)
+-   [NCBI Genome Workbench](ch_app.html#ch_app.applications1)
 
-    -   [Design goals](#design-goals)
+    -   [Design goals](ch_app.html#ch_app.gbench_dg)
 
-    -   [Design](#design)
+    -   [Design](ch_app.html#ch_app.gbench_design)
 
--   [NCBI NetCache Service](#ncbi-netcache-service)
+-   [NCBI NetCache Service](ch_app.html#ch_app.ncbi_netcache_service)
 
-    -   [What is NetCache?](#what-is-netcache)
+    -   [What is NetCache?](ch_app.html#ch_app.what_is_netcache)
 
-    -   [What can NetCache be used for?](#what-can-netcache-be-used-for)
+    -   [What can NetCache be used for?](ch_app.html#ch_app.what_it_can_be_used)
 
-    -   [How to use NetCache](#how-to-use-netcache)
+    -   [How to use NetCache](ch_app.html#ch_app.getting_started)
 
-        -   [The basic ideas](#the-basic-ideas)
+        -   [The basic ideas](ch_app.html#ch_app.The_basic_ideas)
 
-        -   [Setting up your program to use NetCache](#setting-up-your-program-to-use-netcache)
+        -   [Setting up your program to use NetCache](ch_app.html#ch_app.Set_up_your_program_to_use_NetCac)
 
-        -   [Establish the NetCache service name](#establish-the-netcache-service-name)
+        -   [Establish the NetCache service name](ch_app.html#ch_app.Establish_the_NetCache_service_na)
 
-        -   [Initialize the client API](#initialize-the-client-api)
+        -   [Initialize the client API](ch_app.html#ch_app.Initialize_the_client_API)
 
-        -   [Store data](#store-data)
+        -   [Store data](ch_app.html#ch_app.Store_data)
 
-        -   [Retrieve data](#retrieve-data)
+        -   [Retrieve data](ch_app.html#ch_app.Retrieve_data)
 
-        -   [Samples and other resources](#samples-and-other-resources)
+        -   [Samples and other resources](ch_app.html#ch_app.Available_samples)
 
-    -   [Questions and answers](#questions-and-answers)
+    -   [Questions and answers](ch_app.html#ch_app.Questions_and_answers)
 
 DATATOOL: Code Generation and Data Serialization Utility
 --------------------------------------------------------
@@ -218,29 +218,29 @@ DATATOOL: Code Generation and Data Serialization Utility
 
 The following topics are discussed in subsections:
 
--   [Invocation](#invocation)
+-   [Invocation](ch_app.html#ch_app.datatool.html_refArgs)
 
--   [Data specification conversion](#data-specification-conversion)
+-   [Data specification conversion](ch_app.html#ch_app.Data_Specification_C)
 
--   [Definition file](#definition-file)
+-   [Definition file](ch_app.html#ch_app.datatool.html_refDefFile)
 
--   [Module file](#module-file)
+-   [Module file](ch_app.html#ch_app.ch_app_datatool_html_refModFile)
 
--   [Generated code](#generated-code)
+-   [Generated code](ch_app.html#ch_app.datatool.html_refCode)
 
--   [Class diagrams](#class-diagrams)
+-   [Class diagrams](ch_app.html#ch_app.dt_inside.html)
 
 ### Invocation
 
 The following topics are discussed in this section:
 
--   [Main arguments](#main-arguments)
+-   [Main arguments](ch_app.html#ch_app.datatool.html_refMainArgs)
 
--   [Code generation arguments](#code-generation-arguments)
+-   [Code generation arguments](ch_app.html#ch_app.datatool.html_refCodeGenerationAr)
 
 #### Main Arguments
 
-See [Table 1](#table-1).
+See [Table 1](ch_app.html#ch_app.tools_table1).
 
 Table 1. Main arguments
 
@@ -274,38 +274,38 @@ Table 1. Main arguments
 
 #### Code Generation Arguments
 
-See [Table 2](#table-2).
+See [Table 2](ch_app.html#ch_app.tools_table2).
 
 Table 2. Code generation arguments
 
-| Argument        | Effect                                                                | Comments                                                                                                                                                  |
-|-----------------|-----------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| -od \<file\>    | C++ code [definition file](#definition-file)                          | See [Definition file](#definition-file)                                                                                                                   |
-| -ods            | Generate an example definition file (e.g. `MyModuleName._sample_def`) | Must be used with another option that generates code such as -oA.                                                                                         |
-| -odi            | Ignore absent code definition file                                    |                                                                                                                                       |
-| -odw            | Issue a warning about absent code definition file                     |                                                                                                                                       |
-| -oA             | Generate C++ files for all types                                      | Only types from the main module are used (see [-m](#-m) and -mx arguments).                                                                               |
-| -ot \<types\>   | Generate C++ files for listed types                                   | Only types from the main module are used (see [-m](#-m) and -mx arguments).                                                                               |
-| -ox \<types\>   | Exclude types from generation                                         |                                                                                                                                       |
-| -oX             | Turn off recursive type generation                                    |                                                                                                                                       |
-| -of \<file\>    | Write the list of generated C++ files                                 |                                                                                                                                       |
-| -oc \<file\>    | Write combining C++ files                                             |                                                                                                                                       |
-| -on \<string\>  | Default namespace                                                     | The value "-" in the [Definition file](#definition-file) means don't use a namespace at all and overrides the -on option specified elsewhere.             |
-| -opm \<dir\>    | Directory for searching source modules                                |                                                                                                                                       |
-| -oph \<dir\>    | Directory for generated \*.hpp files                                  |                                                                                                                                       |
-| -opc \<dir\>    | Directory for generated \*.cpp files                                  |                                                                                                                                       |
-| -or \<prefix\>  | Add prefix to generated file names                                    |                                                                                                                                       |
-| -orq            | Use quoted syntax form for generated include files                    |                                                                                                                                       |
-| -ors            | Add source file dir to generated file names                           |                                                                                                                                       |
-| -orm            | Add module name to generated file names                               |                                                                                                                                       |
-| -orA            | Combine all -or\* prefixes                                            |                                                                                                                                       |
-| -ocvs           | create ".cvsignore" files                                             |                                                                                                                                       |
-| -oR \<dir\>     | Set -op\* and -or\* arguments for NCBI directory tree                 |                                                                                                                                       |
-| -oDc            | Turn ON generation of Doxygen-style comments                          | The value "-" in the [Definition file](#definition-file) means don't generate Doxygen comments and overrides the -oDc option specified elsewhere.         |
-| -odx \<string\> | URL of documentation root folder                                      | For Doxygen                                                                                                                                               |
-| -lax\_syntax    | Allow non-standard ASN.1 syntax accepted by asntool                   | The value "-" in the [Definition file](#definition-file) means don't allow non-standard syntax and overrides the -lax\_syntax option specified elsewhere. |
-| -pch \<string\> | Name of the precompiled header file to include in all \*.cpp files    |                                                                                                                                       |
-| -oex \<export\> | Add storage-class modifier to generated classes                       | Can be overriden by [[-].\_export](#-export) in the definition file.                                                                                      |
+| Argument        | Effect                                                                  | Comments                                                                                                                                                                             |
+|-----------------|-------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -od \<file\>    | C++ code [definition file](ch_app.html#ch_app.datatool.html_refDefFile) | See [Definition file](ch_app.html#ch_app.datatool.html_refDefFile)                                                                                                                   |
+| -ods            | Generate an example definition file (e.g. `MyModuleName._sample_def`)   | Must be used with another option that generates code such as -oA.                                                                                                                    |
+| -odi            | Ignore absent code definition file                                      |                                                                                                                                                                  |
+| -odw            | Issue a warning about absent code definition file                       |                                                                                                                                                                  |
+| -oA             | Generate C++ files for all types                                        | Only types from the main module are used (see [-m](ch_app.html#ch_app.tools_table1) and -mx arguments).                                                                              |
+| -ot \<types\>   | Generate C++ files for listed types                                     | Only types from the main module are used (see [-m](ch_app.html#ch_app.tools_table1) and -mx arguments).                                                                              |
+| -ox \<types\>   | Exclude types from generation                                           |                                                                                                                                                                  |
+| -oX             | Turn off recursive type generation                                      |                                                                                                                                                                  |
+| -of \<file\>    | Write the list of generated C++ files                                   |                                                                                                                                                                  |
+| -oc \<file\>    | Write combining C++ files                                               |                                                                                                                                                                  |
+| -on \<string\>  | Default namespace                                                       | The value "-" in the [Definition file](ch_app.html#ch_app.datatool.html_refDefFile) means don't use a namespace at all and overrides the -on option specified elsewhere.             |
+| -opm \<dir\>    | Directory for searching source modules                                  |                                                                                                                                                                  |
+| -oph \<dir\>    | Directory for generated \*.hpp files                                    |                                                                                                                                                                  |
+| -opc \<dir\>    | Directory for generated \*.cpp files                                    |                                                                                                                                                                  |
+| -or \<prefix\>  | Add prefix to generated file names                                      |                                                                                                                                                                  |
+| -orq            | Use quoted syntax form for generated include files                      |                                                                                                                                                                  |
+| -ors            | Add source file dir to generated file names                             |                                                                                                                                                                  |
+| -orm            | Add module name to generated file names                                 |                                                                                                                                                                  |
+| -orA            | Combine all -or\* prefixes                                              |                                                                                                                                                                  |
+| -ocvs           | create ".cvsignore" files                                               |                                                                                                                                                                  |
+| -oR \<dir\>     | Set -op\* and -or\* arguments for NCBI directory tree                   |                                                                                                                                                                  |
+| -oDc            | Turn ON generation of Doxygen-style comments                            | The value "-" in the [Definition file](ch_app.html#ch_app.datatool.html_refDefFile) means don't generate Doxygen comments and overrides the -oDc option specified elsewhere.         |
+| -odx \<string\> | URL of documentation root folder                                        | For Doxygen                                                                                                                                                                          |
+| -lax\_syntax    | Allow non-standard ASN.1 syntax accepted by asntool                     | The value "-" in the [Definition file](ch_app.html#ch_app.datatool.html_refDefFile) means don't allow non-standard syntax and overrides the -lax\_syntax option specified elsewhere. |
+| -pch \<string\> | Name of the precompiled header file to include in all \*.cpp files      |                                                                                                                                                                  |
+| -oex \<export\> | Add storage-class modifier to generated classes                         | Can be overriden by [[-].\_export](ch_app.html#ch_app.datatool.html_refDefCommon) in the definition file.                                                                            |
 
 ### Data Specification Conversion
 
@@ -401,7 +401,7 @@ It is possible to convert source Schema into ASN.1, and then use **DATATOOL** to
 
 ### Definition File
 
-It is possible to tune up the C++ code generation by using a definition file, which could be specified in the [-od](#-od) argument. The definition file uses the generic [NCBI configuration](ch_core.html#ch_core.registry_syntax) format also used in the configuration (`*.ini`) files found in NCBI's applications.
+It is possible to tune up the C++ code generation by using a definition file, which could be specified in the [-od](ch_app.html#ch_app.tools_table2) argument. The definition file uses the generic [NCBI configuration](ch_core.html#ch_core.registry_syntax) format also used in the configuration (`*.ini`) files found in NCBI's applications.
 
 **DATATOOL** looks for code generation parameters in several sections of the file in the following order:
 
@@ -455,13 +455,13 @@ Code generation for the various elements can be fine-tuned as illustrated by the
 
 The following additional topics are discussed in this section:
 
--   [Common definitions](#common-definitions)
+-   [Common definitions](ch_app.html#ch_app.datatool.html_refDefCommon)
 
--   [Definitions that affect specific types](#definitions-that-affect-specific-types)
+-   [Definitions that affect specific types](ch_app.html#ch_app.datatool.html_refDefSpecific)
 
--   [The Special [-] Section](#the-special---section)
+-   [The Special [-] Section](ch_app.html#ch_app.The_Special__Section)
 
--   [Examples](#examples)
+-   [Examples](ch_app.html#ch_app.datatool.html_refDefExample)
 
 #### Common Definitions
 
@@ -543,7 +543,7 @@ It is also possible to specify a storage-class modifier, which is required on Mi
     [-]
     _export = EXPORT_SPECIFIER
 
-Because this modifier could also be specified in the [command line](#command-line), the **DATATOOL** code generator uses the following rules to choose the proper one:
+Because this modifier could also be specified in the [command line](ch_app.html#ch_app.tools_table2), the **DATATOOL** code generator uses the following rules to choose the proper one:
 
 -   If no `-oex` flag is given in the command line, no modifier is added at all.
 
@@ -555,17 +555,17 @@ Because this modifier could also be specified in the [command line](#command-lin
 
 The following additional topics are discussed in this section:
 
--   [INTEGER, REAL, BOOLEAN, NULL](#integer-real-boolean-null)
+-   [INTEGER, REAL, BOOLEAN, NULL](ch_app.html#ch_app.datatool.html_refDefINT)
 
--   [ENUMERATED](#enumerated)
+-   [ENUMERATED](ch_app.html#ch_app.datatool.html_refDefENUM)
 
--   [OCTET STRING](#octet-string)
+-   [OCTET STRING](ch_app.html#ch_app.datatool.html_refDefOCTETS)
 
--   [SEQUENCE OF, SET OF](#sequence-of-set-of)
+-   [SEQUENCE OF, SET OF](ch_app.html#ch_app.datatool.html_refDefArray)
 
--   [SEQUENCE, SET](#sequence-set)
+-   [SEQUENCE, SET](ch_app.html#ch_app.datatool.html_refDefClass)
 
--   [CHOICE](#choice)
+-   [CHOICE](ch_app.html#ch_app.datatool.html_refDefChoice)
 
 ##### INTEGER, REAL, BOOLEAN, NULL
 
@@ -615,9 +615,9 @@ There is a special section `[-]` allowed in the definition file which can contai
     ; Generate #include directives with quotes rather than angle brackets:
     -orq = 1
 
-Any of the code generation arguments in [Table 2](#table-2) (except `-od`, `-odi`, and `-odw` which are related to specifying the definition file) can be placed in the `[-]` section.
+Any of the code generation arguments in [Table 2](ch_app.html#ch_app.tools_table2) (except `-od`, `-odi`, and `-odw` which are related to specifying the definition file) can be placed in the `[-]` section.
 
-In some cases, the special value `"-"` causes special processing as noted in [Table 2](#table-2).
+In some cases, the special value `"-"` causes special processing as noted in [Table 2](ch_app.html#ch_app.tools_table2).
 
 #### Examples
 
@@ -720,9 +720,9 @@ Module files simply consist of lines of the form "`KEY = VALUE`". Only the key `
 
 The following additional topics are discussed in this section:
 
--   [Normalized name](#normalized-name)
+-   [Normalized name](ch_app.html#ch_app.datatool.html_refNormalizedName)
 
--   [ENUMERATED types](#enumerated-types)
+-   [ENUMERATED types](ch_app.html#ch_app.datatool.html_refCodeEnum)
 
 #### Normalized Name
 
@@ -749,25 +749,25 @@ By default, for every `ENUMERATED` ASN.1 type, **DATATOOL** will produce a C++ e
 
 The following topics are discussed in this section:
 
--   [Specification analysis](#specification-analysis)
+-   [Specification analysis](ch_app.html#ch_app.dt_inside.html_specs)
 
--   [Data types](#data-types)
+-   [Data types](ch_app.html#ch_app.dt_inside.html_data_types)
 
--   [Data values](#data-values)
+-   [Data values](ch_app.html#ch_app.dt_inside.html_data_values)
 
--   [Code generation](#code-generation)
+-   [Code generation](ch_app.html#ch_app.dt_inside.html_code_gen)
 
 #### Specification Analysis
 
 The following topics are discussed in this section:
 
--   [ASN.1 specification analysis](#asn1-specification-analysis)
+-   [ASN.1 specification analysis](ch_app.html#ch_app.dt_inside.html_specs_asn)
 
--   [DTD specification analysis](#dtd-specification-analysis)
+-   [DTD specification analysis](ch_app.html#ch_app.dt_inside.html_specs_dtd)
 
 ##### ASN.1 Specification Analysis
 
-See [Figure 1](#figure-1).
+See [Figure 1](ch_app.html#ch_app.specs_asn).
 
 [![1. ASN.1 specification analysis.](/book/static/img/specs_asn.gif)](/book/static/img/specs_asn.gif "Click to see the full-resolution image")
 
@@ -775,7 +775,7 @@ See [Figure 1](#figure-1).
 
 ##### DTD Specification Analysis
 
-See [Figure 2](#figure-2).
+See [Figure 2](ch_app.html#ch_app.specs_dtd).
 
 [![2. DTD specification analysis.](/book/static/img/specs_dtd.gif)](/book/static/img/specs_dtd.gif "Click to see the full-resolution image")
 
@@ -787,7 +787,7 @@ See [CDataType](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCD
 
 #### Data Values
 
-See [Figure 3](#figure-3).
+See [Figure 3](ch_app.html#ch_app.data_values).
 
 [![3. Data values.](/book/static/img/data_types.gif)](/book/static/img/data_types.gif "Click to see the full-resolution image")
 
@@ -795,7 +795,7 @@ See [Figure 3](#figure-3).
 
 #### Code Generation
 
-See [Figure 4](#figure-4).
+See [Figure 4](ch_app.html#ch_app.code_gen).
 
 [![4. Code generation.](/book/static/img/type_strings.gif)](/book/static/img/type_strings.gif "Click to see the full-resolution image")
 
@@ -804,25 +804,25 @@ See [Figure 4](#figure-4).
 Load Balancing
 --------------
 
--   [Overview](#overview)
+-   [Overview](ch_app.html#ch_app._Overview)
 
--   [Load Balancing Service Mapping Daemon (LBSMD)](#load-balancing-service-mapping-daemon-lbsmd)
+-   [Load Balancing Service Mapping Daemon (LBSMD)](ch_app.html#ch_app.Load_Balancing_Servi)
 
--   [Database Load Balancing](#database-load-balancing)
+-   [Database Load Balancing](ch_app.html#ch_app.Database_Load_Balancing)
 
--   [Cookie / Argument Affinity Module (MOD\_CAF)](#cookie--argument-affinity-module-modcaf)
+-   [Cookie / Argument Affinity Module (MOD\_CAF)](ch_app.html#ch_app.Cookie___Argument_Af)
 
--   [DISPD Network Dispatcher](#dispd-network-dispatcher)
+-   [DISPD Network Dispatcher](ch_app.html#ch_app.DISPD_Network_Dispat)
 
--   [NCBID Server Launcher](#ncbid-server-launcher)
+-   [NCBID Server Launcher](ch_app.html#ch_app.NCBID_Server_Launche)
 
--   [Firewall Daemon (FWDaemon)](#firewall-daemon-fwdaemon)
+-   [Firewall Daemon (FWDaemon)](ch_app.html#ch_app.Firewall_Daemon_FWDa)
 
--   [Launcherd Utility](#launcherd-utility)
+-   [Launcherd Utility](ch_app.html#ch_app.Launcherd_Utility)
 
--   [Monitoring Tools](#monitoring-tools)
+-   [Monitoring Tools](ch_app.html#ch_app.Monitoring_Tools)
 
--   [Quality Assurance Domain](#quality-assurance-domain)
+-   [Quality Assurance Domain](ch_app.html#ch_app.Quality_Assurance_Do)
 
 ***Note:*** For security reasons not all links in the public version of this document are accessible by the outside NCBI users.
 
@@ -1002,9 +1002,9 @@ defines a server. The detailed description of the individual fields is given bel
 
     -   **`user`** or **`*group`** which makes the LBSMD daemon add the specified user or group of users to the list of personnel who are authorized to modify the server (e.g. post a penalty, issue a rerate command etc.). By default these actions are only allowed to the **`root`** and **`lbsmd`** users, as well as users added to the host authority. Multiple specifications are allowed.
 
-    -   **`script`** which specifies a path to a local executable which checks whether the server is operational. The LBSMD daemon starts this script periodically as specified by the check time parameter(s) above. Only a single script specification is allowed. See [Check Script Specification](#check-script-specification) for more details.
+    -   **`script`** which specifies a path to a local executable which checks whether the server is operational. The LBSMD daemon starts this script periodically as specified by the check time parameter(s) above. Only a single script specification is allowed. See [Check Script Specification](ch_app.html#ch_app.Check_Script_Specification) for more details.
 
--   **`server_descriptor`** specifies the address of the server and supplies additional information. An example of the **`server_descriptor`**:<br/>`STANDALONE somehost:1234 R=3000 L=yes S=yes B=-20`<br/>See [Server Descriptor Specification](#server-descriptor-specification) for more details.
+-   **`server_descriptor`** specifies the address of the server and supplies additional information. An example of the **`server_descriptor`**:<br/>`STANDALONE somehost:1234 R=3000 L=yes S=yes B=-20`<br/>See [Server Descriptor Specification](ch_app.html#ch_app.Server_Descriptor_Specification) for more details.
 
 -   **`launcher_info`** is basically a command line preceded by a pipe symbol ( \\| ) which plays a role of a delimiter from the **`server_descriptor`**. It is only required for the **NCBID** type of service which are configured on the local host.
 
@@ -1938,9 +1938,9 @@ The NCBI Genome Workbench is an integrated sequence visualization and analysis p
 
 The following topics are discussed in this section:
 
--   [Design goals](#design-goals)
+-   [Design goals](ch_app.html#ch_app.gbench_dg)
 
--   [Design](#design)
+-   [Design](ch_app.html#ch_app.gbench_design)
 
 ### Design Goals
 
@@ -1961,27 +1961,27 @@ Cross-platform graphical development presents many challenges to proper encapsul
 NCBI NetCache Service
 ---------------------
 
--   [What is NetCache?](#what-is-netcache)
+-   [What is NetCache?](ch_app.html#ch_app.what_is_netcache)
 
--   [What can NetCache be used for?](#what-can-netcache-be-used-for)
+-   [What can NetCache be used for?](ch_app.html#ch_app.what_it_can_be_used)
 
--   [How to use NetCache](#how-to-use-netcache)
+-   [How to use NetCache](ch_app.html#ch_app.getting_started)
 
-    -   [The basic ideas](#the-basic-ideas)
+    -   [The basic ideas](ch_app.html#ch_app.The_basic_ideas)
 
-    -   [Setting up your program to use NetCache](#setting-up-your-program-to-use-netcache)
+    -   [Setting up your program to use NetCache](ch_app.html#ch_app.Set_up_your_program_to_use_NetCac)
 
-    -   [Establish the NetCache service name](#establish-the-netcache-service-name)
+    -   [Establish the NetCache service name](ch_app.html#ch_app.Establish_the_NetCache_service_na)
 
-    -   [Initialize the client API](#initialize-the-client-api)
+    -   [Initialize the client API](ch_app.html#ch_app.Initialize_the_client_API)
 
-    -   [Store data](#store-data)
+    -   [Store data](ch_app.html#ch_app.Store_data)
 
-    -   [Retrieve data](#retrieve-data)
+    -   [Retrieve data](ch_app.html#ch_app.Retrieve_data)
 
-    -   [Samples and other resources](#samples-and-other-resources)
+    -   [Samples and other resources](ch_app.html#ch_app.Available_samples)
 
--   [Questions and answers](#questions-and-answers)
+-   [Questions and answers](ch_app.html#ch_app.Questions_and_answers)
 
 ### What is NetCache?
 
@@ -2052,19 +2052,19 @@ All new applications developed within NCBI should use **NetCache** together with
 
 The following topics explain how to use NetCache from an application:
 
--   [The basic ideas](#the-basic-ideas)
+-   [The basic ideas](ch_app.html#ch_app.The_basic_ideas)
 
--   [Set up your program to use NetCache](#set-up-your-program-to-use-netcache)
+-   [Set up your program to use NetCache](ch_app.html#ch_app.Set_up_your_program_to_use_NetCac)
 
--   [Establish the NetCache service name](#establish-the-netcache-service-name)
+-   [Establish the NetCache service name](ch_app.html#ch_app.Set_up_your_program_to_use_NetCac)
 
--   [Initialize the client API](#initialize-the-client-api)
+-   [Initialize the client API](ch_app.html#ch_app.Initialize_the_client_API)
 
--   [Store data](#store-data)
+-   [Store data](ch_app.html#ch_app.Store_data)
 
--   [Retrieve data](#retrieve-data)
+-   [Retrieve data](ch_app.html#ch_app.Retrieve_data)
 
--   [Samples and other resources](#samples-and-other-resources)
+-   [Samples and other resources](ch_app.html#ch_app.Available_samples)
 
 #### The basic ideas
 
@@ -2178,7 +2178,7 @@ For a complete reference of **NetCache** configuration parameters, please see th
 
 There are ancillary multiple ways to save data, whether you're using ***CNetCacheAPI*** or ***CNetICacheClient***.
 
-With all the storage methods, you can supply a "time-to-live" parameter, which specifies how long (in seconds) a blob will be accessible. See the [basic ideas](#basic-ideas) section for more information on time-to-live.
+With all the storage methods, you can supply a "time-to-live" parameter, which specifies how long (in seconds) a blob will be accessible. See the [basic ideas](ch_app.html#ch_app.The_basic_ideas) section for more information on time-to-live.
 
 ##### Storing data using CNetCacheAPI
 
@@ -2325,6 +2325,6 @@ A:I have seen 400MB blobs there being written and read without an incident a tho
 
 **Q:How is the expiration of BLOBs handled by NetCache? My thinking is coming from two directions. First, I wouldn’t want BLOBs deleted out from under me, but also, if the expiration is too long, I don’t want to be littering the NetCache. That is: do I need to work hard to remove all of my BLOBs or can I just trust the automatic clean-up?**
 
-A:You can specify a "time-to-live" when you create a blob. If you don't specify a value, you can find the service's default value by calling ***GetBlobInfo()***. See the [basic ideas](#basic-ideas) section for more details.
+A:You can specify a "time-to-live" when you create a blob. If you don't specify a value, you can find the service's default value by calling ***GetBlobInfo()***. See the [basic ideas](ch_app.html#ch_app.The_basic_ideas) section for more details.
 
 

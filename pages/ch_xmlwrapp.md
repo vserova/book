@@ -4,7 +4,8 @@ title: C++ Toolkit test
 nav: pages/ch_xmlwrapp
 ---
 
-21. XmlWrapp (XML parsing and handling, XSLT, XPath)
+
+21\. XmlWrapp (XML parsing and handling, XSLT, XPath)
 ====================================================
 
 Created: August 2, 2009; Last Update: November 7, 2014.

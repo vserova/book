@@ -4,7 +4,8 @@ title: C++ Toolkit test
 nav: pages/ch_intro
 ---
 
-1. Introduction to the C++ Toolkit
+
+1\. Introduction to the C++ Toolkit
 ==================================
 
 Last Update: February 27, 2014.

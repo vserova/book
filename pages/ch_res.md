@@ -4,7 +4,8 @@ title: C++ Toolkit test
 nav: pages/ch_res
 ---
 
-26. C Toolkit Resources for C++ Toolkit Users
+
+26\. C Toolkit Resources for C++ Toolkit Users
 =============================================
 
 Last Update: February 3, 2014.
