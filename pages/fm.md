@@ -13,7 +13,7 @@ Contributing Authors
 
 ###  
 
-For list of contributors, see [Table 1](toolkit.fm.html#fm.T1).
+For list of contributors, see Table 1 below.
 
 #### Table 1. List of Contributors
 
