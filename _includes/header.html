@@ -5,35 +5,22 @@
 		</h1>
 		<h2 class="res_tagline"/>
 	</div>
-	<div class="search">
-		<form method="get" action="/toolkitbook/">
-			<div class="search_form">
-				<label for="database" class="offscreen_noflow">Search database</label>
-				<select id="database">
-						<option value="toolkit">ToolKit</option>
-						<option value="toolkitbook">Book (old for now)</option>
-						<option value="toolkitall">ToolKitAll</option>
-				</select>
-				<div class="nowrap">
-					<label for="term" class="offscreen_noflow" accesskey="/">Search term</label>
-					<div class="nowrap">
-						<div class="jig-ncbiclearbutton-wrap box-shadow">
-							<input role="textbox" aria-autocomplete="list" aria-haspopup="true" name="term" id="term" title="Search ToolKitBook" class="jig-ncbiclearbutton jig-ncbiautocomplete" config="isEnabled:false,disableUrl:'NcbiSearchBarAutoComplCtrl'" autocomplete="off" data-sbconfig="ds:'no',pjs:'no',afs:'yes'" type="text"/>
-							<a style="visibility: hidden;" class="reset" href="#">
-								<img src="/book/default_files/clear.png" alt="Clear input"/>
-							</a>
-						</div>
-					</div>
-					<button id="search" type="submit" class="button_search nowrap" cmd="go">Search</button>
-				</div>
-			</div>
-			<input name="p$a" type="hidden"/>
-			<input name="p$l" value="PAFAppLayout" type="hidden"/>
-			<input name="p$st" value="toolkit" type="hidden"/>
-			<input name="SessionId" value="430737C9550C87A1_0084SID" disabled="disabled" type="hidden"/>
-			<input name="Snapshot" value="/projects/cppdocs/cppdocs@2.18" disabled="disabled" type="hidden"/>
-		</form>
-	</div>
+<div>
+GOOGLE SEARCH:
+<script>
+  (function() {
+    var cx = '005268966818288764579:mkfmpgarrlm';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+</div>
 </div>
 	<div style="height: 1px; "> </div>
 	<div class="nvgtn">
