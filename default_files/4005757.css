@@ -596,7 +596,7 @@ ul.ui-ncbibasicmenu li a, ul.ui-ncbibasicmenu li a:hover {
 a.img_link {
 	border: 0 none;
 }
-.header{background:#d5d5d5 url(//static.pubmed.gov/portal/portal3rc.fcgi/4048106/img/2375536) repeat-x scroll left bottom; position: relative;margin-bottom: 1.231em;z-index:20; height:15em ;}
+.header{background:#d5d5d5 url(//static.pubmed.gov/portal/portal3rc.fcgi/4048106/img/2375536) repeat-x scroll left bottom; position: relative;margin-bottom: 1.231em;z-index:20; height:8em ;}
 .header a{text-decoration:none}
 .header a:hover{text-decoration:underline}
 .search{margin:0 0 0 13.539em; padding:1.2em 0 .7em}
