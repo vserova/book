@@ -55,10 +55,10 @@ body{font:62.5%/1.3846 arial,helvetica,clean,sans-serif;background-color:#ccc;ma
 img{border:0}
 abbr,acronym{cursor:help;border-bottom:1px dotted #000;}
 blockquote{margin:1.3846em 1em;}
-p,table,pre,fieldset,dl{margin: 0.6923em 0;}
+p,pre,fieldset,dl{margin: 0.6923em 0;}
 ol,ul{margin: 0.6923em 1em 0.6923em inherit}
 dl dd{margin-left:1em;}
-table{border-collapse:collapse;margin:1.3846em 0;}
+table{border-collapse:collapse;}
 thead{border-bottom:1px solid #eee;}
 tfoot{border-top:1px solid #eee;}
 th{text-align:center;background-color:#f0f0f0;}
@@ -546,7 +546,6 @@ div.table-scroll {
 	max-height: 500px;
 }
 div.table {
- padding-top: 0.5em;
  }
 .grid{ min-width:800px; max-width:none; width:100%; clear:both; margin:0 auto; text-align:left }
 .labeled-list{}
