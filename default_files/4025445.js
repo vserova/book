@@ -559,7 +559,7 @@ function SymbolSearch(bookID)
  if(sel=='pLXR') { url = "http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=" + f.__symbol.value + "&d="; } else
   if(sel=='pLib') { url = "http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lib_search/libsearch.cgi?public=yes&symbol=" + f.__symbol.value; } else
 //  if(sel=='pToolkitAll') { url = "http://www.ncbi.nlm.nih.gov/toolkitall/?term=" + f.__symbol.value; } else
-  if(sel=='pToolkitAll') { url = "http://www.google.com/#q=" + f.__symbol.value; } else
+  if(sel=='pToolkitAll') { url = "http://www.google.com/#q=site:toolkitbook.github.io " + f.__symbol.value; } else
   if(sel=='iLXR') { url = "http://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/CPP_DOC/lxr/ident?i=" + f.__symbol.value + "&d="; } else
   if(sel=='iLib') { url = "http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lib_search/libsearch.cgi?public=no&symbol=" + f.__symbol.value; } else
   if(sel=='iToolkitAll') { url = "http://test.ncbi.nlm.nih.gov/toolkitall/?term=" + f.__symbol.value; } // else
