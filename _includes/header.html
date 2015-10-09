@@ -1,25 +1,47 @@
 <div class="header">
-
-	<!-- div class="res_logo">
+	<div class="res_logo">
 		<h1 class="res_name">
 			<a href="http://www.ncbi.nlm.nih.gov/toolkit/" title="C++ Toolkit home">C++ Toolkit</a>
 		</h1>
-		<h2 class="res_tagline"/>
-	</div -->
-	<table width="100%"><tr><td width="50%">C++ Toolkit</td><td width="50%"><div class="search"><script>
-  (function() {
-    var cx = '005268966818288764579:mkfmpgarrlm';
-    var gcse = document.createElement('script');
-    gcse.type = 'text/javascript';
-    gcse.async = true;
-    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-        '//cse.google.com/cse.js?cx=' + cx;
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(gcse, s);
-  })();
-</script>
-<gcse:search></gcse:search></div></td></tr></table>
-</div>
+	</div>
+    
+    
+	<div class="search">
+        
+        <form name="frmSymbolSearch" onsubmit="return SymbolSearch('toolkit')" action="/" id="frmSymbolSearch">
+					<table>
+						<tbody>
+							<tr align="center" valign="middle">
+								<td colspan="2" nowrap="nowrap">
+									<input id="search_box" name="__symbol" style="vertical-align:                                        middle; line-height:normal " onkeypress="SymbolSearchKeyPress('toolkit',event)" type="text"/> 					<label for="search_box" class="offscreen_noflow">Search term</label>
+									<button type="submit" value="Search" style="vertical-align:                                        middle; line-height:normal;" onclick="javasrcipt:SymbolSearch('toolkit');">Search</button>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<input id="pToolkitAll" name="__symboloc" type="radio" checked="checked"/>
+									<label for="pToolkitAll" title="Search in the C/C++ source code and in this Book">All</label>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<input id="pLXR" name="__symboloc" type="radio"/>
+									<label for="pLXR" title="Search the symbol in the source code using LINUX Cross-Reference browser">LXR</label>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<input id="pLib" name="__symboloc" type="radio"/>
+									<label for="pLib" title="Locate the Toolkit library(es) where the symbol is defined">Library</label>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+                
+    </div>
+    
+    
 	<div style="height: 1px; "> </div>
 	<div class="nvgtn">
 		<a aria-haspopup="true" aria-expanded="false" role="button" href="#__nav_cntnt" class="jig-ncbipopper" style="float:left; padding-left: 50px;">Contents ▾</a>
