@@ -1,7 +1,7 @@
 <div class="header">
 	<div class="res_logo">
 		<h1 class="res_name">
-			<a class="img_link icnblk_img" title="NCBI" target="mainwindow" href="/book">
+			<a class="img_link icnblk_img" title="NCBI" target="mainwindow" href="http://www.ncbi.nlm.nih.gov/">
 					<img class="source-thumb" src="/book/static/img/ncbi_logo_noborder.png" alt="NCBI Home Page"/>
 				</a>
 			<a href="http://www.ncbi.nlm.nih.gov/toolkit/" title="C++ Toolkit home">C++ Toolkit</a>
@@ -13,36 +13,7 @@
     
         
         <form name="frmSymbolSearch" onsubmit="return SymbolSearch('toolkit')" action="/" id="frmSymbolSearch">
-					<!--
-                    0<table>
-						
-							<tr align="center" valign="middle">
-								<td nowrap="nowrap">
-									<input id="search_box" name="__symbol" style="vertical-align:                                        middle; line-height:normal " onkeypress="SymbolSearchKeyPress('toolkit',event)" type="text"/> 					<label for="search_box" class="offscreen_noflow">Search term</label>
-									<button type="submit" value="Search" style="vertical-align:                                        middle; line-height:normal;" onclick="javasrcipt:SymbolSearch('toolkit');">Search</button>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<input id="pToolkitAll" name="__symboloc" type="radio" checked="checked"/>
-									<label for="pToolkitAll" title="Search in the C/C++ source code and in this Book">All</label>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<input id="pLXR" name="__symboloc" type="radio"/>
-									<label for="pLXR" title="Search the symbol in the source code using LINUX Cross-Reference browser">LXR</label>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<input id="pLib" name="__symboloc" type="radio"/>
-									<label for="pLib" title="Locate the Toolkit library(es) where the symbol is defined">Library</label>
-								</td>
-							</tr>
-						
-					</table>
-                    -->
+
                     <table>
 		<tr>
 			<td colspan="3">
@@ -56,7 +27,7 @@
 		<tr>
 			<td>
 				<input id="google_search" name="__symboloc" type="radio" checked="checked"/>
-				<label for="pToolkitAll" title="Search in the C/C++ source code and in this Book">All</label>			
+				<label for="pToolkitAll" title="Search in the C/C++ source code and in this Book">Book</label>			
 			</td>
 			<td>
 				<input id="pToolkitAll" name="__symboloc" type="radio"/>									
