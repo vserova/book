@@ -12,6 +12,7 @@
     outline:0;
     padding:.4em 0 .4em .6em; 
     width:183px; 
+    border-radius: 10px;
 }
   
 #button-holder{
