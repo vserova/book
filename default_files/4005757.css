@@ -35,6 +35,39 @@
     width:20px; 
 }
 
+.ncbi_logo{
+	position:absolute; right:10px;
+	width: ;
+}
+
+/* NCBI logo experiment */
+
+.aui-header .aui-header-logo img {
+    max-height: 24px;
+    padding: 8px 0;
+}
+.aui-header .aui-header-logo img {
+    border: 0 none;
+    float: left;
+}
+img {
+    font-size: 0;
+}
+html, body, p, div, h1, h2, h3, h4, h5, h6, img, pre, form, fieldset {
+    margin: 0;
+}
+.aui-header .aui-dropdown2-trigger, #header .aui-header .aui-nav-link, #header .aui-header .aui-nav-imagelink, #header .aui-header a {
+    color: #ffffff;
+}
+.aui-header a {
+    line-height: 1;
+}
+h1 {
+    font-weight: normal;
+}
+body {
+    font-family: Arial,sans-serif;
+}
 /******  END - Styles for new header ******/
 
 
