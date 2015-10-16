@@ -37,7 +37,8 @@
 
 .ncbi_logo{
 	position:absolute; right:10px;
-	width: ;
+	max-height: 24px;
+    	padding: 8px 0;
 }
 
 /* NCBI logo experiment */
