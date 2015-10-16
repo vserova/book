@@ -12,7 +12,8 @@
     outline:0;
     padding:.4em 0 .4em .6em; 
     width:183px; 
-    border-radius: 10px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
   
 #button-holder{
@@ -25,6 +26,8 @@
     margin:11px 0 0 0;
     text-align:center;
     width:50px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
   
 #button-holder img{
