@@ -37,7 +37,7 @@ The UTIL module is a collection of useful classes which can be used in more then
 
 The following is an outline of the topics presented in this chapter:
 
--   [Writing a Simple Application](#writing-a-simple-application)
+-   [Writing a Simple Application](#test1)
 
     -   [NCBI C++ Toolkit Application Framework Classes](#ncbi-c++-toolkit-application-framework-classes)
 
@@ -365,6 +365,7 @@ The following is an outline of the topics presented in this chapter:
 
 **Demo Cases** [[src/sample/app/basic](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/basic)]
 
+<a name="test1"/>
 Writing a Simple Application
 ----------------------------
 
