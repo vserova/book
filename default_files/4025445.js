@@ -561,7 +561,9 @@ function SymbolSearch(bookID)
   if(sel=='toolkit') { url = "http://www.ncbi.nlm.nih.gov/toolkit/?term=" + f.__symbol.value; } else
   if(sel=='google_search') { url = "http://www.google.com/#q=site:toolkitbook.github.io " + f.__symbol.value; } 
 
-  window.location = url;
+  // window.location = url;
+  window.open(url,'_newtab');
+  
   return false;
 }
 
