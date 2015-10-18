@@ -380,7 +380,8 @@ This section discusses the following topics:
 
 ***Note:*** The C++ Toolkit can also be [used from a third party application framework](#ch-core.Using-the-C-Toolkit-from-a-Third).
 
-<a name="ch-core.basic-classes"></a>### NCBI C++ Toolkit Application Framework Classes
+<a name="ch-core.basic-classes"></a>
+### NCBI C++ Toolkit Application Framework Classes
 
 The following five fundamental classes form the foundation of the C++ Toolkit Application Framework:
 
@@ -396,7 +397,9 @@ The following five fundamental classes form the foundation of the C++ Toolkit Ap
 
 Each of these classes is discussed in the following sections:
 
-<a name="ch-core.CNcbiApplication"></a>#### CNcbiApplication
+<a name="ch-core.CNcbiApplication"></a>
+
+#### CNcbiApplication
 
 [CNcbiApplication](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNcbiApplication.html) is an abstract class used to define the basic functionality and behavior of an NCBI application. Because this application class effectively supersedes the C-style ***main()*** function, minimally, it must provide the same functionality, i.e.:
 
@@ -416,7 +419,7 @@ In addition, the application class provides the same features previously impleme
 
 The mechanism to execute the application is provided by ***CNcbiApplication***'s member function ***Run()***, for which you must write your own implementation. The ***Run()*** function will be automatically invoked by ***CNcbiApplication::AppMain()***, after it has initialized its ***CNcbiArguments, CNcbiEnvironment, CNcbiRegistry***, and ***CNcbiDiag*** data members.
 
-<a name="ch-core.CNcbiArguments"></a>#### CNcbiArguments
+#### <a name="ch-core.CNcbiArguments"></a>CNcbiArguments
 
 The [CNcbiArguments](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNcbiArguments.html) class provides a data structure for holding the application's command-line arguments, along with methods for accessing and modifying these. Access to the argument values is implemented using the built-in `[ ]` operator. For example, the first argument in **`argv`** (following the program name) can be retrieved using the ***CNcbiApplication::GetArguments()*** method:
 
