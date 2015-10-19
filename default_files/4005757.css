@@ -7,6 +7,13 @@
     	line-height: 1.5;
 }
 
+
+.search{width:50%;left:28em;padding-top:.4em;position:absolute}
+
+
+
+
+
 .search td {border-style:none;}
 .search tr {border-style:none;}
 tr.option {color:white;}
@@ -1236,7 +1243,7 @@ a.img_link {
 
 .db_logo{background:transparent url() no-repeat scroll left top;display:block;height:36px;width:100px;text-indent:-9999px}
 
-.res_logo{width:11.539em;left:1.231em;padding-top:.4em;position:absolute}
+.res_logo{width:25em;left:1.231em;padding-top:.4em;position:absolute}
 .res_logo h1{font-weight:normal;margin:0}
 /*sibling of res_logo*/
 .long{padding:.5em 0}
