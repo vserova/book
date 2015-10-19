@@ -1,5 +1,6 @@
 /******  Styles for new header ******/
 
+.search table {border-style:none;}
 #search_box{
     border-top:thin solid  #e5e5e5;
     border-right:thin solid #e5e5e5;
