@@ -1,5 +1,8 @@
-<!-- header start  -->
-<div class="header">
+
+                        <!--/.header-->
+                        
+                    	<!-- header start  -->
+<div class="header" style="height: 80px">
 	<!--
 	<div class="ncbi_logo" style="position:absolute; right:10px;">
         	<a class="img_link icnblk_img" title="NCBI" target="mainwindow" href="http://www.ncbi.nlm.nih.gov/">
@@ -9,14 +12,14 @@
     	-->
     	
     	<div class="ncbi_logo">
-		<a  href="http://www.ncbi.nlm.nih.gov/">
-			<img src="/book/static/img/ncbi_logo1.png" title="NCBI Home Page"  target="_blank" data-aui-responsive-header-index="0">
+		<a href="http://www.ncbi.nlm.nih.gov/">
+			<img data-aui-responsive-header-index="0" target="_blank" title="NCBI Home Page" src="/book/static/img/ncbi_logo1.png">
 		</a>
 	</div>
     	
 	<div class="res_logo">
 		<h1 class="res_name">
-	        	<a id="toolkit_header" title="Table of Contents Page" target="mainwindow" href="/book">
+	        	<a href="/book" target="mainwindow" title="Table of Contents Page" id="toolkit_header">
 				<!--
 				<a class="img_link icnblk_img" title="Table of Contents Page" target="mainwindow" href="/book">
 				<img class="source-thumb" src="/book/static/img/th-toolkit-lrg.png" alt="Cover of The NCBI C++ Toolkit Book" height="100px" width="80px"/>
@@ -26,49 +29,46 @@
 		</h1>
 	</div>
     
-	<div class="search">
-        	<form name="frmSymbolSearch" onsubmit="return SymbolSearch('toolkit')" action="/" id="frmSymbolSearch">
-		<table>
-		<tr>
+	<div style="position: absolute; height: 80px; right: 100px; top: -25px" class="search" align="top">
+        	
+		<table style="width: 100%">
+      <tbody><tr>
 			<td colspan="4">
-				<input id="search_box" name="__symbol" type='text' placeholder='Search...'  onkeypress="SymbolSearchKeyPress('toolkit',event)"/>
+				<input id="search_box" name="__symbol" placeholder="Search..." onkeypress="SymbolSearchKeyPress('toolkit',event)" type="text">
 				<label for="search_box" class="offscreen_noflow">Search term</label>
-				<div id='button-holder'>
-					<img src="/book/static/img/search_icon.png" onclick="javasrcipt:SymbolSearch('toolkit');" />
-				</div
-					
-			</td>
+				<div id="button-holder">
+					<img src="/book/static/img/search_icon.png" onclick="javasrcipt:SymbolSearch('toolkit');">
+				</div>
 			
-		</tr>
+		</td></tr>
+      
 		<tr class="option">
-			<td>
-				<input id="google_search" name="__symboloc" type="radio" checked="checked"/>
-				<label for="google_search" title="Google Search on this Book">Book</label>			
+			<td width="0%"><nobr><input checked="checked" name="__symboloc" id="google_search" type="radio"> <label title="Google Search on this Book" for="google_search">Book</label>			</nobr>
 			</td>
-			<td>
-				<input id="toolkit" name="__symboloc" type="radio"/>									
-				<label for="toolkit" title="Search in the C/C++ source code">Source</label>			
+			<td width="0%">
+				<nobr><input name="__symboloc" id="toolkit" type="radio"> <label title="Search in the C/C++ source code" for="toolkit">Source</label></nobr>
 			</td>
-			<td>
-				<input id="pLXR" name="__symboloc" type="radio"/>									
-				<label for="pLXR" title="Search the symbol in the source code using LINUX Cross-Reference browser">LXR</label>
+			<td width="0%">
+				<nobr><input name="__symboloc" id="pLXR" type="radio"> <label title="Search the symbol in the source code using LINUX Cross-Reference browser" for="pLXR">LXR</label></nobr>
 			</td>
-			<td>
-				<input id="pLib" name="__symboloc" type="radio"/>									
-				<label for="pLib" title="Locate the Toolkit library(es) where the symbol is defined">Library</label>
+			<td width="100%">
+				<input name="__symboloc" id="pLib" type="radio"> <label title="Locate the Toolkit library(es) where the symbol is defined" for="pLib">Library</label>
 			</td>
 		</tr>
-		</table>
-		</form>
+		</tbody></table>
+		
 	</div>
 
     
 	<div style="height: 1px; "> </div>
 	
-	<div class="nvgtn">
-		<a aria-haspopup="true" aria-expanded="false" role="button" href="#__nav_cntnt" class="jig-ncbipopper" style="float:left; padding-left: 50px;">Contents ▾</a>
-		<div class="ui-helper-reset ui-ncbipopper-wrapper ui-ncbipopper-basic" aria-hidden="true" aria-live="assertive" style="width: 700px; height: 500px; overflow: auto; top: -100px; left: -100px; display: none;" id="__nav_cntnt">
-			<a class="right" href="../">Table of Contents Page</a>
+	
+                </div>
+                      
+                      <div class="nvgtn">
+		<a style="float:left; padding-left: 50px;" class="jig-ncbipopper" href="#__nav_cntnt" role="button" aria-expanded="false" aria-haspopup="true">Contents ▾</a>
+		<div id="__nav_cntnt" style="width: 700px; height: 500px; overflow: auto; top: -100px; left: -100px; display: none; max-height: 455px;" aria-live="assertive" aria-hidden="true" class="ui-helper-reset ui-ncbipopper-wrapper ui-ncbipopper-basic">
+			<a href="../" class="right">Table of Contents Page</a>
 			<ul class="simple-list">
 				<li class="half_rhythm">
 					<a href="/book/pages/fm">Book Information</a>
@@ -206,7 +206,5 @@
 				</li>
 			</ul>
 		</div>
-		<div><a href="https://github.com/toolkitbook/book/edit/gh-pages/{{ page.path }}" style="float:right; padding-right: 50px;"><img src="/book/static/img/button_edit_grey.gif" alt="Edit this page"/></a></div>
+		<div><a style="float:right; padding-right: 50px;" href="https://github.com/toolkitbook/book/edit/gh-pages/pages/ch_core.md"><img alt="Edit this page" src="/book/static/img/button_edit_grey.gif"></a></div>
 	</div>
-</div> 
-<!-- header end -->
