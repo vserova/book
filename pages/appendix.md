@@ -8,6 +8,8 @@ nav: pages/appendix
 Appendix - Books and Styles
 ===========================
 
+<a name="app1.books.html"></a>
+
 Books and links to C++ and STL manuals
 --------------------------------------
 

@@ -33,118 +33,124 @@ Of course, there is always the third method which is to run the program under an
 
 The following is an outline of the topics presented in this chapter:
 
--   [Extracting Debug Data](#extracting-debug-data)
+-   [Extracting Debug Data](#ch-debug.extracting-debug-data)
 
-    -   [Command Line Parameters](#command-line-parameters)
+    -   [Command Line Parameters](#ch-debug.command-line)
 
-    -   [Getting More Trace Data](#getting-more-trace-data)
+    -   [Getting More Trace Data](#ch-debug.more-trace-data)
 
-        -   [Tracing](#tracing)
+        -   [Tracing](#ch-debug.tracing)
 
-        -   [Diagnostic Messages](#diagnostic-messages)
+        -   [Diagnostic Messages](#ch-debug.diagnostic-messages)
 
-    -   [Tracing in the Connection Library](#tracing-in-the-connection-library)
+    -   [Tracing in the Connection Library](#ch-debug.tracing-connection)
 
-    -   [NCBI C++ Toolkit Diagnostics](#ncbi-c++-toolkit-diagnostics)
+    -   [NCBI C++ Toolkit Diagnostics](#ch-debug.toolkit-diagnostics)
 
-    -   [Object state dump](#object-state-dump)
+    -   [Object state dump](#ch-debug.object-state-dump)
 
-    -   [Exceptions](#exceptions)
+    -   [Exceptions](#ch-debug.exceptions)
 
--   [NCBI C++ Error Handling and Diagnostics](#ncbi-c++-error-handling-and-diagnostics)
+-   [NCBI C++ Error Handling and Diagnostics](#ch-debug.err-handling-diagnostics)
 
-    -   [Debug-mode for Internal Use](#debug-mode-for-internal-use)
+    -   [Debug-mode for Internal Use](#ch-debug.debug-mode-internal)
 
-    -   [C++ Exceptions](#c++-exceptions)
+    -   [C++ Exceptions](#ch-debug.cpp-exceptions)
 
-        -   [Standard C++ Exception Classes, and Two Useful NCBI Exception Classes (CErrnoTemplException, CParseTemplException)](#standard-c++-exception-classes-and-two-useful-ncbi-exception-classes-cerrnotemplexception-cparsetemplexception)
+        -   [Standard C++ Exception Classes, and Two Useful NCBI Exception Classes (CErrnoTemplException, CParseTemplException)](#ch-debug.std-cpp-exceptions)
 
-        -   [Using STD\_CATCH\_\*(...) to catch and report exceptions](#using-stdcatch*-to-catch-and-report-exceptions)
+        -   [Using STD\_CATCH\_\*(...) to catch and report exceptions](#ch-debug.using-std-catch)
 
-        -   [Using THROW\*\_TRACE(...) to throw exceptions](#using-throw*trace-to-throw-exceptions)
+        -   [Using THROW\*\_TRACE(...) to throw exceptions](#ch-debug.throw-trace)
 
-        -   [THROWS\*(...) -- Exception Specification](#throws*----exception-specification)
+        -   [THROWS\*(...) -- Exception Specification](#ch-debug.throw-excep-spec)
 
-    -   [Standard NCBI C++ Message Posting](#standard-ncbi-c++-message-posting)
+    -   [Standard NCBI C++ Message Posting](#ch-debug.std-cpp-message-post)
 
-        -   [Formatting and Manipulators](#formatting-and-manipulators)
+        -   [Formatting and Manipulators](#ch-debug.formatting-manipulators)
 
-        -   [ERR\_POST macro](#errpost-macro)
+        -   [ERR\_POST macro](#ch-debug.ERR-POST-ref)
 
-        -   [Turn on the Tracing](#turn-on-the-tracing)
+        -   [Turn on the Tracing](#ch-debug.turn-on-tracing)
 
--   [DebugDump: Take an Object State Snapshot](#debugdump-take-an-object-state-snapshot)
+-   [DebugDump: Take an Object State Snapshot](#ch-debug.debug-dump)
 
-    -   [Terminology](#terminology)
+    -   [Terminology](#ch-debug.debug-terminology)
 
-    -   [Requirements](#requirements)
+    -   [Requirements](#ch-debug.debug-requirements)
 
-    -   [Architecture](#architecture)
+    -   [Architecture](#ch-debug.debug-architecture)
 
-    -   [Implementation](#implementation)
+    -   [Implementation](#ch-debug.debug-impl)
 
-        -   [CDebugDumpable](#cdebugdumpable)
+        -   [CDebugDumpable](#ch-debug.CDebugDumpable)
 
-        -   [CDebugDumpContext](#cdebugdumpcontext)
+        -   [CDebugDumpContext](#ch-debug.CDebugDumpContext)
 
-        -   [CDebugDumpFormatter](#cdebugdumpformatter)
+        -   [CDebugDumpFormatter](#ch-debug.CDebugDumpFormatter)
 
-    -   [Examples](#examples)
+    -   [Examples](#ch-debug.debug-examples)
 
--   [Exception Handling (\*) in the NCBI C++ Toolkit](#exception-handling-*-in-the-ncbi-c++-toolkit)
+-   [Exception Handling (\*) in the NCBI C++ Toolkit](#ch-debug.excep-cpp-toolkit)
 
-    -   [NCBI C++ Exceptions](#ncbi-c++-exceptions)
+    -   [NCBI C++ Exceptions](#ch-debug.ncbi-cpp-exceptions)
 
-        -   [Requirements](#requirements)
+        -   [Requirements](#ch-debug.excep-requirements)
 
-        -   [Architecture](#architecture)
+        -   [Architecture](#ch-debug.excep-architecture)
 
-        -   [Implementation](#implementation)
+        -   [Implementation](#ch-debug.excep-impl)
 
-            -   [CException](#cexception)
+            -   [CException](#ch-debug.CException)
 
-            -   [Derived exceptions](#derived-exceptions)
+            -   [Derived exceptions](#ch-debug.derived-exceptions)
 
-            -   [Reporting an exception](#reporting-an-exception)
+            -   [Reporting an exception](#ch-debug.reporting-exceptions)
 
-            -   [CExceptionReporter](#cexceptionreporter)
+            -   [CExceptionReporter](#ch-debug.CExceptionReporter)
 
-            -   [Choosing and analyzing error codes](#choosing-and-analyzing-error-codes)
+            -   [Choosing and analyzing error codes](#ch-debug.excep-err-codes)
 
-        -   [Examples](#examples)
+        -   [Examples](#ch-debug.excep-examples)
 
-            -   [Throwing an exception](#throwing-an-exception)
+            -   [Throwing an exception](#ch-debug.excep-throwing-example)
 
-            -   [Reporting an exception](#reporting-an-exception)
+            -   [Reporting an exception](#ch-debug.excep-reporting-example)
 
-    -   [The CErrnoTemplException Class](#the-cerrnotemplexception-class)
+    -   [The CErrnoTemplException Class](#ch-debug.CErrnoTemplException)
 
-    -   [The CParseTemplException Class](#the-cparsetemplexception-class)
+    -   [The CParseTemplException Class](#ch-debug.CParseTemplException)
 
-    -   [Macros for Standard C++ Exception Handling](#macros-for-standard-c++-exception-handling)
+    -   [Macros for Standard C++ Exception Handling](#ch-debug.std-excep-macros)
 
-    -   [Exception Tracing](#exception-tracing)
+    -   [Exception Tracing](#ch-debug.excep-tracing)
+
+<a name="ch-debug.extracting-debug-data"></a>
 
 Extracting Debug Data
 ---------------------
 
 The C++ Toolkit has several mechanisms which can be used by a programmer to extract information about the program usage, printing trace and diagnostic messages, and examining the object state dump. The following sections discuss these topics in more detail:
 
--   [Command Line Parameters.](#command-line-parameters)
+-   [Command Line Parameters.](#ch-debug.command-line)
 
--   [Getting More Trace Data.](#getting-more-trace-data)
+-   [Getting More Trace Data.](#ch-debug.more-trace-data)
 
--   [Tracing in the Connection Library](#tracing-in-the-connection-library)
+-   [Tracing in the Connection Library](#ch-debug.tracing-connection)
 
--   [NCBI C++ Toolkit Diagnostics](#ncbi-c++-toolkit-diagnostics)
+-   [NCBI C++ Toolkit Diagnostics](#ch-debug.toolkit-diagnostics)
 
--   [Object state dump](#object-state-dump)
+-   [Object state dump](#ch-debug.object-state-dump)
 
--   [Exceptions](#exceptions)
+-   [Exceptions](#ch-debug.exceptions)
+
+<a name="ch-debug.command-line"></a>
 
 ### Command Line Parameters
 
-There are several command line parameters (see [Table 1](#table-1)), which are applicable to any program which utilizes NCBI C++ toolkit, namely [CNcbiApplication](ch_core.html#ch_core.writing_simple_app) class. They provide with the possibility
+There are several command line parameters (see [Table 1](#ch-debug.T1)), which are applicable to any program which utilizes NCBI C++ toolkit, namely [CNcbiApplication](ch_core.html#ch_core.writing_simple_app) class. They provide with the possibility
+
+<a name="ch-debug.T1"></a>
 
 Table 1. Command line parameters available for use to any program that uses CNcbiApplication
 
@@ -160,6 +166,8 @@ Table 1. Command line parameters available for use to any program that uses CNcb
 
 -   to read the program's [configuration data](ch_core.html#ch_core.registry) from a specified file (`-conffile` key).
 
+<a name="ch-debug.more-trace-data"></a>
+
 ### Getting More Trace Data
 
 All NCBI C++ toolkit libraries produce a good deal of diagnostic messages. Still, many of them remain "invisible" - as long as the tracing is disabled. Some tracing data is only available in debug builds - see [\_TRACE](ch_core.html#ch_core._TRACE) macro for example. Other - e.g., the one produced by [ERR\_POST](ch_core.html#ch_core.ERR_POST) or **`LOG_POST`** macros - could be disabled. There are three ways to manipulate these settings, that is enable or disable tracing, or set the severity level of messages to print:
@@ -172,13 +180,17 @@ All NCBI C++ toolkit libraries produce a good deal of diagnostic messages. Still
 
 The following additional topics relating to trace data are presented in the subsections that follow:
 
--   [Tracing](#tracing)
+-   [Tracing](#ch-debug.tracing)
 
--   [Diagnostic Messages](#diagnostic-messages)
+-   [Diagnostic Messages](#ch-debug.diagnostic-messages)
+
+<a name="ch-debug.tracing"></a>
 
 #### Tracing
 
-There are two ways to post trace messages: using either the [\_TRACE](ch_core.html#ch_core._TRACE) macro or the [ERR\_POST](ch_core.html#ch_core.ERR_POST) macro. Trace messages produced with the help of **`_TRACE`** macro are only available in debug mode, while those posted by **`ERR_POST`** are available in both release and debug builds. By default, tracing is disabled. See [Table 2](#table-2) for settings to enable tracing.
+There are two ways to post trace messages: using either the [\_TRACE](ch_core.html#ch_core._TRACE) macro or the [ERR\_POST](ch_core.html#ch_core.ERR_POST) macro. Trace messages produced with the help of **`_TRACE`** macro are only available in debug mode, while those posted by **`ERR_POST`** are available in both release and debug builds. By default, tracing is disabled. See [Table 2](#ch-debug.T2) for settings to enable tracing.
+
+<a name="ch-debug.T2"></a>
 
 Table 2. Enabling Tracing
 
@@ -188,9 +200,13 @@ Table 2. Enabling Tracing
 
 Please note, when enabling trace from a configuration file, some trace messages could be lost: before configuration file is found and read the application may assume that the trace was disabled. The only way to enable tracing from the very beginning is by setting the environment variable.
 
+<a name="ch-debug.diagnostic-messages"></a>
+
 #### Diagnostic Messages
 
-Diagnostic messages produced by [ERR\_POST](ch_core.html#ch_core.ERR_POST) macro are available both in debug and release builds. Such messages have a [severity level](ch_core.html#ch_core.diag_severity), which defines whether the message will be actually printed or not, and whether the program will be aborted or not. To change the severity level threshold for posting diagnostic messages, see [Table 3](#table-3).
+Diagnostic messages produced by [ERR\_POST](ch_core.html#ch_core.ERR_POST) macro are available both in debug and release builds. Such messages have a [severity level](ch_core.html#ch_core.diag_severity), which defines whether the message will be actually printed or not, and whether the program will be aborted or not. To change the severity level threshold for posting diagnostic messages, see [Table 3](#ch-debug.T3).
+
+<a name="ch-debug.T3"></a>
 
 Table 3. Changing severity level for diagnostic messages
 
@@ -200,9 +216,13 @@ Table 3. Changing severity level for diagnostic messages
 
 Only those messages, which severity is equal or exceeds the threshold will be posted. By default, messages posted with `Fatal` severity level also abort execution of the program. This can be changed by ***SetDiagDieLevel(EDiagSev dieSev)*** API function.
 
+<a name="ch-debug.tracing-connection"></a>
+
 ### Tracing in the Connection Library
 
-The [connection library](ch_conn.html) has its own [tracing options](ch_conn.html#ch_conn.conn_debug_tools). It is possible to print the connection parameters each time the link is established, and even log all data transmitted through the socket during the life of the connection (see [Table 4](#table-4)).
+The [connection library](ch_conn.html) has its own [tracing options](ch_conn.html#ch_conn.conn_debug_tools). It is possible to print the connection parameters each time the link is established, and even log all data transmitted through the socket during the life of the connection (see [Table 4](#ch-debug.T4)).
+
+<a name="ch-debug.T4"></a>
 
 Table 4. Setting up trace options for connection library
 
@@ -211,17 +231,23 @@ Table 4. Setting up trace options for connection library
 | **Connection parameters:** | define **`DEBUG_PRINTOUT`** entry in the **`CONN`** section:<br/>`[CONN]`<br/>`DEBUG_PRINTOUT=TRUE`<br/>Valid values are `TRUE`, or `YES`, or `SOME`. | define **`CONN_DEBUG_PRINTOUT`** environment variable:<br/>`set CONN_DEBUG_PRINTOUT=TRUE`<br/>Valid values are `TRUE`, or `YES`, or `SOME`. |
 | **All data:**              | define **`DEBUG_PRINTOUT`** entry in the **`CONN`** section:<br/>`[CONN]`<br/>`DEBUG_PRINTOUT=ALL`<br/>Valid values are `ALL`, or `DATA`.             | define **`CONN_DEBUG_PRINTOUT`** environment variable:<br/>`set CONN_DEBUG_PRINTOUT=ALL`<br/>Valid values are `ALL`, or `DATA`.             |
 
+<a name="ch-debug.toolkit-diagnostics"></a>
+
 ### NCBI C++ Toolkit Diagnostics
 
-NCBI C++ toolkit provides with a sophisticated [diagnostic mechanism](#diagnostic-mechanism). Diagnostic messages could be redirected to different output channels. It is possible to set up what [additional information](ch_core.html#ch_core.diag_post_flags) should be printed with a message, for example date/time stamp, file name, line number etc. Some macros are defined only in debug mode:**`_TRACE`**, **`_ASSERT`**, **`_TROUBLE`**. Others are also defined in release mode as well: **`_VERIFY`**, **`THROW*_TRACE`**.
+NCBI C++ toolkit provides with a sophisticated [diagnostic mechanism](#ch-debug.std-cpp-message-post). Diagnostic messages could be redirected to different output channels. It is possible to set up what [additional information](ch_core.html#ch_core.diag_post_flags) should be printed with a message, for example date/time stamp, file name, line number etc. Some macros are defined only in debug mode:**`_TRACE`**, **`_ASSERT`**, **`_TROUBLE`**. Others are also defined in release mode as well: **`_VERIFY`**, **`THROW*_TRACE`**.
+
+<a name="ch-debug.object-state-dump"></a>
 
 ### Object state dump
 
-Potentially useful technique in case of trouble is to use [object state dump API](#object-state-dump-api). In order to use it, the object's class must be derived from [CDebugDumpable](#cdebugdumpable) class, and implementation of the class should supply meaningful dump data in its ***DebugDump*** function. Debug dump gives an object's state snapshot, which can help in identifying the cause of problem at run time.
+Potentially useful technique in case of trouble is to use [object state dump API](#ch-debug.debug-dump). In order to use it, the object's class must be derived from [CDebugDumpable](#ch-debug.CDebugDumpable) class, and implementation of the class should supply meaningful dump data in its ***DebugDump*** function. Debug dump gives an object's state snapshot, which can help in identifying the cause of problem at run time.
+
+<a name="ch-debug.exceptions"></a>
 
 ### Exceptions
 
-NCBI C++ toolkit defines its own type of [C++ exceptions](#c++-exceptions). Unlike standard ones, this class
+NCBI C++ toolkit defines its own type of [C++ exceptions](#ch-debug.excep-cpp-toolkit). Unlike standard ones, this class
 
 -   makes it possible to define error codes (specific to each exception class), which could be analyzed from a program,
 
@@ -233,16 +259,20 @@ NCBI C++ toolkit defines its own type of [C++ exceptions](#c++-exceptions). Unli
 
 -   supports using standard [diagnostic mechanism](ch_core.html#ch_core.diag) with all the configuration options it provides.
 
+<a name="ch-debug.err-handling-diagnostics"></a>
+
 NCBI C++ Error Handling and Diagnostics
 ---------------------------------------
 
 The following topics are discussed in this section:
 
--   [Debug-mode for Internal Use](#debug-mode-for-internal-use)
+-   [Debug-mode for Internal Use](#ch-debug.debug-mode-internal)
 
--   [C++ Exceptions](#c++-exceptions)
+-   [C++ Exceptions](#ch-debug.cpp-exceptions)
 
--   [Standard NCBI C++ Message Posting](#standard-ncbi-c++-message-posting)
+-   [Standard NCBI C++ Message Posting](#ch-debug.std-cpp-message-post)
+
+<a name="ch-debug.debug-mode-internal"></a>
 
 ### Debug-mode for Internal Use
 
@@ -256,7 +286,7 @@ There are four preprocessor macros (**`_TROUBLE`**, **`_ASSERT`**, **`_VERIFY`**
 
 -   **`_VERIFY(expr)`** -- Evaluate expression **`expr`**; if **`_DEBUG`** is defined and **`expr`** resulted in zero(or `"false"`) then halt the application.
 
--   **`_TRACE(message)`** -- Has absolutely no effect if **`_DEBUG`** is not defined; otherwise, it outputs the **`message`** using [Standard NCBI C++ message posting](#standard-ncbi-c++-message-posting). NOTE: as a matter of fact, the tracing is turned off by default, even if **`_DEBUG`** is defined, and you still have to do [a special configuration](#a-special-configuration) to really turn it on.
+-   **`_TRACE(message)`** -- Has absolutely no effect if **`_DEBUG`** is not defined; otherwise, it outputs the **`message`** using [Standard NCBI C++ message posting](#ch-debug.std-cpp-message-post). NOTE: as a matter of fact, the tracing is turned off by default, even if **`_DEBUG`** is defined, and you still have to do [a special configuration](#ch-debug.turn-on-tracing) to really turn it on.
 
 All these macros automatically report the file name and line number to the diagnostics. For example, this code located in file `"somefile.cpp"` at line 333:
 
@@ -267,29 +297,35 @@ will output:
 
     "somefile.cpp", line 333: Trace: x + 5 = 105
 
+<a name="ch-debug.cpp-exceptions"></a>
+
 ### C++ Exceptions
 
 `#include <corelib/ncbiexpt.hpp>` [also included in \<corelib/ncbistd.hpp\>]
 
 The following additional topics are discussed in this section:
 
--   [Standard C++ Exception Classes, and Two Useful NCBI Exception Classes (CErrnoTemplException, CParseTemplException)](#standard-c++-exception-classes-and-two-useful-ncbi-exception-classes-cerrnotemplexception-cparsetemplexception)
+-   [Standard C++ Exception Classes, and Two Useful NCBI Exception Classes (CErrnoTemplException, CParseTemplException)](#ch-debug.std-cpp-exceptions)
 
--   [Using STD\_CATCH\_\*(...) to catch and report exceptions](#using-stdcatch*-to-catch-and-report-exceptions)
+-   [Using STD\_CATCH\_\*(...) to catch and report exceptions](#ch-debug.using-std-catch)
 
--   [Using THROW\*\_TRACE(...) to throw exceptions](#using-throw*trace-to-throw-exceptions)
+-   [Using THROW\*\_TRACE(...) to throw exceptions](#ch-debug.throw-trace)
 
--   [THROWS\*(...) -- Exception Specification](#throws*----exception-specification)
+-   [THROWS\*(...) -- Exception Specification](#ch-debug.throw-excep-spec)
+
+<a name="ch-debug.std-cpp-exceptions"></a>
 
 #### Standard C++ Exception Classes, and Two Useful NCBI Exception Classes (CErrnoTemplException, CParseTemplException)
 
-One must use [CException](#cexception) as much as possible. When not possible, [standard C++ exceptions](http://www.cplusplus.com/doc/tutorial/tut5-3.html) should be used. There are also a couple of auxiliary exception classes derived from ***std::runtime\_error*** that may be used if necessary.
+One must use [CException](#ch-debug.CException) as much as possible. When not possible, [standard C++ exceptions](http://www.cplusplus.com/doc/tutorial/tut5-3.html) should be used. There are also a couple of auxiliary exception classes derived from ***std::runtime\_error*** that may be used if necessary.
 
 -   ***CErrnoTemplException*** -- to report failure in a standard C library function; it automatically appends to the user message a system-specific description reported by **`errno`**
 
 -   ***CParseTemplException*** -- to report an erroneous position (passed in the additional constructor parameter) along with the user message
 
-Then, it is **strongly recommended** that when [CException](#cexception) can't be used, and when the basic functionality provided by standard C++ exceptions is insufficient for some reason, one must derive new ad hoc exception classes from one of the standard exception classes. This provides a more uniform way of exception handling, because most exceptions can be caught and appropriately handled using the **`STD_CATCH_*(...)`** preprocessor macros as described below.
+Then, it is **strongly recommended** that when [CException](#ch-debug.CException) can't be used, and when the basic functionality provided by standard C++ exceptions is insufficient for some reason, one must derive new ad hoc exception classes from one of the standard exception classes. This provides a more uniform way of exception handling, because most exceptions can be caught and appropriately handled using the **`STD_CATCH_*(...)`** preprocessor macros as described below.
+
+<a name="ch-debug.using-std-catch"></a>
 
 #### Using **`STD_CATCH_*(...)`** to catch and report exceptions
 
@@ -299,7 +335,7 @@ The **`STD_CATCH_X(subcode, message)`** and **`STD_CATCH_XX(name, subcode, messa
 
 The **`STD_CATCH_ALL_X(subcode, message)`** and **`STD_CATCH_ALL_XX(name, subcode, message)`** macros first try to catch a ***std::exception***-derived exception (using the **`STD_CATCH_X`** and **`STD_CATCH_XX`** macros, respectively), and if the thrown exception was not caught (i.e. if it is not derived from ***std::exception***) then they catch all exceptions and post the given error name, subcode, and message.
 
-The name argument must match one of the pre-defined values in the `error_codes.hpp` header for the relevant module (e.g. [connect](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/connect_2error__codes_8hpp.html)), and the subcode argument must be within the range specified in the same place. The message argument can be of any form acceptable by the [diagnostic class CNcbiDiag](#diagnostic-class-cncbidiag).
+The name argument must match one of the pre-defined values in the `error_codes.hpp` header for the relevant module (e.g. [connect](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/connect_2error__codes_8hpp.html)), and the subcode argument must be within the range specified in the same place. The message argument can be of any form acceptable by the [diagnostic class CNcbiDiag](#ch-debug.std-cpp-message-post).
 
 Using these macros makes dealing with exceptions in NCBI C++ code easy:
 
@@ -325,19 +361,25 @@ Here, if ***SomeFunc()*** executes `throw std::runtime_error("Invalid Arg2");` t
 
 In this output, the `(101.1)` indicates the error code (defined in the module's `error_codes.hpp` header) and the subcode passed to **`STD_CATCH_X`**.
 
+<a name="ch-debug.throw-trace"></a>
+
 #### Using **`THROW*_TRACE(...)`** to throw exceptions
 
 If you use one of **`THROW*_TRACE(...)`** macros to `throw` an exception, and the source was compiled in a debug mode (i.e. with the preprocessor **`_DEBUG`** defined), then you can turn on the following features that proved to be very useful for debugging:
 
--   If the [tracing is on](#tracing-is-on), then the location of the `throw` in the source code and the thrown exception will be printed out to the current diagnostic stream, e.g.:<br/>`THROW_TRACE(CParseException, ("Failed parsing(at pos. 123)", 123));`<br/><br/>`"coretest.cpp", line 708: Trace: CParseException: {123}`<br/>`Failed parsing(at pos. 123)`<br/><br/>`---------------------------------`<br/><br/>`strtod("1e-999999", 0);`<br/>`THROW1_TRACE(CErrnoException, "Failed strtod('1e-999999', 0)");`<br/><br/>`"coretest.cpp", line 718: Trace: CErrnoException:`<br/>`Failed strtod('1e-999999', 0): Result too large`
+-   If the [tracing is on](#ch-debug.turn-on-tracing), then the location of the `throw` in the source code and the thrown exception will be printed out to the current diagnostic stream, e.g.:<br/>`THROW_TRACE(CParseException, ("Failed parsing(at pos. 123)", 123));`<br/><br/>`"coretest.cpp", line 708: Trace: CParseException: {123}`<br/>`Failed parsing(at pos. 123)`<br/><br/>`---------------------------------`<br/><br/>`strtod("1e-999999", 0);`<br/>`THROW1_TRACE(CErrnoException, "Failed strtod('1e-999999', 0)");`<br/><br/>`"coretest.cpp", line 718: Trace: CErrnoException:`<br/>`Failed strtod('1e-999999', 0): Result too large`
 
 -   Sometimes, it can be convenient to just abort the program execution at the place where you throw an exception, e.g. in order to examine the program stack and overall state that led to this `throw`. By default, this feature is not activated. You can turn it on for your whole application by either setting the environment variable **`$ABORT_ON_THROW`** to an arbitrary non-empty string, or by setting the application's registry entry **`ABORT_ON_THROW`** (in the **`[DEBUG]`** section) to an arbitrary non-empty value. You also can turn it on and off in your program code, calling function [SetThrowTraceAbort()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/ncbiexpt_8cpp.html#a2).
 
 NOTE: if the source was not compiled in the debug mode, then the **`THROW*_TRACE(...)`** would just `throw` the specified exception, without doing any of the "fancy stuff" we just described.
 
+<a name="ch-debug.throw-excep-spec"></a>
+
 #### **`THROWS*(...)`** -- Exception Specification
 
 One is discouraged from writing [exception specifications](http://www.gamedev.net/reference/articles/article953.asp) - either with `throw()` or the **`THROWS*`** macros.
+
+<a name="ch-debug.std-cpp-message-post"></a>
 
 ### Standard NCBI C++ Message Posting
 
@@ -467,11 +509,13 @@ However, it is better to use the object-based interface for new code.
 
 The following additional topics are discussed in this section:
 
--   [Formatting and Manipulators](#formatting-and-manipulators)
+-   [Formatting and Manipulators](#ch-debug.formatting-manipulators)
 
--   [ERR\_POST macro](#errpost-macro)
+-   [ERR\_POST macro](#ch-debug.ERR-POST-ref)
 
--   [Turn on the Tracing](#turn-on-the-tracing)
+-   [Turn on the Tracing](#ch-debug.turn-on-tracing)
+
+<a name="ch-debug.formatting-manipulators"></a>
 
 #### Formatting and Manipulators
 
@@ -522,9 +566,13 @@ will write to the diagnostic stream(if the latter was set with ***SetDiagStream(
     Error: Message1_1
     Warning: This is a warning 1235
 
+<a name="ch-debug.ERR-POST-ref"></a>
+
 #### ERR\_POST macro
 
 There is an **`ERR_POST(message)`** macro that can be used to shorten the error posting code. This macro is discussed in the [chapter on Core Library](ch_core.html#ch_core.ERR_POST).
+
+<a name="ch-debug.turn-on-tracing"></a>
 
 #### Turn on the Tracing
 
@@ -532,20 +580,22 @@ The tracing (messages with severity level **`eDiag_Trace`**) is considered to be
 
 By default, the tracing is off -- unless you assign environment variable **`$DIAG_TRACE`** to an arbitrary non-empty string (or, alternatively, you can set **`DIAG_TRACE`** entry in the **`[DEBUG]`** section of your registry to any non-empty value).
 
+<a name="ch-debug.debug-dump"></a>
+
 DebugDump: Take an Object State Snapshot
 ----------------------------------------
 
 The following topics are discussed in this section:
 
--   [Terminology](#terminology)
+-   [Terminology](#ch-debug.debug-terminology)
 
--   [Requirements](#requirements)
+-   [Requirements](#ch-debug.debug-requirements)
 
--   [Architecture](#architecture)
+-   [Architecture](#ch-debug.debug-architecture)
 
--   [Implementation](#implementation)
+-   [Implementation](#ch-debug.debug-impl)
 
--   [Examples](#examples)
+-   [Examples](#ch-debug.debug-examples)
 
 Debugging is an inevitable part of software development. When it comes to a "mystical" problem, one can spend days and days hunting for a glitch. So, being prepared is not just a "nice thing to have", it is a requirement.
 
@@ -554,6 +604,8 @@ When a system being developed crashes consistently, debugging is easy in the sen
 One possible idea is to make the object tell about itself. That is, in case of trouble (but not necessarily trouble), an object could call a function that would report as much as possible about itself and other object it contains or to which it refers. During such operation the object should not do anything important, something that could potentially cause other problems. The diagnostic must of course be safe - it should only take a snapshot of an object's state and never alter that data.
 
 Sure, ***DebugDump*** may cause problems by itself, even if everything is "correct". Let us say there are two objects, which "know" each other: **`Object A`** refers to **`Object B`**, while **`Object B`** refers to **`Object A`** (very common scenario in fact). Now dumping contents of **`Object A`** will cause dumping of **`Object B`**, which in turn will cause dumping of **`Object A`**, and so on until the stack overflows.
+
+<a name="ch-debug.debug-terminology"></a>
 
 ### Terminology
 
@@ -565,6 +617,8 @@ So, dumping the object contents should look as a single function call, i.e. some
 
 The packet of information produced by such operation we call `bundle`. The class ***Object*** is most likely derived from other classes. The function should be called sequentially for each subclass, so it could print its data members. The piece of information produced by the subclass we call `frame`. The object may refer to other objects. Dumping of such object produces a `sub-bundle`, which consists of its own `frames`. To help fight cyclicity, we introduce `depth` of the dump. When an object being dumped wants to dump other objects it refers to, it should reduce the `depth` by one. If the `depth` is already zero, other objects should not be dumped.
 
+<a name="ch-debug.debug-requirements"></a>
+
 ### Requirements
 
 -   The dump data should be separated from its representation. That is, the object should only supply data, something else should format it. Examples of formatting may include generating human-readable text or file in a special format (HTML, XML), or even transmitting the data over the network.
@@ -572,6 +626,8 @@ The packet of information produced by such operation we call `bundle`. The class
 -   Debug and release libraries should be compatible.
 
 -   It should be globally configurable as to whether the dump produces any output or not,
+
+<a name="ch-debug.debug-architecture"></a>
 
 ### Architecture
 
@@ -591,15 +647,19 @@ In general, the system works like this:
 
 -   DebugDump function of each subclass defines a frame name (which must be the type of the subclass), calls DebugDump function of a base class and finally logs its own data members. From within the DebugDump(), the object being dumped "sees" only ***CDebugDumpContext***. It does not know any specifics about target format in which dump data will be eventually represented.
 
+<a name="ch-debug.debug-impl"></a>
+
 ### Implementation
 
 The following topics are discussed in this section:
 
--   [CDebugDumpable](#cdebugdumpable)
+-   [CDebugDumpable](#ch-debug.CDebugDumpable)
 
--   [CDebugDumpContext](#cdebugdumpcontext)
+-   [CDebugDumpContext](#ch-debug.CDebugDumpContext)
 
--   [CDebugDumpFormatter](#cdebugdumpformatter)
+-   [CDebugDumpFormatter](#ch-debug.CDebugDumpFormatter)
+
+<a name="ch-debug.CDebugDumpable"></a>
 
 #### CDebugDumpable
 
@@ -624,6 +684,8 @@ The class is an abstract one. Global options are stored as static variable(s).
                                unsigned int depth) const = 0;
 
 Any derived class must impelement a relevant DebugDump function.
+
+<a name="ch-debug.CDebugDumpContext"></a>
 
 #### CDebugDumpContext
 
@@ -680,6 +742,8 @@ The dump interface looks like this:
 
 A number of overloaded ***Log*** functions is provided for convenience only.
 
+<a name="ch-debug.CDebugDumpFormatter"></a>
+
 #### CDebugDumpFormatter
 
 This abstract class defines dump formatting interface:
@@ -694,6 +758,8 @@ This abstract class defines dump formatting interface:
         virtual void PutValue(   unsigned int level, const string& name,
                                  const string& value, bool is_string,
                                  const string& comment) = 0;
+
+<a name="ch-debug.debug-examples"></a>
 
 ### Examples
 
@@ -719,20 +785,24 @@ The ***DebugDump*** function should look like this:
         ... etc for each data member
     }
 
+<a name="ch-debug.excep-cpp-toolkit"></a>
+
 Exception Handling ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbiexpt.hpp)) in the NCBI C++ Toolkit
 ------------------------------------------------------------------------------------------------------------------------------------------
 
 The following topics are discussed in this section:
 
--   [NCBI C++ Exceptions](#ncbi-c++-exceptions)
+-   [NCBI C++ Exceptions](#ch-debug.ncbi-cpp-exceptions)
 
--   [The CErrnoTemplException Class](#the-cerrnotemplexception-class)
+-   [The CErrnoTemplException Class](#ch-debug.CErrnoTemplException)
 
--   [The CParseTemplException Class](#the-cparsetemplexception-class)
+-   [The CParseTemplException Class](#ch-debug.CParseTemplException)
 
--   [Macros for Standard C++ Exception Handling](#macros-for-standard-c++-exception-handling)
+-   [Macros for Standard C++ Exception Handling](#ch-debug.std-excep-macros)
 
--   [Exception Tracing](#exception-tracing)
+-   [Exception Tracing](#ch-debug.excep-tracing)
+
+<a name="ch-debug.ncbi-cpp-exceptions"></a>
 
 ### NCBI C++ Exceptions
 
@@ -744,13 +814,15 @@ Another problem is analyzing and handling exceptions in a program. When an excep
 
 The following topics are discussed in this section:
 
--   [Requirements](#requirements)
+-   [Requirements](#ch-debug.excep-requirements)
 
--   [Architecture](#architecture)
+-   [Architecture](#ch-debug.excep-architecture)
 
--   [Implementation](#implementation)
+-   [Implementation](#ch-debug.excep-impl)
 
--   [Examples](#examples)
+-   [Examples](#ch-debug.excep-examples)
+
+<a name="ch-debug.excep-requirements"></a>
 
 #### Requirements
 
@@ -765,6 +837,8 @@ In order for exceptions to be more useful, they should meet the following requir
 -   The system should provide for the ability to analyze the exception backlog and possibly print information about each exception separately.
 
 -   It should be possible to report the exception data into an arbitrary output channel and possibly format it differently for each channel.
+
+<a name="ch-debug.excep-architecture"></a>
 
 #### Architecture
 
@@ -786,19 +860,23 @@ The NCBI exception mechanism has a sophisticated reporting mechanism -- the stan
 
 -   NCBI standard diagnostic mechanism is used.
 
+<a name="ch-debug.excep-impl"></a>
+
 #### Implementation
 
 The following topics are discussed in this section:
 
--   [CException](#cexception)
+-   [CException](#ch-debug.CException)
 
--   [Derived exceptions](#derived-exceptions)
+-   [Derived exceptions](#ch-debug.derived-exceptions)
 
--   [Reporting an exception](#reporting-an-exception)
+-   [Reporting an exception](#ch-debug.reporting-exceptions)
 
--   [CExceptionReporter](#cexceptionreporter)
+-   [CExceptionReporter](#ch-debug.CExceptionReporter)
 
--   [Choosing and analyzing error codes](#choosing-and-analyzing-error-codes)
+-   [Choosing and analyzing error codes](#ch-debug.excep-err-codes)
+
+<a name="ch-debug.CException"></a>
 
 ##### CException
 
@@ -892,6 +970,8 @@ Finally, the following data access functions help to analyze exceptions from a p
         /// Get "previous" exception from the backlog.
         const CException* GetPredecessor(void) const;
 
+<a name="ch-debug.derived-exceptions"></a>
+
 ##### Derived exceptions
 
 The only requirement for a derived exception is to define error codes as well as its textual representation. Implementation of several other functions (e.g. constructors) are, in general, pretty straightforward -- so we put it into a macro definition, **`NCBI_EXCEPTION_DEFAULT`**. Please note, this macro can only be used when the derived class has no additional data members. Here is an example of an exception declaration:
@@ -921,15 +1001,19 @@ The only requirement for a derived exception is to define error codes as well as
 
 In case the derived exception has data members not found in the base class, it should also implement its own ***ReportExtra*** method -- to report this non-standard data.
 
+<a name="ch-debug.reporting-exceptions"></a>
+
 ##### Reporting an exception
 
 There are several way to report an NCBI C++ exception:
 
 -   An exception is capable of formatting its own data, returning a string (or a pointer to a string buffer). Each exception report occupies one line. Still, since an exception may contain a backlog of previously thrown exceptions, the resulting report could contain several lines of text - one for each exception thrown. The report normally contains information about the location from which the exception has been thrown, the text representation of the exception class and error code, and a description of the error. The content of the report is defined by [diagnostics post flags](ch_core.html#ch_core.diag_post_flags). The following methods generate reports of this type:<br/>`    /// Standard report (includes full backlog).`<br/>`    virtual const char* what(void) const throw();`<br/><br/>`    /// Report the exception.`<br/>`    ///`<br/>`    /// Report the exception using "reporter" exception reporter.`<br/>`    /// If "reporter" is not specified (value 0), then use the default`<br/>`    /// reporter as set with CExceptionReporter::SetDefault.`<br/>`    void Report(const char* file, int line,`<br/>`                const string& title, CExceptionReporter* reporter = 0,`<br/>`                TDiagPostFlags flags = eDPF_Trace) const;`<br/><br/>`    /// Report this exception only.`<br/>`    ///`<br/>`    /// Report as a string this exception only. No backlog is attached.`<br/>`    string ReportThis(TDiagPostFlags flags = eDPF_Trace) const;`<br/><br/>`    /// Report all exceptions.`<br/>`    ///`<br/>`    /// Report as a string all exceptions. Include full backlog.`<br/>`    string ReportAll (TDiagPostFlags flags = eDPF_Trace) const;`<br/><br/>`    /// Report "standard" attributes.`<br/>`    ///`<br/>`    /// Report "standard" attributes (file, line, type, err.code, user message)`<br/>`    /// into the "out" stream (this exception only, no backlog).`<br/>`    void ReportStd(ostream& out, TDiagPostFlags flags = eDPF_Trace) const;`<br/><br/>Functions ***what()*** and ***ReportAll()*** may also generate a `background` report - the one generated by a default exception reporter. This feature can be disabled by calling the static method<br/>`CException::EnableBackgroundReporting(false);`
 
--   A client can provide its own [exception reporter](#exception-reporter). An object of this class may either use exception data access functions to create its own reports, or redirect reports into its own output channel(s). While it is possible to specify the reporter in the ***CException::Report()*** function, it is better if the same reporting functions are used for exceptions, to install the reporter as a default one instead, using<br/>`CExceptionReporter::SetDefault(const CExceptionReporter* handler);` static function, and use the standard **`NCBI_REPORT_EXCEPTION`** macro in the program.
+-   A client can provide its own [exception reporter](#ch-debug.CExceptionReporter). An object of this class may either use exception data access functions to create its own reports, or redirect reports into its own output channel(s). While it is possible to specify the reporter in the ***CException::Report()*** function, it is better if the same reporting functions are used for exceptions, to install the reporter as a default one instead, using<br/>`CExceptionReporter::SetDefault(const CExceptionReporter* handler);` static function, and use the standard **`NCBI_REPORT_EXCEPTION`** macro in the program.
 
 -   Still another way to report an exception is to use the standard [diagnostic](ch_core.html#ch_core.diag) mechanism provided by NCBI C++ toolkit. In this case the code to generate the report would look like this:<br/>`try {`<br/>`    ...`<br/>`} catch (CException& e) {`<br/>`    ERR_POST_X(1, Critical << "Your message here." << e);`<br/>`}`
+
+<a name="ch-debug.CExceptionReporter"></a>
 
 ##### CExceptionReporter
 
@@ -959,9 +1043,11 @@ The ***CExceptionReporter*** is an abstract class, which defines the reporter in
                             const string& title, const CException& ex,
                             TDiagPostFlags flags = eDPF_Trace) const = 0;
 
+<a name="ch-debug.excep-err-codes"></a>
+
 ##### Choosing and analyzing error codes
 
-Choosing and interpreting error codes can potentially create some problems because each exception class has its own error codes, and interpretation. Error codes are implemented as an enum type, ***EErrCode***, and the enumerated values are stored internally in a program as numbers. So, the same number can be interpreted incorrectly for a different exception class than the one in which the enum type was defined. Say for instance, there is an exception class, which is derived from [CSubsystemException](#csubsystemexception) -- let us call it ***CBiggersystemException*** -- which also defines two error codes: **`eBigger1`** and **`eBigger2`**:
+Choosing and interpreting error codes can potentially create some problems because each exception class has its own error codes, and interpretation. Error codes are implemented as an enum type, ***EErrCode***, and the enumerated values are stored internally in a program as numbers. So, the same number can be interpreted incorrectly for a different exception class than the one in which the enum type was defined. Say for instance, there is an exception class, which is derived from [CSubsystemException](#ch-debug.derived-exceptions) -- let us call it ***CBiggersystemException*** -- which also defines two error codes: **`eBigger1`** and **`eBigger2`**:
 
     class CBiggersystemException : public CSubsystemException
     {
@@ -1031,17 +1117,21 @@ The following shows how ***UppermostCast()*** can be used to catch the correct e
 
 It is possible to use the runtime information to do it even better. Since ***GetErrCode*** function is non-virtual, it might check the type of the object, for which it has been called, against the type of the class to which it belongs. If these two do not match, the function returns `invalid` error code. Such code only means that the caller did not know the correct type of the exception, and the function is unable to interpret it.
 
+<a name="ch-debug.excep-examples"></a>
+
 #### Examples
 
 The following topics are discussed in this section:
 
--   [Throwing an exception](#throwing-an-exception)
+-   [Throwing an exception](#ch-debug.excep-throwing-example)
 
--   [Reporting an exception](#reporting-an-exception)
+-   [Reporting an exception](#ch-debug.excep-reporting-example)
+
+<a name="ch-debug.excep-throwing-example"></a>
 
 ##### Throwing an exception
 
-It is important to remember that the system only provides a mechanism to create a backlog of unfinished tasks, it does not create this backlog automatically. It is up to developer to catch exceptions and re-throw them with the backlog information added. Here is an example of throwing [CSubsystemException](#csubsystemexception) exception:
+It is important to remember that the system only provides a mechanism to create a backlog of unfinished tasks, it does not create this backlog automatically. It is up to developer to catch exceptions and re-throw them with the backlog information added. Here is an example of throwing [CSubsystemException](#ch-debug.derived-exceptions) exception:
 
     ... // your code
     NCBI_THROW(CSubsystemException,eType1,"your message here");
@@ -1061,9 +1151,11 @@ The code that catches, and possibly re-throws the exception might look like this
         NCBI_RETHROW(e, CException, eUnknown, "your message here")
     }
 
+<a name="ch-debug.excep-reporting-example"></a>
+
 ##### Reporting an exception
 
-There are a [number of ways](#number-of-ways) to report ***CException***, for example:
+There are a [number of ways](#ch-debug.reporting-exceptions) to report ***CException***, for example:
 
     try {
         ... // your code
@@ -1076,6 +1168,8 @@ There are a [number of ways](#number-of-ways) to report ***CException***, for ex
     }
 
 We suggest using **`NCBI_REPORT_EXCEPTION(title,e)`** macro (which is equivalent to calling `e.Report(__FILE__,__LINE__,title)`) - it redirects the output into standard diagnostic channels and is highly configurable.
+
+<a name="ch-debug.CErrnoTemplException"></a>
 
 ### The CErrnoTemplException Class
 
@@ -1107,7 +1201,7 @@ The template class is derived form another template class, the ***ErrnoTemplExce
 
 The constructor for the derived ***CErrnoTemplException*** class is defined in terms of the **`NCBI_EXCEPTION_DEFAULT_IMPLEMENTATION_TEMPL`** macro which defines the program code for implementing the constructor.
 
-The `TBase` template parameter is an exception base class such as ***CException*** or ***CCoreException***, or another class similar to these. The ***CStrErrAdapt::strerror*** template parameter is a function defined in an adaptor class for getting the error description string. The ***CErrnoTemplException*** has only one [error core](#error-core) - **`eErrno`** defined in the parent class, ***ErrnoTemplExceptionEx***. To analyze the actual reason of the exception one should use ***GetErrno()*** method:
+The `TBase` template parameter is an exception base class such as ***CException*** or ***CCoreException***, or another class similar to these. The ***CStrErrAdapt::strerror*** template parameter is a function defined in an adaptor class for getting the error description string. The ***CErrnoTemplException*** has only one [error core](#ch-debug.excep-err-codes) - **`eErrno`** defined in the parent class, ***ErrnoTemplExceptionEx***. To analyze the actual reason of the exception one should use ***GetErrno()*** method:
 
     int GetErrno(void) const;
 
@@ -1148,6 +1242,8 @@ The ***CErrnoTemplException*** is used to create exception classes. Here is an e
                                CErrnoTemplException<CCoreException>);
     };
 
+<a name="ch-debug.CParseTemplException"></a>
+
 ### The CParseException Class
 
 The ***CParseTemplException*** is a template class whose parent class is the template parameter `TBase`. The ***CParseTemplException*** class includes an additional ***int*** data member, called **`m_Pos`**. This class was specifically defined to support complex parsing tasks, and its constructor requires that positional information be supplied along with the description message. This makes it impossible to use the standard **`NCBI_THROW`** macro to throw it, so we defined two additional macros:
@@ -1168,9 +1264,13 @@ The ***CParseTemplException*** is a template class whose parent class is the tem
         throw exception_class(__FILE__, __LINE__, \
             &(prev_exception), exception_class::err_code, (message), (extra))
 
+<a name="ch-debug.std-excep-macros"></a>
+
 ### Macros for Standard C++ Exception Handling
 
-The C++ ***throw()*** statement provides a mechanism for specifying the types of exceptions that may be thrown by a function. Functions that do **not** include a ***throw()*** statement in their declaration can throw any type of exception, but where the ***throw()*** statement **is** used, undeclared exception types that are thrown will cause ***std::unexpected()*** to be raised. Various compilers handle these events differently, and the first two macros listed in [Table 5](#table-5), (**`THROWS(())`**, **`THROWS_NONE`**, are provided to support platform-independent exception specifications.
+The C++ ***throw()*** statement provides a mechanism for specifying the types of exceptions that may be thrown by a function. Functions that do **not** include a ***throw()*** statement in their declaration can throw any type of exception, but where the ***throw()*** statement **is** used, undeclared exception types that are thrown will cause ***std::unexpected()*** to be raised. Various compilers handle these events differently, and the first two macros listed in [Table 5](#ch-debug.T5), (**`THROWS(())`**, **`THROWS_NONE`**, are provided to support platform-independent exception specifications.
+
+<a name="ch-debug.T5"></a>
 
 Table 5. Platform Independent Exception Macros
 
@@ -1206,9 +1306,11 @@ The **`STD_CATCH_ALL_X`** macro catches all exceptions. If however, the exceptio
 
 Again, the `(101.1)` indicates the error code (defined in the module's `error_codes.hpp` header) and the subcode passed to **`STD_CATCH_ALL_X`**.
 
+<a name="ch-debug.excep-tracing"></a>
+
 ### Exception Tracing
 
-Knowing exactly where an exception first occurs can be very useful for debugging purposes. [CException](#cexception) class has this functionality built in, so it is highly recommended to use exceptions derived from it. In addition to this a set of **`THROW*_TRACE()`** macros defined in the NCBI C++ Toolkit combine exception handling with [trace](ch_core.html#ch_core._TRACE) mechanisms to provide such information.
+Knowing exactly where an exception first occurs can be very useful for debugging purposes. [CException](#ch-debug.CException) class has this functionality built in, so it is highly recommended to use exceptions derived from it. In addition to this a set of **`THROW*_TRACE()`** macros defined in the NCBI C++ Toolkit combine exception handling with [trace](ch_core.html#ch_core._TRACE) mechanisms to provide such information.
 
 The most commonly used of these macros, `THROW1_TRACE(class_name, init_arg)`, instantiates an exception object of type **`class_name`** using **`init_arg`** to initialize it. The definition of this macro is:
 
@@ -1262,7 +1364,7 @@ The **`THROW0_TRACE`** macro accepts either an exception object or a string as t
 
 The remaining six macros accept two arguments: an "exception" class name and an initialization argument, where both arguments are also passed to the trace message. The class argument need not actually be derived from ***std::exception***, as the pre-processor simply uses the class name to construct a new object of that type using the initialization argument. All of the **`THROW1*_TRACE`** macros assume that there is a single initialization argument. As in the first three macros, **`THROW1_TRACE()`**, **`THROW1p_TRACE()`** and **`THROW1np_TRACE()`** specialize in different types of printable objects, ranging from exceptions and numeric and character types, to aggregate and container types.
 
-The last three macros parallel the previous two sets of macros in their specializations, and may be applied where the exception object's constructor takes multiple arguments. (See also the discussion on [Exception handling](#exception-handling)).
+The last three macros parallel the previous two sets of macros in their specializations, and may be applied where the exception object's constructor takes multiple arguments. (See also the discussion on [Exception handling](#ch-debug.cpp-exceptions)).
 
 It is also possible to specify that execution should abort immediately when an exception occurs. By default, this feature is not activated, but the [SetThrowTraceAbort()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetThrowTraceAbort) function can be used to activate it. Alternatively, you can turn it on for the entire application by setting either the **`$ABORT_ON_THROW`** environment variable, or the application's registry **`ABORT_ON_THROW`** entry (in the **`[DEBUG]`** section) to an arbitrary non-empty value.
 

@@ -29,35 +29,37 @@ If you are interested in downloading source code from the C Toolkit instead of t
 
 The following is an outline of the topics presented in this chapter:
 
--   [Public Access to the Source Code via FTP](#public-access-to-the-source-code-via-ftp)
+-   [Public Access to the Source Code via FTP](#ch-getcode-svn.ftp-download)
 
--   [Read-Only Access to the Source Code via Subversion](#read-only-access-to-the-source-code-via-subversion)
+-   [Read-Only Access to the Source Code via Subversion](#ch-getcode-svn.external)
 
--   [Read-Write Access to the Source Code via Subversion (NCBI only)](#read-write-access-to-the-source-code-via-subversion-ncbi-only)
+-   [Read-Write Access to the Source Code via Subversion (NCBI only)](#ch-getcode-svn.code-retrieval)
 
-    -   [NCBI Source Tree Contents](#ncbi-source-tree-contents)
+    -   [NCBI Source Tree Contents](#ch-getcode-svn.source-tree)
 
-    -   [Source Code Retrieval under Unix](#source-code-retrieval-under-unix)
+    -   [Source Code Retrieval under Unix](#ch-getcode-svn.unix)
 
-        -   [Retrieval of the C++ Toolkit Source Code Tree](#retrieval-of-the-c++-toolkit-source-code-tree)
+        -   [Retrieval of the C++ Toolkit Source Code Tree](#ch-getcode-svn.toolkit)
 
-            -   [Checking Out the Development NCBI C++ Toolkit Source Tree](#checking-out-the-development-ncbi-c++-toolkit-source-tree)
+            -   [Checking Out the Development NCBI C++ Toolkit Source Tree](#ch-getcode-svn.chkout-complete-tree)
 
-            -   [Checking Out the Production NCBI C++ Toolkit Source Tree](#checking-out-the-production-ncbi-c++-toolkit-source-tree)
+            -   [Checking Out the Production NCBI C++ Toolkit Source Tree](#ch-getcode-svn.chkout-production-tree)
 
-            -   [svn\_core: Retrieving core components](#svncore-retrieving-core-components)
+            -   [svn\_core: Retrieving core components](#ch-getcode-svn.core-sh)
 
-            -   [import\_project: Retrieve Source for an Existing Project](#importproject-retrieve-source-for-an-existing-project)
+            -   [import\_project: Retrieve Source for an Existing Project](#ch-getcode-svn.import-project-sh)
 
-            -   [update\_core: Update the Portable and Core Components](#updatecore-update-the-portable-and-core-components)
+            -   [update\_core: Update the Portable and Core Components](#ch-getcode-svn.update-coresh-Update)
 
-            -   [update\_projects: Check out and Update Sources of Selected Projects](#updateprojects-check-out-and-update-sources-of-selected-projects)
+            -   [update\_projects: Check out and Update Sources of Selected Projects](#ch-getcode-svn.update-projects-sh)
 
-    -   [Source Code Retrieval under MS Windows](#source-code-retrieval-under-ms-windows)
+    -   [Source Code Retrieval under MS Windows](#ch-getcode-svn.windows)
 
-    -   [Source Code Retrieval under Mac OS X](#source-code-retrieval-under-mac-os-x)
+    -   [Source Code Retrieval under Mac OS X](#ch-getcode-svn.mac)
 
--   [Source Tree Structure Summary](#source-tree-structure-summary)
+-   [Source Tree Structure Summary](#ch-getcode-svn.src-tree-struct)
+
+<a name="ch-getcode-svn.ftp-download"></a>
 
 Public Access to the Source Code via FTP
 ----------------------------------------
@@ -78,6 +80,8 @@ Public Access to the Source Code via FTP
 
         -   Right-click on the archive's icon, and select `'Extract to...'` to unpack the archive to a user-specified location in the filesystem.
 
+<a name="ch-getcode-svn.external"></a>
+
 Read-Only Access to the Source Code via Subversion
 --------------------------------------------------
 
@@ -89,44 +93,52 @@ The following options for read-only access to the C++ Toolkit Subversion reposit
 
 -   Accessing the repository with a WebDAV client (also using <http://anonsvn.ncbi.nlm.nih.gov/repos/v1/trunk/c++> – although some clients may require dav:// instead of http://).
 
+<a name="ch-getcode-svn.code-retrieval"></a>
+
 Read-Write Access to the Source Code via Subversion (NCBI only)
 ---------------------------------------------------------------
 
-***Note:*** This section discusses read-write access to the Subversion repository, which is only available to users inside NCBI. For public access, see the section on [read-only access](#read-only-access).
+***Note:*** This section discusses read-write access to the Subversion repository, which is only available to users inside NCBI. For public access, see the section on [read-only access](#ch-getcode-svn.external).
 
-Subversion client installation and usage instructions are available on separate pages for [UNIX](#unix), [MS Windows](#ms-windows), and [Mac OS](#mac-os) systems.
+Subversion client installation and usage instructions are available on separate pages for [UNIX](#ch-getcode-svn.unix), [MS Windows](#ch-getcode-svn.windows), and [Mac OS](#ch-getcode-svn.mac) systems.
 
 For a detailed description of the Subversion Version Control System please download the book ["Version Control with Subversion"](http://svnbook.red-bean.com/) or run the command `svn help` on your workstation for quick reference.
 
 The following is an outline of the topics presented in this section. Select the instructions appropriate for your **development** environment.
 
--   [NCBI Source Tree Contents](#ncbi-source-tree-contents)
+-   [NCBI Source Tree Contents](#ch-getcode-svn.source-tree)
 
--   [Source Code Retrieval under Unix](#source-code-retrieval-under-unix)
+-   [Source Code Retrieval under Unix](#ch-getcode-svn.unix)
 
-    -   [Retrieval of the C++ Toolkit Source Tree](#retrieval-of-the-c++-toolkit-source-tree)
+    -   [Retrieval of the C++ Toolkit Source Tree](#ch-getcode-svn.toolkit)
 
-        -   [Checking Out the Development NCBI C++ Toolkit Source Tree](#checking-out-the-development-ncbi-c++-toolkit-source-tree)
+        -   [Checking Out the Development NCBI C++ Toolkit Source Tree](#ch-getcode-svn.chkout-complete-tree)
 
-        -   [Checking Out the Production NCBI C++ Toolkit Source Tree](#checking-out-the-production-ncbi-c++-toolkit-source-tree)
+        -   [Checking Out the Production NCBI C++ Toolkit Source Tree](#ch-getcode-svn.chkout-production-tree)
 
-        -   [svn\_core: Retrieving core components](#svncore-retrieving-core-components)
+        -   [svn\_core: Retrieving core components](#ch-getcode-svn.core-sh)
 
-        -   [import\_project: Retrieve Source for an Existing Project](#importproject-retrieve-source-for-an-existing-project)
+        -   [import\_project: Retrieve Source for an Existing Project](#ch-getcode-svn.import-project-sh)
 
-        -   [update\_core: Update the Portable and Core Components](#updatecore-update-the-portable-and-core-components)
+        -   [update\_core: Update the Portable and Core Components](#ch-getcode-svn.update-coresh-Update)
 
-        -   [update\_projects: Check out and Update Sources of Selected Projects](#updateprojects-check-out-and-update-sources-of-selected-projects)
+        -   [update\_projects: Check out and Update Sources of Selected Projects](#ch-getcode-svn.update-projects-sh)
 
--   [Source Code Retrieval under MS Windows](#source-code-retrieval-under-ms-windows)
+-   [Source Code Retrieval under MS Windows](#ch-getcode-svn.windows)
 
--   [Source Code Retrieval under Mac OS X](#source-code-retrieval-under-mac-os-x)
+-   [Source Code Retrieval under Mac OS X](#ch-getcode-svn.mac)
+
+<a name="ch-getcode-svn.source-tree"></a>
 
 ### NCBI Source Tree Contents
 
 The NCBI C++ Toolkit Subversion repository contains all source code, scripts, utilities, tools, tests and documentation required to build the Toolkit on the major classes of operating systems (`Unix`, `MS Windows` and `Mac OS`).
 
+<a name="ch-getcode-svn.unix"></a>
+
 ### Source Code Retrieval under Unix
+
+<a name="ch-getcode-svn.toolkit"></a>
 
 #### Retrieval of the C++ Toolkit Source Code Tree
 
@@ -134,21 +146,23 @@ This section discusses the methods of checking out the entire source tree or jus
 
 The following sections discuss the checkout process in more detail:
 
--   [Checking Out the Development NCBI C++ Toolkit Source Tree](#checking-out-the-development-ncbi-c++-toolkit-source-tree)
+-   [Checking Out the Development NCBI C++ Toolkit Source Tree](#ch-getcode-svn.chkout-complete-tree)
 
--   [Checking Out the Production NCBI C++ Toolkit Source Tree](#checking-out-the-production-ncbi-c++-toolkit-source-tree)
+-   [Checking Out the Production NCBI C++ Toolkit Source Tree](#ch-getcode-svn.chkout-production-tree)
 
--   [svn\_toolkit\_tree: Quickly checking out the whole Toolkit source tree](#svntoolkittree-quickly-checking-out-the-whole-toolkit-source-tree-)
+-   [svn\_toolkit\_tree: Quickly checking out the whole Toolkit source tree](#ch-getcode-svn.svn-toolkit-tree-Quickly)
 
--   [svn\_core: Retrieving core components](#svncore-retrieving-core-components)
+-   [svn\_core: Retrieving core components](#ch-getcode-svn.core-sh)
 
--   [import\_project: Retrieve Source for an Existing Project](#importproject-retrieve-source-for-an-existing-project)
+-   [import\_project: Retrieve Source for an Existing Project](#ch-getcode-svn.import-project-sh)
 
--   [update\_core: Update the Portable and Core Components](#updatecore-update-the-portable-and-core-components)
+-   [update\_core: Update the Portable and Core Components](#ch-getcode-svn.core-sh)
 
--   [update\_projects: Check out and update Source of Selected Projects](#updateprojects-check-out-and-update-source-of-selected-projects)
+-   [update\_projects: Check out and update Source of Selected Projects](#ch-getcode-svn.update-projects-sh)
 
 ***Note:*** To facilitate the creation of a new project, use the script [new\_project](ch_proj.html#ch_proj.new_proj_struct) which generates new directories and makefiles for the new project from templates, but does not involve checking out files.
+
+<a name="ch-getcode-svn.chkout-complete-tree"></a>
 
 ##### Checking Out the Development NCBI C++ Toolkit Source Tree
 
@@ -163,6 +177,8 @@ For internal projects use:
     svn checkout https://svn.ncbi.nlm.nih.gov/repos/toolkit/trunk/internal/c++
 
 ***Caution:*** Be aware that sources checked out through the development source tree have the latest sources and are different from the public release that is done at periodic intervals. These sources are relatively unstable "development" sources, so they are not guaranteed to work properly or even compile. Use these sources at your own risk (and/or to apply patches to stable releases).The sources are usually better by the end of day and especially by the end of the week (like Sunday evening).
+
+<a name="ch-getcode-svn.chkout-production-tree"></a>
 
 ##### Checking Out the Production NCBI C++ Toolkit Source Tree
 
@@ -182,6 +198,8 @@ where `20031212` is the date when this specific build was originated. You can ea
 
 This command will print directories under `production/`, which correspond to the production builds.
 
+<a name="ch-getcode-svn.svn-toolkit-tree-Quickly"></a>
+
 ##### **svn\_toolkit\_tree**: Quickly checking out the whole Toolkit source tree
 
 Usage:
@@ -195,6 +213,8 @@ Checking out the whole Toolkit source tree using a Subversion client can take 15
 -   The **svn\_toolkit\_tree** script will not accept the name of an existing directory.
 
 The archives that were available at the time of this writing (October 2014) were:
+
+<a name="ch-getcode-svn.T.nc-archivecorresponding"></a>
 
 | Archive                                                 | Corresponding C++ Toolkit tree                                                       |
 |---------------------------------------------------------|--------------------------------------------------------------------------------------|
@@ -214,6 +234,8 @@ For example, to retrieve the current TRUNK version of the "core" part of the C++
     $ ls cpp
     compilers  configure  doc  include  scripts  src
 
+<a name="ch-getcode-svn.core-sh"></a>
+
 ##### **svn\_core**: Retrieving core components
 
 Usage:
@@ -226,7 +248,9 @@ For usage help, run **svn\_core** without arguments.
 
 ***Note:*** **svn\_core** is not available on Windows.
 
-[Table 1](#table-1) describes the arguments of **svn\_core**. Only the target directory and SVN branch arguments are mandatory.
+[Table 1](#ch-getcode-svn.T1) describes the arguments of **svn\_core**. Only the target directory and SVN branch arguments are mandatory.
+
+<a name="ch-getcode-svn.T1"></a>
 
 Table 1. **svn\_core** Arguments
 
@@ -241,12 +265,14 @@ Table 1. **svn\_core** Arguments
 | `--without-ctools`   | Do not check out core projects responsible for working together with the NCBI C Toolkit (the `ctools` directory).                                                                                                                                                                             | n/a                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | `--with-gui`         | Check out core projects responsible for providing cross-platform graphic user interface capability (the `gui` directory). This option is effective by default unless `--without-gui` is used.                                                                                                 | n/a                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | `--without-gui`      | No not check out core projects responsible for providing cross-platform graphic user interface capability (the `gui` directory).                                                                                                                                                              | n/a                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `--with-internal`    | Check out a selection of NCBI-internal core projects. See [Table 4](#table-4) for a detailed list of affected directories.                                                                                                                                                                    | n/a                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `--with-internal`    | Check out a selection of NCBI-internal core projects. See [Table 4](#ch-getcode-svn.T4) for a detailed list of affected directories.                                                                                                                                                          | n/a                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | `--without-internal` | Do not check out NCBI-internal core projects.                                                                                                                                                                                                                                                 | n/a                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | `--with-objects`     | Check out the `objects`, `objmgr`, and `objtools` directories and generate serialization code from the ASN.1 specifications. If this flag is not present, those directories are still checked out (unless overridden by the `--without-objects` flag) but no serialization code is generated. | n/a                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | `--without-objects`  | Do not check out the `objects`, `objmgr`, and `objtools` directories or generate ASN.1 serialization code. (On Unix platforms the code generation can be done later, during the build.)                                                                                                       | n/a                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 
-Some directories are always checked out, regardless of command-line arguments. These are shown in [Table 2](#table-2). (All paths are relative to the repository path `https://svn.ncbi.nlm.nih.gov/repos/toolkit/trunk/c++`.)
+Some directories are always checked out, regardless of command-line arguments. These are shown in [Table 2](#ch-getcode-svn.T2). (All paths are relative to the repository path `https://svn.ncbi.nlm.nih.gov/repos/toolkit/trunk/c++`.)
+
+<a name="ch-getcode-svn.T2"></a>
 
 Table 2. List of the directories that are always checked out
 
@@ -274,7 +300,9 @@ Table 2. List of the directories that are always checked out
 | `(include\|src)/util`             | yes        |
 | `scripts`                         | yes        |
 
-Other directories may or may not be checked out, depending on the `<branch>` and `<platform>` options. These are shown in [Table 3](#table-3).
+Other directories may or may not be checked out, depending on the `<branch>` and `<platform>` options. These are shown in [Table 3](#ch-getcode-svn.T3).
+
+<a name="ch-getcode-svn.T3"></a>
 
 Table 3. Directories that may be checked out depending on branch and platform options
 
@@ -294,7 +322,9 @@ Table 3. Directories that may be checked out depending on branch and platform op
 | `src/connect/mitsock`     | yes        | `<platform>` = mac                   |
 | `src/dll`                 | yes        | `<platform>` = all or mac or msvc    |
 
-Still other directories may be checked out depending on the `--with/--without-<feature>` options. These are shown in [Table 4](#table-4).
+Still other directories may be checked out depending on the `--with/--without-<feature>` options. These are shown in [Table 4](#ch-getcode-svn.T4).
+
+<a name="ch-getcode-svn.T4"></a>
 
 Table 4. Directories that may be checked out depending on --with/--without options
 
@@ -330,6 +360,8 @@ Table 4. Directories that may be checked out depending on --with/--without optio
 | `(include\|src)/internal/txserver`               | yes        | `--with-internal`                           |
 | `(include\|src)/internal/txxmldoc`               | yes        | `--with-internal`                           |
 
+<a name="ch-getcode-svn.import-project-sh"></a>
+
 ##### **import\_project**: Retrieve Source for an Existing Project
 
 Usage:
@@ -349,6 +381,8 @@ For example:
 will check out the `datatool` project from the NCBI C++ tree (`trunk/c++/{src,include}/serial/datatool/`), and create a makefile `Makefile.datatool_app` that uses the project's customized makefile `Makefile.datatool.app`. Now you can just go to the created working directory `c++/src/serial/datatool/` and build the application **datatool** using:
 
     make -f Makefile.datatool_app
+
+<a name="ch-getcode-svn.update-coresh-Update"></a>
 
 ##### **update\_core**: Update the Portable and Core Components
 
@@ -376,6 +410,8 @@ The list `[<dirs>]`, when present, identifies the set of directories relative to
 
 Note that the default list is not pushed onto a user-supplied list of directories.
 
+<a name="ch-getcode-svn.update-projects-sh"></a>
+
 ##### **update\_projects**: Check out and update Source of Selected Projects
 
 Usage:
@@ -392,6 +428,8 @@ The projects to be retrieved (or updated) must be specified in the command line 
 
 The parameter to **update\_projects** indicates the target directory where the sources will be checked out to and where the project will be configured and built. This parameter is optional and is set to the current directory by default.
 
+<a name="ch-getcode-svn.windows"></a>
+
 ### Source Code Retrieval under MS Windows
 
 1  
@@ -403,13 +441,17 @@ Start your favorite command shell. Change current directory to the designated wo
 3  
 Modify source files as required. Refer to [Svnbook](http://svnbook.red-bean.com) for the documentation on particular Subversion commands. Monitor your changes using `svn diff`, synchronize your working copy with the trunk using `svn update`, and finally commit them using `svn commit`.
 
-The rest should be the same as when using Subversion under UNIX systems. See [Source Code Retrieval under Unix](#source-code-retrieval-under-unix).
+The rest should be the same as when using Subversion under UNIX systems. See [Source Code Retrieval under Unix](#ch-getcode-svn.unix).
+
+<a name="ch-getcode-svn.mac"></a>
 
 ### Source Code Retrieval under Mac OS X
 
 Download and install the latest Subversion binaries for MacOSX from [http://subversion.tigris.org/](http://subversion.tigris.org).
 
-The rest should be the same as when using Subversion under UNIX systems. See [Source Code Retrieval under Unix](#source-code-retrieval-under-unix).
+The rest should be the same as when using Subversion under UNIX systems. See [Source Code Retrieval under Unix](#ch-getcode-svn.unix).
+
+<a name="ch-getcode-svn.src-tree-struct"></a>
 
 Source Tree Structure Summary
 -----------------------------

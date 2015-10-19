@@ -27,81 +27,83 @@ This chapter discusses the setup procedures for starting a new project such as t
 
 The following is an outline of the topics presented in this chapter:
 
--   [Starting New Projects](#starting-new-projects)
+-   [Starting New Projects](#ch-proj.start-new-proj)
 
-    -   [New Projects: Location and File Structure](#new-projects-location-and-file-structure-)
+    -   [New Projects: Location and File Structure](#ch-proj.new-proj-struct)
 
-        -   [new\_project: Starting a New Project outside the C++ Toolkit Tree](#newproject-starting-a-new-project-outside-the-c++-toolkit-tree)
+        -   [new\_project: Starting a New Project outside the C++ Toolkit Tree](#ch-proj.new-project-Starting)
 
-        -   [Creating a New Project Inside the C++ Toolkit Tree](#creating-a-new-project-inside-the-c++-toolkit-tree)
+        -   [Creating a New Project Inside the C++ Toolkit Tree](#ch-proj.Creating-a-New-Proje)
 
-    -   [Projects and the Toolkit's SVN Tree Structure](#projects-and-the-toolkit's-svn-tree-structure)
+    -   [Projects and the Toolkit's SVN Tree Structure](#ch-proj.cvs-tree-struct)
 
-    -   [Creating source and include SVN dirs for a new C++ project](#creating-source-and-include-svn-dirs-for-a-new-c++-project)
+    -   [Creating source and include SVN dirs for a new C++ project](#ch-proj.src-include-dirs)
 
-    -   [Starting New Modules](#starting-new-modules-)
+    -   [Starting New Modules](#ch-proj.new-modules)
 
-    -   [Meta-makefiles (to provide multiple and/or recursive builds)](#meta-makefiles-to-provide-multiple-andor-recursive-builds)
+    -   [Meta-makefiles (to provide multiple and/or recursive builds)](#ch-proj.meta-makefiles)
 
-    -   [Project makefiles](#project-makefiles)
+    -   [Project makefiles](#ch-proj.proj-makefiles)
 
-        -   [Example 1: Customized makefile to build a library](#example-1-customized-makefile-to-build-a-library)
+        -   [Example 1: Customized makefile to build a library](#ch-proj.make-proj-lib)
 
-        -   [Example 2: Customized makefile to build an application](#example-2-customized-makefile-to-build-an-application)
+        -   [Example 2: Customized makefile to build an application](#ch-proj.make-proj-app)
 
-        -   [Example 3: User-defined makefile to build... whatever](#example-3-user-defined-makefile-to-build-whatever)
+        -   [Example 3: User-defined makefile to build... whatever](#ch-proj.usr-def-makefile)
 
-    -   [An example of the NCBI C++ makefile hierarchy ("corelib/")](#an-example-of-the-ncbi-c++-makefile-hierarchy-corelib)
+    -   [An example of the NCBI C++ makefile hierarchy ("corelib/")](#ch-proj.makefile-hierarchy)
 
--   [Managing the Work Environment](#managing-the-work-environment)
+-   [Managing the Work Environment](#ch-proj.work-env)
 
-    -   [Obtaining the Very Latest Builds](#obtaining-the-very-latest-builds)
+    -   [Obtaining the Very Latest Builds](#ch-proj.daily-builds)
 
-    -   [Working in a separate directory](#working-in-a-separate-directory)
+    -   [Working in a separate directory](#ch-proj.outside-tree)
 
-        -   [Setting up Directory Location](#setting-up-directory-location-)
+        -   [Setting up Directory Location](#ch-proj.outside-dir-loc)
 
-        -   [The Project's Makefile](#the-project's-makefile-)
+        -   [The Project's Makefile](#ch-proj.outside-tree-makefile)
 
-        -   [Testing your setup](#testing-your-setup-)
+        -   [Testing your setup](#ch-proj.outside-testing)
 
-    -   [Working Independently In a C++ Subtree](#working-independently-in-a-c++-subtree)
+    -   [Working Independently In a C++ Subtree](#ch-proj.work-sub-tree)
 
-    -   [Working within the C++ source tree](#working-within-the-c++-source-tree)
+    -   [Working within the C++ source tree](#ch-proj.inside-tree)
 
-        -   [Checkout the source tree and configure a build directory](#checkout-the-source-tree-and-configure-a-build-directory)
+        -   [Checkout the source tree and configure a build directory](#ch-proj.inside-checkout)
 
-        -   [The project's directories and makefiles](#the-project's-directories-and-makefiles)
+        -   [The project's directories and makefiles](#ch-proj.inside-makefiles)
 
-        -   [Makefile.in meta files](#makefilein-meta-files)
+        -   [Makefile.in meta files](#ch-proj.inside-make-meta)
 
-        -   [An example meta-makefile and its associated project makefiles](#an-example-meta-makefile-and-its-associated-project-makefiles)
+        -   [An example meta-makefile and its associated project makefiles](#ch-proj.inside-example)
 
-        -   [Executing make](#executing-make)
+        -   [Executing make](#ch-proj.inside-make-exec)
 
-        -   [Custom project makefile: Makefile.myProj](#custom-project-makefile-makefilemyproj)
+        -   [Custom project makefile: Makefile.myProj](#ch-proj.inside-cust-make)
 
-        -   [Library project makefile: Makefile.myProj.lib](#library-project-makefile-makefilemyprojlib)
+        -   [Library project makefile: Makefile.myProj.lib](#ch-proj.inside-lib-make)
 
-        -   [Application project makefile: Makefile.myProj.app](#application-project-makefile-makefilemyprojapp)
+        -   [Application project makefile: Makefile.myProj.app](#ch-proj.inside-app-make)
 
-        -   [Defining and running tests](#defining-and-running-tests)
+        -   [Defining and running tests](#ch-proj.inside-tests)
 
-        -   [The configure scripts](#the-configure-scripts)
+        -   [The configure scripts](#ch-proj.inside-config)
 
-    -   [Working with the serializable object classes](#working-with-the-serializable-object-classes)
+    -   [Working with the serializable object classes](#ch-proj.ser-object)
 
-        -   [Serializable Objects](#serializable-objects)
+        -   [Serializable Objects](#ch-proj.ser-objects-intro)
 
-        -   [Locating and browsing serializable objects in the C++ Toolkit](#locating-and-browsing-serializable-objects-in-the-c++-toolkit)
+        -   [Locating and browsing serializable objects in the C++ Toolkit](#ch-proj.locate-ser-objects)
 
-        -   [Base classes and user classes](#base-classes-and-user-classes)
+        -   [Base classes and user classes](#ch-proj.base-classes)
 
-        -   [Adding methods to the user classes](#adding-methods-to-the-user-classes)
+        -   [Adding methods to the user classes](#ch-proj.add-to-usr-classes)
 
-            -   [Checking out source code, configuring the working environment, building the libraries](#checking-out-source-code-configuring-the-working-environment-building-the-libraries).
+            -   [Checking out source code, configuring the working environment, building the libraries](#ch-proj.src-code-work-env).
 
-            -   [Adding methods](#adding-methods)
+            -   [Adding methods](#ch-proj.proj-add-methods)
+
+<a name="ch-proj.start-new-proj"></a>
 
 Starting New Projects
 ---------------------
@@ -110,39 +112,41 @@ The following assumes that you have all of the necessary Toolkit components. If 
 
 The following topics are discussed in this section:
 
--   [New Projects: Location and File Structure](#new-projects-location-and-file-structure)
+-   [New Projects: Location and File Structure](#ch-proj.new-proj-struct)
 
-    -   [new\_project: Starting a New Project outside the C++ Toolkit Tree](#newproject-starting-a-new-project-outside-the-c++-toolkit-tree)
+    -   [new\_project: Starting a New Project outside the C++ Toolkit Tree](#ch-proj.new-project-Starting)
 
-    -   [Creating a New Project Inside the C++ Toolkit Tree](#creating-a-new-project-inside-the-c++-toolkit-tree)
+    -   [Creating a New Project Inside the C++ Toolkit Tree](#ch-proj.Creating-a-New-Proje)
 
--   [Projects and the Toolkit's SVN Tree Structure](#projects-and-the-toolkit's-svn-tree-structure)
+-   [Projects and the Toolkit's SVN Tree Structure](#ch-proj.cvs-tree-struct)
 
--   [Creating source and include SVN dirs for a new C++ project](#creating-source-and-include-svn-dirs-for-a-new-c++-project)
+-   [Creating source and include SVN dirs for a new C++ project](#ch-proj.src-include-dirs)
 
--   [Starting New Modules](#starting-new-modules-)
+-   [Starting New Modules](#ch-proj.new-modules)
 
--   [Meta-makefiles (to provide multiple and/or recursive builds)](#meta-makefiles-to-provide-multiple-andor-recursive-builds)
+-   [Meta-makefiles (to provide multiple and/or recursive builds)](#ch-proj.meta-makefiles)
 
--   [Project makefiles](#project-makefiles)
+-   [Project makefiles](#ch-proj.proj-makefiles)
 
-    -   [Example 1: Customized makefile to build a library](#example-1-customized-makefile-to-build-a-library)
+    -   [Example 1: Customized makefile to build a library](#ch-proj.make-proj-lib)
 
-    -   [Example 2: Customized makefile to build an application](#example-2-customized-makefile-to-build-an-application)
+    -   [Example 2: Customized makefile to build an application](#ch-proj.make-proj-app)
 
-    -   [Example 3: User-defined makefile to build... whatever](#example-3-user-defined-makefile-to-build-whatever)
+    -   [Example 3: User-defined makefile to build... whatever](#ch-proj.usr-def-makefile)
 
--   [An example of the NCBI C++ makefile hierarchy ("corelib/")](#an-example-of-the-ncbi-c++-makefile-hierarchy-corelib)
+-   [An example of the NCBI C++ makefile hierarchy ("corelib/")](#ch-proj.makefile-hierarchy)
+
+<a name="ch-proj.new-proj-struct"></a>
 
 ### New Projects: Location and File Structure
 
 Before creating the new project, you must decide if you need to work within a C++ source tree (or subtree) or merely need to link with the Toolkit libraries and work in a separate directory. The later case is simpler and allows you to work independently in a private directory, but it is not an option if the Toolkit source, headers, or `makefiles` are to be directly used or altered during the new project's development.
 
--   [Work in the Full Toolkit Source Tree](#work-in-the-full-toolkit-source-tree)
+-   [Work in the Full Toolkit Source Tree](#ch-proj.inside-tree)
 
--   [Work in a Toolkit Subtree](#work-in-a-toolkit-subtree)
+-   [Work in a Toolkit Subtree](#ch-proj.work-sub-tree)
 
--   [Work in a Separate Directory](#work-in-a-separate-directory)
+-   [Work in a Separate Directory](#ch-proj.outside-tree)
 
 Regardless of where you build your new project, it must adopt and maintain a particular structure. Specifically, each project's [source tree](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src) relative to `$NCBI/c++` should contain:
 
@@ -150,7 +154,7 @@ Regardless of where you build your new project, it must adopt and maintain a par
 
 -   `src/*.{cpp, hpp}` -- project's source files and private headers
 
--   `src/Makefile.in` -- a [meta-makefile](#meta-makefile) template to specify which local projects (described in `Makefile.*.in`) and sub-projects (located in the project subdirectories) must be built
+-   `src/Makefile.in` -- a [meta-makefile](#ch-proj.meta-makefiles) template to specify which local projects (described in `Makefile.*.in`) and sub-projects (located in the project subdirectories) must be built
 
 -   `src/Makefile.<project_name>.{lib, app}[.in]` -- one or more `customized makefiles` to build a library or an application
 
@@ -160,9 +164,11 @@ Regardless of where you build your new project, it must adopt and maintain a par
 
 The following topics are discussed in this section:
 
--   [new\_project: Starting a New Project outside the C++ Toolkit Tree](#newproject-starting-a-new-project-outside-the-c++-toolkit-tree)
+-   [new\_project: Starting a New Project outside the C++ Toolkit Tree](#ch-proj.new-project-Starting)
 
--   [Creating a New Project Inside the C++ Toolkit Tree](#creating-a-new-project-inside-the-c++-toolkit-tree)
+-   [Creating a New Project Inside the C++ Toolkit Tree](#ch-proj.Creating-a-New-Proje)
+
+<a name="ch-proj.new-project-Starting"></a>
 
 #### **new\_project**: Starting a New Project outside the C++ Toolkit Tree
 
@@ -206,6 +212,8 @@ In many cases, you work on your own project which **is a part** of the NCBI C++ 
 
 ***Note for users inside NCBI:*** To be able to view debug information in the Toolkit libraries for Windows builds, you will need to have the `S:` drive mapped to `\\snowman\win-coremake\Lib`. By default, `new_project` will make this mapping for you if it's not already done.
 
+<a name="ch-proj.Creating-a-New-Proje"></a>
+
 #### Creating a New Project Inside the C++ Toolkit Tree
 
 To create your new project (e.g., "bar\_proj") directories in the NCBI C++ Toolkit source tree (assuming that the entire NCBI C++ Toolkit has been [checked out](ch_getcode_svn.html#ch_getcode_svn.chkout_complete_tree) to directory `foo/c++/`):
@@ -213,9 +221,11 @@ To create your new project (e.g., "bar\_proj") directories in the NCBI C++ Toolk
     cd foo/c++/include && mkdir bar_proj && svn add bar_proj
     cd foo/c++/src     && mkdir bar_proj && svn add bar_proj
 
-From there, you can now [add](#add) and edit your project C++ files.
+From there, you can now [add](#ch-proj.new-modules) and edit your project C++ files.
 
 NOTE: remember to add this new project directory to the **`$(SUB_PROJ)`** list of the upper level [meta-makefile](ch_build.html#ch_build.makefiles_meta) configurable template (e.g., for this particular case, to `foo/c++/src/Makefile.in`).
+
+<a name="ch-proj.cvs-tree-struct"></a>
 
 ### Projects and the Toolkit's SVN Tree Structure
 
@@ -247,7 +257,9 @@ The standard SVN location for NCBI C++/STL projects is `$SVNROOT/internal/c++/`.
 
     -   `Makefile.mk.in` -- included by all makefiles; sets a lot of configuration variables
 
--   The contents of each project are detailed [above](#above). If your project is to become part of the Toolkit tree, you need to ensure that all `makefiles` and `Makefile*.in` templates are available so the master `makefiles` can properly configure and build it (see "[Meta-Makefiles](#meta-makefiles)" and "[Project Makefiles"](#project-makefiles) below). You will also need to [prepare SVN directories](#prepare-svn-directories) to hold the new source and header files.
+-   The contents of each project are detailed [above](#ch-proj.new-proj-struct). If your project is to become part of the Toolkit tree, you need to ensure that all `makefiles` and `Makefile*.in` templates are available so the master `makefiles` can properly configure and build it (see "[Meta-Makefiles](#ch-proj.meta-makefiles)" and "[Project Makefiles"](#ch-proj.proj-makefiles) below). You will also need to [prepare SVN directories](#ch-proj.src-include-dirs) to hold the new source and header files.
+
+<a name="ch-proj.src-include-dirs"></a>
 
 ### Creating source and include SVN dirs for a new C++ project
 
@@ -256,13 +268,15 @@ To create your new project (e.g., "bar\_proj") directories in the NCBI C++ SVN t
     cd foo/c++/include && mkdir bar_proj && SVN add -m "Project Bar" bar_proj
     cd foo/c++/src     && mkdir bar_proj && SVN add -m "Project Bar" bar_proj
 
-Now you can [add](#add) and edit your project C++ files in there.
+Now you can [add](#ch-proj.new-modules) and edit your project C++ files in there.
 
-***NOTE:*** remember to add this new project directory to the **`$(SUB_PROJ)`** list of the upper level [meta-makefile](#meta-makefile) configurable template (e.g., for this particular case, to `foo/c++/src/Makefile.in`).
+***NOTE:*** remember to add this new project directory to the **`$(SUB_PROJ)`** list of the upper level [meta-makefile](#ch-proj.meta-makefiles) configurable template (e.g., for this particular case, to `foo/c++/src/Makefile.in`).
+
+<a name="ch-proj.new-modules"></a>
 
 ### Starting New Modules
 
-Projects in the NCBI C++ Toolkit consist of “modules”, which are most often a pair of source `(*.cpp`) and header (`*.hpp`) files. To help create new modules, template source and header files may be used, or you may modify the sample code generated by the script [new\_project](#newproject). The template source and header files are `.../doc/public/framewrk.cpp` and `.../doc/public/framewrk.hpp`. The template files contain a standard startup framework so that you can just cut-and-paste them to start a new module (just don't forget to replace the "framewrk" stubs by your new module name).
+Projects in the NCBI C++ Toolkit consist of “modules”, which are most often a pair of source `(*.cpp`) and header (`*.hpp`) files. To help create new modules, template source and header files may be used, or you may modify the sample code generated by the script [new\_project](#ch-proj.new-project-Starting). The template source and header files are `.../doc/public/framewrk.cpp` and `.../doc/public/framewrk.hpp`. The template files contain a standard startup framework so that you can just cut-and-paste them to start a new module (just don't forget to replace the "framewrk" stubs by your new module name).
 
 -   Header file (\*.hpp) -- API for the external users. Ideally, this file contains only (well-commented) declarations and inline function implementations for the public interface. No less, and no more.
 
@@ -271,6 +285,8 @@ Projects in the NCBI C++ Toolkit consist of “modules”, which are most often 
 On occasion, a second private header file is required for good encapsulation. Such second headers should be placed in the same directory as the module source file.
 
 Each and every source file **must** include the NCBI disclaimer and (preferably) Subversion keywords (e.g. $Id$). Then, the header file must be protected from double-inclusion, and it must define any inlined functions.
+
+<a name="ch-proj.meta-makefiles"></a>
 
 ### Meta-makefiles (to provide multiple and/or recursive builds)
 
@@ -288,21 +304,25 @@ All projects from the NCBI C++ hierarchy are tied together by a set of `meta-mak
 
 This template separately specifies instructions for user, library and application projects, along with a set of three sub-projects that can be made. The mandatory final two lines `"srcdir = @srcdir@ ; include @builddir@/Makefile.meta"` define the [standard build targets](ch_build.html#ch_build.std_build_targets).
 
+<a name="ch-proj.proj-makefiles"></a>
+
 ### Project makefiles
 
-Just like the configurable template `Makefile.meta.in` is used to ease and standardize the writing of [meta-makefiles](#meta-makefiles), so there are templates to help in the creation of "regular" project makefiles to build a library or an application. These auxiliary template makefiles are described on the "[Working with Makefiles](ch_build.html#ch_build.makefiles_hierarch)" page and listed [above](#above). The **configure**'d versions of these templates get put at the very top of a `build tree`.
+Just like the configurable template `Makefile.meta.in` is used to ease and standardize the writing of [meta-makefiles](#ch-proj.meta-makefiles), so there are templates to help in the creation of "regular" project makefiles to build a library or an application. These auxiliary template makefiles are described on the "[Working with Makefiles](ch_build.html#ch_build.makefiles_hierarch)" page and listed [above](#ch-proj.cvs-tree-struct). The **configure**'d versions of these templates get put at the very top of a `build tree`.
 
-In addition to the `meta-makefile` that must be defined for each project, a customized makefile `Makefile.<project_name>.[app\|lib]` must also be provided. The following three sections give examples of `customized makefiles` for a [library](#library) and an [application](#application), along with a case where a [user-defined](#user-defined) `makefile` is required.
+In addition to the `meta-makefile` that must be defined for each project, a customized makefile `Makefile.<project_name>.[app\|lib]` must also be provided. The following three sections give examples of `customized makefiles` for a [library](#ch-proj.make-proj-lib) and an [application](#ch-proj.make-proj-app), along with a case where a [user-defined](#ch-proj.usr-def-makefile) `makefile` is required.
 
 You have great latitude in specifying optional packages, features and projects in `makefiles`. The macro **`REQUIRES`** in the examples is one way to allows you access them. See the "`Working with Makefiles`" page for a [complete list](ch_build.html#ch_build.packages_opt); the configuration page gives the corresponding [configure options](ch_config.html#ch_config.ch_configprohibit_sy).
 
 The following examples are discussed in this section:
 
--   [Example 1: Customized makefile to build a library](#example-1-customized-makefile-to-build-a-library)
+-   [Example 1: Customized makefile to build a library](#ch-proj.make-proj-lib)
 
--   [Example 2: Customized makefile to build an application](#example-2-customized-makefile-to-build-an-application)
+-   [Example 2: Customized makefile to build an application](#ch-proj.make-proj-app)
 
--   [Example 3: User-defined makefile to build... whatever](#example-3-user-defined-makefile-to-build-whatever)
+-   [Example 3: User-defined makefile to build... whatever](#ch-proj.usr-def-makefile)
+
+<a name="ch-proj.make-proj-lib"></a>
 
 #### Example 1: Customized makefile to build a library
 
@@ -350,13 +370,15 @@ Here are the steps the build process follows:
 
 -   Copy `libxmylib.*` to the top-level `lib/` directory of the `build tree` (for the later use by other projects).
 
-This `customized makefile` should be referred to as `xmylib` in the **`LIB_PROJ`** macro of the relevant [meta-makefile](#meta-makefile). As usual, [Makefile.mk](ch_build.html#ch_build.build_make_macros) will be implicitly included.
+This `customized makefile` should be referred to as `xmylib` in the **`LIB_PROJ`** macro of the relevant [meta-makefile](#ch-proj.meta-makefiles). As usual, [Makefile.mk](ch_build.html#ch_build.build_make_macros) will be implicitly included.
 
 For information about run-time linking with shared libraries, see [this section](ch_config.html#ch_config.ch_configconfightml_).
 
+<a name="ch-proj.make-proj-app"></a>
+
 #### Example 2: Customized makefile to build an application
 
-Here is an example of a `customized makefile` to build the application **my\_exe** from three source files, `my_main.cpp`, `my_src1.cpp`, and `my_src2.c`. To make the example even more realistic, we assume that the said source files include headers from the NCBI SSS DB packages, and the target executable uses the NCBI C++ libraries [libxmylib.\*](#libxmylib*) and `libxncbi.*`, plus NCBI SSS DB, SYBASE, and system network libraries. We assume further that the user would prefer to link statically against libxmylib if building the toolkit as both shared and static libraries (`configure --with-dll --with-static ...`), but is fine with a shared libxncbi.
+Here is an example of a `customized makefile` to build the application **my\_exe** from three source files, `my_main.cpp`, `my_src1.cpp`, and `my_src2.c`. To make the example even more realistic, we assume that the said source files include headers from the NCBI SSS DB packages, and the target executable uses the NCBI C++ libraries [libxmylib.\*](#ch-proj.make-proj-lib) and `libxncbi.*`, plus NCBI SSS DB, SYBASE, and system network libraries. We assume further that the user would prefer to link statically against libxmylib if building the toolkit as both shared and static libraries (`configure --with-dll --with-static ...`), but is fine with a shared libxncbi.
 
     APP      = my_exe
     SRC      = my_main my_src1 my_src2
@@ -372,19 +394,21 @@ Here is an example of a `customized makefile` to build the application **my\_exe
 
 -   Compile `my_src2.c` using the C compiler **`$(CC)`** with the flags **`$(CFLAGS)`** (see Note below).
 
--   Using **`$(CXX)`** as a linker, build an executable **my\_exe** from the object files `my_main.o, my_src1.o, my_src2.o`, the precompiled object file `some_obj.o`, NCBI C++ Toolkit libraries [libxmylib.a](#libxmyliba) and `libxncbi.*`, and NCBI SSS DB, SYBASE, and system network libraries (see Note below).
+-   Using **`$(CXX)`** as a linker, build an executable **my\_exe** from the object files `my_main.o, my_src1.o, my_src2.o`, the precompiled object file `some_obj.o`, NCBI C++ Toolkit libraries [libxmylib.a](#ch-proj.make-proj-lib) and `libxncbi.*`, and NCBI SSS DB, SYBASE, and system network libraries (see Note below).
 
 -   Copy the application to the top-level `bin/` directory of the `build tree` (for later use by other projects).
 
 ***Note:*** Since we did not redefine **`CFLAGS`**, **`CXXFLAGS`**, or **`LDFLAGS`**, their default values **`ORIG_*FLAGS`** (obtained during the `build tree `[configuration](ch_config.html#ch_config.Configuration_and_In)) will be used.
 
-This `customized makefile` should be referred to as **my\_exe** in the **`APP_PROJ`** macro of the relevant [meta-makefile](#meta-makefile). Note also, that the [Makefile.mk](ch_build.html#ch_build.build_make_macros) will be implicitly included.
+This `customized makefile` should be referred to as **my\_exe** in the **`APP_PROJ`** macro of the relevant [meta-makefile](#ch-proj.meta-makefiles). Note also, that the [Makefile.mk](ch_build.html#ch_build.build_make_macros) will be implicitly included.
+
+<a name="ch-proj.usr-def-makefile"></a>
 
 #### Example 3: User-defined makefile to build... whatever
 
 In some cases, we may need more functionality than the `customized makefiles` (designed to build libraries and applications) can provide.
 
-So, if you have a "regular" non-customized `user makefile`, and you want to make from it, then you must enlist this `user makefile` in the **`USR_PROJ`** macro of the project's [meta-makefile](#meta-makefile).
+So, if you have a "regular" non-customized `user makefile`, and you want to make from it, then you must enlist this `user makefile` in the **`USR_PROJ`** macro of the project's [meta-makefile](#ch-proj.meta-makefiles).
 
 Now, during the project build (and before any `customized makefiles` are processed), your makefile will be called with one of the [standard make targets](ch_build.html#ch_build.build_make_proj_target) from the project's build directory. Additionally, the [builddir](ch_build.html#ch_build.T1) and [srcdir](ch_build.html#ch_build.T1) macros will be passed to your makefile (via the **make** command line).
 
@@ -436,6 +460,8 @@ And, of course, it provides build rules for all the [standard make targets](ch_b
         mv humchrom_dat.save.c humchrom_dat.c
         touch humchrom_dat.dep
 
+<a name="ch-proj.makefile-hierarchy"></a>
+
 ### An example of the NCBI C++ makefile hierarchy ("corelib/")
 
 See also the [source](ch_start.html#ch_start.F1) and [build](ch_start.html#ch_start.F2) hierarchy charts.
@@ -463,58 +489,62 @@ See also the [source](ch_start.html#ch_start.F1) and [build](ch_start.html#ch_st
     srcdir = @srcdir@
     include @builddir@/Makefile.meta
 
+<a name="ch-proj.work-env"></a>
+
 Managing the Work Environment
 -----------------------------
 
 The following topics are discussed in this section:
 
--   [Obtaining the Very Latest Builds](#obtaining-the-very-latest-builds)
+-   [Obtaining the Very Latest Builds](#ch-proj.daily-builds)
 
--   [Working in a separate directory](#working-in-a-separate-directory)
+-   [Working in a separate directory](#ch-proj.outside-tree)
 
-    -   [Setting up Directory Location](#setting-up-directory-location-)
+    -   [Setting up Directory Location](#ch-proj.outside-dir-loc)
 
-    -   [The Project's Makefile](#the-project's-makefile-)
+    -   [The Project's Makefile](#ch-proj.outside-tree-makefile)
 
-    -   [Testing your setup](#testing-your-setup-)
+    -   [Testing your setup](#ch-proj.outside-testing)
 
--   [Working Independently In a C++ Subtree](#working-independently-in-a-c++-subtree)
+-   [Working Independently In a C++ Subtree](#ch-proj.work-sub-tree)
 
--   [Working within the C++ source tree](#working-within-the-c++-source-tree)
+-   [Working within the C++ source tree](#ch-proj.inside-tree)
 
-    -   [Checkout the source tree and configure a build directory](#checkout-the-source-tree-and-configure-a-build-directory)
+    -   [Checkout the source tree and configure a build directory](#ch-proj.inside-checkout)
 
-    -   [The project's directories and makefiles](#the-project's-directories-and-makefiles)
+    -   [The project's directories and makefiles](#ch-proj.inside-makefiles)
 
-    -   [Makefile.in meta files](#makefilein-meta-files)
+    -   [Makefile.in meta files](#ch-proj.inside-make-meta)
 
-    -   [An example meta-makefile and its associated project makefiles](#an-example-meta-makefile-and-its-associated-project-makefiles)
+    -   [An example meta-makefile and its associated project makefiles](#ch-proj.inside-example)
 
-    -   [Executing make](#executing-make)
+    -   [Executing make](#ch-proj.inside-make-exec)
 
-    -   [Custom project makefile: Makefile.myProj](#custom-project-makefile-makefilemyproj)
+    -   [Custom project makefile: Makefile.myProj](#ch-proj.inside-cust-make)
 
-    -   [Library project makefile: Makefile.myProj.lib](#library-project-makefile-makefilemyprojlib)
+    -   [Library project makefile: Makefile.myProj.lib](#ch-proj.inside-lib-make)
 
-    -   [Application project makefile: Makefile.myProj.app](#application-project-makefile-makefilemyprojapp)
+    -   [Application project makefile: Makefile.myProj.app](#ch-proj.inside-app-make)
 
-    -   [Defining and running tests](#defining-and-running-tests)
+    -   [Defining and running tests](#ch-proj.inside-tests)
 
-    -   [The configure scripts](#the-configure-scripts)
+    -   [The configure scripts](#ch-proj.inside-config)
 
--   [Working with the serializable object classes](#working-with-the-serializable-object-classes)
+-   [Working with the serializable object classes](#ch-proj.ser-object)
 
-    -   [Serializable Objects](#serializable-objects)
+    -   [Serializable Objects](#ch-proj.ser-objects-intro)
 
-    -   [Locating and browsing serializable objects in the C++ Toolkit](#locating-and-browsing-serializable-objects-in-the-c++-toolkit)
+    -   [Locating and browsing serializable objects in the C++ Toolkit](#ch-proj.locate-ser-objects)
 
-    -   [Base classes and user classes](#base-classes-and-user-classes)
+    -   [Base classes and user classes](#ch-proj.base-classes)
 
-    -   [Adding methods to the user classes](#adding-methods-to-the-user-classes)
+    -   [Adding methods to the user classes](#ch-proj.add-to-usr-classes)
 
-        -   [Checking out source code, configuring the working environment, building the libraries.](#checking-out-source-code-configuring-the-working-environment-building-the-libraries)
+        -   [Checking out source code, configuring the working environment, building the libraries.](#ch-proj.src-code-work-env)
 
-        -   [Adding methods](#adding-methods)
+        -   [Adding methods](#ch-proj.proj-add-methods)
+
+<a name="ch-proj.daily-builds"></a>
 
 ### Obtaining the Very Latest Builds
 
@@ -540,15 +570,19 @@ There are defined symlinks into this directory tree. They include:
 
 -   `$NCBI/c++.trial` - This build is for NCBI developers to quickly check their planned stable component commits using [import\_project](ch_getcode_svn.html#ch_getcode_svn.import_project_sh). It is based on the repository path `toolkit/production/candidates/trial` – which is usually a codebase for the upcoming production build. It is available on 64-bit Linux.
 
+<a name="ch-proj.outside-tree"></a>
+
 ### Working in a separate directory
 
 The following topics are discussed in this section:
 
--   [Setting up Directory Location](#setting-up-directory-location-)
+-   [Setting up Directory Location](#ch-proj.outside-dir-loc)
 
--   [The Project's Makefile](#the-project's-makefile-)
+-   [The Project's Makefile](#ch-proj.outside-tree-makefile)
 
--   [Testing your setup](#testing-your-setup-)
+-   [Testing your setup](#ch-proj.outside-testing)
+
+<a name="ch-proj.outside-dir-loc"></a>
 
 #### Setting up Directory Location
 
@@ -558,7 +592,7 @@ There are two topics relevant to writing an application using the NCBI C++ Toolk
 
 -   How to create a makefile which can link to the correct C++ libraries
 
-What you put in your makefile will depend on where you define your working directory. In this discussion, we assume you will be working **outside** the NCBI C++ tree, say in a directory called `newproj`. This is where you will write both your source and header files. The first step then, is to create the new working directory and use the [new\_project](#newproject) script to install a makefile there:
+What you put in your makefile will depend on where you define your working directory. In this discussion, we assume you will be working **outside** the NCBI C++ tree, say in a directory called `newproj`. This is where you will write both your source and header files. The first step then, is to create the new working directory and use the [new\_project](#ch-proj.new-project-Starting) script to install a makefile there:
 
     mkdir newproj
     new_project newproj app $NCBI/c++/GCC-Debug/build
@@ -570,7 +604,9 @@ The syntax of the script command is:
 
 where: - `project_name` is the name of the directory you will be working in - `app (lib)` is used to indicate whether you will be building an application or a library - `builddir` (optional) specifies what version of the pre-built NCBI C++ Toolkit libraries to link to
 
-Several build environments have been pre-configured and are available for developing on various platforms using different compilers, in either **debug** or **release** mode. These environments include custom-made configuration files, makefile templates, and links to the appropriate pre-built C++ Toolkit libraries. To see a list of the available environments for the platform you are working on, use: `ls -d $NCBI/c++/*/build`. For example, on `Solaris`, the build directories currently available are shown in [Table 1](#table-1).
+Several build environments have been pre-configured and are available for developing on various platforms using different compilers, in either **debug** or **release** mode. These environments include custom-made configuration files, makefile templates, and links to the appropriate pre-built C++ Toolkit libraries. To see a list of the available environments for the platform you are working on, use: `ls -d $NCBI/c++/*/build`. For example, on `Solaris`, the build directories currently available are shown in [Table 1](#ch-proj.T1).
+
+<a name="ch-proj.T1"></a>
 
 Table 1. Build Directories
 
@@ -584,7 +620,9 @@ Table 1. Build Directories
 | `/netopt/ncbi_tools/c++/GCC-Debug/build `  | GCC          | Debug                       |
 | `/netopt/ncbi_tools/c++/GCC-Release/build` | GCC          | Release                     |
 
-In the example above, we specified the GNU compiler debug environment: `$NCBI/c++/GCC-Debug/build`. For a list of currently supported compilers, see the [release notes](https://ncbiconfluence.ncbi.nlm.nih.gov/display/CXX/Release+Notes#ReleaseNotes-release_notes.Platforms_OSs__compi). Running the **new\_project** script will generate a ready-to-use makefile in the directory you just created. For a more detailed description of this and other scripts to assist you in the set-up of your working environment, see [Starting a new C++ project](#starting-a-new-c++-project).
+In the example above, we specified the GNU compiler debug environment: `$NCBI/c++/GCC-Debug/build`. For a list of currently supported compilers, see the [release notes](https://ncbiconfluence.ncbi.nlm.nih.gov/display/CXX/Release+Notes#ReleaseNotes-release_notes.Platforms_OSs__compi). Running the **new\_project** script will generate a ready-to-use makefile in the directory you just created. For a more detailed description of this and other scripts to assist you in the set-up of your working environment, see [Starting a new C++ project](#ch-proj.start-new-proj).
+
+<a name="ch-proj.outside-tree-makefile"></a>
 
 #### The Project's Makefile
 
@@ -593,6 +631,8 @@ The file you just created with the above script will be called `Makefile.newproj
 `$(builddir)/lib` specifies the library path (-L), which in this case points to the GNU debug versions of the NCBI C++ Toolkit libraries. $(LIB) lists the individual libraries in this path that you will be linking to. Minimally, this should include `xncbi` - the library which implements the foundational classes for the C++ tools. Additional library names (e.g. `xhtml, xcgi, `etc.) can be added here.
 
 Since the shell script assumes you will be building a single executable with the same name as your working directory, the application is defined simply as **newproj**. Additional targets to build can be added in the area indicated towards the end of the file. The list of objects (OBJ) should include the names (without extensions) of all source files for the application (APP). Again, the script makes the simplest assumption, i.e. that there is a single source file named `newproj.cpp`. Additional source names can be added here.
+
+<a name="ch-proj.outside-testing"></a>
 
 #### Testing your setup
 
@@ -611,7 +651,9 @@ and running:
 
 Of course, it wasn't necessary to set up the directories and makefiles to accomplish this much, as this example does not use any of the C++ classes or resources defined in the NCBI C++ Toolkit. But having accomplished this, you are now prepared to write an actual application, such as described in [Writing a simple application project](ch_core.html#ch_core.writing_simple_app)
 
-Most real applications will at a minimum, require that you `#include `[ncbistd.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbistd.hpp) in your header file. In addition to defining some basic NCBI C++ Toolkit objects and templates, this header file in turn includes other header files that define the C Toolkit data types, NCBI namespaces, debugging macros, and exception classes. A set of [template](#template) files are also provided for your use in developing new applications.
+Most real applications will at a minimum, require that you `#include `[ncbistd.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbistd.hpp) in your header file. In addition to defining some basic NCBI C++ Toolkit objects and templates, this header file in turn includes other header files that define the C Toolkit data types, NCBI namespaces, debugging macros, and exception classes. A set of [template](#ch-proj.new-modules) files are also provided for your use in developing new applications.
+
+<a name="ch-proj.work-sub-tree"></a>
 
 ### Working Independently In a C++ Subtree
 
@@ -630,7 +672,7 @@ As a result of executing this shell script, you will have a new directory create
     ./[internal/]c++/include/subtree_name
     ./[internal/]c++/src/subtree_name
 
-The `src` and `include` directories will contain all of the requested subtree's source and header files along with any hierarchically defined subdirectories. In addition, the script will create new makefiles with the suffix *\*\_app*. These makefiles are generated from the original [customized makefiles](#customized-makefiles) (`Makefile.*.app`) located in the original `src` subtrees. The customized makefiles were designed to work only in conjunction with the build directories in the larger NCBI C++ tree; the newly created makefiles can be used directly in your new working directories.
+The `src` and `include` directories will contain all of the requested subtree's source and header files along with any hierarchically defined subdirectories. In addition, the script will create new makefiles with the suffix *\*\_app*. These makefiles are generated from the original [customized makefiles](#ch-proj.make-proj-app) (`Makefile.*.app`) located in the original `src` subtrees. The customized makefiles were designed to work only in conjunction with the build directories in the larger NCBI C++ tree; the newly created makefiles can be used directly in your new working directories.
 
 You can re-run **import\_project** to add multiple projects to your tree.
 
@@ -650,29 +692,31 @@ The NCBI C++ Toolkit project directories, along with the libraries they implemen
 
 Two project directories, `internal `and `objects`, may have some subdirectories for which the [import\_project](ch_getcode_svn.html#ch_getcode_svn.import_project_sh) script does not work normally, if at all. The `internal `subdirectories are used for in-house development, and the author of a given project may customize the project for their own needs in a way that is incompatible with [import\_project](ch_getcode_svn.html#ch_getcode_svn.import_project_sh). The `objects` subdirectories are used as the original repositories for ASN.1 specifications (which are available for use in your application as described in the section [Processing ASN.1 Data](ch_ser.html#ch_ser.asn.html)), and subsequently, for writing the object definitions and implementations created by the **datatool** program. Again, these projects can be altered in special ways and some may not be compatible with [import\_project](ch_getcode_svn.html#ch_getcode_svn.import_project_sh). Generally, however, [import\_project](ch_getcode_svn.html#ch_getcode_svn.import_project_sh) should work well with most of these projects.
 
+<a name="ch-proj.inside-tree"></a>
+
 ### Working within the C++ source tree
 
 The following topics are discussed in this section:
 
--   [Checkout the source tree and configure a build directory](#checkout-the-source-tree-and-configure-a-build-directory)
+-   [Checkout the source tree and configure a build directory](#ch-proj.inside-checkout)
 
--   [The project's directories and makefiles](#the-project's-directories-and-makefiles)
+-   [The project's directories and makefiles](#ch-proj.inside-makefiles)
 
--   [Makefile.in meta files](#makefilein-meta-files)
+-   [Makefile.in meta files](#ch-proj.inside-make-meta)
 
--   [An example meta-makefile and its associated project makefiles](#an-example-meta-makefile-and-its-associated-project-makefiles)
+-   [An example meta-makefile and its associated project makefiles](#ch-proj.inside-example)
 
--   [Executing make](#executing-make)
+-   [Executing make](#ch-proj.inside-make-exec)
 
--   [Custom project makefile: Makefile.myProj](#custom-project-makefile-makefilemyproj)
+-   [Custom project makefile: Makefile.myProj](#ch-proj.inside-cust-make)
 
--   [Library project makefile: Makefile.myProj.lib](#library-project-makefile-makefilemyprojlib)
+-   [Library project makefile: Makefile.myProj.lib](#ch-proj.inside-lib-make)
 
--   [Application project makefile: Makefile.myProj.app](#application-project-makefile-makefilemyprojapp)
+-   [Application project makefile: Makefile.myProj.app](#ch-proj.inside-app-make)
 
--   [Defining and running tests](#defining-and-running-tests)
+-   [Defining and running tests](#ch-proj.inside-tests)
 
--   [The configure scripts](#the-configure-scripts)
+-   [The configure scripts](#ch-proj.inside-config)
 
 Most users will find that working in a `checked-out` subtree or a private directory is preferable to working directly in the C++ source tree. There are two good reasons to avoid doing so:
 
@@ -681,6 +725,8 @@ Most users will find that working in a `checked-out` subtree or a private direct
 -   There is no guarantee that the library utilities your private code links to have not become obsolete.
 
 This section is provided for those developers who must work within the source tree. The [Library Reference](part3.html) provides more complete and technical discussion of the topics reviewed here, and many links to the relevant sections are provided. This page is provided as an overview of material presented in the Library Reference and on the [Working with Makefiles](ch_build.html) pages.
+
+<a name="ch-proj.inside-checkout"></a>
 
 #### Checkout ([\*](ch_getcode_svn.html#ch_getcode_svn.source_tree)) the source tree and configure a build directory
 
@@ -704,6 +750,8 @@ The [configure script](ch_config.html#ch_config.Configuration_and_In) is a multi
 
 The **configure** script concludes with a message describing how to build the C++ Toolkit libraries. If your application will be working with ASN.1 data, use the `--with-objects` flag in running the **configure** script, so as to populate the `include/objects` and `src/objects` subdirectories and build the `objects` libraries. The `objects` directories and libraries can also be updated separately from the rest of the compilation, by executing **make** inside the `build/objects` directory. Prior to doing so however, you should always verify that your `build/bin` directory contains the latest version of **datatool**.
 
+<a name="ch-proj.inside-makefiles"></a>
+
 #### The project's directories and makefiles
 
 To start a new project ("`myProj`"), you should begin by creating both a `src` and an `include` subtree for that project inside the C++ tree. In general, all header files that will be accessed by multiple source modules outside the project directory should be placed in the `include` directory. Header files that will be used solely inside the project's `src` directory should be placed in the `src` directory, along with the implementation files.
@@ -712,25 +760,31 @@ In addition to the C++ source files, the `src` subtrees contain `meta-makefiles`
 
 During the configuration process, each of the `meta-makefiles` in the top-level of the `src` tree is translated into a corresponding makefile in the top-level of the `build` tree. Then, for each project directory containing a `Makefile.in`, the **configure** script will: (1) create a corresponding subdirectory of the same name in the `build` tree if it does not already exist, and (2) generate a corresponding makefile in the project's `build` subdirectory. The contents of the project's `Makefile.in` in the `src` subdirectory determine what is written to the project's makefile in the `build` subdirectory. Project subdirectories that do not contain a `Makefile.in` file are ignored by the **configure** script.
 
-Thus, you will also need to create a `meta-makefile` in the newly created `src/myProj` directory before configuring your `build` directory to include the new project. The **configure** script will then create the corresponding subtree in the `build` directory, along with a new makefile generated from the `Makefile.in` you created. See Makefile Hierarchy (Chapter 4, [Figure 1](ch_build.html#ch_build.F1)) and [Figure 1](#figure-1).
+Thus, you will also need to create a `meta-makefile` in the newly created `src/myProj` directory before configuring your `build` directory to include the new project. The **configure** script will then create the corresponding subtree in the `build` directory, along with a new makefile generated from the `Makefile.in` you created. See Makefile Hierarchy (Chapter 4, [Figure 1](ch_build.html#ch_build.F1)) and [Figure 1](#ch-proj.F1).
+
+<a name="ch-proj.F1"></a>
 
 [![Figure 1. Meta makefiles and the makefiles they generate](/book/static/img/cpptree.jpg)](/book/static/img/cpptree.jpg "Click to see the full-resolution image")
 
 Figure 1. Meta makefiles and the makefiles they generate
 
+<a name="ch-proj.inside-make-meta"></a>
+
 #### Makefile.in meta files
 
 The meta-makefile `myProj/Makefile.in` should define at least one of the following macros:
 
--   **`USR_PROJ`** (optional) - a list of names for user-defined makefiles.<br/>This macro is provided for the usage of ordinary stand-alone makefiles which do not utilize the **make** commands contained in additional makefiles in the top-level `build` directory. Each `p_i` listed in `USR_PROJ = p_1 ... p_N` must have a corresponding [Makefile.p\_i](#makefilepi) in the project's source directory. When **make** is executed, the **make** directives contained in these files will be executed directly to build the targets as specified.
+-   **`USR_PROJ`** (optional) - a list of names for user-defined makefiles.<br/>This macro is provided for the usage of ordinary stand-alone makefiles which do not utilize the **make** commands contained in additional makefiles in the top-level `build` directory. Each `p_i` listed in `USR_PROJ = p_1 ... p_N` must have a corresponding [Makefile.p\_i](#ch-proj.inside-cust-make) in the project's source directory. When **make** is executed, the **make** directives contained in these files will be executed directly to build the targets as specified.
 
--   **`LIB_PROJ`** (optional) - a list of names for library makefiles.<br/>For each library `l_i` listed in `LIB_PROJ = l_1 ... l_N`, you must have created a corresponding project makefile named [Makefile.l\_i.lib](#makefilelilib) in the project's source directory. When **make** is executed, these library project makefiles will be used along with `Makefile.lib` and `Makefile.lib.tmpl` (located in the top-level of the `build` tree) to build the specified libraries.
+-   **`LIB_PROJ`** (optional) - a list of names for library makefiles.<br/>For each library `l_i` listed in `LIB_PROJ = l_1 ... l_N`, you must have created a corresponding project makefile named [Makefile.l\_i.lib](#ch-proj.inside-lib-make) in the project's source directory. When **make** is executed, these library project makefiles will be used along with `Makefile.lib` and `Makefile.lib.tmpl` (located in the top-level of the `build` tree) to build the specified libraries.
 
--   **`APP_PROJ`** (optional) - a list of names for application makefiles.<br/>Similarly, each application (`p1, p2, ..., pN`) listed under **`APP_PROJ`** must have a corresponding project makefile named [Makefile.p\*.app](#makefilep*app) in the project's source directory. When **make** is executed, these application project makefiles will be used along with `Makefile.app` and `Makefile.app.tmpl` to build the specified executables.
+-   **`APP_PROJ`** (optional) - a list of names for application makefiles.<br/>Similarly, each application (`p1, p2, ..., pN`) listed under **`APP_PROJ`** must have a corresponding project makefile named [Makefile.p\*.app](#ch-proj.inside-app-make) in the project's source directory. When **make** is executed, these application project makefiles will be used along with `Makefile.app` and `Makefile.app.tmpl` to build the specified executables.
 
 -   **`SUB_PROJ`** (optional) - a list of names for subproject directories (used on recursive makes).<br/>The **`SUB_PROJ`** macro is used to recursively define **make** targets; items listed here define the subdirectories rooted in the project's source directory where **make** should also be executed.
 
 The `Makefile.in` meta file in the project's source directory defines a kind of road map that will be used by the **configure** script to generate a makefile (`Makefile`) in the corresponding directory of the `build` tree. `Makefile.in` does *not* participate in the actual execution of **make**, but rather, defines what will happen at that time by directing the **configure** script in the creation of the `Makefile` that **will** be executed (see also the description of [Makefile targets](ch_build.html#ch_build.std_build_targets)).
+
+<a name="ch-proj.inside-example"></a>
 
 #### An example meta-makefile and its associated project makefiles
 
@@ -770,27 +824,31 @@ There may be any number of application or library makefiles for the project, Eac
     OBJ = myProj
     LIB = xncbi
 
-In this simple example, the **`APP_PROJ`** definition in `Makefile.in` is identical to the definitions of both **`APP`** and **`OBJ`** in `Makefile.myProj.app`. This is not always the case, however, as the **`APP_PROJ`** macro is used to define which makefiles in the `src` directory should be used during compilation, while **`APP`** defines the name of the resulting executable and **`OBJ`** specifies the names of object files. (Project makefiles for applications are described in more detail [below](#below).)
+In this simple example, the **`APP_PROJ`** definition in `Makefile.in` is identical to the definitions of both **`APP`** and **`OBJ`** in `Makefile.myProj.app`. This is not always the case, however, as the **`APP_PROJ`** macro is used to define which makefiles in the `src` directory should be used during compilation, while **`APP`** defines the name of the resulting executable and **`OBJ`** specifies the names of object files. (Project makefiles for applications are described in more detail [below](#ch-proj.inside-app-make).)
+
+<a name="ch-proj.inside-make-exec"></a>
 
 #### Executing make
 
 Given these makefile definitions, executing `make all_r` in the `build` project subdirectory indirectly causes `build/Makefile.meta` to be executed, which sets the following chain of events in motion:
 
 1  
-For each `proj_name` listed in [USR\_PROJ](#usrproj), `Makefile.meta` first tests to see if `Makefile.proj_name` is available in the current `build` directory, and if so, executes:<br/><br/>`make -f Makefile.proj_name builddir="$(builddir)"`<br/>`srcdir="$(srcdir)" $(MFLAGS)`<br/><br/>Otherwise, `Makefile.meta` assumes the required makefile is in the project's source directory, and executes:<br/><br/>`make -f $(srcdir)/Makefile.proj_name builddir="$(builddir)" srcdir="$(srcdir)" $(MFLAGS)`<br/><br/>In either case, the important thing to note here is that the commands contained in the project's makefiles are executed directly and are **not** combined with additional makefiles in the top-level `build` directory. The aliased **`srcdir`**, **`builddir`**, and **`MFLAGS`** are still available and can be referred to inside `Makefile.proj_name`. By default, the resulting libraries and executables are written to the `build` directory only.<br/>
+For each `proj_name` listed in [USR\_PROJ](#ch-proj.inside-make-meta), `Makefile.meta` first tests to see if `Makefile.proj_name` is available in the current `build` directory, and if so, executes:<br/><br/>`make -f Makefile.proj_name builddir="$(builddir)"`<br/>`srcdir="$(srcdir)" $(MFLAGS)`<br/><br/>Otherwise, `Makefile.meta` assumes the required makefile is in the project's source directory, and executes:<br/><br/>`make -f $(srcdir)/Makefile.proj_name builddir="$(builddir)" srcdir="$(srcdir)" $(MFLAGS)`<br/><br/>In either case, the important thing to note here is that the commands contained in the project's makefiles are executed directly and are **not** combined with additional makefiles in the top-level `build` directory. The aliased **`srcdir`**, **`builddir`**, and **`MFLAGS`** are still available and can be referred to inside `Makefile.proj_name`. By default, the resulting libraries and executables are written to the `build` directory only.<br/>
 
 2  
-For each `lib_name` listed in [LIB\_PROJ](#libproj),<br/><br/>`make -f $(builddir)/Makefile.lib.tmpl`<br/><br/>is executed. This in turn specifies that `$(builddir)/Makefile.mk`, `$(srcdir)/Makefile.lib_name.lib`, and `$(builddir)/Makefile.lib` should be included in the generated makefile commands that actually get executed. The resulting libraries are written to the `build` subdirectory and copied to the `lib` subtree.
+For each `lib_name` listed in [LIB\_PROJ](#ch-proj.inside-make-meta),<br/><br/>`make -f $(builddir)/Makefile.lib.tmpl`<br/><br/>is executed. This in turn specifies that `$(builddir)/Makefile.mk`, `$(srcdir)/Makefile.lib_name.lib`, and `$(builddir)/Makefile.lib` should be included in the generated makefile commands that actually get executed. The resulting libraries are written to the `build` subdirectory and copied to the `lib` subtree.
 
 3  
-For each **app\_name** listed in [APP\_PROJ](#appproj),<br/><br/>`make -f $(builddir)/Makefile.app.tmpl`<br/><br/>is executed. This in turn specifies that `$(builddir)/Makefile.mk`, `$(srcdir)/Makefile.app_name.app`, and `$(builddir)/Makefile.app` should be included in the generated makefile commands that actually get executed. The resulting executables are written to the `build` subdirectory and copied to the `bin` subtree.
+For each **app\_name** listed in [APP\_PROJ](#ch-proj.inside-make-meta),<br/><br/>`make -f $(builddir)/Makefile.app.tmpl`<br/><br/>is executed. This in turn specifies that `$(builddir)/Makefile.mk`, `$(srcdir)/Makefile.app_name.app`, and `$(builddir)/Makefile.app` should be included in the generated makefile commands that actually get executed. The resulting executables are written to the `build` subdirectory and copied to the `bin` subtree.
 
 4  
-For each `dir_name` listed in [SUB\_PROJ](#subproj) (on `make all_r`),<br/><br/>`cd dir_name`<br/>`make all_r`<br/><br/>is executed. Steps (1) - (3) are then repeated in the project subdirectory.
+For each `dir_name` listed in [SUB\_PROJ](#ch-proj.inside-make-meta) (on `make all_r`),<br/><br/>`cd dir_name`<br/>`make all_r`<br/><br/>is executed. Steps (1) - (3) are then repeated in the project subdirectory.
 
 More generally, for each subdirectory listed in **`SUB_PROJ`**, the **configure** script will create a relative subdirectory inside the new `build` project directory, and generate the new subdirectory's `Makefile` from the corresponding meta-makefile in the `src` subtree. Note that each subproject directory must also contain its own `Makefile.in` along with the corresponding project makefiles. The recursive make commands, `make all_r, make clean_r`, and `make purge_r` all refer to this definition of the subprojects to define what targets should be recursively built or removed.
 
-#### Custom project makefile: Makefile.myProj ([\*](#*))
+<a name="ch-proj.inside-cust-make"></a>
+
+#### Custom project makefile: Makefile.myProj ([\*](#ch-proj.usr-def-makefile))
 
 As described, regular makefiles contained in the project's `src` directory will be invoked from the `build` directory if their suffixes are specified in the **`USR_PROJ`** macro. This macro is originally defined in the project's `src` directory in the `Makefile.in` meta file, and is propagated to the corresponding `Makefile` in the `build` directory by the **configure** script.
 
@@ -819,7 +877,9 @@ so both the project makefile **and** the source files are non-local. For example
 
 will cause the C program `myProj` to be built directly from `Makefile.myProj` using the default C compiler, library paths, include paths, and compilation flags defined in `ncbi.mk`. The executables and libraries generated from the targets specified in **`USR_PROJ`** are by default written to the current `build` directory only. In this example however, they are also explicitly copied to the `bin` directory, and accordingly, the `purge` directives also remove the copied executable.
 
-#### Library project makefile: Makefile.myProj.lib ([\*](#*))
+<a name="ch-proj.inside-lib-make"></a>
+
+#### Library project makefile: Makefile.myProj.lib ([\*](#ch-proj.make-proj-lib))
 
 `Makefile.lib_name.lib` should contain the following macro definitions:
 
@@ -838,9 +898,11 @@ In addition, any of the make variables defined in `build/Makefile.mk`, such as *
 
 For an example from the Toolkit, see [Makefile.corelib.lib](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib/Makefile.corelib.lib).
 
-For a more detailed example, including information about shared libraries, see [example 1 above](#example-1-above).
+For a more detailed example, including information about shared libraries, see [example 1 above](#ch-proj.make-proj-lib).
 
-#### Application project makefile: Makefile.myProj.app ([\*](#*))
+<a name="ch-proj.inside-app-make"></a>
+
+#### Application project makefile: Makefile.myProj.app ([\*](#ch-proj.make-proj-app))
 
 `Makefile.app_name.app` should contain the following macro definitions:
 
@@ -858,7 +920,9 @@ For example, if C Toolkit libraries should also be included in the linking, use:
 
     LIBS = $(NCBI_C_LIBPATH) -lncbi $(ORIG_LIBS)
 
-The project's application makefile can also redefine the compiler and linker, along with other flags and tools affecting the build process, as described above for `Makefile.*.lib` files. For an example from the Toolkit, see [Makefile.coretest.app](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib/test/Makefile.coretest.app), and for a documented example, see [example 2 above](#example-2-above).
+The project's application makefile can also redefine the compiler and linker, along with other flags and tools affecting the build process, as described above for `Makefile.*.lib` files. For an example from the Toolkit, see [Makefile.coretest.app](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib/test/Makefile.coretest.app), and for a documented example, see [example 2 above](#ch-proj.make-proj-app).
+
+<a name="ch-proj.inside-tests"></a>
 
 #### Defining and running tests
 
@@ -906,6 +970,8 @@ If you'd like to get nightly test results automatically emailed to you, add your
 
 For information about using Boost for unit testing, see the "[Boost Unit Test Framework](ch_boost.html)" chapter.
 
+<a name="ch-proj.inside-config"></a>
+
 #### The configure scripts
 
 A number of [compiler-specific wrappers](ch_config.html#ch_config.Special_Consideratio) for different platforms are described in the chapter on [configuring and building](ch_config.html). Each of these wrappers performs some pre-initialization for the tools and flags used in the **configure** script before running it. The compiler-specific wrappers are in the [c++/compilers](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/compilers) directory. The **configure** script serves two very different types of function: (1) it tests the selected compiler and environment for a multitude of features and generates `#include` and `#define` statements accordingly, and (2) it reads the `Makefile.in` files in the `src` directories and creates the corresponding `build` subtrees and makefiles accordingly.
@@ -914,21 +980,25 @@ Frequently during development it is necessary to make minor adjustments to the `
 
 In contrast, changes to the `src` directory structure, or the addition/deletion of `Makefile.in` files, all require re-running the **configure** script, as these actions require the creation/deletion of subdirectories in the `build` tree and/or the creation/deletion of the associated `Makefile` in those directories.
 
+<a name="ch-proj.ser-object"></a>
+
 ### Working with the serializable object classes
 
 The following topics are discussed in this section:
 
--   [Serializable Objects](#serializable-objects)
+-   [Serializable Objects](#ch-proj.ser-objects-intro)
 
--   [Locating and browsing serializable objects in the C++ Toolkit](#locating-and-browsing-serializable-objects-in-the-c++-toolkit)
+-   [Locating and browsing serializable objects in the C++ Toolkit](#ch-proj.locate-ser-objects)
 
--   [Base classes and user classes](#base-classes-and-user-classes)
+-   [Base classes and user classes](#ch-proj.base-classes)
 
--   [Adding methods to the user classes](#adding-methods-to-the-user-classes)
+-   [Adding methods to the user classes](#ch-proj.add-to-usr-classes)
 
-    -   [Checking out source code, configuring the working environment, building the libraries](#checking-out-source-code-configuring-the-working-environment-building-the-libraries)
+    -   [Checking out source code, configuring the working environment, building the libraries](#ch-proj.src-code-work-env)
 
-    -   [Adding methods](#adding-methods)
+    -   [Adding methods](#ch-proj.proj-add-methods)
+
+<a name="ch-proj.ser-objects-intro"></a>
 
 #### Serializable Objects
 
@@ -938,11 +1008,13 @@ The implementation of these classes as serializable objects has a number of impl
 
 The type information for each class is defined in a separate static [CTypeInfo](ch_ser.html#ch_ser.typeinfo.html_ctypeinfo_ref) object, which can be accessed by all instances of that class. This is a very powerful device, which allows for the implementation of many features generally found only in languages which have built-in class reflection. Using the Toolkit's serializable objects will require some familiarity with the usage of this type information, and several sections of this manual cover these topics (see [Runtime Object Type Information](ch_ser.html#ch_ser.typeinfo.html) for a general discussion).
 
+<a name="ch-proj.locate-ser-objects"></a>
+
 #### Locating and browsing serializable objects in the C++ Toolkit
 
 The top level of the [include/objects](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects) subtree is a set of subdirectories, where each subdirectory includes the public header files for a separately compiled library. Similarly, the [src/objects](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects) subtree includes a set of subtrees containing the source files for these libraries. Finally, your `build/objects` directory will contain a corresponding set of build subtrees where these libraries are actually built.
 
-If you checked out the entire C++ SVN tree, you may be surprised to find that initially, the `include/objects` subtrees are empty, and the subdirectories in the `src/objects` subtree contain only ASN.1 modules. This is because both the header files and source files are auto-generated from the ASN.1 specifications by the [datatool](ch_app.html#ch_app.datatool) program. As described in [Working within the C++ source tree](#working-within-the-c++-source-tree), you can build everything by running `make all_r` in the build directory.
+If you checked out the entire C++ SVN tree, you may be surprised to find that initially, the `include/objects` subtrees are empty, and the subdirectories in the `src/objects` subtree contain only ASN.1 modules. This is because both the header files and source files are auto-generated from the ASN.1 specifications by the [datatool](ch_app.html#ch_app.datatool) program. As described in [Working within the C++ source tree](#ch-proj.inside-tree), you can build everything by running `make all_r` in the build directory.
 
 ***Note:*** If you would like to have the `objects` libraries built locally, you **must** use the `--with-objects` flag when running the **configure** script.
 
@@ -954,6 +1026,8 @@ You can also access the pre-generated serializable objects in the public area, u
 
 For example, `Seq-descr `becomes ***CSeq\_descr***.
 
+<a name="ch-proj.base-classes"></a>
+
 #### Base classes and user classes
 
 The classes whose names are derived in this manner are called the `user classes`, and each also has a corresponding `base class `implementation. The name of the `base class` is arrived at by appending `"_Base"` to the `user class` name. Most of the `user classes `are empty wrapper classes that do not bring any new functionality or data members to the inherited `base class`; they are simply provided as a platform for development. In contrast, the `base classes` are **not** intended for public use (other than browsing), and should never be modified.
@@ -962,7 +1036,9 @@ More generally, the `base classes` should *never* be instantiated or accessed di
 
 Many applications will involve a "tangled hierarchy" of these objects, reflecting the complexity of the real world data that they represent. For example, a ***CBioseq\_set*** contains a list of ***CSeq\_entry*** objects, where each ***CSeq\_entry*** is, in turn, a [choice](ch_ser.html#ch_ser.choice.html) between a ***CBioseq*** and a ***CBioseq\_set***.
 
-Given the potential for this complexity of interactions, a critical design issue becomes how one can ensure that methods which may have been defined only in the `user class` will be available for all instances of that class. In particular, these instances may occur as contained elements of another object which is compiled in a different library. These inter-object dependencies are the motivation for the `user classes`. As shown in [Figure 2](#figure-2), all references to external objects which occur inside the `base classes`, access external `user classes`, so as to include any methods which may be defined only in the `user classes`:
+Given the potential for this complexity of interactions, a critical design issue becomes how one can ensure that methods which may have been defined only in the `user class` will be available for all instances of that class. In particular, these instances may occur as contained elements of another object which is compiled in a different library. These inter-object dependencies are the motivation for the `user classes`. As shown in [Figure 2](#ch-proj.F2), all references to external objects which occur inside the `base classes`, access external `user classes`, so as to include any methods which may be defined only in the `user classes`:
+
+<a name="ch-proj.F2"></a>
 
 [![Figure 2. Example of complex relationships between base classes and user classes](/book/static/img/user_base.gif)](/book/static/img/user_base.gif "Click to see the full-resolution image")
 
@@ -970,15 +1046,19 @@ Figure 2. Example of complex relationships between base classes and user classes
 
 In most cases, adding non-virtual methods to a `user class` will **not** require re-compiling any libraries except the one which defines the modified object. Note however, that adding non-static data members and/or `virtual` methods to the `user classes `**will change** the class layouts, and in these cases only, will entail recompiling any external library objects which access these classes.
 
+<a name="ch-proj.add-to-usr-classes"></a>
+
 #### Adding methods to the user classes
 
 ***Note:*** This section describes the steps currently required to add new methods to the `user classes`. It is subject to change, and there is no guarantee the material here is up-to-date. In general, it is not recommended practice to add methods to the `user classes`, unless your purpose is to extend these classes across all applications as part of a development effort.
 
 The following topics are discussed in this section:
 
--   [Checking out source code, configuring the working environment, building the libraries.](#checking-out-source-code-configuring-the-working-environment-building-the-libraries)
+-   [Checking out source code, configuring the working environment, building the libraries.](#ch-proj.src-code-work-env)
 
--   [Adding methods](#adding-methods)
+-   [Adding methods](#ch-proj.proj-add-methods)
+
+<a name="ch-proj.src-code-work-env"></a>
 
 ##### Checking out source code, configuring the working environment, building the libraries
 
@@ -1006,6 +1086,8 @@ The following topics are discussed in this section:
 <br/>Here **`path_to_compile_dir`** is set to the compile work directory which depends on the compiler settings (e.g: `~/Work/internal/GCC-Debug`). In addition to creating the header and source files, using `make all_r `(instead of just **make**) will build all the libraries. All libraries that are built are also copied to the `lib` dir, e.g.:`~/Work/internal/c++/GCC-Debug/lib`. Similarly, all executables (such as **asn2asn**) are copied to the bin dir, e.g.: `~/Work/internal/c++/GCC-Debug/bin`.
 
 You are now ready to edit the user class files and add methods.
+
+<a name="ch-proj.proj-add-methods"></a>
 
 ##### Adding methods
 

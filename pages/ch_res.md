@@ -13,6 +13,8 @@ Last Update: February 3, 2014.
 Overview
 --------
 
+<a name="ch-res.intro"></a>
+
 For certain tasks in the C++ Toolkit environment, it is necessary to use, or at least refer to, material from the NCBI C Toolkit. Here are some links relevant to the C Toolkit:
 
 -   [C Toolkit Documentation](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/INDEX.HTML)
@@ -23,82 +25,90 @@ For certain tasks in the C++ Toolkit environment, it is necessary to use, or at 
 
 The following is an outline of the topics presented in this chapter:
 
--   [Using NCBI C and C++ Toolkits together](#using-ncbi-c-and-c++-toolkits-together)
+-   [Using NCBI C and C++ Toolkits together](#ch-res.c-cxx.html)
 
-    -   [Overview](#overview)
+    -   [Overview](#ch-res.c-cxx.html-ref-Overview)
 
-    -   [Shared Sources](#shared-sources)
+    -   [Shared Sources](#ch-res.c-cxx.html-ref-SharedSources)
 
-        -   [CONNECT Library](#connect-library)
+        -   [CONNECT Library](#ch-res.c-cxx.html-ref-ConnectLib)
 
-        -   [ASN.1 Specifications](#asn1-specifications)
+        -   [ASN.1 Specifications](#ch-res.c-cxx.html-ref-ASN)
 
-    -   [Run-Time Resources](#run-time-resources)
+    -   [Run-Time Resources](#ch-res.c-cxx.html-ref-RunTimeResources)
 
-        -   [LOG and CNcbiDiag](#log-and-cncbidiag)
+        -   [LOG and CNcbiDiag](#ch-res.c-cxx.html-ref-LOG)
 
-        -   [REG and CNcbiRegistry](#reg-and-cncbiregistry)
+        -   [REG and CNcbiRegistry](#ch-res.c-cxx.html-ref-REG)
 
-        -   [MT\_LOCK and CRWLock](#mtlock-and-crwlock)
+        -   [MT\_LOCK and CRWLock](#ch-res.c-cxx.html-ref-LOCK)
 
-        -   [CONNECT Library in C++ Code](#connect-library-in-c++-code)
+        -   [CONNECT Library in C++ Code](#ch-res.c-cxx.html-ref-ConnectCxx)
 
-        -   [C Toolkit diagnostics redirection](#c-toolkit-diagnostics-redirection)
+        -   [C Toolkit diagnostics redirection](#ch-res.c-cxx.html-ref-CToolkitDiag)
 
-        -   [CONNECT Library in C Code](#connect-library-in-c-code)
+        -   [CONNECT Library in C Code](#ch-res.c-cxx.html-ref-ConnectC)
 
--   [Access to the C Toolkit source tree using CVS](#access-to-the-c-toolkit-source-tree-using-cvs)
+-   [Access to the C Toolkit source tree using CVS](#ch-res.Access-to-the-C-Tool)
 
-    -   [CVS Source Code Retrieval for In-House Users with Read-Write Access](#cvs-source-code-retrieval-for-in-house-users-with-read-write-access)
+    -   [CVS Source Code Retrieval for In-House Users with Read-Write Access](#ch-res.-CVS-Source-Code-Retr-1)
 
-        -   [Using CVS from Unix or Mac OS X](#using-cvs-from-unix-or-mac-os-x)
+        -   [Using CVS from Unix or Mac OS X](#ch-res.Setting-up-CVS-clien)
 
-        -   [Using CVS from Windows](#using-cvs-from-windows)
+        -   [Using CVS from Windows](#ch-res.Using-CVS-on-MS-Wind)
+
+<a name="ch-res.c-cxx.html"></a>
 
 Using NCBI C and C++ Toolkits together
 --------------------------------------
 
 ***Note***: Due to security issues, not all links on this page are accessible by users outside NCBI.
 
--   [Overview](#overview)
+-   [Overview](#ch-res.c-cxx.html-ref-Overview)
 
--   [Shared Sources](#shared-sources)
+-   [Shared Sources](#ch-res.c-cxx.html-ref-SharedSources)
 
-    -   [CONNECT Library](#connect-library)
+    -   [CONNECT Library](#ch-res.c-cxx.html-ref-ConnectLib)
 
-    -   [ASN.1 Specifications](#asn1-specifications)
+    -   [ASN.1 Specifications](#ch-res.c-cxx.html-ref-ASN)
 
--   [Run-Time Resources](#run-time-resources)
+-   [Run-Time Resources](#ch-res.c-cxx.html-ref-RunTimeResources)
 
-    -   [LOG and CNcbiDiag](#log-and-cncbidiag)
+    -   [LOG and CNcbiDiag](#ch-res.c-cxx.html-ref-LOG)
 
-    -   [REG and CNcbiRegistry](#reg-and-cncbiregistry)
+    -   [REG and CNcbiRegistry](#ch-res.c-cxx.html-ref-REG)
 
-    -   [MT\_LOCK and CRWLock](#mtlock-and-crwlock)
+    -   [MT\_LOCK and CRWLock](#ch-res.c-cxx.html-ref-LOCK)
 
-    -   [CONNECT Library in C++ Code](#connect-library-in-c++-code)
+    -   [CONNECT Library in C++ Code](#ch-res.c-cxx.html-ref-ConnectCxx)
 
-        -   [Setting LOG](#setting-log)
+        -   [Setting LOG](#ch-res.c-cxx.html-ref-SettingLOG)
 
-        -   [Setting REG](#setting-reg)
+        -   [Setting REG](#ch-res.c-cxx.html-ref-SettingREG)
 
-        -   [Setting MT-Locking](#setting-mt-locking)
+        -   [Setting MT-Locking](#ch-res.c-cxx.html-ref-SettingLOCK)
 
-        -   [Convenience call CONNECT\_Init()](#convenience-call-connectinit)
+        -   [Convenience call CONNECT\_Init()](#ch-res.c-cxx.html-ref-CONNECT-Init-Cxx)
 
-    -   [C Toolkit diagnostics redirection](#c-toolkit-diagnostics-redirection)
+    -   [C Toolkit diagnostics redirection](#ch-res.c-cxx.html-ref-CToolkitDiag)
 
-    -   [CONNECT Library in C Code](#connect-library-in-c-code)
+    -   [CONNECT Library in C Code](#ch-res.c-cxx.html-ref-ConnectC)
 
-        -   [Convenience call CONNECT\_Init()](#convenience-call-connectinit)
+        -   [Convenience call CONNECT\_Init()](#ch-res.c-cxx.html-ref-CONNECT-Init-C)
+
+<a name="ch-res.c-cxx.html-ref-Overview"></a>
 
 ### Overview
 
 When using both C and C++ Toolkits together in a single application, it is very important to understand that there are some resources shared between the two. This document describes how to safely use both Toolkits together, and how to gain from their cooperation.
 
+<a name="ch-res.c-cxx.html-ref-SharedSources"></a>
+
 ### Shared Sources
 
 To maintain a sort of uniformity and ease in source code maintenance, the `CONNECT` library is the first library of both Toolkits kept the same at the source code level. To provide data interoperability, ASN.1 specifications have to be identical in both Toolkits, too.
+
+<a name="ch-res.c-cxx.html-ref-ConnectLib"></a>
 
 #### CONNECT Library
 
@@ -108,11 +118,15 @@ The [CONNECT](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include
 
 `sync_cxx_to_c.pl` – This script copies files in the opposite direction: from the C++ Toolkit to the C Toolkit. Most of the files common to both Toolkits are synchronized by this script. Here’s the list of C source directories (CVS modules) that are currently copied from Subversion:<br/>- connect<br/>- ctools<br/>- algo/blast/core<br/>- algo/blast/composition\_adjustment<br/>- util/tables<br/>- util/creaders<br/>ASN files in the following CVS modules are also synchronized with Subversion:<br/>- network/medarch/client<br/>- network/taxon1/common<br/>- network/id1arch<br/>- network/id2arch<br/>- access<br/>- asn<br/>- biostruc<br/>- biostruc/cdd<br/>- biostruc/cn3d<br/>- tools<br/>- api<br/>- data
 
+<a name="ch-res.c-cxx.html-ref-ASN"></a>
+
 #### ASN.1 Specifications
 
 Unlike the C source files in the `CONNECT` library, the ASN.1 data specifications are maintained within C Toolkit source structure, and have to be copied over to C++ Toolkit tree whenever they are changed.
 
 However, the internal representations of ASN.1-based objects differ between the two Toolkits. If you need to convert an object from one representation to the other, you can use the template class [CAsnConverter\<\>](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CAsnConverter&d=C), defined in [ctools/asn\_converter.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/ctools/asn_converter.hpp).
+
+<a name="ch-res.c-cxx.html-ref-RunTimeResources"></a>
 
 ### Run-Time Resources
 
@@ -124,6 +138,8 @@ C programs can call [CORE\_SetREG()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP
 
 In a C++ program, it is necessary to convert `native` C++ objects into their C equivalents, so that the C++ objects can be used where types [LOG](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=LOG), [REG](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=REG) or [MT\_LOCK](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=MT_LOCK) are expected. This is done using calls declared in [connect/ncbi\_core\_cxx.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_core_cxx.hpp), as described later in this section.
 
+<a name="ch-res.c-cxx.html-ref-LOG"></a>
+
 #### ***LOG*** and ***CNcbiDiag***
 
 The `CONNECT` library has its own [logger](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=LOG), which has to be set by one of the routines declared in [connect/ncbi\_util.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_util.h): [CORE\_SetLOG()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CORE_SetLOG), [CORE\_SetLOGFILE()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CORE_SetLOGFILE) etc. On the other hand, the interface defined in [connect/ncbi\_core\_cxx.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_core_cxx.hpp) provides the following C++ function to convert a logging stream of the NCBI C++ Toolkit into a ***LOG*** object:
@@ -134,6 +150,8 @@ This function creates the ***LOG*** object on top of the corresponding C++ ***CN
 
     CORE_SetLOG(LOG_cxx2c());
 
+<a name="ch-res.c-cxx.html-ref-REG"></a>
+
 #### REG and CNcbiRegistry
 
 [connect/ncbi\_core\_cxx.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_core_cxx.hpp) declares the following C++ function to bind C ***REG*** object to ***CNcbiRegistry*** used in C++ programs built with the use of the NCBI C++ Toolkit:
@@ -141,6 +159,8 @@ This function creates the ***LOG*** object on top of the corresponding C++ ***CN
     REG REG_cxx2c (CNcbiRegistry* reg, bool pass_ownership = false)
 
 Similarly to `CORE C logger` setting, the returned handle can be used later with [CORE\_SetREG()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CORE_SetREG) declared in [connect/ncbi\_util.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_util.h) to set up the global registry object (`CORE C registry`).
+
+<a name="ch-res.c-cxx.html-ref-LOCK"></a>
 
 #### MT\_LOCK and CRWLock
 
@@ -150,7 +170,11 @@ There is a function
 
 declared in [connect/ncbi\_core\_cxx.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_core_cxx.hpp), which converts an object of class ***CRWLock*** into a C object ***MT\_LOCK***. The latter can be used as an argument to [CORE\_SetLOCK()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CORE_SetLOCK) for setting the global `CORE C MT-lock`, used by a low level code, written in C. Note that passing 0 as the lock pointer will effectively create a new internal ***CRWLock*** object, which will then be converted into ***MT\_LOCK*** and returned. This object gets automatically destroyed when the corresponding ***MT\_LOCK*** is destroyed. If the pointer to ***CRWLock*** is passed a non **`NULL`** value then the second argument can specify whether the resulting ***MT\_LOCK*** acquires the ownership of the lock, thus is able to delete the lock when destructing itself.
 
+<a name="ch-res.c-cxx.html-ref-ConnectCxx"></a>
+
 #### CONNECT Library in C++ Code
+
+<a name="ch-res.c-cxx.html-ref-SettingLOG"></a>
 
 ##### Setting LOG
 
@@ -161,6 +185,8 @@ To set up the `CORE C logger` to use the same logging format of messages and des
     SetDiagPostLevel(eDiag_Info);
     SetDiagPostFlag(eDPF_All);
 
+<a name="ch-res.c-cxx.html-ref-SettingREG"></a>
+
 ##### Setting REG
 
 To set the `CORE C registry` be the same as C++ registry ***CNcbiRegistry***, the following call is necessary:
@@ -169,6 +195,8 @@ To set the `CORE C registry` be the same as C++ registry ***CNcbiRegistry***, th
 
 Here **`cxxreg`** is a ***CNcbiRegistry*** registry object created and maintained by a C++ application.
 
+<a name="ch-res.c-cxx.html-ref-SettingLOCK"></a>
+
 ##### Setting MT-Locking
 
 To set up a CORE lock, which is used throughout the low level code, including places of calls of non-reentrant library calls (if no reentrant counterparts were detected during configure process), one can place the following statement close to the beginning of the program:
@@ -176,6 +204,8 @@ To set up a CORE lock, which is used throughout the low level code, including pl
     CORE_SetLOCK(MT_LOCK_cxx2c());
 
 Note that the use of this call is extremely important in a multi-threaded environment.
+
+<a name="ch-res.c-cxx.html-ref-CONNECT-Init-Cxx"></a>
 
 ##### Convenience call CONNECT\_Init()
 
@@ -189,6 +219,8 @@ An example of how to use this call can be found in the test program [test\_ncbi\
 
 Another good source of information is the set of working application examples in [src/app/id1\_fetch](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/app/id1_fetch). ***Note:*** In the examples, the convenience routine does not change logging levels or disable/enable certain logging properties. If this is desired, the application still has to use separate calls.
 
+<a name="ch-res.c-cxx.html-ref-CToolkitDiag"></a>
+
 #### C Toolkit diagnostics redirection
 
 In a C/C++ program linked against both NCBI C++ and NCBI C Toolkits the diagnostics messages (if any) generated by either Toolkit are not necessarily directed through same route, which may result in lost or garbled messages. To set the diagnostics destination be the same as ***CNcbiDiag***'s one, and thus to guarantee that the messages from both Toolkits will be all stored sequentially and in the order they were generated, there is a call
@@ -197,6 +229,8 @@ In a C/C++ program linked against both NCBI C++ and NCBI C Toolkits the diagnost
     void SetupCToolkitErrPost(void);
 
 which is put in a specially designated directory [ctools](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/ctools) providing back links to the C Toolkit from the C++ Toolkit.
+
+<a name="ch-res.c-cxx.html-ref-ConnectC"></a>
 
 #### CONNECT Library in C Code
 
@@ -212,6 +246,8 @@ Briefly, the calls are:
 
 Exactly the same way as described in the previous section, all objects, resulting from the above functions, can be used to set up `CORE C logger`, `CORE C registry`, and `CORE MT-lock` of the `CONNECT` library using the API defined in [connect/ncbi\_util.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/C_DOC/lxr/source/connect/ncbi_util.h): [CORE\_SetLOG()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/C_DOC/lxr/ident?i=CORE_SetLOG), [CORE\_SetREG()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/C_DOC/lxr/ident?i=CORE_SetREG), and [CORE\_SetLOCK()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/C_DOC/lxr/ident?i=CORE_SetLOCK), respectively.
 
+<a name="ch-res.c-cxx.html-ref-CONNECT-Init-C"></a>
+
 ##### Convenience call CONNECT\_Init()
 
 As an alternative to using per-object settings as shown in the previous paragraph, the following "all-in-one" call is provided:
@@ -222,10 +258,14 @@ This sets `CORE C logger` to go via Toolkit default logging facility, causes `CO
 
 ***Note:*** Again, properties of the logging facility are not affected by this call, i.e. the selection of what gets logged, how, and where, should be controlled by using native C Toolkit's mechanisms defined in [ncbierr.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/C_DOC/lxr/source/corelib/ncbierr.h).
 
+<a name="ch-res.Access-to-the-C-Tool"></a>
+
 Access to the C Toolkit source tree Using CVS
 ---------------------------------------------
 
 For a detailed description of the CVS utility see [the CVS online manual](http://www.cs.utah.edu/csinfo/texinfo/cvs/cvs_toc.html) or run the commands `"man cvs"` or `"cvs --help"` on your Unix workstation.
+
+<a name="ch-res.-CVS-Source-Code-Retr-1"></a>
 
 ### CVS Source Code Retrieval for In-House Users with Read-Write Access
 
@@ -233,9 +273,11 @@ You must have a CVS account set up prior to using CVS - email <span class="oem_s
 
 The C Toolkit CVS repository is available [online](http://intranet/cvsutils/index.cgi/distrib) and may be [searched](http://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/C_DOC/lxr/source) using LXR.
 
--   [Using CVS from Unix or Mac OS X](#using-cvs-from-unix-or-mac-os-x)
+-   [Using CVS from Unix or Mac OS X](#ch-res.Setting-up-CVS-clien)
 
--   [Using CVS from Windows](#using-cvs-from-windows)
+-   [Using CVS from Windows](#ch-res.Using-CVS-on-MS-Wind)
+
+<a name="ch-res.Setting-up-CVS-clien"></a>
 
 #### Using CVS from Unix or Mac OS X
 
@@ -259,6 +301,8 @@ Here the *username* is the user name of the person who did the initial CVS check
 
 -   Impersonate the user who created the CVS directory by creating in the `~/.cvspass` file another string which is a duplicate of the existing one, and in this new string change the username to that of the user who created the directory. This hack will allow you to work with the CVS snapshot of the user who created the directory. However, this type of hack is not recommended for any long term use as you are impersonating another user.
 
+<a name="ch-res.Using-CVS-on-MS-Wind"></a>
+
 #### Using CVS from Windows
 
 The preferred CVS client is [TortoiseCVS](http://www.tortoisecvs.org/). If this is not installed on your PC, ask [PC Systems](http://jira.be-md.ncbi.nlm.nih.gov/secure/CreateIssue!default.jspa?pid=10371) to have it installed. Your TortoiseCVS installation should include both a CVS command-line client and integration into Windows Explorer.
@@ -279,7 +323,7 @@ To use TortoiseCVS as integrated into Windows Explorer:
 
 -   You may also change global preferences (such as external tools) using the Preferences application available from the Start menu.
 
-For command-line use, follow the [in-house Unix / Mac OS X instructions](#in-house-unix--mac-os-x-instructions) with these exceptions:
+For command-line use, follow the [in-house Unix / Mac OS X instructions](#ch-res.Setting-up-CVS-clien) with these exceptions:
 
 -   Make sure you have your "home" directory set up -- i.e. the environment variables **`HOMEDRIVE`** and **`HOMEPATH`** should be set. In NCBI, **`HOMEDRIVE`** usually set to `C:`, and **`HOMEPATH`** is usually set to something like `\Documents and Settings\%USERNAME%` (where `%USERNAME%` is replaced with your Windows user name).
 

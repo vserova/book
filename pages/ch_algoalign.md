@@ -15,9 +15,9 @@ The Global Alignment Library [`xalgoalign`:[include](http://www.ncbi.nlm.nih.gov
 
 The overview for this chapter consists of the following topics:
 
--   [Introduction](#introduction)
+-   [Introduction](#ch-algoalign.intro)
 
--   [Chapter Outline](#chapter-outline)
+-   [Chapter Outline](#ch-algoalign.outline)
 
 ### Introduction
 
@@ -35,35 +35,37 @@ The library contains C++ classes encapsulating global pairwise alignment algorit
 
 The following is an outline of the chapter topics:
 
--   [Computing pairwise global sequence alignments](#computing-pairwise-global-sequence-alignments)
+-   [Computing pairwise global sequence alignments](#ch-algoalign.generic-global-alignment)
 
-    -   [Initialization](#initialization)
+    -   [Initialization](#ch-algoalign.initialization)
 
-    -   [Parameters of alignment](#parameters-of-alignment)
+    -   [Parameters of alignment](#ch-algoalign.setup)
 
-    -   [Computing](#computing)
+    -   [Computing](#ch-algoalign.computing)
 
-    -   [Alignment transcript](#alignment-transcript)
+    -   [Alignment transcript](#ch-algoalign.transcript)
 
--   [Computing multiple sequence alignments](#computing-multiple-sequence-alignments)
+-   [Computing multiple sequence alignments](#ch-algoalign.Computing-multiple-s)
 
--   [Aligning sequences in linear space](#aligning-sequences-in-linear-space)
+-   [Aligning sequences in linear space](#ch-algoalign.divide-and-conquer)
 
-    -   [The idea of the algorithm](#the-idea-of-the-algorithm)
+    -   [The idea of the algorithm](#ch-algoalign.idea)
 
-    -   [Implementation](#implementation)
+    -   [Implementation](#ch-algoalign.mm-implementation)
 
--   [Computing spliced sequences alignments](#computing-spliced-sequences-alignments)
+-   [Computing spliced sequences alignments](#ch-algoalign.spliced-alignment)
 
-    -   [The problem](#the-problem)
+    -   [The problem](#ch-algoalign.uk-formulation)
 
-    -   [Implementation](#implementation)
+    -   [Implementation](#ch-algoalign.uk-implementation)
 
--   [Formatting computed alignments](#formatting-computed-alignments)
+-   [Formatting computed alignments](#ch-algoalign.formatter)
 
-    -   [Formatter object](#formatter-object)
+    -   [Formatter object](#ch-algoalign.nw-formatter)
 
 **Demo Cases** [[src/app/nw\_aligner](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/app/nw_aligner)] [[src/app/splign/](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/app/splign/)]
+
+<a name="ch-algoalign.generic-global-alignment"></a>
 
 Computing pairwise global sequence alignments
 ---------------------------------------------
@@ -74,13 +76,15 @@ Generic **pairwise** global alignment functionality is provided by ***CNWAligner
 
 This functionality is discussed in the following topics:
 
--   [Initialization](#initialization)
+-   [Initialization](#ch-algoalign.initialization)
 
--   [Parameters of alignment](#parameters-of-alignment)
+-   [Parameters of alignment](#ch-algoalign.setup)
 
--   [Computing](#computing)
+-   [Computing](#ch-algoalign.computing)
 
--   [Alignment transcript](#alignment-transcript)
+-   [Alignment transcript](#ch-algoalign.transcript)
+
+<a name="ch-algoalign.initialization"></a>
 
 ### Initialization
 
@@ -101,6 +105,8 @@ The default constructor is provided to support reuse of an aligner object when m
                       bool verify = true);
 
 where the meaning of **`scoremat`** is the same as above.
+
+<a name="ch-algoalign.setup"></a>
 
 ### Parameters of alignment
 
@@ -138,9 +144,13 @@ Pattern is a vector of hits specified by their zero-based coordinates, as in the
     vector<size_t> pattern ( hits, hits + sizeof(hits)/sizeof(hits[0]) );
     aligner.SetPattern(pattern);
 
+<a name="ch-algoalign.computing"></a>
+
 ### Computing
 
 To start computations, call ***Run()***, which returns the overall alignment score having aligned the sequences. Score is a scalar value associated with the alignment and depends on the parameters of the alignment. The global alignment algorithms align two sequences so that the score is the maximum over all possible alignments.
+
+<a name="ch-algoalign.transcript"></a>
 
 ### Alignment transcript
 
@@ -177,6 +187,8 @@ The last three functions search for a continuous segment of matching characters 
 
 The alignment transcript is a simple yet complete representation of alignments that can be used to evaluate virtually every characteristic or detail of any particular alignment. Some of them, such as the percent identity or the number of gaps or mismatches, could be easily restored from the transcript alone, whereas others, such as the scores for protein alignments, would require availability of the original sequences.
 
+<a name="ch-algoalign.Computing-multiple-s"></a>
+
 Computing multiple sequence alignments
 --------------------------------------
 
@@ -196,18 +208,24 @@ The paper reference for this algorithm is:
 
 *J.S. Papadopoulos, R. Agarwala, "COBALT: Constraint-Based Alignment Tool for Multiple Protein Sequences". Bioinformatics, May 2007*
 
+<a name="ch-algoalign.divide-and-conquer"></a>
+
 Aligning sequences in linear space
 ----------------------------------
 
 ***CMMAligner*** is an interface to a linear space variant of the global alignment algorithm. This functionality is discussed in the following topics:
 
--   [The idea of the algorithm](#the-idea-of-the-algorithm)
+-   [The idea of the algorithm](#ch-algoalign.idea)
 
--   [Implementation](#implementation)
+-   [Implementation](#ch-algoalign.mm-implementation)
+
+<a name="ch-algoalign.idea"></a>
 
 ### The idea of the algorithm
 
 That the classical global alignment algorithm requires quadratic space could be a serious restriction in sequence alignment. One way to deal with it is to use alignment patterns. Another approach was first introduced by Hirschberg and became known as a divide-and-conquer strategy. At a coarse level, it suggests computing of scores for partial alignments starting from two opposite corners of the dynamic programming matrix while keeping only those located in the middle rows or columns. After the analysis of the adjacent scores, it is possible to determine cells on those lines through which the global alignment's back-trace path will go. This approach reduces space to linear while only doubling the worst-case time bound. For details see, for example, Dan Gusfield's "Algorithms on Strings, Trees and Sequences".
+
+<a name="ch-algoalign.mm-implementation"></a>
 
 ### Implementation
 
@@ -217,14 +235,18 @@ The divide-and-conquer strategy suggests natural parallelization, where blocks o
 
 When comparing alignments produced with the linear-space version with those produced by ***CNWAligner***, be ready to find many of them similar, although not exactly the same. This is normal, because several optimal alignments may exist for each pair of sequences.
 
+<a name="ch-algoalign.spliced-alignment"></a>
+
 Computing spliced sequences alignments
 --------------------------------------
 
 This functionality is discussed in the following topics:
 
--   [The problem](#the-problem)
+-   [The problem](#ch-algoalign.uk-formulation)
 
--   [Implementation](#implementation)
+-   [Implementation](#ch-algoalign.uk-implementation)
+
+<a name="ch-algoalign.uk-formulation"></a>
 
 ### The problem
 
@@ -246,6 +268,8 @@ Algorithms described in this chapter exploit this idea and address a refined spl
 
 In other words, the library classes provide basic splice alignment algorithms to be used in more sophisticated applications. One real-life application, Splign, can be found under demo cases for the library.
 
+<a name="ch-algoalign.uk-implementation"></a>
+
 ### Implementation
 
 There is a small hierarchy of three classes involved in spliced alignment facilitating a quality/performance trade-off in the case of distorted sequences:
@@ -262,12 +286,16 @@ All classes assume that the spliced sequence is the first of the two input seque
 
 As with the generic global alignment, the immediate output of the algorithms is the alignment transcript. For the sake of spliced alignments, the transcript's alphabet is augmented to accommodate introns as a special sequence-editing operation.
 
+<a name="ch-algoalign.formatter"></a>
+
 Formatting computed alignments
 ------------------------------
 
 This functionality is discussed in the following topics:
 
--   [Formatter object](#formatter-object)
+-   [Formatter object](#ch-algoalign.nw-formatter)
+
+<a name="ch-algoalign.nw-formatter"></a>
 
 ### Formatter object
 

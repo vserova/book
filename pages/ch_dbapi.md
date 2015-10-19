@@ -23,17 +23,17 @@ The overview for this chapter consists of the following topics:
 
 This chapter covers the C++ Toolkit support for database access using:
 
--   the [SDBAPI](#sdbapi) database access library [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/dbapi/simple/) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/dbapi/simple/)];
+-   the [SDBAPI](#ch-dbapi.SDBAPI-UserLayer-Reference) database access library [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/dbapi/simple/) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/dbapi/simple/)];
 
--   the [DBAPI](#dbapi) database access library [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/dbapi/) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/dbapi/)];
+-   the [DBAPI](#ch-dbapi.The-DBAPI-Library) database access library [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/dbapi/) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/dbapi/)];
 
--   the [BDB](#bdb) wrapper [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/db/bdb/) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/db/bdb/)]; or
+-   the [BDB](#ch-dbapi.Major-Features-of-th) wrapper [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/db/bdb/) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/db/bdb/)]; or
 
--   the [SQLite](#sqlite) wrapper [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/db/sqlite/) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/db/sqlite/)].
+-   the [SQLite](#ch-dbapi.The-SQLite-Wrapper) wrapper [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/db/sqlite/) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/db/sqlite/)].
 
 DBAPI was the traditional database access library interface, but has been superseded by SDBAPI - the "simplified" interface. They have considerable overlap, but they are fully not compatible and each has at least one feature the other doesn't, so you must pick one. For example, DBAPI allows a choice of underlying drivers and access to the underlying data source while SDBAPI does not. On the other hand, SDBAPI supports bookmarking blobs while DBAPI doesn't. In the vast majority of cases SDBAPI will be both more than adequate and easier to use and maintain. Therefore, SDBAPI should be the first choice unless there's a compelling reason to use DBAPI.
 
-The DBAPI library provides the underlying [user-layer](#user-layer) and [driver](#driver) API for the NCBI database connectivity project. The project's goal is to provide access to various relational database management systems (RDBMS) with a single uniform user interface. Consult the detailed documentation for details of the [supported DBAPI drivers](#supported-dbapi-drivers).
+The DBAPI library provides the underlying [user-layer](#ch-dbapi.dbapi-user-layer) and [driver](#ch-dbapi.dbapi-driver-ref) API for the NCBI database connectivity project. The project's goal is to provide access to various relational database management systems (RDBMS) with a single uniform user interface. Consult the detailed documentation for details of the [supported DBAPI drivers](#ch-dbapi.dbapi-drivers).
 
 The "BDB wrapper" is part of the NCBI C++ Toolkit and serves as a high-level interface to the open source Berkeley DB library. The BDB wrapper is architecturally different from the DBAPI library and does not follow its design - rather, it is compatible with Berkeley DB v. 4.1 and higher. The primary purpose of the Berkeley DB library is to provide tools to work with flatfile, federated databases. Thus, the BDB wrapper is intended for use by software developers who need small-footprint, high-performance database capabilities with zero administration. The database in this case becomes tightly integrated with the application code. For more information about Berkeley DB, see the official [documentation](http://www.oracle.com/us/products/database/berkeley-db/overview/index.html).
 
@@ -43,122 +43,126 @@ The "SQLite wrapper" is part of the NCBI C++ Toolkit and serves as a high-level 
 
 The following is an outline of the topics presented in this chapter:
 
--   [Security](#security)
+-   [Security](#ch-dbapi.Security)
 
-    -   [Preventing SQL Injection](#preventing-sql-injection)
+    -   [Preventing SQL Injection](#ch-dbapi.Preventing-SQL-Injection)
 
-    -   [Using Kerberos with DBAPI](#using-kerberos-with-dbapi)
+    -   [Using Kerberos with DBAPI](#ch-dbapi.Using-Kerberos-with-DBAPI)
 
--   [SDBAPI / DBAPI Feature Comparison](#sdbapi--dbapi-feature-comparison)
+-   [SDBAPI / DBAPI Feature Comparison](#ch-dbapi.SDBAPI--DBAPI-Feature-Compariso)
 
--   [The SDBAPI Library](#the-sdbapi-library)
+-   [The SDBAPI Library](#ch-dbapi.SDBAPI-UserLayer-Reference)
 
-    -   [SDBAPI Overview](#sdbapi-overview)
+    -   [SDBAPI Overview](#ch-dbapi.Simple-Database-Access-via-C)
 
-    -   [Includes and Linkage](#includes-and-linkage)
+    -   [Includes and Linkage](#ch-dbapi.Includes-and-Linkage)
 
-    -   [Connections](#connections)
+    -   [Connections](#ch-dbapi.Connections)
 
-    -   [Executing Basic Queries](#executing-basic-queries)
+    -   [Executing Basic Queries](#ch-dbapi.Executing-Basic-Queries)
 
-    -   [Stored Procedures and Parameters](#stored-procedures-and-parameters)
+    -   [Stored Procedures and Parameters](#ch-dbapi.Stored-Procedures-and-Parameter)
 
-    -   [Retrieving Results](#retrieving-results)
+    -   [Retrieving Results](#ch-dbapi.Retrieving-Results)
 
-    -   [Getting a Stored Procedure Return Value](#getting-a-stored-procedure-return-value)
+    -   [Getting a Stored Procedure Return Value](#ch-dbapi.Getting-a-Stored-Procedure-Retu)
 
-    -   [Meta-Data Accessors](#meta-data-accessors)
+    -   [Meta-Data Accessors](#ch-dbapi.MetaData-Accessors)
 
-    -   [Working with NULL](#working-with-null)
+    -   [Working with NULL](#ch-dbapi.Working-with-NULL)
 
-    -   [Using Transactions](#using-transactions)
+    -   [Using Transactions](#ch-dbapi.Using-Transactions)
 
-    -   [Using Cursors](#using-cursors)
+    -   [Using Cursors](#ch-dbapi.Using-Cursors)
 
--   [The DBAPI Library](#the-dbapi-library)
+-   [The DBAPI Library](#ch-dbapi.The-DBAPI-Library)
 
-    -   [DBAPI User-Layer Reference](#dbapi-user-layer-reference)
+    -   [DBAPI User-Layer Reference](#ch-dbapi.dbapi-user-layer)
 
-        -   [DBAPI Overview](#dbapi-overview)
+        -   [DBAPI Overview](#ch-dbapi.dbapi-overview)
 
-        -   [Object Hierarchy](#object-hierarchy)
+        -   [Object Hierarchy](#ch-dbapi.dbapi-obj-hierarchy)
 
-        -   [Includes](#includes)
+        -   [Includes](#ch-dbapi.dbapi-includes)
 
-        -   [Objects](#objects)
+        -   [Objects](#ch-dbapi.dbapi-objects)
 
-        -   [Object Life Cycle](#object-life-cycle)
+        -   [Object Life Cycle](#ch-dbapi.dbapi-obj-lifecycle)
 
-        -   [CVariant Type](#cvariant-type)
+        -   [CVariant Type](#ch-dbapi.dbapi-variant)
 
-        -   [Choosing the Driver](#choosing-the-driver)
+        -   [Choosing the Driver](#ch-dbapi.dbapi-choose-driver)
 
-        -   [Data Source and Connections](#data-source-and-connections)
+        -   [Data Source and Connections](#ch-dbapi.dbapi-src-cnxns)
 
-        -   [Main Loop](#main-loop)
+        -   [Main Loop](#ch-dbapi.dbapi-main-loop)
 
-        -   [Input and Output Parameters](#input-and-output-parameters)
+        -   [Input and Output Parameters](#ch-dbapi.dbapi-io-params)
 
-        -   [Stored Procedures](#stored-procedures)
+        -   [Stored Procedures](#ch-dbapi.dbapi-stored-procs)
 
-        -   [Cursors](#cursors)
+        -   [Cursors](#ch-dbapi.dbapi-cursors)
 
-        -   [Working with BLOBs](#working-with-blobs)
+        -   [Working with BLOBs](#ch-dbapi.dbapi-wwblobs)
 
-        -   [Updating BLOBs Using Cursors](#updating-blobs-using-cursors)
+        -   [Updating BLOBs Using Cursors](#ch-dbapi.dbapi-blobs)
 
-        -   [Using Bulk Insert](#using-bulk-insert)
+        -   [Using Bulk Insert](#ch-dbapi.dbapi-bulk-insert)
 
-        -   [Diagnostic Messages](#diagnostic-messages)
+        -   [Diagnostic Messages](#ch-dbapi.dbapi-diag)
 
-        -   [Trace Output](#trace-output)
+        -   [Trace Output](#ch-dbapi.dbapi-trace)
 
-    -   [DBAPI Driver Reference](#dbapi-driver-reference)
+    -   [DBAPI Driver Reference](#ch-dbapi.dbapi-driver-ref)
 
-        -   [Overview](#overview)
+        -   [Overview](#ch-dbapi.dbapi-drvr-overview)
 
-        -   [The driver architecture](#the-driver-architecture)
+        -   [The driver architecture](#ch-dbapi.dbapi-drvr-arch)
 
-        -   [Sample program](#sample-program)
+        -   [Sample program](#ch-dbapi.dbapi-sample-prog)
 
-        -   [Error handling](#error-handling)
+        -   [Error handling](#ch-dbapi.dbapi-errors)
 
-        -   [Driver context and connections](#driver-context-and-connections)
+        -   [Driver context and connections](#ch-dbapi.dbapi-context)
 
-        -   [Driver Manager](#driver-manager)
+        -   [Driver Manager](#ch-dbapi.dbapi-drvr-mgr)
 
-        -   [Text and Image Data Handling](#text-and-image-data-handling)
+        -   [Text and Image Data Handling](#ch-dbapi.dbapi-txt-img)
 
-        -   [Results loop](#results-loop)
+        -   [Results loop](#ch-dbapi.dbapi-results)
 
-    -   [Supported DBAPI drivers](#supported-dbapi-drivers)
+    -   [Supported DBAPI drivers](#ch-dbapi.dbapi-drivers)
 
-        -   [FreeTDS (TDS ver. 7.0)](#freetds-tds-ver-70)
+        -   [FreeTDS (TDS ver. 7.0)](#ch-dbapi.free-tds64)
 
-        -   [Sybase CTLIB](#sybase-ctlib)
+        -   [Sybase CTLIB](#ch-dbapi.dbapi-drvs-ctlib)
 
-        -   [ODBC](#odbc)
+        -   [ODBC](#ch-dbapi.dbapi-drvrs-odbc)
 
-        -   [MySQL Driver](#mysql-driver)
+        -   [MySQL Driver](#ch-dbapi.mysql-driver)
 
--   [The BDB Wrapper](#the-bdb-wrapper)
+-   [The BDB Wrapper](#ch-dbapi.Major-Features-of-th)
 
--   [The SQLite Wrapper](#the-sqlite-wrapper)
+-   [The SQLite Wrapper](#ch-dbapi.The-SQLite-Wrapper)
 
--   [Database Load-Balancing (DBLB)](#database-load-balancing-dblb)
+-   [Database Load-Balancing (DBLB)](#ch-dbapi.Database-loadbalanci)
 
-    -   [Setting up Load-Balancing of Database Servers](#setting-up-load-balancing-of-database-servers)
+    -   [Setting up Load-Balancing of Database Servers](#ch-dbapi.Getting-started)
 
-    -   [Using Database Load-Balancing from C++](#using-database-load-balancing-from-c++)
+    -   [Using Database Load-Balancing from C++](#ch-dbapi.Using-Database-LoadBalancing-fr)
 
-    -   [Load-Balanced Database Access via Python and Perl](#load-balanced-database-access-via-python-and-perl)
+    -   [Load-Balanced Database Access via Python and Perl](#ch-dbapi.Database-Access-via-Python-and)
 
-    -   [Advantages of using DBLB](#advantages-of-using-dblb)
+    -   [Advantages of using DBLB](#ch-dbapi.Advantages-of-using-)
 
-    -   [How it works (by default)](#how-it-works-by-default)
+    -   [How it works (by default)](#ch-dbapi.HOW-IT-WORKS-by-defa)
+
+<a name="ch-dbapi.Security"></a>
 
 Security
 --------
+
+<a name="ch-dbapi.Preventing-SQL-Injection"></a>
 
 ### Preventing SQL Injection
 
@@ -179,6 +183,8 @@ The following sample programs illustrates how to protect against SQL injection f
 -   <http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/dbapi/dbapi_simple.cpp>
 
 See the [Security FAQ](ch_faq.html#ch_faq.Security) for more information.
+
+<a name="ch-dbapi.Using-Kerberos-with-DBAPI"></a>
 
 ### Using Kerberos with DBAPI
 
@@ -204,6 +210,8 @@ They must pass an empty string for the user name.
 
 This is also covered in the [DBAPI section](ch_libconfig.html#ch_libconfig.DBAPI) of the Library Configuration chapter.
 
+<a name="ch-dbapi.SDBAPI--DBAPI-Feature-Compariso"></a>
+
 SDBAPI / DBAPI Feature Comparison
 ---------------------------------
 
@@ -223,6 +231,8 @@ The following features are only available in SDBAPI:
 
 The following table compares the implementation of various features in DBAPI and SDBAPI:
 
+<a name="ch-dbapi.T.nc-featuresdbapidbapisample-c"></a>
+
 | Feature                               | SDBAPI                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | DBAPI                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 |---------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | sample code                           | [src/sample/app/sdbapi](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/sdbapi/)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | [src/sample/app/dbapi](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/dbapi/)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
@@ -239,8 +249,12 @@ The following table compares the implementation of various features in DBAPI and
 | to execute a stored procedure         | `CQuery query = m_Db.NewQuery();`<br/>`query.SetParameter("@max_id", 5);`<br/>`query.SetParameter("@max_fl", 5.1f);`<br/>`query.SetParameter("@num_rows", 0, eSDB_Int4, eSP_InOut);`<br/>`query.ExecuteSP(proc_name);`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | `ICallableStatement *cstmt = conn->PrepareCall("ProcName");`<br/>`Uint1 byte = 1;`<br/>`cstmt->SetParam(CVariant("test"), "@test_input");`<br/>`cstmt->SetParam(CVariant::TinyInt(&byte), "@byte");`<br/>`cstmt->SetOutputParam(CVariant(eDB_Int), "@result");`<br/>`cstmt->Execute();`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | to retrieve results                   | `// Print the results.`<br/>`//`<br/>`// NOTE: For database APIs, array-like indexes are 1-based, not 0-based!`<br/>`//`<br/>`NcbiCout << "int_val    fl_val" << NcbiEndl;`<br/>`ITERATE(CQuery, row, query.SingleSet()) {`<br/>`    NcbiCout`<br/>`        << row[1].AsInt4() << "    "`<br/>`        << row[2].AsFloat() << NcbiEndl;`<br/>`}`<br/><br/>`// Confirm having read all results.`<br/>`query.VerifyDone();`<br/><br/>`// Print the number of result rows.`<br/>`NcbiCout`<br/>`    << "Number of rows: "`<br/>`    << query.GetParameter("@num_rows").AsInt4() << NcbiEndl;` | `// Retrieve and display the data.`<br/>`while (stmt->HasMoreResults()) {`<br/>`    // Use an auto_ptr to manage resultset lifetime.`<br/>`    // NOTE: Use it with caution. When the wrapped parent object`<br/>`    // goes out of scope, all child objects are destroyed`<br/>`    // (which isn't an issue for this demo but could be for`<br/>`    // other applications).`<br/>`    auto_ptr<IResultSet> rs(stmt->GetResultSet());`<br/><br/>`    // Sometimes the results have no rows - and that's ok.`<br/>`    if ( ! stmt->HasRows() ) {`<br/>`        LOG_POST_X(1, Info << "No rows.");`<br/>`        continue;`<br/>`    }`<br/><br/>`    switch (rs->GetResultType()) {`<br/><br/>`    case eDB_StatusResult:`<br/>`        NcbiCout << "\nStatus results:" << NcbiEndl;`<br/>`        while (rs->Next()) {`<br/>`            NcbiCout << "    Status: " << rs->GetVariant(1).GetInt4()`<br/>`                << NcbiEndl;`<br/>`        }`<br/>`        break;`<br/><br/>`    case eDB_ParamResult:`<br/>`        NcbiCout << "\nParameter results:" << NcbiEndl;`<br/>`        while (rs->Next()) {`<br/>`            NcbiCout << "    Parameter: "`<br/>`                << rs->GetVariant(1).GetInt4() << NcbiEndl;`<br/>`        }`<br/>`        break;`<br/><br/>`    case eDB_RowResult: {`<br/>`        NcbiCout << "\nRow results:" << NcbiEndl;`<br/><br/>`        const IResultSetMetaData* rsMeta = rs->GetMetaData();`<br/><br/>`        // Print column headers.`<br/>`        for (unsigned i = 1; i <= rsMeta->GetTotalColumns(); ++i) {`<br/>`            NcbiCout << "    " << rsMeta->GetName(i);`<br/>`        }`<br/>`        NcbiCout << NcbiEndl;`<br/>`        for (unsigned i = 1; i <= rsMeta->GetTotalColumns(); ++i) {`<br/>`            NcbiCout << "    " << string(rsMeta->GetName(i).size(), '=');`<br/>`        }`<br/>`        NcbiCout << NcbiEndl;`<br/><br/>`        while (rs->Next()) {`<br/>`            // Print a row of data.`<br/>`            for (unsigned i = 1; i <= rsMeta->GetTotalColumns(); ++i) {`<br/>`                NcbiCout << "    " << rs->GetVariant(i).GetString();`<br/>`            }`<br/>`            NcbiCout << NcbiEndl;`<br/>`        }`<br/>`        NcbiCout << "    ---------------" << NcbiEndl;`<br/>`        NcbiCout << "    Row count: " << stmt->GetRowCount()`<br/>`            << NcbiEndl;`<br/>`        break;`<br/>`    }`<br/><br/>`    // These types aren't used in this demo, but might be in`<br/>`    // your code.`<br/>`    case eDB_ComputeResult:`<br/>`    case eDB_CursorResult:`<br/>`        LOG_POST_X(1, Warning << "Unhandled results type:"`<br/>`            << rs->GetResultType());`<br/>`        break;`<br/><br/>`    // Any other type means this code is out-of-date.`<br/>`    default:`<br/>`        ERR_POST_X(1, Critical << "Unexpected results type:"`<br/>`            << rs->GetResultType());`<br/>`    }`<br/>`}`<br/>`// The stored procedure will return a status.`<br/>`NcbiCout << "\nStored procedure returned status: "`<br/>`    << cstmt->GetReturnStatus() << NcbiEndl;`<br/>`string msgs = m_Ds->GetErrorInfo();`<br/>`if ( ! msgs.empty() ) {`<br/>`    NcbiCout << "    Errors:" << NcbiEndl;`<br/>`    NcbiCout << "        " << msgs << NcbiEndl;` |
 
+<a name="ch-dbapi.SDBAPI-UserLayer-Reference"></a>
+
 The SDBAPI Library
 ------------------
+
+<a name="ch-dbapi.Simple-Database-Access-via-C"></a>
 
 ### SDBAPI Overview
 
@@ -272,25 +286,27 @@ See the SDBAPI sample programs for more example code:
 
 The following sections cover specific aspects of SDBAPI:
 
--   [Includes and Linkage](#includes-and-linkage)
+-   [Includes and Linkage](#ch-dbapi.Includes-and-Linkage)
 
--   [Connections](#connections)
+-   [Connections](#ch-dbapi.Connections)
 
--   [Executing Basic Queries](#executing-basic-queries)
+-   [Executing Basic Queries](#ch-dbapi.Executing-Basic-Queries)
 
--   [Stored Procedures and Parameters](#stored-procedures-and-parameters)
+-   [Stored Procedures and Parameters](#ch-dbapi.Stored-Procedures-and-Parameter)
 
--   [Retrieving Results](#retrieving-results)
+-   [Retrieving Results](#ch-dbapi.Retrieving-Results)
 
--   [Getting a Stored Procedure Return Value](#getting-a-stored-procedure-return-value)
+-   [Getting a Stored Procedure Return Value](#ch-dbapi.Getting-a-Stored-Procedure-Retu)
 
--   [Meta-Data Accessors](#meta-data-accessors)
+-   [Meta-Data Accessors](#ch-dbapi.MetaData-Accessors)
 
--   [Working with NULL](#working-with-null)
+-   [Working with NULL](#ch-dbapi.Working-with-NULL)
 
--   [Using Transactions](#using-transactions)
+-   [Using Transactions](#ch-dbapi.Using-Transactions)
 
--   [Using Cursors](#using-cursors)
+-   [Using Cursors](#ch-dbapi.Using-Cursors)
+
+<a name="ch-dbapi.Includes-and-Linkage"></a>
 
 ### Includes and Linkage
 
@@ -302,6 +318,8 @@ For proper linkage, merge the following into your LIB and LIBS lines:
 
     LIB  = $(SDBAPI_LIB) xconnect xutil xncbi
     LIBS = $(SDBAPI_LIBS) $(NETWORK_LIBS) $(DL_LIBS) $(ORIG_LIBS)
+
+<a name="ch-dbapi.Connections"></a>
 
 ### Connections
 
@@ -334,14 +352,16 @@ After making the connection, it is recommended to set the connection session par
 
 It may also be appropriate to set, `TEXTSIZE`, depending on your project.
 
+<a name="ch-dbapi.Executing-Basic-Queries"></a>
+
 ### Executing Basic Queries
 
-Once a [connection](#connection) is established, executing a basic query can be as simple as:
+Once a [connection](#ch-dbapi.Connections) is established, executing a basic query can be as simple as:
 
     CQuery query = m_Db.NewQuery("your SQL statement goes here");
     query.Execute();
 
-***Note:*** There are security factors to be considered when executing queries. See the [security section](#security-section), and use the following guidelines when deciding which method to use:
+***Note:*** There are security factors to be considered when executing queries. See the [security section](#ch-dbapi.Security), and use the following guidelines when deciding which method to use:
 
 1  
 If stored procuedures can be used, then use them. This increases both security and performance. Plus, this practice could facilitate testing and documentation.
@@ -355,9 +375,13 @@ Otherwise, if parameterized SQL can be used, then use it.
 4  
 Otherwise, as a last resort, use dynamic SQL. If user-supplied data is used to construct the statement, then you **MUST** sanitize the user-supplied data. Even if the data does not come from an outside user, it's still a good idea to sanitize all dynamic data unless there's a compelling reason not to, in which case that fact should be prominently documented in comments adjacent to the dynamic SQL creation code. See the [Security FAQ](ch_faq.html#ch_faq.Security) for more information.
 
+<a name="ch-dbapi.Stored-Procedures-and-Parameter"></a>
+
 ### Stored Procedures and Parameters
 
 The following settings should be made before executing a store procedure:
+
+<a name="ch-dbapi.T.nc-ansi-nullsonansi-paddingon"></a>
 
 |---------------------------|-------|
 | `ANSI_NULLS`              | `ON`  |
@@ -370,7 +394,7 @@ The following settings should be made before executing a store procedure:
 
 It may also be appropriate to set, `TEXTSIZE`, depending on your project.
 
-Note that **`ANSI_NULLS`** and **`QUOTED_IDENTIFIER`** must be set when the stored procedure is created because they can't be changed at run-time. The other settings can be changed at run-time but typically they're not, so it's efficient to set them when the [connection](#connection) is created.
+Note that **`ANSI_NULLS`** and **`QUOTED_IDENTIFIER`** must be set when the stored procedure is created because they can't be changed at run-time. The other settings can be changed at run-time but typically they're not, so it's efficient to set them when the [connection](#ch-dbapi.Connections) is created.
 
 For input parameters, simply pass the name and value to ***SetParameter()***; for input/output parameters, also pass the database field type and the value **`eSP_InOut`**; for `NULL` parameters call ***SetNullParameter()***. For example:
 
@@ -387,6 +411,8 @@ The stored procedure is invoked by calling ***ExecuteSP()***:
     CQuery query = m_Db.NewQuery();
     query.SetParameter("@max_id", 5);
     query.ExecuteSP(proc_name);
+
+<a name="ch-dbapi.Retrieving-Results"></a>
 
 ### Retrieving Results
 
@@ -429,9 +455,13 @@ Similarly, if a certain number or range of rows is expected, you can verify that
 
 ***Note:*** ***VerifyDone()*** is not a simple, read-only informational method. In its quest to determine if any result sets or rows remain unread, it will read and purge any unread rows. Furthermore, it doesn't return ***bool*** to indicate whether all expected records have been read. Instead, it throws an exception (after reading and purging) if all records had not been read prior to its call, or if the number of read rows was unexpected per ***RequireRowCount()***.
 
+<a name="ch-dbapi.Getting-a-Stored-Procedure-Retu"></a>
+
 ### Getting a Stored Procedure Return Value
 
 To get the return value from a stored procedure, simply call ***GetStatus()***.
+
+<a name="ch-dbapi.MetaData-Accessors"></a>
 
 ### Meta-Data Accessors
 
@@ -448,6 +478,8 @@ A handful of accessors are available for query meta-data:
 -   ***GetTotalColumns()*** -- Gets the number of columns in the current result set.
 
 ***Note:*** These accessors are intended to be used after retrieving the results - they will result in exceptions if called before all data is read. The API doesn't include any accessors for the same information prior to reading the data.
+
+<a name="ch-dbapi.Working-with-NULL"></a>
 
 ### Working with NULL
 
@@ -466,20 +498,30 @@ To determine if a output parameter result is `NULL`:, call ***IsNull()***:
 
 ***Note:*** The ***As\*()*** methods will return default values (e.g. zero or an empty string) when the actual result value is `NULL`. The only way to know if a `NULL` result was converted is to call ***IsNull()***. Therefore, if you need to distinguish between `NULL` and default values, you **must** call ***IsNull()***.
 
+<a name="ch-dbapi.Using-Transactions"></a>
+
 ### Using Transactions
 
 SDBAPI does not provide any special API support for transactions, so simply run, for example:
 
     m_Db.NewQuery("BEGIN TRAN").Execute();
 
+<a name="ch-dbapi.Using-Cursors"></a>
+
 ### Using Cursors
 
-SDBAPI does not support cursors. If you need cursors, you must use [DBAPI](#dbapi).
+SDBAPI does not support cursors. If you need cursors, you must use [DBAPI](#ch-dbapi.dbapi-user-layer).
+
+<a name="ch-dbapi.The-DBAPI-Library"></a>
 
 The DBAPI Library
 -----------------
 
+<a name="ch-dbapi.dbapi-user-layer"></a>
+
 ### DBAPI User-Layer Reference
+
+<a name="ch-dbapi.dbapi-overview"></a>
 
 #### DBAPI Overview
 
@@ -491,7 +533,7 @@ DBAPI has "Native" Access Modules for Sybase, Microsoft SQL Server, SQLITE, and 
 
 DBAPI is split into low-layer and user-layer.
 
-In addition, a simplified C++ API ([SDBAPI](#sdbapi)) layer is provided for cases where the full DBAPI feature set is not required.
+In addition, a simplified C++ API ([SDBAPI](#ch-dbapi.Simple-Database-Access-via-C)) layer is provided for cases where the full DBAPI feature set is not required.
 
 See the [DBAPI configuration parameters reference](ch_libconfig.html#ch_libconfig.DBAPI) for details on configuring the DBAPI library.
 
@@ -501,45 +543,52 @@ See the DBAPI sample programs for example code:
 
 The following sections cover specific aspects of DBAPI in detail.
 
--   [Object Hierarchy](#object-hierarchy)
+-   [Object Hierarchy](#ch-dbapi.dbapi-obj-hierarchy)
 
--   [Includes](#includes)
+-   [Includes](#ch-dbapi.dbapi-includes)
 
--   [Objects](#objects)
+-   [Objects](#ch-dbapi.dbapi-objects)
 
--   [Object Life Cycle](#object-life-cycle)
+-   [Object Life Cycle](#ch-dbapi.dbapi-obj-lifecycle)
 
--   [CVariant Type](#cvariant-type)
+-   [CVariant Type](#ch-dbapi.dbapi-variant)
 
--   [Choosing the Driver](#choosing-the-driver)
+-   [Choosing the Driver](#ch-dbapi.dbapi-choose-driver)
 
--   [Data Source and Connections](#data-source-and-connections)
+-   [Data Source and Connections](#ch-dbapi.dbapi-src-cnxns)
 
--   [Main Loop](#main-loop)
+-   [Main Loop](#ch-dbapi.dbapi-main-loop)
 
--   [Input and Output Parameters](#input-and-output-parameters)
+-   [Input and Output Parameters](#ch-dbapi.dbapi-io-params)
 
--   [Stored Procedures](#stored-procedures)
+-   [Stored Procedures](#ch-dbapi.dbapi-stored-procs)
 
--   [Cursors](#cursors)
+-   [Cursors](#ch-dbapi.dbapi-cursors)
 
--   [Working with BLOBs](#working-with-blobs)
+-   [Working with BLOBs](#ch-dbapi.dbapi-wwblobs)
 
--   [Updating BLOBs Using Cursors](#updating-blobs-using-cursors)
+-   [Updating BLOBs Using Cursors](#ch-dbapi.dbapi-blobs)
 
--   [Using Bulk Insert](#using-bulk-insert)
+-   [Using Bulk Insert](#ch-dbapi.dbapi-bulk-insert)
 
--   [Diagnostic Messages](#diagnostic-messages)
+-   [Diagnostic Messages](#ch-dbapi.dbapi-diag)
 
--   [Trace Output](#trace-output)
+-   [Trace Output](#ch-dbapi.dbapi-trace)
+
+<a name="ch-dbapi.dbapi-obj-hierarchy"></a>
 
 #### Object Hierarchy
 
-See [Figure 1](#figure-1).
+See [Figure 1](#ch-dbapi.F1).
 
-[![Figure 1. Object Hierarchy](/book/static/img/dbapi_user.gif)](/book/static/img/dbapi_user.gif "Click to see the full-resolution image")
+<a name="ch-dbapi.F1"></a>
+
+[<a name="ch-dbapi.dbapi-user.gif"></a>
+![Figure 1. Object Hierarchy](/book/static/img/dbapi_user.gif)](/book/static/img/dbapi_user.gif "Click to see the full-resolution image")
 
 Figure 1. Object Hierarchy
+
+<a name="ch-dbapi.dbapi-includes"></a>
 
 #### Includes
 
@@ -551,13 +600,19 @@ For static linkage the following include file is also necessary:
 
     #include <dbapi/driver/drivers.hpp>
 
+<a name="ch-dbapi.dbapi-objects"></a>
+
 #### Objects
 
 All objects are returned as pointers to their respective interfaces. The null (0) value is valid, meaning that no object was returned.
 
+<a name="ch-dbapi.dbapi-obj-lifecycle"></a>
+
 #### Object Life Cycle
 
 In general, any child object is valid only in the scope of its parent object. This is because most of the objects share the same internal structures. There is no need to delete every object explicitly, as all created objects will be deleted upon program exit. Specifically, all objects are managed by the static ***CDriverManager*** object, and will be destroyed when ***CDriverManager*** is destroyed. It is possible to delete any object from the framework and it is deleted along with all derived objects. For example, when an [IConnection](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIConnection.html) object is deleted, all derived [IStatement](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIStatement.html), [ICallableStatement](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classICallableStatement.html) and [IResultSet](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIResultSet.html) objects will be deleted too. If the number of the objects (for instance [IResultSet](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIResultSet.html)) is very high, it is recommended to delete them explicitly or enclose in the ***auto\_ptr\<...\>*** template. For each object a ***Close()*** method is provided. It disposes of internal resources, required for the proper library cleanup, but leaves the framework intact. After calling ***Close()*** the object becomes invalid. This method may be necessary when the database cleanup and framework cleanup are performed in different places of the code.
+
+<a name="ch-dbapi.dbapi-variant"></a>
 
 #### CVariant Type
 
@@ -566,6 +621,8 @@ The [CVariant](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCVa
 Related sample code:
 
 -   <http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/dbapi/test/dbapi_unit_test_object.cpp>
+
+<a name="ch-dbapi.dbapi-choose-driver"></a>
 
 #### Choosing the Driver
 
@@ -588,6 +645,8 @@ Related sample code:
 
 -   <http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/dbapi/test/dbapi_unit_test_context.cpp>
 
+<a name="ch-dbapi.dbapi-src-cnxns"></a>
+
 #### Data Source and Connections
 
 The [IDataSource](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIDataSource.html) interface defines the database platform. To create an object implementing this interface, use the method ***CreateDs(const string& driver)***. An [IDataSource](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIDataSource.html) can create objects represented by an [IConnection](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIConnection.html) interface, which is responsible for the connection to the database. It is highly recommended to specify the database name as an argument to the ***CreateConnection()*** method, or use the ***SetDatabase()*** method of a [CConnection](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCConnection.html) object instead of using a regular SQL statement. In the latter case, the library won't be able to track the current database.
@@ -604,6 +663,8 @@ Related sample code:
 -   <http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/dbapi/dbapi_simple.cpp>
 
 -   <http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/dbapi/test/dbapi_unit_test_connection.cpp>
+
+<a name="ch-dbapi.dbapi-main-loop"></a>
 
 #### Main Loop
 
@@ -638,6 +699,8 @@ Related sample code:
 
 -   <http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/dbapi/test/dbapi_unit_test_stmt.cpp>
 
+<a name="ch-dbapi.dbapi-io-params"></a>
+
 #### Input and Output Parameters
 
 The method [ICallableStatement](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classICallableStatement.html)***::SetParam(const CVariant& v, const string& name)*** is used to pass parameters to stored procedures and dynamic SQL statements. To ensure the correct parameter type it is recommended to use [CVariant](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCVariant.html) type factories (static methods) to create a [CVariant](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCVariant.html) of the required internal type. There is no internal representation for the BIT parameter type, please use TinyInt of Int types with 0 for `false` and 1 for `true` respectively. Here are a few examples: [CVariant](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCVariant.html)***::Int4(Int4 \*p)***, [CVariant](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCVariant.html)***::TinyInt(UInt1 \*p)***, [CVariant](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCVariant.html)***::VarChar(const char \*p, size\_t len )*** etc.
@@ -649,6 +712,8 @@ Output parameters are set by the [ICallableStatement](http://www.ncbi.nlm.nih.go
 Related sample code:
 
 -   <http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/dbapi/dbapi_simple.cpp>
+
+<a name="ch-dbapi.dbapi-stored-procs"></a>
 
 #### Stored Procedures
 
@@ -741,6 +806,8 @@ Related sample code:
 
 -   <http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/dbapi/test/dbapi_unit_test_proc.cpp>
 
+<a name="ch-dbapi.dbapi-cursors"></a>
+
 #### Cursors
 
 The library currently supports basic cursor features such as setting parameters and cursor update and delete operations.
@@ -757,6 +824,8 @@ Related sample code:
 
 -   <http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/dbapi/test/dbapi_unit_test_cursor.cpp>
 
+<a name="ch-dbapi.dbapi-wwblobs"></a>
+
 #### Working with BLOBs
 
 Due to the possibly very large size, reading and writing BLOBs requires special treatment. During the fetch the contents of the whole column must be read before advancing to the next one. That's why the columns of type IMAGE and TEXT are not bound to the corresponding variables in the resultset and all subsequent columns are not bound either. So it is recommended to put the BLOB columns at the end of the column list. There are several ways to read BLOBs, using [IResultSet](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIResultSet.html)***::Read()***, [IResultSet](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIResultSet.html)***::GetBlobIStream()***, and [IResultSet](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIResultSet.html)***::GetBlobReader()*** methods. The first is the most efficient; it reads data into a supplied buffer until it returns 0 bytes read. The next call will read from the next column. The second method implements the STL istream interface. After each successful column read you should get another istream for the next column. The third implements the C++ Toolkit ***IReader*** interface. If the data size is small and double buffering is not a performance issue, the BLOB columns can be bound to [CVariant](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCVariant.html) variables by calling [IResultSet](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIResultSet.html)***::BindBlobToVariant(true)***. In this case the data should be read using [CVariant](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCVariant.html)***::Read()*** and [CVariant](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCVariant.html)***::GetBlobSize()***. To write BLOBs there are also several options. To pass a BLOB as a SQL parameter you should store it in a [CVariant](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCVariant.html) using [CVariant](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCVariant.html)***::Append()*** and [CVariant](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCVariant.html)***::Truncate()*** methods. To store a BLOB in the database you should initialize this column first by writing a zero value (**`0x0`**) for an IMAGE type or a space value (`' '`) for a TEXT type. After that you can open a regular [IResultSet](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIResultSet.html) or [ICursor](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classICursor.html) and for each required row update the BLOB using [IResultSet](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIResultSet.html)***::GetBlobOStream()***. NOTE: this call opens an additional connection to the database.
@@ -764,6 +833,8 @@ Due to the possibly very large size, reading and writing BLOBs requires special 
 Related sample code:
 
 -   <http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/dbapi/test/dbapi_unit_test_lob.cpp>
+
+<a name="ch-dbapi.dbapi-blobs"></a>
 
 #### Updating BLOBs Using Cursors
 
@@ -779,6 +850,8 @@ It is recommended to update BLOBs using cursors, because no additional connectio
     }
 
 Note that ***GetBlobOStream()*** takes the column number as the first argument and this call is invalid until the cursor is open.
+
+<a name="ch-dbapi.dbapi-bulk-insert"></a>
 
 #### Using Bulk Insert
 
@@ -803,6 +876,8 @@ Related sample code:
 
 -   <http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/dbapi/test/dbapi_unit_test_bcp.cpp>
 
+<a name="ch-dbapi.dbapi-diag"></a>
+
 #### Diagnostic Messages
 
 The DBAPI library is integrated with the C++ Toolkit diagnostic and tracing facility. By default all client and server messages are handled by the Toolkit's standard message handler. However it is possible to redirect the DBAPI-specific messages to a single ***CDB\_MultiEx*** object and retrieve them later at any time. There are two types of redirection, per data source and per connection. The redirection from a data source is enabled by calling ***IDataSource::SetLogStream(0)***. After the call all client- and context-specific messages will be stored in the ***IDataSource*** object. The ***IDataSource::GetErrorInfo()*** method will return the string representation of all accumulated messages and clean up the storage. The ***IDataSource::GetErrorAsEx()*** will return a pointer to the underlying ***CDB\_MultiEx*** object. Retrieving information and cleaning up is left to the developer. Do NOT delete this object. The connection-specific redirection is controlled by calling ***IConnection::MsgToEx(boolean enable)*** method. This redirection is useful; for instance, to temporarily disable default messages from the database server. The ***IConnection::GetErrorInfo()*** and ***IConnection::GetErrorAsEx()*** methods work in the same manner as for the ***IDataSource***
@@ -811,37 +886,45 @@ Related sample code:
 
 -   <http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/dbapi/test/dbapi_unit_test_msg.cpp>
 
+<a name="ch-dbapi.dbapi-trace"></a>
+
 #### Trace Output
 
 The DBAPI library uses the Toolkit-wide DIAG\_TRACE environment variable to do the debug output. To enable it set it to any value. If you have any problems with the DBAPI please include the trace output into your email.
+
+<a name="ch-dbapi.dbapi-driver-ref"></a>
 
 ### DBAPI Driver Reference
 
 The following sections cover low-level access to the various RDBMSs:
 
--   [Overview](#overview)
+-   [Overview](#ch-dbapi.dbapi-drvr-overview)
 
--   [The driver architecture](#the-driver-architecture)
+-   [The driver architecture](#ch-dbapi.dbapi-drvr-arch)
 
--   [Sample program](#sample-program)
+-   [Sample program](#ch-dbapi.dbapi-sample-prog)
 
--   [Error handling](#error-handling)
+-   [Error handling](#ch-dbapi.dbapi-errors)
 
--   [Driver context and connections](#driver-context-and-connections)
+-   [Driver context and connections](#ch-dbapi.dbapi-context)
 
--   [Driver Manager](#driver-manager)
+-   [Driver Manager](#ch-dbapi.dbapi-drvr-mgr)
 
--   [Text and Image Data Handling](#text-and-image-data-handling)
+-   [Text and Image Data Handling](#ch-dbapi.dbapi-txt-img)
 
--   [Results loop](#results-loop)
+-   [Results loop](#ch-dbapi.dbapi-results)
+
+<a name="ch-dbapi.dbapi-drvr-overview"></a>
 
 #### Overview
 
-SDBAPI clients can only use [FreeTDS](#freetds), but DBAPI clients must choose the lower-level driver.
+SDBAPI clients can only use [FreeTDS](#ch-dbapi.free-tds64), but DBAPI clients must choose the lower-level driver.
 
 The NCBI DBAPI driver library describes and implements a set of objects needed to provide a uniform low-level access to the various relational database management systems (RDBMS). The basic driver functionality is the same as in most other RDBMS client APIs. It allows opening a connection to a server, executing a command (query) on this connection and getting the results back. The main advantage of using the driver is that you don't have to change your own upper-level code if you need to move from one RDBMS client API to another.
 
 The driver can use two different methods to access the particular RDBMS. If the RDBMS provides a client library for the given computer system (e.g. Sun/Solaris), then the driver uses that library. If no such client library exists, then the driver connects to an RDBMS through a special gateway server which is running on a computer system where such a library does exist.
+
+<a name="ch-dbapi.dbapi-drvr-arch"></a>
 
 #### The driver architecture
 
@@ -856,6 +939,8 @@ Once you have the connection object, you could use it as a factory for the diffe
 Another important part of the driver is error and message handling. There are two different mechanisms implemented. The first one is exceptions. All exceptions which could be thrown by the driver are inherited from the single base class [CDB\_Exception](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__Exception.html). Drivers use the exception mechanism whenever possible, but in many cases the underlying client library uses callbacks or handlers to report error messages rather than throwing exceptions. The driver supplies a handler's stack mechanism to manage these cases.
 
 To send and to receive the data through the driver you have to use the driver provided datatypes. The collection of the datatypes includes: [one](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__TinyInt.html), [two](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__SmallInt.html), [four](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__Int.html) and [eight](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__BigInt.html) byte integers; [float](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__Float.html) and [double](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__Double.html); [numeric](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__Numeric.html); [char](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__Char.html), [varchar](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__VarChar.html), [binary](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__Binary.html), [varbinary](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__VarBinary.html); [datetime](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__DateTime.html) and [smalldatetime](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__SmallDateTime.html); [text](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__Text.html) and [image](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__Image.html). All datatypes are derived from a single base class [CDB\_Object](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__Object.html).
+
+<a name="ch-dbapi.dbapi-sample-prog"></a>
 
 #### Sample program
 
@@ -913,6 +998,8 @@ This program opens one connection to the server and selects the database names a
             myExHandler.HandleIt(&e);
         }
     }
+
+<a name="ch-dbapi.dbapi-errors"></a>
 
 #### Error handling
 
@@ -987,6 +1074,8 @@ The DBAPI driver may throw any of the following types derived from [CDB\_Excepti
 Drivers use two ways to deliver an error message object to an application. If it is possible to throw an exception, then the driver throws the error message object. If not, then the driver calls the [user's error handler](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__UserHandler.html) with a pointer to the error message object as an argument. It's not always convenient to process all types of error messages in one error handler. Some users may want to use a special error message handler inside some function or block and a default error handler outside. To accommodate these cases the driver provides a [handler stack mechanism](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDBHandlerStack&d=C). The top handler in the stack gets the error message object first. If it knows how to deal with this message, then it processes the message and returns `true`. If handler wants to pass this message to the other handlers, then it returns `false`. So, the driver pushes the error message object through the stack until it gets `true` from the handler. The [default driver's error handler](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__UserHandler__Stream.html), which just prints the error message to **`stderr`**, is always on the bottom of the stack.
 
 Another tool which users may want to use for error handling is the [CDB\_MultiEx](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__MultiEx.html) object. This tool allows collecting multiple [CDB\_Exception](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__Exception.html) objects into one container and then throwing the container as one exception object.
+
+<a name="ch-dbapi.dbapi-context"></a>
 
 #### Driver context and connections
 
@@ -1071,11 +1160,13 @@ The **`pool_name`** argument is just an arbitrary string. An application could u
 
 An application could combine in one pool the connections to the different servers. This mechanism could also be used to group together the connections with some particular settings (default database, transaction isolation level, etc.).
 
+<a name="ch-dbapi.dbapi-drvr-mgr"></a>
+
 #### Driver Manager
 
 It's not always known which NCBI DBAPI driver will be used by a particular program. Sometimes you want a driver to be a parameter in your program. Sometimes you need to use two different drivers in one binary but can not link them statically because of name collisions. Sometimes you just need the driver contexts factory. The [Driver Manager](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=C_DriverMgr&d=C) is intended to solve these problems.
 
-Let's rewrite our [Sample program](#sample-program) using the `Driver Manager`. The original text was.
+Let's rewrite our [Sample program](#ch-dbapi.dbapi-sample-prog) using the `Driver Manager`. The original text was.
 
     #include <iostream>
     #include <dbapi/driver/public.hpp>
@@ -1116,6 +1207,8 @@ If we use the `Driver Manager` we could allow the driver name to be a program ar
             ...
 
 This fragment creates an instance of the `Driver Manager`, dynamically loads the driver's library, implicitly registers this driver, creates the driver context and makes a connection to a server. If you don't want to load some drivers dynamically for any reason, but want to use the `Driver Manager` as a driver contexts factory, then you need to statically link your program with those libraries and explicitly register those using functions from `dbapi/driver/drivers.hpp` header.
+
+<a name="ch-dbapi.dbapi-txt-img"></a>
 
 #### Text and Image Data Handling
 
@@ -1230,6 +1323,8 @@ The recommended algorithm for updating the text/image data is:
     delete my_descr; // we don't need this descriptor anymore
     ...
 
+<a name="ch-dbapi.dbapi-results"></a>
+
 #### Results loop
 
 Each connection in the NCBI DBAPI driver is always single threaded. Therefore, applications have to retrieve all the results from a current command prior to executing a new one. Not all results are meaningful (i.e. an RPC always returns a status result regardless of whether or not a procedure has a return statement), but all results need to be retrieved. The following loop is recommended for retrieving results from all types of commands:
@@ -1274,17 +1369,21 @@ Each connection in the NCBI DBAPI driver is always single threaded. Therefore, a
 
 If you don't want to process some particular type of result, just skip the `while (res->Fetch()){...}` in the corresponding `case`.
 
+<a name="ch-dbapi.dbapi-drivers"></a>
+
 ### Supported DBAPI drivers
 
 The following sections cover the supported DBAPI drivers:
 
--   [FreeTDS (TDS ver. 7.0)](#freetds-tds-ver-70) -- this is the preferred driver
+-   [FreeTDS (TDS ver. 7.0)](#ch-dbapi.free-tds64) -- this is the preferred driver
 
--   [Sybase CTLIB](#sybase-ctlib)
+-   [Sybase CTLIB](#ch-dbapi.dbapi-drvs-ctlib)
 
--   [ODBC](#odbc)
+-   [ODBC](#ch-dbapi.dbapi-drvrs-odbc)
 
--   [MySQL Driver](#mysql-driver)
+-   [MySQL Driver](#ch-dbapi.mysql-driver)
+
+<a name="ch-dbapi.free-tds64"></a>
 
 #### FreeTDS (TDS ver. 7.0)
 
@@ -1320,6 +1419,8 @@ This driver is the most recommended, built-in, and portable.
 
     -   TDS protocol version 4.2 should not be used with MS SQL server.
 
+<a name="ch-dbapi.dbapi-drvs-ctlib"></a>
+
 #### Sybase CTLIB
 
 ***Note:*** This driver is not supported by SDBAPI.
@@ -1341,6 +1442,8 @@ This driver is the most recommended, built-in, and portable.
 -   Caveats:
 
     -   Cannot communicate with MS SQL server using any TDS version.
+
+<a name="ch-dbapi.dbapi-drvrs-odbc"></a>
 
 #### ODBC
 
@@ -1367,6 +1470,8 @@ This driver is the most recommended, built-in, and portable.
     -   On most NCBI PCs, there is an old header `odbcss.h` (from 4/24/1998) installed. The symptom is that although everything compiles just fine, however in the linking stage there are dozens of unresolved symbol errors for ODBC functions. Ask "pc.systems" to fix this for your PC.
 
     -   On UNIX, it's only known to work with Merant's implementation of ODBC, and it has not been thoroughly tested or widely used, so surprises are possible.
+
+<a name="ch-dbapi.mysql-driver"></a>
 
 #### MySQL Driver
 
@@ -1396,6 +1501,8 @@ There is a direct (without ODBC) MySQL driver in the NCBI C++ Toolkit DBAPI. How
 
 -   Setting timeouts
 
+<a name="ch-dbapi.Major-Features-of-th"></a>
+
 The BDB Wrapper
 ---------------
 
@@ -1417,6 +1524,8 @@ NCBI created the "BDB" wrapper to simplify use of the open source [Berkeley DB](
 
 -   **Simple queries.** The BDB wrapper includes implementation of a simple query language to search records in flat files.
 
+<a name="ch-dbapi.The-SQLite-Wrapper"></a>
+
 The SQLite Wrapper
 ------------------
 
@@ -1434,22 +1543,26 @@ Please see the [sqlitewrapp.hpp](http://www.ncbi.nlm.nih.gov/viewvc/v1/trunk/c%2
 
 For more information about SQLite, see the [online SQLite documentation](http://sqlite.org/docs.html).
 
+<a name="ch-dbapi.Database-loadbalanci"></a>
+
 Database Load-Balancing (DBLB)
 ------------------------------
 
-Many server-based databases are load-balanced for efficient resource management. Accessing load-balanced databases is automatically done from C++ when using the [SDBAPI](#sdbapi) library, but requires some specific statements in the client code when using the [DBAPI](#dbapi) library or [scripts](#scripts). This section discusses setting up and using load-balanced databases.
+Many server-based databases are load-balanced for efficient resource management. Accessing load-balanced databases is automatically done from C++ when using the [SDBAPI](#ch-dbapi.SDBAPI-UserLayer-Reference) library, but requires some specific statements in the client code when using the [DBAPI](#ch-dbapi.The-DBAPI-Library) library or [scripts](#ch-dbapi.Database-Access-via-Python-and). This section discusses setting up and using load-balanced databases.
 
 The following sections cover specific aspects of Database Load-Balancing:
 
--   [Setting up Load-Balancing of Database Servers](#setting-up-load-balancing-of-database-servers)
+-   [Setting up Load-Balancing of Database Servers](#ch-dbapi.Getting-started)
 
--   [Using Database Load-Balancing from C++](#using-database-load-balancing-from-c++)
+-   [Using Database Load-Balancing from C++](#ch-dbapi.Using-Database-LoadBalancing-fr)
 
--   [Load-Balanced Database Access via Python and Perl](#load-balanced-database-access-via-python-and-perl)
+-   [Load-Balanced Database Access via Python and Perl](#ch-dbapi.Database-Access-via-Python-and)
 
--   [Advantages of using DBLB](#advantages-of-using-dblb)
+-   [Advantages of using DBLB](#ch-dbapi.Advantages-of-using-)
 
--   [How it works (by default)](#how-it-works-by-default)
+-   [How it works (by default)](#ch-dbapi.HOW-IT-WORKS-by-defa)
+
+<a name="ch-dbapi.Getting-started"></a>
 
 ### Setting up Load-Balancing of Database Servers
 
@@ -1466,9 +1579,11 @@ Tell the DBAs which of the server aliases point to the server that should be use
 3  
 The DBAs will also ask for a DNS name to match the service name as a backup connection method, should everything else fail.
 
+<a name="ch-dbapi.Using-Database-LoadBalancing-fr"></a>
+
 ### Using Database Load-Balancing from C++
 
-For simplest access, see the section on [using SDBAPI](#using-sdbapi) above. SDBAPI uses the database load-balancing by default, so no further steps are necessary.
+For simplest access, see the section on [using SDBAPI](#ch-dbapi.Simple-Database-Access-via-C) above. SDBAPI uses the database load-balancing by default, so no further steps are necessary.
 
 If DBAPI is being used (e.g. if a feature that is only available in DBAPI is required), and you want to activate database load-balancing:
 
@@ -1498,6 +1613,8 @@ Example:
     CTrivialConnValidator my_validator(my_databasename);
     conn->ConnectValidated(
         my_validator, my_username, my_password, my_servicename, my_ databasename);
+
+<a name="ch-dbapi.Database-Access-via-Python-and"></a>
 
 ### Load-Balanced Database Access via Python and Perl
 
@@ -1573,7 +1690,11 @@ There is also a Python module that provides an interface to the load-balancing s
 
 -   documentation: <https://dsubmit.ncbi.nlm.nih.gov/docs/lbsmd/>
 
+<a name="ch-dbapi.Advantages-of-using-"></a>
+
 ### Advantages of using DBLB
+
+<a name="ch-dbapi.C-Specific"></a>
 
 #### C++ Specific
 
@@ -1587,6 +1708,8 @@ There is also a Python module that provides an interface to the load-balancing s
 
 -   If needed, you can implement your own customized mapper. Components of the default connection strategy can be used separately, or in combination with each other and with the user-created strategies, if necessary.
 
+<a name="ch-dbapi.General"></a>
+
 #### General
 
 -   Connecting to the database servers by server name and/or "interfaces" file based aliases still works the same as it used to.
@@ -1594,6 +1717,8 @@ There is also a Python module that provides an interface to the load-balancing s
 -   Automatic avoidance of unresponsive database servers. This prevents your application from hanging for up to 30 seconds on the network timeout.
 
 -   Independence from the database "interfaces" file. A centrally maintained service directory is used instead, which is accessible locally and/or via network. It also dynamically checks database servers' availability and excludes unresponsive servers.
+
+<a name="ch-dbapi.HOW-IT-WORKS-by-defa"></a>
 
 ### How it works (by default)
 

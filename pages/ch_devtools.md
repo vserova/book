@@ -27,6 +27,8 @@ The tools used in-house by software developers at NCBI -- such as debuggers, mem
 
 As mentioned above, the tools used in-house by software developers at NCBI -- such as debuggers, memory checkers, profilers, etc. are discussed in [C++ Toolkit Wiki](http://intranet.ncbi.nlm.nih.gov:6224/wiki-private/CxxToolkit/index.cgi/Development_Tools).
 
+<a name="ch-devtools.s1"></a>
+
 Section Placeholder
 -------------------
 

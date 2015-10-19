@@ -21,65 +21,67 @@ The NCBI C++ Toolkit has forked and enhanced the open-source [xmlwrapp](http://v
 
 The following is an outline of the topics presented in this chapter:
 
--   [General Information](#general-information)
+-   [General Information](#ch-xmlwrapp.General-Information)
 
--   [XmlWrapp Classes](#xmlwrapp-classes)
+-   [XmlWrapp Classes](#ch-xmlwrapp.XmlWrapp-Classes)
 
--   [How To](#how-to)
+-   [How To](#ch-xmlwrapp.How-To)
 
-    -   [Create a Document from an std::string Object](#create-a-document-from-an-stdstring-object)
+    -   [Create a Document from an std::string Object](#ch-xmlwrapp.-Create-a-Document-fr)
 
-    -   [Create a Document from a File](#create-a-document-from-a-file)
+    -   [Create a Document from a File](#ch-xmlwrapp.-Create-a-Document-fr-1)
 
-    -   [Save a Document or Node to a File](#save-a-document-or-node-to-a-file)
+    -   [Save a Document or Node to a File](#ch-xmlwrapp.Save-a-Document-to-a)
 
-    -   [Iterate Over Nodes](#iterate-over-nodes)
+    -   [Iterate Over Nodes](#ch-xmlwrapp.Iterate-Over-Nodes)
 
-    -   [Insert and Remove Nodes](#insert-and-remove-nodes)
+    -   [Insert and Remove Nodes](#ch-xmlwrapp.Insert-and-Remove-No)
 
-    -   [Iterate Over Attributes](#iterate-over-attributes)
+    -   [Iterate Over Attributes](#ch-xmlwrapp.Iterate-Over-Attribu)
 
-    -   [Insert and Remove Attributes](#insert-and-remove-attributes)
+    -   [Insert and Remove Attributes](#ch-xmlwrapp.Insert-and-Remove-At)
 
-    -   [Work with XML Namespaces](#work-with-xml-namespaces)
+    -   [Work with XML Namespaces](#ch-xmlwrapp.Work-with-XML-Namesp)
 
-    -   [Use an Event Parser](#use-an-event-parser)
+    -   [Use an Event Parser](#ch-xmlwrapp.Use-an-Event-Parser)
 
-    -   [Make an XSLT Transformation](#make-an-xslt-transformation)
+    -   [Make an XSLT Transformation](#ch-xmlwrapp.Make-an-XSLT-Transfo)
 
-    -   [Run an XPath Query](#run-an-xpath-query)
+    -   [Run an XPath Query](#ch-xmlwrapp.Run-an-XPath-Query)
 
-    -   [Run an XPath Query with a Default Namespace](#run-an-xpath-query-with-a-default-namespace)
+    -   [Run an XPath Query with a Default Namespace](#ch-xmlwrapp.Run-an-XPath-Query-with-a-De)
 
-    -   [Use an Extension Function](#use-an-extension-function)
+    -   [Use an Extension Function](#ch-xmlwrapp.Use-an-Extension-Function)
 
-    -   [Use an Extension Element](#use-an-extension-element)
+    -   [Use an Extension Element](#ch-xmlwrapp.Use-an-Extension-Element)
 
-    -   [Use an XML Catalog](#use-an-xml-catalog)
+    -   [Use an XML Catalog](#ch-xmlwrapp.Use-an-XML-Catalog)
 
--   [Warning: Collaborative Use of XmlWrapp and libxml2](#warning-collaborative-use-of-xmlwrapp-and-libxml2)
+-   [Warning: Collaborative Use of XmlWrapp and libxml2](#ch-xmlwrapp.Warning-Collaborative-Use-of)
 
--   [Implementation Details](#implementation-details)
+-   [Implementation Details](#ch-xmlwrapp.Implementation-Details)
 
-    -   [Copying and Referencing Nodes](#copying-and-referencing-nodes)
+    -   [Copying and Referencing Nodes](#ch-xmlwrapp.Copying-and-Referencing-Node)
 
-    -   [XPath Expressions and Namespaces](#xpath-expressions-and-namespaces)
+    -   [XPath Expressions and Namespaces](#ch-xmlwrapp.Using-Namespaces-with-XPath)
 
-    -   [Containers of Attributes - Iteration and Size](#containers-of-attributes---iteration-and-size)
+    -   [Containers of Attributes - Iteration and Size](#ch-xmlwrapp.Containers-of-Attributes--It)
 
-    -   [Changing Default Attributes](#changing-default-attributes)
+    -   [Changing Default Attributes](#ch-xmlwrapp.Changing-Default-Attributes)
 
-    -   [Event Parser and Named Entities](#event-parser-and-named-entities)
+    -   [Event Parser and Named Entities](#ch-xmlwrapp.Event-Parser-and-Named-Entit)
 
-    -   [Safe and Unsafe Namespaces](#safe-and-unsafe-namespaces)
+    -   [Safe and Unsafe Namespaces](#ch-xmlwrapp.Safe-and-Unsafe-Namespaces)
 
-    -   [Thread Safety](#thread-safety)
+    -   [Thread Safety](#ch-xmlwrapp.Thread-Safety)
 
-    -   [Safe libxml2 and libxslt Cleanup](#safe-libxml2-and-libxslt-cleanup)
+    -   [Safe libxml2 and libxslt Cleanup](#ch-xmlwrapp.Safe-libxml2-and-libxslt-Cle)
 
-    -   [Formatting of Programmatically Added Content](#formatting-of-programmatically-added-content)
+    -   [Formatting of Programmatically Added Content](#ch-xmlwrapp.Formatting-of-Programmatical)
 
--   [FAQ](#faq)
+-   [FAQ](#ch-xmlwrapp.FAQ)
+
+<a name="ch-xmlwrapp.General-Information"></a>
 
 General Information
 -------------------
@@ -138,7 +140,7 @@ The original open-source [libxmlwrapp](http://vslavik.github.io/xmlwrapp/) 0.6.0
 
     -   Each node and attribute may contain a list of namespace definitions. Namespace definitions can be added to or removed from this list. The list can be retrieved.
 
-    -   XmlWrapp namespace objects can be either safe or unsafe. Safe namespace objects prevent program crashes by eliminating potentially invalid pointers. Using unsafe namespace objects requires less time and memory, but may result in invalid pointers and may cause a crash. See the [safe and unsafe namespaces](#safe-and-unsafe-namespaces) section for more details.
+    -   XmlWrapp namespace objects can be either safe or unsafe. Safe namespace objects prevent program crashes by eliminating potentially invalid pointers. Using unsafe namespace objects requires less time and memory, but may result in invalid pointers and may cause a crash. See the [safe and unsafe namespaces](#ch-xmlwrapp.Safe-and-Unsafe-Namespaces) section for more details.
 
     -   Nodes and attributes can now be searched by namespace as well as by name.
 
@@ -158,9 +160,11 @@ The original open-source [libxmlwrapp](http://vslavik.github.io/xmlwrapp/) 0.6.0
 
 The NCBI enhancements retain the generic nature of `libxmlwrapp`, and are not tailored to any particular application domain.
 
-XmlWrapp demo [applications](https://svn.ncbi.nlm.nih.gov/viewvc/toolkit/trunk/internal/c++/src/internal/demo/misc/xmlwrapp) and [unit tests](https://svn.ncbi.nlm.nih.gov/viewvc/toolkit/trunk/internal/c++/src/internal/test/misc/xmlwrapp) are available inside NCBI, but the most common and basic usage examples are given in the [next section](#next-section).
+XmlWrapp demo [applications](https://svn.ncbi.nlm.nih.gov/viewvc/toolkit/trunk/internal/c++/src/internal/demo/misc/xmlwrapp) and [unit tests](https://svn.ncbi.nlm.nih.gov/viewvc/toolkit/trunk/internal/c++/src/internal/test/misc/xmlwrapp) are available inside NCBI, but the most common and basic usage examples are given in the [next section](#ch-xmlwrapp.How-To).
 
 All the XmlWrapp functionality resides in the C++ namespaces [xml::](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/namespacexml.html) and [xslt::](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/namespacexslt.html), and all the code is Doxygen-style commented.
+
+<a name="ch-xmlwrapp.XmlWrapp-Classes"></a>
 
 XmlWrapp Classes
 ----------------
@@ -181,10 +185,14 @@ To support XSD schema validation and DTD validation, XmlWrapp provides the ***xm
 
 Warnings, errors and fatal errors may occur during the parsing and validating. To collect them, XmlWrapp provides the ***xml::error\_messages*** class. The ***error\_messages*** class includes the ***print()*** method, which returns a string containing a newline-separated list of messages. It also includes the ***has\_warnings()***, ***has\_errors()***, and ***has\_fatal\_errors()*** methods in case you are interested in the presence of a specific type of message. Note that errors and fatal errors are considered separately, so ***has\_fatal\_errors()*** may return `true` while ***has\_errors()*** returns `false`.
 
+<a name="ch-xmlwrapp.How-To"></a>
+
 How To
 ------
 
 This section includes compact code fragments that show the essence of how to achieve typical goals using XmlWrapp. The examples do not illustrate all the features of XmlWrapp and are not intended to be complete and compilable. Your code will need to include the necessary headers, use try-catch blocks, check for errors, and validate the XML document.
+
+<a name="ch-xmlwrapp.-Create-a-Document-fr"></a>
 
 ### Create a Document from an std::string Object
 
@@ -192,6 +200,8 @@ This section includes compact code fragments that show the essence of how to ach
                                      "<TagB>stuff</TagB>"
                                  "</TagA>" );
     xml::document       doc( xmldata.c_str(), xmldata.size(), NULL );
+
+<a name="ch-xmlwrapp.-Create-a-Document-fr-1"></a>
 
 ### Create a Document from a File
 
@@ -202,6 +212,8 @@ This section includes compact code fragments that show the essence of how to ach
     xml::error_messages msgs;
     xml::document       doc( "MyFile.xml", &msgs );
     std:cout << msgs.print() << std:endl;
+
+<a name="ch-xmlwrapp.Save-a-Document-to-a"></a>
 
 ### Save a Document or Node to a File
 
@@ -237,7 +249,9 @@ For example, if you do not want to have the XML declaration at the beginning of 
 
 Note that all the ***save\_to\_\*()*** functions use the same underlying formatting code and therefore respond to flags in the same way.
 
-For further discussion, see the [Formatting of Programmatically Added Content](#formatting-of-programmatically-added-content) section. For a complete list of available formatting flags, see [`enum xml::save_options`](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/namespacexml.html#8599801d006476631c27a732819b9995).
+For further discussion, see the [Formatting of Programmatically Added Content](#ch-xmlwrapp.Formatting-of-Programmatical) section. For a complete list of available formatting flags, see [`enum xml::save_options`](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/namespacexml.html#8599801d006476631c27a732819b9995).
+
+<a name="ch-xmlwrapp.Iterate-Over-Nodes"></a>
 
 ### Iterate Over Nodes
 
@@ -254,6 +268,8 @@ For further discussion, see the [Formatting of Programmatically Added Content](#
         std::cout << "child node '" << child->get_name() << "'" << std:endl;
     }
 
+<a name="ch-xmlwrapp.Insert-and-Remove-No"></a>
+
 ### Insert and Remove Nodes
 
     xml::document           doc( "MyFile2.xml", NULL );
@@ -263,6 +279,8 @@ For further discussion, see the [Formatting of Programmatically Added Content](#
     root.insert( i, xml::node("inserted") );
     i = root.find( "to_remove", root.begin() );
     root.erase( i );
+
+<a name="ch-xmlwrapp.Iterate-Over-Attribu"></a>
 
 ### Iterate Over Attributes
 
@@ -277,6 +295,8 @@ For further discussion, see the [Formatting of Programmatically Added Content](#
         std::cout << i->get_name() << "=" << i->get_value() << std:endl;
     }
 
+<a name="ch-xmlwrapp.Insert-and-Remove-At"></a>
+
 ### Insert and Remove Attributes
 
     xml::document           doc( "MyFile.xml", NULL );
@@ -285,6 +305,8 @@ For further discussion, see the [Formatting of Programmatically Added Content](#
     attrs.insert( "myAttr", "attrValue" );
     xml::attributes::iterator i = attrs.find( "attrToRemove" );
     attrs.erase( i );
+
+<a name="ch-xmlwrapp.Work-with-XML-Namesp"></a>
 
 ### Work with XML Namespaces
 
@@ -306,9 +328,13 @@ For further discussion, see the [Formatting of Programmatically Added Content](#
     root.set_namespace( "myPrefix" );
     attr->set_namespace( "myPrefix" );
 
+<a name="ch-xmlwrapp.Use-an-Event-Parser"></a>
+
 ### Use an Event Parser
 
 For those within NCBI, there is [sample code](https://svn.ncbi.nlm.nih.gov/viewvc/toolkit/trunk/internal/c++/src/internal/test/misc/xmlwrapp/event/test_event.cpp?revision=156258&view=markup) showing how to use an event parser.
+
+<a name="ch-xmlwrapp.Make-an-XSLT-Transfo"></a>
 
 ### Make an XSLT Transformation
 
@@ -344,6 +370,8 @@ Other methods and options are available for saving the transformation result - s
 
     -   The output method specified in the XSL is "`text`" and the platform is Windows.
 
+<a name="ch-xmlwrapp.Run-an-XPath-Query"></a>
+
 ### Run an XPath Query
 
     xml::document                  doc( "example.xml", NULL );
@@ -364,6 +392,8 @@ The **`xpath_expression`** object also supports:
 -   pre-compilation of the XPath query string
 
 -   namespace registration (a single namespace or a list of namespaces)
+
+<a name="ch-xmlwrapp.Run-an-XPath-Query-with-a-De"></a>
 
 ### Run an XPath Query with a Default Namespace
 
@@ -408,6 +438,8 @@ The solution is to create a special namespace with the sole purpose of associati
         std::cout << "Node #" << nnum++ << std::endl
              << *k << std::endl;
 
+<a name="ch-xmlwrapp.Use-an-Extension-Function"></a>
+
 ### Use an Extension Function
 
     class myExtFunc : public xslt::extension_function
@@ -451,6 +483,8 @@ The solution is to create a special namespace with the sole purpose of associati
 Please also see the ***xslt::extension-function*** [class reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classxslt_1_1extension__function.html).
 
 Users inside NCBI can view the [extension function unit tests](https://svn.ncbi.nlm.nih.gov/viewvc/toolkit/trunk/internal/c++/src/internal/test/misc/xmlwrapp/xslt_ext_func/) for more usage examples.
+
+<a name="ch-xmlwrapp.Use-an-Extension-Element"></a>
 
 ### Use an Extension Element
 
@@ -501,6 +535,8 @@ Please also see the ***xslt::extension-element*** [class reference](http://www.n
 
 Users inside NCBI can view the [extension element unit tests](https://svn.ncbi.nlm.nih.gov/viewvc/toolkit/trunk/internal/c++/src/internal/test/misc/xmlwrapp/xslt_ext_elem/) for more usage examples.
 
+<a name="ch-xmlwrapp.Use-an-XML-Catalog"></a>
+
 ### Use an XML Catalog
 
 The **`XML_CATALOG_FILES`** environment variable may be used in one of three ways to control the XML catalog feature of `libxml2` – i.e. the way `libxml2` resolves unreachable external URI's:
@@ -520,13 +556,19 @@ The **`XML_CATALOG_FILES`** environment variable is read once before the first p
 
 There is another environment variable (**`XML_DEBUG_CATALOG`**) to control debug output. If it is defined, then debugging output will be enabled.
 
+<a name="ch-xmlwrapp.Warning-Collaborative-Use-of"></a>
+
 Warning: Collaborative Use of XmlWrapp and libxml2
 --------------------------------------------------
 
 XmlWrapp uses the **`_private`** field of the raw `libxml2 `***xmlNode*** data structure for internal purposes. Therefore, if `libxml2` and XmlWrapp are used collaboratively then this field must not be used in client code. If it is used, it may cause a core dump or other undefined behavior.
 
+<a name="ch-xmlwrapp.Implementation-Details"></a>
+
 Implementation Details
 ----------------------
+
+<a name="ch-xmlwrapp.Copying-and-Referencing-Node"></a>
 
 ### Copying and Referencing Nodes
 
@@ -567,6 +609,8 @@ The **`my_copy`** variable is a recursive copy of the corresponding node togethe
 
 ***Note:*** It is recommended to pass nodes by reference when appropriate to maximize performance and avoid modification of copies.
 
+<a name="ch-xmlwrapp.Using-Namespaces-with-XPath"></a>
+
 ### Using Namespaces with XPath Expressions
 
 XmlWrapp provides the ***xml::xpath\_expression*** class for building reusable XPath expressions. If namespaces are involved then one of the constructors which accept a namespace or a list of namespaces should be used. Otherwise the XPath query results may not have the nodes you expect to get.
@@ -582,6 +626,8 @@ Recommendations:
 -   If you need the best performance then use ***xml::xpath\_expression*** explicitly and do not forget to provide a list of the required namespaces.
 
 -   If you aren’t concerned about performance then use one of the ***xml::node::run\_xpath\_query( const char \* expr)*** methods.
+
+<a name="ch-xmlwrapp.Containers-of-Attributes--It"></a>
 
 ### Containers of Attributes - Iteration and Size
 
@@ -661,6 +707,8 @@ XmlWrapp forbids incrementing iterators provided by ***xml::attributes::find(...
 
 ***Note:*** This `libxml2` limitation affects the ***xml::attributes::size()*** method behavior. It will always provide the number of non-default attributes and will never include the number of default attributes regardless of whether or not a node has default attributes.
 
+<a name="ch-xmlwrapp.Changing-Default-Attributes"></a>
+
 ### Changing Default Attributes
 
 `libxml2` does not provide the ability to change a default attribute. XmlWrapp does provide this ability, but at the cost of implicitly converting the default attribute into a non-default attribute. Consider the following document:
@@ -726,11 +774,15 @@ XmlWrapp will also ensure that all iterators pointing to the same attribute rema
     assert( j->get_value() == std::string( "FR" ) );
     assert( k->get_value() == std::string( "FR" ) );
 
-For a diagram illustrating how the XmlWrapp library handles iterators and changed default attributes, please see [Figure 1, Phantom Attributes](#figure-1-phantom-attributes).
+For a diagram illustrating how the XmlWrapp library handles iterators and changed default attributes, please see [Figure 1, Phantom Attributes](#ch-xmlwrapp.1.2).
+
+<a name="ch-xmlwrapp.1.2"></a>
 
 [![Figure 1. Phantom Attributes.](/book/static/img/ch_xmlwrapp_phantom_attr.png)](/book/static/img/ch_xmlwrapp_phantom_attr.png "Click to see the full-resolution image")
 
 Figure 1. Phantom Attributes.
+
+<a name="ch-xmlwrapp.Event-Parser-and-Named-Entit"></a>
 
 ### Event Parser and Named Entities
 
@@ -750,6 +802,8 @@ Imagine that an event parser which implements both ***text()*** and ***entity\_r
 
 Then the table below lists the callbacks that are called, depending on the value passed to ***substitute\_entities()***:
 
+<a name="ch-xmlwrapp.T.nc-having-this-call-before"></a>
+
 | Having this call before the parser is created:<br/>`xml::init::substitute_entities(true)`<br/>results in the following callbacks: | Having this call before the parser is created:<br/>`xml::init::substitute_entities(false)`<br/>results in the following callbacks: |
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `xml::event_parser::text("Super ")`                                                                                                                                                   | `xml::event_parser::text("Super ")`                                                                                                                                                    |
@@ -762,6 +816,8 @@ So the difference is that the ***entity\_reference()*** callback is never called
 Character entities are handled the same way as named entities.
 
 Generally speaking, the event parser in XmlWrapp behaves the same way as in `libxml2` in terms of what callbacks are called - except that the callbacks in XmlWrapp are C++ methods whereas the callbacks in `libxml2` are C functions.
+
+<a name="ch-xmlwrapp.Safe-and-Unsafe-Namespaces"></a>
 
 ### Safe and Unsafe Namespaces
 
@@ -778,6 +834,8 @@ A safe namespace can be constructed based on strings provided by the user or by 
 When XmlWrapp receives an unsafe namespace for a namespace manipulation operation, it does not perform any checks and uses the raw pointer as-is. So there is a chance to break your document and even cause your application to core dump if an unsafe namespace is used improperly. For example the user may take an unsafe namespace from one document, destroy the document, and then apply the stored unsafe namespace to another document. At the time the original document is destroyed the low level namespace structure is destroyed as well but the pointer to the namespace is still stored so any access operation will cause problems.
 
 Unsafe namespaces have some advantages though. They require less memory and they work faster. So the recommendation is to use safe namespaces unless you really need the best possible performance and slight reduction of the memory footprint.
+
+<a name="ch-xmlwrapp.Thread-Safety"></a>
 
 ### Thread Safety
 
@@ -818,6 +876,8 @@ Searching for an attribute of the node.
 
 The last case is tied to the fact that XmlWrapp is a very thin wrapper and it tends to introduce minimal overhead. In order to keep node references valid when iterators are advanced some private data are attached to the nodes that an iterator points to. The same happens when an attribute iterator is dereferenced. When attribute searching is done it particularly analyses the node private data (because some default attribute values could be changed) and thus causes thread unsafety.
 
+<a name="ch-xmlwrapp.Safe-libxml2-and-libxslt-Cle"></a>
+
 ### Safe libxml2 and libxslt Cleanup
 
 *libxml2 cleanup*
@@ -847,7 +907,11 @@ The situation for `libxslt` cleanup is essentially the same as described above f
 
 Your program should also make sure that XmlWrapp finishes all its data handling before the other part calls ***xsltCleanupGlobals()*** and ***xmlCleanupParser()***.
 
+<a name="ch-xmlwrapp.Formatting-of-Programmatical"></a>
+
 ### Formatting of Programmatically Added Content
+
+<a name="ch-xmlwrapp.How-libxml2-handles-formatti"></a>
 
 #### How libxml2 handles formatting of programmatically added content
 
@@ -910,6 +974,8 @@ That is how `libxml2` works.
 
 While this may not be desirable in certain circumstances, there is no generic and reliable way to detect which text nodes are used for formatting, and which are meaningful content, so it's not feasible to make XmlWrapp adjust inserted content to make it get automatically formatted. Therefore, if the `libxml2` formatting behavior is undesirable, either you'll have to ensure that your documents do not contain any text-like nodes prior to calling ***save\_to\_string()***, or you'll have to create your own code for formatting content prior to inserting it.
 
+<a name="ch-xmlwrapp.How-you-can-influence-format"></a>
+
 #### How you can influence formatting of programmatically added content
 
 There are two ways that you can influence the formatting of programmatically added content:
@@ -922,13 +988,15 @@ For the purposes of this chapter, a "text-like node" is a text, CDATA, or entity
 
 The following sections illustrate how various formatting flags affect the output for both content containing text-like nodes and content not containing text-like nodes. Note that although only ***save\_to\_string()*** is mentioned, the discussion aplies equally to all the ***save\_to\_\*()*** functions because they all use the same underlying formatting code.
 
--   [Original containing text-like nodes](#original-containing-text-like-nodes)
+-   [Original containing text-like nodes](#ch-xmlwrapp.Original-containing-textli-1)
 
--   [Original containing text-like nodes and having programmatically inserted content](#original-containing-text-like-nodes-and-having-programmatically-inserted-content)
+-   [Original containing text-like nodes and having programmatically inserted content](#ch-xmlwrapp.Original-containing-textli-2)
 
--   [Original not containing text-like nodes](#original-not-containing-text-like-nodes)
+-   [Original not containing text-like nodes](#ch-xmlwrapp.Original-not-containing-te-1)
 
--   [Original not containing text-like nodes and having programmatically inserted content](#original-not-containing-text-like-nodes-and-having-programmatically-inserted-content)
+-   [Original not containing text-like nodes and having programmatically inserted content](#ch-xmlwrapp.Original-not-containing-te-2)
+
+<a name="ch-xmlwrapp.Original-containing-textli-1"></a>
 
 ##### Original containing text-like nodes
 
@@ -940,6 +1008,8 @@ Given the following original document (which contains text-like nodes for indent
     </root>
 
 Then the ***save\_to\_string()*** function will produce the following outputs for the given formatting flags:
+
+<a name="ch-xmlwrapp.T.nc-flagsoutputxmlsave-op-1"></a>
 
 <table>
 <colgroup>
@@ -981,6 +1051,8 @@ Then the ***save\_to\_string()*** function will produce the following outputs fo
 </tbody>
 </table>
 
+<a name="ch-xmlwrapp.Original-containing-textli-2"></a>
+
 ##### Original containing text-like nodes and having programmatically inserted content
 
 Given the following original document (which contains text-like nodes for indenting):
@@ -999,6 +1071,8 @@ And given that a node has been programmatically inserted like this:
     root.insert( insert_before, xml::node("inserted") );
 
 Then the ***save\_to\_string()*** function will produce the following outputs for the given formatting flags:
+
+<a name="ch-xmlwrapp.T.nc-flagsoutputxmlsave-op-2"></a>
 
 <table>
 <colgroup>
@@ -1054,6 +1128,8 @@ Then the ***save\_to\_string()*** function will produce the following outputs fo
 </tbody>
 </table>
 
+<a name="ch-xmlwrapp.Original-not-containing-te-1"></a>
+
 ##### Original not containing text-like nodes
 
 Given the following original document (which does not contain any text-like nodes inside the root element and has not been programmatically modified):
@@ -1062,6 +1138,8 @@ Given the following original document (which does not contain any text-like node
     <root><child attr="AttrValue">content</child></root>
 
 Then the ***save\_to\_string()*** function will produce the following outputs for the given formatting flags:
+
+<a name="ch-xmlwrapp.T.nc-flagsoutputxmlsave-op-3"></a>
 
 <table>
 <colgroup>
@@ -1110,6 +1188,8 @@ Then the ***save\_to\_string()*** function will produce the following outputs fo
 </tbody>
 </table>
 
+<a name="ch-xmlwrapp.Original-not-containing-te-2"></a>
+
 ##### Original not containing text-like nodes and having programmatically inserted content
 
 Given the following original document (which does not contain any text-like nodes):
@@ -1126,6 +1206,8 @@ And given that a node has been programmatically inserted like this:
     root.insert( insert_before, xml::node("inserted") );
 
 Then the ***save\_to\_string()*** function will produce the following outputs for the given formatting flags:
+
+<a name="ch-xmlwrapp.T.nc-flagsoutputxmlsave-op-4"></a>
 
 <table>
 <colgroup>
@@ -1185,6 +1267,8 @@ Then the ***save\_to\_string()*** function will produce the following outputs fo
 </tbody>
 </table>
 
+<a name="ch-xmlwrapp.FAQ"></a>
+
 FAQ
 ---
 
@@ -1203,15 +1287,15 @@ A. You need to add the following:
 
 **Q. I read my nicely formatted document from a file, and then I added a few nodes and saved it to a file. Why is my saved document partially unformatted - specifically, all my added nodes are glued into a single long line?**
 
-A. Please see the section on [Formatting of Programmatically Added Content](#formatting-of-programmatically-added-content).
+A. Please see the section on [Formatting of Programmatically Added Content](#ch-xmlwrapp.Formatting-of-Programmatical).
 
 **Q. Is** `libxmlwrapp` **thread safe?**
 
-A. See the [Thread Safety](#thread-safety) section for details.
+A. See the [Thread Safety](#ch-xmlwrapp.Thread-Safety) section for details.
 
 **Q. Does** `libxmlwrapp` **support XML catalogs?**
 
-A. Yes, to the extent that `libxml2` supports them. All the `libxml2` fuctionality is available, but there is no special support code for XML catalogs in the `libxmlwrapp` library. See the [How to Use an XML Catalog](#how-to-use-an-xml-catalog) section for details.
+A. Yes, to the extent that `libxml2` supports them. All the `libxml2` fuctionality is available, but there is no special support code for XML catalogs in the `libxmlwrapp` library. See the [How to Use an XML Catalog](#ch-xmlwrapp.Use-an-XML-Catalog) section for details.
 
 **Q. Does XmlWrapp support XPath 2.0?**
 

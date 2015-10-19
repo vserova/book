@@ -12,11 +12,13 @@ Last Update: November 13, 2013.
 
 The following approaches to developing GUI applications have been proved to work reasonably well:
 
--   [Using wxWidgets (for GUI) and OpenGL (for graphics)](#using-wxwidgets-for-gui-and-opengl-for-graphics)
+-   [Using wxWidgets (for GUI) and OpenGL (for graphics)](#ch-gui.Using-wxWidgets-for-GUI-and-OpenG)
 
--   [Using FOX as a third party package](#using-fox-as-a-third-party-package)
+-   [Using FOX as a third party package](#ch-gui.Using-FOX-as-a-third-party-packag)
 
--   [Using the Genome Workbench wxWidgets-based GUI framework](#using-the-genome-workbench-wxwidgets-based-gui-framework)
+-   [Using the Genome Workbench wxWidgets-based GUI framework](#ch-gui.Using-the-Genome-Workbench-wxWidg)
+
+<a name="ch-gui.Using-wxWidgets-for-GUI-and-OpenG"></a>
 
 Using wxWidgets (for GUI) and OpenGL (for graphics)
 ---------------------------------------------------
@@ -27,6 +29,8 @@ This approach is appropriate for projects requiring complex GUIs with rich user 
 
 This approach is used in NCBI by the [Cn3D](http://www.ncbi.nlm.nih.gov/Structure/CN3D/cn3d.shtml) application, and the [Genome Workbench](http://www.ncbi.nlm.nih.gov/projects/gbench/) application is based on that too. Please see the [wxWidgets](http://www.wxwidgets.org/) and [OpenGL](http://www.opengl.org/) websites for further information.
 
+<a name="ch-gui.Using-FOX-as-a-third-party-packag"></a>
+
 Using FOX as a third party package
 ----------------------------------
 
@@ -35,6 +39,8 @@ This approach is appropriate for projects requiring uniform behavior across plat
 [FOX](http://www.fox-toolkit.org/) is very fast, with compact executables. The API is convenient and consistent, with a complete set of widgets. There is an extremely rich set of layout managers, which is very flexible and fast.
 
 This approach is used in NCBI by the taskedit application. Please see the [FOX](http://www.fox-toolkit.org/) website for further information.
+
+<a name="ch-gui.Using-the-Genome-Workbench-wxWidg"></a>
 
 Using the Genome Workbench wxWidgets-based GUI framework
 --------------------------------------------------------

@@ -21,7 +21,7 @@ The overview for this chapter consists of the following topics:
 
 ### Introduction
 
-This chapter describes the NCBI GRID framework. This framework allows creating, running and maintaining a scalable, load-balanced and fault-tolerant pool of network servers ([Worker Nodes](#worker-nodes)).
+This chapter describes the NCBI GRID framework. This framework allows creating, running and maintaining a scalable, load-balanced and fault-tolerant pool of network servers ([Worker Nodes](#ch-grid.Worker-Nodes)).
 
 Note: Users within NCBI may find additional information on the [internal Wiki page](http://intranet.ncbi.nlm.nih.gov:6224/wiki-private/CxxToolkit/index.cgi/GRID).
 
@@ -29,57 +29,59 @@ Note: Users within NCBI may find additional information on the [internal Wiki pa
 
 The following is an outline of the topics presented in this chapter:
 
--   [Getting Help](#getting-help)
+-   [Getting Help](#ch-grid.Getting-Help)
 
--   [GRID Overview](#grid-overview)
+-   [GRID Overview](#ch-grid.GRID-Overview)
 
-    -   [Purpose](#purpose)
+    -   [Purpose](#ch-grid.-Purpose)
 
-    -   [Components](#components)
+    -   [Components](#ch-grid.Components)
 
-    -   [Architecture and Data Flow](#architecture-and-data-flow)
+    -   [Architecture and Data Flow](#ch-grid.Architecture-and-Dat)
 
-    -   [The GRID Farm](#the-grid-farm)
+    -   [The GRID Farm](#ch-grid.The-GRID-Farm)
 
--   [Worker Nodes](#worker-nodes)
+-   [Worker Nodes](#ch-grid.Worker-Nodes)
 
-    -   [Create a GRID Worker Node from scratch](#create-a-grid-worker-node-from-scratch)
+    -   [Create a GRID Worker Node from scratch](#ch-grid.Create-a-GRID-Worker)
 
-    -   [Converting an existing CGI application into a GRID Node](#converting-an-existing-cgi-application-into-a-grid-node)
+    -   [Converting an existing CGI application into a GRID Node](#ch-grid.Converting-an-existi)
 
-    -   [Wrapping an existing CGI application into a GRID Node](#wrapping-an-existing-cgi-application-into-a-grid-node)
+    -   [Wrapping an existing CGI application into a GRID Node](#ch-grid.-Wrapping-an-existing)
 
-    -   [Wrapping an existing command-line application into a GRID Node](#wrapping-an-existing-command-line-application-into-a-grid-node)
+    -   [Wrapping an existing command-line application into a GRID Node](#ch-grid.-Wrapping-an-existing-1)
 
-    -   [Worker Node Cleanup Procedure](#worker-node-cleanup-procedure)
+    -   [Worker Node Cleanup Procedure](#ch-grid.Worker-Node-Cleanup-)
 
--   [Job Submitters](#job-submitters)
+-   [Job Submitters](#ch-grid.Job-Submitters)
 
--   [Implementing a Network Server](#implementing-a-network-server)
+-   [Implementing a Network Server](#ch-grid.CServer-Multithreade)
 
-    -   [Typical Client-Server Interactions](#typical-client-server-interactions)
+    -   [Typical Client-Server Interactions](#ch-grid.Typical-ClientServer-Interaction)
 
-    -   [The CServer Framework Classes](#the-cserver-framework-classes)
+    -   [The CServer Framework Classes](#ch-grid.The-CServer-Framework-Classes)
 
-    -   [State, Events, and Flow of Control](#state-events-and-flow-of-control)
+    -   [State, Events, and Flow of Control](#ch-grid.State-Events-and-Flow-of-Control)
 
-    -   [Socket Closure and Lifetime](#socket-closure-and-lifetime)
+    -   [Socket Closure and Lifetime](#ch-grid.Socket-Closure-and-Lifetime)
 
-    -   [Diagnostics](#diagnostics)
+    -   [Diagnostics](#ch-grid.Diagnostics)
 
-    -   [Handling Exceptions](#handling-exceptions)
+    -   [Handling Exceptions](#ch-grid.Handling-Exceptions)
 
-    -   [Server Configuration](#server-configuration)
+    -   [Server Configuration](#ch-grid.Server-Configuration)
 
-    -   [Other Resources](#other-resources)
+    -   [Other Resources](#ch-grid.Other-Resources)
 
--   [GRID Utilities](#grid-utilities)
+-   [GRID Utilities](#ch-grid.GRID-Utilities)
 
-    -   [netschedule\_control](#netschedulecontrol)
+    -   [netschedule\_control](#ch-grid.netschedule-control)
 
-    -   [ns\_remote\_job\_control](#nsremotejobcontrol)
+    -   [ns\_remote\_job\_control](#ch-grid.ns-remote-job-contro)
 
-    -   [Alternate list input and output](#alternate-list-input-and-output)
+    -   [Alternate list input and output](#ch-grid.-Alternate-list-input)
+
+<a name="ch-grid.Getting-Help"></a>
 
 Getting Help
 ------------
@@ -96,7 +98,7 @@ Users at NCBI have the following sources for help:
 
 -   The GRID developers:
 
-    -   [Dmitry Kazimirov](http://intranet.ncbi.nlm.nih.gov:6224/wiki-private/CxxToolkit/index.cgi/Dmitry_Kazimirov) for questions about Client-side APIs, [Worker Nodes](#worker-nodes), [NetCache](ch_app.html#ch_app.ncbi_netcache_service) and [NetSchedule](http://intranet.ncbi.nlm.nih.gov:6224/wiki-private/CxxToolkit/index.cgi/NetSchedule) deployment, auxiliary tools and utilities, administration - setup, installation, and upgrades.
+    -   [Dmitry Kazimirov](http://intranet.ncbi.nlm.nih.gov:6224/wiki-private/CxxToolkit/index.cgi/Dmitry_Kazimirov) for questions about Client-side APIs, [Worker Nodes](#ch-grid.Worker-Nodes), [NetCache](ch_app.html#ch_app.ncbi_netcache_service) and [NetSchedule](http://intranet.ncbi.nlm.nih.gov:6224/wiki-private/CxxToolkit/index.cgi/NetSchedule) deployment, auxiliary tools and utilities, administration - setup, installation, and upgrades.
 
     -   [Andrei Gourianov](http://intranet.ncbi.nlm.nih.gov:6224/wiki-private/CxxToolkit/index.cgi/Andrei_Gourianov) for [NetCache](ch_app.html#ch_app.ncbi_netcache_service) server questions.
 
@@ -106,22 +108,26 @@ Users at NCBI have the following sources for help:
 
     -   [Denis Vakatov](http://intranet.ncbi.nlm.nih.gov:6224/wiki-private/CxxToolkit/index.cgi/Denis_Vakatov) for supervision questions.
 
+<a name="ch-grid.GRID-Overview"></a>
+
 GRID Overview
 -------------
 
 The following sections provide an overview of the GRID system:
 
--   [Purpose](#purpose)
+-   [Purpose](#ch-grid.-Purpose)
 
--   [Components](#components)
+-   [Components](#ch-grid.Components)
 
--   [Architecture and Data Flow](#architecture-and-data-flow)
+-   [Architecture and Data Flow](#ch-grid.Architecture-and-Dat)
 
--   [The GRID Farm](#the-grid-farm)
+-   [The GRID Farm](#ch-grid.The-GRID-Farm)
+
+<a name="ch-grid.-Purpose"></a>
 
 ### Purpose
 
-The NCBI GRID is a framework to create, run and maintain a scalable, load-balanced and fault-tolerant pool of network servers ([Worker Nodes](#worker-nodes)).
+The NCBI GRID is a framework to create, run and maintain a scalable, load-balanced and fault-tolerant pool of network servers ([Worker Nodes](#ch-grid.Worker-Nodes)).
 
 It includes independent components that implement distributed data storage and job queueing. It also provides APIs and frameworks to implement worker nodes and job submitters.
 
@@ -135,6 +141,8 @@ Two PowerPoint presentations have additional information about the NCBI GRID:
 
 -   <ftp://ftp.ncbi.nih.gov/toolbox/ncbi_tools++/DOC/PPT/NCBI-Grid.ppt>
 
+<a name="ch-grid.Components"></a>
+
 ### Components
 
 The NCBI GRID framework is built of the following components:
@@ -146,19 +154,19 @@ Network job queue ([NetSchedule](http://intranet.ncbi.nlm.nih.gov:6224/wiki-priv
 Network data storage ([NetCache](ch_app.html#ch_app.ncbi_netcache_service))
 
 3  
-Server-side APIs and tools to develop [Worker Nodes](#worker-nodes):
+Server-side APIs and tools to develop [Worker Nodes](#ch-grid.Worker-Nodes):
 
 a  
-[Out of an existing command-line executable](#out-of-an-existing-command-line-executable)
+[Out of an existing command-line executable](#ch-grid.-Wrapping-an-existing-1)
 
 b  
-[Out of an existing CGI executable](#out-of-an-existing-cgi-executable)
+[Out of an existing CGI executable](#ch-grid.-Wrapping-an-existing)
 
 c  
-[Out of an existing CGI code](#out-of-an-existing-cgi-code) (if it's written using the [NCBI C++ CGI framework](ch_cgi.html))
+[Out of an existing CGI code](#ch-grid.Converting-an-existi) (if it's written using the [NCBI C++ CGI framework](ch_cgi.html))
 
 d  
-[Create a GRID Worker Node from scratch](#create-a-grid-worker-node-from-scratch)
+[Create a GRID Worker Node from scratch](#ch-grid.Create-a-GRID-Worker)
 
 4  
 Client-side API
@@ -167,7 +175,7 @@ Client-side API
 Remote CGI -- enables moving the actual CGI execution to the grid.
 
 6  
-[GRID Utilities](#grid-utilities) for remote administration, monitoring, retrieval and submission (**netschedule\_control**, **netcache\_control**, **ns\_remote\_job\_control**, **ns\_submit\_remote\_job**, etc.)
+[GRID Utilities](#ch-grid.GRID-Utilities) for remote administration, monitoring, retrieval and submission (**netschedule\_control**, **netcache\_control**, **ns\_remote\_job\_control**, **ns\_submit\_remote\_job**, etc.)
 
 All these components are fully portable, in the sense that they can be built and then run and communicate with each other across all platforms that are supported by the NCBI C++ Toolkit (Unix, MS-Windows, MacOSX).
 
@@ -177,9 +185,11 @@ All these components can be load-balanced and are highly scalable. For example, 
 
 To provide more flexibility, load balancing, and fault-tolerance, it is highly advisable to pool NetSchedule and NetCache servers using [NCBI Load Balancer and Service Mapper](ch_app.html#ch_app.Load_Balancing_Servi) (LBSM).
 
+<a name="ch-grid.Architecture-and-Dat"></a>
+
 ### Architecture and Data Flow
 
-[NetSchedule](http://intranet.ncbi.nlm.nih.gov:6224/wiki-private/CxxToolkit/index.cgi/NetSchedule) and [NetCache](ch_app.html#ch_app.ncbi_netcache_service) servers create a media which Submitters and [Worker Nodes](#worker-nodes) use to pass and control jobs and related data:
+[NetSchedule](http://intranet.ncbi.nlm.nih.gov:6224/wiki-private/CxxToolkit/index.cgi/NetSchedule) and [NetCache](ch_app.html#ch_app.ncbi_netcache_service) servers create a media which Submitters and [Worker Nodes](#ch-grid.Worker-Nodes) use to pass and control jobs and related data:
 
 1  
 Submitter prepares input data and stores it in the pool of NetCache servers, recording keys to the data in the job's description.
@@ -203,6 +213,8 @@ The following diagram illustrates this flow of control and data:
 
 [![Image grid-collab.png](/book/static/img/grid-collab.png)](/book/static/img/grid-collab.png "Click to see the full-resolution image")
 
+<a name="ch-grid.The-GRID-Farm"></a>
+
 ### The GRID Farm
 
 To help developers jump-start their distributed computation projects, there is a small farm of machines for general use, running:
@@ -211,63 +223,77 @@ To help developers jump-start their distributed computation projects, there is a
 
 -   Several flavors of network data storage
 
--   A framework to run and maintain users' [Worker Nodes](#worker-nodes)
+-   A framework to run and maintain users' [Worker Nodes](#ch-grid.Worker-Nodes)
 
 ***NOTE:*** Most of the GRID components can be deployed or used outside of the GRID framework (applications can communicate with the components directly via the components' own client APIs). However, in many cases it is beneficial to use the whole GRID framework from the start.
 
 NCBI users can find more information on the [GRID farm Wiki page](http://intranet.ncbi.nlm.nih.gov:6224/wiki-private/CxxToolkit/index.cgi/GRID_Farm).
+
+<a name="ch-grid.Worker-Nodes"></a>
 
 Worker Nodes
 ------------
 
 The following sections describe how to create, configure and run worker nodes:
 
--   [Create a GRID Worker Node from scratch](#create-a-grid-worker-node-from-scratch)
+-   [Create a GRID Worker Node from scratch](#ch-grid.Create-a-GRID-Worker)
 
--   [Converting an existing CGI application into a GRID Node](#converting-an-existing-cgi-application-into-a-grid-node)
+-   [Converting an existing CGI application into a GRID Node](#ch-grid.Converting-an-existi)
 
--   [Wrapping an existing CGI application into a GRID Node](#wrapping-an-existing-cgi-application-into-a-grid-node)
+-   [Wrapping an existing CGI application into a GRID Node](#ch-grid.-Wrapping-an-existing)
 
--   [Wrapping an existing command-line application into a GRID Node](#wrapping-an-existing-command-line-application-into-a-grid-node)
+-   [Wrapping an existing command-line application into a GRID Node](#ch-grid.-Wrapping-an-existing-1)
 
--   [Worker Node Cleanup Procedure](#worker-node-cleanup-procedure)
+-   [Worker Node Cleanup Procedure](#ch-grid.Worker-Node-Cleanup-)
+
+<a name="ch-grid.Create-a-GRID-Worker"></a>
 
 ### Create a GRID Worker Node from scratch
 
 The following sections describe how to Create a GRID Worker Node from scratch:
 
--   [Purpose](#purpose)
+-   [Purpose](#ch-grid.-Purpose-3)
 
--   [Diagram](#diagram)
+-   [Diagram](#ch-grid.-Diagram)
+
+<a name="ch-grid.-Purpose-1"></a>
 
 #### Purpose
 
 Framework to create a multithreaded server that can run on a number of machines and serve the requests using [NetSchedule](http://intranet.ncbi.nlm.nih.gov:6224/wiki-private/CxxToolkit/index.cgi/NetSchedule) and [NetCache](ch_app.html#ch_app.ncbi_netcache_service) services to exchange the job info and data.
 
+<a name="ch-grid.-Diagram"></a>
+
 #### Diagram
 
 <ftp://ftp.ncbi.nih.gov/toolbox/ncbi_tools++/DOC/PPT/IMAGES/GRID_Dec14_2006/Slide3.PNG>
+
+<a name="ch-grid.Converting-an-existi"></a>
 
 ### Converting an existing CGI application into a GRID Node
 
 The following sections describe how to convert an existing CGI application into a GRID node:
 
--   [Purpose](#purpose)
+-   [Purpose](#ch-grid.-Purpose-3)
 
--   [Converting a CGI into a Remote-CGI server](#converting-a-cgi-into-a-remote-cgi-server)
+-   [Converting a CGI into a Remote-CGI server](#ch-grid.Converting-a-CGI-int)
 
--   [Diagram](#diagram)
+-   [Diagram](#ch-grid.-Diagram-3)
 
--   [Features and benefits](#features-and-benefits)
+-   [Features and benefits](#ch-grid.Features-and-benefit)
+
+<a name="ch-grid.-Purpose-2"></a>
 
 #### Purpose
 
 With a rather simple and formal conversion, a CGI's real workload can be moved from the Web servers to any other machines. It also helps to work around the infamous "30-sec Web timeout problem".
 
+<a name="ch-grid.Converting-a-CGI-int"></a>
+
 #### Converting a CGI into a Remote-CGI server
 
 1  
-Modify the code of your original CGI to make it a standalone Remote-CGI server ([Worker Node](#worker-node)). The code conversion is very easy and formal:
+Modify the code of your original CGI to make it a standalone Remote-CGI server ([Worker Node](#ch-grid.Worker-Nodes)). The code conversion is very easy and formal:
 
 a  
 Change application's base class from ***CCgiApplication*** to ***CRemoteCgiApp***
@@ -290,9 +316,13 @@ Define some extra parameters in the configuration files of "remote CGI gateway" 
 4  
 Install and run your Remote-CGI servers on as many machines as you need. They don't require Web server, and can be installed even on PCs and Macs.
 
+<a name="ch-grid.-Diagram-1"></a>
+
 #### Diagram
 
 <ftp://ftp.ncbi.nih.gov/toolbox/ncbi_tools++/DOC/PPT/IMAGES/GRID_Dec14_2006/Slide1.PNG>
+
+<a name="ch-grid.Features-and-benefit"></a>
 
 #### Features and benefits
 
@@ -314,13 +344,17 @@ Install and run your Remote-CGI servers on as many machines as you need. They do
 
 -   Easy to debug, as the Remote-CGI server can be run under debugger or any memory checker on any machine (Unix or MS-Windows)
 
+<a name="ch-grid.-Wrapping-an-existing"></a>
+
 ### Wrapping an existing CGI application into a GRID Node
 
 The following sections describe how to wrap an existing CGI application into a GRID Node:
 
--   [Running existing CGI executable through Grid Framework](#running-existing-cgi-executable-through-grid-framework)
+-   [Running existing CGI executable through Grid Framework](#ch-grid.Running-existing-CGI)
 
--   [Diagram](#diagram)
+-   [Diagram](#ch-grid.-Diagram-3)
+
+<a name="ch-grid.Running-existing-CGI"></a>
 
 #### Running existing CGI executable through Grid Framework
 
@@ -336,17 +370,23 @@ On the client side (front-end) **cgi2rcgi** sees that the job’s status is chan
 
 The second file is cgi2rcgi.inc.html (can be redefined in cgi2.rcgi.ini) which defines tags for particular job’s states. The tag for the particular job’s state replaces `<@VIEW@>` tag in the main html template file.
 
+<a name="ch-grid.-Diagram-2"></a>
+
 #### Diagram
 
 <ftp://ftp.ncbi.nlm.nih.gov/toolbox/ncbi_tools++/DOC/PPT/IMAGES/GRID_Dec14_2006/Slide1.PNG>
+
+<a name="ch-grid.-Wrapping-an-existing-1"></a>
 
 ### Wrapping an existing command-line application into a GRID Node
 
 The following sections describe how to wrap an existing CGI application into a GRID Node:
 
--   [Running arbitrary applications through Grid Framework](#running-arbitrary-applications-through-grid-framework)
+-   [Running arbitrary applications through Grid Framework](#ch-grid.Running-arbitrary-ap)
 
--   [Diagram](#diagram)
+-   [Diagram](#ch-grid.-Diagram-3)
+
+<a name="ch-grid.Running-arbitrary-ap"></a>
 
 #### Running arbitrary applications through Grid Framework
 
@@ -382,19 +422,25 @@ Each line in the file represents one job (lines starting with ‘`#`’ are igno
 
 -   `exclusive` – instructs the **remote\_app** to not get any other jobs from the NetSchedule service while this job is being executed.
 
+<a name="ch-grid.-Diagram-3"></a>
+
 #### Diagram
 
 <ftp://ftp.ncbi.nih.gov/toolbox/ncbi_tools++/DOC/PPT/IMAGES/GRID_Dec14_2006/Slide2.PNG>
+
+<a name="ch-grid.Worker-Node-Cleanup-"></a>
 
 ### Worker Node Cleanup Procedure
 
 The following sections describe the procedure for cleaning up Worker Nodes:
 
--   [Purpose](#purpose)
+-   [Purpose](#ch-grid.-Purpose-3)
 
--   [Job Cleanup](#job-cleanup)
+-   [Job Cleanup](#ch-grid.Job-Cleanup)
 
--   [Worker Node Cleanup](#worker-node-cleanup)
+-   [Worker Node Cleanup](#ch-grid.Worker-Node-Cleanup-)
+
+<a name="ch-grid.-Purpose-3"></a>
 
 #### Purpose
 
@@ -408,6 +454,8 @@ At the time of the call, **`cleanup_event`** will be set to either **`eRegularCl
 
 There are two types of listeners: those called after each job is done and those called when the worker node is shutting down.
 
+<a name="ch-grid.Job-Cleanup"></a>
+
 #### Job Cleanup
 
 Listeners of the first type (per-job cleanup) are installed in the `Do()` method via a call to `CWorkerNodeJobContext::GetCleanupEventSource()->AddListener()`:
@@ -418,6 +466,8 @@ Listeners of the first type (per-job cleanup) are installed in the `Do()` method
     {
         context.GetCleanupEventSource()->AddListener( new CMyWorkerNodeJobCleanupListener(resources_to_free));
     }
+
+<a name="ch-grid.Worker-Node-Cleanup"></a>
 
 #### Worker Node Cleanup
 
@@ -438,10 +488,14 @@ The ***IGridWorkerNodeApp\_Listener*** interface has two methods, `OnGridWorkerS
 
 The older method does not require the guarding that the new method requires.
 
+<a name="ch-grid.Job-Submitters"></a>
+
 Job Submitters
 --------------
 
-An API is available to submit tasks to [Worker Nodes](#worker-nodes), and to monitor and control the submitted tasks.
+An API is available to submit tasks to [Worker Nodes](#ch-grid.Worker-Nodes), and to monitor and control the submitted tasks.
+
+<a name="ch-grid.CServer-Multithreade"></a>
 
 Implementing a Network Server
 -----------------------------
@@ -450,33 +504,35 @@ The [CServer](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSer
 
 The following topics discuss the various aspects of implementing a network server:
 
--   [Typical Client-Server Interactions](#typical-client-server-interactions)
+-   [Typical Client-Server Interactions](#ch-grid.Typical-ClientServer-Interaction)
 
-    -   [Protocols](#protocols)
+    -   [Protocols](#ch-grid.Protocols)
 
-    -   [Request Format](#request-format)
+    -   [Request Format](#ch-grid.Request-Format)
 
-    -   [Response Handling](#response-handling)
+    -   [Response Handling](#ch-grid.Response-Handling)
 
--   [The CServer Framework Classes](#the-cserver-framework-classes)
+-   [The CServer Framework Classes](#ch-grid.The-CServer-Framework-Classes)
 
-    -   [CServer](#cserver)
+    -   [CServer](#ch-grid.CServer)
 
-    -   [IServer\_ConnectionFactory](#iserverconnectionfactory)
+    -   [IServer\_ConnectionFactory](#ch-grid.IServer-ConnectionFactory)
 
-    -   [IServer\_ConnectionHandler](#iserverconnectionhandler)
+    -   [IServer\_ConnectionHandler](#ch-grid.IServer-ConnectionHandler)
 
--   [State, Events, and Flow of Control](#state-events-and-flow-of-control)
+-   [State, Events, and Flow of Control](#ch-grid.State-Events-and-Flow-of-Control)
 
--   [Socket Closure and Lifetime](#socket-closure-and-lifetime)
+-   [Socket Closure and Lifetime](#ch-grid.Socket-Closure-and-Lifetime)
 
--   [Diagnostics](#diagnostics)
+-   [Diagnostics](#ch-grid.Diagnostics)
 
--   [Handling Exceptions](#handling-exceptions)
+-   [Handling Exceptions](#ch-grid.Handling-Exceptions)
 
--   [Server Configuration](#server-configuration)
+-   [Server Configuration](#ch-grid.Server-Configuration)
 
--   [Other Resources](#other-resources)
+-   [Other Resources](#ch-grid.Other-Resources)
+
+<a name="ch-grid.Typical-ClientServer-Interaction"></a>
 
 ### Typical Client-Server Interactions
 
@@ -484,11 +540,13 @@ The ***CServer*** framework is based on sockets and imposes few constraints on c
 
 Typical client-server interactions differ in the following categories:
 
--   [Protocols](#protocols)
+-   [Protocols](#ch-grid.Protocols)
 
--   [Request Format](#request-format)
+-   [Request Format](#ch-grid.Request-Format)
 
--   [Response Handling](#response-handling)
+-   [Response Handling](#ch-grid.Response-Handling)
+
+<a name="ch-grid.Protocols"></a>
 
 #### Protocols
 
@@ -499,6 +557,8 @@ The [NetScheduler](http://www.ncbi.nlm.nih.gov/viewvc/v1/trunk/c++/src/app/netsc
 The [Genome Pipeline](http://mini.ncbi.nlm.nih.gov/1k2qn) server protocol adds a client acknowledgment to the interaction. A missing or corrupt acknowledgment triggers a rollback of the transaction.
 
 Your server can follow whatever pattern of requests and responses is appropriate for the service. Note that a given server is not limited to a fixed communication pattern. As long as the client and server follow the same rules, the protocol can be adapted to whatever is appropriate at the moment.
+
+<a name="ch-grid.Request-Format"></a>
 
 #### Request Format
 
@@ -515,6 +575,8 @@ A more robust way to define the request and response formats is with an ASN.1 sp
 -   [Track Manager](http://mini.ncbi.nlm.nih.gov/1k2qd)
 
 -   [Genome Pipeline](http://mini.ncbi.nlm.nih.gov/1k2qn)
+
+<a name="ch-grid.Response-Handling"></a>
 
 #### Response Handling
 
@@ -534,15 +596,19 @@ NCBI servers that delay their response include:
 
 -   [Genome Pipeline](http://mini.ncbi.nlm.nih.gov/1k2qn)
 
+<a name="ch-grid.The-CServer-Framework-Classes"></a>
+
 ### The CServer Framework Classes
 
 The main classes in the ***CServer*** framework are:
 
--   [CServer](#cserver)
+-   [CServer](#ch-grid.CServer)
 
--   [IServer\_ConnectionFactory](#iserverconnectionfactory)
+-   [IServer\_ConnectionFactory](#ch-grid.IServer-ConnectionFactory)
 
--   [IServer\_ConnectionHandler](#iserverconnectionhandler)
+-   [IServer\_ConnectionHandler](#ch-grid.IServer-ConnectionHandler)
+
+<a name="ch-grid.CServer"></a>
 
 #### CServer
 
@@ -560,6 +626,8 @@ Your server application will probably define, configure, start listening, and ru
     server.SetParameters(params);
     server.AddListener(new CMyConnFactory(&server), params.port);
     server.Run();
+
+<a name="ch-grid.IServer-ConnectionFactory"></a>
 
 #### IServer\_ConnectionFactory
 
@@ -582,6 +650,8 @@ The connection factory class can be as simple as:
     private:
         CMyServer * m_Server;
     };
+
+<a name="ch-grid.IServer-ConnectionHandler"></a>
 
 #### IServer\_ConnectionHandler
 
@@ -607,6 +677,8 @@ The ***OnOpen()***, ***OnRead()***, and ***OnWrite()*** methods are pure virtual
 
 ***Note:*** If your client-server protocol is line-oriented, you can use ***IServer\_LineMessageHandler*** instead of ***IServer\_ConnectionHandler***. In this case you would implement the ***OnMessage()*** method instead of ***OnRead()***.
 
+<a name="ch-grid.State-Events-and-Flow-of-Control"></a>
+
 ### State, Events, and Flow of Control
 
 Generally, your connection handler class should follow a state model and implement the ***GetEventsToPollFor()*** method, which will use the state to select the events that will be handled. This is typically how the connection state is propagated and how socket events result in the flow of control being passed to the events handlers.
@@ -626,6 +698,8 @@ Your state model should reflect the communication protocol and can be more compl
 
 ***GetEventsToPollFor()*** is called from the main thread while the other socket event handling methods are called from various threads allocated from the thread pool.
 
+<a name="ch-grid.Socket-Closure-and-Lifetime"></a>
+
 ### Socket Closure and Lifetime
 
 Nominally, sockets are owned by (and therefore closed by) the ***CServer*** framework. However, there may be cases where your derived class will need to manually close or take ownership of the socket.
@@ -639,6 +713,8 @@ Nominally, sockets are owned by (and therefore closed by) the ***CServer*** fram
 -   If you need to close a connection from your code, you should do so by calling ***CServer::CloseConnection()*** - not by explicitly closing the socket object. The ***CServer*** framework generally owns the socket and therefore needs to manage it.
 
 -   ***Note:*** There is one case when the ***CServer*** framework shouldn't own the socket. If you create a ***CConn\_SocketStream*** on an existing socket, then you must take ownership as shown here:<br/><br/>`SOCK sk = GetSocket().GetSOCK();`<br/>`GetSocket().SetOwnership(eNoOwnership);`<br/>`GetSocket().Reset(0, eTakeOwnership, eCopyTimeoutsToSOCK);`<br/>`AutoPtr<CConn_SocketStream> stream = new CConn_SocketStream(sk);`<br/>
+
+<a name="ch-grid.Diagnostics"></a>
 
 ### Diagnostics
 
@@ -691,17 +767,23 @@ Each thread has its own diagnostics context. Therefore, simultaneous calls to **
 
 The connection handler should ensure that each request-start has a corresponding request-stop - for example by writing the request-stop in a destructor if it wasn't already written.
 
+<a name="ch-grid.Handling-Exceptions"></a>
+
 ### Handling Exceptions
 
-There are server application-wide configuration parameters to control whether or not otherwise-unhandled exceptions will be caught by the server. See the [Server Configuration](#server-configuration) section for details.
+There are server application-wide configuration parameters to control whether or not otherwise-unhandled exceptions will be caught by the server. See the [Server Configuration](#ch-grid.Server-Configuration) section for details.
 
 ***Note:*** If your event handler catches an exception, it does **not** need to close the connection because ***CServer*** automatically closes connections in this case.
 
-See the [Socket Closure and Lifetime](#socket-closure-and-lifetime) section for related information.
+See the [Socket Closure and Lifetime](#ch-grid.Socket-Closure-and-Lifetime) section for related information.
+
+<a name="ch-grid.Server-Configuration"></a>
 
 ### Server Configuration
 
 The following configuration parameters can be used to fine-tune ***CServer***-derived server behavior:
+
+<a name="ch-grid.T.nc-parameterbrief-descriptiond"></a>
 
 | Parameter                                                 | Brief Description                                                        | Default |
 |-----------------------------------------------------------|--------------------------------------------------------------------------|---------|
@@ -709,6 +791,8 @@ The following configuration parameters can be used to fine-tune ***CServer***-de
 | **`NCBI_CONFIG__THREADPOOL__CATCH_UNHANDLED_EXCEPTIONS`** | Controls whether ***CThreadInPool\_ForServer*** should catch exceptions. | true    |
 
 See the [connection library configuration reference](ch_libconfig.html#ch_libconfig.libconfig_connect) for more information on configuration parameters.
+
+<a name="ch-grid.Other-Resources"></a>
 
 ### Other Resources
 
@@ -728,16 +812,20 @@ Here are some places to look for reference and to see how to ***CServer*** is us
 
 -   [Genome Pipeline](http://mini.ncbi.nlm.nih.gov/1k2qn) (NCBI only)
 
+<a name="ch-grid.GRID-Utilities"></a>
+
 GRID Utilities
 --------------
 
 The following sections describe the GRID Utilities:
 
--   [netschedule\_control](#netschedulecontrol)
+-   [netschedule\_control](#ch-grid.netschedule-control)
 
--   [ns\_remote\_job\_control](#nsremotejobcontrol)
+-   [ns\_remote\_job\_control](#ch-grid.ns-remote-job-contro)
 
--   [Alternate list input and output](#alternate-list-input-and-output)
+-   [Alternate list input and output](#ch-grid.-Alternate-list-input)
+
+<a name="ch-grid.netschedule-control"></a>
 
 ### netschedule\_control
 
@@ -746,6 +834,8 @@ The following sections describe the GRID Utilities:
 NCBI NetSchedule control utility. This program can be used to operate NetSchedule servers and server groups from the command line.
 
 **OPTIONS:**
+
+<a name="ch-grid.T3"></a>
 
 <table>
 <colgroup>
@@ -883,7 +973,7 @@ NCBI NetSchedule control utility. This program can be used to operate NetSchedul
 </tr>
 <tr class="odd">
 <td align="left">-read &lt;BATCH_ID_OUTPUT,JOB_IDS_OUTPUT,LIMIT,TIMEOUT&gt;</td>
-<td align="left">Retrieve IDs of the completed jobs and change their state to Reading.<br/><br/>For the first two parameters, the <a href="#alternate-list-output">Alternate list output</a> format can be used.<br/><br/><strong>Parameter descriptions:</strong><br/><strong><code>BATCH_ID_OUTPUT</code></strong>
+<td align="left">Retrieve IDs of the completed jobs and change their state to Reading.<br/><br/>For the first two parameters, the <a href="#ch-grid.Alternate-list-outpu">Alternate list output</a> format can be used.<br/><br/><strong>Parameter descriptions:</strong><br/><strong><code>BATCH_ID_OUTPUT</code></strong>
 <ul>
 <li><p>Defines where to send the ID of the retrieved jobs. Can be either a file name or '-'.</p></li>
 </ul>
@@ -909,7 +999,7 @@ NCBI NetSchedule control utility. This program can be used to operate NetSchedul
 </tr>
 <tr class="even">
 <td align="left">-read_confirm &lt;JOB_LIST&gt;</td>
-<td align="left">Mark jobs in <code>JOB_LIST</code> as successfully retrieved. The <a href="#alternate-list-input">Alternate list input</a> format can be used to specify <code>JOB_LIST</code>. If this operation succeeds, the specified jobs will change their state to <code>Confirmed</code>.<br/><br/>Examples:<br/>
+<td align="left">Mark jobs in <code>JOB_LIST</code> as successfully retrieved. The <a href="#ch-grid.-Alternate-list-input">Alternate list input</a> format can be used to specify <code>JOB_LIST</code>. If this operation succeeds, the specified jobs will change their state to <code>Confirmed</code>.<br/><br/>Examples:<br/>
 <pre><code>    netschedule_control -service NS_Test -queue test \
         -read_confirm @job_ids.lst
     netschedule_control -service NS_Test -queue test \
@@ -944,6 +1034,8 @@ NCBI NetSchedule control utility. This program can be used to operate NetSchedul
 </tbody>
 </table>
 
+<a name="ch-grid.ns-remote-job-contro"></a>
+
 ### ns\_remote\_job\_control
 
 DESCRIPTION:
@@ -951,6 +1043,8 @@ DESCRIPTION:
 This utility acts as a submitter for the remote\_app daemon. It initiates job execution on remote\_app, and then checks the status and the results of the job.
 
 OPTIONS:
+
+<a name="ch-grid.T4"></a>
 
 <table>
 <colgroup>
@@ -1036,7 +1130,7 @@ OPTIONS:
 </tr>
 <tr class="odd">
 <td align="left">-stdout &lt;JOB_IDS&gt;</td>
-<td align="left">Dump concatenated standard output streams of the specified jobs. The <code>JOB_IDS</code> argument can be specified in the <a href="#alternate-list-input">Alternate list input</a> format.<br/>Examples:<br/>
+<td align="left">Dump concatenated standard output streams of the specified jobs. The <code>JOB_IDS</code> argument can be specified in the <a href="#ch-grid.-Alternate-list-input">Alternate list input</a> format.<br/>Examples:<br/>
 <pre><code>    ns_remote_job_control -ns NS_Test -q test \
         -stdout JSID_01_4_130.14.24.10_9100,JSID_01_5_130.14.24.10_9100
     ns_remote_job_control -ns NS_Test -q test -stdout @job_ids.lst
@@ -1044,7 +1138,7 @@ OPTIONS:
 </tr>
 <tr class="even">
 <td align="left">-stderr &lt;JOB_IDS&gt;</td>
-<td align="left">Dump concatenated standard error streams of the specified jobs. The <code>JOB_IDS</code> argument can be specified in the <a href="#alternate-list-input">Alternate list input</a> format. See the description of the <code>-stdout</code> command for examples.</td>
+<td align="left">Dump concatenated standard error streams of the specified jobs. The <code>JOB_IDS</code> argument can be specified in the <a href="#ch-grid.-Alternate-list-input">Alternate list input</a> format. See the description of the <code>-stdout</code> command for examples.</td>
 </tr>
 <tr class="odd">
 <td align="left">-cancel &lt;JOB_ID&gt;</td>
@@ -1091,9 +1185,13 @@ OPTIONS:
 </tbody>
 </table>
 
+<a name="ch-grid.-Alternate-list-input"></a>
+
 ### Alternate list input and output
 
 This section describes two alternative methods of printing the results of operations that generate lists (e.g. lists of job IDs) and three methods of inputting such lists as command line arguments.
+
+<a name="ch-grid.Alternate-list-outpu"></a>
 
 #### Alternate list output
 
@@ -1105,6 +1203,8 @@ The `-read` command of `netschedule_control` produces a list of job IDs as its o
         # and the list of jobs to job_ids.lst
         netschedule_control -service NS_Test -queue test \
             -read -,job_ids.lst,10,300
+
+<a name="ch-grid.-Alternate-list-input-1"></a>
 
 #### Alternate list input
 

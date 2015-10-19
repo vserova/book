@@ -31,111 +31,113 @@ This chapter provides an introduction to the major components that make up the T
 
 The following is an outline of the topics presented in this chapter:
 
--   [The CORELIB Module](#the-corelib-module)
+-   [The CORELIB Module](#ch-intro.intro-corelib)
 
-    -   [Application Framework](#application-framework)
+    -   [Application Framework](#ch-intro.intro-appframe)
 
-    -   [Argument processing](#argument-processing)
+    -   [Argument processing](#ch-intro.intro-args)
 
-    -   [Diagnostics](#diagnostics)
+    -   [Diagnostics](#ch-intro.intro-diag)
 
-    -   [Environment Interface](#environment-interface)
+    -   [Environment Interface](#ch-intro.intro-env)
 
-    -   [Files and Directories](#files-and-directories)
+    -   [Files and Directories](#ch-intro.intro-files-dirs)
 
-    -   [MT Test wrappers](#mt-test-wrappers)
+    -   [MT Test wrappers](#ch-intro.intro-mt-test)
 
-    -   [Object and Ref classes](#object-and-ref-classes)
+    -   [Object and Ref classes](#ch-intro.intro-cref)
 
-    -   [Portability definitions](#portability-definitions)
+    -   [Portability definitions](#ch-intro.intro-pdef)
 
-    -   [Portable Exception Handling](#portable-exception-handling)
+    -   [Portable Exception Handling](#ch-intro.intro-pexcep)
 
-    -   [Portable Process Pipes](#portable-process-pipes)
+    -   [Portable Process Pipes](#ch-intro.intro-pipe)
 
-    -   [Registry](#registry)
+    -   [Registry](#ch-intro.intro-reg)
 
-    -   [STL Use Hints](#stl-use-hints)
+    -   [STL Use Hints](#ch-intro.intro-stl)
 
-    -   [String Manipulations](#string-manipulations)
+    -   [String Manipulations](#ch-intro.intro-str)
 
-    -   [Template Utilities](#template-utilities)
+    -   [Template Utilities](#ch-intro.intro-tempu)
 
-    -   [Threads](#threads)
+    -   [Threads](#ch-intro.intro-threads)
 
-    -   [Time](#time)
+    -   [Time](#ch-intro.intro-time)
 
--   [The ALGORITHM Module](#the-algorithm-module)
+-   [The ALGORITHM Module](#ch-intro.intro-algo)
 
--   [The CGI Module](#the-cgi-module)
+-   [The CGI Module](#ch-intro.intro-cgi)
 
--   [The CONNECT Module](#the-connect-module)
+-   [The CONNECT Module](#ch-intro.intro-conn)
 
-    -   [Socket classes](#socket-classes)
+    -   [Socket classes](#ch-intro.intro-socket)
 
-    -   [Connector and Connection Handles](#connector-and-connection-handles)
+    -   [Connector and Connection Handles](#ch-intro.intro-connector)
 
-    -   [Connection Streams](#connection-streams)
+    -   [Connection Streams](#ch-intro.intro-streams)
 
-    -   [Sendmail API](#sendmail-api)
+    -   [Sendmail API](#ch-intro.intro-sendmail)
 
-    -   [Threaded Server](#threaded-server)
+    -   [Threaded Server](#ch-intro.intro-threadedserver)
 
--   [The CTOOL Module](#the-ctool-module)
+-   [The CTOOL Module](#ch-intro.intro-ctool)
 
--   [The DBAPI Module](#the-dbapi-module)
+-   [The DBAPI Module](#ch-intro.intro-dbapi)
 
-    -   [Database User Classes](#database-user-classes)
+    -   [Database User Classes](#ch-intro.intro-dbapi-user)
 
-    -   [Database Driver Architecture](#database-driver-architecture)
+    -   [Database Driver Architecture](#ch-intro.intro-dbapi-driver)
 
--   [The GUI Module](#the-gui-module)
+-   [The GUI Module](#ch-intro.intro-gui)
 
--   [The HTML Module](#the-html-module)
+-   [The HTML Module](#ch-intro.intro-html)
 
-    -   [Relationships between HTML classes](#relationships-between-html-classes)
+    -   [Relationships between HTML classes](#ch-intro.intro-html-classes)
 
-    -   [HTML Processing](#html-processing)
+    -   [HTML Processing](#ch-intro.intro-html-processing)
 
--   [The OBJECT MANAGER Module](#the-object-manager-module)
+-   [The OBJECT MANAGER Module](#ch-intro.intro-objmgr)
 
--   [The SERIAL Module](#the-serial-module)
+-   [The SERIAL Module](#ch-intro.intro-ser)
 
--   [The UTIL Module](#the-util-module)
+-   [The UTIL Module](#ch-intro.intro-util)
 
-    -   [Checksum](#checksum)
+    -   [Checksum](#ch-intro.intro-checksum)
 
-    -   [Console Debug Dump Viewer](#console-debug-dump-viewer)
+    -   [Console Debug Dump Viewer](#ch-intro.intro-dumpv)
 
-    -   [Diff API](#diff-api)
+    -   [Diff API](#ch-intro.Diff-API)
 
-    -   [Floating Point Comparison](#floating-point-comparison)
+    -   [Floating Point Comparison](#ch-intro.Floating-Point-Comparison)
 
-    -   [Lightweight Strings](#lightweight-strings)
+    -   [Lightweight Strings](#ch-intro.intro-lightstring)
 
-    -   [Linked Sets](#linked-sets)
+    -   [Linked Sets](#ch-intro.intro-linkedset)
 
-    -   [Random Number Generator](#random-number-generator)
+    -   [Random Number Generator](#ch-intro.intro-random)
 
-    -   [Range Support](#range-support)
+    -   [Range Support](#ch-intro.intro-range)
 
-    -   [Registry based DNS](#registry-based-dns)
+    -   [Registry based DNS](#ch-intro.intro-regdns)
 
-    -   [Regular Expressions](#regular-expressions)
+    -   [Regular Expressions](#ch-intro.Regular-Expressions)
 
-    -   [Resizing Iterator](#resizing-iterator)
+    -   [Resizing Iterator](#ch-intro.intro-resizeiterator)
 
-    -   [Rotating Log Streams](#rotating-log-streams)
+    -   [Rotating Log Streams](#ch-intro.intro-rotatelog)
 
-    -   [Stream Support](#stream-support)
+    -   [Stream Support](#ch-intro.intro-streamsupport)
 
-    -   [String Search](#string-search)
+    -   [String Search](#ch-intro.intro-strsearch)
 
-    -   [Synchronized and blocking queue](#synchronized-and-blocking-queue)
+    -   [Synchronized and blocking queue](#ch-intro.Synchronized-and-blo)
 
-    -   [Thread Pools](#thread-pools)
+    -   [Thread Pools](#ch-intro.intro-thrpools)
 
-    -   [UTF 8 Conversion](#utf-8-conversion)
+    -   [UTF 8 Conversion](#ch-intro.intro-utf8)
+
+<a name="ch-intro.intro-corelib"></a>
 
 The CORELIB Module
 ------------------
@@ -144,45 +146,49 @@ The C++ Toolkit can be seen as consisting of several major pieces of code that w
 
 The following is a list of the CORELIB facilities. Note that each facility may be implemented by a number of C++ classes spread across many files.
 
--   [Application Framework](#application-framework)
+-   [Application Framework](#ch-intro.intro-appframe)
 
--   [Argument processing](#argument-processing)
+-   [Argument processing](#ch-intro.intro-args)
 
--   [Diagnostics](#diagnostics)
+-   [Diagnostics](#ch-intro.intro-diag)
 
--   [Environment Interface](#environment-interface)
+-   [Environment Interface](#ch-intro.intro-env)
 
--   [Files and Directories](#files-and-directories)
+-   [Files and Directories](#ch-intro.intro-files-dirs)
 
--   [MT Test wrappers](#mt-test-wrappers)
+-   [MT Test wrappers](#ch-intro.intro-mt-test)
 
--   [Object and Ref classes](#object-and-ref-classes)
+-   [Object and Ref classes](#ch-intro.intro-cref)
 
--   [Portability definitions](#portability-definitions)
+-   [Portability definitions](#ch-intro.intro-pdef)
 
--   [Portable Exception Handling](#portable-exception-handling)
+-   [Portable Exception Handling](#ch-intro.intro-pexcep)
 
--   [Portable Process Pipes](#portable-process-pipes)
+-   [Portable Process Pipes](#ch-intro.intro-pipe)
 
--   [Registry](#registry)
+-   [Registry](#ch-intro.intro-reg)
 
--   [STL Use Hints](#stl-use-hints)
+-   [STL Use Hints](#ch-intro.intro-stl)
 
--   [String Manipulations](#string-manipulations)
+-   [String Manipulations](#ch-intro.intro-str)
 
--   [Template Utilities](#template-utilities)
+-   [Template Utilities](#ch-intro.intro-tempu)
 
--   [Threads](#threads)
+-   [Threads](#ch-intro.intro-threads)
 
--   [Time](#time)
+-   [Time](#ch-intro.intro-time)
 
 A brief description of each of each of these facilities are presented in the subsections that follow:
+
+<a name="ch-intro.intro-appframe"></a>
 
 ### Application Framework
 
 The Application framework primarily consists of an abstract class called ***CNcbiApplication*** which defines the high level behavior of an application. For example, every application upon loading seems to go through a cycle of doing some initialization, then some processing, and upon completion of processing, doing some clean up activity before exiting. These three phases are modeled in the ***CNcbiApplication*** class as interface methods ***Init()***, ***Run()***, and ***Exit()***.
 
-A new application is written by deriving a class from the ***CNcbiApplication*** base class and writing an implementation of the ***Init()***, ***Run()***, and ***Exit()*** methods. Execution control to the new application is passed by calling the application object's ***AppMain()*** method inherited from the ***CNcbiApplication*** base class (see [Figure 1](#figure-1)). The ***AppMain()*** method is similar to the ***main()*** method used in C/C++ programs and calls the ***Init()***, ***Run()***, and ***Exit()*** methods.
+A new application is written by deriving a class from the ***CNcbiApplication*** base class and writing an implementation of the ***Init()***, ***Run()***, and ***Exit()*** methods. Execution control to the new application is passed by calling the application object's ***AppMain()*** method inherited from the ***CNcbiApplication*** base class (see [Figure 1](#ch-intro.F1)). The ***AppMain()*** method is similar to the ***main()*** method used in C/C++ programs and calls the ***Init()***, ***Run()***, and ***Exit()*** methods.
+
+<a name="ch-intro.F1"></a>
 
 ![Figure 1. The CNcbiApplication class](/book/static/img/CNcbiApplication.gif)
 
@@ -190,15 +196,19 @@ Figure 1. The ***CNcbiApplication*** class
 
 More details on [using the CNcbiApplication class](ch_core.html#ch_core.writing_simple_app) are presented in a later chapter.
 
+<a name="ch-intro.intro-args"></a>
+
 ### Argument processing
 
 In a C++ program, control is transferred from the command line to the program via the ***main()*** function. The ***main()*** function is passed a count of the number of arguments (int argc), and an array of character strings containing arguments to the program (`char** argv`). As long as the argument types are simple, one can simply set up a loop to iterate through the array of argument values and process them. However, with time applications evolve and grow more complex. Often there is a need to do some more complex argument checking. For example, the application may want to enforce a check on the number and position of arguments, check the argument type (int, string, etc.), check for constraints on argument values, check for flags, check for arguments that follow a keyword (***-logfile mylogfile.log***), check for mandatory arguments, display usage help on the arguments, etc.
 
 To make the above tasks easier, the CORELIB provides a number of portable classes that encapsulate the functionality of argument checking and processing. The main classes that provide this functionality are the ***CArgDescriptions***, ***CArgs***, ***CArgValue*** classes.
 
-Argument descriptions such as the expected number, type, position, mandatory and optional attributes are setup during an application's initilization such as the application object's ***Init()*** method (see [previous section](#previous-section)) by calling the ***CArgDescriptions*** class methods. Then, the arguments are extracted by calling the ***CArgs*** class methods.
+Argument descriptions such as the expected number, type, position, mandatory and optional attributes are setup during an application's initilization such as the application object's ***Init()*** method (see [previous section](#ch-intro.intro-appframe)) by calling the ***CArgDescriptions*** class methods. Then, the arguments are extracted by calling the ***CArgs*** class methods.
 
 More details on [argument processing](ch_core.html#ch_core.cmd_line_args) are presented in a later chapter.
+
+<a name="ch-intro.intro-diag"></a>
 
 ### Diagnostics
 
@@ -208,11 +218,15 @@ You can set the severity level of the message to Information, Warning, Error, Cr
 
 More details on [diagnostic streams](ch_core.html#ch_core.CNcbiDiag) and [processing of diagnostic messages](ch_debug.html#ch_debug.std_cpp_message_post) are presented in later chapters.
 
+<a name="ch-intro.intro-env"></a>
+
 ### Environment Interface
 
 An application can read the environment variable settings (such as PATH) that are in affect when the application is run. CORELIB defines a portable ***CNcbiEnvironment*** class that stores the environment variable settings and provides applications with methods to get the environment variable values.
 
 More details on the [environment interface](ch_core.html#ch_core.CNcbiEnvironment) are presented in a later chapter.
+
+<a name="ch-intro.intro-files-dirs"></a>
 
 ### Files and Directories
 
@@ -222,11 +236,15 @@ For example, if you create a ***CFile*** object corresponding to a system file, 
 
 More details on [file and directory classes](ch_core.html#ch_core.files_dirs) are presented in later chapters.
 
+<a name="ch-intro.intro-mt-test"></a>
+
 ### MT Test wrappers
 
-The ***CNcbiApplication*** class which was [discussed earlier](#discussed-earlier) provides a framework for writing portable applications. For writing portable multi-threaded applications, the CORELIB provides a ***CThreadedApp*** class derived from ***CNcbiApplication*** class which provides a framework for building multi-threaded applications.
+The ***CNcbiApplication*** class which was [discussed earlier](#ch-intro.intro-appframe) provides a framework for writing portable applications. For writing portable multi-threaded applications, the CORELIB provides a ***CThreadedApp*** class derived from ***CNcbiApplication*** class which provides a framework for building multi-threaded applications.
 
 Instead of using the ***Init()***, ***Run()***, ***Exit()*** methods for the ***CNcbiApplication*** class, the ***CThreadedApp*** class defines specialized methods such as ***Thread\_Init()***, ***Thread\_Run()***, ***Thread\_Exit()***, ***Thread\_Destroy()*** for controlling thread behavior. These methods operate on a specific thread identified by a thread index parameter.
+
+<a name="ch-intro.intro-cref"></a>
 
 ### Object and Ref classes
 
@@ -238,6 +256,8 @@ The CORELIB implements a portable reference counted smart pointer through the **
 
 More [CObject classes](ch_core.html#ch_core.smart_ptrs) are presented in a later chapter.
 
+<a name="ch-intro.intro-pdef"></a>
+
 ### Portability definitions
 
 To help with portability, the CORELIB uses only those C/C++ standard types that have some guarantees about size and representation. In particular, use of long, long long, float is not recommended for portable code.
@@ -245,6 +265,8 @@ To help with portability, the CORELIB uses only those C/C++ standard types that 
 To help with portability, integer types such as `Int1`, `Uint1`, `Int2`, `Uint2`, `Int4`, `Uint4`, `Int8`, `Uint8` have been defined with constant limits. For example, a signed integer of two bytes size is defined as type `Int2` with a minimum size of `kMin_I2` and a maximum size of `kMax_I2`. There are minimum and maximum limit constants defined for each of the different integer types.
 
 More details on [standard portable data types](ch_core.html#ch_core.std_ncbi_types) are presented in a later chapter.
+
+<a name="ch-intro.intro-pexcep"></a>
 
 ### Portable Exception Handling
 
@@ -256,11 +278,15 @@ These exception classes provides many useful facilities such as a unique identif
 
 More details on [exceptions and exception handling](ch_debug.html#ch_debug.ncbi_cpp_exceptions) are presented in a later chapter.
 
+<a name="ch-intro.intro-pipe"></a>
+
 ### Portable Process Pipes
 
 A pipe is a common mechanism used to establish communications between two separate processes. The pipe serves as a communication channel between processes.
 
 The CORELIB defines the ***CPipe*** class that provides a portable inter-process communications facility between a parent process and its child process. The pipe is created by specifying the command and arguments used to start the child process and specifying the type of data channels (text or binary) that will connect the processes. Data is sent across the pipe using the ***CPipe*** read and write methods.
+
+<a name="ch-intro.intro-reg"></a>
 
 ### Registry
 
@@ -272,6 +298,8 @@ The ***CNcbiRegistry*** class provides a portable facility to access, modify and
 
 More details on the [Registry](ch_core.html#ch_core.CNcbiRegistry) are presented in a later chapter.
 
+<a name="ch-intro.intro-stl"></a>
+
 ### STL Use Hints
 
 To minimize naming conflicts, all NCBI code is placed in the ncbi name space. The CORELIB defines a number of portable macros to help manage name space definitions. For example, you can use the **`BEGIN_NAME_SPACE`** macro at the start of a section of code to place that code in the specified name space. The **`END_NAME_SPACE`** macros is used to indicate the end the of the name space definition. To declare the use of the NCBI namespace, the macros **`USING_NCBI_SCOPE`** is used.
@@ -280,11 +308,15 @@ A number of macros have been defined to handle non-standard behavior of C++ comp
 
 More details on the [use of portable macros](ch_style.html#ch_style.using_NCBI_namespace) are presented in a later chapter.
 
+<a name="ch-intro.intro-str"></a>
+
 ### String Manipulations
 
 C++ defines the standard string class that provides operations on strings. However, compilers may exhibit non-portable string behavior especially with regards to multi-threaded programs. The CORELIB provides portable string manipulation facilities through the ***NStr*** class that provides a number of class-wide functions for string manipulation.
 
 ***NStr*** portable functions include the string-to-X and X-to-string conversion functions where X is a data type including a pointer type, string comparisons with and without case, pattern searches within a string, string truncation, substring replacements, string splitting and join operations, string tokenization, etc.
+
+<a name="ch-intro.intro-tempu"></a>
 
 ### Template Utilities
 
@@ -293,6 +325,8 @@ The C++ Template classes support a number of useful template classes for data st
 The CORELIB defines a number of useful utility template classes. Some examples are template classes and functions for checking for equality of objects through a pointer, checking for non-null values of pointers, getting and setting map elements, deleting all elements from a container of pointers where the container can be a list, vector, set, multiset, map or multimap.
 
 More details on the [template utilities](ch_core.html#ch_core.template_utils) are presented in a later chapter.
+
+<a name="ch-intro.intro-threads"></a>
 
 ### Threads
 
@@ -306,6 +340,8 @@ Synchronization between threads is provided through mutexes and read/write locks
 
 More details on [threads](ch_core.html#ch_core.threads) and [synchronization](ch_core.html#ch_core.mutexes) are presented in a later chapter.
 
+<a name="ch-intro.intro-time"></a>
+
 ### Time
 
 The ***CTime*** class provides a portable interface to date and time functions. ***CTime*** can operate with both local and UTC time, and can be used to store data and time at a particular moment or elapsed time. The time epoch is defined as Jan 1, 1900 so you cannot use ***CTime*** for storing timestamps before Jan 1, 1900.
@@ -315,6 +351,8 @@ The ***CTime*** class can adjust for daylight savings time. For display purposes
 A class ***CStopWatch*** is also available that acts as a stop watch and measures elapsed time via the ***Elapsed()*** method, after its ***Start()*** method is called.
 
 More details on the [CTime class](ch_core.html#ch_core.portable_time_class) are presented in a later chapter.
+
+<a name="ch-intro.intro-algo"></a>
 
 The ALGORITHM Module
 --------------------
@@ -327,6 +365,8 @@ The ALGORITHM module is a collection of rigorously defined, often computationall
 
 -   SEQUENCE. Various algorithms on biological sequences, including antigenic determinant prediction, CPG-island finder, ORF finder, string matcher and others.
 
+<a name="ch-intro.intro-cgi"></a>
+
 The CGI Module
 --------------
 
@@ -334,7 +374,7 @@ The CGI module provides an integrated framework for writing CGI applications. It
 
 The CGI module consists of a number of classes. The interaction between these classes is fairly complex, and therefore, not covered in this introductory chapter. We will attempt to only identify the major classes in this overview, and cover the details of their interaction in later chapters. Among the more important of the CGI classes are the ***CCgiApplication***, ***CCgiContext***, ***CCgiRequest***, ***CCgiResponse***, and ***CCgiCookie***.
 
-The ***CCgiApplication*** is used to define the CGI application and is derived from the ***CNcbiApplication***[discussed eariler](#-discussed-eariler). You write a CGI application by deriving application class from ***CCgiApplication*** and providing an adoption of the ***Init()***, ***Run()***, and ***Exit()*** methods inherited from the ***CNcbiApplication*** class. Details on [how to implement the Init(), Run() and Exit() methods for a CGI application](ch_cgi.html#ch_cgi.cgi_app_class) are provided in a later chapter.
+The ***CCgiApplication*** is used to define the CGI application and is derived from the ***CNcbiApplication***[discussed eariler](#ch-intro.intro-appframe). You write a CGI application by deriving application class from ***CCgiApplication*** and providing an adoption of the ***Init()***, ***Run()***, and ***Exit()*** methods inherited from the ***CNcbiApplication*** class. Details on [how to implement the Init(), Run() and Exit() methods for a CGI application](ch_cgi.html#ch_cgi.cgi_app_class) are provided in a later chapter.
 
 The ***CCgiRequest*** class is designed to receive and parse the request, and the ***CCgiResponse*** class outputs the response to an output stream.
 
@@ -344,6 +384,8 @@ The CGI application executes in a 'context' defined by the ***CCgiContext*** cla
 
 More details on [CGI classes and their interactions](ch_cgi.html#ch_cgi.cgi_class_overview) are presented in a later chapter.
 
+<a name="ch-intro.intro-conn"></a>
+
 The CONNECT Module
 ------------------
 
@@ -351,15 +393,17 @@ The CONNECT module implements a variety of interfaces and classes dealing with m
 
 The following is a list of topics presented in this section:
 
--   [Socket classes](#socket-classes)
+-   [Socket classes](#ch-intro.intro-socket)
 
--   [Connector and Connection Handles](#connector-and-connection-handles)
+-   [Connector and Connection Handles](#ch-intro.intro-connector)
 
--   [Connection Streams](#connection-streams)
+-   [Connection Streams](#ch-intro.intro-streams)
 
--   [Sendmail API](#sendmail-api)
+-   [Sendmail API](#ch-intro.intro-sendmail)
 
--   [Threaded Server](#threaded-server)
+-   [Threaded Server](#ch-intro.intro-threadedserver)
+
+<a name="ch-intro.intro-socket"></a>
 
 ### Socket classes
 
@@ -372,6 +416,8 @@ The ***CSocket*** class encapsulates the descriptions of both local and remote e
 The ***CListeningSocket*** is used by server-side applications to listen for connection requests. The ***CListeningSocket*** constructor specifies the port to listen to and the size of the connection request queue. You can change the port that the server application listens to any time by using the ***Listen()*** method. The ***Accept()*** method accepts the connection request, and returns a ***CSocket*** object through which data is transferred.
 
 The ***CSocketAPI*** is a C++ wrapper for class-wide common socket utility functions available for sockets such as the ***gethostname()***, ***gethostbyaddr()***, ***ntoa()***, ***aton()***, and so on.
+
+<a name="ch-intro.intro-connector"></a>
 
 ### Connector and Connection Handles
 
@@ -391,11 +437,15 @@ The general service connector is the most complex connector in the library, and 
 
 More details on [connector classes](ch_conn.html#ch_conn.conn_def) are presented in a later chapter.
 
+<a name="ch-intro.intro-streams"></a>
+
 ### Connection Streams
 
 The CONNECT module provides a higher level of abstraction to connection programming in the form of C++ connection stream classes derived from the ***CNcbiIostream*** class, which is in turn typedef'd as ***std::iostream***. This makes the familiar stream I/O operators and manipulators available to the connection stream. In addition, ***CConn\_IOStream*** performs more error checking than ***std::iostream*** and it allows input operations to be tied to the output operations so that any input attempt first flushes the output queue from the internal buffers.
 
-[Figure 2](#figure-2) shows the most common connection stream classes derived from ***CConn\_IOStream*** - ***CConn\_HttpStream***, ***CConn\_MemoryStream***, ***CConn\_ServiceStream***, and ***CConn\_SocketStream***.
+[Figure 2](#ch-intro.F2) shows the most common connection stream classes derived from ***CConn\_IOStream*** - ***CConn\_HttpStream***, ***CConn\_MemoryStream***, ***CConn\_ServiceStream***, and ***CConn\_SocketStream***.
+
+<a name="ch-intro.F2"></a>
 
 ![Figure 2. Connection stream classes](/book/static/img/CConn_IOStream.gif)
 
@@ -411,11 +461,15 @@ Figure 2. Connection stream classes
 
 More details on [connection stream classes](ch_conn.html#ch_conn.cpp_connection_streams) are presented in a later chapter.
 
+<a name="ch-intro.intro-sendmail"></a>
+
 ### Sendmail API
 
 The CONNECT module provides an API that provides access to SMTP protocol. SMTP (Simple Mail Transfer Protocol) is a standard email relaying protocol used by many popular MTAs (Message Transfer Agents), such as sendmail, smail, etc, found on many systems. SMTP passes (relays) email messages between hosts in the Internet all the way from sender to recipient.
 
 To initiate the use of the sendmail API, you must call the ***SendMailInfo\_Int()*** function that initializes structure ***SSendMailInfo***, passed by a pointer. Your code then modifies the structure to contain proper information such as that expected in a mail header (To, From, CC, BCC fields) and other communication settings from their default values set at initialization. Then, you can send email using the ***CORE\_SendMail()*** or ***CORE\_SendMailEx()*** functions.
+
+<a name="ch-intro.intro-threadedserver"></a>
 
 ### Threaded Server
 
@@ -425,12 +479,16 @@ You must derive your threaded server from the ***CThreadedServer*** class and de
 
 More details on threaded server classes are presented in a later chapter.
 
+<a name="ch-intro.intro-ctool"></a>
+
 The CTOOL Module
 ----------------
 
-The CTOOL module provides bridge mechanisms and conversion functions. More specifically, the CTOOL module provides a number of useful functions such as a bridge between the NCBI C++ Toolkit and the older C Toolkit for error handling, an ASN.1 connections stream that builds on top of the [connection stream](#connection-stream), and an ASN converter that provides templates for converting ASN.1-based objects between NCBI's C and C++ in-memory layouts.
+The CTOOL module provides bridge mechanisms and conversion functions. More specifically, the CTOOL module provides a number of useful functions such as a bridge between the NCBI C++ Toolkit and the older C Toolkit for error handling, an ASN.1 connections stream that builds on top of the [connection stream](#ch-intro.intro-connector), and an ASN converter that provides templates for converting ASN.1-based objects between NCBI's C and C++ in-memory layouts.
 
 The ASN.1 connections support is provides through functions ***CreateAsnConn()*** for creating an ASN stream connection; ***CreateAsnConn\_ServiceEx()*** for creating a service connection using the service name, type and connection parameters; and ***CreateAsnConn\_Service()*** which is a specialized case of ***CreateAsnConn\_ServiceEx()*** with some parameters set to zero.
+
+<a name="ch-intro.intro-dbapi"></a>
 
 The DBAPI Module
 ----------------
@@ -441,9 +499,11 @@ The user classes are used by a programmer to access the database. The user class
 
 The following is a list of topics presented in this section:
 
--   [Database User Classes](#database-user-classes)
+-   [Database User Classes](#ch-intro.intro-dbapi-user)
 
--   [Database Driver Architecture](#database-driver-architecture)
+-   [Database Driver Architecture](#ch-intro.intro-dbapi-driver)
+
+<a name="ch-intro.intro-dbapi-user"></a>
 
 ### Database User Classes
 
@@ -461,6 +521,8 @@ The ***CVariant*** class is used to describe the fields of a record which can be
 
 For sample code illustrating the above mentioned steps, see the [Data Source and Connections](ch_dbapi.html#ch_dbapi.dbapi_src_cnxns) and [Main Loop](ch_dbapi.html#ch_dbapi.dbapi_main_loop) sections.
 
+<a name="ch-intro.intro-dbapi-driver"></a>
+
 ### Database Driver Architecture
 
 The driver can use two different methods to access the particular RDBMS. If RDBMS provides a client library (`CTLib`) for a given computer system, then the driver utilizes this library. If there is no client library, then the driver connects to RDBMS through a special gateway server which is running on a computer system where such library does exist.
@@ -475,12 +537,16 @@ Once you have the ***CDB\_Connection*** object, you can use it as a factory for 
 
 More [details on the database driver architecture](ch_dbapi.html#ch_dbapi.dbapi_driver_ref) is presented in a later chapter.
 
+<a name="ch-intro.intro-gui"></a>
+
 The GUI Module
 --------------
 
 The C++ Toolkit does not include its own GUI Module. Instead, Toolkit-based GUI applications make use of third party GUI packages. Depending on the requirements, we recommend either [wxWidgets](http://www.wxwidgets.org/) or [FOX](http://www.fox-toolkit.org/).
 
 More details on developing GUI application in conjunction with the C++ Toolkit are presented in a [later chapter](ch_gui.html).
+
+<a name="ch-intro.intro-html"></a>
 
 The HTML Module
 ---------------
@@ -493,19 +559,25 @@ Note that while the HTML classes can be used to represent the HTML page internal
 
 The following is a list of topics presented in this section:
 
--   [Relationships between HTML classes](#relationships-between-html-classes)
+-   [Relationships between HTML classes](#ch-intro.intro-html-classes)
 
--   [HTML Processing](#html-processing)
+-   [HTML Processing](#ch-intro.intro-html-processing)
+
+<a name="ch-intro.intro-html-classes"></a>
 
 ### Relationships between HTML classes
 
-The base class for all nodes in the graph structure for an HTML document is the ***CNCBINode***. The ***CNCBINode*** class is derived from ***CObject*** and provides the ability to add, delete, and modify the nodes in the graph. The ability to add and modify nodes is inherited by all the classes derived from ***CNCBINode*** (see [Figure 3](#figure-3)). The classes derived from ***CNCBINode*** represent the HTML elements on an HTML page. You can easily identify the HTML element that a class handles from the class names such as ***CHTMLText***, ***CHTMLButtonList***, etc.
+The base class for all nodes in the graph structure for an HTML document is the ***CNCBINode***. The ***CNCBINode*** class is derived from ***CObject*** and provides the ability to add, delete, and modify the nodes in the graph. The ability to add and modify nodes is inherited by all the classes derived from ***CNCBINode*** (see [Figure 3](#ch-intro.F3)). The classes derived from ***CNCBINode*** represent the HTML elements on an HTML page. You can easily identify the HTML element that a class handles from the class names such as ***CHTMLText***, ***CHTMLButtonList***, etc.
+
+<a name="ch-intro.F3"></a>
 
 ![Figure 3. HTML classes derived from CNCBINode](/book/static/img/CNCBINode.gif)
 
 Figure 3. HTML classes derived from ***CNCBINode***
 
-The text node classes ***CHTMLText*** and ***CHTMLPlainText*** are intended to be used directly by the user. Both ***CHTMLText*** and ***CHTMLPlainText*** are used to insert text into the generated html, with the difference that ***CHTMLPlainText*** class performs HTML encoding before generation. A number of other classes such as ***CHTMLNode***, ***CHTMLElement***, ***CHTMLOpenElement***, and ***CHTMLListElement*** are base classes for the elements actually used to construct an HTML page, such as ***CHTML\_head***, ***CHTML\_form*** (see [Figure 4](#figure-4)).
+The text node classes ***CHTMLText*** and ***CHTMLPlainText*** are intended to be used directly by the user. Both ***CHTMLText*** and ***CHTMLPlainText*** are used to insert text into the generated html, with the difference that ***CHTMLPlainText*** class performs HTML encoding before generation. A number of other classes such as ***CHTMLNode***, ***CHTMLElement***, ***CHTMLOpenElement***, and ***CHTMLListElement*** are base classes for the elements actually used to construct an HTML page, such as ***CHTML\_head***, ***CHTML\_form*** (see [Figure 4](#ch-intro.F4)).
+
+<a name="ch-intro.F4"></a>
 
 ![Figure 4. The CHTMLNode class and its derived classes](/book/static/img/CHTMLNode.gif)
 
@@ -513,7 +585,9 @@ Figure 4. The ***CHTMLNode*** class and its derived classes
 
 The ***CHTMLNode*** class is the base class for ***CHTMLElement*** and ***CHTMLOpenElement*** and is used for describing the HTML elements that are found in an HTML page such as HEAD, BODY, H1, BR, etc. The ***CHTMLElement*** tag describes those tags that have a close tag and are well formed. The ***CHTMLOpenElement*** class describes tags that are often found without the corresponding close tag such as the BR element that inserts a line break. The ***CHTMLListElement*** class is used in lists such as the OL element.
 
-Important classes of HTML elements used in forms to input data are the input elements such as checkboxes, radio buttons, text fields, etc. The ***CHTML\_input*** class derived from the ***CHTML\_OpenElement*** class serves as the base class for a variety of input elements (see [Figure 5](#figure-5)).
+Important classes of HTML elements used in forms to input data are the input elements such as checkboxes, radio buttons, text fields, etc. The ***CHTML\_input*** class derived from the ***CHTML\_OpenElement*** class serves as the base class for a variety of input elements (see [Figure 5](#ch-intro.F5)).
+
+<a name="ch-intro.F5"></a>
 
 ![Figure 5. The CHTML\_input class and its derived classes](/book/static/img/CHTML_input.gif)
 
@@ -521,9 +595,13 @@ Figure 5. The ***CHTML\_input*** class and its derived classes
 
 More [details on HTML classes and their relationships](ch_html.html#ch_html.html_classes) is presented in a later chapter.
 
+<a name="ch-intro.intro-html-processing"></a>
+
 ### HTML Processing
 
-The HTML classes can be used to dynamically generate pages. In addition to the classes described in the previous section, there are a number of page classes that are designed to help with HTML processing. The page classes serve as generalized containers for collections of other HTML components, which are mapped to the page. [Figure 6](#figure-6) describes the important classes in page class hierarchy.
+The HTML classes can be used to dynamically generate pages. In addition to the classes described in the previous section, there are a number of page classes that are designed to help with HTML processing. The page classes serve as generalized containers for collections of other HTML components, which are mapped to the page. [Figure 6](#ch-intro.F6) describes the important classes in page class hierarchy.
+
+<a name="ch-intro.F6"></a>
 
 ![Figure 6. HTML page classes](/book/static/img/CHTMLPage.gif)
 
@@ -534,6 +612,8 @@ The ***CHTMLBasicPage*** class is as a base class whose features are inherited b
 The ***CHTMLPage*** class when used with the appropriate HTML template file, can generate the 'bolier plate' web pages such as a standard corporate web page, with a corporate logo, a hook for an application-specific logo, a top menubar of links to several databases served by a query program, a links sidebar for application-specific links to relevant sites, a VIEW tag for an application's web interface, a bottom menubar for help links, disclaimers, and other boiler plate links. The template file is a simple HTML text file with named tags (\<@tagname@\>) which allow the insertion of new HTML blocks into a pre-formatted page.
 
 More [details on CHTMLBasicPage, CHTMLPage and related classes](ch_html.html#ch_html.page_classes) is presented in a later chapter.
+
+<a name="ch-intro.intro-objmgr"></a>
 
 The OBJECT MANAGER Module
 -------------------------
@@ -562,6 +642,8 @@ The Object Manager includes numerous classes for accessing bio sequence data suc
 
 More [details on the Object Manager and related classes](ch_objmgr.html) is presented in a later chapter.
 
+<a name="ch-intro.intro-ser"></a>
+
 The SERIAL Module
 -----------------
 
@@ -579,6 +661,8 @@ Input data can be very large in size; also, reading it completely into memory co
 
 In essence, “hook” is a callback function that client application provides to serial library. Client application installs the hook, then reads (or writes) data object, and somewhere from the depths of serialization processing, the library calls this hook function at appropriate times, for example, when a data chunk of specified type is about to be read. It is also possible to install [context-specific hooks](ch_ser.html#ch_ser.stack_path_hooks). Such hooks are triggered when serializing a particular object type in a particular context; for example, for all objects of class A which are contained in object B.
 
+<a name="ch-intro.intro-util"></a>
+
 The UTIL Module
 ---------------
 
@@ -586,39 +670,41 @@ The UTIL module is collection of some very useful utility classes that implement
 
 The following sections give an overview of the utility classes:
 
--   [Checksum](#checksum)
+-   [Checksum](#ch-intro.intro-checksum)
 
--   [Console Debug Dump Viewer](#console-debug-dump-viewer)
+-   [Console Debug Dump Viewer](#ch-intro.intro-dumpv)
 
--   [Diff API](#diff-api)
+-   [Diff API](#ch-intro.Diff-API)
 
--   [Floating Point Comparison](#floating-point-comparison)
+-   [Floating Point Comparison](#ch-intro.Floating-Point-Comparison)
 
--   [Lightweight Strings](#lightweight-strings)
+-   [Lightweight Strings](#ch-intro.intro-lightstring)
 
--   [Range Support](#range-support)
+-   [Range Support](#ch-intro.intro-range)
 
--   [Linked Sets](#linked-sets)
+-   [Linked Sets](#ch-intro.intro-linkedset)
 
--   [Random Number Generator](#random-number-generator)
+-   [Random Number Generator](#ch-intro.intro-random)
 
--   [Registry based DNS](#registry-based-dns)
+-   [Registry based DNS](#ch-intro.intro-regdns)
 
--   [Regular Expressions](#regular-expressions)
+-   [Regular Expressions](#ch-intro.Regular-Expressions)
 
--   [Resizing Iterator](#resizing-iterator)
+-   [Resizing Iterator](#ch-intro.intro-resizeiterator)
 
--   [Rotating Log Streams](#rotating-log-streams)
+-   [Rotating Log Streams](#ch-intro.intro-rotatelog)
 
--   [Stream Support](#stream-support)
+-   [Stream Support](#ch-intro.intro-streamsupport)
 
--   [String Search](#string-search)
+-   [String Search](#ch-intro.intro-strsearch)
 
--   [Synchronized and blocking queue](#synchronized-and-blocking-queue)
+-   [Synchronized and blocking queue](#ch-intro.Synchronized-and-blo)
 
--   [Thread Pools](#thread-pools)
+-   [Thread Pools](#ch-intro.intro-thrpools)
 
--   [UTF 8 Conversion](#utf-8-conversion)
+-   [UTF 8 Conversion](#ch-intro.intro-utf8)
+
+<a name="ch-intro.intro-checksum"></a>
 
 ### Checksum
 
@@ -629,6 +715,8 @@ The checksum calculation is set up by creating a ***CChecksum*** object using th
 Data on which the checksum is to be computed is passed to the ***CChecksum's****AddLine()*** or ***AddChars()*** method as a character array. As data is passed to these methods, the CRC is computed and stored in the class. You can get the value of the computed CRC using the ***GetChecksum()*** method. Alternatively, you can use the ***WriteChecksum()*** method and pass it a ***CNcbiOstream*** object and have the CRC written to the output stream in the following syntax:
 
 /\* Original file checksum: lines: *nnnn*, chars: *nnnn*, CRC32: *xxxxxxxx* \*/
+
+<a name="ch-intro.intro-dumpv"></a>
 
 ### Console Debug Dump Viewer
 
@@ -644,7 +732,9 @@ The Console Debug Dump Viewer is implemented by the ***CDebugDumpViewer*** class
        d[ump]    address  depth
        go
 
-The ***CDebugDumpViewer*** class also permits the enabling and disabling of debug dump breakpoints from the [registry](#registry).
+The ***CDebugDumpViewer*** class also permits the enabling and disabling of debug dump breakpoints from the [registry](#ch-intro.intro-reg).
+
+<a name="ch-intro.Diff-API"></a>
 
 ### Diff API
 
@@ -704,6 +794,8 @@ For more detailed usage, see the test program:
 
 <http://www.ncbi.nlm.nih.gov/viewvc/v1/trunk/c%2B%2B/src/util/diff/test/>
 
+<a name="ch-intro.Floating-Point-Comparison"></a>
+
 ### Floating Point Comparison
 
 For technical reasons, direct comparison of "close" floating point values is simply not reliable on most computers in use today. Therefore, in cases where the values being compared might be close, it is advisable to apply a tolerance when making comparisons to avoid unexpected results.
@@ -731,6 +823,8 @@ For further details on this function, see its Doxygen [documentation](http://www
 
 For technical details on the subject, including what it means to be close, see "[Comparing floating point numbers](http://www.cygnus-software.com/papers/comparingfloats/comparingfloats.htm)" by Bruce Dawson.
 
+<a name="ch-intro.intro-lightstring"></a>
+
 ### Lightweight Strings
 
 Class ***CTempString*** implements a light-weight string on top of a storage buffer whose lifetime management is known and controlled.
@@ -747,17 +841,23 @@ Take into account, that the character string array kept by ***CTempString*** obj
 
 It's convenient to use the class ***CTempString*** as an argument of API functions so that no allocation or deallocation will take place on of the function call.
 
+<a name="ch-intro.intro-linkedset"></a>
+
 ### Linked Sets
 
 The UTIL module defines a template container class, ***CLinkedMultiset***, that can hold a linked list of multiset container types.
 
 The ***CLinkedMultiset*** defines iterator methods ***begin()***, ***end()***, ***find()***, ***lower\_bound()***, ***upper\_bound()***, to help traverse the container. The method ***get()***, fetches the contained value, the method ***insert()*** inserts a new value into the container, and the method ***erase()***, removes the specified value from the container.
 
+<a name="ch-intro.intro-random"></a>
+
 ### Random Number Generator
 
 The UTIL module defines the ***CRandom*** class that can be used for generating 32-bit unsigned random numbers. The random number generator algorithm is the Lagged Fibonacci Generator (LFG) algorithm.
 
 The random number generator is initialized with a seed value, and then the ***GetRandom()*** method is called to get the next random number. You can also specify that the random number value that is returned be in a specified range of values.
+
+<a name="ch-intro.intro-range"></a>
 
 ### Range Support
 
@@ -769,11 +869,15 @@ Another class, the ***CIntervalTree*** class, has the same functionality as the 
 
 More [details on range classes](ch_core.html#ch_core.template_typename_Co) are presented in a later chapter.
 
+<a name="ch-intro.intro-regdns"></a>
+
 ### Registry based DNS
 
-The UTIL module defines the ***CSmallDns*** class that implements a simple [registry](#registry) based DNS server. The ***CSmallDns*** class provides DNS name to IP address translations similar to a standard DNS server, except that the database used to store DNS name to IP address mappings is a non-standard local database. The database of DNS names and IP address mappings are kept in a registry-like file named by local\_hosts\_file using section [LOCAL\_DNS].
+The UTIL module defines the ***CSmallDns*** class that implements a simple [registry](#ch-intro.intro-reg) based DNS server. The ***CSmallDns*** class provides DNS name to IP address translations similar to a standard DNS server, except that the database used to store DNS name to IP address mappings is a non-standard local database. The database of DNS names and IP address mappings are kept in a registry-like file named by local\_hosts\_file using section [LOCAL\_DNS].
 
 The ***CSmallDns*** has two methods that are responsible for providing the DNS name to IP address translations: the ***LocalResolveDNS*** method and the ***LocalBackResolveDNS*** method. The ***LocalResolveDNS*** method does 'forward' name resolution. That is, given a host name, it returns a string containing the IP address in the dotted decimal notation. The ***LocalBackResolveDNS*** method does a 'reverse lookup'. That is, given an IP address as a dotted decimal notation string, it returns the host name stored in the registry.
+
+<a name="ch-intro.Regular-Expressions"></a>
 
 ### Regular Expressions
 
@@ -793,11 +897,15 @@ To use ***CRegexp***, link with the `xregexp` library:
 
 ***Note:*** ***CRegexp*** has no replacement functionality - i.e. there is no API support for replacing matched text with provided text or matched groups.
 
+<a name="ch-intro.intro-resizeiterator"></a>
+
 ### Resizing Iterator
 
 The UTIL module defines two template classes, the ***CResizingIterator*** and the ***CConstResizingIterator*** classes that handle sequences represented as packed sequences of elements of different sizes For example, a vector \<char\> might actually hold 2-bit values, such as nucleotides, or 32-bit integer values.
 
 The purpose of these iterator classes is to provide iterator semantics for data values that can be efficiently represented as a packed sequence of elements regardless of the size.
+
+<a name="ch-intro.intro-rotatelog"></a>
 
 ### Rotating Log Streams
 
@@ -805,9 +913,13 @@ The UTIL module defines the ***CRotatingLogStream*** class that can be used to i
 
 The rotating log can be specified as a file, with an upper limit (in bytes) to how big the log will grow. The ***CRotatingLogStream*** defines a method called ***Rotate()*** that implements the default rotation.
 
+<a name="ch-intro.intro-streamsupport"></a>
+
 ### Stream Support
 
-The UTIL module defines a number of portable classes that provide additional stream support beyond that provided by the standard C++ streams. The ***CByteSource*** class acts as an abstract base class (see [Figure 7](#figure-7)), for a number of stream classes derived from it. As the name of the other classes derived from ***CByteSource*** suggests, each of these classes provides the methods from reading from the named source. To list a few examples: ***CFileByteSource*** is a specialized class for reading from a named file; ***CMemoryByteSource*** is a specialized class for reading from a memory buffer; ***CResultByteSource*** is a specialized class for reading database results; ***CStreamByteSource*** is a specialized class from reading from the C++ input stream (istream); ***CFStreamByteSource*** is a specialized class from reading from the C++ input file stream (ifstream).
+The UTIL module defines a number of portable classes that provide additional stream support beyond that provided by the standard C++ streams. The ***CByteSource*** class acts as an abstract base class (see [Figure 7](#ch-intro.F7)), for a number of stream classes derived from it. As the name of the other classes derived from ***CByteSource*** suggests, each of these classes provides the methods from reading from the named source. To list a few examples: ***CFileByteSource*** is a specialized class for reading from a named file; ***CMemoryByteSource*** is a specialized class for reading from a memory buffer; ***CResultByteSource*** is a specialized class for reading database results; ***CStreamByteSource*** is a specialized class from reading from the C++ input stream (istream); ***CFStreamByteSource*** is a specialized class from reading from the C++ input file stream (ifstream).
+
+<a name="ch-intro.F7"></a>
 
 ![Figure 7. Relationship between CByteSource and its derived classes](/book/static/img/CByteSource.gif)
 
@@ -819,6 +931,8 @@ Additional classes, the ***CIStreamBuffer*** and the ***COStreamBuffer*** have b
 
 More details on the stream classes are presented in a later chapter.
 
+<a name="ch-intro.intro-strsearch"></a>
+
 ### String Search
 
 The UTIL module defines the ***CBoyerMooreMatcher*** class and the ***CTextFsm*** class which are used for searching for a single pattern over varying texts.
@@ -826,6 +940,8 @@ The UTIL module defines the ***CBoyerMooreMatcher*** class and the ***CTextFsm**
 The ***CBoyerMooreMatcher*** class, as the name suggests, uses the Boyer-Moore algorithm for string searches. The ***CTextFsm*** is a template class that performs the search using a finite state automaton for a specified to be matched data type. Since the matched data type is often a string, the ***CTextFsa*** class is defined as a convenience by instantiating the ***CTextFsm*** with the matched type template parameter set to string.
 
 The search can be setup as a case sensitive or case insensitive search. The default is case sensitive search. In the case of the ***CBoyerMooreMatcher*** class, the search can be setup for any pattern match or a whole word match. A whole word match means that a pattern was found to be between white spaces. The default is any pattern match.
+
+<a name="ch-intro.Synchronized-and-blo"></a>
 
 ### Synchronized and blocking queue
 
@@ -835,6 +951,8 @@ There is also ***CSyncQueue::TAccessGuard*** class which can lock the queue for 
 
 For more details on ***CSyncQueue*** look here: <http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/CSyncQueueDescription.html>.
 
+<a name="ch-intro.intro-thrpools"></a>
+
 ### Thread Pools
 
 The UTIL module defines a number of classes implementing pool of threads.
@@ -842,6 +960,8 @@ The UTIL module defines a number of classes implementing pool of threads.
 ***CThreadPool*** is the main class. It executes any tasks derived from the ***CThreadPool\_Task*** class. The number of threads in pool is controlled by special holder of this policy — object derived from ***CThreadPool\_Controller*** (default implementation is ***CThreadPool\_Controller\_PID*** based on Proportional-Integral-Derivative algortithm). All threads executing by ***CThreadPool*** are the instances of ***CThreadPool\_Thread*** class or its derivatives.
 
 More [details on threaded pool classes](ch_core.html#ch_core.Thread_Pools) are presented in a later chapter.
+
+<a name="ch-intro.intro-utf8"></a>
 
 ### UTF 8 Conversion
 

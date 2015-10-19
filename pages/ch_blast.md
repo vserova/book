@@ -15,9 +15,9 @@ Overview
 
 The overview for this chapter consists of the following topics:
 
--   [Introduction](#introduction)
+-   [Introduction](#ch-blast.intro)
 
--   [Chapter Outline](#chapter-outline)
+-   [Chapter Outline](#ch-blast.outline)
 
 ### Introduction
 
@@ -29,46 +29,50 @@ An attempt was made to isolate the user of the BLAST API (as exposed in `algo/bl
 
 ### Chapter Outline
 
-[CLocalBlast](#clocalblast)
+[CLocalBlast](#ch-blast.CLocalBlast)
 
--   [Query Sequence](#query-sequence)
+-   [Query Sequence](#ch-blast.-Query-Sequence)
 
--   [Options](#options)
+-   [Options](#ch-blast.-Options)
 
--   [Target Sequences](#target-sequences)
+-   [Target Sequences](#ch-blast.-Target-Sequences)
 
--   [Results](#results)
+-   [Results](#ch-blast.-Results)
 
-[CRemoteBlast](#cremoteblast)
+[CRemoteBlast](#ch-blast.CRemoteBlast)
 
--   [Query Sequence](#query-sequence)
+-   [Query Sequence](#ch-blast.-Query-Sequence-1)
 
--   [Options](#options)
+-   [Options](#ch-blast.-Options-1)
 
--   [Target Sequences](#target-sequences)
+-   [Target Sequences](#ch-blast.-Target-Sequences-1)
 
--   [Results](#results)
+-   [Results](#ch-blast.-Results-1)
 
-[The Uniform Interface](#the-uniform-interface)
+[The Uniform Interface](#ch-blast.The-Uniform-Interfac)
 
-[CBl2Seq](#cbl2seq)
+[CBl2Seq](#ch-blast.CBl2Seq)
 
--   [Query Sequence](#query-sequence)
+-   [Query Sequence](#ch-blast.-Query-Sequence-2)
 
--   [Options and Program Type](#options-and-program-type)
+-   [Options and Program Type](#ch-blast.Options-and-Program-)
 
--   [Target Sequences](#target-sequences)
+-   [Target Sequences](#ch-blast.-Target-Sequences-2)
 
--   [Results](#results)
+-   [Results](#ch-blast.-Results-2)
 
 [C++ BLAST Options Cookbook](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/blast_opts_cookbook.html)
 
-[Sample Applications](#sample-applications)
+[Sample Applications](#ch-blast.Sample-Applications)
+
+<a name="ch-blast.CLocalBlast"></a>
 
 CLocalBlast
 -----------
 
 The class [CLocalBlast](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CLocalBlast&d=C) can be used for searches that run locally on a machine (as opposed to sending the request over the network to use the CPU of another machine) and search a query (or queries) against a preformatted BLAST database, which holds the target sequence data in a format optimal for BLAST searches. The demonstration program `blast_demo.cpp` illustrates the use of ***CLocalBlast***. There are a few different ***CLocalBlast*** constructors, but they always take three arguments reflecting the need for a query sequence, a set of BLAST options, and a set of target sequences (e.g., BLAST database). First we discuss how to construct these arguments and then we discuss how to access the results.
+
+<a name="ch-blast.-Query-Sequence"></a>
 
 ### Query Sequence
 
@@ -84,9 +88,13 @@ An example use of ***CBlastInputSource*** is ***CBlastFastaInputSource***, which
 
 ***CBlastFastaInputSource*** uses ***CBlastInputConfig*** to provide more control over the file reading process. For example, the read process can be limited to a range of each sequence, or sequence letters that appear in lowercase can be scheduled for masking by BLAST. ***CBlastInputConfig*** can be used by other classes to provide the same kind of control, although not all class members will be appropriate for every data source.
 
+<a name="ch-blast.-Options"></a>
+
 ### Options
 
-The BLAST options classes were designed to allow a programmer to easily set the options to values appropriate to common tasks, but then modify individual options as needed. [Table 1](#table-1) lists the supported tasks.
+The BLAST options classes were designed to allow a programmer to easily set the options to values appropriate to common tasks, but then modify individual options as needed. [Table 1](#ch-blast.T18.3) lists the supported tasks.
+
+<a name="ch-blast.T18.3"></a>
 
 Table 1: List of tasks supported by the CBlastOptionsHandle. “Translated nucleotide” means that the input was nucleotide, but the comparison is based upon the protein. PSSM is a “position-specific scoring matrix”. The “EProgram” can be used as an argument to CBlastOptionsFactory::Create
 
@@ -104,7 +112,7 @@ Table 1: List of tasks supported by the CBlastOptionsHandle. “Translated nucle
 | ***ePSIBlast***      | 3                     | PSSM                  | Protein               | Extremely sensitive method to find distant homologies |
 | ***ePHIBlastp***     | 3                     | Protein               | Protein               | Uses pattern in query to start alignments             |
 
-The ***CBlastOptionsFactory*** class offers a single static method to create [CBlastOptionsHandle](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBlastOptionsHandle.html) subclasses so that options applicable to all variants of BLAST can be inspected or modified. The actual type of the [CBlastOptionsHandle](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBlastOptionsHandle.html) returned by the ***Create()*** method is determined by its `EProgram` argument (see [Table 1](#table-1)). The return value of this function is guaranteed to have reasonable defaults set for the selected task.
+The ***CBlastOptionsFactory*** class offers a single static method to create [CBlastOptionsHandle](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBlastOptionsHandle.html) subclasses so that options applicable to all variants of BLAST can be inspected or modified. The actual type of the [CBlastOptionsHandle](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBlastOptionsHandle.html) returned by the ***Create()*** method is determined by its `EProgram` argument (see [Table 1](#ch-blast.T18.3)). The return value of this function is guaranteed to have reasonable defaults set for the selected task.
 
 The ***CBlastOptionsHandle*** class encapsulates options that are common to all variants of BLAST, from which more specific tasks can inherit the common options. The subclasses of [CBlastOptionsHandle](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBlastOptionsHandle.html) should present an interface that is more specific, i.e.: only contain options relevant to the task at hand, although it might not be an exhaustive interface for all options available for the task. Please note that the initialization of this class' data members follows the template method design pattern, and this should be followed by subclasses also. Below is an example use of the ***CBlastOptionsHandle*** to create a set of options appropriate to “blastn” and then to set the expect value to non-default values:
 
@@ -131,30 +139,44 @@ If the same type of search (e.g., nucleotide query vs. nucleotide database) will
 
 The ***CBlastOptionsHandle*** design arranges the BLAST options in a hierarchy. For example all searches that involve protein-protein comparisons (including proteins translated from a nucleotide sequence) are handled by ***CBlastProteinOptionsHandle*** or a subclass (e.g., ***CBlastxOptionsHandle***). A limitation of this design is that the introduction of new algorithms or new options that only apply to some programs may violate the class hierarchy. To allow advanced users to overcome this limitation the ***GetOptions()*** and ***SetOptions()*** methods of the [CBlastOptionsHandle](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBlastOptionsHandle.html) hierarchy allow access to the [CBlastOptions](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBlastOptions.html) class, the lowest level class in the C++ BLAST options API which contains all options available to all variants of the BLAST algorithm. No guarantees about the validity of the options are made if this interface is used, therefore invoking ***Validate()*** is *strongly* recommended.
 
+<a name="ch-blast.-Target-Sequences"></a>
+
 ### Target Sequences
 
 One may specify a BLAST database to search with the [CSearchDatabase](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSearchDatabase&d=C) class. Normally it is only necessary to provide a string for the database name and state whether it is a nucleotide or protein database. It is also possible to specify an entrez query or a vector of GI’s that will be used to limit the search.
 
+<a name="ch-blast.-Results"></a>
+
 ### Results
 
 The ***Run()*** method of ***CLocalBlast*** returns a [CSearchResultSet](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSearchResultSet&d=C) that may be used to obtain results of the search. The ***CSearchResultSet*** class is a random access container of ***CSearchResults*** objects, one for each query submitted in the search. The ***CSearchResult*** class provides access to alignment (as a ***CSeq\_align\_set***), the query **`Cseq_id`**, warning or error messages that were generated during the run, as well as the filtered query regions (assuming query filtering was set).
+
+<a name="ch-blast.CRemoteBlast"></a>
 
 CRemoteBlast
 ------------
 
 The ***CRemoteBlast*** class sends a BLAST request to the SPLITD system at the NCBI. This can be advantageous in many situations. There is no need to download the (possibly) large BLAST databases to the user’s machine; the search may be spread across many machines by the SPLITD system at the NCBI, making it very fast; and the results will be kept on the NCBI server for 36 hours in case the users wishes to retrieve them again the next day. On the other hand the user must select one of the BLAST databases maintained by the NCBI since it is not possible to upload a custom database for searching. Here we discuss a ***CRemoteBlast*** constructor that takes three arguments, reflecting the need for a query sequence(s), a set of BLAST options, and a BLAST database. Readers are advised to read the ***CLocalBlast*** section before they read this section.
 
+<a name="ch-blast.-Query-Sequence-1"></a>
+
 ### Query Sequence
 
-A ***TSeqLocVector*** should be used as input to ***CRemoteBlast***. Please see the section on [CLocalBlast](#clocalblast) for details.
+A ***TSeqLocVector*** should be used as input to ***CRemoteBlast***. Please see the section on [CLocalBlast](#ch-blast.CLocalBlast) for details.
+
+<a name="ch-blast.-Options-1"></a>
 
 ### Options
 
 ***CBlastOptionsFactory::Create()*** can again be used to create options for ***CRemoteBlast***. In this case though it is necessary to set the second (default) argument of ***Create()*** to **`CBlastOptions::eRemote`**.
 
+<a name="ch-blast.-Target-Sequences-1"></a>
+
 ### Target Sequences
 
-One may use the ***CSearchDatabase*** class to specify a BLAST database, similar to the method outlined in the [CLocalBlast](#clocalblast) section. In this case it is important to remember though that the user must select from the BLAST databases available on the NCBI Web site and not one built locally.
+One may use the ***CSearchDatabase*** class to specify a BLAST database, similar to the method outlined in the [CLocalBlast](#ch-blast.CLocalBlast) section. In this case it is important to remember though that the user must select from the BLAST databases available on the NCBI Web site and not one built locally.
+
+<a name="ch-blast.-Results-1"></a>
 
 ### Results
 
@@ -162,10 +184,14 @@ After construction of the ***CRemoteBlast*** object the user should call one of 
 
 Finally ***CRemoteBlast*** provides a constructor that takes a string, which it expects to be an RID issued by the SPLITD system. This RID might have been obtained by an earlier run of ***CRemoteBlast*** or it could be one that was obtained from the NCBI SPLITD system via the web page. Note that the SPLITD system will keep results on it’s server for 36 hours, so the RID cannot be older than that.
 
+<a name="ch-blast.The-Uniform-Interfac"></a>
+
 The Uniform Interface
 ---------------------
 
 The [ISeqSearch](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ISeqSearch) class is an abstract interface class. Concrete subclasses can run either local ([CLocalSeqSearch](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CLocalSeqSearch)) or remote searches ([CRemoteSeqSearch](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRemoteSeqSearch)). The concrete classes will only perform an intersection of the tasks that ***CLocalBlast*** and ***CRemoteBlast*** can perform. As an example, there is no method to retrieve a Request identifier (RID) from subclasses of ***ISeqSearch*** as this is supported only for remote searches but not for local searches. The methods supported by the concrete subclasses and the return values are similar to those of ***CLocalBlast*** and ***CRemoteBlast***.
+
+<a name="ch-blast.CBl2Seq"></a>
 
 CBl2Seq
 -------
@@ -174,21 +200,31 @@ CBl2Seq
 
 The BLAST database holds the target sequence data in a format optimal for BLAST searches, so that if a target sequence is to be searched more than a few times it is best to convert it to a BLAST database and use ***CLocalBlast***.
 
+<a name="ch-blast.-Query-Sequence-2"></a>
+
 ### Query Sequence
 
-The query sequence (or sequences) is represented either as a ***SSeqLoc*** (for a single query sequence) or as a ***TSeqLocVector*** (in the case of multiple query sequences). The ***CBlastInput*** class, described in the [CLocalBlast](#clocalblast) section, can be used to produce a ***TSeqLocVector***.
+The query sequence (or sequences) is represented either as a ***SSeqLoc*** (for a single query sequence) or as a ***TSeqLocVector*** (in the case of multiple query sequences). The ***CBlastInput*** class, described in the [CLocalBlast](#ch-blast.CLocalBlast) section, can be used to produce a ***TSeqLocVector***.
+
+<a name="ch-blast.Options-and-Program-"></a>
 
 ### Options and Program Type
 
-The ***CBl2Seq*** constructor takes either an [EProgram](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=EProgram) enum (see [Table 1](#table-1)) or [CBlastOptionsHandle](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CBlastOptionsHandle) (see relevant section under [CLocalBlast](#clocalblast)). In the former case the default set of options for the given ***EProgram*** are used. In the latter case it is possible for the user to set options to non-default values.
+The ***CBl2Seq*** constructor takes either an [EProgram](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=EProgram) enum (see [Table 1](#ch-blast.T18.3)) or [CBlastOptionsHandle](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CBlastOptionsHandle) (see relevant section under [CLocalBlast](#ch-blast.CLocalBlast)). In the former case the default set of options for the given ***EProgram*** are used. In the latter case it is possible for the user to set options to non-default values.
+
+<a name="ch-blast.-Target-Sequences-2"></a>
 
 ### Target Sequences
 
 The target sequence(s) is represented either as a ***SSeqLoc*** or ***TSeqLocVector***.
 
+<a name="ch-blast.-Results-2"></a>
+
 ### Results
 
 The ***Run()*** method of the ***CBl2Seq*** class returns a collection of ***CSeq\_align\_set***’s. The method ***GetMessages()*** may be used to obtain any error or warning messages generated during the search.
+
+<a name="ch-blast.Sample-Applications"></a>
 
 Sample Applications
 -------------------

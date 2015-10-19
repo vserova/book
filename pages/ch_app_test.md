@@ -13,9 +13,9 @@ Created: April 1, 2003; Last Update: March 17, 2015.
 Overview
 --------
 
--   [Introduction](#introduction)
+-   [Introduction](#ch-app.Intro)
 
--   [Chapter Outline](#chapter-outline)
+-   [Chapter Outline](#ch-app.Outline)
 
 ### Introduction
 
@@ -203,6 +203,8 @@ The following is an outline of the topics presented in this chapter:
 
     -   [Questions and answers](ch_app.html#ch_app.Questions_and_answers)
 
+<a name="ch-app.datatool"></a>
+
 DATATOOL: Code Generation and Data Serialization Utility
 --------------------------------------------------------
 
@@ -230,6 +232,8 @@ The following topics are discussed in subsections:
 
 -   [Class diagrams](ch_app.html#ch_app.dt_inside.html)
 
+<a name="ch-app.datatool.html-refArgs"></a>
+
 ### Invocation
 
 The following topics are discussed in this section:
@@ -238,9 +242,13 @@ The following topics are discussed in this section:
 
 -   [Code generation arguments](ch_app.html#ch_app.datatool.html_refCodeGenerationAr)
 
+<a name="ch-app.datatool.html-refMainArgs"></a>
+
 #### Main Arguments
 
 See [Table 1](ch_app.html#ch_app.tools_table1).
+
+<a name="ch-app.tools-table1"></a>
 
 Table 1. Main arguments
 
@@ -272,9 +280,13 @@ Table 1. Main arguments
 | conffile \<File\_In\>  | Program's configuration (registry) data file              |                                                        |
 | -version               | Print version number                                      | Ignores other arguments                                                    |
 
+<a name="ch-app.datatool.html-refCodeGenerationAr"></a>
+
 #### Code Generation Arguments
 
 See [Table 2](ch_app.html#ch_app.tools_table2).
+
+<a name="ch-app.tools-table2"></a>
 
 Table 2. Code generation arguments
 
@@ -307,9 +319,13 @@ Table 2. Code generation arguments
 | -pch \<string\> | Name of the precompiled header file to include in all \*.cpp files      |                                                                                                                                                                  |
 | -oex \<export\> | Add storage-class modifier to generated classes                         | Can be overriden by [[-].\_export](ch_app.html#ch_app.datatool.html_refDefCommon) in the definition file.                                                                            |
 
+<a name="ch-app.Data-Specification-C"></a>
+
 ### Data Specification Conversion
 
 When parsing a data specification, **DATATOOL** identifies the specification format based on the source file extension - ASN, DTD, or XSD.
+
+<a name="ch-app.Scope-Prefixes"></a>
 
 #### Scope Prefixes
 
@@ -339,11 +355,15 @@ Later, DTD parsing was added into **DATATOOL**. Here, scope prefixes were not ne
 
 With the addition of XML Schema parser and generator, when converting ASN.1 specification, elements can be declared in Schema locally if needed, and scope prefixes make almost no sense. Still, they are preserved for compatibility.
 
+<a name="ch-app.Modular-DTD-and-Sche"></a>
+
 #### Modular DTD and Schemata
 
 Here, ‘module’ means ASN.1 module. Single ASN.1 specification file may contain several modules. When converting it into DTD or XML schema, it might be convenient to put each module definitions into a separate file. To do so, one should specify a special file name in `-fx` or `-fxs` command line parameter. The names of output DTD or Schema files will then be chosen automatically - they will be named after ASN.1 modules defined in the source. ‘Modular’ output does not make much sense when the source specification is DTD or Schema.
 
 You can find a number of DTDs and Schema converted by **DATATOOL** from NCBI public ASN.1 specifications [here](http://www.ncbi.nlm.nih.gov/data_specs).
+
+<a name="ch-app.Converting-XML-Schem"></a>
 
 #### Converting XML Schema into ASN.1
 
@@ -398,6 +418,8 @@ translates into this ASN.1:
 Each unnamed local element gets a name. When generating C++ data storage classes from Schema, **DATATOOL** marks such data types as anonymous.
 
 It is possible to convert source Schema into ASN.1, and then use **DATATOOL** to generate C++ classes from the latter. In this case **DATATOOL** and serial library provide compatibility of ASN.1 output. If you generate data storage classes from Schema, and use them to write data in ASN.1 format (binary or text), if you then convert that Schema into ASN.1, generate classes from it, and again write same data in ASN.1 format using this new set of classes, then these two files will be identical.
+
+<a name="ch-app.datatool.html-refDefFile"></a>
 
 ### Definition File
 
@@ -462,6 +484,8 @@ The following additional topics are discussed in this section:
 -   [The Special [-] Section](ch_app.html#ch_app.The_Special__Section)
 
 -   [Examples](ch_app.html#ch_app.datatool.html_refDefExample)
+
+<a name="ch-app.datatool.html-refDefCommon"></a>
 
 #### Common Definitions
 
@@ -551,6 +575,8 @@ Because this modifier could also be specified in the [command line](ch_app.html#
 
 -   The command-line parameter in the form `-oex FOOBAR` will cause the generated classes to have a `FOOBAR` storage-class modifier, unless another one is specified in the definition file. The modifier from the definition file always takes precedence.
 
+<a name="ch-app.datatool.html-refDefSpecific"></a>
+
 #### Definitions That Affect Specific Types
 
 The following additional topics are discussed in this section:
@@ -567,9 +593,13 @@ The following additional topics are discussed in this section:
 
 -   [CHOICE](ch_app.html#ch_app.datatool.html_refDefChoice)
 
+<a name="ch-app.datatool.html-refDefINT"></a>
+
 ##### INTEGER, REAL, BOOLEAN, NULL
 
 `_type`      C++ type: int, short, unsigned, long, etc.
+
+<a name="ch-app.datatool.html-refDefENUM"></a>
 
 ##### ENUMERATED
 
@@ -577,23 +607,33 @@ The following additional topics are discussed in this section:
 
 `_prefix`      Prefix for names of enum values. The default is "e".
 
+<a name="ch-app.datatool.html-refDefOCTETS"></a>
+
 ##### OCTET STRING
 
 `_char`      Vector element type: char, unsigned char, or signed char.
+
+<a name="ch-app.datatool.html-refDefArray"></a>
 
 ##### SEQUENCE OF, SET OF
 
 `_type`      STL container type: list, vector, set, or multiset.
 
+<a name="ch-app.datatool.html-refDefClass"></a>
+
 ##### SEQUENCE, SET
 
 `memberName._delay`      Mark the specified member for delayed reading.
+
+<a name="ch-app.datatool.html-refDefChoice"></a>
 
 ##### CHOICE
 
 `_virtual_choice`      If not empty, do not generate a special class for choice. Rather make the choice class as the parent one of all its variants.
 
 `variantName._delay`      Mark the specified variant for delayed reading.
+
+<a name="ch-app.The-Special--Section"></a>
 
 #### The Special [-] Section
 
@@ -618,6 +658,8 @@ There is a special section `[-]` allowed in the definition file which can contai
 Any of the code generation arguments in [Table 2](ch_app.html#ch_app.tools_table2) (except `-od`, `-odi`, and `-odw` which are related to specifying the definition file) can be placed in the `[-]` section.
 
 In some cases, the special value `"-"` causes special processing as noted in [Table 2](ch_app.html#ch_app.tools_table2).
+
+<a name="ch-app.datatool.html-refDefExample"></a>
 
 #### Examples
 
@@ -652,6 +694,8 @@ If we have the following ASN.1 specification (this not a "real" specification - 
     }
 
 Then the following definitions will effect the generation of objects:
+
+<a name="ch-app.T.nc-definitioneffected-objectsda"></a>
 
 | Definition                                                          | Effected Objects                                                   |
 |---------------------------------------------------------------------|--------------------------------------------------------------------|
@@ -704,6 +748,8 @@ Then edit the module definition file (`catalogentry.def`) and change `RR` to a m
 
 The new name will be used the next time the module is built.
 
+<a name="ch-app.ch-app-datatool-html-refModFile"></a>
+
 ### Module File
 
 Module files are not used directly by **DATATOOL**, but they are read by `new_module.sh` and [project\_tree\_builder](ch_config.html#ch_config._Build_the_Toolkit) and therefore determine what **DATATOOL**'s command line will be when **DATATOOL** is invoked from the NCBI build system.
@@ -716,6 +762,8 @@ Module files simply consist of lines of the form "`KEY = VALUE`". Only the key `
 
 -   `MODULE_PATH`      Specifies the directory containing the current module, again relative to `.../src`. Almost all module files contain this definition, however it is no longer used by either `new_module.sh` or the `project_tree_builder` and is therefore not necessary.
 
+<a name="ch-app.datatool.html-refCode"></a>
+
 ### Generated Code
 
 The following additional topics are discussed in this section:
@@ -723,6 +771,8 @@ The following additional topics are discussed in this section:
 -   [Normalized name](ch_app.html#ch_app.datatool.html_refNormalizedName)
 
 -   [ENUMERATED types](ch_app.html#ch_app.datatool.html_refCodeEnum)
+
+<a name="ch-app.datatool.html-refNormalizedName"></a>
 
 #### Normalized Name
 
@@ -741,9 +791,13 @@ The default C++ class name can be overridden by explicitly specifying in the def
     [MyModule.Seq-data]
     _class=CMySeqData
 
+<a name="ch-app.datatool.html-refCodeEnum"></a>
+
 #### ENUMERATED Types
 
 By default, for every `ENUMERATED` ASN.1 type, **DATATOOL** will produce a C++ enum type with the name ***ENormalizedName***.
+
+<a name="ch-app.dt-inside.html"></a>
 
 ### Class Diagrams
 
@@ -757,6 +811,8 @@ The following topics are discussed in this section:
 
 -   [Code generation](ch_app.html#ch_app.dt_inside.html_code_gen)
 
+<a name="ch-app.dt-inside.html-specs"></a>
+
 #### Specification Analysis
 
 The following topics are discussed in this section:
@@ -765,41 +821,65 @@ The following topics are discussed in this section:
 
 -   [DTD specification analysis](ch_app.html#ch_app.dt_inside.html_specs_dtd)
 
+<a name="ch-app.dt-inside.html-specs-asn"></a>
+
 ##### ASN.1 Specification Analysis
 
 See [Figure 1](ch_app.html#ch_app.specs_asn).
 
-[![1. ASN.1 specification analysis.](/book/static/img/specs_asn.gif)](/book/static/img/specs_asn.gif "Click to see the full-resolution image")
+<a name="ch-app.specs-asn"></a>
+
+[<a name="ch-app.specs-asn.gif"></a>
+![1. ASN.1 specification analysis.](/book/static/img/specs_asn.gif)](/book/static/img/specs_asn.gif "Click to see the full-resolution image")
 
 1\. ASN.1 specification analysis.
+
+<a name="ch-app.dt-inside.html-specs-dtd"></a>
 
 ##### DTD Specification Analysis
 
 See [Figure 2](ch_app.html#ch_app.specs_dtd).
 
-[![2. DTD specification analysis.](/book/static/img/specs_dtd.gif)](/book/static/img/specs_dtd.gif "Click to see the full-resolution image")
+<a name="ch-app.specs-dtd"></a>
+
+[<a name="ch-app.specs-dtd.gif"></a>
+![2. DTD specification analysis.](/book/static/img/specs_dtd.gif)](/book/static/img/specs_dtd.gif "Click to see the full-resolution image")
 
 2\. DTD specification analysis.
+
+<a name="ch-app.dt-inside.html-data-types"></a>
 
 #### Data Types
 
 See [CDataType](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDataType.html).
 
+<a name="ch-app.dt-inside.html-data-values"></a>
+
 #### Data Values
 
 See [Figure 3](ch_app.html#ch_app.data_values).
 
-[![3. Data values.](/book/static/img/data_types.gif)](/book/static/img/data_types.gif "Click to see the full-resolution image")
+<a name="ch-app.data-values"></a>
+
+[<a name="ch-app.data-types.gif"></a>
+![3. Data values.](/book/static/img/data_types.gif)](/book/static/img/data_types.gif "Click to see the full-resolution image")
 
 3\. Data values.
+
+<a name="ch-app.dt-inside.html-code-gen"></a>
 
 #### Code Generation
 
 See [Figure 4](ch_app.html#ch_app.code_gen).
 
-[![4. Code generation.](/book/static/img/type_strings.gif)](/book/static/img/type_strings.gif "Click to see the full-resolution image")
+<a name="ch-app.code-gen"></a>
+
+[<a name="ch-app.type-strings.gif"></a>
+![4. Code generation.](/book/static/img/type_strings.gif)](/book/static/img/type_strings.gif "Click to see the full-resolution image")
 
 4\. Code generation.
+
+<a name="ch-app.Load-Balancing"></a>
 
 Load Balancing
 --------------
@@ -836,11 +916,14 @@ The section covers the following topics:
 
 -   Monitoring facilities
 
+<a name="ch-app.-Overview"></a>
+
 ### Overview
 
 The purpose of load balancing is distributing the load among the service providers available on the NCBI network basing on certain rules. The load is generated by both locally-connected and Internet-connected users. The figures below show the most typical usage scenarios.
 
-[![Image LoadBalancingLocal.jpg](/book/static/img/LoadBalancingLocal.jpg)](/book/static/img/LoadBalancingLocal.jpg "Click to see the full-resolution image")
+[<a name="ch-app.LoadBalancingLocal.jpg"></a>
+![Image LoadBalancingLocal.jpg](/book/static/img/LoadBalancingLocal.jpg)](/book/static/img/LoadBalancingLocal.jpg "Click to see the full-resolution image")
 
 Figure 5. Local Clients
 
@@ -858,7 +941,8 @@ Another typical scenario for the local NCBI clients is when client code is run o
 
 The communication scenarios become more complicated in case when clients are located outside of the NCBI network. The figure below describes the interactions between modules when the user requested a service which does not suppose a long term connection.
 
-[![Image LoadBalancingInternetShort.jpg](/book/static/img/LoadBalancingInternetShort.jpg)](/book/static/img/LoadBalancingInternetShort.jpg "Click to see the full-resolution image")
+[<a name="ch-app.LoadBalancingInternetShort.jpg"></a>
+![Image LoadBalancingInternetShort.jpg](/book/static/img/LoadBalancingInternetShort.jpg)](/book/static/img/LoadBalancingInternetShort.jpg "Click to see the full-resolution image")
 
 Figure 6. Internet Clients. Short Term Connection
 
@@ -866,7 +950,8 @@ The clients have no abilities to connect to front end Apache web servers directl
 
 The next figure explains the interactions for the case when an Internet client requests a service which supposes a long term connection.
 
-[![Image LoadBalancingInternetLong.jpg](/book/static/img/LoadBalancingInternetLong.jpg)](/book/static/img/LoadBalancingInternetLong.jpg "Click to see the full-resolution image")
+[<a name="ch-app.LoadBalancingInternetLong.jpg"></a>
+![Image LoadBalancingInternetLong.jpg](/book/static/img/LoadBalancingInternetLong.jpg)](/book/static/img/LoadBalancingInternetLong.jpg "Click to see the full-resolution image")
 
 Figure 7. Internet Clients. Long Term Connection
 
@@ -876,7 +961,8 @@ The data flow in the scenario is as follows. A request from the client reaches a
 
 The most complicated scenario comes to the picture when an arbitrary Unix filter program is used as a service provided for the outside NCBI users. The figure below shows all the components involved into the scenario.
 
-[![Image LoadBalancingDispD.jpg](/book/static/img/LoadBalancingDispD.jpg)](/book/static/img/LoadBalancingDispD.jpg "Click to see the full-resolution image")
+[<a name="ch-app.LoadBalancingDispD.jpg"></a>
+![Image LoadBalancingDispD.jpg](/book/static/img/LoadBalancingDispD.jpg)](/book/static/img/LoadBalancingDispD.jpg "Click to see the full-resolution image")
 
 Figure 8. NCBID at Work
 
@@ -884,7 +970,11 @@ The data flow in the scenario is as follows. A request from the client reaches a
 
 Further sections describe all the components in more detail.
 
+<a name="ch-app.Load-Balancing-Servi"></a>
+
 ### Load Balancing Service Mapping Daemon (LBSMD)
+
+<a name="ch-app.-Overview-1"></a>
 
 #### Overview
 
@@ -915,6 +1005,8 @@ The LBSMD daemon can also periodically check whether the configured servers are 
 Lastly, LBSMD can pull port load information as posted by the running servers. This is done via a simple API <http://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/CPP_DOC/lxr/source/include/connect/daemons/lbsmdapi.h>. The information is then used to calculate the final server rates in run-time.
 
 Although cients can [redirect services](ch_conn.html#ch_conn.Service_Redirection), LBSMD does not distinguish between direct and redirected services.
+
+<a name="ch-app.-Configuration"></a>
 
 #### Configuration
 
@@ -1008,6 +1100,8 @@ defines a server. The detailed description of the individual fields is given bel
 
 -   **`launcher_info`** is basically a command line preceded by a pipe symbol ( \\| ) which plays a role of a delimiter from the **`server_descriptor`**. It is only required for the **NCBID** type of service which are configured on the local host.
 
+<a name="ch-app.Check-Script-Specification"></a>
+
 ##### Check Script Specification
 
 The check script file is configured between square brackets '[' and ']' in the service definition line. For example, the service definition line:
@@ -1036,6 +1130,8 @@ Output to **`stderr`** is attached to the LBSMD log file; the CPU limit is set t
 
 The check script is expected to produce one of the following exit codes:
 
+<a name="ch-app.T.nc-codesmeaning0the-server-is-f"></a>
+
 | Code(s)                     | Meaning                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 |-----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | 0                           | The server is fully available, i.e. "running at full throttle".                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
@@ -1063,6 +1159,8 @@ If the check script crashes ungracefully (with or without the coredump) 100+ tim
 Servers are called SUPPRESSED when they are 100% penalized (see server penalties below); while RESERVED is a special state that LBSMD maintains. 100% penalty makes an entry not only unavailable for regular use (same as RESERVED) but also assumes some maintenance work in progress (so that any underlying state changes will not be announced immediately but only when the entry goes out of the 100% penalized state, if any state change still remains). On the other hand and from the client perspective, RESERVED and SUPPRESSED may look identical.
 
 ***Note:*** The check script operation is complementary to setting a penalty prior to doing any disruptive changes in production. In other words, the script is only reliable as long as the service is expected to work. If there is any scheduled maintenance, it should be communicated to LBSMD via a penalty rather than by an assumption that the failing script will do the job of bringing the service to the down state and excluding it from LB.
+
+<a name="ch-app.Server-Descriptor-Specification"></a>
 
 ##### Server Descriptor Specification
 
@@ -1139,6 +1237,8 @@ Server descriptors of type ***NAMEHOLD*** are special. As **`arguments`**, they 
     TestService  NAMEHOLD    :0 DNS
     TestService2 NAMEHOLD foo:0 NCBID
 
+<a name="ch-app.Sites"></a>
+
 #### Sites
 
 LBSMD is minimally aware of NCBI network layout and can generally guess its “site” information from either an IP address or special location-role files located in the /etc/ncbi directory: a BE-MD production and development site, a BE-MD.QA site, a BE-MD.TRY site, and lastly an ST-VA site. When reading zone information from the “@” directive of the configuration, LBSMD can treat special non-numeric values as the following: “@try” as the production zone within BE-MD.TRY, “@qa” as the production zone within BE-MD.QA, “@dev” as a development zone within the current site, and “@\*prod\*” (e.g. @intprod) as a production zone within the current site – where the production zone has a value of “1” and the development – “2”: so “@2” and “@dev” as well as “@1” and “@\*prod\*” are each equivalent. That makes the definition of zones more convenient by the %include directive with the pipe character:
@@ -1149,9 +1249,13 @@ Suppose that the daemon detected its site as ST-VA and assigned it a value of 0x
 
 Both zone and site (or site alone) can be permanently assigned with the command-line parameters and then may not be overridden from the configuration file(s).
 
+<a name="ch-app.Signals"></a>
+
 #### Signals
 
 The table below describes the LBSMD daemon signal processing.
+
+<a name="ch-app.T.nc-SignalReactionSIGHUPreload-t"></a>
 
 |---------|---------------------------------------------------------------------------------------------------------------------------|
 | Signal  | Reaction                                                                                                                  |
@@ -1160,11 +1264,14 @@ The table below describes the LBSMD daemon signal processing.
 | SIGTERM | quit                                                                                                                      |
 | SIGUSR1 | toggle the verbosity level between less verbose (default) and more verbose (when every warning generated is stored) modes |
 
+<a name="ch-app.Automatic-Configurat"></a>
+
 #### Automatic Configuration Distribution
 
 The configuration files structure is unified for all the hosts in the NCBI network. It is shown on the figure below.
 
-[![Image ch\_app\_lbsmd\_cfg\_structure.png](/book/static/img/ch_app_lbsmd_cfg_structure.png)](/book/static/img/ch_app_lbsmd_cfg_structure.png "Click to see the full-resolution image")
+[<a name="ch-app.ch-app-lbsmd-cfg-structure.png"></a>
+![Image ch\_app\_lbsmd\_cfg\_structure.png](/book/static/img/ch_app_lbsmd_cfg_structure.png)](/book/static/img/ch_app_lbsmd_cfg_structure.png "Click to see the full-resolution image")
 
 Figure 9. LBSMD Configuration Files Structure
 
@@ -1184,11 +1291,16 @@ So, if it is required to change the `/etc/lbsmd/local/servrc.cfg.ieb` file on th
 
 As soon as the modified file is checked in the file will be delivered to the corresponding host with the proper name automatically. The changes will take effect in a few minutes. The process of the configuration distribution is illustrated on the figure below.
 
-[![Image CFEngine.jpg](/book/static/img/CFEngine.jpg)](/book/static/img/CFEngine.jpg "Click to see the full-resolution image")
+[<a name="ch-app.CFEngine.jpg"></a>
+![Image CFEngine.jpg](/book/static/img/CFEngine.jpg)](/book/static/img/CFEngine.jpg "Click to see the full-resolution image")
 
 Figure 10. Automatic Configuration Distribution
 
+<a name="ch-app.Monitoring-and-Contr"></a>
+
 #### Monitoring and Control
+
+<a name="ch-app.Service-Search"></a>
 
 ##### Service Search
 
@@ -1198,11 +1310,14 @@ The following web page can be used to search for a service:
 
 The following screen will appear
 
-[![Image LBSMDSearchMain.gif](/book/static/img/LBSMDSearchMain.gif)](/book/static/img/LBSMDSearchMain.gif "Click to see the full-resolution image")
+[<a name="ch-app.LBSMDSearchMain.gif"></a>
+![Image LBSMDSearchMain.gif](/book/static/img/LBSMDSearchMain.gif)](/book/static/img/LBSMDSearchMain.gif "Click to see the full-resolution image")
 
 Figure 11. NCBI Service Search Page
 
 As an example of usage a user might enter the partial name of the service like "TaxService" and click on the “Go” button. The search results will display "TaxService", "TaxService3" and "TaxService3Test" if those services are available (see <http://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/NETWORK/lbsmc/search.cgi?key=rb_svc&service=TaxService&host=&button=Go&db=>).
+
+<a name="ch-app.lbsmc-Utility"></a>
 
 ##### lbsmc Utility
 
@@ -1260,6 +1375,8 @@ For example, to print a list of hosts which names match the pattern “sutil\*�
     * Hosts:4\747, Srvrs:44/1223/23  \|   Heap:249856, used:237291/249616, free:240 *
     LBSMD PID: 17530, config: /etc/lbsmd/servrc.cfg
 
+<a name="ch-app.NCBI-Intranet-Web-Ut"></a>
+
 ##### NCBI Intranet Web Utilities
 
 The NCBI intranet users can also visit the following quick reference links:
@@ -1278,11 +1395,14 @@ The output is provided in either long or short format. The format depends on whe
 
 In case if the service name is more than the allowed number of characters to display the trailing characters will be replaced with “\>”. When there is more information about the host / service to be displayed the “+” character is put beside the host / service name (this additional information can be retrieved by adding the -i option). When both “+” and “\>” are to be shown they are replaced with the single character “\*”. In the case of wide-output format the “\#” character shown in the service line means that there is no host information available for the service (similar to the static servers). The “!” character in the service line denotes that the service was configured / stored with an error (this character actually should never appear in the listings and should be reported whenever encountered). Wide output for hosts contains the time of bootup and startup. If the startup time is preceded by the “~” character then the host was gone for a while and then came back while the lbsmc utility was running. The “+” character in the times is to show that the date belongs to the past year(s).
 
+<a name="ch-app.Server-Penalizer-API"></a>
+
 ##### Server Penalizer API and Utility
 
 The utility allows to report problems of accessing a certain server to the LBSMD daemon, in the form of a penalty which is a value in the range [0..100] that shows, in percentages, how bad the server is. The value 0 means that the server is completely okay, whereas 100 means that the server (is misbehaving and) should **not** be used at all. The penalty is not a constant value: once set, it starts to decrease in time, at first slowly, then faster and faster until it reaches zero. This way, if a server was penalized for some reason and later the problem has been resolved, then the server becomes available gradually as its penalty (not being reset by applications again in the absence of the offending reason) becomes zero. The figure below illustrates how the value of penalty behaves.
 
-[![Image Penalty.jpg](/book/static/img/Penalty.jpg)](/book/static/img/Penalty.jpg "Click to see the full-resolution image")
+[<a name="ch-app.Penalty.jpg"></a>
+![Image Penalty.jpg](/book/static/img/Penalty.jpg)](/book/static/img/Penalty.jpg "Click to see the full-resolution image")
 
 Figure 12. Penalty Value Characteristics
 
@@ -1310,11 +1430,14 @@ The command resets the penalty to 0 (no penalty) and is useful when, as for the 
 
 The formal description of the lbsm\_feedback utility parameters is given below.
 
-[![Image lbsm\_feedback.gif](/book/static/img/lbsm_feedback.gif)](/book/static/img/lbsm_feedback.gif "Click to see the full-resolution image")
+[<a name="ch-app.lbsm-feedback.gif"></a>
+![Image lbsm\_feedback.gif](/book/static/img/lbsm_feedback.gif)](/book/static/img/lbsm_feedback.gif "Click to see the full-resolution image")
 
 Figure 13. lbsm\_feedback Arguments
 
 The `servicename` can be an identifier with ‘\*’ for any symbols and / or ‘?’ for a single character. The `penalty value` is an integer value in the range 0 ... 100. The `port number` and `time` are integers. The `hostname` is an identifier and the `rate value` is a floating point value.
+
+<a name="ch-app.SVN-Repository"></a>
 
 #### SVN Repository
 
@@ -1325,6 +1448,8 @@ The SVN repository where the LBSMD daemon source code is located can be retrieve
 The daemon code is in this file:
 
 `c++/src/connect/daemons/lbsmd.c`
+
+<a name="ch-app.-Log-Files"></a>
 
 #### Log Files
 
@@ -1343,6 +1468,8 @@ The log file size can be controlled by the -s command line option. By default, -
 NCBI intranet users can get few (no more than 100) recent lines of the log file on an NCBI internal host. It is also possible to visit the following link:
 
 <http://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/NETWORK/lbsmd.cgi?log>
+
+<a name="ch-app.-Configuration-Exampl"></a>
 
 #### Configuration Examples
 
@@ -1376,17 +1503,24 @@ NCBI intranet users can also visit the following link to get a sample configurat
 
 <http://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/NETWORK/lbsmd.cgi?cfg>
 
+<a name="ch-app.Database-Load-Balancing"></a>
+
 ### Database Load Balancing
 
 Database load balancing is an important part of the overall load balancing function. Please see the [Database Load Balancer](ch_dbapi.html#ch_dbapi.Database_loadbalanci) section in the [Database Access](ch_dbapi.html) chapter for more details.
 
+<a name="ch-app.Cookie---Argument-Af"></a>
+
 ### Cookie / Argument Affinity Module (MOD\_CAF)
+
+<a name="ch-app.-Overview-2"></a>
 
 #### Overview
 
 The cookie / argument affinity module (CAF module in the further discussion) helps to virtualize and to dispatch a web site by modifying the way how Apache resolves host names. It is done by superseding conventional `gethostbyname*()` API. The CAF module is implemented as an Apache web server module and uses the LBSMD daemon collected data to make a decision how to dispatch a request. The data exchange between the CAF module and the LBSMD daemon is done via a shared memory segment as shown on the figure below.
 
-[![Image CAF-LBSMD.gif](/book/static/img/CAF-LBSMD.gif)](/book/static/img/CAF-LBSMD.gif "Click to see the full-resolution image")
+[<a name="ch-app.CAF-LBSMD.gif"></a>
+![Image CAF-LBSMD.gif](/book/static/img/CAF-LBSMD.gif)](/book/static/img/CAF-LBSMD.gif "Click to see the full-resolution image")
 
 Figure 14. CAF Module and LBSMD daemon data exchange
 
@@ -1406,9 +1540,13 @@ The CAF module has its own status page that can be made available in the look so
 
 The CAF module can also report the number of slots that the Apache server has configured and used up each time a new request comes in and is being processed. The information resides in a shared memory segment that several Apache servers can use cooperatively on the same machine. Formerly, this functionality has been implemented in a separate SPY module, which is now fully integrated into this module. Using a special compile-time macro it is possible to obtain the former SPY-only functionality (now called LBSMD reporter feature) without any other CAF features. Note that no CAF\* directives will be recognized in Apache configuration, should the reduced functionality build be chosen.
 
+<a name="ch-app.-Configuration-1"></a>
+
 #### Configuration
 
 The table below describes Apache configuration directives which are taken into account by the CAF module.
+
+<a name="ch-app.T.nc-DirectiveDescriptionLBSMD--O"></a>
 
 |-------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Directive                                             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
@@ -1447,6 +1585,8 @@ The table below describes Apache configuration directives which are taken into a
 All hierarchy complying settings are inherited in directories that are deeper in the directory tree, unless overridden there. The new setting then takes effect for that and all descendant directories/locations.
 
 There are 4 predefined proxies that may be used [or operated on] without prior declaration by either "CAFProxyCookie" or "CAFProxyArgument" directives:
+
+<a name="ch-app.T.nc-LB-nameCookieNamePreferenceD"></a>
 
 |------------|-----------------|------------|-----------|----------|----------|----------|
 | LB name    | CookieName      | Preference | Delimiter | Crypted? | Argument | AltArg   |
@@ -1488,6 +1628,8 @@ denotes a host range from `130.14.8.0` thru `130.14.9.255` (including the ends).
 ***Note*** that `127/8` gets automatically added, whether or not it is explicitly included into the configuration file. The file loader also warns if it encounters any specifications that overlap each other. Inexistent (or unreadable) file causes internal hardcoded defaults to be used - a warning is issued in this case.
 
 ***Note*** that the IP table file is read once per Apache daemon's life cycle (and it is \*not\* reloaded upon graceful restarts). The complete stop / start sequence should be performed to force the IP table be reloaded.
+
+<a name="ch-app.-Configuration-Exampl-1"></a>
 
 #### Configuration Examples
 
@@ -1532,9 +1674,13 @@ The effect of the above is that "My-Cookie" will be used in LB name searches of 
 
 The effect of the above is that if an incoming URL resolves to use "systems.lb", then "ticket", if found in the query string, would be considered for lookup of "systems.lb" with the load-balancing daemon.
 
+<a name="ch-app.Arguments-Matching"></a>
+
 #### Arguments Matching
 
 Suppose that the DB=A is a query argument (explicit DB selection, including just "DB" (as a standalone argument, treated as missing value), "DB=" (missing value)). That will cause the following order of precedence in selecting the target host:
+
+<a name="ch-app.T.nc-MatchDescriptionDBABest--A--"></a>
 
 |----------------|-------------------------------------------------------------------------------|
 | Match          | Description                                                                   |
@@ -1548,6 +1694,8 @@ No host with an explicit DB assignment (DB=B or DB=-) is being selected above if
 
 Suppose that there is no DB selection in the request. Then the hosts are selected in the following order:
 
+<a name="ch-app.T.nc-MatchDescriptionDBBest---sta"></a>
+
 |----------------|------------------------------------------------------------------------------|
 | Match          | Description                                                                  |
 | DB=-           | Best<br/>"-" stands for "missing from the request" |
@@ -1560,6 +1708,8 @@ No host with a non-empty DB assignment (DB=B or DB=\*) is being selected in the 
 Only if there are no hosts in the best available category of hosts, the next category is used. That is, no "good" matches will ever be used if there are "best" matches available. Moreover, if all "best" matches have been used up but are known to exist, the search fails.
 
 "~" may not be used along with "\*": "~\*" combination will be silently ignored entirety, and will not modify the other specified affinities. Note that "~" alone has a meaning of 'anything but empty argument value, ""'. Also note that formally, "~A" is an equivalent to "~A \*" as well as "~-" is an equivalent to "\*".
+
+<a name="ch-app.Argument-Matching-Ex"></a>
 
 ##### Argument Matching Examples
 
@@ -1581,9 +1731,13 @@ DB=- \*
 
 makes the host to serve requests that don't have any DB argument in their query strings, or when their DB argument failed to literally match affinity lines of all other hosts. Adding "!" to the line doesn't change the behavior.
 
+<a name="ch-app.Log-File"></a>
+
 #### Log File
 
 The CAF module uses the Apache web server log files to put CAF module’s messages into.
+
+<a name="ch-app.-Monitoring"></a>
 
 #### Monitoring
 
@@ -1603,11 +1757,17 @@ The status of the CAF modules can be seen via a web interface using the followin
 
 <http://web91.be-md.qa.ncbi.nlm.nih.gov/caf-status>
 
+<a name="ch-app.DISPD-Network-Dispat"></a>
+
 ### DISPD Network Dispatcher
+
+<a name="ch-app.-Overview-3"></a>
 
 #### Overview
 
 The DISPD dispatcher is a CGI/1.0-compliant program (the actual file name is `dispd.cgi`). Its purpose is mapping a requested service name to an actual server location when the client has no direct access to the LBSMD daemon. This mapping is called dispatching. Optionally, the DISPD dispatcher can also pass data between the client, who requested the mapping, and the server, which implements the service, found as a result of dispatching. This combined mode is called a connection. The client may choose any of these modes if there are no special requirements on data transfer (e.g., firewall connection). In some cases, however, the requested connection mode implicitly limits the request to be a dispatching-only request, and the actual data flow between the client and the server occurs separately at a later stage.
+
+<a name="ch-app.Protocol-Description"></a>
 
 #### Protocol Description
 
@@ -1625,9 +1785,13 @@ In case of a connection request the request body can contain data to be passed t
 
 Mapping of a service name into a server address is done by the LBSMD daemon which is run on the same host where the DISPD dispatcher is run. The DISPD dispatcher never dispatches a non-local client to a server marked as local-only (by means of L=yes in the configuration of the LBSMD daemon). Otherwise, the result of dispatching is exactly what the client would get from the [service mapping API](ch_conn.html#ch_conn.service_mapping_api) if run locally. Specifying capabilities explicitly the client can narrow the server search, for example, by choosing stateless servers only.
 
+<a name="ch-app.Client-Request-to-DI"></a>
+
 ##### Client Request to DISPD
 
 The following additional HTTP tags are recognized in the client request to the DISPD dispatcher.
+
+<a name="ch-app.T.nc-TagDescriptionAcceptedServer"></a>
 
 <table>
 <colgroup>
@@ -1687,9 +1851,13 @@ The following additional HTTP tags are recognized in the client request to the D
 </tbody>
 </table>
 
+<a name="ch-app.DISPD-Client-Respons"></a>
+
 ##### DISPD Client Response
 
 The DISPD dispatcher can produce the following HTTP tags in response to the client.
+
+<a name="ch-app.T.nc-TagDescriptionRelayPath-path"></a>
 
 |-------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Tag                                       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
@@ -1699,6 +1867,8 @@ The DISPD dispatcher can produce the following HTTP tags in response to the clie
 | `Dispatcher-Failures: <failures>`         | The tag value lists all transient failures that the dispatcher might have experienced while processing the request. A fatal error (if any) always appears as the last failure in the list. In this case, the reply body would contain a copy of the message as well.<br/>***Note:*** Fatal dispatching failure is also indicated by an unsuccessful HTTP completion code.                                                                                                                                                                                                                                                                                                                                                                                             |
 | `Used-Server-Info-n: <server_info>`       | The tag informs the client end of server infos that having been unsuccessfully used during current connection request (so that the client will be able to skip over them if needs to).<br/>`n` is an integral suffix, enumerating from 1.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | `Dispatcher-Messages:`                    | The tag is used to issue a message into standard error log of a client. The message is intercepted and delivered from within Toolkit HTTP API.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+
+<a name="ch-app.Communication-Scheme"></a>
 
 ##### Communication Schemes
 
@@ -1748,7 +1918,11 @@ The DISPD dispatcher uses simple heuristics in analyzing an HTTP header to deter
 
 The DISPD dispatcher always preserves original HTTP tags `User-Agent` and `Client-Platform` when doing both relaying and firewalling.
 
+<a name="ch-app.NCBID-Server-Launche"></a>
+
 ### NCBID Server Launcher
+
+<a name="ch-app.-Overview-4"></a>
 
 #### Overview
 
@@ -1778,12 +1952,18 @@ In the ***STATEFUL*** mode, the NCBID utility starts the program in a more trick
 
 For the sake of the backward compatibility the NCBID utility creates the following environment variables (in addition to CGI/1.0 environment variables created by the HTTP daemon when calling NCBID) before starting the service executables:
 
+<a name="ch-app.T.nc-NameDescriptionNI-CLIENT-IPA"></a>
+
 |----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Name                 | Description                                                                                                                                                                                              |
 | NI\_CLIENT\_IPADDR   | The variable contains an IP address of the remote host.<br/>It could also be an IP address of the firewall daemon if the NCBID utility was started as a result of firewalling. |
 | NI\_CLIENT\_PLATFORM | The variable contains the client platform extracted from the HTTP tag `Client-Platform` provided by the client if any.                                                                                   |
 
+<a name="ch-app.Firewall-Daemon-FWDa"></a>
+
 ### Firewall Daemon (FWDaemon)
+
+<a name="ch-app.-Overview-5"></a>
 
 #### Overview
 
@@ -1797,9 +1977,13 @@ The FWDaemon allows a network client to establish a persistent TCP/IP connection
 
 ***Note:*** One FWDaemon can simultaneously serve many client/server pairs.
 
+<a name="ch-app.FWDaemon-Behind-a--R"></a>
+
 ##### FWDaemon Behind a "Regular" Firewall
 
 If a network client is behind a regular firewall, then a system administrator should open the above addresses (only!) for outgoing connections and set your client to "firewall" mode. Now the network client can use NCBI network services in a usual way (as if there were no firewall at all).
+
+<a name="ch-app.FWDaemon-Behind-a--N"></a>
 
 ##### FWDaemon Behind a "Non-Transparent" Firewall
 
@@ -1811,6 +1995,8 @@ The mapping on your non-transparent firewall server should be similar to the fol
 
 Please note that there is a port range that might not be presently used by any clients and servers, but it is reserved for future extensions. Nevertheless, it is recommended that you have this range configured on firewalls to allow the applications to function seamlessly in the future.
 
+<a name="ch-app.-Monitoring-1"></a>
+
 #### Monitoring
 
 The FWDaemon could be monitored using the following web page:
@@ -1819,13 +2005,15 @@ The FWDaemon could be monitored using the following web page:
 
 Having the page loaded into a browser the user will see the following.
 
-[![Image FWDaemonMonitor.gif](/book/static/img/FWDaemonMonitor.gif)](/book/static/img/FWDaemonMonitor.gif "Click to see the full-resolution image")
+[<a name="ch-app.FWDaemonMonitor.gif"></a>
+![Image FWDaemonMonitor.gif](/book/static/img/FWDaemonMonitor.gif)](/book/static/img/FWDaemonMonitor.gif "Click to see the full-resolution image")
 
 Figure 15. FWDaemon Checking Web Page
 
 By clicking the “Check” button a page similar to the following will appear.
 
-[![Image FWDaemonCheckPage.gif](/book/static/img/FWDaemonCheckPage.gif)](/book/static/img/FWDaemonCheckPage.gif "Click to see the full-resolution image")
+[<a name="ch-app.FWDaemonCheckPage.gif"></a>
+![Image FWDaemonCheckPage.gif](/book/static/img/FWDaemonCheckPage.gif)](/book/static/img/FWDaemonCheckPage.gif "Click to see the full-resolution image")
 
 Figure 16. FWDaemon Presence Check
 
@@ -1847,6 +2035,8 @@ The outside NCBI network users can check the connection to the NAT service follo
     See http://www.ncbi.nlm.nih.gov/cpp/network/firewall.html.
     Connection closed by foreign host.
 
+<a name="ch-app.-Log-Files-1"></a>
+
 #### Log Files
 
 The FWDaemon stores its log files at the following location:
@@ -1857,17 +2047,22 @@ which is usually a link to `/var/log/fwdaemon`.
 
 The file is formed locally on a host where FWDaemon is running.
 
+<a name="ch-app.FWDaemon-and-NCBID-D"></a>
+
 #### FWDaemon and NCBID Server Data Exchange
 
 One of the key points in the communications between the NCBID server and the FWDaemon is that the DISPD dispatcher instructs the FWDaemon to expect a new client connection. This instruction is issued as a reaction on a remote client request. It is possible that the remote client requested a service but did not use it. To prevent resource leaking and facilitate the usage monitoring the FWDaemon keeps a track of those requested but not used connections in a special file. The NCBID dispatcher is able to read that file before requesting a new connection from the FWDaemon and if the client was previously marked as the one who left connections not used then the NCBID dispatcher refuses the connection request.
 
 The data exchange is illustrated on the figure below.
 
-[![Image DISPDAndFWDaemon.jpg](/book/static/img/DISPDAndFWDaemon.jpg)](/book/static/img/DISPDAndFWDaemon.jpg "Click to see the full-resolution image")
+[<a name="ch-app.DISPDAndFWDaemon.jpg"></a>
+![Image DISPDAndFWDaemon.jpg](/book/static/img/DISPDAndFWDaemon.jpg)](/book/static/img/DISPDAndFWDaemon.jpg "Click to see the full-resolution image")
 
 Figure 17. DISPD FWDaemon Data Exchange
 
 The location of the `.dispd.msg` file is detected by the DISPD dispatcher as follows. The dispatcher determines the user name who owns the `dispd.cgi` executable. Then the dispatcher looks to the home directory for that user. The directory is used to look for the `.dispd.msg` file. The FWDaemon is run under the same user and the `.dispd.msg` file is saved by the daemon in its home directory.
+
+<a name="ch-app.Launcherd-Utility"></a>
 
 ### Launcherd Utility
 
@@ -1885,6 +2080,8 @@ The common practice for the launcherd utility is to be run by the standard Unix 
 
 `# DO NOT EDIT THIS FILE - edit the master and reinstall.`<br/>`# (/export/home/service/UPGRADE/crontabs/service1/crontab `<br/>`# installed on Thu Mar 20 20:48:02 2008) `<br/>`# (Cron version -- $Id: crontab.c,v 2.13 1994/01/17 03:20:37 vixie Exp $) `<br/>`MAILTO=ncbiduse@ncbi`<br/>`*/3 * * * * test -x /export/home/service/launcherd && /export/home/service/launcherd -q -l /export/home/service/bounce.log -- Bounce  /export/home/service/bounce >/dev/null MAILTO=grid-mon@ncbi,taxhelp@ncbi`<br/>`*/3 * * * * test -x /export/home/service/launcherd && /export/home/service/launcherd -q -l /var/log/taxservice -- TaxService /export /home/service/taxservice/taxservice >/dev/null`<br/>
 
+<a name="ch-app.Monitoring-Tools"></a>
+
 ### Monitoring Tools
 
 There are various ways to monitor the services available at NCBI. These are generic third party tools and specific NCBI developed utilities. The specific utilities are described above in the sections related to a certain component.
@@ -1896,6 +2093,8 @@ The system availability and performance could be visualized by using Zabbix soft
 One more web based tool to monitor servers / services statuses is Nagios. It can be reached at:
 
 [http://nagios.ncbi.nlm.nih.gov](http://nagios.ncbi.nlm.nih.gov/)
+
+<a name="ch-app.Quality-Assurance-Do"></a>
 
 ### Quality Assurance Domain
 
@@ -1911,7 +2110,8 @@ To set the cookie the user can visit the following link:
 
 A screen similar to the following will appear:
 
-[![Image QACookieManager.gif](/book/static/img/QACookieManager.gif)](/book/static/img/QACookieManager.gif "Click to see the full-resolution image")
+[<a name="ch-app.QACookieManager.gif"></a>
+![Image QACookieManager.gif](/book/static/img/QACookieManager.gif)](/book/static/img/QACookieManager.gif "Click to see the full-resolution image")
 
 Figure 18. QA Cookie Manager.
 
@@ -1927,9 +2127,12 @@ which means to replace `portal` with `portalqa` etc.
 
 So the further processing of the request is done using the substituted name. The process is illustrated on the figure below.
 
-[![Image QA.jpg](/book/static/img/QA.jpg)](/book/static/img/QA.jpg "Click to see the full-resolution image")
+[<a name="ch-app.QA.jpg"></a>
+![Image QA.jpg](/book/static/img/QA.jpg)](/book/static/img/QA.jpg "Click to see the full-resolution image")
 
 Figure 19. NCBI QA
+
+<a name="ch-app.applications1"></a>
 
 NCBI Genome Workbench
 ---------------------
@@ -1942,9 +2145,13 @@ The following topics are discussed in this section:
 
 -   [Design](ch_app.html#ch_app.gbench_design)
 
+<a name="ch-app.gbench-dg"></a>
+
 ### Design Goals
 
 The primary goal of Genome Workbench is to provide a flexible platform for development of new analytic and visualization techniques. To this end, the application must facilitate easy modification and extension. In addition, we place a large emphasis on cross-platform development, and Genome Workbench should function and appear identically on all supported platforms.
+
+<a name="ch-app.gbench-design"></a>
 
 ### Design
 
@@ -1957,6 +2164,8 @@ The View/Controller aspect of the architecture is implemented through the abstra
 To permit maximal extensibility, the framework delegates much of the function of creating and presenting views and analyses to a series of plugins. In fact, most of the basic components of the application itself are implemented as plugins. The Genome Workbench framework defines three classes of plugins: data loaders, views, and algorithms. Technically, a plugin is simply a shared library defining a standard entry point. These libraries are loaded on demand; the entry point returns a list of plugin factories, which are responsible for creating the actual plugin instances.
 
 Cross-platform graphical development presents many challenges to proper encapsulation. To alleviate a lot of the difficulties seen with such development, we use a cross-platform GUI toolkit (FLTK) in combination with OpenGL for graphical development.
+
+<a name="ch-app.ncbi-netcache-service"></a>
 
 NCBI NetCache Service
 ---------------------
@@ -1982,6 +2191,8 @@ NCBI NetCache Service
     -   [Samples and other resources](ch_app.html#ch_app.Available_samples)
 
 -   [Questions and answers](ch_app.html#ch_app.Questions_and_answers)
+
+<a name="ch-app.what-is-netcache"></a>
 
 ### What is NetCache?
 
@@ -2013,6 +2224,8 @@ Therefore, it's better to provide a centralized service that provides robust tem
 
 **NetCache** is load-balanced and has high performance and virtually unlimited scalability. Any Linux, Unix or Windows machine can be a **NetCache** host, and any application can use it. For example, the success with which **NetCache** solves the problem of distributed access to temporary storage enables the [NCBI Grid](ch_grid.html) framework to rely on it for passing data between its components.
 
+<a name="ch-app.what-it-can-be-used"></a>
+
 ### What can NetCache be used for?
 
 Programs can use **NetCache** for data exchange. For example, one application can put a blob into **NetCache** and pass the blob key to another application, which can then access (retrieve, update, remove) the data. Some typical use cases are:
@@ -2029,7 +2242,8 @@ Programs can use **NetCache** for data exchange. For example, one application ca
 
 The diagram below illustrates how **NetCache** works.
 
-[![Image NetCache\_diagramm.gif](/book/static/img/NetCache_diagramm.gif)](/book/static/img/NetCache_diagramm.gif "Click to see the full-resolution image")
+[<a name="ch-app.NetCache-diagramm.gif"></a>
+![Image NetCache\_diagramm.gif](/book/static/img/NetCache_diagramm.gif)](/book/static/img/NetCache_diagramm.gif "Click to see the full-resolution image")
 
 1  
 Client requests a named service from the Load Balancer.
@@ -2045,6 +2259,8 @@ Client connects to the selected **NetCache** server and sends the data to store.
 
 5  
 **NetCache** generates and returns a unique key which can then be used to access the data.
+
+<a name="ch-app.getting-started"></a>
 
 ### How to use NetCache
 
@@ -2065,6 +2281,8 @@ The following topics explain how to use NetCache from an application:
 -   [Retrieve data](ch_app.html#ch_app.Retrieve_data)
 
 -   [Samples and other resources](ch_app.html#ch_app.Available_samples)
+
+<a name="ch-app.The-basic-ideas"></a>
 
 #### The basic ideas
 
@@ -2110,6 +2328,8 @@ There are multiple ways to write data to **NetCache** and read it back, but the 
 
         -   ***Note:*** Calling ***GetBlobSize()*** will prolong a blob's lifetime (unless `prolong_on_read` is `false`), but calling ***GetBlobInfo()*** will not.
 
+<a name="ch-app.Set-up-your-program-to-use-NetCac"></a>
+
 #### Set up your program to use NetCache
 
 To use **NetCache** from your application, you must use the [NCBI application framework](ch_core.html#ch_core.CNcbiApplication) by deriving you application class from ***CNcbiApplication***. If your application is a CGI, you can derive from ***CCgiApplication***.
@@ -2139,6 +2359,8 @@ An even easier way to get a new CGI application started is to use the [new\_proj
 
     new_project mycgi app/netcache
 
+<a name="ch-app.Establish-the-NetCache-service-na"></a>
+
 #### Establish the NetCache service name
 
 All applications using **NetCache** must use a service name. A service name is essentially just an alias for a group of **NetCache** servers from which the load balancer can choose when connecting the **NetCache** client and server. For applications with minimal resource requirements, the selected service may be relatively unimportant, but applications with large resource requirements may need their own dedicated **NetCache** servers. But in all cases, developers should contact <span class="oem_span">nypk4jvylGujip5ust5upo5nv/</span> and ask what service name to use for new applications.
@@ -2149,6 +2371,8 @@ Service names are typically specified on the command line or stored in the appli
 
     [netcache_api]
     service=the_svc_name_here
+
+<a name="ch-app.Initialize-the-client-API"></a>
 
 #### Initialize the client API
 
@@ -2174,11 +2398,15 @@ If you are using ***CNetICacheClient***, you either need to use API methods that
 
 For a complete reference of **NetCache** configuration parameters, please see the [NetCache and NetSchedule](ch_libconfig.html#ch_libconfig.NetCache_and_NetSchedule) section in the Library Configuration chapter:
 
+<a name="ch-app.Store-data"></a>
+
 #### Store data
 
 There are ancillary multiple ways to save data, whether you're using ***CNetCacheAPI*** or ***CNetICacheClient***.
 
 With all the storage methods, you can supply a "time-to-live" parameter, which specifies how long (in seconds) a blob will be accessible. See the [basic ideas](ch_app.html#ch_app.The_basic_ideas) section for more information on time-to-live.
+
+<a name="ch-app.Storing-data-using-CNetCacheAPI"></a>
 
 ##### Storing data using CNetCacheAPI
 
@@ -2204,6 +2432,8 @@ If you are saving a new blob using ***CNetCacheAPI***, it will create a unique b
         writer->Write(chunk_buf, chunk_size);
         // (data written at writer deletion or writer.Close())
 
+<a name="ch-app.Storing-data-using-CNetICacheClie"></a>
+
 ##### Storing data using CNetICacheClient
 
 If you are saving a new blob using ***CNetICacheClient***, you must supply a unique { blob key / version / subkey / cache name } combination. Here are two ways (with the cache name coming from the registry) to store data using ***CNetICacheClient*** (see the [class reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNetICacheClient.html) for additional methods):
@@ -2220,11 +2450,15 @@ If you are saving a new blob using ***CNetICacheClient***, you must supply a uni
         writer->Write(chunk_buf, chunk_size);
         // (data written at writer deletion or writer.Close())
 
+<a name="ch-app.Retrieve-data"></a>
+
 #### Retrieve data
 
 Retrieving data is more or less complementary to storing data.
 
 If an attempt is made to retrieve a blob after its time-to-live has expired, an exception will be thrown.
+
+<a name="ch-app.Retrieving-data-using-CNetCacheAP"></a>
 
 ##### Retrieving data using CNetCacheAPI
 
@@ -2251,6 +2485,8 @@ The following code snippet demonstrates three ways of retrieving data using ***C
             NCBI_USER_THROW("Error while reading BLOB");
         }
 
+<a name="ch-app.Retrieving-data-using-CNetICacheC"></a>
+
 ##### Retrieving data using CNetICacheClient
 
 The following code snippet demonstrates two ways to retrieve data using ***CNetICacheClient***, with the cache name coming from the registry (see the [class reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNetICacheClient.html) for additional methods):
@@ -2271,6 +2507,8 @@ The following code snippet demonstrates two ways to retrieve data using ***CNetI
         ...
         remaining -= bytes_read;
     }
+
+<a name="ch-app.Available-samples"></a>
 
 #### Samples and other resources
 
@@ -2293,6 +2531,8 @@ Please see the [NetCache and NetSchedule](ch_libconfig.html#ch_libconfig.NetCach
 The `grid_cli` command-line tool (available on both Windows and Unix) provides convenient sub-commands for manipulating blobs, getting their status, checking servers, etc.
 
 You can also email <span class="oem_span">nypk4jvylGujip5ust5upo5nv/</span> if you have questions.
+
+<a name="ch-app.Questions-and-answers"></a>
 
 ### Questions and answers
 
