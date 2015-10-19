@@ -1,7 +1,7 @@
 /******  Styles for new header ******/
 
 .search table {border-style:none;}
-.tr.option {color:white;}
+tr.option {color:white;}
 
 #search_box{
     border-top:thin solid  #e5e5e5;
