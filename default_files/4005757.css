@@ -1,6 +1,10 @@
 /******  Styles for new header ******/
 
-#toolkit_header {color:white;}
+#toolkit_header {
+	color:white;
+	font-size: 3em;
+    	line-height: 3;
+}
 
 .search td {border-style:none;}
 .search tr {border-style:none;}
