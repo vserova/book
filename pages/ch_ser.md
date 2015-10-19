@@ -2101,8 +2101,7 @@ Figure 1 illustrates the paths traversed by ***CTypeIterator\<CA\>*** and ***CTy
 
 <a name="ch-ser.F2"></a>
 
-[<a name="ch-ser.typeiter.gif"></a>
-![Figure 1. Traversal path of the CTypeIterator](/book/static/img/typeiter.gif)](/book/static/img/typeiter.gif "Click to see the full-resolution image")
+[![Figure 1. Traversal path of the CTypeIterator](/book/static/img/typeiter.gif)](/book/static/img/typeiter.gif "Click to see the full-resolution image")
 
 Figure 1. Traversal path of the CTypeIterator
 

@@ -583,8 +583,7 @@ See [Figure 1](#ch-dbapi.F1).
 
 <a name="ch-dbapi.F1"></a>
 
-[<a name="ch-dbapi.dbapi-user.gif"></a>
-![Figure 1. Object Hierarchy](/book/static/img/dbapi_user.gif)](/book/static/img/dbapi_user.gif "Click to see the full-resolution image")
+[![Figure 1. Object Hierarchy](/book/static/img/dbapi_user.gif)](/book/static/img/dbapi_user.gif "Click to see the full-resolution image")
 
 Figure 1. Object Hierarchy
 
