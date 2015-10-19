@@ -1,6 +1,6 @@
 /******  Styles for new header ******/
 
-.search table {border-style:none;}
+.search tr,td {border-style:none;}
 tr.option {color:white;}
 
 #search_box{
