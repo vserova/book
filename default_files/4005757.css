@@ -1,5 +1,7 @@
 /******  Styles for new header ******/
 
+#toolkit_header {color:white;}
+
 .search td {border-style:none;}
 .search tr {border-style:none;}
 tr.option {color:white;}
