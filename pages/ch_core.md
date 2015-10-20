@@ -4,8 +4,6 @@ title: C++ Toolkit test
 nav: pages/ch_core
 ---
 
-ZZZZZZZZZZZZZZZZZ
-
 8\. Portability, Core Functionality and Application Framework
 ============================================================
 
@@ -1690,8 +1688,15 @@ Finally, the environment variable `NCBI_CONFIG_OVERRIDES` can be used to name a 
 
 With the exceptions noted above, the following rules determine the search order for application and system initialization files. Although application and system initialization files are not typically found in the same place, the same search order rules apply to both (with the above exceptions).
 
-1 If the environment variable NCBI\_CONFIG\_PATH is set, that will be the only path searched for initialization files.
-2 Otherwise, the search order includes the following directories in order:aIf the environment variable NCBI\_DONT\_USE\_LOCAL\_CONFIG is not defined then:iThe current working directory (".").iiThe user's home directory (if it can be established).bThe path in the environment variable NCBI (if it is defined).cThe standard system directory ("/etc" on Unix-like systems, and given by the environment variable SYSTEMROOT on Windows).dThe directory containing the application, if known (this requires use of CNcbiApplication).
+1. If the environment variable NCBI\_CONFIG\_PATH is set, that will be the only path searched for initialization files.
+2. Otherwise, the search order includes the following directories in order:
+  a. If the environment variable NCBI\_DONT\_USE\_LOCAL\_CONFIG is not defined then:
+    i. The current working directory (".").
+    ii. The user's home directory (if it can be established).
+  b. The path in the environment variable NCBI (if it is defined).
+  c. The standard system directory ("/etc" on Unix-like systems, and given by the environment variable SYSTEMROOT on Windows).
+  d. The directory containing the application, if known (this requires use of CNcbiApplication).
+
 ***Note:*** The search ends with the first file found.
 
 The above rules determine the search order for directories, but there are also rules for initialization file names:
@@ -3496,10 +3501,11 @@ The following topics are discussed in this section:
 
 ***CThread*** class is defined in `include/corelib/ncbithr.hpp`. The ***CThread*** class provides all basic thread functionality: thread creation, launching, termination, and cleanup. To create user-defined thread one needs only to provide the thread's ***Main()*** function and, in some cases, create a new constructor to transfer data to the thread object, and override ***OnExit()*** method for thread-specific data cleanup. To create a custom thread:
 
-1 Derive your class from CThread, override Main() and, if necessary, OnExit() methods.
-2 Create thread object in your application. You can do this only with new operator, since static or in-stack thread objects are prohibited (see below). The best way to reference thread objects is to use CRef\<CThread\> class.
-3 Call Run() to start the thread execution.
-4 Call Detach() to let the thread run independently (it will destroy itself on termination then), or use Join() to wait for the thread termination.
+1. Derive your class from CThread, override Main() and, if necessary, OnExit() methods.
+2. Create thread object in your application. You can do this only with new operator, since static or in-stack thread objects are prohibited (see below). The best way to reference thread objects is to use CRef\<CThread\> class.
+3. Call Run() to start the thread execution.
+4. Call Detach() to let the thread run independently (it will destroy itself on termination then), or use Join() to wait for the thread termination.
+
 The code should look like:
 
     #include <corelib/ncbistd.hpp>
