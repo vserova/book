@@ -21,7 +21,7 @@ The overview for this chapter consists of the following topics:
 
 ### Introduction
 
--   **CORELIB library** `xncbi`:[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib) | [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib)
+-   **CORELIB library** `xncbi`:[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib)
 
 The CORELIB provides a portable low-level API and many useful application framework classes for argument processing, diagnostics, environment interface, object and reference classes, portability definitions, portable exceptions, stream wrappers, string manipulation, threads, etc.
 
@@ -29,7 +29,7 @@ This chapter provides reference material for many of CORELIB's facilities. For a
 
 ***Note***: The CORELIB must be linked to every executable that uses the NCBI C++ Toolkit!
 
--   **UTIL library** `xutil`:[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/util) | [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/util)
+-   **UTIL library** `xutil`:[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/util) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/util)
 
 The UTIL module is a collection of useful classes which can be used in more then one application. This chapter provides reference material for many of UTIL's facilities. For an overview of the UTIL module please refer to the [UTIL section in the introductory chapter](ch_intro.html#ch_intro.intro_util) on the C++ Toolkit.
 
@@ -1007,7 +1007,7 @@ The [CArgDescriptions](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/
 
 **Mandatory named positional arguments:**`<value>` (example: `12 Feb`) These are position-`dependent` arguments (of any type), which are read using a `value` only. They do, however, have names stored with their descriptions, which they are associated with in an order-dependent fashion. Specifically, the order in which untagged argument descriptions are added to the ***CArgDescriptions*** object using ***AddPositional()*** defines the order in which these arguments should appear in the command line. [AddPositional (key, comment, value\_type, flags)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html)
 
-**Optional named positional arguments:**`[value]` (example: `foo.txt bar`) Position-`dependent` arguments that are `optional`. They always go after the `mandatory` positional arguments. The order in which untagged argument descriptions are added to the ***CArgDescriptions*** object using ***Add[Optional|Default]Positional()*** defines the order in which these arguments should appear in the command line. [AddOptionalPositional (key, comment, value\_type, flags)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html)[AddDefaultPositional (key, comment, value\_type, default\_value, flags)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html)
+**Optional named positional arguments:**`[value]` (example: `foo.txt bar`) Position-`dependent` arguments that are `optional`. They always go after the `mandatory` positional arguments. The order in which untagged argument descriptions are added to the ***CArgDescriptions*** object using ***Add[Optional\|Default]Positional()*** defines the order in which these arguments should appear in the command line. [AddOptionalPositional (key, comment, value\_type, flags)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html)[AddDefaultPositional (key, comment, value\_type, default\_value, flags)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html)
 
 **Unnamed positional arguments** (all of the same type: `<value1> | [valueN]` (example: `foo.c bar.c xxx.c`). These are also position-`dependent` arguments that are read using a `value` only. They are expected to appear at the very end of the command line, after all named arguments. Unlike the previous argument type, however, these arguments do not have individual, named descriptions but share a single "unnamed" description. You can specify how many mandatory and how many optional arguments to expect using **`n_mandatory`** and **`n_optional`** parameters: [AddExtra (n\_mandatory, n\_optional, comment, type, flags)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html)
 
