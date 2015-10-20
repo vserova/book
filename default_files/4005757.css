@@ -41,7 +41,7 @@ tr.option {color:white;}
     border-bottom-left-radius: 10px;
 }
 #google_search {
-	margin-left:.8em;
+	margin-left:1.2em;
 }  
 #button-holder{
     background-color:#f1f1f1;
@@ -73,7 +73,12 @@ tr.option {color:white;}
 }
 /******  END - Styles for new header ******/
 
-
+/******** Make large tables in <div class="container"> scrollable like in the old book *******/
+div.container table {
+    	overflow: auto;
+	max-width: none;
+	max-height: 500px;	
+}
 /********************************************************************/
 /*  ComponentID=3734262 /sandbox/cfm/Components/BESetSelectorFormCSS@1.2  */
 
