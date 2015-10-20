@@ -4,8 +4,7 @@ title: C++ Toolkit test
 nav: pages/ch_dbapi
 ---
 
-
-10\. Database Access Support
+10. Database Access Support
 ===========================
 
 Last Update: April 2, 2015.
@@ -23,13 +22,13 @@ The overview for this chapter consists of the following topics:
 
 This chapter covers the C++ Toolkit support for database access using:
 
--   the [SDBAPI](#ch-dbapi.SDBAPI-UserLayer-Reference) database access library [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/dbapi/simple/) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/dbapi/simple/)];
+-   the [SDBAPI](#ch-dbapi.SDBAPI-UserLayer-Reference) database access library [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/dbapi/simple/) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/dbapi/simple/)];
 
--   the [DBAPI](#ch-dbapi.The-DBAPI-Library) database access library [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/dbapi/) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/dbapi/)];
+-   the [DBAPI](#ch-dbapi.The-DBAPI-Library) database access library [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/dbapi/) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/dbapi/)];
 
--   the [BDB](#ch-dbapi.Major-Features-of-th) wrapper [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/db/bdb/) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/db/bdb/)]; or
+-   the [BDB](#ch-dbapi.Major-Features-of-th) wrapper [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/db/bdb/) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/db/bdb/)]; or
 
--   the [SQLite](#ch-dbapi.The-SQLite-Wrapper) wrapper [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/db/sqlite/) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/db/sqlite/)].
+-   the [SQLite](#ch-dbapi.The-SQLite-Wrapper) wrapper [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/db/sqlite/) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/db/sqlite/)].
 
 DBAPI was the traditional database access library interface, but has been superseded by SDBAPI - the "simplified" interface. They have considerable overlap, but they are fully not compatible and each has at least one feature the other doesn't, so you must pick one. For example, DBAPI allows a choice of underlying drivers and access to the underlying data source while SDBAPI does not. On the other hand, SDBAPI supports bookmarking blobs while DBAPI doesn't. In the vast majority of cases SDBAPI will be both more than adequate and easier to use and maintain. Therefore, SDBAPI should be the first choice unless there's a compelling reason to use DBAPI.
 
@@ -170,11 +169,9 @@ This section is not intended to cover all the important aspects of security beca
 
 However, it's worth pointing out a couple of the most important ways to protect against SQL injection:
 
-1  
-Never construct a SQL statement from user-supplied input if the same functionality can be achieved by passing the user input to stored procedures or parameterized SQL.
+1.  Never construct a SQL statement from user-supplied input if the same functionality can be achieved by passing the user input to stored procedures or parameterized SQL.
 
-2  
-If constructing a SQL statement from user-supplied input cannot be avoided, then you MUST sanitize the user input.
+2.  If constructing a SQL statement from user-supplied input cannot be avoided, then you MUST sanitize the user input.
 
 The following sample programs illustrates how to protect against SQL injection for basic SQL statements using SDBAPI and DBAPI:
 
@@ -190,23 +187,17 @@ See the [Security FAQ](ch_faq.html#ch_faq.Security) for more information.
 
 Within NCBI, individual users (i.e. not service accounts) can use Kerberos with DBAPI, provided the following conditions are met:
 
-1  
-The database must allow them to connect using Kerberos. (Email <span class="oem_span">kiolswGujip5ust5upo5nv/</span> if you need help with this.)
+1.  The database must allow them to connect using Kerberos. (Email <span class="oem_span">kiolswGujip5ust5upo5nv/</span> if you need help with this.)
 
-2  
-DBAPI must be configured to enable Kerberos.
+2.  DBAPI must be configured to enable Kerberos.
 
-a  
-Either the **`NCBI_CONFIG__DBAPI__CAN_USE_KERBEROS`** environment variable must be set to `true`; or
+    -   Either the **`NCBI_CONFIG__DBAPI__CAN_USE_KERBEROS`** environment variable must be set to `true`; or
 
-b  
-the `can_use_kerberos` entry in the `dbapi` section of the application configuration file must be set to `true`.
+    -   the `can_use_kerberos` entry in the `dbapi` section of the application configuration file must be set to `true`.
 
-3  
-Their Kerberos ticket must not be expired.
+3.  Their Kerberos ticket must not be expired.
 
-4  
-They must pass an empty string for the user name.
+4.  They must pass an empty string for the user name.
 
 This is also covered in the [DBAPI section](ch_libconfig.html#ch_libconfig.DBAPI) of the Library Configuration chapter.
 
@@ -363,17 +354,13 @@ Once a [connection](#ch-dbapi.Connections) is established, executing a basic que
 
 ***Note:*** There are security factors to be considered when executing queries. See the [security section](#ch-dbapi.Security), and use the following guidelines when deciding which method to use:
 
-1  
-If stored procuedures can be used, then use them. This increases both security and performance. Plus, this practice could facilitate testing and documentation.
+1.  If stored procuedures can be used, then use them. This increases both security and performance. Plus, this practice could facilitate testing and documentation.
 
-2  
-Otherwise, if the SQL statement does not depend on dynamic values, then use static SQL.
+2.  Otherwise, if the SQL statement does not depend on dynamic values, then use static SQL.
 
-3  
-Otherwise, if parameterized SQL can be used, then use it.
+3.  Otherwise, if parameterized SQL can be used, then use it.
 
-4  
-Otherwise, as a last resort, use dynamic SQL. If user-supplied data is used to construct the statement, then you **MUST** sanitize the user-supplied data. Even if the data does not come from an outside user, it's still a good idea to sanitize all dynamic data unless there's a compelling reason not to, in which case that fact should be prominently documented in comments adjacent to the dynamic SQL creation code. See the [Security FAQ](ch_faq.html#ch_faq.Security) for more information.
+4.  Otherwise, as a last resort, use dynamic SQL. If user-supplied data is used to construct the statement, then you **MUST** sanitize the user-supplied data. Even if the data does not come from an outside user, it's still a good idea to sanitize all dynamic data unless there's a compelling reason not to, in which case that fact should be prominently documented in comments adjacent to the dynamic SQL creation code. See the [Security FAQ](ch_faq.html#ch_faq.Security) for more information.
 
 <a name="ch-dbapi.Stored-Procedures-and-Parameter"></a>
 
@@ -780,17 +767,17 @@ It is also possible to use [IStatement](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/
         case eDB_RowResult:
             while( rs->Next() ) {
                 if( rs->GetVariant(1).GetInt4() == 2121 ) {
-                    NcbiCout << rs->GetVariant(2).GetString() << "\|"
-                             << rs->GetVariant(3).GetString() << "\|"
-                             << rs->GetVariant(4).GetString() << "\|"
-                             << rs->GetVariant(5).GetString() << "\|"
-                             << rs->GetVariant(6).GetString() << "\|"
-                             << rs->GetVariant(7).GetString() << "\|"
+                    NcbiCout << rs->GetVariant(2).GetString() << "|"
+                             << rs->GetVariant(3).GetString() << "|"
+                             << rs->GetVariant(4).GetString() << "|"
+                             << rs->GetVariant(5).GetString() << "|"
+                             << rs->GetVariant(6).GetString() << "|"
+                             << rs->GetVariant(7).GetString() << "|"
                              << NcbiEndl;
                 } else {
-                    NcbiCout << rs->GetVariant(1).GetInt4() << "\|"
-                             << rs->GetVariant(2).GetFloat() << "\|"
-                             << rs->GetVariant("date_val").GetString() << "\|"
+                    NcbiCout << rs->GetVariant(1).GetInt4() << "|"
+                             << rs->GetVariant(2).GetFloat() << "|"
+                             << rs->GetVariant("date_val").GetString() << "|"
                              << NcbiEndl;
                 }
             }
@@ -972,7 +959,7 @@ This program opens one connection to the server and selects the database names a
             while(lcmd->HasMoreResults()) {
                 CDB_Result* r= lcmd->Result();
                 // skip all but row result
-                if (r == 0  \|\|  r->ResultType() != eDB_RowResult) {
+                if (r == 0  ||  r->ResultType() != eDB_RowResult) {
                     delete r;
                     continue;
                 }
@@ -1256,7 +1243,7 @@ Let's suppose that we want to insert a new row into table T as described above.
     while(lcmd->HasMoreResults()) {
         CDB_Result* r= lcmd->Result();
         // skip all but row result
-        if (r == 0  \|\|  r->ResultType() != eDB_RowResult) {
+        if (r == 0  ||  r->ResultType() != eDB_RowResult) {
             delete r;
             continue;
         }
@@ -1302,7 +1289,7 @@ The recommended algorithm for updating the text/image data is:
     while(lcmd->HasMoreResults()) {
         CDB_Result* r= lcmd->Result();
         // skip all but row result
-        if (r == 0  \|\|  r->ResultType() != eDB_RowResult) {
+        if (r == 0  ||  r->ResultType() != eDB_RowResult) {
             delete r;
             continue;
         }
@@ -1569,14 +1556,11 @@ For the following to be clear, it is important to distinguish between a database
 
 The following steps must be done prior to database load-balancing:
 
-1  
-Ask the DBAs to add your service name (e.g. YOURSERVICE) to the load-balancer configuration database. Typically, the names are clear, for example, there are server aliases YOURSERVICE1, and YOURSERVICE2 that already exist, and databases that have “YOURSERVICE” as an embedded string, but if not, the databases providing the service and the server aliases involved should be given. Note that if databases are moved to different underlying servers, both the server aliases, and the load-balancer configuration which points to those servers are both moved, synchronously.
+1.  Ask the DBAs to add your service name (e.g. YOURSERVICE) to the load-balancer configuration database. Typically, the names are clear, for example, there are server aliases YOURSERVICE1, and YOURSERVICE2 that already exist, and databases that have “YOURSERVICE” as an embedded string, but if not, the databases providing the service and the server aliases involved should be given. Note that if databases are moved to different underlying servers, both the server aliases, and the load-balancer configuration which points to those servers are both moved, synchronously.
 
-2  
-Tell the DBAs which of the server aliases point to the server that should be used, if the load-balancer is unavailable, as the DBAPI will look for a server alias with the same name as the service, in that case.
+2.  Tell the DBAs which of the server aliases point to the server that should be used, if the load-balancer is unavailable, as the DBAPI will look for a server alias with the same name as the service, in that case.
 
-3  
-The DBAs will also ask for a DNS name to match the service name as a backup connection method, should everything else fail.
+3.  The DBAs will also ask for a DNS name to match the service name as a backup connection method, should everything else fail.
 
 <a name="ch-dbapi.Using-Database-LoadBalancing-fr"></a>
 
@@ -1586,11 +1570,9 @@ For simplest access, see the section on [using SDBAPI](#ch-dbapi.Simple-Database
 
 If DBAPI is being used (e.g. if a feature that is only available in DBAPI is required), and you want to activate database load-balancing:
 
-1  
-Before the very first DBAPI connection attempt, call:<br/><br/>`#include <dbapi/driver/dbapi_svc_mapper.hpp>`<br/>`DBLB_INSTALL_DEFAULT();`<br/>
+1.  Before the very first DBAPI connection attempt, call:<br/><br/>`#include <dbapi/driver/dbapi_svc_mapper.hpp>`<br/>`DBLB_INSTALL_DEFAULT();`<br/>
 
-2  
-Link `'$(XCONNEXT)'` and `'xconnect'` libraries to your application.
+2.  Link `'$(XCONNEXT)'` and `'xconnect'` libraries to your application.
 
 If steps (1) and (2) above are done then the DBAPI connection methods (such as ***Connect()*** or ***ConnectValidated()***) will attempt to resolve the passed server name as a load-balanced service name.
 
@@ -1723,28 +1705,20 @@ There is also a Python module that provides an interface to the load-balancing s
 
 The following steps are performed each time a request is made to establish a load-balanced connection to a named database service:
 
-1  
-The requests will first go through the DBLB mechanism that tries to match the requested service name against the services known to the NCBI [Load Balancer](ch_app.html#ch_app.Load_Balancing) and/or those described in the application's configuration file.
+1.  The requests will first go through the DBLB mechanism that tries to match the requested service name against the services known to the NCBI [Load Balancer](ch_app.html#ch_app.Load_Balancing) and/or those described in the application's configuration file.
 
-2  
-If the requested service name is unknown to the load balancer then this name will be used "as is".
+2.  If the requested service name is unknown to the load balancer then this name will be used "as is".
 
-3  
-However, if this service name is known to the DBLB then the DBLB will try to establish a connection to the database server that it deems the most suitable. If the service is handled by the NCBI load-balancer, then the unresponsive servers will be weeded out, and a load on the machines that run the servers may be taken into account too.
+3.  However, if this service name is known to the DBLB then the DBLB will try to establish a connection to the database server that it deems the most suitable. If the service is handled by the NCBI load-balancer, then the unresponsive servers will be weeded out, and a load on the machines that run the servers may be taken into account too.
 
-4  
-***C++ only:*** If the connection cannot be established, then DBLB will automatically retry the connection, now using another suitable database server.
+4.  ***C++ only:*** If the connection cannot be established, then DBLB will automatically retry the connection, now using another suitable database server.
 
-5  
-This procedure may be repeated several times, during which there will be only one attempt to connect to each database.
+5.  This procedure may be repeated several times, during which there will be only one attempt to connect to each database.
 
-6  
-***C++ only:*** Once a database connection is successfully established it will be "latched-on". This means that when you will try to connect to the same service or alias within the same application again then you will be connected to the same database server (this can be relaxed or turned off completely).
+6.  ***C++ only:*** Once a database connection is successfully established it will be "latched-on". This means that when you will try to connect to the same service or alias within the same application again then you will be connected to the same database server (this can be relaxed or turned off completely).
 
-7  
-For example, you can connect to the "PMC" service which is currently mapped to two servers. The server names are provided dynamically by the NCBI load-balancer, so you never have to change your configuration or recompile your application if either a service configuration or an "interfaces" file get changed.
+7.  For example, you can connect to the "PMC" service which is currently mapped to two servers. The server names are provided dynamically by the NCBI load-balancer, so you never have to change your configuration or recompile your application if either a service configuration or an "interfaces" file get changed.
 
-8  
-***C++ only:*** If ***ConnectValidated()*** is used to connect to a database, then requests to establish database connections will first go through the server-level load-balancing mechanism. On successful login to server, the database connection will be validated against the validator. If the validator does not "approve" the connection, then DBAPI will automatically close this connection and repeat this login/validate attempt with the next server, and so on, until a "good" (successful login + successful validation) connection is found. If you want to validate a connection against more than one validator/database, then you can combine validators. Class ***CConnValidatorCoR*** was developed to allow combining of other validators into a chain.
+8.  ***C++ only:*** If ***ConnectValidated()*** is used to connect to a database, then requests to establish database connections will first go through the server-level load-balancing mechanism. On successful login to server, the database connection will be validated against the validator. If the validator does not "approve" the connection, then DBAPI will automatically close this connection and repeat this login/validate attempt with the next server, and so on, until a "good" (successful login + successful validation) connection is found. If you want to validate a connection against more than one validator/database, then you can combine validators. Class ***CConnValidatorCoR*** was developed to allow combining of other validators into a chain.
 
 

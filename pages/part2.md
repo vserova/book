@@ -4,7 +4,6 @@ title: C++ Toolkit test
 nav: pages/part2
 ---
 
-
 Part 2. Development Framework
 =============================
 

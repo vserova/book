@@ -4,8 +4,7 @@ title: C++ Toolkit test
 nav: pages/ch_grid
 ---
 
-
-23\. Distributed Computing
+23. Distributed Computing
 =========================
 
 Created: May 14, 2007; Last Update: November 13, 2013.
@@ -147,35 +146,25 @@ Two PowerPoint presentations have additional information about the NCBI GRID:
 
 The NCBI GRID framework is built of the following components:
 
-1  
-Network job queue ([NetSchedule](http://intranet.ncbi.nlm.nih.gov:6224/wiki-private/CxxToolkit/index.cgi/NetSchedule))
+1.  Network job queue ([NetSchedule](http://intranet.ncbi.nlm.nih.gov:6224/wiki-private/CxxToolkit/index.cgi/NetSchedule))
 
-2  
-Network data storage ([NetCache](ch_app.html#ch_app.ncbi_netcache_service))
+2.  Network data storage ([NetCache](ch_app.html#ch_app.ncbi_netcache_service))
 
-3  
-Server-side APIs and tools to develop [Worker Nodes](#ch-grid.Worker-Nodes):
+3.  Server-side APIs and tools to develop [Worker Nodes](#ch-grid.Worker-Nodes):
 
-a  
-[Out of an existing command-line executable](#ch-grid.-Wrapping-an-existing-1)
+    -   [Out of an existing command-line executable](#ch-grid.-Wrapping-an-existing-1)
 
-b  
-[Out of an existing CGI executable](#ch-grid.-Wrapping-an-existing)
+    -   [Out of an existing CGI executable](#ch-grid.-Wrapping-an-existing)
 
-c  
-[Out of an existing CGI code](#ch-grid.Converting-an-existi) (if it's written using the [NCBI C++ CGI framework](ch_cgi.html))
+    -   [Out of an existing CGI code](#ch-grid.Converting-an-existi) (if it's written using the [NCBI C++ CGI framework](ch_cgi.html))
 
-d  
-[Create a GRID Worker Node from scratch](#ch-grid.Create-a-GRID-Worker)
+    -   [Create a GRID Worker Node from scratch](#ch-grid.Create-a-GRID-Worker)
 
-4  
-Client-side API
+4.  Client-side API
 
-5  
-Remote CGI -- enables moving the actual CGI execution to the grid.
+5.  Remote CGI -- enables moving the actual CGI execution to the grid.
 
-6  
-[GRID Utilities](#ch-grid.GRID-Utilities) for remote administration, monitoring, retrieval and submission (**netschedule\_control**, **netcache\_control**, **ns\_remote\_job\_control**, **ns\_submit\_remote\_job**, etc.)
+6.  [GRID Utilities](#ch-grid.GRID-Utilities) for remote administration, monitoring, retrieval and submission (**netschedule\_control**, **netcache\_control**, **ns\_remote\_job\_control**, **ns\_submit\_remote\_job**, etc.)
 
 All these components are fully portable, in the sense that they can be built and then run and communicate with each other across all platforms that are supported by the NCBI C++ Toolkit (Unix, MS-Windows, MacOSX).
 
@@ -191,23 +180,17 @@ To provide more flexibility, load balancing, and fault-tolerance, it is highly a
 
 [NetSchedule](http://intranet.ncbi.nlm.nih.gov:6224/wiki-private/CxxToolkit/index.cgi/NetSchedule) and [NetCache](ch_app.html#ch_app.ncbi_netcache_service) servers create a media which Submitters and [Worker Nodes](#ch-grid.Worker-Nodes) use to pass and control jobs and related data:
 
-1  
-Submitter prepares input data and stores it in the pool of NetCache servers, recording keys to the data in the job's description.
+1.  Submitter prepares input data and stores it in the pool of NetCache servers, recording keys to the data in the job's description.
 
-2  
-Submitter submits the job to the appropriate queue in the pool of NetSchedule servers.
+2.  Submitter submits the job to the appropriate queue in the pool of NetSchedule servers.
 
-3  
-Worker Node polls "its" queue on the NetSchedule servers for jobs, and takes the submitted job for processing.
+3.  Worker Node polls "its" queue on the NetSchedule servers for jobs, and takes the submitted job for processing.
 
-4  
-Worker Node retrieves the job's input data from the NetCache server(s) and processes the job.
+4.  Worker Node retrieves the job's input data from the NetCache server(s) and processes the job.
 
-5  
-Worker Node stores the job's results in NetCache and changes the job's status to "`done`" in NetSchedule.
+5.  Worker Node stores the job's results in NetCache and changes the job's status to "`done`" in NetSchedule.
 
-6  
-Submitter sees that the job is done and reads its result from NetCache.
+6.  Submitter sees that the job is done and reads its result from NetCache.
 
 The following diagram illustrates this flow of control and data:
 
@@ -292,29 +275,21 @@ With a rather simple and formal conversion, a CGI's real workload can be moved f
 
 #### Converting a CGI into a Remote-CGI server
 
-1  
-Modify the code of your original CGI to make it a standalone Remote-CGI server ([Worker Node](#ch-grid.Worker-Nodes)). The code conversion is very easy and formal:
+1.  Modify the code of your original CGI to make it a standalone Remote-CGI server ([Worker Node](#ch-grid.Worker-Nodes)). The code conversion is very easy and formal:
 
-a  
-Change application's base class from ***CCgiApplication*** to ***CRemoteCgiApp***
+    -   Change application's base class from ***CCgiApplication*** to ***CRemoteCgiApp***
 
-b  
-Link the application with the library `xgridcgi` rather than with `xcgi`
+    -   Link the application with the library `xgridcgi` rather than with `xcgi`
 
-2  
-Replace your original CGIs by a one-line shell scripts that calls "remote CGI gateway" (**cgi2rcgi.cgi**) application.
+2.  Replace your original CGIs by a one-line shell scripts that calls "remote CGI gateway" (**cgi2rcgi.cgi**) application.
 
-3  
-Match "remote CGI gateways" against Remote-CGI servers:
+3.  Match "remote CGI gateways" against Remote-CGI servers:
 
-a  
-Ask us to register your remote CGI in the GRID framework
+    -   Ask us to register your remote CGI in the GRID framework
 
-b  
-Define some extra parameters in the configuration files of "remote CGI gateway" and Remote-CGI servers to connect them via the GRID framework
+    -   Define some extra parameters in the configuration files of "remote CGI gateway" and Remote-CGI servers to connect them via the GRID framework
 
-4  
-Install and run your Remote-CGI servers on as many machines as you need. They don't require Web server, and can be installed even on PCs and Macs.
+4.  Install and run your Remote-CGI servers on as many machines as you need. They don't require Web server, and can be installed even on PCs and Macs.
 
 <a name="ch-grid.-Diagram-1"></a>
 
@@ -1210,14 +1185,11 @@ The `-read` command of `netschedule_control` produces a list of job IDs as its o
 
 There are three ways one can specify a list of arguments in a command line option that accepts the Alternate list input format (like the -stdout and stderr options of ns\_remote\_job\_conrol):
 
-1  
-Via a comma-separated (or a space-separated) list.
+1.  Via a comma-separated (or a space-separated) list.
 
-2  
-By using a text file (one argument per line). The name of the file must be prefixed with '@' to distinguish from the explicit enumeration of the previous case.
+2.  By using a text file (one argument per line). The name of the file must be prefixed with '@' to distinguish from the explicit enumeration of the previous case.
 
-3  
-Via **`stdin`** (denoted by '-'). This variant does not differ from using a text file except that list items are red from the standard input - one item per line.
+3.  Via **`stdin`** (denoted by '-'). This variant does not differ from using a text file except that list items are red from the standard input - one item per line.
 
 **Examples:**
 

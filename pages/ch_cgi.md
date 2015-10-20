@@ -4,8 +4,7 @@ title: C++ Toolkit test
 nav: pages/ch_cgi
 ---
 
-
-11\. CGI and Fast-CGI
+11. CGI and Fast-CGI
 ====================
 
 Created: January 1, 2005; Last Update: February 2, 2015.
@@ -21,7 +20,7 @@ The overview for this chapter consists of the following topics:
 
 ### Introduction
 
-**CGI and Fast-CGI** [Libraries `xcgi` and `xfcgi`: [include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/cgi) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi)]
+**CGI and Fast-CGI** [Libraries `xcgi` and `xfcgi`: [include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/cgi) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi)]
 
 These library classes represent an [integrated framework](#ch-cgi.cgi-class-overview) with which to write CGI applications and are designed to help retrieve and parse an HTTP request and then to compose and deliver an HTTP response. (See also this additional [class reference documentation](#ch-cgi.)). `xfcgi` is a FastCGI version of `xcgi`.
 
@@ -33,27 +32,27 @@ These library classes represent an [integrated framework](#ch-cgi.cgi-class-over
 
 CGI Interface
 
--   [Basic CGI Application Class](#ch-cgi.cgi-app-class) (includes [CGI Diagnostic Handling](#ch-cgi.cgi-diag.html)) cgiapp[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/cgi/cgiapp.hpp) \\| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi/cgiapp.cpp)]
+-   [Basic CGI Application Class](#ch-cgi.cgi-app-class) (includes [CGI Diagnostic Handling](#ch-cgi.cgi-diag.html)) cgiapp[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/cgi/cgiapp.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi/cgiapp.cpp)]
 
--   [CGI Application Context Classes](#ch-cgi.cgi-app-context) cgictx[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/cgi/cgictx.hpp) \\| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi/cgictx.cpp)]
+-   [CGI Application Context Classes](#ch-cgi.cgi-app-context) cgictx[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/cgi/cgictx.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi/cgictx.cpp)]
 
--   [HTTP Request Parser](#ch-cgi.cgi-http-req) ncbicgi[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/cgi/ncbicgi.hpp) \\| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi/ncbicgi.cpp)]
+-   [HTTP Request Parser](#ch-cgi.cgi-http-req) ncbicgi[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/cgi/ncbicgi.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi/ncbicgi.cpp)]
 
--   [HTTP Cookies](#ch-cgi.cgi-http-cookies) ncbicgi[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/cgi/ncbicgi.hpp) \\| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi/ncbicgi.cpp)]
+-   [HTTP Cookies](#ch-cgi.cgi-http-cookies) ncbicgi[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/cgi/ncbicgi.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi/ncbicgi.cpp)]
 
--   [HTTP Response Generator](#ch-cgi.cgi-http-resp) ncbicgir[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/cgi/ncbicgir.hpp) \\| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi/ncbicgir.cpp)]
+-   [HTTP Response Generator](#ch-cgi.cgi-http-resp) ncbicgir[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/cgi/ncbicgir.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi/ncbicgir.cpp)]
 
--   [Basic CGI Resource Class](#ch-cgi.cgi-res-class) ncbires[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/cgi/ncbires.hpp) \\| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi/ncbires.cpp)]
+-   [Basic CGI Resource Class](#ch-cgi.cgi-res-class) ncbires[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/cgi/ncbires.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi/ncbires.cpp)]
 
 ***FastCGI*** CGI Interface
 
--   Adapter Between C++ and FastCGI Streams fcgibuf[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi/fcgibuf.hpp) \\| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi/fcgibuf.cpp)]
+-   Adapter Between C++ and FastCGI Streams fcgibuf[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi/fcgibuf.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi/fcgibuf.cpp)]
 
 -   Fast-CGI Loop Function fcgi\_run[[.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi/fcgi_run.cpp)]
 
 -   Plain CGI Stub for the Fast-CGI Loop Function cgi\_run[[.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi/cgi_run.cpp)]
 
-**Demo Cases** [[src/cgi/demo](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi/demo) \\| [C++/src/sample/app/cgi/](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/cgi/)]
+**Demo Cases** [[src/cgi/demo](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi/demo) \| [C++/src/sample/app/cgi/](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/cgi/)]
 
 **Test Cases** [[src/cgi/test](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi/test)]
 
@@ -1396,26 +1395,19 @@ Building creates both a FastCGI-enabled application and a regular CGI applicatio
 
 The round-trip sequence of events for a FastCGI request/response is:
 
-1  
-The FCGI application is started (independent of any requests).
+1.  The FCGI application is started (independent of any requests).
 
-2  
-An HTTP request is sent to the URL for the proxy script.
+2.  An HTTP request is sent to the URL for the proxy script.
 
-3  
-The web server invokes the proxy script using the regular CGI protocol (**`STDIN`** and environment variables).
+3.  The web server invokes the proxy script using the regular CGI protocol (**`STDIN`** and environment variables).
 
-4  
-The proxy script forwards the request to your FCGI application through a socket.
+4.  The proxy script forwards the request to your FCGI application through a socket.
 
-5  
-The FCGI application processes the request and sends the response and exit status back to the proxy script via the socket.
+5.  The FCGI application processes the request and sends the response and exit status back to the proxy script via the socket.
 
-6  
-The proxy sends the response back to the web server via the CGI protocol (**`STDOUT`** and exit status).
+6.  The proxy sends the response back to the web server via the CGI protocol (**`STDOUT`** and exit status).
 
-7  
-The web server sends the response and status code to the client via HTTP.
+7.  The web server sends the response and status code to the client via HTTP.
 
 [![Image ch\_cgi\_fcgi\_events.png](/book/static/img/ch_cgi_fcgi_events.png)](/book/static/img/ch_cgi_fcgi_events.png "Click to see the full-resolution image")
 
@@ -1423,7 +1415,7 @@ The web server sends the response and status code to the client via HTTP.
 
 To connect the proxy script to the FCGI application, first find a port that's available on the machine that will run the application. For example, to find out if port 5000 is available for listening:
 
-    myhost$  netstat -l --numeric-ports \| grep 5000
+    myhost$  netstat -l --numeric-ports | grep 5000
     tcp        0      0 *:5000                      *:*                         LISTEN
 
 If the port is available there won't be any output; if it's in use by another process the output will be similar to the above.
@@ -1448,39 +1440,28 @@ The `Iterations` entry specifies the number of requests that the FCGI applicatio
 
 To debug a "plain" CGI, first create a FastCGI-capable version of it, then debug that. To create a FastCGI-capable version of a "plain" CGI:
 
-1  
-Change the makefile to build `fmyapp.fcgi` instead of `myapp.cgi` and to link with `xfcgi.lib` instead of `xcgi.lib`. ***Note:*** the application must use the C++ Toolkit's CGI framework (as in the above [example](#ch-cgi.html)).
+1.  Change the makefile to build `fmyapp.fcgi` instead of `myapp.cgi` and to link with `xfcgi.lib` instead of `xcgi.lib`. ***Note:*** the application must use the C++ Toolkit's CGI framework (as in the above [example](#ch-cgi.html)).
 
-2  
-Rebuild.
+2.  Rebuild.
 
-3  
-Install the [proxy script](http://www.ncbi.nlm.nih.gov/viewvc/v1/trunk/c++/src/sample/app/cgi/fcgi_sample.cgi?view=log) on the web server in place of, or in addition to, the existing CGI.
+3.  Install the [proxy script](http://www.ncbi.nlm.nih.gov/viewvc/v1/trunk/c++/src/sample/app/cgi/fcgi_sample.cgi?view=log) on the web server in place of, or in addition to, the existing CGI.
 
-4  
-[Configure the connection](#ch-cgi.Connecting-the-FCGI-proxy-to-the) between the proxy and the application.
+4.  [Configure the connection](#ch-cgi.Connecting-the-FCGI-proxy-to-the) between the proxy and the application.
 
 To debug a FastCGI-capable application:
 
-1  
-If desired, move the application to a development host for more flexibility in debugging:
+1.  If desired, move the application to a development host for more flexibility in debugging:
 
-a  
-Copy the FCGI application and the files it uses (e.g. `fmyapp.fcgi`, `fmyapp.ini,` and `myapp.html`) to the desired host.
+    -   Copy the FCGI application and the files it uses (e.g. `fmyapp.fcgi`, `fmyapp.ini,` and `myapp.html`) to the desired host.
 
-b  
-[Configure the connection](#ch-cgi.Connecting-the-FCGI-proxy-to-the) between the proxy and the application.
+    -   [Configure the connection](#ch-cgi.Connecting-the-FCGI-proxy-to-the) between the proxy and the application.
 
-2  
-Start `fmyapp.fcgi` under the debugger (or a memory checker or other tool), set a breakpoint on ***ProcessRequest()***, and issue a "run" command. The program will remain in the running state while listening for a request from the proxy script.
+2.  Start `fmyapp.fcgi` under the debugger (or a memory checker or other tool), set a breakpoint on ***ProcessRequest()***, and issue a "run" command. The program will remain in the running state while listening for a request from the proxy script.
 
-3  
-From your web browser (or using `GET`/`POST` command-line utilities), submit a web request to the proxy, `fmyapp.cgi`. The request will be tunneled to `fmyapp.fcgi` and the debugger will stop at the breakpoint.
+3.  From your web browser (or using `GET`/`POST` command-line utilities), submit a web request to the proxy, `fmyapp.cgi`. The request will be tunneled to `fmyapp.fcgi` and the debugger will stop at the breakpoint.
 
-4  
-Debug the processing of the request.
+4.  Debug the processing of the request.
 
-5  
-Issue another "run" command to the debugger to complete processing of the current request, send the response back to the proxy, and begin waiting for the next request (or exit if the configured number of iterations has been reached).
+5.  Issue another "run" command to the debugger to complete processing of the current request, send the response back to the proxy, and begin waiting for the next request (or exit if the configured number of iterations has been reached).
 
 

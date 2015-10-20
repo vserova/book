@@ -4,8 +4,7 @@ title: C++ Toolkit test
 nav: pages/ch_libconfig
 ---
 
-
-30\. Library Configuration
+30. Library Configuration
 =========================
 
 Last Update: June 24, 2014.
@@ -809,7 +808,7 @@ Table 13. Objects-related configuration parameters
 
 <a name="ch-libconfig.TF.40"></a>
 
-<sup>d</sup> case-insensitive: true values are { yes \\| 1 }; anything else is false
+<sup>d</sup> case-insensitive: true values are { yes \| 1 }; anything else is false
 
 <a name="ch-libconfig.cSRA"></a>
 

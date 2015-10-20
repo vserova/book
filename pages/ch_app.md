@@ -4,8 +4,7 @@ title: C++ Toolkit test
 nav: pages/ch_app
 ---
 
-
-24\. Applications
+24. Applications
 ================
 
 Created: April 1, 2003; Last Update: March 17, 2015.
@@ -342,10 +341,10 @@ Initially, **DATATOOL** and the serial library supported serialization in ASN.1 
 
 Here, accidentally, element ***str*** is defined identically both in ***Date*** and ***Time*** productions; while the meaning of element ***std*** depends on the context. To avoid ambiguity, this specification translates into the following DTD:
 
-    <!ELEMENT Date (Date_str \| Date_std)>
+    <!ELEMENT Date (Date_str | Date_std)>
     <!ELEMENT Date_str (#PCDATA)>
     <!ELEMENT Date_std (Date-std)>
-    <!ELEMENT Time (Time_str \| Time_std)>
+    <!ELEMENT Time (Time_str | Time_std)>
     <!ELEMENT Time_str (#PCDATA)>
     <!ELEMENT Time_std (Time-std)>
 
@@ -427,17 +426,13 @@ It is possible to tune up the C++ code generation by using a definition file, wh
 
 **DATATOOL** looks for code generation parameters in several sections of the file in the following order:
 
-1  
-`[ModuleName.TypeName]`
+1.  `[ModuleName.TypeName]`
 
-2  
-`[TypeName]`
+2.  `[TypeName]`
 
-3  
-`[ModuleName]`
+3.  `[ModuleName]`
 
-4  
-`[-]`
+4.  `[-]`
 
 Parameter definitions follow a "name = value" format. The "name" part of the definition serves two functions: (1) selecting the specific element to which the definition applies, and (2) selecting the code generation parameter (such as `_class`) that will be fine-tuned for that element.
 
@@ -778,11 +773,9 @@ The following additional topics are discussed in this section:
 
 By default, DATATOOL generates "normalized" C++ class names from ASN.1 type names using two rules:
 
-1  
-Convert any hyphens ("***-***") into underscores ("***\_***"), because hyphens are not legal characters in C++ class names.
+1.  Convert any hyphens ("***-***") into underscores ("***\_***"), because hyphens are not legal characters in C++ class names.
 
-2  
-Prepend a 'C' character.
+2.  Prepend a 'C' character.
 
 For example, the default normalized C++ class name for the ASN.1 type name "***Seq-data***" is "***CSeq\_data***".
 
@@ -831,7 +824,7 @@ See [Figure 1](#ch-app.specs-asn).
 
 [![1. ASN.1 specification analysis.](/book/static/img/specs_asn.gif)](/book/static/img/specs_asn.gif "Click to see the full-resolution image")
 
-1\. ASN.1 specification analysis.
+1. ASN.1 specification analysis.
 
 <a name="ch-app.dt-inside.html-specs-dtd"></a>
 
@@ -843,7 +836,7 @@ See [Figure 2](#ch-app.specs-dtd).
 
 [![2. DTD specification analysis.](/book/static/img/specs_dtd.gif)](/book/static/img/specs_dtd.gif "Click to see the full-resolution image")
 
-2\. DTD specification analysis.
+2. DTD specification analysis.
 
 <a name="ch-app.dt-inside.html-data-types"></a>
 
@@ -861,7 +854,7 @@ See [Figure 3](#ch-app.data-values).
 
 [![3. Data values.](/book/static/img/data_types.gif)](/book/static/img/data_types.gif "Click to see the full-resolution image")
 
-3\. Data values.
+3. Data values.
 
 <a name="ch-app.dt-inside.html-code-gen"></a>
 
@@ -873,7 +866,7 @@ See [Figure 4](#ch-app.code-gen).
 
 [![4. Code generation.](/book/static/img/type_strings.gif)](/book/static/img/type_strings.gif "Click to see the full-resolution image")
 
-4\. Code generation.
+4. Code generation.
 
 <a name="ch-app.Load-Balancing"></a>
 
@@ -1036,7 +1029,7 @@ causes the contents of the named file **`filename`** to be inserted here. The da
 
 Once started, the daemon first tries to read its configuration from `/etc/lbsmd/servrc.cfg`. If the file is not found (or is not readable) the daemon looks for the configuration file `servrc.cfg` in the directory from which it has been started. This fallback mechanism is not used when the configuration file name is explicitly stated in the command line. The daemon periodically checks the configuration file and all of its descendants and reloads (discards) their contents if some of the files have been either updated, (re-)moved, or added.
 
-The “**`filename`**” can be followed by a pipe character ( \\| ) and some text (up to the end of the line or the comment introduced by the hash character). That text is then prepended to every line (but the `%include` directives) read from the included file.
+The “**`filename`**” can be followed by a pipe character ( \| ) and some text (up to the end of the line or the comment introduced by the hash character). That text is then prepended to every line (but the `%include` directives) read from the included file.
 
 A configuration line of the form
 
@@ -1068,7 +1061,7 @@ goes into the host environment. The host environment can be accessed by clients 
 
 A configuration line of the form
 
-    service_name [check_specifier] server_descriptor [\| launcher_info ]
+    service_name [check_specifier] server_descriptor [| launcher_info ]
 
 defines a server. The detailed description of the individual fields is given below.
 
@@ -1090,7 +1083,7 @@ defines a server. The detailed description of the individual fields is given bel
 
 -   **`server_descriptor`** specifies the address of the server and supplies additional information. An example of the **`server_descriptor`**:<br/>`STANDALONE somehost:1234 R=3000 L=yes S=yes B=-20`<br/>See [Server Descriptor Specification](#ch-app.Server-Descriptor-Specification) for more details.
 
--   **`launcher_info`** is basically a command line preceded by a pipe symbol ( \\| ) which plays a role of a delimiter from the **`server_descriptor`**. It is only required for the **NCBID** type of service which are configured on the local host.
+-   **`launcher_info`** is basically a command line preceded by a pipe symbol ( \| ) which plays a role of a delimiter from the **`server_descriptor`**. It is only required for the **NCBID** type of service which are configured on the local host.
 
 <a name="ch-app.Check-Script-Specification"></a>
 
@@ -1104,11 +1097,11 @@ sets the period in seconds between script checks as "`5`" (the default period is
 
 The following command-line parameters are always passed to the script upon execution:
 
--   **`argv[0]`** = name of the executable with preceding '\\|' character if **`stdin`** / **`stdout`** are open to the server connection (/dev/null otherwise), ***NB***: '\\|' is not always readily accessible from within shell scripts, so it's duplicated in **`argv[2]`** for convenience;
+-   **`argv[0]`** = name of the executable with preceding '\|' character if **`stdin`** / **`stdout`** are open to the server connection (/dev/null otherwise), ***NB***: '\|' is not always readily accessible from within shell scripts, so it's duplicated in **`argv[2]`** for convenience;
 
 -   **`argv[1]`** = name of the service being checked;
 
--   **`argv[2]`** = if piped, "\\|host:port" of the connection point being checked, otherwise "host:port" of the server as per configuration;
+-   **`argv[2]`** = if piped, "\|host:port" of the connection point being checked, otherwise "host:port" of the server as per configuration;
 
 The following additional command-line parameters will be passed to the script if it has been run before:
 
@@ -1198,17 +1191,17 @@ where:
 
 -   locality markers (Note: If necessary, both L and P markers can be combined in a particular service definition):
 
-    -   L={yes\\|no} sets (if yes) the server to be local only. The default is no. The [service mapping API](ch_conn.html#ch_conn.service_mapping_api) returns local only servers in the case of mapping with the use of LBSMD running on the same - local - host (direct mapping), or if the dispatching (indirect mapping) occurs within the NCBI Intranet. Otherwise, if the service mapping occurs using a non-local network (certainly indirectly, by exchange with dispd.cgi) then servers that are local only are not seen.
+    -   L={yes\|no} sets (if yes) the server to be local only. The default is no. The [service mapping API](ch_conn.html#ch_conn.service_mapping_api) returns local only servers in the case of mapping with the use of LBSMD running on the same - local - host (direct mapping), or if the dispatching (indirect mapping) occurs within the NCBI Intranet. Otherwise, if the service mapping occurs using a non-local network (certainly indirectly, by exchange with dispd.cgi) then servers that are local only are not seen.
 
-    -   P={yes\\|no} sets (if yes) the server to be private. The default is no. Private servers are not seen by the outside NCBI users (exactly like local servers), but in addition these servers are not seen from the NCBI Intranet if requested from a host, which is different from one where the private server runs. This flag cannot be used for DNS servers.
+    -   P={yes\|no} sets (if yes) the server to be private. The default is no. Private servers are not seen by the outside NCBI users (exactly like local servers), but in addition these servers are not seen from the NCBI Intranet if requested from a host, which is different from one where the private server runs. This flag cannot be used for DNS servers.
 
 -   Stateful server:
 
-    -   S={yes\\|no}. The default is no.<br/>Indication of stateful server, which allows only dedicated socket (stateful) connections. This tag is not allowed for HTTP\* and DNS servers.
+    -   S={yes\|no}. The default is no.<br/>Indication of stateful server, which allows only dedicated socket (stateful) connections. This tag is not allowed for HTTP\* and DNS servers.
 
 -   Secure server:
 
-    -   $={yes\\|no}. The default is no.<br/>Indication of the server to be used with secure connections only. For STANDALONE servers it means to use SSL, and for the HTTP\* ones – to use the HTTPS protocol.
+    -   $={yes\|no}. The default is no.<br/>Indication of the server to be used with secure connections only. For STANDALONE servers it means to use SSL, and for the HTTP\* ones – to use the HTTPS protocol.
 
 -   Content type indication:
 
@@ -1235,7 +1228,7 @@ Server descriptors of type ***NAMEHOLD*** are special. As **`arguments`**, they 
 
 LBSMD is minimally aware of NCBI network layout and can generally guess its “site” information from either an IP address or special location-role files located in the /etc/ncbi directory: a BE-MD production and development site, a BE-MD.QA site, a BE-MD.TRY site, and lastly an ST-VA site. When reading zone information from the “@” directive of the configuration, LBSMD can treat special non-numeric values as the following: “@try” as the production zone within BE-MD.TRY, “@qa” as the production zone within BE-MD.QA, “@dev” as a development zone within the current site, and “@\*prod\*” (e.g. @intprod) as a production zone within the current site – where the production zone has a value of “1” and the development – “2”: so “@2” and “@dev” as well as “@1” and “@\*prod\*” are each equivalent. That makes the definition of zones more convenient by the %include directive with the pipe character:
 
-    %include /etc/ncbi/role \|@    # define zone via the role file 
+    %include /etc/ncbi/role |@    # define zone via the role file 
 
 Suppose that the daemon detected its site as ST-VA and assigned it a value of 0x300; then the above directive assigns the current zone the value of 0x100 if the file reads “prod” or “1”, and zone 0x200 if the file reads “dev” or “2”. Note that if the file reads either “try” or “qa”, or “4”, the implied “@” directive will flag an error because of the mismatch between the resultant zone and the current site values.
 
@@ -1274,7 +1267,7 @@ The files `servrc.cfg` and `servrc.cfg.systems` have fixed structure and should 
 
 The file names in that repository match the following pattern:
 
-`hostname.{be-md\|st-va}[.qa]`
+`hostname.{be-md|st-va}[.qa]`
 
 where `be-md` is used for Bethesda, MD site and `st-va` is used for Sterling, VA site. The optional `.qa` suffix is used for quality assurance department hosts.
 
@@ -1361,7 +1354,7 @@ For example, to print a list of hosts which names match the pattern “sutil\*�
     testsutils_lb      25     DNS    sutils2:2441              1000.00        155.95
     testsutils_lb      27     DNS    sutils3:2441              1000.00        129.03
     --------------------------------------------------------------------------------
-    * Hosts:4\747, Srvrs:44/1223/23  \|   Heap:249856, used:237291/249616, free:240 *
+    * Hosts:4\747, Srvrs:44/1223/23  |   Heap:249856, used:237291/249616, free:240 *
     LBSMD PID: 17530, config: /etc/lbsmd/servrc.cfg
 
 <a name="ch-app.NCBI-Intranet-Web-Ut"></a>
@@ -1483,7 +1476,7 @@ Here is an example of a LBSMD configuration file:
         C=application/x-www-form-urlencoded L=no
     bounce[60]HTTP /Service/bounce.cgi L=no C=x-ncbi-data/x-unknown
     # Services of old dispatcher
-    bounce[60]NCBID '' L=yes C=x-ncbi-data/x-unknown \| \
+    bounce[60]NCBID '' L=yes C=x-ncbi-data/x-unknown | \
     ..../web/public/htdocs/Service/bounce
 
 NCBI intranet users can also visit the following link to get a sample configuration file:
@@ -1831,7 +1824,7 @@ The following additional HTTP tags are recognized in the client request to the D
 <td align="left">The tag is used by the DISPD dispatcher internally to identify the <code>&lt;host&gt;</code>, where the request comes from, in case if relaying is involved. Although the DISPD dispatcher effectively disregards this tag if the request originates from outside NCBI (and thus it cannot be easily fooled by address spoofing), in-house applications <strong>should not</strong> use this tag when connecting to the DISPD dispatcher because the tag <strong>is trusted and considered</strong> within the NCBI Intranet.</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>Server-Count: {N\|ALL}</code></td>
+<td align="left"><code>Server-Count: {N|ALL}</code></td>
 <td align="left">The tag defines how many server infos to include per response (default <code>N</code>=3, <code>ALL</code> causes everything to be returned at once).<br/><code>N</code> is an integer and <code>ALL</code> is a keyword.</td>
 </tr>
 </tbody>
@@ -1872,27 +1865,21 @@ These are scenarios of data flow between the client and the server, depending on
 
 A. Stateless client
 
-1  
-Client is **not using firewall** mode
+1.  Client is **not using firewall** mode
 
-I  
-The client has to connect to the server by its own, using dispatching information obtained earlier; or
+    -   The client has to connect to the server by its own, using dispatching information obtained earlier; or
 
-II  
-The client connects to the DISPD dispatcher with a connection request (e.g., the case of Web browsers) and the DISPD dispatcher facilitates data relaying for the client to the server.
+    -   The client connects to the DISPD dispatcher with a connection request (e.g., the case of Web browsers) and the DISPD dispatcher facilitates data relaying for the client to the server.
 
-2  
-If the client chooses to use the firewall mode then the only way to communicate with the server is to connect to the DISPD dispatcher (making a connection request) and use the DISPD dispatcher as a relay.
+2.  If the client chooses to use the firewall mode then the only way to communicate with the server is to connect to the DISPD dispatcher (making a connection request) and use the DISPD dispatcher as a relay.
 
 ***Note:*** Even if the server is stand-alone (but lacking S=yes in the configuration file of the LBSMD daemon) then the DISPD dispatcher initiates a microsession to the server and wraps its output into an HTTP/1.0-compliant reply. Data from both HTTP and NCBID servers are simply relayed one-to-one.
 
 B. Stateful-capable client
 
-1  
-A client which is **not using the firewall** mode has to connect directly to the server, using the dispatcher information obtained earlier (e.g., with the use of ***INFORMATION\_ONLY*** in `Dispatch-Mode` tag) if local; for external clients the connection point is provided by the `Connection-Info` tag (port range 4444-4544).
+1.  A client which is **not using the firewall** mode has to connect directly to the server, using the dispatcher information obtained earlier (e.g., with the use of ***INFORMATION\_ONLY*** in `Dispatch-Mode` tag) if local; for external clients the connection point is provided by the `Connection-Info` tag (port range 4444-4544).
 
-2  
-If the firewall mode is selected, then the client has to expect `Connection-Info` to come back from the DISPD dispatcher pointing out where to connect to the server. If ***TRY\_STATELESS*** comes out as a value of the former tag, then the client has to switch into a stateless mode (e.g., by setting ***STATELESS\_ONLY*** in the `Client-Mode` tag) for the request to succeed.
+2.  If the firewall mode is selected, then the client has to expect `Connection-Info` to come back from the DISPD dispatcher pointing out where to connect to the server. If ***TRY\_STATELESS*** comes out as a value of the former tag, then the client has to switch into a stateless mode (e.g., by setting ***STATELESS\_ONLY*** in the `Client-Mode` tag) for the request to succeed.
 
 ***Note:*** ***TRY\_STATELESS*** could be induced by many reasons, mainly because all servers for the service are stateless ones or because the FWDaemon is not available on the host, where the client's request was received.
 
@@ -1914,7 +1901,7 @@ The DISPD dispatcher always preserves original HTTP tags `User-Agent` and `Clien
 
 The LBSMD daemon supports services of type NCBID which are really Unix filter programs that read data from the stdin stream and write the output into the stdout stream without having a common protocol. Thus, HTTP/1.0 was chosen as a framed protocol for wrapping both requests and replies, and the NCBID utility CGI program was created to pass a request from the HTTP body to the server and to put the reply from the server into the HTTP body and send it back to the client. The NCBID utility also provides a dedicated connection between the server and the client, if the client supports the stateful way of communication. Former releases of the NCBID utility were implemented as a separate CGI program however the latest releases integrated the NCBID utility and the DISPD dispatcher into a single component (`ncbid.cgi` is a hard link to `dispd.cgi`).
 
-The NCBID utility determines the requested service from the query string in the same way as the DISPD dispatcher does, i.e., by looking into the value of the CGI parameter service. An executable file which has to be run is then obtained by searching the configuration file (shared with the LBSMD daemon; the default name is `servrc.cfg`): the path to the executable along with optional command-line parameters is specified after the bar character ("\\|") in the line containing a service definition.
+The NCBID utility determines the requested service from the query string in the same way as the DISPD dispatcher does, i.e., by looking into the value of the CGI parameter service. An executable file which has to be run is then obtained by searching the configuration file (shared with the LBSMD daemon; the default name is `servrc.cfg`): the path to the executable along with optional command-line parameters is specified after the bar character ("\|") in the line containing a service definition.
 
 The NCBID utility can work in either of two connection modes, stateless and stateful, as determined by reading the following HTTP header tag:
 
@@ -2225,20 +2212,15 @@ The diagram below illustrates how **NetCache** works.
 
 [![Image NetCache\_diagramm.gif](/book/static/img/NetCache_diagramm.gif)](/book/static/img/NetCache_diagramm.gif "Click to see the full-resolution image")
 
-1  
-Client requests a named service from the Load Balancer.
+1.  Client requests a named service from the Load Balancer.
 
-2  
-Load Balancer chooses the least loaded server (on this diagram Server 2) corresponding to the requested service.
+2.  Load Balancer chooses the least loaded server (on this diagram Server 2) corresponding to the requested service.
 
-3  
-Load Balancer returns the chosen server to the client.
+3.  Load Balancer returns the chosen server to the client.
 
-4  
-Client connects to the selected **NetCache** server and sends the data to store.
+4.  Client connects to the selected **NetCache** server and sends the data to store.
 
-5  
-**NetCache** generates and returns a unique key which can then be used to access the data.
+5.  **NetCache** generates and returns a unique key which can then be used to access the data.
 
 <a name="ch-app.getting-started"></a>
 

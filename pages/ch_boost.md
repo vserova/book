@@ -4,8 +4,7 @@ title: C++ Toolkit test
 nav: pages/ch_boost
 ---
 
-
-20\. Using the Boost Unit Test Framework
+20. Using the Boost Unit Test Framework
 =======================================
 
 Last Update: November 13, 2014.
@@ -386,13 +385,13 @@ The Boost Unit Test Framework was extended by NCBI to provide several ways to di
 
 ##### Disabling Tests with Configuration File Entries
 
-The **`[UNITTESTS_DISABLE]`** section of the application configuration file can be customized to disable test cases or suites. Entries in this section should specify a test case or suite name and a logical expression for disabling it (expressions that evaluate to **`true`** disable the test). The logical expression can be formed from the logical constants **`true`** and **`false`**, numeric constants, [library-defined](#ch-boost.LibraryDefined-Variables) or [user-defined](#ch-boost.-Disabling-Tests-with-1) unit test variables, logical operators ('`!`', '`&&`', and '`\|\|`'), and parentheses.
+The **`[UNITTESTS_DISABLE]`** section of the application configuration file can be customized to disable test cases or suites. Entries in this section should specify a test case or suite name and a logical expression for disabling it (expressions that evaluate to **`true`** disable the test). The logical expression can be formed from the logical constants **`true`** and **`false`**, numeric constants, [library-defined](#ch-boost.LibraryDefined-Variables) or [user-defined](#ch-boost.-Disabling-Tests-with-1) unit test variables, logical operators ('`!`', '`&&`', and '`||`'), and parentheses.
 
 To disable specific tests, use commands like:
 
     [UNITTESTS_DISABLE]
     SomeTestCaseName = OS_Windows && PLATFORM_BigEndian
-    SomeTestSuiteName = (OS_Linux \|\| OS_Solaris) && COMPILER_GCC
+    SomeTestSuiteName = (OS_Linux || OS_Solaris) && COMPILER_GCC
 
 There is a special entry `GLOBAL` that can be used to disable all tests. For example, to disable all tests under Cygwin, use:
 

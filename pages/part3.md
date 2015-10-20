@@ -4,7 +4,6 @@ title: C++ Toolkit test
 nav: pages/part3
 ---
 
-
 Part 3. C++ Toolkit Library Reference
 =====================================
 

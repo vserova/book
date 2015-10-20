@@ -4,8 +4,7 @@ title: C++ Toolkit test
 nav: pages/ch_core_test
 ---
 
-
-8\. Portability, Core Functionality and Application Framework
+8. Portability, Core Functionality and Application Framework
 ============================================================
 
 Last Update: December 2, 2014.
@@ -21,7 +20,7 @@ The overview for this chapter consists of the following topics:
 
 ### Introduction
 
--   **CORELIB library** `xncbi`:[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib)
+-   **CORELIB library** `xncbi`:[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib)
 
 The CORELIB provides a portable low-level API and many useful application framework classes for argument processing, diagnostics, environment interface, object and reference classes, portability definitions, portable exceptions, stream wrappers, string manipulation, threads, etc.
 
@@ -29,7 +28,7 @@ This chapter provides reference material for many of CORELIB's facilities. For a
 
 ***Note***: The CORELIB must be linked to every executable that uses the NCBI C++ Toolkit!
 
--   **UTIL library** `xutil`:[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/util) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/util)
+-   **UTIL library** `xutil`:[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/util) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/util)
 
 The UTIL module is a collection of useful classes which can be used in more then one application. This chapter provides reference material for many of UTIL's facilities. For an overview of the UTIL module please refer to the [UTIL section in the introductory chapter](ch_intro.html#ch_intro.intro_util) on the C++ Toolkit.
 
@@ -524,7 +523,7 @@ Complete details for the ***CNcbiRegistry*** can be found in the section on [The
 
 #### CNcbiDiag
 
-The [CNcbiDiag](ch_core.html#ch_core.diag) class implements much of the functionality of the NCBI C++ Toolkit error-processing mechanisms; however, it is not intended to be used directly. Instead, use the [`{ERR\|LOG}_POST*`](ch_core.html#ch_core.ERR_POST) and [`_TRACE`](ch_core.html#ch_core._TRACE) macros. See the sections on [Diagnostic Streams](ch_core.html#ch_core.diag) and [Message Posting](ch_debug.html#ch_debug.std_cpp_message_post) for related information.
+The [CNcbiDiag](ch_core.html#ch_core.diag) class implements much of the functionality of the NCBI C++ Toolkit error-processing mechanisms; however, it is not intended to be used directly. Instead, use the [`{ERR|LOG}_POST*`](ch_core.html#ch_core.ERR_POST) and [`_TRACE`](ch_core.html#ch_core._TRACE) macros. See the sections on [Diagnostic Streams](ch_core.html#ch_core.diag) and [Message Posting](ch_debug.html#ch_debug.std_cpp_message_post) for related information.
 
 <a name="ch-core.creating-simple-app"></a>
 
@@ -548,14 +547,11 @@ Using the [new\_project](ch_proj.html#ch_proj.outside_tree) shell script, create
 
 This will create:
 
-1  
-the project folder -- `example`
+1.  the project folder -- `example`
 
-2  
-the source file -- `example.cpp`
+2.  the source file -- `example.cpp`
 
-3  
-the makefiles -- `Makefile`, `                                                 Makefile.builddir`, `Makefile.in`, `Makefile.example.app`, `                                                 Makefile.example_app`, `Makefile.out`
+3.  the makefiles -- `Makefile`, `                                                 Makefile.builddir`, `Makefile.in`, `Makefile.example.app`, `                                                 Makefile.example_app`, `Makefile.out`
 
 Then build the project and run the application:
 
@@ -571,42 +567,31 @@ Using the [new\_project](ch_proj.html#ch_proj.outside_tree) shell script, create
 
 This will create:
 
-1  
-the project folder -- `example`
+1.  the project folder -- `example`
 
-2  
-the source file -- `example\src\example\basic_sample.cpp` (the source file name is always `basic_sample.cpp`, regardless of the project name)
+2.  the source file -- `example\src\example\basic_sample.cpp` (the source file name is always `basic_sample.cpp`, regardless of the project name)
 
-3  
-the MSVC project file -- `example\compilers\msvc1000_prj\static\build\example\example.exe.vcproj`
+3.  the MSVC project file -- `example\compilers\msvc1000_prj\static\build\example\example.exe.vcproj`
 
-4  
-the MSVC solution file -- `example\compilers\msvc1000_prj\static\build\example.sln`
+4.  the MSVC solution file -- `example\compilers\msvc1000_prj\static\build\example.sln`
 
-5  
-a project makefile -- `example\src\example\Makefile.example.app`
+5.  a project makefile -- `example\src\example\Makefile.example.app`
 
-6  
-other folders and files needed for building under Windows
+6.  other folders and files needed for building under Windows
 
 ***Note:*** If you prefer to have your source file name match your project name, you can achieve that by making the following edits before opening Visual Studio (for basic application projects, that is - other project types might require more edits):
 
-1  
-Rename the source file from `example\src\example\basic_sample.cpp` to `example.cpp`.
+1.  Rename the source file from `example\src\example\basic_sample.cpp` to `example.cpp`.
 
-2  
-Edit the MSVC project file `example\compilers\msvc1000_prj\static\build\example\example.exe.vcproj` and replace "basic\_sample" with "example".
+2.  Edit the MSVC project file `example\compilers\msvc1000_prj\static\build\example\example.exe.vcproj` and replace "basic\_sample" with "example".
 
-3  
-Edit the project makefile `example\src\example\Makefile.example.app` and replace "basic\_sample" with "example".
+3.  Edit the project makefile `example\src\example\Makefile.example.app` and replace "basic\_sample" with "example".
 
 Then open the solution file `example\compilers\msvc1000_prj\static\build\example.sln` with MSVS and:
 
-1  
-Build the **`-CONFIGURE-`** project (reloading the project when prompted).
+1.  Build the **`-CONFIGURE-`** project (reloading the project when prompted).
 
-2  
-Build the project and run the application.
+2.  Build the project and run the application.
 
 <a name="ch-core.discuss-sample-app"></a>
 
@@ -614,7 +599,7 @@ Build the project and run the application.
 
 In the [sample application](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/basic/basic_sample.cpp) above:
 
-1\. There is an application class derived from ***CNcbiApplication***, which overrides the purely virtual function ***Run()*** as well as the initialization (***Init()***) and cleanup (***Exit()***) functions:
+1. There is an application class derived from ***CNcbiApplication***, which overrides the purely virtual function ***Run()*** as well as the initialization (***Init()***) and cleanup (***Exit()***) functions:
 
     class CSampleBasicApplication : public CNcbiApplication
 
@@ -630,7 +615,7 @@ In the [sample application](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/
 
                                             };
 
-2\. The program's main function creates an object of the application class and calls its ***AppMain()*** function:
+2. The program's main function creates an object of the application class and calls its ***AppMain()*** function:
 
     int main(int argc, const char* argv[])
 
@@ -642,7 +627,7 @@ In the [sample application](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/
 
                                             }
 
-3\. The application's initialization function creates an [argument descriptions object](ch_core.html#ch_core.cmd_line_args), which describes the expected command-line arguments and the usage context:
+3. The application's initialization function creates an [argument descriptions object](ch_core.html#ch_core.cmd_line_args), which describes the expected command-line arguments and the usage context:
 
     void CSampleBasicApplication::Init(void)
 
@@ -668,7 +653,7 @@ In the [sample application](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/
 
                                             }
 
-4\. The application's ***Run()*** function prints those arguments into the standard output stream or in a file.
+4. The application's ***Run()*** function prints those arguments into the standard output stream or in a file.
 
 More [realistic examples of applications](ch_demo.html) that use the NCBI C++ Toolkit are available.
 
@@ -1215,9 +1200,9 @@ The [CArgDescriptions](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/
 
 **Mandatory named positional arguments:**`<value>` (example: `12 Feb`) These are position-`dependent` arguments (of any type), which are read using a `value` only. They do, however, have names stored with their descriptions, which they are associated with in an order-dependent fashion. Specifically, the order in which untagged argument descriptions are added to the ***CArgDescriptions*** object using ***AddPositional()*** defines the order in which these arguments should appear in the command line. [AddPositional (key, comment, value\_type, flags)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html)
 
-**Optional named positional arguments:**`[value]` (example: `foo.txt bar`) Position-`dependent` arguments that are `optional`. They always go after the `mandatory` positional arguments. The order in which untagged argument descriptions are added to the ***CArgDescriptions*** object using ***Add[Optional\\|Default]Positional()*** defines the order in which these arguments should appear in the command line. [AddOptionalPositional (key, comment, value\_type, flags)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html)[AddDefaultPositional (key, comment, value\_type, default\_value, flags)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html)
+**Optional named positional arguments:**`[value]` (example: `foo.txt bar`) Position-`dependent` arguments that are `optional`. They always go after the `mandatory` positional arguments. The order in which untagged argument descriptions are added to the ***CArgDescriptions*** object using ***Add[Optional\|Default]Positional()*** defines the order in which these arguments should appear in the command line. [AddOptionalPositional (key, comment, value\_type, flags)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html)[AddDefaultPositional (key, comment, value\_type, default\_value, flags)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html)
 
-**Unnamed positional arguments** (all of the same type: `                                             <value1> \| [valueN]` (example: `foo.c bar.c                                                 xxx.c`). These are also position-`dependent` arguments that are read using a `value` only. They are expected to appear at the very end of the command line, after all named arguments. Unlike the previous argument type, however, these arguments do not have individual, named descriptions but share a single "unnamed" description. You can specify how many mandatory and how many optional arguments to expect using **`n_mandatory`** and **`n_optional`** parameters: [AddExtra (n\_mandatory, n\_optional, comment, type, flags)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html)
+**Unnamed positional arguments** (all of the same type: `                                             <value1> | [valueN]` (example: `foo.c bar.c                                                 xxx.c`). These are also position-`dependent` arguments that are read using a `value` only. They are expected to appear at the very end of the command line, after all named arguments. Unlike the previous argument type, however, these arguments do not have individual, named descriptions but share a single "unnamed" description. You can specify how many mandatory and how many optional arguments to expect using **`n_mandatory`** and **`n_optional`** parameters: [AddExtra (n\_mandatory, n\_optional, comment, type, flags)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html)
 
 **Aliases** can be created for any arguments. They allow using an alternative argument name in the command line. However, only the original argument name can be used to access its value in the C++ code.
 
@@ -1578,23 +1563,17 @@ Setting up a program to support command-based command lines is similar, but requ
 
 Programs that support command-based command lines must execute these steps:
 
-1  
-Create a command descriptions object (class ***CCommandArgDescriptions***) for the overall program description.
+1.  Create a command descriptions object (class ***CCommandArgDescriptions***) for the overall program description.
 
-2  
-Create argument descriptions objects (class ***CArgDescriptions***) for each command.
+2.  Create argument descriptions objects (class ***CArgDescriptions***) for each command.
 
-3  
-Add the actual argument descriptions to the argument descriptions objects using methods such as ***AddOpening()***, ***AddPositional()***, etc.
+3.  Add the actual argument descriptions to the argument descriptions objects using methods such as ***AddOpening()***, ***AddPositional()***, etc.
 
-4  
-Add each argument descriptions object to the overall command descriptions object.
+4.  Add each argument descriptions object to the overall command descriptions object.
 
-5  
-Determine which command was specified on the command line.
+5.  Determine which command was specified on the command line.
 
-6  
-Process the appropriate arguments for the given command.
+6.  Process the appropriate arguments for the given command.
 
 For a sample program that demonstrates argument processing for command-based command lines, see [multi\_command.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/basic/multi_command.cpp).
 
@@ -2123,29 +2102,21 @@ Finally, the environment variable `NCBI_CONFIG_OVERRIDES` can be used to name a 
 
 With the exceptions noted above, the following rules determine the search order for application and system initialization files. Although application and system initialization files are not typically found in the same place, the same search order rules apply to both (with the above exceptions).
 
-1  
-If the environment variable **`NCBI_CONFIG_PATH`** is set, that will be the only path searched for initialization files.
+1.  If the environment variable **`NCBI_CONFIG_PATH`** is set, that will be the only path searched for initialization files.
 
-2  
-Otherwise, the search order includes the following directories in order:
+2.  Otherwise, the search order includes the following directories in order:
 
-a  
-If the environment variable **`NCBI_DONT_USE_LOCAL_CONFIG`** is *not* defined then:
+    -   If the environment variable **`NCBI_DONT_USE_LOCAL_CONFIG`** is *not* defined then:
 
-i  
-The current working directory ("`.`").
+        -   The current working directory ("`.`").
 
-ii  
-The user's home directory (if it can be established).
+        -   The user's home directory (if it can be established).
 
-b  
-The path in the environment variable **`NCBI`** (if it is defined).
+    -   The path in the environment variable **`NCBI`** (if it is defined).
 
-c  
-The standard system directory ("`/etc`" on Unix-like systems, and given by the environment variable **`SYSTEMROOT`** on Windows).
+    -   The standard system directory ("`/etc`" on Unix-like systems, and given by the environment variable **`SYSTEMROOT`** on Windows).
 
-d  
-The directory containing the application, if known (this requires use of ***CNcbiApplication***).
+    -   The directory containing the application, if known (this requires use of ***CNcbiApplication***).
 
 ***Note:*** The search ends with the first file found.
 
@@ -2155,35 +2126,25 @@ For the application registry: When the initialization file name is not explicitl
 
 On Unix-like systems, if an application `dir1/app1` is a symlink to `dir2/app2`, the directory/name search order will be:
 
-1  
-`./app1.ini`
+1.  `./app1.ini`
 
-2  
-`$NCBI/app1.ini`
+2.  `$NCBI/app1.ini`
 
-3  
-`~/app1.ini`
+3.  `~/app1.ini`
 
-4  
-`dir1/app1.ini`
+4.  `dir1/app1.ini`
 
-5  
-`dir2/app1.ini`
+5.  `dir2/app1.ini`
 
-6  
-`./app2.ini`
+6.  `./app2.ini`
 
-7  
-`$NCBI/app2.ini`
+7.  `$NCBI/app2.ini`
 
-8  
-`~/app2.ini`
+8.  `~/app2.ini`
 
-9  
-`dir1/app2.ini`
+9.  `dir1/app2.ini`
 
-10  
-`dir2/app2.ini`
+10. `dir2/app2.ini`
 
 For the system registry: The name `.ncbirc` is tried on Unix-like systems and `ncbi.ini` is tried on Windows. ***Note:*** NCBI in-house Linux systems have "`/etc/.ncbirc`" symlinked to "`/opt/ncbi/config/.ncbirc`" so that applications running on production systems (or with **`NCBI`** unset) still pick up standard configuration settings.
 
@@ -2225,11 +2186,11 @@ Each ***CNcbiRegistry*** entry has a set of flags that control how it is handled
 
                                         fEntryCase = 0x2000,///< Create with case-sensitive entry names
 
-                                        fCoreLayers = fTransient \| fPersistent \| fJustCore,
+                                        fCoreLayers = fTransient | fPersistent | fJustCore,
 
-                                        fAllLayers = fTransient \| fPersistent \| fNotJustCore,
+                                        fAllLayers = fTransient | fPersistent | fNotJustCore,
 
-                                        fCaseFlags = fSectionCase \| fEntryCase
+                                        fCaseFlags = fSectionCase | fEntryCase
 
                                         };
 
@@ -2253,7 +2214,7 @@ For example, the following code demonstrates that the bit-wise OR of **`        
 
     CNcbiRegistry reg;
 
-                                        CNcbiRegistry::TFlags flags = CNcbiRegistry::fNoOverride \|
+                                        CNcbiRegistry::TFlags flags = CNcbiRegistry::fNoOverride |
 
                                         CNcbiRegistry::fTruncate;
 
@@ -2282,7 +2243,7 @@ Once the registry has been initialized by its constructor, it is also possible t
     void Read(CNcbiIstream& is, TFlags flags
                                         = 0);
 
-Valid flags for the ***Read()*** method include **`eTransient `**and **`eNoOverride`**. The default is for all values to be read in as `persistent`, with the capability of overriding any previously loaded value associated with the same name. Either or both of these defaults can be modified by specifying **`                                         eTransient, eNoOverride`**, or (**`eTransient \| eNoOverride`**) as the **`flags`** argument in the above expression.
+Valid flags for the ***Read()*** method include **`eTransient `**and **`eNoOverride`**. The default is for all values to be read in as `persistent`, with the capability of overriding any previously loaded value associated with the same name. Either or both of these defaults can be modified by specifying **`                                         eTransient, eNoOverride`**, or (**`eTransient | eNoOverride`**) as the **`flags`** argument in the above expression.
 
 The ***Write()*** method takes as its sole argument, a destination stream to which only the `persistent` configuration parameters will be written.
 
@@ -2398,68 +2359,47 @@ The following topics are discussed in this section:
 
 The following decision tree describes how the destination for diagnostics messages is determined.
 
-1  
-Before the application is constructed (before ***AppMain()*** is called), everything goes to:
+1.  Before the application is constructed (before ***AppMain()*** is called), everything goes to:
 
-1  
-(Unix-like systems only) `/log/fallback/UNKNOWN.{log\|err\|trace}` -- if available
+    1.  (Unix-like systems only) `/log/fallback/UNKNOWN.{log|err|trace}` -- if available
 
-2  
-**`STDERR`** -- otherwise
+    2.  **`STDERR`** -- otherwise
 
-2  
-When the application is ready, and its name is known, but before the configuration file is loaded:
+2.  When the application is ready, and its name is known, but before the configuration file is loaded:
 
-1  
-If ***AppMain()*** is passed flags **`                                                     eDS_Default`** or **`eDS_ToStdlog`**, then the diagnostics goes:
+    1.  If ***AppMain()*** is passed flags **`                                                     eDS_Default`** or **`eDS_ToStdlog`**, then the diagnostics goes:
 
-1  
-(Unix-like systems only) if `/log` is present:
+        1.  (Unix-like systems only) if `/log` is present:
 
-1  
-if the application is described in `/etc/toolkitrc` -- to `/log/<token>/appname.{log\|err\|trace}`
+            1.  if the application is described in `/etc/toolkitrc` -- to `/log/<token>/appname.{log|err|trace}`
 
-2  
-else if environment variable **`$SERVER_PORT`** is set -- to `/log/$SERVER_PORT/appname.{log\|err\|trace}`
+            2.  else if environment variable **`$SERVER_PORT`** is set -- to `/log/$SERVER_PORT/appname.{log|err|trace}`
 
-3  
-else (or if failed to switch to one of the above two locations) -- to `                                                                     /log/srv/appname.{log\|err\|trace}`
+            3.  else (or if failed to switch to one of the above two locations) -- to `                                                                     /log/srv/appname.{log|err|trace}`
 
-4  
-or, if failed to switch to that -- to `/log/fallback/appname.{                                                                     log\|err\|trace}`
+            4.  or, if failed to switch to that -- to `/log/fallback/appname.{                                                                     log|err|trace}`
 
-2  
-else (or if failed to switch to any of the /log location):
+        2.  else (or if failed to switch to any of the /log location):
 
-1  
-**`eDS_ToStdlog`** -- to `                                                                     <current_working_dir>/appname.{ log\|err\|trace}` (and, if cannot, then continues to go to **`STDERR`**)
+            1.  **`eDS_ToStdlog`** -- to `                                                                     <current_working_dir>/appname.{ log|err|trace}` (and, if cannot, then continues to go to **`STDERR`**)
 
-2  
-**`eDS_Default`** -- continues to go to **`                                                                     STDERR`**
+            2.  **`eDS_Default`** -- continues to go to **`                                                                     STDERR`**
 
-2  
-If ***AppMain()*** is passed flags other than **`eDS_Default`** or **`eDS_ToStdlog`**, then the diagnostics goes to:
+    2.  If ***AppMain()*** is passed flags other than **`eDS_Default`** or **`eDS_ToStdlog`**, then the diagnostics goes to:
 
-1  
-**`eDS_ToStdout`** -- standard output stream
+        1.  **`eDS_ToStdout`** -- standard output stream
 
-2  
-**`eDS_ToStderr`** -- standard error stream
+        2.  **`eDS_ToStderr`** -- standard error stream
 
-3  
-**`eDS_ToMemory`** -- the application memory
+        3.  **`eDS_ToMemory`** -- the application memory
 
-4  
-**`eDS_Disable`** -- nowhere
+        4.  **`eDS_Disable`** -- nowhere
 
-5  
-**`eDS_User`** -- wherever it went before the ***AppMain()*** call
+        5.  **`eDS_User`** -- wherever it went before the ***AppMain()*** call
 
-6  
-**`eDS_ToSyslog`** -- system log daemon
+        6.  **`eDS_ToSyslog`** -- system log daemon
 
-3  
-After the configuration file is loaded, and if it has an alternative location for the log files, then switch to logging to that location. See the list of logfile-related [Registry](ch_libconfig.html#ch_libconfig.libconfig_logfile).
+3.  After the configuration file is loaded, and if it has an alternative location for the log files, then switch to logging to that location. See the list of logfile-related [Registry](ch_libconfig.html#ch_libconfig.libconfig_logfile).
 
 The boolean `TryRootLogFirst` argument in the `[LOG]` section of the application's config file changes the order of locations to be tested. If `                                         TryRootLogFirst` is set, the application will try to open the log file under `/log` first. Only if this fails, then the location specified in the config file will be used.
 
@@ -2895,7 +2835,7 @@ For example:
 The `<event> <message>` portion of the log output will have the format:
 
     <severity>: <module>(<err_code>.<err_subcode>
-                                                \| <err_text>) "<file>", line <line>: <class>::<func>
+                                                | <err_text>) "<file>", line <line>: <class>::<func>
                                                 --- <prefixes> <user_message> <err_code_message> <err_code_explanation>
 
 Thus, the `<event>` field is really just the diagnostic message severity, and the `<message>` field is composed of a number of sub-fields.
@@ -3065,13 +3005,13 @@ where the presence of each field in the output is controlled by the post flags [
 
                                             /// when calling CNcbiDiag().
 
-                                            eDPF_ImportantFlagsMask = eDPF_PreMergeLines \|
+                                            eDPF_ImportantFlagsMask = eDPF_PreMergeLines |
 
-                                            eDPF_MergeLines \|
+                                            eDPF_MergeLines |
 
-                                            eDPF_OmitInfoSev \|
+                                            eDPF_OmitInfoSev |
 
-                                            eDPF_OmitSeparator \|
+                                            eDPF_OmitSeparator |
 
                                             eDPF_AtomicWrite,
 
@@ -3324,13 +3264,13 @@ where [SDiagMessage](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i
 
 A family of **`ERR_POST*`** macros and a corresponding family of **`LOG_POST*`** macros are available for routine error posting. Each family has a set of macros:
 
--   **`{ERR\|LOG}_POST(msg)`** – for posting a simple message. ***Note:*** these macros are deprecated. Use **`{ERR\|LOG}_POST_X`** instead (except for tests) for more flexible error statistics and logging.
+-   **`{ERR|LOG}_POST(msg)`** – for posting a simple message. ***Note:*** these macros are deprecated. Use **`{ERR|LOG}_POST_X`** instead (except for tests) for more flexible error statistics and logging.
 
--   **`{ERR\|LOG}_POST_X(subcode, msg)`** – for posting a default error code, a given subcode, and a message. Each call to **`                                                 {ERR\|LOG}_POST_X`** must use a different subcode for proper error statistics and logging. The default error code is selected by **`NCBI_USE_ERRCODE_X`**. The error code is selected from those defined by **`NCBI_DEFINE_ERRCODE_X`** in the appropriate header file, e.g. `include/corelib/error_codes.h`.
+-   **`{ERR|LOG}_POST_X(subcode, msg)`** – for posting a default error code, a given subcode, and a message. Each call to **`                                                 {ERR|LOG}_POST_X`** must use a different subcode for proper error statistics and logging. The default error code is selected by **`NCBI_USE_ERRCODE_X`**. The error code is selected from those defined by **`NCBI_DEFINE_ERRCODE_X`** in the appropriate header file, e.g. `include/corelib/error_codes.h`.
 
--   **`{ERR\|LOG}_POST_EX(code, subcode, msg)`** – for posting a given error code, a given error subcode, and a message. This macro should only be used if you have to use a variable for the subcode, or to specify an error code other than the current default. In all other cases (except for tests), use **`{ERR\|LOG}_POST_X`** for more flexible error statistics and logging.
+-   **`{ERR|LOG}_POST_EX(code, subcode, msg)`** – for posting a given error code, a given error subcode, and a message. This macro should only be used if you have to use a variable for the subcode, or to specify an error code other than the current default. In all other cases (except for tests), use **`{ERR|LOG}_POST_X`** for more flexible error statistics and logging.
 
--   **`{ERR\|LOG}_POST_XX(code, subcode, msg)`** – these macros must be used in place of **`{ERR\|LOG}_POST_X`** within header files so that the same error code will be used for header-defined code, regardless of the error codes that including files may use.
+-   **`{ERR|LOG}_POST_XX(code, subcode, msg)`** – these macros must be used in place of **`{ERR|LOG}_POST_X`** within header files so that the same error code will be used for header-defined code, regardless of the error codes that including files may use.
 
 The **`LOG_POST_*`** macros just write a string to the log file, and are useful if a human-readable log file is desired. The output from the **`ERR_POST_*`** macros is not easily read by humans, but facilitates automatic indexing for searching and/or error statistics. There are multiple flags to [control the appearance of the message](ch_core.html#ch_core.diag_post_flags) generated by the **`ERR_POST_*`** macros.
 
@@ -4068,8 +4008,8 @@ The parameter **`treat_as`** is defined as an enum type of ***EBasename*** and h
 
 The parameter **`flags`** is defined as an enum type of ***EFlags*** and has the values `                                         fLoadNow`, `fLoadLater`, `                                             fAutoUnload`, `fNoAutoUnload`, `fBaseName`, `                                         fExactName`, `fGlobal`, `                                             fLocal`, and `fDefault`. The flags `fLoadNow`, `                                         fLoadLater`, `fAutoUnload`, `                                             fNoAutoUnload`, `fBaseName`, and `fExactName` correspond to the similarly named enum values as described in the above paragraphs. The flag `                                         fGlobal` indicates that the DLL should be loaded as `                                             RTLD_GLOBAL`, while the flag `fLocal` indicates that the DLL should be loaded as `RTLD_LOCAL`. The flag `fDefault` is defined as:
 
-    fDefault = fLoadNow \| fNoAutoUnload \| fBaseName
-                                        \| fGlobal
+    fDefault = fLoadNow | fNoAutoUnload | fBaseName
+                                        | fGlobal
 
 <a name="ch-core.CDll-basename"></a>
 
@@ -4260,17 +4200,13 @@ The following topics are discussed in this section:
 
 ***CThread*** class is defined in `                                         include/corelib/ncbithr.hpp`. The ***CThread*** class provides all basic thread functionality: thread creation, launching, termination, and cleanup. To create user-defined thread one needs only to provide the thread's ***Main()*** function and, in some cases, create a new constructor to transfer data to the thread object, and override ***OnExit()*** method for thread-specific data cleanup. To create a custom thread:
 
-1  
-Derive your class from ***CThread***, override ***Main()*** and, if necessary, ***OnExit()*** methods.
+1.  Derive your class from ***CThread***, override ***Main()*** and, if necessary, ***OnExit()*** methods.
 
-2  
-Create thread object in your application. You can do this only with `                                             new` operator, since static or in-stack thread objects are prohibited (see below). The best way to reference thread objects is to use ***CRef\<CThread\>*** class.
+2.  Create thread object in your application. You can do this only with `                                             new` operator, since static or in-stack thread objects are prohibited (see below). The best way to reference thread objects is to use ***CRef\<CThread\>*** class.
 
-3  
-Call ***Run()*** to start the thread execution.
+3.  Call ***Run()*** to start the thread execution.
 
-4  
-Call ***Detach()*** to let the thread run independently (it will destroy itself on termination then), or use ***Join()*** to wait for the thread termination.
+4.  Call ***Detach()*** to let the thread run independently (it will destroy itself on termination then), or use ***Join()*** to wait for the thread termination.
 
 The code should look like:
 
@@ -4836,21 +4772,21 @@ The last method on the list, the ***Remove()*** method accepts an enumeration ty
 
                                         // initial defaults for dirs
 
-                                        fDefaultDirUser = fRead \| fExecute \| fWrite,
+                                        fDefaultDirUser = fRead | fExecute | fWrite,
 
                                         ///< Default user permission for dir.
 
-                                        fDefaultDirGroup = fRead \| fExecute,
+                                        fDefaultDirGroup = fRead | fExecute,
 
                                         ///< Default group permission for dir.
 
-                                        fDefaultDirOther = fRead \| fExecute,
+                                        fDefaultDirOther = fRead | fExecute,
 
                                         ///< Default other permission for dir.
 
                                         // initial defaults for non-dir entries (files, etc.)
 
-                                        fDefaultUser = fRead \| fWrite,
+                                        fDefaultUser = fRead | fWrite,
 
                                         ///< Default user permission for file
 

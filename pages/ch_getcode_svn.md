@@ -4,8 +4,7 @@ title: C++ Toolkit test
 nav: pages/ch_getcode_svn
 ---
 
-
-3\. Retrieve the Source Code (FTP and Subversion)
+3. Retrieve the Source Code (FTP and Subversion)
 ================================================
 
 Created: April 1, 2003; Last Update: October 1, 2014.
@@ -70,7 +69,7 @@ Public Access to the Source Code via FTP
 
 -   **Unpack the Source Archive**
 
-    -   *Unix and Macintosh Systems*<br/>The Unix distributions have been archived using the standard **tar** command and compressed using **gzip**. When unpacked, all files will be under the directory `ncbi_cxx--<version_number>`, which will be created in the current directory. (***Caution:*** If `ncbi_cxx--<version_number>` already exists, **tar** extraction will overwrite existing files.) To unpack the archive: `gunzip -c ncbi_cxx--*.tar.gz \| tar xvf -`
+    -   *Unix and Macintosh Systems*<br/>The Unix distributions have been archived using the standard **tar** command and compressed using **gzip**. When unpacked, all files will be under the directory `ncbi_cxx--<version_number>`, which will be created in the current directory. (***Caution:*** If `ncbi_cxx--<version_number>` already exists, **tar** extraction will overwrite existing files.) To unpack the archive: `gunzip -c ncbi_cxx--*.tar.gz | tar xvf -`
 
     -   *Windows Systems*<br/>The Microsoft Windows versions of the source distribution have been prepared as self-extracting executables. By default a sub-folder `ncbi_cxx--<version_number >` will be created in the current folder to contain the extracted source. If `ncbi_cxx--<version_number >` already exists in the folder where the executable is launched, user confirmation is required before files are overwritten. To actually perform the extraction, do one of the following:
 
@@ -432,14 +431,11 @@ The parameter to **update\_projects** indicates the target directory where the s
 
 ### Source Code Retrieval under MS Windows
 
-1  
-In NCBI, the SVN clients must be set up and ready to use. Ask Systems if you don’t have the client installed on your workstation. If you are working outside of NCBI, then you can download the latest version of Subversion from <http://subversion.tigris.org/servlets/ProjectDocumentList?folderID=91>. Run the Subversion installer and follow the instructions. The latest version may not come with an executable installer though. In this case, please unpack the ***zip*** archive with the latest Subversion binaries to a local directory, for example `C:\Program Files\svn-win32-1.4.2`. Change the **`PATH`** environment variable so that it points to the `bin` subdirectory under your Subversion installation directory, for example `set PATH=%PATH%;C:\Program Files\svn-win32-1.4.2\bin`
+1.  In NCBI, the SVN clients must be set up and ready to use. Ask Systems if you don’t have the client installed on your workstation. If you are working outside of NCBI, then you can download the latest version of Subversion from <http://subversion.tigris.org/servlets/ProjectDocumentList?folderID=91>. Run the Subversion installer and follow the instructions. The latest version may not come with an executable installer though. In this case, please unpack the ***zip*** archive with the latest Subversion binaries to a local directory, for example `C:\Program Files\svn-win32-1.4.2`. Change the **`PATH`** environment variable so that it points to the `bin` subdirectory under your Subversion installation directory, for example `set PATH=%PATH%;C:\Program Files\svn-win32-1.4.2\bin`
 
-2  
-Start your favorite command shell. Change current directory to the designated working directory. At the command prompt, type:`svn co https://svn.ncbi.nlm.nih.gov/repos/toolkit/trunk/c++`
+2.  Start your favorite command shell. Change current directory to the designated working directory. At the command prompt, type:`svn co https://svn.ncbi.nlm.nih.gov/repos/toolkit/trunk/c++`
 
-3  
-Modify source files as required. Refer to [Svnbook](http://svnbook.red-bean.com) for the documentation on particular Subversion commands. Monitor your changes using `svn diff`, synchronize your working copy with the trunk using `svn update`, and finally commit them using `svn commit`.
+3.  Modify source files as required. Refer to [Svnbook](http://svnbook.red-bean.com) for the documentation on particular Subversion commands. Monitor your changes using `svn diff`, synchronize your working copy with the trunk using `svn update`, and finally commit them using `svn commit`.
 
 The rest should be the same as when using Subversion under UNIX systems. See [Source Code Retrieval under Unix](#ch-getcode-svn.unix).
 

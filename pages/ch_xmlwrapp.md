@@ -4,8 +4,7 @@ title: C++ Toolkit test
 nav: pages/ch_xmlwrapp
 ---
 
-
-21\. XmlWrapp (XML parsing and handling, XSLT, XPath)
+21. XmlWrapp (XML parsing and handling, XSLT, XPath)
 ====================================================
 
 Created: August 2, 2009; Last Update: November 7, 2014.
@@ -541,14 +540,11 @@ Users inside NCBI can view the [extension element unit tests](https://svn.ncbi.n
 
 The **`XML_CATALOG_FILES`** environment variable may be used in one of three ways to control the XML catalog feature of `libxml2` – i.e. the way `libxml2` resolves unreachable external URI's:
 
-1  
-If **`XML_CATALOG_FILES`** is not set in the process environment then the default catalog will be used.
+1.  If **`XML_CATALOG_FILES`** is not set in the process environment then the default catalog will be used.
 
-2  
-If it is set to an empty value then the default catalog will be deactivated and there will be no resolution of unreachable external URI's.
+2.  If it is set to an empty value then the default catalog will be deactivated and there will be no resolution of unreachable external URI's.
 
-3  
-If it is set to a space-separated list of catalog files, then `libxml2` will use these files to resolve external URI's. Any invalid paths will be silently ignored.
+3.  If it is set to a space-separated list of catalog files, then `libxml2` will use these files to resolve external URI's. Any invalid paths will be silently ignored.
 
 The default catalog is `/etc/xml/catalog` for non-Windows systems. For Windows, the default catalog is `<module_path>\..\etc\catalog`, where `<module_path>` is the path to the installed `libxml2.dll`, if available, otherwise the path to the running program.
 
@@ -847,32 +843,23 @@ There are two major sources of thread unsafety when the XmlWrapp library is used
 
 It is hard to say exactly where libxml2 and libxslt are not thread safe, so this topic is not discussed in this document. However, if your code doesn't break any of the following statements then you are on the safe side in terms of thread safety in XmlWrapp:
 
-1  
-It is thread-safe to work with different documents from different threads.
+1.  It is thread-safe to work with different documents from different threads.
 
-2  
-It is not thread-safe to modify the same document from different threads.
+2.  It is not thread-safe to modify the same document from different threads.
 
-3  
-It is thread-safe to perform non-modifying operations on the same document in different threads except in the following cases:
+3.  It is thread-safe to perform non-modifying operations on the same document in different threads except in the following cases:
 
-a  
-Applying the same stylesheet to different documents. This case is related to the fact that a result document needs a reference to the stylesheet so there is reference counting. (Note: This exception does not apply if the compiler is C++11 conformant.)
+    -   Applying the same stylesheet to different documents. This case is related to the fact that a result document needs a reference to the stylesheet so there is reference counting. (Note: This exception does not apply if the compiler is C++11 conformant.)
 
-b  
-Using copies of XPath query result node sets in different threads. This case is also related to reference counting because node sets are not really copied but reference counting is used instead.
+    -   Using copies of XPath query result node sets in different threads. This case is also related to reference counting because node sets are not really copied but reference counting is used instead.
 
-c  
-The following operations are not thread-safe when performed on the same node from different threads in any combination:
+    -   The following operations are not thread-safe when performed on the same node from different threads in any combination:
 
-i  
-Dereferencing the node iterator.
+        -   Dereferencing the node iterator.
 
-ii  
-Dereferencing the node attributes iterator.
+        -   Dereferencing the node attributes iterator.
 
-iii  
-Searching for an attribute of the node.
+        -   Searching for an attribute of the node.
 
 The last case is tied to the fact that XmlWrapp is a very thin wrapper and it tends to introduce minimal overhead. In order to keep node references valid when iterators are advanced some private data are attached to the nodes that an iterator points to. The same happens when an attribute iterator is dereferenced. When attribute searching is done it particularly analyses the node private data (because some default attribute values could be changed) and thus causes thread unsafety.
 
@@ -947,11 +934,9 @@ But instead it produces:
 
 This is because the original document contained a text-node (the newline and space) immediately following the opening tag of the root element, and therefore:
 
-a  
-`libxml2` does not alter the original content - i.e. the pretty-printing of the original content is reproduced intact; and
+-   `libxml2` does not alter the original content - i.e. the pretty-printing of the original content is reproduced intact; and
 
-b  
-`libxml2` does not alter the inserted content - i.e. the inserted content contained no formatting to start with, and none is added, so the new content is inserted immediately before the child node.
+-   `libxml2` does not alter the inserted content - i.e. the inserted content contained no formatting to start with, and none is added, so the new content is inserted immediately before the child node.
 
 However, if you start with:
 

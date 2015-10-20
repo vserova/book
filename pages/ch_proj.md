@@ -4,8 +4,7 @@ title: C++ Toolkit test
 nav: pages/ch_proj
 ---
 
-
-6\. Project Creation and Management
+6. Project Creation and Management
 ==================================
 
 Last Update: December 2, 2014.
@@ -310,7 +309,7 @@ This template separately specifies instructions for user, library and applicatio
 
 Just like the configurable template `Makefile.meta.in` is used to ease and standardize the writing of [meta-makefiles](#ch-proj.meta-makefiles), so there are templates to help in the creation of "regular" project makefiles to build a library or an application. These auxiliary template makefiles are described on the "[Working with Makefiles](ch_build.html#ch_build.makefiles_hierarch)" page and listed [above](#ch-proj.cvs-tree-struct). The **configure**'d versions of these templates get put at the very top of a `build tree`.
 
-In addition to the `meta-makefile` that must be defined for each project, a customized makefile `Makefile.<project_name>.[app\|lib]` must also be provided. The following three sections give examples of `customized makefiles` for a [library](#ch-proj.make-proj-lib) and an [application](#ch-proj.make-proj-app), along with a case where a [user-defined](#ch-proj.usr-def-makefile) `makefile` is required.
+In addition to the `meta-makefile` that must be defined for each project, a customized makefile `Makefile.<project_name>.[app|lib]` must also be provided. The following three sections give examples of `customized makefiles` for a [library](#ch-proj.make-proj-lib) and an [application](#ch-proj.make-proj-app), along with a case where a [user-defined](#ch-proj.usr-def-makefile) `makefile` is required.
 
 You have great latitude in specifying optional packages, features and projects in `makefiles`. The macro **`REQUIRES`** in the examples is one way to allows you access them. See the "`Working with Makefiles`" page for a [complete list](ch_build.html#ch_build.packages_opt); the configuration page gives the corresponding [configure options](ch_config.html#ch_config.ch_configprohibit_sy).
 
@@ -600,7 +599,7 @@ What you put in your makefile will depend on where you define your working direc
 
 The syntax of the script command is:
 
-    new_project <project_name> <app \| lib> [builddir]
+    new_project <project_name> <app | lib> [builddir]
 
 where: - `project_name` is the name of the directory you will be working in - `app (lib)` is used to indicate whether you will be building an application or a library - `builddir` (optional) specifies what version of the pre-built NCBI C++ Toolkit libraries to link to
 
@@ -832,17 +831,13 @@ In this simple example, the **`APP_PROJ`** definition in `Makefile.in` is identi
 
 Given these makefile definitions, executing `make all_r` in the `build` project subdirectory indirectly causes `build/Makefile.meta` to be executed, which sets the following chain of events in motion:
 
-1  
-For each `proj_name` listed in [USR\_PROJ](#ch-proj.inside-make-meta), `Makefile.meta` first tests to see if `Makefile.proj_name` is available in the current `build` directory, and if so, executes:<br/><br/>`make -f Makefile.proj_name builddir="$(builddir)"`<br/>`srcdir="$(srcdir)" $(MFLAGS)`<br/><br/>Otherwise, `Makefile.meta` assumes the required makefile is in the project's source directory, and executes:<br/><br/>`make -f $(srcdir)/Makefile.proj_name builddir="$(builddir)" srcdir="$(srcdir)" $(MFLAGS)`<br/><br/>In either case, the important thing to note here is that the commands contained in the project's makefiles are executed directly and are **not** combined with additional makefiles in the top-level `build` directory. The aliased **`srcdir`**, **`builddir`**, and **`MFLAGS`** are still available and can be referred to inside `Makefile.proj_name`. By default, the resulting libraries and executables are written to the `build` directory only.<br/>
+1.  For each `proj_name` listed in [USR\_PROJ](#ch-proj.inside-make-meta), `Makefile.meta` first tests to see if `Makefile.proj_name` is available in the current `build` directory, and if so, executes:<br/><br/>`make -f Makefile.proj_name builddir="$(builddir)"`<br/>`srcdir="$(srcdir)" $(MFLAGS)`<br/><br/>Otherwise, `Makefile.meta` assumes the required makefile is in the project's source directory, and executes:<br/><br/>`make -f $(srcdir)/Makefile.proj_name builddir="$(builddir)" srcdir="$(srcdir)" $(MFLAGS)`<br/><br/>In either case, the important thing to note here is that the commands contained in the project's makefiles are executed directly and are **not** combined with additional makefiles in the top-level `build` directory. The aliased **`srcdir`**, **`builddir`**, and **`MFLAGS`** are still available and can be referred to inside `Makefile.proj_name`. By default, the resulting libraries and executables are written to the `build` directory only.<br/>
 
-2  
-For each `lib_name` listed in [LIB\_PROJ](#ch-proj.inside-make-meta),<br/><br/>`make -f $(builddir)/Makefile.lib.tmpl`<br/><br/>is executed. This in turn specifies that `$(builddir)/Makefile.mk`, `$(srcdir)/Makefile.lib_name.lib`, and `$(builddir)/Makefile.lib` should be included in the generated makefile commands that actually get executed. The resulting libraries are written to the `build` subdirectory and copied to the `lib` subtree.
+2.  For each `lib_name` listed in [LIB\_PROJ](#ch-proj.inside-make-meta),<br/><br/>`make -f $(builddir)/Makefile.lib.tmpl`<br/><br/>is executed. This in turn specifies that `$(builddir)/Makefile.mk`, `$(srcdir)/Makefile.lib_name.lib`, and `$(builddir)/Makefile.lib` should be included in the generated makefile commands that actually get executed. The resulting libraries are written to the `build` subdirectory and copied to the `lib` subtree.
 
-3  
-For each **app\_name** listed in [APP\_PROJ](#ch-proj.inside-make-meta),<br/><br/>`make -f $(builddir)/Makefile.app.tmpl`<br/><br/>is executed. This in turn specifies that `$(builddir)/Makefile.mk`, `$(srcdir)/Makefile.app_name.app`, and `$(builddir)/Makefile.app` should be included in the generated makefile commands that actually get executed. The resulting executables are written to the `build` subdirectory and copied to the `bin` subtree.
+3.  For each **app\_name** listed in [APP\_PROJ](#ch-proj.inside-make-meta),<br/><br/>`make -f $(builddir)/Makefile.app.tmpl`<br/><br/>is executed. This in turn specifies that `$(builddir)/Makefile.mk`, `$(srcdir)/Makefile.app_name.app`, and `$(builddir)/Makefile.app` should be included in the generated makefile commands that actually get executed. The resulting executables are written to the `build` subdirectory and copied to the `bin` subtree.
 
-4  
-For each `dir_name` listed in [SUB\_PROJ](#ch-proj.inside-make-meta) (on `make all_r`),<br/><br/>`cd dir_name`<br/>`make all_r`<br/><br/>is executed. Steps (1) - (3) are then repeated in the project subdirectory.
+4.  For each `dir_name` listed in [SUB\_PROJ](#ch-proj.inside-make-meta) (on `make all_r`),<br/><br/>`cd dir_name`<br/>`make all_r`<br/><br/>is executed. Steps (1) - (3) are then repeated in the project subdirectory.
 
 More generally, for each subdirectory listed in **`SUB_PROJ`**, the **configure** script will create a relative subdirectory inside the new `build` project directory, and generate the new subdirectory's `Makefile` from the corresponding meta-makefile in the `src` subtree. Note that each subproject directory must also contain its own `Makefile.in` along with the corresponding project makefiles. The recursive make commands, `make all_r, make clean_r`, and `make purge_r` all refer to this definition of the subprojects to define what targets should be recursively built or removed.
 

@@ -4,8 +4,7 @@ title: C++ Toolkit test
 nav: pages/ch_datamod
 ---
 
-
-14\. Biological Sequence Data Model
+14. Biological Sequence Data Model
 ==================================
 
 Last Update: April 24, 2014.
@@ -234,7 +233,7 @@ A Seq-align is considered to be a SEQUENCE OF segments. Each segment is an unbro
         id=100        AAGGCCTTTTAGAGATGATGATGATGATGA
         id=200        AAGGCCTaTTAG.......GATGATGATGA
         id=300        ....CCTTTTAGAGATGATGAT....ATGA
-                      \| 1 \|   2   \|   3  \| 4\| 5 \| 6 \|  Segments
+                      | 1 |   2   |   3  | 4| 5 | 6 |  Segments
 
 [![Image ch\_datamod\_G3.jpg](/book/static/img/ch_datamod_G3.jpg)](/book/static/img/ch_datamod_G3.jpg "Click to see the full-resolution image")
 
@@ -2713,14 +2712,14 @@ All the forms of ***Seq-align*** are composed of segments. Each segment is an al
         id=100        AAGGCCTTTTAGAGATGATGATGATGATGA
         id=200        AAGGCCTaTTAG.......GATGATGATGA
         id=300        ....CCTTTTAGAGATGATGAT....ATGA
-                      \| 1 \|   2  \|   3   \|4\| 5  \| 6\|  Segments
+                      | 1 |   2  |   3   |4| 5  | 6|  Segments
 
 Taking only two of the sequences in a two way alignment, only three segments are needed to define the alignment:
 
         Seq-ids
         id=100        AAGGCCTTTTAGAGATGATGATGATGATGA
         id=200        AAGGCCTaTTAG.......GATGATGATGA
-                      \|     1    \|   2   \|     3   \|  Segments
+                      |     1    |   2   |     3   |  Segments
 
 <a name="ch-datamod.Seqalign"></a>
 
@@ -2815,7 +2814,7 @@ The three dimensional alignment show above is repeated below, followed by its AS
         id=100        AAGGCCTTTTAGAGATGATGATGATGATGA
         id=200        AAGGCCTaTTAG.......GATGATGATGA
         id=300        ....CCTTTTAGAGATGATGAT....ATGA
-                      \| 1 \|   2  \|   3   \|4\| 5  \| 6\|  Segments
+                      | 1 |   2  |   3   |4| 5  | 6|  Segments
 
     Seq-align ::= {
         type global ,
@@ -2842,7 +2841,7 @@ Each ***Std-seg*** must give its dimension, so it can be used for ***diags***. O
         id=100          AAGGCCTTTTAGAGATGATGATGATGATGA
         id=200          AAGGCCTaTTAG.......GATGATGATGA
         id=300          ....CCTTTTAGAGATGATGAT....ATGA
-                        \| 1 \|   2  \|   3   \|4\| 5  \| 6\|  Segments
+                        | 1 |   2  |   3   |4| 5  | 6|  Segments
 
     Seq-align ::= {
         type global ,
@@ -4967,7 +4966,7 @@ See also the [online-version](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lx
 
     Variation-ref ::= SEQUENCE {
         -- ids (i.e., SNP rsid / ssid, dbVar nsv/nssv)
-        -- expected values include 'dbSNP\|rs12334', 'dbSNP\|ss12345', 'dbVar\|nsv1'
+        -- expected values include 'dbSNP|rs12334', 'dbSNP|ss12345', 'dbVar|nsv1'
         --
         -- we relate three kinds of IDs here:
         --  - our current object's id

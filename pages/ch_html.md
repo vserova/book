@@ -4,13 +4,12 @@ title: C++ Toolkit test
 nav: pages/ch_html
 ---
 
-
-12\. HTML
+12. HTML
 ========
 
 Last Update: November 15, 2013.
 
-The HTML API [Library `xhtml`: [include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/html) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/html)]
+The HTML API [Library `xhtml`: [include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/html) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/html)]
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 The overview for this chapter consists of the following topics:

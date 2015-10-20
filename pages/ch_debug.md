@@ -4,8 +4,7 @@ title: C++ Toolkit test
 nav: pages/ch_debug
 ---
 
-
-22\. Debugging, Exceptions, and Error Handling
+22. Debugging, Exceptions, and Error Handling
 =============================================
 
 Last Update: April 24, 2014.
@@ -1360,7 +1359,7 @@ or simply a `printable` object to be thrown, as in:
 
     THROW0_TRACE("print this message")
 
-The **`THROW0_TRACE`** macro accepts either an exception object or a string as the argument to be thrown. The **`THROW0p_TRACE`** macro generalizes this functionality by accepting any `printable` object, such as `complex(1,3)`, as its single argument. Any object with a defined output operator is, of course, printable. The third macro generalizes this one step further, and accepts aggregate arguments such as ***vector\<T\>***, where **`T`** is a printable object. Note that in cases where the object to be thrown is not a ***std::exception***, you will need to use **`STD_CATCH_ALL_{X\|XX}`** or a customized catch statement to catch the thrown object.
+The **`THROW0_TRACE`** macro accepts either an exception object or a string as the argument to be thrown. The **`THROW0p_TRACE`** macro generalizes this functionality by accepting any `printable` object, such as `complex(1,3)`, as its single argument. Any object with a defined output operator is, of course, printable. The third macro generalizes this one step further, and accepts aggregate arguments such as ***vector\<T\>***, where **`T`** is a printable object. Note that in cases where the object to be thrown is not a ***std::exception***, you will need to use **`STD_CATCH_ALL_{X|XX}`** or a customized catch statement to catch the thrown object.
 
 The remaining six macros accept two arguments: an "exception" class name and an initialization argument, where both arguments are also passed to the trace message. The class argument need not actually be derived from ***std::exception***, as the pre-processor simply uses the class name to construct a new object of that type using the initialization argument. All of the **`THROW1*_TRACE`** macros assume that there is a single initialization argument. As in the first three macros, **`THROW1_TRACE()`**, **`THROW1p_TRACE()`** and **`THROW1np_TRACE()`** specialize in different types of printable objects, ranging from exceptions and numeric and character types, to aggregate and container types.
 

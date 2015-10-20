@@ -4,8 +4,7 @@ title: C++ Toolkit test
 nav: pages/ch_faq
 ---
 
-
-29\. FAQs, Useful Documentation Links, and Mailing Lists
+29. FAQs, Useful Documentation Links, and Mailing Lists
 =======================================================
 
 Last Update: August 8, 2014.
@@ -106,17 +105,13 @@ Following are some of the common questions regarding security. If you have a dif
 
 Summary:
 
-1  
-No SQL EVER passed in by a user is allowed.
+1.  No SQL EVER passed in by a user is allowed.
 
-2  
-Use stored procedures whenever possible.
+2.  Use stored procedures whenever possible.
 
-3  
-If stored procedures are not possible, and if the SQL statement needs to be constructed from user input, use parameterized SQL whenever possible.
+3.  If stored procedures are not possible, and if the SQL statement needs to be constructed from user input, use parameterized SQL whenever possible.
 
-4  
-If constructing dynamic SQL from user input is unavoidable, you MUST sanitize the user input.
+4.  If constructing dynamic SQL from user input is unavoidable, you MUST sanitize the user input.
 
 Please see the NCBI document "[SQL Security and Hygiene](https://sp.ncbi.nlm.nih.gov/IEB/ISS/dbas/Shared%20Documents/SQL%20Security%20and%20Hygiene.doc)" for more details.
 
@@ -237,7 +232,7 @@ Here's a code snippet that shows all combinations:
     ostr << MSerial_Xml(fSerial_Xml_NoRefDTD) << obj;
 
     // serialize XML without either an XML declaration or a DOCTYPE
-    ostr << MSerial_Xml(fSerial_Xml_NoXmlDecl \| fSerial_Xml_NoRefDTD) << obj;
+    ostr << MSerial_Xml(fSerial_Xml_NoXmlDecl | fSerial_Xml_NoRefDTD) << obj;
 
 ***Note:*** The serial library can read XML whether or not it contains the XML declaration or DOCTYPE without using special flags. For example:
 
@@ -335,17 +330,13 @@ By default, the compiler options for NCBI C++ Toolkit libraries do not specify t
 
 If you need to use a different setting for `_SECURE_SCL` than the Toolkit uses, you will have to recompile all Toolkit libraries that you want to link with. To change this setting and rebuild the Toolkit:
 
-1  
-Open [src\\build-system\\Makefile.mk.in.msvc](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/build-system/Makefile.mk.in.msvc).
+1.  Open [src\\build-system\\Makefile.mk.in.msvc](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/build-system/Makefile.mk.in.msvc).
 
-2  
-Edit the `PreprocessorDefinitions` entry in the `[Compiler.*release]` section for the desired configuration(s), using `_SECURE_SCL=0;` or `_SECURE_SCL=1;`.
+2.  Edit the `PreprocessorDefinitions` entry in the `[Compiler.*release]` section for the desired configuration(s), using `_SECURE_SCL=0;` or `_SECURE_SCL=1;`.
 
-3  
-Build the `-CONFIGURE-` project in the solution that contains all the Toolkit libraries you want to use. See the section on [choosing a build scope](ch_config.html#ch_config.Choosing_a_Build_Scope) for tips on picking the solution. Ignore the reload solution prompts - when the build completes, then close and reopen the solution.
+3.  Build the `-CONFIGURE-` project in the solution that contains all the Toolkit libraries you want to use. See the section on [choosing a build scope](ch_config.html#ch_config.Choosing_a_Build_Scope) for tips on picking the solution. Ignore the reload solution prompts - when the build completes, then close and reopen the solution.
 
-4  
-Build the `-BUILD-ALL-` project to rebuild the libraries.
+4.  Build the `-BUILD-ALL-` project to rebuild the libraries.
 
 A similar situation exists for the `_HAS_ITERATOR_DEBUGGING` macro, however the C++ Toolkit does not set this macro for either 2008 or 2010, so you are unlikely to encounter any problems due to this setting. It's possible (however unlikely) that other third party libraries could turn this macro off in debug, in which case you'd have to rebuild so the settings for all libraries match.
 
@@ -392,11 +383,9 @@ Two tools are available to resolve the common linking questions:
 
 For example, suppose the linker complains about the symbol ***ncbi::CIStreamBuffer::FindChar(char)*** being undefined. Here is how to use these tools to resolve this problem:
 
-1  
-To find the library(s) where the unresolved symbol is defined, use the [Library search](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lib_search/libsearch.cgi?public=yes) tool:<br/><br/>Using the example above, enter `FindChar` as a search term. The library where this symbol is defined is [libxutil.a (ncbi\_core)](http://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/CPP_DOC/depgraphs/xutil.html).<br/><br/>Now that you have the library that defines the symbol, you can proceed to find the library dependencies it introduces. ***Note:*** The simplest way to do this is by just clicking on the library in the search results to show its dependencies. Alternatively, you can proceed to step 2.<br/>
+1.  To find the library(s) where the unresolved symbol is defined, use the [Library search](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lib_search/libsearch.cgi?public=yes) tool:<br/><br/>Using the example above, enter `FindChar` as a search term. The library where this symbol is defined is [libxutil.a (ncbi\_core)](http://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/CPP_DOC/depgraphs/xutil.html).<br/><br/>Now that you have the library that defines the symbol, you can proceed to find the library dependencies it introduces. ***Note:*** The simplest way to do this is by just clicking on the library in the search results to show its dependencies. Alternatively, you can proceed to step 2.<br/>
 
-2  
-The [Library dependencies](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/dglistdeps.cgi) tool finds all the other libraries that a given library depends on. This tool can also help you create the `LIB` and `LIBS` lines in your makefile. For example, enter your current `LIB` and `LIBS` lines plus the new library from step 1, and it will generate optimized `LIB` and `LIBS` lines containing the library needed for your symbol and any other needed libraries.<br/><br/>Continuing with the example above, entering `libxutil.a` (or just `xutil`) will create this result:<br/><br/>`LIB  = `[xutil](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/xutil.html) [xncbi](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/xncbi.html)<br/>`LIBS = $(ORIG_LIBS)`<br/><br/>Clicking on any of the links will show the required items for that link plus a dependency graph for the clicked item. The nodes in the diagram are also navigable.
+2.  The [Library dependencies](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/dglistdeps.cgi) tool finds all the other libraries that a given library depends on. This tool can also help you create the `LIB` and `LIBS` lines in your makefile. For example, enter your current `LIB` and `LIBS` lines plus the new library from step 1, and it will generate optimized `LIB` and `LIBS` lines containing the library needed for your symbol and any other needed libraries.<br/><br/>Continuing with the example above, entering `libxutil.a` (or just `xutil`) will create this result:<br/><br/>`LIB  = `[xutil](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/xutil.html) [xncbi](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/xncbi.html)<br/>`LIBS = $(ORIG_LIBS)`<br/><br/>Clicking on any of the links will show the required items for that link plus a dependency graph for the clicked item. The nodes in the diagram are also navigable.
 
 ***Note:*** If you are using Visual C++, please also see the question about [adding libraries to Visual C++ projects](#ch-faq.How-do-I-add-a-library-to-a-Visua).
 
@@ -425,17 +414,13 @@ NCBI C++ Library Dependency Graphs (public libraries only)
 
 In cases where the above methods do not work, you can also search manually using the following steps:
 
-1  
-Look for the source file that defines the symbol. This can be done by going to the [LXR source browser](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDate) and doing an identifier search on the symbol (e.g., [CDate](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDate&d=) or [XmlEncode](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=XmlEncode&d=)). Look for a source file where the identifier is defined (e.g. in the "Defined as a class in" section for ***CDate***, or in the "Defined as a function in" section for ***XmlEncode()***). For serializable object classes (such as ***CDate***) look for the base class definition. Follow a link to this source file.
+1.  Look for the source file that defines the symbol. This can be done by going to the [LXR source browser](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDate) and doing an identifier search on the symbol (e.g., [CDate](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDate&d=) or [XmlEncode](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=XmlEncode&d=)). Look for a source file where the identifier is defined (e.g. in the "Defined as a class in" section for ***CDate***, or in the "Defined as a function in" section for ***XmlEncode()***). For serializable object classes (such as ***CDate***) look for the base class definition. Follow a link to this source file.
 
-2  
-Near the top of the LXR page for the source file is a path, and each component of the path links to another LXR page. Click the link to the last directory.
+2.  Near the top of the LXR page for the source file is a path, and each component of the path links to another LXR page. Click the link to the last directory.
 
-3  
-The resulting LXR page for the directory should list the makefile for the library of interest (e.g. `Makefile.general.lib` for ***CDate*** or `Makefile.corelib.lib` for ***XmlEncode()***). Click on the link to the makefile. You should see the LIB line with the name of the library that contains your symbol.
+3.  The resulting LXR page for the directory should list the makefile for the library of interest (e.g. `Makefile.general.lib` for ***CDate*** or `Makefile.corelib.lib` for ***XmlEncode()***). Click on the link to the makefile. You should see the LIB line with the name of the library that contains your symbol.
 
-4  
-Add the library name to the list of libraries you already have and enter them into the [library dependencies tool](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/dglistdeps.cgi) to create your final LIB and LIBS lines.
+4.  Add the library name to the list of libraries you already have and enter them into the [library dependencies tool](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/dglistdeps.cgi) to create your final LIB and LIBS lines.
 
 In some cases, the library name is a variant on the subdirectory name. These variants are summarized in [Table 1](#ch-faq.T1).
 

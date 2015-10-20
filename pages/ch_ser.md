@@ -4,13 +4,12 @@ title: C++ Toolkit test
 nav: pages/ch_ser
 ---
 
-
-13\. Data Serialization (ASN.1, XML)
+13. Data Serialization (ASN.1, XML)
 ===================================
 
 Last Update: April 7, 2015.
 
-The SERIAL API [Library `xserial`:[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/serial) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/serial)]
+The SERIAL API [Library `xserial`:[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/serial) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/serial)]
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 The overview for this chapter consists of the following topics:
@@ -511,8 +510,8 @@ Here is a complete program that illustrates how to create a read hook for class 
     //
     // You should adopt a meaningful naming convention for your hook classes.
     // In this example, the convention is C<mode><context>Hook_<object>__<member>
-    // where:   <mode>=(Read\|Write\|Copy\|Skip)
-    //          <context>=(Obj\|CM\|CV)  --  object, class member, or choice variant
+    // where:   <mode>=(Read|Write|Copy|Skip)
+    //          <context>=(Obj|CM|CV)  --  object, class member, or choice variant
     // and hyphens in ASN.1 object types are replaced with underscores.
     //
     // Note:  Since this is a read hook, ReadClassMember() will only be called when
@@ -1276,11 +1275,11 @@ The general form of the stack path mask is:
 
 More formally:
 
-    StackPathMask ::= (TypeName \| Wildcard) ('.' (MemberName \| Wildcard))+
+    StackPathMask ::= (TypeName | Wildcard) ('.' (MemberName | Wildcard))+
 
 Here `TypeName` and `MemberName` are strings; '`.`' separates path elements; and `Wildcard` is defined as:
 
-    Wildcard ::= ('?' \| '*')
+    Wildcard ::= ('?' | '*')
 
 The question mark means "match exactly one path element with any name", while the asterisk means "match one or more path elements with any names".
 
@@ -1553,7 +1552,7 @@ The behavior of initialization verification has been designed to allow for maxim
 
 Setting ***eSerialVerifyData\_Never*** or ***eSerialVerifyData\_Always*** results in a "forced" behavior: setting ***eSerialVerifyData\_Never*** prohibits later attempts to enable verification; setting ***eSerialVerifyData\_Always*** prohibits attempts to disable it. The default behavior could be defined from the outside, using the **`SET_VERIFY_DATA_GET`** environment variable:
 
-        SET_VERIFY_DATA_GET ::= ( 'NO' \| 'NEVER' \| 'YES' \| 'ALWAYS' )
+        SET_VERIFY_DATA_GET ::= ( 'NO' | 'NEVER' | 'YES' | 'ALWAYS' )
 
 Alternatively, the default behavior can also be set from a program code using ***CSerialObject::SetVerifyDataXXX()*** functions.
 
@@ -1591,10 +1590,10 @@ In this case, on reading a missing data member, stream initializes it with a "de
 
 The default behavior could be set similarly to CSerialObject. The environment variables are as follows:
 
-        SET_VERIFY_DATA_READ  ::= ( 'NO' \| 'NEVER' \| 'YES' \| 'ALWAYS' \|
-     'DEFVALUE' \| 'DEFVALUE_ALWAYS' )
-        SET_VERIFY_DATA_WRITE ::= ( 'NO' \| 'NEVER' \| 'YES' \| 'ALWAYS' \|
-     'DEFVALUE' \| 'DEFVALUE_ALWAYS' )
+        SET_VERIFY_DATA_READ  ::= ( 'NO' | 'NEVER' | 'YES' | 'ALWAYS' |
+     'DEFVALUE' | 'DEFVALUE_ALWAYS' )
+        SET_VERIFY_DATA_WRITE ::= ( 'NO' | 'NEVER' | 'YES' | 'ALWAYS' |
+     'DEFVALUE' | 'DEFVALUE_ALWAYS' )
 
 <a name="ch-ser.simplified-serialization-inte"></a>
 
@@ -2516,17 +2515,13 @@ The following topics are discussed in this section:
 
 Run-time information about data types is necessary in several contexts, including:
 
-1  
-When reading, writing, and processing serialized data, where runtime information about a type's internal structure is needed.
+1.  When reading, writing, and processing serialized data, where runtime information about a type's internal structure is needed.
 
-2  
-When reading from an arbitrary data source, where data members' external aliases must be used to locate the corresponding class data members (e.g.*MyXxx* may be aliased as *my-xxx* in the input data file).
+2.  When reading from an arbitrary data source, where data members' external aliases must be used to locate the corresponding class data members (e.g.*MyXxx* may be aliased as *my-xxx* in the input data file).
 
-3  
-When using a generalized [C++ type iterator](#ch-ser.iterators.html) to traverse the data members of an object.
+3.  When using a generalized [C++ type iterator](#ch-ser.iterators.html) to traverse the data members of an object.
 
-4  
-When accessing the object type information *per se* (without regard to any particular object instance), e.g. to dump it to a file as ASN.1 or DTD specifications (not data).
+4.  When accessing the object type information *per se* (without regard to any particular object instance), e.g. to dump it to a file as ASN.1 or DTD specifications (not data).
 
 In the first three cases above, it is necessary to have both the object itself as well as its runtime type information. This is because in these contexts, the object is usually passed inside a generic function, as a pointer to its most base parent type [CObject.](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObject.html) The runtime type information is needed here, as there is no other way to ascertain the actual object's data members. In addition to providing this information, a runtime type information object provides an interface for accessing and modifying these data members.
 
@@ -3494,73 +3489,73 @@ Other methods encapsulate operations supported by the SOAP server, which the cli
 Test Cases [[src/serial/test](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/serial/test)]
 ----------------------------------------------------------------------------------------------------------
 
-[Available Serializable Classes](ch_proj.html#ch_proj.ser_object) (as per NCBI ASN.1 Specifications) [Library `xobjects`: [include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects)]
+[Available Serializable Classes](ch_proj.html#ch_proj.ser_object) (as per NCBI ASN.1 Specifications) [Library `xobjects`: [include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects)]
 
 The ASN.1 data objects are automatically built from their corresponding specifications in the NCBI ASN.1 data model, using [DATATOOL](ch_app.html#ch_app.datatool) to generate all of the required source code. This set of serializable classes defines an interface to many important sequence and sequence-aware objects that users may directly employ, or extend with their own code. An `Object Manager`[(see below)](ch_objmgr.html) coordinates and simplifies the use of these ASN.1-derived objects.
 
 Serializable Classes
 
--   access [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/access) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/access)]
+-   access [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/access) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/access)]
 
--   biblio [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/biblio) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/biblio)]
+-   biblio [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/biblio) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/biblio)]
 
--   cdd [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/cdd) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/cdd)]
+-   cdd [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/cdd) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/cdd)]
 
--   cn3d [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/cn3d) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/cn3d)]
+-   cn3d [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/cn3d) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/cn3d)]
 
--   docsum [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/docsum) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/docsum)]
+-   docsum [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/docsum) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/docsum)]
 
--   entrez2 [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/entrez2) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/entrez2)]
+-   entrez2 [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/entrez2) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/entrez2)]
 
--   featdef [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/featdef) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/featdef)]
+-   featdef [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/featdef) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/featdef)]
 
--   general [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/general) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/general)]
+-   general [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/general) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/general)]
 
--   id1 [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/id1) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/id1)]
+-   id1 [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/id1) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/id1)]
 
--   medlars [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/medlars) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/medlars)]
+-   medlars [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/medlars) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/medlars)]
 
--   medline [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/medline) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/medline)]
+-   medline [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/medline) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/medline)]
 
--   mim [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/mim) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/mim)]
+-   mim [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/mim) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/mim)]
 
--   mla [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/mla) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/mla)]
+-   mla [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/mla) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/mla)]
 
--   mmdb1 [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/mmdb1) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/mmdb1)]
+-   mmdb1 [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/mmdb1) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/mmdb1)]
 
--   mmdb2 [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/mmdb2) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/mmdb2)]
+-   mmdb2 [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/mmdb2) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/mmdb2)]
 
--   mmdb3 [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/mmdb3) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/mmdb3)]
+-   mmdb3 [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/mmdb3) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/mmdb3)]
 
--   ncbimime [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/ncbimime) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/ncbimime)]
+-   ncbimime [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/ncbimime) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/ncbimime)]
 
--   objprt [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/objprt) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/objprt)]
+-   objprt [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/objprt) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/objprt)]
 
--   proj [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/proj) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/proj)]
+-   proj [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/proj) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/proj)]
 
--   pub [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/pub) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/pub)]
+-   pub [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/pub) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/pub)]
 
--   pubmed [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/pubmed) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/pubmed)]
+-   pubmed [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/pubmed) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/pubmed)]
 
--   seq [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/seq) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seq)]
+-   seq [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/seq) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seq)]
 
--   seqalign [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/seqalign) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqalign)]
+-   seqalign [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/seqalign) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqalign)]
 
--   seqblock [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/seqblock) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqblock)]
+-   seqblock [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/seqblock) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqblock)]
 
--   seqcode [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/seqcode) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqcode)]
+-   seqcode [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/seqcode) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqcode)]
 
--   seqfeat [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/seqfeat) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqfeat)]
+-   seqfeat [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/seqfeat) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqfeat)]
 
--   seqloc [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/seqloc) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqloc)]
+-   seqloc [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/seqloc) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqloc)]
 
--   seqres [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/seqres) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqres)]
+-   seqres [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/seqres) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqres)]
 
--   seqset [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/seqset) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqset)]
+-   seqset [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/seqset) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqset)]
 
--   submit [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/submit) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/submit)]
+-   submit [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/submit) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/submit)]
 
--   taxon1 [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/taxon1) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/taxon1)]
+-   taxon1 [[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/taxon1) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/taxon1)]
 
 A Test Application Using the Serializable ASN.1 Classes
 

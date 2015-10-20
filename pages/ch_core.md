@@ -4,9 +4,7 @@ title: C++ Toolkit test
 nav: pages/ch_core
 ---
 
-TMP
-
-8\. Portability, Core Functionality and Application Framework
+8. Portability, Core Functionality and Application Framework
 ============================================================
 
 Last Update: December 29, 2014.
@@ -2200,11 +2198,11 @@ Table 4. Filter String Samples
 
 For example:
 
--   To log diagnostic messages from source files located in `src/corelib` with error codes from 101 to 106 and any subcode, use the following filter: â`/corelib (101-106.)`â.
+-   To log diagnostic messages from source files located in `src/corelib` with error codes from 101 to 106 and any subcode, use the following filter: “`/corelib (101-106.)`”.
 
--   To exclude log messages from sources in `src/serial` and `src/dbapi`, use this filter: â`!/serial !/dbapi`â.
+-   To exclude log messages from sources in `src/serial` and `src/dbapi`, use this filter: “`!/serial !/dbapi`”.
 
--   To log messages from sources in `src/serial` excluding those with error code 802 and subcodes 4 and 10 through 12, and to exclude messages from sources in `src/dbapi/driver`, use the following filter: â`/serial !(802.4,10-12) !/dbapi/driver`â.
+-   To log messages from sources in `src/serial` excluding those with error code 802 and subcodes 4 and 10 through 12, and to exclude messages from sources in `src/dbapi/driver`, use the following filter: “`/serial !(802.4,10-12) !/dbapi/driver`”.
 
 <a name="ch-core.Log-File-Format"></a>
 
@@ -2253,17 +2251,17 @@ Fields in the new post format:
 
 | Field       | Description                                                                                           | Width                                         | Type or format                                                                                                                                                       |
 |-------------|-------------------------------------------------------------------------------------------------------|-----------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| pid         | Process ID                                                                                            | â¥ 5                                           | Uint8 (decimal)                                                                                                                                                      |
-| tid         | Thread ID                                                                                             | â¥ 3                                           | Uint8 (decimal)                                                                                                                                                      |
-| rid         | Request ID (e.g. iteration number for a CGI)                                                          | â¥ 4                                           | int (decimal)                                                                                                                                                        |
+| pid         | Process ID                                                                                            | ≥ 5                                           | Uint8 (decimal)                                                                                                                                                      |
+| tid         | Thread ID                                                                                             | ≥ 3                                           | Uint8 (decimal)                                                                                                                                                      |
+| rid         | Request ID (e.g. iteration number for a CGI)                                                          | ≥ 4                                           | int (decimal)                                                                                                                                                        |
 | state       | Application state code                                                                                | 2                                             | string                                                                                                                                                               |
 | guid        | [Globally unique process ID](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=x_CreateUID) | 16                                            | Int8 (hexadecimal)                                                                                                                                                   |
-| psn         | Serial number of the posting within the process                                                       | â¥ 4                                           | int (decimal)                                                                                                                                                        |
-| tsn         | Serial number of the posting within the thread                                                        | â¥ 4                                           | int (decimal)                                                                                                                                                        |
-| time        | Astronomical date and time at which the message was posted                                            | â¥ 23<br/>(often 26) | `YYYY-MM-DDThh:mm:ss.sss[sss[sss]]`<br/>While seconds typically have six digits after the decimal, there could be more or as few as three. |
+| psn         | Serial number of the posting within the process                                                       | ≥ 4                                           | int (decimal)                                                                                                                                                        |
+| tsn         | Serial number of the posting within the thread                                                        | ≥ 4                                           | int (decimal)                                                                                                                                                        |
+| time        | Astronomical date and time at which the message was posted                                            | ≥ 23<br/>(often 26) | `YYYY-MM-DDThh:mm:ss.sss[sss[sss]]`<br/>While seconds typically have six digits after the decimal, there could be more or as few as three. |
 | host        | Name of the host where the process runs                                                               | 15                                            | string (UNK\_HOST if unknown)                                                                                                                                        |
 | client      | Client IP address                                                                                     | 15                                            | valid IP address string (UNK\_CLIENT if unknown)                                                                                                                     |
-| session     | Session ID                                                                                            | â¥ 24                                          | string (UNK\_SESSION if unknown)                                                                                                                                     |
+| session     | Session ID                                                                                            | ≥ 24                                          | string (UNK\_SESSION if unknown)                                                                                                                                     |
 | application | Name of the application (see note below)                                                              | varies                                        | string (UNK\_APP if unknown)                                                                                                                                         |
 | event       | What was happening to cause the post (e.g. app start)                                                 | 13                                            | string (see the [Events and Messages](#ch-core.Events-and-Messages) section)                                                                                         |
 | message     | The logged message                                                                                    | varies                                        | string (see the [Events and Messages](#ch-core.Events-and-Messages) section)                                                                                         |
@@ -2672,11 +2670,11 @@ The NCBI-specific status codes must be different from the [standard (HTTP) statu
 
 | Range     | Description                        |
 |-----------|------------------------------------|
-| 120 â 199 | Informational/provisional response |
-| 220 â 299 | Success                            |
-| 320 â 399 | Redirection                        |
-| 420 â 499 | Bad request (client error)         |
-| 520 â 599 | Server Error                       |
+| 120 – 199 | Informational/provisional response |
+| 220 – 299 | Success                            |
+| 320 – 399 | Redirection                        |
+| 420 – 499 | Bad request (client error)         |
+| 520 – 599 | Server Error                       |
 
 So far we have the following NCBI specific status codes:
 
@@ -2771,13 +2769,13 @@ The log entries produced by the two families are almost identical for the [new p
 
 The macros are:
 
--   **`{ERR|LOG}_POST(msg)`** â for posting a simple message. ***Note:*** these macros are deprecated. Use **`{ERR|LOG}_POST_X`** instead (except for tests) for more flexible error statistics and logging.
+-   **`{ERR|LOG}_POST(msg)`** – for posting a simple message. ***Note:*** these macros are deprecated. Use **`{ERR|LOG}_POST_X`** instead (except for tests) for more flexible error statistics and logging.
 
--   **`{ERR|LOG}_POST_X(subcode, msg)`** â for posting a default error code, a given subcode, and a message. Each call to **`{ERR|LOG}_POST_X`** must use a different subcode for proper error statistics and logging. The default error code is selected by **`NCBI_USE_ERRCODE_X`**. The error code is selected from those defined by **`NCBI_DEFINE_ERRCODE_X`** in the appropriate header file, e.g. `include/corelib/error_codes.h`.
+-   **`{ERR|LOG}_POST_X(subcode, msg)`** – for posting a default error code, a given subcode, and a message. Each call to **`{ERR|LOG}_POST_X`** must use a different subcode for proper error statistics and logging. The default error code is selected by **`NCBI_USE_ERRCODE_X`**. The error code is selected from those defined by **`NCBI_DEFINE_ERRCODE_X`** in the appropriate header file, e.g. `include/corelib/error_codes.h`.
 
--   **`{ERR|LOG}_POST_EX(code, subcode, msg)`** â for posting a given error code, a given error subcode, and a message. This macro should only be used if you have to use a variable for the subcode, or to specify an error code other than the current default. In all other cases (except for tests), use **`{ERR|LOG}_POST_X`** for more flexible error statistics and logging.
+-   **`{ERR|LOG}_POST_EX(code, subcode, msg)`** – for posting a given error code, a given error subcode, and a message. This macro should only be used if you have to use a variable for the subcode, or to specify an error code other than the current default. In all other cases (except for tests), use **`{ERR|LOG}_POST_X`** for more flexible error statistics and logging.
 
--   **`{ERR|LOG}_POST_XX(code, subcode, msg)`** â these macros must be used in place of **`{ERR|LOG}_POST_X`** within header files so that the same error code will be used for header-defined code, regardless of the error codes that including files may use.
+-   **`{ERR|LOG}_POST_XX(code, subcode, msg)`** – these macros must be used in place of **`{ERR|LOG}_POST_X`** within header files so that the same error code will be used for header-defined code, regardless of the error codes that including files may use.
 
 The **`LOG_POST_*`** macros just write a string to the log file, and are useful if a human-readable log file is desired. The output from the **`ERR_POST_*`** macros is not easily read by humans, but facilitates automatic indexing for searching and/or error statistics. There are multiple flags to [control the appearance of the message](#ch-core.diag-post-flags) generated by the **`ERR_POST_*`** macros.
 
@@ -4555,11 +4553,11 @@ Main class implementing functionality of pool of threads. ***CThreadPool*** can 
 
 -   with custom object controlling the number of threads (instance of class derived from ***CThreadPool\_Controller***). This object will control among all other the minimum and maximum limits on count of simultaneously working threads.
 
-Both constructors take additional parameter - maximum number of tasks waiting in the inner ***CThreadPool***âs queue for their execution. When this limit will be reached next call to ***AddTask()*** will block until some task from queue is executed and there is free room for new task.
+Both constructors take additional parameter - maximum number of tasks waiting in the inner ***CThreadPool***’s queue for their execution. When this limit will be reached next call to ***AddTask()*** will block until some task from queue is executed and there is free room for new task.
 
 ***CThreadPool*** has the ability to execute among ordinary tasks some exclusive ones. After call to ***RequestExclusiveExecution()*** all threads in pool will suspend their work (finishing currently executing tasks) and exclusive task will be executed in the special exclusive thread.
 
-If thereâs necessity to implement some special per-thread logic in ***CThreadPool*** then class can be derived to override virtual method ***CreateThread()*** in which some custom object derived from ***CThreadPool\_Thread*** can be created.
+If there’s necessity to implement some special per-thread logic in ***CThreadPool*** then class can be derived to override virtual method ***CreateThread()*** in which some custom object derived from ***CThreadPool\_Thread*** can be created.
 
 <a name="ch-core.Class-CThreadPool-Ta"></a>
 

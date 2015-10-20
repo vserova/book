@@ -4,7 +4,6 @@ title: C++ Toolkit test
 nav: pages/part5
 ---
 
-
 Part 5. Software
 ================
 

@@ -4,7 +4,6 @@ title: C++ Toolkit test
 nav: pages/part8
 ---
 
-
 Release Notes
 =============
 

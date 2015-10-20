@@ -4,8 +4,7 @@ title: C++ Toolkit test
 nav: pages/ch_intro
 ---
 
-
-1\. Introduction to the C++ Toolkit
+1. Introduction to the C++ Toolkit
 ==================================
 
 Last Update: February 27, 2014.
@@ -887,7 +886,7 @@ A simple example of using ***CRegexp***:
 
     #include <util/xregexp/regexp.hpp>
     ...
-        CRegexp regex("^(bye\|exit\|quit)$", CRegexp::fCompile_ignore_case);
+        CRegexp regex("^(bye|exit|quit)$", CRegexp::fCompile_ignore_case);
         bool time2quit = regex.IsMatch(line);
 
 To use ***CRegexp***, link with the `xregexp` library:

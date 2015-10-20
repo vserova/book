@@ -4,8 +4,7 @@ title: C++ Toolkit test
 nav: pages/ch_demo
 ---
 
-
-25\. Examples and Demos
+25. Examples and Demos
 ======================
 
 Last Update: July 12, 2013.
@@ -241,7 +240,7 @@ The type is a number, indicating who assigned the ID, as follows:
 
 #### FASTA Sequence ID Format
 
-This format consists of a two- or three-letter tag indicating the ID's type, followed by one or more data fields, which are separated from the tag and each other by vertical bars (\\|). The vertical bar is a special character in most command-line shells, so command-line arguments containing ID's usually must be quoted. [Table 5](#ch-demo.T5) shows the specific possibilities.
+This format consists of a two- or three-letter tag indicating the ID's type, followed by one or more data fields, which are separated from the tag and each other by vertical bars (\|). The vertical bar is a special character in most command-line shells, so command-line arguments containing ID's usually must be quoted. [Table 5](#ch-demo.T5) shows the specific possibilities.
 
 <a name="ch-demo.T5"></a>
 
@@ -352,7 +351,7 @@ Table 5. FASTA sequence ID format values
 
     id1_fetch -fmt fasta -gi 35 -maxplex bioseq
 
-    >emb\|CAA35615.1\|\|gi\|35 Bovine mRNA for 3 beta hydroxy-5-ene steroid dehydrogenase/delta
+    >emb|CAA35615.1||gi|35 Bovine mRNA for 3 beta hydroxy-5-ene steroid dehydrogenase/delta
      5-delta4 isomerase (EC 1.1.1.145, EC 5.3.3.1), and translated products
     MAGWSCLVTGGGGFLGQRIICLLVEEKDLQEIRVLDKVFRPEVREEFSKLQSKIKLTLLEGDILDEQCLK
     GACQGTSVVIHTASVIDVRNAVPRETIMNVNVKGTQLLLEACVQASVPVFIHTSTIEVAGPNSYREIIQD
@@ -375,7 +374,7 @@ Table 5. FASTA sequence ID format values
         gi 35
     }
 
-    id1_fetch -lt state -fasta 'emb\|CAA35615' -fmt xml
+    id1_fetch -lt state -fasta 'emb|CAA35615' -fmt xml
 
     <?xml version="1.0"?>
     <!DOCTYPE ID1server-back PUBLIC "-//NCBI//NCBI ID1Access/EN" "NCBI_ID1Access.dtd">
@@ -383,7 +382,7 @@ Table 5. FASTA sequence ID format values
         <ID1server-back_gistate>40</ID1server-back_gistate>
     </ID1server-back>
 
-    id1_fetch -lt state -flat '5=CAA35615.1' -fmt asnb \| od -t u1
+    id1_fetch -lt state -flat '5=CAA35615.1' -fmt asnb | od -t u1
 
     0000000 166 128 002 001 040 000 000
     0000007

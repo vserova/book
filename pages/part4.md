@@ -4,7 +4,6 @@ title: C++ Toolkit test
 nav: pages/part4
 ---
 
-
 Part 4. Wrappers for 3rd-Party Packages
 =======================================
 

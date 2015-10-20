@@ -4,13 +4,12 @@ title: C++ Toolkit test
 nav: pages/ch_conn
 ---
 
-
-9\. Networking and IPC
+9. Networking and IPC
 =====================
 
 Last Update: October 26, 2014.
 
-Connection Library [Library `xconnect`: [include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect)]
+Connection Library [Library `xconnect`: [include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect)]
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 The overview for this chapter consists of the following topics:
@@ -37,27 +36,27 @@ The following is an outline of the topics presented in this chapter, with links 
 
     -   The notions of a connection and a ***CONNECTOR***; different types of connections that the library provides; programming API.
 
-    -   Open and Manage Connections to an Abstract I/O -- `ncbi_connection`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_connection.h) \\| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_connection.c)]
+    -   Open and Manage Connections to an Abstract I/O -- `ncbi_connection`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_connection.h) \| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_connection.c)]
 
-    -   Abstract I/O -- `ncbi_connector`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_connector.h) \\| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_connector.c)]
+    -   Abstract I/O -- `ncbi_connector`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_connector.h) \| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_connector.c)]
 
-    -   [Socket Connector](#ch-conn.socket-connector) -- `ncbi_socket_connector`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_socket_connector.h) \\| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_socket_connector.c)]
+    -   [Socket Connector](#ch-conn.socket-connector) -- `ncbi_socket_connector`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_socket_connector.h) \| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_socket_connector.c)]
 
-    -   [File Connector](#ch-conn.file-connector) -- `ncbi_file_connector`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_file_connector.h) \\| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_file_connector.c)]
+    -   [File Connector](#ch-conn.file-connector) -- `ncbi_file_connector`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_file_connector.h) \| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_file_connector.c)]
 
-    -   In-memory Connector -- `ncbi_memory_connector`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_memory_connector.h) \\| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_memory_connector.c)]
+    -   In-memory Connector -- `ncbi_memory_connector`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_memory_connector.h) \| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_memory_connector.c)]
 
     -   Higher level connection protocols:
 
         -   [Common Parameters](#ch-conn.Connection-related-parameters) for higher level connectors
 
-        -   [HTTP Connector](#ch-conn.HTTP-Connector) -- `ncbi_http_connector`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_http_connector.h) \\| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_http_connector.c)]
+        -   [HTTP Connector](#ch-conn.HTTP-Connector) -- `ncbi_http_connector`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_http_connector.h) \| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_http_connector.c)]
 
-        -   [Service Connector](#ch-conn.service-connector) -- `ncbi_service_connector`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_service_connector.h) \\| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_service_connector.c)]
+        -   [Service Connector](#ch-conn.service-connector) -- `ncbi_service_connector`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_service_connector.h) \| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_service_connector.c)]
 
 -   [Debugging Tools and Troubleshooting Documentation](#ch-conn.conn-debug-tools)
 
--   [CONN-Based C++ Streams and Stream Buffers](#ch-conn.cpp-connection-streams) -- `ncbi_conn_stream`[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_conn_stream.hpp) \\| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_conn_stream.cpp)], `ncbi_conn_streambuf`[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_conn_streambuf.hpp) \\| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_conn_streambuf.cpp)]
+-   [CONN-Based C++ Streams and Stream Buffers](#ch-conn.cpp-connection-streams) -- `ncbi_conn_stream`[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_conn_stream.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_conn_stream.cpp)], `ncbi_conn_streambuf`[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_conn_streambuf.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_conn_streambuf.cpp)]
 
     -   Built on top of connection objects.
 
@@ -65,17 +64,17 @@ The following is an outline of the topics presented in this chapter, with links 
 
     -   Description of service name resolution API.
 
-    -   NCBI Server Meta-Address Info -- `ncbi_server_info`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_server_info.h) \\| [p.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_server_infop.h) \\| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_server_info.c)]
+    -   NCBI Server Meta-Address Info -- `ncbi_server_info`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_server_info.h) \| [p.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_server_infop.h) \| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_server_info.c)]
 
-    -   Resolve NCBI Service Name to the Server Meta-Address -- `ncbi_service`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_service.h) \\| [p.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_servicep.h) \\| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_service.c)]
+    -   Resolve NCBI Service Name to the Server Meta-Address -- `ncbi_service`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_service.h) \| [p.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_servicep.h) \| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_service.c)]
 
-    -   Resolve NCBI Service Name to the Server Meta-Address using NCBI Network Dispatcher ([DISPD](ch_app.html#ch_app.DISPD_Network_Dispat)) -- `ncbi_dispd`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_dispd.h) \\| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_dispd.c)]
+    -   Resolve NCBI Service Name to the Server Meta-Address using NCBI Network Dispatcher ([DISPD](ch_app.html#ch_app.DISPD_Network_Dispat)) -- `ncbi_dispd`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_dispd.h) \| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_dispd.c)]
 
-    -   Resolve NCBI Service Name to the Server Meta-Address using NCBI [Load-Balancing Service Mapper (LBSM)](ch_app.html#ch_app.Load_Balancing_Servi) -- `ncbi_lbsmd`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_lbsmd.h) \\| [.c](http://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_lbsmd.c) \\| [\_stub.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_lbsmd_stub.c)]
+    -   Resolve NCBI Service Name to the Server Meta-Address using NCBI [Load-Balancing Service Mapper (LBSM)](ch_app.html#ch_app.Load_Balancing_Servi) -- `ncbi_lbsmd`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_lbsmd.h) \| [.c](http://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_lbsmd.c) \| [\_stub.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_lbsmd_stub.c)]
 
-    -   [NCBI LBSM client-server data exchange API](#ch-conn.service-mapping-api) -- `ncbi_lbsm`[[.h](http://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_lbsm.h) \\| [.c](http://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_lbsm.c)]
+    -   [NCBI LBSM client-server data exchange API](#ch-conn.service-mapping-api) -- `ncbi_lbsm`[[.h](http://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_lbsm.h) \| [.c](http://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_lbsm.c)]
 
-    -   Implementation of LBSM Using SYSV IPC (shared memory and semaphores) -- `ncbi_lbsm_ipc`[[.h](http://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_lbsm_ipc.h) \\| [.c](http://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_lbsm_ipc.c)]
+    -   Implementation of LBSM Using SYSV IPC (shared memory and semaphores) -- `ncbi_lbsm_ipc`[[.h](http://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_lbsm_ipc.h) \| [.c](http://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_lbsm_ipc.c)]
 
 -   [Threaded Server Support](#ch-conn.Threaded-Server-Supp)
 
@@ -83,31 +82,31 @@ For additional related information, see:
 
 -   C++ Interfaces to the Library
 
-    -   [Diagnostic Handler for E-Mailing Logs](ch_cgi.html#ch_cgi.cgi_diag.html) -- `email_diag_handler`[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/email_diag_handler.hpp) \\| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/email_diag_handler.cpp)]
+    -   [Diagnostic Handler for E-Mailing Logs](ch_cgi.html#ch_cgi.cgi_diag.html) -- `email_diag_handler`[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/email_diag_handler.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/email_diag_handler.cpp)]
 
-    -   [Using the CONNECT Library with the C++ Toolkit](ch_res.html#ch_res.c_cxx.html) -- `ncbi_core_cxx`[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_core_cxx.hpp) \\| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_core_cxx.cpp)]
+    -   [Using the CONNECT Library with the C++ Toolkit](ch_res.html#ch_res.c_cxx.html) -- `ncbi_core_cxx`[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_core_cxx.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_core_cxx.cpp)]
 
-    -   Multithreaded Network Server Framework -- `threaded_server`[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/threaded_server.hpp) \\| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/threaded_server.cpp)]
+    -   Multithreaded Network Server Framework -- `threaded_server`[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/threaded_server.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/threaded_server.cpp)]
 
--   [Basic Types and Functionality (for Registry, Logging and MT Locks)](ch_res.html#ch_res.c_cxx.html_ref_RunTimeResources) -- `ncbi_core`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_core.h) \\| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_core.c)], `ncbi_types`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_types.h)]
+-   [Basic Types and Functionality (for Registry, Logging and MT Locks)](ch_res.html#ch_res.c_cxx.html_ref_RunTimeResources) -- `ncbi_core`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_core.h) \| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_core.c)], `ncbi_types`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_types.h)]
 
--   Portable TCP/IP Socket Interface -- `ncbi_socket`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_socket.h) \\| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_socket.c)]
+-   Portable TCP/IP Socket Interface -- `ncbi_socket`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_socket.h) \| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_socket.c)]
 
 -   Memory Management
 
-    -   Memory-Resident FIFO Storage Area -- `ncbi_buffer`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_buffer.h) \\| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_buffer.c)]
+    -   Memory-Resident FIFO Storage Area -- `ncbi_buffer`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_buffer.h) \| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_buffer.c)]
 
-    -   Simple Heap Manager With Primitive Garbage Collection -- `ncbi_heapmgr`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_heapmgr.h) \\| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_heapmgr.c)]
+    -   Simple Heap Manager With Primitive Garbage Collection -- `ncbi_heapmgr`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_heapmgr.h) \| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_heapmgr.c)]
 
 -   Connection Library Utilities
 
-    -   Connection Utilities -- `ncbi_connutil`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_connutil.h) \\| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_connutil.c)]
+    -   Connection Utilities -- `ncbi_connutil`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_connutil.h) \| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_connutil.c)]
 
-    -   Send Mail (in accordance with RFC821 [protocol] and RFC822 [headers]) -- `ncbi_sendmail`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_sendmail.h) \\| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_sendmail.c)]
+    -   Send Mail (in accordance with RFC821 [protocol] and RFC822 [headers]) -- `ncbi_sendmail`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_sendmail.h) \| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_sendmail.c)]
 
-    -   Auxiliary (optional) Code for `ncbi_core`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_core.h) \\| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_core.c)] -- `ncbi_util`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_util.h) \\| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_util.c)]
+    -   Auxiliary (optional) Code for `ncbi_core`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_core.h) \| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_core.c)] -- `ncbi_util`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_util.h) \| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_util.c)]
 
-    -   Non-ANSI, Widely Used Functions -- `ncbi_ansi_ext`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_ansi_ext.h) \\| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_ansi_ext.c)]
+    -   Non-ANSI, Widely Used Functions -- `ncbi_ansi_ext`[[.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_ansi_ext.h) \| [.c](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/ncbi_ansi_ext.c)]
 
 -   daemons [[src/connect/daemons](http://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/CPP_DOC/lxr/source/src/connect/daemons)]
 
@@ -407,7 +406,7 @@ The network information structure (from [connect/ncbi\_connutil.h](http://www.nc
      * NOTE2:      HTTP passwords can be either clear text or Base64 encoded values
      *             enclosed in square brackets [] (which are not Base-64 charset).
      *             For encoding / decoding, one can use command line open ssl:
-     *             echo "password\|base64value" \| openssl enc {-e\|-d} -base64
+     *             echo "password|base64value" | openssl enc {-e|-d} -base64
      *             or an online tool (search the Web for "base64 online").
      */
     typedef struct {  /* NCBI_FAKE_WARNING: ICC */
@@ -454,17 +453,13 @@ The convenience API consists of these functions:
 
 -   [ConnNetInfo\_Create](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ConnNetInfo_Create)`(const char* service)`<br/><br/>Create and return a pointer to a new ***SConnNetInfo*** structure, filled either with parameters specific to a named **`service`** or with default values (if the **`service`** is specified as **`NULL`**, which is typical in the case of ordinary HTTP connections). Parameters for the structure are taken from (in order of precedence):
 
-    1  
-    environment variables of the form **`<service>_CONN_<name>`**, where **`name`** is the name of the field;
+    1.  environment variables of the form **`<service>_CONN_<name>`**, where **`name`** is the name of the field;
 
-    2  
-    a service-specific registry section (see below the note about the registry) named **`[service]`** using the key **`CONN_<name>`**;
+    2.  a service-specific registry section (see below the note about the registry) named **`[service]`** using the key **`CONN_<name>`**;
 
-    3  
-    an environment variable of the form **`CONN_<name>`**; or
+    3.  an environment variable of the form **`CONN_<name>`**; or
 
-    4  
-    a registry section named **`[CONN]`** using **`name`** as a key.<br/><br/>The default value is applied if none of the above resulted in a successful match.<br/><br/>The search for the keys in both environment and registry is not case-sensitive, but the values of the keys are case sensitive (except for enumerated types and boolean values, which can be of any, even mixed, case). Boolean fields accept `1`, `"ON"`, `"YES"`, and `"TRUE"` as `true` values; all other values are treated as `false`. In addition to a floating point number treated as a number of seconds, **`timeout`** can accept (case-insensitively) the keyword `"INFINITE"`.<br/><br/>***Note***: The first two steps in the above sequence are skipped if the **`service`** name is passed as **`NULL`**.<br/><br/>***Caution***: The library can not provide reasonable default values for **`path`** and **`args`** when the structure is used for HTTP connectors.
+    4.  a registry section named **`[CONN]`** using **`name`** as a key.<br/><br/>The default value is applied if none of the above resulted in a successful match.<br/><br/>The search for the keys in both environment and registry is not case-sensitive, but the values of the keys are case sensitive (except for enumerated types and boolean values, which can be of any, even mixed, case). Boolean fields accept `1`, `"ON"`, `"YES"`, and `"TRUE"` as `true` values; all other values are treated as `false`. In addition to a floating point number treated as a number of seconds, **`timeout`** can accept (case-insensitively) the keyword `"INFINITE"`.<br/><br/>***Note***: The first two steps in the above sequence are skipped if the **`service`** name is passed as **`NULL`**.<br/><br/>***Caution***: The library can not provide reasonable default values for **`path`** and **`args`** when the structure is used for HTTP connectors.
 
 <!-- -->
 
@@ -514,7 +509,7 @@ Argument [flags](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=TSO
 
 -   **`fHTTP_UrlEncodeOutput`** - URL encode output data passed in the HTTP body to the HTTP server.<br/>
 
--   **`fHTTP_UrlCodec`** - Perform both decoding and encoding (**`fHTTP_UrlDecodeInput \| fHTTP_UrlEncodeOutput`**).<br/>
+-   **`fHTTP_UrlCodec`** - Perform both decoding and encoding (**`fHTTP_UrlDecodeInput | fHTTP_UrlEncodeOutput`**).<br/>
 
 -   **`fHTTP_NoUpread`** - By default, writing always verifies that incoming data are available for reading, and those data are extracted and stored in an internal buffer. This default behavior avoids I/O deadlock, when writing creates a backward stream of data, which, if unread, blocks the connection entirely. This flag disables the default behavior, making connections ***not*** attempt to empty incoming data channel into a temporary intermediate buffer while sending data to the HTTP server.<br/>
 
@@ -632,7 +627,7 @@ A formal description of these types is given in [connect/ncbi\_server\_info.h](h
         fSERV_Standalone = 0x02,
         fSERV_HttpGet    = 0x04,
         fSERV_HttpPost   = 0x08,
-        fSERV_Http       = fSERV_HttpGet \| fSERV_HttpPost,
+        fSERV_Http       = fSERV_HttpGet | fSERV_HttpPost,
         fSERV_Firewall   = 0x10,
         fSERV_Dns        = 0x20
     } ESERV_Type;
@@ -852,7 +847,7 @@ The API defined in [connect/ncbi\_service.h](http://www.ncbi.nlm.nih.gov/IEB/Too
         }
         SERV_Close(iter);
     }
-    if (!iter \|\| !n)
+    if (!iter || !n)
         printf("Service not found\n");
 
 ***Note:*** Services can be [redirected](#ch-conn.Service-Redirection).
@@ -1016,7 +1011,7 @@ The list of local services is only used in cases of wildcard searches, or in cas
 
 Examples:
 
-1\. In `.ini` file
+1. In `.ini` file
 
     [CONN]
     LOCAL_ENABLE=yes
@@ -1030,7 +1025,7 @@ Examples:
 
 Note that entries for MSSQL14, 16, and 17 are not shown, and they are not required (inexistent definitions for declared services are simply ignored).
 
-2\. In environment set the following variables (equivalent to the `.ini` fragment above but having a higher precedence):
+2. In environment set the following variables (equivalent to the `.ini` fragment above but having a higher precedence):
 
     CONN_LOCAL_ENABLE=yes
     CONN_LOCAL_SERVICES="MSSQL10 MSSQL14 MSSQL15 MSSQL16 MSSQL17"

@@ -4,7 +4,6 @@ title: C++ Toolkit test
 nav: pages/fm
 ---
 
-
 Book Information
 ================
 

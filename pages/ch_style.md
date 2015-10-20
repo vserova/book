@@ -4,8 +4,7 @@ title: C++ Toolkit test
 nav: pages/ch_style
 ---
 
-
-7\. Programming Policies and Guidelines
+7. Programming Policies and Guidelines
 ======================================
 
 Last Update: September 24, 2014.
@@ -370,13 +369,13 @@ In `if, for, while, do, switch, case`, etc. and type definition statements:
 
  
 
-    struct\|union\|enum <[S\|U\|E]TypeName> {
+    struct|union|enum <[S|U|E]TypeName> {
         .....;
     };
 
  
 
-    class \| struct \| union <[C\|I\|P\|S\|U]TypeName>
+    class | struct | union <[C|I|P|S|U]TypeName>
     {
         .....;
     };
@@ -562,7 +561,7 @@ As the above examples do not make all of our policies on whitespace clear, here 
 
 -   When reasonably possible, use spaces to align corresponding elements vertically. (This overrides most of the rules below.)
 
--   Leave one space on either side of most binary operators, and two spaces on either side of boolean `&&` and `\|\|`.
+-   Leave one space on either side of most binary operators, and two spaces on either side of boolean `&&` and `||`.
 
 -   Put one space between the names of flow-control keywords and macros and their arguments, but no space after the names of functions except when necessary for alignment.
 

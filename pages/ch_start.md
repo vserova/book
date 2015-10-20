@@ -4,8 +4,7 @@ title: C++ Toolkit test
 nav: pages/ch_start
 ---
 
-
-2\. Getting Started
+2. Getting Started
 ==================
 
 Last Update: September 27, 2014.
@@ -86,7 +85,7 @@ A good deal of the complication and tedium of getting started has thankfully bee
 
 -   **Get the Source Tree (see** [Figure 1](#ch-start.F1)**)**
 
-    -   Retrieve via SVN ([in-house](ch_getcode_svn.html#ch_getcode_svn.code_retrieval) \\| [public](ch_getcode_svn.html#ch_getcode_svn.external)), **or**
+    -   Retrieve via SVN ([in-house](ch_getcode_svn.html#ch_getcode_svn.code_retrieval) \| [public](ch_getcode_svn.html#ch_getcode_svn.external)), **or**
 
     -   Download [via FTP](ch_getcode_svn.html#ch_getcode_svn.ftp_download), **or**
 
@@ -430,7 +429,7 @@ Fortunately, for the common situations where a [script](ch_getcode_svn.html#ch_g
 
 -   [Compiler Flag Macros](ch_build.html#ch_build.build_make_macros): **`CFLAGS, CPPFLAGS, CXXFLAGS, LDFLAGS`** Include or override C compiler, C/C++ preprocessor, C++ compiler, and linker flags, respectively. Many more localization macros are also [available for use](ch_config.html#ch_config.ch_configlocalizatio).
 
--   [Altering the Active Version of the Toolkit](ch_proj.html#ch_proj.new_project_Starting) You can change the active version of NCBI C++ toolkit by manually setting the variable **`$(builddir)`** in `Makefile.foo_[app\|lib]` to the desired toolkit path, e.g.: `builddir = $(NCBI)/c++/GCC-Release/build`.<br/>Consult [this list](ch_proj.html#ch_proj.outside_dir_loc) or, better, look at the output of '`ls -d $NCBI/c++/*/build`' to see those pre-built Toolkit builds available on your system.
+-   [Altering the Active Version of the Toolkit](ch_proj.html#ch_proj.new_project_Starting) You can change the active version of NCBI C++ toolkit by manually setting the variable **`$(builddir)`** in `Makefile.foo_[app|lib]` to the desired toolkit path, e.g.: `builddir = $(NCBI)/c++/GCC-Release/build`.<br/>Consult [this list](ch_proj.html#ch_proj.outside_dir_loc) or, better, look at the output of '`ls -d $NCBI/c++/*/build`' to see those pre-built Toolkit builds available on your system.
 
 <a name="ch-start.coding-infrastructure"></a>
 
@@ -444,7 +443,7 @@ Summarized below are some features of the global Toolkit infrastructure that use
 
 -   ***Configuration-Dependent Macros and*** `ncbiconf.h`` #ifdef` tests for the configuration-dependent macros, for example **`_DEBUG`** or **`NCBI_OS_UNIX`**, etc., are used throughout the Toolkit for conditional compilation and accommodate your environment's requirements. The **configure** script defines many of these macros; the resulting `#define`'s appear in the [ncbiconf.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/find?string=ncbiconf.h) header and is found in the `<builddir>/inc` directory. It is not typically included explicitly by the programmer, however. Rather, it is included by other basic Toolkit headers (e.g., `ncbitype.h, ncbicfg.h, ncbistl.hpp`) to pick up configuration-specific features.
 
--   ***NCBI Types (***`ncbitype.h, ncbi_limits.[h\|hpp]`***)*** To promote code portability developers are strongly encouraged to use these standard C/C++ types whenever possible as they are ensured to have well-defined behavior throughout the Toolkit. Also see the current [type-use rules](ch_core.html#ch_core.types_policy). The [ncbitype.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbitype.h) header provides a set of [fixed-size integer types](ch_core.html#ch_core.fixed_size_integers) for special situations, while the `ncbi_limits.[`[h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbi_limits.h)`\| `[hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbi_limits.h)`]` headers set numeric limits for the supported types.
+-   ***NCBI Types (***`ncbitype.h, ncbi_limits.[h|hpp]`***)*** To promote code portability developers are strongly encouraged to use these standard C/C++ types whenever possible as they are ensured to have well-defined behavior throughout the Toolkit. Also see the current [type-use rules](ch_core.html#ch_core.types_policy). The [ncbitype.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbitype.h) header provides a set of [fixed-size integer types](ch_core.html#ch_core.fixed_size_integers) for special situations, while the `ncbi_limits.[`[h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbi_limits.h)`| `[hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbi_limits.h)`]` headers set numeric limits for the supported types.
 
 -   ***The*** `ncbistd.hpp` ***header*** The NCBI C++ standard \#include's and \#defin'itions are found in [ncbistd.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbistd.hpp), which provides the interface to many of the basic Toolkit modules. The explicit NCBI headers included by `ncbistd.hpp` are: `ncbitype.h, ncbistl.hpp, ncbistr.hpp, ncbidbg.hpp, ncbiexpt.hpp` and `ncbi_limits.h`.
 
@@ -452,7 +451,7 @@ Summarized below are some features of the global Toolkit infrastructure that use
 
 -   ***Use of the C++ STL (Standard Template Library) in the Toolkit*** The Toolkit employs the STL's set of template container classes, algorithms and iterators for managing collections of objects. Being standardized interfaces, coding with them provides portability. However, one drawback is the inability of STL containers to deal with reference objects, a problem area the Toolkit's [CRef and CObject classes](ch_core.html#ch_core.CRef) largely remedy.
 
--   ***Serializable Objects, the ASN.1 Data Types and*** **datatool** The [ASN.1 data model](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/DATAMODL.HTML) for biological data underlies all of the C and C++ Toolkit development at NCBI. The C++ Toolkit represents the ASN.1 data types as [serializable objects](ch_proj.html#ch_proj.ser_object), that is, objects able to save, restore, or transmit their state. This requires knowledge of an object's type and as such a ***CTypeInfo*** object is provided in each class to encapsulate [type information](ch_ser.html#ch_ser.typeinfo.html).<br/>Additionally, [object stream](ch_ser.html#ch_ser.objstream.html) classes (***CObject[IO]Stream***, and subclasses) have been designed specifically to perform data object serialization. The nuts-and-bolts of doing this has been documented on the [Processing Serial Data](ch_ser.html#ch_ser.asn.html) page, with additional information about the contents and parsing of ASN.1-derived objects in [Traversing a Data Structure](ch_ser.html#ch_ser.traverse.html).Each of the serializable objects appears in its own subdirectory under `[`[src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects)`\| `[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects)`]/objects`. These `objects/*` projects are configured differently from the rest of the Toolkit, in that header and source files are auto-generated from the ASN.1 specifications by the [datatool](ch_app.html#ch_app.datatool) program. The --with-objects flag to **configure** also directs a build of the [user classes](ch_proj.html#ch_proj.base_classes) for the serializable objects.
+-   ***Serializable Objects, the ASN.1 Data Types and*** **datatool** The [ASN.1 data model](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/DATAMODL.HTML) for biological data underlies all of the C and C++ Toolkit development at NCBI. The C++ Toolkit represents the ASN.1 data types as [serializable objects](ch_proj.html#ch_proj.ser_object), that is, objects able to save, restore, or transmit their state. This requires knowledge of an object's type and as such a ***CTypeInfo*** object is provided in each class to encapsulate [type information](ch_ser.html#ch_ser.typeinfo.html).<br/>Additionally, [object stream](ch_ser.html#ch_ser.objstream.html) classes (***CObject[IO]Stream***, and subclasses) have been designed specifically to perform data object serialization. The nuts-and-bolts of doing this has been documented on the [Processing Serial Data](ch_ser.html#ch_ser.asn.html) page, with additional information about the contents and parsing of ASN.1-derived objects in [Traversing a Data Structure](ch_ser.html#ch_ser.traverse.html).Each of the serializable objects appears in its own subdirectory under `[`[src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects)`| `[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects)`]/objects`. These `objects/*` projects are configured differently from the rest of the Toolkit, in that header and source files are auto-generated from the ASN.1 specifications by the [datatool](ch_app.html#ch_app.datatool) program. The --with-objects flag to **configure** also directs a build of the [user classes](ch_proj.html#ch_proj.base_classes) for the serializable objects.
 
 <a name="ch-start.key-classes"></a>
 

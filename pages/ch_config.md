@@ -4,8 +4,7 @@ title: C++ Toolkit test
 nav: pages/ch_config
 ---
 
-
-4\. Configure, Build, and Use the Toolkit
+4. Configure, Build, and Use the Toolkit
 ========================================
 
 Last Update: November 13, 2014.
@@ -240,7 +239,7 @@ Path lines may have a trailing "`update-only`". If so, it means that the selecte
 
 Path components may contain limited regular-expression-like syntax. For example,
 
-    internal/[^m].*/(app\|unit_test\|demo\|samples).*
+    internal/[^m].*/(app|unit_test|demo|samples).*
 
 selects all the sub-subdirectories beginning with `app`, `unit_test`, `demo`, or `samples` that are contained in all internal subdirectories that begin with something other than '`m`'. Different tools may support regular expressions to different degrees. The special string `c++` in a path may be interpreted literally rather than as a regular expression.
 
@@ -367,7 +366,7 @@ An important benefit of using project tags is that all dependencies for the proj
 
 All project tags must be defined in `src\build-system\project_tags.txt` prior to use. Tag names should be easily recognizable and classifiable, like ‘`proj[_subproj]`’, e.g. “`pubchem`” or “`pubchem_openeye`”.
 
-Once defined in `project_tags.txt`, project tags can then be associated with any number of projects by using the **`PROJ_TAG`** macro in the `Makefile.in` or `Makefile.*.{app\|lib}` for the selected projects. Project tag definitions apply recursively to subprojects and subdirectories (similar to a [`REQUIRES`](ch_proj.html#ch_proj.proj_makefiles) definition), thereby removing the need to define tags in all makefiles in a subtree. Subprojects may define additional tags, or undefine inherited tags by prefixing a hyphen '`-`' to the tag.
+Once defined in `project_tags.txt`, project tags can then be associated with any number of projects by using the **`PROJ_TAG`** macro in the `Makefile.in` or `Makefile.*.{app|lib}` for the selected projects. Project tag definitions apply recursively to subprojects and subdirectories (similar to a [`REQUIRES`](ch_proj.html#ch_proj.proj_makefiles) definition), thereby removing the need to define tags in all makefiles in a subtree. Subprojects may define additional tags, or undefine inherited tags by prefixing a hyphen '`-`' to the tag.
 
 The syntax for defining (or undefining) a project tag is:
 
@@ -389,29 +388,23 @@ then the latter project's effective tag definition is:
 
 ##### Filtering with Project Tags
 
-A tag filter can be constructed from one or more project tags – either as a single tag or as a Boolean expression of tags. Boolean expressions of tags can include grouping (parentheses) and the '`&&`' (AND), '`\|\|`" (OR), and '`!`' (NOT) operators, for example: `(core \|\| web) && !test`
+A tag filter can be constructed from one or more project tags – either as a single tag or as a Boolean expression of tags. Boolean expressions of tags can include grouping (parentheses) and the '`&&`' (AND), '`||`" (OR), and '`!`' (NOT) operators, for example: `(core || web) && !test`
 
 ***Note:*** An asterisk '`*`' or an empty string can be used in place of a tag filter in the "Allowed project tags" field on the [Configuration tab](#ch-config.Configuration-tab) of the configuration GUI. These values are not filters, but simply indicate that all projects in the build scope will be passed to the configuration process without filtering.
 
 The following places are searched in the order given for the tag filter to use (if any) in the configuration process:
 
-1  
-The "Allowed project tags" field in the configuration GUI (if the configuration GUI is being used).
+1.  The "Allowed project tags" field in the configuration GUI (if the configuration GUI is being used).
 
-2  
-A tag filter definition line in a project list file (if one is being used).
+2.  A tag filter definition line in a project list file (if one is being used).
 
-a  
-To use a project list file for configuration, either specify the project list file in the "Subtree, or LST file" field on the [Configuration tab](#ch-config.Configuration-tab) of the configuration GUI or use the `--with-projects=FILE` argument for the `configure` script.
+    -   To use a project list file for configuration, either specify the project list file in the "Subtree, or LST file" field on the [Configuration tab](#ch-config.Configuration-tab) of the configuration GUI or use the `--with-projects=FILE` argument for the `configure` script.
 
-b  
-When one project list file includes another, only the original will be scanned for a filter. This applies to both interactive (i.e. with the configuration GUI) and non-interactive configuring.
+    -   When one project list file includes another, only the original will be scanned for a filter. This applies to both interactive (i.e. with the configuration GUI) and non-interactive configuring.
 
-c  
-The syntax for the tag filter definition line in a project list file is: `#define TAGS [ tag_filter ]`
+    -   The syntax for the tag filter definition line in a project list file is: `#define TAGS [ tag_filter ]`
 
-3  
-For MSVC, the **`-projtag`** option of the **`PTB_FLAGS`** macro in the `compilers\msvc1000_prj\static\build\UtilityProjects\configure._` file for non-interactive configuring, or the same option in the `configure_dialog._` file for interactive configuring.
+3.  For MSVC, the **`-projtag`** option of the **`PTB_FLAGS`** macro in the `compilers\msvc1000_prj\static\build\UtilityProjects\configure._` file for non-interactive configuring, or the same option in the `configure_dialog._` file for interactive configuring.
 
 If a significant tag filter (i.e. something besides an asterisk or empty field) is found in one of the above places, then that tag filter will be supplied to the configuration process. Otherwise, there will be no filtering of the projects.
 
@@ -489,7 +482,7 @@ The Configuration tab allows you to:
 
 -   Specify the subset of the Toolkit that you want to build, using either a path for a subtree (e.g. `src\`) or a project list file (`*.lst`) for specific projects. Clicking on the "..." button opens a file selection dialog, which can be used to navigate to the desired subtree or to select a project list file.
 
--   Specify one or more project tags (which will restrict the scope of the build to the specified projects). Clicking on the "..." button simply displays the valid choices for project tags (it isn't used for selecting tags). More than one project tag can be combined in a Boolean expression, for example:<br/>`(code \|\| web) && !test`
+-   Specify one or more project tags (which will restrict the scope of the build to the specified projects). Clicking on the "..." button simply displays the valid choices for project tags (it isn't used for selecting tags). More than one project tag can be combined in a Boolean expression, for example:<br/>`(code || web) && !test`
 
 -   Load a configuration from a file. This requires having previously saved a configuration, from the [Done tab](#ch-config.Done-tab). If you load a configuration from a file, the file path is shown in the "Originally loaded from" text field and the Reset button becomes enabled. Clicking the Reset button resets all configuration settings to the values that were used to invoke the configuration GUI.
 
@@ -1093,7 +1086,7 @@ Some of the above system and third-party packages can be prohibited from use by 
 
 *--without-orbacus* (ORBacus CORBA)
 
-[and MANY more; ./configure --help \\| grep ‘\\-\\-without-‘ will give a current list for both this and the following heading.]
+[and MANY more; ./configure --help \| grep ‘\\-\\-without-‘ will give a current list for both this and the following heading.]
 
 <a name="ch-config.Optional-Projects"></a>
 
@@ -1101,15 +1094,15 @@ Some of the above system and third-party packages can be prohibited from use by 
 
 You can control whether to build the following core packages using the following ***configure*** flags:
 
-*--without-serial* -- do not build C++ ASN.1 serialization library and [datatool](ch_app.html#ch_app.datatool); see in `internal/c++/{ `[src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/serial) *\\|* [include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/serial)`}/serial` directories
+*--without-serial* -- do not build C++ ASN.1 serialization library and [datatool](ch_app.html#ch_app.datatool); see in `internal/c++/{ `[src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/serial) *\|* [include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/serial)`}/serial` directories
 
-*--without-ctools* -- do not build projects that use NCBI C Toolkit see in `internal/c++/{ `[src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/ctools) *\\|* [include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/ctools)`}/ctools` directories
+*--without-ctools* -- do not build projects that use NCBI C Toolkit see in `internal/c++/{ `[src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/ctools) *\|* [include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/ctools)`}/ctools` directories
 
-*--without-gui* -- do not build projects that use wxWindows GUI package see in `internal/c++/{ `[src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/gui) *\\|* [include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/gui)`}/gui` directories
+*--without-gui* -- do not build projects that use wxWindows GUI package see in `internal/c++/{ `[src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/gui) *\|* [include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/gui)`}/gui` directories
 
-*--with-objects* -- generate and build libraries to serialize ASN.1 objects; see in `internal/c++/{ `[src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects) *\\|* [include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects)`}/objects` directories
+*--with-objects* -- generate and build libraries to serialize ASN.1 objects; see in `internal/c++/{ `[src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects) *\|* [include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects)`}/objects` directories
 
-*--with-internal* -- build of internal projects is by default disabled on most platforms; see in `internal/c++/{ `[src](http://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/CPP_DOC/lxr/source/src/internal) *\\|* [include](http://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/CPP_DOC/lxr/source/include/internal)`}/internal` directories
+*--with-internal* -- build of internal projects is by default disabled on most platforms; see in `internal/c++/{ `[src](http://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/CPP_DOC/lxr/source/src/internal) *\|* [include](http://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/CPP_DOC/lxr/source/include/internal)`}/internal` directories
 
 <a name="ch-config.Miscellaneous-withou"></a>
 
@@ -1304,9 +1297,9 @@ Most of the non-GCC compilers require special tools and additional mandatory fla
 
 These wrapper scripts are located in the *compilers/* directory, and now we have such wrappers for the `SUN WorkShop` (`5.5` through `5.9)`, `GCC` and `ICC` compilers:
 
--   `WorkShop.sh` {32\\|64} [build\_dir] [--configure-flags]
+-   `WorkShop.sh` {32\|64} [build\_dir] [--configure-flags]
 
--   `WorkShop55.sh` {32\\|64} [build\_dir] [--configure-flags]
+-   `WorkShop55.sh` {32\|64} [build\_dir] [--configure-flags]
 
 -   `ICC.sh` [build\_dir] [--configure-flags]
 
@@ -1551,7 +1544,7 @@ There are a few indispensable external components that have analogs in the Toolk
 
 ##### Fine-Tuning with MSVC Project Files
 
-While default MSVS project settings are defined in the [Makefile.mk.in.msvc](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/build-system/Makefile.mk.in.msvc) file, each project can require additional MSVC-specific fine-tuning, such as compiler or linker options, additional source code, etc. These tune-ups can be specified in `Makefile.<project_name>.[ `[lib](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib/Makefile.corelib.lib.msvc)\\|[app](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/dbapi/Makefile.dbapi_advanced_features.app.msvc)`].msvc` file located in the project source directory. All entries in such `*.msvc` file are optional.
+While default MSVS project settings are defined in the [Makefile.mk.in.msvc](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/build-system/Makefile.mk.in.msvc) file, each project can require additional MSVC-specific fine-tuning, such as compiler or linker options, additional source code, etc. These tune-ups can be specified in `Makefile.<project_name>.[ `[lib](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib/Makefile.corelib.lib.msvc)\|[app](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/dbapi/Makefile.dbapi_advanced_features.app.msvc)`].msvc` file located in the project source directory. All entries in such `*.msvc` file are optional.
 
 Any section name can have one or several optional suffixes, so it can take the following forms:
 
@@ -1561,17 +1554,17 @@ Any section name can have one or several optional suffixes, so it can take the f
 
 -   `SectionName.Platform`
 
--   `SectionName.[static\|dll]`
+-   `SectionName.[static|dll]`
 
--   `SectionName.[debug\|release]`
+-   `SectionName.[debug|release]`
 
--   `SectionName.CompilerVersion.[debug\|release]`
+-   `SectionName.CompilerVersion.[debug|release]`
 
--   `SectionName.[static\|dll].[debug\|release]`
+-   `SectionName.[static|dll].[debug|release]`
 
--   `SectionName.[debug\|release].ConfigurationName`
+-   `SectionName.[debug|release].ConfigurationName`
 
--   `SectionName.[static\|dll].[debug\|release].ConfigurationName`
+-   `SectionName.[static|dll].[debug|release].ConfigurationName`
 
 <a name="ch-config.T4"></a>
 
@@ -1786,35 +1779,25 @@ There is a template solution, `compilers\msvc1000_prj\user\build\ncbi_user.sln`,
 
 ***Note:*** Do not use this solution directly. Instead, make a new solution based on the template:
 
-1  
-Make copies of the `compilers\msvc1000_prj\user\` subtree and the `scripts\projects\ncbi_user.lst` file (keep the copies in the same folders as the originals).
+1.  Make copies of the `compilers\msvc1000_prj\user\` subtree and the `scripts\projects\ncbi_user.lst` file (keep the copies in the same folders as the originals).
 
-2  
-Rename the subtree, solution file, and project list file appropriately, for example to `compilers\msvc1000_prj\project_name\, compilers\msvc1000_prj\project_name\build\project_name.sln`, and `scripts\projects\project_name.lst`.
+2.  Rename the subtree, solution file, and project list file appropriately, for example to `compilers\msvc1000_prj\project_name\, compilers\msvc1000_prj\project_name\build\project_name.sln`, and `scripts\projects\project_name.lst`.
 
-3  
-In the folder `compilers\msvc1000_prj\project_name\build\UtilityProjects\`, use a text editor to edit `_CONFIGURE_.vcproj`, and `_CONFIGURE_DIALOG_.vcproj`. Change all instances of "`ncbi_user`" to "`project_name`".
+3.  In the folder `compilers\msvc1000_prj\project_name\build\UtilityProjects\`, use a text editor to edit `_CONFIGURE_.vcproj`, and `_CONFIGURE_DIALOG_.vcproj`. Change all instances of "`ncbi_user`" to "`project_name`".
 
-4  
-In the same folder, also edit `configure._`, and `configure_dialog._`:
+4.  In the same folder, also edit `configure._`, and `configure_dialog._`:
 
-a  
-Change all instances of "`ncbi_user`" to "`project_name`".
+    -   Change all instances of "`ncbi_user`" to "`project_name`".
 
-b  
-By default, the solution uses static runtime libraries. If you want to use DLL's, also add the `'-dll`' option to the '`set PTB_FLAGS=`' line.
+    -   By default, the solution uses static runtime libraries. If you want to use DLL's, also add the `'-dll`' option to the '`set PTB_FLAGS=`' line.
 
-c  
-By default, the solution uses a project list file. If you don't want to use a project list file (e.g. if you want to use a project tag filter instead), also change the '`set PTB_PROJECT_REQ=`' line to the appropriate subtree, e.g. '`set PTB_PROJECT_REQ=src\cgi\`'.
+    -   By default, the solution uses a project list file. If you don't want to use a project list file (e.g. if you want to use a project tag filter instead), also change the '`set PTB_PROJECT_REQ=`' line to the appropriate subtree, e.g. '`set PTB_PROJECT_REQ=src\cgi\`'.
 
-d  
-If you want to use a project tag filter, add the `'-projtag`' option to the '`set PTB_FLAGS=`' line, e.g. '`set PTB_FLAGS=-projtag "core && !test"`'. See the section on [reducing build scope](#ch-config.Reducing-Build-Scope-with-Proj) for more information on using project tags.
+    -   If you want to use a project tag filter, add the `'-projtag`' option to the '`set PTB_FLAGS=`' line, e.g. '`set PTB_FLAGS=-projtag "core && !test"`'. See the section on [reducing build scope](#ch-config.Reducing-Build-Scope-with-Proj) for more information on using project tags.
 
-5  
-If your new project will use a project list file, edit `scripts\projects\project_name.lst` to identify the required project folders.
+5.  If your new project will use a project list file, edit `scripts\projects\project_name.lst` to identify the required project folders.
 
-6  
-Your custom solution can now be built. Open the solution file `compilers\msvc1000_prj\project_name\build\project_name.sln`, [configure](#ch-config.Configuring-with-Vis), and [build](#ch-config.Building-with-Visual).
+6.  Your custom solution can now be built. Open the solution file `compilers\msvc1000_prj\project_name\build\project_name.sln`, [configure](#ch-config.Configuring-with-Vis), and [build](#ch-config.Building-with-Visual).
 
 Note that the project directory, `msvc1000_prj`, may be different for your version of Visual C++.
 
@@ -1836,9 +1819,9 @@ If you do not have the external libraries already installed, you can download, b
 
 The built Toolkit applications and libraries will be put, respectively, to:
 
-`compilers\msvc1000_prj\{static\|dll}\bin\<config_name>`
+`compilers\msvc1000_prj\{static|dll}\bin\<config_name>`
 
-`compilers\msvc1000_prj\{static\|dll}\lib\<config_name>`
+`compilers\msvc1000_prj\{static|dll}\lib\<config_name>`
 
 Note that the project directory, `msvc1000_prj`, may be different for your version of Visual C++.
 
@@ -1912,14 +1895,11 @@ The script will create the build tree, copy (or extract from the repository) rel
 
 Here's an example showing all the steps needed to build and debug the COBALT test application using `import_project` with Visual C++ (you should be able to apply the approach of this example to your project by changing some names):
 
-1  
-In the Windows command-line prompt, run:<br/>`import_project algo/cobalt`<br/>This will prepare a Visual Studio solution and open Visual Studio. There, build "`cobalt_unit_test.exe`". It's all 32-bit by default, even though your Windows is 64-bit.<br/>(Agree to map "S:" disk if you want to see debug info from the pre-built libraries.)
+1.  In the Windows command-line prompt, run:<br/>`import_project algo/cobalt`<br/>This will prepare a Visual Studio solution and open Visual Studio. There, build "`cobalt_unit_test.exe`". It's all 32-bit by default, even though your Windows is 64-bit.<br/>(Agree to map "S:" disk if you want to see debug info from the pre-built libraries.)
 
-2  
-Copy your "data" dir from:<br/>`imported_projects\src\algo\cobalt\unit_test\data`<br/>to:<br/>`imported_projects\compilers\msvc1000_prj\static\build\algo\cobalt\unit_test\data`
+2.  Copy your "data" dir from:<br/>`imported_projects\src\algo\cobalt\unit_test\data`<br/>to:<br/>`imported_projects\compilers\msvc1000_prj\static\build\algo\cobalt\unit_test\data`
 
-3  
-Debug it (right-click on it, and choose Debug).
+3.  Debug it (right-click on it, and choose Debug).
 
 If this doesn't work (for whatever reasons) on your own PC, you're welcome to use the communal PC servers (via Remote Desktop):
 
@@ -2094,7 +2074,7 @@ In the Toolkit, such compound libraries are described using a set of special mak
 
 ##### Fine-Tuning Xcode Target Build Settings
 
-While default build settings are defined in the `Makefile.mk.in.xcode` file, it is possible to redefine some of them in special tune-up files – `Makefile.<project_name>.{lib\|app}.xcode` – located in the project source directory. All entries in the tune-up files are optional.
+While default build settings are defined in the `Makefile.mk.in.xcode` file, it is possible to redefine some of them in special tune-up files – `Makefile.<project_name>.{lib|app}.xcode` – located in the project source directory. All entries in the tune-up files are optional.
 
 Section names in the tune-up files can have one or more optional suffixes and can take any of the following forms:
 
@@ -2104,17 +2084,17 @@ Section names in the tune-up files can have one or more optional suffixes and ca
 
 -   `SectionName.Platform`
 
--   `SectionName.[static\|dll]`
+-   `SectionName.[static|dll]`
 
--   `SectionName.[debug\|release]`
+-   `SectionName.[debug|release]`
 
--   `SectionName.CompilerVersion.[debug\|release]`
+-   `SectionName.CompilerVersion.[debug|release]`
 
--   `SectionName.[static\|dll].[debug\|release]`
+-   `SectionName.[static|dll].[debug|release]`
 
--   `SectionName.[debug\|release].ConfigurationName`
+-   `SectionName.[debug|release].ConfigurationName`
 
--   `SectionName.[static\|dll].[debug\|release].ConfigurationName`
+-   `SectionName.[static|dll].[debug|release].ConfigurationName`
 
 Here, '`static`' or '`dll`' means the type of runtime libraries that a particular build uses; '`debug`' or '`release`' means the type of the build configuration; and '`ConfigurationName`' means the name of the build configuration, for example DebugDLL or ReleaseMT.
 
@@ -2214,9 +2194,9 @@ To build from the command-line, run `make all_r`. Optionally build the testsuite
 
 Applications and libraries produced by the build will be put, respectively, into:
 
--   `compilers/xcode30_prj/{static\|dll}/bin/<ConfigurationName>`
+-   `compilers/xcode30_prj/{static|dll}/bin/<ConfigurationName>`
 
--   `compilers/xcode30_prj/{static\|dll}/lib/<ConfigurationName>`
+-   `compilers/xcode30_prj/{static|dll}/lib/<ConfigurationName>`
 
 <a name="ch-config.Xcode"></a>
 

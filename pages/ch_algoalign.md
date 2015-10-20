@@ -4,13 +4,12 @@ title: C++ Toolkit test
 nav: pages/ch_algoalign
 ---
 
-
-18\. Biological Sequence Alignment
+18. Biological Sequence Alignment
 =================================
 
 Last Update: October 18, 2013.
 
-The Global Alignment Library [`xalgoalign`:[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/algo/align) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/algo/align)]
+The Global Alignment Library [`xalgoalign`:[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/algo/align) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/algo/align)]
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 The overview for this chapter consists of the following topics:
@@ -157,7 +156,7 @@ To start computations, call ***Run()***, which returns the overall alignment sco
 The immediate output of the global alignment algorithms is a transcript.The transcript serves as a basic representation of alignments and is simply a string of elementary commands transforming the first sequence into the second one on a per-character basis. These commands (transcript characters) are (M)atch, (R)eplace, (I)nsert, and (D)elete. For example, the alignment
 
     TTC-ATCTCTAAATCTCTCTCATATATATCG
-    \|\|\| \|\|\|\|\|\|     \|\|\|\| \|\| \|\|\| \|\|\|\|
+    ||| ||||||     |||| || ||| ||||
     TTCGATCTCT-----TCTC-CAGATAAATCG
 
 has a transcript:
@@ -315,7 +314,7 @@ Supported text formats and their ***ETextFormatType*** constants follow:
 
 -   Type 1 (**`eFormatType1`**):<br/>`TTC-ATCTCTAAATCTCTCTCATATATATCG`<br/>`TTCGATCTCT-----TCTC-CAGATAAATCG`<br/>`                      ^   ^    `<br/>
 
--   Type 2 (**`eFormatType2`**):<br/>`TTC-ATCTCTAAATCTCTCTCATATATATCG`<br/>`\|\|\| \|\|\|\|\|\|     \|\|\|\| \|\| \|\|\| \|\|\|\|`<br/>`TTCGATCTCT-----TCTC-CAGATAAATCG`<br/>
+-   Type 2 (**`eFormatType2`**):<br/>`TTC-ATCTCTAAATCTCTCTCATATATATCG`<br/>`||| ||||||     |||| || ||| ||||`<br/>`TTCGATCTCT-----TCTC-CAGATAAATCG`<br/>
 
 -   Gapped FastA (**`eFormatFastA`**):<br/>`>SEQ1`<br/>`TTC-ATCTCTAAATCTCTCTCATATATATCG`<br/>`>SEQ2`<br/>`TTCGATCTCT-----TCTC-CAGATAAATCG`<br/>
 
