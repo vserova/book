@@ -4,7 +4,6 @@ title: C++ Toolkit test
 nav: pages/ch_core
 ---
 
-EEEE
 
 8\. Portability, Core Functionality and Application Framework
 ============================================================
@@ -22,7 +21,7 @@ The overview for this chapter consists of the following topics:
 
 ### Introduction
 
--   **CORELIB library** `xncbi`:[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib)
+-   **CORELIB library** `xncbi`:[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib) | [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib)
 
 The CORELIB provides a portable low-level API and many useful application framework classes for argument processing, diagnostics, environment interface, object and reference classes, portability definitions, portable exceptions, stream wrappers, string manipulation, threads, etc.
 
@@ -30,7 +29,7 @@ This chapter provides reference material for many of CORELIB's facilities. For a
 
 ***Note***: The CORELIB must be linked to every executable that uses the NCBI C++ Toolkit!
 
--   **UTIL library** `xutil`:[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/util) \\| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/util)
+-   **UTIL library** `xutil`:[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/util) | [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/util)
 
 The UTIL module is a collection of useful classes which can be used in more then one application. This chapter provides reference material for many of UTIL's facilities. For an overview of the UTIL module please refer to the [UTIL section in the introductory chapter](ch_intro.html#ch_intro.intro_util) on the C++ Toolkit.
 
@@ -508,7 +507,7 @@ Complete details for the ***CNcbiRegistry*** can be found in the section on [The
 
 #### CNcbiDiag
 
-The [CNcbiDiag](#ch-core.diag) class implements much of the functionality of the NCBI C++ Toolkit error-processing mechanisms; however, it is not intended to be used directly. Instead, use the [`{ERR\|LOG}_POST*`](#ch-core.ERR-POST) and [`_TRACE`](#ch-core.-TRACE) macros. See the sections on [Diagnostic Streams](#ch-core.diag) and [Message Posting](ch_debug.html#ch_debug.std_cpp_message_post) for related information.
+The [CNcbiDiag](#ch-core.diag) class implements much of the functionality of the NCBI C++ Toolkit error-processing mechanisms; however, it is not intended to be used directly. Instead, use the [`{ERR|LOG}_POST*`](#ch-core.ERR-POST) and [`_TRACE`](#ch-core.-TRACE) macros. See the sections on [Diagnostic Streams](#ch-core.diag) and [Message Posting](ch_debug.html#ch_debug.std_cpp_message_post) for related information.
 
 <a name="ch-core.creating-simple-app"></a>
 
@@ -1008,9 +1007,9 @@ The [CArgDescriptions](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/
 
 **Mandatory named positional arguments:**`<value>` (example: `12 Feb`) These are position-`dependent` arguments (of any type), which are read using a `value` only. They do, however, have names stored with their descriptions, which they are associated with in an order-dependent fashion. Specifically, the order in which untagged argument descriptions are added to the ***CArgDescriptions*** object using ***AddPositional()*** defines the order in which these arguments should appear in the command line. [AddPositional (key, comment, value\_type, flags)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html)
 
-**Optional named positional arguments:**`[value]` (example: `foo.txt bar`) Position-`dependent` arguments that are `optional`. They always go after the `mandatory` positional arguments. The order in which untagged argument descriptions are added to the ***CArgDescriptions*** object using ***Add[Optional\\|Default]Positional()*** defines the order in which these arguments should appear in the command line. [AddOptionalPositional (key, comment, value\_type, flags)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html)[AddDefaultPositional (key, comment, value\_type, default\_value, flags)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html)
+**Optional named positional arguments:**`[value]` (example: `foo.txt bar`) Position-`dependent` arguments that are `optional`. They always go after the `mandatory` positional arguments. The order in which untagged argument descriptions are added to the ***CArgDescriptions*** object using ***Add[Optional|Default]Positional()*** defines the order in which these arguments should appear in the command line. [AddOptionalPositional (key, comment, value\_type, flags)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html)[AddDefaultPositional (key, comment, value\_type, default\_value, flags)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html)
 
-**Unnamed positional arguments** (all of the same type: `<value1> \| [valueN]` (example: `foo.c bar.c xxx.c`). These are also position-`dependent` arguments that are read using a `value` only. They are expected to appear at the very end of the command line, after all named arguments. Unlike the previous argument type, however, these arguments do not have individual, named descriptions but share a single "unnamed" description. You can specify how many mandatory and how many optional arguments to expect using **`n_mandatory`** and **`n_optional`** parameters: [AddExtra (n\_mandatory, n\_optional, comment, type, flags)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html)
+**Unnamed positional arguments** (all of the same type: `<value1> | [valueN]` (example: `foo.c bar.c xxx.c`). These are also position-`dependent` arguments that are read using a `value` only. They are expected to appear at the very end of the command line, after all named arguments. Unlike the previous argument type, however, these arguments do not have individual, named descriptions but share a single "unnamed" description. You can specify how many mandatory and how many optional arguments to expect using **`n_mandatory`** and **`n_optional`** parameters: [AddExtra (n\_mandatory, n\_optional, comment, type, flags)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html)
 
 **Aliases** can be created for any arguments. They allow using an alternative argument name in the command line. However, only the original argument name can be used to access its value in the C++ code.
 
@@ -1778,9 +1777,9 @@ Each ***CNcbiRegistry*** entry has a set of flags that control how it is handled
         fCountCleared   = 0x80,  ///< Let explicitly cleared entries stand
         fSectionCase    = 0x1000,///< Create with case-sensitive section names
         fEntryCase      = 0x2000,///< Create with case-sensitive entry names
-        fCoreLayers     = fTransient \| fPersistent \| fJustCore,
-        fAllLayers      = fTransient \| fPersistent \| fNotJustCore,
-        fCaseFlags      = fSectionCase \| fEntryCase
+        fCoreLayers     = fTransient | fPersistent | fJustCore,
+        fAllLayers      = fTransient | fPersistent | fNotJustCore,
+        fCaseFlags      = fSectionCase | fEntryCase
     };
     typedef int TFlags;  ///< Binary OR of "EFlags"
 
@@ -1801,7 +1800,7 @@ The flag **`fWithNcbirc`** can be passed to the ***CNcbiRegistry*** constructor,
 For example, the following code demonstrates that the bit-wise OR of **`fTruncate `**and **`fNoOverride`** strips all leading and trailing blanks and does not override an existing value:
 
     CNcbiRegistry reg;
-    CNcbiRegistry::TFlags flags = CNcbiRegistry::fNoOverride \|
+    CNcbiRegistry::TFlags flags = CNcbiRegistry::fNoOverride |
                                   CNcbiRegistry::fTruncate;
     reg.Set("MySection", "MyName", " Not Overridden  ", flags);
     reg.Set("MySection", "MyName", " Not Saved ",       flags);
@@ -1821,7 +1820,7 @@ Once the registry has been initialized by its constructor, it is also possible t
 
     void Read(CNcbiIstream& is, TFlags flags = 0);
 
-Valid flags for the ***Read()*** method include **`eTransient `**and **`eNoOverride`**. The default is for all values to be read in as `persistent`, with the capability of overriding any previously loaded value associated with the same name. Either or both of these defaults can be modified by specifying **`eTransient, eNoOverride`**, or (**`eTransient \| eNoOverride`**) as the **`flags`** argument in the above expression.
+Valid flags for the ***Read()*** method include **`eTransient `**and **`eNoOverride`**. The default is for all values to be read in as `persistent`, with the capability of overriding any previously loaded value associated with the same name. Either or both of these defaults can be modified by specifying **`eTransient, eNoOverride`**, or (**`eTransient | eNoOverride`**) as the **`flags`** argument in the above expression.
 
 The ***Write()*** method takes as its sole argument, a destination stream to which only the `persistent` configuration parameters will be written.
 
@@ -1934,7 +1933,7 @@ The following decision tree describes how the destination for diagnostics messag
 
 1.  Before the application is constructed (before ***AppMain()*** is called), everything goes to:
 
-    1.  (Unix-like systems only) `/log/fallback/UNKNOWN.{log\|err\|trace}` -- if available
+    1.  (Unix-like systems only) `/log/fallback/UNKNOWN.{log|err|trace}` -- if available
 
     2.  **`STDERR`** -- otherwise
 
@@ -1944,17 +1943,17 @@ The following decision tree describes how the destination for diagnostics messag
 
         1.  (Unix-like systems only) if `/log` is present:
 
-            1.  if the application is described in `/etc/toolkitrc` -- to `/log/<token>/appname.{log\|err\|trace}`
+            1.  if the application is described in `/etc/toolkitrc` -- to `/log/<token>/appname.{log|err|trace}`
 
-            2.  else if environment variable **`$SERVER_PORT`** is set -- to `/log/$SERVER_PORT/appname.{log\|err\|trace}`
+            2.  else if environment variable **`$SERVER_PORT`** is set -- to `/log/$SERVER_PORT/appname.{log|err|trace}`
 
-            3.  else (or if failed to switch to one of the above two locations) -- to `/log/srv/appname.{log\|err\|trace}`
+            3.  else (or if failed to switch to one of the above two locations) -- to `/log/srv/appname.{log|err|trace}`
 
-            4.  or, if failed to switch to that -- to `/log/fallback/appname.{ log\|err\|trace}`
+            4.  or, if failed to switch to that -- to `/log/fallback/appname.{ log|err|trace}`
 
         2.  else (or if failed to switch to any of the /log location):
 
-            1.  **`eDS_ToStdlog`** -- to `<current_working_dir>/appname.{ log\|err\|trace}` (and, if cannot, then continues to go to **`STDERR`**)
+            1.  **`eDS_ToStdlog`** -- to `<current_working_dir>/appname.{ log|err|trace}` (and, if cannot, then continues to go to **`STDERR`**)
 
             2.  **`eDS_Default`** -- continues to go to **`STDERR`**
 
@@ -2418,7 +2417,7 @@ For example:
 
 The `<event> <message>` portion of the log output will contain:
 
-    <severity>: <module>(<err_code>.<err_subcode> \| <err_text>) "<file>", line <line>: <class>::<func> --- <prefixes> <user_message> <err_code_message> <err_code_explanation>
+    <severity>: <module>(<err_code>.<err_subcode> | <err_text>) "<file>", line <line>: <class>::<func> --- <prefixes> <user_message> <err_code_message> <err_code_explanation>
 
 Thus, the `<event>` field is really just the diagnostic message severity, and the `<message>` field is composed of a number of sub-fields.
 
@@ -2547,10 +2546,10 @@ where the presence of each field in the output is controlled by the post flags [
         /// Important bits which should be taken from the globally set flags
         /// even if a user attempts to override (or forgets to set) them
         /// when calling CNcbiDiag().
-        eDPF_ImportantFlagsMask = eDPF_PreMergeLines \|
-                                  eDPF_MergeLines \|
-                                  eDPF_OmitInfoSev \|
-                                  eDPF_OmitSeparator \|
+        eDPF_ImportantFlagsMask = eDPF_PreMergeLines |
+                                  eDPF_MergeLines |
+                                  eDPF_OmitInfoSev |
+                                  eDPF_OmitSeparator |
                                   eDPF_AtomicWrite,
 
         /// Use flags provided by user as-is, do not allow CNcbiDiag to replace
@@ -2771,13 +2770,13 @@ The log entries produced by the two families are almost identical for the [new p
 
 The macros are:
 
--   **`{ERR\|LOG}_POST(msg)`** â for posting a simple message. ***Note:*** these macros are deprecated. Use **`{ERR\|LOG}_POST_X`** instead (except for tests) for more flexible error statistics and logging.
+-   **`{ERR|LOG}_POST(msg)`** â for posting a simple message. ***Note:*** these macros are deprecated. Use **`{ERR|LOG}_POST_X`** instead (except for tests) for more flexible error statistics and logging.
 
--   **`{ERR\|LOG}_POST_X(subcode, msg)`** â for posting a default error code, a given subcode, and a message. Each call to **`{ERR\|LOG}_POST_X`** must use a different subcode for proper error statistics and logging. The default error code is selected by **`NCBI_USE_ERRCODE_X`**. The error code is selected from those defined by **`NCBI_DEFINE_ERRCODE_X`** in the appropriate header file, e.g. `include/corelib/error_codes.h`.
+-   **`{ERR|LOG}_POST_X(subcode, msg)`** â for posting a default error code, a given subcode, and a message. Each call to **`{ERR|LOG}_POST_X`** must use a different subcode for proper error statistics and logging. The default error code is selected by **`NCBI_USE_ERRCODE_X`**. The error code is selected from those defined by **`NCBI_DEFINE_ERRCODE_X`** in the appropriate header file, e.g. `include/corelib/error_codes.h`.
 
--   **`{ERR\|LOG}_POST_EX(code, subcode, msg)`** â for posting a given error code, a given error subcode, and a message. This macro should only be used if you have to use a variable for the subcode, or to specify an error code other than the current default. In all other cases (except for tests), use **`{ERR\|LOG}_POST_X`** for more flexible error statistics and logging.
+-   **`{ERR|LOG}_POST_EX(code, subcode, msg)`** â for posting a given error code, a given error subcode, and a message. This macro should only be used if you have to use a variable for the subcode, or to specify an error code other than the current default. In all other cases (except for tests), use **`{ERR|LOG}_POST_X`** for more flexible error statistics and logging.
 
--   **`{ERR\|LOG}_POST_XX(code, subcode, msg)`** â these macros must be used in place of **`{ERR\|LOG}_POST_X`** within header files so that the same error code will be used for header-defined code, regardless of the error codes that including files may use.
+-   **`{ERR|LOG}_POST_XX(code, subcode, msg)`** â these macros must be used in place of **`{ERR|LOG}_POST_X`** within header files so that the same error code will be used for header-defined code, regardless of the error codes that including files may use.
 
 The **`LOG_POST_*`** macros just write a string to the log file, and are useful if a human-readable log file is desired. The output from the **`ERR_POST_*`** macros is not easily read by humans, but facilitates automatic indexing for searching and/or error statistics. There are multiple flags to [control the appearance of the message](#ch-core.diag-post-flags) generated by the **`ERR_POST_*`** macros.
 
@@ -3392,7 +3391,7 @@ The parameter **`treat_as`** is defined as an enum type of ***EBasename*** and h
 
 The parameter **`flags`** is defined as an enum type of ***EFlags*** and has the values `fLoadNow`, `fLoadLater`, `fAutoUnload`, `fNoAutoUnload`, `fBaseName`, `fExactName`, `fGlobal`, `fLocal`, and `fDefault`. The flags `fLoadNow`, `fLoadLater`, `fAutoUnload`, `fNoAutoUnload`, `fBaseName`, and `fExactName` correspond to the similarly named enum values as described in the above paragraphs. The flag `fGlobal` indicates that the DLL should be loaded as `RTLD_GLOBAL`, while the flag `fLocal` indicates that the DLL should be loaded as `RTLD_LOCAL`. The flag `fDefault` is defined as:
 
-    fDefault = fLoadNow \| fNoAutoUnload \| fBaseName \| fGlobal
+    fDefault = fLoadNow | fNoAutoUnload | fBaseName | fGlobal
 
 <a name="ch-core.CDll-basename"></a>
 
@@ -4033,14 +4032,14 @@ The last method on the list, the ***Remove()*** method accepts an enumeration ty
         fWrite   = 2,       ///< Write permission
         fRead    = 4,       ///< Read permission
         // initial defaults for dirs
-        fDefaultDirUser  = fRead \| fExecute \| fWrite,
+        fDefaultDirUser  = fRead | fExecute | fWrite,
                             ///< Default user permission for dir.
-        fDefaultDirGroup = fRead \| fExecute,
+        fDefaultDirGroup = fRead | fExecute,
                             ///< Default group permission for dir.
-        fDefaultDirOther = fRead \| fExecute,
+        fDefaultDirOther = fRead | fExecute,
                             ///< Default other permission for dir.
         // initial defaults for non-dir entries (files, etc.)
-        fDefaultUser     = fRead \| fWrite,
+        fDefaultUser     = fRead | fWrite,
                             ///< Default user permission for file
         fDefaultGroup    = fRead,
                             ///< Default group permission for file
