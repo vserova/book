@@ -4,7 +4,7 @@ title: C++ Toolkit test
 nav: pages/ch_core
 ---
 
-XXXXX
+YYYYY
 
 8\. Portability, Core Functionality and Application Framework
 ============================================================
@@ -1692,12 +1692,12 @@ With the exceptions noted above, the following rules determine the search order 
 
 1. If the environment variable NCBI\_CONFIG\_PATH is set, that will be the only path searched for initialization files.
 2. Otherwise, the search order includes the following directories in order:
-  a. If the environment variable NCBI\_DONT\_USE\_LOCAL\_CONFIG is not defined then:
-    i. The current working directory (".").
-    ii. The user's home directory (if it can be established).
-  b. The path in the environment variable NCBI (if it is defined).
-  c. The standard system directory ("/etc" on Unix-like systems, and given by the environment variable SYSTEMROOT on Windows).
-  d. The directory containing the application, if known (this requires use of CNcbiApplication).
+  * If the environment variable NCBI\_DONT\_USE\_LOCAL\_CONFIG is not defined then:
+    * The current working directory (".").
+    * The user's home directory (if it can be established).
+  * The path in the environment variable NCBI (if it is defined).
+  * The standard system directory ("/etc" on Unix-like systems, and given by the environment variable SYSTEMROOT on Windows).
+  * The directory containing the application, if known (this requires use of CNcbiApplication).
 
 ***Note:*** The search ends with the first file found.
 
