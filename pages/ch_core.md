@@ -4,7 +4,7 @@ title: C++ Toolkit test
 nav: pages/ch_core
 ---
 
-XXXX
+XXXXX
 
 8\. Portability, Core Functionality and Application Framework
 ============================================================
