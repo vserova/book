@@ -4,7 +4,7 @@ title: C++ Toolkit test
 nav: pages/ch_core
 ---
 
-QQQQQQQQQQ
+WWWW
 
 8\. Portability, Core Functionality and Application Framework
 ============================================================
@@ -1689,9 +1689,9 @@ Finally, the environment variable `NCBI_CONFIG_OVERRIDES` can be used to name a 
 ***Note:*** Several means are available to control loading of the system initialization file. It can be enabled by the **`IRegistry::fWithNcbirc`** flag. It can be disabled if (1) it contains the `DONT_USE_NCBIRC` entry in the `NCBI` section, (2) it contains syntax errors or no entries, or (3) if the environment variable **`NCBI_DONT_USE_NCBIRC`** is defined.
 
 With the exceptions noted above, the following rules determine the search order for application and system initialization files. Although application and system initialization files are not typically found in the same place, the same search order rules apply to both (with the above exceptions).
-1\.  If the environment variable **`NCBI_CONFIG_PATH`** is set, that will be the only path searched for initialization files.
+1.  If the environment variable **`NCBI_CONFIG_PATH`** is set, that will be the only path searched for initialization files.
 
-2\.  Otherwise, the search order includes the following directories in order:
+2.  Otherwise, the search order includes the following directories in order:
 
     -   If the environment variable **`NCBI_DONT_USE_LOCAL_CONFIG`** is *not* defined then:
 
