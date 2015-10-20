@@ -4,7 +4,7 @@ title: C++ Toolkit test
 nav: pages/ch_core
 ---
 
-YYYYY
+QQQQQQQQQQ
 
 8\. Portability, Core Functionality and Application Framework
 ============================================================
@@ -1689,16 +1689,21 @@ Finally, the environment variable `NCBI_CONFIG_OVERRIDES` can be used to name a 
 ***Note:*** Several means are available to control loading of the system initialization file. It can be enabled by the **`IRegistry::fWithNcbirc`** flag. It can be disabled if (1) it contains the `DONT_USE_NCBIRC` entry in the `NCBI` section, (2) it contains syntax errors or no entries, or (3) if the environment variable **`NCBI_DONT_USE_NCBIRC`** is defined.
 
 With the exceptions noted above, the following rules determine the search order for application and system initialization files. Although application and system initialization files are not typically found in the same place, the same search order rules apply to both (with the above exceptions).
+1\.  If the environment variable **`NCBI_CONFIG_PATH`** is set, that will be the only path searched for initialization files.
 
-1. If the environment variable NCBI\_CONFIG\_PATH is set, that will be the only path searched for initialization files.
-2. Otherwise, the search order includes the following directories in order:
-  * If the environment variable NCBI\_DONT\_USE\_LOCAL\_CONFIG is not defined then:
-    * The current working directory (".").
-    * The user's home directory (if it can be established).
-  * The path in the environment variable NCBI (if it is defined).
-  * The standard system directory ("/etc" on Unix-like systems, and given by the environment variable SYSTEMROOT on Windows).
-  * The directory containing the application, if known (this requires use of CNcbiApplication).
+2\.  Otherwise, the search order includes the following directories in order:
 
+    -   If the environment variable **`NCBI_DONT_USE_LOCAL_CONFIG`** is *not* defined then:
+
+        -   The current working directory ("`.`").
+
+        -   The user's home directory (if it can be established).
+
+    -   The path in the environment variable **`NCBI`** (if it is defined).
+
+    -   The standard system directory ("`/etc`" on Unix-like systems, and given by the environment variable **`SYSTEMROOT`** on Windows).
+
+    -   The directory containing the application, if known (this requires use of ***CNcbiApplication***).
 ***Note:*** The search ends with the first file found.
 
 The above rules determine the search order for directories, but there are also rules for initialization file names:
