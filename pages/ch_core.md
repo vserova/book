@@ -5,7 +5,6 @@ nav: pages/ch_core
 ---
 
 
-
 8\. Portability, Core Functionality and Application Framework
 ============================================================
 
