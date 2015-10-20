@@ -31,52 +31,52 @@ This chapter describes the NCBI Biological Sequence Data Model, with emphasis on
 
 The following is an outline of the topics presented in this chapter:
 
--   [Data Model](#ch-datamod.datamodel.data-model)
+-   [Data Model](#ch_datamod.datamodel.data_model)
 
--   [General Use Objects](#ch-datamod.datamodel.general)
+-   [General Use Objects](#ch_datamod.datamodel.general)
 
--   [Bibliographic References](#ch-datamod.datamodel.biblio)
+-   [Bibliographic References](#ch_datamod.datamodel.biblio)
 
--   [MEDLINE Data](#ch-datamod.datamodel.medline)
+-   [MEDLINE Data](#ch_datamod.datamodel.medline)
 
--   [Biological Sequences](#ch-datamod.-Biological-Sequences-1)
+-   [Biological Sequences](#ch_datamod._Biological_Sequences_1)
 
--   [Collections of Sequences](#ch-datamod.datamodel.seqset)
+-   [Collections of Sequences](#ch_datamod.datamodel.seqset)
 
--   [Sequence Locations and Identifiers](#ch-datamod.datamodel.seqloc)
+-   [Sequence Locations and Identifiers](#ch_datamod.datamodel.seqloc)
 
--   [Sequence Features](#ch-datamod.datamodel.seqfeat)
+-   [Sequence Features](#ch_datamod.datamodel.seqfeat)
 
--   [Sequence Alignments](#ch-datamod.-Sequence-Alignments-1)
+-   [Sequence Alignments](#ch_datamod._Sequence_Alignments_1)
 
--   [Sequence Graphs](#ch-datamod.datamodel.seqres)
+-   [Sequence Graphs](#ch_datamod.datamodel.seqres)
 
--   [Common ASN.1 Specifications](#ch-datamod.Common-ASN1-Specifications)
+-   [Common ASN.1 Specifications](#ch_datamod.Common_ASN1_Specifications)
 
-<a name="ch-datamod.datamodel.data-model"></a>
+<a name="ch_datamod.datamodel.data_model"></a>
 
 Data Model
 ----------
 
 The Data Model section outlines the NCBI model for biotechnology information, which is centered on the concept of a biological sequence as a simple, linear coordinate system.
 
--   [Introduction](#ch-datamod.-Introduction)
+-   [Introduction](#ch_datamod._Introduction)
 
--   [Biological Sequences](#ch-datamod.-Biological-Sequences)
+-   [Biological Sequences](#ch_datamod._Biological_Sequences)
 
--   [Classes of Biological Sequences](#ch-datamod.Classes-of-Biologica)
+-   [Classes of Biological Sequences](#ch_datamod.Classes_of_Biologica)
 
--   [Locations on Biological Sequences](#ch-datamod.Locations-on-Biologi)
+-   [Locations on Biological Sequences](#ch_datamod.Locations_on_Biologi)
 
--   [Associating Annotations With Locations On Biological Sequences](#ch-datamod.Associating-Annotati)
+-   [Associating Annotations With Locations On Biological Sequences](#ch_datamod.Associating_Annotati)
 
--   [Collections of Related Biological Sequences](#ch-datamod.Collections-of-Relat)
+-   [Collections of Related Biological Sequences](#ch_datamod.Collections_of_Relat)
 
--   [Consequences of the Data Model](#ch-datamod.Consequences-of-the-)
+-   [Consequences of the Data Model](#ch_datamod.Consequences_of_the_)
 
--   [Programming Considerations](#ch-datamod.Programming-Consider)
+-   [Programming Considerations](#ch_datamod.Programming_Consider)
 
-<a name="ch-datamod.-Introduction"></a>
+<a name="ch_datamod._Introduction"></a>
 
 ### Introduction
 
@@ -96,7 +96,7 @@ The power of molecular biology is that DNA and protein sequence data cut across 
 
 This data model establishes a biological sequence as a simple integer coordinate system with which diverse data can be associated. It is reasonable to hope that such a simple core can be very stable and compatible with a very wide range of data. Additional information closely linked to the coordinate system, such as the sequence of amino acids or bases, or genes on a genetic map are layered onto it. With stable identifiers for specific coordinate systems, a greater diversity of information about the coordinate system can be specifically attached to it in a very flexible yet rigorous way. The essential differences between different biological forms are preserved, yet they can viewed as aspects of the same thing around the core, and thus move us toward our goal of understanding the totality.
 
-<a name="ch-datamod.-Biological-Sequences"></a>
+<a name="ch_datamod._Biological_Sequences"></a>
 
 ### Biological Sequences
 
@@ -114,7 +114,7 @@ A Bioseq has two optional elements, which both have descriptive information abou
 
 A Bioseq is only required to have two elements, id and inst. Bioseq.id is a set of one or more identifiers for this Bioseq. An identifier is a key which allows us to retrieve this object from a database or identify it uniquely. It is not a name, which is a human compatible description, but not necessarily a unique identifier. The name "Jane Doe" does not uniquely identify a person in the United States, while the identifier, social security number, does. Each Seq-id is a CHOICE of one of a number of identifier types from different databases, which may have different structures. All Bioseqs *must* have at least one identifier.
 
-<a name="ch-datamod.Classes-of-Biologica"></a>
+<a name="ch_datamod.Classes_of_Biologica"></a>
 
 ### Classes of Biological Sequences
 
@@ -177,7 +177,7 @@ Coordinates on ANY class of Bioseq are ALWAYS integer offsets. So the first resi
 
 The consequence of this design is that one uses EXACTLY the same data object to describe the location of a gene on an unsequenced restriction fragment, a fully sequenced piece of DNA, a partially sequenced piece of DNA, a putative overview of a large genetic region, or a genetic or physical map. Software to display, manipulate, or compare gene locations can work without change on the full range of possible representations. Sequence and physical map data can be easily integrated into a single, dynamically assembled view by creating a segmented sequence which points alternatively to raw or constructed Bioseqs and parts of a map Bioseq. The relationship between a genetic and physical map is simply an alignment between two Bioseqs of representation class map, no different than the alignment between two sequences of class raw generated by a database search program like BLAST or FASTA.
 
-<a name="ch-datamod.Locations-on-Biologi"></a>
+<a name="ch_datamod.Locations_on_Biologi"></a>
 
 ### Locations on Biological Sequences
 
@@ -202,17 +202,17 @@ Seq-loc.null indicates a region of unknown length for which no data exists. Such
 
 All other Seq-loc types, except Seq-loc.feat, contain a Seq-id. This means they are independent of context. This means that data objects describing information ABOUT Bioseqs can be created and exchanged independently from the Bioseq itself. This encourages the development and exchange of structured knowledge about sequence data from many directions and is an essential goal of the data model.
 
-<a name="ch-datamod.Associating-Annotati"></a>
+<a name="ch_datamod.Associating_Annotati"></a>
 
 ### Associating Annotations With Locations On Biological Sequences
 
 Seq-annot, or sequence annotation, is a collection of information ABOUT a sequence, tied to specific regions of Bioseqs through the use of Seq-loc's. A Bioseq can have many Seq-annot's associated with it. This allows knowledge from a variety of sources to be collected in a single place but still be attributed to the original sources. Currently there are three kinds of Seq-annot, feature tables, alignments, and graphs.
 
-<a name="ch-datamod.Feature-Tables"></a>
+<a name="ch_datamod.Feature_Tables"></a>
 
 #### Feature Tables
 
-A feature table is a collection of Seq-feat, or [sequence features](#ch-datamod.datamodel.seqfeat). A Seq-feat is designed to tie a Seq-loc together with a datablock, a block of specific data. Datablocks are defined objects themselves, many of which are objects used in their own right in some other context, such as publications ([CPub\_Base](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCPub__Base.html)) or references to organisms (Org-ref) or genes (Gene-ref). Some datablocks, such as coding regions (CdRegion) make sense only in the context of a Seq-loc. However, since by design there is no intention that one datablock need to have anything in common with any other datablock, each can be tailored exactly to do a particular job. If a change or addition is required to one datablock, no others are affected. In those cases where a pre-existing object from another context is used as a datablock, any software that can use that object can now operate on the feature as well. For example, a piece of code to display a publication can operate on a publication from a bibliographic database or one used as a sequence feature with no change.
+A feature table is a collection of Seq-feat, or [sequence features](#ch_datamod.datamodel.seqfeat). A Seq-feat is designed to tie a Seq-loc together with a datablock, a block of specific data. Datablocks are defined objects themselves, many of which are objects used in their own right in some other context, such as publications ([CPub\_Base](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCPub__Base.html)) or references to organisms (Org-ref) or genes (Gene-ref). Some datablocks, such as coding regions (CdRegion) make sense only in the context of a Seq-loc. However, since by design there is no intention that one datablock need to have anything in common with any other datablock, each can be tailored exactly to do a particular job. If a change or addition is required to one datablock, no others are affected. In those cases where a pre-existing object from another context is used as a datablock, any software that can use that object can now operate on the feature as well. For example, a piece of code to display a publication can operate on a publication from a bibliographic database or one used as a sequence feature with no change.
 
 Since the Seq-feat data structure itself and the Seq-loc used to attach it to the sequence are common to all features, it is also possible to support a class of operations over all features without regard to the different types of datablocks attached to them. So a function to determine all features in a particular region of a Bioseq need not care what type of features they are.
 
@@ -222,7 +222,7 @@ A Seq-feat is bipolar in that it contains up to two Seq-loc's. Seq-feat.location
 
 The presence of two Seq-loc's also allows a more complete representation of data conflicts or exceptional biological circumstances. If an author presents a DNA sequence and its protein product in a figure in a paper, it is possible to enter the DNA and protein sequences independently, then confirm through the CdRegion feature that the DNA in fact translates to that protein sequence. In an unfortunate number of published papers, the DNA presented does not translate to the protein presented. This may be a signal that the database has made an error of some sort, which can be caught early and corrected. Or the original paper may be in error. In this case, the "conflict" flag can be set in CdRegion, but the protein sequence is not lost, and retroactive work can be done to determine the source of the problem. It may also be the case that a genomic sequence cannot be translated to a protein for a known biological reason, such as RNA editing or suppressor tRNAs. In this case the "exception" flag can be set in Seq-feat to indicate that the data are correct, but will not behave in the expected way.
 
-<a name="ch-datamod.-Sequence-Alignments"></a>
+<a name="ch_datamod._Sequence_Alignments"></a>
 
 #### Sequence Alignments
 
@@ -242,13 +242,13 @@ The example above is a global alignment that is each segment sequentially maps a
 
 The example above illustrates the most general form of a Seq-align, Std-seg, where each segment is purely a correlated set of Seq-loc. Two other forms of Seq-align allow denser packing of data for when only raw Bioseqs are aligned. These are Dense-seg, for global alignments, and Dense-diag for "diag" collections. The basic underlying model for these denser types is very similar to that shown above, but the data structure itself is somewhat different.
 
-<a name="ch-datamod.Sequence-Graph"></a>
+<a name="ch_datamod.Sequence_Graph"></a>
 
 #### Sequence Graph
 
 The third annotation type is a graph on a sequence, Seq-graph. It is basically a Seq-loc, over which to apply the graph, and a series of numbers representing values of the graph along the sequence. A software tool which calculates base composition or hydrophobic tendency might generate a Seq-graph. Additional fields in Seq-graph allow specification of axis labels, setting of ranges covered, compression of the data relative to the sequence, and so on.
 
-<a name="ch-datamod.Collections-of-Relat"></a>
+<a name="ch_datamod.Collections_of_Relat"></a>
 
 ### Collections of Related Biological Sequences
 
@@ -301,7 +301,7 @@ Then follows the equivalent of Seq-inst, that is the instantiation of the data. 
 
 Finally, a Bioseq-set may contain Seq-annot's. Generally one would put the Seq-annot's which apply to more than one Bioseq in the Bioseq-set at this level. Examples would be CdRegion features that point to DNA and protein Bioseqs, or Seq-align which align more than one Bioseq with each other. However, since Seq-annot's always explicitly cite a Seq-id, it does not matter, in terms of meaning, at what level they are put. This is in contrast to descriptors, where context does matter.
 
-<a name="ch-datamod.Consequences-of-the-"></a>
+<a name="ch_datamod.Consequences_of_the_"></a>
 
 ### Consequences of the Data Model
 
@@ -317,7 +317,7 @@ The database now has the information from five different research groups, expert
 
 [![Image ch\_datamod\_G4.jpg](/book/static/img/ch_datamod_G4.jpg)](/book/static/img/ch_datamod_G4.jpg "Click to see the full-resolution image")
 
-<a name="ch-datamod.Programming-Consider"></a>
+<a name="ch_datamod.Programming_Consider"></a>
 
 ### Programming Considerations
 
@@ -343,30 +343,30 @@ Types (such as Person-id) that contain other types can be constructed by assigni
     CPerson_id person;
     person.SetDbtag(tag);
 
-<a name="ch-datamod.datamodel.general"></a>
+<a name="ch_datamod.datamodel.general"></a>
 
 General Use Objects
 -------------------
 
 This section describes the data objects defined in [general.asn](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/general/general.asn) and their C++ classes and APIs. They are a miscellaneous collection of generally useful types.
 
--   [The Date: Date-std and Date](#ch-datamod.The-Date-Datestd-and)
+-   [The Date: Date-std and Date](#ch_datamod.The_Date_Datestd_and)
 
--   [Identifying Things: Object-id](#ch-datamod.-Identifying-Things-O)
+-   [Identifying Things: Object-id](#ch_datamod._Identifying_Things_O)
 
--   [Identifying Things: Dbtag](#ch-datamod.-Identifying-Things-D-1)
+-   [Identifying Things: Dbtag](#ch_datamod._Identifying_Things_D_1)
 
--   [Identifying People: Name-std](#ch-datamod.-Identifying-People-N)
+-   [Identifying People: Name-std](#ch_datamod._Identifying_People_N)
 
--   [Identifying People: Person-id](#ch-datamod.-Identifying-People-P-1)
+-   [Identifying People: Person-id](#ch_datamod._Identifying_People_P_1)
 
--   [Expressing Uncertainty with Fuzzy Integers: Int-fuzz](#ch-datamod.Expressing-Uncertain)
+-   [Expressing Uncertainty with Fuzzy Integers: Int-fuzz](#ch_datamod.Expressing_Uncertain)
 
--   [Creating Your Own Objects: User-object and User-field](#ch-datamod.Creating-Your-Own-Ob)
+-   [Creating Your Own Objects: User-object and User-field](#ch_datamod.Creating_Your_Own_Ob)
 
--   [ASN.1 Specification: general.asn](#ch-datamod.-ASN1-Specification-g)
+-   [ASN.1 Specification: general.asn](#ch_datamod._ASN1_Specification_g)
 
-<a name="ch-datamod.The-Date-Datestd-and"></a>
+<a name="ch_datamod.The_Date_Datestd_and"></a>
 
 ### The Date: Date-std and Date
 
@@ -394,7 +394,7 @@ To include a time in the date:
     CDate_std adate(CTime(CTime::eCurrent));
     adate.SetSeason("late summer");
 
-<a name="ch-datamod.-Identifying-Things-O"></a>
+<a name="ch_datamod._Identifying_Things_O"></a>
 
 ### Identifying Things: Object-id
 
@@ -408,7 +408,7 @@ Types that include choices, such as Object-id, retain the last CHOICE assigned t
     obj.SetId(123);
     obj.SetStr("some object");
 
-<a name="ch-datamod.-Identifying-Things-D-1"></a>
+<a name="ch_datamod._Identifying_Things_D_1"></a>
 
 ### Identifying Things: Dbtag
 
@@ -416,7 +416,7 @@ A Dbtag is an Object-id within the context of a database. The database is just d
 
 The Dbtag type is implemented by the [CDbtag](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDbtag.html) class.
 
-<a name="ch-datamod.-Identifying-People-N"></a>
+<a name="ch_datamod._Identifying_People_N"></a>
 
 ### Identifying People: Name-std
 
@@ -424,7 +424,7 @@ A Name-std is a structured type for representing names with readily understood m
 
 The Name-std type is implemented by the [CName\_std](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCName__std.html) class.
 
-<a name="ch-datamod.-Identifying-People-P-1"></a>
+<a name="ch_datamod._Identifying_People_P_1"></a>
 
 ### Identifying People: Person-id
 
@@ -440,17 +440,17 @@ The pure string form should be the CHOICE of last resort because no assumptions 
 
 The Person-id type is implemented by the [CPerson\_id](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCPerson__id.html) class.
 
-<a name="ch-datamod.Expressing-Uncertain"></a>
+<a name="ch_datamod.Expressing_Uncertain"></a>
 
 ### Expressing Uncertainty with Fuzzy Integers: Int-fuzz
 
-Lengths of [Biological Sequences](#ch-datamod.-Biological-Sequences-1) and locations on them are expressed with integers. However, sometimes it is desirable to be able to indicate some uncertainty about that length or location. Unfortunately, most software cannot make good use of such uncertainties, though in most cases this is fine. In order to provide both a simple, single integer view, as well as a more complex fuzzy view when appropriate, we have adopted the following strategy. In the NCBI specifications, all lengths and locations are always given by simple integers. If information about fuzziness is appropriate, then an Int-fuzz is ADDED to the data. In this case, the simple integer can be considered a "best guess" of the length or location. Thus simple software can ignore fuzziness, while it is not lost to more sophisticated uses.
+Lengths of [Biological Sequences](#ch_datamod._Biological_Sequences_1) and locations on them are expressed with integers. However, sometimes it is desirable to be able to indicate some uncertainty about that length or location. Unfortunately, most software cannot make good use of such uncertainties, though in most cases this is fine. In order to provide both a simple, single integer view, as well as a more complex fuzzy view when appropriate, we have adopted the following strategy. In the NCBI specifications, all lengths and locations are always given by simple integers. If information about fuzziness is appropriate, then an Int-fuzz is ADDED to the data. In this case, the simple integer can be considered a "best guess" of the length or location. Thus simple software can ignore fuzziness, while it is not lost to more sophisticated uses.
 
 Fuzziness can take a variety of forms. It can be plus or minus some fixed value. It can be somewhere in a range of values. It can be plus or minus a percentage of the best guess value. It may also be certain boundary conditions (greater than the value, less than the value) or refer to the bond BETWEEN residues of the biological sequence (bond to the right of this residue, bond to the left of that residue).
 
 The Int-fuzz type is implemented by the [CInt\_fuzz](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCInt__fuzz.html) class.
 
-<a name="ch-datamod.Creating-Your-Own-Ob"></a>
+<a name="ch_datamod.Creating_Your_Own_Ob"></a>
 
 ### Creating Your Own Objects: User-object and User-field
 
@@ -464,58 +464,58 @@ The User-object is provided in a number of places in the public ASN.1 specificat
 
 The User-object and User-field types are implemented with the [CUser\_object](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCUser__object.html) and [CUser\_field](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCUser__field.html) classes.
 
-<a name="ch-datamod.datamodel.biblio"></a>
+<a name="ch_datamod.datamodel.biblio"></a>
 
 Bibliographic References
 ------------------------
 
 The Bibliographic References section documents types for storing publications of any sort and collections of publications. The types are defined in [biblio.asn](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/biblio/biblio.asn) and [pub.asn](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/pub/pub.asn) modules.
 
-<a name="ch-datamod.Content"></a>
+<a name="ch_datamod.Content"></a>
 
 ### Content
 
--   [Introduction](#ch-datamod.-Introduction-2)
+-   [Introduction](#ch_datamod._Introduction_2)
 
--   [Citation Components: Affiliation](#ch-datamod.-Citation-Components-)
+-   [Citation Components: Affiliation](#ch_datamod._Citation_Components_)
 
--   [Citation Components: Authors](#ch-datamod.-Citation-Components--1)
+-   [Citation Components: Authors](#ch_datamod._Citation_Components__1)
 
--   [Citation Components: Imprint](#ch-datamod.-Citation-Components--2)
+-   [Citation Components: Imprint](#ch_datamod._Citation_Components__2)
 
--   [Citation Components: Title](#ch-datamod.-Citation-Components--3)
+-   [Citation Components: Title](#ch_datamod._Citation_Components__3)
 
--   [Citing an Article](#ch-datamod.Citing-an-Article)
+-   [Citing an Article](#ch_datamod.Citing_an_Article)
 
--   [Citing a Journal](#ch-datamod.Citing-a-Journal)
+-   [Citing a Journal](#ch_datamod.Citing_a_Journal)
 
--   [Citing a Book](#ch-datamod.Citing-a-Book)
+-   [Citing a Book](#ch_datamod.Citing_a_Book)
 
--   [Citing a Proceedings](#ch-datamod.Citing-a-Proceedings)
+-   [Citing a Proceedings](#ch_datamod.Citing_a_Proceedings)
 
--   [Citing a Letter, Manuscript, or Thesis](#ch-datamod.Citing-a-Letter--Man)
+-   [Citing a Letter, Manuscript, or Thesis](#ch_datamod.Citing_a_Letter__Man)
 
--   [Citing Directly Submitted Data](#ch-datamod.Citing-Directly-Subm)
+-   [Citing Directly Submitted Data](#ch_datamod.Citing_Directly_Subm)
 
--   [Citing a Patent](#ch-datamod.Citing-a-Patent)
+-   [Citing a Patent](#ch_datamod.Citing_a_Patent)
 
--   [Identifying a Patent](#ch-datamod.Identifying-a-Patent)
+-   [Identifying a Patent](#ch_datamod.Identifying_a_Patent)
 
--   [Citing an Article or Book which is In Press](#ch-datamod.Citing-an-Article-or)
+-   [Citing an Article or Book which is In Press](#ch_datamod.Citing_an_Article_or)
 
--   [Special Cases: Unpublished, Unparsed, or Unusual](#ch-datamod.Special-Cases-Unpubl)
+-   [Special Cases: Unpublished, Unparsed, or Unusual](#ch_datamod.Special_Cases_Unpubl)
 
--   [Accommodating Any Publication Type](#ch-datamod.Accommodating-Any-Pu)
+-   [Accommodating Any Publication Type](#ch_datamod.Accommodating_Any_Pu)
 
--   [Grouping Different Forms of Citation for a Single Work](#ch-datamod.Grouping-Different-F)
+-   [Grouping Different Forms of Citation for a Single Work](#ch_datamod.Grouping_Different_F)
 
--   [Sets of Citations](#ch-datamod.Sets-of-Citations)
+-   [Sets of Citations](#ch_datamod.Sets_of_Citations)
 
--   [ASN.1 Specification: biblio.asn](#ch-datamod.-ASN1-Specification-b-1)
+-   [ASN.1 Specification: biblio.asn](#ch_datamod._ASN1_Specification_b_1)
 
--   [ASN.1 Specification: pub.asn](#ch-datamod.-ASN1-Specification-p-2)
+-   [ASN.1 Specification: pub.asn](#ch_datamod._ASN1_Specification_p_2)
 
-<a name="ch-datamod.-Introduction-2"></a>
+<a name="ch_datamod._Introduction_2"></a>
 
 #### Introduction
 
@@ -525,7 +525,7 @@ Much of the following bibliographic specification was derived from the component
 
 In this section we also present a specification for the Pub type, publications of any sort and collections of publications. The MEDLINE specification has enough unique components that it is discussed separately in another section.
 
-<a name="ch-datamod.-Citation-Components-"></a>
+<a name="ch_datamod._Citation_Components_"></a>
 
 #### Citation Components: Affiliation
 
@@ -535,17 +535,17 @@ The structured form has a number of fields taken from the ANSI guidelines. "affi
 
 The Affil type is implemented by the [CAffil](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCAffil.html) class.
 
-<a name="ch-datamod.-Citation-Components--1"></a>
+<a name="ch_datamod._Citation_Components__1"></a>
 
 #### Citation Components: Authors
 
-The Auth-list type represents the list of authors for the citation. It is a SEQUENCE, not a SET, since the order of author names matters. The names can be unstructured strings (the least desirable), semi-structured strings following the MEDLINE rules (e.g. "Jones JM"), or fully structured Author type objects (most desirable). An Affil can be associated with the whole list (typical of a scientific article). A more detailed discussion on the use of different types of names can be found in the "[Identifying People](#ch-datamod.-Identifying-People-N)" section of the "[General Use Objects](#ch-datamod.datamodel.general)" section.
+The Auth-list type represents the list of authors for the citation. It is a SEQUENCE, not a SET, since the order of author names matters. The names can be unstructured strings (the least desirable), semi-structured strings following the MEDLINE rules (e.g. "Jones JM"), or fully structured Author type objects (most desirable). An Affil can be associated with the whole list (typical of a scientific article). A more detailed discussion on the use of different types of names can be found in the "[Identifying People](#ch_datamod._Identifying_People_N)" section of the "[General Use Objects](#ch_datamod.datamodel.general)" section.
 
-If fully structured Authors are used, each Author can have an individual Affil. The Author uses Person-id as defined [above](#ch-datamod.-Identifying-People-P-1). The structured form also allows specification of the role of individual authors in producing the citation. The primary author(s) does not mean the "first" author, but rather that this author had a role in the original writing or experimental work. A secondary author is a reviewer or editor of the article. It is rare in a scientific work that a secondary author is ever mentioned by name. Authors may play different roles in the work, compiling, editing, and translating. Again, in a scientific work, the authors mentioned did none of these things, but were involved in the actual writing of the paper, although it would not be unusual anymore for one author to be the patent assignee. For scientific work, then, the main advantages of using the Author form are the use of fielded names and of individual Affils. For a book, being able to indicate the editors vs. the authors is useful also.
+If fully structured Authors are used, each Author can have an individual Affil. The Author uses Person-id as defined [above](#ch_datamod._Identifying_People_P_1). The structured form also allows specification of the role of individual authors in producing the citation. The primary author(s) does not mean the "first" author, but rather that this author had a role in the original writing or experimental work. A secondary author is a reviewer or editor of the article. It is rare in a scientific work that a secondary author is ever mentioned by name. Authors may play different roles in the work, compiling, editing, and translating. Again, in a scientific work, the authors mentioned did none of these things, but were involved in the actual writing of the paper, although it would not be unusual anymore for one author to be the patent assignee. For scientific work, then, the main advantages of using the Author form are the use of fielded names and of individual Affils. For a book, being able to indicate the editors vs. the authors is useful also.
 
 The Auth-list type is implemented by the [CAuth\_list](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCAuth__list.html) class and the Author type is implemented by the [CAuthor](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCAuthor.html) class.
 
-<a name="ch-datamod.-Citation-Components--2"></a>
+<a name="ch_datamod._Citation_Components__2"></a>
 
 #### Citation Components: Imprint
 
@@ -553,7 +553,7 @@ Imprint provides information about the physical form in which the citation appea
 
 The Imprint type is implemented by the [CImprint](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCImprint.html) class.
 
-<a name="ch-datamod.-Citation-Components--3"></a>
+<a name="ch_datamod._Citation_Components__3"></a>
 
 #### Citation Components: Title
 
@@ -567,7 +567,7 @@ Title can be of a number of types. "name" is the full title of an article, or th
 
 The Title type is implemented by the [CTitle](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCTitle.html) class.
 
-<a name="ch-datamod.Citing-an-Article"></a>
+<a name="ch_datamod.Citing_an_Article"></a>
 
 #### Citing an Article
 
@@ -575,7 +575,7 @@ An article always occurs within some other published medium. It can be an articl
 
 The Cit-art type is implemented by the [CCit\_art](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCCit__art.html) class.
 
-<a name="ch-datamod.Citing-a-Journal"></a>
+<a name="ch_datamod.Citing_a_Journal"></a>
 
 #### Citing a Journal
 
@@ -583,15 +583,15 @@ Cit-jour is used to cite an issue of a journal, not an article within a journal 
 
 The Cit-jour type is implemented by the [CCit\_jour](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCCit__jour.html) class.
 
-<a name="ch-datamod.Citing-a-Book"></a>
+<a name="ch_datamod.Citing_a_Book"></a>
 
 #### Citing a Book
 
-Cit-book is used to cite a whole book, not an article within a book (see Cit-art, [above](#ch-datamod.Citing-an-Article)). Cit-book.title is the title of this particular book. Cit-book.coll is used if the book if part of a collection, or muti-volume set (e.g. "The Complete Works of Charles Darwin"). Cit-book.authors is for the authors or editors of the book itself (not necessarily of any particular chapter). Cit-book.imp contains the publication information about the book. As with a Cit-art, if the Cit-book is being used to cite a chapter in a book, the pages in given in Cit-book.imp.
+Cit-book is used to cite a whole book, not an article within a book (see Cit-art, [above](#ch_datamod.Citing_an_Article)). Cit-book.title is the title of this particular book. Cit-book.coll is used if the book if part of a collection, or muti-volume set (e.g. "The Complete Works of Charles Darwin"). Cit-book.authors is for the authors or editors of the book itself (not necessarily of any particular chapter). Cit-book.imp contains the publication information about the book. As with a Cit-art, if the Cit-book is being used to cite a chapter in a book, the pages in given in Cit-book.imp.
 
 The Cit-book type is implemented by the [CCit\_book](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCCit__book.html) class.
 
-<a name="ch-datamod.Citing-a-Proceedings"></a>
+<a name="ch_datamod.Citing_a_Proceedings"></a>
 
 #### Citing a Proceedings
 
@@ -599,7 +599,7 @@ A proceedings is a book published as a result or byproduct of a meeting. As such
 
 The Cit-proc type is implemented by the [CCit\_proc](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCCit__proc.html) class.
 
-<a name="ch-datamod.Citing-a-Letter--Man"></a>
+<a name="ch_datamod.Citing_a_Letter__Man"></a>
 
 #### Citing a Letter, Manuscript, or Thesis
 
@@ -607,7 +607,7 @@ A letter, manuscript, or a thesis share most components and so are grouped toget
 
 The Cit-let type is implemented by the [CCit\_let](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCCit__let.html) class.
 
-<a name="ch-datamod.Citing-Directly-Subm"></a>
+<a name="ch_datamod.Citing_Directly_Subm"></a>
 
 #### Citing Directly Submitted Data
 
@@ -615,7 +615,7 @@ The Cit-sub type is used to cite the submission of data directly to a database, 
 
 The Cit-sub type is implemented by the [CCit\_sub](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCCit__sub.html) class.
 
-<a name="ch-datamod.Citing-a-Patent"></a>
+<a name="ch_datamod.Citing_a_Patent"></a>
 
 #### Citing a Patent
 
@@ -623,7 +623,7 @@ A full patent citation, Cit-pat conveys not only enough information to identify 
 
 The Cit-pat type is implemented by the [CCit\_pat](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCCit__pat.html) class.
 
-<a name="ch-datamod.Identifying-a-Patent"></a>
+<a name="ch_datamod.Identifying_a_Patent"></a>
 
 #### Identifying a Patent
 
@@ -631,13 +631,13 @@ When citing a patent, it may be sufficient to merely unambiguously identify it, 
 
 The CId-pat type is implemented by the [CId\_pat](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCId__pat.html) class.
 
-<a name="ch-datamod.Citing-an-Article-or"></a>
+<a name="ch_datamod.Citing_an_Article_or"></a>
 
 #### Citing an Article or Book which is In Press
 
 A number of the fields in Cit-art and Cit-book are OPTIONAL, not only to allow incorporation of older, incomplete databases, but also to allow partial information for works submitted, or in press. One simply fills in as many of the fields in Cit-art or Cit-book as possible. One must also set the "pre-pub" flag in Imprint to the appropriate status. That's it. Once the work is published, the remaining information is filled in and the "pre-pub" flag is removed. NOTE: this does NOT apply to work which is "unpublished" or "personal communication", or even "in preparation" because one knows nothing about where or when (or if) it will ever be published. One must use a Cit-gen for this (below).
 
-<a name="ch-datamod.Special-Cases-Unpubl"></a>
+<a name="ch_datamod.Special_Cases_Unpubl"></a>
 
 #### Special Cases: Unpublished, Unparsed, or Unusual
 
@@ -649,7 +649,7 @@ Software developed to display or print a Cit-gen must be opportunistic about usi
 
 The Cit-gen type is implemented by the [CCit\_gen](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCCit__gen.html) class.
 
-<a name="ch-datamod.Accommodating-Any-Pu"></a>
+<a name="ch_datamod.Accommodating_Any_Pu"></a>
 
 #### Accommodating Any Publication Type
 
@@ -657,7 +657,7 @@ The Pub type is designed to accommodate a citation of any kind defined in the bi
 
 The Pub type is implemented by the [CPub](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCPub.html) class.
 
-<a name="ch-datamod.Grouping-Different-F"></a>
+<a name="ch_datamod.Grouping_Different_F"></a>
 
 #### Grouping Different Forms of Citation for a Single Work
 
@@ -665,7 +665,7 @@ In some cases a database builder may wish to present more than one form of citat
 
 The Pub-equiv type is implemented by the [CPub\_equiv](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCPub__equiv.html) class.
 
-<a name="ch-datamod.Sets-of-Citations"></a>
+<a name="ch_datamod.Sets_of_Citations"></a>
 
 #### Sets of Citations
 
@@ -673,34 +673,34 @@ One often needs to collect a set of citations together. Unlike the Pub-equiv typ
 
 The Pub-set type is implemented by the [CPub\_set](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCPub__set.html) class.
 
-<a name="ch-datamod.datamodel.medline"></a>
+<a name="ch_datamod.datamodel.medline"></a>
 
 MEDLINE Data
 ------------
 
 This section is an introduction to MEDLINE and the structure of a MEDLINE record. It describes types defined in the [medline.asn](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/medline/medline.asn) module.
 
-<a name="ch-datamod.datamodel.types.medline"></a>
+<a name="ch_datamod.datamodel.types.medline"></a>
 
 ### Module Types
 
--   [Introduction](#ch-datamod.-Introduction-3)
+-   [Introduction](#ch_datamod._Introduction_3)
 
--   [Structure of a MEDLINE Entry](#ch-datamod.Structure-of-a-MEDLI)
+-   [Structure of a MEDLINE Entry](#ch_datamod.Structure_of_a_MEDLI)
 
--   [MeSH Index Terms](#ch-datamod.MeSH-Index-Terms)
+-   [MeSH Index Terms](#ch_datamod.MeSH_Index_Terms)
 
--   [Substance Records](#ch-datamod.Substance-Records)
+-   [Substance Records](#ch_datamod.Substance_Records)
 
--   [Database Cross Reference Records](#ch-datamod.Database-Cross-Refer)
+-   [Database Cross Reference Records](#ch_datamod.Database_Cross_Refer)
 
--   [Funding Identifiers](#ch-datamod.Funding-Identifiers)
+-   [Funding Identifiers](#ch_datamod.Funding_Identifiers)
 
--   [Gene Symbols](#ch-datamod.Gene-Symbols)
+-   [Gene Symbols](#ch_datamod.Gene_Symbols)
 
--   [ASN.1 Specification: medline.asn](#ch-datamod.-ASN1-Specification-m-3)
+-   [ASN.1 Specification: medline.asn](#ch_datamod._ASN1_Specification_m_3)
 
-<a name="ch-datamod.-Introduction-3"></a>
+<a name="ch_datamod._Introduction_3"></a>
 
 #### Introduction
 
@@ -708,7 +708,7 @@ MEDLINE is the largest and oldest biomedical database in the world. It is built 
 
 MEDLINE is a valuable resource in its own right. In addition, the MEDLINE uid can serve as a valuable link between entries in factual databases. When NCBI processes a new molecular biology factual database into the standardized format, we also normalize the bibliographic citations and attempt to map them to MEDLINE. For the biomedical databases we have tried thus far, we have succeeding in mapping most or all of the citations this way. From then on, linkage to other data objects can be made simply and easily through the shared MEDLINE uid. The MEDLINE uid also allows movement from the data item to the world of scientific literature in general and back.
 
-<a name="ch-datamod.Structure-of-a-MEDLI"></a>
+<a name="ch_datamod.Structure_of_a_MEDLI"></a>
 
 #### Structure of a MEDLINE Entry
 
@@ -718,7 +718,7 @@ The entry-month (em) is the month and year in which the entry became part of the
 
 The article citation itself is contained in a standard Cit-art, imported from the bibliographic module, so will not be discussed further here. The entry often contains the abstract from the article. The rest of the entry consists of various index terms, which will be discussed below.
 
-<a name="ch-datamod.MeSH-Index-Terms"></a>
+<a name="ch_datamod.MeSH_Index_Terms"></a>
 
 #### MeSH Index Terms
 
@@ -728,82 +728,82 @@ A MeSH term may be qualified by one or more sub-headings. For example, the MeSH 
 
 A MeSH term or a sub-heading may be flagged as indicating the "main point" of the article. Again the most specific form is used. If the main point of the article was about insulin and they also discuss genetics, then the insulin MeSH term will be flagged but the genetics sub-heading will not be. However, if the main point of the article was the genetics of insulin, then the sub-heading genetics under the MeSH term insulin will be flagged but the MeSH term itself will not be.
 
-<a name="ch-datamod.Substance-Records"></a>
+<a name="ch_datamod.Substance_Records"></a>
 
 #### Substance Records
 
 If an article has substantial discussion of recognizable chemical compounds, they are indexed in the substance records. The record may contain only the name of the compound, or it may contain the name and a Chemical Abstracts Service (CAS) registry number or a Enzyme Commission (EC) number as appropriate.
 
-<a name="ch-datamod.Database-Cross-Refer"></a>
+<a name="ch_datamod.Database_Cross_Refer"></a>
 
 #### Database Cross Reference Records
 
 If an article cites an identifier recognized to be from a known list of biomedical databases, the cross reference is given in this field and the key for which database it was from. A typical example would be a GenBank accession number citing in an article.
 
-<a name="ch-datamod.Funding-Identifiers"></a>
+<a name="ch_datamod.Funding_Identifiers"></a>
 
 #### Funding Identifiers
 
 If an id number from a grant or contract is cited in the article (usually acknowledging support) it will appear in this field.
 
-<a name="ch-datamod.Gene-Symbols"></a>
+<a name="ch_datamod.Gene_Symbols"></a>
 
 #### Gene Symbols
 
 As an experiment, Library Operations at the NLM is putting in mnemonic symbols from articles, if they appear by form and usage to be gene symbols. Obviously such symbols vary and are not always properly used, so this field must be approached with caution. Nonetheless it can provide a route to a rich source of potentially relevant citations.
 
-<a name="ch-datamod.-Biological-Sequences-1"></a>
+<a name="ch_datamod._Biological_Sequences_1"></a>
 
 Biological Sequences
 --------------------
 
 This section describes types used to represent biological data. These types are defined in the [seq.asn](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seq/seq.asn), [seqblock.asn](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqblock/seqblock.asn), and [seqcode.asn](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqcode/seqcode.asn) modules.
 
-<a name="ch-datamod.datamodel.cpp.seq"></a>
+<a name="ch_datamod.datamodel.cpp.seq"></a>
 
 ### C++ Implementation Notes
 
--   [Introduction](#ch-datamod.-Introduction-4)
+-   [Introduction](#ch_datamod._Introduction_4)
 
--   [Bioseq: the Biological Sequence](#ch-datamod.Bioseq-the-Biologica)
+-   [Bioseq: the Biological Sequence](#ch_datamod.Bioseq_the_Biologica)
 
--   [Seq-id: Identifying the Bioseq](#ch-datamod.-Seqid-Identifying-th)
+-   [Seq-id: Identifying the Bioseq](#ch_datamod._Seqid_Identifying_th)
 
--   [Seq-annot: Annotating the Bioseq](#ch-datamod.Seqannot-Annotating-)
+-   [Seq-annot: Annotating the Bioseq](#ch_datamod.Seqannot_Annotating_)
 
--   [Seq-descr: Describing the Bioseq and Placing It In Context](#ch-datamod.Seqdescr-Describing-)
+-   [Seq-descr: Describing the Bioseq and Placing It In Context](#ch_datamod.Seqdescr_Describing_)
 
--   [Seq-inst: Instantiating the Bioseq](#ch-datamod.Seqinst-Instantiatin)
+-   [Seq-inst: Instantiating the Bioseq](#ch_datamod.Seqinst_Instantiatin)
 
--   [Seq-hist: History of a Seq-inst](#ch-datamod.Seqhist-History-of-a)
+-   [Seq-hist: History of a Seq-inst](#ch_datamod.Seqhist_History_of_a)
 
--   [Seq-data: Encoding the Sequence Data Itself](#ch-datamod.Seqdata-Encoding-the)
+-   [Seq-data: Encoding the Sequence Data Itself](#ch_datamod.Seqdata_Encoding_the)
 
--   [Tables of Sequence Codes](#ch-datamod.Tables-of-Sequence-C)
+-   [Tables of Sequence Codes](#ch_datamod.Tables_of_Sequence_C)
 
--   [Mapping Between Different Sequence Alphabets](#ch-datamod.Mapping-Between-Diff)
+-   [Mapping Between Different Sequence Alphabets](#ch_datamod.Mapping_Between_Diff)
 
--   [Pubdesc: Publication Describing a Bioseq](#ch-datamod.Pubdesc-Publication-)
+-   [Pubdesc: Publication Describing a Bioseq](#ch_datamod.Pubdesc_Publication_)
 
--   [Numbering: Applying a Numbering System to a Bioseq](#ch-datamod.Numbering-Applying-a)
+-   [Numbering: Applying a Numbering System to a Bioseq](#ch_datamod.Numbering_Applying_a)
 
--   [ASN.1 Specification: seq.asn](#ch-datamod.-ASN1-Specification-s-4)
+-   [ASN.1 Specification: seq.asn](#ch_datamod._ASN1_Specification_s_4)
 
--   [ASN.1 Specification: seqblock.asn](#ch-datamod.-ASN1-Specification-s-5)
+-   [ASN.1 Specification: seqblock.asn](#ch_datamod._ASN1_Specification_s_5)
 
--   [ASN.1 Specification: seqcode.asn](#ch-datamod.-ASN1-Specification-s-6)
+-   [ASN.1 Specification: seqcode.asn](#ch_datamod._ASN1_Specification_s_6)
 
-<a name="ch-datamod.-Introduction-4"></a>
+<a name="ch_datamod._Introduction_4"></a>
 
 #### Introduction
 
-A biological sequence is a single, continuous molecule of nucleic acid or protein. It can be thought of as a multiple inheritance class hierarchy. One hierarchy is that of the underlying molecule type: DNA, RNA, or protein. The other hierarchy is the way the underlying biological sequence is represented by the data structure. It could be a physical or genetic map, an actual sequence of amino acids or nucleic acids, or some more complicated data structure building a composite view from other entries. An overview of this data model has been presented previously, in the [Data Model section](#ch-datamod.datamodel.data-model). The overview will not be repeated here so if you have not read that section, do so now. This section will concern itself with the details of the specification and representation of biological sequence data.
+A biological sequence is a single, continuous molecule of nucleic acid or protein. It can be thought of as a multiple inheritance class hierarchy. One hierarchy is that of the underlying molecule type: DNA, RNA, or protein. The other hierarchy is the way the underlying biological sequence is represented by the data structure. It could be a physical or genetic map, an actual sequence of amino acids or nucleic acids, or some more complicated data structure building a composite view from other entries. An overview of this data model has been presented previously, in the [Data Model section](#ch_datamod.datamodel.data_model). The overview will not be repeated here so if you have not read that section, do so now. This section will concern itself with the details of the specification and representation of biological sequence data.
 
-<a name="ch-datamod.Bioseq-the-Biologica"></a>
+<a name="ch_datamod.Bioseq_the_Biologica"></a>
 
 #### Bioseq: the Biological Sequence
 
-A Bioseq represents a single, continuous molecule of nucleic acid or protein. It can be anything from a band on a gel to a complete chromosome. It can be a genetic or physical map. All Bioseqs have more common properties than differences. All Bioseqs must have at least one identifier, a Seq-id (i.e. Bioseqs must be citable). Seq-ids are discussed in detail in the [Sequence Ids and Locations](#ch-datamod.datamodel.seqloc) section. All Bioseqs represent an integer coordinate system (even maps). All positions on Bioseqs are given by offsets from the first residue, and thus fall in the range from zero to (length - 1). All Bioseqs may have specific descriptive data elements (descriptors) and/or annotations such as feature tables, alignments, or graphs associated with them.
+A Bioseq represents a single, continuous molecule of nucleic acid or protein. It can be anything from a band on a gel to a complete chromosome. It can be a genetic or physical map. All Bioseqs have more common properties than differences. All Bioseqs must have at least one identifier, a Seq-id (i.e. Bioseqs must be citable). Seq-ids are discussed in detail in the [Sequence Ids and Locations](#ch_datamod.datamodel.seqloc) section. All Bioseqs represent an integer coordinate system (even maps). All positions on Bioseqs are given by offsets from the first residue, and thus fall in the range from zero to (length - 1). All Bioseqs may have specific descriptive data elements (descriptors) and/or annotations such as feature tables, alignments, or graphs associated with them.
 
 The differences in Bioseqs arise primarily from the way they are instantiated (represented). Different data elements are required to represent a map than are required to represent a sequence of residues.
 
@@ -827,19 +827,19 @@ The C++ Toolkit introduced some new methods for Bioseq's:
 
 In addition, many utility functions for working with Bioseqs and sequence data are defined in the [CSeqportUtil](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeqportUtil.html) class.
 
-<a name="ch-datamod.-Seqid-Identifying-th"></a>
+<a name="ch_datamod._Seqid_Identifying_th"></a>
 
 #### Seq-id: Identifying the Bioseq
 
-Every Bioseq MUST have at least one Seq-id, or sequence identifier. This means a Bioseq is always citable. You can refer to it by a label of some sort. This is a crucial property for different software tools or different scientists to be able to talk about the same thing. There is a wide range of Seq-ids and they are used in different ways. They are discussed in more detail in the [Sequence Ids and Locations](#ch-datamod.datamodel.seqloc) section.
+Every Bioseq MUST have at least one Seq-id, or sequence identifier. This means a Bioseq is always citable. You can refer to it by a label of some sort. This is a crucial property for different software tools or different scientists to be able to talk about the same thing. There is a wide range of Seq-ids and they are used in different ways. They are discussed in more detail in the [Sequence Ids and Locations](#ch_datamod.datamodel.seqloc) section.
 
-<a name="ch-datamod.Seqannot-Annotating-"></a>
+<a name="ch_datamod.Seqannot_Annotating_"></a>
 
 #### Seq-annot: Annotating the Bioseq
 
 A Seq-annot is a self-contained package of sequence annotations, or information that refers to specific locations on specific Bioseqs. Every Seq-annot can have an Object-id for local use by software, a Dbtag for globally identifying the source of the Seq-annot, and/or a name and description for display and use by a human. These describe the whole package of annotations and make it attributable to a source, independent of the source of the Bioseq.
 
-A Seq-annot may contain a feature table, a set of sequence alignments, or a set of graphs of attributes along the sequence. These are described in detail in the [Sequence Annotation](#ch-datamod.Associating-Annotati) section.
+A Seq-annot may contain a feature table, a set of sequence alignments, or a set of graphs of attributes along the sequence. These are described in detail in the [Sequence Annotation](#ch_datamod.Associating_Annotati) section.
 
 A Bioseq may have many Seq-annots. This means it is possible for one Bioseq to have feature tables from several different sources, or a feature table and set of alignments. A collection of sequences (see Sets Of Bioseqs) can have Seq-annots as well. Finally, a Seq-annot can stand alone, not directly attached to anything. This is because each element in the Seq-annot has specific references to locations on Bioseqs so the information is very explicitly associated with Bioseqs, not implicitly associated by attachment. This property makes possible the exchange of information about Bioseqs as naturally as the exchange of the Bioseqs themselves, be it among software tools or between scientists or as contributions to public databases.
 
@@ -855,7 +855,7 @@ Some of the important methods for the [CSeq\_annot](http://www.ncbi.nlm.nih.gov/
 
 -   ***AddUserObject()*** - add a user-object descriptor.
 
-<a name="ch-datamod.Seqdescr-Describing-"></a>
+<a name="ch_datamod.Seqdescr_Describing_"></a>
 
 #### Seq-descr: Describing the Bioseq and Placing It In Context
 
@@ -865,7 +865,7 @@ The C++ implementation of [CSeq\_descr](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/
 
 **Seqdesc Choice Variants**
 
-<a name="ch-datamod.T3"></a>
+<a name="ch_datamod.T3"></a>
 
 |-----------|-----------------|----------------------------------------------------|
 | **Value** | **Name**        | **Explanation**                                    |
@@ -895,13 +895,13 @@ The C++ implementation of [CSeq\_descr](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/
 | 23        | e\_Source       | source of materials, includes Org-ref              |
 | 24        | e\_Molinfo      | info on the molecule and techniques                |
 
-<a name="ch-datamod.moltype-The-Molecule"></a>
+<a name="ch_datamod.moltype_The_Molecule"></a>
 
 ##### mol-type: The Molecule Type
 
-A Seq-descr.mol-type is of type GIBB-mol. It is derived from the molecule information used in the GenInfo BackBone database. It indicates the biological role of the Bioseq in life. It can be genomic (including organelle genomes). It can be a transcription product such as pre-mRNA, mRNA, rRNA, tRNA, snRNA (small nuclear RNA), or scRNA (small cytoplasmic RNA). All amino acid sequences are peptides. No distinction is made at this level about the level of processing of the peptide (but see [Prot-ref](#ch-datamod.Protref-Reference-To) in the [Sequence Features](#ch-datamod.datamodel.seqfeat) section). The type other-genetic is provided for "other genetic material" such a B chromosomes or F factors that are not normal genomic material but are also not transcription products. The type genomic-mRNA is provided to describe sequences presented in figures in papers in which the author has combined genomic flanking sequence with cDNA sequence. Since such a figure often does not accurately reflect either the sequence of the mRNA or the sequence of genome, this practice should be discouraged.
+A Seq-descr.mol-type is of type GIBB-mol. It is derived from the molecule information used in the GenInfo BackBone database. It indicates the biological role of the Bioseq in life. It can be genomic (including organelle genomes). It can be a transcription product such as pre-mRNA, mRNA, rRNA, tRNA, snRNA (small nuclear RNA), or scRNA (small cytoplasmic RNA). All amino acid sequences are peptides. No distinction is made at this level about the level of processing of the peptide (but see [Prot-ref](#ch_datamod.Protref_Reference_To) in the [Sequence Features](#ch_datamod.datamodel.seqfeat) section). The type other-genetic is provided for "other genetic material" such a B chromosomes or F factors that are not normal genomic material but are also not transcription products. The type genomic-mRNA is provided to describe sequences presented in figures in papers in which the author has combined genomic flanking sequence with cDNA sequence. Since such a figure often does not accurately reflect either the sequence of the mRNA or the sequence of genome, this practice should be discouraged.
 
-<a name="ch-datamod.modif-Modifying-Our-"></a>
+<a name="ch_datamod.modif_Modifying_Our_"></a>
 
 ##### modif: Modifying Our Assumptions About a Bioseq
 
@@ -911,7 +911,7 @@ The modifier concept permits a lot of flexibility. So a peptide with GIBB-mod = 
 
 **GIBB-mod**
 
-<a name="ch-datamod.T4"></a>
+<a name="ch_datamod.T4"></a>
 
 |-----------|----------------------------|--------------------------------------------------------------------------------------------------------------------|
 | **Value** | **Name**                   | **Explanation**                                                                                                    |
@@ -944,7 +944,7 @@ The modifier concept permits a lot of flexibility. So a peptide with GIBB-mod = 
 | 26        | eGIBB\_mod\_physmap        | physical map (not ordered restriction map)                                                                         |
 | 255       | eGIBB\_mod\_other          |                                                                                                |
 
-<a name="ch-datamod.method-Protein-Seque"></a>
+<a name="ch_datamod.method_Protein_Seque"></a>
 
 ##### method: Protein Sequencing Method
 
@@ -952,7 +952,7 @@ The method ***GetMethod()*** gives the method used to obtain a protein sequence.
 
 **GIBB-method**
 
-<a name="ch-datamod.T5"></a>
+<a name="ch_datamod.T5"></a>
 
 |-----------|-----------------------------------|--------------------------------------------------------|
 | **Value** | **Name**                          | **Explanation**                                        |
@@ -963,13 +963,13 @@ The method ***GetMethod()*** gives the method used to obtain a protein sequence.
 | 5         | eGIBB\_method\_seq\_pept\_homol   | peptides sequenced, fragments ordered by homology      |
 | 6         | eGIBB\_method\_concept\_trans\_a  | conceptual translation, provided by author of sequence |
 
-<a name="ch-datamod.name-A-Descriptive-N"></a>
+<a name="ch_datamod.name_A_Descriptive_N"></a>
 
 ##### name: A Descriptive Name
 
 A sequence name is very different from a sequence identifier. A Seq-id uniquely identifies a specific Bioseq. A Seq-id may be no more than an integer and will not necessarily convey any biological or descriptive information in itself. A name is not guaranteed to uniquely identify a single Bioseq, but if used with caution, can be a very useful tool to identify the best current entry for a biological entity. For example, we may wish to associate the name "SV40" with a single Bioseq for the complete genome of SV40. Let us suppose this Bioseq has the Seq-id 10. Then it is discovered that there were errors in the original Bioseq designated 10, and it is replaced by a new Bioseq from a curator with Seq-id 15. The name "SV40" can be moved to Seq-id 15 now. If a biologist wishes to see the "best" or "most typical" sequence of the SV40 genome, she would retrieve on the name "SV40". At an earlier point in time she would get Bioseq 10. At a later point she would get Bioseq 15. Note that her query is always answered in the context of best current data. On the other hand, if she had done a sequence analysis on Bioseq 10 and wanted to compare results, she would cite Seq-id 10, not the name "SV40", since her results apply to the specific Bioseq, 10, not necessarily to the "best" or "most typical" entry for the virus at the moment.
 
-<a name="ch-datamod.title-A-Descriptive-"></a>
+<a name="ch_datamod.title_A_Descriptive_"></a>
 
 ##### title: A Descriptive Title
 
@@ -997,101 +997,101 @@ Because of the utility of such terse summaries, NCBI has been experimenting with
 
 Gene and protein names come first. If both gene name and protein name are know they are linked with "=". If more than two genes are on a Bioseq then the first and last gene are given, separated by "...". A region name, if available, will precede the gene names. Extra comments will appear in {}. Organism, strain names, and molecule type and modifier appear in [] at the end. Note that the whole definition is constructed from structured information in the ASN.1 data structure by software. It is not composed by hand, but is instead a brief, machine generated summary of the entry based on data within the entry. We therefore discourage attempts to machine parse this line. It may change, but the underlying structured data will not. Software should always be designed to process the structured data.
 
-<a name="ch-datamod.org-What-Organism-Di"></a>
+<a name="ch_datamod.org_What_Organism_Di"></a>
 
 ##### org: What Organism Did this Come From?
 
 If the whole Bioseq comes from a single organism (the usual case). See the Feature Table section for a detailed description of the Org-ref (organism reference) data structure.
 
-<a name="ch-datamod.comment-Commentary-T"></a>
+<a name="ch_datamod.comment_Commentary_T"></a>
 
 ##### comment: Commentary Text
 
 A comment that applies to the whole Bioseq may go here. A comment may contain many sentences or paragraphs. A Bioseq may have many comments.
 
-<a name="ch-datamod.num-Applying-a-Numbe"></a>
+<a name="ch_datamod.num_Applying_a_Numbe"></a>
 
 ##### num: Applying a Numbering System to a Bioseq
 
 One may apply a custom numbering system over the full length of the Bioseq with this Seqdescr. See the section on Numbering later in this chapter for a detailed description of the possible forms this can take. To report the numbering system used in a particular publication, the Pubdesc Seq-descr has its own Numbering slot.
 
-<a name="ch-datamod.maploc-Map-Location"></a>
+<a name="ch_datamod.maploc_Map_Location"></a>
 
 ##### maploc: Map Location
 
 The map location given here is a Dbtag, to be able to cite a map location given by a map database to this Bioseq (e.g. "GDB", "4q21"). It is not necessarily the map location published by the author of the Bioseq. A map location published by the author would be part of a Pubdesc Seq-descr.
 
-<a name="ch-datamod.pir-PIR-Specific-Dat"></a>
+<a name="ch_datamod.pir_PIR_Specific_Dat"></a>
 
 ##### pir: PIR Specific Data
 
-<a name="ch-datamod.sp-SWISSPROT-Data"></a>
+<a name="ch_datamod.sp_SWISSPROT_Data"></a>
 
 ##### sp: SWISSPROT Data
 
-<a name="ch-datamod.embl-EMBL-Data"></a>
+<a name="ch_datamod.embl_EMBL_Data"></a>
 
 ##### embl: EMBL Data
 
-<a name="ch-datamod.prf-PRF-Data"></a>
+<a name="ch_datamod.prf_PRF_Data"></a>
 
 ##### prf: PRF Data
 
-<a name="ch-datamod.pdb-PDB-Data"></a>
+<a name="ch_datamod.pdb_PDB_Data"></a>
 
 ##### pdb: PDB Data
 
 NCBI produces ASN.1 encoded entries from data provided by many different sources. Almost all of the data items from these widely differing sources are mapped into the common ASN.1 specifications described in this document. However, in all cases a small number of elements are unique to a particular data source, or cannot be unambiguously mapped into the common ASN.1 specification. Rather than lose such elements, they are carried in small data structures unique to each data source. These are specified in [seqblock.asn](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqblock/seqblock.asn) and implemented by the C++ classes [CGB\_block](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCGB__block.html), [CEMBL\_block](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCEMBL__block.html), [CSP\_block](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSP__block.html), [CPIR\_block](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCPIR__block.html), [CPRF\_block](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCPRF__block.html), and [CPDB\_block](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCPDB__block.html).
 
-<a name="ch-datamod.genbank-GenBank-Flat"></a>
+<a name="ch_datamod.genbank_GenBank_Flat"></a>
 
 ##### genbank: GenBank Flatfile Specific Data
 
 A number of data items unique to the GenBank flatfile format do not map readily to the common ASN.1 specification. These fields are partially populated by NCBI for Bioseqs derived from other sources than GenBank to permit the production of valid GenBank flatfile entries from those Bioseqs. Other fields are populated to preserve information coming from older GenBank entries.
 
-<a name="ch-datamod.pub-Description-of-a"></a>
+<a name="ch_datamod.pub_Description_of_a"></a>
 
 ##### pub: Description of a Publication
 
 This Seq-descr is used both to cite a particular bibliographic source and to carry additional information about the Bioseq as it appeared in that publication, such as the numbering system to use, the figure it appeared in, a map location given by the author in that paper, and so. See the section on the Pubdesc later in this chapter for a more detailed description of this data type.
 
-<a name="ch-datamod.region-Name-of-a-Gen"></a>
+<a name="ch_datamod.region_Name_of_a_Gen"></a>
 
 ##### region: Name of a Genomic Region
 
 A region of genome often has a name which is a commonly understood description for the Bioseq, such as "B-globin cluster".
 
-<a name="ch-datamod.user-A-Userdefined-S"></a>
+<a name="ch_datamod.user_A_Userdefined_S"></a>
 
 ##### user: A User-defined Structured Object
 
 This is a place holder for software or databases to add their own structured datatypes to Bioseqs without corrupting the common specification or disabling the automatic ASN.1 syntax checking. A User-object can also be used as a feature. See the chapter on General User Objects for a detailed explanation of User-objects.
 
-<a name="ch-datamod.neighbors-Bioseqs-Re"></a>
+<a name="ch_datamod.neighbors_Bioseqs_Re"></a>
 
 ##### neighbors: Bioseqs Related by Sequence Similarity
 
 NCBI computes a list of "neighbors", or closely related Bioseqs based on sequence similarity for use in the Entrez service. This descriptor is so that such context setting information could be included in a Bioseq itself, if desired.
 
-<a name="ch-datamod.createdate"></a>
+<a name="ch_datamod.createdate"></a>
 
 ##### create-date
 
 This is the date a Bioseq was created for the first time. It is normally supplied by the source database. It may not be present when not normally distributed by the source database.
 
-<a name="ch-datamod.updatedate"></a>
+<a name="ch_datamod.updatedate"></a>
 
 ##### update-date
 
 This is the date of the last update to a Bioseq by the source database. For several source databases this is the only date provided with an entry. The nature of the last update done is generally not available in computer readable (or any) form.
 
-<a name="ch-datamod.-het-Heterogen"></a>
+<a name="ch_datamod._het_Heterogen"></a>
 
 ##### het: Heterogen
 
 A "heterogen" is a non-biopolymer atom or molecule associated with Bioseqs from PDB. When a heterogen appears at the Seq-descr level, it means it was resolved in the crystal structure but is not associated with specific residues of the Bioseq. Heterogens which are associated with specific residues of the Bioseq are attached as features.
 
-<a name="ch-datamod.Seqinst-Instantiatin"></a>
+<a name="ch_datamod.Seqinst_Instantiatin"></a>
 
 #### Seq-inst: Instantiating the Bioseq
 
@@ -1105,19 +1105,19 @@ Some of the important methods for Seq-inst are:
 
 -   ***IsNa*** - determines if the sequence type is nucleic acid
 
-<a name="ch-datamod.Seqinst-Virtual-Bios"></a>
+<a name="ch_datamod.Seqinst_Virtual_Bios"></a>
 
 ##### Seq-inst: Virtual Bioseq
 
 A "virtual" Bioseq is one in which we know the type of molecule, and possibly its length, topology, and/or strandedness, but for which we do not have sequence data. It is not unusual to have some uncertainty about the length of a virtual Bioseq, so Seq-inst.fuzz may be used. The fields Seq-inst.seq-data and Seq-inst.ext are not appropriate for a virtual Bioseq.
 
-<a name="ch-datamod.Seqinst-Raw-Bioseq"></a>
+<a name="ch_datamod.Seqinst_Raw_Bioseq"></a>
 
 ##### Seq-inst: Raw Bioseq
 
 A "raw" Bioseq does have sequence data, so Seq-inst.length must be set and there should be no Seq-inst.fuzz associated with it. Seq-inst.seq-data must be filled in with the sequence itself and a Seq-data encoding must be selected which is appropriate to Seq-inst.mol. The topology and strandedness may or may not be available. Seq-inst.ext is not appropriate.
 
-<a name="ch-datamod.Seqinst-Segmented-Bi"></a>
+<a name="ch_datamod.Seqinst_Segmented_Bi"></a>
 
 ##### Seq-inst: Segmented Bioseq
 
@@ -1131,7 +1131,7 @@ A variation of the case above is when one has no idea at all what the length of 
 
 The Bioseqs referenced by a segmented Bioseq should always be from the same Seq-inst.mol class as the segmented Bioseq, but may well come from a mixture of Seq-inst.repr classes (as for example the mixture of virtual and raw Bioseq references used to describe sequenced and unsequenced genomic regions above). Other reasonable mixtures might be raw and map (see below) Bioseqs to describe a region which is fully mapped and partially sequenced, or even a mixture of virtual, raw, and map Bioseqs for a partially mapped and partially sequenced region. The "character" of any region of a segmented Bioseq is always taken from the underlying Bioseq to which it points in that region. However, a segmented Bioseq can have its own annotations. Things like feature tables are not automatically propagated to the segmented Bioseq.
 
-<a name="ch-datamod.Seqinst-Reference-Bi"></a>
+<a name="ch_datamod.Seqinst_Reference_Bi"></a>
 
 ##### Seq-inst: Reference Bioseq
 
@@ -1141,7 +1141,7 @@ In the first example, software would want to be able to use the Seq-loc to gathe
 
 In the second example, software would not propagate annotations or descriptors from the underlying Bioseq by default (because presumably the scientist prefers his own view to the public one) but the connection to the underlying Bioseq is not lost. Thus the public annotations are available on demand and any new annotations added by the scientist share the public coordinate system and can be compared with those done by others.
 
-<a name="ch-datamod.Seqinst-Constructed-"></a>
+<a name="ch_datamod.Seqinst_Constructed_"></a>
 
 ##### Seq-inst: Constructed Bioseq
 
@@ -1153,7 +1153,7 @@ The constructed Bioseq is like a raw, rather than a segmented, Bioseq because Se
 
 Seq-inst.ext is not used for the constructed Bioseq. The relationship of the merged sequence to its component Bioseqs is stored in Seq-inst.hist, the history of the Bioseq (described in more detail below). Seq-hist.assembly contains alignments of the constructed Bioseq with its component Bioseqs. Any Bioseq can have a Seq-hist.assembly. A raw Bioseq may use this to show its relationship to its gel readings. The constructed Bioseq is special in that its Seq-hist.assembly shows how a high level view was constructed from other pieces. The sequence in a constructed Bioseq is only posited to exist. However, since it is constructed from data by possibly many different laboratories, it may never have been sequenced in its entirety from a single biological source.
 
-<a name="ch-datamod.Seqinst-Typical-or-C"></a>
+<a name="ch_datamod.Seqinst_Typical_or_C"></a>
 
 ##### Seq-inst: Typical or Consensus Bioseq
 
@@ -1163,7 +1163,7 @@ While a consensus Bioseq can represent a frequency profile (including the probab
 
 Seq-hist.assembly can be used in a consensus Bioseq to record the sequence regions used to construct the pattern and their relationships with it. While Seq-hist.assembly for a constructed Bioseq indicates the relationship with Bioseqs which are meant to be superseded by the constructed Bioseq, the consensus Bioseq does not in any way replace the Bioseqs in its Seq-hist.assembly. Rather it is a summary of common features among them, not a "better" or "more complete" version of them.
 
-<a name="ch-datamod.Seqinst-Map-Bioseqs"></a>
+<a name="ch_datamod.Seqinst_Map_Bioseqs"></a>
 
 ##### Seq-inst: Map Bioseqs
 
@@ -1175,7 +1175,7 @@ A number of attributes of Bioseqs can make such a generic representation more "n
 
 A physical map Bioseq has similar strengths and weaknesses as the genetic map Bioseq. It can represent an ordered map (such as an ordered restriction map) very well and easily. For some contig building approaches, ordering information is essential to the process of building the physical map and would have to be stored and processed separately by the map building research group. However, the map Bioseq serves very well as a vehicle for periodic reports of the group's best view of the physical map for consumption by the scientific public. The map Bioseq data structure maps quite well to the figures such groups publish to summarize their work. The map Bioseq is an electronic summary that can be integrated with other data and software tools.
 
-<a name="ch-datamod.Seqhist-History-of-a"></a>
+<a name="ch_datamod.Seqhist_History_of_a"></a>
 
 #### Seq-hist: History of a Seq-inst
 
@@ -1191,7 +1191,7 @@ Seq-hist.replaced-by is a forward pointer. It means this Bioseq was replaced by 
 
 Another fate which may await a Bioseq is that it is completely withdrawn. This is relatively rare but does happen. Seq-hist.deleted can either be set to just TRUE, or the date of the deletion event can be entered (preferred). If the deleted date is present, the ASN.1 will have the Date CHOICE for Seq-hist.deleted, else if the deleted boolean is TRUE the ASN.1 will have the BOOLEAN form.
 
-<a name="ch-datamod.Seqdata-Encoding-the"></a>
+<a name="ch_datamod.Seqdata_Encoding_the"></a>
 
 #### Seq-data: Encoding the Sequence Data Itself
 
@@ -1205,7 +1205,7 @@ Some of the important methods for [CSeq\_data](http://www.ncbi.nlm.nih.gov/IEB/T
 
 -   ***CSeq\_data()*** - constructors to create objects from string or vector of char
 
-<a name="ch-datamod.IUPACaa-The-IUPACIUB"></a>
+<a name="ch_datamod.IUPACaa_The_IUPACIUB"></a>
 
 ##### IUPACaa: The IUPAC-IUB Encoding of Amino Acids
 
@@ -1215,7 +1215,7 @@ In the NCBI C++ implementation, the values are stored one value per byte.
 
 **IUPACaa**
 
-<a name="ch-datamod.T6"></a>
+<a name="ch_datamod.T6"></a>
 
 |-----------|------------|--------------------------|
 | **Value** | **Symbol** | **Name**                 |
@@ -1245,7 +1245,7 @@ In the NCBI C++ implementation, the values are stored one value per byte.
 | 89        | Y          | Tyrosine                 |
 | 90        | Z          | Glu or Gln               |
 
-<a name="ch-datamod.NCBIeaa-Extended-IUP"></a>
+<a name="ch_datamod.NCBIeaa_Extended_IUP"></a>
 
 ##### NCBIeaa: Extended IUPAC Encoding of Amino Acids
 
@@ -1255,7 +1255,7 @@ In the NCBI C++ implementation, the values are stored one value per byte.
 
 **NCBIeaa**
 
-<a name="ch-datamod.T7"></a>
+<a name="ch_datamod.T7"></a>
 
 |-----------|------------|--------------------------|
 | **Value** | **Symbol** | **Name**                 |
@@ -1288,7 +1288,7 @@ In the NCBI C++ implementation, the values are stored one value per byte.
 | 89        | Y          | Tyrosine                 |
 | 90        | Z          | Glu or Gln               |
 
-<a name="ch-datamod.NCBIstdaa-A-Simple-S"></a>
+<a name="ch_datamod.NCBIstdaa_A_Simple_S"></a>
 
 ##### NCBIstdaa: A Simple Sequential Code for Amino Acids
 
@@ -1298,7 +1298,7 @@ In the NCBI C++ implementation, the values are stored one value per byte.
 
 **NCBIstdaa**
 
-<a name="ch-datamod.T8"></a>
+<a name="ch_datamod.T8"></a>
 
 |-----------|------------|--------------------------|
 | **Value** | **Symbol** | **Name**                 |
@@ -1331,13 +1331,13 @@ In the NCBI C++ implementation, the values are stored one value per byte.
 | 26        | O          | Pyrrolysine              |
 | 27        | J          | Leu or Ile               |
 
-<a name="ch-datamod.NCBI8aa-An-Encoding-"></a>
+<a name="ch_datamod.NCBI8aa_An_Encoding_"></a>
 
 ##### NCBI8aa: An Encoding for Modified Amino Acids
 
 Post-translational modifications can introduce a number of non-standard or modified amino acids into biological molecules. The NCBI8aa code will be used to represent up to 250 possible amino acids by using the remaining coding space in the NCBIstdaa code. That is, for the first 26 values, NCBI8aa will be identical to NCBIstdaa. The remaining 224 values will be used for the most commonly encountered modified amino acids. Only the first 250 values will be used to signify amino acids, leaving values in the range of 250-255 to be used for software control codes. Obviously there are a very large number of possible modified amino acids, especially if one takes protein engineering into account. However, the intent here is to only represent commonly found biological forms. This encoding is not yet available since decisions about what amino acids to include not all have been made yet.
 
-<a name="ch-datamod.NCBIpaa-A-Profile-St"></a>
+<a name="ch_datamod.NCBIpaa_A_Profile_St"></a>
 
 ##### NCBIpaa: A Profile Style Encoding for Amino Acids
 
@@ -1345,7 +1345,7 @@ The NCBIpaa encoding is designed to accommodate a frequency profile describing a
 
 This type of encoding would presumably never appear except in a Bioseq of type "consensus". In the C++ implementation these amino acids are encoded at 30 bytes per amino acid in a simple linear order. That is, the first 30 bytes are the first amino acid, the second 30 the next amino acid, and so on.
 
-<a name="ch-datamod.IUPACna-The-IUPACIUB"></a>
+<a name="ch_datamod.IUPACna_The_IUPACIUB"></a>
 
 ##### IUPACna: The IUPAC-IUB Encoding for Nucleic Acids
 
@@ -1355,7 +1355,7 @@ The C++ implementation encodes one value for a nucleic acid residue per byte.
 
 **IUPACna**
 
-<a name="ch-datamod.T10"></a>
+<a name="ch_datamod.T10"></a>
 
 |-----------|------------|------------------|
 | **Value** | **Symbol** | **Name**         |
@@ -1375,7 +1375,7 @@ The C++ implementation encodes one value for a nucleic acid residue per byte.
 | 87        | W          | A or T           |
 | 89        | Y          | T or C           |
 
-<a name="ch-datamod.NCBI4na-A-Four-Bit-E"></a>
+<a name="ch_datamod.NCBI4na_A_Four_Bit_E"></a>
 
 ##### NCBI4na: A Four Bit Encoding of Nucleic Acids
 
@@ -1383,7 +1383,7 @@ It is possible to represent the same set of nucleic acid and ambiguities with a 
 
 **NCBI4na**
 
-<a name="ch-datamod.T11"></a>
+<a name="ch_datamod.T11"></a>
 
 |-----------|------------|------------------|
 | **Value** | **Symbol** | **Name**         |
@@ -1404,7 +1404,7 @@ It is possible to represent the same set of nucleic acid and ambiguities with a 
 | 14        | B          | G or T or C      |
 | 15        | N          | A or G or C or T |
 
-<a name="ch-datamod.NCBI2na-A-Two-Bit-En"></a>
+<a name="ch_datamod.NCBI2na_A_Two_Bit_En"></a>
 
 ##### NCBI2na: A Two Bit Encoding for Nucleic Acids
 
@@ -1412,7 +1412,7 @@ If no ambiguous bases are present in a nucleic acid sequence it can be completel
 
 **NCBI2na**
 
-<a name="ch-datamod.T12"></a>
+<a name="ch_datamod.T12"></a>
 
 |-----------|------------|----------------|
 | **Value** | **Symbol** | **Name**       |
@@ -1421,13 +1421,13 @@ If no ambiguous bases are present in a nucleic acid sequence it can be completel
 | 2         | G          | Guanine        |
 | 3         | T          | Thymine/Uracil |
 
-<a name="ch-datamod.NCBI8na-An-Eight-Bit"></a>
+<a name="ch_datamod.NCBI8na_An_Eight_Bit"></a>
 
 ##### NCBI8na: An Eight Bit Sequential Encoding for Modified Nucleic Acids
 
 The first 16 values of NCBI8na are identical with those of NCBI4na. The remaining possible 234 values will be used for common, biologically occurring modified bases such as those found in tRNAs. This full encoding is still being determined at the time of this writing. Only the first 250 values will be used, leaving values in the range of 250-255 to be used as control codes in software.
 
-<a name="ch-datamod.NCBIpna-A-Frequency-"></a>
+<a name="ch_datamod.NCBIpna_A_Frequency_"></a>
 
 ##### NCBIpna: A Frequency Profile Encoding for Nucleic Acids
 
@@ -1435,7 +1435,7 @@ Frequency profiles have been used to describe motifs and signals in nucleic acid
 
 The sequence is encoded as a simple linear sequence of bytes where the first five bytes code for the first position, the next five for the second position, and so on. Typically the NCBIpna notation would only be found on a Bioseq of type consensus. However, one can imagine other uses for such an encoding, for example to represent knowledge about low resolution sequence data in an easily computable form.
 
-<a name="ch-datamod.Tables-of-Sequence-C"></a>
+<a name="ch_datamod.Tables_of_Sequence_C"></a>
 
 #### Tables of Sequence Codes
 
@@ -1465,35 +1465,35 @@ The table has 4 rows (with values 0-3) with one letter symbols. If we wished to 
 
 In the case of nucleic acid codes, the Seq-code-table also has rows for indexes to complement the values represented in the table. In the example above, the complement of 0 ("A") is 3 ("T").
 
-<a name="ch-datamod.Mapping-Between-Diff"></a>
+<a name="ch_datamod.Mapping_Between_Diff"></a>
 
 #### Mapping Between Different Sequence Alphabets
 
 A Seq-map-table provides a mapping from the values of one alphabet to the values of another, very like the way complements are mapped above. A Seq-map-table has two Seq-code-types, one giving the alphabet to map from and the other the alphabet to map to. The Seq-map-table has the same number of rows and the same "start-at" value as the Seq-code-table for the alphabet it maps FROM. This makes the mapping a simple array lookup using the value of a residue of the FROM alphabet and subtracting "start-at". Remember that alphabets are not created equal and mapping from a bigger alphabet to a smaller may result in loss of information.
 
-<a name="ch-datamod.Pubdesc-Publication-"></a>
+<a name="ch_datamod.Pubdesc_Publication_"></a>
 
 #### Pubdesc: Publication Describing a Bioseq
 
-A Pubdesc is a data structure used to record how a particular publication described a Bioseq. It contains the citation itself as a Pub-equiv (see the [Bibliographic References](#ch-datamod.datamodel.biblio) chapter) so that equivalent forms of the citation (e.g. a MEDLINE uid and a Cit-Art) can all be accommodated in a single data structure. Then a number of additional fields allow a more complete description of what was presented in the publication. These extra fields are generally only filled in for entries produced by the NCBI journal scanning component of GenBank, also known as the Backbone database. This information is not generally available in data from any other database yet.
+A Pubdesc is a data structure used to record how a particular publication described a Bioseq. It contains the citation itself as a Pub-equiv (see the [Bibliographic References](#ch_datamod.datamodel.biblio) chapter) so that equivalent forms of the citation (e.g. a MEDLINE uid and a Cit-Art) can all be accommodated in a single data structure. Then a number of additional fields allow a more complete description of what was presented in the publication. These extra fields are generally only filled in for entries produced by the NCBI journal scanning component of GenBank, also known as the Backbone database. This information is not generally available in data from any other database yet.
 
 Pubdesc.name is the name given the sequence in the publication, usually in the figure. Pubdesc.fig gives the figure the Bioseq appeared in so a scientist can locate it in the paper. Pubdesc.num preserves the numbering system used by the author (see Numbering below). Pubdesc.numexc, if TRUE, indicates that a "numbering exception" was found (i.e. the author's numbering did not agree with the number of residues in the sequence). This usually indicates an error in the preparation of the figure. If Pubdesc.poly-a is TRUE, then a poly-A tract was indicated for the Bioseq in the figure, but was not explicitly preserved in the sequence itself (e.g. ...AGAATTTCT (Poly-A) ). Pubdesc.maploc is the map location for this sequence as given by the author in this paper. Pubdesc.seq-raw allows the presentation of the sequence exactly as typed from the figure. This is never used now. Pubdesc.align-group, if present, indicates the Bioseq was presented in a group aligned with other Bioseqs. The align-group value is an arbitrary integer. Other Bioseqs from the same publication which are part of the same alignment will have the same align-group number.
 
 Pubdesc.comment is simply a free text comment associated with this publication. SWISSPROT entries may also have this field filled.
 
-<a name="ch-datamod.Numbering-Applying-a"></a>
+<a name="ch_datamod.Numbering_Applying_a"></a>
 
 #### Numbering: Applying a Numbering System to a Bioseq
 
 Internally, locations on Bioseqs are ALWAYS integer offsets in the range 0 to (length - 1). However, it is often helpful to display some other numbering system. The Numbering data structure supports a variety of numbering styles and conventions. In the ASN.1 specification, it is simply a CHOICE of the four possible types. When a Numbering object is supplied as a Seq-descr, then it applies to the complete length of the Bioseq. A Numbering object can also be a feature, in which case it only applies to the interval defined by the feature's location.
 
-<a name="ch-datamod.Numcont-A-Continuous"></a>
+<a name="ch_datamod.Numcont_A_Continuous"></a>
 
 ##### Num-cont: A Continuous Integer Numbering System
 
 The most widely used numbering system for sequences is some form of a continuous integer numbering. Num-cont.refnum is the number to assign to the first residue in the Bioseq. If Num-cont.has-zero is TRUE, the numbering system uses zero. When biologists start numbering with a negative number, it is quite common for them to skip zero, going directly from -1 to +1, so the DEFAULT for has-zero is FALSE. This only reflects common usage, not any recommendation in terms of convention. Any useful software tool should support both conventions, since they are both used in the literature. Finally, the most common numbering systems are ascending; however descending numbering systems are encountered from time to time, so Num-cont.ascending would then be set to FALSE.
 
-<a name="ch-datamod.Numreal-A-Real-Numbe"></a>
+<a name="ch_datamod.Numreal_A_Real_Numbe"></a>
 
 ##### Num-real: A Real Number Numbering Scheme
 
@@ -1503,13 +1503,13 @@ map units = ( Num-real.a \* base\_pair\_position) + Num-real.b
 
 in this example. Since such numbering systems generally have their own units (e.g. "map units", "centisomes", "centimorgans", etc), Num-real.units provides a string for labeling the display.
 
-<a name="ch-datamod.Numenum-An-Enumerate"></a>
+<a name="ch_datamod.Numenum_An_Enumerate"></a>
 
 ##### Num-enum: An Enumerated Numbering Scheme
 
 Occasionally biologists do not use a continuous numbering system at all. Crystallographers and immunologists, for example, who do extensive studies on one or a few sequences, may name the individual residues in the sequence as they fit them into a theoretical framework. So one might see residues numbered ... "10" "11" "12" "12A" "12B" "12C" "13" "14" ... To accommodate this sort of scheme the "name" of each residue must be explicitly given by a string, since there is no anticipating any convention that may be used. The Num-enum.num gives the number of residue names (which should agree with the number of residues in the Bioseq, in the case of use as a Seq-descr), followed by the names as strings.
 
-<a name="ch-datamod.Numref-Numbering-by-"></a>
+<a name="ch_datamod.Numref_Numbering_by_"></a>
 
 ##### Num-ref: Numbering by Reference to Another Bioseq
 
@@ -1517,40 +1517,40 @@ Two types of references are allowed. The "sources" references are meant to apply
 
 The "aligns" reference requires that the Num-ref-aligns alignment be filled in with an alignment of the target Bioseq with one or more pieces of other Bioseqs. The numbering will come from the aligned pieces.
 
-<a name="ch-datamod.Numbering-C-Class"></a>
+<a name="ch_datamod.Numbering_C_Class"></a>
 
 ##### Numbering: C++ Class
 
 A Numbering object is implemented by the C++ class [CNumbering](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNumbering.html). The choice of numbering type is represented by the [E\_Choice](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNumbering__Base.html#431389cd64d215c294e8f46f416372e0) enumeration. The class contains methods for getting and setting the various types of numbering.
 
-<a name="ch-datamod.datamodel.seqset"></a>
+<a name="ch_datamod.datamodel.seqset"></a>
 
 Collections of Sequences
 ------------------------
 
 This section describes the types used to organize multiple Bioseqs into tree structures. The types are located in the [seqset.asn](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqset/seqset.asn) module.
 
-<a name="ch-datamod.datamodel.cpp.seqset"></a>
+<a name="ch_datamod.datamodel.cpp.seqset"></a>
 
 ### C++ Implementation Notes
 
--   [Introduction](#ch-datamod.-Introduction-5)
+-   [Introduction](#ch_datamod._Introduction_5)
 
--   [Seq-entry: The Sequence Entry](#ch-datamod.Seqentry-The-Sequenc)
+-   [Seq-entry: The Sequence Entry](#ch_datamod.Seqentry_The_Sequenc)
 
--   [Bioseq-set: A Set Of Seq-entry's](#ch-datamod.Bioseqset-A-Set-Of-S)
+-   [Bioseq-set: A Set Of Seq-entry's](#ch_datamod.Bioseqset_A_Set_Of_S)
 
--   [Bioseq-sets are Convenient Packages](#ch-datamod.Bioseqsets-are-Conve)
+-   [Bioseq-sets are Convenient Packages](#ch_datamod.Bioseqsets_are_Conve)
 
--   [ASN.1 Specification: seqset.asn](#ch-datamod.-ASN1-Specification-s-7)
+-   [ASN.1 Specification: seqset.asn](#ch_datamod._ASN1_Specification_s_7)
 
-<a name="ch-datamod.-Introduction-5"></a>
+<a name="ch_datamod._Introduction_5"></a>
 
 #### Introduction
 
 A biological sequence is often most appropriately stored in the context of other, related sequences. Such a collection might have a biological basis (e.g. a nucleic acid and its translated proteins, or the chains of an enzyme complex) or some other basis (e.g. a release of GenBank, or the sequences published in an article). The Bioseq-set provides a framework for collections of sequences.
 
-<a name="ch-datamod.Seqentry-The-Sequenc"></a>
+<a name="ch_datamod.Seqentry_The_Sequenc"></a>
 
 #### Seq-entry: The Sequence Entry
 
@@ -1564,11 +1564,11 @@ Some of the important methods for [CSeq\_entry](http://www.ncbi.nlm.nih.gov/IEB/
 
 -   ***Parentize()*** - recursive update of parent Seq-entries
 
-<a name="ch-datamod.Bioseqset-A-Set-Of-S"></a>
+<a name="ch_datamod.Bioseqset_A_Set_Of_S"></a>
 
 #### Bioseq-set: A Set Of Seq-entry's
 
-A Bioseq-set contains a convenient collection of Seq-entry's. It can have descriptors and annotations just like a single Bioseq (see [Biological Sequences](#ch-datamod.-Biological-Sequences)). It can have identifiers for the set, although these are less thoroughly controlled than Seq-ids at this time. Since the "heart" of a Bioseq-set is a collection of Seq-entry's, which themselves are either a Bioseq or a Bioseq-set, a Bioseq-set can recursively contain other sets. This recursive property makes for a very rich data structure, and a necessary one for biological sequence data, but presents new challenges for software to manipulate and display it. We will discuss some guidelines for building and using Bioseq-sets below, based on the NCBI experience to date.
+A Bioseq-set contains a convenient collection of Seq-entry's. It can have descriptors and annotations just like a single Bioseq (see [Biological Sequences](#ch_datamod._Biological_Sequences)). It can have identifiers for the set, although these are less thoroughly controlled than Seq-ids at this time. Since the "heart" of a Bioseq-set is a collection of Seq-entry's, which themselves are either a Bioseq or a Bioseq-set, a Bioseq-set can recursively contain other sets. This recursive property makes for a very rich data structure, and a necessary one for biological sequence data, but presents new challenges for software to manipulate and display it. We will discuss some guidelines for building and using Bioseq-sets below, based on the NCBI experience to date.
 
 Some of the important methods for [CBioseq\_set](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBioseq__set.html) are:
 
@@ -1576,25 +1576,25 @@ Some of the important methods for [CBioseq\_set](http://www.ncbi.nlm.nih.gov/IEB
 
 -   ***GetParentSet()*** - gets the parent of the current [CBioseq\_set](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBioseq__set.html)
 
-<a name="ch-datamod.id-local-identifier-"></a>
+<a name="ch_datamod.id_local_identifier_"></a>
 
 ##### id: local identifier for this set
 
 The id field just contains an integer or string to identify this set for internal use by a software system or database. This is useful for building collections of sequences for temporary use, but still be able to cite them.
 
-<a name="ch-datamod.coll-global-identifi"></a>
+<a name="ch_datamod.coll_global_identifi"></a>
 
 ##### coll: global identifier for this set
 
 The coll field is a Dbtag, which will accept a string to identify a source database and a string or integer as an identifier within that database. This semi-controlled form provides a global identifier for the set of sequences in a simple way.
 
-<a name="ch-datamod.level-nesting-level-"></a>
+<a name="ch_datamod.level_nesting_level_"></a>
 
 ##### level: nesting level of set
 
 Since Bioseq-sets are recursive, the level integer was conceived as a way of explicitly indicating the nesting level. In practice we have found this to be of little or no use and recommend it be ignored and eventually removed.
 
-<a name="ch-datamod.class-classification"></a>
+<a name="ch_datamod.class_classification"></a>
 
 ##### class: classification of sets
 
@@ -1604,7 +1604,7 @@ The class field is an attempt to classify sets of sequences that may be widely u
 
 The following table summarizes the types of Bioseq-sets:
 
-<a name="ch-datamod.T13"></a>
+<a name="ch_datamod.T13"></a>
 
 |-----------|----------------|----------------------------------------------------------------------------------------------------------------------------------------|
 | **Value** | **ASN.1 name** | **Explanation**                                                                                                                        |
@@ -1623,23 +1623,23 @@ The following table summarizes the types of Bioseq-sets:
 | 12        | pdb-entry      | all the Bioseqs associated with a single PDB structure                                                                                 |
 | 255       | other          | new type. Usually Bioseq-set.release will have an explanatory string                                                                   |
 
-<a name="ch-datamod.release-an-explanato"></a>
+<a name="ch_datamod.release_an_explanato"></a>
 
 ##### release: an explanatory string
 
 This is just a free text field which can contain a human readable description of the set. Often used to show which release of GenBank, for example.
 
-<a name="ch-datamod.date"></a>
+<a name="ch_datamod.date"></a>
 
 ##### date
 
 This is a date associated with the creation of this set.
 
-<a name="ch-datamod.descr-Seqdescr-for-t"></a>
+<a name="ch_datamod.descr_Seqdescr_for_t"></a>
 
 ##### descr: Seq-descr for this set
 
-Just like a Bioseq, a Bioseq-set can have Seq-descr (see [Biological Sequences](#ch-datamod.-Biological-Sequences)) which set it in a biological or bibliographic context, or confer a title or a name. The rule for descriptors at the set level is that they apply to "all of everything below". So if an Org-ref is given at the set level, it means that every Bioseq in the set comes from that organism. If this is not true, then Org-ref would not appear on the set, but different Org-refs would occur on lower level members.
+Just like a Bioseq, a Bioseq-set can have Seq-descr (see [Biological Sequences](#ch_datamod._Biological_Sequences)) which set it in a biological or bibliographic context, or confer a title or a name. The rule for descriptors at the set level is that they apply to "all of everything below". So if an Org-ref is given at the set level, it means that every Bioseq in the set comes from that organism. If this is not true, then Org-ref would not appear on the set, but different Org-refs would occur on lower level members.
 
 For any Bioseq in arbitrarily deeply nested Bioseq-sets, one should be able to collect all Bioseq-set.descr from all higher level Bioseq-sets that contain the Bioseq, and move them to the Bioseq. If this process introduces any confusion or contradiction, then the set level descriptor has been incorrectly used.
 
@@ -1647,7 +1647,7 @@ The only exception to this is the title and name types, which often refer to the
 
 To simplify access to elements like this that depend on a set context, a series of BioseqContext() functions are provided in utilities which allow easy access to all relevant descriptors starting with a specific Bioseq and moving up the levels in the set.
 
-<a name="ch-datamod.seqset-the-sequences"></a>
+<a name="ch_datamod.seqset_the_sequences"></a>
 
 ##### seq-set: the sequences and sets within the Bioseq-set
 
@@ -1687,7 +1687,7 @@ A nuc-prot set where the nucleic acid is segmented simply replaces the nucleic a
         protein2 (Bioseq)
         etc.
 
-<a name="ch-datamod.annot-Seqannots-for-"></a>
+<a name="ch_datamod.annot_Seqannots_for_"></a>
 
 ##### annot: Seq-annots for the set
 
@@ -1695,46 +1695,46 @@ A Bioseq-set can have Seq-annots just like a Bioseq can. Because all forms of Se
 
 However, as a convention, NCBI puts the Seq-annot at the nesting level of the set that contains all the Bioseqs referenced by it, if possible. So if a feature applies just to one Bioseq, it goes in the Bioseq.annot itself. If it applies to all the members of a segmented set, it goes in Bioseq-set.annot of the segset. If, like a coding region, it points to both nucleic acid and protein sequences, it goes in the Bioseq-set.annot of the nuc-prot set.
 
-<a name="ch-datamod.Bioseqsets-are-Conve"></a>
+<a name="ch_datamod.Bioseqsets_are_Conve"></a>
 
 #### Bioseq-sets are Convenient Packages
 
 Remember that Bioseq-sets are just convenient ways to package Bioseqs and associated annotations. But Bioseqs may appear in various contexts and software should always be prepared to deal with them that way. A segmented Bioseq may not appear as part of a segset and a Bioseq with coding regions may not appear as part of a nuc-prot set. In both cases the elements making up the segmented Bioseq and the Bioseqs involved in the coding regions all use Seq-locs, which explicit reference Seq-ids. So they are not dependent on context. NCBI packages Bioseqs in sets for convenience, so all the closely related elements can be retrieved together. But this is only a convenience, not a requirement of the specification. The same caveat applies to the ordering conventions within a set, described above.
 
-<a name="ch-datamod.datamodel.seqloc"></a>
+<a name="ch_datamod.datamodel.seqloc"></a>
 
 Sequence Locations and Identifiers
 ----------------------------------
 
 This section contains documentation for types used to identify Bioseqs and describe locations on them. These types are defined in the [seqloc.asn](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqloc/seqloc.asn) module.
 
-<a name="ch-datamod.datamodel.cpp.seqloc"></a>
+<a name="ch_datamod.datamodel.cpp.seqloc"></a>
 
 ### C++ Implementation Notes
 
--   [Introduction](#ch-datamod.-Introduction-6)
+-   [Introduction](#ch_datamod._Introduction_6)
 
--   [Seq-id: Identifying Sequences](#ch-datamod.-Seqid-Identifying-Se-1)
+-   [Seq-id: Identifying Sequences](#ch_datamod._Seqid_Identifying_Se_1)
 
--   [Seq-id: Semantics of Use](#ch-datamod.Seqid-Semantics-of-U)
+-   [Seq-id: Semantics of Use](#ch_datamod.Seqid_Semantics_of_U)
 
--   [Seq-id: The C++ Implementation](#ch-datamod.Seqid-The-C-Implemen)
+-   [Seq-id: The C++ Implementation](#ch_datamod.Seqid_The_C_Implemen)
 
--   [NCBI ID Database: Imposing Stable Seq-ids](#ch-datamod.NCBI-ID-Database-Imp)
+-   [NCBI ID Database: Imposing Stable Seq-ids](#ch_datamod.NCBI_ID_Database_Imp)
 
--   [Seq-loc: Locations on a Bioseq](#ch-datamod.Seqloc-Locations-on-)
+-   [Seq-loc: Locations on a Bioseq](#ch_datamod.Seqloc_Locations_on_)
 
--   [Seq-loc: The C++ Implementation](#ch-datamod.Seqloc-The-C-Impleme)
+-   [Seq-loc: The C++ Implementation](#ch_datamod.Seqloc_The_C_Impleme)
 
--   [ASN.1 Specification: seqloc.asn](#ch-datamod.-ASN1-Specification-s-8)
+-   [ASN.1 Specification: seqloc.asn](#ch_datamod._ASN1_Specification_s_8)
 
-<a name="ch-datamod.-Introduction-6"></a>
+<a name="ch_datamod._Introduction_6"></a>
 
 #### Introduction
 
-As described in the [Biological Sequences](#ch-datamod.-Biological-Sequences) chapter, a Bioseq always has at least one identifier. This means that any valid biological sequence can be referenced by using this identifier. However, all identifiers are not created equal. They may differ in their basic structure (e.g. a GenBank accession number is required to have an uppercase letter followed by exactly five digits while the NCBI GenInfo Id uses a simple integer identifier). They also differ in how they are used (e.g. the sequence identified by the GenBank accession number may change from release to release while the sequence identified by the NCBI GenInfo Id will always be exactly the same sequence).
+As described in the [Biological Sequences](#ch_datamod._Biological_Sequences) chapter, a Bioseq always has at least one identifier. This means that any valid biological sequence can be referenced by using this identifier. However, all identifiers are not created equal. They may differ in their basic structure (e.g. a GenBank accession number is required to have an uppercase letter followed by exactly five digits while the NCBI GenInfo Id uses a simple integer identifier). They also differ in how they are used (e.g. the sequence identified by the GenBank accession number may change from release to release while the sequence identified by the NCBI GenInfo Id will always be exactly the same sequence).
 
-Locations of regions on Bioseqs are always given as integer offsets, also described in the [Biological Sequences](#ch-datamod.-Biological-Sequences) chapter. So the first residue is always 0 and the last residue is always (length - 1). Further, since all the classes of Bioseqs from bands on a gel to genetic or physical maps to sequenced DNA use the same integer offset convention, locations always have the same form and meaning even when moving between very different types of Bioseq representations. This allows alignment, comparison, and display functions, among others, to have the same uniform interface and semantics, no matter what the underlying Bioseq class. Specialized numbering systems are supported but only as descriptive annotation (see Numbering in [Biological Sequences](#ch-datamod.-Biological-Sequences-1) and Feature types "seq" and "num" in [Sequence Features](#ch-datamod.datamodel.seqfeat)). The internal conventions for positions on sequences are always the same.
+Locations of regions on Bioseqs are always given as integer offsets, also described in the [Biological Sequences](#ch_datamod._Biological_Sequences) chapter. So the first residue is always 0 and the last residue is always (length - 1). Further, since all the classes of Bioseqs from bands on a gel to genetic or physical maps to sequenced DNA use the same integer offset convention, locations always have the same form and meaning even when moving between very different types of Bioseq representations. This allows alignment, comparison, and display functions, among others, to have the same uniform interface and semantics, no matter what the underlying Bioseq class. Specialized numbering systems are supported but only as descriptive annotation (see Numbering in [Biological Sequences](#ch_datamod._Biological_Sequences_1) and Feature types "seq" and "num" in [Sequence Features](#ch_datamod.datamodel.seqfeat)). The internal conventions for positions on sequences are always the same.
 
 There are no implicit Bioseq locations. All locations include a sequence identifier. This means Features, Alignments, and Graphs are always independent of context and can always be exchanged, submitted to databases, or stored as independent objects. The main consequence of this is that information ABOUT regions of Bioseqs can be developed and contributed to the public scientific discussion without any special rights of editing the Bioseq itself needing to be granted to anyone but the original author of the Bioseq. Bioseqs in the public databases, then, no longer need an anointed curator (beyond the original author) to be included in ongoing scientific discussion and data exchange by electronic media.
 
@@ -1748,7 +1748,7 @@ In addition to the various sequence location and identifier classes, several con
 
 -   ***SameOrientation()***
 
-<a name="ch-datamod.-Seqid-Identifying-Se-1"></a>
+<a name="ch_datamod._Seqid_Identifying_Se_1"></a>
 
 #### Seq-id: Identifying Sequences
 
@@ -1756,7 +1756,7 @@ In a pure sense, a Seq-id is meant to unambiguously identify a Bioseq. Unfortuna
 
 One Seq-id type, "gi", has been implemented specifically to make a simple, absolutely stable Seq-id available for sequence data derived from any source. It is discussed in detail below.
 
-A Textseq-id structure is used in many Seq-ids described below. It has four possible fields; a name, an accession number, a release, and a version. Formally, all fields are OPTIONAL, although to be useful, a Textseq-id should have at least a name or an accession or both. This style of Seq-id is used by GenBank, EMBL, DDBJ, PIR, SWISS-PROT, and PRF, but the semantics of its use differ considerably depending on the database. However none of these databases guarantees the stability of name or accession (i.e. that it points at a specific sequence), so to be unambiguous the id must also have the version. See the discussion under [Seq-id: Semantics](#ch-datamod.Seqid-Semantics-of-U) for details.
+A Textseq-id structure is used in many Seq-ids described below. It has four possible fields; a name, an accession number, a release, and a version. Formally, all fields are OPTIONAL, although to be useful, a Textseq-id should have at least a name or an accession or both. This style of Seq-id is used by GenBank, EMBL, DDBJ, PIR, SWISS-PROT, and PRF, but the semantics of its use differ considerably depending on the database. However none of these databases guarantees the stability of name or accession (i.e. that it points at a specific sequence), so to be unambiguous the id must also have the version. See the discussion under [Seq-id: Semantics](#ch_datamod.Seqid_Semantics_of_U) for details.
 
 Some important methods of the [CSeq\_id](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__id.html) class are:
 
@@ -1778,41 +1778,41 @@ Some important nonmember template functions are:
 
 -   ***GetSeq\_idByType()*** -- search the container of [CRef](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCRef.html)\<[CSeq\_id](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__id.html)\> for the id of given type.
 
-<a name="ch-datamod.Seqid-Semantics-of-U"></a>
+<a name="ch_datamod.Seqid_Semantics_of_U"></a>
 
 #### Seq-id: Semantics of Use
 
 Different databases use their ids in different ways and these patterns may change over time. An attempt is made is this section to describe current usage and offer some guidelines for interpreting Seq-ids.
 
-<a name="ch-datamod.local-Privately-Main"></a>
+<a name="ch_datamod.local_Privately_Main"></a>
 
 ##### local: Privately Maintained Data
 
-The local Seq-id is an Object-id (see discussion in [General Use Objects](#ch-datamod.datamodel.general)), which is a CHOICE of a string or an integer. This is to reconcile the requirement that all Bioseqs have a Seq-id and the needs of local software tools to manipulate data produced or maintained privately. This might be pre-publication data, data still being developed, or proprietary data. The Object-id will accommodate either a string or a number as is appropriate for the local environment. It is the responsibility of local software to keep the local Seq-ids unique. A local Seq-id is not globally unique, so when Bioseqs with such identifiers are published or exchanged, context (i.e. the submitter or owner of the id) must be maintained or a new id class must be applied to the Bioseq (e.g. the assignment of a GenBank accession upon direct data submission to GenBank).
+The local Seq-id is an Object-id (see discussion in [General Use Objects](#ch_datamod.datamodel.general)), which is a CHOICE of a string or an integer. This is to reconcile the requirement that all Bioseqs have a Seq-id and the needs of local software tools to manipulate data produced or maintained privately. This might be pre-publication data, data still being developed, or proprietary data. The Object-id will accommodate either a string or a number as is appropriate for the local environment. It is the responsibility of local software to keep the local Seq-ids unique. A local Seq-id is not globally unique, so when Bioseqs with such identifiers are published or exchanged, context (i.e. the submitter or owner of the id) must be maintained or a new id class must be applied to the Bioseq (e.g. the assignment of a GenBank accession upon direct data submission to GenBank).
 
-<a name="ch-datamod.refseq-From-the-Reference-Seq"></a>
+<a name="ch_datamod.refseq_From_the_Reference_Seq"></a>
 
 ##### refseq: From the Reference Sequence project at the NCBI
 
 The [Reference Sequence project](http://www.ncbi.nlm.nih.gov/RefSeq/) at the NCBI aims to provide a comprehensive, integrated, non-redundant, well-annotated set of sequences, including genomic DNA, transcripts, and proteins. RefSeq assigns accessions (but not a LOCUS) to all entries. RefSeq accessions begin with two letters followed by an underscore, with additional letters after the underscore for some accessions. The leading characters have a distinct meaning as described in the [RefSeq accession format reference](http://www.ncbi.nlm.nih.gov/projects/RefSeq/key.html#accession).
 
-<a name="ch-datamod.general-Ids-from-Loc"></a>
+<a name="ch_datamod.general_Ids_from_Loc"></a>
 
 ##### general: Ids from Local Databases
 
-The Seq-id type "general" uses a Dbtag (see discussion in [General Use Objects](#ch-datamod.datamodel.general)), which is an Object-id as in Seq-id.local, above, with an additional string to identify a source database. This means that an integer or string id from a smaller database can create Seq-ids which both cite the database source and make the local Seq-ids globally unique (usually). For example, the EcoSeq database is a collection of E.coli sequences derived from many sources, maintained by Kenn Rudd. Each sequence in EcoSeq has a unique descriptive name which is used as its primary identifier. A "general" Seq-id could be make for the EcoSeq entry "EcoAce" by making the following "general" Seq-id:
+The Seq-id type "general" uses a Dbtag (see discussion in [General Use Objects](#ch_datamod.datamodel.general)), which is an Object-id as in Seq-id.local, above, with an additional string to identify a source database. This means that an integer or string id from a smaller database can create Seq-ids which both cite the database source and make the local Seq-ids globally unique (usually). For example, the EcoSeq database is a collection of E.coli sequences derived from many sources, maintained by Kenn Rudd. Each sequence in EcoSeq has a unique descriptive name which is used as its primary identifier. A "general" Seq-id could be make for the EcoSeq entry "EcoAce" by making the following "general" Seq-id:
 
     Seq-id ::= general {
             db "EcoSeq" ,
             tag str "EcoAce" }
 
-<a name="ch-datamod.gibbsq--gibbmt-GenIn"></a>
+<a name="ch_datamod.gibbsq__gibbmt_GenIn"></a>
 
 ##### gibbsq, gibbmt: GenInfo Backbone Ids
 
 The "gibbsq" and "gibbmt" IDs were formerly used to access the "GenInfo Backbone" database. They are now obsolete.
 
-<a name="ch-datamod.genbank--embl--ddbj-"></a>
+<a name="ch_datamod.genbank__embl__ddbj_"></a>
 
 ##### genbank, embl, ddbj: The International Nucleic Acid Sequence Databases
 
@@ -1824,13 +1824,13 @@ All three databases also assign an Accession Number to each entry. Accession num
 
 To compensate for such shifts, it is advisable to supplement accession numbers with version numbers to yield stable, unique identifiers for all three databases. (Historically, it was likewise possible to supplement them with release fields, but those are no longer in active use and retrieval services will disregard them.)
 
-<a name="ch-datamod.pir-PIR-Internationa"></a>
+<a name="ch_datamod.pir_PIR_Internationa"></a>
 
 ##### pir: PIR International
 
 The PIR database is also produced through an international collaboration with contributors in the US at the Protein Identification Resource of the National Biomedical Research Foundation (NBRF), in Europe at the Martinsried Institute for Protein Sequences (MIPS), and in Japan at the International Protein Information Database in Japan (JIPID). They also use an entry name and accession number. The PIR accession numbers, however, are not related to the GenBank/EMBL/DDBJ accession numbers in any way and have a very different meaning. In PIR, the entry name identifies the sequence, which is meant to be the "best version" of that protein. The accession numbers are in transition from a meaning more similar to the GenBank/EMBL/DDBJ accessions, to one in which an accession is associated with protein sequences exactly as they appeared in specific publications. Thus, at present, PIR ids may have both an accession and a name, they will move to more typically having either a name or an accession, depending on what is being cited, the "best" sequence or an original published sequence.
 
-<a name="ch-datamod.swissprot-SWISSPROT"></a>
+<a name="ch_datamod.swissprot_SWISSPROT"></a>
 
 ##### swissprot: UniProt Knowledgebase
 
@@ -1838,37 +1838,37 @@ Originally the Seq-id type "swissprot" referred to the Swiss-Prot database, but 
 
 With the exception of legacy PIR entry names (which the C++ Toolkit cannot recognize when untagged), UniProtKB identifiers are coordinated with those of GenBank, EMBL, and DDBJ and do not conflict.
 
-<a name="ch-datamod.prf-Protein-Research"></a>
+<a name="ch_datamod.prf_Protein_Research"></a>
 
 ##### prf: Protein Research Foundation
 
 The Protein Research Foundation in Japan has a large database of protein sequence and peptide fragments derived from the literature. Again, there is a name and an accession number. Since this database is meant only to record the sequence as it appeared in a particular publication, the relationship between the id and the sequence is quite stable in practice.
 
-<a name="ch-datamod.patent-Citing-a-Pate"></a>
+<a name="ch_datamod.patent_Citing_a_Pate"></a>
 
 ##### patent: Citing a Patent
 
-The minimal information to unambiguously identify a sequence in a patent is first to unambiguously identify the patent (by the Patent-seq-id.cit, see [Bibliographic References](#ch-datamod.datamodel.biblio) for a discussion of Id-pat) and then providing an integer serial number to identify the sequence within the patent. The sequence data for sequence related patents are now being submitted to the international patent offices in computer readable form, and the serial number for the sequence is assigned by the processing office. However, older sequence related patents were not assigned serial numbers by the processing patent offices. For those sequences the serial number is assigned arbitrarily (but still uniquely). Note that a sequence with a Patent-seq-id just appeared as part of a patent document. It is NOT necessarily what was patented by the patent document.
+The minimal information to unambiguously identify a sequence in a patent is first to unambiguously identify the patent (by the Patent-seq-id.cit, see [Bibliographic References](#ch_datamod.datamodel.biblio) for a discussion of Id-pat) and then providing an integer serial number to identify the sequence within the patent. The sequence data for sequence related patents are now being submitted to the international patent offices in computer readable form, and the serial number for the sequence is assigned by the processing office. However, older sequence related patents were not assigned serial numbers by the processing patent offices. For those sequences the serial number is assigned arbitrarily (but still uniquely). Note that a sequence with a Patent-seq-id just appeared as part of a patent document. It is NOT necessarily what was patented by the patent document.
 
-<a name="ch-datamod.pdb-Citing-a-Biopoly"></a>
+<a name="ch_datamod.pdb_Citing_a_Biopoly"></a>
 
 ##### pdb: Citing a Biopolymer Chain from a Structure Database
 
 The Protein Data Bank (PDB, also known as the Brookhaven Database), is a collection of data about structures of biological entities such hemoglobin or cytochrome c. The basic entry in PDB is a structural model of a molecule, not a sequence as in most sequence databases. A molecule may have multiple chains. So a PDB-seq-id has a string for the PDB entry name (called PDB-mol-id here) and a single character for a chain identifier within the molecule. The use of the single character just maps the PDB practice. The character may be a digit, a letter, or even a space (ASCII 32). As with the databases using the Textseq-id, the sequence of the chain in PDB associated with this information is not stable, so to be unambiguous the id must also include the release date.
 
-<a name="ch-datamod.giim-GenInfo-Import-"></a>
+<a name="ch_datamod.giim_GenInfo_Import_"></a>
 
 ##### giim: GenInfo Import Id
 
 A Giimport-id ("giim") was a temporary id used to identify sequences imported into the GenInfo system at NCBI before long term identifiers, such as "gi", became stable. It is now obsolete.
 
-<a name="ch-datamod.gi-A-Stable--Uniform"></a>
+<a name="ch_datamod.gi_A_Stable__Uniform"></a>
 
 ##### gi: A Stable, Uniform Id Applied to Sequences From All Sources
 
 A Seq-id of type "gi" is a simple integer assigned to a sequence by the NCBI "ID" database. It can be applied to a Bioseq of any representation class, nucleic acid or protein. It uniquely identifies a sequence from a particular source. If the sequence changes at all, then a new "gi" is assigned. The "gi" does not change if only annotations are changed. Thus the "gi" provides a simple, uniform way of identifying a stable coordinate system on a Bioseq provided by data sources which themselves may not have stable ids. This is the identifier of choice for all references to Bioseqs through features or alignments. See discussion below.
 
-<a name="ch-datamod.Seqid-The-C-Implemen"></a>
+<a name="ch_datamod.Seqid_The_C_Implemen"></a>
 
 #### Seq-id: The C++ Implementation
 
@@ -1876,7 +1876,7 @@ A Seq-id is implemented in C++ as a choice, summarized in the following table:
 
 **Seq-id**
 
-<a name="ch-datamod.T14"></a>
+<a name="ch_datamod.T14"></a>
 
 |-----------|------------------------|---------------------------------------------|
 | **Value** | **Enum name**          | **Description**                             |
@@ -1904,11 +1904,11 @@ A Seq-id is implemented in C++ as a choice, summarized in the following table:
 
 A large number of additional functions for manipulating SeqIds are described in the [Sequence Utilities](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/util/sequence.hpp) chapter.
 
-<a name="ch-datamod.NCBI-ID-Database-Imp"></a>
+<a name="ch_datamod.NCBI_ID_Database_Imp"></a>
 
 #### NCBI ID Database: Imposing Stable Seq-ids
 
-As described in the [Data Model](#ch-datamod.datamodel.data-model) section, Bioseqs provide a simple integer coordinate system through which a host of different data and analytical results can be easily associated with each other, even with scientists working independently of each other and on heterogeneous systems. For this model to work, however, requires stable identifiers for these integer coordinate systems. If one scientist notes a coding region from positions 10-50 of sequence "A", then the database adds a single base pair at position 5 of "A" without changing the identifier of "A", then at the next release of the database the scientist's coding region is now frame-shifted one position and invalid. Unfortunately this is currently the case due to the casual use of sequence identifiers by most existing databases.
+As described in the [Data Model](#ch_datamod.datamodel.data_model) section, Bioseqs provide a simple integer coordinate system through which a host of different data and analytical results can be easily associated with each other, even with scientists working independently of each other and on heterogeneous systems. For this model to work, however, requires stable identifiers for these integer coordinate systems. If one scientist notes a coding region from positions 10-50 of sequence "A", then the database adds a single base pair at position 5 of "A" without changing the identifier of "A", then at the next release of the database the scientist's coding region is now frame-shifted one position and invalid. Unfortunately this is currently the case due to the casual use of sequence identifiers by most existing databases.
 
 Since NCBI integrates data from many different databases which follow their own directions, we must impose stable ids on an unstable starting material. While a daunting task, it is not, in the main, impossible. We have built a database called "ID", whose sole task is to assign and track stable sequence ids. ID assigns "gi" numbers, simple arbitrary integers which stably identify a particular sequence coordinate system.
 
@@ -1916,11 +1916,11 @@ The first time ID "sees" a Bioseq, say EMBL accession A00000, it checks to see i
 
 Now EMBL sends an update of the entry which is just a correction to the feature table. The same process occurs, except this time there is a previous entry with the same EMBL accession number. ID retrieves the old entry and compares the sequence of the old entry with the new entry. Since they are identical it reassigns GI 5 to the same entry, converts the new annotations, and stores it as the most current view of that EMBL entry.
 
-Now ID gets another update to A00000, but this time the sequence is different. ID assigns a new GI, say 6, to this entry. It also updates the sequence history (Seq-inst.hist, see the [Biological Sequences](#ch-datamod.-Biological-Sequences-1) section) of both old and new entries to make a doubly linked list. The GI 5 entry has a pointer that it has been replaced by GI 6, and the GI 6 entry has a pointer showing it replaced GI 5. When NCBI makes a new data release the entry designated GI 6 will be released to represent EMBL entry A00000. However, the ASN.1 form of the data contains an explicit history. A scientist who annotated a coding region on GI 5 can discover that it has been replaced by GI 6. The GI 5 entry can still be retrieved from ID, aligned with GI 6, and the scientist can determine if her annotation is still valid on the new entry. If she annotated using the accession number instead of the GI, of course, she could be out of luck.
+Now ID gets another update to A00000, but this time the sequence is different. ID assigns a new GI, say 6, to this entry. It also updates the sequence history (Seq-inst.hist, see the [Biological Sequences](#ch_datamod._Biological_Sequences_1) section) of both old and new entries to make a doubly linked list. The GI 5 entry has a pointer that it has been replaced by GI 6, and the GI 6 entry has a pointer showing it replaced GI 5. When NCBI makes a new data release the entry designated GI 6 will be released to represent EMBL entry A00000. However, the ASN.1 form of the data contains an explicit history. A scientist who annotated a coding region on GI 5 can discover that it has been replaced by GI 6. The GI 5 entry can still be retrieved from ID, aligned with GI 6, and the scientist can determine if her annotation is still valid on the new entry. If she annotated using the accession number instead of the GI, of course, she could be out of luck.
 
 Since ID is attempting to order a chaotic world, mistakes will inevitably be made. However, it is clear that in the vast majority of cases it is possible to impose stable ids. As scientists and software begin to use the GI ids and reap the benefits of stable ids, the world may gradually become less chaotic. The Seq-inst.hist data structure can even be used by data suppliers to actively maintain an explicit history without ID having to infer it, which would be the ideal case.
 
-<a name="ch-datamod.Seqloc-Locations-on-"></a>
+<a name="ch_datamod.Seqloc_Locations_on_"></a>
 
 #### Seq-loc: Locations on a Bioseq
 
@@ -1946,25 +1946,25 @@ Some important methods of the [CSeq\_loc](http://www.ncbi.nlm.nih.gov/IEB/ToolBo
 
 Beside these methods, a new class [CSeq\_loc\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__loc__CI.html) is defined in Seq\_loc.hpp, which provides simplified access to individual ranges of any Seq-loc, regardless of its real type and structure.
 
-<a name="ch-datamod.null-A-Gap"></a>
+<a name="ch_datamod.null_A_Gap"></a>
 
 ##### null: A Gap
 
 A null Seq-loc can be used in a Seq-loc with many components to indicate a gap of unknown size. For example it is used in segmented sequences to indicate such gaps between the sequenced pieces.
 
-<a name="ch-datamod.empty-A-Gap-in-an-Al"></a>
+<a name="ch_datamod.empty_A_Gap_in_an_Al"></a>
 
 ##### empty: A Gap in an Alignment
 
 A alignment (see Sequence Alignments) may require that every Seq-loc refer to a Bioseq, even for a gap. They empty type fulfills this need.
 
-<a name="ch-datamod.whole-A-Reference-to"></a>
+<a name="ch_datamod.whole_A_Reference_to"></a>
 
 ##### whole: A Reference to a Whole Bioseq
 
 This is just a shorthand for the Bioseq from 0 to (length -1). This form is falling out of favor at NCBI because it means one must retrieve the referenced Bioseq to determine the length of the location. An interval covering the whole Bioseq is equivalent to this and more useful. On the other hand, if an unstable Seq-id is used here, it always applies to the full length of the Bioseq, even if the length changes. This was the original rationale for this type. And it may still be valid while unstable sequences persist.
 
-<a name="ch-datamod.int-An-Interval-on-a"></a>
+<a name="ch_datamod.int_An_Interval_on_a"></a>
 
 ##### int: An Interval on a Bioseq
 
@@ -1976,25 +1976,25 @@ The value of Seq-interval.strand is the only value different in intervals on the
 
 The plus or minus strand is an attribute on each simple Seq-loc (interval or point) instead of as an operation on an arbitrarily complex location (as in the GenBank/EMBL/DDBJ flatfile Feature Table) since it means even very complex locations can be processed to a base pair location in simple linear order, instead of requiring that the whole expression be processed and resolved first.
 
-<a name="ch-datamod.packedint-A-Series-o"></a>
+<a name="ch_datamod.packedint_A_Series_o"></a>
 
 ##### packed-int: A Series of Intervals
 
 A Packed-seqint is simply a SEQUENCE OF Seq-interval. That means the location is resolved by evaluating a series of Seq-interval in order. Note that the Seq-intervals in the series need not all be on the same Bioseq or on the same strand.
 
-<a name="ch-datamod.pnt-A-Single-Point-o"></a>
+<a name="ch_datamod.pnt_A_Single_Point_o"></a>
 
 ##### pnt: A Single Point on a Sequence
 
 A Seq-point is essentially one-half of a Seq-interval and the discussion (above) about fuzziness and strand applies equally to Seq-point.
 
-<a name="ch-datamod.packedpnt-A-Collecti"></a>
+<a name="ch_datamod.packedpnt_A_Collecti"></a>
 
 ##### packed-pnt: A Collection of Points
 
 A Packed-seqpnt is an optimization for attaching a large number of points to a single Bioseq. Information about the Seq-id, strand, or fuzziness need not be duplicated for every point. Of course, this also means it must apply equally to all points as well. This would typically be the case for listing all the cut sites of a certain restriction enzyme, for example.
 
-<a name="ch-datamod.mix-An-Arbitrarily-C"></a>
+<a name="ch_datamod.mix_An_Arbitrarily_C"></a>
 
 ##### mix: An Arbitrarily Complex Location
 
@@ -2002,25 +2002,25 @@ A Seq-loc-mix is simply a SEQUENCE OF Seq-loc. The location is resolved by resol
 
 A Seq-loc-mix might be used to represent a segmented sequence with gaps of unknown length. In this case it would consist of some elements of type "int" for intervals on Bioseqs and some of type "null" representing gaps of unknown length. Another use would be to combine a Seq-interval representing an untranslated leader, with a Packed-seqint from a multi-exon coding region feature, and another Seq-interval representing an untranslated 3' end, to define the extent of an mRNA on a genomic sequence.
 
-<a name="ch-datamod.equiv-Equivalent-Loc"></a>
+<a name="ch_datamod.equiv_Equivalent_Loc"></a>
 
 ##### equiv: Equivalent Locations
 
 This form is simply a SET OF Seq-locs that are equivalent to each other. Such a construct could be used to represent alternative splicing, for example (and is when translating the GenBank/EMBL/DDBJ location "one-of"). However note that such a location can never resolve to a single result. Further, if there are multiple "equiv" forms in a complex Seq-loc, it is unclear if all possible combinations are valid. In general this construct should be avoided unless there is no alternative.
 
-<a name="ch-datamod.bond-A-Chemical-Bond"></a>
+<a name="ch_datamod.bond_A_Chemical_Bond"></a>
 
 ##### bond: A Chemical Bond Between Two Residues
 
 The data elements in a Seq-bond are just two Seq-points. The meaning is that these two points have a chemical bond between them (which is different than describing just the location of two points). At NCBI we have restricted its use to covalent bonds. Note that the points may be on the same (intra-chain bond) or different (inter-chain bond) Bioseqs.
 
-<a name="ch-datamod.feat-A-Location-Indi"></a>
+<a name="ch_datamod.feat_A_Location_Indi"></a>
 
 ##### feat: A Location Indirectly Referenced Through A Feature
 
-This one is really for the future, when not only Bioseqs, but features have stable ids. The meaning is "the location of this feature". This way one could give a valid location by citing, for example a Gene feature, which would resolve to the location of that gene on a Bioseq. When identifiable features become common (see [Sequence Features](#ch-datamod.datamodel.seqfeat)) this will become a very useful location.
+This one is really for the future, when not only Bioseqs, but features have stable ids. The meaning is "the location of this feature". This way one could give a valid location by citing, for example a Gene feature, which would resolve to the location of that gene on a Bioseq. When identifiable features become common (see [Sequence Features](#ch_datamod.datamodel.seqfeat)) this will become a very useful location.
 
-<a name="ch-datamod.Seqloc-The-C-Impleme"></a>
+<a name="ch_datamod.Seqloc_The_C_Impleme"></a>
 
 #### Seq-loc: The C++ Implementation
 
@@ -2028,7 +2028,7 @@ The following table summarizes the Choice variants for [CSeq\_loc](http://www.nc
 
 **Seq-loc**
 
-<a name="ch-datamod.T15"></a>
+<a name="ch_datamod.T15"></a>
 
 |----------------|----------------|----------------------|
 | **Enum Value** | **Enum name**  | **ASN.1 name**       |
@@ -2047,7 +2047,7 @@ The following table summarizes the Choice variants for [CSeq\_loc](http://www.nc
 
 Note that e\_Mix and e\_Equiv Seq-loc types can recursively contain other Seq-locs. Also, the e\_Int type (implemented by [CSeq\_interval](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__interval.html)) has the following strand enumeration:
 
-<a name="ch-datamod.T16"></a>
+<a name="ch_datamod.T16"></a>
 
 |----------------|--------------------------|----------------------|
 | **Enum Value** | **Enum name**            | **Notes**            |
@@ -2060,66 +2060,66 @@ Note that e\_Mix and e\_Equiv Seq-loc types can recursively contain other Seq-lo
 
 In addition, there are a large number of utility functions for working with SeqLocs described in the chapter on [Sequence Utilities](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/util/sequence.hpp). This allow traversal of complex locations, comparison of locations for overlap, conversion of coordinates in locations, and ability to open a window on a Bioseq through a location.
 
-<a name="ch-datamod.datamodel.seqfeat"></a>
+<a name="ch_datamod.datamodel.seqfeat"></a>
 
 Sequence Features
 -----------------
 
 This section documents data structures used to describe regions of Bioseqs. The types are located in the [seqfeat.asn](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqfeat/seqfeat.asn) module.
 
-<a name="ch-datamod.datamodel.cpp.seqfeat"></a>
+<a name="ch_datamod.datamodel.cpp.seqfeat"></a>
 
 ### C++ Implementation Notes
 
 In the C++ Toolkit, many types defined in the seqfeat ASN.1 module are extended to simplify access to the feature data. The [CSeq\_feat](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__feat.html) class has methods for comparing features by type and location. The [CSeqFeatData](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeqFeatData.html) class defines feature subtypes and qualifiers so that you can better identify individual features.
 
--   [Introduction](#ch-datamod.datamodel.seqalign)
+-   [Introduction](#ch_datamod.datamodel.seqalign)
 
--   [Seq-feat: Structure of a Feature](#ch-datamod.Seqfeat-Structure-of)
+-   [Seq-feat: Structure of a Feature](#ch_datamod.Seqfeat_Structure_of)
 
--   [SeqFeatData: Type Specific Feature Data](#ch-datamod.SeqFeatData-Type-Spe)
+-   [SeqFeatData: Type Specific Feature Data](#ch_datamod.SeqFeatData_Type_Spe)
 
--   [Seq-feat Implementation in C++](#ch-datamod.Seqfeat-Implementati)
+-   [Seq-feat Implementation in C++](#ch_datamod.Seqfeat_Implementati)
 
--   [CdRegion: Coding Region](#ch-datamod.CdRegion-Coding-Regi)
+-   [CdRegion: Coding Region](#ch_datamod.CdRegion_Coding_Regi)
 
--   [Genetic Codes](#ch-datamod.Genetic-Codes)
+-   [Genetic Codes](#ch_datamod.Genetic_Codes)
 
--   [Rsite-ref: Reference To A Restriction Enzyme](#ch-datamod.Rsiteref-Reference-T)
+-   [Rsite-ref: Reference To A Restriction Enzyme](#ch_datamod.Rsiteref_Reference_T)
 
--   [RNA-ref: Reference To An RNA](#ch-datamod.RNAref-Reference-To-)
+-   [RNA-ref: Reference To An RNA](#ch_datamod.RNAref_Reference_To_)
 
--   [Gene-ref: Reference To A Gene](#ch-datamod.Generef-Reference-To)
+-   [Gene-ref: Reference To A Gene](#ch_datamod.Generef_Reference_To)
 
--   [Prot-ref: Reference To A Protein](#ch-datamod.Protref-Reference-To)
+-   [Prot-ref: Reference To A Protein](#ch_datamod.Protref_Reference_To)
 
--   [Txinit: Transcription Initiation](#ch-datamod.Txinit-Transcription)
+-   [Txinit: Transcription Initiation](#ch_datamod.Txinit_Transcription)
 
--   [Current Genetic Code Table: gc.prt](#ch-datamod.Current-Genetic-Code)
+-   [Current Genetic Code Table: gc.prt](#ch_datamod.Current_Genetic_Code)
 
--   [ASN.1 Specification: seqfeat.asn](#ch-datamod.-ASN1-Specification-s-9)
+-   [ASN.1 Specification: seqfeat.asn](#ch_datamod._ASN1_Specification_s_9)
 
-<a name="ch-datamod.datamodel.seqalign"></a>
+<a name="ch_datamod.datamodel.seqalign"></a>
 
 #### Introduction
 
 A sequence feature (Seq-feat) is a block of structured data (SeqFeatData) explicitly attached to a region of a Bioseq through one or two Seq-locs (see Sequence Locations and Identifiers). The Seq-feat itself can carry information common to all features, as well as serving as the junction between the SeqFeatData and Seq-loc(s). Since a Seq-feat references a Bioseq through an explicit Seq-loc, a Seq-feat is an entity which can stand alone, or be moved between contexts without loss of information. Thus, information ABOUT Bioseqs can be created, exchanged, and compared independently from the Bioseq itself. This is an important attribute of the NCBI data model.
 
-A feature table is a set of Seq-feat gathered together within a Seq-annot (see [Biological Sequences](#ch-datamod.-Biological-Sequences)). The Seq-annot allows the features to be attributed to a source and be associated with a title or comment. Seq-feats are normally exchanged "packaged" into a feature table.
+A feature table is a set of Seq-feat gathered together within a Seq-annot (see [Biological Sequences](#ch_datamod._Biological_Sequences)). The Seq-annot allows the features to be attributed to a source and be associated with a title or comment. Seq-feats are normally exchanged "packaged" into a feature table.
 
-<a name="ch-datamod.Seqfeat-Structure-of"></a>
+<a name="ch_datamod.Seqfeat_Structure_of"></a>
 
 #### Seq-feat: Structure of a Feature
 
 A Seq-feat is a data structure common to all features. The fields it contains can be evaluated by software the same way for all features, ignoring the "data" element which is what makes each feature class unique.
 
-<a name="ch-datamod.id-Features-Can-Have"></a>
+<a name="ch_datamod.id_Features_Can_Have"></a>
 
 ##### id: Features Can Have Identifiers
 
 At this time unique identifiers for features are even less available or controlled than sequence identifiers. However, as molecular biology informatics becomes more sophisticated, it will become not only useful, but essential to be able to cite features as precisely as NCBI is beginning to be able to cite sequences. The Seq-feat.id slot is where these identifiers will go. The Feat-id object for features, meant to be equivalent of the Seq-id object for Bioseqs, is not very fully developed yet. It can accommodate feature ids from the NCBI Backbone database, local ids, and the generic Dbtag type. Look for better characterized global ids to appear here in future as the requirement for structured data exchange becomes increasingly accepted.
 
-<a name="ch-datamod.data-Structured-Data"></a>
+<a name="ch_datamod.data_Structured_Data"></a>
 
 ##### data: Structured Data Makes Feature Types Unique
 
@@ -2129,11 +2129,11 @@ This design completely modularizes the components required specifically by each 
 
 Software can be written in a very modular fashion, reflecting the data design. Functions common to all features (such as determining all features in a sequence region) simply ignore the "data" field and are robust against changes or additions to this component. Functions which process particular types have a well defined data interface unique to each type.
 
-Perhaps a less obvious consequence is code and data reuse. Data objects used in other contexts can be used as features simply by making them a CHOICE in SeqFeatData. For example, the publication feature reuses the Pubdesc type used for Bioseq descriptors. This type includes all the standard bibliographic types (see [Bibliographic References](#ch-datamod.datamodel.biblio)) used by MEDLINE or other bibliographic databases. Software which displays, queries, or retrieves publications will work without change on the "data" component of a publication feature because it is EXACTLY THE SAME object. This has profound positive consequences for both data and code development and maintenance.
+Perhaps a less obvious consequence is code and data reuse. Data objects used in other contexts can be used as features simply by making them a CHOICE in SeqFeatData. For example, the publication feature reuses the Pubdesc type used for Bioseq descriptors. This type includes all the standard bibliographic types (see [Bibliographic References](#ch_datamod.datamodel.biblio)) used by MEDLINE or other bibliographic databases. Software which displays, queries, or retrieves publications will work without change on the "data" component of a publication feature because it is EXACTLY THE SAME object. This has profound positive consequences for both data and code development and maintenance.
 
 This modularization also makes it natural to discuss each allowed feature type separately as is done in the SeqFeatData section below.
 
-<a name="ch-datamod.partial-This-Feature"></a>
+<a name="ch_datamod.partial_This_Feature"></a>
 
 ##### partial: This Feature is Incomplete
 
@@ -2141,7 +2141,7 @@ If Seq-feat.partial is TRUE, the feature is incomplete in some (unspecified) way
 
 Seq-feat.partial should ALWAYS be TRUE if the feature is incomplete, even if Seq-feat.location indicates the incompleteness as well.
 
-<a name="ch-datamod.except-There-is-Some"></a>
+<a name="ch_datamod.except_There_is_Some"></a>
 
 ##### except: There is Something Biologically Exceptional
 
@@ -2151,13 +2151,13 @@ Seq-feat.except does not necessarily indicate there is something wrong with the 
 
 Ideally, one should try to avoid or minimize exceptions by the way annotation is done. An approach to minimizing the RNA editing problem is described in the "product" section below. If one is forced to use exception consistently, it is a signal that a new or revised feature type is needed.
 
-<a name="ch-datamod.comment-A-Comment-Ab"></a>
+<a name="ch_datamod.comment_A_Comment_Ab"></a>
 
 ##### comment: A Comment About This Feature
 
 No length limit is set on the comment, but practically speaking brief is better.
 
-<a name="ch-datamod.product-Does-This-Fe"></a>
+<a name="ch_datamod.product_Does_This_Fe"></a>
 
 ##### product: Does This Feature Produce Another Bioseq?
 
@@ -2167,37 +2167,37 @@ This explicit linkage is extremely valuable for connecting diverse types. Linkag
 
 Note that such a feature is as valuable in association with its product Bioseq alone as it is with its source Bioseq alone, and could be distributed with either or both.
 
-<a name="ch-datamod.location-Source-Loca"></a>
+<a name="ch_datamod.location_Source_Loca"></a>
 
 ##### location: Source Location of This Feature
 
 The Seq-feat.location is the traditional location associated with a feature. While it is possible to use any Seq-loc type in Seq-feat.location, it is recommended to use types which resolve to a single unique sequence. The use of a type like Seq-loc-equiv to represent alternative splicing of exons (similar to the GenBank/EMBL/DDBJ feature table "one-of") is strongly discouraged. Consider the example of such an alternatively spliced coding region. What protein sequence is coded for by such usage? This problem is accentuated by the availability of the "product" slot. Which protein sequence is the product of this coding region? While such a short hand notation may seem attractive at first glance, it is clearly much more useful to represent each splicing alternative, and its associated protein product, times of expression, etc. separately.
 
-<a name="ch-datamod.qual-GenBank-Style-Q"></a>
+<a name="ch_datamod.qual_GenBank_Style_Q"></a>
 
 ##### qual: GenBank Style Qualifiers
 
 The GenBank/EMBL/DDBJ feature table uses "qualifiers", a combination of a string key and a string value. Many of these qualifiers do not map to the ASN.1 specification, so this provides a means of carrying them in the Seq-feat for features derived from those sources.
 
-<a name="ch-datamod.title-A-User-Defined"></a>
+<a name="ch_datamod.title_A_User_Defined"></a>
 
 ##### title: A User Defined Name
 
 This field is provided for naming features for display. It would be used by end-user software to allow the user to add locally meaningful names to features. This is not an id, as this is provided by the "id" slot.
 
-<a name="ch-datamod.ext-A-User-Defined-S"></a>
+<a name="ch_datamod.ext_A_User_Defined_S"></a>
 
 ##### ext: A User Defined Structured Extension
 
-The "ext" field allows the extension of a standard feature type with a structured User-object (see [General Use Objects](#ch-datamod.datamodel.general)) defined by a user. For example, a particular scientist may have additional detailed information about coding regions which do not fit into the standard CdRegion data type. Rather than create a completely new feature type, the CdRegion type can be extended by filling in as much of the standard CdRegion fields as possible, then putting the additional information in the User-object. Software which only expects a standard coding region will operate on the extended feature without a problem, while software that can make use of the additional data in the User-object can operate on exactly the same the feature.
+The "ext" field allows the extension of a standard feature type with a structured User-object (see [General Use Objects](#ch_datamod.datamodel.general)) defined by a user. For example, a particular scientist may have additional detailed information about coding regions which do not fit into the standard CdRegion data type. Rather than create a completely new feature type, the CdRegion type can be extended by filling in as much of the standard CdRegion fields as possible, then putting the additional information in the User-object. Software which only expects a standard coding region will operate on the extended feature without a problem, while software that can make use of the additional data in the User-object can operate on exactly the same the feature.
 
-<a name="ch-datamod.cit-Citations-For-Th"></a>
+<a name="ch_datamod.cit_Citations_For_Th"></a>
 
 ##### cit: Citations For This Feature
 
-This slot is a set of Pubs which are citations about the feature itself, not about the Bioseq as a whole. It can be of any type, although the most common is type "pub", a set of any kind of Pubs. The individual Pubs within the set may be Pub-equivs (see [Bibliographic References](#ch-datamod.datamodel.biblio)) to hold equivalent forms for the same publication, so some thought should be given to the process of accessing all the possible levels of information in this seemingly simple field.
+This slot is a set of Pubs which are citations about the feature itself, not about the Bioseq as a whole. It can be of any type, although the most common is type "pub", a set of any kind of Pubs. The individual Pubs within the set may be Pub-equivs (see [Bibliographic References](#ch_datamod.datamodel.biblio)) to hold equivalent forms for the same publication, so some thought should be given to the process of accessing all the possible levels of information in this seemingly simple field.
 
-<a name="ch-datamod.expev-Experimental-E"></a>
+<a name="ch_datamod.expev_Experimental_E"></a>
 
 ##### exp-ev: Experimental Evidence
 
@@ -2205,19 +2205,19 @@ If it is known for certain that there is or is not experimental evidence support
 
 This field is only a simple flag. It gives no indication of what kind of evidence may be available. A structured field of this type will differ from feature type to feature type, and thus is inappropriate to the generic Seq-feat. Information regarding the quality of the feature can be found in the CdRegion feature and even more detail on methods in the Tx-init feature. Other feature types may gain experimental evidence fields appropriate to their types as it becomes clear what a reasonable classification of that evidence might be.
 
-<a name="ch-datamod.xref-Linking-To-Othe"></a>
+<a name="ch_datamod.xref_Linking_To_Othe"></a>
 
 ##### xref: Linking To Other Features
 
-SeqFeatXrefs are copies of the Seq-feat.data field and (optionally) the Seq-feat.id field from other related features. This is a copy operation and is meant to keep some degree of connectivity or completeness with a Seq-feat that is moved out of context. For example, in a collection of data including a nucleic acid sequence and its translated protein product, there would be a Gene feature on the nucleic acid, a [Prot-ref](#ch-datamod.Protref-Reference-To) feature on the protein, and a CdRegion feature linking all three together. However, if the CdRegion feature is taken by itself, the name of the translated protein and the name of the gene are not immediately available. The Seq-feat.xref provides a simple way to copy the relevant information. Note that there is a danger to any such copy operation in that the original source of the copied data may be modified without updating the copy. Software should be careful about this, and the best course is to take the original data if it is available to the software, using any copies in xref only as a last resort. If the "id" is included in the xref, this makes it easier for software to keep the copy up to date. But it depends on widespread use of feature ids.
+SeqFeatXrefs are copies of the Seq-feat.data field and (optionally) the Seq-feat.id field from other related features. This is a copy operation and is meant to keep some degree of connectivity or completeness with a Seq-feat that is moved out of context. For example, in a collection of data including a nucleic acid sequence and its translated protein product, there would be a Gene feature on the nucleic acid, a [Prot-ref](#ch_datamod.Protref_Reference_To) feature on the protein, and a CdRegion feature linking all three together. However, if the CdRegion feature is taken by itself, the name of the translated protein and the name of the gene are not immediately available. The Seq-feat.xref provides a simple way to copy the relevant information. Note that there is a danger to any such copy operation in that the original source of the copied data may be modified without updating the copy. Software should be careful about this, and the best course is to take the original data if it is available to the software, using any copies in xref only as a last resort. If the "id" is included in the xref, this makes it easier for software to keep the copy up to date. But it depends on widespread use of feature ids.
 
-<a name="ch-datamod.SeqFeatData-Type-Spe"></a>
+<a name="ch_datamod.SeqFeatData_Type_Spe"></a>
 
 #### SeqFeatData: Type Specific Feature Data
 
 The "data" slot of a Seq-feat is filled with SeqFeatData, which is just a CHOICE of a variety of specific data structures. They are listed under their CHOICE type below, but for most types a detailed discussion will be found under the type name itself later in this chapter, or in another chapter. That is because most types are data objects in their own right, and may find uses in many other contexts than features.
 
-<a name="ch-datamod.gene-Location-Of-A-G"></a>
+<a name="ch_datamod.gene_Location_Of_A_G"></a>
 
 ##### gene: Location Of A Gene
 
@@ -2225,15 +2225,15 @@ A gene is a feature of its own, rather than a modifier of other features as in t
 
 The gene feature is implemented by a Gene-ref object, or a "reference to" a gene. The Gene-ref object is discussed below.
 
-<a name="ch-datamod.org-Source-Organism-"></a>
+<a name="ch_datamod.org_Source_Organism_"></a>
 
 ##### org: Source Organism Of The Bioseq
 
-Normally when a whole Bioseq or set of Bioseqs is from the same organism, the Org-ref (reference to Organism) will be found at the descriptor level of the Bioseq or Bioseq-set (see [Biological Sequences](#ch-datamod.-Biological-Sequences-1)). However, in some cases the whole Bioseq may not be from the same organism. This may occur naturally (e.g. a provirus integrated into a host chromosome) or artificially (e.g. recombinant DNA techniques).
+Normally when a whole Bioseq or set of Bioseqs is from the same organism, the Org-ref (reference to Organism) will be found at the descriptor level of the Bioseq or Bioseq-set (see [Biological Sequences](#ch_datamod._Biological_Sequences_1)). However, in some cases the whole Bioseq may not be from the same organism. This may occur naturally (e.g. a provirus integrated into a host chromosome) or artificially (e.g. recombinant DNA techniques).
 
 The org feature is implemented by an Org-ref object, or a "reference to" an organism. The Orgref is discussed below.
 
-<a name="ch-datamod.cdregion-Coding-Region-1"></a>
+<a name="ch_datamod.cdregion_Coding_Region_1"></a>
 
 ##### cdregion: Coding Region
 
@@ -2241,35 +2241,35 @@ A cdregion is a region of nucleic acid which codes for a protein. It can be thou
 
 A cdregion feature is implemented by a Cdregion object, discussed below.
 
-<a name="ch-datamod.prot-Describing-A-Pr"></a>
+<a name="ch_datamod.prot_Describing_A_Pr"></a>
 
 ##### prot: Describing A Protein
 
-A protein feature describes and/or names a protein or region of a protein. It uses a [Prot-ref](#ch-datamod.Protref-Reference-To) object, or "reference to" a protein, described in detail below.
+A protein feature describes and/or names a protein or region of a protein. It uses a [Prot-ref](#ch_datamod.Protref_Reference_To) object, or "reference to" a protein, described in detail below.
 
 A single amino acid Bioseq can have many protein features on it. It may have one over its full length describing a pro-peptide, then a shorter one describing the mature peptide. An extreme case might be a viral polyprotein which would have one protein feature for the whole polyprotein, then additional protein features for each of the component mature proteins. One should always take into account the "location" slot of a protein feature.
 
-<a name="ch-datamod.rna-Describing-An-RN"></a>
+<a name="ch_datamod.rna_Describing_An_RN"></a>
 
 ##### rna: Describing An RNA
 
 An RNA feature can describe both coding intermediates and structural RNAs using an RNA-ref, or "reference to" an RNA. The RNA-ref is described in more detail below. The Seq-feat.location for an RNA can be attached to either the genomic sequence coding for the RNA, or to the sequence of the RNA itself, when available. The determination of whether the Bioseq the RNA feature is attached to is genomic or an RNA type is made by examining the Bioseq.descr.mol-type, not by making assumptions based on the feature. When both the genomic Bioseq and the RNA Bioseq are both available, one could attach the RNA Seq-feat.location to the genomic sequence and the Seq-feat.product to the RNA to connect them and capture explicitly the process by which the RNA is created.
 
-<a name="ch-datamod.pub-Publication-Abou"></a>
+<a name="ch_datamod.pub_Publication_Abou"></a>
 
 ##### pub: Publication About A Bioseq Region
 
-When a publication describes a whole Bioseq, it would normally be at the "descr" slot of the Bioseq. However, if it applies to a sub region of the Bioseq, it is convenient to make it a feature. The pub feature uses a Pubdesc (see [Biological Sequences](#ch-datamod.-Biological-Sequences) for a detailed description) to describe a publication and how it relates to the Bioseq. To indicate a citation about a specific feature (as opposed to about the sequence region in general), use the Seq-feat.cit slot of that feature.
+When a publication describes a whole Bioseq, it would normally be at the "descr" slot of the Bioseq. However, if it applies to a sub region of the Bioseq, it is convenient to make it a feature. The pub feature uses a Pubdesc (see [Biological Sequences](#ch_datamod._Biological_Sequences) for a detailed description) to describe a publication and how it relates to the Bioseq. To indicate a citation about a specific feature (as opposed to about the sequence region in general), use the Seq-feat.cit slot of that feature.
 
-<a name="ch-datamod.seq-Tracking-Origina"></a>
+<a name="ch_datamod.seq_Tracking_Origina"></a>
 
 ##### seq: Tracking Original Sequence Sources
 
 The "seq" feature is a simple way to associate a region of sequence with a region of another. For example, if one wished to annotate a region of a recombinant sequence as being from "pBR322 10-50" one would simply use a Seq-loc (see Sequence Locations and Identifiers) for the interval 10-50 on Seq-id pBR322. Software tools could use such information to provide the pBR322 numbering system over that interval.
 
-This feature is really meant to accommodate older or approximate data about the source of a sequence region and is no more than annotation. More specific and computationally useful ways of doing this are (1) create the recombinant sequence as a segmented sequence directly (see [Biological Sequences](#ch-datamod.-Biological-Sequences)), (2) use the Seq-hist field of a Bioseq to record its history, (3) create alignments (see Sequence Alignments) which are also valid Seq-annots, to indicate more complex relationships of one Bioseq to others.
+This feature is really meant to accommodate older or approximate data about the source of a sequence region and is no more than annotation. More specific and computationally useful ways of doing this are (1) create the recombinant sequence as a segmented sequence directly (see [Biological Sequences](#ch_datamod._Biological_Sequences)), (2) use the Seq-hist field of a Bioseq to record its history, (3) create alignments (see Sequence Alignments) which are also valid Seq-annots, to indicate more complex relationships of one Bioseq to others.
 
-<a name="ch-datamod.imp-Importing-Featur"></a>
+<a name="ch_datamod.imp_Importing_Featur"></a>
 
 ##### imp: Importing Features From Other Data Models
 
@@ -2277,19 +2277,19 @@ The SeqFeatData types explicitly define only certain well understood or widely u
 
 GenBank/EMBL/DDBJ use a "location" called "replace" which is actually an editing operation on the sequence which incorporates literal strings. Since the locations defined in this specification are locations on sequences, and not editing operations, features with replace operators are all converted to Imp-feat so that the original location string can be preserved. This same strategy is taken in the face of incorrectly constructed locations encountered in parsing outside databases into ASN.1.
 
-<a name="ch-datamod.region-A-Named-Regio"></a>
+<a name="ch_datamod.region_A_Named_Regio"></a>
 
 ##### region: A Named Region
 
 The region feature provides a simple way to name a region of a Bioseq (e.g. "globin locus", "LTR", "subrepeat region", etc).
 
-<a name="ch-datamod.comment-A-Comment-On"></a>
+<a name="ch_datamod.comment_A_Comment_On"></a>
 
 ##### comment: A Comment On A Region Of Sequence
 
 The comment feature allows a comment to be made about any specified region of sequence. Since comment is already a field in Seq-feat, there is no need for an additional type specific data item in this case, so it is just NULL.
 
-<a name="ch-datamod.bond-A-Bond-Between-"></a>
+<a name="ch_datamod.bond_A_Bond_Between_"></a>
 
 ##### bond: A Bond Between Residues
 
@@ -2301,7 +2301,7 @@ This feature annotates a bond between two residues. A Seq-loc of type "bond" is 
     thioether (4) ,
     other (255)
 
-<a name="ch-datamod.site-A-Defined-Site"></a>
+<a name="ch_datamod.site_A_Defined_Site"></a>
 
 ##### site: A Defined Site
 
@@ -2331,51 +2331,51 @@ The site feature annotates a know site from the following specified list. If the
     dna-binding (22) ,
     other (255)
 
-<a name="ch-datamod.rsite-A-Restriction-"></a>
+<a name="ch_datamod.rsite_A_Restriction_"></a>
 
 ##### rsite: A Restriction Enzyme Cut Site
 
 A restriction map is basically a feature table with rsite features. Software which generates such a feature table could then use any sequence annotation viewer to display its results. Restriction maps generated by physical methods (before sequence is available), can use this feature to create a map type Bioseq representing the ordered restriction map. For efficiency one would probably create one Seq-feat for each restriction enzyme used and used the Packed-pnt Seq-loc in the location slot. See Rsite-ref, below.
 
-<a name="ch-datamod.user-A-User-Defined-"></a>
+<a name="ch_datamod.user_A_User_Defined_"></a>
 
 ##### user: A User Defined Feature
 
-An end-user can create a feature completely of their own design by using a User-object (see [General Use Objects](#ch-datamod.datamodel.general)) for SeqFeatData. This provides a means for controlled addition and testing of new feature types, which may or may not become widely accepted or to "graduate" to a defined SeqFeatData type. It is also a means for software to add structured information to Bioseqs for its own use and which may never be intended to become a widely used standard. All the generic feature operations, including display, deletion, determining which features are carried on a sub region of sequence, etc, can be applied to an user feature with no knowledge of the particular User-object structure or meaning. Yet software which recognizes that User-object can take advantage of it.
+An end-user can create a feature completely of their own design by using a User-object (see [General Use Objects](#ch_datamod.datamodel.general)) for SeqFeatData. This provides a means for controlled addition and testing of new feature types, which may or may not become widely accepted or to "graduate" to a defined SeqFeatData type. It is also a means for software to add structured information to Bioseqs for its own use and which may never be intended to become a widely used standard. All the generic feature operations, including display, deletion, determining which features are carried on a sub region of sequence, etc, can be applied to an user feature with no knowledge of the particular User-object structure or meaning. Yet software which recognizes that User-object can take advantage of it.
 
 If an existing feature type is available but lacks certain additional fields necessary for a special task or view of information, then it should be extended with the Seq-feat.ext slot, rather than building a complete user feature de novo.
 
-<a name="ch-datamod.txinit-Transcription-Initia-1"></a>
+<a name="ch_datamod.txinit_Transcription_Initia_1"></a>
 
 ##### txinit: Transcription Initiation
 
-This feature is used to designate the region of transcription initiation, about which considerable knowledge is available. See [Txinit](#ch-datamod.Txinit-Transcription), below.
+This feature is used to designate the region of transcription initiation, about which considerable knowledge is available. See [Txinit](#ch_datamod.Txinit_Transcription), below.
 
-<a name="ch-datamod.num-Applying-Custom-"></a>
+<a name="ch_datamod.num_Applying_Custom_"></a>
 
 ##### num: Applying Custom Numbering To A Region
 
-A Numbering object can be used as a Bioseq descriptor to associate various numbering systems with an entire Bioseq. When used as a feature, the numbering system applies only to the region in Seq-feat.location. This make multiple, discontinuous numbering systems available on the same Bioseq. See [Biological Sequences](#ch-datamod.-Biological-Sequences) for a description of Numbering, and also Seq-feat.seq, above, for an alternative way of applying a sequence name and its numbering system to a sequence region.
+A Numbering object can be used as a Bioseq descriptor to associate various numbering systems with an entire Bioseq. When used as a feature, the numbering system applies only to the region in Seq-feat.location. This make multiple, discontinuous numbering systems available on the same Bioseq. See [Biological Sequences](#ch_datamod._Biological_Sequences) for a description of Numbering, and also Seq-feat.seq, above, for an alternative way of applying a sequence name and its numbering system to a sequence region.
 
-<a name="ch-datamod.psecstr-Protein-Seco"></a>
+<a name="ch_datamod.psecstr_Protein_Seco"></a>
 
 ##### psec-str: Protein Secondary Structure
 
 Secondary structure can be annotated on a protein sequence using this type. It can be predicted by algorithm (in which case Seq-feat.exp-ev should be "not-experimental") or by analysis of the known protein structure (Seq-feat.exp-ev = "experimental"). Only three types of secondary structure are currently supported. A "helix" is any helix, a "sheet" is beta sheet, and "turn" is a beta or gamma turn. Given the controversial nature of secondary structure classification (not be mention prediction), we opted to keep it simple until it was clear that more detail was really necessary or understood.
 
-<a name="ch-datamod.nonstdresidue-Unusua"></a>
+<a name="ch_datamod.nonstdresidue_Unusua"></a>
 
 ##### non-std-residue: Unusual Residues
 
 When an unusual residue does not have a direct sequence code, the "best" standard substitute can be used in the sequence and the residue can be labeled with its real name. No attempt is made to enforce a standard nomenclature for this string.
 
-<a name="ch-datamod.-het-Heterogen-1"></a>
+<a name="ch_datamod._het_Heterogen_1"></a>
 
 ##### het: Heterogen
 
 In the PDB structural database, non-biopolymer atoms associated with a Bioseq are referred to as "heterogens". When a heterogen appears as a feature, it is assumed to be bonded to the sequence positions in Seq-feat.location. If there is no specific bonding information, the heterogen will appear as a descriptor of the Bioseq. The Seq-loc for the Seq-feat.location will probably be a point or points, not a bond. A Seq-loc of type bond is between sequence residues.
 
-<a name="ch-datamod.Seqfeat-Implementati"></a>
+<a name="ch_datamod.Seqfeat_Implementati"></a>
 
 #### Seq-feat Implementation in C++
 
@@ -2383,7 +2383,7 @@ The C++ implementation of a Seq-feat is mostly straightforward. However, some ex
 
 **SeqFeat.id**
 
-<a name="ch-datamod.T17"></a>
+<a name="ch_datamod.T17"></a>
 
 |----------------|-----------|
 | **ASN.1 name** | **Value** |
@@ -2395,7 +2395,7 @@ The C++ implementation of a Seq-feat is mostly straightforward. However, some ex
 
 **SeqFeat.data**
 
-<a name="ch-datamod.T18"></a>
+<a name="ch_datamod.T18"></a>
 
 |-----------------|-----------|
 | **ASN.1 name**  | **Value** |
@@ -2424,13 +2424,13 @@ The C++ implementation of a Seq-feat is mostly straightforward. However, some ex
 
 Of course, within the software tools for producing GenBank, report, or other formats from ASN.1 are functions to format and display features as well. There are some functions to manipulate the [CSeqFeatData](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeqFeatData.html) objects, such as the translation of a CdRegion, and a host of functions to use and compare the Seq-locs of "product" and "location" or easily access and use the sequence regions they point to. These functions are discussed in the [Sequence Utilities](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/util/sequence.hpp) chapter. Additional functions, described in [Exploring The Data](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/misc/sequence_macros.hpp), allow one to easily locate features of interest by type, in arbitrarily complex objects.
 
-<a name="ch-datamod.CdRegion-Coding-Regi"></a>
+<a name="ch_datamod.CdRegion_Coding_Regi"></a>
 
 #### CdRegion: Coding Region
 
 A CdRegion, in association with a Seq-feat, is considered "instructions to translate" to protein. The Seq-locs used by the Seq-feat do not necessarily reflect the exon structure of the primary transcript (although they often do). A Seq-feat of type CdRegion can point both to the source nucleic acid and to the protein sequence it produces. Most of the information about the source nucleic acid (such as the gene) or the destination protein (such as its name) is associated directly with those Bioseqs. The CdRegion only serves as a link between them, and as a method for explicitly encoding the information needed to derive one from the other.
 
-<a name="ch-datamod.orf-Open-Reading-Fra"></a>
+<a name="ch_datamod.orf_Open_Reading_Fra"></a>
 
 ##### orf: Open Reading Frame
 
@@ -2438,7 +2438,7 @@ CdRegion.orf is TRUE if the coding region is only known to be an open reading fr
 
 The orf flag is not set when any reasonable argument can be made that the CdRegion is really expressed, such as detection of mRNA or strong sequence similarity to known proteins.
 
-<a name="ch-datamod.Translation-Informat"></a>
+<a name="ch_datamod.Translation_Informat"></a>
 
 ##### Translation Information
 
@@ -2448,13 +2448,13 @@ The genetic code is assumed to be the universal code unless given explicitly. Th
 
 Occasionally the genetic code is not followed at specific positions in the sequence. Examples are the use of alternate initiation codons only in the first position, the effects of suppresser tRNAs, or the addition of selenocysteine. The Code-break object specifies the three bases of the codon in the Bioseq which is treated differently and the amino acid which is generated at that position. During translation the genetic code is followed except at positions indicated by Code-breaks, where the instructions in the Code-break are followed instead.
 
-<a name="ch-datamod.Problems-With-Transl"></a>
+<a name="ch_datamod.Problems_With_Transl"></a>
 
 ##### Problems With Translations
 
 In a surprising number of cases an author publishes both a nucleic acid sequence and the protein sequence produced by its coding region, but the translation of the coding region does not yield the published protein sequence. On the basis of the publication it is not possible to know for certain which sequence is correct. In the NCBI Backbone database both sequences are preserved as published by the author, but the conflict flag is set to TRUE in the CdRegion. If available, the number of gaps and mismatches in the alignment of the translated sequence to the published protein sequence are also given so a judgment can be made about the severity of the problem.
 
-<a name="ch-datamod.Genetic-Codes"></a>
+<a name="ch_datamod.Genetic_Codes"></a>
 
 #### Genetic Codes
 
@@ -2474,7 +2474,7 @@ The genetic code arrays have names which indicate the amino acid alphabet used (
 
 The contents of gc.prt, the current supported genetic codes, is given at the end of this chapter.
 
-<a name="ch-datamod.C-Implementation-Of-"></a>
+<a name="ch_datamod.C_Implementation_Of_"></a>
 
 ##### C++ Implementation Of Genetic Codes
 
@@ -2482,7 +2482,7 @@ The GeneticCode type is summarized as follows:
 
 **GeneticCode Elements**
 
-<a name="ch-datamod.T19"></a>
+<a name="ch_datamod.T19"></a>
 
 |----------------|-----------|
 | **ASN.1 name** | **Value** |
@@ -2495,7 +2495,7 @@ The GeneticCode type is summarized as follows:
 | sncbi8aa       | 7         |
 | sncbistdaa     | 8         |
 
-<a name="ch-datamod.Rsiteref-Reference-T"></a>
+<a name="ch_datamod.Rsiteref_Reference_T"></a>
 
 #### Rsite-ref: Reference To A Restriction Enzyme
 
@@ -2503,7 +2503,7 @@ This simple data structure just references a restriction enzyme. It is a choice 
 
 Note that this reference is not an Rsite-entry which might contain a host of information about the restriction enzyme, but is only a reference to the enzyme.
 
-<a name="ch-datamod.RNAref-Reference-To-"></a>
+<a name="ch_datamod.RNAref_Reference_To_"></a>
 
 #### RNA-ref: Reference To An RNA
 
@@ -2513,7 +2513,7 @@ The "ext" field allows the addition of structure information appropriate to a sp
 
 As nomenclature and attributes for classes of RNAs becomes better understood and accepted, the RNA-ref.ext will gain additional extensions.
 
-<a name="ch-datamod.Generef-Reference-To"></a>
+<a name="ch_datamod.Generef_Reference_To"></a>
 
 #### Gene-ref: Reference To A Gene
 
@@ -2529,7 +2529,7 @@ The "db" field allows the Gene-ref to be attached to controlled identifiers from
 
 The "syn" field holds synonyms for the gene. It does not attempt to discriminate symbols, alleles, or descriptions.
 
-<a name="ch-datamod.Protref-Reference-To"></a>
+<a name="ch_datamod.Protref_Reference_To"></a>
 
 #### Prot-ref: Reference To A Protein
 
@@ -2543,7 +2543,7 @@ The "activity" field allows the various known activities of the protein to be sp
 
 The "db" field is to accommodate keys from protein databases. While protein nomenclature is not well controlled, there are subfields such as immunology which have controlled names. There are also databases which characterize proteins in other ways than sequence, such as 2-d spot databases which could provide such a key.
 
-<a name="ch-datamod.Txinit-Transcription"></a>
+<a name="ch_datamod.Txinit_Transcription"></a>
 
 #### Txinit: Transcription Initiation
 
@@ -2551,7 +2551,7 @@ This is an example of a SeqFeatData block designed and built by a domain expert,
 
 The Txinit object is well described by its comments in the ASN.1 definition. The best source of more in depth discussion of these fields is in the EPD documentation, and so it will not be reproduced here.
 
-<a name="ch-datamod.Current-Genetic-Code"></a>
+<a name="ch_datamod.Current_Genetic_Code"></a>
 
 #### Current Genetic Code Table: gc.prt
 
@@ -2672,32 +2672,32 @@ The Txinit object is well described by its comments in the ASN.1 definition. The
     } 
     }
 
-<a name="ch-datamod.-Sequence-Alignments-1"></a>
+<a name="ch_datamod._Sequence_Alignments_1"></a>
 
 Sequence Alignments
 -------------------
 
-<a name="ch-datamod.Sequence-Alignments"></a>
+<a name="ch_datamod.Sequence_Alignments"></a>
 
 ### Sequence Alignments
 
--   [Introduction](#ch-datamod.Introduction)
+-   [Introduction](#ch_datamod.Introduction)
 
--   [Seq-align](#ch-datamod.Seqalign)
+-   [Seq-align](#ch_datamod.Seqalign)
 
--   [Score: Score Of An Alignment Or Segment](#ch-datamod.Score-Score-Of-An-Al)
+-   [Score: Score Of An Alignment Or Segment](#ch_datamod.Score_Score_Of_An_Al)
 
--   [Dense-diag: Segments For diags Seq-align](#ch-datamod.Densediag-Segments-F)
+-   [Dense-diag: Segments For diags Seq-align](#ch_datamod.Densediag_Segments_F)
 
--   [Dense-seg: Segments for "global" or "partial" Seq-align](#ch-datamod.Denseseg-Segments-fo)
+-   [Dense-seg: Segments for "global" or "partial" Seq-align](#ch_datamod.Denseseg_Segments_fo)
 
--   [Std-seg: Aligning Any Bioseq Type With Any Other](#ch-datamod.Stdseg-Aligning-Any-)
+-   [Std-seg: Aligning Any Bioseq Type With Any Other](#ch_datamod.Stdseg_Aligning_Any_)
 
--   [ASN.1 Specification: seqalign.asn](#ch-datamod.-ASN1-Specification-s-10)
+-   [ASN.1 Specification: seqalign.asn](#ch_datamod._ASN1_Specification_s_10)
 
--   [C++ Implementation Notes](#ch-datamod.C-Implementation-Not)
+-   [C++ Implementation Notes](#ch_datamod.C_Implementation_Not)
 
-<a name="ch-datamod.Introduction"></a>
+<a name="ch_datamod.Introduction"></a>
 
 #### Introduction
 
@@ -2722,13 +2722,13 @@ Taking only two of the sequences in a two way alignment, only three segments are
         id=200        AAGGCCTaTTAG.......GATGATGATGA
                       |     1    |   2   |     3   |  Segments
 
-<a name="ch-datamod.Seqalign"></a>
+<a name="ch_datamod.Seqalign"></a>
 
 #### Seq-align
 
 A ***Seq-align*** is a collection of segments representing one complete alignment. The whole ***Seq-align*** may have a Score representing some measure of quality or attributing the method used to build the ***Seq-align***. In addition, each segment may have a score for that segment alone.
 
-<a name="ch-datamod.type-global"></a>
+<a name="ch_datamod.type_global"></a>
 
 ##### type: global
 
@@ -2736,7 +2736,7 @@ A global alignment is the alignment of ***Bioseq***s over their complete length.
 
 The segments making up a global alignment are assumed to be connected in order from first to last to make up the alignment, and that the full lengths of all sequences will be accounted for in the alignment.
 
-<a name="ch-datamod.type-partial"></a>
+<a name="ch_datamod.type_partial"></a>
 
 ##### type: partial
 
@@ -2746,7 +2746,7 @@ Like a global alignment, the segments making up a partial alignment are assumed 
 
 A partial or global alignment may use either the ***denseg*** choice of segment (for aligned ***Bioseq***s with one to one residue mappings, such as protein or nucleic acid sequences) or the ***std*** choice for any ***Bioseq***s including maps. In both cases there is an ordered relationship between one segment and the next to make the complete alignment.
 
-<a name="ch-datamod.type-diags"></a>
+<a name="ch_datamod.type_diags"></a>
 
 ##### type: diags
 
@@ -2754,7 +2754,7 @@ A ***Seq-align*** of type ***diags*** means that each segment is independent of 
 
 The ***diags*** type of ***Seq-align*** may use either the ***dendiag*** choice of segment (for aligned ***Bioseq***s with one to one residue mappings, such as protein or nucleic acid sequences) or the ***std*** choice for any ***Bioseq***s including maps. In both cases the ***SEQUENCE OF*** does not imply any ordered relationship between one segment and the next. Each segment is independent of any other.
 
-<a name="ch-datamod.Typedisc"></a>
+<a name="ch_datamod.Typedisc"></a>
 
 ##### Type:disc
 
@@ -2764,7 +2764,7 @@ Each chunk is a non-recursive ***Seq-align*** of type ''global'' or ''partial'' 
 
 Examples of usage include mRNA-to-genomic alignments representing exons or genomic-to-genomic alignments containing unaligned regions.
 
-<a name="ch-datamod.dim-Dimensionality-O"></a>
+<a name="ch_datamod.dim_Dimensionality_O"></a>
 
 ##### dim: Dimensionality Of The Alignment
 
@@ -2774,13 +2774,13 @@ Another common situation is when many sequences are aligned to one, as is the ca
 
 The ***dim*** attribute at the level of the ***Seq-align*** is **optional**, while the ***dim*** attribute is required on **each** segment. This is because it is convenient for a global or partial alignment to know the dimensionality for the whole alignment. It is also an integrity check that every segment in such a ***Seq-align*** has the same dimension. For ***diags*** however, the segments are independent of each other, and may even have different dimensions. This would be true for algorithms that locate the best n-way diagonals, where n can be 2 to the number of sequences. For a simple dot-matrix, all segments would be dimension two.
 
-<a name="ch-datamod.Score-Score-Of-An-Al"></a>
+<a name="ch_datamod.Score_Score_Of_An_Al"></a>
 
 #### Score: Score Of An Alignment Or Segment
 
 A Score contains an id (of type Object-id) which is meant to identify the method used to generate the score. It could be a string (e.g. "BLAST raw score", "BLAST p value") or an integer for use by a software system planning to process a number of defined values. The value of the Score is either an integer or real number. Both ***Seq-align*** and segment types allow more than one Score so that a variety of measures for the same alignment can be accommodated.
 
-<a name="ch-datamod.Densediag-Segments-F"></a>
+<a name="ch_datamod.Densediag_Segments_F"></a>
 
 #### Dense-diag: Segments For diags Seq-align
 
@@ -2792,7 +2792,7 @@ In the case of nucleic acids, if any or all of the segments are on the complemen
 
 Clearly all ***Bioseq*** regions involved in a ***Dense-diag*** must have the same length, so this form does not allow stretching of one ***Bioseq*** compared to another, as may occur when comparing a genetic map ***Bioseq*** to a physical map or sequence ***Bioseq***. In this case one would use ***Std-seg***.
 
-<a name="ch-datamod.Denseseg-Segments-fo"></a>
+<a name="ch_datamod.Denseseg_Segments_fo"></a>
 
 #### Dense-seg: Segments for "global" or "partial" Seq-align
 
@@ -2830,7 +2830,7 @@ The three dimensional alignment show above is repeated below, followed by its AS
             starts { 0,0,-1, 4,4,0, 12,-1,8, 19,12,15, 22,15,-1, 26,19,18 } ,
             lens { 4, 8, 7, 3, 4, 4 } } }
 
-<a name="ch-datamod.Stdseg-Aligning-Any-"></a>
+<a name="ch_datamod.Stdseg_Aligning_Any_"></a>
 
 #### Std-seg: Aligning Any Bioseq Type With Any Other
 
@@ -2961,32 +2961,32 @@ Each ***Std-seg*** must give its dimension, so it can be used for ***diags***. O
 
 Clearly the ***Std-seg*** method should only be used when its flexibility is required. Nonetheless, there is no ready substitute for ***Std-seg*** when flexibility is demanded.
 
-<a name="ch-datamod.C-Implementation-Not"></a>
+<a name="ch_datamod.C_Implementation_Not"></a>
 
 #### C++ Implementation Notes
 
 The C++ Toolkit adds several methods to the classes generated from ASN.1 specifications to simplify alignment data access and manipulation. The [CSeq\_align](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__align.html) class has methods returning ***Seq-id***, start, stop, and strand for a particular alignment row, regardless of its representation; it allows swapping alignment rows or converting the alignment from one type to another. The [CDense\_seg](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDense__seg.html) class extends the default set of alignment members with sequence character width (1 or 3, depending on molecule type).
 
-<a name="ch-datamod.datamodel.seqres"></a>
+<a name="ch_datamod.datamodel.seqres"></a>
 
 Sequence Graphs
 ---------------
 
 The Sequence Graphs section describes the Seq-graph type used to associate some analytical data with a region on a Bioseq. The type definition is located in the [seqres.asn](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqres/seqres.asn) module.
 
--   [Introduction](#ch-datamod.-Introduction-9)
+-   [Introduction](#ch_datamod._Introduction_9)
 
--   [Seq-graph: Graph on a Bioseq](#ch-datamod.Seqgraph-Graph-on-a-)
+-   [Seq-graph: Graph on a Bioseq](#ch_datamod.Seqgraph_Graph_on_a_)
 
--   [ASN.1 Specification: seqres.asn](#ch-datamod.-ASN1-Specification-s-11)
+-   [ASN.1 Specification: seqres.asn](#ch_datamod._ASN1_Specification_s_11)
 
-<a name="ch-datamod.-Introduction-9"></a>
+<a name="ch_datamod._Introduction_9"></a>
 
 ### Introduction
 
 Analytical tools can attach results to Bioseqs in named collections as Seq-annots. This allows analytical programs developed from various sources to add information to a standard object (the Bioseq) and then let a single program designed for displaying a Bioseq and its associated information show the analytical results in an integrated fashion. Feature tables have been discussed previously, and can serve as the vehicle for results from restriction mapping programs, motif searching programs, open reading frame locators, and so on. Alignment programs and curator tools can produce Seq-annots containing Seq-aligns. In this chapter we present the third annotation type, a graph, which can be used to show properties like G+C content, surface potential, hydrophobicity, and so on.
 
-<a name="ch-datamod.Seqgraph-Graph-on-a-"></a>
+<a name="ch_datamod.Seqgraph_Graph_on_a_"></a>
 
 ### Seq-graph: Graph on a Bioseq
 
@@ -2994,38 +2994,38 @@ A Seq-graph defines some continuous set of values over a defined interval on a B
 
 The graphs themselves can be coded as byte, integer, or real values. Each type defines the maximum and minimum values to show on the graph (no given values need necessarily reach the maximum or minimum) and the value along which to draw the X axis of the graph.
 
-<a name="ch-datamod.Common-ASN1-Specifications"></a>
+<a name="ch_datamod.Common_ASN1_Specifications"></a>
 
 Common ASN.1 Specifications
 ---------------------------
 
 Following are the ASN.1 specifications referenced in this chapter:
 
--   [general.asn](#ch-datamod.-ASN1-Specification-g)
+-   [general.asn](#ch_datamod._ASN1_Specification_g)
 
--   [biblio.asn](#ch-datamod.-ASN1-Specification-b-1)
+-   [biblio.asn](#ch_datamod._ASN1_Specification_b_1)
 
--   [pub.asn](#ch-datamod.-ASN1-Specification-p-2)
+-   [pub.asn](#ch_datamod._ASN1_Specification_p_2)
 
--   [medline.asn](#ch-datamod.-ASN1-Specification-m-3)
+-   [medline.asn](#ch_datamod._ASN1_Specification_m_3)
 
--   [seq.asn](#ch-datamod.-ASN1-Specification-s-4)
+-   [seq.asn](#ch_datamod._ASN1_Specification_s_4)
 
--   [seqblock.asn](#ch-datamod.-ASN1-Specification-s-5)
+-   [seqblock.asn](#ch_datamod._ASN1_Specification_s_5)
 
--   [seqcode.asn](#ch-datamod.-ASN1-Specification-s-6)
+-   [seqcode.asn](#ch_datamod._ASN1_Specification_s_6)
 
--   [seqset.asn](#ch-datamod.-ASN1-Specification-s-7)
+-   [seqset.asn](#ch_datamod._ASN1_Specification_s_7)
 
--   [seqloc.asn](#ch-datamod.-ASN1-Specification-s-8)
+-   [seqloc.asn](#ch_datamod._ASN1_Specification_s_8)
 
--   [seqfeat.asn](#ch-datamod.-ASN1-Specification-s-9)
+-   [seqfeat.asn](#ch_datamod._ASN1_Specification_s_9)
 
--   [seqalign.asn](#ch-datamod.-ASN1-Specification-s-10)
+-   [seqalign.asn](#ch_datamod._ASN1_Specification_s_10)
 
--   [seqres.asn](#ch-datamod.-ASN1-Specification-s-11)
+-   [seqres.asn](#ch_datamod._ASN1_Specification_s_11)
 
-<a name="ch-datamod.-ASN1-Specification-g"></a>
+<a name="ch_datamod._ASN1_Specification_g"></a>
 
 ### ASN.1 Specification: general.asn
 
@@ -3184,7 +3184,7 @@ See also the [online-version](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lx
 
     END
 
-<a name="ch-datamod.-ASN1-Specification-b-1"></a>
+<a name="ch_datamod._ASN1_Specification_b_1"></a>
 
 ### ASN.1 Specification: biblio.asn
 
@@ -3437,7 +3437,7 @@ See also the [online-version](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lx
 
     END
 
-<a name="ch-datamod.-ASN1-Specification-p-2"></a>
+<a name="ch_datamod._ASN1_Specification_p_2"></a>
 
 ### ASN.1 Specification: pub.asn
 
@@ -3491,7 +3491,7 @@ See also the [online-version](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lx
 
     END
 
-<a name="ch-datamod.-ASN1-Specification-m-3"></a>
+<a name="ch_datamod._ASN1_Specification_m_3"></a>
 
 ### ASN.1 Specification: medline.asn
 
@@ -3587,7 +3587,7 @@ See also the [online-version](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lx
 
     END
 
-<a name="ch-datamod.-ASN1-Specification-s-4"></a>
+<a name="ch_datamod._ASN1_Specification_s_4"></a>
 
 ### ASN.1 Specification: seq.asn
 
@@ -4052,7 +4052,7 @@ See also the [online-version](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lx
 
     END
 
-<a name="ch-datamod.-ASN1-Specification-s-5"></a>
+<a name="ch_datamod._ASN1_Specification_s_5"></a>
 
 ### ASN.1 Specification: seqblock.asn
 
@@ -4290,7 +4290,7 @@ See also the [online-version](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lx
 
     END
 
-<a name="ch-datamod.-ASN1-Specification-s-6"></a>
+<a name="ch_datamod._ASN1_Specification_s_6"></a>
 
 ### ASN.1 Specification: seqcode.asn
 
@@ -4362,7 +4362,7 @@ See also the [online-version](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lx
 
     END
 
-<a name="ch-datamod.-ASN1-Specification-s-7"></a>
+<a name="ch_datamod._ASN1_Specification_s_7"></a>
 
 ### ASN.1 Specification: seqset.asn
 
@@ -4430,7 +4430,7 @@ See also the [online-version](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lx
 
     END
 
-<a name="ch-datamod.-ASN1-Specification-s-8"></a>
+<a name="ch_datamod._ASN1_Specification_s_8"></a>
 
 ### ASN.1 Specification: seqloc.asn
 
@@ -4564,7 +4564,7 @@ See also the [online-version](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lx
 
     END
 
-<a name="ch-datamod.-ASN1-Specification-s-9"></a>
+<a name="ch_datamod._ASN1_Specification_s_9"></a>
 
 ### ASN.1 Specification: seqfeat.asn
 
@@ -5697,7 +5697,7 @@ See also the [online-version](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lx
 
     END
 
-<a name="ch-datamod.-ASN1-Specification-s-10"></a>
+<a name="ch_datamod._ASN1_Specification_s_10"></a>
 
 ### ASN.1 Specification: seqalign.asn
 
@@ -5999,7 +5999,7 @@ See also the [online-version](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lx
 
     END
 
-<a name="ch-datamod.-ASN1-Specification-s-11"></a>
+<a name="ch_datamod._ASN1_Specification_s_11"></a>
 
 ### ASN.1 Specification: seqres.asn
 

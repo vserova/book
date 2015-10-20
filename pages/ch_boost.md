@@ -43,49 +43,49 @@ While the framework may be of interest to outside organizations, this chapter is
 
 The following is an outline of the topics presented in this chapter:
 
--   [Why Use the Boost Unit Test Framework?](#ch-boost.Why-Use-the-Boost-Un)
+-   [Why Use the Boost Unit Test Framework?](#ch_boost.Why_Use_the_Boost_Un)
 
--   [How to Use the Boost Unit Test Framework](#ch-boost.How-to-Use-the-Boost)
+-   [How to Use the Boost Unit Test Framework](#ch_boost.How_to_Use_the_Boost)
 
-    -   [Creating a New Unit Test](#ch-boost.Creating-a-New-Unit-)
+    -   [Creating a New Unit Test](#ch_boost.Creating_a_New_Unit_)
 
-    -   [Customizing an Existing Unit Test](#ch-boost.Customizing-an-Exist)
+    -   [Customizing an Existing Unit Test](#ch_boost.Customizing_an_Exist)
 
-        -   [Modifying the Makefile](#ch-boost.Modifying-the-Makefi)
+        -   [Modifying the Makefile](#ch_boost.Modifying_the_Makefi)
 
-        -   [Modifying the Source File](#ch-boost.Modifying-the-Source)
+        -   [Modifying the Source File](#ch_boost.Modifying_the_Source)
 
-            -   [Using Testing Tools](#ch-boost.Using-Testing-Tools)
+            -   [Using Testing Tools](#ch_boost.Using_Testing_Tools)
 
-            -   [Adding Initialization and/or Finalization](#ch-boost.Adding-Initializatio)
+            -   [Adding Initialization and/or Finalization](#ch_boost.Adding_Initializatio)
 
-            -   [Handling Timeouts](#ch-boost.Handling-Timeouts)
+            -   [Handling Timeouts](#ch_boost.Handling_Timeouts)
 
-            -   [Handling Command-Line Arguments in Test Cases](#ch-boost.Handling-CommandLine)
+            -   [Handling Command-Line Arguments in Test Cases](#ch_boost.Handling_CommandLine)
 
-            -   [Creating Test Suites](#ch-boost.Creating-Test-Suites)
+            -   [Creating Test Suites](#ch_boost.Creating_Test_Suites)
 
-            -   [Managing Dependencies](#ch-boost.Managing-Dependencie)
+            -   [Managing Dependencies](#ch_boost.Managing_Dependencie)
 
-            -   [Unit Tests with Multiple Files](#ch-boost.Unit-Tests-with-Mult)
+            -   [Unit Tests with Multiple Files](#ch_boost.Unit_Tests_with_Mult)
 
-        -   [Disabling Tests](#ch-boost.Disabling-Tests)
+        -   [Disabling Tests](#ch_boost.Disabling_Tests)
 
-            -   [Disabling Tests with Configuration File Entries](#ch-boost.-Disabling-Tests-with)
+            -   [Disabling Tests with Configuration File Entries](#ch_boost._Disabling_Tests_with)
 
-            -   [Library-Defined Variables](#ch-boost.LibraryDefined-Variables)
+            -   [Library-Defined Variables](#ch_boost.LibraryDefined_Variables)
 
-            -   [User-Defined Variables](#ch-boost.-Disabling-Tests-with-1)
+            -   [User-Defined Variables](#ch_boost._Disabling_Tests_with_1)
 
-            -   [Disabling or Skipping Tests Explicitly in Code](#ch-boost.Disabling-Tests-Expl)
+            -   [Disabling or Skipping Tests Explicitly in Code](#ch_boost.Disabling_Tests_Expl)
 
-    -   [Viewing Unit Tests Results from the Nightly Build](#ch-boost.Viewing-Unit-Tests-R)
+    -   [Viewing Unit Tests Results from the Nightly Build](#ch_boost.Viewing_Unit_Tests_R)
 
-    -   [Running Unit Tests from a Command-Line](#ch-boost.Running-Unit-Tests-f)
+    -   [Running Unit Tests from a Command-Line](#ch_boost.Running_Unit_Tests_f)
 
-    -   [Limitations Of The Boost Unit Test Framework](#ch-boost.Limitations-of-the-B)
+    -   [Limitations Of The Boost Unit Test Framework](#ch_boost.Limitations_of_the_B)
 
-<a name="ch-boost.Why-Use-the-Boost-Un"></a>
+<a name="ch_boost.Why_Use_the_Boost_Un"></a>
 
 Why Use the Boost Unit Test Framework?
 --------------------------------------
@@ -110,14 +110,14 @@ The value of unit testing is clearly recognized at the highest levels of managem
 
     -   All results are archived and available through a [web interface](http://intranet/ieb/ToolBox/STAT/test_stat/test_stat_ext.cgi).
 
-<a name="ch-boost.How-to-Use-the-Boost"></a>
+<a name="ch_boost.How_to_Use_the_Boost"></a>
 
 How to Use the Boost Unit Test Framework
 ----------------------------------------
 
 This chapter assumes you are starting from a working Toolkit source tree. If not, please refer to the chapters on [obtaining the source code](ch_getcode_svn.html), and [configuring and building the Toolkit](ch_config.html).
 
-<a name="ch-boost.Creating-a-New-Unit-"></a>
+<a name="ch_boost.Creating_a_New_Unit_"></a>
 
 ### Creating a New Unit Test
 
@@ -137,9 +137,9 @@ You can build and run these projects immediately to see how they work:
     make
     make check
 
-Once your unit test is created, you must [customize](#ch-boost.Customizing-an-Exist) it to meet your testing requirements. This involves editing these files:
+Once your unit test is created, you must [customize](#ch_boost.Customizing_an_Exist) it to meet your testing requirements. This involves editing these files:
 
-<a name="ch-boost.T3"></a>
+<a name="ch_boost.T3"></a>
 
 |-------------------------------------|-------------------------------------------------------------------------------------------------|
 | **File**                            | **Purpose**                                                                                     |
@@ -152,41 +152,41 @@ Once your unit test is created, you must [customize](#ch-boost.Customizing-an-Ex
 | `unit_test_alt_sample.cpp`          | Source code for the `unit_test_alt_sample` unit test.                                           |
 | `unit_test_alt_sample.ini`          | Configuration file for the `unit_test_alt_sample` unit test.                                    |
 
-<a name="ch-boost.Customizing-an-Exist"></a>
+<a name="ch_boost.Customizing_an_Exist"></a>
 
 ### Customizing an Existing Unit Test
 
 This section contains the following topics:
 
--   [Modifying the Makefile](#ch-boost.Modifying-the-Makefi)
+-   [Modifying the Makefile](#ch_boost.Modifying_the_Makefi)
 
--   [Modifying the Source File](#ch-boost.Modifying-the-Source)
+-   [Modifying the Source File](#ch_boost.Modifying_the_Source)
 
-    -   [Using Testing Tools](#ch-boost.Using-Testing-Tools)
+    -   [Using Testing Tools](#ch_boost.Using_Testing_Tools)
 
-    -   [Adding Initialization and/or Finalization](#ch-boost.Adding-Initializatio)
+    -   [Adding Initialization and/or Finalization](#ch_boost.Adding_Initializatio)
 
-    -   [Handling Timeouts](#ch-boost.Handling-Timeouts)
+    -   [Handling Timeouts](#ch_boost.Handling_Timeouts)
 
-    -   [Handling Command-Line Arguments in Test Cases](#ch-boost.Handling-CommandLine)
+    -   [Handling Command-Line Arguments in Test Cases](#ch_boost.Handling_CommandLine)
 
-    -   [Creating Test Suites](#ch-boost.Creating-Test-Suites)
+    -   [Creating Test Suites](#ch_boost.Creating_Test_Suites)
 
-    -   [Managing Dependencies](#ch-boost.Managing-Dependencie)
+    -   [Managing Dependencies](#ch_boost.Managing_Dependencie)
 
-    -   [Unit Tests with Multiple Files](#ch-boost.Unit-Tests-with-Mult)
+    -   [Unit Tests with Multiple Files](#ch_boost.Unit_Tests_with_Mult)
 
--   [Disabling Tests](#ch-boost.Disabling-Tests)
+-   [Disabling Tests](#ch_boost.Disabling_Tests)
 
-    -   [Disabling Tests with Configuration File Entries](#ch-boost.-Disabling-Tests-with)
+    -   [Disabling Tests with Configuration File Entries](#ch_boost._Disabling_Tests_with)
 
-    -   [Library-Defined Variables](#ch-boost.LibraryDefined-Variables)
+    -   [Library-Defined Variables](#ch_boost.LibraryDefined_Variables)
 
-    -   [User-Defined Variables](#ch-boost.-Disabling-Tests-with-1)
+    -   [User-Defined Variables](#ch_boost._Disabling_Tests_with_1)
 
-    -   [Disabling or Skipping Tests Explicitly in Code](#ch-boost.Disabling-Tests-Expl)
+    -   [Disabling or Skipping Tests Explicitly in Code](#ch_boost.Disabling_Tests_Expl)
 
-<a name="ch-boost.Modifying-the-Makefi"></a>
+<a name="ch_boost.Modifying_the_Makefi"></a>
 
 #### Modifying the Makefile
 
@@ -202,43 +202,43 @@ If you are using the `new_project` script (recommended), this setting is include
 
 ***Note:*** Please also see the "[Defining and running tests](ch_proj.html#ch_proj.inside_tests)" section for unit test makefile information that isn't specific to Boost.
 
-<a name="ch-boost.Modifying-the-Source"></a>
+<a name="ch_boost.Modifying_the_Source"></a>
 
 #### Modifying the Source File
 
-A unit test is simply a test of a unit of code, such as a class. Because each unit has many requirements, each unit test has many test cases. Your unit test code should therefore consist of a test case for each testable requirement. Each test case should be as small and independent of other test cases as possible. For information on how to handle dependencies between test cases, see the section on [managing dependencies](#ch-boost.Managing-Dependencie).
+A unit test is simply a test of a unit of code, such as a class. Because each unit has many requirements, each unit test has many test cases. Your unit test code should therefore consist of a test case for each testable requirement. Each test case should be as small and independent of other test cases as possible. For information on how to handle dependencies between test cases, see the section on [managing dependencies](#ch_boost.Managing_Dependencie).
 
-Starting with an existing unit test source file, simply add, change, or remove test cases as appropriate for your unit test. Test cases are defined by the **`BOOST_AUTO_TEST_CASE`** macro, which looks similar to a function. The macro has a single argument (the test case name) and a block of code that implements the test. Test case names must be unique at each level of the test suite hierarchy (see [managing dependencies](#ch-boost.Managing-Dependencie)). Test cases should contain code that will succeed if the requirement under test is correctly implemented, and fail otherwise. Determination of success is made using Boost [testing tools](#ch-boost.Using-Testing-Tools) such as **`BOOST_REQUIRE`** and **`BOOST_CHECK`**.
+Starting with an existing unit test source file, simply add, change, or remove test cases as appropriate for your unit test. Test cases are defined by the **`BOOST_AUTO_TEST_CASE`** macro, which looks similar to a function. The macro has a single argument (the test case name) and a block of code that implements the test. Test case names must be unique at each level of the test suite hierarchy (see [managing dependencies](#ch_boost.Managing_Dependencie)). Test cases should contain code that will succeed if the requirement under test is correctly implemented, and fail otherwise. Determination of success is made using Boost [testing tools](#ch_boost.Using_Testing_Tools) such as **`BOOST_REQUIRE`** and **`BOOST_CHECK`**.
 
 The following sections discuss modifying the source file in more detail:
 
--   [Using Testing Tools](#ch-boost.Using-Testing-Tools)
+-   [Using Testing Tools](#ch_boost.Using_Testing_Tools)
 
--   [Adding Initialization and/or Finalization](#ch-boost.Adding-Initializatio)
+-   [Adding Initialization and/or Finalization](#ch_boost.Adding_Initializatio)
 
--   [Handling Timeouts](#ch-boost.Handling-Timeouts)
+-   [Handling Timeouts](#ch_boost.Handling_Timeouts)
 
--   [Handling Command-Line Arguments in Test Cases](#ch-boost.Handling-CommandLine)
+-   [Handling Command-Line Arguments in Test Cases](#ch_boost.Handling_CommandLine)
 
--   [Creating Test Suites](#ch-boost.Creating-Test-Suites)
+-   [Creating Test Suites](#ch_boost.Creating_Test_Suites)
 
--   [Managing Dependencies](#ch-boost.Managing-Dependencie)
+-   [Managing Dependencies](#ch_boost.Managing_Dependencie)
 
--   [Unit Tests with Multiple Files](#ch-boost.Unit-Tests-with-Mult)
+-   [Unit Tests with Multiple Files](#ch_boost.Unit_Tests_with_Mult)
 
-<a name="ch-boost.Using-Testing-Tools"></a>
+<a name="ch_boost.Using_Testing_Tools"></a>
 
 ##### Using Testing Tools
 
 Testing tools are macros that are used to detect errors and determine whether a given test case passes or fails.
 
-While at a basic level test cases can pass or fail, it is useful to distinguish between those failures that make subsequent testing pointless or impossible and those that don’t. Therefore, there are two levels of testing: **`CHECK`** (which upon failure generates an error but allows subsequent testing to continue), and **`REQUIRE`** (which upon failure generates a fatal error and aborts the current test case). In addition, there is a warning level, **`WARN`**, that can report something of interest without generating an error, although by default you will have to [set a command-line argument](#ch-boost.Running-Unit-Tests-f) to see warning messages.
+While at a basic level test cases can pass or fail, it is useful to distinguish between those failures that make subsequent testing pointless or impossible and those that don’t. Therefore, there are two levels of testing: **`CHECK`** (which upon failure generates an error but allows subsequent testing to continue), and **`REQUIRE`** (which upon failure generates a fatal error and aborts the current test case). In addition, there is a warning level, **`WARN`**, that can report something of interest without generating an error, although by default you will have to [set a command-line argument](#ch_boost.Running_Unit_Tests_f) to see warning messages.
 
-If the failure of one test case should result in skipping another then you should [add a dependency](#ch-boost.Managing-Dependencie) between them.
+If the failure of one test case should result in skipping another then you should [add a dependency](#ch_boost.Managing_Dependencie) between them.
 
 Many Boost testing tools have variants for each error level. The most common Boost testing tools are:
 
-<a name="ch-boost.T4"></a>
+<a name="ch_boost.T4"></a>
 
 |--------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
 | **Testing Tool**                                 | **Purpose**                                                                                                 |
@@ -253,7 +253,7 @@ See the Boost testing tools [reference page](http://www.boost.org/doc/libs/1_53_
 
 The NCBI extensions to the Boost library add a number of convenience testing tools that enclose the similarly-named Boost testing tools in a **`NO_THROW`** test:
 
-<a name="ch-boost.T5"></a>
+<a name="ch_boost.T5"></a>
 
 |----------------------------------------|-------------------------------------------|
 | **Boost Testing Tool**                 | **NCBI "NO\_THROW " Extension**           |
@@ -264,7 +264,7 @@ The NCBI extensions to the Boost library add a number of convenience testing too
 
 ***Note:*** Testing tools are only supported within the context of test cases. That is, within functions defined by the **`BOOST_AUTO_TEST_CASE`** macro and within functions called by a test case. They are not supported in functions defined by the **`NCBITEST_*`** macros.
 
-<a name="ch-boost.Adding-Initializatio"></a>
+<a name="ch_boost.Adding_Initializatio"></a>
 
 ##### Adding Initialization and/or Finalization
 
@@ -280,7 +280,7 @@ If your unit test requires initialization prior to executing test cases, or if f
         // Your finalization code here...
     }
 
-<a name="ch-boost.Handling-Timeouts"></a>
+<a name="ch_boost.Handling_Timeouts"></a>
 
 ##### Handling Timeouts
 
@@ -293,7 +293,7 @@ If exceeding a maximum execution time constitutes a failure for your test case, 
         // Your test code here...
     }
 
-<a name="ch-boost.Handling-CommandLine"></a>
+<a name="ch_boost.Handling_CommandLine"></a>
 
 ##### Handling Command-Line Arguments in Test Cases
 
@@ -320,7 +320,7 @@ Next, add code like the following to access the argument from within a test case
 
 Adding your own command-line arguments will not affect the application’s ability to process other command-line arguments such as `-help` or `-dryrun`.
 
-<a name="ch-boost.Creating-Test-Suites"></a>
+<a name="ch_boost.Creating_Test_Suites"></a>
 
 ##### Creating Test Suites
 
@@ -342,7 +342,7 @@ Test suites are simply groups of test cases. The test cases included in a test s
 
 Note that the beginning test suite declaration defines the test suite name and does not include a semicolon.
 
-<a name="ch-boost.Managing-Dependencie"></a>
+<a name="ch_boost.Managing_Dependencie"></a>
 
 ##### Managing Dependencies
 
@@ -362,31 +362,31 @@ Test cases and suites can be dependent on other test cases or suites. This is us
 
 When an independent test item (case or suite) fails, all of the test items that depend on it will be skipped.
 
-<a name="ch-boost.Unit-Tests-with-Mult"></a>
+<a name="ch_boost.Unit_Tests_with_Mult"></a>
 
 ##### Unit Tests with Multiple Files
 
 The [new\_project](ch_proj.html#ch_proj.new_project_Starting) script is designed to create single-file unit tests by default, but you can add as many files as necessary to implement your unit test. Use of the **`BOOST_AUTO_TEST_MAIN`** macro is now deprecated.
 
-<a name="ch-boost.Disabling-Tests"></a>
+<a name="ch_boost.Disabling_Tests"></a>
 
 #### Disabling Tests
 
-The Boost Unit Test Framework was extended by NCBI to provide several ways to disable test cases and suites. Test cases and suites are disabled based on logical expressions in the application configuration file or, less commonly, by explicitly disabling or skipping them. The logical expressions are based on unit test variables which are defined either by the library or by the user. All such variables are essentially Boolean in that they are either defined (**`true`**) or not defined (**`false`**). ***Note:*** these methods of disabling tests don't apply if specific tests are [run from the command-line](#ch-boost.Running-Unit-Tests-f).
+The Boost Unit Test Framework was extended by NCBI to provide several ways to disable test cases and suites. Test cases and suites are disabled based on logical expressions in the application configuration file or, less commonly, by explicitly disabling or skipping them. The logical expressions are based on unit test variables which are defined either by the library or by the user. All such variables are essentially Boolean in that they are either defined (**`true`**) or not defined (**`false`**). ***Note:*** these methods of disabling tests don't apply if specific tests are [run from the command-line](#ch_boost.Running_Unit_Tests_f).
 
--   [Disabling Tests with Configuration File Entries](#ch-boost.-Disabling-Tests-with)
+-   [Disabling Tests with Configuration File Entries](#ch_boost._Disabling_Tests_with)
 
--   [Library-Defined Variables](#ch-boost.LibraryDefined-Variables)
+-   [Library-Defined Variables](#ch_boost.LibraryDefined_Variables)
 
--   [User-Defined Variables](#ch-boost.-Disabling-Tests-with-1)
+-   [User-Defined Variables](#ch_boost._Disabling_Tests_with_1)
 
--   [Disabling or Skipping Tests Explicitly in Code](#ch-boost.Disabling-Tests-Expl)
+-   [Disabling or Skipping Tests Explicitly in Code](#ch_boost.Disabling_Tests_Expl)
 
-<a name="ch-boost.-Disabling-Tests-with"></a>
+<a name="ch_boost._Disabling_Tests_with"></a>
 
 ##### Disabling Tests with Configuration File Entries
 
-The **`[UNITTESTS_DISABLE]`** section of the application configuration file can be customized to disable test cases or suites. Entries in this section should specify a test case or suite name and a logical expression for disabling it (expressions that evaluate to **`true`** disable the test). The logical expression can be formed from the logical constants **`true`** and **`false`**, numeric constants, [library-defined](#ch-boost.LibraryDefined-Variables) or [user-defined](#ch-boost.-Disabling-Tests-with-1) unit test variables, logical operators ('`!`', '`&&`', and '`||`'), and parentheses.
+The **`[UNITTESTS_DISABLE]`** section of the application configuration file can be customized to disable test cases or suites. Entries in this section should specify a test case or suite name and a logical expression for disabling it (expressions that evaluate to **`true`** disable the test). The logical expression can be formed from the logical constants **`true`** and **`false`**, numeric constants, [library-defined](#ch_boost.LibraryDefined_Variables) or [user-defined](#ch_boost._Disabling_Tests_with_1) unit test variables, logical operators ('`!`', '`&&`', and '`||`'), and parentheses.
 
 To disable specific tests, use commands like:
 
@@ -401,13 +401,13 @@ There is a special entry `GLOBAL` that can be used to disable all tests. For exa
 
 ***Note***: If the configuration file contains either a test name or a variable name that has not been defined (e.g. due to a typo) then the test program will exit immediately with an error, without executing any tests.
 
-<a name="ch-boost.LibraryDefined-Variables"></a>
+<a name="ch_boost.LibraryDefined_Variables"></a>
 
 ##### Library-Defined Variables
 
-When the NCBI-extended Boost Test library is built, it defines a set of unit test variables based on the build, compiler, operating system, and platform. See [Table 1](#ch-boost.IT1) for a list of related variables ([test\_boost.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib/test_boost.cpp) has the latest [list of variables](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=x_InitCommonParserVars&d=)).
+When the NCBI-extended Boost Test library is built, it defines a set of unit test variables based on the build, compiler, operating system, and platform. See [Table 1](#ch_boost.IT1) for a list of related variables ([test\_boost.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib/test_boost.cpp) has the latest [list of variables](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=x_InitCommonParserVars&d=)).
 
-<a name="ch-boost.IT1"></a>
+<a name="ch_boost.IT1"></a>
 
 Table 1. Build Generated Predefined Variables
 
@@ -425,9 +425,9 @@ Table 1. Build Generated Predefined Variables
 |  |  | `OS_Unix`           |     |
 |  |  | `OS_Windows`        |     |
 
-At run-time, the library also checks the `FEATURES` environment variable and creates unit test variables based on the current set of features. See [Table 2](#ch-boost.IT2) for a list of feature, package, and project related variables ([test\_boost.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib/test_boost.cpp) has the latest [list of features](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=s_NcbiFeatures&d=)).
+At run-time, the library also checks the `FEATURES` environment variable and creates unit test variables based on the current set of features. See [Table 2](#ch_boost.IT2) for a list of feature, package, and project related variables ([test\_boost.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib/test_boost.cpp) has the latest [list of features](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=s_NcbiFeatures&d=)).
 
-<a name="ch-boost.IT2"></a>
+<a name="ch_boost.IT2"></a>
 
 Table 2. Check Script Generated Predefined Variables
 
@@ -509,7 +509,7 @@ The automated nightly test suite defines the `FEATURES` environment variable bef
     [UNITTESTS_DISABLE]
     SomeTestCaseName = !FEATURE_in_house_resources
 
-<a name="ch-boost.-Disabling-Tests-with-1"></a>
+<a name="ch_boost._Disabling_Tests_with_1"></a>
 
 ##### User-Defined Variables
 
@@ -525,7 +525,7 @@ Then add a line to the configuration file to disable a test based on the value o
     [UNITTESTS_DISABLE]
     MyTestName = my_ini_var
 
-User-defined variables can be used in conjunction with [command-line arguments](#ch-boost.Handling-CommandLine):
+User-defined variables can be used in conjunction with [command-line arguments](#ch_boost.Handling_CommandLine):
 
     NCBITEST_INIT_VARIABLES(parser)
     {
@@ -538,7 +538,7 @@ Then, passing the argument on the command-line controls the disabling of the tes
     ./foo my_arg # test is disabled 
     ./foo        # test is not disabled (at least via command-line / config file)
 
-<a name="ch-boost.Disabling-Tests-Expl"></a>
+<a name="ch_boost.Disabling_Tests_Expl"></a>
 
 ##### Disabling or Skipping Tests Explicitly in Code
 
@@ -561,37 +561,37 @@ The extensions also include two functions for globally disabling or skipping all
 
 The difference between these functions is that globally disabled unit tests will report the status **`DIS`** to check scripts while skipped tests will report the status **`SKP`**.
 
-<a name="ch-boost.Viewing-Unit-Tests-R"></a>
+<a name="ch_boost.Viewing_Unit_Tests_R"></a>
 
 ### Viewing Unit Tests Results from the Nightly Build
 
 The Boost Unit Test Framework provides more than just command-line testing. Each unit test built with the framework becomes incorporated into nightly testing and is tested on multiple platforms and under numerous configurations. All such results are archived in the database and available through a [web interface](http://intranet/ieb/ToolBox/STAT/test_stat/test_stat_ext.cgi).
 
-The main page (see [Figure 1](#ch-boost.F20.1)) provides many ways to narrow down the vast quantity of statistics available. The top part of the page allows you to select test date, test result, build configuration (branch, compiler, operating system, etc), debug/release, and more. The page also has a column for selecting tests, and a column for configurations. For best results, refine the selection as much as possible, and then click on the “See test statistics” button.
+The main page (see [Figure 1](#ch_boost.F20.1)) provides many ways to narrow down the vast quantity of statistics available. The top part of the page allows you to select test date, test result, build configuration (branch, compiler, operating system, etc), debug/release, and more. The page also has a column for selecting tests, and a column for configurations. For best results, refine the selection as much as possible, and then click on the “See test statistics” button.
 
-<a name="ch-boost.F20.1"></a>
+<a name="ch_boost.F20.1"></a>
 
 [![Figure 1. Test Interface](/book/static/img/TestInterface.png)](/book/static/img/TestInterface.png "Click to see the full-resolution image")
 
 Figure 1. Test Interface
 
-The “See test statistics” button retrieves the desired statistics in a second page (see [Figure 2](#ch-boost.F20.2)). The results are presented in tables: one for each selected date, with unit tests down the left side and configurations across the top. Further refinements of the displayed results can be made by removing rows, columns, or dates; and by selecting whether all columns, all cells, or only selected cells are displayed.
+The “See test statistics” button retrieves the desired statistics in a second page (see [Figure 2](#ch_boost.F20.2)). The results are presented in tables: one for each selected date, with unit tests down the left side and configurations across the top. Further refinements of the displayed results can be made by removing rows, columns, or dates; and by selecting whether all columns, all cells, or only selected cells are displayed.
 
-<a name="ch-boost.F20.2"></a>
+<a name="ch_boost.F20.2"></a>
 
 [![Figure 2. Test Matrix](/book/static/img/TestMatrix.png)](/book/static/img/TestMatrix.png "Click to see the full-resolution image")
 
 Figure 2. Test Matrix
 
-Each cell in the results tables represents a specific unit test performed on a specific date under a specific configuration. Clicking on a cell retrieves a third page (see [Figure 3](#ch-boost.F20.3)) that shows information about that test and its output.
+Each cell in the results tables represents a specific unit test performed on a specific date under a specific configuration. Clicking on a cell retrieves a third page (see [Figure 3](#ch_boost.F20.3)) that shows information about that test and its output.
 
-<a name="ch-boost.F20.3"></a>
+<a name="ch_boost.F20.3"></a>
 
 [![Figure 3. Test Result](/book/static/img/TestResult.png)](/book/static/img/TestResult.png "Click to see the full-resolution image")
 
 Figure 3. Test Result
 
-<a name="ch-boost.Running-Unit-Tests-f"></a>
+<a name="ch_boost.Running_Unit_Tests_f"></a>
 
 ### Running Unit Tests from a Command-Line
 
@@ -615,7 +615,7 @@ To see warning messages, use this:
 
 Additional runtime parameters can be set. For a complete list, see the online [documentation](http://www.boost.org/doc/libs/1_53_0/libs/test/doc/html/utf/user-guide/runtime-config/reference.html).
 
-<a name="ch-boost.Limitations-of-the-B"></a>
+<a name="ch_boost.Limitations_of_the_B"></a>
 
 ### Limitations of the Boost Unit Test Framework
 

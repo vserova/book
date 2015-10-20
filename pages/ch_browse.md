@@ -19,17 +19,17 @@ The overview for this chapter consists of the following topics:
 
 ### Introduction
 
-The NCBI C++ Toolkit source code is highly browseable and can be searched in a variety of useful ways. To that end we provide two source browsers, one based on the [LXR Engine](#ch-browse.lxr) and another based on [Doxygen](#ch-browse.doxygen). These are complementary approaches that allow the Toolkit source to be searched and navigated according to its file hierarchy and present an alphabetical list of all classes, macros, variables, typedefs, etc. named in the Toolkit, as well as a summary of the parent-child relationships among the classes.
+The NCBI C++ Toolkit source code is highly browseable and can be searched in a variety of useful ways. To that end we provide two source browsers, one based on the [LXR Engine](#ch_browse.lxr) and another based on [Doxygen](#ch_browse.doxygen). These are complementary approaches that allow the Toolkit source to be searched and navigated according to its file hierarchy and present an alphabetical list of all classes, macros, variables, typedefs, etc. named in the Toolkit, as well as a summary of the parent-child relationships among the classes.
 
 ### Chapter Outline
 
 The following is an outline of the topics presented in this chapter:
 
--   [LXR](#ch-browse.lxr)
+-   [LXR](#ch_browse.lxr)
 
--   [Doxygen Browser](#ch-browse.doxygen)
+-   [Doxygen Browser](#ch_browse.doxygen)
 
-<a name="ch-browse.lxr"></a>
+<a name="ch_browse.lxr"></a>
 
 LXR
 ---
@@ -48,7 +48,7 @@ Some hints for using LXR:
 
 -   ***Note***: The documentation itself is not searched by LXR.
 
-<a name="ch-browse.doxygen"></a>
+<a name="ch_browse.doxygen"></a>
 
 Doxygen Browser
 ---------------

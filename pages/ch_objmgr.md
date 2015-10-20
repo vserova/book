@@ -19,73 +19,73 @@ Overview
 
 The `Object Manager` is a library, working in conjunction with the serializable object classes [(see above)](ch_ser.html) to facilitate access to biological sequence data. The `Object Manager` has been designed to coordinate the use of these objects, particularly the management of the details of loading data from one or more potentially heterogeneous data sources. The goal is to present a consistent, flexible interface to users that minimizes their exposure to the details of interacting with biological databases and their underlying data structures.
 
-Most of the major classes in this library have a short [definition](#ch-objmgr.om-def.html) in addition to the descriptions and links below. Handles are the primary mechanism through which users access data; details of the retrieval are managed transparently by the `Object Manager`.
+Most of the major classes in this library have a short [definition](#ch_objmgr.om_def.html) in addition to the descriptions and links below. Handles are the primary mechanism through which users access data; details of the retrieval are managed transparently by the `Object Manager`.
 
-See the [usage page](#ch-objmgr.om-faq.html) to begin working with the Object Manager. An [example](#ch-objmgr.om-tasks.html) and [sample project](#ch-objmgr.om-start.html) have been created to further assist new users and serve as a template for new projects. We have also compiled a [list of common problems](#ch-objmgr.om-problems.html) encountered when using the `Object Manager`.
+See the [usage page](#ch_objmgr.om_faq.html) to begin working with the Object Manager. An [example](#ch_objmgr.om_tasks.html) and [sample project](#ch_objmgr.om_start.html) have been created to further assist new users and serve as a template for new projects. We have also compiled a [list of common problems](#ch_objmgr.om_problems.html) encountered when using the `Object Manager`.
 
 Object Manager [[include/objmgr](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr) \| [src/objmgr](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr)]
 
--   [Top-Level Object Manager Classes](#ch-objmgr.om-def.html)
+-   [Top-Level Object Manager Classes](#ch_objmgr.om_def.html)
 
-    -   [CObjectManager Class](#ch-objmgr.om-attrib.html-Object-manager): Manage Serializable Data Objects object\_manager[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/object_manager.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/object_manager.cpp)]
+    -   [CObjectManager Class](#ch_objmgr.om_attrib.html_Object_manager): Manage Serializable Data Objects object\_manager[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/object_manager.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/object_manager.cpp)]
 
-    -   [Scope Definition for Bio-Sequence Data](#ch-objmgr.om-attrib.html-Scope) scope[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/scope.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/scope.cpp)]
+    -   [Scope Definition for Bio-Sequence Data](#ch_objmgr.om_attrib.html_Scope) scope[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/scope.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/scope.cpp)]
 
-    -   [Data loader](#ch-objmgr.om-attrib.html-Data-loader) Base Class data\_loader[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/data_loader.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/data_loader.cpp)]
+    -   [Data loader](#ch_objmgr.om_attrib.html_Data_loader) Base Class data\_loader[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/data_loader.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/data_loader.cpp)]
 
 -   Handles
 
     -   Seq\_id Handle (now located outside of the Object Manager) seq\_id\_handle[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/seq/seq_id_handle.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seq/seq_id_handle.cpp)]
 
-    -   [Bioseq handle](#ch-objmgr.om-attrib.html-Bioseq-handle) bioseq\_handle[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/bioseq_handle.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/bioseq_handle.cpp)]
+    -   [Bioseq handle](#ch_objmgr.om_attrib.html_Bioseq_handle) bioseq\_handle[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/bioseq_handle.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/bioseq_handle.cpp)]
 
-    -   [Bioseq-set handle](#ch-objmgr.om-attrib.Bioseq-set-handle) bioseq\_set\_handle[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/bioseq_set_handle.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/bioseq_set_handle.cpp)]
+    -   [Bioseq-set handle](#ch_objmgr.om_attrib.Bioseq_set_handle) bioseq\_set\_handle[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/bioseq_set_handle.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/bioseq_set_handle.cpp)]
 
-    -   [Seq-entry handle](#ch-objmgr.om-attrib.Seq-entry-handle) seq\_entry\_handle[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seq_entry_handle.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seq_entry_handle.cpp)]
+    -   [Seq-entry handle](#ch_objmgr.om_attrib.Seq_entry_handle) seq\_entry\_handle[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seq_entry_handle.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seq_entry_handle.cpp)]
 
-    -   [Seq-annot handle](#ch-objmgr.om-attrib.Seq-annot-handle) seq\_annot\_handle[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seq_annot_handle.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seq_annot_handle.cpp)]
+    -   [Seq-annot handle](#ch_objmgr.om_attrib.Seq_annot_handle) seq\_annot\_handle[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seq_annot_handle.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seq_annot_handle.cpp)]
 
-    -   [Seq-feat handle](#ch-objmgr.om-attrib.html-Seq-feat-handle) seq\_feat\_handle[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seq_feat_handle.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seq_feat_handle.cpp)]
+    -   [Seq-feat handle](#ch_objmgr.om_attrib.html_Seq_feat_handle) seq\_feat\_handle[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seq_feat_handle.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seq_feat_handle.cpp)]
 
-    -   [Seq-align handle](#ch-objmgr.om-attrib.Seq-align-handle) seq\_align\_handle[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seq_align_handle.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seq_align_handle.cpp)]
+    -   [Seq-align handle](#ch_objmgr.om_attrib.Seq_align_handle) seq\_align\_handle[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seq_align_handle.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seq_align_handle.cpp)]
 
-    -   [Seq-graph handle](#ch-objmgr.om-attrib.Seq-graph-handle) seq\_graph\_handle[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seq_graph_handle.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seq_graph_handle.cpp)]
+    -   [Seq-graph handle](#ch_objmgr.om_attrib.Seq_graph_handle) seq\_graph\_handle[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seq_graph_handle.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seq_graph_handle.cpp)]
 
 -   Accessing Sequence Data
 
-    -   [Sequence Map](#ch-objmgr.om-attrib.html-Seq-map) seq\_map[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seq_map.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seq_map.cpp)]
+    -   [Sequence Map](#ch_objmgr.om_attrib.html_Seq_map) seq\_map[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seq_map.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seq_map.cpp)]
 
-    -   [Representation of/Random Access to the Letters of a Bioseq](#ch-objmgr.om-attrib.html-Seq-vector) seq\_vector[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seq_vector.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seq_vector.cpp)]
+    -   [Representation of/Random Access to the Letters of a Bioseq](#ch_objmgr.om_attrib.html_Seq_vector) seq\_vector[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seq_vector.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seq_vector.cpp)]
 
 -   Iterators
 
-    -   [Tree structure iterators](#ch-objmgr.Tree-structure-iterators)
+    -   [Tree structure iterators](#ch_objmgr.Tree_structure_iterators)
 
-        -   [Bioseq iterator](#ch-objmgr.om-attrib.html-Bioseq-iterator) bioseq\_ci[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/bioseq_ci.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/bioseq_ci.cpp)]
+        -   [Bioseq iterator](#ch_objmgr.om_attrib.html_Bioseq_iterator) bioseq\_ci[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/bioseq_ci.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/bioseq_ci.cpp)]
 
-        -   [Seq-entry iterator](#ch-objmgr.om-attrib.Seq-entry-iterator) seq\_entry\_ci[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seq_entry_ci.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seq_entry_ci.cpp)]
+        -   [Seq-entry iterator](#ch_objmgr.om_attrib.Seq_entry_iterator) seq\_entry\_ci[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seq_entry_ci.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seq_entry_ci.cpp)]
 
-    -   [Descriptor iterators](#ch-objmgr.Descriptor-iterators)
+    -   [Descriptor iterators](#ch_objmgr.Descriptor_iterators)
 
-        -   [Seq-descr iterator](#ch-objmgr.om-attrib.Seq-descr-iterator) seq\_descr\_ci[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seq_descr_ci.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seq_descr_ci.cpp)]
+        -   [Seq-descr iterator](#ch_objmgr.om_attrib.Seq_descr_iterator) seq\_descr\_ci[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seq_descr_ci.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seq_descr_ci.cpp)]
 
-        -   [Seqdesc iterator](#ch-objmgr.om-attrib.Seqdesc-iterator) seqdesc\_ci[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seqdesc_ci.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seqdesc_ci.cpp)]
+        -   [Seqdesc iterator](#ch_objmgr.om_attrib.Seqdesc_iterator) seqdesc\_ci[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seqdesc_ci.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seqdesc_ci.cpp)]
 
-    -   [Annotation iterators](#ch-objmgr.Annotation-iterators)
+    -   [Annotation iterators](#ch_objmgr.Annotation_iterators)
 
-        -   [Seq-annot iterator](#ch-objmgr.om-attrib.Seq-annot-iterator) seq\_annot\_ci[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seq_annot_ci.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seq_annot_ci.cpp)]
+        -   [Seq-annot iterator](#ch_objmgr.om_attrib.Seq_annot_iterator) seq\_annot\_ci[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seq_annot_ci.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seq_annot_ci.cpp)]
 
-        -   [Annotation iterator](#ch-objmgr.om-attrib.html-Annot-iterator) annot\_ci[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/annot_ci.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/annot_ci.cpp)]
+        -   [Annotation iterator](#ch_objmgr.om_attrib.html_Annot_iterator) annot\_ci[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/annot_ci.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/annot_ci.cpp)]
 
-        -   [Feature iterator](#ch-objmgr.om-attrib.Feature-iterator) feat\_ci[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/feat_ci.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/feat_ci.cpp)]
+        -   [Feature iterator](#ch_objmgr.om_attrib.Feature_iterator) feat\_ci[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/feat_ci.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/feat_ci.cpp)]
 
-        -   [Alignment iterator](#ch-objmgr.om-attrib.Alignment-iterator) align\_ci[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/align_ci.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/align_ci.cpp)]
+        -   [Alignment iterator](#ch_objmgr.om_attrib.Alignment_iterator) align\_ci[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/align_ci.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/align_ci.cpp)]
 
-        -   [Graph iterator](#ch-objmgr.om-attrib.html-Graph-iterator) graph\_ci[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/graph_ci.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/graph_ci.cpp)]
+        -   [Graph iterator](#ch_objmgr.om_attrib.html_Graph_iterator) graph\_ci[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/graph_ci.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/graph_ci.cpp)]
 
-    -   [Seq-map iterator](#ch-objmgr.om-attrib.Seq-map-iterator) seq\_map\_ci[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seq_map_ci.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seq_map_ci.cpp)]
+    -   [Seq-map iterator](#ch_objmgr.om_attrib.Seq_map_iterator) seq\_map\_ci[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seq_map_ci.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seq_map_ci.cpp)]
 
-    -   [Seq-vector iterator](#ch-objmgr.om-attrib.Seq-vector-iterator) seq\_vector\_ci[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seq_vector_ci.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seq_vector_ci.cpp)]
+    -   [Seq-vector iterator](#ch_objmgr.om_attrib.Seq_vector_iterator) seq\_vector\_ci[[.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seq_vector_ci.hpp) \| [.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seq_vector_ci.cpp)]
 
 **Demo Cases**
 
@@ -101,49 +101,49 @@ Object Manager [[include/objmgr](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC
 
 The following is an outline of the topics presented in this chapter:
 
--   [Preface](#ch-objmgr.om-preface.html)
+-   [Preface](#ch_objmgr.om_preface.html)
 
--   [Requirements](#ch-objmgr.om-requirements.html)
+-   [Requirements](#ch_objmgr.om_requirements.html)
 
--   [Use cases](#ch-objmgr.om-usecases.html)
+-   [Use cases](#ch_objmgr.om_usecases.html)
 
--   [Classes](#ch-objmgr.object-manager4)
+-   [Classes](#ch_objmgr.object_manager4)
 
-    -   [Definition](#ch-objmgr.om-def.html)
+    -   [Definition](#ch_objmgr.om_def.html)
 
-    -   [Attributes and operations](#ch-objmgr.om-attrib.html)
+    -   [Attributes and operations](#ch_objmgr.om_attrib.html)
 
--   [Request history and conflict resolution](#ch-objmgr.om-reqhist.html)
+-   [Request history and conflict resolution](#ch_objmgr.om_reqhist.html)
 
--   [GenBank data loader configuration](#ch-objmgr.GenBank-data-loader-)
+-   [GenBank data loader configuration](#ch_objmgr.GenBank_data_loader_)
 
--   [Use of Local Data Storage (LDS) by Object Manager](#ch-objmgr.Use-of-Local-Data-Storage-LDS)
+-   [Use of Local Data Storage (LDS) by Object Manager](#ch_objmgr.Use_of_Local_Data_Storage_LDS)
 
-    -   [Registering the LDS loader with the Object Manager](#ch-objmgr.Registering-the-LDS-loader-wit)
+    -   [Registering the LDS loader with the Object Manager](#ch_objmgr.Registering_the_LDS_loader_wit)
 
-    -   [Using both the LDS and GenBank loaders](#ch-objmgr.Using-both-the-LDS-and-GenBank)
+    -   [Using both the LDS and GenBank loaders](#ch_objmgr.Using_both_the_LDS_and_GenBank)
 
-    -   [Known gotchas](#ch-objmgr.Known-gotchas)
+    -   [Known gotchas](#ch_objmgr.Known_gotchas)
 
--   [Configuring NetCached to cache GenBank data](#ch-objmgr.Configuring-NetCache)
+-   [Configuring NetCached to cache GenBank data](#ch_objmgr.Configuring_NetCache)
 
--   [In-Memory Caching in the Object Manager and Data Loaders](#ch-objmgr.InMemory-Caching-in-the-Object)
+-   [In-Memory Caching in the Object Manager and Data Loaders](#ch_objmgr.InMemory_Caching_in_the_Object)
 
 -   Usage
 
-    -   [How to use it](#ch-objmgr.om-faq.html)
+    -   [How to use it](#ch_objmgr.om_faq.html)
 
     -   [Generic code example](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/objmgr/objmgr_sample.cpp)
 
--   [Educational exercises](#ch-objmgr.object-manager9)
+-   [Educational exercises](#ch_objmgr.object_manager9)
 
-    -   [Framework setup](#ch-objmgr.om-start.html)
+    -   [Framework setup](#ch_objmgr.om_start.html)
 
-    -   [Tasks description](#ch-objmgr.om-tasks.html)
+    -   [Tasks description](#ch_objmgr.om_tasks.html)
 
-    -   [Common problems](#ch-objmgr.om-problems.html)
+    -   [Common problems](#ch_objmgr.om_problems.html)
 
-<a name="ch-objmgr.om-preface.html"></a>
+<a name="ch_objmgr.om_preface.html"></a>
 
 Preface
 -------
@@ -154,7 +154,7 @@ In these circumstances the problem of storing, searching, retrieving and exchang
 
 The NCBI databases and software tools are designed around a particular model of biological sequence data. The nature of this data is not yet fully understood, and its fundamental properties and relationships are constantly being revised. So, the data model must be very flexible. NCBI uses [Abstract Syntax Notation One](http://asn1.elibel.tm.fr) (ASN.1) as a formal language to describe [biological sequence data and its associated information](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/INDEX.HTML).
 
-<a name="ch-objmgr.om-requirements.html"></a>
+<a name="ch_objmgr.om_requirements.html"></a>
 
 Requirements
 ------------
@@ -175,7 +175,7 @@ Biological sequences are identified by [Seq-id](http://www.ncbi.nlm.nih.gov/IEB/
 
 The system must support multithreading. It should be possible to work with bio sequence data from multiple threads.
 
-<a name="ch-objmgr.om-usecases.html"></a>
+<a name="ch_objmgr.om_usecases.html"></a>
 
 Use cases
 ---------
@@ -220,102 +220,102 @@ Multithreading. There are two scenarios:
 
 -   Different threads create their own scopes to work with the same data source. That is, the data source is a shared resource.
 
-<a name="ch-objmgr.object-manager4"></a>
+<a name="ch_objmgr.object_manager4"></a>
 
 Classes
 -------
 
-<a name="ch-objmgr.om-def.html"></a>
+<a name="ch_objmgr.om_def.html"></a>
 
 ### Definition
 
 Here we define Object Manager's key classes and their behavior:
 
--   [Object manager](#ch-objmgr.om-def.html-Object-manager)
+-   [Object manager](#ch_objmgr.om_def.html_Object_manager)
 
--   [Scope](#ch-objmgr.om-def.html-Scope)
+-   [Scope](#ch_objmgr.om_def.html_Scope)
 
--   [Data loader](#ch-objmgr.om-def.html-Data-loader)
+-   [Data loader](#ch_objmgr.om_def.html_Data_loader)
 
--   [Data source](#ch-objmgr.om-def.html-Data-source)
+-   [Data source](#ch_objmgr.om_def.html_Data_source)
 
--   [Handles](#ch-objmgr.om-def.html-Handles)
+-   [Handles](#ch_objmgr.om_def.html_Handles)
 
--   [Seq-map](#ch-objmgr.om-def.html-Seq-map)
+-   [Seq-map](#ch_objmgr.om_def.html_Seq_map)
 
--   [Seq-vector](#ch-objmgr.om-def.html-Seq-vector)
+-   [Seq-vector](#ch_objmgr.om_def.html_Seq_vector)
 
--   [Seq-annot](#ch-objmgr.Seqannot-1)
+-   [Seq-annot](#ch_objmgr.Seqannot_1)
 
--   [Iterators](#ch-objmgr.om-def.html-Iterators)
+-   [Iterators](#ch_objmgr.om_def.html_Iterators)
 
--   [CFeatTree](#ch-objmgr.CFeatTree)
+-   [CFeatTree](#ch_objmgr.CFeatTree)
 
-<a name="ch-objmgr.om-def.html-Object-manager"></a>
+<a name="ch_objmgr.om_def.html_Object_manager"></a>
 
 #### Object manager
 
 Object manager manages data objects, provides them to Scopes when needed. It knows all existing Data sources and Data loaders. When a Scope needs one, it receives a data object from the Object Manager. This enables sharing and reusing of all relevant data between different Scopes. Another function of the Object Manager is letting Scopes know each other, letting Scopes to communicate. This is a barely visible entity.
 
-<a name="ch-objmgr.om-def.html-Scope"></a>
+<a name="ch_objmgr.om_def.html_Scope"></a>
 
 #### Scope
 
 Scope is a top-level object available to a client. Its purpose is to define a scope of visibility and reference resolution and provide access to the bio sequence data.
 
-<a name="ch-objmgr.om-def.html-Data-loader"></a>
+<a name="ch_objmgr.om_def.html_Data_loader"></a>
 
 #### Data loader
 
 Data loader is a link between in-process data storage and remote, out-of process data source. Its purpose is to communicate with a remote data source, receive data from there, and understand what is already received and what is missing, and pass data to the local storage (Data source). Data loader maintains its own index of what data is loaded already and references that data in the Data source.
 
-<a name="ch-objmgr.om-def.html-Data-source"></a>
+<a name="ch_objmgr.om_def.html_Data_source"></a>
 
 #### Data source
 
 Data source stores bio sequence data locally. Scope communicates with this object to obtain any sequence data. Data source creates and maintains internal indices to facilitate information search. Data source may contain data of several top-level [Seq-entry](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/SEQSET.HTML)'s. In case client pushes an externally constructed Seq-entry object in the Scope, such object is stored in a separate Data source. In this case, Data source has only one top-level Seq-entry. From the other side, when Data source is linked to a Data loader, it will contain all top-level Seq-entry's retrieved by that loader.
 
-<a name="ch-objmgr.om-def.html-Handles"></a>
+<a name="ch_objmgr.om_def.html_Handles"></a>
 
 #### Handles
 
 Most objects received from the Object Manager are accessed through handles. One of the most important of them is Bioseq handle, a proxy for [CBioseq](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/BIOSEQ.HTML). Its purpose is to facilitate access to Bioseq data. When client wants to access particular biological sequence, it requests a Bioseq handle from the Scope. Another important class is Seq-id handle which is used in many places to optimize data indexing. Other handles used in the Object Manager are:
 
--   [Bioseq-set handle](#ch-objmgr.om-attrib.Bioseq-set-handle)
+-   [Bioseq-set handle](#ch_objmgr.om_attrib.Bioseq_set_handle)
 
--   [Seq-entry handle](#ch-objmgr.om-attrib.Seq-entry-handle)
+-   [Seq-entry handle](#ch_objmgr.om_attrib.Seq_entry_handle)
 
--   [Seq-annot handle](#ch-objmgr.om-attrib.Seq-annot-handle)
+-   [Seq-annot handle](#ch_objmgr.om_attrib.Seq_annot_handle)
 
--   [Seq-feat handle](#ch-objmgr.om-attrib.html-Seq-feat-handle)
+-   [Seq-feat handle](#ch_objmgr.om_attrib.html_Seq_feat_handle)
 
--   [Seq-align handle](#ch-objmgr.om-attrib.Seq-align-handle)
+-   [Seq-align handle](#ch_objmgr.om_attrib.Seq_align_handle)
 
--   [Seq-graph handle](#ch-objmgr.om-attrib.Seq-graph-handle)
+-   [Seq-graph handle](#ch_objmgr.om_attrib.Seq_graph_handle)
 
 Most handles have two versions: simple read-only handle and edit handle, which may be used to modify the data.
 
-<a name="ch-objmgr.om-def.html-Seq-map"></a>
+<a name="ch_objmgr.om_def.html_Seq_map"></a>
 
 #### Seq-map
 
-[Seq-map](#ch-objmgr.om-attrib.html-Seq-map) contains general information about the sequence structure: location of data, references gaps etc.
+[Seq-map](#ch_objmgr.om_attrib.html_Seq_map) contains general information about the sequence structure: location of data, references gaps etc.
 
-<a name="ch-objmgr.om-def.html-Seq-vector"></a>
+<a name="ch_objmgr.om_def.html_Seq_vector"></a>
 
 #### Seq-vector
 
-[Seq-vector](#ch-objmgr.om-attrib.html-Seq-vector) provides sequence data in the selected coding.
+[Seq-vector](#ch_objmgr.om_attrib.html_Seq_vector) provides sequence data in the selected coding.
 
-<a name="ch-objmgr.Seqannot-1"></a>
+<a name="ch_objmgr.Seqannot_1"></a>
 
 #### Seq-annot
 
-A [Seq-annot](#ch-objmgr.Seqannot-2) is a self-contained package of sequence annotations, or information that refers to specific locations on specific Bioseqs. It may contain a feature table, a set of sequence alignments, or a set of graphs of attributes along the sequence. A Bioseq may have many Seq-annot's.
+A [Seq-annot](#ch_objmgr.Seqannot_2) is a self-contained package of sequence annotations, or information that refers to specific locations on specific Bioseqs. It may contain a feature table, a set of sequence alignments, or a set of graphs of attributes along the sequence. A Bioseq may have many Seq-annot's.
 
 See the [Seq-annot section](ch_datamod.html#ch_datamod.Seqannot_Annotating_) in the [data model chapter](ch_datamod.html) for more information.
 
-<a name="ch-objmgr.om-def.html-Iterators"></a>
+<a name="ch_objmgr.om_def.html_Iterators"></a>
 
 #### Iterators
 
@@ -327,23 +327,23 @@ Many objects in the Object Manager can be enumerated using iterators. Some of th
 
 There are several annotation iterator classes; some specialized for particular annotation types:
 
--   [Seq-annot iterator](#ch-objmgr.om-attrib.Seq-annot-iterator) - traverses Seq-annot objects starting from a given Seq-entry/Bioseq up to the top-level Seq-entry (The same way as Descriptor iterators do) or down to each leaf Seq-entry.
+-   [Seq-annot iterator](#ch_objmgr.om_attrib.Seq_annot_iterator) - traverses Seq-annot objects starting from a given Seq-entry/Bioseq up to the top-level Seq-entry (The same way as Descriptor iterators do) or down to each leaf Seq-entry.
 
--   [Annot iterator](#ch-objmgr.om-attrib.html-Annot-iterator) -traverses Seq-annot objects ([Seq-annot](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/BIOSEQ.HTML)) rather than individual annotations.
+-   [Annot iterator](#ch_objmgr.om_attrib.html_Annot_iterator) -traverses Seq-annot objects ([Seq-annot](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/BIOSEQ.HTML)) rather than individual annotations.
 
--   [Feature iterator](#ch-objmgr.om-attrib.Feature-iterator) - traverses sequence features ([Seq-feat](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/SEQFEAT.HTML)).
+-   [Feature iterator](#ch_objmgr.om_attrib.Feature_iterator) - traverses sequence features ([Seq-feat](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/SEQFEAT.HTML)).
 
--   [Alignment iterator](#ch-objmgr.om-attrib.Alignment-iterator) - traverses sequence alignments descriptions ([Seq-align](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/SEQALIGN.HTML)).
+-   [Alignment iterator](#ch_objmgr.om_attrib.Alignment_iterator) - traverses sequence alignments descriptions ([Seq-align](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/SEQALIGN.HTML)).
 
--   [Graph iterator](#ch-objmgr.om-attrib.html-Graph-iterator) - traverses sequence graphs ([Seq-graph](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/SEQRES.HTML)).
+-   [Graph iterator](#ch_objmgr.om_attrib.html_Graph_iterator) - traverses sequence graphs ([Seq-graph](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/SEQRES.HTML)).
 
-**Tree iterators** include [Bioseq iterator](#ch-objmgr.om-attrib.html-Bioseq-iterator) and [Seq-entry iterator](#ch-objmgr.om-attrib.Seq-entry-iterator), which may be used to visit leafs and nodes of a Seq-entry tree.
+**Tree iterators** include [Bioseq iterator](#ch_objmgr.om_attrib.html_Bioseq_iterator) and [Seq-entry iterator](#ch_objmgr.om_attrib.Seq_entry_iterator), which may be used to visit leafs and nodes of a Seq-entry tree.
 
-[Seq-map iterator](#ch-objmgr.om-attrib.Seq-map-iterator) iterates over parts of a Bioseq. It is used mostly with segmented sequences to enumerate their segments and check their type without fetching complete sequence data.
+[Seq-map iterator](#ch_objmgr.om_attrib.Seq_map_iterator) iterates over parts of a Bioseq. It is used mostly with segmented sequences to enumerate their segments and check their type without fetching complete sequence data.
 
-[Seq-vector iterator](#ch-objmgr.om-attrib.Seq-vector-iterator) is used to access individual sequence characters in a selected coding.
+[Seq-vector iterator](#ch_objmgr.om_attrib.Seq_vector_iterator) is used to access individual sequence characters in a selected coding.
 
-<a name="ch-objmgr.CFeatTree"></a>
+<a name="ch_objmgr.CFeatTree"></a>
 
 #### CFeatTree
 
@@ -382,77 +382,77 @@ The ***CFeatTree*** class can also improve the performance of the ***feature::Ge
 
 ***Note:*** There are "old" and "new" ***GetBestXxxForYyy()*** functions. The "new" functions are in the `feature` namespace, are located in `include/objmgr/util/feature.hpp`, and should be used for new development, as they are more efficient. The "old" functions are in the `sequence` namespace and are located in `include/objmgr/util/sequence.hpp`.
 
-<a name="ch-objmgr.om-attrib.html"></a>
+<a name="ch_objmgr.om_attrib.html"></a>
 
 ### Attributes and Operations
 
--   [Object manager](#ch-objmgr.om-attrib.html-Object-manager)
+-   [Object manager](#ch_objmgr.om_attrib.html_Object_manager)
 
--   [Scope](#ch-objmgr.om-attrib.html-Scope)
+-   [Scope](#ch_objmgr.om_attrib.html_Scope)
 
--   [Data loader](#ch-objmgr.om-attrib.html-Data-loader)
+-   [Data loader](#ch_objmgr.om_attrib.html_Data_loader)
 
-    -   [Interaction with the Object Manager](#ch-objmgr.Interaction-with-the-Object--1)
+    -   [Interaction with the Object Manager](#ch_objmgr.Interaction_with_the_Object__1)
 
 -   Handles:
 
-    -   [Bioseq handle](#ch-objmgr.om-attrib.html-Bioseq-handle)
+    -   [Bioseq handle](#ch_objmgr.om_attrib.html_Bioseq_handle)
 
-    -   [Bioseq-set handle](#ch-objmgr.om-attrib.Bioseq-set-handle)
+    -   [Bioseq-set handle](#ch_objmgr.om_attrib.Bioseq_set_handle)
 
-    -   [Seq-entry handle](#ch-objmgr.om-attrib.Seq-entry-handle)
+    -   [Seq-entry handle](#ch_objmgr.om_attrib.Seq_entry_handle)
 
-    -   [Seq-annot handle](#ch-objmgr.om-attrib.Seq-annot-handle)
+    -   [Seq-annot handle](#ch_objmgr.om_attrib.Seq_annot_handle)
 
-    -   [Seq-feat handle](#ch-objmgr.om-attrib.html-Seq-feat-handle)
+    -   [Seq-feat handle](#ch_objmgr.om_attrib.html_Seq_feat_handle)
 
-    -   [Seq-align handle](#ch-objmgr.om-attrib.Seq-align-handle)
+    -   [Seq-align handle](#ch_objmgr.om_attrib.Seq_align_handle)
 
-    -   [Seq-graph handle](#ch-objmgr.om-attrib.Seq-graph-handle)
+    -   [Seq-graph handle](#ch_objmgr.om_attrib.Seq_graph_handle)
 
--   [Seq-map](#ch-objmgr.om-attrib.html-Seq-map)
+-   [Seq-map](#ch_objmgr.om_attrib.html_Seq_map)
 
--   [Seq-vector](#ch-objmgr.om-attrib.html-Seq-vector)
+-   [Seq-vector](#ch_objmgr.om_attrib.html_Seq_vector)
 
--   [Seq-annot](#ch-objmgr.Seqannot-2)
+-   [Seq-annot](#ch_objmgr.Seqannot_2)
 
-    -   [Interaction with the Object Manager](#ch-objmgr.Interaction-with-the-Object--2)
+    -   [Interaction with the Object Manager](#ch_objmgr.Interaction_with_the_Object__2)
 
 -   Iterators:
 
-    -   [Bioseq iterator](#ch-objmgr.om-attrib.html-Bioseq-iterator)
+    -   [Bioseq iterator](#ch_objmgr.om_attrib.html_Bioseq_iterator)
 
-    -   [Seq-entry iterator](#ch-objmgr.om-attrib.Seq-entry-iterator)
+    -   [Seq-entry iterator](#ch_objmgr.om_attrib.Seq_entry_iterator)
 
-    -   [Seq-descr iterator](#ch-objmgr.om-attrib.Seq-descr-iterator)
+    -   [Seq-descr iterator](#ch_objmgr.om_attrib.Seq_descr_iterator)
 
-    -   [Seqdesc iterator](#ch-objmgr.om-attrib.Seqdesc-iterator)
+    -   [Seqdesc iterator](#ch_objmgr.om_attrib.Seqdesc_iterator)
 
-    -   [Seq-annot iterator](#ch-objmgr.om-attrib.Seq-annot-iterator)
+    -   [Seq-annot iterator](#ch_objmgr.om_attrib.Seq_annot_iterator)
 
-    -   [Annot iterator](#ch-objmgr.om-attrib.html-Annot-iterator)
+    -   [Annot iterator](#ch_objmgr.om_attrib.html_Annot_iterator)
 
-    -   [Feature iterator](#ch-objmgr.om-attrib.Feature-iterator)
+    -   [Feature iterator](#ch_objmgr.om_attrib.Feature_iterator)
 
-    -   [Alignment iterator](#ch-objmgr.om-attrib.Alignment-iterator)
+    -   [Alignment iterator](#ch_objmgr.om_attrib.Alignment_iterator)
 
-    -   [Graph iterator](#ch-objmgr.om-attrib.html-Graph-iterator)
+    -   [Graph iterator](#ch_objmgr.om_attrib.html_Graph_iterator)
 
-    -   [Seq-map iterator](#ch-objmgr.om-attrib.Seq-map-iterator)
+    -   [Seq-map iterator](#ch_objmgr.om_attrib.Seq_map_iterator)
 
-    -   [Seq-vector iterator](#ch-objmgr.om-attrib.Seq-vector-iterator)
+    -   [Seq-vector iterator](#ch_objmgr.om_attrib.Seq_vector_iterator)
 
-<a name="ch-objmgr.om-attrib.html-Object-manager"></a>
+<a name="ch_objmgr.om_attrib.html_Object_manager"></a>
 
 #### Object manager
 
-Before being able to use any Scopes, a client must create and initialize the Object Manager ([CObjectManager](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CObjectManager)). Initialization functions include registration of [Data loaders](#ch-objmgr.om-attrib.html-Data-loader), some of which may be declared as default ones. All default Data loaders are added to a Scope when the latter asks for them. All Data loaders are named, so Scopes may refer to them by name. Another kind of data object is [CSeq\_entry](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_entry) - it does not require any data loader, but also may be registered with the Object Manager. Seq-entry may not be a default data object.
+Before being able to use any Scopes, a client must create and initialize the Object Manager ([CObjectManager](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CObjectManager)). Initialization functions include registration of [Data loaders](#ch_objmgr.om_attrib.html_Data_loader), some of which may be declared as default ones. All default Data loaders are added to a Scope when the latter asks for them. All Data loaders are named, so Scopes may refer to them by name. Another kind of data object is [CSeq\_entry](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_entry) - it does not require any data loader, but also may be registered with the Object Manager. Seq-entry may not be a default data object.
 
 ***CObjectManager*** is a multi-thread-safe singleton class, which means that only one instance of the class will be created, and it will be safely accessible from all threads. This object gets created in the first call to ***CObjectManager::GetInstance(void)*** and does not get destroyed until the program terminates (even if all references to it are destroyed), so all calls to ***GetInstance()*** will return the same object. Therefore you can either save the ***CRef*** returned by ***GetInstance()*** or call ***GetInstance()*** again for subsequent use.
 
 Most other ***CObjectManager*** methods are used to manage Data loaders.
 
-<a name="ch-objmgr.attrib-objmgr-object-methods"></a>
+<a name="ch_objmgr.attrib_objmgr_object_methods"></a>
 
 #### CObjectManager important methods
 
@@ -470,15 +470,15 @@ Most other ***CObjectManager*** methods are used to manage Data loaders.
 
 See the [CObjectManager API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectManager.html) for an up-to-date list of all methods.
 
-<a name="ch-objmgr.om-attrib.html-Scope"></a>
+<a name="ch_objmgr.om_attrib.html_Scope"></a>
 
 #### Scope
 
-The Scope class ([CScope](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CScope)) is designed to be a lightweight object, which could be easily created and destroyed. Scope may even be created on the stack - as an automatic object. Scope is populated with data by adding data loaders or already created Seq-entry's to it. [Data loaders](#ch-objmgr.om-attrib.html-Data-loader) can only be added by name, which means it must be registered with the Object Manager beforehand. Once an externally created Seq-entry is added to a Scope, it should not be modified any more.
+The Scope class ([CScope](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CScope)) is designed to be a lightweight object, which could be easily created and destroyed. Scope may even be created on the stack - as an automatic object. Scope is populated with data by adding data loaders or already created Seq-entry's to it. [Data loaders](#ch_objmgr.om_attrib.html_Data_loader) can only be added by name, which means it must be registered with the Object Manager beforehand. Once an externally created Seq-entry is added to a Scope, it should not be modified any more.
 
 The main task of a scope is to cache resolved data references. Any resolved data chunk will be locked by the scope through which it was fetched. For this reason retrieving a lot of unrelated data through the same scope may consume a lot of memory. To clean a scope's cache and release the memory you can use ***ResetHistory*** or just destroy the scope and create a new one. ***Note:*** When a scope is destroyed or cleaned any handles retrieved from the scope become invalid.
 
-<a name="ch-objmgr.attrib-scope-object-methods"></a>
+<a name="ch_objmgr.attrib_scope_object_methods"></a>
 
 #### CScope important methods
 
@@ -510,13 +510,13 @@ All data sources (data loaders and explicitly added data) have priorities. For e
 
 ***Note:*** the priority you've specified for a data loader at registration time (***RegisterInObjectManager()***) is a new default for it, and can be overridden when you add the data loader to a scope.
 
-<a name="ch-objmgr.om-attrib.html-Data-loader"></a>
+<a name="ch_objmgr.om_attrib.html_Data_loader"></a>
 
 #### Data loader
 
 The Data loader base class ([CDataLoader](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDataLoader)) is almost never used by a client application directly. The specific data loaders (like GenBank data loader) have several static methods which should be used to register loaders in the Object Manager. Each of ***RegisterInObjectManager*** methods constructs a loader name depending on the arguments, checks if a loader with this name is already registered, creates and registers the loader if necessary. ***GetLoaderNameFromArgs*** methods may be used to get a potential loader's name from a set of arguments. ***RegisterInObjectManager*** returns a simple structure with two methods: ***IsCreated***, indicating if the loader was just created or a registered loader with the same name was found, and ***GetLoader***, returning pointer to the loader. The pointer may be null if the ***RegisterInObjectManager*** function fails or if the type of the already registered loader can not be casted to the type requested.
 
-<a name="ch-objmgr.Interaction-with-the-Object--1"></a>
+<a name="ch_objmgr.Interaction_with_the_Object__1"></a>
 
 ##### Interaction with the Object Manager
 
@@ -524,7 +524,7 @@ By default, the Object Manager will use registered data loaders to fetch basic i
 
 If the Object Manager finds a difference between a Seq-entry loaded by a data loader and an in-memory Seq-entry (having the same Seq-id) loaded with ***AddTopLevelSeqEntry()***, the in-memory data will be used instead of the data from the data loader.
 
-<a name="ch-objmgr.om-attrib.html-Bioseq-handle"></a>
+<a name="ch_objmgr.om_attrib.html_Bioseq_handle"></a>
 
 #### Bioseq handle
 
@@ -532,7 +532,7 @@ When a client wants to access a Bioseq data, it asks the Scope for a Bioseq hand
 
 Most methods of CBioseq for checking and getting object members are mirrored in the Bioseq handle's interface. Other methods are described below.
 
-<a name="ch-objmgr.attrib-bioseq-handle-object-me"></a>
+<a name="ch_objmgr.attrib_bioseq_handle_object_me"></a>
 
 #### CBioseq\_Handle important methods
 
@@ -568,13 +568,13 @@ Most methods of CBioseq for checking and getting object members are mirrored in 
 
 See the [CBioseq\_Handle API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBioseq__Handle.html) for an up-to-date list of all methods.
 
-<a name="ch-objmgr.om-attrib.Bioseq-set-handle"></a>
+<a name="ch_objmgr.om_attrib.Bioseq_set_handle"></a>
 
 #### Bioseq-set handle
 
 The Bioseq-set handle class ([CBioseq\_set\_Handle](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CBioseq_set_Handle)) is a proxy class for Bioseq-set objects. Like in Bioseq handle, most of its methods allow read-only access to the members of ***CBioseq\_set*** object. Some other methods are similar to the Bioseq handle's interface.
 
-<a name="ch-objmgr.attrib-bioseq-set-handle-objec"></a>
+<a name="ch_objmgr.attrib_bioseq_set_handle_objec"></a>
 
 #### CBioseq\_set\_Handle important methods
 
@@ -590,13 +590,13 @@ The Bioseq-set handle class ([CBioseq\_set\_Handle](http://www.ncbi.nlm.nih.gov/
 
 See the [CBioseq\_set\_Handle API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBioseq__set__Handle.html) for an up-to-date list of all methods.
 
-<a name="ch-objmgr.om-attrib.Seq-entry-handle"></a>
+<a name="ch_objmgr.om_attrib.Seq_entry_handle"></a>
 
 #### Seq-entry handle
 
 The Seq-entry handle class ([CSeq\_entry\_Handle](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_entry_Handle)) is a proxy class for Seq-entry objects. Most of its methods allow read-only access to the members of Seq-entry object. Other methods may be used to navigate the Seq-entry tree.
 
-<a name="ch-objmgr.attrib-seq-entry-handle-object"></a>
+<a name="ch_objmgr.attrib_seq_entry_handle_object"></a>
 
 #### CSeq\_entry\_Handle important methods
 
@@ -614,13 +614,13 @@ The Seq-entry handle class ([CSeq\_entry\_Handle](http://www.ncbi.nlm.nih.gov/IE
 
 See the [CSeq\_entry\_Handle API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__entry__Handle.html) for an up-to-date list of all methods.
 
-<a name="ch-objmgr.om-attrib.Seq-annot-handle"></a>
+<a name="ch_objmgr.om_attrib.Seq_annot_handle"></a>
 
 #### Seq-annot handle
 
 The Seq-annot handle class ([CSeq\_annot\_Handle](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_annot_Handle)) is a simple proxy for Seq-annot objects.
 
-<a name="ch-objmgr.attrib-seq-annot-handle-object"></a>
+<a name="ch_objmgr.attrib_seq_annot_handle_object"></a>
 
 #### CSeq\_annot\_Handle important methods
 
@@ -632,29 +632,29 @@ The Seq-annot handle class ([CSeq\_annot\_Handle](http://www.ncbi.nlm.nih.gov/IE
 
 See the [CSeq\_annot\_Handle API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__annot__Handle.html) for an up-to-date list of all methods.
 
-<a name="ch-objmgr.om-attrib.html-Seq-feat-handle"></a>
+<a name="ch_objmgr.om_attrib.html_Seq_feat_handle"></a>
 
 #### Seq-feat handle
 
 The Seq-feat handle class ([CSeq\_feat\_Handle](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_feat_Handle)) is a read-only proxy to Seq-feat objects data. It also simplifies and optimizes access to methods of SNP features.
 
-<a name="ch-objmgr.om-attrib.Seq-align-handle"></a>
+<a name="ch_objmgr.om_attrib.Seq_align_handle"></a>
 
 #### Seq-align handle
 
 The Seq-align handle class ([CSeq\_align\_Handle](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_align_Handle)) is a read-only proxy to Seq-align objects data. Most of its methods are simply mapped to the ***CSeq\_align*** methods.
 
-<a name="ch-objmgr.om-attrib.Seq-graph-handle"></a>
+<a name="ch_objmgr.om_attrib.Seq_graph_handle"></a>
 
 #### Seq-graph handle
 
 The Seq-graph handle class ([CSeq\_graph\_Handle](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_graph_Handle)) is a read-only proxy to Seq-graph objects data. Most of its methods are simply mapped to the ***CSeq\_graph*** methods.
 
-<a name="ch-objmgr.om-attrib.html-Seq-map"></a>
+<a name="ch_objmgr.om_attrib.html_Seq_map"></a>
 
 #### Seq-map
 
-The Seq-map class ([CSeqMap](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeqMap)) object gives a general description of a biological sequence: the location and type of each segment, without the actual sequence data. It provides the overall structure of a Bioseq, or can be constructed from a Seq-loc, representing a set of locations rather than a real Bioseq. Seq-map is typically used with [Seq-map iterator](#ch-objmgr.om-attrib.Seq-map-iterator), which enumerates individual segments. Special flags allow selecting the types of segments to be iterated and the maximum depth of resolved references.
+The Seq-map class ([CSeqMap](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeqMap)) object gives a general description of a biological sequence: the location and type of each segment, without the actual sequence data. It provides the overall structure of a Bioseq, or can be constructed from a Seq-loc, representing a set of locations rather than a real Bioseq. Seq-map is typically used with [Seq-map iterator](#ch_objmgr.om_attrib.Seq_map_iterator), which enumerates individual segments. Special flags allow selecting the types of segments to be iterated and the maximum depth of resolved references.
 
 <a name="idp50322672"></a>
 
@@ -676,7 +676,7 @@ The Seq-map class ([CSeqMap](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr
 
 See the [CSeqMap API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeqMap.html) for an up-to-date list of all methods.
 
-<a name="ch-objmgr.om-attrib.html-Seq-vector"></a>
+<a name="ch_objmgr.om_attrib.html_Seq_vector"></a>
 
 #### Seq-vector
 
@@ -706,7 +706,7 @@ The Seq-vector class ([CSeqVector](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_D
 
 See the [CSeqVector API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeqVector.html) for an up-to-date list of all methods.
 
-<a name="ch-objmgr.Seqannot-2"></a>
+<a name="ch_objmgr.Seqannot_2"></a>
 
 #### Seq-annot
 
@@ -730,7 +730,7 @@ The Seq-annot class ([CSeq\_annot](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_D
 
 See the [CSeq\_annot API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__annot.html) for an up-to-date list of all methods.
 
-<a name="ch-objmgr.Interaction-with-the-Object--2"></a>
+<a name="ch_objmgr.Interaction_with_the_Object__2"></a>
 
 ##### Interaction with the Object Manager
 
@@ -742,59 +742,59 @@ This behavior can be modified by passing an appropriate [SAnnotSelector](http://
 
 In addition you can disable/enable annotations by name or type using other methods of ***SAnnotSelector***. Selection by name is useful for GenBank external annotations like SNPs because their names are fixed - "SNP", "CDD", etc.
 
-<a name="ch-objmgr.Tree-structure-iterators"></a>
+<a name="ch_objmgr.Tree_structure_iterators"></a>
 
 #### Tree structure iterators
 
-<a name="ch-objmgr.om-attrib.html-Bioseq-iterator"></a>
+<a name="ch_objmgr.om_attrib.html_Bioseq_iterator"></a>
 
 ##### Bioseq iterator
 
 The Bioseq iterator class ([CBioseq\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CBioseq_CI)) enumerates bioseqs in a given Seq-entry. Optional filters may be used to restrict types of bioseqs to iterate.
 
-<a name="ch-objmgr.om-attrib.Seq-entry-iterator"></a>
+<a name="ch_objmgr.om_attrib.Seq_entry_iterator"></a>
 
 ##### Seq-entry iterator
 
 The Seq-entry iterator ([CSeq\_entry\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_entry_CI)) enumerates Seq-entry's in a given parent Seq-entry or a Bioseq-set. Note that the iterator enumerates sub-entries for only one tree level. It **does not** go down the tree if it finds a sub-entry of type 'set'.
 
-<a name="ch-objmgr.Descriptor-iterators"></a>
+<a name="ch_objmgr.Descriptor_iterators"></a>
 
 #### Descriptor iterators
 
-<a name="ch-objmgr.om-attrib.Seq-descr-iterator"></a>
+<a name="ch_objmgr.om_attrib.Seq_descr_iterator"></a>
 
 ##### Seq-descr iterator
 
-The Seq-descr iterator ([CSeq\_descr\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_descr_CI&d=)) enumerates [CSeq\_descr](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_descr) objects from a Bioseq or Seq-entry handle. The iterator starts from the specified point in the tree and goes up to the top-level Seq-entry. This provides sets of descriptors more closely related to the Bioseq/Seq-entry requested to be returned first, followed by descriptors that are more generic. To enumerate individual descriptors [CSeqdesc\_CI](#ch-objmgr.om-attrib.Seqdesc-iterator) iterator should be used.
+The Seq-descr iterator ([CSeq\_descr\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_descr_CI&d=)) enumerates [CSeq\_descr](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_descr) objects from a Bioseq or Seq-entry handle. The iterator starts from the specified point in the tree and goes up to the top-level Seq-entry. This provides sets of descriptors more closely related to the Bioseq/Seq-entry requested to be returned first, followed by descriptors that are more generic. To enumerate individual descriptors [CSeqdesc\_CI](#ch_objmgr.om_attrib.Seqdesc_iterator) iterator should be used.
 
-<a name="ch-objmgr.om-attrib.Seqdesc-iterator"></a>
+<a name="ch_objmgr.om_attrib.Seqdesc_iterator"></a>
 
 ##### Seqdesc iterator
 
 Another type of descriptor iterator is [CSeqdesc\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeqdesc_CI). It enumerates individual descriptors ([CSeqdesc](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeqdesc)) rather than sets of them. Optional flags allow selecting type of descriptors to be included and depth of the search. The iteration starts from the requested Seq-entry or Bioseq and proceeds to the top-level Seq-entry or stops after going selected number of Seq-entry's up the tree.
 
-<a name="ch-objmgr.Annotation-iterators"></a>
+<a name="ch_objmgr.Annotation_iterators"></a>
 
 #### Annotation iterators
 
-<a name="ch-objmgr.om-attrib.Seq-annot-iterator"></a>
+<a name="ch_objmgr.om_attrib.Seq_annot_iterator"></a>
 
 ##### Seq-annot iterator
 
 The Seq-annot iterator ([CSeq\_annot\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_annot_CI)) may be used to enumerate [CSeq\_annot](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_annot) objects - packs of annotations (features, graphs, alignments etc.). The iterator can work in two directions: starting from a Bioseq and going up to the top-level Seq-entry, or going down the tree from the selected Seq-entry.
 
-<a name="ch-objmgr.om-attrib.html-Annot-iterator"></a>
+<a name="ch_objmgr.om_attrib.html_Annot_iterator"></a>
 
 ##### Annot iterator
 
-Although returning [CSeq\_annot](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_annot) objects, [CAnnot\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CAnnot_CI) searches individual features, alignments and graphs related to the specified Bioseq or Seq-loc. It enumerates all Seq-annot's containing the requested annotations. The search parameters may be fine-tuned using [SAnnotSelector](#ch-objmgr.om-attrib.html-SAnnot-selector) for feature, alignment, or graph iterators.
+Although returning [CSeq\_annot](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_annot) objects, [CAnnot\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CAnnot_CI) searches individual features, alignments and graphs related to the specified Bioseq or Seq-loc. It enumerates all Seq-annot's containing the requested annotations. The search parameters may be fine-tuned using [SAnnotSelector](#ch_objmgr.om_attrib.html_SAnnot_selector) for feature, alignment, or graph iterators.
 
-<a name="ch-objmgr.om-attrib.html-SAnnot-selector"></a>
+<a name="ch_objmgr.om_attrib.html_SAnnot_selector"></a>
 
 ##### SAnnotSelector
 
-[SAnnotSelector](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SAnnotSelector) is a helper class which may be used to fine-tune annotation iterator's settings. It is used with [CAnnot\_CI](#ch-objmgr.om-attrib.html-Annot-iterator), [CFeat\_CI](#ch-objmgr.om-attrib.Feature-iterator), [CAlign\_CI](#ch-objmgr.om-attrib.Alignment-iterator) and [CGraph\_CI](#ch-objmgr.om-attrib.html-Graph-iterator) iterators. Below is the brief explanation of the class methods. Some methods have several modifications to simplify the selector usage. E.g. one can find `SetOverlapIntervals()` more convenient than `SetOverlapType(SAnnotSelector::eOverlap_Intervals)`.
+[SAnnotSelector](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SAnnotSelector) is a helper class which may be used to fine-tune annotation iterator's settings. It is used with [CAnnot\_CI](#ch_objmgr.om_attrib.html_Annot_iterator), [CFeat\_CI](#ch_objmgr.om_attrib.Feature_iterator), [CAlign\_CI](#ch_objmgr.om_attrib.Alignment_iterator) and [CGraph\_CI](#ch_objmgr.om_attrib.html_Graph_iterator) iterators. Below is the brief explanation of the class methods. Some methods have several modifications to simplify the selector usage. E.g. one can find `SetOverlapIntervals()` more convenient than `SetOverlapType(SAnnotSelector::eOverlap_Intervals)`.
 
 -   ***SetAnnotType*** - selects type of annotations to search for (features, alignments or graphs). Type-specific iterators set this type automatically.
 
@@ -824,13 +824,13 @@ Although returning [CSeq\_annot](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC
 
 -   ***SetNoMapping*** - prevents the iterator from mapping locations to the top-level Bioseq. This option can dramatically increase iterators' performance when searching annotations on a segmented Bioseq.
 
-<a name="ch-objmgr.om-attrib.Feature-iterator"></a>
+<a name="ch_objmgr.om_attrib.Feature_iterator"></a>
 
 ##### Feature iterator
 
-The Feature iterator ([CFeat\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CFeat_CI)) is a kind of annotation iterator. It enumerates [CSeq\_feat](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_feat) objects related to a Bioseq, Seq-loc, or contained in a particular Seq-entry or Seq-annot regardless of the referenced locations. The search parameters may be set using [SAnnotSelector](#ch-objmgr.om-attrib.html-SAnnot-selector) (preferred method) or using constructors with different arguments. The iterator returns ***CMappedFeat*** object rather than ***CSeq\_feat***. This allows accessing both the original feature (e.g. loaded from a database) and the mapped one, with its location adjusted according to the search parameters. Most methods of ***CMappedFeat*** are just proxies for the original feature members and are not listed here.
+The Feature iterator ([CFeat\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CFeat_CI)) is a kind of annotation iterator. It enumerates [CSeq\_feat](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_feat) objects related to a Bioseq, Seq-loc, or contained in a particular Seq-entry or Seq-annot regardless of the referenced locations. The search parameters may be set using [SAnnotSelector](#ch_objmgr.om_attrib.html_SAnnot_selector) (preferred method) or using constructors with different arguments. The iterator returns ***CMappedFeat*** object rather than ***CSeq\_feat***. This allows accessing both the original feature (e.g. loaded from a database) and the mapped one, with its location adjusted according to the search parameters. Most methods of ***CMappedFeat*** are just proxies for the original feature members and are not listed here.
 
-<a name="ch-objmgr.attr-mapped-feat-object-method"></a>
+<a name="ch_objmgr.attr_mapped_feat_object_method"></a>
 
 #### CMappedFeat important methods
 
@@ -846,30 +846,30 @@ The Feature iterator ([CFeat\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DO
 
 See the [CMappedFeat API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCMappedFeat.html) for an up-to-date list of all methods.
 
-<a name="ch-objmgr.om-attrib.Alignment-iterator"></a>
+<a name="ch_objmgr.om_attrib.Alignment_iterator"></a>
 
 ##### Alignment iterator
 
-The Alignment iterator ([CAlign\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CAlign_CI)) enumerates [CSeq\_align](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_align) objects related to the specified Bioseq or Seq-loc. It behaves much like [CFeat\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CFeat_CI). ***operator\**** and ***operator-\>*** return a mapped ***CSeq\_align*** object. To get the original alignment you can use ***GetOriginalSeq\_align*** or ***GetSeq\_align\_Handle*** methods. The objects iterated over may be selected by using [SAnnotSelector](#ch-objmgr.om-attrib.html-SAnnot-selector) in the constructor.
+The Alignment iterator ([CAlign\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CAlign_CI)) enumerates [CSeq\_align](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_align) objects related to the specified Bioseq or Seq-loc. It behaves much like [CFeat\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CFeat_CI). ***operator\**** and ***operator-\>*** return a mapped ***CSeq\_align*** object. To get the original alignment you can use ***GetOriginalSeq\_align*** or ***GetSeq\_align\_Handle*** methods. The objects iterated over may be selected by using [SAnnotSelector](#ch_objmgr.om_attrib.html_SAnnot_selector) in the constructor.
 
-<a name="ch-objmgr.om-attrib.html-Graph-iterator"></a>
+<a name="ch_objmgr.om_attrib.html_Graph_iterator"></a>
 
 ##### Graph iterator
 
-The Graph iterator ([CGraph\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CGraph_CI)) enumerates [CSeq\_graph](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_graph) objects related to a specific Bioseq or Seq-loc. It behaves much like [CFeat\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CFeat_CI), returning ***CMappedGraph*** object which imitates the interface of ***CSeq\_graph*** and has additional methods to access both original and mapped graphs. The objects iterated over may be selected by using [SAnnotSelector](#ch-objmgr.om-attrib.html-SAnnot-selector) in the constructor.
+The Graph iterator ([CGraph\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CGraph_CI)) enumerates [CSeq\_graph](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_graph) objects related to a specific Bioseq or Seq-loc. It behaves much like [CFeat\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CFeat_CI), returning ***CMappedGraph*** object which imitates the interface of ***CSeq\_graph*** and has additional methods to access both original and mapped graphs. The objects iterated over may be selected by using [SAnnotSelector](#ch_objmgr.om_attrib.html_SAnnot_selector) in the constructor.
 
 ***Note:*** Quality Graphs for cSRA data are not iterated by default. To include them, set the following configuration parameter:
 
     [csra_loader]
     quality_graphs=true
 
-<a name="ch-objmgr.om-attrib.Seq-map-iterator"></a>
+<a name="ch_objmgr.om_attrib.Seq_map_iterator"></a>
 
 #### Seq-map iterator
 
-The Seq-map iterator ([CSeqMap\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeqMap_CI)) is used to enumerate [Seq-map](#ch-objmgr.om-attrib.html-Seq-map) segments. The segments to be iterated are selected through a [SSeqMapSelector](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SSeqMapSelector).
+The Seq-map iterator ([CSeqMap\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeqMap_CI)) is used to enumerate [Seq-map](#ch_objmgr.om_attrib.html_Seq_map) segments. The segments to be iterated are selected through a [SSeqMapSelector](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SSeqMapSelector).
 
-<a name="ch-objmgr.ch-objmgr-CSeqMap-CI-important"></a>
+<a name="ch_objmgr.ch_objmgr_CSeqMap_CI_important"></a>
 
 #### CSeqMap\_CI important methods
 
@@ -899,7 +899,7 @@ See the [CSeqMap\_CI API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_
 
 ***Note:*** Some methods will throw exceptions if called inappropriately, so you should either check for the appropriate conditions before calling these methods or catch the exceptions. The methods that throw and the appropriate conditions for calling them are:
 
-<a name="ch-objmgr.ch-objmgr-CSeqMap-CI-import001"></a>
+<a name="ch_objmgr.ch_objmgr_CSeqMap_CI_import001"></a>
 
 | Method            | Calling Condition                                                                                                                                                                                                                                                                |
 |-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -909,7 +909,7 @@ See the [CSeqMap\_CI API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_
 
 ***Note:*** Some other methods will not throw exceptions if called inappropriately, and will instead return invalid data. Therefore you must check for the appropriate conditions before calling these methods or using their data:
 
-<a name="ch-objmgr.T.nc-methodcalling-conditionge"></a>
+<a name="ch_objmgr.T.nc_methodcalling_conditionge"></a>
 
 | Method                  | Calling Condition                                                   |
 |-------------------------|---------------------------------------------------------------------|
@@ -917,7 +917,7 @@ See the [CSeqMap\_CI API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_
 | ***GetEndPosition***    | ***IsUnknownLength*** must return false.                            |
 | ***GetRefEndPosition*** | Type must be `eSeqRef` and ***IsUnknownLength*** must return false. |
 
-<a name="ch-objmgr.SSeqMapSelector"></a>
+<a name="ch_objmgr.SSeqMapSelector"></a>
 
 ##### SSeqMapSelector
 
@@ -1024,13 +1024,13 @@ Here is some code that illustrates:
         cout << endl;
     }
 
-<a name="ch-objmgr.om-attrib.Seq-vector-iterator"></a>
+<a name="ch_objmgr.om_attrib.Seq_vector_iterator"></a>
 
 #### Seq-vector iterator
 
-The Seq-vector iterator ([CSeqVector\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeqVector_CI)) is used to access individual characters from a [Seq-vector](#ch-objmgr.om-attrib.html-Seq-vector). It has better performance than ***CSeqVector::operator[]*** when used for sequential access to the data.
+The Seq-vector iterator ([CSeqVector\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeqVector_CI)) is used to access individual characters from a [Seq-vector](#ch_objmgr.om_attrib.html_Seq_vector). It has better performance than ***CSeqVector::operator[]*** when used for sequential access to the data.
 
-<a name="ch-objmgr.attr-seq-vector-ci-object-meth"></a>
+<a name="ch_objmgr.attr_seq_vector_ci_object_meth"></a>
 
 #### CSeqVector\_CI important methods
 
@@ -1044,7 +1044,7 @@ The Seq-vector iterator ([CSeqVector\_CI](http://www.ncbi.nlm.nih.gov/IEB/ToolBo
 
 See the [CSeqVector\_CI API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeqVector__CI.html) for an up-to-date list of all methods.
 
-<a name="ch-objmgr.om-reqhist.html"></a>
+<a name="ch_objmgr.om_reqhist.html"></a>
 
 Request history and conflict resolution
 ---------------------------------------
@@ -1059,7 +1059,7 @@ There are several points of potential ambiguity:
 
 4.  the history of requests may create conflicts (when the Object Manager is unable to decide what exactly is the meaning of the request).
 
-<a name="ch-objmgr.object-manager-1-7"></a>
+<a name="ch_objmgr.object_manager_1_7"></a>
 
 ### Incomplete Seq-id
 
@@ -1067,7 +1067,7 @@ Biological sequence id ([Seq-id](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS
 
 The Object Manager's interpretation of such requests is kind of arbitrary (yet reasonable, e.g. only the latest version of a given accession is chosen). That is, the sequence could probably be found, but only one sequence, not the list of 'matching' ones. At this point the initially incomplete Seq-id has been resolved into a complete one. That is, the client asked the Scope for a BioseqHandle providing an incomplete Seq-id as the input. The Scope resolved it into a specific complete Seq-id and returned a handle. The client may now ask the handle about its Seq-id. The returned Seq-id differs from the one provided initially by the client.
 
-<a name="ch-objmgr.object-manager-1-8"></a>
+<a name="ch_objmgr.object_manager_1_8"></a>
 
 ### History of requests
 
@@ -1075,13 +1075,13 @@ Once the Seq-id has been resolved into a specific Seq-entry, the Object Manager 
 
 By 'session' we mean here the same Scope of resolution. That is, as long as the data are requested through the same Scope, it is consistent. In another Scope the data could potentially be different. The Scope can be made to forget about previous requests by calling its ***ResetHistory()*** method.
 
-<a name="ch-objmgr.object-manager-1-9"></a>
+<a name="ch_objmgr.object_manager_1_9"></a>
 
 ### Ambiguous requests
 
 It is possible that there are several Seq-entry's which contain requested information. In this case the processing depends on what is actually requested: sequence data or sequence annotations. The Bioseq may be taken from only one source, while annotations - from several Seq-entry's.
 
-<a name="ch-objmgr.object-manager-2-36"></a>
+<a name="ch_objmgr.object_manager_2_36"></a>
 
 #### Request for Bioseq
 
@@ -1093,13 +1093,13 @@ Scopes use several rules when searching for the best Bioseq for each requested S
 
 3.  If more than one Data source of the same priority contain the Bioseq or there is one Data source with several versions of the same Seq-id, ask the Data source to resolve the conflict. The Data source may take into account whether the Bioseq is most recent or not, what Seq-entry's have been already used by the Scope (preferred Seq-entry's), etc.
 
-<a name="ch-objmgr.object-manager-2-37"></a>
+<a name="ch_objmgr.object_manager_2_37"></a>
 
 #### Request for annotations
 
 Annotation iterators start with examining all Data Sources in the Scope to find all top-level Seq-entry's that contain annotations pointing to the given Seq-id. The rules for filtering annotations are slightly different than for resolving Bioseqs. First of all, the scope resolves the requested Seq-id and takes all annotations related to the Seq-id from its top-level Seq-entry. TSEs containing both sequence and annotations with the same Seq-id are ignored, since any other Bioseq with the same id is considered an old version of the resolved one. If there are external annotations in TSEs not containing a Bioseq with the requested Seq-id, they are also collected.
 
-<a name="ch-objmgr.GenBank-data-loader-"></a>
+<a name="ch_objmgr.GenBank_data_loader_"></a>
 
 GenBank data loader configuration
 ---------------------------------
@@ -1108,7 +1108,7 @@ Application configuration is stored in a file with the same name as application,
 
 <br/>GenBank data loader looks for parameters in section `[genbank]` and its subsections.
 
-<a name="ch-objmgr.Main-GenBank-data-lo"></a>
+<a name="ch_objmgr.Main_GenBank_data_lo"></a>
 
 ### Main GenBank data loader configuration<br/>section [genbank]
 
@@ -1126,11 +1126,11 @@ Application configuration is stored in a file with the same name as application,
     ; By default, each reader opens its connection depending on reader settings.
     preopen = true
 
-<a name="ch-objmgr.GenBank-readers-conf"></a>
+<a name="ch_objmgr.GenBank_readers_conf"></a>
 
 ### GenBank readers configuration
 
-<a name="ch-objmgr.Readers-id1--id2sect"></a>
+<a name="ch_objmgr.Readers_id1__id2sect"></a>
 
 #### Readers id1& id2<br/>section [genbank/id1] or [genbank/id2]
 
@@ -1160,7 +1160,7 @@ Application configuration is stored in a file with the same name as application,
     ; number of connection retries in case of error (default: 5)
     retry = 3
 
-<a name="ch-objmgr.Readers-pubseqos---p"></a>
+<a name="ch_objmgr.Readers_pubseqos___p"></a>
 
 #### Readers pubseqos & pubseqos2<br/>section [genbank/pubseqos] or [genbank/pubseqos2]
 
@@ -1188,7 +1188,7 @@ Application configuration is stored in a file with the same name as application,
     ; number of connection retries in case of error (default: 3)
     retry = 3
 
-<a name="ch-objmgr.Reader-cachesection-"></a>
+<a name="ch_objmgr.Reader_cachesection_"></a>
 
 #### Reader cache<br/>section [gebank/cache]
 
@@ -1232,7 +1232,7 @@ For example:
     ; Display name of this application for use by netcached in its logs and diagnostics.
     client = objmgr_demo
 
-<a name="ch-objmgr.Configuring-NetCache"></a>
+<a name="ch_objmgr.Configuring_NetCache"></a>
 
 Configuring NetCached to cache GenBank data
 -------------------------------------------
@@ -1247,7 +1247,7 @@ Section **[bdb]** describes parameters of BerkeleyDB database for main NetCache 
 
 One or more **[icache\_???]** sections describe parameters of ICache instances used by **GenBank** loader.
 
-<a name="ch-objmgr.Server-configuration"></a>
+<a name="ch_objmgr.Server_configuration"></a>
 
 ### Server configuration<br/>section [server]
 
@@ -1293,7 +1293,7 @@ One or more **[icache\_???]** sections describe parameters of ICache instances u
     ; specified time
     session_shutdown_timeout=30
 
-<a name="ch-objmgr.Main-BerkeleyDB-data"></a>
+<a name="ch_objmgr.Main_BerkeleyDB_data"></a>
 
 ### Main BerkeleyDB database configuration<br/>section [bdb]
 
@@ -1411,7 +1411,7 @@ One or more **[icache\_???]** sections describe parameters of ICache instances u
     ; Cache opens approx 7 files per RR volume.
     rr_volumes=3
 
-<a name="ch-objmgr.ICache-instances-con"></a>
+<a name="ch_objmgr.ICache_instances_con"></a>
 
 ### ICache instances configuration<br/>sections [icache\_\*]
 
@@ -1470,7 +1470,7 @@ For example:
     overflow_limit=1M
     ttl_prolong
 
-<a name="ch-objmgr.Use-of-Local-Data-Storage-LDS"></a>
+<a name="ch_objmgr.Use_of_Local_Data_Storage_LDS"></a>
 
 Use of Local Data Storage (LDS) by Object Manager
 -------------------------------------------------
@@ -1479,7 +1479,7 @@ Serializable object data can be stored locally in an SQLite database for efficie
 
 The required libraries are:
 
-<a name="ch-objmgr.T.nc-unixlib--ncbi-xloader-lds"></a>
+<a name="ch_objmgr.T.nc_unixlib__ncbi_xloader_lds"></a>
 
 |---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | UNIX    | `LIB  = ncbi_xloader_lds2 lds2 xobjread id2 id1 seqsplit sqlitewrapp creaders $(COMPRESS_LIBS) $(SOBJMGR_LIBS)`<br/>`LIBS = $(SQLITE3_LIBS) $(CMPRS_LIBS) $(DL_LIBS) $(ORIG_LIBS)` |
@@ -1487,7 +1487,7 @@ The required libraries are:
 
 A demonstration program is available: [SVN](http://www.ncbi.nlm.nih.gov/viewvc/v1/trunk/c%2B%2B/src/sample/app/lds/lds2_sample.cpp?view=markup) \| [LXR](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/lds/lds2_sample.cpp)
 
-<a name="ch-objmgr.Registering-the-LDS-loader-wit"></a>
+<a name="ch_objmgr.Registering_the_LDS_loader_wit"></a>
 
 ### Registering the LDS loader with the Object Manager
 
@@ -1506,7 +1506,7 @@ For example, the following code creates an LDS database, populates it with data,
     // Explicitly add LDS to scope.
     scope.AddDataLoader(CLDS2_DataLoader::GetLoaderNameFromArgs(db_path));
 
-<a name="ch-objmgr.Using-both-the-LDS-and-GenBank"></a>
+<a name="ch_objmgr.Using_both_the_LDS_and_GenBank"></a>
 
 ### Using both the LDS and GenBank loaders
 
@@ -1559,11 +1559,11 @@ To add the LDS data loader and any other default loaders to the scope:
 
 By registering with **`eDefault`**, the LDS data loader will be added to the scope along with the default data loaders.
 
-<a name="ch-objmgr.Known-gotchas"></a>
+<a name="ch_objmgr.Known_gotchas"></a>
 
 ### Known gotchas
 
-<a name="ch-objmgr.Resolving-Data-References"></a>
+<a name="ch_objmgr.Resolving_Data_References"></a>
 
 #### Resolving Data References
 
@@ -1572,22 +1572,22 @@ Multiple factors determine whether data references can be resolved or not. For e
     SAnnotSelector sel;
     sel.SetUnresolvedFlag(SAnnotSelector::eSearchUnresolved);
 
-For more information about resolving data references, see the section on [SAnnot\_Selector](#ch-objmgr.om-attrib.html-SAnnot-selector) and the associated [header documentation](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/structSAnnotSelector.html).
+For more information about resolving data references, see the section on [SAnnot\_Selector](#ch_objmgr.om_attrib.html_SAnnot_selector) and the associated [header documentation](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/structSAnnotSelector.html).
 
-<a name="ch-objmgr.Setting-Loader-Priority"></a>
+<a name="ch_objmgr.Setting_Loader_Priority"></a>
 
 #### Setting Loader Priority
 
 It is the caller's responsibility to ensure that the priorities are different for different loaders – or that the same sequence won't be found by both loaders. If multiple loaders are registered with the same priority, or if they are registered without specifying a priority (which results in them both getting the default priority), and if both loaders can fetch the same data, then an exception may be thrown.
 
-<a name="ch-objmgr.InMemory-Caching-in-the-Object"></a>
+<a name="ch_objmgr.InMemory_Caching_in_the_Object"></a>
 
 In-Memory Caching in the Object Manager and Data Loaders
 --------------------------------------------------------
 
 The following table summarizes the classes that perform short-term, in-memory caching for various objects. A custom class must be written for short-term caching of other objects or long-term caching of any objects.
 
-<a name="ch-objmgr.T.nc-objectscaching-done-bymas"></a>
+<a name="ch_objmgr.T.nc_objectscaching_done_bymas"></a>
 
 | Object(s)            | Caching done by                                                                                     |
 |----------------------|-----------------------------------------------------------------------------------------------------|
@@ -1605,30 +1605,30 @@ Short-term caching is done automatically for [CGBDataLoader](http://www.ncbi.nlm
 
 Long-term caching is not done by either the Object Manager or the GenBank data loader, so to get it you will have to implement your own mechanism. Simply keeping a handle on the objects you wish to cache long-term will prevent them from being put into the short-term cache. When you no longer need the objects to be cached, just delete the handles. Note that some system of prioritization must be used to limit the number of handles kept, since keeping handles on all object would be essentially the same as increasing the short-term cache size, which presumably failed if you're trying long-term caching. You may want to see if the [CSyncQueue\_\_priority\_\_queue](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSyncQueue__priority__queue.html) class will meet your needs.
 
-<a name="ch-objmgr.om-faq.html"></a>
+<a name="ch_objmgr.om_faq.html"></a>
 
 How to use it
 -------------
 
-1.  [Start working with the Object Manager](#ch-objmgr.om-faq.html-start)
+1.  [Start working with the Object Manager](#ch_objmgr.om_faq.html_start)
 
-2.  [Add externally created top-level Seq-entry to the Scope](#ch-objmgr.om-faq.html-add-tse)
+2.  [Add externally created top-level Seq-entry to the Scope](#ch_objmgr.om_faq.html_add_tse)
 
-3.  [Add a data loader to the Scope](#ch-objmgr.om-faq.html-add-data-loader)
+3.  [Add a data loader to the Scope](#ch_objmgr.om_faq.html_add_data_loader)
 
-4.  [Start working with a Bioseq](#ch-objmgr.om-faq.html-find-tse)
+4.  [Start working with a Bioseq](#ch_objmgr.om_faq.html_find_tse)
 
-5.  [Access sequence data](#ch-objmgr.om-faq.html-seq-vector)
+5.  [Access sequence data](#ch_objmgr.om_faq.html_seq_vector)
 
-6.  [Edit sequence data](#ch-objmgr.Edit-sequence-data)
+6.  [Edit sequence data](#ch_objmgr.Edit_sequence_data)
 
-7.  [Enumerate sequence descriptions](#ch-objmgr.om-faq.html-descriptions)
+7.  [Enumerate sequence descriptions](#ch_objmgr.om_faq.html_descriptions)
 
-8.  [Enumerate sequence annotations](#ch-objmgr.om-faq.html-annotations)
+8.  [Enumerate sequence annotations](#ch_objmgr.om_faq.html_annotations)
 
-9.  [Use the CPrefetchManager class](#ch-objmgr.Use-the-CPrefetchManager-class)
+9.  [Use the CPrefetchManager class](#ch_objmgr.Use_the_CPrefetchManager_class)
 
-<a name="ch-objmgr.om-faq.html-start"></a>
+<a name="ch_objmgr.om_faq.html_start"></a>
 
 ### Start working with the Object Manager
 
@@ -1652,7 +1652,7 @@ Create a ***CScope***. The Scope may be created as an object on the stack, or on
     CRef<CScope> scope1 = new CScope(*obj_mgr);
     CScope scope2(*obj_mgr);
 
-<a name="ch-objmgr.om-faq.html-add-tse"></a>
+<a name="ch_objmgr.om_faq.html_add_tse"></a>
 
 ### Add externally created top-level Seq-entry to the Scope
 
@@ -1662,7 +1662,7 @@ Once there is a Seq-entry created somehow, it can be added to the `Scope` using 
     ... // Populate or load the Seq-entry in some way
     scope.AddTopLevelSeqEntry(*entry);
 
-<a name="ch-objmgr.om-faq.html-add-data-loader"></a>
+<a name="ch_objmgr.om_faq.html_add_data_loader"></a>
 
 ### Add a data loader to the Scope
 
@@ -1683,7 +1683,7 @@ A more convenient way to add data loaders to a Scope is to register them with th
                                               CObjectManager::eDefault, 1);
     scope.AddDefaults();
 
-<a name="ch-objmgr.om-faq.html-find-tse"></a>
+<a name="ch_objmgr.om_faq.html_find_tse"></a>
 
 ### Start working with a Bioseq
 
@@ -1696,7 +1696,7 @@ In order to be able to access a Bioseq, one has to obtain a `Bioseq handle` from
         ... // Failed to get the bioseq handle
     }
 
-<a name="ch-objmgr.om-faq.html-seq-vector"></a>
+<a name="ch_objmgr.om_faq.html_seq_vector"></a>
 
 ### Access sequence data
 
@@ -1732,7 +1732,7 @@ It is possible then to enumerate all the segments in the map asking their type, 
         }
     }
 
-<a name="ch-objmgr.Edit-sequence-data"></a>
+<a name="ch_objmgr.Edit_sequence_data"></a>
 
 ### Edit sequence data
 
@@ -1754,11 +1754,11 @@ A shared TSE can be made editable by gettng an edit handle for any object in the
 
 Once a TSE is editable, any object within it can be edited with either a ***CBioseq\_EditHandle*** or a ***CBioseq\_Handle***.
 
-<a name="ch-objmgr.om-faq.html-descriptions"></a>
+<a name="ch_objmgr.om_faq.html_descriptions"></a>
 
 ### Enumerate sequence descriptions
 
-[Descriptor iterators](#ch-objmgr.Descriptor-iterators) may be initialized with a Bioseq handle or Seq-entry handle. This makes it possible to enumerate all ***CSeqdesc*** objects the Bioseq or the Seq-entry refers to:
+[Descriptor iterators](#ch_objmgr.Descriptor_iterators) may be initialized with a Bioseq handle or Seq-entry handle. This makes it possible to enumerate all ***CSeqdesc*** objects the Bioseq or the Seq-entry refers to:
 
     for (CSeqdesc_CI desc_it(handle); desc_it; ++desc_it) {
         const CSeqdesc& desc = *desc_it;
@@ -1772,11 +1772,11 @@ Another type of descriptor iterator iterates over sets of descriptors rather tha
         ... // your code here
     }
 
-<a name="ch-objmgr.om-faq.html-annotations"></a>
+<a name="ch_objmgr.om_faq.html_annotations"></a>
 
 ### Enumerate sequence annotations
 
-[Annotation iterators](#ch-objmgr.Annotation-iterators) may be used to enumerate annotations (features, alignments and graphs) related to a Bioseq or a Seq-loc. They are very flexible and can be fine-tuned through Annot-selector structure:
+[Annotation iterators](#ch_objmgr.Annotation_iterators) may be used to enumerate annotations (features, alignments and graphs) related to a Bioseq or a Seq-loc. They are very flexible and can be fine-tuned through Annot-selector structure:
 
     // Search all TSEs in the Scope for gene features
     SAnnotSelector sel;
@@ -1817,7 +1817,7 @@ All the above examples iterate annotations in a continuous interval on a Bioseq.
         ... // your code here
     }
 
-<a name="ch-objmgr.Use-the-cSRA-data-loader"></a>
+<a name="ch_objmgr.Use_the_cSRA_data_loader"></a>
 
 ### Use the cSRA data loader
 
@@ -1837,7 +1837,7 @@ Also, the returned data will be cilpped to exclude poor quality reads. If you wa
     [csra]
     clip_by_quality=false
 
-<a name="ch-objmgr.Use-the-CPrefetchManager-class"></a>
+<a name="ch_objmgr.Use_the_CPrefetchManager_class"></a>
 
 ### Use the CPrefetchManager class
 
@@ -1885,16 +1885,16 @@ The [CPrefetchManager](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/
 
 ***Note:*** Error handling was removed from the above code for clarity - please see the [Object Manager test code](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objtools/test/objmgr/test_objmgr_data_mt.cpp) for examples of appropriate error handling.
 
-<a name="ch-objmgr.object-manager9"></a>
+<a name="ch_objmgr.object_manager9"></a>
 
 Educational Exercises
 ---------------------
 
-<a name="ch-objmgr.om-start.html"></a>
+<a name="ch_objmgr.om_start.html"></a>
 
 ### Setup the framework for the C++ Object Manager learning task
 
-<a name="ch-objmgr.object-manager-2-45"></a>
+<a name="ch_objmgr.object_manager_2_45"></a>
 
 #### Starting point
 
@@ -1908,7 +1908,7 @@ To jump-start your first project utilizing the new C++ `Object Manager` in the C
 
 The [new\_project](ch_proj.html#ch_proj.outside_tree) script can also be used to create a new project on Windows, and the usage is the same as on UNIX.
 
-<a name="ch-objmgr.object-manager-2-47"></a>
+<a name="ch_objmgr.object_manager_2_47"></a>
 
 #### How to convert the test application into CGI one?
 
@@ -1924,7 +1924,7 @@ In order to convert your application into CGI one:
 
 Please also see the section on [FCGI Redirection and Debugging CGI Programs](ch_cgi.html#ch_cgi.FCGI_Redirection_and_Debugging_C) for more information.
 
-<a name="ch-objmgr.object-manager-2-48"></a>
+<a name="ch_objmgr.object_manager_2_48"></a>
 
 #### Convert CGI application into Fast-CGI one
 
@@ -1933,7 +1933,7 @@ In the **`LIB=...`** section of `Makefile.task_cgiapp`, just replace `xcgi` libr
     LIB = xobjmgr id1 seqset $(SEQ_LIBS) pub medline biblio general \
         xser xhtml xfcgi xutil xconnect xncbi
 
-<a name="ch-objmgr.om-tasks.html"></a>
+<a name="ch_objmgr.om_tasks.html"></a>
 
 ### Task Description
 
@@ -1961,19 +1961,19 @@ The main idea here is to build one task on the top of another, in growing level 
 
 10. convert the application into a FCGI one.
 
-<a name="ch-objmgr.object-manager-2-49"></a>
+<a name="ch_objmgr.object_manager_2_49"></a>
 
 #### Test Bioseqs
 
 Below is the list of example sequences to use with the C++ toolkit training course. It starts with one Teaching Example that has one genomic nucleic acid sequence and one protein with a cd-region. Following that is the list of Test Examples. Once the code is functioning on the Teaching Example, we suggest running it through these. They include a bunch of different conditions: short sequence with one cd-region, longer with 6 cd-regions, a protein record (this is an error, and code should recover), segmented sequence, 8 megabase genomic contig, a popset member, and a draft sequence with no cd-regions.
 
-<a name="ch-objmgr.object-manager-3-30"></a>
+<a name="ch_objmgr.object_manager_3_30"></a>
 
 ##### Teaching example
 
-IDs and description of the sequence to be used as a simple teaching example is shown in [Table 1](#ch-objmgr.T1).
+IDs and description of the sequence to be used as a simple teaching example is shown in [Table 1](#ch_objmgr.T1).
 
-<a name="ch-objmgr.T1"></a>
+<a name="ch_objmgr.T1"></a>
 
 Table 1. Teaching Example: Sequence
 
@@ -1993,13 +1993,13 @@ The application should produce the following results for the above Bioseq:
     Cdreg: 46.4405%
     Non-Cdreg: 39.7052%
 
-<a name="ch-objmgr.object-manager-3-31"></a>
+<a name="ch_objmgr.object_manager_3_31"></a>
 
 ##### Test examples
 
-More complicated test Bioseqs are listed in [Table 2](#ch-objmgr.T2).
+More complicated test Bioseqs are listed in [Table 2](#ch_objmgr.T2).
 
-<a name="ch-objmgr.T2"></a>
+<a name="ch_objmgr.T2"></a>
 
 Table 2. Test Examples: Sequences
 
@@ -2014,7 +2014,7 @@ Table 2. Test Examples: Sequences
 | AC116052   | AC116052.1   | 19697559 | Mus musculus chromosome UNK clone                           |
 | Q08345     | Q08345.1     | 729008   | Epithelial discoidin domain receptor 1 precursor...         |
 
-<a name="ch-objmgr.object-manager-3-32"></a>
+<a name="ch_objmgr.object_manager_3_32"></a>
 
 ##### Correct Results
 
@@ -2344,32 +2344,32 @@ Below are shown the correct results for each of the test Bioseqs. You can use th
         Segment: pos=0, length=913, type=DATA
     Not a DNA
 
-<a name="ch-objmgr.om-problems.html"></a>
+<a name="ch_objmgr.om_problems.html"></a>
 
 ### Common problems
 
-1.  [How to construct Seq\_id by accession?](#ch-objmgr.om-problems.html-seqid)
+1.  [How to construct Seq\_id by accession?](#ch_objmgr.om_problems.html_seqid)
 
-2.  [What is the format of data CSeqVector returns?](#ch-objmgr.om-problems.html-seqvector)
+2.  [What is the format of data CSeqVector returns?](#ch_objmgr.om_problems.html_seqvector)
 
-3.  [What to pay attention to when processing cd-regions?](#ch-objmgr.om-problems.html-cdreg)
+3.  [What to pay attention to when processing cd-regions?](#ch_objmgr.om_problems.html_cdreg)
 
-<a name="ch-objmgr.om-problems.html-seqid"></a>
+<a name="ch_objmgr.om_problems.html_seqid"></a>
 
 #### How to construct Seq\_id by accession?
 
 ***CSeq\_id*** class has constructor, accepting a string, which may contain a Bioseq accession, or accession and version separated with dot. If no version is provided, the Object Manager will try to find and fetch the latest one.
 
-<a name="ch-objmgr.om-problems.html-seqvector"></a>
+<a name="ch_objmgr.om_problems.html_seqvector"></a>
 
 #### What is the format of data CSeqVector returns?
 
 ***GetSeqVector*** method of ***CBioseq\_Handle*** has optional argument to select data coding. One of the possible values for this argument is `CBioseq_Handle::eCoding_Iupac`. It forces the resulting Seq-vector to convert data to printable characters - either Iupac-na or Iupac-aa, depending on the sequence type. Gaps in the sequence are coded with special character, which can be received using ***CSeqVector::GetGapChar***, for nucleotides in Iupac coding it will be 'N' character. Note that when calculating the percentage of 'G' /'C' in a sequence you need to ignore gaps.
 
-<a name="ch-objmgr.om-problems.html-cdreg"></a>
+<a name="ch_objmgr.om_problems.html_cdreg"></a>
 
 #### What to pay attention to when processing cd-regions?
 
-When looking for cd-regions on a sequence, you get a set of features, which locations describe their position on the sequence. Please note, that these locations may, and do overlap, which makes calculating percentage of 'G'/'C' in the cd-regions much more difficult. To simplify this part of the task you can merge individual cd-region locations using [CSeq\_loc](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_loc) methods (do not forget to sort the Seq-locs for correct merging) and use the resulting Seq-loc to initialize a [Seq-vector](#ch-objmgr.om-attrib.html-Seq-vector). To calculate percentage of 'G'/'C' for non-cdr parts of a sequence create a new Seq-loc with ***CSeq\_loc***::***Subtract()*** method.
+When looking for cd-regions on a sequence, you get a set of features, which locations describe their position on the sequence. Please note, that these locations may, and do overlap, which makes calculating percentage of 'G'/'C' in the cd-regions much more difficult. To simplify this part of the task you can merge individual cd-region locations using [CSeq\_loc](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_loc) methods (do not forget to sort the Seq-locs for correct merging) and use the resulting Seq-loc to initialize a [Seq-vector](#ch_objmgr.om_attrib.html_Seq_vector). To calculate percentage of 'G'/'C' for non-cdr parts of a sequence create a new Seq-loc with ***CSeq\_loc***::***Subtract()*** method.
 
 

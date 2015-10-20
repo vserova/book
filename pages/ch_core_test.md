@@ -363,7 +363,7 @@ The following is an outline of the topics presented in this chapter:
 
 **Demo Cases** [[src/sample/app/basic](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/basic)]
 
-<a name="ch-core.writing-simple-app"></a>
+<a name="ch_core.writing_simple_app"></a>
 
 Writing a Simple Application
 ----------------------------
@@ -380,7 +380,7 @@ This section discusses the following topics:
 
 ***Note:*** The C++ Toolkit can also be [used from a third party application framework](ch_core.html#ch_core.Using_the_C_Toolkit_from_a_Third).
 
-<a name="ch-core.basic-classes"></a>
+<a name="ch_core.basic_classes"></a>
 
 ### NCBI C++ Toolkit Application Framework Classes
 
@@ -398,7 +398,7 @@ The following five fundamental classes form the foundation of the C++ Toolkit Ap
 
 Each of these classes is discussed in the following sections:
 
-<a name="ch-core.CNcbiApplication"></a>
+<a name="ch_core.CNcbiApplication"></a>
 
 #### CNcbiApplication
 
@@ -420,7 +420,7 @@ In addition, the application class provides the same features previously impleme
 
 The mechanism to execute the application is provided by ***CNcbiApplication***'s member function ***Run()***, for which you must write your own implementation. The ***Run()*** function will be automatically invoked by ***CNcbiApplication::AppMain()***, after it has initialized its ***CNcbiArguments, CNcbiEnvironment, CNcbiRegistry***, and ***CNcbiDiag*** data members.
 
-<a name="ch-core.CNcbiArguments"></a>
+<a name="ch_core.CNcbiArguments"></a>
 
 #### CNcbiArguments
 
@@ -434,7 +434,7 @@ In addition to the ***CNcbiArguments*** class, there are other related classes u
 
 When using the C++ Toolkit on the Mac OS, you can specify command-line arguments in a separate file with the name of your executable and ".args" extension. Each argument should be on a separate line (see [Table 1](ch_core.html#ch_core.T1)).
 
-<a name="ch-core.T1"></a>
+<a name="ch_core.T1"></a>
 
 Table 1. Example of Command-line Arguments
 
@@ -442,23 +442,23 @@ Table 1. Example of Command-line Arguments
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------|
 | -gi "Integer" (GI id of the Seq-Entry to examine) OPTIONAL ARGUMENTS: -h (Print this USAGE message; ignore other arguments) -reconstruct (Reconstruct title) -accession (Prepend accession) -organism (Append organism name) | -gi 10200 -reconstruct -accession -organism |
 
-<a name="ch-core.TF.1"></a>
+<a name="ch_core.TF.1"></a>
 
 Please note:
 
-<a name="ch-core.TF.2"></a>
+<a name="ch_core.TF.2"></a>
 
 File must contain Macintosh-style line breaks.
 
-<a name="ch-core.TF.3"></a>
+<a name="ch_core.TF.3"></a>
 
 No extra spaces are allowed after argument ("-accession" and not "-accession ").
 
-<a name="ch-core.TF.4"></a>
+<a name="ch_core.TF.4"></a>
 
 Arguments must be followed by an empty terminating line.
 
-<a name="ch-core.CNcbiEnvironment"></a>
+<a name="ch_core.CNcbiEnvironment"></a>
 
 #### CNcbiEnvironment
 
@@ -514,19 +514,19 @@ In this example, the ***GetEnvironment()*** is defined in the ***CNcbiApplicatio
 
 To delete all of the cached entries and reload new ones from the environment pointer (envp), use the ***CNcbiEnvironment::Reset()*** method.
 
-<a name="ch-core.CNcbiRegistry"></a>
+<a name="ch_core.CNcbiRegistry"></a>
 
 #### CNcbiRegistry
 
 Complete details for the ***CNcbiRegistry*** can be found in the section on [The CNcbiRegistry Class](ch_core.html#ch_core.registry).
 
-<a name="ch-core.CNcbiDiag"></a>
+<a name="ch_core.CNcbiDiag"></a>
 
 #### CNcbiDiag
 
 The [CNcbiDiag](ch_core.html#ch_core.diag) class implements much of the functionality of the NCBI C++ Toolkit error-processing mechanisms; however, it is not intended to be used directly. Instead, use the [`{ERR|LOG}_POST*`](ch_core.html#ch_core.ERR_POST) and [`_TRACE`](ch_core.html#ch_core._TRACE) macros. See the sections on [Diagnostic Streams](ch_core.html#ch_core.diag) and [Message Posting](ch_debug.html#ch_debug.std_cpp_message_post) for related information.
 
-<a name="ch-core.creating-simple-app"></a>
+<a name="ch_core.creating_simple_app"></a>
 
 ### Creating a Simple Application
 
@@ -538,7 +538,7 @@ This section discusses the following topics:
 
 -   [Discussion of the Sample Application](ch_core.html#ch_core.discuss_sample_app)
 
-<a name="ch-core.creating-unix-app"></a>
+<a name="ch_core.creating_unix_app"></a>
 
 #### Unix-like Systems
 
@@ -558,7 +558,7 @@ Then build the project and run the application:
 
     cd example; make; ./example
 
-<a name="ch-core.creating-ms-app"></a>
+<a name="ch_core.creating_ms_app"></a>
 
 #### MS Windows
 
@@ -594,7 +594,7 @@ Then open the solution file `example\compilers\msvc1000_prj\static\build\example
 
 2.  Build the project and run the application.
 
-<a name="ch-core.discuss-sample-app"></a>
+<a name="ch_core.discuss_sample_app"></a>
 
 #### Discussion of the Sample Application
 
@@ -658,7 +658,7 @@ In the [sample application](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/
 
 More [realistic examples of applications](ch_demo.html) that use the NCBI C++ Toolkit are available.
 
-<a name="ch-core.inside-app-class"></a>
+<a name="ch_core.inside_app_class"></a>
 
 ### Inside the NCBI Application Class
 
@@ -998,7 +998,7 @@ The NCBI application (built by deriving from ***CNcbiApplication***) throws the 
 
 As shown above, source files that utilize the ***CNcbiApplication*** class must `#include` the header file where that class is defined, `corelib/ncbiapp.hpp`, in the `include/` directory. This header file in turn includes `corelib/ncbistd.hpp`, which should **always** be `#include`'d.
 
-<a name="ch-core.cmd-line-args"></a>
+<a name="ch_core.cmd_line_args"></a>
 
 Processing Command-Line Arguments
 ---------------------------------
@@ -1023,7 +1023,7 @@ This section discusses the following topics:
 
 -   [Code Examples](ch_core.html#ch_core.arg_code_example)
 
-<a name="ch-core.cmd-line-APIs"></a>
+<a name="ch_core.cmd_line_APIs"></a>
 
 ### Capabilities of the Command-Line API
 
@@ -1051,7 +1051,7 @@ Normally, a ***CArgDescriptions*** object that contains the argument description
 
 See [Table 3](ch_core.html#ch_core.T3) for the standard command-line options for the default instance of ***CArgDescriptions***.
 
-<a name="ch-core.T3"></a>
+<a name="ch_core.T3"></a>
 
 Table 3. Standard command-line options for the default instance of CArgDescriptions
 
@@ -1065,7 +1065,7 @@ To avoid creation of a default ***CArgDescriptions*** object that may not be nee
 
 It is also possible to use the ***CNcbiApplication::HideStdArgs(THideStdArgs hide\_mask)*** method to hide description of the standard arguments (`-h,                                             -logfile, -conffile`) in the [USAGE](ch_core.html#ch_core.CArgDescriptions_Usage) message. Please note: This only hides the description of these flags; it is still possible to use them.
 
-<a name="ch-core.arg-classes"></a>
+<a name="ch_core.arg_classes"></a>
 
 ### The Relationships between the ***CArgDescriptions***, ***CArgs***, and ***CArgValue*** Classes
 
@@ -1073,7 +1073,7 @@ The [CArgDescriptions](ch_core.html#ch_core.CArgDescriptions) class provides an 
 
 The resulting [CArgs](ch_core.html#ch_core.CArgs) object will contain parsed, verified, and ready-to-use argument values, which are stored as [CArgValue](ch_core.html#ch_core.CArgValue). The value of a particular argument can be accessed using the argument's name (as specified in the [CArgDescriptions](ch_core.html#ch_core.CArgDescriptions) object), and the returned [CArgValue](ch_core.html#ch_core.CArgValue) object can then be safely type-cast to a correct C++ type (***int***, ***string***, ***stream***, etc.) because the argument types have been verified. These class relations and methods can be summarized schematically as shown in [Figure 1](ch_core.html#ch_core.F1).
 
-<a name="ch-core.F1"></a>
+<a name="ch_core.F1"></a>
 
 ![Figure 1. Argument processing class relations.](/book/static/img/flow.gif)
 
@@ -1081,7 +1081,7 @@ Figure 1. Argument processing class relations.
 
 The last statement in this example implicitly references a [CArgValue](ch_core.html#ch_core.CArgValue) object, in the value returned when the `[                                             ] `operator is applied to **`myArgs`**. The method ***CArgValue::AsDouble()*** is then applied to this object to retrieve a ***double***.
 
-<a name="ch-core.cmd-line-syntax"></a>
+<a name="ch_core.cmd_line_syntax"></a>
 
 ### Command-Line Syntax
 
@@ -1100,7 +1100,7 @@ Command-less command-line arguments fit the following profile:
 
 where:
 
-<a name="ch-core.T.nc-arg-keykey-value--mandatory"></a>
+<a name="ch_core.T.nc_arg_keykey_value__mandatory"></a>
 
 |-----------------|-----------------------------------------------------------|
 | arg\_key        | -\<key\> \<value\> -- (mandatory)                         |
@@ -1135,7 +1135,7 @@ The [Supporting Command-Based Command Lines](ch_core.html#ch_core.Supporting_Com
 
                                         svn checkin -m "message" myapp.cpp
 
-<a name="ch-core.CArgDescriptions"></a>
+<a name="ch_core.CArgDescriptions"></a>
 
 ### The ***CArgDescriptions*** ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html)) class
 
@@ -1157,7 +1157,7 @@ The following is a list of topics discussed in this section:
 
 -   [Generating a USAGE Message](ch_core.html#ch_core.CArgDescriptions_Usage)
 
-<a name="ch-core.argdescr.CArgDescriptions-Cons"></a>
+<a name="ch_core.argdescr.CArgDescriptions_Cons"></a>
 
 #### The CArgDescriptions Constructor
 
@@ -1167,7 +1167,7 @@ The constructor for ***CArgDescriptions*** accepts a Boolean argument, auto\_hel
 
 If "auto\_help" is passed TRUE, then a special flag "-h" will be added to the list of accepted arguments, and passing "-h" in the command line will print out USAGE and ignore all other passed arguments.
 
-<a name="ch-core.CArgDescriptions-Attr"></a>
+<a name="ch_core.CArgDescriptions_Attr"></a>
 
 #### Describing Argument Attributes
 
@@ -1187,7 +1187,7 @@ The methods for ***AddXxx()*** are passed the following argument attributes:
 
 -   *flags*, the `flags` argument, to provide additional control of the arguments' behavior.
 
-<a name="ch-core.CArgDescriptions-Types"></a>
+<a name="ch_core.CArgDescriptions_Types"></a>
 
 #### Argument Types
 
@@ -1215,7 +1215,7 @@ Any of the registered descriptions can be tested for existence and/or deleted us
 
 These methods can also be applied to the unnamed positional arguments (as a `group`), using: `Exist(kEmptyStr)` and `Delete(kEmptyStr).`
 
-<a name="ch-core.CArgDescriptions-StdValueTypes"></a>
+<a name="ch_core.CArgDescriptions_StdValueTypes"></a>
 
 #### Restricting the Input Argument Values
 
@@ -1241,7 +1241,7 @@ Although each argument's input value is initially loaded as a simple character s
 
                                             };
 
-<a name="ch-core.CArgDescriptions-UserValueTypes"></a>
+<a name="ch_core.CArgDescriptions_UserValueTypes"></a>
 
 #### Implementing User-defined Restrictions Using the ***CArgAllow*** Class
 
@@ -1279,7 +1279,7 @@ Here, the constructor takes no arguments, and the ***Allow()*** method returns *
 
 There are two other pre-defined constraint classes: [CArgAllow\_Symbols](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgAllow__Symbols.html) and [CArgAllow\_String](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgAllow__String.html). If the value provided on the command line is not in the allowed set of values specified for that argument, then an exception will be generated. This exception can be caught and handled in the usual manner, as described in the discussion of [Generating a USAGE message.](ch_core.html#ch_core.CArgDescriptions_Usage)
 
-<a name="ch-core.CArgDescriptions-App"></a>
+<a name="ch_core.CArgDescriptions_App"></a>
 
 #### Using ***CArgDescriptions*** in Applications
 
@@ -1300,7 +1300,7 @@ The description of program arguments should be provided in the application's ***
 
 The ***SetUsageContext()*** method is used to define the name of the program and its description, which is to be displayed in the `USAGE` message. As long as the initialization of the application is completed and there is still no argument description, ***CNcbiApplication*** class provides a "default" one. This behavior can be overridden by calling the ***DisableArgDescriptions()*** method of `CNcbiAppliation`.
 
-<a name="ch-core.CArgDescriptions-Usage"></a>
+<a name="ch_core.CArgDescriptions_Usage"></a>
 
 #### Generating a `USAGE `Message
 
@@ -1348,7 +1348,7 @@ The information generated for each argument is displayed in the format:
 
 The arguments in the USAGE message can be arranged into groups by using ***SetCurrentGroup()*** method of the ***CArgDescriptions*** object.
 
-<a name="ch-core.CArgs"></a>
+<a name="ch_core.CArgs"></a>
 
 ### The CArgs ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgs.html)) Class: A Container Class for CArgValue ([\*](ch_core.html#ch_core.CArgValue)) Objects
 
@@ -1426,7 +1426,7 @@ The CArgs object is created by executing the ***CArgDescriptions::CreateArgs()**
 
 All `named` arguments can be accessed using the `[ ]` operator, as in: `                                         myCArgs["f"]`, where `"f"` is the name registered for that argument. There are two ways to access the **N**-th `unnamed` positional argument: `                                         myCArgs["#N"]` and `myCArgs[N]`, where 1 \<= **N** \<= GetNExtra().
 
-<a name="ch-core.CArgValue"></a>
+<a name="ch_core.CArgValue"></a>
 
 ### ***CArgValue*** ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgValue.html)) Class: The Internal Representation of Argument Values
 
@@ -1540,7 +1540,7 @@ An exception will be generated with an appropriate error message, if:
 
 -   "f" was described as an optional key or positional argument without default value (i.e., using the ***AddOptional\*\*\*()*** method), and it was not defined in the command line. Note that you can check for this case using the ***CArgValue::HasValue()*** method.
 
-<a name="ch-core.Supporting-CommandBased-Command"></a>
+<a name="ch_core.Supporting_CommandBased_Command"></a>
 
 ### Supporting Command-Based Command Lines
 
@@ -1580,13 +1580,13 @@ For a sample program that demonstrates argument processing for command-based com
 
 For more information on standard command lines and general information applicable to all command line processing, see the [Command-Line Syntax](ch_core.html#ch_core.cmd_line_syntax) and [CArgDescriptions](ch_core.html#ch_core.CArgDescriptions) sections.
 
-<a name="ch-core.arg-code-example"></a>
+<a name="ch_core.arg_code_example"></a>
 
 ### Code Examples
 
 A simple application program, [test\_ncbiargs\_sample.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib/test/test_ncbiargs_sample.cpp) demonstrates the usage of these classes for argument processing. See also [test\_ncbiargs.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib/test/test_ncbiargs.cpp) (especially ***main()***, ***s\_InitTest0()*** and ***s\_RunTest0()*** there), and [asn2asn.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/app/asn2asn/asn2asn.cpp) for more examples.
 
-<a name="ch-core.namespace-concat"></a>
+<a name="ch_core.namespace_concat"></a>
 
 Namespace, Name Concatenation, and Compiler-specific Macros
 -----------------------------------------------------------
@@ -1603,7 +1603,7 @@ These topics are discussed in greater detail in the following subsections:
 
 -   [Compiler Specific Macros](ch_core.html#ch_core.compiler_specific_macros)
 
-<a name="ch-core.ncbi-namespace"></a>
+<a name="ch_core.ncbi_namespace"></a>
 
 ### NCBI Namespace
 
@@ -1617,19 +1617,19 @@ All new NCBI classes must be in the **`ncbi::`** namespace to avoid naming confl
 
 The use of **`BEGIN_NCBI_SCOPE`**, **`                                         END_NCBI_SCOPE`**, and **`USING_NCBI_SCOPE`** is discussed in [use of the NCBI name scope](ch_style.html#ch_style.using_NCBI_namespace).
 
-<a name="ch-core.other-namespace-macros"></a>
+<a name="ch_core.other_namespace_macros"></a>
 
 ### Other Namespace Macros
 
 The **`BEGIN_NCBI_SCOPE`**, **`                                         END_NCBI_SCOPE`**, and **`USING_NCBI_SCOPE`** macros in turn use the more general purpose **`BEGIN_SCOPE(ns)`**, **`END_SCOPE(ns)`**, and **`                                         USING_SCOPE(ns)`** macros, where the macro parameter **`                                             ns`** is the namespace being defined. All NCBI-related code should be in the **`ncbi::`** namespace so the **`                                         BEGIN_NCBI_SCOPE`**, **`END_NCBI_SCOPE`**, and **`USING_NCBI_SCOPE`** should be adequate for new NCBI code. However, in those rare circumstances, if you need to define a new name scope, you can directly use the **`BEGIN_SCOPE(ns)`**, **`END_SCOPE(ns)`**, and **`                                         USING_SCOPE(ns)`** macros.
 
-<a name="ch-core.name-concat"></a>
+<a name="ch_core.name_concat"></a>
 
 ### Name Concatenation
 
 The macros **`NCBI_NAME2`** and **`                                         NCBI_NAME3`** define concatenation of two and three names, respectively. These are used to build names for program-generated class, struct, or method names.
 
-<a name="ch-core.compiler-specific-macros"></a>
+<a name="ch_core.compiler_specific_macros"></a>
 
 ### Compiler-specific Macros
 
@@ -1651,7 +1651,7 @@ For MSVC v6.0, the `for` keyword is defined as a macro to overcome a problem wit
 
 Another macro called **`NCBI_EAT_SEMICOLON`** is used in creating new names that can allow a trailing semicolon without producing a compiler warning in some compilers.
 
-<a name="ch-core.Configuration-Parame"></a>
+<a name="ch_core.Configuration_Parame"></a>
 
 Configuration Parameters
 ------------------------
@@ -1668,7 +1668,7 @@ The following topics discuss using the ***CParam*** class.
 
 -   [Supporting Classes](ch_core.html#ch_core.Supporting_Classes)
 
-<a name="ch-core.General-Usage-Inform"></a>
+<a name="ch_core.General_Usage_Inform"></a>
 
 ### General Usage Information
 
@@ -1686,7 +1686,7 @@ and include the NCBI core library in your makefile:
 
     LIB = xncbi
 
-<a name="ch-core.Macros-for-Creating-"></a>
+<a name="ch_core.Macros_for_Creating_"></a>
 
 ### Macros for Creating Parameters
 
@@ -1710,7 +1710,7 @@ The **`default_value`** macro parameter provides the default value for the param
 
 The **`flags`** macro parameter (a bitwise OR of enum values) can be used to control certain behavior options for the parameter. Currently, these enum values are:
 
-<a name="ch-core.T.nc-Enum-ValuePurposeeParam-Def"></a>
+<a name="ch_core.T.nc_Enum_ValuePurposeeParam_Def"></a>
 
 | Enum Value       | Purpose                                  |
 |------------------|------------------------------------------|
@@ -1809,13 +1809,13 @@ Another way to conveniently use a configuration parameter is to use the **`     
 
                                         }
 
-<a name="ch-core.Methods-for-Using-Pa"></a>
+<a name="ch_core.Methods_for_Using_Pa"></a>
 
 ### Methods for Using Parameters
 
 Important methods of the ***CParam*** class are:
 
-<a name="ch-core.T.nc-MethodStaticPurposeGetState"></a>
+<a name="ch_core.T.nc_MethodStaticPurposeGetState"></a>
 
 | Method                     | Static | Purpose                                                                                                                                                                                                                                                                                                                                                       |
 |----------------------------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -1850,7 +1850,7 @@ Typical uses involve getting the current or default values:
 
                                         }
 
-<a name="ch-core.Supporting-Classes"></a>
+<a name="ch_core.Supporting_Classes"></a>
 
 ### Supporting Classes
 
@@ -1874,7 +1874,7 @@ The CParam class is packaged with two supporting classes: ***CParamException*** 
 
 -   ***operator\<\<()*** and ***operator\>\>()*** can be useful in other contexts.
 
-<a name="ch-core.registry"></a>
+<a name="ch_core.registry"></a>
 
 Using the CNcbiRegistry Class
 -----------------------------
@@ -1897,7 +1897,7 @@ The following topics are discussed in this section:
 
 -   [Additional Registry Methods](ch_core.html#ch_core.registry_addmethods)
 
-<a name="ch-core.registry-intro"></a>
+<a name="ch_core.registry_intro"></a>
 
 ### Working with the Registry Class: CNcbiRegistry
 
@@ -1923,7 +1923,7 @@ If the special environment variable **`NCBI_CONFIG_OVERRIDES`** is defined, the 
 
 For the application registry, the name of the configuration file can be explicitly set with the `-conffile` command-line argument, set (or disabled) with the **`conf`** argument of [CNcbiApplication::AppMain()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNcbiApplication.html), or implicitly set (or disabled) according to [search order rules](ch_core.html#ch_core.ini_search_order). If the `-conffile` command-line argument is supplied, that path will be used. If the **`conf`** argument to ***AppMain()*** is supplied, the file will be determined according to [Table 2](ch_core.html#ch_core.T2). Otherwise, the file will be determined according to [search order rules](ch_core.html#ch_core.ini_search_order). The application registry follows the overrides registry in precedence.
 
-<a name="ch-core.T2"></a>
+<a name="ch_core.T2"></a>
 
 Table 2. Location of configuration files
 
@@ -1945,7 +1945,7 @@ Although registry objects can be instantiated and manipulated independently, the
 
 See the [Registry](ch_libconfig.html#ch_libconfig.libconfig_registry) and [Environment](ch_libconfig.html#ch_libconfig.Environment) sections of the library configuration chapter for more information on controlling the registry via the environment.
 
-<a name="ch-core.registry-syntax"></a>
+<a name="ch_core.registry_syntax"></a>
 
 ### Syntax of the Registry Configuration File
 
@@ -2091,7 +2091,7 @@ Entries defined in a subregistry can be "undefined" by explicitly defining the e
 
 Finally, the environment variable `NCBI_CONFIG_OVERRIDES` can be used to name a configuration file whose entries override any corresponding entries in all the processed registry files.
 
-<a name="ch-core.ini-search-order"></a>
+<a name="ch_core.ini_search_order"></a>
 
 ### Search Order for Initialization (\*.ini) Files
 
@@ -2149,7 +2149,7 @@ On Unix-like systems, if an application `dir1/app1` is a symlink to `dir2/app2`,
 
 For the system registry: The name `.ncbirc` is tried on Unix-like systems and `ncbi.ini` is tried on Windows. ***Note:*** NCBI in-house Linux systems have "`/etc/.ncbirc`" symlinked to "`/opt/ncbi/config/.ncbirc`" so that applications running on production systems (or with **`NCBI`** unset) still pick up standard configuration settings.
 
-<a name="ch-core.registry-Eflags"></a>
+<a name="ch_core.registry_Eflags"></a>
 
 ### ***Fine-Tuning Registry Parameters Using IRegistry::EFlags***
 
@@ -2199,7 +2199,7 @@ Each ***CNcbiRegistry*** entry has a set of flags that control how it is handled
 
 Some pairs of these flags are mutually exclusive and have a default if neither flag is given:
 
-<a name="ch-core.T.nc-flag-pairdefaultftransient-"></a>
+<a name="ch_core.T.nc_flag_pairdefaultftransient_"></a>
 
 | Flag Pair                            | Default           |
 |--------------------------------------|-------------------|
@@ -2230,7 +2230,7 @@ For example, the following code demonstrates that the bit-wise OR of **`        
 
                                         // outputs "[MySection]MyName=Not Overridden."
 
-<a name="ch-core.registry-mainmethods"></a>
+<a name="ch_core.registry_mainmethods"></a>
 
 ### Main Methods of ***CNcbiRegistry***
 
@@ -2266,7 +2266,7 @@ The ***Get()*** method first searches the set of `transient` parameters for a pa
 
                                         TFlags flags = 0) const;
 
-<a name="ch-core.registry-addmethods"></a>
+<a name="ch_core.registry_addmethods"></a>
 
 ### Additional Registry Methods
 
@@ -2282,7 +2282,7 @@ Four additional note-worthy methods defined in the ***CNcbiRegistry*** interface
 
 ***Empty()*** returns `                                         true` if the registry is empty. ***Clear()*** empties out the registry, discarding all stored parameters. ***EnumerateSections()*** writes all registry section names to the list of strings parameter named "sections". ***EnumerateEntries()*** writes the list of parameter names in section to the list of strings parameter named "entries".
 
-<a name="ch-core.stream-wrappers"></a>
+<a name="ch_core.stream_wrappers"></a>
 
 Portable Stream Wrappers
 ------------------------
@@ -2295,7 +2295,7 @@ Instead of using the iostream, istream or ostream, you should use the portable *
 
 The ***ncbistre.hpp*** also defines functions that handle platform-specific end of line reads. For example, ***Endl()*** represents platform specific end of line, and ***NcbiGetline()*** reads from a specified input stream to a string, and ***NcbiGetlineEOL()*** reads from a specified input stream to a string taking into account platform specific end of line.
 
-<a name="ch-core.diag"></a>
+<a name="ch_core.diag"></a>
 
 Working with Diagnostic Streams ([\*](ch_debug.html#ch_debug.std_cpp_message_post))
 -----------------------------------------------------------------------------------
@@ -2354,7 +2354,7 @@ The following topics are discussed in this section:
 
     -   [Obtaining a Stack Trace for Exceptions](ch_core.html#ch_core.Obtaining_a_Stack_Trace_for_Exce)
 
-<a name="ch-core.Where-Diagnostic-Messages-Go"></a>
+<a name="ch_core.Where_Diagnostic_Messages_Go"></a>
 
 ### Where Diagnostic Messages Go
 
@@ -2410,7 +2410,7 @@ The boolean `TryRootLogFirst` argument in the `[LOG]` section of the application
 
 -   Before the application configuration is loaded, a copy of all diagnostics is saved in memory. If the log destination is changed by the application configuration, then the saved diagnostics are dumped to the final log destination.
 
-<a name="ch-core.diag-severity"></a>
+<a name="ch_core.diag_severity"></a>
 
 ### Setting Diagnostic Severity Levels
 
@@ -2449,13 +2449,13 @@ The severity level can be set directly in **`POST`** and **`TRACE`** statements,
     ERR_POST_X(1, Critical << "Something quite
                                         bad has happened.");
 
-<a name="ch-core.diagnostic-messages-filtering"></a>
+<a name="ch_core.diagnostic_messages_filtering"></a>
 
 ### Diagnostic Messages Filtering
 
 Diagnostic messages from the ***CNcbiDiag*** and ***CException*** classes can be filtered by the source file path; or by the module, class, or function name. Messages from the ***CNcbiDiag*** class can also be filtered by error code. If a ***CException*** object is created by chaining to a previous exception, then all exceptions in the chain will be checked against the filter and the exception will pass if any exception in the chain passes (even if one of them is suppressed by a negative condition). The filter can be set by the **`TRACE_FILTER`** or **`                                         POST_FILTER`** entry in the **`[DIAG]`** section of the registry file or during runtime through [SetDiagFilter()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetDiagFilter). Messages with a severity level of **`                                             Fatal`** are not filtered; messages with a severity level of **`                                                 Trace`** are filtered by **`TRACE_FILTER`**; and all other messages are filtered by **`POST_FILTER`**. Filter strings contain filtering conditions separated by a space. An empty filter string means that all messages will appear in the log unfiltered. Filtering conditions are processed from left to right until a condition that matches the message is found. If the message does not match any of the conditions, then the message will be filtered out. Filtering conditions in the string may be preceded by an exclamation mark, which reverses the behavior (so if a message matches the condition it will be suppressed). See [Table 4](ch_core.html#ch_core.T4) for filtering condition samples and syntax.
 
-<a name="ch-core.T4"></a>
+<a name="ch_core.T4"></a>
 
 Table 4. Filter String Samples
 
@@ -2642,7 +2642,7 @@ For example:
 
 -   To log messages from sources in `src/serial` excluding those with error code 802 and subcodes 4 and 10 through 12, and to exclude messages from sources in `src/dbapi/driver`, use the following filter: “`/serial !(802.4,10-12)                                                 !/dbapi/driver`”.
 
-<a name="ch-core.Log-File-Format"></a>
+<a name="ch_core.Log_File_Format"></a>
 
 ### Log File Format
 
@@ -2672,7 +2672,7 @@ See also:
 
 ***Note:*** The old and new post formats described below apply to log messages generated by programs using the C++ Toolkit diagnostics API. Log messages generated in other ways may have different formats.
 
-<a name="ch-core.The-Old-Post-Format"></a>
+<a name="ch_core.The_Old_Post_Format"></a>
 
 #### The Old Post Format
 
@@ -2680,7 +2680,7 @@ The old format for log messages is simply a message - prefixed with the severity
 
     [<severity>: ]<Message>
 
-<a name="ch-core.The-New-Post-Format"></a>
+<a name="ch_core.The_New_Post_Format"></a>
 
 #### The New Post Format
 
@@ -2690,7 +2690,7 @@ The new format for the application log and error postings is:
                                             <guid> <psn>/<tsn> <time> <host> <client> <session>
                                             <application> <event> <message>
 
-<a name="ch-core.T.nc-fielddescriptionwidthtype-o"></a>
+<a name="ch_core.T.nc_fielddescriptionwidthtype_o"></a>
 
 Fields in the new post format:
 
@@ -2729,11 +2729,11 @@ For more details, see:
 
 -   [Examples](ch_core.html#ch_core.Examples)
 
-<a name="ch-core.Application-States"></a>
+<a name="ch_core.Application_States"></a>
 
 ##### Application States
 
-<a name="ch-core.T.nc-application-state-codemeani"></a>
+<a name="ch_core.T.nc_application_state_codemeani"></a>
 
 Application state codes:
 
@@ -2752,7 +2752,7 @@ The normal state transitions are:
 
 ![Image ch\_core\_log\_fmt\_app\_states.png](/book/static/img/ch_core_log_fmt_app_states.png)
 
-<a name="ch-core.Events-and-Messages"></a>
+<a name="ch_core.Events_and_Messages"></a>
 
 ##### Events and Messages
 
@@ -2771,7 +2771,7 @@ The `<event> <message>` portion of the log output will contain:
     stop <exit_code> <timespan>
                                                 [SIG=<exit_signal>]
 
-<a name="ch-core.T.application-stop-event--messag"></a>
+<a name="ch_core.T.application_stop_event__messag"></a>
 
 Application stop event - message sub-fields:
 
@@ -2816,7 +2816,7 @@ The `<event> <message>` portion of the log output will contain:
 
 The message sub-fields for `request-stop` events are:
 
-<a name="ch-core.T.nc-requeststop-subfielddescrip"></a>
+<a name="ch_core.T.nc_requeststop_subfielddescrip"></a>
 
 Request stop event - message sub-fields:
 
@@ -2841,7 +2841,7 @@ The `<event> <message>` portion of the log output will have the format:
 
 Thus, the `<event>` field is really just the diagnostic message severity, and the `<message>` field is composed of a number of sub-fields.
 
-<a name="ch-core.T.nc-field-or-subfielddescriptio"></a>
+<a name="ch_core.T.nc_field_or_subfielddescriptio"></a>
 
 Diagnostic message event / severity field - message sub-fields:
 
@@ -2858,7 +2858,7 @@ Diagnostic message event / severity field - message sub-fields:
 | `err_code_message`                                                                             | Short error code description                                                                                                                                                        |
 | `err_code_explanation`                                                                         | Detailed explanation of the error code                                                                                                                                              |
 
-<a name="ch-core.Examples"></a>
+<a name="ch_core.Examples"></a>
 
 ##### Examples
 
@@ -2878,7 +2878,7 @@ An example of diagnostic messages:
 
 (Click [here](/toolkit/doc/book/img/ch_core_log_fmt_diagnostic.png) for the full-resolution image.)
 
-<a name="ch-core.diag-post-flags"></a>
+<a name="ch_core.diag_post_flags"></a>
 
 #### Controlling the Appearance of Diagnostic Messages using Post Flags
 
@@ -3030,7 +3030,7 @@ The default message format displays only the severity level and the message body
 
     SetDiagPostFlag(eDPF_DateTime); // set flag globally
 
-<a name="ch-core.diag-set-stream"></a>
+<a name="ch_core.diag_set_stream"></a>
 
 ### Defining the Output Stream
 
@@ -3070,13 +3070,13 @@ To turn on the log file splitting, call (before the log file initialization):
 
 This function should be called before the application's constructor for the setting to be used from the very beginning.
 
-<a name="ch-core.Tee-Output-to-STDERR"></a>
+<a name="ch_core.Tee_Output_to_STDERR"></a>
 
 ### Tee Output to STDERR
 
 Sometimes it is helpful to generate human-readable diagnostics on the console in addition to storing detailed diagnostics in the machine-parsable log files. In these cases, it is likely that both the message severity required to trigger output and the output format should be different for the log file and the console. For example:
 
-<a name="ch-core.T.nc-severityformatlog-fileerror"></a>
+<a name="ch_core.T.nc_severityformatlog_fileerror"></a>
 
 | Destination | Severity | Format                                                             |
 |-------------|----------|--------------------------------------------------------------------|
@@ -3085,7 +3085,7 @@ Sometimes it is helpful to generate human-readable diagnostics on the console in
 
 To set up this sort of tee, set these configuration parameters (see the [Registry](ch_libconfig.html#ch_libconfig.libconfig_diag) for details):
 
-<a name="ch-core.T.nc-configuration-parameterexam"></a>
+<a name="ch_core.T.nc_configuration_parameterexam"></a>
 
 | Configuration Parameter     | Example Value | Notes                                                            |
 |-----------------------------|---------------|------------------------------------------------------------------|
@@ -3100,7 +3100,7 @@ Alternatively, you can use the ***Console*** manipulator to indicate that output
 
 ***Note:*** Output sent to the console using this manipulator will also go to the log file if the message severity at least meets the severity threshold for the log file. The effect of the manipulator lasts until the next flush, which typically occurs after each post.
 
-<a name="ch-core.diag-buffering"></a>
+<a name="ch_core.diag_buffering"></a>
 
 ### The Message Buffer
 
@@ -3114,7 +3114,7 @@ Implicit message termination also occurs as a side effect of applying one of the
 
 When the message controlled by an instance of ***CNcbiDiag*** is complete, ***CNcbiDiag*** calls a global callback function (of type [FDiagHandler](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=FDiagHandler)) and passes the message (along with its severity level) as the function arguments. The default callback function posts errors to the currently designated output stream, with the action (continue or abort) determined by the severity level of the message.
 
-<a name="ch-core.Request-Exit-Status-Codes"></a>
+<a name="ch_core.Request_Exit_Status_Codes"></a>
 
 ### Request Exit Status Codes
 
@@ -3124,7 +3124,7 @@ This section describes the possible values of the request exit codes used in NCB
 
 Request exit status codes are either [standard](ch_core.html#ch_core.Standard_HTTPlike_status_codes) or [NCBI-specific](ch_core.html#ch_core.NCBIspecific_status_codes).
 
-<a name="ch-core.Standard-HTTPlike-status-codes"></a>
+<a name="ch_core.Standard_HTTPlike_status_codes"></a>
 
 #### Standard (HTTP-like) status codes
 
@@ -3132,7 +3132,7 @@ The NCBI request exit codes must conform to the HTTP status codes:
 
 <http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html>
 
-<a name="ch-core.NCBIspecific-status-codes"></a>
+<a name="ch_core.NCBIspecific_status_codes"></a>
 
 #### NCBI-specific status codes
 
@@ -3140,7 +3140,7 @@ If the situation cannot be described using one of the [standard (HTTP) status co
 
 The NCBI-specific status codes must be different from the [standard (HTTP) status codes](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html). At the same time these codes better follow at least the range requirements of the [standard (HTTP) status codes](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html), that is they better belong to one of the following ranges:
 
-<a name="ch-core.T.nc-rangedescription120--199inf"></a>
+<a name="ch_core.T.nc_rangedescription120__199inf"></a>
 
 | Range     | Description                        |
 |-----------|------------------------------------|
@@ -3152,7 +3152,7 @@ The NCBI-specific status codes must be different from the [standard (HTTP) statu
 
 So far we have the following NCBI specific status codes:
 
-<a name="ch-core.T.nc-valuedescription0unknown-er"></a>
+<a name="ch_core.T.nc_valuedescription0unknown_er"></a>
 
 | Value        | Description                                                                                                              |
 |--------------|--------------------------------------------------------------------------------------------------------------------------|
@@ -3160,13 +3160,13 @@ So far we have the following NCBI specific status codes:
 | 555          | NCBI Network Dispatcher refused a request from and outside user which is in its "abusers list"                           |
 | 1000 + errno | Unclassifiable server error when only errno is known (NOTE: the value of errno can be different on different platforms!) |
 
-<a name="ch-core.diag-errcodes"></a>
+<a name="ch_core.diag_errcodes"></a>
 
 ### Error codes and their Descriptions
 
 Error codes and subcodes are posted to an output stream only if applicable [post flags](ch_core.html#ch_core.diag_post_flags) were set. In addition to error codes, the logging framework can also post text explanations. The [CDiagErrCodeInfo](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDiagErrCodeInfo.html) class is used to find the error message that corresponds to a given error code/subcode. Such descriptions could be specified directly in the program code or placed in a separate message file. It is even possible to use several such files simultaneously. ***CDiagErrCodeInfo*** can also read error descriptions from any input stream(s), not necessarily files.
 
-<a name="ch-core.err-msg-file"></a>
+<a name="ch_core.err_msg_file"></a>
 
 #### Preparing an Error Message File
 
@@ -3235,7 +3235,7 @@ where
 
 Error message files can be automatically read by setting a configuration parameter. You can either define the `MessageFile` entry in the `DEBUG` section of the application registry, or set the environment variable **`NCBI_CONFIG__DEBUG__MessageFile`** (note the double-underscores and character case).
 
-<a name="ch-core.diag-handlers"></a>
+<a name="ch_core.diag_handlers"></a>
 
 ### Defining Custom Handlers using CDiagHandler
 
@@ -3259,7 +3259,7 @@ The user can install his own handler (of type [CDiagHandler](http://www.ncbi.nlm
 
 where [SDiagMessage](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SDiagMessage) is a simple struct defined in `ncbidiag.hpp` whose data members' values are obtained from the ***CNcbiDiag*** object. The transfer of data values occurs at the time that ***Post*** is invoked. See also the section on [Message posting](ch_debug.html#ch_debug.std_cpp_message_post) for a more technical discussion.
 
-<a name="ch-core.ERR-POST"></a>
+<a name="ch_core.ERR_POST"></a>
 
 ### The ERR\_POST and LOG\_POST Macros
 
@@ -3355,7 +3355,7 @@ Generally, the default error code and the **`ERR_POST_X`** macro should be used.
 
                                         ERR_POST(ErrCode(1501, 3) << "My error message.");
 
-<a name="ch-core.-TRACE"></a>
+<a name="ch_core._TRACE"></a>
 
 ### The \_TRACE macro
 
@@ -3373,7 +3373,7 @@ Just like **`ERR_POST`**, the **`                                         _TRACE
 
 Here, only the second trace message will be posted, as tracing is disabled when the first **`_TRACE()`** macro call is executed.
 
-<a name="ch-core.Stack-Traces"></a>
+<a name="ch_core.Stack_Traces"></a>
 
 ### Stack Traces
 
@@ -3385,7 +3385,7 @@ Using stack traces with diagnostics is discussed in the following topics:
 
 -   [Obtaining a Stack Trace for Exceptions](ch_core.html#ch_core.Obtaining_a_Stack_Trace_for_Exce)
 
-<a name="ch-core.Printing-a-Stack-Trace"></a>
+<a name="ch_core.Printing_a_Stack_Trace"></a>
 
 #### Printing a Stack Trace
 
@@ -3418,7 +3418,7 @@ An example of a stack trace output on Linux:
 
                                             ./my_prog ???:0 std::__throw_logic_error(char const*) offset=0x62
 
-<a name="ch-core.Obtaining-a-Stack-Trace-for-Exce"></a>
+<a name="ch_core.Obtaining_a_Stack_Trace_for_Exce"></a>
 
 #### Obtaining a Stack Trace for Exceptions
 
@@ -3467,7 +3467,7 @@ An example of an exception with a stack trace on Linux:
 
                                             ./my_prog ???:0 std::__throw_logic_error(char const*) offset=0x62
 
-<a name="ch-core.debug-module-ref"></a>
+<a name="ch_core.debug_module_ref"></a>
 
 Debug Macros
 ------------
@@ -3476,7 +3476,7 @@ A number of debug macros such as **`_TRACE`**, **`_TROUBLE`**, **`_ASSERT`**, **
 
 These macros are part of CORELIB. However, they are discussed in a separate chapter on [Debugging, Exceptions, and Error Handling](ch_debug.html).
 
-<a name="ch-core.exception-handling-ref"></a>
+<a name="ch_core.exception_handling_ref"></a>
 
 Handling Exceptions
 -------------------
@@ -3485,7 +3485,7 @@ The CORELIB defines an extended exception handling mechanism based on the C++ st
 
 While the extended exception handling mechanism is part of CORELIB, it is discussed in a separate chapter on [Debugging, Exceptions, and Error Handling](ch_debug.html).
 
-<a name="ch-core.std-ncbi-types"></a>
+<a name="ch_core.std_ncbi_types"></a>
 
 Defining the Standard NCBI C++ types and their Limits
 -----------------------------------------------------
@@ -3506,7 +3506,7 @@ The following topics are discussed in this section:
 
 -   [Encouraged and Discouraged Types](ch_core.html#ch_core.types_policy)
 
-<a name="ch-core.port-header-files"></a>
+<a name="ch_core.port_header_files"></a>
 
 ### Headers Files containing Portability Definitions
 
@@ -3522,13 +3522,13 @@ The following topics are discussed in this section:
 
 -   [corelib/ncbi\_limits.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbi_limits.hpp) -- temporary (and incomplete) replacement for the Standard C++ Template Library's API
 
-<a name="ch-core.built-in-integral-types"></a>
+<a name="ch_core.built_in_integral_types"></a>
 
 ### Built-in Integral Types
 
 We [encourage](ch_core.html#ch_core.types_policy) the use of standard C/C++ types shown in [Table 5](ch_core.html#ch_core.T5), and we state that the following assumptions (no less, no more) on their sizes and limits will be valid for all supported platforms:
 
-<a name="ch-core.T5"></a>
+<a name="ch_core.T5"></a>
 
 Table 5. Standard C/C++ Types
 
@@ -3609,15 +3609,15 @@ Table 5. Standard C/C++ Types
 </tbody>
 </table>
 
-<a name="ch-core.TF.5"></a>
+<a name="ch_core.TF.5"></a>
 
 Types ***"long"*** and ***"float"*** are [**discouraged**](ch_core.html#ch_core.types_policy) to use in the portable code.
 
-<a name="ch-core.TF.6"></a>
+<a name="ch_core.TF.6"></a>
 
 Type ***"long long"*** is **prohibited** to use in the portable code.
 
-<a name="ch-core.auxiliary-types"></a>
+<a name="ch_core.auxiliary_types"></a>
 
 ### Auxiliary Types
 
@@ -3627,7 +3627,7 @@ Use type ***"size\_t"*** to represent a size of memory structure, e.g. obtained 
 
 Use type ***"SIZE\_TYPE"*** to represent a size of standard C++ ***"string"*** - this is a portable substitution for ***"std::string::size\_type"***.
 
-<a name="ch-core.fixed-size-integers"></a>
+<a name="ch_core.fixed_size_integers"></a>
 
 ### Fixed-size Integer Types
 
@@ -3639,7 +3639,7 @@ Sometimes it is necessary to use an integer type which:
 
 NCBI C++ standard headers provide the fixed-size integer types shown in [Table 6](ch_core.html#ch_core.T6):
 
-<a name="ch-core.T6"></a>
+<a name="ch_core.T6"></a>
 
 Table 6. Fixed-integer Types
 
@@ -3656,7 +3656,7 @@ Table 6. Fixed-integer Types
 
 In [Table 7](ch_core.html#ch_core.T7), the **`"kM*_*"`** are constants of relevant fixed-size integer type. They are guaranteed to be equal to the appropriate `preprocessor constants` from the old NCBI C headers(**`"INT*_M*"`**). Please also note that the mentioned **`"INT*_M*"`** are not defined in the C++ headers - in order to discourage their use in the C++ code.
 
-<a name="ch-core.T7"></a>
+<a name="ch_core.T7"></a>
 
 Table 7. Correspondence between the kM\*\_\* constants and the old style INT\*\_M\* constants
 
@@ -3675,13 +3675,13 @@ Table 7. Correspondence between the kM\*\_\* constants and the old style INT\*\_
 | **`kMax_I8`**      | +9223372036854775807  | **`INT8_MAX`**  |
 | **`kMax_UI8`**     | +18446744073709551615 | **`UINT8_MAX`** |
 
-<a name="ch-core.big-scalar"></a>
+<a name="ch_core.big_scalar"></a>
 
 ### The ***"Ncbi\_BigScalar"*** Type
 
 NCBI C++ standard headers also define a special type ***"Ncbi\_BigScalar"***. The only assumption that can be made(and used in your code) is that ***"Ncbi\_BigScalar"*** variable has a size which is enough to hold any integral, floating-point or pointer variable like ***"Int8"***, or ***"double"("long double")***, or ***"void\*"***. This type can be useful e.g. to hold a callback data of arbitrary fundamental type; however, in general, the use of this type is discouraged.
 
-<a name="ch-core.types-policy"></a>
+<a name="ch_core.types_policy"></a>
 
 ### Encouraged and Discouraged Types
 
@@ -3695,7 +3695,7 @@ For the sake of code portability and for better compatibility with the third-par
 
 -   For the policy on other types see in sections ["Auxiliary types"](ch_core.html#ch_core.auxiliary_types) and "Floating point types".
 
-<a name="ch-core.smart-ptrs"></a>
+<a name="ch_core.smart_ptrs"></a>
 
 Understanding Smart Pointers: the ***CObject*** and ***CRef*** Classes
 ----------------------------------------------------------------------
@@ -3716,7 +3716,7 @@ The following is a list of topics discussed in this section:
 
 -   [CRef Pitfalls](ch_core.html#ch_core.CRef_pitfalls)
 
-<a name="ch-core.auto-ptr"></a>
+<a name="ch_core.auto_ptr"></a>
 
 ### STL auto\_ptrs
 
@@ -3750,7 +3750,7 @@ Even if this first problem did not occur - for example if only one ***auto\_ptr*
 
 The problem with using ***auto\_ptr*** is that it provides semantics of strict ownership. When an ***auto\_ptr*** is destructed, it deletes the object it points to, and therefore the object should not be pointed to simultaneously by others. Two or more ***auto\_ptr***s should not own the same object; that is, point to the same object. This can occur if two ***auto\_ptr***s are initialized to the same object, as seen in the above example where auto pointers **`a1`** and **`a2`** are both initialized with **`ip`**. In using ***auto\_ptr***, the programmer must ensure that situations similar to the above do not occur.
 
-<a name="ch-core.CRef"></a>
+<a name="ch_core.CRef"></a>
 
 ### The CRef ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCRef.html)) Class
 
@@ -3789,7 +3789,7 @@ Each member function of the ***CRef*** class also has a `const` implementation t
 
 As described there, this `typedef` defines ***TId*** to be a list of pointers to [CBiostruc\_id](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBiostruc__id.html) objects. And as you might expect, ***CBiostruc\_id*** is a specialized subclass of ***CObject***.
 
-<a name="ch-core.CObject"></a>
+<a name="ch_core.CObject"></a>
 
 ### The CObject ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObject.html)) Class
 
@@ -3797,7 +3797,7 @@ The ***CObject*** class serves as a base class for all objects requiring a refer
 
 The ***CObject*** class contains a single private data member, the reference counter, and a set of member functions which provide an interface to the reference counter. As such, it is truly a base class which has no stand-alone utility, as it does not even provide allocation for data values. It is the `descendant` classes, which inherit all the functionality of the ***CObject*** class, that provide the necessary richness in representation and allocation required for the widely diverse set of objects implemented in the NCBI C++ Toolkit. Nevertheless, it is often necessary to use smart pointers on simple data types, such as ***int***, ***string*** etc. The ***CObjectFor*** class, described below, was designed for this purpose.
 
-<a name="ch-core.CObjectFor"></a>
+<a name="ch_core.CObjectFor"></a>
 
 ### The CObjectFor ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectFor.html)) class: using smart pointers for standard types
 
@@ -3807,7 +3807,7 @@ An example program, [smart.cpp](ch_demo.html#ch_demo.examples_1_4), uses the [CR
 
 In the first case, the original auto\_ptr, **`orig_ap`**, becomes `NULL` at the moment when ownership is transferred to **`copy_ap`** by the copy constructor. Using ***CRef*** objects however, the reference contained in the original ***CRef*** remains accessible (via **`orig`**) in all blocks where **`                                         orig`** is defined. Moreover, the reference itself, i.e. the object pointed to, continues to exist until **all** references to it have been removed.
 
-<a name="ch-core.CRef-usage"></a>
+<a name="ch_core.CRef_usage"></a>
 
 ### When to use CRefs and auto\_ptrs
 
@@ -3829,11 +3829,11 @@ If ***ComplexFunction()*** executes normally, control returns to the block where
 
 One situation where they may not be required is when a pointer is embedded inside another object. If that object's destructor also handles the deallocation of its embedded objects, then it is sufficient to use a ***CRef*** on the containing object only.
 
-<a name="ch-core.CRef-pitfalls"></a>
+<a name="ch_core.CRef_pitfalls"></a>
 
 ### CRef Pitfalls
 
-<a name="ch-core.object-destruction"></a>
+<a name="ch_core.object_destruction"></a>
 
 #### Inadvertent Object Destruction
 
@@ -3873,7 +3873,7 @@ In this example the function ***f()*** establishes a local ***CRef*** to the ***
 
                                             // the CMy object pointed to by "a" is not destroyed!
 
-<a name="ch-core.atomic-counters"></a>
+<a name="ch_core.atomic_counters"></a>
 
 Atomic Counters
 ---------------
@@ -3944,7 +3944,7 @@ The ***CMutableAtomicCounter*** uses the ***CAtomicCounter*** as its internal st
 
                                     };
 
-<a name="ch-core.portable-dll"></a>
+<a name="ch_core.portable_dll"></a>
 
 Portable mechanisms for loading DLLs
 ------------------------------------
@@ -3963,7 +3963,7 @@ The following additional topics are described in this section:
 
 -   [Other CDll Methods](ch_core.html#ch_core.CDll_methods)
 
-<a name="ch-core.CDll-constructor"></a>
+<a name="ch_core.CDll_constructor"></a>
 
 ### CDll Constructor
 
@@ -4012,13 +4012,13 @@ The parameter **`flags`** is defined as an enum type of ***EFlags*** and has the
     fDefault = fLoadNow | fNoAutoUnload | fBaseName
                                         | fGlobal
 
-<a name="ch-core.CDll-basename"></a>
+<a name="ch_core.CDll_basename"></a>
 
 ### CDll Basename
 
 The DLL name is considered the basename if it does not contain embedded '/', '\\', or ':' symbols. Also, in this case, if the DLL name does not match the pattern "lib\*.so", "lib\*.so.\*", or "\*.dll" and if `eExactName` flag is not passed to the constructor, then it will be automatically transformed according to the following rules:
 
-<a name="ch-core.T.nc-osruleunixlikename--libname"></a>
+<a name="ch_core.T.nc_osruleunixlikename__libname"></a>
 
 | OS        | Rule                     |
 |-----------|--------------------------|
@@ -4047,7 +4047,7 @@ If the DLL is specified by its basename, then it will be searched after the tran
 
     -   The directories that are listed in the **`PATH`** environment variable
 
-<a name="ch-core.CDll-methods"></a>
+<a name="ch_core.CDll_methods"></a>
 
 ### Other CDll Methods
 
@@ -4069,7 +4069,7 @@ This method returns the entry point's address on success, or NULL on error. If t
 
 Some sample code illustrating the use of these methods is shown in [src/corelib/test/test\_ncbidll.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib/test/test_ncbidll.cpp)
 
-<a name="ch-core.CExec"></a>
+<a name="ch_core.CExec"></a>
 
 Executing Commands and Spawning Processes using the CExec class
 ---------------------------------------------------------------
@@ -4086,7 +4086,7 @@ The following topics relating to the ***CExec*** class are discussed, next:
 
 -   [Waiting for a Process to Terminate using the Wait() method](ch_core.html#ch_core.wait_method)
 
-<a name="ch-core.system-call"></a>
+<a name="ch_core.system_call"></a>
 
 ### Executing a System Command using the System() Method
 
@@ -4096,7 +4096,7 @@ You can use the class-wide ***CExec::System()*** method to execute a system comm
 
 ***CExec::System()*** returns the executed command's exit code and throws an exception if the command failed to execute. If cmdline is a null pointer, ***CExec::System()*** checks if the shell (command interpreter) exists and is executable. If the shell is available, ***System()*** returns a non-zero value; otherwise, it returns 0.
 
-<a name="ch-core.process-modes"></a>
+<a name="ch_core.process_modes"></a>
 
 ### Defining Spawned Process Modes (EMode type)
 
@@ -4110,7 +4110,7 @@ The spawned process can be created in several modes defined by the enum type ***
 
 -   `eDetach`: This mode continues to execute the calling process and new process is "detached" and run in background with no access to console or keyboard. Calls to ***Wait()*** against new process will fail. This is an asynchronous spawn.
 
-<a name="ch-core.spawn-process"></a>
+<a name="ch_core.spawn_process"></a>
 
 ### Spawning a Process using SpawnX() Methods
 
@@ -4160,7 +4160,7 @@ Refer to the [include/corelib/ncbiexec.hpp](http://www.ncbi.nlm.nih.gov/IEB/Tool
 
 Some sample code illustrating the use of these methods is shown in [src/corelib/test/test\_ncbiexec.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib/test/test_ncbiexec.cpp)
 
-<a name="ch-core.wait-method"></a>
+<a name="ch_core.wait_method"></a>
 
 ### Waiting for a Process to Terminate using the Wait() method
 
@@ -4170,7 +4170,7 @@ The ***CExec*** class defines a ***Wait()*** method that causes a process to wai
 
 The argument to the ***Wait()*** method is the pid (process ID) of the child process on which the caller is waiting to terminate. ***Wait()*** returns immediately if the specified child process has already terminated and returns an exit code of the child process, if there are no errors; or a -1, if an error has occurred.
 
-<a name="ch-core.threads"></a>
+<a name="ch_core.threads"></a>
 
 Implementing Parallelism using Threads and Synchronization Mechanisms
 ---------------------------------------------------------------------
@@ -4195,7 +4195,7 @@ The following topics are discussed in this section:
 
 -   [Thread local storage (CTls\<\> class [\*])](ch_core.html#ch_core.thread_local_storage)
 
-<a name="ch-core.using-threads"></a>
+<a name="ch_core.using_threads"></a>
 
 ### Using Threads
 
@@ -4289,25 +4289,25 @@ It is important not to terminate the program until there are running threads. Pr
 
 The following subsections discuss the individual classes in more detail.
 
-<a name="ch-core.thread-public-methods"></a>
+<a name="ch_core.thread_public_methods"></a>
 
 ### CThread ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CThread)) class public methods
 
 ***CThread(void)*** Create the thread object (without running it). ***bool Run(void)*** Spawn the new thread, initialize internal ***CThread*** data and launch user-provided ***Main()***. The method guarantees that the new thread will start before it returns to the calling function. ***void Detach(void)*** Inform the thread that user does not need to wait for its termination. Detached thread will destroy itself after termination. If ***Detach()*** is called for a thread, which has already terminated, it will be scheduled for destruction immediately. Only one call to ***Detach()*** is allowed for each thread object. ***void Join(void\*\* exit\_data)*** Wait for the thread termination. ***Join()*** will store the ***void*** pointer as returned by the user's ***Main()*** method, or passed to the ***Exit()*** function to the **`exit_data`**. Then the thread will be scheduled for destruction. Only one call to ***Join()*** is allowed for each thread object. If called more than once, ***Join()*** will cause a runtime error. ***static void Exit(void\* exit\_data)*** This function may be called by a thread object itself to terminate the thread. The thread will be terminated and, if already detached, scheduled for destruction. **`exit_data`** value is transferred to the ***Join()*** function as if it was returned by the ***Main()***. ***Exit()*** will also call virtual method ***OnExit()*** to execute user-provided cleanup code (if any). ***bool Discard(void)*** Schedules the thread object for destruction if it has not been run yet. This function is provided since there is no other way to delete a thread object without running it. On success, return `true`. If the thread has already been run, ***Discard()*** do nothing and return `false`. ***static CThread::TID GetSelf(void)*** This method returns a unique thread ID. This ID may be then used to identify threads, for example, to track the owner of a shared resource. Since the main thread has no associated ***CThread*** object, a special value of 0 (zero) is reserved for the main thread ID.
 
-<a name="ch-core.thread-protected-methods"></a>
+<a name="ch_core.thread_protected_methods"></a>
 
 ### CThread ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CThread)) class protected methods
 
 ***virtual void\* Main(void)Main()*** is the thread's main function (just like an application ***main()*** function). This method is not defined in the ***CThread*** class. It must be provided by derived user-defined class. The return value is passed to the ***Join()*** function (and thus may be used by another thread for some sort of inter-thread communication). ***virtual void OnExit(void)*** This method is called (in the context of the thread) just before the thread termination to cleanup thread-specific resources. ***OnExit()*** is NOT called by ***Discard()***, since the thread has not been run in this case and there are no thread-specific data to destroy. ***virtual ~CThread(void)*** The destructor is protected to avoid thread object premature destruction. For this reason, no thread object can be static or stack-allocated. It is important to declare any ***CThread*** derived class destructor as `protected`.
 
-<a name="ch-core.thread-life-cycle"></a>
+<a name="ch_core.thread_life_cycle"></a>
 
 ### Thread Life Cycle
 
 [Figure 2](ch_core.html#ch_core.F2) shows a typical thread life cycle. The figure demonstrates that thread constructors are called from the parent thread. The child thread is spawned by the ***Run()*** function only. Then, the user-provided ***Main()*** method (containing code created by user) gets executed. The thread's destructor may be called in the context of either parent or child thread depending on the state of the thread at the moment when ***Join()*** or ***Detach()*** is called.
 
-<a name="ch-core.F2"></a>
+<a name="ch_core.F2"></a>
 
 ![Figure 2. Thread Life Cycle](/book/static/img/thread_life_cycle.gif)
 
@@ -4333,13 +4333,13 @@ This means that cleaning up thread-specific data can not be done from the thread
 
 There is one more possibility to destroy a thread. If a thread has been created, but does not need to be run, one can use ***Discard()*** method to destroy the thread object without running it. Again, the object will not be destroyed until there are ***CRef***s referencing it.
 
-<a name="ch-core.referencing-threads"></a>
+<a name="ch_core.referencing_threads"></a>
 
 ### Referencing Thread Objects
 
 It should be emphasized that regular (C) pointer to a thread object is not reliable. The thread may terminate at unpredictable moment, destroying itself. There is no possibility to safely access thread object after ***Join()*** using C pointers. The only solution to this problem is to use ***CRef*** class. ***CThread*** class provides a mechanism to prevent premature destruction if there are ***CRef*** references to the thread object.
 
-<a name="ch-core.thread-local-storage"></a>
+<a name="ch_core.thread_local_storage"></a>
 
 ### Thread local storage (CTls\<\> class [[\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CTls)])
 
@@ -4393,7 +4393,7 @@ By default, all TLS objects are destroyed on program termination, since in most 
 
 Calling ***Discard()*** will schedule the TLS to be destroyed as soon as there are no ***CRef*** references to the object left. The method should be used with care.
 
-<a name="ch-core.mutexes"></a>
+<a name="ch_core.mutexes"></a>
 
 ### Mutexes
 
@@ -4415,7 +4415,7 @@ These classes are discussed in the subsections that follow:
 
 -   [Lock Classes](ch_core.html#ch_core.lock_classes)
 
-<a name="ch-core.CMutex"></a>
+<a name="ch_core.CMutex"></a>
 
 #### CMutex
 
@@ -4483,7 +4483,7 @@ It is important not to unlock the mutex protected by a mutex guard. ***CFastMute
 
 In addition to usual ***Lock()*** and ***Unlock()*** methods, the ***CMutex*** class implements a method to test the mutex state before locking it. ***TryLock()*** method attempts to acquire the mutex for the calling thread and returns `true` on success (this includes nested locks by the same thread) or `false` if the mutex has been acquired by another thread. After a successful ***TryLock()*** the mutex should be unlocked like after regular ***Lock()***.
 
-<a name="ch-core.CFastMutex"></a>
+<a name="ch_core.CFastMutex"></a>
 
 #### CFastMutex
 
@@ -4527,7 +4527,7 @@ The ***CFastMutex*** should be used only to protect small and simple parts of co
 
                                             }
 
-<a name="ch-core.SSystemMutex"></a>
+<a name="ch_core.SSystemMutex"></a>
 
 #### SSystemMutex and SSystemFastMutex
 
@@ -4535,13 +4535,13 @@ The ***CMutex*** class is built on the platform-dependent mutex class, ***SSyste
 
 Each of the ***SSystemMutex*** and ***SSystemFastMutex*** classes have the ***Lock()***, ***TryLock()*** and ***Unlock()*** methods that are platform specific. These methods are used by the platform independent classes, ***CMutex*** and ***CFastMutex*** to provide locking and unlocking services.
 
-<a name="ch-core.CMutexGuard"></a>
+<a name="ch_core.CMutexGuard"></a>
 
 #### CMutexGuard and CFastMutexGuard
 
 The ***CMutexGuard*** and the ***CFastMutexGuard*** classes provide platform independent read and write lock guards to the mutexes. These classes are aliased as typedefs TReadLockGuard and TWriteLockGuard in the ***CMutexGuard*** and the ***CFastMutexGuard*** classes.
 
-<a name="ch-core.lock-classes"></a>
+<a name="ch_core.lock_classes"></a>
 
 #### Lock Classes
 
@@ -4573,7 +4573,7 @@ The following subsections describe these locks in more detail:
 
 -   [CSemaphore](ch_core.html#ch_core.CSemaphore)
 
-<a name="ch-core.CRWLock"></a>
+<a name="ch_core.CRWLock"></a>
 
 ##### CRWLock
 
@@ -4599,7 +4599,7 @@ The ***TryReadLock()*** and ***TryWriteLock()*** methods are used to try and acq
 
 As expected from the name, the ***Unlock()*** method releases the RW-lock.
 
-<a name="ch-core.CAutoRW"></a>
+<a name="ch_core.CAutoRW"></a>
 
 ##### CAutoRW
 
@@ -4607,7 +4607,7 @@ The ***CAutoRW*** class is used to provide a Read Write lock that is automatical
 
 An acquired lock can be released by an explicit call to the class ***Release()*** method. The lock can also be released by the class destructor. When the destructor is called the lock if successfully acquired and not already released by ***Release()*** is released.
 
-<a name="ch-core.CReadLockGuard"></a>
+<a name="ch_core.CReadLockGuard"></a>
 
 ##### CReadLockGuard
 
@@ -4615,7 +4615,7 @@ The ***CReadLockGuard*** class is used to provide a basic read lock guard that c
 
 The class constructor can be passed a ***CRWLock*** object on which a read lock is acquired, and which is registered to be released by the class destructor. The class's ***Guard()*** method can also be called with a ***CRWLock*** object and if this is not the same as the already registered ***CRWLock*** object, the old registered object is released, and the new ***CRWLock*** object is registered and a read lock acquired on it.
 
-<a name="ch-core.CWriteLockGuard"></a>
+<a name="ch_core.CWriteLockGuard"></a>
 
 ##### CWriteLockGuard
 
@@ -4623,13 +4623,13 @@ The ***CWriteLockGuard*** class is used to provide a basic write lock guard that
 
 The class constructor can be passed a ***CRWLock*** object on which a write lock is acquired, and which is registered to be released by the class destructor. The class's ***Guard()*** method can also be called with a ***CRWLock*** object and if this is not the same as the already registered ***CRWLock*** object, the old registered object is released, and the new ***CRWLock*** object is registered and a write lock acquired on it.
 
-<a name="ch-core.CInternalRWLock"></a>
+<a name="ch_core.CInternalRWLock"></a>
 
 ##### CInternalRWLock
 
 The ***CInternalRWLock*** class holds platform dependent RW-lock data such as data on semaphores and mutexes. This class is not meant to be used directly by user applications. This class is used by other classes such as the ***CRWLock*** class.
 
-<a name="ch-core.CSemaphore"></a>
+<a name="ch_core.CSemaphore"></a>
 
 ##### CSemaphore
 
@@ -4644,7 +4644,7 @@ The ***TryWait()*** method can wait for the specified time for the semaphore's c
 
 The semaphore count is incremented by the ***Post()*** method and an exception is thrown if the maximum count is exceeded.
 
-<a name="ch-core.files-dirs"></a>
+<a name="ch_core.files_dirs"></a>
 
 Working with File and Directories Using CFile and CDir
 ------------------------------------------------------
@@ -4661,7 +4661,7 @@ The following sections discuss the file and directory classes in more detail:
 
 -   [Waiting for a Process to Terminate using the Wait() method](ch_core.html#ch_core.wait_method)
 
-<a name="ch-core.CDirEntry"></a>
+<a name="ch_core.CDirEntry"></a>
 
 ### CDirEntry class
 
@@ -4831,7 +4831,7 @@ Other methods in ***CDirEntry*** deal specifically with checking the attributes 
 
 These methods are inherited by the derived classes ***CDir*** and ***CFile*** that are used to access directories and files, respectively.
 
-<a name="ch-core.CFile"></a>
+<a name="ch_core.CFile"></a>
 
 ### CFile class
 
@@ -4873,7 +4873,7 @@ Additionally, you can specify the type of operations (read, write) that should b
 
                                         };
 
-<a name="ch-core.CDir"></a>
+<a name="ch_core.CDir"></a>
 
 ### CDir class
 
@@ -4895,7 +4895,7 @@ The [CDir](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDir.ht
 
 The last method on the list, the ***Remove()*** method accepts an enumeration type parameter, ***EDirRemoveMode***, defined in the [CDirEntry](ch_core.html#ch_core.CDirEntry) class which specifies the extent of the directory removal operation - you can delete only an empty directory, only files in a directory but not any subdirectories, or remove the entire directory tree.
 
-<a name="ch-core.CMemoryFile"></a>
+<a name="ch_core.CMemoryFile"></a>
 
 ### CMemoryFile class
 
@@ -4950,7 +4950,7 @@ The methods ***MemMapAdvise()*** and ***MemMapAdviseAddr()*** allow one to advis
 
 The memory usage advice is implemented on Unix platforms only, and is not supported on Windows platforms.
 
-<a name="ch-core.string-classes"></a>
+<a name="ch_core.string_classes"></a>
 
 String APIs
 -----------
@@ -4967,7 +4967,7 @@ The following sections provide additional details on string APIs
 
 -   [PCase and PNocase](ch_core.html#ch_core.pcase)
 
-<a name="ch-core.string-consts"></a>
+<a name="ch_core.string_consts"></a>
 
 ### String Constants
 
@@ -4979,13 +4979,13 @@ The C++-language style empty string constants are **`NcbiEmptyString`** and the 
 
 The **`SIZE_TYPE`** is an alias for the string::size\_type, and the **`NPOS`** defines a constant that is returned when a substring search fails, or to indicate an unspecified string position.
 
-<a name="ch-core.NStr"></a>
+<a name="ch_core.NStr"></a>
 
 ### NStr Class
 
 The ***NStr*** class encapsulates a number of class-wide static methods. These include string concatenation, string conversion, string comparison, string search functions. Most of these string operations should be familiar to developers by name. For details, see the ***NStr*** [static methods documentation](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classNStr.html#pub-static-methods).
 
-<a name="ch-core.UTF-strings"></a>
+<a name="ch_core.UTF_strings"></a>
 
 ### UTF-8 Strings
 
@@ -5009,7 +5009,7 @@ Conversion to ASCII from ***CStringUTF8*** is defined by the ***AsAscii()*** met
 
                                         wstring AsUnicode(void) const
 
-<a name="ch-core.pcase"></a>
+<a name="ch_core.pcase"></a>
 
 ### PCase and PNocase
 
@@ -5017,7 +5017,7 @@ The ***PCase*** and ***PNocase*** structures define case-sensitive and case-inse
 
 A convenience template function ***AStrEquiv*** is defined that accepts the two classes to be compared as template parameters and a third template parameter that can be the comparison class such as the ***PCase*** and ***PNocase*** defined above.
 
-<a name="ch-core.portable-time-class"></a>
+<a name="ch_core.portable_time_class"></a>
 
 Portable Time Class
 -------------------
@@ -5030,7 +5030,7 @@ The subsections that follow discuss the following topics:
 
 -   [Other CTime Methods](ch_core.html#ch_core.CTimeMethods)
 
-<a name="ch-core.CTime"></a>
+<a name="ch_core.CTime"></a>
 
 ### ***CTime*** Class Constructors
 
@@ -5060,7 +5060,7 @@ The explicit conversion constructor allows the conversion to be made from a stri
 
 There is also a copy constructor defined that permits copy operations for ***CTime*** objects.
 
-<a name="ch-core.CTimeMethods"></a>
+<a name="ch_core.CTimeMethods"></a>
 
 ### Other ***CTime*** Methods
 
@@ -5088,7 +5088,7 @@ If you need to work with time zones explicitly, you can use ***GetTimeZoneFormat
 
 Also defined for ***CTime*** are assignment operators to assign a ***CTime*** object to another ***CTime*** and an assignment operator where the right hand side is a time value string.
 
-<a name="ch-core.template-utils"></a>
+<a name="ch_core.template_utils"></a>
 
 Template Utilities
 ------------------
@@ -5101,7 +5101,7 @@ The following topics are discussed in this section:
 
 -   [Template Functions](ch_core.html#ch_core.template_functions)
 
-<a name="ch-core.function-objects"></a>
+<a name="ch_core.function_objects"></a>
 
 ### Function Objects
 
@@ -5109,7 +5109,7 @@ The ***p\_equal\_to*** and ***pair\_equal\_to*** are template function classes t
 
 The ***CNameGetter*** template defines the function ***GetKey()***, which returns the name attribute for the template parameter.
 
-<a name="ch-core.template-functions"></a>
+<a name="ch_core.template_functions"></a>
 
 ### Template Functions
 
@@ -5131,7 +5131,7 @@ The ***AutoMap()*** template function works with a cache pointed to ***auto\_ptr
 
 A ***FindBestChoice()*** template function is defined that returns the best choice (lowest score) value in the container. The container and scoring functions are specified as template parameters. The ***FindBestChoice()*** in turn uses the ***CBestChoiceTracker*** template class, which uses the standard unary\_function as its base class. The ***CBestChoiceTracker*** contains the logic to record the scoring function and keep track of the current value and the best score.
 
-<a name="ch-core.misc-types-macros"></a>
+<a name="ch_core.misc_types_macros"></a>
 
 Miscellaneous Types and Macros
 ------------------------------
@@ -5148,7 +5148,7 @@ The following topics are discussed in this section:
 
 -   [Sequence Position Types](ch_core.html#ch_core.seq_pos_types)
 
-<a name="ch-core.misc-enum-types"></a>
+<a name="ch_core.misc_enum_types"></a>
 
 ### Miscellaneous Enumeration Types
 
@@ -5156,7 +5156,7 @@ The enum type ***EOwnership*** defines the constants `eNoOwnership` and `       
 
 The enum type ***ENullable*** defines the constants `eNullable` and `                                         eNotNullable`. These are used to specify if a data element can hold a null or not-null value.
 
-<a name="ch-core.AutoPtr"></a>
+<a name="ch_core.AutoPtr"></a>
 
 ### AutoPtr Class
 
@@ -5166,7 +5166,7 @@ Another class related to the ***auto\_ptr*** class is the ***AutoPtr*** class. T
 
 A certain amount of flexibility has been provided in terms of how the pointer is to be deleted. This is done by passing a second argument to the ***AutoPtr*** template. This second argument allows the passing of a functor object that defines the deletion of the object. You can define "malloc" pointers in ***AutoPtr***, or you can use an ***ArrayDeleter*** template class to properly delete an array of objects using "delete[]". By default, the internal pointer will be deleted using the "delete" operator.
 
-<a name="ch-core.ITERATE-macros"></a>
+<a name="ch_core.ITERATE_macros"></a>
 
 ### ITERATE macros
 
@@ -5194,13 +5194,13 @@ Therefore, to make it easier to write code that will correctly and efficiently i
 
 The **`ITERATE`** and **`                                         NON_CONST_ITERATE`** macros are defined in [include/corelib/ncbimisc.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbimisc.hpp), along with related macros including **`                                                 NON_CONST_SET_ITERATE`**, **`ERASE_ITERATE`**, **`VECTOR_ERASE`**, **`REVERSE_ITERATE`**, **`ITERATE_SIMPLE`**, and more.
 
-<a name="ch-core.seq-pos-types"></a>
+<a name="ch_core.seq_pos_types"></a>
 
 ### Sequence Position Types
 
 The ***TSeqPos*** and and ***TSignedSeqPos*** are defined to specify sequence locations and length. ***TSeqPos*** is defined as an unsigned int, and ***TSignedSqPos*** is a signed int that should be used only when negative values are a possibility for reporting differences between positions, or for error reporting, although exceptions are generally better for error reporting.
 
-<a name="ch-core.Containers"></a>
+<a name="ch_core.Containers"></a>
 
 Containers
 ----------
@@ -5217,13 +5217,13 @@ The following classes are described in this section:
 
 -   [class CIntervalTree](ch_core.html#ch_core.class_CIntervalTree)
 
-<a name="ch-core.template-typename-Co"></a>
+<a name="ch_core.template_typename_Co"></a>
 
 ### template\<typename Coordinate\> class CRange
 
 Class for storing information about some interval (from:to). From and to points are inclusive.
 
-<a name="ch-core.-Typedefs-1"></a>
+<a name="ch_core._Typedefs_1"></a>
 
 #### Typedefs
 
@@ -5231,7 +5231,7 @@ Class for storing information about some interval (from:to). From and to points 
 
 synonym of Coordinate.
 
-<a name="ch-core.-Methods-1"></a>
+<a name="ch_core._Methods_1"></a>
 
 #### Methods
 
@@ -5305,25 +5305,25 @@ check if non empty intervals intersect
 
 check if intervals intersect
 
-<a name="ch-core.-template-typename-Ob-2"></a>
+<a name="ch_core._template_typename_Ob_2"></a>
 
 ### template\<typename Object, typename Coordinate = int\> class CRangeMap
 
 Class for storing and retrieving data using interval as key. Also allows efficient iteration over intervals intersecting with specified interval. Time of iteration is proportional to amount of intervals produced by iterator. In some cases, algorithm is not so efficient and may slowdown.
 
-<a name="ch-core.-template-typename-Ob-3"></a>
+<a name="ch_core._template_typename_Ob_3"></a>
 
 ### template\<typename Object, typename Coordinate = int\> class CRangeMultiMap
 
 Almost the same as [CRangeMap](ch_core.html#ch_core._template_typename_Ob_2) but allows several values have the same key interval.
 
-<a name="ch-core.class-CIntervalTree"></a>
+<a name="ch_core.class_CIntervalTree"></a>
 
 ### class CIntervalTree
 
 Class with the same functionality as [CRangeMap](ch_core.html#ch_core._template_typename_Ob_2) although with different algorithm. It is faster and its speed is not affected by type of data but it uses more memory (triple as [CRangeMap](ch_core.html#ch_core._template_typename_Ob_2)) and, as a result, less efficient when amount of interval in set is quite big. It uses about 140 bytes per interval for 64 bit program so you can calculate if ***CIntervalTree*** is acceptable. For example, it becomes less efficient than [CRangeMap](ch_core.html#ch_core._template_typename_Ob_2) when total memory becomes greater than processor cache.
 
-<a name="ch-core.Thread-Pools"></a>
+<a name="ch_core.Thread_Pools"></a>
 
 Thread Pools
 ------------
@@ -5342,7 +5342,7 @@ The following classes are discussed in this section:
 
 -   [CThreadPool\_Controller\_PID](ch_core.html#ch_core._Class_CThreadPool_Co)
 
-<a name="ch-core.CTreadPool"></a>
+<a name="ch_core.CTreadPool"></a>
 
 ### Class CThreadPool
 
@@ -5358,31 +5358,31 @@ Both constructors take additional parameter - maximum number of tasks waiting in
 
 If there’s necessity to implement some special per-thread logic in ***CThreadPool*** then class can be derived to override virtual method ***CreateThread()*** in which some custom object derived from ***CThreadPool\_Thread*** can be created.
 
-<a name="ch-core.Class-CThreadPool-Ta"></a>
+<a name="ch_core.Class_CThreadPool_Ta"></a>
 
 ### Class CThreadPool\_Task
 
 Abstract class derived from [CObject](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CObject&d=C), encapsulating task for execution in a ***CThreadPool***. The pure virtual method ***EStatus Execute(void)*** is called when some thread in pool becomes free and ready to execute this task. The lifetime of the task is controlled inside pool by ***CRef***\<\> classes.
 
-<a name="ch-core.-template--typename-T-1"></a>
+<a name="ch_core._template__typename_T_1"></a>
 
 ### Class CThreadPool\_Thread
 
 Base class for a thread running inside ***CThreadPool*** and executing its tasks. Class can be derived to implement some per-thread functionality in ***CThreadPool***. For this purpose there are protected virtual methods ***Initialize()*** and ***Finalize()*** which are called at the start and finish of the thread correspondingly. And there are methods ***GetPool()*** and ***GetCurrentTask()*** for application needs.
 
-<a name="ch-core.-Class-CThreadPool-Co"></a>
+<a name="ch_core._Class_CThreadPool_Co"></a>
 
 ### Class CThreadPool\_Controller
 
 Abstract base class for implementations of policies of threads creation and deletion inside pool.
 
-<a name="ch-core.-Class-CThreadPool-Co-1"></a>
+<a name="ch_core._Class_CThreadPool_Co_1"></a>
 
 ### Class CThreadPool\_Controller\_PID
 
 Default object controlling number of threads working in the pool. Implementation is based on Proportional-Integral-Derivative algorithm for keeping in memory just threads that are necessary for efficient work.
 
-<a name="ch-core.Miscellaneous-Classe"></a>
+<a name="ch_core.Miscellaneous_Classe"></a>
 
 Miscellaneous Classes
 ---------------------
@@ -5393,7 +5393,7 @@ The following classes are discussed in this section. For an overview of these cl
 
 -   [class CChecksum](ch_core.html#ch_core.class_CChecksum)
 
-<a name="ch-core.class-CLightString"></a>
+<a name="ch_core.class_CLightString"></a>
 
 ### class CTempString
 
@@ -5409,13 +5409,13 @@ Take into account, that the character string array kept by ***CTempString*** obj
 
 It's convenient to use the class ***CTempString*** as an argument of API functions so that no allocation or deallocation will take place on of the function call.
 
-<a name="ch-core.class-CChecksum"></a>
+<a name="ch_core.class_CChecksum"></a>
 
 ### class CChecksum
 
 Class for CRC32 checksum calculation. It also has methods for adding and checking checkum line in text files.
 
-<a name="ch-core.Input-Output-Utility"></a>
+<a name="ch_core.Input_Output_Utility"></a>
 
 Input/Output Utility Classes
 ----------------------------
@@ -5440,61 +5440,61 @@ This section provides reference information on a number of Input/Output Utility 
 
 -   [class CSubSourceCollector](ch_core.html#ch_core.class_CSubSourceColl)
 
-<a name="ch-core.class-CIStreamBuffer"></a>
+<a name="ch_core.class_CIStreamBuffer"></a>
 
 ### class CIStreamBuffer
 
 Class for additional buffering of standard C++ input streams (sometimes standard C++ iostreams performance quite bad). Uses [CByteSource](ch_core.html#ch_core.class_CByteSource) as a data source.
 
-<a name="ch-core.class-COStreamBuffer"></a>
+<a name="ch_core.class_COStreamBuffer"></a>
 
 ### class COStreamBuffer
 
 Class for additional buffering of standard C++ output streams (sometimes standard C++ iostreams performance quite bad).
 
-<a name="ch-core.class-CByteSource"></a>
+<a name="ch_core.class_CByteSource"></a>
 
 ### class CByteSource
 
 Abstract class for abstract source of byte data (file, stream, memory etc).
 
-<a name="ch-core.class-CStreamByteSou"></a>
+<a name="ch_core.class_CStreamByteSou"></a>
 
 ### class CStreamByteSource
 
 [CByteSource](ch_core.html#ch_core.class_CByteSource) subclass for reading from C++ istream.
 
-<a name="ch-core.class-CFStreamByteSo"></a>
+<a name="ch_core.class_CFStreamByteSo"></a>
 
 ### class CFStreamByteSource
 
 [CByteSource](ch_core.html#ch_core.class_CByteSource) subclass for reading from C++ ifstream.
 
-<a name="ch-core.class-CFileByteSourc"></a>
+<a name="ch_core.class_CFileByteSourc"></a>
 
 ### class CFileByteSource
 
 [CByteSource](ch_core.html#ch_core.class_CByteSource) subclass for reading from named file.
 
-<a name="ch-core.class-CMemoryByteSou"></a>
+<a name="ch_core.class_CMemoryByteSou"></a>
 
 ### class CMemoryByteSource
 
 [CByteSource](ch_core.html#ch_core.class_CByteSource) subclass for reading from memory buffer.
 
-<a name="ch-core.class-CByteSourceRea"></a>
+<a name="ch_core.class_CByteSourceRea"></a>
 
 ### class CByteSourceReader
 
 Abstract class for reading data from [CByteSource](ch_core.html#ch_core.class_CByteSource).
 
-<a name="ch-core.class-CSubSourceColl"></a>
+<a name="ch_core.class_CSubSourceColl"></a>
 
 ### class CSubSourceCollector
 
 Abstract class for obtaining piece of [CByteSource](ch_core.html#ch_core.class_CByteSource) as separate source.
 
-<a name="ch-core.Using-the-C-Toolkit-from-a-Third"></a>
+<a name="ch_core.Using_the_C_Toolkit_from_a_Third"></a>
 
 Using the C++ Toolkit from a Third Party Application Framework
 --------------------------------------------------------------
@@ -5515,7 +5515,7 @@ To initialize the NCBI C++ Toolkit internal infrastructure use the function:
 
 where the parameter meanings are:
 
-<a name="ch-core.T.nc-parametermeaningargcargumen"></a>
+<a name="ch_core.T.nc_parametermeaningargcargumen"></a>
 
 | Parameter         | Meaning                                                                                                                                                                 |
 |-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

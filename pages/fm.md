@@ -13,7 +13,7 @@ Book Information
 Contributing Authors
 --------------------
 
-<a name="header-placeholder"></a>
+<a name="header_placeholder"></a>
 
 ###  
 

@@ -19,7 +19,7 @@ The overview for this chapter consists of the following topics:
 
 -   Chapter Outline
 
-<a name="ch-html.ch-html-intro"></a>
+<a name="ch_html.ch_html_intro"></a>
 
 Introduction
 
@@ -27,119 +27,119 @@ Introduction
 
 **NB Don't confuse it with the** [**C++ CGI framework API**](ch_cgi.html) **-- which is alive and well!**
 
-The HTML module can be used to compose and print out a HTML page by using a static HTML template with embedded dynamic fragments. The HTML module provides a rich set of classes to help build the dynamic fragments using HTML tag nodes together with [text nodes](#ch-html.webpgs-text) arranged into a tree-like structure.
+The HTML module can be used to compose and print out a HTML page by using a static HTML template with embedded dynamic fragments. The HTML module provides a rich set of classes to help build the dynamic fragments using HTML tag nodes together with [text nodes](#ch_html.webpgs_text) arranged into a tree-like structure.
 
-This chapter provides reference material for many of the HTML facilities. You can also see the quick reference guide, a note about [using the HTML and CGI classes together](#ch-html.using-CCgiApplication) and an additional [class reference document](#ch-html.html-classes). For an overview of the HTML module please refer to the HTML section in the introductory chapter on the C++ Toolkit.
+This chapter provides reference material for many of the HTML facilities. You can also see the quick reference guide, a note about [using the HTML and CGI classes together](#ch_html.using_CCgiApplication) and an additional [class reference document](#ch_html.html_classes). For an overview of the HTML module please refer to the HTML section in the introductory chapter on the C++ Toolkit.
 
 ### Chapter Outline
 
 The following is an outline of the topics presented in this chapter:
 
--   [NCBI C++ HTML Classes](#ch-html.html-classes)
+-   [NCBI C++ HTML Classes](#ch_html.html_classes)
 
-    -   [Basic Classes](#ch-html.basic-classes)
+    -   [Basic Classes](#ch_html.basic_classes)
 
-        -   [CNCBINode](#ch-html.CNCBINode)
+        -   [CNCBINode](#ch_html.CNCBINode)
 
-        -   [CHTMLText](#ch-html.CHTMLText)
+        -   [CHTMLText](#ch_html.CHTMLText)
 
-        -   [CHTMLPlainText](#ch-html.CHTMLPlainText)
+        -   [CHTMLPlainText](#ch_html.CHTMLPlainText)
 
-        -   [CHTMLNode](#ch-html.CHTMLNode)
+        -   [CHTMLNode](#ch_html.CHTMLNode)
 
-        -   [CHTMLElement](#ch-html.CHTMLElement)
+        -   [CHTMLElement](#ch_html.CHTMLElement)
 
-        -   [CHTMLOpenElement](#ch-html.CHTMLOpenElement)
+        -   [CHTMLOpenElement](#ch_html.CHTMLOpenElement)
 
-        -   [CHTMLListElement](#ch-html.CHTMLListElement)
-
-<!-- -->
-
--   [Specialized Tag Classes used in Forms](#ch-html.tag-form)
-
-    -   [CHTML\_form: derived from CHTMLElement](#ch-html.CHTML-form)
-
-    -   [CHTML\_input: derived from CHTMLOpenElement](#ch-html.CHTML-input)
-
-    -   [CHTML\_checkbox: derived from CHTML\_input](#ch-html.CHTML-checkbox)
-
-    -   [CHTML\_hidden: derived from CHTML\_input](#ch-html.CHTML-hidden)
-
-    -   [CHTML\_image: derived from CHTML\_input](#ch-html.CHTML-image)
-
-    -   [CHTML\_radio: derived from CHTML\_input](#ch-html.CHTML-radio)
-
-    -   [CHTML\_reset: derived from CHTML\_input](#ch-html.CHTML-reset)
-
-    -   [CHTML\_submit: derived from CHTML\_input](#ch-html.CHTML-submit)
-
-    -   [CHTML\_text: derived from CHTML\_input](#ch-html.CHTML-text)
-
-    -   [CHTML\_select: derived from CHTMLElement](#ch-html.CHTML-select)
-
-    -   [CHTML\_option: derived from CHTMLElement](#ch-html.CHTML-option)
-
-    -   [CHTML\_textarea: derived from CHTMLElement](#ch-html.CHTML-textarea)
+        -   [CHTMLListElement](#ch_html.CHTMLListElement)
 
 <!-- -->
 
--   [Specialized Tag Classes used in Lists](#ch-html.spl-tag-classes)
+-   [Specialized Tag Classes used in Forms](#ch_html.tag_form)
 
-    -   [CHTML\_dl: derived from CHTMLElement](#ch-html.CHTML-dl)
+    -   [CHTML\_form: derived from CHTMLElement](#ch_html.CHTML_form)
 
-    -   [CHTML\_ol: derived from CHTMLListElement](#ch-html.CHTML-ol)
+    -   [CHTML\_input: derived from CHTMLOpenElement](#ch_html.CHTML_input)
 
-<!-- -->
+    -   [CHTML\_checkbox: derived from CHTML\_input](#ch_html.CHTML_checkbox)
 
--   [Other Specialized Tag Classes](#ch-html.other-spl-tag-classes)
+    -   [CHTML\_hidden: derived from CHTML\_input](#ch_html.CHTML_hidden)
 
-    -   [CHTML\_table: derived from CHTMLElement](#ch-html.CHTML-table)
+    -   [CHTML\_image: derived from CHTML\_input](#ch_html.CHTML_image)
 
-    -   [CHTML\_a: derived from CHTMLElement](#ch-html.CHTML-a)
+    -   [CHTML\_radio: derived from CHTML\_input](#ch_html.CHTML_radio)
 
-    -   [CHTML\_img: derived from CHTMLOpenElement](#ch-html.CHTML-img)
+    -   [CHTML\_reset: derived from CHTML\_input](#ch_html.CHTML_reset)
 
-    -   [CHTML\_font: derived from CHTMLElement](#ch-html.CHTML-font)
+    -   [CHTML\_submit: derived from CHTML\_input](#ch_html.CHTML_submit)
 
-    -   [CHTML\_color: derived from CHTMLElement](#ch-html.CHTML-color)
+    -   [CHTML\_text: derived from CHTML\_input](#ch_html.CHTML_text)
 
-    -   [CHTML\_br: derived from CHTMLOpenElement](#ch-html.CHTML-br)
+    -   [CHTML\_select: derived from CHTMLElement](#ch_html.CHTML_select)
 
-    -   [CHTML\_basefont: derived from CHTMLElement](#ch-html.CHTML-basefont)
+    -   [CHTML\_option: derived from CHTMLElement](#ch_html.CHTML_option)
 
-<!-- -->
-
--   [Generating Web Pages with the HTML classes](#ch-html.webpgs.html)
-
-    -   [The CNCBINode class](#ch-html.webpgs.html-node)
-
-    -   [HTML Text nodes: CHTMLText and CHTMLPlainText](#ch-html.webpgs-text)
-
-    -   [The NCBI Page classes](#ch-html.page-classes)
-
-    -   [Using the CHTMLPage class with Template Files](#ch-html.CHTMLPage)
-
-    -   [The CHTMLTagNode class](#ch-html.CHTMLTagNode)
-
-    -   [The CHTMLNode class](#ch-html.webpgs-htmlnode)
-
-    -   [The CHTMLDualNode class](#ch-html.CHTMLDualNode)
-
-    -   [Using the HTML classes with a CCgiApplication object](#ch-html.using-CCgiApplication)
+    -   [CHTML\_textarea: derived from CHTMLElement](#ch_html.CHTML_textarea)
 
 <!-- -->
 
--   [Supplementary Information](#ch-html.webpgs-appendix)
+-   [Specialized Tag Classes used in Lists](#ch_html.spl_tag_classes)
+
+    -   [CHTML\_dl: derived from CHTMLElement](#ch_html.CHTML_dl)
+
+    -   [CHTML\_ol: derived from CHTMLListElement](#ch_html.CHTML_ol)
+
+<!-- -->
+
+-   [Other Specialized Tag Classes](#ch_html.other_spl_tag_classes)
+
+    -   [CHTML\_table: derived from CHTMLElement](#ch_html.CHTML_table)
+
+    -   [CHTML\_a: derived from CHTMLElement](#ch_html.CHTML_a)
+
+    -   [CHTML\_img: derived from CHTMLOpenElement](#ch_html.CHTML_img)
+
+    -   [CHTML\_font: derived from CHTMLElement](#ch_html.CHTML_font)
+
+    -   [CHTML\_color: derived from CHTMLElement](#ch_html.CHTML_color)
+
+    -   [CHTML\_br: derived from CHTMLOpenElement](#ch_html.CHTML_br)
+
+    -   [CHTML\_basefont: derived from CHTMLElement](#ch_html.CHTML_basefont)
+
+<!-- -->
+
+-   [Generating Web Pages with the HTML classes](#ch_html.webpgs.html)
+
+    -   [The CNCBINode class](#ch_html.webpgs.html_node)
+
+    -   [HTML Text nodes: CHTMLText and CHTMLPlainText](#ch_html.webpgs_text)
+
+    -   [The NCBI Page classes](#ch_html.page_classes)
+
+    -   [Using the CHTMLPage class with Template Files](#ch_html.CHTMLPage)
+
+    -   [The CHTMLTagNode class](#ch_html.CHTMLTagNode)
+
+    -   [The CHTMLNode class](#ch_html.webpgs_htmlnode)
+
+    -   [The CHTMLDualNode class](#ch_html.CHTMLDualNode)
+
+    -   [Using the HTML classes with a CCgiApplication object](#ch_html.using_CCgiApplication)
+
+<!-- -->
+
+-   [Supplementary Information](#ch_html.webpgs_appendix)
 
     -   The ***CNCBINode::TMode*** class
 
-    -   [Quick Reference Guide](#ch-html.quick-ref)
+    -   [Quick Reference Guide](#ch_html.quick_ref)
 
 **Demo Cases** [[src/html/demo](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/html/demo)]
 
 **Test Cases** [[src/html/test](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/html/test)]
 
-<a name="ch-html.html-classes"></a>
+<a name="ch_html.html_classes"></a>
 
 NCBI C++ HTML Classes
 ---------------------
@@ -158,15 +158,15 @@ A sample program, `htmldemo.cpp`, can be found in `internal/c++/src/html/demo`.
 
 Next, the following topics are discussed:
 
--   [Basic Classes](#ch-html.basic-classes)
+-   [Basic Classes](#ch_html.basic_classes)
 
--   [Specialized Tag Classes used in Forms](#ch-html.tag-form)
+-   [Specialized Tag Classes used in Forms](#ch_html.tag_form)
 
--   [Specialized Tag Classes used in Lists](#ch-html.spl-tag-classes)
+-   [Specialized Tag Classes used in Lists](#ch_html.spl_tag_classes)
 
--   [Other Specialized Tag Classes](#ch-html.other-spl-tag-classes)
+-   [Other Specialized Tag Classes](#ch_html.other_spl_tag_classes)
 
-<a name="ch-html.basic-classes"></a>
+<a name="ch_html.basic_classes"></a>
 
 ### Basic Classes
 
@@ -178,21 +178,21 @@ There are several basic classes for the html library. The most basic class is **
 
 The following basic classes are discussed in more detail, next:
 
--   [CNCBINode](#ch-html.CNCBINode)
+-   [CNCBINode](#ch_html.CNCBINode)
 
--   [CHTMLText](#ch-html.CHTMLText)
+-   [CHTMLText](#ch_html.CHTMLText)
 
--   [CHTMLPlainText](#ch-html.CHTMLPlainText)
+-   [CHTMLPlainText](#ch_html.CHTMLPlainText)
 
--   [CHTMLNode](#ch-html.CHTMLNode)
+-   [CHTMLNode](#ch_html.CHTMLNode)
 
--   [CHTMLElement](#ch-html.CHTMLElement)
+-   [CHTMLElement](#ch_html.CHTMLElement)
 
--   [CHTMLOpenElement](#ch-html.CHTMLOpenElement)
+-   [CHTMLOpenElement](#ch_html.CHTMLOpenElement)
 
--   [CHTMLListElement](#ch-html.CHTMLListElement)
+-   [CHTMLListElement](#ch_html.CHTMLListElement)
 
-<a name="ch-html.CNCBINode"></a>
+<a name="ch_html.CNCBINode"></a>
 
 #### CNCBINode
 
@@ -224,7 +224,7 @@ The following basic classes are discussed in more detail, next:
 
 **void SetAttribute(const string& name, const string& value) void SetAttribute(const string& name) void SetAttribute(const string& name, int value) void SetOptionalAttribute(const string& name, const string& value) void SetOptionalAttribute(const string& name, bool set) void SetAttribute(const char\* name, const string& value) void SetAttribute(const char\* name) void SetAttribute(const char\* name, int value) void SetOptionalAttribute(const char\* name, const string& value) void SetOptionalAttribute(const char\* name, bool set)** Set an attribute. ***SetOptionalAttribute()*** only sets the attribute if value contains a string or is true.
 
-<a name="ch-html.CHTMLText"></a>
+<a name="ch_html.CHTMLText"></a>
 
 #### CHTMLText
 
@@ -234,7 +234,7 @@ This is a text node that can contain html tags, including tags of the form \<@..
 
 **const string& GetText(void) const void SetText(const string& text)** Get and set the text in the node.
 
-<a name="ch-html.CHTMLPlainText"></a>
+<a name="ch_html.CHTMLPlainText"></a>
 
 #### CHTMLPlainText
 
@@ -246,7 +246,7 @@ This node is for text that is to be HTML encoded. For example, characters like "
 
 Get and set text in the node.
 
-<a name="ch-html.CHTMLNode"></a>
+<a name="ch_html.CHTMLNode"></a>
 
 #### CHTMLNode
 
@@ -261,7 +261,7 @@ Get and set text in the node.
 
 **void AppendHTMLText(const string &)** Appends a ***CHTMLTextNode***. This type of node can contain HTML tags, i.e. it is not html encoded.
 
-<a name="ch-html.CHTMLElement"></a>
+<a name="ch_html.CHTMLElement"></a>
 
 #### CHTMLElement
 
@@ -269,13 +269,13 @@ Get and set text in the node.
 
 The tags derived from this class include: ***CHTML\_html, CHTML\_head, CHTML\_body, CHTML\_base, CHTML\_isindex, CHTML\_link, CHTML\_meta, CHTML\_script, CHTML\_style, CHTML\_title, CHTML\_address, CHTML\_blockquote, CHTML\_center, CHTML\_div, CHTML\_h1, CHTML\_h2, CHTML\_h3, CHTML\_h4, CHTML\_h5, CHTML\_h6, CHTML\_hr, CHTML\_p, CHTML\_pre, CHTML\_dt, CHTML\_dd, CHTML\_li, CHTML\_caption, CHTML\_col, CHTML\_colgroup, CHTML\_thead, CHTML\_tbody, CHTML\_tfoot, CHTML\_tr, CHTML\_th, CHTML\_td, CHTML\_applet, CHTML\_param, CHTML\_cite, CHTML\_code, CHTML\_dfn, CHTML\_em, CHTML\_kbd, CHTML\_samp, CHTML\_strike, CHTML\_strong, CHTML\_var, CHTML\_b, CHTML\_big, CHTML\_i, CHTML\_s, CHTML\_small, CHTML\_sub, CHTML\_sub, CHTML\_sup, CHTML\_tt, CHTML\_u, CHTML\_blink, CHTML\_map, CHTML\_area***
 
-<a name="ch-html.CHTMLOpenElement"></a>
+<a name="ch_html.CHTMLOpenElement"></a>
 
 #### CHTMLOpenElement
 
 This is used for tags that do not have a close tag (like `img`). The constructors are of the same form as ***CHTMLElement***. The tags derived from this class include: ***CHTML\_pnop*** (paragraph tag without a close tag)
 
-<a name="ch-html.CHTMLListElement"></a>
+<a name="ch_html.CHTMLListElement"></a>
 
 #### CHTMLListElement
 
@@ -285,7 +285,7 @@ These are elements used in a list.
 
 **CHTMLListElement\* AppendItem(const string& item) CHTMLListElement\* AppendItem(CNCBINode\* item)** These functions add ***CHTMLText*** and ***CNCBINode*** items as children of the ***CHTMLListElement***. The tags derived from this class include: ***CHTML\_ul, CHTML\_dir, CHTML\_menu***.
 
-<a name="ch-html.tag-form"></a>
+<a name="ch_html.tag_form"></a>
 
 ### Specialized Tag Classes used in Forms
 
@@ -293,31 +293,31 @@ The rest of the sections deal with tag classes that have additional members or m
 
 The following specialized tag classes used in forms are discussed, next:
 
--   [CHTML\_form: derived from CHTMLElement](#ch-html.CHTML-form)
+-   [CHTML\_form: derived from CHTMLElement](#ch_html.CHTML_form)
 
--   [CHTML\_input: derived from CHTMLOpenElement](#ch-html.CHTML-input)
+-   [CHTML\_input: derived from CHTMLOpenElement](#ch_html.CHTML_input)
 
--   [CHTML\_checkbox: derived from CHTML\_input](#ch-html.CHTML-checkbox)
+-   [CHTML\_checkbox: derived from CHTML\_input](#ch_html.CHTML_checkbox)
 
--   [CHTML\_hidden: derived from CHTML\_input](#ch-html.CHTML-hidden)
+-   [CHTML\_hidden: derived from CHTML\_input](#ch_html.CHTML_hidden)
 
--   [CHTML\_image: derived from CHTML\_input](#ch-html.CHTML-image)
+-   [CHTML\_image: derived from CHTML\_input](#ch_html.CHTML_image)
 
--   [CHTML\_radio: derived from CHTML\_input](#ch-html.CHTML-radio)
+-   [CHTML\_radio: derived from CHTML\_input](#ch_html.CHTML_radio)
 
--   [CHTML\_reset: derived from CHTML\_input](#ch-html.CHTML-reset)
+-   [CHTML\_reset: derived from CHTML\_input](#ch_html.CHTML_reset)
 
--   [CHTML\_submit: derived from CHTML\_input](#ch-html.CHTML-submit)
+-   [CHTML\_submit: derived from CHTML\_input](#ch_html.CHTML_submit)
 
--   [CHTML\_text: derived from CHTML\_input](#ch-html.CHTML-text)
+-   [CHTML\_text: derived from CHTML\_input](#ch_html.CHTML_text)
 
--   [CHTML\_select: derived from CHTMLElement](#ch-html.CHTML-select)
+-   [CHTML\_select: derived from CHTMLElement](#ch_html.CHTML_select)
 
--   [CHTML\_option: derived from CHTMLElement](#ch-html.CHTML-option)
+-   [CHTML\_option: derived from CHTMLElement](#ch_html.CHTML_option)
 
--   [CHTML\_textarea: derived from CHTMLElement](#ch-html.CHTML-textarea)
+-   [CHTML\_textarea: derived from CHTMLElement](#ch_html.CHTML_textarea)
 
-<a name="ch-html.CHTML-form"></a>
+<a name="ch_html.CHTML_form"></a>
 
 #### CHTML\_form: derived from CHTMLElement
 
@@ -325,55 +325,55 @@ The following specialized tag classes used in forms are discussed, next:
 
 **void AddHidden(const string& name, const string& value)** Add a hidden value to the form.
 
-<a name="ch-html.CHTML-input"></a>
+<a name="ch_html.CHTML_input"></a>
 
 #### CHTML\_input: derived from CHTMLOpenElement
 
 **CHTML\_input(const string& type, const string& name)** Create a input tag of the given type and name. Several of the following classes are specialized versions of the input tag, for example, ***CHTML\_checkbox***.
 
-<a name="ch-html.CHTML-checkbox"></a>
+<a name="ch_html.CHTML_checkbox"></a>
 
 #### CHTML\_checkbox: derived from CHTML\_input
 
 **CHTML\_checkbox(const string& name) CHTML\_checkbox(const string& name, bool checked, const string& description = NcbiEmptyString) CHTML\_checkbox(const string& name, const string& value) CHTML\_checkbox(const string& name, const string& value, bool checked, const string& description = NcbiEmptyString)** Create a checkbox with the given attributes. This is an input tag with `type` = `"checkbox"`.
 
-<a name="ch-html.CHTML-hidden"></a>
+<a name="ch_html.CHTML_hidden"></a>
 
 #### CHTML\_hidden: derived from CHTML\_input
 
 **CHTML\_hidden(const string& name, const string& value)** Create a hidden value with the given attributes. This is an input tag with `type` = `"hidden"`.
 
-<a name="ch-html.CHTML-image"></a>
+<a name="ch_html.CHTML_image"></a>
 
 #### CHTML\_image: derived from CHTML\_input
 
 **CHTML\_image(const string& name, const string& src)** Create an image submit input tag. This is an input tag with `type` = `"image"`.
 
-<a name="ch-html.CHTML-radio"></a>
+<a name="ch_html.CHTML_radio"></a>
 
 #### CHTML\_radio: derived from CHTML\_input
 
 **CHTML\_radio(const string& name, const string& value) CHTML\_radio(const string& name, const string& value, bool checked, const string& description = NcbiEmptyString)** Creates a radio button. Radio buttons are input tags with `type` = `"radio button"`.
 
-<a name="ch-html.CHTML-reset"></a>
+<a name="ch_html.CHTML_reset"></a>
 
 #### CHTML\_reset: derived from CHTML\_input
 
 **CHTML\_reset(const string& label = NcbiEmptyString)** Create a reset button. This is an input tag with `type` = `"reset"`.
 
-<a name="ch-html.CHTML-submit"></a>
+<a name="ch_html.CHTML_submit"></a>
 
 #### CHTML\_submit: derived from CHTML\_input
 
 **CHTML\_submit(const string& name) CHTML\_submit(const string& name, const string& label)** Create a submit button. This is an input tag with `type` = `"submit"`.
 
-<a name="ch-html.CHTML-text"></a>
+<a name="ch_html.CHTML_text"></a>
 
 #### CHTML\_text: derived from CHTML\_input
 
 **CHTML\_text(const string& name, const string& value = NcbiEmptyString) CHTML\_text(const string& name, int size, const string& value = NcbiEmptyString) CHTML\_text(const string& name, int size, int maxlength, const string& value = NcbiEmptyString)** Create a text box. This is an input tag with `type` = `"text"`.
 
-<a name="ch-html.CHTML-select"></a>
+<a name="ch_html.CHTML_select"></a>
 
 #### CHTML\_select: derived from CHTMLElement
 
@@ -381,13 +381,13 @@ The following specialized tag classes used in forms are discussed, next:
 
 **CHTML\_select\* AppendOption(const string& option, bool selected = false) CHTML\_select\* AppendOption(const string& option, const string& value, bool selected = false)** Add an entry to the selection box by using the option tag. Returns **`*this`** to allow you to daisy-chain calls to ***AppendOption()***.
 
-<a name="ch-html.CHTML-option"></a>
+<a name="ch_html.CHTML_option"></a>
 
 #### CHTML\_option: derived from CHTMLElement
 
 **CHTML\_option(const string& content, bool selected = false) CHTML\_option(const string& content, const string& value, bool selected = false)** The option tag used inside of select elements. See ***CHTML\_select*** for an easy way to add option.
 
-<a name="ch-html.CHTML-textarea"></a>
+<a name="ch_html.CHTML_textarea"></a>
 
 #### CHTML\_textarea: derived from CHTMLElement
 
@@ -395,7 +395,7 @@ The following specialized tag classes used in forms are discussed, next:
 
 Create a textarea tag inside of a form.
 
-<a name="ch-html.spl-tag-classes"></a>
+<a name="ch_html.spl_tag_classes"></a>
 
 ### Specialized Tag Classes used in Lists
 
@@ -403,11 +403,11 @@ These are specialized tag classes used in lists. See "Basic Classes" for non-spe
 
 The following specialized tag classes used in lists are discussed, next:
 
--   [CHTML\_dl: derived from CHTMLElement](#ch-html.CHTML-dl)
+-   [CHTML\_dl: derived from CHTMLElement](#ch_html.CHTML_dl)
 
--   [CHTML\_ol: derived from CHTMLListElement](#ch-html.CHTML-ol)
+-   [CHTML\_ol: derived from CHTMLListElement](#ch_html.CHTML_ol)
 
-<a name="ch-html.CHTML-dl"></a>
+<a name="ch_html.CHTML_dl"></a>
 
 #### CHTML\_dl: derived from CHTMLElement
 
@@ -415,33 +415,33 @@ The following specialized tag classes used in lists are discussed, next:
 
 **CHTML\_dl\* AppendTerm(const string& term, CNCBINode\* definition = 0) CHTML\_dl\* AppendTerm(const string& term, const string& definition) CHTML\_dl\* AppendTerm(CNCBINode\* term, CNCBINode\* definition = 0) CHTML\_dl\* AppendTerm(CNCBINode\* term, const string& definition)** Append a term and definition to the list by using `DD` and `DT` tags.
 
-<a name="ch-html.CHTML-ol"></a>
+<a name="ch_html.CHTML_ol"></a>
 
 #### CHTML\_ol: derived from CHTMLListElement
 
 **CHTML\_ol(bool compact = false) CHTML\_ol(const string& type, bool compact = false) CHTML\_ol(int start, bool compact = false) CHTML\_ol(int start, const string& type, bool compact = false)** The last two constructors let you specify the starting number for the list.
 
-<a name="ch-html.other-spl-tag-classes"></a>
+<a name="ch_html.other_spl_tag_classes"></a>
 
 ### Other Specialized Tag Classes
 
 These tag classes that have additional members or member functions that make the tags easier to use. The following classes are discussed next:
 
--   [CHTML\_table: derived from CHTMLElement](#ch-html.CHTML-table)
+-   [CHTML\_table: derived from CHTMLElement](#ch_html.CHTML_table)
 
--   [CHTML\_a: derived from CHTMLElement](#ch-html.CHTML-a)
+-   [CHTML\_a: derived from CHTMLElement](#ch_html.CHTML_a)
 
--   [CHTML\_img: derived from CHTMLOpenElement](#ch-html.CHTML-img)
+-   [CHTML\_img: derived from CHTMLOpenElement](#ch_html.CHTML_img)
 
--   [CHTML\_font: derived from CHTMLElement](#ch-html.CHTML-font)
+-   [CHTML\_font: derived from CHTMLElement](#ch_html.CHTML_font)
 
--   [CHTML\_color: derived from CHTMLElement](#ch-html.CHTML-color)
+-   [CHTML\_color: derived from CHTMLElement](#ch_html.CHTML_color)
 
--   [CHTML\_br: derived from CHTMLOpenElement](#ch-html.CHTML-br)
+-   [CHTML\_br: derived from CHTMLOpenElement](#ch_html.CHTML_br)
 
--   [CHTML\_basefont: derived from CHTMLElement](#ch-html.CHTML-basefont)
+-   [CHTML\_basefont: derived from CHTMLElement](#ch_html.CHTML_basefont)
 
-<a name="ch-html.CHTML-table"></a>
+<a name="ch_html.CHTML_table"></a>
 
 #### CHTML\_table: derived from CHTMLElement
 
@@ -455,19 +455,19 @@ These tag classes that have additional members or member functions that make the
 
 **CHTML\_table\* SetCellSpacing(int spacing) CHTML\_table\* SetCellPadding(int padding)** Set the cellspacing or cellpadding attributes.
 
-<a name="ch-html.CHTML-a"></a>
+<a name="ch_html.CHTML_a"></a>
 
 #### CHTML\_a: derived from CHTMLElement
 
 **CHTML\_a(const string& href, const string& text) CHTML\_a(const string& href, CNCBINode\* node)** Creates a hyperlink that contains the given text or node.
 
-<a name="ch-html.CHTML-img"></a>
+<a name="ch_html.CHTML_img"></a>
 
 #### CHTML\_img: derived from CHTMLOpenElement
 
 **CHTML\_img(const string& url) CHTML\_img(const string& url, int width, int height)** Creates an image tag with the given attributes.
 
-<a name="ch-html.CHTML-font"></a>
+<a name="ch_html.CHTML_font"></a>
 
 #### CHTML\_font: derived from CHTMLElement
 
@@ -475,52 +475,52 @@ These tag classes that have additional members or member functions that make the
 
 **void SetRelativeSize(int size)** Set the size of the font tag.
 
-<a name="ch-html.CHTML-color"></a>
+<a name="ch_html.CHTML_color"></a>
 
 #### CHTML\_color: derived from CHTMLElement
 
 **CHTML\_color(const string& color, CNCBINode\* node = 0) CHTML\_color(const string& color, const string& text)** Create a font tag with the given color and append either node or text.
 
-<a name="ch-html.CHTML-br"></a>
+<a name="ch_html.CHTML_br"></a>
 
 #### CHTML\_br: derived from CHTMLOpenElement
 
 **CHTML\_br(void) CHTML\_br(int number)** The last constructor lets you insert multiple `BR` tags.
 
-<a name="ch-html.CHTML-basefont"></a>
+<a name="ch_html.CHTML_basefont"></a>
 
 #### CHTML\_basefont: derived from CHTMLElement
 
 **CHTML\_basefont(int size) CHTML\_basefont(const string& typeface) CHTML\_basefont(const string& typeface, int size)** Set the basefont for the page with the given attributes.
 
-<a name="ch-html.webpgs.html"></a>
+<a name="ch_html.webpgs.html"></a>
 
 Generating Web Pages with the HTML classes
 ------------------------------------------
 
 Web applications involving interactions with a client via a complex HTML interface can be difficult to understand and maintain. The NCBI C++ Toolkit classes decouple the complexity of interacting with a CGI client from the complexity of generating HTML output by defining separate class hierarchies for these activities. In fact, one useful application of the HTML classes is to generate web pages "offline".
 
-The chapter on [Developing CGI Applications](ch_cgi.html#ch_cgi.cg_develop_apps) discussed only the activities involved in processing the client's request and generating a response. This section introduces the C++ Toolkit components that support the creation of HTML pages, and concludes with a brief consideration of how the HTML classes can be used in consort with a running ***CCgiApplication***. Further discussion of combining a CGI application with the HTML classes can be found in the section on [An example web-based CGI application](ch_cgi.html#ch_cgi.html). See also [NCBI C++ HTML Classes](#ch-html.html-classes) in the Reference Manual.
+The chapter on [Developing CGI Applications](ch_cgi.html#ch_cgi.cg_develop_apps) discussed only the activities involved in processing the client's request and generating a response. This section introduces the C++ Toolkit components that support the creation of HTML pages, and concludes with a brief consideration of how the HTML classes can be used in consort with a running ***CCgiApplication***. Further discussion of combining a CGI application with the HTML classes can be found in the section on [An example web-based CGI application](ch_cgi.html#ch_cgi.html). See also [NCBI C++ HTML Classes](#ch_html.html_classes) in the Reference Manual.
 
 The following topics are discussed in this section:
 
--   [The CNCBINode class](#ch-html.webpgs.html-node)
+-   [The CNCBINode class](#ch_html.webpgs.html_node)
 
--   [HTML Text nodes: CHTMLText and CHTMLPlainText](#ch-html.webpgs-text)
+-   [HTML Text nodes: CHTMLText and CHTMLPlainText](#ch_html.webpgs_text)
 
--   [The NCBI Page classes](#ch-html.page-classes)
+-   [The NCBI Page classes](#ch_html.page_classes)
 
--   [Using the CHTMLPage class with Template Files](#ch-html.CHTMLPage)
+-   [Using the CHTMLPage class with Template Files](#ch_html.CHTMLPage)
 
--   [The CHTMLTagNode class](#ch-html.CHTMLTagNode)
+-   [The CHTMLTagNode class](#ch_html.CHTMLTagNode)
 
--   [The CHTMLNode class](#ch-html.webpgs-htmlnode)
+-   [The CHTMLNode class](#ch_html.webpgs_htmlnode)
 
--   [The CHTMLDualNode class](#ch-html.CHTMLDualNode)
+-   [The CHTMLDualNode class](#ch_html.CHTMLDualNode)
 
--   [Using the HTML classes with a CCgiApplication object](#ch-html.using-CCgiApplication)
+-   [Using the HTML classes with a CCgiApplication object](#ch_html.using_CCgiApplication)
 
-<a name="ch-html.webpgs.html-node"></a>
+<a name="ch_html.webpgs.html_node"></a>
 
 ### The ***CNCBINode*** ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode)) class
 
@@ -532,7 +532,7 @@ All of the HTML classes are derived from the ***CNCBINode*** class, which in tur
 
 -   **`m_Children`** - a list of subnodes embedded (at run-time) in this node
 
-The **`m_Name`** data member is used differently depending on the type of node. For HTML [text](#ch-html.webpgs-text) nodes, **`m_Name`** stores the actual body of text. For [CHTMLElement](#ch-html.quick-ref) objects, **`m_Name`** stores the HTML tagname that will be used in generating HTML formatted output.
+The **`m_Name`** data member is used differently depending on the type of node. For HTML [text](#ch_html.webpgs_text) nodes, **`m_Name`** stores the actual body of text. For [CHTMLElement](#ch_html.quick_ref) objects, **`m_Name`** stores the HTML tagname that will be used in generating HTML formatted output.
 
 The **`m_Attributes`** data member provides for the encoding of specific features to be associated with the node, such as background color for a web page. A group of "Get/SetAttribute" member functions are provided for access and modification of the node's attributes. All of the "SetAttribute" methods return **`this`** - a pointer to the HTML node being operated on, and so, can be daisy-chained, as in:
 
@@ -560,9 +560,9 @@ A number of member functions are provided to operate on **`m_Children`**. These 
 
 Depending on flags set at compile time, **`m_Children`** is represented as either a list of ***CNodeRef*** objects, or a list of ***auto\_ptr\<CNodeRef\>***, where [CNodeRef](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNodeRef) is a typedef for ***CRef\<CNCBINode\>***. This distinction is transparent to the user however, and the important point is that the deallocation of all dynamically embedded child nodes is handled automatically by the containing class.
 
-[CNCBINode::Print()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Print) recursively generates the HTML text for the node and all of its children, and outputs the result to a specified output stream. The ***Print()*** function takes two arguments: (1) an output stream, and (2) a ***CNCBINode::TMode*** object, where [TMode](#ch-html.CNCBINode-TMode) is an internal class defined inside the ***CNCBINode*** class. The ***TMode*** object is used by the print function to determine what type of encoding takes place on the output, and in some cases, to locate the containing parent node.
+[CNCBINode::Print()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Print) recursively generates the HTML text for the node and all of its children, and outputs the result to a specified output stream. The ***Print()*** function takes two arguments: (1) an output stream, and (2) a ***CNCBINode::TMode*** object, where [TMode](#ch_html.CNCBINode_TMode) is an internal class defined inside the ***CNCBINode*** class. The ***TMode*** object is used by the print function to determine what type of encoding takes place on the output, and in some cases, to locate the containing parent node.
 
-Many of the ***CNCBINode*** objects do not actually allocate their embedded subnodes until the ***Print()*** method is invoked. Instead, a kind of lazy evaluation is used, and the information required to install these nodes to **`m_Children`** is used by the ***CreateSubNodes()*** method only when output has been requested (see discussion [below](#ch-html.webpgs.html-createsub)).
+Many of the ***CNCBINode*** objects do not actually allocate their embedded subnodes until the ***Print()*** method is invoked. Instead, a kind of lazy evaluation is used, and the information required to install these nodes to **`m_Children`** is used by the ***CreateSubNodes()*** method only when output has been requested (see discussion [below](#ch_html.webpgs.html_createsub)).
 
 A slice of the NCBI C++ Toolkit class hierarchy rooted at the [CNCBINode](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode) class includes the following directly derived subclasses:
 
@@ -576,23 +576,23 @@ A slice of the NCBI C++ Toolkit class hierarchy rooted at the [CNCBINode](http:/
 
     -   ***CPager***
 
-    -   [CHTMLText](#ch-html.webpgs-text)
+    -   [CHTMLText](#ch_html.webpgs_text)
 
     -   ***CHTMLTagNode***
 
-    -   [CHTMLPlainText](#ch-html.webpgs-text)
+    -   [CHTMLPlainText](#ch_html.webpgs_text)
 
-    -   [CHTMLNode](#ch-html.webpgs-htmlnode)
+    -   [CHTMLNode](#ch_html.webpgs_htmlnode)
 
-    -   [CHTMLDualNode](#ch-html.CHTMLDualNode)
+    -   [CHTMLDualNode](#ch_html.CHTMLDualNode)
 
-    -   [CHTMLBasicPage](#ch-html.CHTMLPage)
+    -   [CHTMLBasicPage](#ch_html.CHTMLPage)
 
     -   ***CButtonList***
 
 Many of these subclasses make little sense out of context, as they are designed for use as subcomponents of, for example, a ***CHTMLPage***. Exceptions to this are the text nodes, described next.
 
-<a name="ch-html.webpgs-text"></a>
+<a name="ch_html.webpgs_text"></a>
 
 ### HTML Text nodes: ***CHTMLText*** ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLText.html)) and ***CHTMLPlainText*** ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPlainText))
 
@@ -616,9 +616,9 @@ will generate:
 
 The text in the ***CHTMLText*** node is output verbatim, and the web browser interprets the `<br>` tags as line breaks. In contrast, the ***CHTMLPlainText*** node effectively "insulates" its content from the browser's interpretation by encoding the `<br>` tags as "\<br&gt;".
 
-***CHTMLText*** nodes also play a special role in the implementation of page nodes that work with template files. A `tagname` in the text is delimited by "\<@" and "@\>", as in: `<@tagname@>`. This device is used for example, when working with [template files](#ch-html.CHTMLPage), to allow additional nodes to be inserted in a pre-formatted web page. The ***CHTMLText::PrintBegin()*** method is specialized to skip over the tag names and their delimiters, outputting only the text generated by the nodes that should be inserted in that tagged section. Further discussion of this feature is deferred until the section on the [NCBI page classes](#ch-html.page-classes), which contain a ***TTagMap***.
+***CHTMLText*** nodes also play a special role in the implementation of page nodes that work with template files. A `tagname` in the text is delimited by "\<@" and "@\>", as in: `<@tagname@>`. This device is used for example, when working with [template files](#ch_html.CHTMLPage), to allow additional nodes to be inserted in a pre-formatted web page. The ***CHTMLText::PrintBegin()*** method is specialized to skip over the tag names and their delimiters, outputting only the text generated by the nodes that should be inserted in that tagged section. Further discussion of this feature is deferred until the section on the [NCBI page classes](#ch_html.page_classes), which contain a ***TTagMap***.
 
-<a name="ch-html.page-classes"></a>
+<a name="ch_html.page_classes"></a>
 
 ### The NCBI Page classes
 
@@ -628,9 +628,9 @@ The page classes serve as generalized containers for collections of other HTML c
 
     -   [CHTMLPage](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPage)
 
-<a name="ch-html.webpgs.html-tagmap"></a>
+<a name="ch_html.webpgs.html_tagmap"></a>
 
-In addition to the data members inherited from [CNCBINode](#ch-html.webpgs.html-node), three new private data members are defined in the ***CHTMLBasicPage*** class.
+In addition to the data members inherited from [CNCBINode](#ch_html.webpgs.html_node), three new private data members are defined in the ***CHTMLBasicPage*** class.
 
 -   **`m_CgiApplication`** - a pointer to the ***CCgiApplication***
 
@@ -642,7 +642,7 @@ In effect, **`m_TagMap`** is used to map strings to tagged subcomponents of the 
 
     typedef map<string, BaseTagMapper*> TTagMap;
 
-<a name="ch-html.webpgs.html-tagmapper"></a>
+<a name="ch_html.webpgs.html_tagmapper"></a>
 
 Here, [BaseTagMapper](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=BaseTagMapper) is a base class for a set of functor-like structs. Each of the derived subclasses of ***BaseTagMapper*** has a single data member (e.g. **`m_Node, m_Function`** or **`m_Method`**), which points to either a ***CNCBINode***, or a function that returns a pointer to a ***CNCBINode***. The ***BaseTagMapper*** class also has a single member function, [MapTag()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=MapTag), which knows how to "invoke" its data member.
 
@@ -656,7 +656,7 @@ In order for a new mapping to have any effect however, the tag must also occur i
 
 The primary purpose of the ***CHTMLBasicPage*** is as a base class whose features are inherited by the ***CHTMLPage*** class - it is not intended for direct usage. Important inherited features include its three data members: **`m_CgiApplication`**, **`m_Style`**, and **`m_TagMap`**, and its member functions: ***Get/SetApplication(), Get/SetStyle(), MapTag()***, and ***AddTagMap()***. Several of the more advanced HTML components generate their content via access of the running CGI application. For example, see the description of a ***CSelection*** node. It is not strictly necessary to specify a CGI application when instantiating a page object however, and constructors are available that do not require an application argument.
 
-<a name="ch-html.CHTMLPage"></a>
+<a name="ch_html.CHTMLPage"></a>
 
 ### Using the ***CHTMLPage*** class with Template Files
 
@@ -713,7 +713,7 @@ An example using the NCBI standard template file should help make these concepts
 
 The name of the template file is stored in **`m_TemplateFile`**, and no further action on that file will be taken until `Page->Print(cout)` is executed. The call to ***AddTagMap()*** is in a sense then, a forward reference to a tag that we know is contained in the template. Thus, although a new ***CHTMLText*** node is instantiated in this statement, it is not appended to the page as a child, but is instead "mapped" to the page's **`m_TagMap`** where it is indexed by "VIEW".
 
-The contents of the template file will not be read until ***Print()*** is invoked. At that time, the text in the template file will be stored in a [CHTMLText](#ch-html.webpgs-text) node, and when that node is in turn printed, any tag node substitutions will then be made. More generally, nodes are not added to the page's **`m_Children`** graph until ***Print()*** is executed. At that time, ***CreateSubNodes()*** is invoked if **`m_Children`** is empty. Finally, the actual mapping of a tag (embedded in the template) to the associated ***TagMapper*** in **`m_TagMap`**, is executed by ***CHTMLText::PrintBegin()***.
+The contents of the template file will not be read until ***Print()*** is invoked. At that time, the text in the template file will be stored in a [CHTMLText](#ch_html.webpgs_text) node, and when that node is in turn printed, any tag node substitutions will then be made. More generally, nodes are not added to the page's **`m_Children`** graph until ***Print()*** is executed. At that time, ***CreateSubNodes()*** is invoked if **`m_Children`** is empty. Finally, the actual mapping of a tag (embedded in the template) to the associated ***TagMapper*** in **`m_TagMap`**, is executed by ***CHTMLText::PrintBegin()***.
 
 The ***CHTMLPage*** class, in combination with a template file, provides a very powerful and general method for generating a "boiler-plate" web page which can be adapted to application-specific needs using the ***CHTMLPage::AddTagMap()*** method. When needed, The user can edit the template file to insert additional `<@tagname@>` tags. The ***AddTagMap()*** method is defined **only** for page objects however, as they are the only class having a **`m_TagMap`** data member.
 
@@ -731,13 +731,13 @@ Before continuing to a general discussion of `tagnodes`, let's review how the pa
 
 NOTE: appending any child nodes directly to the page prior to calling the ***Print()*** method will make the template effectively inaccessible, since **`m_Children()`** will not be empty. For this reason, the user is advised to use ***AddTagNode()*** rather than ***AppendChild()*** when adding subcomponents.
 
-<a name="ch-html.CHTMLTagNode"></a>
+<a name="ch_html.CHTMLTagNode"></a>
 
 ### The ***CHTMLTagNode*** ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLTagNode)) class
 
 The objects and methods described to this point provide no mechanisms for dynamically adding tagged nodes. As mentioned, the user is free to edit the template file to contain additional `<@tag@>` names, and ***AddTagMap()*** can then be used to associate tagmappers with these new tags. This however, requires that one know ahead of time how many tagged nodes will be used. The problem specifically arises in the usage of template files, as it is not possible to add child nodes directly to the page without overriding the the template file.
 
-The ***CHTMLTagNode*** class addresses this issue. Derived directly from ***CNCBINode***, the class's constructor takes a single (***string*** or ***char\****) argument, **`tagname`**, which is stored as **`m_Name`**. The [CHTMLTagNode::PrintChildren()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=PrintChildren) method is specialized to handle tags, and makes a call to [MapTagAll](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=MapTagAll)`(GetName(), mode)`. Here, ***GetName()*** returns the **`m_Name`** of the ***CHTMLTagNode***, and **`mode`** is the [TMode](#ch-html.CNCBINode-TMode) argument that was passed in to ***PrintChildren()***. In addition to an enumeration variable specifying the mode of output, a ***TMode*** object has a pointer to the parent node that invoked ***PrintChildren()***. This pointer is used by ***MapTagAll()***, to locate a parent node whose **`m_TagMap`** has an installed `tagmapper` for the tagname. The ***TMode*** object's parent pointer essentially implements a stack which can be used to retrace the dynamic chain of ***PrintChildren()*** invocations, until either a match is found or the end of the call stack is reached. When a match is found, the associated `tagmapper`'s ***MapTag()*** method is invoked, and ***Print()*** is applied to the node returned by this function.
+The ***CHTMLTagNode*** class addresses this issue. Derived directly from ***CNCBINode***, the class's constructor takes a single (***string*** or ***char\****) argument, **`tagname`**, which is stored as **`m_Name`**. The [CHTMLTagNode::PrintChildren()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=PrintChildren) method is specialized to handle tags, and makes a call to [MapTagAll](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=MapTagAll)`(GetName(), mode)`. Here, ***GetName()*** returns the **`m_Name`** of the ***CHTMLTagNode***, and **`mode`** is the [TMode](#ch_html.CNCBINode_TMode) argument that was passed in to ***PrintChildren()***. In addition to an enumeration variable specifying the mode of output, a ***TMode*** object has a pointer to the parent node that invoked ***PrintChildren()***. This pointer is used by ***MapTagAll()***, to locate a parent node whose **`m_TagMap`** has an installed `tagmapper` for the tagname. The ***TMode*** object's parent pointer essentially implements a stack which can be used to retrace the dynamic chain of ***PrintChildren()*** invocations, until either a match is found or the end of the call stack is reached. When a match is found, the associated `tagmapper`'s ***MapTag()*** method is invoked, and ***Print()*** is applied to the node returned by this function.
 
 The following example uses an auxillary `CNCBINode(tagHolder)` to install additional ***CHTMLTagNode*** objects. The tags themselves however, are installed in the containing page's **`m_TagMap`**, where they will be retrieved by the ***MapTagAll()*** function, when ***PrintChildren()*** is called for the auxillary node. That node in turn, is mapped to the page's **`VIEW`** tag. When the parent page is "printed", ***CreateSubNodes()*** will create a ***CHTMLText*** node. The text node will hold the contents of the template file and be appended as a child to the page. When ***PrintBegin()*** is later invoked for the text node, ***MapTagAll()*** associates the **`VIEW`** string with the ***CNCBINode***, and in turn, calls ***Print()*** on that node.
 
@@ -767,7 +767,7 @@ The following example uses an auxillary `CNCBINode(tagHolder)` to install additi
         return 1;
     }
 
-<a name="ch-html.webpgs-htmlnode"></a>
+<a name="ch_html.webpgs_htmlnode"></a>
 
 ### The ***CHTMLNode*** ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLNode)) class
 
@@ -779,11 +779,11 @@ In addition to the subclasses explicitly defined in the hierarchy, a large numbe
 
 A rich interface of settable attributes is defined in the base class, and is applicable to all of the derived subclasses, including those implemented by the preprocessor macros. Settable attributes include: `class, style, id, width, height, size, alignment, color, title, accesskey,` and `name`. All of the ***SetXxx()*** functions which set these attributes return a **`this`** pointer, cast as ***CHTMLNode\****.
 
-<a name="ch-html.CHTMLDualNode"></a>
+<a name="ch_html.CHTMLDualNode"></a>
 
 ### The ***CHTMLDualNode*** ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLDualNode)) class
 
-***CHTMLDualNode*** is derived directly from the ***CNCBINode*** class, and provides the base class for all elements requiring different means for displaying data in [eHTML](#ch-html.webpgs-appendix) and [ePlainText](#ch-html.webpgs-appendix) modes.
+***CHTMLDualNode*** is derived directly from the ***CNCBINode*** class, and provides the base class for all elements requiring different means for displaying data in [eHTML](#ch_html.webpgs_appendix) and [ePlainText](#ch_html.webpgs_appendix) modes.
 
 This class interface includes several constructors. The second argument in these constructors specifies the alternative text to be displayed in **`ePlainText`** mode. The first argument of these constructors expects HTML text or pointer to an object of (or inherited from) CNCBINode class. It will be appended to the node using ***AppendChild()*** method, and printed out in **`eHTML`** mode. For example:
 
@@ -802,24 +802,24 @@ will generate:
 
     \n TEXT \n
 
-<a name="ch-html.using-CCgiApplication"></a>
+<a name="ch_html.using_CCgiApplication"></a>
 
 ### Using the HTML classes with a ***CCgiApplication*** object
 
 The previous chapter described the NCBI C++ Toolkit's [CGI](ch_cgi.html#ch_cgi.cg_develop_apps) classes, with an emphasis on their independence from the HTML classes. In practice however, a real application must employ both types of objects, and they must communicate with one another. The only explicit connection between the CGI and HTML components is in the HTML page classes, whose constructors accept a [CCgiApplication](ch_cgi.html#ch_cgi.cgi_app_class) as an input parameter. The open-ended definition of the page's **`m_TagMap`** data member also allows the user to install `tagmapper` functions that are under control of the application, thus providing an "output port" for the application. In particular, an application-specific ***CreateView()*** method can easily be installed as the function to be associated with a page's **`VIEW`** tag. The [CGI sample program](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/cgi) provides a simple example of using these classes in coordination with each other.
 
-<a name="ch-html.webpgs-appendix"></a>
+<a name="ch_html.webpgs_appendix"></a>
 
 Supplementary Information
 -------------------------
 
 The following topics are discussed in this section:
 
--   [The CNCBINode::TMode class](#ch-html.CNCBINode-TMode)
+-   [The CNCBINode::TMode class](#ch_html.CNCBINode_TMode)
 
--   [Quick Reference Guide](#ch-html.quick-ref)
+-   [Quick Reference Guide](#ch_html.quick_ref)
 
-<a name="ch-html.CNCBINode-TMode"></a>
+<a name="ch_html.CNCBINode_TMode"></a>
 
 ### The ***CNCBINode::TMode*** class
 
@@ -859,13 +859,13 @@ In the first top-level call to ***Print()***, **`prev`** is the default ***TMode
 
 where **`M`** is the ***TMode*** input parameter, and **`N`** is the current node.
 
-<a name="ch-html.webpgs.html-createsub"></a>
+<a name="ch_html.webpgs.html_createsub"></a>
 
 Thus, the output encoding specified at the top level is propagated to the ***PrintXxx()*** methods of all the child nodes embedded in the parent. The ***CNCBINode::PrintXxx()*** methods essentially do nothing;***PrintBegin()*** and ***PrintEnd()*** simply return 0, and ***PrintChildren()*** just calls ***Print()*** on each child. Thus, the actual printing is implemented by the [PrintBegin()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=PrintBegin) and [PrintEnd()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=PrintEnd) metwebpgs.html\_CHTMLBasicPaghods that are specialized by the child objects.
 
-As the foregoing discussion implies, a generic ***CNCBINode*** which has no children explicitly installed will generate no output. For example, a [CHTMLPage](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPage) object which has been initialized by loading a [template](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateTemplate) file has no children until they are explicitly created. In this case, the ***Print()*** method will first call [CreateSubNodes()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateSubNodes) before executing ***PrintChildren()***. The use of template files, and the associated set of `TagMap` functions are discussed in the section on the NCBI [Page](#ch-html.webpgs.html-tagmap) classes.
+As the foregoing discussion implies, a generic ***CNCBINode*** which has no children explicitly installed will generate no output. For example, a [CHTMLPage](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPage) object which has been initialized by loading a [template](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateTemplate) file has no children until they are explicitly created. In this case, the ***Print()*** method will first call [CreateSubNodes()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateSubNodes) before executing ***PrintChildren()***. The use of template files, and the associated set of `TagMap` functions are discussed in the section on the NCBI [Page](#ch_html.webpgs.html_tagmap) classes.
 
-<a name="ch-html.quick-ref"></a>
+<a name="ch_html.quick_ref"></a>
 
 ### Quick Reference Guide
 
@@ -913,7 +913,7 @@ The following is a quick reference guide to the HTML and related classes:
 
 <!-- -->
 
--   [CHTMLElement](#ch-html.quick-ref)
+-   [CHTMLElement](#ch_html.quick_ref)
 
     -   ***CHTML\_a***
 
@@ -991,9 +991,9 @@ The following is a quick reference guide to the HTML and related classes:
 
 -   [CButtonList](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CButtonList) (Custom feature not for general use.) Derived from ***CNCBINode***; defined in [components.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CButtonList). An HTML select button with a drop down list; used in ***CPagerBox***. The constructor takes no arguments, and child nodes (options) are added using method [CbuttonList::CreateSubNodes()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateSubNodes)
 
--   [CHTML\_a](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_a) Derived from [CHTMLElement](#ch-html.quick-ref), defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_a) - an HTML anchor element, as used in *\<a href="..."\>*. The constructor takes the URL string as the argument, and optionally, a ***CNCBINode*** to be appended as a child node. The label inserted before the closing tag (\</a\>) can thus be specified by providing a ***CHTMLText*** node to the constructor, or by using the ***AppendChild()*** after the anchor has been created.
+-   [CHTML\_a](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_a) Derived from [CHTMLElement](#ch_html.quick_ref), defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_a) - an HTML anchor element, as used in *\<a href="..."\>*. The constructor takes the URL string as the argument, and optionally, a ***CNCBINode*** to be appended as a child node. The label inserted before the closing tag (\</a\>) can thus be specified by providing a ***CHTMLText*** node to the constructor, or by using the ***AppendChild()*** after the anchor has been created.
 
--   [CHTML\_basefont](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_basefont) Derived from [CHTMLElement](#ch-html.quick-ref), defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_basefont) - an HTML basefont element used to define the font size and/or typeface for text embedded in this node by ***AppendChild()***. The constructor expects one to two arguments specifying size, typeface, or both.
+-   [CHTML\_basefont](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_basefont) Derived from [CHTMLElement](#ch_html.quick_ref), defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_basefont) - an HTML basefont element used to define the font size and/or typeface for text embedded in this node by ***AppendChild()***. The constructor expects one to two arguments specifying size, typeface, or both.
 
 -   [CHTML\_br](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_br) Derived from ***CHTMLOpenElement***, defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_br) - the HTML component used to insert line breaks. The constructor takes no arguments.
 
@@ -1003,15 +1003,15 @@ The following is a quick reference guide to the HTML and related classes:
 
 -   [CHTML\_dir](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_dir) Derived from ***CHTMLListElement***, defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_dir) - the HTML component used to insert a `dir` list. The constructor takes zero to two arguments; if no arguments are provided, the `compact` attribute is by default false, and the `type` attribute is left to the browser. `CHTML_dir("square", true)` will create a compact `dir` element with square icons. Items can be added to the list using `AppendChild(new CHTMLText("<li>...")`.
 
--   [CHTML\_dl](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_dl) Derived from [CHTMLElement](#ch-html.quick-ref), defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_dl) - an HTML glossary list. The constructor takes a single ***bool*** argument; if no arguments are provided, the `compact` attribute is by default false. Terms are added to the list using [AppendTerm()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AppendTerm).
+-   [CHTML\_dl](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_dl) Derived from [CHTMLElement](#ch_html.quick_ref), defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_dl) - an HTML glossary list. The constructor takes a single ***bool*** argument; if no arguments are provided, the `compact` attribute is by default false. Terms are added to the list using [AppendTerm()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AppendTerm).
 
--   [CHTML\_fieldset](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_fieldset) Derived from [CHTMLElement](#ch-html.quick-ref), defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_fieldset) - an element that groups related form controls (such as checkboxes, radio buttons, etc.) together to define a `form control group`. The constructors take at most 1 argument, which may be either a ***string*** or a ***CHTML\_legend*** node. If the argument is a ***string***, then it is used to create a ***CHTML\_legend*** node for the `fieldset`. The individual form controls to be included in the group are specified using the ***AppendChild()*** method.
+-   [CHTML\_fieldset](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_fieldset) Derived from [CHTMLElement](#ch_html.quick_ref), defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_fieldset) - an element that groups related form controls (such as checkboxes, radio buttons, etc.) together to define a `form control group`. The constructors take at most 1 argument, which may be either a ***string*** or a ***CHTML\_legend*** node. If the argument is a ***string***, then it is used to create a ***CHTML\_legend*** node for the `fieldset`. The individual form controls to be included in the group are specified using the ***AppendChild()*** method.
 
 -   [CHTML\_file](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_file) Derived from ***CHTML\_input***, defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_file) - used only inside a ***CHTML\_form*** - a `form` input type to create a file widget for selecting files to be sent to the server. The constructor takes a ***string*** name and an optional ***string*** value.
 
--   [CHTML\_font](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_font) Derived from [CHTMLElement](#ch-html.quick-ref), defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_font) - an HTML font element. The constructor takes up to four arguments. The first three arguments specify the font typeface and size, along with a Boolean value indicating whether the given font size is absolute or relative. The last argument is either a ***string*** or a ***CNCBINode*** containing text. Additional text should be added using the ***AppendChild()*** method.
+-   [CHTML\_font](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_font) Derived from [CHTMLElement](#ch_html.quick_ref), defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_font) - an HTML font element. The constructor takes up to four arguments. The first three arguments specify the font typeface and size, along with a Boolean value indicating whether the given font size is absolute or relative. The last argument is either a ***string*** or a ***CNCBINode*** containing text. Additional text should be added using the ***AppendChild()*** method.
 
--   [CHTML\_form](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_form) Derived from [CHTMLElement](#ch-html.quick-ref), defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_form) - an HTML `form` node with two constructors. The first takes the URL ***string*** (for submission of form data) and method (**`CHTML::eGet`** or **`CHTML::ePost`**), and the ***AppendChild()*** method is used to add nodes. The second constructor takes three arguments, specifying the URL, an HTML node to append to the form, and the enumereated get/post method.
+-   [CHTML\_form](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_form) Derived from [CHTMLElement](#ch_html.quick_ref), defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_form) - an HTML `form` node with two constructors. The first takes the URL ***string*** (for submission of form data) and method (**`CHTML::eGet`** or **`CHTML::ePost`**), and the ***AppendChild()*** method is used to add nodes. The second constructor takes three arguments, specifying the URL, an HTML node to append to the form, and the enumereated get/post method.
 
 -   [CHTML\_hidden](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_hidden) Derived from ***CHTML\_input***, defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_hidden) - used only inside a ***CHTML\_form*** - the HTML node for adding `hidden` key/value pairs to the data that will be submitted by an ***CHTML\_form***. The constructor takes a name ***string*** and a value, where the latter may be either a ***string*** or an ***int***.
 
@@ -1023,43 +1023,43 @@ The following is a quick reference guide to the HTML and related classes:
 
 -   [CHTML\_input](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_input) Derived from ***CHTMLOpenElement***, defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_input) - the base class for all HTML input elements to be added to a ***CHTML\_form***. The constructor takes a (***char\****) input type and a (***string***) name. The constructor for each of the subclasses has a static member **`sm_InputType`** which is passed as the first argument to the ***CParent***'s (***CHTML\_input***) constructor.
 
--   [CHTML\_label](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_label) Derived from [CHTMLElement](#ch-html.quick-ref), defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_label) - associates a label with a form control. The constructors take a ***string*** argument which specifies the text for the label, and optionally, a second ***string*** argument specifying the `FOR` attribute. The `FOR` attribute explicitly identifies the form control to associate with this label.
+-   [CHTML\_label](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_label) Derived from [CHTMLElement](#ch_html.quick_ref), defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_label) - associates a label with a form control. The constructors take a ***string*** argument which specifies the text for the label, and optionally, a second ***string*** argument specifying the `FOR` attribute. The `FOR` attribute explicitly identifies the form control to associate with this label.
 
--   [CHTML\_legend](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_legend) Derived from [CHTMLElement](#ch-html.quick-ref), defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_legend) - defines a caption for a ***CHTML\_fieldset*** element. The constructors take a single argument which may be either a ***string*** or a ***CHTMLNode***.
+-   [CHTML\_legend](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_legend) Derived from [CHTMLElement](#ch_html.quick_ref), defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_legend) - defines a caption for a ***CHTML\_fieldset*** element. The constructors take a single argument which may be either a ***string*** or a ***CHTMLNode***.
 
 -   [CHTML\_menu](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_menu) Derived from ***CHTMLListElement***, defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_menu) - the HTML component used to insert a `menu` list. The constructor takes zero to two arguments; if no arguments are provided, the `compact` attribute is by default false, and the `type` attribute is left to the browser. `CHTML_menu("square", true)` will create a compact `menu` element with square icons. Items can be added to the list using `AppendChild(new CHTMLText("<li>...")`.
 
 -   [CHTML\_ol](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_ol) Derived from ***CHTMLListElement***, defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_ol) - the HTML component used to insert an enumerated list. The constructor takes up to three arguments, specifying the starting number, the `type` of enumeration (Arabic, Roman Numeral etc.), and a Boolean argument specifying whether or not the display should be compact. Items can be added to the list using `AppendChild(new CHTMLText("<li>...")`.
 
--   [CHTML\_option](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_option) Derived from [CHTMLElement](#ch-html.quick-ref), defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_option) - an HTML `option` associated with a ***CHTML\_select*** component. The constructor takes a value (***string***), a label (***string*** or ***char\****), and a Boolean indicating whether or not the option is by default selected. The last two arguments are optional, and by default the option is not selected.
+-   [CHTML\_option](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_option) Derived from [CHTMLElement](#ch_html.quick_ref), defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_option) - an HTML `option` associated with a ***CHTML\_select*** component. The constructor takes a value (***string***), a label (***string*** or ***char\****), and a Boolean indicating whether or not the option is by default selected. The last two arguments are optional, and by default the option is not selected.
 
 -   [CHTML\_radio](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_radio) Derived from ***CHTML\_input***, defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_radio) - can only be used inside a ***CHTML\_form***; the HTML component for a radio button. The constructor takes up to four arguments specifying the name (***string***), value (***string***), state (***bool***), and description (***string***) for the node.
 
 -   [CHTML\_reset](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_reset) Derived from ***CHTML\_input***, defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_reset) - can only be used inside a ***CHTML\_form***; the HTML component for a reset button. The constructor takes a single optional argument specifying the button's label.
 
--   [CHTML\_select](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_select) Derived from [CHTMLElement](#ch-html.quick-ref), defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_select) - an HTML `select` component. The constructor takes up to three arguments, specifying the name (***string***) and size (***int***) of the selection box, along with a Boolean specifying whether or not multiple selections are allowed (default is false). Select options should be added using the ***AppendOption()*** method.
+-   [CHTML\_select](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_select) Derived from [CHTMLElement](#ch_html.quick_ref), defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_select) - an HTML `select` component. The constructor takes up to three arguments, specifying the name (***string***) and size (***int***) of the selection box, along with a Boolean specifying whether or not multiple selections are allowed (default is false). Select options should be added using the ***AppendOption()*** method.
 
 -   [CHTML\_submit](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_submit) Derived from ***CHTML\_input***, defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_submit) - can only be used inside a ***CHTML\_form***; the HTML component for a submit button. The constructor takes two ***string*** arguments specifying the button's name and label (optional). When selected, this causes the data selections in the including `form` to be sent to the `form`'s URL.
 
--   [CHTML\_table](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_table) Derived from [CHTMLElement](#ch-html.quick-ref), defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_table) - an HTML table element. The constructor takes no arguments, but many member functions are provided to get/set attributes of the table. Because each of the "set attribute" methods returns **`this`**, the invocations can be strung together in a single statement.<br/>Use [InsertAt](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/search?string=InsertAt)`(row, col, contents)` to add **`contents`** to table cell **`row, col`**. To add contents to the next available cell, use `AppendChild (new`<br/>` <listref rid="webpgs.html_CHTML_tc" RBID="webpgs.html_CHTML_tc"> `***CHTML\_tc***` </listref>`<br/>`(tag, contents))`, where **`tag`** is type ***char\**** and **`contents`** is type ***char\*, string*** or ***CNCBINode\****.
+-   [CHTML\_table](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_table) Derived from [CHTMLElement](#ch_html.quick_ref), defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_table) - an HTML table element. The constructor takes no arguments, but many member functions are provided to get/set attributes of the table. Because each of the "set attribute" methods returns **`this`**, the invocations can be strung together in a single statement.<br/>Use [InsertAt](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/search?string=InsertAt)`(row, col, contents)` to add **`contents`** to table cell **`row, col`**. To add contents to the next available cell, use `AppendChild (new`<br/>` <listref rid="webpgs.html_CHTML_tc" RBID="webpgs.html_CHTML_tc"> `***CHTML\_tc***` </listref>`<br/>`(tag, contents))`, where **`tag`** is type ***char\**** and **`contents`** is type ***char\*, string*** or ***CNCBINode\****.
 
--   [CHTML\_tc](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_tc) Derived from [CHTMLElement](#ch-html.quick-ref), defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_tc) - an HTML table cell element. All of the constructors expect the first argument to be a `char* tagname`. The second argument, if present, may be text (***char\**** or ***string***) or a pointer to a ***CNCBINode***.
+-   [CHTML\_tc](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_tc) Derived from [CHTMLElement](#ch_html.quick_ref), defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_tc) - an HTML table cell element. All of the constructors expect the first argument to be a `char* tagname`. The second argument, if present, may be text (***char\**** or ***string***) or a pointer to a ***CNCBINode***.
 
 -   [CHTML\_text](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_text) Derived from ***CHTML\_input***, defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_text) - can only be used inside a ***CHTML\_form***; the HTML component for a text box inside a form. The constructor takes up to four arguments: name (***string***), size (***int***), maxlength (***int***), and value (***string***). Only the first argument is required.
 
 -   [CHTML\_textarea](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_textarea) Derived from ***CHTML\_input***, defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_textarea) - can only be used inside a ***CHTML\_form***; the HTML component for a textarea inside a form. The constructor takes up to four arguments: name (***string***), cols (***int***), rows (***int***), and value (***string***). Only the last argument is optional.
 
--   [CHTML\_tr](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_tr) Derived from [CHTMLElement](#ch-html.quick-ref), defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_tr) - an HTML table row element. The constructors take a single argument, which may be either a ***string*** or a pointer to a ***CNCBINode***.
+-   [CHTML\_tr](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_tr) Derived from [CHTMLElement](#ch_html.quick_ref), defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_tr) - an HTML table row element. The constructors take a single argument, which may be either a ***string*** or a pointer to a ***CNCBINode***.
 
 -   [CHTML\_ul](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_ul) Derived from ***CHTMLListElement***, defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_ul) - the HTML component used to insert an unordered list. The constructor takes zero to two arguments; if no arguments are provided, the `compact` attribute is by default false, and the `type` attribute is left to the browser. `CHTML_menu("square", true)` will create a compact list element with square icons. Items can be added to the list using `AppendChild(new CHTMLText("<li>...")`.
 
--   [CHTMLBasicPage](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLBasicPage) Derived from ***CNCBINode***, defined in [page.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLBasicPage) - The base class for ***CHTMLPage*** and its descendants. The HTML page classes serve as generalized containers for collections of other HTML elements, which together define a web page. Each page has a [TTagMap](#ch-html.webpgs.html-tagmap), which maps names (***strings***) to the HTML subcomponents embedded in the page. Two constructors are defined. The first takes no arguments, and the other, takes a pointer to a [CCgiApplication](ch_cgi.html#ch_cgi.cgi_app_class) and a **`style`** (***int***) argument.
+-   [CHTMLBasicPage](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLBasicPage) Derived from ***CNCBINode***, defined in [page.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLBasicPage) - The base class for ***CHTMLPage*** and its descendants. The HTML page classes serve as generalized containers for collections of other HTML elements, which together define a web page. Each page has a [TTagMap](#ch_html.webpgs.html_tagmap), which maps names (***strings***) to the HTML subcomponents embedded in the page. Two constructors are defined. The first takes no arguments, and the other, takes a pointer to a [CCgiApplication](ch_cgi.html#ch_cgi.cgi_app_class) and a **`style`** (***int***) argument.
 
 -   [CHTMLComment](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLComment) Derived from ***CHTMLNode***, defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLComment) - used to insert an HTML comment. The constructor takes at most one argument, which may be a ***char\****, a ***string***, or a ***CNCBINode***. The constructor then uses [AppendPlainText()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AppendPlainText) or [AppendChild()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AppendChild), depending on the type of argument, to append the argument to the comment node.
 
 -   [CHTMLElement](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLElement) Derived from ***CHTMLOpenElement***, defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLElement) - the base class for all tagged elements which require a closing tag of the form `</tagname>`. ***CHTMLElement*** specializes the [PrintEnd()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=PrintEnd) method by generating the end tag `</m_Name>` on the output, where **`m_Name`** stores the tagname of the instance's subclass. Subclasses include ***CHTML\_a, CHTML\_basefont, CHTML\_dl, CHTML\_font, CHTML\_form, CHTML\_option, CHTML\_select, CHTML\_table, CHTML\_tc, CHTML\_textarea***, and ***CHTMLListElement***.
 
--   [CHTMLListElement](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLListElement) Derived from [CHTMLElement](#ch-html.quick-ref), defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLListElement) - the base class for ***CHTML\_ul***, ***CHTML\_ol***, ***CHTML\_dir***, and ***CHTML\_menu*** lists. Arguments to the constructor include the **`tagname`** and **`type`** strings for the list, along with a Boolean indicating whether or not the list is compact.
+-   [CHTMLListElement](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLListElement) Derived from [CHTMLElement](#ch_html.quick_ref), defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLListElement) - the base class for ***CHTML\_ul***, ***CHTML\_ol***, ***CHTML\_dir***, and ***CHTML\_menu*** lists. Arguments to the constructor include the **`tagname`** and **`type`** strings for the list, along with a Boolean indicating whether or not the list is compact.
 
 -   [CHTMLNode](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLNode) Derived from ***CNCBINode***, defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLNode) - the base class for ***CHTMLComment*** and ***CHTMLOpenElement***. Attributes include `style, id, title, accesskey, color, bgcolor, height, width, align, valign, size, name,` and `class`. All of the constructors require a **`tagname`** argument, which may be either type ***char\**** or ***string***. The optional second argument may be type ***char\****, ***string***, or ***CNCBINode***.
 
@@ -1071,7 +1071,7 @@ The following is a quick reference guide to the HTML and related classes:
 
 -   [CHTMLTagNode](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLTagNode) Derived from ***CNCBINode***; defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLTagNode).
 
--   [CHTMLDualNode](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLDualNode) Derived from ***CNCBINode***, defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLDualNode) - Allows the user to [explicitly specify](#ch-html.CHTMLDualNode) what exactly to print out in **`eHTML`** and in **`ePlainText`** modes. The constructor takes 2 arguments -- the first one is for **`eHTML`** mode output (string or a pointer to a ***CNCBINode***), and the second one is a plain text for **`ePlainText`** mode output.
+-   [CHTMLDualNode](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLDualNode) Derived from ***CNCBINode***, defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLDualNode) - Allows the user to [explicitly specify](#ch_html.CHTMLDualNode) what exactly to print out in **`eHTML`** and in **`ePlainText`** modes. The constructor takes 2 arguments -- the first one is for **`eHTML`** mode output (string or a pointer to a ***CNCBINode***), and the second one is a plain text for **`ePlainText`** mode output.
 
 -   [CHTMLSpecialChar](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLSpecialChar) Derived from ***CHTMLDualNode***, defined in [html.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLSpecialChar) - A class for HTML special chars like `&nbsp`, `&copy,` etc. Elements of this class have two variants for output, for eHTML and ePlainText modes. For example: `&nbsp` have plain text variant - " ", and `&copy` - "(c)". `html.hpp` has several predefined simple classes, based on this class, for any special chars. It is ***CHTML\_nbsp***, ***CHTML\_gt***, ***CHTML\_lt***, ***CHTML\_quot***, ***CHTML\_amp***, ***CHTML\_copy*** and ***CHTML\_reg***. Each have one optional arqument, which specify the number of symbols to output.
 

@@ -12,13 +12,13 @@ Last Update: November 13, 2013.
 
 The following approaches to developing GUI applications have been proved to work reasonably well:
 
--   [Using wxWidgets (for GUI) and OpenGL (for graphics)](#ch-gui.Using-wxWidgets-for-GUI-and-OpenG)
+-   [Using wxWidgets (for GUI) and OpenGL (for graphics)](#ch_gui.Using_wxWidgets_for_GUI_and_OpenG)
 
--   [Using FOX as a third party package](#ch-gui.Using-FOX-as-a-third-party-packag)
+-   [Using FOX as a third party package](#ch_gui.Using_FOX_as_a_third_party_packag)
 
--   [Using the Genome Workbench wxWidgets-based GUI framework](#ch-gui.Using-the-Genome-Workbench-wxWidg)
+-   [Using the Genome Workbench wxWidgets-based GUI framework](#ch_gui.Using_the_Genome_Workbench_wxWidg)
 
-<a name="ch-gui.Using-wxWidgets-for-GUI-and-OpenG"></a>
+<a name="ch_gui.Using_wxWidgets_for_GUI_and_OpenG"></a>
 
 Using wxWidgets (for GUI) and OpenGL (for graphics)
 ---------------------------------------------------
@@ -29,7 +29,7 @@ This approach is appropriate for projects requiring complex GUIs with rich user 
 
 This approach is used in NCBI by the [Cn3D](http://www.ncbi.nlm.nih.gov/Structure/CN3D/cn3d.shtml) application, and the [Genome Workbench](http://www.ncbi.nlm.nih.gov/projects/gbench/) application is based on that too. Please see the [wxWidgets](http://www.wxwidgets.org/) and [OpenGL](http://www.opengl.org/) websites for further information.
 
-<a name="ch-gui.Using-FOX-as-a-third-party-packag"></a>
+<a name="ch_gui.Using_FOX_as_a_third_party_packag"></a>
 
 Using FOX as a third party package
 ----------------------------------
@@ -40,7 +40,7 @@ This approach is appropriate for projects requiring uniform behavior across plat
 
 This approach is used in NCBI by the taskedit application. Please see the [FOX](http://www.fox-toolkit.org/) website for further information.
 
-<a name="ch-gui.Using-the-Genome-Workbench-wxWidg"></a>
+<a name="ch_gui.Using_the_Genome_Workbench_wxWidg"></a>
 
 Using the Genome Workbench wxWidgets-based GUI framework
 --------------------------------------------------------

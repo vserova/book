@@ -37,77 +37,77 @@ In addition to building the Toolkit libraries and applications, this chapter als
 
 ### Chapter Outline
 
-[General Information for All Platforms](#ch-config.-General-Information-)
+[General Information for All Platforms](#ch_config._General_Information_)
 
--   [Choosing a Build Scope](#ch-config.Choosing-a-Build-Scope)
+-   [Choosing a Build Scope](#ch_config.Choosing_a_Build_Scope)
 
-    -   [Project List Files](#ch-config.Project-List-Files)
+    -   [Project List Files](#ch_config.Project_List_Files)
 
-    -   [Reducing Build Scope with Project Tags](#ch-config.Reducing-Build-Scope-with-Proj)
+    -   [Reducing Build Scope with Project Tags](#ch_config.Reducing_Build_Scope_with_Proj)
 
--   [Configure the Build](#ch-config.Configure-the-Build)
+-   [Configure the Build](#ch_config.Configure_the_Build)
 
-    -   [Site-Specific Third Party Library Configuration](#ch-config.SiteSpecific-Third-Party-Libra)
+    -   [Site-Specific Third Party Library Configuration](#ch_config.SiteSpecific_Third_Party_Libra)
 
-    -   [Configuring with the Configuration GUI](#ch-config.Configuring-with-the-Java-GUI)
+    -   [Configuring with the Configuration GUI](#ch_config.Configuring_with_the_Java_GUI)
 
--   [Use the Toolkit](#ch-config.Use-the-Toolkit)
+-   [Use the Toolkit](#ch_config.Use_the_Toolkit)
 
--   [Supported Platforms](#ch-config.Supported-Platforms)
+-   [Supported Platforms](#ch_config.Supported_Platforms)
 
-[Unix](#ch-config.UNIX)
+[Unix](#ch_config.UNIX)
 
--   [General Information for Unix Platforms](#ch-config.-General-Information--1)
+-   [General Information for Unix Platforms](#ch_config._General_Information__1)
 
-    -   [Choosing a Build Scope with Unix](#ch-config.-Choosing-a-Build-Sco)
+    -   [Choosing a Build Scope with Unix](#ch_config._Choosing_a_Build_Sco)
 
-    -   [Configuring with Unix](#ch-config.Configuring-with-UNI)
+    -   [Configuring with Unix](#ch_config.Configuring_with_UNI)
 
-    -   [Building with Unix](#ch-config.Building-with-UNIX)
+    -   [Building with Unix](#ch_config.Building_with_UNIX)
 
-    -   [Using the Toolkit with Unix](#ch-config.-Using-the-Toolkit-wi)
+    -   [Using the Toolkit with Unix](#ch_config._Using_the_Toolkit_wi)
 
--   [Special Considerations for Specific Unix Platforms](#ch-config.Special-Consideratio)
+-   [Special Considerations for Specific Unix Platforms](#ch_config.Special_Consideratio)
 
-    -   [Linux / ICC](#ch-config.Linux---ICC)
+    -   [Linux / ICC](#ch_config.Linux___ICC)
 
-    -   [Cygwin / GCC](#ch-config.-Cygwin---GCC)
+    -   [Cygwin / GCC](#ch_config._Cygwin___GCC)
 
-[MS Windows](#ch-config.MS-Windows)
+[MS Windows](#ch_config.MS_Windows)
 
--   [MS Visual C++](#ch-config.MS-Visual-C-2008)
+-   [MS Visual C++](#ch_config.MS_Visual_C_2008)
 
-    -   [Choosing a Build Scope with Visual C++](#ch-config.-Choosing-a-Build-Sco-1)
+    -   [Choosing a Build Scope with Visual C++](#ch_config._Choosing_a_Build_Sco_1)
 
-    -   [Configuring with Visual C++](#ch-config.Configuring-with-Vis)
+    -   [Configuring with Visual C++](#ch_config.Configuring_with_Vis)
 
-    -   [Building with Visual C++](#ch-config.Building-with-Visual)
+    -   [Building with Visual C++](#ch_config.Building_with_Visual)
 
-    -   [Using the Toolkit with Visual C++](#ch-config.-Using-the-Toolkit-wi-1)
+    -   [Using the Toolkit with Visual C++](#ch_config._Using_the_Toolkit_wi_1)
 
--   [Cygwin / GCC](#ch-config.Cygwin-GCC)
+-   [Cygwin / GCC](#ch_config.Cygwin_GCC)
 
-[Mac OS X](#ch-config.Mac-OS-X)
+[Mac OS X](#ch_config.Mac_OS_X)
 
--   [Xcode 3.0, 3.1](#ch-config.Xcode-30--31)
+-   [Xcode 3.0, 3.1](#ch_config.Xcode_30__31)
 
-    -   [Choosing a Build Scope with Xcode 3.0 or Later](#ch-config.-Choosing-a-Build-Sco-2)
+    -   [Choosing a Build Scope with Xcode 3.0 or Later](#ch_config._Choosing_a_Build_Sco_2)
 
-    -   [Configuring with Xcode 3.0 or Later](#ch-config.Configuring-with-Xco)
+    -   [Configuring with Xcode 3.0 or Later](#ch_config.Configuring_with_Xco)
 
-    -   [Building with Xcode 3.0 or Later](#ch-config.Building-with-Xcode-)
+    -   [Building with Xcode 3.0 or Later](#ch_config.Building_with_Xcode_)
 
--   [Xcode 1.0, 2.0](#ch-config.Xcode)
+-   [Xcode 1.0, 2.0](#ch_config.Xcode)
 
-    -   [Build the Toolkit](#ch-config.-Build-the-Toolkit)
+    -   [Build the Toolkit](#ch_config._Build_the_Toolkit)
 
-    -   [The Build Results](#ch-config.-The-Build-Results-2)
+    -   [The Build Results](#ch_config._The_Build_Results_2)
 
--   [Darwin / GCC](#ch-config.GCC)
+-   [Darwin / GCC](#ch_config.GCC)
 
--   [Code Warrior](#ch-config.CodeWarrior) (discontinued as of April 30, 2006)
+-   [Code Warrior](#ch_config.CodeWarrior) (discontinued as of April 30, 2006)
 
-<a name="ch-config.-General-Information-"></a>
+<a name="ch_config._General_Information_"></a>
 
 General Information for All Platforms
 -------------------------------------
@@ -118,29 +118,29 @@ Using the Toolkit on any platform requires these basic high-level steps:
 
 -   [Get the source files](ch_getcode_svn.html) from NCBI and place them in your working directory.
 
--   [Choose a build scope](#ch-config.Choosing-a-Build-Scope).
+-   [Choose a build scope](#ch_config.Choosing_a_Build_Scope).
 
--   [Configure the build](#ch-config.Configure-the-Build).
+-   [Configure the build](#ch_config.Configure_the_Build).
 
 -   Build.
 
--   [Use the Toolkit](#ch-config.Use-the-Toolkit) from your application.
+-   [Use the Toolkit](#ch_config.Use_the_Toolkit) from your application.
 
-<a name="ch-config.Choosing-a-Build-Scope"></a>
+<a name="ch_config.Choosing_a_Build_Scope"></a>
 
 ### Choosing a Build Scope
 
 After [preparing the development environment](ch_faq.html#ch_faq.How_do_I_prepare_my_development_e), you'll need to choose a build scope. Choosing a build scope means deciding whether you want to build the entire Toolkit or just some portion of it. The build system includes methods on most platforms for building pre-defined scopes, such as just the core libraries and applications, the Genome Workbench, pre-defined lists of one or more projects, etc. Choosing a build scope must be done before configuring on some platforms. On other platforms it can be done either before or after configuring. See the section for your platform for more details on pre-defined build scope choices.
 
-<a name="ch-config.Project-List-Files"></a>
+<a name="ch_config.Project_List_Files"></a>
 
 #### Project List Files
 
-A very convenient way to explicitly define the build scope is to use a project list file. These files are simple line-oriented text files that essentially just list the set of projects you want included in (or excluded from) your build scope. Project list files can be referenced from various build-related tools including the **configure** script and the [Configuration GUI](#ch-config.Configuring-with-the-Java-GUI) (which pass the files to the build system); the [update\_projects](ch_getcode_svn.html#ch_getcode_svn.update_projects_sh) script; and the [`prepare_release`](http://mini.ncbi.nlm.nih.gov/376) framework (NCBI only).
+A very convenient way to explicitly define the build scope is to use a project list file. These files are simple line-oriented text files that essentially just list the set of projects you want included in (or excluded from) your build scope. Project list files can be referenced from various build-related tools including the **configure** script and the [Configuration GUI](#ch_config.Configuring_with_the_Java_GUI) (which pass the files to the build system); the [update\_projects](ch_getcode_svn.html#ch_getcode_svn.update_projects_sh) script; and the [`prepare_release`](http://mini.ncbi.nlm.nih.gov/376) framework (NCBI only).
 
-Project list files consist of two types of lines (ignoring blank lines) - [path lines](#ch-config.Path-Lines-in-Project-List-Fil), and [hash lines](#ch-config.Hash-Lines-in-Project-List-Fil). Thus, any non-blank line that doesn't begin with the hash character "`#`" must be a path line.
+Project list files consist of two types of lines (ignoring blank lines) - [path lines](#ch_config.Path_Lines_in_Project_List_Fil), and [hash lines](#ch_config.Hash_Lines_in_Project_List_Fil). Thus, any non-blank line that doesn't begin with the hash character "`#`" must be a path line.
 
-<a name="ch-config.Path-Lines-in-Project-List-Fil"></a>
+<a name="ch_config.Path_Lines_in_Project_List_Fil"></a>
 
 ##### Path Lines in Project List Files
 
@@ -162,7 +162,7 @@ For example, the path `connect/services` results in the inclusion of:
 
 -   the include subtree `trunk/c++/include/connect/services`.
 
-Note that subtrees are recursive by default. See the section on using a [trailing dollar sign](#ch-config.Trailing-dollarsign) for making the selection non-recursive.
+Note that subtrees are recursive by default. See the section on using a [trailing dollar sign](#ch_config.Trailing_dollarsign) for making the selection non-recursive.
 
 Similarly, paths beginning with `internal/` result in the inclusion of source and include subtrees from the internal codebase. For example, the path `internal/ilink` results in the inclusion of the source subtree `trunk/internal/c++/src/internal/ilink` and the include subtree `trunk/internal/c++/include/internal/ilink`.
 
@@ -172,17 +172,17 @@ The general syntax for path lines is represented by the following diagram:
 
 The various elements of the above syntax diagram are discussed in the following sections:
 
--   [Leading hyphen](#ch-config.Leading-hyphen)
+-   [Leading hyphen](#ch_config.Leading_hyphen)
 
--   [Leading dot-slash or caret-slash](#ch-config.Leading-dotslash-or-caretslash)
+-   [Leading dot-slash or caret-slash](#ch_config.Leading_dotslash_or_caretslash)
 
--   [Trailing dollar sign](#ch-config.Trailing-dollarsign)
+-   [Trailing dollar sign](#ch_config.Trailing_dollarsign)
 
--   [Trailing update-only](#ch-config.Trailing-updateonly)
+-   [Trailing update-only](#ch_config.Trailing_updateonly)
 
--   [Regular expressions in project paths](#ch-config.Regular-expressions)
+-   [Regular expressions in project paths](#ch_config.Regular_expressions)
 
-<a name="ch-config.Leading-hyphen"></a>
+<a name="ch_config.Leading_hyphen"></a>
 
 ##### Leading hyphen
 
@@ -195,7 +195,7 @@ results in excluding the `demo` subdirectory while including all the other subdi
 
 ***Note:*** Path lines might not be processed in the order they appear in the project list file. For example, the **prepare\_release** framework first builds a tree formed from all the "positive" path lines (those without leading hyphens), and then removes the subtrees specified by "negative" path lines (those with leading hyphens).
 
-<a name="ch-config.Leading-dotslash-or-caretslash"></a>
+<a name="ch_config.Leading_dotslash_or_caretslash"></a>
 
 ##### Leading dot-slash or caret-slash
 
@@ -203,7 +203,7 @@ Path lines may have a leading "`./`" or "`^/`". A leading "`./`" means that the 
 
 ***Note:*** As of June, 2014, the only tool supporting this syntax feature is **prepare\_release**.
 
-<a name="ch-config.Trailing-dollarsign"></a>
+<a name="ch_config.Trailing_dollarsign"></a>
 
 ##### Trailing dollar sign
 
@@ -228,13 +228,13 @@ select:
 
     -   `trunk/c++/src/util/compress/`
 
-<a name="ch-config.Trailing-updateonly"></a>
+<a name="ch_config.Trailing_updateonly"></a>
 
 ##### Trailing update-only
 
 Path lines may have a trailing "`update-only`". If so, it means that the selected subtrees will be kept up-to-date with respect to the repository, but will not be built.
 
-<a name="ch-config.Regular-expressions"></a>
+<a name="ch_config.Regular_expressions"></a>
 
 ##### Regular expressions in project paths
 
@@ -246,11 +246,11 @@ selects all the sub-subdirectories beginning with `app`, `unit_test`, `demo`, or
 
 ***Note:*** Using regular expression characters early in a path can cause significant performance problems. For example, when the **prepare\_release** framework detects a regular expression character in a path component, it performs a recursive SVN list command and applies the regular expression to the results.
 
-<a name="ch-config.Hash-Lines-in-Project-List-Fil"></a>
+<a name="ch_config.Hash_Lines_in_Project_List_Fil"></a>
 
 ##### Hash Lines in Project List Files
 
-Non-blank lines in a project list file must be either [path lines](#ch-config.Path-Lines-in-Project-List-Fil) or hash lines (i.e. start with the hash character "`#`").
+Non-blank lines in a project list file must be either [path lines](#ch_config.Path_Lines_in_Project_List_Fil) or hash lines (i.e. start with the hash character "`#`").
 
 The primary purpose of hash lines is to enable two complementary goals:
 
@@ -262,15 +262,15 @@ While the C preprocessor will only process hash lines, other tools may process b
 
 To remain compatible with the C preprocessor while supporting processing by other tools, the project list file grammar encompasses four hash line constructs:
 
--   [include lines](#ch-config.Include-lines)
+-   [include lines](#ch_config.Include_lines)
 
--   [project tag lines](#ch-config.Project-tag-lines)
+-   [project tag lines](#ch_config.Project_tag_lines)
 
--   [hashed path lines](#ch-config.Hashed-path-lines)
+-   [hashed path lines](#ch_config.Hashed_path_lines)
 
--   [comment blocks](#ch-config.Comment-blocks)
+-   [comment blocks](#ch_config.Comment_blocks)
 
-<a name="ch-config.Include-lines"></a>
+<a name="ch_config.Include_lines"></a>
 
 ##### Include lines
 
@@ -278,11 +278,11 @@ Project list files may include others, using C syntax and semantics, for example
 
     #include "../../projects/no_gbench.lst"
 
-<a name="ch-config.Project-tag-lines"></a>
+<a name="ch_config.Project_tag_lines"></a>
 
 ##### Project tag lines
 
-Project tags may be used to filter the final set of selected projects (see the [Defining Project Tags](#ch-config.Defining-Project-Tags) and [Filtering with Project Tags](#ch-config.Filtering-with-Project-Tags) sections for more details).
+Project tags may be used to filter the final set of selected projects (see the [Defining Project Tags](#ch_config.Defining_Project_Tags) and [Filtering with Project Tags](#ch_config.Filtering_with_Project_Tags) sections for more details).
 
 The general syntax for project tag lines is represented by the following diagram:
 
@@ -292,7 +292,7 @@ For example:
 
     #define  TAGS  [demo test]
 
-<a name="ch-config.Hashed-path-lines"></a>
+<a name="ch_config.Hashed_path_lines"></a>
 
 ##### Hashed path lines
 
@@ -306,7 +306,7 @@ Unfortunately, this will appear to the C preprocessor as an invalid preprocessor
 
 Therefore, if you don't mind error messages like this in your terminal output, you may be able to get away with hashed path lines. However, this is discouraged because future tools may detect the preprocessor error, and this construct may become deprecated. To be safe, you should use a comment block as described below.
 
-<a name="ch-config.Comment-blocks"></a>
+<a name="ch_config.Comment_blocks"></a>
 
 ##### Comment blocks
 
@@ -351,17 +351,17 @@ However, there are safe ways to use block comments in project list files - here 
     #define  LST_COMMENT2  comment
     #define  LST_COMMENT3  here
 
-<a name="ch-config.Reducing-Build-Scope-with-Proj"></a>
+<a name="ch_config.Reducing_Build_Scope_with_Proj"></a>
 
 #### Reducing Build Scope with Project Tags
 
-The pre-defined build scopes mentioned [above](#ch-config.Choosing-a-Build-Scope) may be unnecessarily broad for your task. You can reduce the build scope by using project tags.
+The pre-defined build scopes mentioned [above](#ch_config.Choosing_a_Build_Scope) may be unnecessarily broad for your task. You can reduce the build scope by using project tags.
 
-There are two complementary parts to using project tags. First, project tags are [defined](#ch-config.Defining-Project-Tags) and associated with selected projects. Second, a tag filter is [supplied](#ch-config.Filtering-with-Project-Tags) to the configuration process. The configuration process then filters the list of projects that will be built, based on each project's tags and the supplied tag filter.
+There are two complementary parts to using project tags. First, project tags are [defined](#ch_config.Defining_Project_Tags) and associated with selected projects. Second, a tag filter is [supplied](#ch_config.Filtering_with_Project_Tags) to the configuration process. The configuration process then filters the list of projects that will be built, based on each project's tags and the supplied tag filter.
 
 An important benefit of using project tags is that all dependencies for the projects that match the tag filter will be automatically deduced and added to the build list.
 
-<a name="ch-config.Defining-Project-Tags"></a>
+<a name="ch_config.Defining_Project_Tags"></a>
 
 ##### Defining Project Tags
 
@@ -385,13 +385,13 @@ then the latter project's effective tag definition is:
 
     PROJ_TAG = foo xyz
 
-<a name="ch-config.Filtering-with-Project-Tags"></a>
+<a name="ch_config.Filtering_with_Project_Tags"></a>
 
 ##### Filtering with Project Tags
 
 A tag filter can be constructed from one or more project tags – either as a single tag or as a Boolean expression of tags. Boolean expressions of tags can include grouping (parentheses) and the '`&&`' (AND), '`||`" (OR), and '`!`' (NOT) operators, for example: `(core || web) && !test`
 
-***Note:*** An asterisk '`*`' or an empty string can be used in place of a tag filter in the "Allowed project tags" field on the [Configuration tab](#ch-config.Configuration-tab) of the configuration GUI. These values are not filters, but simply indicate that all projects in the build scope will be passed to the configuration process without filtering.
+***Note:*** An asterisk '`*`' or an empty string can be used in place of a tag filter in the "Allowed project tags" field on the [Configuration tab](#ch_config.Configuration_tab) of the configuration GUI. These values are not filters, but simply indicate that all projects in the build scope will be passed to the configuration process without filtering.
 
 The following places are searched in the order given for the tag filter to use (if any) in the configuration process:
 
@@ -399,7 +399,7 @@ The following places are searched in the order given for the tag filter to use (
 
 2.  A tag filter definition line in a project list file (if one is being used).
 
-    -   To use a project list file for configuration, either specify the project list file in the "Subtree, or LST file" field on the [Configuration tab](#ch-config.Configuration-tab) of the configuration GUI or use the `--with-projects=FILE` argument for the `configure` script.
+    -   To use a project list file for configuration, either specify the project list file in the "Subtree, or LST file" field on the [Configuration tab](#ch_config.Configuration_tab) of the configuration GUI or use the `--with-projects=FILE` argument for the `configure` script.
 
     -   When one project list file includes another, only the original will be scanned for a filter. This applies to both interactive (i.e. with the configuration GUI) and non-interactive configuring.
 
@@ -409,23 +409,23 @@ The following places are searched in the order given for the tag filter to use (
 
 If a significant tag filter (i.e. something besides an asterisk or empty field) is found in one of the above places, then that tag filter will be supplied to the configuration process. Otherwise, there will be no filtering of the projects.
 
-<a name="ch-config.Configure-the-Build"></a>
+<a name="ch_config.Configure_the_Build"></a>
 
 ### Configure the Build
 
-Prior to configuring, users outside NCBI should make sure the paths to their third party libraries are [correctly specified](#ch-config.SiteSpecific-Third-Party-Libra).
+Prior to configuring, users outside NCBI should make sure the paths to their third party libraries are [correctly specified](#ch_config.SiteSpecific_Third_Party_Libra).
 
 For the configuration step you can specify whether to use static or dynamically-linked libraries; whether to generate multithread-safe code; whether to look for various third-party libraries at alternative locations; whether or not to include debugging information; etc.
 
 Configuration can be done in one of three ways:
 
--   Using the [Configuration GUI](#ch-config.Configuring-with-the-Java-GUI).
+-   Using the [Configuration GUI](#ch_config.Configuring_with_the_Java_GUI).
 
--   Using a "native" IDE – [MSVC](#ch-config.MS-Visual-C-2008) on Windows or [Xcode](#ch-config.Xcode-30--31) on Mac OS X.
+-   Using a "native" IDE – [MSVC](#ch_config.MS_Visual_C_2008) on Windows or [Xcode](#ch_config.Xcode_30__31) on Mac OS X.
 
--   Using the command-line on [Unix](#ch-config.Configuring-with-UNI), [Cygwin/Windows](#ch-config.Configuring-with-Vis), or [Mac OS X](#ch-config.Configuring-with-Xco).
+-   Using the command-line on [Unix](#ch_config.Configuring_with_UNI), [Cygwin/Windows](#ch_config.Configuring_with_Vis), or [Mac OS X](#ch_config.Configuring_with_Xco).
 
-<a name="ch-config.SiteSpecific-Third-Party-Libra"></a>
+<a name="ch_config.SiteSpecific_Third_Party_Libra"></a>
 
 #### Site-Specific Third Party Library Configuration
 
@@ -433,7 +433,7 @@ Users outside NCBI should check the file `src/build-system/config.site` to see i
 
 ***Note:*** The `configure --with-PACKAGE` options take precedence over the `config.site` and **`PACKAGE_PATH`** settings.
 
-<a name="ch-config.Configuring-with-the-Java-GUI"></a>
+<a name="ch_config.Configuring_with_the_Java_GUI"></a>
 
 #### Using the Configuration GUI
 
@@ -441,21 +441,21 @@ The configuration GUI can be launched from a command shell or from an IDE (MSVC 
 
 The following sections describe how to use the configuration GUI:
 
--   [Starting the configuration GUI](#ch-config.Starting-the-configuration-GUI)
+-   [Starting the configuration GUI](#ch_config.Starting_the_configuration_GUI)
 
--   [Configuration tab](#ch-config.Configuration-tab)
+-   [Configuration tab](#ch_config.Configuration_tab)
 
--   [Advanced tab](#ch-config.Advanced-tab)
+-   [Advanced tab](#ch_config.Advanced_tab)
 
--   [Third party libraries tab](#ch-config.Third-party-libraries-tab)
+-   [Third party libraries tab](#ch_config.Third_party_libraries_tab)
 
--   [Projects tab](#ch-config.Projects-tab)
+-   [Projects tab](#ch_config.Projects_tab)
 
--   [Done tab](#ch-config.Done-tab)
+-   [Done tab](#ch_config.Done_tab)
 
-See the [Unix](#ch-config.Configuring-with-UNI), [Windows](#ch-config.Configuring-with-Vis), and [Mac OS X](#ch-config.Configuring-with-Xco) sections for OS-specific configuration information.
+See the [Unix](#ch_config.Configuring_with_UNI), [Windows](#ch_config.Configuring_with_Vis), and [Mac OS X](#ch_config.Configuring_with_Xco) sections for OS-specific configuration information.
 
-<a name="ch-config.Starting-the-configuration-GUI"></a>
+<a name="ch_config.Starting_the_configuration_GUI"></a>
 
 ##### Starting the configuration GUI
 
@@ -469,7 +469,7 @@ To launch the configuration GUI:
 
 The configuration GUI has a "Wizard" style design – selections are made in a sequence of steps, followed by clicking the Next button. After each step additional tabs may be enabled, depending on the specific data. It opens with initial values set by the invoking program (the configure script for command-line invocation or the **project\_tree\_builder** program for IDE's).
 
-<a name="ch-config.Configuration-tab"></a>
+<a name="ch_config.Configuration_tab"></a>
 
 ##### Configuration tab
 
@@ -485,9 +485,9 @@ The Configuration tab allows you to:
 
 -   Specify one or more project tags (which will restrict the scope of the build to the specified projects). Clicking on the "..." button simply displays the valid choices for project tags (it isn't used for selecting tags). More than one project tag can be combined in a Boolean expression, for example:<br/>`(code || web) && !test`
 
--   Load a configuration from a file. This requires having previously saved a configuration, from the [Done tab](#ch-config.Done-tab). If you load a configuration from a file, the file path is shown in the "Originally loaded from" text field and the Reset button becomes enabled. Clicking the Reset button resets all configuration settings to the values that were used to invoke the configuration GUI.
+-   Load a configuration from a file. This requires having previously saved a configuration, from the [Done tab](#ch_config.Done_tab). If you load a configuration from a file, the file path is shown in the "Originally loaded from" text field and the Reset button becomes enabled. Clicking the Reset button resets all configuration settings to the values that were used to invoke the configuration GUI.
 
-<a name="ch-config.Advanced-tab"></a>
+<a name="ch_config.Advanced_tab"></a>
 
 ##### Advanced tab
 
@@ -521,7 +521,7 @@ These additional options generally don't need to be changed, but they allow you 
 
 -   Select a different location to use as the root of the source tree.
 
-<a name="ch-config.Third-party-libraries-tab"></a>
+<a name="ch_config.Third_party_libraries_tab"></a>
 
 ##### Third party libraries tab
 
@@ -537,7 +537,7 @@ The Third party libraries tab allows you to:
 
 -   Add VTune configurations. If selected, new VTune configurations will be added to the list of available configurations – for example, VTune\_DebugDLL.
 
-<a name="ch-config.Projects-tab"></a>
+<a name="ch_config.Projects_tab"></a>
 
 ##### Projects tab
 
@@ -551,7 +551,7 @@ The "-all" and "+all" buttons uncheck or check all the items in a column.
 
 The Tags column allows you to quickly select all items having the selected project tag(s). Also, selecting items in the other columns will update the selection status of the tags column.
 
-<a name="ch-config.Done-tab"></a>
+<a name="ch_config.Done_tab"></a>
 
 ##### Done tab
 
@@ -565,19 +565,19 @@ The Done tab:
 
 -   Shows the path for the generated solution file.
 
--   Gives the option to save the configuration parameters. Once saved, the same parameters can be loaded again from the [Configuration tab](#ch-config.Configuration-tab).
+-   Gives the option to save the configuration parameters. Once saved, the same parameters can be loaded again from the [Configuration tab](#ch_config.Configuration_tab).
 
 -   Gives the option to start over and create a new set of configuration parameters.
 
 -   Gives the option to close the tool, via the Finish button. Closing the tool will return you to the configuration process, which will continue based on the parameters set in the configuration GUI.
 
-<a name="ch-config.Use-the-Toolkit"></a>
+<a name="ch_config.Use_the_Toolkit"></a>
 
 ### Use the Toolkit
 
 After choosing a build scope, configuring, and building the Toolkit, you can now use it. The Toolkit itself includes useful applications, demo programs, and sample code – in addition to the libraries you can use from your own applications. You can also build a suite of test applications and/or sample applications if desired.
 
-<a name="ch-config.Supported-Platforms"></a>
+<a name="ch_config.Supported_Platforms"></a>
 
 ### Supported Platforms
 
@@ -585,72 +585,72 @@ The term “platform” in this chapter has a specific meaning: the combination 
 
 The list of supported platforms may change with new releases. For the platforms supported in the release you are using, see the [Supported Platforms](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/public_releases/release_notes.html#release_notes.Platforms_OSs__compi) section in the release notes. Note that some platforms are only partially supported.
 
-<a name="ch-config.UNIX"></a>
+<a name="ch_config.UNIX"></a>
 
 Unix
 ----
 
-***Note:*** Please also see the [General Information for All Platforms](#ch-config.-General-Information-) section, as it contains relevant information that is not repeated here.
+***Note:*** Please also see the [General Information for All Platforms](#ch_config._General_Information_) section, as it contains relevant information that is not repeated here.
 
 This section covers the following topics:
 
--   [General Information for Unix Platforms](#ch-config.-General-Information--1)
+-   [General Information for Unix Platforms](#ch_config._General_Information__1)
 
-    -   [Choosing a Build Scope](#ch-config.-Choosing-a-Build-Sco)
+    -   [Choosing a Build Scope](#ch_config._Choosing_a_Build_Sco)
 
-    -   [Configuring](#ch-config.Configuring-with-UNI)
+    -   [Configuring](#ch_config.Configuring_with_UNI)
 
-    -   [Building](#ch-config.Building-with-UNIX)
+    -   [Building](#ch_config.Building_with_UNIX)
 
-    -   [Using](#ch-config.-Using-the-Toolkit-wi)
+    -   [Using](#ch_config._Using_the_Toolkit_wi)
 
--   [Special Considerations for Specific Unix Platforms](#ch-config.Special-Consideratio)
+-   [Special Considerations for Specific Unix Platforms](#ch_config.Special_Consideratio)
 
-    -   [Linux / ICC](#ch-config.Linux---ICC)
+    -   [Linux / ICC](#ch_config.Linux___ICC)
 
-    -   [Cygwin / GCC](#ch-config.-Cygwin---GCC)
+    -   [Cygwin / GCC](#ch_config._Cygwin___GCC)
 
-<a name="ch-config.-General-Information--1"></a>
+<a name="ch_config._General_Information__1"></a>
 
 ### General Information for Unix Platforms
 
-This section provides information on configuring, building, and using the Toolkit that is applicable to all Unix platforms. The section [Special Considerations for Specific Unix Platforms](#ch-config.Special-Consideratio) addresses platform-specific details.
+This section provides information on configuring, building, and using the Toolkit that is applicable to all Unix platforms. The section [Special Considerations for Specific Unix Platforms](#ch_config.Special_Consideratio) addresses platform-specific details.
 
 Note, however, that the sections on specific platforms do not address the level of support for specific compilers. See the [Supported Platforms](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/public_releases/release_notes.html#release_notes.Platforms_OSs__compi) section in the release notes for information on partially supported compilers.
 
 The following topics are discussed in this section:
 
--   [Choosing a Build Scope](#ch-config.-Choosing-a-Build-Sco)
+-   [Choosing a Build Scope](#ch_config._Choosing_a_Build_Sco)
 
--   [Configuring](#ch-config.Configuring-with-UNI)
+-   [Configuring](#ch_config.Configuring_with_UNI)
 
-    -   [Configuration Script configure](#ch-config.Configuration-and-In)
+    -   [Configuration Script configure](#ch_config.Configuration_and_In)
 
-    -   [Structure of the Build Tree Produced by configure](#ch-config.Structure-of-the-Bui)
+    -   [Structure of the Build Tree Produced by configure](#ch_config.Structure_of_the_Bui)
 
-    -   [Options for Fine-Tuning the configure Script](#ch-config.Running-the-configur)
+    -   [Options for Fine-Tuning the configure Script](#ch_config.Running_the_configur)
 
-    -   [Quick Reconfiguration](#ch-config.ch-configpre-built-h)
+    -   [Quick Reconfiguration](#ch_config.ch_configpre_built_h)
 
--   [Building](#ch-config.Building-with-UNIX)
+-   [Building](#ch_config.Building_with_UNIX)
 
-    -   [General Principles for Building with Unix](#ch-config.General-Principles-f)
+    -   [General Principles for Building with Unix](#ch_config.General_Principles_f)
 
-    -   [Building Only Core Libraries and Applications](#ch-config.Building-Only-Core-L)
+    -   [Building Only Core Libraries and Applications](#ch_config.Building_Only_Core_L)
 
-    -   [Building GUI Libraries and Applications](#ch-config.Building-GUI-Librari)
+    -   [Building GUI Libraries and Applications](#ch_config.Building_GUI_Librari)
 
-    -   [Building the Genome Workbench](#ch-config.Building-the-Genome-)
+    -   [Building the Genome Workbench](#ch_config.Building_the_Genome_)
 
-    -   [Building the Entire Toolkit](#ch-config.Building-the-Entire-)
+    -   [Building the Entire Toolkit](#ch_config.Building_the_Entire_)
 
--   [Using](#ch-config.-Using-the-Toolkit-wi)
+-   [Using](#ch_config._Using_the_Toolkit_wi)
 
-    -   [Modify or Debug an Existing Toolkit Application](#ch-config.-Modify-an-Existing-T)
+    -   [Modify or Debug an Existing Toolkit Application](#ch_config._Modify_an_Existing_T)
 
-    -   [Modify or Debug an Existing Toolkit Library](#ch-config.-Modify-an-Existing-T-1)
+    -   [Modify or Debug an Existing Toolkit Library](#ch_config._Modify_an_Existing_T_1)
 
-<a name="ch-config.-Choosing-a-Build-Sco"></a>
+<a name="ch_config._Choosing_a_Build_Sco"></a>
 
 #### Choosing a Build Scope with Unix
 
@@ -672,51 +672,51 @@ Next, you can limit what is built:
 
 You can also choose between static and shared libraries - or build both. Building with static libraries will result in much larger applications and require much more disk space.
 
-<a name="ch-config.Configuring-with-UNI"></a>
+<a name="ch_config.Configuring_with_UNI"></a>
 
 #### Configuring with Unix
 
 The following topics are discussed in this section:
 
--   [Configuration Script configure](#ch-config.Configuration-and-In)
+-   [Configuration Script configure](#ch_config.Configuration_and_In)
 
--   [Structure of the Build Tree Produced by configure](#ch-config.Structure-of-the-Bui)
+-   [Structure of the Build Tree Produced by configure](#ch_config.Structure_of_the_Bui)
 
--   [Options for Fine-Tuning the configure Script](#ch-config.Running-the-configur)
+-   [Options for Fine-Tuning the configure Script](#ch_config.Running_the_configur)
 
-    -   [Getting a Synopsis of Available Configuration Options](#ch-config.ch-configget-synopsi)
+    -   [Getting a Synopsis of Available Configuration Options](#ch_config.ch_configget_synopsi)
 
-    -   [Debug vs. Release Configuration](#ch-config.Debug-vs-Release-Con)
+    -   [Debug vs. Release Configuration](#ch_config.Debug_vs_Release_Con)
 
-    -   [Multi-Thread Safe Compilation and Linking with MT Libraries](#ch-config.ch-configmt-safe-com)
+    -   [Multi-Thread Safe Compilation and Linking with MT Libraries](#ch_config.ch_configmt_safe_com)
 
-    -   [Building Shared Libraries (DLLs)](#ch-config.Building-Shared-Libr)
+    -   [Building Shared Libraries (DLLs)](#ch_config.Building_Shared_Libr)
 
-    -   [Finer-grained Control of Projects: --with-projects](#ch-config.ch-configwith-projec)
+    -   [Finer-grained Control of Projects: --with-projects](#ch_config.ch_configwith_projec)
 
-    -   [Building in the 64-bit mode](#ch-config.ch-configbuilding-64)
+    -   [Building in the 64-bit mode](#ch_config.ch_configbuilding_64)
 
-    -   [Localization for the System and Third-Party Packages](#ch-config.ch-configlocalizatio)
+    -   [Localization for the System and Third-Party Packages](#ch_config.ch_configlocalizatio)
 
-    -   [Naming the Build Tree](#ch-config.Naming-the-Build-Tre)
+    -   [Naming the Build Tree](#ch_config.Naming_the_Build_Tre)
 
-    -   [Hard-Coding Run-Time DLL Path into Executables and DLLs](#ch-config.ch-configconfightml-)
+    -   [Hard-Coding Run-Time DLL Path into Executables and DLLs](#ch_config.ch_configconfightml_)
 
-    -   [Automatic Generation of Dependencies (for GNU make Only)](#ch-config.Automatic-Generation)
+    -   [Automatic Generation of Dependencies (for GNU make Only)](#ch_config.Automatic_Generation)
 
-    -   [After-Configure User Callback Script](#ch-config.AfterConfigure-User-)
+    -   [After-Configure User Callback Script](#ch_config.AfterConfigure_User_)
 
-    -   [Tools and Flags](#ch-config.ch-configconfig-flag)
+    -   [Tools and Flags](#ch_config.ch_configconfig_flag)
 
-    -   [Prohibiting the Use of Some of the System and Third-party Packages](#ch-config.ch-configprohibit-sy)
+    -   [Prohibiting the Use of Some of the System and Third-party Packages](#ch_config.ch_configprohibit_sy)
 
-    -   [Optional Projects](#ch-config.Optional-Projects)
+    -   [Optional Projects](#ch_config.Optional_Projects)
 
-    -   [Miscellaneous: --without-exe, --without-execopy, --with-lib-rebuilds(=ask)](#ch-config.Miscellaneous-withou)
+    -   [Miscellaneous: --without-exe, --without-execopy, --with-lib-rebuilds(=ask)](#ch_config.Miscellaneous_withou)
 
--   [Quick Reconfiguration](#ch-config.ch-configpre-built-h)
+-   [Quick Reconfiguration](#ch_config.ch_configpre_built_h)
 
-<a name="ch-config.Configuration-and-In"></a>
+<a name="ch_config.Configuration_and_In"></a>
 
 ##### Configuration Script configure
 
@@ -738,9 +738,9 @@ A configuration tool with a Java-based GUI is also available and can be launched
 
 Additional parameters can also be passed to configure, just as without the configuration GUI.
 
-For more information on using the configuration GUI, see the [general section on configuring](#ch-config.Configure-the-Build).
+For more information on using the configuration GUI, see the [general section on configuring](#ch_config.Configure_the_Build).
 
-<a name="ch-config.Structure-of-the-Bui"></a>
+<a name="ch_config.Structure_of_the_Bui"></a>
 
 ##### Structure of the Build Tree Produced by configure
 
@@ -766,43 +766,43 @@ Each configuration process results in a new [build tree](ch_start.html#ch_start.
 
 -   `.*.dep` files, with timestamps of the built Toolkit libraries.
 
-<a name="ch-config.Running-the-configur"></a>
+<a name="ch_config.Running_the_configur"></a>
 
 ##### Options for Fine-Tuning the configure Script
 
 The configure script is highly customizable. The following sections describe some of the configuration options:
 
--   [Getting a Synopsis of Available Configuration Options](#ch-config.ch-configget-synopsi)
+-   [Getting a Synopsis of Available Configuration Options](#ch_config.ch_configget_synopsi)
 
--   [Debug vs. Release Configuration](#ch-config.Debug-vs-Release-Con)
+-   [Debug vs. Release Configuration](#ch_config.Debug_vs_Release_Con)
 
--   [Multi-Thread Safe Compilation and Linking with MT Libraries](#ch-config.ch-configmt-safe-com)
+-   [Multi-Thread Safe Compilation and Linking with MT Libraries](#ch_config.ch_configmt_safe_com)
 
--   [Building Shared Libraries (DLLs)](#ch-config.Building-Shared-Libr)
+-   [Building Shared Libraries (DLLs)](#ch_config.Building_Shared_Libr)
 
--   [Finer-grained Control of Projects: --with-projects](#ch-config.ch-configwith-projec)
+-   [Finer-grained Control of Projects: --with-projects](#ch_config.ch_configwith_projec)
 
--   [Building in the 64-bit mode](#ch-config.ch-configbuilding-64)
+-   [Building in the 64-bit mode](#ch_config.ch_configbuilding_64)
 
--   [Localization for the System and Third-Party Packages](#ch-config.ch-configlocalizatio)
+-   [Localization for the System and Third-Party Packages](#ch_config.ch_configlocalizatio)
 
--   [Naming the Build Tree](#ch-config.Naming-the-Build-Tre)
+-   [Naming the Build Tree](#ch_config.Naming_the_Build_Tre)
 
--   [Hard-Coding Run-Time DLL Path into Executables and DLLs](#ch-config.ch-configconfightml-)
+-   [Hard-Coding Run-Time DLL Path into Executables and DLLs](#ch_config.ch_configconfightml_)
 
--   [Automatic Generation of Dependencies (for GNU make Only)](#ch-config.Automatic-Generation)
+-   [Automatic Generation of Dependencies (for GNU make Only)](#ch_config.Automatic_Generation)
 
--   [After-Configure User Callback Script](#ch-config.AfterConfigure-User-)
+-   [After-Configure User Callback Script](#ch_config.AfterConfigure_User_)
 
--   [Tools and Flags](#ch-config.ch-configconfig-flag)
+-   [Tools and Flags](#ch_config.ch_configconfig_flag)
 
--   [Prohibiting the Use of Some of the System and Third-party Packages](#ch-config.ch-configprohibit-sy)
+-   [Prohibiting the Use of Some of the System and Third-party Packages](#ch_config.ch_configprohibit_sy)
 
--   [Optional Projects](#ch-config.Optional-Projects)
+-   [Optional Projects](#ch_config.Optional_Projects)
 
--   [Miscellaneous: --without-exe, --without-execopy, --with-lib-rebuilds(=ask)](#ch-config.Miscellaneous-withou)
+-   [Miscellaneous: --without-exe, --without-execopy, --with-lib-rebuilds(=ask)](#ch_config.Miscellaneous_withou)
 
-<a name="ch-config.ch-configget-synopsi"></a>
+<a name="ch_config.ch_configget_synopsi"></a>
 
 ##### Getting Synopsis of Available Configuration Options
 
@@ -810,7 +810,7 @@ To get the full list of available configuration options, run `./configure --help
 
 ***Note:*** Do not use the "standard" configure options listed in the *"Directory and file names:"* section of the help printout (such as `--prefix= `*,* `--bindir=`, etc.) because these are usually not used by the NCBI ***configure*** script.
 
-<a name="ch-config.Debug-vs-Release-Con"></a>
+<a name="ch_config.Debug_vs_Release_Con"></a>
 
 ##### Debug vs. Release Configuration
 
@@ -826,7 +826,7 @@ The following two ***configure*** flags control whether to target for the *Debug
 
 default: *--with-debug --without-optimization*
 
-<a name="ch-config.ch-configmt-safe-com"></a>
+<a name="ch_config.ch_configmt_safe_com"></a>
 
 ##### Multi-Thread Safe Compilation and Linking with MT Libraries
 
@@ -836,7 +836,7 @@ default: *--with-debug --without-optimization*
 
 default: *--without-mt*
 
-<a name="ch-config.Building-Shared-Libr"></a>
+<a name="ch_config.Building_Shared_Libr"></a>
 
 ##### Building Shared Libraries (DLLs)
 
@@ -852,11 +852,11 @@ default: build libraries as *static* (albeit with position-independent code); ho
 
 See [this example](ch_proj.html#ch_proj.make_proj_lib) for more information about building shared libraries.
 
-<a name="ch-config.ch-configwith-projec"></a>
+<a name="ch_config.ch_configwith_projec"></a>
 
 ##### Finer-grained Control of Projects: --with-projects
 
-If the above options aren't specific enough for you, you can also tell ***configure*** which projects you want to build by passing the flag *--with-projects=FILE*, where *FILE* contains a list of [extended regular expressions](http://www.opengroup.org/onlinepubs/007904975/basedefs/xbd_chap09.html) indicating which directories to build in. (See the [Project List Files](#ch-config.Project-List-Files) section for a detailed discussion.) With this option, the *make* target `all_p` will build all selected projects under the current directory. If there is a project that you want to keep track of but not automatically build, you can follow its name with "update-only". To **exclude** projects that would otherwise match, list them explicitly with an initial hyphen. (Exclusions can also be regular expressions rather than simple project names.) If no *FILE* argument is supplied then ***configure*** expects to find a project list file named "projects" in the top-level c++ directory.
+If the above options aren't specific enough for you, you can also tell ***configure*** which projects you want to build by passing the flag *--with-projects=FILE*, where *FILE* contains a list of [extended regular expressions](http://www.opengroup.org/onlinepubs/007904975/basedefs/xbd_chap09.html) indicating which directories to build in. (See the [Project List Files](#ch_config.Project_List_Files) section for a detailed discussion.) With this option, the *make* target `all_p` will build all selected projects under the current directory. If there is a project that you want to keep track of but not automatically build, you can follow its name with "update-only". To **exclude** projects that would otherwise match, list them explicitly with an initial hyphen. (Exclusions can also be regular expressions rather than simple project names.) If no *FILE* argument is supplied then ***configure*** expects to find a project list file named "projects" in the top-level c++ directory.
 
 For instance, a file containing the lines
 
@@ -868,15 +868,15 @@ For instance, a file containing the lines
 
 would request a non-recursive build in `corelib` and a recursive build in `util`, and a recursive build in `serial` that skipped `serial/test`. It would also request keeping the `test` project up-to-date (for the benefit of the programs in `util/test`).
 
-***Note:*** The flags listed [above](#ch-config.Optional-Projects) still apply; for instance, you still need *--with-internal* to enable internal projects. However, [update\_projects](ch_getcode_svn.html#ch_getcode_svn.update_projects_sh) can automatically take care of these for you.
+***Note:*** The flags listed [above](#ch_config.Optional_Projects) still apply; for instance, you still need *--with-internal* to enable internal projects. However, [update\_projects](ch_getcode_svn.html#ch_getcode_svn.update_projects_sh) can automatically take care of these for you.
 
 Project list files may also define a project tag filter, with the syntax:
 
     #define TAGS [ tag_filter ]
 
-See the section on [filtering with project tags](#ch-config.Filtering-with-Project-Tags) for more information.
+See the section on [filtering with project tags](#ch_config.Filtering_with_Project_Tags) for more information.
 
-<a name="ch-config.ch-configbuilding-64"></a>
+<a name="ch_config.ch_configbuilding_64"></a>
 
 ##### Building in the 64-bit Mode
 
@@ -884,13 +884,13 @@ See the section on [filtering with project tags](#ch-config.Filtering-with-Proje
 
 default: depends on the platform; usually *--without-64* if both 32-bit and 64-bit build modes are available.
 
-<a name="ch-config.ch-configlocalizatio"></a>
+<a name="ch_config.ch_configlocalizatio"></a>
 
 ##### Localization for the System and Third-Party Packages
 
-There is some configuration info that usually cannot be guessed or detected automatically, and thus in most cases it must be specified "manually" for the given local host's working environment. This is done by setting the localization environment variables (see [Table 2](#ch-config.ref-TableLocalization1)) in addition to the "generic" ones ([CC, CXX, CPP, AR, RANLIB, STRIP, CFLAGS, CXXFLAGS, CPPFLAGS, LDFLAGS, LIBS](#ch-config.ch-configconfig-flag)).
+There is some configuration info that usually cannot be guessed or detected automatically, and thus in most cases it must be specified "manually" for the given local host's working environment. This is done by setting the localization environment variables (see [Table 2](#ch_config.ref_TableLocalization1)) in addition to the "generic" ones ([CC, CXX, CPP, AR, RANLIB, STRIP, CFLAGS, CXXFLAGS, CPPFLAGS, LDFLAGS, LIBS](#ch_config.ch_configconfig_flag)).
 
-<a name="ch-config.ref-TableLocalization1"></a>
+<a name="ch_config.ref_TableLocalization1"></a>
 
 Table 2. User-defined localization variables
 
@@ -914,17 +914,17 @@ Table 2. User-defined localization variables
 | NCBI\_PM\_PATH  | $NCBI/pubmed[64]                     | Path to the NCBI PubMed package             |
 | ORBACUS\_PATH   | $NCBI/corba/OB-4.0.1                 | Path to the ORBacus CORBA package           |
 
-<a name="ch-config.TF.1"></a>
+<a name="ch_config.TF.1"></a>
 
 Note: It is also possible to make configure look elsewhere for Sybase by means of --with-sybase-local[=DIR]. If you specify a directory, it will override SYBASE\_PATH; otherwise, the default will change to /export/home/sybase/clients/current, but SYBASE\_PATH will still take priority. Also, the option --with-sybase-new will change the default version of Sybase from 12.0 to 12.5 and adapt to its layout.
 
-<a name="ch-config.TF.2"></a>
+<a name="ch_config.TF.2"></a>
 
 It is also possible to override WXWIN\_PATH by --with-wxwin=DIR, FLTK\_PATH by --\> --with-fltk=DIR, and ORBACUS\_PATH by --with-orbacus=DIR.
 
-On the basis of [Table 2](#ch-config.ref-TableLocalization1), ***configure*** will derive the variables shown in [Table 3](#ch-config.ref-TableLocalization2) to use in the generated makefiles.
+On the basis of [Table 2](#ch_config.ref_TableLocalization1), ***configure*** will derive the variables shown in [Table 3](#ch_config.ref_TableLocalization2) to use in the generated makefiles.
 
-<a name="ch-config.ref-TableLocalization2"></a>
+<a name="ch_config.ref_TableLocalization2"></a>
 
 Table 3. Derived localization variables for makefiles
 
@@ -960,9 +960,9 @@ Table 3. Derived localization variables for makefiles
 | ORBACUS\_INCLUDE   | -I$ORBACUS\_PATH/include -I$ORBACUS\_PATH/{Release\\|Debug}[MT][64]/inc                                           | \#include ORBacus CORBA headers   |
 | ORBACUS\_LIBPATH   | -L$ORBACUS\_PATH/{Release\\|Debug}[MT][64]/lib                                                                    | Link with ORBacus CORBA libs.     |
 
-***Note:*** The file `src/build-system/config.site` may also be [edited](#ch-config.SiteSpecific-Third-Party-Libra) to simplify localization of third party libraries, especially for users outside NCBI.
+***Note:*** The file `src/build-system/config.site` may also be [edited](#ch_config.SiteSpecific_Third_Party_Libra) to simplify localization of third party libraries, especially for users outside NCBI.
 
-<a name="ch-config.Naming-the-Build-Tre"></a>
+<a name="ch_config.Naming_the_Build_Tre"></a>
 
 ##### Naming the Build Tree
 
@@ -980,7 +980,7 @@ With *--with-build-root=*, you still can explicitly use *--with-suffix* and *--w
 
 There is also a special case with "*--with-build-root=."* for those who prefer to put object files, libraries, and executables in the same directory as the sources. But be advised that this will not allow you to configure other *build trees*.
 
-<a name="ch-config.ch-configconfightml-"></a>
+<a name="ch_config.ch_configconfightml_"></a>
 
 ##### Hard-Coding Run-Time DLL Paths into Executables and DLLs
 
@@ -1005,7 +1005,7 @@ The makefile macro **`ncbi_runpath`** will be set to the resulting runpath, if a
 
 See [this example](ch_proj.html#ch_proj.make_proj_lib) for more information about building shared libraries.
 
-<a name="ch-config.Automatic-Generation"></a>
+<a name="ch_config.Automatic_Generation"></a>
 
 ##### Automatic Generation of Dependencies (for GNU make only)
 
@@ -1019,7 +1019,7 @@ Also, you can always switch between these two variants "manually", after the con
 
 ***Note:*** You **must** use GNU *make* if you configured with *--with-autodep*, because in this case the makefiles would use very specific GNU *make* features!
 
-<a name="ch-config.AfterConfigure-User-"></a>
+<a name="ch_config.AfterConfigure_User_"></a>
 
 ##### After-Configure User Callback Script
 
@@ -1037,11 +1037,11 @@ will execute (after the configuration is done):
 
     echo foobar /home/user/c++/GCC-Debug
 
-<a name="ch-config.ch-configconfig-flag"></a>
+<a name="ch_config.ch_configconfig_flag"></a>
 
 ##### Tools and Flags
 
-There is a predefined set of tools and flags used in the build process. The user can customize these tools and flags by setting the environment variables shown in [Table 1](#ch-config.ref-TableToolsAndFlags) for the ***configure*** script. For example, if you intend to debug the Toolkit with Insure++, you should run ***configure*** with **`CC`** and **`CXX`** set to **`insure`**.
+There is a predefined set of tools and flags used in the build process. The user can customize these tools and flags by setting the environment variables shown in [Table 1](#ch_config.ref_TableToolsAndFlags) for the ***configure*** script. For example, if you intend to debug the Toolkit with Insure++, you should run ***configure*** with **`CC`** and **`CXX`** set to **`insure`**.
 
 [Later](ch_build.html#ch_build.build_make_macros), these tools and flags will be engaged in the makefile build rules, such as:
 
@@ -1055,7 +1055,7 @@ There is a predefined set of tools and flags used in the build process. The user
 
 For more information on these and other variables, see [the GNU autoconf documentation](http://www.gnu.org/software/autoconf/manual/autoconf.html). The specified tools and flags will then be "frozen" inside the makefiles of *build tree* produced by this ***configure*** run.
 
-<a name="ch-config.ch-configprohibit-sy"></a>
+<a name="ch_config.ch_configprohibit_sy"></a>
 
 ##### Prohibiting the Use of Some of the System and Third-Party Packages
 
@@ -1089,7 +1089,7 @@ Some of the above system and third-party packages can be prohibited from use by 
 
 [and MANY more; ./configure --help \| grep ‘\\-\\-without-‘ will give a current list for both this and the following heading.]
 
-<a name="ch-config.Optional-Projects"></a>
+<a name="ch_config.Optional_Projects"></a>
 
 ##### Optional Projects
 
@@ -1105,7 +1105,7 @@ You can control whether to build the following core packages using the following
 
 *--with-internal* -- build of internal projects is by default disabled on most platforms; see in `internal/c++/{ `[src](http://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/CPP_DOC/lxr/source/src/internal) *\|* [include](http://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/CPP_DOC/lxr/source/include/internal)`}/internal` directories
 
-<a name="ch-config.Miscellaneous-withou"></a>
+<a name="ch_config.Miscellaneous_withou"></a>
 
 ##### Miscellaneous: --without-exe, --without-execopy, --with-lib-rebuilds(=ask)
 
@@ -1125,7 +1125,7 @@ In the unconditional mode (*--with-lib-rebuilds*), building an application will 
 
 The conditional mode (*--with-lib-rebuilds=ask*) is like the unconditional mode, except that when the system discovers that a needed library is out of date, it asks you about it. You can then choose between keeping your current version (because you prefer it or because nothing relevant has changed) and building an updated version.
 
-<a name="ch-config.ch-configpre-built-h"></a>
+<a name="ch_config.ch_configpre_built_h"></a>
 
 ##### Quick Reconfiguration
 
@@ -1150,29 +1150,29 @@ Run ***reconfigure.sh*** with argument:
 
 Naturally, *update* is the fastest of these methods, *reconf* is slower, and *recheck* (which is an exact equivalent of re-running the ***configure*** script with the same command-line arguments as were provided during the original configuration) is the slowest.
 
-<a name="ch-config.Building-with-UNIX"></a>
+<a name="ch_config.Building_with_UNIX"></a>
 
 #### Building with Unix
 
 Following are some examples of how to build specific projects and some additional topics:
 
--   [General Principles for Building with Unix](#ch-config.General-Principles-f)
+-   [General Principles for Building with Unix](#ch_config.General_Principles_f)
 
--   [Building Only Core Libraries and Applications](#ch-config.Building-Only-Core-L)
+-   [Building Only Core Libraries and Applications](#ch_config.Building_Only_Core_L)
 
--   [Building GUI Libraries and Applications](#ch-config.Building-GUI-Librari)
+-   [Building GUI Libraries and Applications](#ch_config.Building_GUI_Librari)
 
--   [Building the Genome Workbench](#ch-config.Building-the-Genome-)
+-   [Building the Genome Workbench](#ch_config.Building_the_Genome_)
 
--   [Building the Entire Toolkit](#ch-config.Building-the-Entire-)
+-   [Building the Entire Toolkit](#ch_config.Building_the_Entire_)
 
-<a name="ch-config.General-Principles-f"></a>
+<a name="ch_config.General_Principles_f"></a>
 
 ##### General Principles for Building with Unix
 
 Use this key for the examples in the “Building with Unix” sections:
 
-<a name="ch-config.T3"></a>
+<a name="ch_config.T3"></a>
 
 |------------------------|-------------------------------------------------------------------------------------------|
 | $YOUR\_WORK\_DIR       | your directory corresponding to the top-level c++ directory in the source tree            |
@@ -1206,7 +1206,7 @@ To run a test suite after building, use this additional command:
 
     make check_r
 
-<a name="ch-config.Building-Only-Core-L"></a>
+<a name="ch_config.Building_Only_Core_L"></a>
 
 ##### Building Only Core Libraries and Applications with Unix
 
@@ -1215,7 +1215,7 @@ To run a test suite after building, use this additional command:
     cd GCC401-Debug/build
     make all_r
 
-<a name="ch-config.Building-GUI-Librari"></a>
+<a name="ch_config.Building_GUI_Librari"></a>
 
 ##### Building GUI Libraries and Applications with Unix
 
@@ -1224,7 +1224,7 @@ To run a test suite after building, use this additional command:
     cd GCC401-Debug/build
     make -f Makefile.flat gui/
 
-<a name="ch-config.Building-the-Genome-"></a>
+<a name="ch_config.Building_the_Genome_"></a>
 
 ##### Building the Genome Workbench with Unix
 
@@ -1234,7 +1234,7 @@ To run a test suite after building, use this additional command:
     make -f Makefile.flat gui/app/
     (cd gui/app/gbench_install && make)
 
-<a name="ch-config.Building-the-Entire-"></a>
+<a name="ch_config.Building_the_Entire_"></a>
 
 ##### Building the Entire Toolkit with Unix
 
@@ -1243,17 +1243,17 @@ To run a test suite after building, use this additional command:
     cd GCC401-Debug/build
     make all_r
 
-<a name="ch-config.-Using-the-Toolkit-wi"></a>
+<a name="ch_config._Using_the_Toolkit_wi"></a>
 
 #### Using the Toolkit with Unix
 
 This section discusses the following examples of how to use the Toolkit with Unix:
 
--   [Modify or Debug an Existing Toolkit Application](#ch-config.-Modify-an-Existing-T)
+-   [Modify or Debug an Existing Toolkit Application](#ch_config._Modify_an_Existing_T)
 
--   [Modify or Debug an Existing Toolkit Library](#ch-config.-General-Information-)
+-   [Modify or Debug an Existing Toolkit Library](#ch_config._General_Information_)
 
-<a name="ch-config.-Modify-an-Existing-T"></a>
+<a name="ch_config._Modify_an_Existing_T"></a>
 
 ##### Modify or Debug an Existing Toolkit Application with Unix
 
@@ -1271,7 +1271,7 @@ You can now edit, build, and/or debug the application:
     make all_r
     # if desired, debug using your favorite debugger
 
-<a name="ch-config.-Modify-an-Existing-T-1"></a>
+<a name="ch_config._Modify_an_Existing_T_1"></a>
 
 ##### Modify or Debug an Existing Toolkit Library with Unix
 
@@ -1290,11 +1290,11 @@ You can now edit, build, and/or debug (via some application) the library:
     # if you want to debug the library, build a dependent application
     # then debug using your favorite debugger
 
-<a name="ch-config.Special-Consideratio"></a>
+<a name="ch_config.Special_Consideratio"></a>
 
 ### Special Considerations for Specific Unix Platforms
 
-Most of the non-GCC compilers require special tools and additional mandatory flags to compile and link C++ code properly. That's why there are special scripts that perform the required non-standard, compiler-specific pre-initialization for the [tools and flags](#ch-config.ch-configconfig-flag) used before running ***configure***.
+Most of the non-GCC compilers require special tools and additional mandatory flags to compile and link C++ code properly. That's why there are special scripts that perform the required non-standard, compiler-specific pre-initialization for the [tools and flags](#ch_config.ch_configconfig_flag) used before running ***configure***.
 
 These wrapper scripts are located in the *compilers/* directory, and now we have such wrappers for the `SUN WorkShop` (`5.5` through `5.9)`, `GCC` and `ICC` compilers:
 
@@ -1308,88 +1308,88 @@ Note that these scripts accept all regular ***configure*** flags and then pass t
 
 The following topics are discussed in this section:
 
--   [Linux / ICC](#ch-config.Linux---ICC)
+-   [Linux / ICC](#ch_config.Linux___ICC)
 
--   [Cygwin / GCC](#ch-config.-Cygwin---GCC)
+-   [Cygwin / GCC](#ch_config._Cygwin___GCC)
 
-<a name="ch-config.Linux---ICC"></a>
+<a name="ch_config.Linux___ICC"></a>
 
 #### Linux / ICC
 
-To build a project on Linux / ICC, just follow the generic [Unix guidelines](#ch-config.-General-Information--1) but instead of running the `./configure.sh` script you will need to run `compilers/unix/ICC.sh`.
+To build a project on Linux / ICC, just follow the generic [Unix guidelines](#ch_config._General_Information__1) but instead of running the `./configure.sh` script you will need to run `compilers/unix/ICC.sh`.
 
-<a name="ch-config.-Cygwin---GCC"></a>
+<a name="ch_config._Cygwin___GCC"></a>
 
 #### Cygwin / GCC
 
-To build a project on Cygwin / GCC, just follow the generic [Unix guidelines](#ch-config.-General-Information--1) but instead of running the `./configure.sh` script you will need to run `compilers/cygwin/build.sh`.
+To build a project on Cygwin / GCC, just follow the generic [Unix guidelines](#ch_config._General_Information__1) but instead of running the `./configure.sh` script you will need to run `compilers/cygwin/build.sh`.
 
-<a name="ch-config.MS-Windows"></a>
+<a name="ch_config.MS_Windows"></a>
 
 MS Windows
 ----------
 
-***Note:*** Please also see the [General Information for All Platforms](#ch-config.-General-Information-) section, as it contains relevant information that is not repeated here.
+***Note:*** Please also see the [General Information for All Platforms](#ch_config._General_Information_) section, as it contains relevant information that is not repeated here.
 
 The following topics are discussed in this section:
 
--   [MS Visual C++](#ch-config.MS-Visual-C-2008)
+-   [MS Visual C++](#ch_config.MS_Visual_C_2008)
 
-    -   [Choosing a Build Scope](#ch-config.-Choosing-a-Build-Sco-1)
+    -   [Choosing a Build Scope](#ch_config._Choosing_a_Build_Sco_1)
 
-    -   [Configuring](#ch-config.Configuring-with-Vis)
+    -   [Configuring](#ch_config.Configuring_with_Vis)
 
-    -   [Building](#ch-config.Building-with-Visual)
+    -   [Building](#ch_config.Building_with_Visual)
 
-    -   [Using](#ch-config.-Using-the-Toolkit-wi-1)
+    -   [Using](#ch_config._Using_the_Toolkit_wi_1)
 
--   [Cygwin / GCC](#ch-config.Cygwin-GCC)
+-   [Cygwin / GCC](#ch_config.Cygwin_GCC)
 
-<a name="ch-config.MS-Visual-C-2008"></a>
+<a name="ch_config.MS_Visual_C_2008"></a>
 
 ### MS Visual C++
 
 The following topics are discussed in this section:
 
--   [Choosing a Build Scope](#ch-config.-Choosing-a-Build-Sco-1)
+-   [Choosing a Build Scope](#ch_config._Choosing_a_Build_Sco_1)
 
--   [Configuring](#ch-config.Configuring-with-Vis)
+-   [Configuring](#ch_config.Configuring_with_Vis)
 
-    -   [Site-Specific Build Tree Configuration](#ch-config.-SiteSpecific-Build-T)
+    -   [Site-Specific Build Tree Configuration](#ch_config._SiteSpecific_Build_T)
 
-    -   [Fine-Tuning with MSVC Project Files](#ch-config.FineTuning-MSVC-Proj)
+    -   [Fine-Tuning with MSVC Project Files](#ch_config.FineTuning_MSVC_Proj)
 
-        -   [Excluding project from the build](#ch-config.Excluding-project-fr)
+        -   [Excluding project from the build](#ch_config.Excluding_project_fr)
 
-        -   [Adding files to project](#ch-config.Adding-files-to-proj)
+        -   [Adding files to project](#ch_config.Adding_files_to_proj)
 
-        -   [Excluding files from project](#ch-config.Excluding-files-from)
+        -   [Excluding files from project](#ch_config.Excluding_files_from)
 
-        -   [Adjusting build tools settings](#ch-config.Adjusting-build-tool)
+        -   [Adjusting build tools settings](#ch_config.Adjusting_build_tool)
 
-        -   [Specifying custom build rules](#ch-config.Specifying-custom-bu)
+        -   [Specifying custom build rules](#ch_config.Specifying_custom_bu)
 
-    -   [DLL Configuration](#ch-config.DLL-Configuration)
+    -   [DLL Configuration](#ch_config.DLL_Configuration)
 
-    -   [Fine-Tuning with Environment Variables](#ch-config.FineTuning-with-Envi)
+    -   [Fine-Tuning with Environment Variables](#ch_config.FineTuning_with_Envi)
 
--   [Building](#ch-config.Building-with-Visual)
+-   [Building](#ch_config.Building_with_Visual)
 
-    -   [Building a Custom Solution](#ch-config.Create-Custom-Soluti)
+    -   [Building a Custom Solution](#ch_config.Create_Custom_Soluti)
 
-    -   [Building External Libraries (Optional)](#ch-config.Building-External-Li)
+    -   [Building External Libraries (Optional)](#ch_config.Building_External_Li)
 
-    -   [The Build Results](#ch-config.-The-Build-Results)
+    -   [The Build Results](#ch_config._The_Build_Results)
 
--   [Using](#ch-config.-Using-the-Toolkit-wi-1)
+-   [Using](#ch_config._Using_the_Toolkit_wi_1)
 
-    -   [Start a new project that uses the Toolkit](#ch-config.Start-a-New-Project-)
+    -   [Start a new project that uses the Toolkit](#ch_config.Start_a_New_Project_)
 
-    -   [Start a new project in the Toolkit](#ch-config.Start-New-Project-in)
+    -   [Start a new project in the Toolkit](#ch_config.Start_New_Project_in)
 
-    -   [Modify or Debug an existing project in the Toolkit](#ch-config.Modify-Existing-Proj)
+    -   [Modify or Debug an existing project in the Toolkit](#ch_config.Modify_Existing_Proj)
 
-<a name="ch-config.-Choosing-a-Build-Sco-1"></a>
+<a name="ch_config._Choosing_a_Build_Sco_1"></a>
 
 #### Choosing a Build Scope with Visual C++
 
@@ -1419,11 +1419,11 @@ You can also choose between static and shared libraries. Building with static li
 
 If you want to build the entire Toolkit, choose
 
-<a name="ch-config.Configuring-with-Vis"></a>
+<a name="ch_config.Configuring_with_Vis"></a>
 
 #### Configuring with Visual C++
 
-Once you have [chosen a build scope](#ch-config.-Choosing-a-Build-Sco-1), you are ready to configure.
+Once you have [chosen a build scope](#ch_config._Choosing_a_Build_Sco_1), you are ready to configure.
 
 If you used either the `import_project` script or the `update_projects` script then you don’t need to configure because both of those scripts use existing configurations.
 
@@ -1435,7 +1435,7 @@ The Visual Studio specific configuration files are:
 
 -   [src\\build-system\\project\_tree\_builder.ini](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/build-system/project_tree_builder.ini)
 
--   [src\\....\\Makefile.\*.msvc](#ch-config.FineTuning-MSVC-Proj)
+-   [src\\....\\Makefile.\*.msvc](#ch_config.FineTuning_MSVC_Proj)
 
 Each of the standard solutions use a predefined list of projects to build, which is taken from `scripts\projects\*.lst files`.
 
@@ -1452,35 +1452,35 @@ To configure and generate the project list, open the chosen solution, select the
 
 in the Output window before reloading. Once this message appears, you can either click "Reload" or click "Ignore" and then manually close and reopen the solution. The reloaded solution will list all configured projects.
 
-A configuration tool with a Java-based GUI is also available and can be launched by building the **-CONFIGURE-DIALOG-** project. For more information on using the configuration GUI, see the [general section on configuring](#ch-config.Configure-the-Build).
+A configuration tool with a Java-based GUI is also available and can be launched by building the **-CONFIGURE-DIALOG-** project. For more information on using the configuration GUI, see the [general section on configuring](#ch_config.Configure_the_Build).
 
 The following topics discuss configuring with Visual C++ in more detail:
 
--   [Site-Specific Build Tree Configuration](#ch-config.-SiteSpecific-Build-T)
+-   [Site-Specific Build Tree Configuration](#ch_config._SiteSpecific_Build_T)
 
--   [Fine-Tuning with MSVC Project Files](#ch-config.FineTuning-MSVC-Proj)
+-   [Fine-Tuning with MSVC Project Files](#ch_config.FineTuning_MSVC_Proj)
 
-    -   [Excluding a Project From the Build](#ch-config.Excluding-project-fr)
+    -   [Excluding a Project From the Build](#ch_config.Excluding_project_fr)
 
-    -   [Adding Files to a Project](#ch-config.Adding-files-to-proj)
+    -   [Adding Files to a Project](#ch_config.Adding_files_to_proj)
 
-    -   [Excluding Files From a Project](#ch-config.Excluding-files-from)
+    -   [Excluding Files From a Project](#ch_config.Excluding_files_from)
 
-    -   [Adjusting Build Tools Settings](#ch-config.Adjusting-build-tool)
+    -   [Adjusting Build Tools Settings](#ch_config.Adjusting_build_tool)
 
-    -   [Specifying Custom Build Rules](#ch-config.Specifying-custom-bu)
+    -   [Specifying Custom Build Rules](#ch_config.Specifying_custom_bu)
 
--   [DLL Configuration](#ch-config.DLL-Configuration)
+-   [DLL Configuration](#ch_config.DLL_Configuration)
 
--   [Fine-Tuning with Environment Variables](#ch-config.FineTuning-with-Envi)
+-   [Fine-Tuning with Environment Variables](#ch_config.FineTuning_with_Envi)
 
-<a name="ch-config.-SiteSpecific-Build-T"></a>
+<a name="ch_config._SiteSpecific_Build_T"></a>
 
 ##### Site-Specific Build Tree Configuration
 
-File [project\_tree\_builder.ini](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/build-system/project_tree_builder.ini) (see [Table 4](#ch-config.proj-tree-build-ini-file-lo)) describes build and source tree configurations, contains information about the location of 3rd-party libraries and applications, and includes information used to resolve macro definitions found in the Unix-style makefile templates.
+File [project\_tree\_builder.ini](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/build-system/project_tree_builder.ini) (see [Table 4](#ch_config.proj_tree_build_ini_file_lo)) describes build and source tree configurations, contains information about the location of 3rd-party libraries and applications, and includes information used to resolve macro definitions found in the Unix-style makefile templates.
 
-<a name="ch-config.proj-tree-build-ini-file-lo"></a>
+<a name="ch_config.proj_tree_build_ini_file_lo"></a>
 
 Table 4. Project Tree Builder INI file (Local Site)
 
@@ -1541,7 +1541,7 @@ There are a few indispensable external components that have analogs in the Toolk
 
 ***Note:*** There are some requirements which, when building for MS Visual Studio, are always or never met. These requirements are listed in '`ProvidedRequests`', '`StandardFeatures`', or '`NotProvidedRequests`' of the '`Configure`' section.
 
-<a name="ch-config.FineTuning-MSVC-Proj"></a>
+<a name="ch_config.FineTuning_MSVC_Proj"></a>
 
 ##### Fine-Tuning with MSVC Project Files
 
@@ -1567,7 +1567,7 @@ Any section name can have one or several optional suffixes, so it can take the f
 
 -   `SectionName.[static|dll].[debug|release].ConfigurationName`
 
-<a name="ch-config.T4"></a>
+<a name="ch_config.T4"></a>
 
 |----------------------|--------------------------------------------------------|
 | `CompilerVersion`    | 1000 (i.e. MSVC 2010)                                  |
@@ -1578,21 +1578,21 @@ Any section name can have one or several optional suffixes, so it can take the f
 
 Settings in sections with more detailed names (ones that appear later on this list) override ones in sections with less detailed names (ones that appear earlier).
 
-***Note:*** After changing settings, you will need to [reconfigure](#ch-config.Configuring-with-Vis) and reload the solution for the change to take effect.
+***Note:*** After changing settings, you will need to [reconfigure](#ch_config.Configuring_with_Vis) and reload the solution for the change to take effect.
 
 The following topics discuss further fine-tuning with MSVC project files:
 
--   [Excluding a Project From the Build](#ch-config.Excluding-project-fr)
+-   [Excluding a Project From the Build](#ch_config.Excluding_project_fr)
 
--   [Adding Files to a Project](#ch-config.Adding-files-to-proj)
+-   [Adding Files to a Project](#ch_config.Adding_files_to_proj)
 
--   [Excluding Files From a Project](#ch-config.Excluding-files-from)
+-   [Excluding Files From a Project](#ch_config.Excluding_files_from)
 
--   [Adjusting Build Tools Settings](#ch-config.Adjusting-build-tool)
+-   [Adjusting Build Tools Settings](#ch_config.Adjusting_build_tool)
 
--   [Specifying Custom Build Rules](#ch-config.Specifying-custom-bu)
+-   [Specifying Custom Build Rules](#ch_config.Specifying_custom_bu)
 
-<a name="ch-config.Excluding-project-fr"></a>
+<a name="ch_config.Excluding_project_fr"></a>
 
 ##### Excluding a Project From the Build
 
@@ -1602,7 +1602,7 @@ To exclude a project from the build, set the '`ExcludeProject`' entry in the '`C
 
 -   `ExcludeProject=TRUE`
 
-<a name="ch-config.Adding-files-to-proj"></a>
+<a name="ch_config.Adding_files_to_proj"></a>
 
 ##### Adding Files to a Project
 
@@ -1622,7 +1622,7 @@ To add files to a project, add entries to the '`AddToProject`' section. The sect
 
 -   `SourceFiles=`
 
-<a name="ch-config.T5"></a>
+<a name="ch_config.T5"></a>
 
 |--------------------|---------------------------------------------------------------------------|
 | `HeadersInInclude` | override default list of headers from include directory                   |
@@ -1640,9 +1640,9 @@ means "add all files with h extension, add `file1.hpp`, and do not add `file2.h`
 
 ***Note:*** A single exclamation mark with no file name means "do not add any header files".
 
-All directories given in the '`IncludeDirs`' entry should be specified relative to the source directory. (Absolute paths aren't supported, nor are paths containing special characters such as spaces or commas.) After [reconfiguring](#ch-config.Configuring-with-Vis), these directories are saved in the `AdditionalIncludeDirectories` project property - now relative to **`$(ProjectDir)`**. The following table illustrates this path conversion:
+All directories given in the '`IncludeDirs`' entry should be specified relative to the source directory. (Absolute paths aren't supported, nor are paths containing special characters such as spaces or commas.) After [reconfiguring](#ch_config.Configuring_with_Vis), these directories are saved in the `AdditionalIncludeDirectories` project property - now relative to **`$(ProjectDir)`**. The following table illustrates this path conversion:
 
-<a name="ch-config.T.nc-includedirs-path-specifie"></a>
+<a name="ch_config.T.nc_includedirs_path_specifie"></a>
 
 | IncludeDirs Path -<br/>specified relative to source directory | AdditionalIncludeDirectories Path -<br/>saved relative to $(ProjectDir) |
 |-----------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
@@ -1652,7 +1652,7 @@ All directories given in the '`IncludeDirs`' entry should be specified relative 
 | `..\\..\\..\\somedir`                                                                   | `..\..\..\..\..\..\somedir`                                                                       |
 | `..\\..\\..\\..\\somedir`, etc.                                                         | `..\..\..\..\..\..\..\somedir`, etc.                                                              |
 
-Although '`IncludeDirs`' does not support absolute paths, it is possible to add absolute paths by changing the '`AdditionalOptions`' entry in the '`[Compiler]`' section (see [Build Tool Settings](#ch-config.Adjusting-build-tool)).
+Although '`IncludeDirs`' does not support absolute paths, it is possible to add absolute paths by changing the '`AdditionalOptions`' entry in the '`[Compiler]`' section (see [Build Tool Settings](#ch_config.Adjusting_build_tool)).
 
 Here are some example entries for the '`AddToProject`' section:
 
@@ -1665,13 +1665,13 @@ Here are some example entries for the '`AddToProject`' section:
     ResourceFiles=cn3d.rc
     SourceFiles = sysalloc
 
-<a name="ch-config.Excluding-files-from"></a>
+<a name="ch_config.Excluding_files_from"></a>
 
 ##### Excluding Files From a Project
 
 To exclude files from a project, set the '`SourceFiles`' or '`LIB`' entries of the '`ExcludedFromProject`' section.
 
-<a name="ch-config.Adjusting-build-tool"></a>
+<a name="ch_config.Adjusting_build_tool"></a>
 
 ##### Adjusting Build Tools Settings
 
@@ -1706,17 +1706,17 @@ Here are some example settings, with some illustrating how section name suffixes
 
 Relative paths specified in build tool settings are relative to **`$(ProjectDir)`**.
 
-***Note:*** '`AdditionalOptions`' entries are applied when the tool executes - they do not modify other project properties. For example, if you add an include path using '`AdditionalOptions`', it will not affect the '`AdditionalIncludeDirectories`' property, which is used by the IDE. In this case, Visual C++ will not be able to check syntax, lookup definitions, use IntelliSense, etc. for files in that location while you're editing - but they will compile normally. Therefore, use the '`AddToProject`' section (see [above](#ch-config.Adding-files-to-proj)) for include directories unless you must use an absolute path.
+***Note:*** '`AdditionalOptions`' entries are applied when the tool executes - they do not modify other project properties. For example, if you add an include path using '`AdditionalOptions`', it will not affect the '`AdditionalIncludeDirectories`' property, which is used by the IDE. In this case, Visual C++ will not be able to check syntax, lookup definitions, use IntelliSense, etc. for files in that location while you're editing - but they will compile normally. Therefore, use the '`AddToProject`' section (see [above](#ch_config.Adding_files_to_proj)) for include directories unless you must use an absolute path.
 
 See the [Makefile.mk.in.msvc](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/build-system/Makefile.mk.in.msvc) file for the default MSVS project settings.
 
-<a name="ch-config.Specifying-custom-bu"></a>
+<a name="ch_config.Specifying_custom_bu"></a>
 
 ##### Specifying Custom Build Rules
 
 To specify custom build rules for selected files in the project (usually non C++ files) use the '`CustomBuild`' section. It has a single entry, '`SourceFiles`', which lists one or more files to apply the custom build rules to. Then, create a section with the name of the file, and define the following entries there: '`Commandline`', '`Description`', '`Outputs`', and '`AdditionalDependencies`' - that is, the same entries as in the Custom Build Step of Microsoft Visual Studio project property pages. This data will then be inserted "as is" into the MSVS project file.
 
-<a name="ch-config.DLL-Configuration"></a>
+<a name="ch_config.DLL_Configuration"></a>
 
 ##### DLL Configuration
 
@@ -1724,7 +1724,7 @@ The Toolkit Unix-style makefile templates give a choice of building the library 
 
 In the Toolkit, such compound DLLs are described using a set of special makefiles in the `src/dl`l subdirectory. Each such file – `Makefile.*.dll` – contains the following entries:
 
-<a name="ch-config.T6"></a>
+<a name="ch_config.T6"></a>
 
 |--------------|---------------------------------------------------|
 | DLL          | name of the compound DLL                          |
@@ -1732,7 +1732,7 @@ In the Toolkit, such compound DLLs are described using a set of special makefile
 | DEPENDENCIES | dependencies on other static or dynamic libraries |
 | CPPFLAGS     | additional compiler flags, specific for this DLL  |
 
-<a name="ch-config.FineTuning-with-Envi"></a>
+<a name="ch_config.FineTuning_with_Envi"></a>
 
 ##### Fine-Tuning with Environment Variables
 
@@ -1750,11 +1750,11 @@ The **`PTB_PROJECT`** environment variable can be used to redefine the default p
 
 **`PTB_PROJECT=scripts\projects\datatool\project.lst`**
 
-<a name="ch-config.Building-with-Visual"></a>
+<a name="ch_config.Building_with_Visual"></a>
 
 #### Building with Visual C++
 
-Once you have [chosen a build scope](#ch-config.-Choosing-a-Build-Sco-1) and have [configured](#ch-config.Configuring-with-Vis), you are ready to build. The configure process creates a solution containing all the projects you can build.
+Once you have [chosen a build scope](#ch_config._Choosing_a_Build_Sco_1) and have [configured](#ch_config.Configuring_with_Vis), you are ready to build. The configure process creates a solution containing all the projects you can build.
 
 To build a library, application, sample, or any other project, simply choose your configuration (e.g. ReleaseDLL), right-click on the desired project, and select "Build". To build all projects in the solution, build the -**BUILD-ALL-** project.
 
@@ -1764,13 +1764,13 @@ By the way, you can build a desired project by right-clicking on it and selectin
 
 Following are some additional build-related topics:
 
--   [Building a Custom Solution](#ch-config.Create-Custom-Soluti)
+-   [Building a Custom Solution](#ch_config.Create_Custom_Soluti)
 
--   [Building External Libraries (Optional)](#ch-config.Building-External-Li)
+-   [Building External Libraries (Optional)](#ch_config.Building_External_Li)
 
--   [The Build Results](#ch-config.-The-Build-Results)
+-   [The Build Results](#ch_config._The_Build_Results)
 
-<a name="ch-config.Create-Custom-Soluti"></a>
+<a name="ch_config.Create_Custom_Soluti"></a>
 
 ##### Building a Custom Solution
 
@@ -1794,15 +1794,15 @@ There is a template solution, `compilers\msvc1000_prj\user\build\ncbi_user.sln`,
 
     -   By default, the solution uses a project list file. If you don't want to use a project list file (e.g. if you want to use a project tag filter instead), also change the '`set PTB_PROJECT_REQ=`' line to the appropriate subtree, e.g. '`set PTB_PROJECT_REQ=src\cgi\`'.
 
-    -   If you want to use a project tag filter, add the `'-projtag`' option to the '`set PTB_FLAGS=`' line, e.g. '`set PTB_FLAGS=-projtag "core && !test"`'. See the section on [reducing build scope](#ch-config.Reducing-Build-Scope-with-Proj) for more information on using project tags.
+    -   If you want to use a project tag filter, add the `'-projtag`' option to the '`set PTB_FLAGS=`' line, e.g. '`set PTB_FLAGS=-projtag "core && !test"`'. See the section on [reducing build scope](#ch_config.Reducing_Build_Scope_with_Proj) for more information on using project tags.
 
 5.  If your new project will use a project list file, edit `scripts\projects\project_name.lst` to identify the required project folders.
 
-6.  Your custom solution can now be built. Open the solution file `compilers\msvc1000_prj\project_name\build\project_name.sln`, [configure](#ch-config.Configuring-with-Vis), and [build](#ch-config.Building-with-Visual).
+6.  Your custom solution can now be built. Open the solution file `compilers\msvc1000_prj\project_name\build\project_name.sln`, [configure](#ch_config.Configuring_with_Vis), and [build](#ch_config.Building_with_Visual).
 
 Note that the project directory, `msvc1000_prj`, may be different for your version of Visual C++.
 
-<a name="ch-config.Building-External-Li"></a>
+<a name="ch_config.Building_External_Li"></a>
 
 ##### Building External Libraries (Optional)
 
@@ -1814,7 +1814,7 @@ Alternatively, the source code for the [NCBI C Toolkit](ftp://ftp.ncbi.nih.gov/t
 
 If you do not have the external libraries already installed, you can download, build, and install the NCBI C Toolkit and the freely distributed 3rd-party packages. The source code for the NCBI C Toolkit and the freely distributed 3rd-party packages can be downloaded from the NCBI FTP site and built in all available configurations. Refer to the documentation on the specific packages you wish to install for more information.
 
-<a name="ch-config.-The-Build-Results"></a>
+<a name="ch_config._The_Build_Results"></a>
 
 ##### The Build Results
 
@@ -1828,19 +1828,19 @@ Note that the project directory, `msvc1000_prj`, may be different for your versi
 
 ***Note:*** If the PTB (project tree builder) stage fails, the build may be stuck in a "locked" state. To "unlock" it, delete the file "`__configure.lock`" from the project directory.
 
-<a name="ch-config.-Using-the-Toolkit-wi-1"></a>
+<a name="ch_config._Using_the_Toolkit_wi_1"></a>
 
 #### Using the Toolkit with Visual C++
 
 This section dissusses the following examples of how to use the Toolkit with Windows:
 
--   [Start a New Project That Uses the Toolkit](#ch-config.Start-a-New-Project-)
+-   [Start a New Project That Uses the Toolkit](#ch_config.Start_a_New_Project_)
 
--   [Start a New Project in the Toolkit](#ch-config.Start-New-Project-in)
+-   [Start a New Project in the Toolkit](#ch_config.Start_New_Project_in)
 
--   [Modify or Debug an Existing Project in the Toolkit](#ch-config.Modify-Existing-Proj)
+-   [Modify or Debug an Existing Project in the Toolkit](#ch_config.Modify_Existing_Proj)
 
-<a name="ch-config.Start-a-New-Project-"></a>
+<a name="ch_config.Start_a_New_Project_"></a>
 
 ##### Start a New Project That Uses the Toolkit
 
@@ -1850,7 +1850,7 @@ To use an already built C++ Toolkit (with all its build settings and configured 
 
 where:
 
-<a name="ch-config.T7"></a>
+<a name="ch_config.T7"></a>
 
 |------------|--------------------------------------------------------------------------------------|
 | \<name\>   | is the name of the project to create                                                 |
@@ -1874,7 +1874,7 @@ For example, if the Toolkit is built in the `U:\cxx` folder, then this command:
 
 To add new source files or libraries to the project, edit `name\src\name\Makefile.name.app` makefile template, then rebuild the **-CONFIGURE-** project of the solution.
 
-<a name="ch-config.Start-New-Project-in"></a>
+<a name="ch_config.Start_New_Project_in"></a>
 
 ##### Start a New Project in the Toolkit with Visual C++
 
@@ -1884,7 +1884,7 @@ Then, build the **-CONFIGURE-** project and reload the solution.
 
 To start a new project that will become part of the Toolkit, create the makefile template first. For applications it must be named `Makefile.< project_name>.app`; for libraries - `Makefile.<project_name>.lib`. If it is a new folder in the source tree, you will also need to create `Makefile.in` file in the new folder, to specify to the configuration system what should be built in the new folder. Also, the new folder must be listed in the `SUB_PROJ` section of the parent folder's `Makefile.in`. Finally, make sure your new project folder is listed in the appropriate project list file in `scripts\projects\*.lst`. It can be either a subdirectory of an already listed directory, or a new entry in the list.
 
-<a name="ch-config.Modify-Existing-Proj"></a>
+<a name="ch_config.Modify_Existing_Proj"></a>
 
 ##### Modify or Debug an Existing Project in the Toolkit with Visual C++
 
@@ -1906,40 +1906,40 @@ If this doesn't work (for whatever reasons) on your own PC, you're welcome to us
 
 <http://intranet.ncbi.nlm.nih.gov/wiki-private/CxxToolkit/index.cgi/Software_Development#Software_Development9>
 
-<a name="ch-config.Cygwin-GCC"></a>
+<a name="ch_config.Cygwin_GCC"></a>
 
 ### Cygwin / GCC
 
-To build the project with Cygwin / GCC, just follow the generic [Unix guidelines](#ch-config.-General-Information--1), noting any [special considerations](#ch-config.-Cygwin---GCC).
+To build the project with Cygwin / GCC, just follow the generic [Unix guidelines](#ch_config._General_Information__1), noting any [special considerations](#ch_config._Cygwin___GCC).
 
-<a name="ch-config.Mac-OS-X"></a>
+<a name="ch_config.Mac_OS_X"></a>
 
 Mac OS X
 --------
 
-***Note:*** Please also see the [General Information for All Platforms](#ch-config.-General-Information-) section, as it contains relevant information that is not repeated here.
+***Note:*** Please also see the [General Information for All Platforms](#ch_config._General_Information_) section, as it contains relevant information that is not repeated here.
 
 This section covers the following topics:
 
--   [Xcode 3.0, 3.1](#ch-config.Xcode-30--31)
+-   [Xcode 3.0, 3.1](#ch_config.Xcode_30__31)
 
-    -   [Choosing a Build Scope](#ch-config.-Choosing-a-Build-Sco-2)
+    -   [Choosing a Build Scope](#ch_config._Choosing_a_Build_Sco_2)
 
-    -   [Configuring](#ch-config.Configuring-with-Xco)
+    -   [Configuring](#ch_config.Configuring_with_Xco)
 
-    -   [Building](#ch-config.Building-with-Xcode-)
+    -   [Building](#ch_config.Building_with_Xcode_)
 
--   [Xcode 1.0, 2.0](#ch-config.Xcode)
+-   [Xcode 1.0, 2.0](#ch_config.Xcode)
 
-    -   [Build the Toolkit](#ch-config.-Build-the-Toolkit)
+    -   [Build the Toolkit](#ch_config._Build_the_Toolkit)
 
-    -   [The Build Results](#ch-config.-The-Build-Results-2)
+    -   [The Build Results](#ch_config._The_Build_Results_2)
 
--   [Darwin / GCC](#ch-config.GCC)
+-   [Darwin / GCC](#ch_config.GCC)
 
--   [CodeWarrior](#ch-config.CodeWarrior)
+-   [CodeWarrior](#ch_config.CodeWarrior)
 
-<a name="ch-config.Xcode-30--31"></a>
+<a name="ch_config.Xcode_30__31"></a>
 
 ### Xcode 3.0, 3.1
 
@@ -1947,29 +1947,29 @@ Starting with Xcode build system version 3.0, the NCBI C++ Toolkit uses a new ap
 
 The following topics are discussed in this section:
 
--   [Choosing a Build Scope](#ch-config.-Choosing-a-Build-Sco-2)
+-   [Choosing a Build Scope](#ch_config._Choosing_a_Build_Sco_2)
 
--   [Configuring](#ch-config.Configuring-with-Xco)
+-   [Configuring](#ch_config.Configuring_with_Xco)
 
-    -   [Site-Specific Build Tree Configuration](#ch-config.-SiteSpecific-Build-T-1)
+    -   [Site-Specific Build Tree Configuration](#ch_config._SiteSpecific_Build_T_1)
 
-    -   [Dynamic Libraries Configuration](#ch-config.Dynamic-Libraries-Co)
+    -   [Dynamic Libraries Configuration](#ch_config.Dynamic_Libraries_Co)
 
-    -   [Fine-Tuning Xcode Target Build Settings](#ch-config.FineTuning-Xcode-Tar)
+    -   [Fine-Tuning Xcode Target Build Settings](#ch_config.FineTuning_Xcode_Tar)
 
-    -   [Adding Files to Target](#ch-config.Adding-Files-to-Targ)
+    -   [Adding Files to Target](#ch_config.Adding_Files_to_Targ)
 
-    -   [Specifying a Custom Build Script](#ch-config.Specifying-a-Custom-)
+    -   [Specifying a Custom Build Script](#ch_config.Specifying_a_Custom_)
 
--   [Building](#ch-config.Building-with-Xcode-)
+-   [Building](#ch_config.Building_with_Xcode_)
 
-    -   [Building 3<sup>rd</sup>-Party Libraries (Optional)](#ch-config.Build-3rdParty-Libra)
+    -   [Building 3<sup>rd</sup>-Party Libraries (Optional)](#ch_config.Build_3rdParty_Libra)
 
-    -   [Building from a Command-Line](#ch-config.Building-from-a-Comm)
+    -   [Building from a Command-Line](#ch_config.Building_from_a_Comm)
 
-    -   [The Build Results](#ch-config.-The-Build-Results-1)
+    -   [The Build Results](#ch_config._The_Build_Results_1)
 
-<a name="ch-config.-Choosing-a-Build-Sco-2"></a>
+<a name="ch_config._Choosing_a_Build_Sco_2"></a>
 
 #### Choosing a Build Scope with Xcode 3.0 or Later
 
@@ -1997,17 +1997,17 @@ The first two projects build console applications and required libraries only; t
 
 Note that the project directory, `xcode30_prj`, may be different for your version of Xcode.
 
-<a name="ch-config.Configuring-with-Xco"></a>
+<a name="ch_config.Configuring_with_Xco"></a>
 
 #### Configuring with Xcode 3.0 or Later
 
-Once you have [chosen a build scope](#ch-config.-Choosing-a-Build-Sco-2), you are ready to configure.
+Once you have [chosen a build scope](#ch_config._Choosing_a_Build_Sco_2), you are ready to configure.
 
 Each standard project contains a single special target called **CONFIGURE**. Building **CONFIGURE** first builds an application called project tree builder (PTB) and then runs that application. PTB overwrites the current standard project file with a new project that contains all the other Xcode build targets. The new build targets are based on Unix-style makefile templates (`src/.../Makefile.*`) and are specified by predefined lists of projects in `scripts/projects/*.lst` files.
 
 When **CONFIGURE** is built, a dialog will pop up stating that the project file has been overwritten by an external process (the external process is the PTB). Reload the project to ensure that it is loaded correctly. Then any or all of the other targets can be built.
 
-A configuration tool with a Java-based GUI is also available and can be launched by building the **CONFIGURE-DIALOG** target. For more information on using the configuration GUI, see the [general section on configuring](#ch-config.Configure-the-Build).
+A configuration tool with a Java-based GUI is also available and can be launched by building the **CONFIGURE-DIALOG** target. For more information on using the configuration GUI, see the [general section on configuring](#ch_config.Configure_the_Build).
 
 You may build any of the five standard projects. The projects in the `static` directory build libraries and applications using static Toolkit libraries, the other three use dynamic libraries.
 
@@ -2021,27 +2021,27 @@ Additional configuration files include:
 
 -   `src/.../Makefile.*.xcode`
 
-Modifying `project_tree_builder.ini` is described below in the section [Site-Specific Build Tree Configuration](#ch-config.-SiteSpecific-Build-T-1).
+Modifying `project_tree_builder.ini` is described below in the section [Site-Specific Build Tree Configuration](#ch_config._SiteSpecific_Build_T_1).
 
-Modifying `Makefile.mk.in.xcode` and `Makefile.*.xcode` is described below in the section [Fine-Tuning Xcode Target Build Settings](#ch-config.FineTuning-Xcode-Tar).
+Modifying `Makefile.mk.in.xcode` and `Makefile.*.xcode` is described below in the section [Fine-Tuning Xcode Target Build Settings](#ch_config.FineTuning_Xcode_Tar).
 
 The following topics discuss additional information about configuring with Xcode:
 
--   [Site-Specific Build Tree Configuration](#ch-config.-SiteSpecific-Build-T-1)
+-   [Site-Specific Build Tree Configuration](#ch_config._SiteSpecific_Build_T_1)
 
--   [Dynamic Libraries Configuration](#ch-config.Dynamic-Libraries-Co)
+-   [Dynamic Libraries Configuration](#ch_config.Dynamic_Libraries_Co)
 
--   [Fine-Tuning Xcode Target Build Settings](#ch-config.FineTuning-Xcode-Tar)
+-   [Fine-Tuning Xcode Target Build Settings](#ch_config.FineTuning_Xcode_Tar)
 
--   [Adding Files to Target](#ch-config.Adding-Files-to-Targ)
+-   [Adding Files to Target](#ch_config.Adding_Files_to_Targ)
 
--   [Specifying a Custom Build Script](#ch-config.Specifying-a-Custom-)
+-   [Specifying a Custom Build Script](#ch_config.Specifying_a_Custom_)
 
-<a name="ch-config.-SiteSpecific-Build-T-1"></a>
+<a name="ch_config._SiteSpecific_Build_T_1"></a>
 
 ##### Site-Specific Build Tree Configuration
 
-The build tree configuration can be tailored to your site by modifying the file [src/build-system/project\_tree\_builder.ini](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/build-system/project_tree_builder.ini) (see [Table 4](#ch-config.proj-tree-build-ini-file-lo)). For example, you may need to change the location of 3<sup>rd</sup>-party libraries to match your systems. Or you may need to specify conditions under which a certain project is excluded from the build.
+The build tree configuration can be tailored to your site by modifying the file [src/build-system/project\_tree\_builder.ini](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/build-system/project_tree_builder.ini) (see [Table 4](#ch_config.proj_tree_build_ini_file_lo)). For example, you may need to change the location of 3<sup>rd</sup>-party libraries to match your systems. Or you may need to specify conditions under which a certain project is excluded from the build.
 
 `project_tree_builder.ini` describes build and source tree configurations; contains information about the location of 3rd-party libraries and applications; and includes information used to resolve macro definitions found in the Unix-style makefile templates.
 
@@ -2055,7 +2055,7 @@ There are a few indispensable external components that have analogs in the Toolk
 
 ***Note:*** There may be some requirements which are always or never met. These requirements are listed in the '`ProvidedRequests`', '`StandardFeatures`', or '`NotProvidedRequests`' entries of the '`Configure`' section.
 
-<a name="ch-config.Dynamic-Libraries-Co"></a>
+<a name="ch_config.Dynamic_Libraries_Co"></a>
 
 ##### Dynamic Libraries Configuration
 
@@ -2071,7 +2071,7 @@ In the Toolkit, such compound libraries are described using a set of special mak
 
 -   CPPFLAGS – additional compiler flags, specific for this dynamic library.
 
-<a name="ch-config.FineTuning-Xcode-Tar"></a>
+<a name="ch_config.FineTuning_Xcode_Tar"></a>
 
 ##### Fine-Tuning Xcode Target Build Settings
 
@@ -2101,7 +2101,7 @@ Here, '`static`' or '`dll`' means the type of runtime libraries that a particula
 
 Settings in sections with more detailed names (ones that appear later on this list) override ones in sections with less detailed names (ones that appear earlier).
 
-<a name="ch-config.Adding-Files-to-Targ"></a>
+<a name="ch_config.Adding_Files_to_Targ"></a>
 
 ##### Adding Files to Target
 
@@ -2129,7 +2129,7 @@ means "add all files with the `.h` extension, add `file1.hpp`, and do not add `f
 
 ***Note:*** A single exclamation mark with no file name means "do not add any header files".
 
-<a name="ch-config.Specifying-a-Custom-"></a>
+<a name="ch_config.Specifying_a_Custom_"></a>
 
 ##### Specifying a Custom Build Script
 
@@ -2143,25 +2143,25 @@ In the appropriate `Makefile.*.xcode` customization file, define a section calle
 
 -   `Shell` – which shell to use (the default is ‘/bin/sh’).
 
-<a name="ch-config.Building-with-Xcode-"></a>
+<a name="ch_config.Building_with_Xcode_"></a>
 
 #### Building with Xcode 3.0 or Later
 
-Once you have [chosen a build scope](#ch-config.-Choosing-a-Build-Sco-2) and have [configured](#ch-config.Configuring-with-Xco), you are ready to build.
+Once you have [chosen a build scope](#ch_config._Choosing_a_Build_Sco_2) and have [configured](#ch_config.Configuring_with_Xco), you are ready to build.
 
-***Note:*** Some projects may require using [3rd-party libraries](#ch-config.Build-3rdParty-Libra).
+***Note:*** Some projects may require using [3rd-party libraries](#ch_config.Build_3rdParty_Libra).
 
 Select the desired project and build it. To build all projects, select the **BUILD-ALL** project.
 
 Following are some examples of how to build specific projects and some additional topics:
 
--   [Building 3<sup>rd</sup>-Party Libraries (Optional)](#ch-config.Build-3rdParty-Libra)
+-   [Building 3<sup>rd</sup>-Party Libraries (Optional)](#ch_config.Build_3rdParty_Libra)
 
--   [Building from a Command-Line](#ch-config.Building-from-a-Comm)
+-   [Building from a Command-Line](#ch_config.Building_from_a_Comm)
 
--   [The Build Results](#ch-config.-The-Build-Results-1)
+-   [The Build Results](#ch_config._The_Build_Results_1)
 
-<a name="ch-config.Build-3rdParty-Libra"></a>
+<a name="ch_config.Build_3rdParty_Libra"></a>
 
 ##### Build 3<sup>rd</sup>-Party Libraries (optional)
 
@@ -2171,11 +2171,11 @@ At NCBI, these libraries are already installed, and their locations are [hard co
 
 If you do not have the external libraries already installed, you can download, build, and install the NCBI C Toolkit and the freely distributed 3rd-party packages. The source code for the NCBI C Toolkit and the freely distributed 3rd-party packages can be downloaded from the NCBI FTP site and built in all available configurations. Refer to the documentation on the specific packages you wish to install for more information.
 
-<a name="ch-config.Building-from-a-Comm"></a>
+<a name="ch_config.Building_from_a_Comm"></a>
 
 ##### Building from a Command-Line with Xcode 3.0 or Later
 
-From the command-line, you can either build exactly as [under Unix](#ch-config.Building-with-UNIX), or you can build for Xcode.
+From the command-line, you can either build exactly as [under Unix](#ch_config.Building_with_UNIX), or you can build for Xcode.
 
 To configure for Xcode, first run `configure` in the Xcode project directory (run `configure --help` to see available options):
 
@@ -2189,7 +2189,7 @@ To build from the command-line, run `make all_r`. Optionally build the testsuite
     make all_r
     make check_r
 
-<a name="ch-config.-The-Build-Results-1"></a>
+<a name="ch_config._The_Build_Results_1"></a>
 
 ##### The Build Results
 
@@ -2199,7 +2199,7 @@ Applications and libraries produced by the build will be put, respectively, into
 
 -   `compilers/xcode30_prj/{static|dll}/lib/<ConfigurationName>`
 
-<a name="ch-config.Xcode"></a>
+<a name="ch_config.Xcode"></a>
 
 ### Xcode 1.0, 2.0
 
@@ -2207,11 +2207,11 @@ For versions of Xcode earlier than 3.0 the handmade scripts have to be used.
 
 The following topics are discussed in this section:
 
--   [Build the Toolkit](#ch-config.-Build-the-Toolkit)
+-   [Build the Toolkit](#ch_config._Build_the_Toolkit)
 
--   [The Build Results](#ch-config.-The-Build-Results-2)
+-   [The Build Results](#ch_config._The_Build_Results_2)
 
-<a name="ch-config.-Build-the-Toolkit"></a>
+<a name="ch_config._Build_the_Toolkit"></a>
 
 #### Build the Toolkit
 
@@ -2225,7 +2225,7 @@ This GUI tool generates a new NCBI C++ Toolkit Xcode project. It allows you to:
 
 -   Specify third-party installation directories.
 
-<a name="ch-config.-The-Build-Results-2"></a>
+<a name="ch_config._The_Build_Results_2"></a>
 
 #### The Build Results
 
@@ -2249,13 +2249,13 @@ Genome Workbench plugins are built as Mach-O bundles (also with `.dylib` extensi
 
 -   `<output_dir>/Genome Workbench.app/Contents/MacOS/plugins`
 
-<a name="ch-config.GCC"></a>
+<a name="ch_config.GCC"></a>
 
 ### Darwin / GCC
 
-To build the project with Darwin / GCC, just follow the generic [Unix guidelines](#ch-config.-General-Information--1).
+To build the project with Darwin / GCC, just follow the generic [Unix guidelines](#ch_config._General_Information__1).
 
-<a name="ch-config.CodeWarrior"></a>
+<a name="ch_config.CodeWarrior"></a>
 
 ### CodeWarrior
 

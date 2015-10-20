@@ -35,13 +35,13 @@ See [Getting Started](ch_start.html) for basic information on using the NCBI C++
 
         -   [An example for serializable ASN.1 objects and the `Object Manager`](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/objects/) using the [xobjects](ch_ser.html) library.
 
-    -   [id1\_fetch](#ch-demo.id1-fetch.html) ID1 and Entrez2 client
+    -   [id1\_fetch](#ch_demo.id1_fetch.html) ID1 and Entrez2 client
 
--   [Examples from the Programming Manual](#ch-demo.examples4)
+-   [Examples from the Programming Manual](#ch_demo.examples4)
 
-    -   [applic.cpp](#ch-demo.examples-1-3)
+    -   [applic.cpp](#ch_demo.examples_1_3)
 
-    -   [smart.cpp](#ch-demo.examples-1-4)
+    -   [smart.cpp](#ch_demo.examples_1_4)
 
     -   [ctypeiter.cpp](ch_ser.html#ch_ser.ctypeiter_cpp.html)
 
@@ -51,7 +51,7 @@ See [Getting Started](ch_start.html) for basic information on using the NCBI C++
 
     -   [traverseBS.cpp](ch_ser.html#ch_ser.traverse_cpp.html)
 
-    -   [Web-CGI demo](#ch-demo.prog-man-CARdemo-index.html)
+    -   [Web-CGI demo](#ch_demo.prog_man_CARdemo_index.html)
 
 -   Test and Demo Programs in the C++ Tree
 
@@ -63,30 +63,30 @@ See [Getting Started](ch_start.html) for basic information on using the NCBI C++
 
     -   [coretest.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib/test/coretest.cpp)
 
-<a name="ch-demo.id1-fetch.html"></a>
+<a name="ch_demo.id1_fetch.html"></a>
 
 ID1\_FETCH - the ID1 and Entrez2 client
 ---------------------------------------
 
--   [Synopsis](#ch-demo.Synopsis)
+-   [Synopsis](#ch_demo.Synopsis)
 
--   [Invocation](#ch-demo.id1-fetch.html-ref-Invocation)
+-   [Invocation](#ch_demo.id1_fetch.html_ref_Invocation)
 
-    -   [Output Data Formats](#ch-demo.id1-fetch.html-ref-fmt)
+    -   [Output Data Formats](#ch_demo.id1_fetch.html_ref_fmt)
 
-    -   [Lookup Types](#ch-demo.id1-fetch.html-ref-lt)
+    -   [Lookup Types](#ch_demo.id1_fetch.html_ref_lt)
 
-    -   [Output Complexity Levels](#ch-demo.id1-fetch.html-ref-maxplex)
+    -   [Output Complexity Levels](#ch_demo.id1_fetch.html_ref_maxplex)
 
-    -   [Flattened Sequence ID Format](#ch-demo.id1-fetch.html-ref-flat)
+    -   [Flattened Sequence ID Format](#ch_demo.id1_fetch.html_ref_flat)
 
-    -   [FASTA Sequence ID Format](#ch-demo.id1-fetch.html-ref-fasta)
+    -   [FASTA Sequence ID Format](#ch_demo.id1_fetch.html_ref_fasta)
 
--   [Examples of Usage](#ch-demo.id1-fetch.html-ref-Examples)
+-   [Examples of Usage](#ch_demo.id1_fetch.html_ref_Examples)
 
 **Location**: [c++/src/app/id1\_fetch/id1\_fetch.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/app/id1_fetch/id1_fetch.cpp) (compiled executable is `$NCBI/c++/Release/bin/id1_fetch` on NCBI systems)
 
-<a name="ch-demo.Synopsis"></a>
+<a name="ch_demo.Synopsis"></a>
 
 ### Synopsis:
 
@@ -96,13 +96,13 @@ ID1\_FETCH - the ID1 and Entrez2 client
 
 This program corresponds to **idfetch** from the C Toolkit.
 
-<a name="ch-demo.id1-fetch.html-ref-Invocation"></a>
+<a name="ch_demo.id1_fetch.html_ref_Invocation"></a>
 
 ### Invocation
 
-See [Table 1](#ch-demo.T1).
+See [Table 1](#ch_demo.T1).
 
-<a name="ch-demo.T1"></a>
+<a name="ch_demo.T1"></a>
 
 Table 1. Invocation flags
 
@@ -110,28 +110,28 @@ Table 1. Invocation flags
 |--------------|---------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `-h`         |                               | Print usage message and exit.                                                                                                                                                                                                 |
 | `-gi N`      | integer                                           | GenInfo ID of sequence to look up.                                                                                                                                                                                            |
-| `-fmt fmt`   | [format type](#ch-demo.id1-fetch.html-ref-fmt)    | Output data format; default is `asn` (ASN.1 text).                                                                                                                                                                            |
+| `-fmt fmt`   | [format type](#ch_demo.id1_fetch.html_ref_fmt)    | Output data format; default is `asn` (ASN.1 text).                                                                                                                                                                            |
 | `-out file`  | filename                                          | Write output to specified file rather than stdout.                                                                                                                                                                            |
 | `-log file`  | filename                                          | Write errors and messages to specified file rather than stderr.                                                                                                                                                               |
 | `-db str`    | string                                            | Use specified database. **Mandatory for** [Entrez](http://www.ncbi.nlm.nih.gov/books/NBK21081/) **queries**, where it is normally either Nucleotide or Protein. Also specifies satellite database for sequence-entry lookups. |
 | `-ent N`     | integer                                           | Dump specified subentity. Only relevant for sequence-entry lookups.                                                                                                                                                           |
-| `-lt type`   | [lookup type](#ch-demo.id1-fetch.html-ref-lt)     | Type of lookup; default is `entry` (sequence entry).                                                                                                                                                                          |
-| `-in file`   | filename                                          | Read sequence IDs from file rather than command line. May contain raw GI IDs, [flattened IDs](#ch-demo.id1-fetch.html-ref-flat), and [FASTA-format IDs](#ch-demo.id1-fetch.html-ref-fasta).                                   |
-| `-maxplex m` | [complexity](#ch-demo.id1-fetch.html-ref-maxplex) | Maximum output complexity level; default is `entry` (entire entry).                                                                                                                                                           |
-| `-flat id`   | [flat ID](#ch-demo.id1-fetch.html-ref-flat)       | Flattened ID of sequence to look up.                                                                                                                                                                                          |
-| `-fasta id`  | [FASTA ID](#ch-demo.id1-fetch.html-ref-fasta)     | [FASTA](http://blast.ncbi.nlm.nih.gov/blast/fasta.shtml)-style ID of sequence to look up.                                                                                                                                     |
+| `-lt type`   | [lookup type](#ch_demo.id1_fetch.html_ref_lt)     | Type of lookup; default is `entry` (sequence entry).                                                                                                                                                                          |
+| `-in file`   | filename                                          | Read sequence IDs from file rather than command line. May contain raw GI IDs, [flattened IDs](#ch_demo.id1_fetch.html_ref_flat), and [FASTA-format IDs](#ch_demo.id1_fetch.html_ref_fasta).                                   |
+| `-maxplex m` | [complexity](#ch_demo.id1_fetch.html_ref_maxplex) | Maximum output complexity level; default is `entry` (entire entry).                                                                                                                                                           |
+| `-flat id`   | [flat ID](#ch_demo.id1_fetch.html_ref_flat)       | Flattened ID of sequence to look up.                                                                                                                                                                                          |
+| `-fasta id`  | [FASTA ID](#ch_demo.id1_fetch.html_ref_fasta)     | [FASTA](http://blast.ncbi.nlm.nih.gov/blast/fasta.shtml)-style ID of sequence to look up.                                                                                                                                     |
 | `-query str` | string                                            | Generate ID list from specified [Entrez](http://www.ncbi.nlm.nih.gov/books/NBK21081/) query.                                                                                                                                  |
 | `-qf file`   | file                                              | Generate ID list from [Entrez](http://www.ncbi.nlm.nih.gov/books/NBK21081/) query in specified file.                                                                                                                          |
 
 ***Note***: You must specify exactly one of the options indicating what to look up: `-gi, -in, -flat, -fasta, -query, -qf`.
 
-<a name="ch-demo.id1-fetch.html-ref-fmt"></a>
+<a name="ch_demo.id1_fetch.html_ref_fmt"></a>
 
 #### Output Data Formats
 
-The possible values of the `-fmt` argument are shown in [Table 2](#ch-demo.T2).
+The possible values of the `-fmt` argument are shown in [Table 2](#ch_demo.T2).
 
-<a name="ch-demo.T2"></a>
+<a name="ch_demo.T2"></a>
 
 Table 2. Output data formats
 
@@ -146,13 +146,13 @@ Table 2. Output data formats
 | quality | Quality scores                                                                                                                     | Lookup type must be entry (default); data not always available.  |
 | xml     | XML                                                                                                                                | Isomorphic to ASN.1 output.                                      |
 
-<a name="ch-demo.id1-fetch.html-ref-lt"></a>
+<a name="ch_demo.id1_fetch.html_ref_lt"></a>
 
 #### Lookup Types
 
-The possible values of the `-lt` argument are shown in [Table 3](#ch-demo.T3).
+The possible values of the `-lt` argument are shown in [Table 3](#ch_demo.T3).
 
-<a name="ch-demo.T3"></a>
+<a name="ch_demo.T3"></a>
 
 Table 3. Lookup types
 
@@ -165,13 +165,13 @@ Table 3. Lookup types
 | revisions | Summary of changes to the sequence data or annotations |
 | state     | The sequence's status                                  |
 
-<a name="ch-demo.id1-fetch.html-ref-maxplex"></a>
+<a name="ch_demo.id1_fetch.html_ref_maxplex"></a>
 
 #### Output Complexity Levels
 
-The possible values of the `-maxplex` argument are shown in [Table 4](#ch-demo.T4).
+The possible values of the `-maxplex` argument are shown in [Table 4](#ch_demo.T4).
 
-<a name="ch-demo.T4"></a>
+<a name="ch_demo.T4"></a>
 
 Table 4. Maximum output complexity level values
 
@@ -183,7 +183,7 @@ Table 4. Maximum output complexity level values
 | nuc-prot   | Minimal nuc-prot            |
 | pub-set    | Minimal pub-set             |
 
-<a name="ch-demo.id1-fetch.html-ref-flat"></a>
+<a name="ch_demo.id1_fetch.html_ref_flat"></a>
 
 #### Flattened Sequence ID Format
 
@@ -237,17 +237,17 @@ The type is a number, indicating who assigned the ID, as follows:
 
 -   TrEMBL
 
-<a name="ch-demo.id1-fetch.html-ref-fasta"></a>
+<a name="ch_demo.id1_fetch.html_ref_fasta"></a>
 
 #### FASTA Sequence ID Format
 
-This format consists of a two- or three-letter tag indicating the ID's type, followed by one or more data fields, which are separated from the tag and each other by vertical bars (\|). The vertical bar is a special character in most command-line shells, so command-line arguments containing ID's usually must be quoted. [Table 5](#ch-demo.T5) shows the specific possibilities.
+This format consists of a two- or three-letter tag indicating the ID's type, followed by one or more data fields, which are separated from the tag and each other by vertical bars (\|). The vertical bar is a special character in most command-line shells, so command-line arguments containing ID's usually must be quoted. [Table 5](#ch_demo.T5) shows the specific possibilities.
 
-<a name="ch-demo.T5"></a>
+<a name="ch_demo.T5"></a>
 
 Table 5. FASTA sequence ID format values
 
-| Type                                                                                | Format(s) [<sup>1</sup>](#ch-demo.TF.1)                                        | Example(s)                                                         |
+| Type                                                                                | Format(s) [<sup>1</sup>](#ch_demo.TF.1)                                        | Example(s)                                                         |
 |-------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|--------------------------------------------------------------------|
 | local                                                                               | `lcl\|integer`<br/>`lcl\|string`                     | `lcl\|123`<br/>`lcl\|hmm271`             |
 | GenInfo backbone seqid                                                              | `bbs\|integer`                                                                 | `bbs\|123`                                                         |
@@ -259,7 +259,7 @@ Table 5. FASTA sequence ID format values
 | [SWISS-PROT](http://www.ebi.ac.uk/swissprot)                                        | `sp\|accession\|name`                                                          | `sp\|P01013\|OVAX_CHICK`                                           |
 | patent                                                                              | `pat\|country\|patent\|sequence`                                               | `pat\|US\|RE33188\|1`                                              |
 | pre-grant patent                                                                    | `pgp\|country\|application-number\|seq-number`                                 | `pgp\|EP\|0238993\|7`                                              |
-| [RefSeq](http://www.ncbi.nlm.nih.gov/projects/RefSeq) [<sup>2</sup>](#ch-demo.TF.2) | `ref\|accession\|name`                                                         | `ref\|NM_010450.1\|`                                               |
+| [RefSeq](http://www.ncbi.nlm.nih.gov/projects/RefSeq) [<sup>2</sup>](#ch_demo.TF.2) | `ref\|accession\|name`                                                         | `ref\|NM_010450.1\|`                                               |
 | general database reference                                                          | `gnl\|database\|integer`<br/>`gnl\|database\|string` | `gnl\|taxon\|9606`<br/>`gnl\|PID\|e1632` |
 | GenInfo integrated database                                                         | `gi\|integer`                                                                  | `gi\|21434723`                                                     |
 | [DDBJ](http://www.ddbj.nig.ac.jp)                                                   | `dbj\|accession\|locus`                                                        | `dbj\|BAC85684.1\|`                                                |
@@ -269,22 +269,22 @@ Table 5. FASTA sequence ID format values
 | third-party [EMBL](http://www.embl-heidelberg.de)                                   | `tpe\|accession\|name`                                                         | `tpe\|BN000123\|`                                                  |
 | third-party [DDBJ](http://www.ddbj.nig.ac.jp)                                       | `tpd\|accession\|name`                                                         | `tpd\|FAA00017\|`                                                  |
 | TrEMBL                                                                              | `tr\|accession\|name`                                                          | `tr\|Q90RT2\|Q90RT2_9HIV1`                                         |
-| genome pipeline [<sup>3</sup>](#ch-demo.TF.3)                                       | `gpp\|accession\|name`                                                         | `gpp\|GPC_123456789\|`                                             |
-| named annotation track [<sup>3</sup>](#ch-demo.TF.3)                                | `nat\|accession\|name`                                                         | `nat\|AT_123456789.1\|`                                            |
+| genome pipeline [<sup>3</sup>](#ch_demo.TF.3)                                       | `gpp\|accession\|name`                                                         | `gpp\|GPC_123456789\|`                                             |
+| named annotation track [<sup>3</sup>](#ch_demo.TF.3)                                | `nat\|accession\|name`                                                         | `nat\|AT_123456789.1\|`                                            |
 
-<a name="ch-demo.TF.1"></a>
+<a name="ch_demo.TF.1"></a>
 
 <sup>1</sup> Spaces should not be present in ID's. It's okay to leave off the final vertical bar for most text ID types (such as gb) when the locus is absent; apart from that, vertical bars must be present even if an adjacent field is omitted.
 
-<a name="ch-demo.TF.2"></a>
+<a name="ch_demo.TF.2"></a>
 
 <sup>2</sup> Some RefSeq accessions have additional letters following the underscore. See the [RefSeq accession format reference](http://www.ncbi.nlm.nih.gov/RefSeq/key.html#accession) for details.
 
-<a name="ch-demo.TF.3"></a>
+<a name="ch_demo.TF.3"></a>
 
 <sup>3</sup> For NCBI internal use.
 
-<a name="ch-demo.id1-fetch.html-ref-Examples"></a>
+<a name="ch_demo.id1_fetch.html_ref_Examples"></a>
 
 ### Example Usage
 
@@ -433,28 +433,28 @@ Table 5. FASTA sequence ID format values
      99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99
      99 99 99 99 99 99
 
-<a name="ch-demo.examples4"></a>
+<a name="ch_demo.examples4"></a>
 
 Examples from the Programming Manual
 ------------------------------------
 
--   [applic.cpp](#ch-demo.examples-1-3)
+-   [applic.cpp](#ch_demo.examples_1_3)
 
--   [smart.cpp](#ch-demo.examples-1-4)
+-   [smart.cpp](#ch_demo.examples_1_4)
 
--   [An Example of a Web-based CGI Application - Source Files](#ch-demo.prog-man-CARdemo-index.html)
+-   [An Example of a Web-based CGI Application - Source Files](#ch_demo.prog_man_CARdemo_index.html)
 
-    -   [car.cpp](#ch-demo.carcpp)
+    -   [car.cpp](#ch_demo.carcpp)
 
-    -   [car.hpp](#ch-demo.carhpp)
+    -   [car.hpp](#ch_demo.carhpp)
 
-    -   [car\_cgi.cpp](#ch-demo.car-cgicpp)
+    -   [car\_cgi.cpp](#ch_demo.car_cgicpp)
 
-    -   [Makefile.car\_app](#ch-demo.Makefilecar-app)
+    -   [Makefile.car\_app](#ch_demo.Makefilecar_app)
 
-    -   [car.html](#ch-demo.carhtml)
+    -   [car.html](#ch_demo.carhtml)
 
-<a name="ch-demo.examples-1-3"></a>
+<a name="ch_demo.examples_1_3"></a>
 
 ### applic.cpp
 
@@ -558,7 +558,7 @@ Examples from the Programming Manual
           return theTestApp.AppMain(argc, argv);
     }
 
-<a name="ch-demo.examples-1-4"></a>
+<a name="ch_demo.examples_1_4"></a>
 
 ### smart.cpp
 
@@ -629,11 +629,11 @@ Examples from the Programming Manual
         return theTestApp.AppMain(argc, argv);
     }
 
-<a name="ch-demo.prog-man-CARdemo-index.html"></a>
+<a name="ch_demo.prog_man_CARdemo_index.html"></a>
 
 ### An Example of a Web-based CGI Application - Source Files
 
-<a name="ch-demo.carcpp"></a>
+<a name="ch_demo.carcpp"></a>
 
 #### car.cpp
 
@@ -681,7 +681,7 @@ Examples from the Programming Manual
 
     END_NCBI_SCOPE
 
-<a name="ch-demo.carhpp"></a>
+<a name="ch_demo.carhpp"></a>
 
 #### car.hpp
 
@@ -744,7 +744,7 @@ Examples from the Programming Manual
 
     #endif  /* CAR__HPP */
 
-<a name="ch-demo.car-cgicpp"></a>
+<a name="ch_demo.car_cgicpp"></a>
 
 #### car\_cgi.cpp
 
@@ -965,7 +965,7 @@ Examples from the Programming Manual
         return CCarCgi().AppMain(argc, argv);
     }
 
-<a name="ch-demo.Makefilecar-app"></a>
+<a name="ch_demo.Makefilecar_app"></a>
 
 #### Makefile.car\_app
 
@@ -1010,7 +1010,7 @@ Examples from the Programming Manual
 
     ###  PUT YOUR OWN ADDITIONAL TARGETS (MAKE COMMANDS/RULES) BELOW HERE  ###
 
-<a name="ch-demo.carhtml"></a>
+<a name="ch_demo.carhtml"></a>
 
 #### car.html
 

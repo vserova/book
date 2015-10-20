@@ -25,82 +25,82 @@ This chapter contains frequently asked questions and useful links.
 
 ### Chapter Outline
 
--   [FAQs](#ch-faq.)
+-   [FAQs](#ch_faq.)
 
-    -   [Security](#ch-faq.Security)
+    -   [Security](#ch_faq.Security)
 
-        -   [How do I prevent SQL Injection attacks?](#ch-faq.How-do-I-prevent-SQL-Injection-at)
+        -   [How do I prevent SQL Injection attacks?](#ch_faq.How_do_I_prevent_SQL_Injection_at)
 
-        -   [How do I prevent Cross-Site Scripting (XSS) attacks?](#ch-faq.How-do-I-prevent-CrossSite-Script)
+        -   [How do I prevent Cross-Site Scripting (XSS) attacks?](#ch_faq.How_do_I_prevent_CrossSite_Script)
 
-    -   [General](#ch-faq.general)
+    -   [General](#ch_faq.general)
 
-        -   [How do I prepare my development environment for using the C++ Toolkit?](#ch-faq.How-do-I-prepare-my-development-e)
+        -   [How do I prepare my development environment for using the C++ Toolkit?](#ch_faq.How_do_I_prepare_my_development_e)
 
-        -   [The GetTypeInfo() method is not declared or defined in any of the objects for which it is part of the interface?](#ch-faq.faq.CannotFindGetTypeInfo)
+        -   [The GetTypeInfo() method is not declared or defined in any of the objects for which it is part of the interface?](#ch_faq.faq.CannotFindGetTypeInfo)
 
-        -   [Which include file should be used in \*.cpp files, class.hpp or class\_.hpp?](#ch-faq.ref-WhichIncludeFile)
+        -   [Which include file should be used in \*.cpp files, class.hpp or class\_.hpp?](#ch_faq.ref_WhichIncludeFile)
 
-        -   [How can I disable the XML declaration or DOCTYPE with the serial library?](#ch-faq.How-can-I-disable-the-XML-declara)
+        -   [How can I disable the XML declaration or DOCTYPE with the serial library?](#ch_faq.How_can_I_disable_the_XML_declara)
 
-    -   [Compiling](#ch-faq.Compiling)
+    -   [Compiling](#ch_faq.Compiling)
 
-        -   [How do I compile for 32-bit on a 64-bit machine in a typical C++ Toolkit app?](#ch-faq.How-do-I-compile-for-32bit-on-a-6)
+        -   [How do I compile for 32-bit on a 64-bit machine in a typical C++ Toolkit app?](#ch_faq.How_do_I_compile_for_32bit_on_a_6)
 
-        -   [Which Visual C++ project should I build?](#ch-faq.Which-Visual-C-project-should-I-b)
+        -   [Which Visual C++ project should I build?](#ch_faq.Which_Visual_C_project_should_I_b)
 
-        -   [What compiler options are required to be compatible with C++ Toolkit libraries?](#ch-faq.What-compiler-options-are-require)
+        -   [What compiler options are required to be compatible with C++ Toolkit libraries?](#ch_faq.What_compiler_options_are_require)
 
-            -   [Checked iterators](#ch-faq.Checked-iterators)
+            -   [Checked iterators](#ch_faq.Checked_iterators)
 
-            -   [C++ exceptions](#ch-faq.C-exceptions)
+            -   [C++ exceptions](#ch_faq.C_exceptions)
 
-            -   [Runtime library](#ch-faq.Runtime-library)
+            -   [Runtime library](#ch_faq.Runtime_library)
 
-    -   [Linking](#ch-faq.linker)
+    -   [Linking](#ch_faq.linker)
 
-        -   [How does one find the libraries to link when the linker complains of undefined symbols?](#ch-faq.faq.CannotFindObjectSymbol)
+        -   [How does one find the libraries to link when the linker complains of undefined symbols?](#ch_faq.faq.CannotFindObjectSymbol)
 
-        -   [How do I add a library to a Visual C++ project?](#ch-faq.How-do-I-add-a-library-to-a-Visua)
+        -   [How do I add a library to a Visual C++ project?](#ch_faq.How_do_I_add_a_library_to_a_Visua)
 
-        -   [Linker complains it "cannot find symbol" in something like: "SunWS\_cache/CC\_obj\_b/bXmZkg3zX5VBJvYgjABX.o"](#ch-faq.ref-CannotFindSymbol)
+        -   [Linker complains it "cannot find symbol" in something like: "SunWS\_cache/CC\_obj\_b/bXmZkg3zX5VBJvYgjABX.o"](#ch_faq.ref_CannotFindSymbol)
 
-        -   [MAKE complains it does not know "how to make target: /home/qqq/c++/WorkShop6-Debug/lib/.seqset.dep"](#ch-faq.ref-HowMakeDep)
+        -   [MAKE complains it does not know "how to make target: /home/qqq/c++/WorkShop6-Debug/lib/.seqset.dep"](#ch_faq.ref_HowMakeDep)
 
-        -   [Still getting bizarre errors with unresolved symbols, unfound libraries, etc., and nothing seems to help out much](#ch-faq.ref-LastResort)
+        -   [Still getting bizarre errors with unresolved symbols, unfound libraries, etc., and nothing seems to help out much](#ch_faq.ref_LastResort)
 
-    -   [Debugging](#ch-faq.debugger)
+    -   [Debugging](#ch_faq.debugger)
 
-        -   [Debugger (DBX) warns it "cannot find file /home/coremake/c++/foobar.cpp", then it does not show source code](#ch-faq.ref-DBX-Sources)
+        -   [Debugger (DBX) warns it "cannot find file /home/coremake/c++/foobar.cpp", then it does not show source code](#ch_faq.ref_DBX_Sources)
 
-    -   [ASN](#ch-faq.asn)
+    -   [ASN](#ch_faq.asn)
 
-        -   [Creating an out-of-tree application that uses your own local ASN.1 spec and a pre-built C++ Toolkit](#ch-faq.ref-AddingUserASN)
+        -   [Creating an out-of-tree application that uses your own local ASN.1 spec and a pre-built C++ Toolkit](#ch_faq.ref_AddingUserASN)
 
-        -   [How to add new ASN.1 module from the C Toolkit to the C++ Toolkit?](#ch-faq.ref-AddingASN)
+        -   [How to add new ASN.1 module from the C Toolkit to the C++ Toolkit?](#ch_faq.ref_AddingASN)
 
-        -   [Converting ASN.1 object in memory from C to C++ representation (or vice versa)](#ch-faq.ref-CToCxxASN)
+        -   [Converting ASN.1 object in memory from C to C++ representation (or vice versa)](#ch_faq.ref_CToCxxASN)
 
--   [Useful Documentation Links](#ch-faq.links.html)
+-   [Useful Documentation Links](#ch_faq.links.html)
 
--   [Mailing Lists](#ch-faq.mailing-lists)
+-   [Mailing Lists](#ch_faq.mailing_lists)
 
-<a name="ch-faq."></a>
+<a name="ch_faq."></a>
 
 FAQs
 ----
 
-<a name="ch-faq.Security"></a>
+<a name="ch_faq.Security"></a>
 
 ### Security
 
 Following are some of the common questions regarding security. If you have a different question, or if these questions don't fully address your concern, please email your question to <span class="oem_span">jww4jvylGujip5ust5upo5nv/</span>.
 
--   [How do I prevent SQL Injection attacks?](#ch-faq.How-do-I-prevent-SQL-Injection-at)
+-   [How do I prevent SQL Injection attacks?](#ch_faq.How_do_I_prevent_SQL_Injection_at)
 
--   [How do I prevent Cross-Site Scripting (XSS) attacks?](#ch-faq.How-do-I-prevent-CrossSite-Script)
+-   [How do I prevent Cross-Site Scripting (XSS) attacks?](#ch_faq.How_do_I_prevent_CrossSite_Script)
 
-<a name="ch-faq.How-do-I-prevent-SQL-Injection-at"></a>
+<a name="ch_faq.How_do_I_prevent_SQL_Injection_at"></a>
 
 #### How do I prevent SQL Injection attacks?
 
@@ -120,13 +120,13 @@ Sample code is also available for [SDBAPI](http://www.ncbi.nlm.nih.gov/IEB/ToolB
 
 For more information on using a database from your application, see the "[Database Access](ch_dbapi.html)" chapter of the C++ Toolkit book.
 
-<a name="ch-faq.How-do-I-prevent-CrossSite-Script"></a>
+<a name="ch_faq.How_do_I_prevent_CrossSite_Script"></a>
 
 #### How do I prevent Cross-Site Scripting (XSS) attacks?
 
 NEVER trust user-supplied strings - always sanitize them before using them.
 
-<a name="ch-faq.T.nc-before-including-a-usersuppl"></a>
+<a name="ch_faq.T.nc_before_including_a_usersuppl"></a>
 
 | Before including a user-supplied string in: | Sanitize the string with:                                                                                      |
 |---------------------------------------------|----------------------------------------------------------------------------------------------------------------|
@@ -139,25 +139,25 @@ NEVER trust user-supplied strings - always sanitize them before using them.
 
 ***Note:*** In addition to sanitizing URLs with [NStr::URLEncode()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=URLEncode), the [CUrl](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCUrl.html) class can be used to take apart and reassemble a URL. If the original URL was malformed an error would be produced. At the very least, improper URL segments would be mangled.
 
-<a name="ch-faq.general"></a>
+<a name="ch_faq.general"></a>
 
 ### General
 
-<a name="ch-faq.How-do-I-prepare-my-development-e"></a>
+<a name="ch_faq.How_do_I_prepare_my_development_e"></a>
 
 #### How do I prepare my development environment for using the C++ Toolkit?
 
 That depends on your development environment and whether you are inside or outside of NCBI:
 
--   [Unix or Mac OS X inside NCBI](#ch-faq.Unix-or-Mac-OS-X-inside-NCBI)
+-   [Unix or Mac OS X inside NCBI](#ch_faq.Unix_or_Mac_OS_X_inside_NCBI)
 
--   [Unix or Mac OX X outside NCBI](#ch-faq.Unix-or-Mac-OX-X-outside-NCBI)
+-   [Unix or Mac OX X outside NCBI](#ch_faq.Unix_or_Mac_OX_X_outside_NCBI)
 
--   [Windows inside NCBI](#ch-faq.Windows-inside-NCBI)
+-   [Windows inside NCBI](#ch_faq.Windows_inside_NCBI)
 
--   [Windows outside NCBI](#ch-faq.Windows-outside-NCBI)
+-   [Windows outside NCBI](#ch_faq.Windows_outside_NCBI)
 
-<a name="ch-faq.Unix-or-Mac-OS-X-inside-NCBI"></a>
+<a name="ch_faq.Unix_or_Mac_OS_X_inside_NCBI"></a>
 
 ##### Unix or Mac OS X inside NCBI
 
@@ -167,7 +167,7 @@ All developer Unix accounts should be automatically prepared for using the C++ T
     new_project
     echo $NCBI
 
-<a name="ch-faq.Unix-or-Mac-OX-X-outside-NCBI"></a>
+<a name="ch_faq.Unix_or_Mac_OX_X_outside_NCBI"></a>
 
 ##### Unix or Mac OX X outside NCBI
 
@@ -175,7 +175,7 @@ After [downloading the Toolkit source](ch_getcode_svn.html#ch_getcode_svn.ftp_do
 
 Once the Toolkit is [configured and built](ch_config.html#ch_config.UNIX), then you can use it.
 
-<a name="ch-faq.Windows-inside-NCBI"></a>
+<a name="ch_faq.Windows_inside_NCBI"></a>
 
 ##### Windows inside NCBI
 
@@ -187,7 +187,7 @@ Your `PATH` should include `\\snowman\win-coremake\Scripts\bin`.
 
 If you want to step into the source for the C++ Toolkit libraries while debugging, then drive `S:` must be mapped to `\\snowman\win-coremake\Lib`. You can map it or let the `new_project` script map it for you.
 
-<a name="ch-faq.Windows-outside-NCBI"></a>
+<a name="ch_faq.Windows_outside_NCBI"></a>
 
 ##### Windows outside NCBI
 
@@ -197,7 +197,7 @@ A [supported version of MSVC](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/pu
 
 Once the Toolkit is [configured and built](ch_config.html#ch_config.MS_Windows), then you can use it.
 
-<a name="ch-faq.faq.CannotFindGetTypeInfo"></a>
+<a name="ch_faq.faq.CannotFindGetTypeInfo"></a>
 
 #### The ***GetTypeInfo()*** method is not declared or defined in any of the objects for which it is part of the interface
 
@@ -211,13 +211,13 @@ The macro DECLARE\_INTERNAL\_TYPE\_INFO() is used in the `*.hpp` files to declar
 
 See [User-defined Type Information in the Programming Manual](ch_ser.html#ch_ser.usrtypeinfo.html) for more information.
 
-<a name="ch-faq.ref-WhichIncludeFile"></a>
+<a name="ch_faq.ref_WhichIncludeFile"></a>
 
 #### Which include file should be used in \*.cpp files, class.hpp or class\_.hpp?
 
 Include the **class**.hpp (file without underscore). Never instantiate or use a class of the form C\*\_Base directly. Instead use the C\* form which inherits from the C\*\_Base class (e.g., don't use CSeq\_id\_Base directly -- use CSeq\_id instead).
 
-<a name="ch-faq.How-can-I-disable-the-XML-declara"></a>
+<a name="ch_faq.How_can_I_disable_the_XML_declara"></a>
 
 #### How can I disable the XML declaration or DOCTYPE with the serial library?
 
@@ -239,37 +239,37 @@ Here's a code snippet that shows all combinations:
 
     istr >> MSerial_Xml >> obj;
 
-<a name="ch-faq.Compiling"></a>
+<a name="ch_faq.Compiling"></a>
 
 ### Compiling
 
-<a name="ch-faq.How-do-I-compile-for-32bit-on-a-6"></a>
+<a name="ch_faq.How_do_I_compile_for_32bit_on_a_6"></a>
 
 #### How do I compile for 32-bit on a 64-bit machine in a typical C++ Toolkit app?
 
 Our 64-bit Linux systems only support building 64-bit code; to produce 32-bit binaries, you'll need a 32-bit system.
 
-<a name="ch-faq.Which-Visual-C-project-should-I-b"></a>
+<a name="ch_faq.Which_Visual_C_project_should_I_b"></a>
 
 #### Which Visual C++ project should I build?
 
 After creating a new project, you may notice quite a few projects appear in the solution, besides your program, and that the **-HIERARCHICAL-VIEW-** project is bold (indicating that it's the startup project). Do not build any of these projects or the solution as a whole. Instead, set your program as the default startup project and build it.
 
-You can build **-CONFIGURE-DIALOG-** if you need to reconfigure your project (see the section on [using the configuration GUI](ch_config.html#ch_config.Configuring_with_the_Java_GUI)), and you will need to build **-CONFIGURE-** if you add libraries (see the question below on [adding a library to a Visual C++ project](#ch-faq.How-do-I-add-a-library-to-a-Visua)).
+You can build **-CONFIGURE-DIALOG-** if you need to reconfigure your project (see the section on [using the configuration GUI](ch_config.html#ch_config.Configuring_with_the_Java_GUI)), and you will need to build **-CONFIGURE-** if you add libraries (see the question below on [adding a library to a Visual C++ project](#ch_faq.How_do_I_add_a_library_to_a_Visua)).
 
-<a name="ch-faq.What-compiler-options-are-require"></a>
+<a name="ch_faq.What_compiler_options_are_require"></a>
 
 #### What compiler options are required to be compatible with C++ Toolkit libraries?
 
 These compiler options must be properly set under Microsoft Visual C++:
 
--   [C++ exceptions](#ch-faq.C-exceptions)
+-   [C++ exceptions](#ch_faq.C_exceptions)
 
--   [Runtime library](#ch-faq.Runtime-library)
+-   [Runtime library](#ch_faq.Runtime_library)
 
--   [Checked iterators](#ch-faq.Checked-iterators)
+-   [Checked iterators](#ch_faq.Checked_iterators)
 
-<a name="ch-faq.C-exceptions"></a>
+<a name="ch_faq.C_exceptions"></a>
 
 ##### C++ exceptions
 
@@ -283,13 +283,13 @@ NCBI C++ Toolkit libraries use the `/EHsc` compiler option with Visual C++ to:
 
 For more information, see the MSDN [page](http://msdn.microsoft.com/en-us/library/1deeycx5.aspx) on `/EH`.
 
-<a name="ch-faq.Runtime-library"></a>
+<a name="ch_faq.Runtime_library"></a>
 
 ##### Runtime library
 
 You must specify the appropriate Visual C++ runtime library to link with:
 
-<a name="ch-faq.T.nc-configurationcompiler-option"></a>
+<a name="ch_faq.T.nc_configurationcompiler_option"></a>
 
 | Configuration | Compiler Option |
 |---------------|-----------------|
@@ -300,7 +300,7 @@ You must specify the appropriate Visual C++ runtime library to link with:
 
 For more information, see the MSDN [page](http://msdn.microsoft.com/en-us/library/2kzt1wy3.aspx) on runtime library options.
 
-<a name="ch-faq.Checked-iterators"></a>
+<a name="ch_faq.Checked_iterators"></a>
 
 ##### Checked iterators
 
@@ -314,7 +314,7 @@ To disable checked iterators, set `_SECURE_SCL=0`; to enable them, set `_SECURE_
 
 The Visual C++ defaults for `_SECURE_SCL` are:
 
-<a name="ch-faq.T.nc-visual-c-versiondebugrelease"></a>
+<a name="ch_faq.T.nc_visual_c_versiondebugrelease"></a>
 
 | Visual C++ Version | Debug | Release |
 |--------------------|-------|---------|
@@ -347,7 +347,7 @@ Finally, the macro `_ITERATOR_DEBUG_LEVEL` was introduced with Visual C++ 2010 t
 
 If you set `_ITERATOR_DEBUG_LEVEL`, then `_SECURE_SCL` and `_HAS_ITERATOR_DEBUGGING` will be set according to this table:
 
-<a name="ch-faq.T.nc--iterator-debug-level-secure"></a>
+<a name="ch_faq.T.nc__iterator_debug_level_secure"></a>
 
 | `_ITERATOR_DEBUG_LEVEL` | `_SECURE_SCL` | `_HAS_ITERATOR_DEBUGGING` |
 |-------------------------|---------------|---------------------------|
@@ -365,17 +365,17 @@ For more information, see:
 
 -   [Breaking Changes in Visual C++](http://msdn.microsoft.com/en-us/library/bb531344.aspx)
 
-<a name="ch-faq.linker"></a>
+<a name="ch_faq.linker"></a>
 
 ### Linking
 
-<a name="ch-faq.faq.CannotFindObjectSymbol"></a>
+<a name="ch_faq.faq.CannotFindObjectSymbol"></a>
 
 #### How does one find the libraries to link when the linker complains of undefined symbols?
 
 Two tools are available to resolve the common linking questions:
 
-<a name="ch-faq.T.nc-questiontoolwhich-libraries-"></a>
+<a name="ch_faq.T.nc_questiontoolwhich_libraries_"></a>
 
 | Question                                              | Tool                                                                                                  |
 |-------------------------------------------------------|-------------------------------------------------------------------------------------------------------|
@@ -388,11 +388,11 @@ For example, suppose the linker complains about the symbol ***ncbi::CIStreamBuff
 
 2.  The [Library dependencies](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/dglistdeps.cgi) tool finds all the other libraries that a given library depends on. This tool can also help you create the `LIB` and `LIBS` lines in your makefile. For example, enter your current `LIB` and `LIBS` lines plus the new library from step 1, and it will generate optimized `LIB` and `LIBS` lines containing the library needed for your symbol and any other needed libraries.<br/><br/>Continuing with the example above, entering `libxutil.a` (or just `xutil`) will create this result:<br/><br/>`LIB  = `[xutil](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/xutil.html) [xncbi](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/xncbi.html)<br/>`LIBS = $(ORIG_LIBS)`<br/><br/>Clicking on any of the links will show the required items for that link plus a dependency graph for the clicked item. The nodes in the diagram are also navigable.
 
-***Note:*** If you are using Visual C++, please also see the question about [adding libraries to Visual C++ projects](#ch-faq.How-do-I-add-a-library-to-a-Visua).
+***Note:*** If you are using Visual C++, please also see the question about [adding libraries to Visual C++ projects](#ch_faq.How_do_I_add_a_library_to_a_Visua).
 
 To make it easier to work with the NCBI C++ Toolkit's many libraries, we have generated illustrations of their dependency relationships, available for various scopes and in various formats:
 
-<a name="ch-faq.lib-depgraph"></a>
+<a name="ch_faq.lib_depgraph"></a>
 
 NCBI C++ Library Dependency Graphs (including internal libraries)
 
@@ -402,7 +402,7 @@ NCBI C++ Library Dependency Graphs (including internal libraries)
 | Just C++ Toolkit libraries                                |                                                                |                                                                     | [PDF](http://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/CPP_DOC/depgraphs/depgraph-c++.pdf)  | [PS](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/depgraph-c++.ps)  |                                                                     |
 | Highly connected or otherwise noteworthy public libraries | [GIF](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/depgraph-core.gif) | [PNG](http://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/CPP_DOC/depgraphs/depgraph-core.png) | [PDF](http://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/CPP_DOC/depgraphs/depgraph-core.pdf) | [PS](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/depgraph-core.ps) |                                                                     |
 
-<a name="ch-faq.T4"></a>
+<a name="ch_faq.T4"></a>
 
 NCBI C++ Library Dependency Graphs (public libraries only)
 
@@ -423,9 +423,9 @@ In cases where the above methods do not work, you can also search manually using
 
 4.  Add the library name to the list of libraries you already have and enter them into the [library dependencies tool](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/dglistdeps.cgi) to create your final LIB and LIBS lines.
 
-In some cases, the library name is a variant on the subdirectory name. These variants are summarized in [Table 1](#ch-faq.T1).
+In some cases, the library name is a variant on the subdirectory name. These variants are summarized in [Table 1](#ch_faq.T1).
 
-<a name="ch-faq.T1"></a>
+<a name="ch_faq.T1"></a>
 
 Table 1. Examples where the library name is a variant on the sub directory name
 
@@ -460,13 +460,13 @@ Most often, difficulties arise when one is linking an application using the nume
     LIB = ncbimime cdd cn3d mmdb scoremat seqset $(SEQ_LIBS) \ 
           pub medline biblio general xser xutil xncbi
 
-<a name="ch-faq.How-do-I-add-a-library-to-a-Visua"></a>
+<a name="ch_faq.How_do_I_add_a_library_to_a_Visua"></a>
 
 #### How do I add a library to a Visual C++ project?
 
-If you are using Visual C++, you should [add the appropriate LIB and LIBS lines](#ch-faq.faq.CannotFindObjectSymbol) to the `Makefile.<your_project>.app` file located in the source directory, then build the **-CONFIGURE-** target, then close and reopen the solution. This process will update the project properties with the proper search directories and required libraries.
+If you are using Visual C++, you should [add the appropriate LIB and LIBS lines](#ch_faq.faq.CannotFindObjectSymbol) to the `Makefile.<your_project>.app` file located in the source directory, then build the **-CONFIGURE-** target, then close and reopen the solution. This process will update the project properties with the proper search directories and required libraries.
 
-<a name="ch-faq.ref-CannotFindSymbol"></a>
+<a name="ch_faq.ref_CannotFindSymbol"></a>
 
 #### Linker complains it "cannot find symbol" in something like: "SunWS\_cache/CC\_obj\_b/bXmZkg3zX5VBJvYgjABX.o"
 
@@ -475,7 +475,7 @@ Go to the relevant build dir, clean and rebuild everything using:
     cd /home/qqq/c++/WorkShop6-Debug/build/FooBar 
     make purge_r all_r
 
-<a name="ch-faq.ref-HowMakeDep"></a>
+<a name="ch_faq.ref_HowMakeDep"></a>
 
 #### MAKE complains it does not know "how to make target: /home/qqq/c++/WorkShop6-Debug/lib/.seqset.dep"
 
@@ -484,7 +484,7 @@ This means that the "`libseqset.a`" library is not built. To build it:
     cd /home/qqq/c++/WorkShop6-Debug/build/objects/seqset 
     make
 
-<a name="ch-faq.ref-LastResort"></a>
+<a name="ch_faq.ref_LastResort"></a>
 
 #### Still getting bizarre errors with unresolved symbols, unfound libraries, etc., and nothing seems to help out much
 
@@ -496,11 +496,11 @@ As the last resort, try to CVS update, reconfigure, clean and rebuild everything
     make purge_r 
     make all_r
 
-<a name="ch-faq.debugger"></a>
+<a name="ch_faq.debugger"></a>
 
 ### Debugging
 
-<a name="ch-faq.ref-DBX-Sources"></a>
+<a name="ch_faq.ref_DBX_Sources"></a>
 
 #### Debugger (DBX) warns it "cannot find file /home/coremake/c++/foobar.cpp", then it does not show source code
 
@@ -513,11 +513,11 @@ This happens when you link to the public C++ Toolkit libraries (from `"$NCBI/c++
     pathmap /j/coremake/c++2 /netopt/ncbi_tools/c++ 
     pathmap /j/coremake/c++3 /netopt/ncbi_tools/c++
 
-<a name="ch-faq.asn"></a>
+<a name="ch_faq.asn"></a>
 
 ### ASN
 
-<a name="ch-faq.ref-AddingUserASN"></a>
+<a name="ch_faq.ref_AddingUserASN"></a>
 
 #### Creating an out-of-tree application that uses your own local ASN.1 spec and a pre-built C++ Toolkit
 
@@ -568,19 +568,19 @@ Then, create and build the application:
     ## Build the application
     make -f Makefile.foo_main_app
 
-<a name="ch-faq.ref-AddingASN"></a>
+<a name="ch_faq.ref_AddingASN"></a>
 
 #### How to add new ASN.1 specification to the C++ Toolkit?
 
 ***Caution!*** If you are not in the C++ core developers group, please do not do it yourself! -- instead, just send your request to `cpp-core@ncbi.nlm.nih.gov`.
 
-<a name="ch-faq.ref-CToCxxASN"></a>
+<a name="ch_faq.ref_CToCxxASN"></a>
 
 #### Converting ASN.1 object in memory from C to C++ representation (or vice versa)
 
 The C++ Toolkit header [ctools/asn\_converter.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/ctools/asn_converter.hpp) now provides a template class ([CAsnConverter\<\>](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CAsnConverter&d=C)) for this exact purpose.
 
-<a name="ch-faq.links.html"></a>
+<a name="ch_faq.links.html"></a>
 
 Useful Documentation Links
 --------------------------
@@ -597,13 +597,13 @@ Useful Documentation Links
 
 -   [[Chart] NCBI C++ build tree hierarchy](ch_start.html#ch_start.F2)
 
--   [[Chart] NCBI C++ Library Dependency graph](#ch-faq.lib-depgraph)
+-   [[Chart] NCBI C++ Library Dependency graph](#ch_faq.lib_depgraph)
 
 -   [[Doc] NCBI IDX Database Documentation (Intranet only)](https://sp.ncbi.nlm.nih.gov/IEB/pss/idxapi/Shared%20Documents/Forms/AllItems.aspx)
 
 -   [[Doc] Documentation styles](ch_style.html)
 
-<a name="ch-faq.mailing-lists"></a>
+<a name="ch_faq.mailing_lists"></a>
 
 Mailing Lists
 -------------

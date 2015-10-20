@@ -27,81 +27,81 @@ This chapter discusses policies and guidelines for the development of NCBI softw
 
 The following is an outline of the topics presented in this chapter:
 
--   [Choice of Language](#ch-style.Choice-of-Language)
+-   [Choice of Language](#ch_style.Choice_of_Language)
 
--   [Source Code Conventions](#ch-style.prog-style)
+-   [Source Code Conventions](#ch_style.prog_style)
 
-    -   [Public Domain Notice](#ch-style.Public-Domain-Notice)
+    -   [Public Domain Notice](#ch_style.Public_Domain_Notice)
 
-    -   [Naming Conventions](#ch-style.naming-conv)
+    -   [Naming Conventions](#ch_style.naming_conv)
 
-    -   [Name Prefixing and/or the Use of Namespaces](#ch-style.naming-prefix)
+    -   [Name Prefixing and/or the Use of Namespaces](#ch_style.naming_prefix)
 
-    -   [Use of the NCBI Name Scope](#ch-style.using-NCBI-namespace)
+    -   [Use of the NCBI Name Scope](#ch_style.using_NCBI_namespace)
 
-    -   [Use of Include Directives](#ch-style.using-includes)
+    -   [Use of Include Directives](#ch_style.using_includes)
 
-    -   [Code Indentation and Bracing](#ch-style.code-indentation)
+    -   [Code Indentation and Bracing](#ch_style.code_indentation)
 
-    -   [Class Declaration](#ch-style.class-decl)
+    -   [Class Declaration](#ch_style.class_decl)
 
-    -   [Function Declaration](#ch-style.func-decl)
+    -   [Function Declaration](#ch_style.func_decl)
 
-    -   [Function Definition](#ch-style.func-def)
+    -   [Function Definition](#ch_style.func_def)
 
-    -   [Use of Whitespace](#ch-style.useof-whitespace)
+    -   [Use of Whitespace](#ch_style.useof_whitespace)
 
-    -   [Alternative Tokens](#ch-style.Alternative-Tokens)
+    -   [Alternative Tokens](#ch_style.Alternative_Tokens)
 
-    -   [Standard Header Template](#ch-style.std-header-template)
+    -   [Standard Header Template](#ch_style.std_header_template)
 
--   [Doxygen Comments](#ch-style.Doxygen-Comments)
+-   [Doxygen Comments](#ch_style.Doxygen_Comments)
 
--   [C++ Guidelines](#ch-style.style-guidelines)
+-   [C++ Guidelines](#ch_style.style_guidelines)
 
-    -   [Introduction to Some C++ and STL Features and Techniques](#ch-style.intro-stl-features)
+    -   [Introduction to Some C++ and STL Features and Techniques](#ch_style.intro_stl_features)
 
-        -   [C++ Implementation Guide](#ch-style.impl-guideline)
+        -   [C++ Implementation Guide](#ch_style.impl_guideline)
 
-            -   [Limitations on Using C++11 Features](#ch-style.Limitations-on-Using-C11-Featur)
+            -   [Limitations on Using C++11 Features](#ch_style.Limitations_on_Using_C11_Featur)
 
-            -   [Use of STL (Standard Template Library)](#ch-style.stl-templ-lib)
+            -   [Use of STL (Standard Template Library)](#ch_style.stl_templ_lib)
 
-            -   [Use of C++ Exceptions](#ch-style.use-cpp-excep)
+            -   [Use of C++ Exceptions](#ch_style.use_cpp_excep)
 
-            -   [Design](#ch-style.style-design)
+            -   [Design](#ch_style.style_design)
 
-            -   [Make Your Code Readable](#ch-style.Make-Your-Code-Reada)
+            -   [Make Your Code Readable](#ch_style.Make_Your_Code_Reada)
 
-        -   [C++ Tips and Tricks](#ch-style.cpp-tips-tricks)
+        -   [C++ Tips and Tricks](#ch_style.cpp_tips_tricks)
 
-        -   [Standard Template Library (STL)](#ch-style.style-templ-library)
+        -   [Standard Template Library (STL)](#ch_style.style_templ_library)
 
-            -   [STL Tips and Tricks](#ch-style.stl-tips-tricks)
+            -   [STL Tips and Tricks](#ch_style.stl_tips_tricks)
 
-    -   [C++/STL Pitfalls and Discouraged/Prohibited Features](#ch-style.style-pitfalls)
+    -   [C++/STL Pitfalls and Discouraged/Prohibited Features](#ch_style.style_pitfalls)
 
-        -   [STL and Standard C++ Library's Bad Guys](#ch-style.stl-bad-guys)
+        -   [STL and Standard C++ Library's Bad Guys](#ch_style.stl_bad_guys)
 
-            -   [Non-Standard STL Classes](#ch-style.cpp-nonstd-stl)
+            -   [Non-Standard STL Classes](#ch_style.cpp_nonstd_stl)
 
-        -   [C++ Bad Guys](#ch-style.cpp-bad-guys)
+        -   [C++ Bad Guys](#ch_style.cpp_bad_guys)
 
-            -   [Operator Overload](#ch-style.style-op-overload)
+            -   [Operator Overload](#ch_style.style_op_overload)
 
-            -   [Assignment and Copy Constructor Overload](#ch-style.assign-copy-constr)
+            -   [Assignment and Copy Constructor Overload](#ch_style.assign_copy_constr)
 
-            -   [Omitting "void" in a No-Argument Function Prototype](#ch-style.no-arg-prototype)
+            -   [Omitting "void" in a No-Argument Function Prototype](#ch_style.no_arg_prototype)
 
-            -   [Do Not Mix malloc and new](#ch-style.malloc-new)
+            -   [Do Not Mix malloc and new](#ch_style.malloc_new)
 
-        -   [Miscellaneous Gotchas](#ch-style.Miscellaneous-Gotchas)
+        -   [Miscellaneous Gotchas](#ch_style.Miscellaneous_Gotchas)
 
--   [Source Code Repositories](#ch-style.Source-Code-Repositories)
+-   [Source Code Repositories](#ch_style.Source_Code_Repositories)
 
--   [Testing](#ch-style.Testing)
+-   [Testing](#ch_style.Testing)
 
-<a name="ch-style.Choice-of-Language"></a>
+<a name="ch_style.Choice_of_Language"></a>
 
 Choice of Language
 ------------------
@@ -120,7 +120,7 @@ Choice of Language
 
 See the "[Recommended programming and scripting languages](http://intranet.ncbi.nlm.nih.gov:6224/wiki-private/CxxToolkit/index.cgi/Recommended_programming_and_scripting_languages)" Wiki page for more information and updates to this policy. Send proposals for corrections, additions and extensions of the policy on language choice to the languages mailing list, <span class="oem_span">shun.hnlzGujip5ust5upo5nv/</span>.
 
-<a name="ch-style.prog-style"></a>
+<a name="ch_style.prog_style"></a>
 
 Source Code Conventions
 -----------------------
@@ -129,47 +129,47 @@ This section contains C++ style guidelines, although many of these guidelines co
 
 The following topics are discussed in this section:
 
--   [Public Domain Notice](#ch-style.Public-Domain-Notice)
+-   [Public Domain Notice](#ch_style.Public_Domain_Notice)
 
--   [Naming Conventions](#ch-style.naming-conv)
+-   [Naming Conventions](#ch_style.naming_conv)
 
-    -   [Type Names](#ch-style.T1)
+    -   [Type Names](#ch_style.T1)
 
-    -   [Preprocessor Define/Macro](#ch-style.T1)
+    -   [Preprocessor Define/Macro](#ch_style.T1)
 
-    -   [Function Arguments and Local Variables](#ch-style.T1)
+    -   [Function Arguments and Local Variables](#ch_style.T1)
 
-    -   [Constants](#ch-style.T1)
+    -   [Constants](#ch_style.T1)
 
-    -   [Class and Structure Data Members (Fields)](#ch-style.T1)
+    -   [Class and Structure Data Members (Fields)](#ch_style.T1)
 
-    -   [Class Member Functions (Methods)](#ch-style.T1)
+    -   [Class Member Functions (Methods)](#ch_style.T1)
 
-    -   [Module Static Functions and Data](#ch-style.T1)
+    -   [Module Static Functions and Data](#ch_style.T1)
 
-    -   [Global ("extern") Functions and Data](#ch-style.T1)
+    -   [Global ("extern") Functions and Data](#ch_style.T1)
 
--   [Name Prefixing and/or the Use of Namespaces](#ch-style.naming-prefix)
+-   [Name Prefixing and/or the Use of Namespaces](#ch_style.naming_prefix)
 
--   [Use of the NCBI Name Scope](#ch-style.using-NCBI-namespace)
+-   [Use of the NCBI Name Scope](#ch_style.using_NCBI_namespace)
 
--   [Use of Include Directives](#ch-style.using-includes)
+-   [Use of Include Directives](#ch_style.using_includes)
 
--   [Code Indentation and Bracing](#ch-style.code-indentation)
+-   [Code Indentation and Bracing](#ch_style.code_indentation)
 
--   [Class Declaration](#ch-style.class-decl)
+-   [Class Declaration](#ch_style.class_decl)
 
--   [Function Declaration](#ch-style.func-decl)
+-   [Function Declaration](#ch_style.func_decl)
 
--   [Function Definition](#ch-style.func-def)
+-   [Function Definition](#ch_style.func_def)
 
--   [Use of Whitespace](#ch-style.useof-whitespace)
+-   [Use of Whitespace](#ch_style.useof_whitespace)
 
--   [Alternative Tokens](#ch-style.Alternative-Tokens)
+-   [Alternative Tokens](#ch_style.Alternative_Tokens)
 
--   [Standard Header Template](#ch-style.std-header-template)
+-   [Standard Header Template](#ch_style.std_header_template)
 
-<a name="ch-style.Public-Domain-Notice"></a>
+<a name="ch_style.Public_Domain_Notice"></a>
 
 ### Public Domain Notice
 
@@ -203,11 +203,11 @@ All NCBI-authored C/C++ source files **must** begin with a comment containing NC
 
 If you have questions, please email to <span class="oem_span">jww4jvylGujip5ust5upo5nv/</span>.
 
-<a name="ch-style.naming-conv"></a>
+<a name="ch_style.naming_conv"></a>
 
 ### Naming Conventions
 
-<a name="ch-style.T1"></a>
+<a name="ch_style.T1"></a>
 
 Table 1. Naming Conventions
 
@@ -228,13 +228,13 @@ EXAMPLE
 `typedef int (*FMyFunc)(void);`
 ***P****PredicateName*
 `struct PMyPred { bool operator() (.... , ....); };`
-***T****AuxiliaryTypedef* [(\*)](#ch-style.1.3.1)
+***T****AuxiliaryTypedef* [(\*)](#ch_style.1.3.1)
 `typedef map<int,string> TMyMapIntStr;`
 ***T****Iterator****\_I***
 `typedef list<int>::iterator TMyList_I;`
 ***T****ConstIterator****\_CI***
 `typedef set<string>::const_iterator TMySet_CI;`
-***N****Namespace* [(see also)](#ch-style.naming-prefix)
+***N****Namespace* [(see also)](#ch_style.naming_prefix)
 `namespace NMyNamespace { ..... }`
 **Preprocessor Define/Macro**
 *MACRO\_NAME*
@@ -274,11 +274,11 @@ EXAMPLE
 ***g\_****GlobalVar*
 `short g_MyGlobalVar;`
 
-<a name="ch-style.1.3.1"></a>
+<a name="ch_style.1.3.1"></a>
 
 (\*) The auxiliary typedefs (like ***T****AuxiliaryTypedef*) are usually used for an ad-hoc type mappings (especially when using templates) and not when a real type definition takes place.
 
-<a name="ch-style.naming-prefix"></a>
+<a name="ch_style.naming_prefix"></a>
 
 ### Name Prefixing and/or the Use of Namespaces
 
@@ -290,7 +290,7 @@ In addition to the above naming conventions that highlight the nature and/or the
 
 For example, if you are creating a new class called "`Bar`" in package "`Foo`" then it is good practice to name it "***CFooBar***" rather than just "***CBar***". Similarly, you should name new constants like "**`kFooSomeconst`**", new types like "***TFooSometype***", etc.
 
-<a name="ch-style.using-NCBI-namespace"></a>
+<a name="ch_style.using_NCBI_namespace"></a>
 
 ### Use of the NCBI Name Scope
 
@@ -302,7 +302,7 @@ For code that does not define a new API but merely **uses** the NCBI C++ API, th
 
 Use macro **`NCBI_USING_NAMESPACE_STD;`** (semicolon-terminated) if you want to bring all types and prototypes from the `"std::"` namespace into the current scope, without bringing in anything from the `"ncbi::"` namespace.
 
-<a name="ch-style.using-includes"></a>
+<a name="ch_style.using_includes"></a>
 
 ### Use of Include Directives
 
@@ -310,7 +310,7 @@ If a header file is in the local directory or not on the INCLUDE path, use quote
 
 In general, if a header file is commonly used, it must be on the INCLUDE path and therefore requires the bracketed form.
 
-<a name="ch-style.code-indentation"></a>
+<a name="ch_style.code_indentation"></a>
 
 ### Code Indentation and Bracing
 
@@ -390,11 +390,11 @@ In `if, for, while, do, switch, case`, etc. and type definition statements:
         .....;
     }
 
-<a name="ch-style.class-decl"></a>
+<a name="ch_style.class_decl"></a>
 
 ### Class Declaration
 
-Class declarations should be rich in [Doxygen-style comments](#ch-style.Doxygen-Comments). This will increase the value of the Doxygen-based API documentation.
+Class declarations should be rich in [Doxygen-style comments](#ch_style.Doxygen_Comments). This will increase the value of the Doxygen-based API documentation.
 
     /// @file FileName
     /// Description of file -- note that this is _required_ if you want
@@ -507,11 +507,11 @@ Class declarations should be rich in [Doxygen-style comments](#ch-style.Doxygen-
         CFooClass& operator= (const CFooClass&);
     };
 
-<a name="ch-style.func-decl"></a>
+<a name="ch_style.func_decl"></a>
 
 ### Function Declaration
 
-[Doxygen-style comments](#ch-style.Doxygen-Comments) for functions should describe what the function does, its parameters, and what it returns.
+[Doxygen-style comments](#ch_style.Doxygen_Comments) for functions should describe what the function does, its parameters, and what it returns.
 
 For global function declarations, put all Doxygen-style comments in the header file. Prefix global functions with **`g_`**.
 
@@ -525,11 +525,11 @@ For global function declarations, put all Doxygen-style comments in the header f
      long    arg3 = 12  ///< short description of "arg3"
      );
 
-<a name="ch-style.func-def"></a>
+<a name="ch_style.func_def"></a>
 
 ### Function Definition
 
-[Doxygen-style comments](#ch-style.Doxygen-Comments) are not needed for member function definitions or global function definitions because their comments are put with their declarations in the header file.
+[Doxygen-style comments](#ch_style.Doxygen_Comments) are not needed for member function definitions or global function definitions because their comments are put with their declarations in the header file.
 
 For static functions, put all Doxygen-style comments immediately before the function definition. Prefix static functions with **`s_`**.
 
@@ -554,7 +554,7 @@ For static functions, put all Doxygen-style comments immediately before the func
         .......
     }
 
-<a name="ch-style.useof-whitespace"></a>
+<a name="ch_style.useof_whitespace"></a>
 
 ### Use of Whitespace
 
@@ -572,19 +572,19 @@ As the above examples do not make all of our policies on whitespace clear, here 
 
 -   Leave two blank lines between function definitions.
 
-<a name="ch-style.Alternative-Tokens"></a>
+<a name="ch_style.Alternative_Tokens"></a>
 
 ### Alternative Tokens
 
 The alternative tokens "`and`", "`not_eq`", "`:>`", etc. should not be used in place of the primary tokens "`&&`", "`!=`", "`]`", etc. Although alternative tokens are valid in C++, the primary tokens are more familiar and conventional. Using alternative tokens would therefore make code less readable without much benefit to most C++ developers.
 
-<a name="ch-style.std-header-template"></a>
+<a name="ch_style.std_header_template"></a>
 
 ### Standard Header Template
 
 A standard header template file, [header\_template.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/common/header_template.hpp), has been provided in the `include/common` directory that can be used as a template for creating header files. This header file adheres to the standards outlined in the previous sections and uses a documentation style for files, classes, methods, macros etc. that allows for automatic generation of documentation from the source code. It is strongly suggested that you obtain a copy of this file and model your documentation using the examples in that file.
 
-<a name="ch-style.Doxygen-Comments"></a>
+<a name="ch_style.Doxygen_Comments"></a>
 
 Doxygen Comments
 ----------------
@@ -601,60 +601,60 @@ Please do not use superfluous comments, such as ‘`/// Destructor`’. Especial
 
 Please see the [Doxygen manual](http://www.stack.nl/~dimitri/doxygen/manual.html) for complete usage information. More information can also be found in the chapter on [Toolkit browsers](ch_browse.html).
 
-<a name="ch-style.style-guidelines"></a>
+<a name="ch_style.style_guidelines"></a>
 
 C++ Guidelines
 --------------
 
 This section discusses the following topics:
 
--   [Introduction to Some C++ and STL Features and Techniques](#ch-style.intro-stl-features)
+-   [Introduction to Some C++ and STL Features and Techniques](#ch_style.intro_stl_features)
 
-    -   [C++ Implementation Guide](#ch-style.impl-guideline)
+    -   [C++ Implementation Guide](#ch_style.impl_guideline)
 
-        -   [Limitations on Using C++11 Features](#ch-style.Limitations-on-Using-C11-Featur)
+        -   [Limitations on Using C++11 Features](#ch_style.Limitations_on_Using_C11_Featur)
 
-        -   [Use of STL (Standard Template Library)](#ch-style.stl-templ-lib)
+        -   [Use of STL (Standard Template Library)](#ch_style.stl_templ_lib)
 
-        -   [Use of C++ Exceptions](#ch-style.use-cpp-excep)
+        -   [Use of C++ Exceptions](#ch_style.use_cpp_excep)
 
-        -   [Design](#ch-style.style-design)
+        -   [Design](#ch_style.style_design)
 
-        -   [Make Your Code Readable](#ch-style.Make-Your-Code-Reada)
+        -   [Make Your Code Readable](#ch_style.Make_Your_Code_Reada)
 
-    -   [C++ Tips and Tricks](#ch-style.cpp-tips-tricks)
+    -   [C++ Tips and Tricks](#ch_style.cpp_tips_tricks)
 
-    -   [Standard Template Library (STL)](#ch-style.style-templ-library)
+    -   [Standard Template Library (STL)](#ch_style.style_templ_library)
 
-        -   [STL Tips and Tricks](#ch-style.stl-tips-tricks)
+        -   [STL Tips and Tricks](#ch_style.stl_tips_tricks)
 
--   [C++/STL Pitfalls and Discouraged/Prohibited Features](#ch-style.style-pitfalls)
+-   [C++/STL Pitfalls and Discouraged/Prohibited Features](#ch_style.style_pitfalls)
 
-    -   [STL and Standard C++ Library's Bad Guys](#ch-style.stl-bad-guys)
+    -   [STL and Standard C++ Library's Bad Guys](#ch_style.stl_bad_guys)
 
-        -   [Non-Standard STL Classes](#ch-style.cpp-nonstd-stl)
+        -   [Non-Standard STL Classes](#ch_style.cpp_nonstd_stl)
 
-    -   [C++ Bad Guys](#ch-style.cpp-bad-guys)
+    -   [C++ Bad Guys](#ch_style.cpp_bad_guys)
 
-        -   [Operator Overload](#ch-style.style-op-overload)
+        -   [Operator Overload](#ch_style.style_op_overload)
 
-        -   [Assignment and Copy Constructor Overload](#ch-style.assign-copy-constr)
+        -   [Assignment and Copy Constructor Overload](#ch_style.assign_copy_constr)
 
-        -   [Omitting "void" in a No-Argument Function Prototype](#ch-style.no-arg-prototype)
+        -   [Omitting "void" in a No-Argument Function Prototype](#ch_style.no_arg_prototype)
 
-        -   [Do Not Mix malloc and new](#ch-style.malloc-new)
+        -   [Do Not Mix malloc and new](#ch_style.malloc_new)
 
-    -   [Miscellaneous Gotchas](#ch-style.Miscellaneous-Gotchas)
+    -   [Miscellaneous Gotchas](#ch_style.Miscellaneous_Gotchas)
 
-<a name="ch-style.intro-stl-features"></a>
+<a name="ch_style.intro_stl_features"></a>
 
 ### Introduction to Some C++ and STL Features and Techniques
 
-<a name="ch-style.impl-guideline"></a>
+<a name="ch_style.impl_guideline"></a>
 
 #### C++ Implementation Guide
 
-<a name="ch-style.Limitations-on-Using-C11-Featur"></a>
+<a name="ch_style.Limitations_on_Using_C11_Featur"></a>
 
 ##### Limitations on Using C++11 Features
 
@@ -670,13 +670,13 @@ Do not use C++11 features in code that is:
 
 -   Known to be a dependency for the projects that still need to be compiled with older compilers.
 
-<a name="ch-style.stl-templ-lib"></a>
+<a name="ch_style.stl_templ_lib"></a>
 
 ##### Use of STL (Standard Template Library)
 
-Use the [Standard Template Library (STL)](#ch-style.style-templ-library), which is part of ANSI/ISO C++. It'll make programming easier, as well as make it easier for others to understand and maintain your code.
+Use the [Standard Template Library (STL)](#ch_style.style_templ_library), which is part of ANSI/ISO C++. It'll make programming easier, as well as make it easier for others to understand and maintain your code.
 
-<a name="ch-style.use-cpp-excep"></a>
+<a name="ch_style.use_cpp_excep"></a>
 
 ##### Use of C++ Exceptions
 
@@ -689,7 +689,7 @@ Use the [Standard Template Library (STL)](#ch-style.style-templ-library), which 
     void foo(void) throw ();
     void bar(void) throw (std::exception);
 
-<a name="ch-style.style-design"></a>
+<a name="ch_style.style_design"></a>
 
 ##### Design
 
@@ -701,7 +701,7 @@ Use the [Standard Template Library (STL)](#ch-style.style-templ-library), which 
 
 ***NOTE:*** Some people prefer the [Unified Modelling Language](http://www.rational.com/uml/index.jtmpl) to describe the relationships between objects.
 
-<a name="ch-style.Make-Your-Code-Reada"></a>
+<a name="ch_style.Make_Your_Code_Reada"></a>
 
 ##### Make Your Code Readable
 
@@ -753,7 +753,7 @@ Instead, create a meaningful enumerated type that captures the meaning of the pa
 
 As an added benefit, using an enumerated type for parameters instead of **`bool`** gives you the ability to expand the enumerated type to include more variants in the future if necessary - without changing the parameter type.
 
-<a name="ch-style.cpp-tips-tricks"></a>
+<a name="ch_style.cpp_tips_tricks"></a>
 
 #### C++ Tips and Tricks
 
@@ -767,13 +767,13 @@ As an added benefit, using an enumerated type for parameters instead of **`bool`
 
 See the [C++ FAQ](http://www.parashift.com/c++-faq-lite)
 
-<a name="ch-style.style-templ-library"></a>
+<a name="ch_style.style_templ_library"></a>
 
 #### Standard Template Library (STL)
 
 The STL is a library included in ANSI/ISO C++ for stream, string, and container (linked lists, etc.) manipulation.
 
-<a name="ch-style.stl-tips-tricks"></a>
+<a name="ch_style.stl_tips_tricks"></a>
 
 ##### STL Tips and Tricks
 
@@ -797,31 +797,31 @@ If you create a container of pointers to objects, the objects are not destroyed 
 
 If you pass a container to a function, don't add a local object to the container. The local variable will be destroyed when you leave the function.
 
-<a name="ch-style.style-pitfalls"></a>
+<a name="ch_style.style_pitfalls"></a>
 
 ### C++/STL Pitfalls and Discouraged/Prohibited Features
 
--   [STL and Standard C++ Library's Bad Guys](#ch-style.stl-bad-guys)
+-   [STL and Standard C++ Library's Bad Guys](#ch_style.stl_bad_guys)
 
-    -   [Non-Standard Classes](#ch-style.cpp-nonstd-stl)
+    -   [Non-Standard Classes](#ch_style.cpp_nonstd_stl)
 
--   [C++ Bad Guys](#ch-style.cpp-bad-guys)
+-   [C++ Bad Guys](#ch_style.cpp_bad_guys)
 
-    -   [Operator Overload](#ch-style.style-op-overload)
+    -   [Operator Overload](#ch_style.style_op_overload)
 
-    -   [Assignment and Copy Constructor Overload](#ch-style.assign-copy-constr)
+    -   [Assignment and Copy Constructor Overload](#ch_style.assign_copy_constr)
 
-    -   [Omitting "void" in a No-Argument Function Prototype](#ch-style.no-arg-prototype)
+    -   [Omitting "void" in a No-Argument Function Prototype](#ch_style.no_arg_prototype)
 
-    -   [Do Not Mix malloc and new](#ch-style.malloc-new)
+    -   [Do Not Mix malloc and new](#ch_style.malloc_new)
 
--   [Miscellaneous Gotchas](#ch-style.Miscellaneous-Gotchas)
+-   [Miscellaneous Gotchas](#ch_style.Miscellaneous_Gotchas)
 
-<a name="ch-style.stl-bad-guys"></a>
+<a name="ch_style.stl_bad_guys"></a>
 
 #### STL and Standard C++ Library's Bad Guys
 
-<a name="ch-style.cpp-nonstd-stl"></a>
+<a name="ch_style.cpp_nonstd_stl"></a>
 
 ##### Non-Standard STL Classes
 
@@ -829,17 +829,17 @@ If you pass a container to a function, don't add a local object to the container
 
 -   The NCBI C++ Toolkit includes ***hash\_map***, ***hash\_multimap***, ***hash\_set***, and ***hash\_multiset*** classes (from headers [\<corelib/hash\_map.hpp\>](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/hash__map_8hpp.html) and [\<corelib/hash\_set.hpp\>](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/hash__set_8hpp.html)). These classes are more portable than, and should be used instead of, the STL's respective ***hash\_\**** classes.
 
-<a name="ch-style.cpp-bad-guys"></a>
+<a name="ch_style.cpp_bad_guys"></a>
 
 #### C++ Bad Guys
 
-<a name="ch-style.style-op-overload"></a>
+<a name="ch_style.style_op_overload"></a>
 
 ##### Operator Overload
 
 Do not use operator overloading for the objects where they have unnatural or ambiguous meaning. For example, the defining of `operator==()` for your class ***"CFoo"*** so that there exist { CFoo a,b,c; } such that `(a == b)` and `(b == c)` are `true` while `(a == c)` is `false` would be a very bad idea. It turns out that otherwise, especially in large projects, people have different ideas of what an overloaded operator means, leading to all sorts of bugs.
 
-<a name="ch-style.assign-copy-constr"></a>
+<a name="ch_style.assign_copy_constr"></a>
 
 ##### Assignment and Copy Constructor Overload
 
@@ -870,19 +870,19 @@ In many cases when you don't want to have the assignment and copy constructor at
         CFooClass& operator=(const CFooClass&);
     };
 
-<a name="ch-style.no-arg-prototype"></a>
+<a name="ch_style.no_arg_prototype"></a>
 
 ##### Omitting `"void"` in a No-Argument Function Prototype
 
 Do not omit `"void"` in the prototype of a function without arguments (e.g. always write ***"int f(void)"*** rather than just ***"int f()"***).
 
-<a name="ch-style.malloc-new"></a>
+<a name="ch_style.malloc_new"></a>
 
 ##### Do Not Mix malloc and new
 
 On some platforms, malloc and new may use completely different memory managers, so never "free()" what you created using "new" and never "delete" what you created using "malloc()". Also, when calling C code from C++ **always** allocate any structs or other items using "malloc()". The C routine may use "realloc()" or "free()" on the items, which can cause memory corruption if you allocated using "new."
 
-<a name="ch-style.Miscellaneous-Gotchas"></a>
+<a name="ch_style.Miscellaneous_Gotchas"></a>
 
 #### Miscellaneous Gotchas
 
@@ -906,14 +906,14 @@ It is beyond the scope of this document to discuss all C++ gotchas, but this sec
 
 For more information, see the [C++ Draft Standard](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2011/n3242.pdf), or search related topics on the internet.
 
-<a name="ch-style.Source-Code-Repositories"></a>
+<a name="ch_style.Source_Code_Repositories"></a>
 
 Source Code Repositories
 ------------------------
 
 The following Subversion repositories have been set up for general use within NCBI:
 
-<a name="ch-style.T.nc-repositorypurposetoolkitc-"></a>
+<a name="ch_style.T.nc_repositorypurposetoolkitc_"></a>
 
 |----------------------------------------------------------------------|------------------------------------------------------------|
 | **Repository**                                                       | **Purpose**                                                |
@@ -930,7 +930,7 @@ Note for NCBI developers: Using these repositories has the additional advantages
 
 -   integrated with [JIRA](https://jira.ncbi.nlm.nih.gov/secure/Dashboard.jspa) and [FishEye](http://fisheye:8008/).
 
-<a name="ch-style.Testing"></a>
+<a name="ch_style.Testing"></a>
 
 Testing
 -------

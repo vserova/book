@@ -29,62 +29,62 @@ This section is intended as a bird's-eye view of the Toolkit for new users, and 
 
 The following is an outline of the topics presented in this chapter:
 
--   [Quick Start](#ch-start.quick-start)
+-   [Quick Start](#ch_start.quick_start)
 
--   [Example Applications](#ch-start.example-apps)
+-   [Example Applications](#ch_start.example_apps)
 
--   [Example Libraries](#ch-start.Example-Libraries)
+-   [Example Libraries](#ch_start.Example_Libraries)
 
--   [Source Tree Availability](#ch-start.source-avail)
+-   [Source Tree Availability](#ch_start.source_avail)
 
-    -   [FTP Availability](#ch-start.ftp-avail)
+    -   [FTP Availability](#ch_start.ftp_avail)
 
-    -   [SVN Availability](#ch-start.svn-avail)
+    -   [SVN Availability](#ch_start.svn_avail)
 
-    -   [Availability via Shell Scripts](#ch-start.script-avail)
+    -   [Availability via Shell Scripts](#ch_start.script_avail)
 
--   [Source Tree Contents](#ch-start.source-tree-contents)
+-   [Source Tree Contents](#ch_start.source_tree_contents)
 
-    -   [Top-Level Source Organization](#ch-start.source-organization)
+    -   [Top-Level Source Organization](#ch_start.source_organization)
 
-    -   [The Core NCBI C++ Toolkit](#ch-start.core-contents)
+    -   [The Core NCBI C++ Toolkit](#ch_start.core_contents)
 
-    -   [Source Tree for Individual Projects](#ch-start.src-tree-proj)
+    -   [Source Tree for Individual Projects](#ch_start.src_tree_proj)
 
-    -   [The Makefile Templates](#ch-start.make-templates)
+    -   [The Makefile Templates](#ch_start.make_templates)
 
-    -   [The New Module Stubs](#ch-start.new-module-stubs)
+    -   [The New Module Stubs](#ch_start.new_module_stubs)
 
--   [Decide Where You Will Work (in-tree, in a subtree, out-of-tree)](#ch-start.where-to-work)
+-   [Decide Where You Will Work (in-tree, in a subtree, out-of-tree)](#ch_start.where_to_work)
 
--   [Basic Installation and Configuration Considerations](#ch-start.basic-install)
+-   [Basic Installation and Configuration Considerations](#ch_start.basic_install)
 
--   [Basics of Using the C++ Toolkit](#ch-start.basic-using-toolkit)
+-   [Basics of Using the C++ Toolkit](#ch_start.basic_using_toolkit)
 
-    -   [Compiling and Linking with make](#ch-start.using-make)
+    -   [Compiling and Linking with make](#ch_start.using_make)
 
-    -   [Makefile Customization](#ch-start.makefile-custom)
+    -   [Makefile Customization](#ch_start.makefile_custom)
 
-    -   [Basic Toolkit Coding Infrastructure](#ch-start.coding-infrastructure)
+    -   [Basic Toolkit Coding Infrastructure](#ch_start.coding_infrastructure)
 
-    -   [Key Classes](#ch-start.key-classes)
+    -   [Key Classes](#ch_start.key_classes)
 
-    -   [The Object Manager and datatool](#ch-start.objmgr-datatool)
+    -   [The Object Manager and datatool](#ch_start.objmgr_datatool)
 
-    -   [Debugging and Diagnostic Aids](#ch-start.debug-diag-aids)
+    -   [Debugging and Diagnostic Aids](#ch_start.debug_diag_aids)
 
-    -   [Coding Standards and Guidelines](#ch-start.coding-stds-guidelines)
+    -   [Coding Standards and Guidelines](#ch_start.coding_stds_guidelines)
 
--   [Noteworthy Files](#ch-start.noteworthy-files)
+-   [Noteworthy Files](#ch_start.noteworthy_files)
 
-<a name="ch-start.quick-start"></a>
+<a name="ch_start.quick_start"></a>
 
 Quick Start
 -----------
 
 A good deal of the complication and tedium of getting started has thankfully been wrapped by a number of shell scripts. They facilitate a 'quick start' whether starting anew or within an existing Toolkit work environment. ('Non-quick starts' sometimes cannot be avoided, but they are considered [elsewhere](ch_proj.html#ch_proj.new_proj_struct).)
 
--   **Get the Source Tree (see** [Figure 1](#ch-start.F1)**)**
+-   **Get the Source Tree (see** [Figure 1](#ch_start.F1)**)**
 
     -   Retrieve via SVN ([in-house](ch_getcode_svn.html#ch_getcode_svn.code_retrieval) \| [public](ch_getcode_svn.html#ch_getcode_svn.external)), **or**
 
@@ -92,7 +92,7 @@ A good deal of the complication and tedium of getting started has thankfully bee
 
     -   Run [svn\_core](ch_getcode_svn.html#ch_getcode_svn.core_sh) *(requires a SVN repository containing the C++ Toolkit; for NCBI users)*
 
--   **Configure the build tree (see** [Figure 2](#ch-start.F2)**)**
+-   **Configure the build tree (see** [Figure 2](#ch_start.F2)**)**
 
     -   Use the [configure](ch_config.html#ch_config.Running_the_configur) script, **or**
 
@@ -106,13 +106,13 @@ A good deal of the complication and tedium of getting started has thankfully bee
 
 -   **Work on your new or existing application or library** the scripts [new\_project](ch_proj.html#ch_proj.new_proj_struct) and (for an existing Toolkit project) [import\_project](ch_getcode_svn.html#ch_getcode_svn.import_project_sh) help to set up the appropriate `makefiles` and/or source.
 
-<a name="ch-start.F1"></a>
+<a name="ch_start.F1"></a>
 
 [![Figure 1. NCBI C++ Source Tree](/book/static/img/src_tree.gif)](/book/static/img/src_tree.gif "Click to see the full-resolution image")
 
 Figure 1. NCBI C++ Source Tree
 
-<a name="ch-start.F2"></a>
+<a name="ch_start.F2"></a>
 
 [![Figure 2. NCBI C++ Build Tree](/book/static/img/bld_tree.gif)](/book/static/img/bld_tree.gif "Click to see the full-resolution image")
 
@@ -120,16 +120,16 @@ Figure 2. NCBI C++ Build Tree
 
 In a nutshell, that's all it takes to get up and running. The download, configuration, installation and build actions are shown for two cases in this sample.
 
-The last item, employing the Toolkit in a project, completely glosses over the substantial issue of how to use the installed Toolkit. Where does one begin to look to identify the functionality to solve your particular problem, or indeed, to write the simplest of programs? "[Basics of Using the C++ Toolkit](#ch-start.basic-using-toolkit)" will deal with those issues. Investigate these and other topics with the set of [sample applications](#ch-start.example-apps). See [Examples](ch_demo.html) for further cases that employ specific features of the NCBI C++ Toolkit.
+The last item, employing the Toolkit in a project, completely glosses over the substantial issue of how to use the installed Toolkit. Where does one begin to look to identify the functionality to solve your particular problem, or indeed, to write the simplest of programs? "[Basics of Using the C++ Toolkit](#ch_start.basic_using_toolkit)" will deal with those issues. Investigate these and other topics with the set of [sample applications](#ch_start.example_apps). See [Examples](ch_demo.html) for further cases that employ specific features of the NCBI C++ Toolkit.
 
-<a name="ch-start.example-apps"></a>
+<a name="ch_start.example_apps"></a>
 
 Example Applications
 --------------------
 
 The suite of application examples below highlight important areas of the Toolkit and can be used as a starting point for your own development. Note that you may generate the sample application code by running the [new\_project](ch_proj.html#ch_proj.new_proj_struct) script for that application. The following examples are now available:
 
--   [app/basic](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/basic/) - This example builds two applications: a generic application (`basic_sample`) to demonstrate the use of [key Toolkit classes](#ch-start.key-classes), and an example program (`multi_command`) that accepts multiple command line forms.
+-   [app/basic](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/basic/) - This example builds two applications: a generic application (`basic_sample`) to demonstrate the use of [key Toolkit classes](#ch_start.key_classes), and an example program (`multi_command`) that accepts multiple command line forms.
 
 -   [app/alnmgr](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/alnmgr/) - Creates an alignment manager application.
 
@@ -165,7 +165,7 @@ The suite of application examples below highlight important areas of the Toolkit
 
 To build an example use its accompanying `Makefile`.
 
-<a name="ch-start.Example-Libraries"></a>
+<a name="ch_start.Example_Libraries"></a>
 
 Example Libraries
 -----------------
@@ -180,26 +180,26 @@ The following example libraries can be created with [new\_project](ch_proj.html#
 
 -   [lib/xsd](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/lib/xsd/) - Creates an XML Schema project.
 
-<a name="ch-start.source-avail"></a>
+<a name="ch_start.source_avail"></a>
 
 Source Tree Availability
 ------------------------
 
 The source tree is available through FTP, SVN and by running special scripts. The following subsections discuss these topics in more detail:
 
--   [FTP Availability](#ch-start.ftp-avail)
+-   [FTP Availability](#ch_start.ftp_avail)
 
--   [SVN Availability](#ch-start.svn-avail)
+-   [SVN Availability](#ch_start.svn_avail)
 
--   [Availability via Shell Scripts](#ch-start.script-avail)
+-   [Availability via Shell Scripts](#ch_start.script_avail)
 
-<a name="ch-start.ftp-avail"></a>
+<a name="ch_start.ftp_avail"></a>
 
 ### FTP Availability
 
 The Toolkit source is available via ftp at [ftp://ftp.ncbi.nih.gov/toolbox/ncbi\_tools++/CURRENT/](ftp://ftp.ncbi.nih.gov/toolbox/ncbi_tools++/CURRENT), and the archives available, with unpacking instructions, are listed on the [download page](ch_getcode_svn.html). If you plan to modify the Toolkit source in any way with the ftp code, it is strongly advised that it be placed under a source code control system (preferably SVN) so that you can rollback to an earlier revision without having to ftp the entire archive once again.
 
-<a name="ch-start.svn-avail"></a>
+<a name="ch_start.svn_avail"></a>
 
 ### SVN Availability
 
@@ -207,7 +207,7 @@ NCBI users can obtain the source tree directly from the internal [SVN repository
 
 A [read-only repository](ch_getcode_svn.html#ch_getcode_svn.external) is also available to the public.
 
-<a name="ch-start.script-avail"></a>
+<a name="ch_start.script_avail"></a>
 
 ### Availability via Shell Scripts
 
@@ -221,28 +221,28 @@ For NCBI users, the various shell scripts in `$NCBI/c++/scripts` tailor the work
 
 -   **update\_projects**. Details on [update\_core](ch_getcode_svn.html#ch_getcode_svn.update_projects_sh) and [update\_projects](ch_getcode_svn.html#ch_getcode_svn.update_projects_sh) are covered in later chapter.
 
-<a name="ch-start.source-tree-contents"></a>
+<a name="ch_start.source_tree_contents"></a>
 
 Source Tree Contents
 --------------------
 
 The following topics are discussed in this section:
 
--   [Top-Level Source Organization](#ch-start.source-organization)
+-   [Top-Level Source Organization](#ch_start.source_organization)
 
--   [The Core NCBI C++ Toolkit](#ch-start.core-contents)
+-   [The Core NCBI C++ Toolkit](#ch_start.core_contents)
 
--   [Source Tree for Individual Projects](#ch-start.src-tree-proj)
+-   [Source Tree for Individual Projects](#ch_start.src_tree_proj)
 
--   [The Makefile Templates](#ch-start.make-templates)
+-   [The Makefile Templates](#ch_start.make_templates)
 
--   [The New Module Stubs](#ch-start.new-module-stubs)
+-   [The New Module Stubs](#ch_start.new_module_stubs)
 
-<a name="ch-start.source-organization"></a>
+<a name="ch_start.source_organization"></a>
 
 ### Top-Level Source Organization
 
-The NCBI C++ Toolkit `source tree` (see [Figure 1](#ch-start.F1)) is organized as follows:
+The NCBI C++ Toolkit `source tree` (see [Figure 1](#ch_start.F1)) is organized as follows:
 
 -   `src/` -- a hierarchical directory tree of [NCBI C++ projects](ch_proj.html#ch_proj.start_new_proj). Contained within `src` are all source files (`*.cpp, *.c`), along with private header files (`*.hpp, *.h`), makefiles (`Makefile.*`, including [Makefile.mk](ch_build.html#ch_build.build_make_macros)), scripts (`*.sh`), and occasionally some project-specific data
 
@@ -262,7 +262,7 @@ The NCBI C++ Toolkit `source tree` (see [Figure 1](#ch-start.F1)) is organized a
 
 -   **doc/** -- NCBI C++ documentation, including a library reference, configuration and installation instructions, example code and guidelines for **everybody** writing code for the NCBI C++ Toolkit.
 
-<a name="ch-start.core-contents"></a>
+<a name="ch_start.core_contents"></a>
 
 ### The Core NCBI C++ Toolkit
 
@@ -274,11 +274,11 @@ The 'core' libraries of the Toolkit provide users with a highly portable set of 
 
 Consult the library reference (Part 3 of this book) for further details.
 
-<a name="ch-start.src-tree-proj"></a>
+<a name="ch_start.src_tree_proj"></a>
 
 ### Source Tree for Individual Projects
 
-For the overall NCBI C++ source tree structure see [Top-Level Source Organization](#ch-start.source-organization) above.
+For the overall NCBI C++ source tree structure see [Top-Level Source Organization](#ch_start.source_organization) above.
 
 An individual project contains the set of source code and/or scripts that are required to build a Toolkit library or executable. In the NCBI source tree, projects are identified as sub-trees of the `src`, and `include` directories of the main C++ tree root. For example, `corelib `and `objects/objmgr` are both projects. However, note that a project's code exists in two sibling directories: the public headers in `include/` and the source code, private headers and `makefiles` in `src`.
 
@@ -294,11 +294,11 @@ The contents of each project's [source tree](http://www.ncbi.nlm.nih.gov/IEB/Too
 
 -   sub-project directories (if any)
 
-<a name="ch-start.make-templates"></a>
+<a name="ch_start.make_templates"></a>
 
 ### The Makefile Templates
 
-Each project is built by customizing a set of generic `makefiles`. These generic `makefile` templates (`Makefile.*.in`) are found in `src` and help to control the assembly of the entire Toolkit via recursive builds of the individual projects. (The usage of these `makefiles` and other configurations issues are [summarized below](#ch-start.basic-install) and detailed on the [Working with Makefiles](ch_build.html) page.)
+Each project is built by customizing a set of generic `makefiles`. These generic `makefile` templates (`Makefile.*.in`) are found in `src` and help to control the assembly of the entire Toolkit via recursive builds of the individual projects. (The usage of these `makefiles` and other configurations issues are [summarized below](#ch_start.basic_install) and detailed on the [Working with Makefiles](ch_build.html) page.)
 
 -   `Makefile.in` -- makefile to perform a recursive build in all project subdirectories
 
@@ -320,13 +320,13 @@ Each project is built by customizing a set of generic `makefiles`. These generic
 
 -   `Makefile.rules.in, Makefile.rules_with_autodep.in` -- instructions for building object files; included by most other makefiles
 
-<a name="ch-start.new-module-stubs"></a>
+<a name="ch_start.new_module_stubs"></a>
 
 ### The New Module Stubs
 
-A Toolkit module typically consists of a header (`*.hpp`) and a source (`*.cpp`) file. Use the [stubs](ch_proj.html#ch_proj.new_modules) provided, which include boilerplate such as the NCBI disclaimer and SVN revision information, to easily start a new module. You may also consider using the [sample code](#ch-start.example-apps) described above for your new module.
+A Toolkit module typically consists of a header (`*.hpp`) and a source (`*.cpp`) file. Use the [stubs](ch_proj.html#ch_proj.new_modules) provided, which include boilerplate such as the NCBI disclaimer and SVN revision information, to easily start a new module. You may also consider using the [sample code](#ch_start.example_apps) described above for your new module.
 
-<a name="ch-start.where-to-work"></a>
+<a name="ch_start.where_to_work"></a>
 
 Decide Where You Will Work (in-tree, in a subtree, out-of-tree)
 ---------------------------------------------------------------
@@ -335,14 +335,14 @@ Depending on how you plan to interact with the NCBI C++ Toolkit source tree, the
 
 Most users will find it preferable and fully sufficient to work in a subtree or a private directory. Certain situations and users (particularly Toolkit developers) do require access to the full Toolkit source tree; in such instances one must work [in-tree](ch_proj.html#ch_proj.inside_tree).
 
-<a name="ch-start.basic-install"></a>
+<a name="ch_start.basic_install"></a>
 
 Basic Installation and Configuration Considerations
 ---------------------------------------------------
 
 ***Note:*** Much of this discussion is Unix-centric. Windows and Mac users would also benefit from reading the instructions specific to those systems.
 
-The configuration and installation process is automated with the **configure** script and its [wrappers](ch_config.html#ch_config.Special_Consideratio) in the `compilers` directory. These scripts handle the compiler- and platform-dependent Toolkit settings and create the build` tree` (see [Figure 2](#ch-start.F2)) skeleton. The configured `build tree`, located in `<builddir>`, is populated with customized `meta-makefile`, headers and source files. Most system-dependence has been isolated in the `<builddir>/inc/ncbiconf.h` header. By running `make all_r` from `<builddir>`, the full Toolbox is built for the target platform and compiler combination.
+The configuration and installation process is automated with the **configure** script and its [wrappers](ch_config.html#ch_config.Special_Consideratio) in the `compilers` directory. These scripts handle the compiler- and platform-dependent Toolkit settings and create the build` tree` (see [Figure 2](#ch_start.F2)) skeleton. The configured `build tree`, located in `<builddir>`, is populated with customized `meta-makefile`, headers and source files. Most system-dependence has been isolated in the `<builddir>/inc/ncbiconf.h` header. By running `make all_r` from `<builddir>`, the full Toolbox is built for the target platform and compiler combination.
 
 Summarized below are some basic ways to control the installation and configuration process. More comprehensive documentation can be found at [config.html](ch_config.html).
 
@@ -366,7 +366,7 @@ Summarized below are some basic ways to control the installation and configurati
 
 -   [Working with Multiple build trees](ch_config.html#ch_config.Configuration_and_In) Managing builds for a variety of platforms and/or compiler environments is straightforward. The configure/install/build cycle has been designed to support the concurrent development of multiple builds from the same source files. This is accomplished by having independent `build trees` that exist as sibling directories. Each build is configured according to its own set of configuration options and thus produces distinct libraries and executables. All builds are nonetheless constructed from the same source code in $NCBI/`c++/{src, include}`.
 
-<a name="ch-config.ref-TableToolsAndFlags"></a>
+<a name="ch_config.ref_TableToolsAndFlags"></a>
 
 Table 1. Environment variables that affect the configure / build process
 
@@ -385,28 +385,28 @@ Table 1. Environment variables that affect the configure / build process
 | LIBS          | None                                                                          | Libraries to link to every executable                                                                 |
 | STRIP         | strip                                                                         | To discard symbolic info                                                                              |
 
-<a name="ch-start.basic-using-toolkit"></a>
+<a name="ch_start.basic_using_toolkit"></a>
 
 Basics of Using the C++ Toolkit
 -------------------------------
 
 The following topics are discussed in this section:
 
--   [Compiling and Linking with make](#ch-start.using-make)
+-   [Compiling and Linking with make](#ch_start.using_make)
 
--   [Makefile Customization](#ch-start.makefile-custom)
+-   [Makefile Customization](#ch_start.makefile_custom)
 
--   [Basic Toolkit Coding Infrastructure](#ch-start.coding-infrastructure)
+-   [Basic Toolkit Coding Infrastructure](#ch_start.coding_infrastructure)
 
--   [Key Classes](#ch-start.key-classes)
+-   [Key Classes](#ch_start.key_classes)
 
--   [The Object Manager and datatool](#ch-start.objmgr-datatool)
+-   [The Object Manager and datatool](#ch_start.objmgr_datatool)
 
--   [Debugging and Diagnostic Aids](#ch-start.debug-diag-aids)
+-   [Debugging and Diagnostic Aids](#ch_start.debug_diag_aids)
 
--   [Coding Standards and Guidelines](#ch-start.coding-stds-guidelines)
+-   [Coding Standards and Guidelines](#ch_start.coding_stds_guidelines)
 
-<a name="ch-start.using-make"></a>
+<a name="ch_start.using_make"></a>
 
 ### Compiling and Linking with **make**
 
@@ -416,9 +416,9 @@ To initiate compilation and linking, run **make**:
 
     make -f <Makefile_Name> [<target_name>]
 
-When run from the top of the build tree, this command can make the entire tree (with target `all_r`). If given within a specific project subdirectory it can be made to target just that project. The Toolkit has in its `src `directory templates (e.g., `Makefile.*.in`) for [makefiles](ch_build.html#ch_build.build_proj_makefiles) and [meta-makefiles](ch_build.html#ch_build.makefiles_meta) that define common file locations, compiler options, environment settings, and [standard make targets](ch_build.html#ch_build.build_make_proj_target). Each Toolkit project has a specialized [meta-makefile](#ch-start.make-templates) in its `src` directory. The relevant `meta-makefile` templates for a project, e.g., `Makefile.in`, are customized by **configure** and placed in its `build tree`. For new projects, whether [in](ch_proj.html#ch_proj.inside_tree) or [out](ch_proj.html#ch_proj.outside_tree) of the C++ Toolkit tree, the programmer must provide either `makefiles` or `meta-makefiles`.
+When run from the top of the build tree, this command can make the entire tree (with target `all_r`). If given within a specific project subdirectory it can be made to target just that project. The Toolkit has in its `src `directory templates (e.g., `Makefile.*.in`) for [makefiles](ch_build.html#ch_build.build_proj_makefiles) and [meta-makefiles](ch_build.html#ch_build.makefiles_meta) that define common file locations, compiler options, environment settings, and [standard make targets](ch_build.html#ch_build.build_make_proj_target). Each Toolkit project has a specialized [meta-makefile](#ch_start.make_templates) in its `src` directory. The relevant `meta-makefile` templates for a project, e.g., `Makefile.in`, are customized by **configure** and placed in its `build tree`. For new projects, whether [in](ch_proj.html#ch_proj.inside_tree) or [out](ch_proj.html#ch_proj.outside_tree) of the C++ Toolkit tree, the programmer must provide either `makefiles` or `meta-makefiles`.
 
-<a name="ch-start.makefile-custom"></a>
+<a name="ch_start.makefile_custom"></a>
 
 ### Makefile Customization
 
@@ -432,7 +432,7 @@ Fortunately, for the common situations where a [script](ch_getcode_svn.html#ch_g
 
 -   [Altering the Active Version of the Toolkit](ch_proj.html#ch_proj.new_project_Starting) You can change the active version of NCBI C++ toolkit by manually setting the variable **`$(builddir)`** in `Makefile.foo_[app|lib]` to the desired toolkit path, e.g.: `builddir = $(NCBI)/c++/GCC-Release/build`.<br/>Consult [this list](ch_proj.html#ch_proj.outside_dir_loc) or, better, look at the output of '`ls -d $NCBI/c++/*/build`' to see those pre-built Toolkit builds available on your system.
 
-<a name="ch-start.coding-infrastructure"></a>
+<a name="ch_start.coding_infrastructure"></a>
 
 ### Basic Toolkit Coding Infrastructure
 
@@ -454,7 +454,7 @@ Summarized below are some features of the global Toolkit infrastructure that use
 
 -   ***Serializable Objects, the ASN.1 Data Types and*** **datatool** The [ASN.1 data model](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/DATAMODL.HTML) for biological data underlies all of the C and C++ Toolkit development at NCBI. The C++ Toolkit represents the ASN.1 data types as [serializable objects](ch_proj.html#ch_proj.ser_object), that is, objects able to save, restore, or transmit their state. This requires knowledge of an object's type and as such a ***CTypeInfo*** object is provided in each class to encapsulate [type information](ch_ser.html#ch_ser.typeinfo.html).<br/>Additionally, [object stream](ch_ser.html#ch_ser.objstream.html) classes (***CObject[IO]Stream***, and subclasses) have been designed specifically to perform data object serialization. The nuts-and-bolts of doing this has been documented on the [Processing Serial Data](ch_ser.html#ch_ser.asn.html) page, with additional information about the contents and parsing of ASN.1-derived objects in [Traversing a Data Structure](ch_ser.html#ch_ser.traverse.html).Each of the serializable objects appears in its own subdirectory under `[`[src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects)`| `[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects)`]/objects`. These `objects/*` projects are configured differently from the rest of the Toolkit, in that header and source files are auto-generated from the ASN.1 specifications by the [datatool](ch_app.html#ch_app.datatool) program. The --with-objects flag to **configure** also directs a build of the [user classes](ch_proj.html#ch_proj.base_classes) for the serializable objects.
 
-<a name="ch-start.key-classes"></a>
+<a name="ch_start.key_classes"></a>
 
 ### Key Classes
 
@@ -488,7 +488,7 @@ For reference, we list some of the fundamental classes used in developing applic
 
 -   [Exception Handling](ch_debug.html#ch_debug.excep_cpp_toolkit) (classes, macros and tracing for exceptions)
 
-<a name="ch-start.objmgr-datatool"></a>
+<a name="ch_start.objmgr_datatool"></a>
 
 ### The Object Manager and **datatool**
 
@@ -498,7 +498,7 @@ The [Object Manager](ch_objmgr.html) is a C++ Toolkit library whose goal is to t
 
 [Jump-start](ch_objmgr.html#ch_objmgr.om_start.html) and [Object Manager FAQ](ch_objmgr.html#ch_objmgr.om_faq.html) are all available to help new users.
 
-<a name="ch-start.debug-diag-aids"></a>
+<a name="ch_start.debug_diag_aids"></a>
 
 ### Debugging and Diagnostic Aids
 
@@ -506,7 +506,7 @@ The Toolkit has a number of methods for catching, reporting and handling coding 
 
 For more detailed and extensive reporting of an object's state (including the states of any contained objects), a special [debug dump interface](ch_debug.html#ch_debug.debug_dump) has been implemented. All objects derived from the ***CObject*** class, which is in turn derived from the abstract base class [CDebugDumpable](ch_debug.html#ch_debug.debug_architecture), automatically have this capability.
 
-<a name="ch-start.coding-stds-guidelines"></a>
+<a name="ch_start.coding_stds_guidelines"></a>
 
 ### Coding Standards and Guidelines
 
@@ -520,14 +520,14 @@ All C++ source in the Toolkit has a [well-defined coding style](ch_style.html#ch
 
 -   [declaring and defining classes and functions](ch_style.html#ch_style.class_decl)
 
-<a name="ch-start.noteworthy-files"></a>
+<a name="ch_start.noteworthy_files"></a>
 
 Noteworthy Files
 ----------------
 
-A list of important files is given in [Table 1](#ch-start.T1).
+A list of important files is given in [Table 1](#ch_start.T1).
 
-<a name="ch-start.T1"></a>
+<a name="ch_start.T1"></a>
 
 Table 1. Noteworthy Files
 
@@ -535,7 +535,7 @@ Table 1. Noteworthy Files
 |---------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **compilers/\*/\<compiler\_name\>.sh**                                                                                                            | Use the **configure** shell script, or one of its [compiler-specific wrappers](ch_config.html#ch_config.Special_Consideratio), to fully configure and install all files required to build the Toolkit.                                                                                                                                                         |
 | **import\_project**                                                                                                                               | Import only an existing Toolkit project into an independent subtree of your current Toolkit source tree. (Requires a SVN source repository.)                                                                                                                                                                                                                   |
-| **update\_{core\\|projects}**                                                                                                                     | Update your local copy of either the [core](#ch-start.core-contents) Toolkit or set of specified projects. (Requires a SVN source repository.)                                                                                                                                                                                                                 |
+| **update\_{core\\|projects}**                                                                                                                     | Update your local copy of either the [core](#ch_start.core_contents) Toolkit or set of specified projects. (Requires a SVN source repository.)                                                                                                                                                                                                                 |
 | **new\_project**                                                                                                                                  | Set up a new project outside of the NCBI C++ Toolkit tree to access pre-built version of the Toolkit libraries. Sample code can be requested to serve as a template for the new module.                                                                                                                                                                        |
 | `src/<project_dir>/Makefile.in`<br/>`src/<project_dir>/`<br/>` Makefile.<project>.{app, lib}` | Customized `meta-makefile` template and the corresponding datafile to provide project-specific source dependencies, libraries, compiler flags, etc. This information is accessed by **configure** to build a projects's `meta-makefile` (see below).                                                                                                           |
 | `doc/framewrk.{cpp\|hpp}`                                                                                                                         | Basic templates for source and header files that can be used when starting a new module. Includes common headers, the NCBI disclaimer and SVN keywords in a standard way.                                                                                                                                                                                      |

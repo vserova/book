@@ -13,9 +13,9 @@ Created: April 1, 2003; Last Update: March 17, 2015.
 Overview
 --------
 
--   [Introduction](#ch-app.Intro)
+-   [Introduction](#ch_app.Intro)
 
--   [Chapter Outline](#ch-app.Outline)
+-   [Chapter Outline](#ch_app.Outline)
 
 ### Introduction
 
@@ -25,185 +25,185 @@ Most of the applications discussed in this chapter are built on a regular basis,
 
 The following is an outline of the topics presented in this chapter:
 
--   [DATATOOL: code generation and data serialization utility](#ch-app.datatool)
+-   [DATATOOL: code generation and data serialization utility](#ch_app.datatool)
 
-    -   [Invocation](#ch-app.datatool.html-refArgs)
+    -   [Invocation](#ch_app.datatool.html_refArgs)
 
-        -   [Main arguments](#ch-app.datatool.html-refMainArgs)
+        -   [Main arguments](#ch_app.datatool.html_refMainArgs)
 
-        -   [Code generation arguments](#ch-app.datatool.html-refCodeGenerationAr)
+        -   [Code generation arguments](#ch_app.datatool.html_refCodeGenerationAr)
 
-    -   [Data specification conversion](#ch-app.Data-Specification-C)
+    -   [Data specification conversion](#ch_app.Data_Specification_C)
 
-        -   [Scope prefixes](#ch-app.Scope-Prefixes)
+        -   [Scope prefixes](#ch_app.Scope_Prefixes)
 
-        -   [Modular DTD and Schemata](#ch-app.Modular-DTD-and-Sche)
+        -   [Modular DTD and Schemata](#ch_app.Modular_DTD_and_Sche)
 
-        -   [Converting XML Schema into ASN.1](#ch-app.Converting-XML-Schem)
+        -   [Converting XML Schema into ASN.1](#ch_app.Converting_XML_Schem)
 
-    -   [Definition file](#ch-app.datatool.html-refDefFile)
+    -   [Definition file](#ch_app.datatool.html_refDefFile)
 
-        -   [Common definitions](#ch-app.datatool.html-refDefCommon)
+        -   [Common definitions](#ch_app.datatool.html_refDefCommon)
 
-        -   [Definitions that affect specific types](#ch-app.datatool.html-refDefSpecific)
+        -   [Definitions that affect specific types](#ch_app.datatool.html_refDefSpecific)
 
-            -   [INTEGER, REAL, BOOLEAN, NULL](#ch-app.datatool.html-refDefINT)
+            -   [INTEGER, REAL, BOOLEAN, NULL](#ch_app.datatool.html_refDefINT)
 
-            -   [ENUMERATED](#ch-app.datatool.html-refDefENUM)
+            -   [ENUMERATED](#ch_app.datatool.html_refDefENUM)
 
-            -   [OCTET STRING](#ch-app.datatool.html-refDefOCTETS)
+            -   [OCTET STRING](#ch_app.datatool.html_refDefOCTETS)
 
-            -   [SEQUENCE OF, SET OF](#ch-app.datatool.html-refDefArray)
+            -   [SEQUENCE OF, SET OF](#ch_app.datatool.html_refDefArray)
 
-            -   [SEQUENCE, SET](#ch-app.datatool.html-refDefClass)
+            -   [SEQUENCE, SET](#ch_app.datatool.html_refDefClass)
 
-            -   [CHOICE](#ch-app.datatool.html-refDefChoice)
+            -   [CHOICE](#ch_app.datatool.html_refDefChoice)
 
-        -   [The Special [-] Section](#ch-app.The-Special--Section)
+        -   [The Special [-] Section](#ch_app.The_Special__Section)
 
-        -   [Examples](#ch-app.datatool.html-refDefExample)
+        -   [Examples](#ch_app.datatool.html_refDefExample)
 
-    -   [Module file](#ch-app.ch-app-datatool-html-refModFile)
+    -   [Module file](#ch_app.ch_app_datatool_html_refModFile)
 
-    -   [Generated code](#ch-app.datatool.html-refCode)
+    -   [Generated code](#ch_app.datatool.html_refCode)
 
-        -   [Normalized name](#ch-app.datatool.html-refNormalizedName)
+        -   [Normalized name](#ch_app.datatool.html_refNormalizedName)
 
-        -   [ENUMERATED types](#ch-app.datatool.html-refCodeEnum)
+        -   [ENUMERATED types](#ch_app.datatool.html_refCodeEnum)
 
-    -   [Class diagrams](#ch-app.dt-inside.html)
+    -   [Class diagrams](#ch_app.dt_inside.html)
 
-        -   [Specification analysis](#ch-app.dt-inside.html-specs)
+        -   [Specification analysis](#ch_app.dt_inside.html_specs)
 
-            -   [ASN.1 specification analysis](#ch-app.dt-inside.html-specs-asn)
+            -   [ASN.1 specification analysis](#ch_app.dt_inside.html_specs_asn)
 
-            -   [DTD specification analysis](#ch-app.dt-inside.html-specs-dtd)
+            -   [DTD specification analysis](#ch_app.dt_inside.html_specs_dtd)
 
-        -   [Data types](#ch-app.dt-inside.html-data-types)
+        -   [Data types](#ch_app.dt_inside.html_data_types)
 
-        -   [Data values](#ch-app.dt-inside.html-data-values)
+        -   [Data values](#ch_app.dt_inside.html_data_values)
 
-        -   [Code generation](#ch-app.dt-inside.html-code-gen)
+        -   [Code generation](#ch_app.dt_inside.html_code_gen)
 
--   [Load Balancing](#ch-app.Load-Balancing)
+-   [Load Balancing](#ch_app.Load_Balancing)
 
-    -   [Overview](#ch-app.-Overview)
+    -   [Overview](#ch_app._Overview)
 
-    -   [Load Balancing Service Mapping Daemon (LBSMD)](#ch-app.Load-Balancing-Servi)
+    -   [Load Balancing Service Mapping Daemon (LBSMD)](#ch_app.Load_Balancing_Servi)
 
-        -   [Overview](#ch-app.-Overview-1)
+        -   [Overview](#ch_app._Overview_1)
 
-        -   [Configuration](#ch-app.-Configuration)
+        -   [Configuration](#ch_app._Configuration)
 
-            -   [Check Script Specification](#ch-app.Check-Script-Specification)
+            -   [Check Script Specification](#ch_app.Check_Script_Specification)
 
-            -   [Server Descriptor Specification](#ch-app.Server-Descriptor-Specification)
+            -   [Server Descriptor Specification](#ch_app.Server_Descriptor_Specification)
 
-        -   [Signals](#ch-app.Signals)
+        -   [Signals](#ch_app.Signals)
 
-        -   [Automatic Configuration Distribution](#ch-app.Automatic-Configurat)
+        -   [Automatic Configuration Distribution](#ch_app.Automatic_Configurat)
 
-        -   [Monitoring and Control](#ch-app.Monitoring-and-Contr)
+        -   [Monitoring and Control](#ch_app.Monitoring_and_Contr)
 
-            -   [Service Search](#ch-app.Service-Search)
+            -   [Service Search](#ch_app.Service_Search)
 
-            -   [lbsmc Utility](#ch-app.lbsmc-Utility)
+            -   [lbsmc Utility](#ch_app.lbsmc_Utility)
 
-            -   [NCBI Intranet Web Utilities](#ch-app.NCBI-Intranet-Web-Ut)
+            -   [NCBI Intranet Web Utilities](#ch_app.NCBI_Intranet_Web_Ut)
 
-            -   [Server Penalizer API and Utility](#ch-app.Server-Penalizer-API)
+            -   [Server Penalizer API and Utility](#ch_app.Server_Penalizer_API)
 
-        -   [SVN Repository](#ch-app.SVN-Repository)
+        -   [SVN Repository](#ch_app.SVN_Repository)
 
-        -   [Log Files](#ch-app.-Log-Files)
+        -   [Log Files](#ch_app._Log_Files)
 
-        -   [Configuration Examples](#ch-app.-Configuration-Exampl)
+        -   [Configuration Examples](#ch_app._Configuration_Exampl)
 
-    -   [Database Load Balancing](#ch-app.Database-Load-Balancing)
+    -   [Database Load Balancing](#ch_app.Database_Load_Balancing)
 
-    -   [Cookie / Argument Affinity Module (MOD\_CAF)](#ch-app.Cookie---Argument-Af)
+    -   [Cookie / Argument Affinity Module (MOD\_CAF)](#ch_app.Cookie___Argument_Af)
 
-        -   [Overview](#ch-app.-Overview-2)
+        -   [Overview](#ch_app._Overview_2)
 
-        -   [Configuration](#ch-app.-Configuration-1)
+        -   [Configuration](#ch_app._Configuration_1)
 
-        -   [Configuration Examples](#ch-app.-Configuration-Exampl)
+        -   [Configuration Examples](#ch_app._Configuration_Exampl)
 
-        -   [Arguments Matching](#ch-app.Arguments-Matching)
+        -   [Arguments Matching](#ch_app.Arguments_Matching)
 
-            -   [Argument Matching Examples](#ch-app.Argument-Matching-Ex)
+            -   [Argument Matching Examples](#ch_app.Argument_Matching_Ex)
 
-        -   [Log File](#ch-app.Log-File)
+        -   [Log File](#ch_app.Log_File)
 
-        -   [Monitoring](#ch-app.-Monitoring)
+        -   [Monitoring](#ch_app._Monitoring)
 
-    -   [DISPD Network Dispatcher](#ch-app.DISPD-Network-Dispat)
+    -   [DISPD Network Dispatcher](#ch_app.DISPD_Network_Dispat)
 
-        -   [Overview](#ch-app.-Overview-3)
+        -   [Overview](#ch_app._Overview_3)
 
-        -   [Protocol Description](#ch-app.Protocol-Description)
+        -   [Protocol Description](#ch_app.Protocol_Description)
 
-            -   [Client Request to DISPD](#ch-app.Client-Request-to-DI)
+            -   [Client Request to DISPD](#ch_app.Client_Request_to_DI)
 
-            -   [DISPD Client Response](#ch-app.DISPD-Client-Respons)
+            -   [DISPD Client Response](#ch_app.DISPD_Client_Respons)
 
-            -   [Communication Schemes](#ch-app.Communication-Scheme)
+            -   [Communication Schemes](#ch_app.Communication_Scheme)
 
-    -   [NCBID Server Launcher](#ch-app.NCBID-Server-Launche)
+    -   [NCBID Server Launcher](#ch_app.NCBID_Server_Launche)
 
-        -   [Overview](#ch-app.-Overview-4)
+        -   [Overview](#ch_app._Overview_4)
 
-    -   [Firewall Daemon (FWDaemon)](#ch-app.Firewall-Daemon-FWDa)
+    -   [Firewall Daemon (FWDaemon)](#ch_app.Firewall_Daemon_FWDa)
 
-        -   [Overview](#ch-app.-Overview-5)
+        -   [Overview](#ch_app._Overview_5)
 
-            -   [FWDaemon Behind a "Regular" Firewall](#ch-app.FWDaemon-Behind-a--R)
+            -   [FWDaemon Behind a "Regular" Firewall](#ch_app.FWDaemon_Behind_a__R)
 
-            -   [FWDaemon Behind a "Non-Transparent" Firewall](#ch-app.FWDaemon-Behind-a--N)
+            -   [FWDaemon Behind a "Non-Transparent" Firewall](#ch_app.FWDaemon_Behind_a__N)
 
-        -   [Monitoring](#ch-app.-Monitoring-1)
+        -   [Monitoring](#ch_app._Monitoring_1)
 
-        -   [Log Files](#ch-app.-Log-Files-1)
+        -   [Log Files](#ch_app._Log_Files_1)
 
-        -   [FWDaemon and NCBID Dispatcher Data Exchange](#ch-app.FWDaemon-and-NCBID-D)
+        -   [FWDaemon and NCBID Dispatcher Data Exchange](#ch_app.FWDaemon_and_NCBID_D)
 
-    -   [Launcherd Utility](#ch-app.Launcherd-Utility)
+    -   [Launcherd Utility](#ch_app.Launcherd_Utility)
 
-    -   [Monitoring Tools](#ch-app.Monitoring-Tools)
+    -   [Monitoring Tools](#ch_app.Monitoring_Tools)
 
-    -   [Quality Assurance Domain](#ch-app.Quality-Assurance-Do)
+    -   [Quality Assurance Domain](#ch_app.Quality_Assurance_Do)
 
--   [NCBI Genome Workbench](#ch-app.applications1)
+-   [NCBI Genome Workbench](#ch_app.applications1)
 
-    -   [Design goals](#ch-app.gbench-dg)
+    -   [Design goals](#ch_app.gbench_dg)
 
-    -   [Design](#ch-app.gbench-design)
+    -   [Design](#ch_app.gbench_design)
 
--   [NCBI NetCache Service](#ch-app.ncbi-netcache-service)
+-   [NCBI NetCache Service](#ch_app.ncbi_netcache_service)
 
-    -   [What is NetCache?](#ch-app.what-is-netcache)
+    -   [What is NetCache?](#ch_app.what_is_netcache)
 
-    -   [What can NetCache be used for?](#ch-app.what-it-can-be-used)
+    -   [What can NetCache be used for?](#ch_app.what_it_can_be_used)
 
-    -   [How to use NetCache](#ch-app.getting-started)
+    -   [How to use NetCache](#ch_app.getting_started)
 
-        -   [The basic ideas](#ch-app.The-basic-ideas)
+        -   [The basic ideas](#ch_app.The_basic_ideas)
 
-        -   [Setting up your program to use NetCache](#ch-app.Set-up-your-program-to-use-NetCac)
+        -   [Setting up your program to use NetCache](#ch_app.Set_up_your_program_to_use_NetCac)
 
-        -   [Establish the NetCache service name](#ch-app.Establish-the-NetCache-service-na)
+        -   [Establish the NetCache service name](#ch_app.Establish_the_NetCache_service_na)
 
-        -   [Initialize the client API](#ch-app.Initialize-the-client-API)
+        -   [Initialize the client API](#ch_app.Initialize_the_client_API)
 
-        -   [Store data](#ch-app.Store-data)
+        -   [Store data](#ch_app.Store_data)
 
-        -   [Retrieve data](#ch-app.Retrieve-data)
+        -   [Retrieve data](#ch_app.Retrieve_data)
 
-        -   [Samples and other resources](#ch-app.Available-samples)
+        -   [Samples and other resources](#ch_app.Available_samples)
 
-    -   [Questions and answers](#ch-app.Questions-and-answers)
+    -   [Questions and answers](#ch_app.Questions_and_answers)
 
-<a name="ch-app.datatool"></a>
+<a name="ch_app.datatool"></a>
 
 DATATOOL: Code Generation and Data Serialization Utility
 --------------------------------------------------------
@@ -220,35 +220,35 @@ DATATOOL: Code Generation and Data Serialization Utility
 
 The following topics are discussed in subsections:
 
--   [Invocation](#ch-app.datatool.html-refArgs)
+-   [Invocation](#ch_app.datatool.html_refArgs)
 
--   [Data specification conversion](#ch-app.Data-Specification-C)
+-   [Data specification conversion](#ch_app.Data_Specification_C)
 
--   [Definition file](#ch-app.datatool.html-refDefFile)
+-   [Definition file](#ch_app.datatool.html_refDefFile)
 
--   [Module file](#ch-app.ch-app-datatool-html-refModFile)
+-   [Module file](#ch_app.ch_app_datatool_html_refModFile)
 
--   [Generated code](#ch-app.datatool.html-refCode)
+-   [Generated code](#ch_app.datatool.html_refCode)
 
--   [Class diagrams](#ch-app.dt-inside.html)
+-   [Class diagrams](#ch_app.dt_inside.html)
 
-<a name="ch-app.datatool.html-refArgs"></a>
+<a name="ch_app.datatool.html_refArgs"></a>
 
 ### Invocation
 
 The following topics are discussed in this section:
 
--   [Main arguments](#ch-app.datatool.html-refMainArgs)
+-   [Main arguments](#ch_app.datatool.html_refMainArgs)
 
--   [Code generation arguments](#ch-app.datatool.html-refCodeGenerationAr)
+-   [Code generation arguments](#ch_app.datatool.html_refCodeGenerationAr)
 
-<a name="ch-app.datatool.html-refMainArgs"></a>
+<a name="ch_app.datatool.html_refMainArgs"></a>
 
 #### Main Arguments
 
-See [Table 1](#ch-app.tools-table1).
+See [Table 1](#ch_app.tools_table1).
 
-<a name="ch-app.tools-table1"></a>
+<a name="ch_app.tools_table1"></a>
 
 Table 1. Main arguments
 
@@ -280,29 +280,29 @@ Table 1. Main arguments
 | conffile \<File\_In\>  | Program's configuration (registry) data file              |                                                        |
 | -version               | Print version number                                      | Ignores other arguments                                                    |
 
-<a name="ch-app.datatool.html-refCodeGenerationAr"></a>
+<a name="ch_app.datatool.html_refCodeGenerationAr"></a>
 
 #### Code Generation Arguments
 
-See [Table 2](#ch-app.tools-table2).
+See [Table 2](#ch_app.tools_table2).
 
-<a name="ch-app.tools-table2"></a>
+<a name="ch_app.tools_table2"></a>
 
 Table 2. Code generation arguments
 
 | Argument        | Effect                                                                | Comments                                                                                                                                                                  |
 |-----------------|-----------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| -od \<file\>    | C++ code [definition file](#ch-app.datatool.html-refDefFile)          | See [Definition file](#ch-app.datatool.html-refDefFile)                                                                                                                   |
+| -od \<file\>    | C++ code [definition file](#ch_app.datatool.html_refDefFile)          | See [Definition file](#ch_app.datatool.html_refDefFile)                                                                                                                   |
 | -ods            | Generate an example definition file (e.g. `MyModuleName._sample_def`) | Must be used with another option that generates code such as -oA.                                                                                                         |
 | -odi            | Ignore absent code definition file                                    |                                                                                                                                                       |
 | -odw            | Issue a warning about absent code definition file                     |                                                                                                                                                       |
-| -oA             | Generate C++ files for all types                                      | Only types from the main module are used (see [-m](#ch-app.tools-table1) and -mx arguments).                                                                              |
-| -ot \<types\>   | Generate C++ files for listed types                                   | Only types from the main module are used (see [-m](#ch-app.tools-table1) and -mx arguments).                                                                              |
+| -oA             | Generate C++ files for all types                                      | Only types from the main module are used (see [-m](#ch_app.tools_table1) and -mx arguments).                                                                              |
+| -ot \<types\>   | Generate C++ files for listed types                                   | Only types from the main module are used (see [-m](#ch_app.tools_table1) and -mx arguments).                                                                              |
 | -ox \<types\>   | Exclude types from generation                                         |                                                                                                                                                       |
 | -oX             | Turn off recursive type generation                                    |                                                                                                                                                       |
 | -of \<file\>    | Write the list of generated C++ files                                 |                                                                                                                                                       |
 | -oc \<file\>    | Write combining C++ files                                             |                                                                                                                                                       |
-| -on \<string\>  | Default namespace                                                     | The value "-" in the [Definition file](#ch-app.datatool.html-refDefFile) means don't use a namespace at all and overrides the -on option specified elsewhere.             |
+| -on \<string\>  | Default namespace                                                     | The value "-" in the [Definition file](#ch_app.datatool.html_refDefFile) means don't use a namespace at all and overrides the -on option specified elsewhere.             |
 | -opm \<dir\>    | Directory for searching source modules                                |                                                                                                                                                       |
 | -oph \<dir\>    | Directory for generated \*.hpp files                                  |                                                                                                                                                       |
 | -opc \<dir\>    | Directory for generated \*.cpp files                                  |                                                                                                                                                       |
@@ -313,19 +313,19 @@ Table 2. Code generation arguments
 | -orA            | Combine all -or\* prefixes                                            |                                                                                                                                                       |
 | -ocvs           | create ".cvsignore" files                                             |                                                                                                                                                       |
 | -oR \<dir\>     | Set -op\* and -or\* arguments for NCBI directory tree                 |                                                                                                                                                       |
-| -oDc            | Turn ON generation of Doxygen-style comments                          | The value "-" in the [Definition file](#ch-app.datatool.html-refDefFile) means don't generate Doxygen comments and overrides the -oDc option specified elsewhere.         |
+| -oDc            | Turn ON generation of Doxygen-style comments                          | The value "-" in the [Definition file](#ch_app.datatool.html_refDefFile) means don't generate Doxygen comments and overrides the -oDc option specified elsewhere.         |
 | -odx \<string\> | URL of documentation root folder                                      | For Doxygen                                                                                                                                                               |
-| -lax\_syntax    | Allow non-standard ASN.1 syntax accepted by asntool                   | The value "-" in the [Definition file](#ch-app.datatool.html-refDefFile) means don't allow non-standard syntax and overrides the -lax\_syntax option specified elsewhere. |
+| -lax\_syntax    | Allow non-standard ASN.1 syntax accepted by asntool                   | The value "-" in the [Definition file](#ch_app.datatool.html_refDefFile) means don't allow non-standard syntax and overrides the -lax\_syntax option specified elsewhere. |
 | -pch \<string\> | Name of the precompiled header file to include in all \*.cpp files    |                                                                                                                                                       |
-| -oex \<export\> | Add storage-class modifier to generated classes                       | Can be overriden by [[-].\_export](#ch-app.datatool.html-refDefCommon) in the definition file.                                                                            |
+| -oex \<export\> | Add storage-class modifier to generated classes                       | Can be overriden by [[-].\_export](#ch_app.datatool.html_refDefCommon) in the definition file.                                                                            |
 
-<a name="ch-app.Data-Specification-C"></a>
+<a name="ch_app.Data_Specification_C"></a>
 
 ### Data Specification Conversion
 
 When parsing a data specification, **DATATOOL** identifies the specification format based on the source file extension - ASN, DTD, or XSD.
 
-<a name="ch-app.Scope-Prefixes"></a>
+<a name="ch_app.Scope_Prefixes"></a>
 
 #### Scope Prefixes
 
@@ -355,7 +355,7 @@ Later, DTD parsing was added into **DATATOOL**. Here, scope prefixes were not ne
 
 With the addition of XML Schema parser and generator, when converting ASN.1 specification, elements can be declared in Schema locally if needed, and scope prefixes make almost no sense. Still, they are preserved for compatibility.
 
-<a name="ch-app.Modular-DTD-and-Sche"></a>
+<a name="ch_app.Modular_DTD_and_Sche"></a>
 
 #### Modular DTD and Schemata
 
@@ -363,7 +363,7 @@ Here, ‘module’ means ASN.1 module. Single ASN.1 specification file may conta
 
 You can find a number of DTDs and Schema converted by **DATATOOL** from NCBI public ASN.1 specifications [here](http://www.ncbi.nlm.nih.gov/data_specs).
 
-<a name="ch-app.Converting-XML-Schem"></a>
+<a name="ch_app.Converting_XML_Schem"></a>
 
 #### Converting XML Schema into ASN.1
 
@@ -419,11 +419,11 @@ Each unnamed local element gets a name. When generating C++ data storage classes
 
 It is possible to convert source Schema into ASN.1, and then use **DATATOOL** to generate C++ classes from the latter. In this case **DATATOOL** and serial library provide compatibility of ASN.1 output. If you generate data storage classes from Schema, and use them to write data in ASN.1 format (binary or text), if you then convert that Schema into ASN.1, generate classes from it, and again write same data in ASN.1 format using this new set of classes, then these two files will be identical.
 
-<a name="ch-app.datatool.html-refDefFile"></a>
+<a name="ch_app.datatool.html_refDefFile"></a>
 
 ### Definition File
 
-It is possible to tune up the C++ code generation by using a definition file, which could be specified in the [-od](#ch-app.tools-table2) argument. The definition file uses the generic [NCBI configuration](ch_core.html#ch_core.registry_syntax) format also used in the configuration (`*.ini`) files found in NCBI's applications.
+It is possible to tune up the C++ code generation by using a definition file, which could be specified in the [-od](#ch_app.tools_table2) argument. The definition file uses the generic [NCBI configuration](ch_core.html#ch_core.registry_syntax) format also used in the configuration (`*.ini`) files found in NCBI's applications.
 
 **DATATOOL** looks for code generation parameters in several sections of the file in the following order:
 
@@ -473,15 +473,15 @@ Code generation for the various elements can be fine-tuned as illustrated by the
 
 The following additional topics are discussed in this section:
 
--   [Common definitions](#ch-app.datatool.html-refDefCommon)
+-   [Common definitions](#ch_app.datatool.html_refDefCommon)
 
--   [Definitions that affect specific types](#ch-app.datatool.html-refDefSpecific)
+-   [Definitions that affect specific types](#ch_app.datatool.html_refDefSpecific)
 
--   [The Special [-] Section](#ch-app.The-Special--Section)
+-   [The Special [-] Section](#ch_app.The_Special__Section)
 
--   [Examples](#ch-app.datatool.html-refDefExample)
+-   [Examples](#ch_app.datatool.html_refDefExample)
 
-<a name="ch-app.datatool.html-refDefCommon"></a>
+<a name="ch_app.datatool.html_refDefCommon"></a>
 
 #### Common Definitions
 
@@ -563,7 +563,7 @@ It is also possible to specify a storage-class modifier, which is required on Mi
     [-]
     _export = EXPORT_SPECIFIER
 
-Because this modifier could also be specified in the [command line](#ch-app.tools-table2), the **DATATOOL** code generator uses the following rules to choose the proper one:
+Because this modifier could also be specified in the [command line](#ch_app.tools_table2), the **DATATOOL** code generator uses the following rules to choose the proper one:
 
 -   If no `-oex` flag is given in the command line, no modifier is added at all.
 
@@ -571,31 +571,31 @@ Because this modifier could also be specified in the [command line](#ch-app.tool
 
 -   The command-line parameter in the form `-oex FOOBAR` will cause the generated classes to have a `FOOBAR` storage-class modifier, unless another one is specified in the definition file. The modifier from the definition file always takes precedence.
 
-<a name="ch-app.datatool.html-refDefSpecific"></a>
+<a name="ch_app.datatool.html_refDefSpecific"></a>
 
 #### Definitions That Affect Specific Types
 
 The following additional topics are discussed in this section:
 
--   [INTEGER, REAL, BOOLEAN, NULL](#ch-app.datatool.html-refDefINT)
+-   [INTEGER, REAL, BOOLEAN, NULL](#ch_app.datatool.html_refDefINT)
 
--   [ENUMERATED](#ch-app.datatool.html-refDefENUM)
+-   [ENUMERATED](#ch_app.datatool.html_refDefENUM)
 
--   [OCTET STRING](#ch-app.datatool.html-refDefOCTETS)
+-   [OCTET STRING](#ch_app.datatool.html_refDefOCTETS)
 
--   [SEQUENCE OF, SET OF](#ch-app.datatool.html-refDefArray)
+-   [SEQUENCE OF, SET OF](#ch_app.datatool.html_refDefArray)
 
--   [SEQUENCE, SET](#ch-app.datatool.html-refDefClass)
+-   [SEQUENCE, SET](#ch_app.datatool.html_refDefClass)
 
--   [CHOICE](#ch-app.datatool.html-refDefChoice)
+-   [CHOICE](#ch_app.datatool.html_refDefChoice)
 
-<a name="ch-app.datatool.html-refDefINT"></a>
+<a name="ch_app.datatool.html_refDefINT"></a>
 
 ##### INTEGER, REAL, BOOLEAN, NULL
 
 `_type`      C++ type: int, short, unsigned, long, etc.
 
-<a name="ch-app.datatool.html-refDefENUM"></a>
+<a name="ch_app.datatool.html_refDefENUM"></a>
 
 ##### ENUMERATED
 
@@ -603,25 +603,25 @@ The following additional topics are discussed in this section:
 
 `_prefix`      Prefix for names of enum values. The default is "e".
 
-<a name="ch-app.datatool.html-refDefOCTETS"></a>
+<a name="ch_app.datatool.html_refDefOCTETS"></a>
 
 ##### OCTET STRING
 
 `_char`      Vector element type: char, unsigned char, or signed char.
 
-<a name="ch-app.datatool.html-refDefArray"></a>
+<a name="ch_app.datatool.html_refDefArray"></a>
 
 ##### SEQUENCE OF, SET OF
 
 `_type`      STL container type: list, vector, set, or multiset.
 
-<a name="ch-app.datatool.html-refDefClass"></a>
+<a name="ch_app.datatool.html_refDefClass"></a>
 
 ##### SEQUENCE, SET
 
 `memberName._delay`      Mark the specified member for delayed reading.
 
-<a name="ch-app.datatool.html-refDefChoice"></a>
+<a name="ch_app.datatool.html_refDefChoice"></a>
 
 ##### CHOICE
 
@@ -629,7 +629,7 @@ The following additional topics are discussed in this section:
 
 `variantName._delay`      Mark the specified variant for delayed reading.
 
-<a name="ch-app.The-Special--Section"></a>
+<a name="ch_app.The_Special__Section"></a>
 
 #### The Special [-] Section
 
@@ -651,11 +651,11 @@ There is a special section `[-]` allowed in the definition file which can contai
     ; Generate #include directives with quotes rather than angle brackets:
     -orq = 1
 
-Any of the code generation arguments in [Table 2](#ch-app.tools-table2) (except `-od`, `-odi`, and `-odw` which are related to specifying the definition file) can be placed in the `[-]` section.
+Any of the code generation arguments in [Table 2](#ch_app.tools_table2) (except `-od`, `-odi`, and `-odw` which are related to specifying the definition file) can be placed in the `[-]` section.
 
-In some cases, the special value `"-"` causes special processing as noted in [Table 2](#ch-app.tools-table2).
+In some cases, the special value `"-"` causes special processing as noted in [Table 2](#ch_app.tools_table2).
 
-<a name="ch-app.datatool.html-refDefExample"></a>
+<a name="ch_app.datatool.html_refDefExample"></a>
 
 #### Examples
 
@@ -691,7 +691,7 @@ If we have the following ASN.1 specification (this not a "real" specification - 
 
 Then the following definitions will effect the generation of objects:
 
-<a name="ch-app.T.nc-definitioneffected-objectsda"></a>
+<a name="ch_app.T.nc_definitioneffected_objectsda"></a>
 
 | Definition                                                          | Effected Objects                                                   |
 |---------------------------------------------------------------------|--------------------------------------------------------------------|
@@ -744,7 +744,7 @@ Then edit the module definition file (`catalogentry.def`) and change `RR` to a m
 
 The new name will be used the next time the module is built.
 
-<a name="ch-app.ch-app-datatool-html-refModFile"></a>
+<a name="ch_app.ch_app_datatool_html_refModFile"></a>
 
 ### Module File
 
@@ -758,17 +758,17 @@ Module files simply consist of lines of the form "`KEY = VALUE`". Only the key `
 
 -   `MODULE_PATH`      Specifies the directory containing the current module, again relative to `.../src`. Almost all module files contain this definition, however it is no longer used by either `new_module.sh` or the `project_tree_builder` and is therefore not necessary.
 
-<a name="ch-app.datatool.html-refCode"></a>
+<a name="ch_app.datatool.html_refCode"></a>
 
 ### Generated Code
 
 The following additional topics are discussed in this section:
 
--   [Normalized name](#ch-app.datatool.html-refNormalizedName)
+-   [Normalized name](#ch_app.datatool.html_refNormalizedName)
 
--   [ENUMERATED types](#ch-app.datatool.html-refCodeEnum)
+-   [ENUMERATED types](#ch_app.datatool.html_refCodeEnum)
 
-<a name="ch-app.datatool.html-refNormalizedName"></a>
+<a name="ch_app.datatool.html_refNormalizedName"></a>
 
 #### Normalized Name
 
@@ -785,114 +785,114 @@ The default C++ class name can be overridden by explicitly specifying in the def
     [MyModule.Seq-data]
     _class=CMySeqData
 
-<a name="ch-app.datatool.html-refCodeEnum"></a>
+<a name="ch_app.datatool.html_refCodeEnum"></a>
 
 #### ENUMERATED Types
 
 By default, for every `ENUMERATED` ASN.1 type, **DATATOOL** will produce a C++ enum type with the name ***ENormalizedName***.
 
-<a name="ch-app.dt-inside.html"></a>
+<a name="ch_app.dt_inside.html"></a>
 
 ### Class Diagrams
 
 The following topics are discussed in this section:
 
--   [Specification analysis](#ch-app.dt-inside.html-specs)
+-   [Specification analysis](#ch_app.dt_inside.html_specs)
 
--   [Data types](#ch-app.dt-inside.html-data-types)
+-   [Data types](#ch_app.dt_inside.html_data_types)
 
--   [Data values](#ch-app.dt-inside.html-data-values)
+-   [Data values](#ch_app.dt_inside.html_data_values)
 
--   [Code generation](#ch-app.dt-inside.html-code-gen)
+-   [Code generation](#ch_app.dt_inside.html_code_gen)
 
-<a name="ch-app.dt-inside.html-specs"></a>
+<a name="ch_app.dt_inside.html_specs"></a>
 
 #### Specification Analysis
 
 The following topics are discussed in this section:
 
--   [ASN.1 specification analysis](#ch-app.dt-inside.html-specs-asn)
+-   [ASN.1 specification analysis](#ch_app.dt_inside.html_specs_asn)
 
--   [DTD specification analysis](#ch-app.dt-inside.html-specs-dtd)
+-   [DTD specification analysis](#ch_app.dt_inside.html_specs_dtd)
 
-<a name="ch-app.dt-inside.html-specs-asn"></a>
+<a name="ch_app.dt_inside.html_specs_asn"></a>
 
 ##### ASN.1 Specification Analysis
 
-See [Figure 1](#ch-app.specs-asn).
+See [Figure 1](#ch_app.specs_asn).
 
-<a name="ch-app.specs-asn"></a>
+<a name="ch_app.specs_asn"></a>
 
 [![1. ASN.1 specification analysis.](/book/static/img/specs_asn.gif)](/book/static/img/specs_asn.gif "Click to see the full-resolution image")
 
 1. ASN.1 specification analysis.
 
-<a name="ch-app.dt-inside.html-specs-dtd"></a>
+<a name="ch_app.dt_inside.html_specs_dtd"></a>
 
 ##### DTD Specification Analysis
 
-See [Figure 2](#ch-app.specs-dtd).
+See [Figure 2](#ch_app.specs_dtd).
 
-<a name="ch-app.specs-dtd"></a>
+<a name="ch_app.specs_dtd"></a>
 
 [![2. DTD specification analysis.](/book/static/img/specs_dtd.gif)](/book/static/img/specs_dtd.gif "Click to see the full-resolution image")
 
 2. DTD specification analysis.
 
-<a name="ch-app.dt-inside.html-data-types"></a>
+<a name="ch_app.dt_inside.html_data_types"></a>
 
 #### Data Types
 
 See [CDataType](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDataType.html).
 
-<a name="ch-app.dt-inside.html-data-values"></a>
+<a name="ch_app.dt_inside.html_data_values"></a>
 
 #### Data Values
 
-See [Figure 3](#ch-app.data-values).
+See [Figure 3](#ch_app.data_values).
 
-<a name="ch-app.data-values"></a>
+<a name="ch_app.data_values"></a>
 
 [![3. Data values.](/book/static/img/data_types.gif)](/book/static/img/data_types.gif "Click to see the full-resolution image")
 
 3. Data values.
 
-<a name="ch-app.dt-inside.html-code-gen"></a>
+<a name="ch_app.dt_inside.html_code_gen"></a>
 
 #### Code Generation
 
-See [Figure 4](#ch-app.code-gen).
+See [Figure 4](#ch_app.code_gen).
 
-<a name="ch-app.code-gen"></a>
+<a name="ch_app.code_gen"></a>
 
 [![4. Code generation.](/book/static/img/type_strings.gif)](/book/static/img/type_strings.gif "Click to see the full-resolution image")
 
 4. Code generation.
 
-<a name="ch-app.Load-Balancing"></a>
+<a name="ch_app.Load_Balancing"></a>
 
 Load Balancing
 --------------
 
--   [Overview](#ch-app.-Overview)
+-   [Overview](#ch_app._Overview)
 
--   [Load Balancing Service Mapping Daemon (LBSMD)](#ch-app.Load-Balancing-Servi)
+-   [Load Balancing Service Mapping Daemon (LBSMD)](#ch_app.Load_Balancing_Servi)
 
--   [Database Load Balancing](#ch-app.Database-Load-Balancing)
+-   [Database Load Balancing](#ch_app.Database_Load_Balancing)
 
--   [Cookie / Argument Affinity Module (MOD\_CAF)](#ch-app.Cookie---Argument-Af)
+-   [Cookie / Argument Affinity Module (MOD\_CAF)](#ch_app.Cookie___Argument_Af)
 
--   [DISPD Network Dispatcher](#ch-app.DISPD-Network-Dispat)
+-   [DISPD Network Dispatcher](#ch_app.DISPD_Network_Dispat)
 
--   [NCBID Server Launcher](#ch-app.NCBID-Server-Launche)
+-   [NCBID Server Launcher](#ch_app.NCBID_Server_Launche)
 
--   [Firewall Daemon (FWDaemon)](#ch-app.Firewall-Daemon-FWDa)
+-   [Firewall Daemon (FWDaemon)](#ch_app.Firewall_Daemon_FWDa)
 
--   [Launcherd Utility](#ch-app.Launcherd-Utility)
+-   [Launcherd Utility](#ch_app.Launcherd_Utility)
 
--   [Monitoring Tools](#ch-app.Monitoring-Tools)
+-   [Monitoring Tools](#ch_app.Monitoring_Tools)
 
--   [Quality Assurance Domain](#ch-app.Quality-Assurance-Do)
+-   [Quality Assurance Domain](#ch_app.Quality_Assurance_Do)
 
 ***Note:*** For security reasons not all links in the public version of this document are accessible by the outside NCBI users.
 
@@ -906,7 +906,7 @@ The section covers the following topics:
 
 -   Monitoring facilities
 
-<a name="ch-app.-Overview"></a>
+<a name="ch_app._Overview"></a>
 
 ### Overview
 
@@ -956,11 +956,11 @@ The data flow in the scenario is as follows. A request from the client reaches a
 
 Further sections describe all the components in more detail.
 
-<a name="ch-app.Load-Balancing-Servi"></a>
+<a name="ch_app.Load_Balancing_Servi"></a>
 
 ### Load Balancing Service Mapping Daemon (LBSMD)
 
-<a name="ch-app.-Overview-1"></a>
+<a name="ch_app._Overview_1"></a>
 
 #### Overview
 
@@ -992,7 +992,7 @@ Lastly, LBSMD can pull port load information as posted by the running servers. T
 
 Although cients can [redirect services](ch_conn.html#ch_conn.Service_Redirection), LBSMD does not distinguish between direct and redirected services.
 
-<a name="ch-app.-Configuration"></a>
+<a name="ch_app._Configuration"></a>
 
 #### Configuration
 
@@ -1080,13 +1080,13 @@ defines a server. The detailed description of the individual fields is given bel
 
     -   **`user`** or **`*group`** which makes the LBSMD daemon add the specified user or group of users to the list of personnel who are authorized to modify the server (e.g. post a penalty, issue a rerate command etc.). By default these actions are only allowed to the **`root`** and **`lbsmd`** users, as well as users added to the host authority. Multiple specifications are allowed.
 
-    -   **`script`** which specifies a path to a local executable which checks whether the server is operational. The LBSMD daemon starts this script periodically as specified by the check time parameter(s) above. Only a single script specification is allowed. See [Check Script Specification](#ch-app.Check-Script-Specification) for more details.
+    -   **`script`** which specifies a path to a local executable which checks whether the server is operational. The LBSMD daemon starts this script periodically as specified by the check time parameter(s) above. Only a single script specification is allowed. See [Check Script Specification](#ch_app.Check_Script_Specification) for more details.
 
--   **`server_descriptor`** specifies the address of the server and supplies additional information. An example of the **`server_descriptor`**:<br/>`STANDALONE somehost:1234 R=3000 L=yes S=yes B=-20`<br/>See [Server Descriptor Specification](#ch-app.Server-Descriptor-Specification) for more details.
+-   **`server_descriptor`** specifies the address of the server and supplies additional information. An example of the **`server_descriptor`**:<br/>`STANDALONE somehost:1234 R=3000 L=yes S=yes B=-20`<br/>See [Server Descriptor Specification](#ch_app.Server_Descriptor_Specification) for more details.
 
 -   **`launcher_info`** is basically a command line preceded by a pipe symbol ( \| ) which plays a role of a delimiter from the **`server_descriptor`**. It is only required for the **NCBID** type of service which are configured on the local host.
 
-<a name="ch-app.Check-Script-Specification"></a>
+<a name="ch_app.Check_Script_Specification"></a>
 
 ##### Check Script Specification
 
@@ -1116,7 +1116,7 @@ Output to **`stderr`** is attached to the LBSMD log file; the CPU limit is set t
 
 The check script is expected to produce one of the following exit codes:
 
-<a name="ch-app.T.nc-codesmeaning0the-server-is-f"></a>
+<a name="ch_app.T.nc_codesmeaning0the_server_is_f"></a>
 
 | Code(s)                     | Meaning                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 |-----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -1146,7 +1146,7 @@ Servers are called SUPPRESSED when they are 100% penalized (see server penalties
 
 ***Note:*** The check script operation is complementary to setting a penalty prior to doing any disruptive changes in production. In other words, the script is only reliable as long as the service is expected to work. If there is any scheduled maintenance, it should be communicated to LBSMD via a penalty rather than by an assumption that the failing script will do the job of bringing the service to the down state and excluding it from LB.
 
-<a name="ch-app.Server-Descriptor-Specification"></a>
+<a name="ch_app.Server_Descriptor_Specification"></a>
 
 ##### Server Descriptor Specification
 
@@ -1223,7 +1223,7 @@ Server descriptors of type ***NAMEHOLD*** are special. As **`arguments`**, they 
     TestService  NAMEHOLD    :0 DNS
     TestService2 NAMEHOLD foo:0 NCBID
 
-<a name="ch-app.Sites"></a>
+<a name="ch_app.Sites"></a>
 
 #### Sites
 
@@ -1235,13 +1235,13 @@ Suppose that the daemon detected its site as ST-VA and assigned it a value of 0x
 
 Both zone and site (or site alone) can be permanently assigned with the command-line parameters and then may not be overridden from the configuration file(s).
 
-<a name="ch-app.Signals"></a>
+<a name="ch_app.Signals"></a>
 
 #### Signals
 
 The table below describes the LBSMD daemon signal processing.
 
-<a name="ch-app.T.nc-SignalReactionSIGHUPreload-t"></a>
+<a name="ch_app.T.nc_SignalReactionSIGHUPreload_t"></a>
 
 |---------|---------------------------------------------------------------------------------------------------------------------------|
 | Signal  | Reaction                                                                                                                  |
@@ -1250,7 +1250,7 @@ The table below describes the LBSMD daemon signal processing.
 | SIGTERM | quit                                                                                                                      |
 | SIGUSR1 | toggle the verbosity level between less verbose (default) and more verbose (when every warning generated is stored) modes |
 
-<a name="ch-app.Automatic-Configurat"></a>
+<a name="ch_app.Automatic_Configurat"></a>
 
 #### Automatic Configuration Distribution
 
@@ -1280,11 +1280,11 @@ As soon as the modified file is checked in the file will be delivered to the cor
 
 Figure 10. Automatic Configuration Distribution
 
-<a name="ch-app.Monitoring-and-Contr"></a>
+<a name="ch_app.Monitoring_and_Contr"></a>
 
 #### Monitoring and Control
 
-<a name="ch-app.Service-Search"></a>
+<a name="ch_app.Service_Search"></a>
 
 ##### Service Search
 
@@ -1300,7 +1300,7 @@ Figure 11. NCBI Service Search Page
 
 As an example of usage a user might enter the partial name of the service like "TaxService" and click on the “Go” button. The search results will display "TaxService", "TaxService3" and "TaxService3Test" if those services are available (see <http://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/NETWORK/lbsmc/search.cgi?key=rb_svc&service=TaxService&host=&button=Go&db=>).
 
-<a name="ch-app.lbsmc-Utility"></a>
+<a name="ch_app.lbsmc_Utility"></a>
 
 ##### lbsmc Utility
 
@@ -1358,7 +1358,7 @@ For example, to print a list of hosts which names match the pattern “sutil\*�
     * Hosts:4\747, Srvrs:44/1223/23  |   Heap:249856, used:237291/249616, free:240 *
     LBSMD PID: 17530, config: /etc/lbsmd/servrc.cfg
 
-<a name="ch-app.NCBI-Intranet-Web-Ut"></a>
+<a name="ch_app.NCBI_Intranet_Web_Ut"></a>
 
 ##### NCBI Intranet Web Utilities
 
@@ -1378,7 +1378,7 @@ The output is provided in either long or short format. The format depends on whe
 
 In case if the service name is more than the allowed number of characters to display the trailing characters will be replaced with “\>”. When there is more information about the host / service to be displayed the “+” character is put beside the host / service name (this additional information can be retrieved by adding the -i option). When both “+” and “\>” are to be shown they are replaced with the single character “\*”. In the case of wide-output format the “\#” character shown in the service line means that there is no host information available for the service (similar to the static servers). The “!” character in the service line denotes that the service was configured / stored with an error (this character actually should never appear in the listings and should be reported whenever encountered). Wide output for hosts contains the time of bootup and startup. If the startup time is preceded by the “~” character then the host was gone for a while and then came back while the lbsmc utility was running. The “+” character in the times is to show that the date belongs to the past year(s).
 
-<a name="ch-app.Server-Penalizer-API"></a>
+<a name="ch_app.Server_Penalizer_API"></a>
 
 ##### Server Penalizer API and Utility
 
@@ -1418,7 +1418,7 @@ Figure 13. lbsm\_feedback Arguments
 
 The `servicename` can be an identifier with ‘\*’ for any symbols and / or ‘?’ for a single character. The `penalty value` is an integer value in the range 0 ... 100. The `port number` and `time` are integers. The `hostname` is an identifier and the `rate value` is a floating point value.
 
-<a name="ch-app.SVN-Repository"></a>
+<a name="ch_app.SVN_Repository"></a>
 
 #### SVN Repository
 
@@ -1430,7 +1430,7 @@ The daemon code is in this file:
 
 `c++/src/connect/daemons/lbsmd.c`
 
-<a name="ch-app.-Log-Files"></a>
+<a name="ch_app._Log_Files"></a>
 
 #### Log Files
 
@@ -1450,7 +1450,7 @@ NCBI intranet users can get few (no more than 100) recent lines of the log file 
 
 <http://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/NETWORK/lbsmd.cgi?log>
 
-<a name="ch-app.-Configuration-Exampl"></a>
+<a name="ch_app._Configuration_Exampl"></a>
 
 #### Configuration Examples
 
@@ -1484,17 +1484,17 @@ NCBI intranet users can also visit the following link to get a sample configurat
 
 <http://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/NETWORK/lbsmd.cgi?cfg>
 
-<a name="ch-app.Database-Load-Balancing"></a>
+<a name="ch_app.Database_Load_Balancing"></a>
 
 ### Database Load Balancing
 
 Database load balancing is an important part of the overall load balancing function. Please see the [Database Load Balancer](ch_dbapi.html#ch_dbapi.Database_loadbalanci) section in the [Database Access](ch_dbapi.html) chapter for more details.
 
-<a name="ch-app.Cookie---Argument-Af"></a>
+<a name="ch_app.Cookie___Argument_Af"></a>
 
 ### Cookie / Argument Affinity Module (MOD\_CAF)
 
-<a name="ch-app.-Overview-2"></a>
+<a name="ch_app._Overview_2"></a>
 
 #### Overview
 
@@ -1520,13 +1520,13 @@ The CAF module has its own status page that can be made available in the look so
 
 The CAF module can also report the number of slots that the Apache server has configured and used up each time a new request comes in and is being processed. The information resides in a shared memory segment that several Apache servers can use cooperatively on the same machine. Formerly, this functionality has been implemented in a separate SPY module, which is now fully integrated into this module. Using a special compile-time macro it is possible to obtain the former SPY-only functionality (now called LBSMD reporter feature) without any other CAF features. Note that no CAF\* directives will be recognized in Apache configuration, should the reduced functionality build be chosen.
 
-<a name="ch-app.-Configuration-1"></a>
+<a name="ch_app._Configuration_1"></a>
 
 #### Configuration
 
 The table below describes Apache configuration directives which are taken into account by the CAF module.
 
-<a name="ch-app.T.nc-DirectiveDescriptionLBSMD--O"></a>
+<a name="ch_app.T.nc_DirectiveDescriptionLBSMD__O"></a>
 
 |-------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Directive                                             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
@@ -1566,7 +1566,7 @@ All hierarchy complying settings are inherited in directories that are deeper in
 
 There are 4 predefined proxies that may be used [or operated on] without prior declaration by either "CAFProxyCookie" or "CAFProxyArgument" directives:
 
-<a name="ch-app.T.nc-LB-nameCookieNamePreferenceD"></a>
+<a name="ch_app.T.nc_LB_nameCookieNamePreferenceD"></a>
 
 |------------|-----------------|------------|-----------|----------|----------|----------|
 | LB name    | CookieName      | Preference | Delimiter | Crypted? | Argument | AltArg   |
@@ -1609,7 +1609,7 @@ denotes a host range from `130.14.8.0` thru `130.14.9.255` (including the ends).
 
 ***Note*** that the IP table file is read once per Apache daemon's life cycle (and it is \*not\* reloaded upon graceful restarts). The complete stop / start sequence should be performed to force the IP table be reloaded.
 
-<a name="ch-app.-Configuration-Exampl-1"></a>
+<a name="ch_app._Configuration_Exampl_1"></a>
 
 #### Configuration Examples
 
@@ -1654,13 +1654,13 @@ The effect of the above is that "My-Cookie" will be used in LB name searches of 
 
 The effect of the above is that if an incoming URL resolves to use "systems.lb", then "ticket", if found in the query string, would be considered for lookup of "systems.lb" with the load-balancing daemon.
 
-<a name="ch-app.Arguments-Matching"></a>
+<a name="ch_app.Arguments_Matching"></a>
 
 #### Arguments Matching
 
 Suppose that the DB=A is a query argument (explicit DB selection, including just "DB" (as a standalone argument, treated as missing value), "DB=" (missing value)). That will cause the following order of precedence in selecting the target host:
 
-<a name="ch-app.T.nc-MatchDescriptionDBABest--A--"></a>
+<a name="ch_app.T.nc_MatchDescriptionDBABest__A__"></a>
 
 |----------------|-------------------------------------------------------------------------------|
 | Match          | Description                                                                   |
@@ -1674,7 +1674,7 @@ No host with an explicit DB assignment (DB=B or DB=-) is being selected above if
 
 Suppose that there is no DB selection in the request. Then the hosts are selected in the following order:
 
-<a name="ch-app.T.nc-MatchDescriptionDBBest---sta"></a>
+<a name="ch_app.T.nc_MatchDescriptionDBBest___sta"></a>
 
 |----------------|------------------------------------------------------------------------------|
 | Match          | Description                                                                  |
@@ -1689,7 +1689,7 @@ Only if there are no hosts in the best available category of hosts, the next cat
 
 "~" may not be used along with "\*": "~\*" combination will be silently ignored entirety, and will not modify the other specified affinities. Note that "~" alone has a meaning of 'anything but empty argument value, ""'. Also note that formally, "~A" is an equivalent to "~A \*" as well as "~-" is an equivalent to "\*".
 
-<a name="ch-app.Argument-Matching-Ex"></a>
+<a name="ch_app.Argument_Matching_Ex"></a>
 
 ##### Argument Matching Examples
 
@@ -1711,13 +1711,13 @@ DB=- \*
 
 makes the host to serve requests that don't have any DB argument in their query strings, or when their DB argument failed to literally match affinity lines of all other hosts. Adding "!" to the line doesn't change the behavior.
 
-<a name="ch-app.Log-File"></a>
+<a name="ch_app.Log_File"></a>
 
 #### Log File
 
 The CAF module uses the Apache web server log files to put CAF module’s messages into.
 
-<a name="ch-app.-Monitoring"></a>
+<a name="ch_app._Monitoring"></a>
 
 #### Monitoring
 
@@ -1737,17 +1737,17 @@ The status of the CAF modules can be seen via a web interface using the followin
 
 <http://web91.be-md.qa.ncbi.nlm.nih.gov/caf-status>
 
-<a name="ch-app.DISPD-Network-Dispat"></a>
+<a name="ch_app.DISPD_Network_Dispat"></a>
 
 ### DISPD Network Dispatcher
 
-<a name="ch-app.-Overview-3"></a>
+<a name="ch_app._Overview_3"></a>
 
 #### Overview
 
 The DISPD dispatcher is a CGI/1.0-compliant program (the actual file name is `dispd.cgi`). Its purpose is mapping a requested service name to an actual server location when the client has no direct access to the LBSMD daemon. This mapping is called dispatching. Optionally, the DISPD dispatcher can also pass data between the client, who requested the mapping, and the server, which implements the service, found as a result of dispatching. This combined mode is called a connection. The client may choose any of these modes if there are no special requirements on data transfer (e.g., firewall connection). In some cases, however, the requested connection mode implicitly limits the request to be a dispatching-only request, and the actual data flow between the client and the server occurs separately at a later stage.
 
-<a name="ch-app.Protocol-Description"></a>
+<a name="ch_app.Protocol_Description"></a>
 
 #### Protocol Description
 
@@ -1765,13 +1765,13 @@ In case of a connection request the request body can contain data to be passed t
 
 Mapping of a service name into a server address is done by the LBSMD daemon which is run on the same host where the DISPD dispatcher is run. The DISPD dispatcher never dispatches a non-local client to a server marked as local-only (by means of L=yes in the configuration of the LBSMD daemon). Otherwise, the result of dispatching is exactly what the client would get from the [service mapping API](ch_conn.html#ch_conn.service_mapping_api) if run locally. Specifying capabilities explicitly the client can narrow the server search, for example, by choosing stateless servers only.
 
-<a name="ch-app.Client-Request-to-DI"></a>
+<a name="ch_app.Client_Request_to_DI"></a>
 
 ##### Client Request to DISPD
 
 The following additional HTTP tags are recognized in the client request to the DISPD dispatcher.
 
-<a name="ch-app.T.nc-TagDescriptionAcceptedServer"></a>
+<a name="ch_app.T.nc_TagDescriptionAcceptedServer"></a>
 
 <table>
 <colgroup>
@@ -1831,13 +1831,13 @@ The following additional HTTP tags are recognized in the client request to the D
 </tbody>
 </table>
 
-<a name="ch-app.DISPD-Client-Respons"></a>
+<a name="ch_app.DISPD_Client_Respons"></a>
 
 ##### DISPD Client Response
 
 The DISPD dispatcher can produce the following HTTP tags in response to the client.
 
-<a name="ch-app.T.nc-TagDescriptionRelayPath-path"></a>
+<a name="ch_app.T.nc_TagDescriptionRelayPath_path"></a>
 
 |-------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Tag                                       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
@@ -1848,7 +1848,7 @@ The DISPD dispatcher can produce the following HTTP tags in response to the clie
 | `Used-Server-Info-n: <server_info>`       | The tag informs the client end of server infos that having been unsuccessfully used during current connection request (so that the client will be able to skip over them if needs to).<br/>`n` is an integral suffix, enumerating from 1.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | `Dispatcher-Messages:`                    | The tag is used to issue a message into standard error log of a client. The message is intercepted and delivered from within Toolkit HTTP API.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 
-<a name="ch-app.Communication-Scheme"></a>
+<a name="ch_app.Communication_Scheme"></a>
 
 ##### Communication Schemes
 
@@ -1892,11 +1892,11 @@ The DISPD dispatcher uses simple heuristics in analyzing an HTTP header to deter
 
 The DISPD dispatcher always preserves original HTTP tags `User-Agent` and `Client-Platform` when doing both relaying and firewalling.
 
-<a name="ch-app.NCBID-Server-Launche"></a>
+<a name="ch_app.NCBID_Server_Launche"></a>
 
 ### NCBID Server Launcher
 
-<a name="ch-app.-Overview-4"></a>
+<a name="ch_app._Overview_4"></a>
 
 #### Overview
 
@@ -1926,18 +1926,18 @@ In the ***STATEFUL*** mode, the NCBID utility starts the program in a more trick
 
 For the sake of the backward compatibility the NCBID utility creates the following environment variables (in addition to CGI/1.0 environment variables created by the HTTP daemon when calling NCBID) before starting the service executables:
 
-<a name="ch-app.T.nc-NameDescriptionNI-CLIENT-IPA"></a>
+<a name="ch_app.T.nc_NameDescriptionNI_CLIENT_IPA"></a>
 
 |----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Name                 | Description                                                                                                                                                                                              |
 | NI\_CLIENT\_IPADDR   | The variable contains an IP address of the remote host.<br/>It could also be an IP address of the firewall daemon if the NCBID utility was started as a result of firewalling. |
 | NI\_CLIENT\_PLATFORM | The variable contains the client platform extracted from the HTTP tag `Client-Platform` provided by the client if any.                                                                                   |
 
-<a name="ch-app.Firewall-Daemon-FWDa"></a>
+<a name="ch_app.Firewall_Daemon_FWDa"></a>
 
 ### Firewall Daemon (FWDaemon)
 
-<a name="ch-app.-Overview-5"></a>
+<a name="ch_app._Overview_5"></a>
 
 #### Overview
 
@@ -1951,13 +1951,13 @@ The FWDaemon allows a network client to establish a persistent TCP/IP connection
 
 ***Note:*** One FWDaemon can simultaneously serve many client/server pairs.
 
-<a name="ch-app.FWDaemon-Behind-a--R"></a>
+<a name="ch_app.FWDaemon_Behind_a__R"></a>
 
 ##### FWDaemon Behind a "Regular" Firewall
 
 If a network client is behind a regular firewall, then a system administrator should open the above addresses (only!) for outgoing connections and set your client to "firewall" mode. Now the network client can use NCBI network services in a usual way (as if there were no firewall at all).
 
-<a name="ch-app.FWDaemon-Behind-a--N"></a>
+<a name="ch_app.FWDaemon_Behind_a__N"></a>
 
 ##### FWDaemon Behind a "Non-Transparent" Firewall
 
@@ -1969,7 +1969,7 @@ The mapping on your non-transparent firewall server should be similar to the fol
 
 Please note that there is a port range that might not be presently used by any clients and servers, but it is reserved for future extensions. Nevertheless, it is recommended that you have this range configured on firewalls to allow the applications to function seamlessly in the future.
 
-<a name="ch-app.-Monitoring-1"></a>
+<a name="ch_app._Monitoring_1"></a>
 
 #### Monitoring
 
@@ -2007,7 +2007,7 @@ The outside NCBI network users can check the connection to the NAT service follo
     See http://www.ncbi.nlm.nih.gov/cpp/network/firewall.html.
     Connection closed by foreign host.
 
-<a name="ch-app.-Log-Files-1"></a>
+<a name="ch_app._Log_Files_1"></a>
 
 #### Log Files
 
@@ -2019,7 +2019,7 @@ which is usually a link to `/var/log/fwdaemon`.
 
 The file is formed locally on a host where FWDaemon is running.
 
-<a name="ch-app.FWDaemon-and-NCBID-D"></a>
+<a name="ch_app.FWDaemon_and_NCBID_D"></a>
 
 #### FWDaemon and NCBID Server Data Exchange
 
@@ -2033,7 +2033,7 @@ Figure 17. DISPD FWDaemon Data Exchange
 
 The location of the `.dispd.msg` file is detected by the DISPD dispatcher as follows. The dispatcher determines the user name who owns the `dispd.cgi` executable. Then the dispatcher looks to the home directory for that user. The directory is used to look for the `.dispd.msg` file. The FWDaemon is run under the same user and the `.dispd.msg` file is saved by the daemon in its home directory.
 
-<a name="ch-app.Launcherd-Utility"></a>
+<a name="ch_app.Launcherd_Utility"></a>
 
 ### Launcherd Utility
 
@@ -2051,7 +2051,7 @@ The common practice for the launcherd utility is to be run by the standard Unix 
 
 `# DO NOT EDIT THIS FILE - edit the master and reinstall.`<br/>`# (/export/home/service/UPGRADE/crontabs/service1/crontab `<br/>`# installed on Thu Mar 20 20:48:02 2008) `<br/>`# (Cron version -- $Id: crontab.c,v 2.13 1994/01/17 03:20:37 vixie Exp $) `<br/>`MAILTO=ncbiduse@ncbi`<br/>`*/3 * * * * test -x /export/home/service/launcherd && /export/home/service/launcherd -q -l /export/home/service/bounce.log -- Bounce  /export/home/service/bounce >/dev/null MAILTO=grid-mon@ncbi,taxhelp@ncbi`<br/>`*/3 * * * * test -x /export/home/service/launcherd && /export/home/service/launcherd -q -l /var/log/taxservice -- TaxService /export /home/service/taxservice/taxservice >/dev/null`<br/>
 
-<a name="ch-app.Monitoring-Tools"></a>
+<a name="ch_app.Monitoring_Tools"></a>
 
 ### Monitoring Tools
 
@@ -2065,7 +2065,7 @@ One more web based tool to monitor servers / services statuses is Nagios. It can
 
 [http://nagios.ncbi.nlm.nih.gov](http://nagios.ncbi.nlm.nih.gov/)
 
-<a name="ch-app.Quality-Assurance-Do"></a>
+<a name="ch_app.Quality_Assurance_Do"></a>
 
 ### Quality Assurance Domain
 
@@ -2101,7 +2101,7 @@ So the further processing of the request is done using the substituted name. The
 
 Figure 19. NCBI QA
 
-<a name="ch-app.applications1"></a>
+<a name="ch_app.applications1"></a>
 
 NCBI Genome Workbench
 ---------------------
@@ -2110,17 +2110,17 @@ The NCBI Genome Workbench is an integrated sequence visualization and analysis p
 
 The following topics are discussed in this section:
 
--   [Design goals](#ch-app.gbench-dg)
+-   [Design goals](#ch_app.gbench_dg)
 
--   [Design](#ch-app.gbench-design)
+-   [Design](#ch_app.gbench_design)
 
-<a name="ch-app.gbench-dg"></a>
+<a name="ch_app.gbench_dg"></a>
 
 ### Design Goals
 
 The primary goal of Genome Workbench is to provide a flexible platform for development of new analytic and visualization techniques. To this end, the application must facilitate easy modification and extension. In addition, we place a large emphasis on cross-platform development, and Genome Workbench should function and appear identically on all supported platforms.
 
-<a name="ch-app.gbench-design"></a>
+<a name="ch_app.gbench_design"></a>
 
 ### Design
 
@@ -2134,34 +2134,34 @@ To permit maximal extensibility, the framework delegates much of the function of
 
 Cross-platform graphical development presents many challenges to proper encapsulation. To alleviate a lot of the difficulties seen with such development, we use a cross-platform GUI toolkit (FLTK) in combination with OpenGL for graphical development.
 
-<a name="ch-app.ncbi-netcache-service"></a>
+<a name="ch_app.ncbi_netcache_service"></a>
 
 NCBI NetCache Service
 ---------------------
 
--   [What is NetCache?](#ch-app.what-is-netcache)
+-   [What is NetCache?](#ch_app.what_is_netcache)
 
--   [What can NetCache be used for?](#ch-app.what-it-can-be-used)
+-   [What can NetCache be used for?](#ch_app.what_it_can_be_used)
 
--   [How to use NetCache](#ch-app.getting-started)
+-   [How to use NetCache](#ch_app.getting_started)
 
-    -   [The basic ideas](#ch-app.The-basic-ideas)
+    -   [The basic ideas](#ch_app.The_basic_ideas)
 
-    -   [Setting up your program to use NetCache](#ch-app.Set-up-your-program-to-use-NetCac)
+    -   [Setting up your program to use NetCache](#ch_app.Set_up_your_program_to_use_NetCac)
 
-    -   [Establish the NetCache service name](#ch-app.Establish-the-NetCache-service-na)
+    -   [Establish the NetCache service name](#ch_app.Establish_the_NetCache_service_na)
 
-    -   [Initialize the client API](#ch-app.Initialize-the-client-API)
+    -   [Initialize the client API](#ch_app.Initialize_the_client_API)
 
-    -   [Store data](#ch-app.Store-data)
+    -   [Store data](#ch_app.Store_data)
 
-    -   [Retrieve data](#ch-app.Retrieve-data)
+    -   [Retrieve data](#ch_app.Retrieve_data)
 
-    -   [Samples and other resources](#ch-app.Available-samples)
+    -   [Samples and other resources](#ch_app.Available_samples)
 
--   [Questions and answers](#ch-app.Questions-and-answers)
+-   [Questions and answers](#ch_app.Questions_and_answers)
 
-<a name="ch-app.what-is-netcache"></a>
+<a name="ch_app.what_is_netcache"></a>
 
 ### What is NetCache?
 
@@ -2193,7 +2193,7 @@ Therefore, it's better to provide a centralized service that provides robust tem
 
 **NetCache** is load-balanced and has high performance and virtually unlimited scalability. Any Linux, Unix or Windows machine can be a **NetCache** host, and any application can use it. For example, the success with which **NetCache** solves the problem of distributed access to temporary storage enables the [NCBI Grid](ch_grid.html) framework to rely on it for passing data between its components.
 
-<a name="ch-app.what-it-can-be-used"></a>
+<a name="ch_app.what_it_can_be_used"></a>
 
 ### What can NetCache be used for?
 
@@ -2223,7 +2223,7 @@ The diagram below illustrates how **NetCache** works.
 
 5.  **NetCache** generates and returns a unique key which can then be used to access the data.
 
-<a name="ch-app.getting-started"></a>
+<a name="ch_app.getting_started"></a>
 
 ### How to use NetCache
 
@@ -2231,21 +2231,21 @@ All new applications developed within NCBI should use **NetCache** together with
 
 The following topics explain how to use NetCache from an application:
 
--   [The basic ideas](#ch-app.The-basic-ideas)
+-   [The basic ideas](#ch_app.The_basic_ideas)
 
--   [Set up your program to use NetCache](#ch-app.Set-up-your-program-to-use-NetCac)
+-   [Set up your program to use NetCache](#ch_app.Set_up_your_program_to_use_NetCac)
 
--   [Establish the NetCache service name](#ch-app.Set-up-your-program-to-use-NetCac)
+-   [Establish the NetCache service name](#ch_app.Set_up_your_program_to_use_NetCac)
 
--   [Initialize the client API](#ch-app.Initialize-the-client-API)
+-   [Initialize the client API](#ch_app.Initialize_the_client_API)
 
--   [Store data](#ch-app.Store-data)
+-   [Store data](#ch_app.Store_data)
 
--   [Retrieve data](#ch-app.Retrieve-data)
+-   [Retrieve data](#ch_app.Retrieve_data)
 
--   [Samples and other resources](#ch-app.Available-samples)
+-   [Samples and other resources](#ch_app.Available_samples)
 
-<a name="ch-app.The-basic-ideas"></a>
+<a name="ch_app.The_basic_ideas"></a>
 
 #### The basic ideas
 
@@ -2291,7 +2291,7 @@ There are multiple ways to write data to **NetCache** and read it back, but the 
 
         -   ***Note:*** Calling ***GetBlobSize()*** will prolong a blob's lifetime (unless `prolong_on_read` is `false`), but calling ***GetBlobInfo()*** will not.
 
-<a name="ch-app.Set-up-your-program-to-use-NetCac"></a>
+<a name="ch_app.Set_up_your_program_to_use_NetCac"></a>
 
 #### Set up your program to use NetCache
 
@@ -2322,7 +2322,7 @@ An even easier way to get a new CGI application started is to use the [new\_proj
 
     new_project mycgi app/netcache
 
-<a name="ch-app.Establish-the-NetCache-service-na"></a>
+<a name="ch_app.Establish_the_NetCache_service_na"></a>
 
 #### Establish the NetCache service name
 
@@ -2335,7 +2335,7 @@ Service names are typically specified on the command line or stored in the appli
     [netcache_api]
     service=the_svc_name_here
 
-<a name="ch-app.Initialize-the-client-API"></a>
+<a name="ch_app.Initialize_the_client_API"></a>
 
 #### Initialize the client API
 
@@ -2361,15 +2361,15 @@ If you are using ***CNetICacheClient***, you either need to use API methods that
 
 For a complete reference of **NetCache** configuration parameters, please see the [NetCache and NetSchedule](ch_libconfig.html#ch_libconfig.NetCache_and_NetSchedule) section in the Library Configuration chapter:
 
-<a name="ch-app.Store-data"></a>
+<a name="ch_app.Store_data"></a>
 
 #### Store data
 
 There are ancillary multiple ways to save data, whether you're using ***CNetCacheAPI*** or ***CNetICacheClient***.
 
-With all the storage methods, you can supply a "time-to-live" parameter, which specifies how long (in seconds) a blob will be accessible. See the [basic ideas](#ch-app.The-basic-ideas) section for more information on time-to-live.
+With all the storage methods, you can supply a "time-to-live" parameter, which specifies how long (in seconds) a blob will be accessible. See the [basic ideas](#ch_app.The_basic_ideas) section for more information on time-to-live.
 
-<a name="ch-app.Storing-data-using-CNetCacheAPI"></a>
+<a name="ch_app.Storing_data_using_CNetCacheAPI"></a>
 
 ##### Storing data using CNetCacheAPI
 
@@ -2395,7 +2395,7 @@ If you are saving a new blob using ***CNetCacheAPI***, it will create a unique b
         writer->Write(chunk_buf, chunk_size);
         // (data written at writer deletion or writer.Close())
 
-<a name="ch-app.Storing-data-using-CNetICacheClie"></a>
+<a name="ch_app.Storing_data_using_CNetICacheClie"></a>
 
 ##### Storing data using CNetICacheClient
 
@@ -2413,7 +2413,7 @@ If you are saving a new blob using ***CNetICacheClient***, you must supply a uni
         writer->Write(chunk_buf, chunk_size);
         // (data written at writer deletion or writer.Close())
 
-<a name="ch-app.Retrieve-data"></a>
+<a name="ch_app.Retrieve_data"></a>
 
 #### Retrieve data
 
@@ -2421,7 +2421,7 @@ Retrieving data is more or less complementary to storing data.
 
 If an attempt is made to retrieve a blob after its time-to-live has expired, an exception will be thrown.
 
-<a name="ch-app.Retrieving-data-using-CNetCacheAP"></a>
+<a name="ch_app.Retrieving_data_using_CNetCacheAP"></a>
 
 ##### Retrieving data using CNetCacheAPI
 
@@ -2448,7 +2448,7 @@ The following code snippet demonstrates three ways of retrieving data using ***C
             NCBI_USER_THROW("Error while reading BLOB");
         }
 
-<a name="ch-app.Retrieving-data-using-CNetICacheC"></a>
+<a name="ch_app.Retrieving_data_using_CNetICacheC"></a>
 
 ##### Retrieving data using CNetICacheClient
 
@@ -2471,7 +2471,7 @@ The following code snippet demonstrates two ways to retrieve data using ***CNetI
         remaining -= bytes_read;
     }
 
-<a name="ch-app.Available-samples"></a>
+<a name="ch_app.Available_samples"></a>
 
 #### Samples and other resources
 
@@ -2495,7 +2495,7 @@ The `grid_cli` command-line tool (available on both Windows and Unix) provides c
 
 You can also email <span class="oem_span">nypk4jvylGujip5ust5upo5nv/</span> if you have questions.
 
-<a name="ch-app.Questions-and-answers"></a>
+<a name="ch_app.Questions_and_answers"></a>
 
 ### Questions and answers
 
@@ -2528,6 +2528,6 @@ A:I have seen 400MB blobs there being written and read without an incident a tho
 
 **Q:How is the expiration of BLOBs handled by NetCache? My thinking is coming from two directions. First, I wouldn’t want BLOBs deleted out from under me, but also, if the expiration is too long, I don’t want to be littering the NetCache. That is: do I need to work hard to remove all of my BLOBs or can I just trust the automatic clean-up?**
 
-A:You can specify a "time-to-live" when you create a blob. If you don't specify a value, you can find the service's default value by calling ***GetBlobInfo()***. See the [basic ideas](#ch-app.The-basic-ideas) section for more details.
+A:You can specify a "time-to-live" when you create a blob. If you don't specify a value, you can find the service's default value by calling ***GetBlobInfo()***. See the [basic ideas](#ch_app.The_basic_ideas) section for more details.
 
 
