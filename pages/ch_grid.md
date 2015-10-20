@@ -949,7 +949,23 @@ NCBI NetSchedule control utility. This program can be used to operate NetSchedul
 </tr>
 <tr class="odd">
 <td align="left">-read &lt;BATCH_ID_OUTPUT,JOB_IDS_OUTPUT,LIMIT,TIMEOUT&gt;</td>
-<td align="left">Retrieve IDs of the completed jobs and change their state to Reading.<br/><br/>For the first two parameters, the <a href="#ch-grid.Alternate-list-outpu">Alternate list output</a> format can be used.<br/><br/><strong>Parameter descriptions:</strong><br/><strong><code>BATCH_ID_OUTPUT</code></strong>- Defines where to send the ID of the retrieved jobs. Can be either a file name or '-'.<strong><code>JOB_IDS</code></strong>- Defines where to send the list of jobs that were switched to the state <code>Reading</code>. Can be either a file name or '-'.<strong><code>LIMIT</code></strong>- Maximum number of jobs retrieved.<strong><code>TIMEOUT</code></strong>- Timeout before jobs will be switched back to the state <code>Done</code> so that they can be returned again in response to another <code>-read</code>.<br/><strong>Examples:</strong><br/>
+<td align="left">Retrieve IDs of the completed jobs and change their state to Reading.<br/><br/>For the first two parameters, the <a href="#ch-grid.Alternate-list-outpu">Alternate list output</a> format can be used.<br/><br/><strong>Parameter descriptions:</strong><br/><strong><code>BATCH_ID_OUTPUT</code></strong>
+<ul>
+<li><p>Defines where to send the ID of the retrieved jobs. Can be either a file name or '-'.</p></li>
+</ul>
+<strong><code>JOB_IDS</code></strong>
+<ul>
+<li><p>Defines where to send the list of jobs that were switched to the state <code>Reading</code>. Can be either a file name or '-'.</p></li>
+</ul>
+<strong><code>LIMIT</code></strong>
+<ul>
+<li><p>Maximum number of jobs retrieved.</p></li>
+</ul>
+<strong><code>TIMEOUT</code></strong>
+<ul>
+<li><p>Timeout before jobs will be switched back to the state <code>Done</code> so that they can be returned again in response to another <code>-read</code>.</p></li>
+</ul>
+<br/><strong>Examples:</strong><br/>
 <pre><code>    netschedule_control -service NS_Test -queue test \
         -read batch_id.txt,job_ids.lst,100,300
     netschedule_control -service NS_Test -queue test \
@@ -1038,7 +1054,17 @@ OPTIONS:
 </tr>
 <tr class="odd">
 <td align="left">-jlist &lt;STATUS&gt;</td>
-<td align="left">Show jobs by status. STATUS can be one of the following:- <code>all</code>- <code>canceled</code>- <code>done</code>- <code>failed</code>- <code>pending</code>- <code>returned</code>- <code>running</code><br/></td>
+<td align="left">Show jobs by status. STATUS can be one of the following:
+<ul>
+<li><p><code>all</code></p></li>
+<li><p><code>canceled</code></p></li>
+<li><p><code>done</code></p></li>
+<li><p><code>failed</code></p></li>
+<li><p><code>pending</code></p></li>
+<li><p><code>returned</code></p></li>
+<li><p><code>running</code></p></li>
+</ul>
+<br/></td>
 </tr>
 <tr class="even">
 <td align="left">-qlist</td>
@@ -1058,7 +1084,25 @@ OPTIONS:
 </tr>
 <tr class="even">
 <td align="left">-attr &lt;ATTRIBUTE&gt;</td>
-<td align="left">Show one of the following job attributes:- <code>cmdline</code>- <code>progress</code>- <code>raw_input</code>- <code>raw_output</code>- <code>retcode</code>- <code>status</code>- <code>stdin</code>- <code>stdout</code>- <code>stderr</code><br/><br/>Alternatively, the ATTRIBUTE parameter can be specified as one of the following attribute sets:- <code>standard</code>- <code>full</code>- <code>minimal</code><br/></td>
+<td align="left">Show one of the following job attributes:
+<ul>
+<li><p><code>cmdline</code></p></li>
+<li><p><code>progress</code></p></li>
+<li><p><code>raw_input</code></p></li>
+<li><p><code>raw_output</code></p></li>
+<li><p><code>retcode</code></p></li>
+<li><p><code>status</code></p></li>
+<li><p><code>stdin</code></p></li>
+<li><p><code>stdout</code></p></li>
+<li><p><code>stderr</code></p></li>
+</ul>
+<br/><br/>Alternatively, the ATTRIBUTE parameter can be specified as one of the following attribute sets:
+<ul>
+<li><p><code>standard</code></p></li>
+<li><p><code>full</code></p></li>
+<li><p><code>minimal</code></p></li>
+</ul>
+<br/></td>
 </tr>
 <tr class="odd">
 <td align="left">-stdout &lt;JOB_IDS&gt;</td>
@@ -1078,7 +1122,13 @@ OPTIONS:
 </tr>
 <tr class="even">
 <td align="left">-cmd &lt;COMMAND&gt;</td>
-<td align="left">Apply one of the following commands to the queue specified by the <code>-q</code> option:- <code>drop_jobs</code>- <code>kill_nodes</code>- <code>shutdown_nodes</code><br/></td>
+<td align="left">Apply one of the following commands to the queue specified by the <code>-q</code> option:
+<ul>
+<li><p><code>drop_jobs</code></p></li>
+<li><p><code>kill_nodes</code></p></li>
+<li><p><code>shutdown_nodes</code></p></li>
+</ul>
+<br/></td>
 </tr>
 <tr class="odd">
 <td align="left">-render &lt;OUTPUT_FORMAT&gt;</td>
