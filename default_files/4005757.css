@@ -8,10 +8,14 @@
 }
 
 
-.search{width:50%;}
+.search{
+	width:50%;
+}
 
 
-
+.header{
+	padding-bottom:5px;
+}
 
 
 .search td {border-style:none;}
@@ -58,7 +62,7 @@ tr.option {color:white;}
 .ncbi_logo{
 	position:absolute; right:10px;
 	max-height: 24px;
-    	padding: 8px 0;
+    	padding: 2.2em;
 }
 
 
