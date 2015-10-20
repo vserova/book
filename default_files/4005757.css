@@ -8,11 +8,22 @@
 }
 
 
+.header{background:#205081; repeat-x scroll left bottom; position: relative;margin-bottom: 1.231em;z-index:20 } 
+/* .header{background:#d5d5d5 url(/portal/portal3rc.fcgi/4048106/img/2375536) repeat-x scroll left bottom; position: relative;margin-bottom: 1.231em;z-index:20 } */
+
+.header a{text-decoration:none}
+.header a:hover{text-decoration:underline}
+
+.search{
+	position: absolute; 
+	height: 80px; 
+	right: 100px; 
+	top: -25px
+	margin:0 0 0 13.539em; 
+	padding:1.2em 
+	0 .7em}
+
 .search{width:50%;}
-
-
-
-
 
 .search td {border-style:none;}
 .search tr {border-style:none;}
@@ -58,7 +69,7 @@ tr.option {color:white;}
 .ncbi_logo{
 	position:absolute; right:10px;
 	max-height: 24px;
-    	padding: 8px 0;
+    	padding: 2.2em;
 }
 
 
@@ -1162,14 +1173,6 @@ a.img_link {
 /********************************************************************/
 /*  ComponentID=3871380 /projects/standards/standard_searchbar_css@1.16  */
 
-.header{background:#d5d5d5 url(/portal/portal3rc.fcgi/4048106/img/2375536) repeat-x scroll left bottom; position: relative;margin-bottom: 1.231em;z-index:20 } 
-/* .header{background:#d5d5d5 url(/portal/portal3rc.fcgi/4048106/img/2375536) repeat-x scroll left bottom; position: relative;margin-bottom: 1.231em;z-index:20 } */
-
-.header{background:#205081;}
-.header a{text-decoration:none}
-.header a:hover{text-decoration:underline}
-
-.search{margin:0 0 0 13.539em; padding:1.2em 0 .7em}
 .search_form{*zoom:1}
 .search_form select,.search_form .jig-ncbiclearbutton-wrap,.search_form button{margin-right:.2em;font-family:arial,helvetica,sans-serif;}
 .search_form select{font-size: 1.077em; width:8.5em;margin-right:.3em;*vertical-align: middle; position: relative; bottom: 1px;}
@@ -1231,7 +1234,7 @@ h1.img_logo a{padding:0}
 /********************************************************************/
 /*  ComponentID=4005757 /projects/PAF/BaseComponents/PAFLocalNavCSS@1.5  */
 
-div.page div.header { margin-bottom: 0;}
+div.page { margin-bottom: 0;}
 
 
 
