@@ -4,8 +4,9 @@ title: C++ Toolkit test
 nav: pages/ch_core
 ---
 
-8. Portability, Core Functionality and Application Framework
-============================================================
+
+8\. Portability, Core Functionality and Application Framework
+===========================================================================
 
 Last Update: December 29, 2014.
 
@@ -2021,180 +2022,20 @@ Filter strings contain filtering conditions separated by a space. An empty filte
 
 Table 4. Filter String Samples
 
-<table>
-<colgroup>
-<col width="25%" />
-<col width="25%" />
-<col width="25%" />
-<col width="25%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">Filter</th>
-<th align="left">Description</th>
-<th align="left">Matches</th>
-<th align="left">Non Matches</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left"><code>/corelib</code></td>
-<td align="left">Log message from source file located in <code>src/corelib</code> or <code>include/corelib</code> or subdirectories.</td>
-<td align="left"><ul>
-<li><p><code>src/corelib/ncbidiag.cpp</code></p></li>
-<li><p><code>src/corelib/test/test_ncbiexec.cpp</code></p></li>
-<li><p><code>include/corelib/ncbidiag.hpp</code></p></li>
-</ul></td>
-<td align="left"><ul>
-<li><p><code>src/cgi/cgiapp.cpp</code></p></li>
-</ul></td>
-</tr>
-<tr class="even">
-<td align="left"><code>/corelib/test</code></td>
-<td align="left">Log message from source file located in <code>src/corelib/test</code> or <code>include/corelib/test</code> or subdirectories.</td>
-<td align="left"><ul>
-<li><p><code>src/corelib/test/test_ncbiexec.cpp</code></p></li>
-</ul></td>
-<td align="left"><ul>
-<li><p><code>src/corelib/ncbidiag.cpp</code></p></li>
-<li><p><code>include/corelib/ncbidiag.hpp</code></p></li>
-<li><p><code>src/cgi/cgiapp.cpp</code></p></li>
-</ul></td>
-</tr>
-<tr class="odd">
-<td align="left"><code>/corelib/</code></td>
-<td align="left">Log message from source file located in <code>src/corelib</code> or <code>include/corelib</code>, but not subdirectories.</td>
-<td align="left"><ul>
-<li><p><code>src/corelib/ncbidiag.cpp</code></p></li>
-<li><p><code>include/corelib/ncbidiag.hpp</code></p></li>
-</ul></td>
-<td align="left"><ul>
-<li><p><code>src/corelib/test/test_ncbiexec.cpp</code></p></li>
-<li><p><code>src/cgi/cgiapp.cpp</code></p></li>
-</ul></td>
-</tr>
-<tr class="even">
-<td align="left"><code>corelib</code></td>
-<td align="left">Log message with module name set to &quot;corelib&quot; and any class or function name.</td>
-<td align="left"><ul>
-<li><p><code>corelib</code></p></li>
-<li><p><code>corelib</code>::<em><strong>CNcbiDiag</strong></em></p></li>
-<li><p><code>corelib</code>::<em><strong>CNcbiDiag</strong></em>::<em><strong>GetModule()</strong></em></p></li>
-</ul></td>
-<td align="left"><ul>
-<li><p><em><strong>CNcbiDiag</strong></em></p></li>
-<li><p><em><strong>CNcbiDiag</strong></em>::<em><strong>GetModule()</strong></em></p></li>
-<li><p><em><strong>GetModule()</strong></em></p></li>
-</ul></td>
-</tr>
-<tr class="odd">
-<td align="left"><code>corelib</code>::<em><strong>CNcbiDiag</strong></em></td>
-<td align="left">Log message with module name set to &quot;corelib&quot;, class name set to &quot;<em><strong>CNcbiDiag</strong></em>&quot; and any function name.</td>
-<td align="left"><ul>
-<li><p><code>corelib</code>::<em><strong>CNcbiDiag</strong></em></p></li>
-<li><p><code>corelib</code>::<em><strong>CNcbiDiag</strong></em>::<em><strong>GetModule()</strong></em></p></li>
-</ul></td>
-<td align="left"><ul>
-<li><p><code>corelib</code></p></li>
-<li><p><em><strong>CNcbiDiag</strong></em></p></li>
-<li><p><em><strong>CNcbiDiag</strong></em>::<em><strong>GetModule()</strong></em></p></li>
-<li><p><em><strong>GetModule()</strong></em></p></li>
-</ul></td>
-</tr>
-<tr class="even">
-<td align="left">::<em><strong>CNcbiDiag</strong></em></td>
-<td align="left">Log message with class name set to &quot;<em><strong>CNcbiDiag</strong></em>&quot; and any module or function name.</td>
-<td align="left"><ul>
-<li><p><code>corelib</code>::<em><strong>CNcbiDiag</strong></em></p></li>
-<li><p><code>corelib</code>::<em><strong>CNcbiDiag</strong></em>::<em><strong>GetModule()</strong></em></p></li>
-<li><p><em><strong>CNcbiDiag</strong></em></p></li>
-<li><p><em><strong>CNcbiDiag</strong></em>::<em><strong>GetModule()</strong></em></p></li>
-</ul></td>
-<td align="left"><ul>
-<li><p><code>corelib</code></p></li>
-<li><p><em><strong>GetModule()</strong></em></p></li>
-</ul></td>
-</tr>
-<tr class="odd">
-<td align="left">?</td>
-<td align="left">Log message with module name not set and any class or function name.</td>
-<td align="left"><ul>
-<li><p><em><strong>CNcbiDiag</strong></em></p></li>
-<li><p><em><strong>CNcbiDiag</strong></em>::<em><strong>GetModule()</strong></em></p></li>
-<li><p><em><strong>GetModule()</strong></em></p></li>
-</ul></td>
-<td align="left"><ul>
-<li><p><code>corelib</code></p></li>
-<li><p><code>corelib</code>::<em><strong>CNcbiDiag</strong></em></p></li>
-<li><p><code>corelib</code>::<em><strong>CNcbiDiag</strong></em>::<em><strong>GetModule()</strong></em></p></li>
-<li><p><code>corelib</code>::<em><strong>CNcbiDiag</strong></em>::<em><strong>GetModule()</strong></em></p></li>
-</ul></td>
-</tr>
-<tr class="even">
-<td align="left"><code>corelib</code>::?</td>
-<td align="left">Log message with module name set to &quot;corelib&quot;, class name not set and any function name.</td>
-<td align="left"><ul>
-<li><p><code>corelib</code></p></li>
-<li><p><code>corelib</code>::<em><strong>GetModule()</strong></em></p></li>
-</ul></td>
-<td align="left"><ul>
-<li><p><code>corelib</code>::<em><strong>CNcbiDiag</strong></em></p></li>
-<li><p><code>corelib</code>::<em><strong>CNcbiDiag</strong></em>::<em><strong>GetModule()</strong></em></p></li>
-<li><p><em><strong>CNcbiDiag</strong></em>::<em><strong>GetModule()</strong></em></p></li>
-<li><p><em><strong>GetModule()</strong></em></p></li>
-</ul></td>
-</tr>
-<tr class="odd">
-<td align="left"><em><strong>GetModule()</strong></em></td>
-<td align="left">Log message with function name set to &quot;<em><strong>GetModule</strong></em>&quot; and any class or module name.</td>
-<td align="left"><ul>
-<li><p><code>corelib</code>::<em><strong>GetModule()</strong></em></p></li>
-<li><p><em><strong>CNcbiDiag</strong></em>::<em><strong>GetModule()</strong></em></p></li>
-<li><p><em><strong>GetModule()</strong></em></p></li>
-</ul></td>
-<td align="left"><ul>
-<li><p><code>Corelib</code></p></li>
-<li><p><code>corelib</code>::<em><strong>CNcbiDiag</strong></em></p></li>
-<li><p><em><strong>CNcbiDiag</strong></em></p></li>
-</ul></td>
-</tr>
-<tr class="even">
-<td align="left">(20.11)</td>
-<td align="left">Log messages with error code 20 and subcode 11.</td>
-<td align="left"><ul>
-<li><p>ErrCode(20,11)</p></li>
-</ul></td>
-<td align="left"><ul>
-<li><p>ErrCode(20,10)</p></li>
-<li><p>ErrCode(123,11)</p></li>
-</ul></td>
-</tr>
-<tr class="odd">
-<td align="left">(20-80.)</td>
-<td align="left">Log messages with error code from 20 to 80 and any subcode.</td>
-<td align="left"><ul>
-<li><p>ErrCode(20,11)</p></li>
-<li><p>ErrCode(20,10)</p></li>
-<li><p>ErrCode(51,1)</p></li>
-</ul></td>
-<td align="left"><ul>
-<li><p>ErrCode(123,11)</p></li>
-</ul></td>
-</tr>
-<tr class="even">
-<td align="left">(20-80,120,311-400.1-50,60)</td>
-<td align="left">Log messages with error code from 20 to 80, 120, from 311 to 400 and subcode from 1 to 50 and 60.</td>
-<td align="left"><ul>
-<li><p>ErrCode(20,11)</p></li>
-<li><p>ErrCode(321,60)</p></li>
-</ul></td>
-<td align="left"><ul>
-<li><p>ErrCode(20,51)</p></li>
-<li><p>ErrCode(321,61)</p></li>
-</ul></td>
-</tr>
-</tbody>
-</table>
+| Filter                      | Description                                                                                               | Matches                                                                                                                          | Non Matches                                                                                                                           |
+|-----------------------------|-----------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------|
+| `/corelib`                  | Log message from source file located in `src/corelib` or `include/corelib` or subdirectories.             | - `src/corelib/ncbidiag.cpp`- `src/corelib/test/test_ncbiexec.cpp`- `include/corelib/ncbidiag.hpp`                               | - `src/cgi/cgiapp.cpp`                                                                                                                |
+| `/corelib/test`             | Log message from source file located in `src/corelib/test` or `include/corelib/test` or subdirectories.   | - `src/corelib/test/test_ncbiexec.cpp`                                                                                           | - `src/corelib/ncbidiag.cpp`- `include/corelib/ncbidiag.hpp`- `src/cgi/cgiapp.cpp`                                                    |
+| `/corelib/`                 | Log message from source file located in `src/corelib` or `include/corelib`, but not subdirectories.       | - `src/corelib/ncbidiag.cpp`- `include/corelib/ncbidiag.hpp`                                                                     | - `src/corelib/test/test_ncbiexec.cpp`- `src/cgi/cgiapp.cpp`                                                                          |
+| `corelib`                   | Log message with module name set to "corelib" and any class or function name.                             | - `corelib`- `corelib`::***CNcbiDiag***- `corelib`::***CNcbiDiag***::***GetModule()***                                           | - ***CNcbiDiag***- ***CNcbiDiag***::***GetModule()***- ***GetModule()***                                                              |
+| `corelib`::***CNcbiDiag***  | Log message with module name set to "corelib", class name set to "***CNcbiDiag***" and any function name. | - `corelib`::***CNcbiDiag***- `corelib`::***CNcbiDiag***::***GetModule()***                                                      | - `corelib`- ***CNcbiDiag***- ***CNcbiDiag***::***GetModule()***- ***GetModule()***                                                   |
+| ::***CNcbiDiag***           | Log message with class name set to "***CNcbiDiag***" and any module or function name.                     | - `corelib`::***CNcbiDiag***- `corelib`::***CNcbiDiag***::***GetModule()***- ***CNcbiDiag***- ***CNcbiDiag***::***GetModule()*** | - `corelib`- ***GetModule()***                                                                                                        |
+| ?                           | Log message with module name not set and any class or function name.                                      | - ***CNcbiDiag***- ***CNcbiDiag***::***GetModule()***- ***GetModule()***                                                         | - `corelib`- `corelib`::***CNcbiDiag***- `corelib`::***CNcbiDiag***::***GetModule()***- `corelib`::***CNcbiDiag***::***GetModule()*** |
+| `corelib`::?                | Log message with module name set to "corelib", class name not set and any function name.                  | - `corelib`- `corelib`::***GetModule()***                                                                                        | - `corelib`::***CNcbiDiag***- `corelib`::***CNcbiDiag***::***GetModule()***- ***CNcbiDiag***::***GetModule()***- ***GetModule()***    |
+| ***GetModule()***           | Log message with function name set to "***GetModule***" and any class or module name.                     | - `corelib`::***GetModule()***- ***CNcbiDiag***::***GetModule()***- ***GetModule()***                                            | - `Corelib`- `corelib`::***CNcbiDiag***- ***CNcbiDiag***                                                                              |
+| (20.11)                     | Log messages with error code 20 and subcode 11.                                                           | - ErrCode(20,11)                                                                                                                 | - ErrCode(20,10)- ErrCode(123,11)                                                                                                     |
+| (20-80.)                    | Log messages with error code from 20 to 80 and any subcode.                                               | - ErrCode(20,11)- ErrCode(20,10)- ErrCode(51,1)                                                                                  | - ErrCode(123,11)                                                                                                                     |
+| (20-80,120,311-400.1-50,60) | Log messages with error code from 20 to 80, 120, from 311 to 400 and subcode from 1 to 50 and 60.         | - ErrCode(20,11)- ErrCode(321,60)                                                                                                | - ErrCode(20,51)- ErrCode(321,61)                                                                                                     |
 
 For example:
 

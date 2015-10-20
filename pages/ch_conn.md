@@ -4,8 +4,9 @@ title: C++ Toolkit test
 nav: pages/ch_conn
 ---
 
-9. Networking and IPC
-=====================
+
+9\. Networking and IPC
+====================================
 
 Last Update: October 26, 2014.
 

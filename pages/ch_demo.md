@@ -4,8 +4,9 @@ title: C++ Toolkit test
 nav: pages/ch_demo
 ---
 
-25. Examples and Demos
-======================
+
+25\. Examples and Demos
+=====================================
 
 Last Update: July 12, 2013.
 

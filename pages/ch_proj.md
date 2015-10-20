@@ -4,8 +4,9 @@ title: C++ Toolkit test
 nav: pages/ch_proj
 ---
 
-6. Project Creation and Management
-==================================
+
+6\. Project Creation and Management
+=================================================
 
 Last Update: December 2, 2014.
 

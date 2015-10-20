@@ -4,8 +4,9 @@ title: C++ Toolkit test
 nav: pages/part2
 ---
 
-Part 2. Development Framework
-=============================
+
+Part 2\. Development Framework
+============================================
 
 Part 2 deals with the development framework, and discusses how to download the Toolkit code and configure the source code for different platforms, how to build the libraries and executables, how to setup projects, and the recommended style for writing code. The following is a list of chapters in this part:
 

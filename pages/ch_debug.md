@@ -4,8 +4,9 @@ title: C++ Toolkit test
 nav: pages/ch_debug
 ---
 
-22. Debugging, Exceptions, and Error Handling
-=============================================
+
+22\. Debugging, Exceptions, and Error Handling
+============================================================
 
 Last Update: April 24, 2014.
 

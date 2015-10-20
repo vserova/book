@@ -4,8 +4,9 @@ title: C++ Toolkit test
 nav: pages/ch_datamod
 ---
 
-14. Biological Sequence Data Model
-==================================
+
+14\. Biological Sequence Data Model
+=================================================
 
 Last Update: April 24, 2014.
 

@@ -4,8 +4,9 @@ title: C++ Toolkit test
 nav: pages/ch_dbapi
 ---
 
-10. Database Access Support
-===========================
+
+10\. Database Access Support
+==========================================
 
 Last Update: April 2, 2015.
 

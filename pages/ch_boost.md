@@ -4,8 +4,9 @@ title: C++ Toolkit test
 nav: pages/ch_boost
 ---
 
-20. Using the Boost Unit Test Framework
-=======================================
+
+20\. Using the Boost Unit Test Framework
+======================================================
 
 Last Update: November 13, 2014.
 

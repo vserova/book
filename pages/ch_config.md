@@ -4,8 +4,9 @@ title: C++ Toolkit test
 nav: pages/ch_config
 ---
 
-4. Configure, Build, and Use the Toolkit
-========================================
+
+4\. Configure, Build, and Use the Toolkit
+=======================================================
 
 Last Update: November 13, 2014.
 

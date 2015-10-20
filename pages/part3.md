@@ -4,8 +4,9 @@ title: C++ Toolkit test
 nav: pages/part3
 ---
 
-Part 3. C++ Toolkit Library Reference
-=====================================
+
+Part 3\. C++ Toolkit Library Reference
+====================================================
 
 Part 3 discusses the the core library and the different specialized libraries such as the connection, database API, CGI, HTML, Serial, Util, GUI etc. The following is a list of chapters in this part:
 

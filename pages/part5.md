@@ -4,8 +4,9 @@ title: C++ Toolkit test
 nav: pages/part5
 ---
 
-Part 5. Software
-================
+
+Part 5\. Software
+===============================
 
 Part 5 discusses debugging mechansims, development tools, examples, demos and tests for the C++ Toolkit. The following is a list of chapters in this part:
 

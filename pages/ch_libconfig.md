@@ -4,8 +4,9 @@ title: C++ Toolkit test
 nav: pages/ch_libconfig
 ---
 
-30. Library Configuration
-=========================
+
+30\. Library Configuration
+========================================
 
 Last Update: June 24, 2014.
 
