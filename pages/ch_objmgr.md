@@ -907,6 +907,8 @@ See the [CSeqMap\_CI API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_
 | ***GetRefSeqid*** | Type must be `eSeqRef`.                                                                                                                                                                                                                                                          |
 | ***GetRefData***  | Type must be `eSeqGap` or `eSeqData`.                                                                                                                                                                                                                                            |
 
+<div class="table-scroll"></div>
+
 ***Note:*** Some other methods will not throw exceptions if called inappropriately, and will instead return invalid data. Therefore you must check for the appropriate conditions before calling these methods or using their data:
 
 <a name="ch_objmgr.T.nc_methodcalling_conditionge"></a>
@@ -916,6 +918,8 @@ See the [CSeqMap\_CI API reference](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_
 | ***GetLength***         | ***IsUnknownLength*** must return false.                            |
 | ***GetEndPosition***    | ***IsUnknownLength*** must return false.                            |
 | ***GetRefEndPosition*** | Type must be `eSeqRef` and ***IsUnknownLength*** must return false. |
+
+<div class="table-scroll"></div>
 
 <a name="ch_objmgr.SSeqMapSelector"></a>
 
@@ -1485,6 +1489,8 @@ The required libraries are:
 | UNIX    | `LIB  = ncbi_xloader_lds2 lds2 xobjread id2 id1 seqsplit sqlitewrapp creaders $(COMPRESS_LIBS) $(SOBJMGR_LIBS)`<br/>`LIBS = $(SQLITE3_LIBS) $(CMPRS_LIBS) $(DL_LIBS) $(ORIG_LIBS)` |
 | Windows | `id1.lib, id2.lib, lds2.lib, sqlitewrapp.lib, sqlite3.lib, ncbi_xloader_lds2.lib, xobjread.lib`                                                                                                              |
 
+<div class="table-scroll"></div>
+
 A demonstration program is available: [SVN](http://www.ncbi.nlm.nih.gov/viewvc/v1/trunk/c%2B%2B/src/sample/app/lds/lds2_sample.cpp?view=markup) \| [LXR](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/lds/lds2_sample.cpp)
 
 <a name="ch_objmgr.Registering_the_LDS_loader_wit"></a>
@@ -1594,6 +1600,8 @@ The following table summarizes the classes that perform short-term, in-memory ca
 | master TSE blob      | [CObjectManager](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectManager.html) |
 | id, gi, label, taxid | [CGBDataLoader](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCGBDataLoader.html)   |
 | blob id              | [CGBDataLoader](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCGBDataLoader.html)   |
+
+<div class="table-scroll"></div>
 
 If you want in-memory caching for objects other than those listed in the table, you can implement a cache in a [CDataLoader](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDataLoader&d=) subclass. For an example implementation, see the [CGBDataLoader](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CGBDataLoader&d=) class. ***CGBDataLoader*** actually has two Seq-id caches - one for blob id's and the other for the other small objects listed in the table. The size for both of these caches is controlled through the [[GENBANK] ID\_GC\_SIZE](ch_libconfig.html#ch_libconfig.Objects_Object_Manager_Obje) configuration parameter (i.e. their sizes can't be set independently). Subclasses of ***CGBDataLoader*** can access their configuration using the [CParam methods](ch_core.html#ch_core.Methods_for_Using_Pa).
 
@@ -1981,6 +1989,8 @@ Table 1. Teaching Example: Sequence
 |-----------|------------|----------|------------------------------|
 | AJ438945  | AJ438945.1 | 19584253 | Homo sapiens SLC16A1 gene... |
 
+<div class="table-scroll"></div>
+
 The application should produce the following results for the above Bioseq:
 
     ID: emb|AJ438945.1|HSA438945 + gi|19584253
@@ -2013,6 +2023,8 @@ Table 2. Test Examples: Sequences
 | AF022257   | AF022257.1   | 2415435  | HIV-1 patient ACH0039, clone 3918C6 from The Netherlands... |
 | AC116052   | AC116052.1   | 19697559 | Mus musculus chromosome UNK clone                           |
 | Q08345     | Q08345.1     | 729008   | Epithelial discoidin domain receptor 1 precursor...         |
+
+<div class="table-scroll"></div>
 
 <a name="ch_objmgr.object_manager_3_32"></a>
 

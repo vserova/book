@@ -808,6 +808,8 @@ Then the table below lists the callbacks that are called, depending on the value
 |                                                                                                                                                                   | `xml::event_parser::entity_reference("my")`                                                                                                                                            |
 | `xml::event_parser::text(" oh!")`                                                                                                                                                     | `xml::event_parser::text(" oh!")`                                                                                                                                                      |
 
+<div class="table-scroll"></div>
+
 So the difference is that the ***entity\_reference()*** callback is never called if ***substitute\_entities(true)*** is called. ***Note:*** The ***entity\_reference()*** callback is also not called if a standard entity is used (e.g. **`&apos;`**, **`&amp;`**, **`&quot;`**, **`&lt;`**, **`&gt;`**), regardless of any call to ***substitute\_entities()***.
 
 Character entities are handled the same way as named entities.
@@ -1037,6 +1039,8 @@ Then the ***save\_to\_string()*** function will produce the following outputs fo
 </tbody>
 </table>
 
+<div class="table-scroll"></div>
+
 <a name="ch_xmlwrapp.Original_containing_textli_2"></a>
 
 ##### Original containing text-like nodes and having programmatically inserted content
@@ -1114,6 +1118,8 @@ Then the ***save\_to\_string()*** function will produce the following outputs fo
 </tbody>
 </table>
 
+<div class="table-scroll"></div>
+
 <a name="ch_xmlwrapp.Original_not_containing_te_1"></a>
 
 ##### Original not containing text-like nodes
@@ -1173,6 +1179,8 @@ Then the ***save\_to\_string()*** function will produce the following outputs fo
 </tr>
 </tbody>
 </table>
+
+<div class="table-scroll"></div>
 
 <a name="ch_xmlwrapp.Original_not_containing_te_2"></a>
 
@@ -1252,6 +1260,8 @@ Then the ***save\_to\_string()*** function will produce the following outputs fo
 </tr>
 </tbody>
 </table>
+
+<div class="table-scroll"></div>
 
 <a name="ch_xmlwrapp.FAQ"></a>
 

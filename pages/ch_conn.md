@@ -178,6 +178,8 @@ After successful creation with ***CONN\_Create()***, the following calls from **
 |------------------------------------------------------------------------------------|
 | `CONN_Read(CONN conn, void* buf, size_t size, size_t* n_read, EIO_ReadMethod how)` |
 
+<div class="table-scroll"></div>
+
 Read or peek data, depending on read method **`how`**, up to **`size`** bytes from connection to specified buffer **`buf`**, return (via pointer argument **`n_read`**) the number of bytes actually read. The last argument **`how`** can be one of the following:
 
 -   [eIO\_ReadPlain](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=EIO_ReadMethod) - to read data in a regular way, that is, extracting data from the connection;
@@ -192,6 +194,8 @@ A return value other than **`eIO_Success`** means trouble. Specifically, the ret
 
 |---------------------------------------------------------------------|
 | `CONN_ReadLine(CONN conn, char* line, size_t size, size_t* n_read)` |
+
+<div class="table-scroll"></div>
 
 Read up to **`size`** bytes from connection into the string buffer pointed to by **`line`**. Stop reading if either '\\n' or an error is encountered. Replace '\\n' with '\\0'. Upon return **`*n_read`** contains the number of characters written to **`line`**, not including the terminating '\\0'. If not enough space provided in **`line`** to accomodate the '\\0'-terminated line, then all **`size`** bytes are used up and **`*n_read`** is equal to **`size`** upon return - this is the only case when **`line`** will not be '\\0'-terminated.
 
@@ -208,6 +212,8 @@ This call utilizes **`eIO_Read`** timeout as set by ***CONN\_SetTimeout().***
 |--------------------------------------------------------------------------|
 | `CONN_Write(CONN conn, const void* buf, size_t size, size_t* n_written)` |
 
+<div class="table-scroll"></div>
+
 Write up to **`size`** bytes from the buffer **`buf`** to the connection. Return the number of actually written bytes in **`n_written`**. It may not return **`eIO_Success`** if no data at all can be written before the write timeout expired or an error occurred. Parameter **`how`** modifies the write behavior:
 
 -   [eIO\_WritePlain](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=EIO_WriteMethod) - return immediately after having written as little as 1 byte of data, or if an error has occurred;
@@ -221,6 +227,8 @@ Write up to **`size`** bytes from the buffer **`buf`** to the connection. Return
 |----------------------------------------------------------|
 | `CONN_PushBack(CONN conn, const void* buf, size_t size)` |
 
+<div class="table-scroll"></div>
+
 Push back **`size`** bytes from the buffer **`buf`** into connection. Return **`eIO_Success`** on success, other code on error.
 
 ***Note 1:*** The data pushed back may not necessarily be the same as previously obtained from the connection.
@@ -232,12 +240,16 @@ Push back **`size`** bytes from the buffer **`buf`** into connection. Return **`
 |------------------------------------------------|
 | `CONN_GetPosition(CONN conn, EIO_Event event)` |
 
+<div class="table-scroll"></div>
+
 Get read (**`event`** == **`eIO_Read`**) or write (**`event`** == **`eIO_Write`**) position within the connection. Positions are advanced from 0 on, and only concerning I/O that has caused calling to the actual connector's "read" (i.e. pushbacks never considered, and peeks -- not always) and "write" methods. Special case: **`eIO_Open`** as **`event`** causes to clear both positions with 0, and to return 0.
 
 <a name="ch_conn.T.nc_conn_flushconn_conn"></a>
 
 |-------------------------|
 | `CONN_Flush(CONN conn)` |
+
+<div class="table-scroll"></div>
 
 Explicitly flush connection from any pending data written by ***CONN\_Write()***.
 
@@ -252,12 +264,16 @@ Explicitly flush connection from any pending data written by ***CONN\_Write()***
 |-------------------------------------------------------------------------|
 | `CONN_SetTimeout(CONN conn, EIO_Event action, const STimeout* timeout)` |
 
+<div class="table-scroll"></div>
+
 Set the timeout on the specified I/O action, [eIO\_Read](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=EIO_Event), **`eIO_Write`**, **`eIO_ReadWrite`**, **`eIO_Open`**, and **`eIO_Close`**. The latter two actions are used in a phase of opening and closing the link, respectively. If the connection cannot be read (written, established, closed) within the specified period, **`eIO_Timeout`** would result from connection I/O calls. A timeout can be passed as the **`NULL`**-pointer. This special case denotes an infinite value for that timeout. Also, a special value **`kDefaultTimeout`** may be used for any timeout. This value specifies the timeout set by default for the current connection type.
 
 <a name="ch_conn.T.nc_conn_gettimeoutconn_conn_ei"></a>
 
 |------------------------------------------------|
 | `CONN_GetTimeout(CONN conn, EIO_Event action)` |
+
+<div class="table-scroll"></div>
 
 Obtain (via the return value of type ***const*** [STimeout](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=STimeout)***\****) timeouts set by the ***CONN\_SetTimeout()*** routine, or active by default (i.e., special value **`kDefaultTimeout`**).
 
@@ -268,12 +284,16 @@ Obtain (via the return value of type ***const*** [STimeout](http://www.ncbi.nlm.
 |-------------------------------------------------|
 | `CONN_ReInit(CONN conn, CONNECTOR replacement)` |
 
+<div class="table-scroll"></div>
+
 This function clears the current contents of a connection and places ("immerse") a new connector into it. The previous connector (if any) is closed first (if open), then gets destroyed, and thus must not be referenced again in the program. As a special case, the new connector can be the same connector, which is currently active within the connection. It this case, the connector is not destroyed; instead, it will be effectively re-opened. If the connector passed as **`NULL`**, then the **`conn`** handle is kept existing but unusable (the old connector closed and destroyed) and can be ***CONN\_ReInit()***'ed later. None of the timeouts are touched by this call.
 
 <a name="ch_conn.T.nc_conn_waitconn_conn_eio_even"></a>
 
 |------------------------------------------------------------------|
 | `CONN_Wait(CONN conn, EIO_Event event, const STimeout* timeout)` |
+
+<div class="table-scroll"></div>
 
 Suspend the program until the connection is ready to perform reading (**`event`** =**`eIO_Read`**) or writing (**`event`** = **`eIO_Write`**), or until the timeout (if non-**`NULL`**) expires. If the timeout is passed as **`NULL`**, then the wait time is indefinite.
 
@@ -282,12 +302,16 @@ Suspend the program until the connection is ready to perform reading (**`event`*
 |-----------------------------------------------|
 | `CONN_Status(CONN conn, EIO_Event direction)` |
 
+<div class="table-scroll"></div>
+
 Provide the information about recent low-level data exchange in the link. The operation direction has to be specified as either **`eIO_Read`** or **`eIO_Write`**. The necessity of this call arises from the fact that sometimes the return value of a ***CONN*** API function does not really tell that the problem has been detected: suppose, the user peeks data into a 100-byte buffer and gets 10 bytes. The return status **`eIO_Success`** signals that those 10 bytes were found in the connection okay. But how do you know whether the end-of-file condition occurred during the last operation? This is where ***CONN\_Status()*** comes in handy. When inquired about the read operation, return value **`eIO_Closed`** denotes that **`EOF`** was actually hit while making the peek, and those 10 bytes are in fact the only data left untaken, no more are expected to come.
 
 <a name="ch_conn.T.nc_conn_closeconn_conn"></a>
 
 |-------------------------|
 | `CONN_Close(CONN conn)` |
+
+<div class="table-scroll"></div>
 
 Close the connection by closing the link (if open), deleting underlying connector(s) (if any) and the connection itself. Regardless of the return status (which may indicate certain problems), the connection handle becomes invalid and cannot be reused.
 
@@ -296,12 +320,16 @@ Close the connection by closing the link (if open), deleting underlying connecto
 |--------------------------|
 | `CONN_Cancel(CONN conn)` |
 
+<div class="table-scroll"></div>
+
 Cancel the connection's I/O ability. This is **not** connection closure, but any data extraction or insertion (Read/Write) will be effectively rejected after this call (and **`eIO_Interrupt`** will result, same for ***CONN\_Status()***). ***CONN\_Close()*** is still required to release internal connection structures.
 
 <a name="ch_conn.T.nc_conn_gettypeconn_conn"></a>
 
 |---------------------------|
 | `CONN_GetType(CONN conn)` |
+
+<div class="table-scroll"></div>
 
 Return character string (null-terminated), verbally representing the current connection type, such as `"HTTP"`, `"SOCKET"`, `"SERVICE/HTTP"`, etc. The unknown connection type gets returned as **`NULL`**.
 
@@ -310,12 +338,16 @@ Return character string (null-terminated), verbally representing the current con
 |-------------------------------|
 | `CONN_Description(CONN conn)` |
 
+<div class="table-scroll"></div>
+
 Return a human-readable description of the connection as a character '\\0'-terminated string. The string is not guaranteed to have any particular format and is intended solely for something like logging and debugging. Return **`NULL`** if the connection cannot provide any description information (or if it is in a bad state). Application program must call ***free()*** to deallocate space occupied by the returned string when the description is no longer needed.
 
 <a name="ch_conn.T.nc_conn_setcallbackconn_conn_e"></a>
 
 |-----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `CONN_SetCallback(CONN conn, ECONN_Callback type,`<br/>`                 const SCONN_Callback* new_cb, SCONN_Callback* old_cb)` |
+
+<div class="table-scroll"></div>
 
 Set user callback function to be invoked upon an event specified by callback **`type`**. The old callback (if any) gets returned via the passed pointer **`old_cb`** (if not **`NULL`**). Callback structure [SCONN\_Callback](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SCONN_Callback) has the following fields: callback function `func` and `void* data`. Callback function **`func`** should have the following prototype:
 

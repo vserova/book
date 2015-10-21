@@ -280,6 +280,8 @@ Table 1. Main arguments
 | conffile \<File\_In\>  | Program's configuration (registry) data file              |                                                        |
 | -version               | Print version number                                      | Ignores other arguments                                                    |
 
+<div class="table-scroll"></div>
+
 <a name="ch_app.datatool.html_refCodeGenerationAr"></a>
 
 #### Code Generation Arguments
@@ -318,6 +320,8 @@ Table 2. Code generation arguments
 | -lax\_syntax    | Allow non-standard ASN.1 syntax accepted by asntool                   | The value "-" in the [Definition file](#ch_app.datatool.html_refDefFile) means don't allow non-standard syntax and overrides the -lax\_syntax option specified elsewhere. |
 | -pch \<string\> | Name of the precompiled header file to include in all \*.cpp files    |                                                                                                                                                       |
 | -oex \<export\> | Add storage-class modifier to generated classes                       | Can be overriden by [[-].\_export](#ch_app.datatool.html_refDefCommon) in the definition file.                                                                            |
+
+<div class="table-scroll"></div>
 
 <a name="ch_app.Data_Specification_C"></a>
 
@@ -699,6 +703,8 @@ Then the following definitions will effect the generation of objects:
 | `[Dates]`<br/>`E._pointer = true`         | elements of the `Dates` container                                  |
 | `[Int-fuzz]`<br/>`range.min._type = long` | the `min` member of the `range` member of the `Int-fuzz` structure |
 | `[Int-fuzz]`<br/>`alt.E._type = long`     | elements of the `alt` member of the `Int-fuzz` structure           |
+
+<div class="table-scroll"></div>
 
 As another example, suppose you have a ***CatalogEntry*** type comprised of a ***Summary*** element and either a ***RecordA*** element or a ***RecordB*** element, as defined by the following XSD specification:
 
@@ -1134,6 +1140,8 @@ The check script is expected to produce one of the following exit codes:
 | 211 - 220                   | ALERT (email contacts and retain the current server state).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | 221 - 230                   | ALERT (email contacts and base the server rate on the dependency check only).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 
+<div class="table-scroll"></div>
+
 Exit codes 126, 127, and other unlisted codes are treated as if 0 had been returned (i.e. the server rate is based on the dependency check only).
 
 Any exit code other than 123 resets the repetition count, even though the new code may be equal to the previous one. In the absence of a previous code, exit code 123 will not be counted as a repetition, will cause a warning to be logged.
@@ -1249,6 +1257,8 @@ The table below describes the LBSMD daemon signal processing.
 | SIGINT  | quit                                                                                                                      |
 | SIGTERM | quit                                                                                                                      |
 | SIGUSR1 | toggle the verbosity level between less verbose (default) and more verbose (when every warning generated is stored) modes |
+
+<div class="table-scroll"></div>
 
 <a name="ch_app.Automatic_Configurat"></a>
 
@@ -1562,6 +1572,8 @@ The table below describes Apache configuration directives which are taken into a
 | CAFProxyPreference proxy preference                   | It sets a preference (floating point number from the range [0..100]) that the proxy would have if a host matching the cookie is found. The preference value 0 selects the default value which is currently 95. It can appear anywhere in configuration, but is hierarchy complying.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | CAFProxyCryptKey proxy key                            | It sets a crypt key that should be used to decode the cookie. Default is the key preset when a cookie correspondence is created [via either "CAFProxyCookie" or "CAFProxyArgument"]. To disable cookie decrypting (e.g. if the cookie comes in as a plain text) use "". Can appear anywhere in configuration, but is hierarchy complying.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 
+<div class="table-scroll"></div>
+
 All hierarchy complying settings are inherited in directories that are deeper in the directory tree, unless overridden there. The new setting then takes effect for that and all descendant directories/locations.
 
 There are 4 predefined proxies that may be used [or operated on] without prior declaration by either "CAFProxyCookie" or "CAFProxyArgument" directives:
@@ -1574,6 +1586,8 @@ There are 4 predefined proxies that may be used [or operated on] without prior d
 | eutils.lb  | LB-Hint-Pubmed  | 95         | \\|       | yes      | db       | DBAF     |
 | mapview.lb | LB-Hint-MapView | 95         | \\|       | yes      | \<none\> | \<none\> |
 | blastq.lb  | LB-Hint-Blast   | 95         | \\|       | yes      | \<none\> | \<none\> |
+
+<div class="table-scroll"></div>
 
 ***NOTE***: The same cookie can be used to tie up an affinity for multiple LB proxies. On the other hand, LB proxy names are all unique throughout the configuration file.
 
@@ -1670,6 +1684,8 @@ Suppose that the DB=A is a query argument (explicit DB selection, including just
 | DB=-           | Poor. <br/>"-" stands for "missing in the request"  |
 | DB=B           | Mismatch. It is used for fallbacks only as the last resort                    |
 
+<div class="table-scroll"></div>
+
 No host with an explicit DB assignment (DB=B or DB=-) is being selected above if there is an exclamation point "!" [stands for "only"] in the assignment. DB=~A for the host causes the host to be skipped from selection as well. DBs are screened in the order of appearance, the first one is taken, so "DB=~A A" skips all requests having DB=A in their query strings.
 
 Suppose that there is no DB selection in the request. Then the hosts are selected in the following order:
@@ -1682,6 +1698,8 @@ Suppose that there is no DB selection in the request. Then the hosts are selecte
 | DB not defined | Good                                                                         |
 | DB=\*          | Fair.<br/>"\*" stands for "any other"              |
 | DB=B           | Poor                                                                         |
+
+<div class="table-scroll"></div>
 
 No host with a non-empty DB assignment (DB=B or DB=\*) is being selected in the above scenario if there is an exclamation point "!" [stands for "only"] in the assignment. DB=~- defined for the host causes the host not to be considered.
 
@@ -1831,6 +1849,8 @@ The following additional HTTP tags are recognized in the client request to the D
 </tbody>
 </table>
 
+<div class="table-scroll"></div>
+
 <a name="ch_app.DISPD_Client_Respons"></a>
 
 ##### DISPD Client Response
@@ -1847,6 +1867,8 @@ The DISPD dispatcher can produce the following HTTP tags in response to the clie
 | `Dispatcher-Failures: <failures>`         | The tag value lists all transient failures that the dispatcher might have experienced while processing the request. A fatal error (if any) always appears as the last failure in the list. In this case, the reply body would contain a copy of the message as well.<br/>***Note:*** Fatal dispatching failure is also indicated by an unsuccessful HTTP completion code.                                                                                                                                                                                                                                                                                                                                                                                             |
 | `Used-Server-Info-n: <server_info>`       | The tag informs the client end of server infos that having been unsuccessfully used during current connection request (so that the client will be able to skip over them if needs to).<br/>`n` is an integral suffix, enumerating from 1.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | `Dispatcher-Messages:`                    | The tag is used to issue a message into standard error log of a client. The message is intercepted and delivered from within Toolkit HTTP API.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+
+<div class="table-scroll"></div>
 
 <a name="ch_app.Communication_Scheme"></a>
 
@@ -1932,6 +1954,8 @@ For the sake of the backward compatibility the NCBID utility creates the followi
 | Name                 | Description                                                                                                                                                                                              |
 | NI\_CLIENT\_IPADDR   | The variable contains an IP address of the remote host.<br/>It could also be an IP address of the firewall daemon if the NCBID utility was started as a result of firewalling. |
 | NI\_CLIENT\_PLATFORM | The variable contains the client platform extracted from the HTTP tag `Client-Platform` provided by the client if any.                                                                                   |
+
+<div class="table-scroll"></div>
 
 <a name="ch_app.Firewall_Daemon_FWDa"></a>
 

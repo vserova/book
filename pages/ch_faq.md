@@ -137,6 +137,8 @@ NEVER trust user-supplied strings - always sanitize them before using them.
 | JSON                                        | ***[NStr::JsonEncode()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=JsonEncode)***             |
 | SQL                                         | ***[NStr::SQLEncode()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SQLEncode)***               |
 
+<div class="table-scroll"></div>
+
 ***Note:*** In addition to sanitizing URLs with [NStr::URLEncode()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=URLEncode), the [CUrl](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCUrl.html) class can be used to take apart and reassemble a URL. If the original URL was malformed an error would be produced. At the very least, improper URL segments would be mangled.
 
 <a name="ch_faq.general"></a>
@@ -298,6 +300,8 @@ You must specify the appropriate Visual C++ runtime library to link with:
 | ReleaseDLL    | `/MD`           |
 | ReleaseMT     | `/MT`           |
 
+<div class="table-scroll"></div>
+
 For more information, see the MSDN [page](http://msdn.microsoft.com/en-us/library/2kzt1wy3.aspx) on runtime library options.
 
 <a name="ch_faq.Checked_iterators"></a>
@@ -320,6 +324,8 @@ The Visual C++ defaults for `_SECURE_SCL` are:
 |--------------------|-------|---------|
 | 2010               | 1     | 0       |
 | 2008               | 1     | 1       |
+
+<div class="table-scroll"></div>
 
 By default, the compiler options for NCBI C++ Toolkit libraries do not specify the `_SECURE_SCL` option for debug configurations, and specify `_SECURE_SCL=0` for release configurations. Therefore they use checked iterators for debug configurations, but not for release configurations.
 
@@ -355,6 +361,8 @@ If you set `_ITERATOR_DEBUG_LEVEL`, then `_SECURE_SCL` and `_HAS_ITERATOR_DEBUGG
 | 1                       | 1             | 0                         |
 | 2                       | 1             | 1                         |
 
+<div class="table-scroll"></div>
+
 If you don't set `_ITERATOR_DEBUG_LEVEL`, it will be set automatically according to the values of `_SECURE_SCL` and `_HAS_ITERATOR_DEBUGGING` per the above table. Therefore, you can use either `_ITERATOR_DEBUG_LEVEL` or `_SECURE_SCL` and `_HAS_ITERATOR_DEBUGGING` as you see fit. In most cases, you won't need to set any of them. You just need to know about them in case you link with libraries that use different settings.
 
 For more information, see:
@@ -382,6 +390,8 @@ Two tools are available to resolve the common linking questions:
 | Which libraries contain a given symbol?               | [Library search](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lib_search/libsearch.cgi?public=yes) |
 | Which other libraries does a given library depend on? | [Library dependencies](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/dglistdeps.cgi)      |
 
+<div class="table-scroll"></div>
+
 For example, suppose the linker complains about the symbol ***ncbi::CIStreamBuffer::FindChar(char)*** being undefined. Here is how to use these tools to resolve this problem:
 
 1.  To find the library(s) where the unresolved symbol is defined, use the [Library search](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lib_search/libsearch.cgi?public=yes) tool:<br/><br/>Using the example above, enter `FindChar` as a search term. The library where this symbol is defined is [libxutil.a (ncbi\_core)](http://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/CPP_DOC/depgraphs/xutil.html).<br/><br/>Now that you have the library that defines the symbol, you can proceed to find the library dependencies it introduces. ***Note:*** The simplest way to do this is by just clicking on the library in the search results to show its dependencies. Alternatively, you can proceed to step 2.<br/>
@@ -402,6 +412,8 @@ NCBI C++ Library Dependency Graphs (including internal libraries)
 | Just C++ Toolkit libraries                                |                                                                |                                                                     | [PDF](http://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/CPP_DOC/depgraphs/depgraph-c++.pdf)  | [PS](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/depgraph-c++.ps)  |                                                                     |
 | Highly connected or otherwise noteworthy public libraries | [GIF](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/depgraph-core.gif) | [PNG](http://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/CPP_DOC/depgraphs/depgraph-core.png) | [PDF](http://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/CPP_DOC/depgraphs/depgraph-core.pdf) | [PS](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/depgraph-core.ps) |                                                                     |
 
+<div class="table-scroll"></div>
+
 <a name="ch_faq.T4"></a>
 
 NCBI C++ Library Dependency Graphs (public libraries only)
@@ -412,6 +424,8 @@ NCBI C++ Library Dependency Graphs (public libraries only)
 | Non-GUI libraries                                         |                                                                |                                                                | [PDF](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/depgraph-public-nogui.pdf) | [PS](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/depgraph-public-nogui.ps) |                                                                  |
 | GUI libraries                                             | [GIF](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/depgraph-gui.gif)  | [PNG](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/depgraph-gui.png)  | [PDF](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/depgraph-gui.pdf)          | [PS](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/depgraph-gui.ps)          |                                                                  |
 | Highly connected or otherwise noteworthy public libraries | [GIF](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/depgraph-core.gif) | [PNG](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/depgraph-core.png) | [PDF](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/depgraph-core.pdf)         | [PS](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/depgraph-core.ps)         |                                                                  |
+
+<div class="table-scroll"></div>
 
 In cases where the above methods do not work, you can also search manually using the following steps:
 
@@ -446,6 +460,8 @@ Table 1. Examples where the library name is a variant on the sub directory name
 | objtools/alnmgr                        | xalnmgr                            |
 | serial                                 | xser                               |
 | util                                   | xutil                              |
+
+<div class="table-scroll"></div>
 
 Most often, difficulties arise when one is linking an application using the numerous `"objects/"` libraries. To give you some relief, here are some examples involving such libraries. They show the right order of libraries, as well as which libraries you may actually need. Using this as a starting point, it's **much** easier to find the right combination of libraries:
 

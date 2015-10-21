@@ -273,6 +273,7 @@ EXAMPLE
 `double g_MyGlobalFunc(void);`
 ***g\_****GlobalVar*
 `short g_MyGlobalVar;`
+<div class="table-scroll"></div>
 
 <a name="ch_style.1.3.1"></a>
 
@@ -921,6 +922,8 @@ The following Subversion repositories have been set up for general use within NC
 | [gbench](https://svn.ncbi.nlm.nih.gov/viewvc/gbench/)                | GUI / GBENCH                                               |
 | [staff](https://svn.ncbi.nlm.nih.gov/viewvc/staff/)                  | individuals' projects (not parts of any official projects) |
 | [misc\_projects](https://svn.ncbi.nlm.nih.gov/viewvc/misc_projects/) | projects not falling into any of the other categories      |
+
+<div class="table-scroll"></div>
 
 Note for NCBI developers: Using these repositories has the additional advantages that they are:
 

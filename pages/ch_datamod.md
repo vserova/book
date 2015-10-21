@@ -895,6 +895,8 @@ The C++ implementation of [CSeq\_descr](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/
 | 23        | e\_Source       | source of materials, includes Org-ref              |
 | 24        | e\_Molinfo      | info on the molecule and techniques                |
 
+<div class="table-scroll"></div>
+
 <a name="ch_datamod.moltype_The_Molecule"></a>
 
 ##### mol-type: The Molecule Type
@@ -944,6 +946,8 @@ The modifier concept permits a lot of flexibility. So a peptide with GIBB-mod = 
 | 26        | eGIBB\_mod\_physmap        | physical map (not ordered restriction map)                                                                         |
 | 255       | eGIBB\_mod\_other          |                                                                                                |
 
+<div class="table-scroll"></div>
+
 <a name="ch_datamod.method_Protein_Seque"></a>
 
 ##### method: Protein Sequencing Method
@@ -962,6 +966,8 @@ The method ***GetMethod()*** gives the method used to obtain a protein sequence.
 | 4         | eGIBB\_method\_seq\_pept\_overlap | peptides sequenced, fragments ordered by overlap       |
 | 5         | eGIBB\_method\_seq\_pept\_homol   | peptides sequenced, fragments ordered by homology      |
 | 6         | eGIBB\_method\_concept\_trans\_a  | conceptual translation, provided by author of sequence |
+
+<div class="table-scroll"></div>
 
 <a name="ch_datamod.name_A_Descriptive_N"></a>
 
@@ -1245,6 +1251,8 @@ In the NCBI C++ implementation, the values are stored one value per byte.
 | 89        | Y          | Tyrosine                 |
 | 90        | Z          | Glu or Gln               |
 
+<div class="table-scroll"></div>
+
 <a name="ch_datamod.NCBIeaa_Extended_IUP"></a>
 
 ##### NCBIeaa: Extended IUPAC Encoding of Amino Acids
@@ -1288,6 +1296,8 @@ In the NCBI C++ implementation, the values are stored one value per byte.
 | 89        | Y          | Tyrosine                 |
 | 90        | Z          | Glu or Gln               |
 
+<div class="table-scroll"></div>
+
 <a name="ch_datamod.NCBIstdaa_A_Simple_S"></a>
 
 ##### NCBIstdaa: A Simple Sequential Code for Amino Acids
@@ -1330,6 +1340,8 @@ In the NCBI C++ implementation, the values are stored one value per byte.
 | 25        | \*         | Termination              |
 | 26        | O          | Pyrrolysine              |
 | 27        | J          | Leu or Ile               |
+
+<div class="table-scroll"></div>
 
 <a name="ch_datamod.NCBI8aa_An_Encoding_"></a>
 
@@ -1375,6 +1387,8 @@ The C++ implementation encodes one value for a nucleic acid residue per byte.
 | 87        | W          | A or T           |
 | 89        | Y          | T or C           |
 
+<div class="table-scroll"></div>
+
 <a name="ch_datamod.NCBI4na_A_Four_Bit_E"></a>
 
 ##### NCBI4na: A Four Bit Encoding of Nucleic Acids
@@ -1404,6 +1418,8 @@ It is possible to represent the same set of nucleic acid and ambiguities with a 
 | 14        | B          | G or T or C      |
 | 15        | N          | A or G or C or T |
 
+<div class="table-scroll"></div>
+
 <a name="ch_datamod.NCBI2na_A_Two_Bit_En"></a>
 
 ##### NCBI2na: A Two Bit Encoding for Nucleic Acids
@@ -1420,6 +1436,8 @@ If no ambiguous bases are present in a nucleic acid sequence it can be completel
 | 1         | C          | Cytosine       |
 | 2         | G          | Guanine        |
 | 3         | T          | Thymine/Uracil |
+
+<div class="table-scroll"></div>
 
 <a name="ch_datamod.NCBI8na_An_Eight_Bit"></a>
 
@@ -1622,6 +1640,8 @@ The following table summarizes the types of Bioseq-sets:
 | 11        | swissprot      | SWISSPROT entries                                                                                                                      |
 | 12        | pdb-entry      | all the Bioseqs associated with a single PDB structure                                                                                 |
 | 255       | other          | new type. Usually Bioseq-set.release will have an explanatory string                                                                   |
+
+<div class="table-scroll"></div>
 
 <a name="ch_datamod.release_an_explanato"></a>
 
@@ -1902,6 +1922,8 @@ A Seq-id is implemented in C++ as a choice, summarized in the following table:
 | 19        | e\_Gpipe               | Internal NCBI genome pipeline processing id |
 | 20        | e\_Named\_annot\_track | Internal named annotation tracking id       |
 
+<div class="table-scroll"></div>
+
 A large number of additional functions for manipulating SeqIds are described in the [Sequence Utilities](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/util/sequence.hpp) chapter.
 
 <a name="ch_datamod.NCBI_ID_Database_Imp"></a>
@@ -2045,6 +2067,8 @@ The following table summarizes the Choice variants for [CSeq\_loc](http://www.nc
 | 10             | e\_Bond        | bond                 |
 | 11             | e\_Feat        | feat                 |
 
+<div class="table-scroll"></div>
+
 Note that e\_Mix and e\_Equiv Seq-loc types can recursively contain other Seq-locs. Also, the e\_Int type (implemented by [CSeq\_interval](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__interval.html)) has the following strand enumeration:
 
 <a name="ch_datamod.T16"></a>
@@ -2057,6 +2081,8 @@ Note that e\_Mix and e\_Equiv Seq-loc types can recursively contain other Seq-lo
 | 3              | e\_Na\_strand\_both      | in forward direction |
 | 4              | e\_Na\_strand\_both\_rev | in reverse direction |
 | 5              | e\_Na\_strand\_other     |  |
+
+<div class="table-scroll"></div>
 
 In addition, there are a large number of utility functions for working with SeqLocs described in the chapter on [Sequence Utilities](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/util/sequence.hpp). This allow traversal of complex locations, comparison of locations for overlap, conversion of coordinates in locations, and ability to open a window on a Bioseq through a location.
 
@@ -2393,6 +2419,8 @@ The C++ implementation of a Seq-feat is mostly straightforward. However, some ex
 | local          | 3         |
 | general        | 4         |
 
+<div class="table-scroll"></div>
+
 **SeqFeat.data**
 
 <a name="ch_datamod.T18"></a>
@@ -2421,6 +2449,8 @@ The C++ implementation of a Seq-feat is mostly straightforward. However, some ex
 | het             | 19        |
 | biosrc          | 20        |
 | clone           | 21        |
+
+<div class="table-scroll"></div>
 
 Of course, within the software tools for producing GenBank, report, or other formats from ASN.1 are functions to format and display features as well. There are some functions to manipulate the [CSeqFeatData](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeqFeatData.html) objects, such as the translation of a CdRegion, and a host of functions to use and compare the Seq-locs of "product" and "location" or easily access and use the sequence regions they point to. These functions are discussed in the [Sequence Utilities](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/util/sequence.hpp) chapter. Additional functions, described in [Exploring The Data](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/misc/sequence_macros.hpp), allow one to easily locate features of interest by type, in arbitrarily complex objects.
 
@@ -2494,6 +2524,8 @@ The GeneticCode type is summarized as follows:
 | sncbieaa       | 6         |
 | sncbi8aa       | 7         |
 | sncbistdaa     | 8         |
+
+<div class="table-scroll"></div>
 
 <a name="ch_datamod.Rsiteref_Reference_T"></a>
 

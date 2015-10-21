@@ -449,6 +449,8 @@ There are three main **structural contexts** in which an object might be encount
 | Class Member   | When the stream object matches a specified member of a specified `SEQUENCE` type – for example, the **`id`** member of the ***Bioseq*** type. |
 | Choice Variant | When the stream object matches a specified variant of a specified `CHOICE` type – for example, the **`std`** variant of the ***Date*** type.  |
 
+<div class="table-scroll"></div>
+
 Complex structural contexts can be created by nesting the main structural contexts. For example, a [stack path hook](#ch_ser.stack_path_hooks) can apply to a specific class member, but only when it is nested inside another specified class member. Stack path hooks also make it possible to hook objects only within a limited level of nesting - for example, hooking only the highest-level Seq-entry's. For more details see the [stack path hook](#ch_ser.stack_path_hooks) section.
 
 There are four **processing modes** that can be applied to input/output streams:
@@ -462,6 +464,8 @@ There are four **processing modes** that can be applied to input/output streams:
 | Copy  | When objects are parsed from an input stream and written directly to an output stream.   |
 | Write | When objects are written to an output stream.                                            |
 
+<div class="table-scroll"></div>
+
 The **operation** is not restricted to a limited set of choices. It can be any application-specific task, as long as that task is compatible with the processing mode. For example, a skip operation can be performed inside a read hook, provided that the skipped content is optional for the object being read. Similarly, a read operation can be performed inside a skip hook. The operation performed inside a hook must preserve the integrity of the hooked object, and must advance the stream all the way through the hooked object and no farther.
 
 Hooks can be installed for all combinations of structural context and processing mode. Each combination has a base class that defines a pure virtual method that must be defined in a derived class to implement the hook – e.g. the ***CReadObjectHook*** class defines a pure virtual ***ReadObject()*** method. The definition of the overriding method in the derived class is often referred to as "the hook".
@@ -474,6 +478,8 @@ Hooks can be installed for all combinations of structural context and processing
 | [Write](#ch_ser.objstream.html_writehooks) | [CWriteObjectHook](#ch_ser.Write_Object_Hook_Sample) | [CWriteClassMemberHook](#ch_ser.Write_Class_Member_Hook_Sample) | [CWriteChoiceVariantHook](#ch_ser.Write_Choice_Variant_Hook_Sample) |
 | [Copy](#ch_ser.objstream.html_copyhooks)   | [CCopyObjectHook](#ch_ser.Copy_Object_Hook_Sample)   | [CCopyClassMemberHook](#ch_ser.Copy_Class_Member_Hook_Sample)   | [CCopyChoiceVariantHook](#ch_ser.Copy_Choice_Variant_Hook_Sample)   |
 | [Skip](#ch_ser.Skip_mode_hooks)            | [CSkipObjectHook](#ch_ser.Skip_Object_Hook_Sample)   | [CSkipClassMemberHook](#ch_ser.Skip_Class_Member_Hook_Sample)   | [CSkipChoiceVariantHook](#ch_ser.Skip_Choice_Variant_Hook_Sample)   |
+
+<div class="table-scroll"></div>
 
 In addition, there is a [hook guard](#ch_ser.objstream.html_hookguard) class, which simplifies creating any of the above hooks. There are also [stack path hook](#ch_ser.stack_path_hooks) methods corresponding to each structural context / processing mode combination above, making it easy to create hooks for virtually any conceivable situation.
 
@@ -1502,6 +1508,8 @@ Table 1. Network Service Client Generation Parameters
 | **`reply`** (REQUIRED)   | ASN.1 type for replies, as above.                                                                                                                                                                                                                                               |
 | **`reply.choice_name`**  | Reply choice appropriate for requests of type **`choice_name`**; defaults to **`choice_name`** as well, and determines the return type of ***AskChoice\_name***. May be set to `special` to suppress automatic method generation and let the user class handle the whole thing. |
 
+<div class="table-scroll"></div>
+
 <a name="ch_ser.serial_verify"></a>
 
 ### Verification of Class Member Initialization
@@ -2305,6 +2313,8 @@ Table 2. BEGIN\_NAMED\_\* Macro names and their usage
 | [BEGIN\_NAMED\_ENUM\_INF](#ch_ser.usrtypeinfo.html_class_ref)             | Enum object               | EnumAlias, EnumName, IsInteger             |
 | [BEGIN\_NAMED\_ENUM\_IN\_INFO](#ch_ser.usrtypeinfo.html_class_ref)        | internal Enum object      | EnumAlias, CppContext, EnumName, IsInteger |
 
+<div class="table-scroll"></div>
+
 The first four macros in Table 2 apply to C++ objects. The **`DECLARE_INTERNAL_TYPE_INFO()`** macro **must** appear in the class definition's public section. These macros take two ***string*** arguments:
 
 -   an external alias for the type, and
@@ -2374,6 +2384,8 @@ Table 3. ADD\_\* Macros and their usage
 | ADD\_NAMED\_ENUM\_IN\_CHOICE\_VARIANT | Add an enumeration variant to a C++ choice object                             | VariantAlias, VariantName, CppContext, EnumName     |
 | ADD\_NAMED\_CHOICE\_VARIANT           | Add a variant of the type specified by **`TypeMacro`** to a C++ choice object | VariantAlias, VariantName, TypeMacro, TypeMacroArgs |
 | ADD\_ENUM\_VALUE                      | Add a named enumeration value to an `enum`                                    | EnumValName, Value                                  |
+
+<div class="table-scroll"></div>
 
 -   [BEGIN\_NAMED\_ABSTRACT\_CLASS\_INFO(ClassAlias, ClassName)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=BEGIN_NAMED_ABSTRACT_CLASS_INFO)
 
@@ -2477,6 +2489,8 @@ Table 4. Type macros and their arguments
 | STL\_CHAR\_vector | (C++ Char type)                       |
 | STL\_auto\_ptr    | (Type,Args)                           |
 | CHOICE            | (Type,Args)                           |
+
+<div class="table-scroll"></div>
 
 The **`ADD_MEMBER`** macro generates a call to the corresponding **`ADD_NAMED_MEMBER`** macro as follows:
 
@@ -3315,6 +3329,8 @@ For example, suppose a specification is changed a la:
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `Date ::= SEQUENCE {`<br/>`    year INTEGER ,`<br/>`    month INTEGER ,`<br/>`    day INTEGER }` | `Date ::= SEQUENCE {`<br/>`    year INTEGER ,`<br/>`epoch VisibleString OPTIONAL ,`<br/>`    month INTEGER ,`<br/>`    day INTEGER }` |
 
+<div class="table-scroll"></div>
+
 The old specification associates tag 2 with month and tag 3 with day; the new specification associates tag 2 with epoch, tag 3 with month, and tag 4 with day. Thus, if an old reader reads a new file it will choke on tag 4 and if a new reader reads an old file it will choke on the absence of tag 4.
 
 However, suppose the specification is changed this way:
@@ -3324,6 +3340,8 @@ However, suppose the specification is changed this way:
 | Old Specification                                                                                                                                                              | New Specification                                                                                                                                                                                                                                                              |
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `Date ::= SEQUENCE {`<br/>`    year INTEGER ,`<br/>`    month INTEGER ,`<br/>`    day INTEGER }` | `Date ::= SEQUENCE {`<br/>`    year INTEGER ,`<br/>`    month INTEGER ,`<br/>`    day INTEGER ,`<br/>`epoch VisibleString OPTIONAL`<br/>` }` |
+
+<div class="table-scroll"></div>
 
 Now the new reader can read old data without any trouble. Old readers will not be able to read new data because tag 4 was not part of the specification they were built for so they will crash upon the first instance of epoch data (but they will read all data up to that point just fine).
 
@@ -3341,6 +3359,8 @@ It is conceivable that a "schema version" could be incorporated into a type begi
 
 |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `subsnp ::= SEQUENCE {`<br/>`  version INTEGER {`<br/>`    snp_v1(1),`<br/>`    snp_v2(2),`<br/>`    max_version(255)`<br/>`  },`<br/>`  data CHOICE {`<br/>`    subsnp_v1 SubSNP_v1`<br/>`    subsnp_v2 SubSNP_v2`<br/>`}` |
+
+<div class="table-scroll"></div>
 
 However, old readers would still not be able to read new data, so it's unclear what the advantage of this approach would have over simply adding optional members to the end of the type.
 

@@ -444,6 +444,8 @@ Table 1. Example of Command-line Arguments
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------|
 | -gi "Integer" (GI id of the Seq-Entry to examine) OPTIONAL ARGUMENTS: -h (Print this USAGE message; ignore other arguments) -reconstruct (Reconstruct title) -accession (Prepend accession) -organism (Append organism name) | -gi 10200 -reconstruct -accession -organism |
 
+<div class="table-scroll"></div>
+
 <a name="ch_core.TF.1"></a>
 
 Please note:
@@ -875,6 +877,8 @@ Table 3. Standard command-line options for the default instance of CArgDescripti
 | -logfile  | Redirect program's log into the specified file.                 | theapp -logfile theapp\_log  |
 | -conffile | Read the program's configuration data from the specified file.  | theapp -conffile theapp\_cfg |
 
+<div class="table-scroll"></div>
+
 To avoid creation of a default ***CArgDescriptions*** object that may not be needed, for instance if the standard flags described in [Table 3](#ch_core.T3) are not used, one should call the ***CNcbiApplication::DisableArgDescriptions()*** function from an application object constructor.
 
 It is also possible to use the ***CNcbiApplication::HideStdArgs(THideStdArgs hide\_mask)*** method to hide description of the standard arguments (`-h, -logfile, -conffile`) in the [USAGE](#ch_core.CArgDescriptions_Usage) message. Please note: This only hides the description of these flags; it is still possible to use them.
@@ -924,6 +928,8 @@ where:
 | arg\_pos\_dflt  | [\<value\>] -- (optional, with default value)             |
 | arg\_extra      | \<value\> -- (dep. on the constraint policy)              |
 | arg\_extra\_opt | [\<value\>] -- (dep. on the constraint policy)            |
+
+<div class="table-scroll"></div>
 
 and: `<key>` must be followed by `<value>`. In all cases '`-<key> <value>`' is equivalent to '`-<key>=<value>`'. If '=' is used as separator, the value can be empty ('`-<key>=`'). For arguments with a single-char name `fOptionalSeparator` flag can be set. In this case the value can be specified without any separator: `-<k><value>`
 
@@ -1397,6 +1403,8 @@ The **`flags`** macro parameter (a bitwise OR of enum values) can be used to con
 | eParam\_NoLoad   | Do not load from registry or environment |
 | eParam\_NoThread | Do not use per-thread values             |
 
+<div class="table-scroll"></div>
+
 See the [enum definition](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ENcbiParamFlags&d=) for an up-to-date list.
 
 The **`env`** macro parameter can be used to specify the environment variable to be searched. If the **`env`** macro parameter is not used, the environment will be searched for a variable having the form **`NCBI_CONFIG__<section>__<name>`** (***note:*** the first underscore is single; the others are double).
@@ -1484,6 +1492,8 @@ Important methods of the ***CParam*** class are:
 | ***GetThreadDefault()***   | Yes    | Get the thread-local default value if set, otherwise the global default value.                                                                                                                                                                                                                                                                                |
 | ***SetThreadDefault()***   | Yes    | Set a new thread-local default value.                                                                                                                                                                                                                                                                                                                         |
 | ***ResetThreadDefault()*** | Yes    | Reset the thread default value as if it has not been set.                                                                                                                                                                                                                                                                                                     |
+
+<div class="table-scroll"></div>
 
 Typical uses involve getting the current or default values:
 
@@ -1579,6 +1589,8 @@ Table 2. Location of configuration files
 | *empty* [default] | Compose the config file name from the base application name plus `.ini`. Also try to strip file extensions, e.g., for the application named **my\_app.cgi.exe** try subsequently: `my_app.cgi.exe.ini`, `my_app.cgi.ini`, `my_app.ini`. Using these names, search in directories as described in the "Otherwise" case for non-empty **`conf`** (see below).                                                                                                                                                                                           |
 | `NULL`            | Do not even try to load the registry at all                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | *non-empty*       | If **`conf`** contains a path, then try to load from the config file named **`conf`** (only and exactly!). If the path is not fully qualified and it starts from `../` or `./`, then look for the config file starting from the current working dir. **Otherwise** (only a basename, without path), the config file will be searched for in the following places (in the order of preference): 1. current work directory; 2. user home directory; 3. directory defined by environment variable **`NCBI`**; 4. system directory; 5. program directory. |
+
+<div class="table-scroll"></div>
 
 When the application registry is successfully loaded, you can access it using the method [CNcbiApplication::GetConfig()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNcbiApplication.html). The application will throw an exception if the config file is found, is not empty, and either cannot be opened or contains invalid entries. If the **`conf`** argument to [CNcbiApplication::AppMain()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNcbiApplication.html) is not `NULL` and the config file cannot be found, then a warning will be posted to the application diagnostic stream.
 
@@ -1792,6 +1804,8 @@ Some pairs of these flags are mutually exclusive and have a default if neither f
 | **`fTransient`** / **`fPersistent`** | **`fPersistent`** |
 | **`fOverride`** / **`fNoOverride`**  | **`fOverride`**   |
 | **`fJustCore`** / **`fNotJustCore`** | **`fJustCore`**   |
+
+<div class="table-scroll"></div>
 
 It is not necessary to use the **`fNoTruncate`** flag because it represents the default behavior - no values are truncated unless **`fTruncate`** is used.
 
@@ -2197,6 +2211,8 @@ Table 4. Filter String Samples
 </tbody>
 </table>
 
+<div class="table-scroll"></div>
+
 For example:
 
 -   To log diagnostic messages from source files located in `src/corelib` with error codes from 101 to 106 and any subcode, use the following filter: “`/corelib (101-106.)`”.
@@ -2267,6 +2283,8 @@ Fields in the new post format:
 | event       | What was happening to cause the post (e.g. app start)                                                 | 13                                            | string (see the [Events and Messages](#ch_core.Events_and_Messages) section)                                                                                         |
 | message     | The logged message                                                                                    | varies                                        | string (see the [Events and Messages](#ch_core.Events_and_Messages) section)                                                                                         |
 
+<div class="table-scroll"></div>
+
 ***Note:*** Regarding the width and padding of standard fields:
 
 -   Minimum-width numeric fields are right-justified and zero-padded - for example, a pid of 123 will get printed as "00123" while a pid of 1234567 will get printed as "1234567".
@@ -2301,6 +2319,8 @@ Application state codes:
 | `RB`                   | request is starting                         |
 | `R`                    | request is being processed                  |
 | `RE`                   | request is exiting                          |
+
+<div class="table-scroll"></div>
 
 ***Note:*** The "A" and "P" codes are essentially synonymous. The "P" codes are generated by newer programs, but the "A" codes may still be present in some data.
 
@@ -2356,6 +2376,8 @@ Application stop event - message sub-fields:
 | `timespan`    | Application execution time                           |
 | `exit_signal` | Signal number, if application exited due to a signal |
 
+<div class="table-scroll"></div>
+
 For example:
 
     stop            0 0.149036509
@@ -2407,6 +2429,8 @@ Request stop event - message sub-fields:
 | `bytes_read`    | Input data read during the request execution, in bytes (zero if not set)           |
 | `bytes_written` | Output data written during the request execution, in bytes (zero if not set)       |
 
+<div class="table-scroll"></div>
+
 For example:
 
     request-stop  200 0.105005566
@@ -2438,6 +2462,8 @@ Diagnostic message event / severity field - message sub-fields:
 | `err_code_message`        | Short error code description                                                                                                                                                        |
 | `err_code_explanation`    | Detailed explanation of the error code                                                                                                                                              |
 
+<div class="table-scroll"></div>
+
 <a name="ch_core.Event_The_application_posts_perf"></a>
 
 ##### Event: The application posts performance logging information
@@ -2457,6 +2483,8 @@ Performance logging event - message sub-fields:
 | `exit_code`              | Application exit code (zero if not set)                                                                                                        |
 | `timespan`               | Application execution time                                                                                                                     |
 | `performance_parameters` | URL-encoded name=value pairs -- the resource name given to the logger, the status message (if given), and any others from ***AddParameter()*** |
+
+<div class="table-scroll"></div>
 
 For example:
 
@@ -2610,6 +2638,8 @@ Sometimes it is helpful to generate human-readable diagnostics on the console in
 | Log File    | Error    | [new](#ch_core.The_New_Post_Format) (machine-parsable) |
 | Console     | Warning  | [old](#ch_core.The_Old_Post_Format) (human-readable)   |
 
+<div class="table-scroll"></div>
+
 To set up this sort of tee, set these configuration parameters (see the [library configuration chapter](ch_libconfig.html#ch_libconfig.libconfig_diag) for details):
 
 <a name="ch_core.T.nc_configuration_parameterexam"></a>
@@ -2620,6 +2650,8 @@ To set up this sort of tee, set these configuration parameters (see the [library
 | **`DIAG_OLD_POST_FORMAT`**  | False         | This makes the log file use the new format.                      |
 | **`DIAG_POST_LEVEL`**       | Error         | This sets the minimum severity required to post to the log file. |
 | **`DIAG_TEE_MIN_SEVERITY`** | Warning       | This sets the minimum severity required to post to the console.  |
+
+<div class="table-scroll"></div>
 
 Alternatively, you can use the ***Console*** manipulator to indicate that output should go to the console (in human-readable format):
 
@@ -2677,6 +2709,8 @@ The NCBI-specific status codes must be different from the [standard (HTTP) statu
 | 420 – 499 | Bad request (client error)         |
 | 520 – 599 | Server Error                       |
 
+<div class="table-scroll"></div>
+
 So far we have the following NCBI specific status codes:
 
 <a name="ch_core.T.nc_valuedescription0unknown_er"></a>
@@ -2686,6 +2720,8 @@ So far we have the following NCBI specific status codes:
 | 0            | Unknown error                                                                                                            |
 | 555          | NCBI Network Dispatcher refused a request from and outside user which is in its "abusers list"                           |
 | 1000 + errno | Unclassifiable server error when only errno is known (NOTE: the value of errno can be different on different platforms!) |
+
+<div class="table-scroll"></div>
 
 <a name="ch_core.diag_errcodes"></a>
 
@@ -3066,6 +3102,8 @@ Table 5. Standard C/C++ Types
 | ***unsigned int***          | 4 or more   | **`kMin_UInt`** (0)                  | **`kMax_UInt`** (4294967295 or greater) |                                                                                     |
 | ***double***                | 4 or more   | **`kMin_Double`**                    | **`kMax_Double`**                       |                                                                                     |
 
+<div class="table-scroll"></div>
+
 <a name="ch_core.TF.5"></a>
 
 Types ***"long"*** and ***"float"*** are [**discouraged**](#ch_core.types_policy) to use in the portable code.
@@ -3111,6 +3149,8 @@ Table 6. Fixed-integer Types
 | ***Int8***         | 8           | **`kMin_I8`** | **`kMax_I8`**  |
 | ***Uint8***        | 8           | 0             | **`kMax_UI8`** |
 
+<div class="table-scroll"></div>
+
 In [Table 7](#ch_core.T7), the **`"kM*_*"`** are constants of relevant fixed-size integer type. They are guaranteed to be equal to the appropriate `preprocessor constants` from the old NCBI C headers(**`"INT*_M*"`**). Please also note that the mentioned **`"INT*_M*"`** are not defined in the C++ headers - in order to discourage their use in the C++ code.
 
 <a name="ch_core.T7"></a>
@@ -3131,6 +3171,8 @@ Table 7. Correspondence between the kM\*\_\* constants and the old style INT\*\_
 | **`kMin_I8`**      | -9223372036854775808  | **`INT8_MIN`**  |
 | **`kMax_I8`**      | +9223372036854775807  | **`INT8_MAX`**  |
 | **`kMax_UI8`**     | +18446744073709551615 | **`UINT8_MAX`** |
+
+<div class="table-scroll"></div>
 
 <a name="ch_core.big_scalar"></a>
 
@@ -3405,6 +3447,8 @@ The DLL name is considered the basename if it does not contain embedded '/', '\\
 |-----------|--------------------------|
 | Unix-like | `<name> -> lib<name>.so` |
 | Windows   | `<name> -> <name>.dll`   |
+
+<div class="table-scroll"></div>
 
 If the DLL is specified by its basename, then it will be searched after the transformation described above in the following locations:
 
@@ -4721,6 +4765,8 @@ where the parameter meanings are:
 | **`argv`**        | Argument vector [argv in a regular main(argc, argv)].                                                                                                                   |
 | **`envp`**        | Environment pointer [envp in a regular main(argc, argv, envp)]; a null pointer (the default) corresponds to the standard system array (environ on most Unix platforms). |
 | **`log_handler`** | Handler for diagnostic messages that are emitted by the C++ Toolkit code.                                                                                               |
+
+<div class="table-scroll"></div>
 
 ***Note:*** The ***TNcbiToolkit\_XChar*** parameter type is used for compatibility with applications that use Unicode under Windows.
 

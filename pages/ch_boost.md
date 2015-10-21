@@ -152,6 +152,8 @@ Once your unit test is created, you must [customize](#ch_boost.Customizing_an_Ex
 | `unit_test_alt_sample.cpp`          | Source code for the `unit_test_alt_sample` unit test.                                           |
 | `unit_test_alt_sample.ini`          | Configuration file for the `unit_test_alt_sample` unit test.                                    |
 
+<div class="table-scroll"></div>
+
 <a name="ch_boost.Customizing_an_Exist"></a>
 
 ### Customizing an Existing Unit Test
@@ -247,6 +249,8 @@ Many Boost testing tools have variants for each error level. The most common Boo
 | **`BOOST_<level>_THROW(expression, exception)`** | Fails if execution of the expression doesn’t throw an exception of the given type (or one derived from it). |
 | **`BOOST_<level>_NO_THROW(expression)`**         | Fails if execution of the expression throws any exception.                                                  |
 
+<div class="table-scroll"></div>
+
 Note that **`BOOST_<level>_EQUAL(var1,var2)`** is equivalent to **`BOOST_<level> (var1==var2)`**, but in the case of failure it prints the value of each variable, which can be helpful. Also, it is not a good idea to compare floating point values directly - instead, use **`BOOST_<level>_CLOSE(var1,var2,tolerance)`**.
 
 See the Boost testing tools [reference page](http://www.boost.org/doc/libs/1_53_0/libs/test/doc/html/utf/testing-tools/reference.html) for documentation on these and other testing tools.
@@ -261,6 +265,8 @@ The NCBI extensions to the Boost library add a number of convenience testing too
 | **`BOOST_<level>_EQUAL(left, right)`** | **`NCBITEST_<level>_EQUAL(left, right)`** |
 | **`BOOST_<level>_NE(left, right)`**    | **`NCBITEST_<level>_NE(left, right)`**    |
 | **`BOOST_<level>_MESSAGE(pred, msg)`** | **`NCBITEST_<level>_MESSAGE(pred, msg)`** |
+
+<div class="table-scroll"></div>
 
 ***Note:*** Testing tools are only supported within the context of test cases. That is, within functions defined by the **`BOOST_AUTO_TEST_CASE`** macro and within functions called by a test case. They are not supported in functions defined by the **`NCBITEST_*`** macros.
 
@@ -425,6 +431,8 @@ Table 1. Build Generated Predefined Variables
 |  |  | `OS_Unix`           |     |
 |  |  | `OS_Windows`        |     |
 
+<div class="table-scroll"></div>
+
 At run-time, the library also checks the `FEATURES` environment variable and creates unit test variables based on the current set of features. See [Table 2](#ch_boost.IT2) for a list of feature, package, and project related variables ([test\_boost.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib/test_boost.cpp) has the latest [list of features](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=s_NcbiFeatures&d=)).
 
 <a name="ch_boost.IT2"></a>
@@ -501,6 +509,8 @@ Table 2. Check Script Generated Predefined Variables
 |  | `wx2_8`                                                               |  |
 |  | `wxWidgets`                                                           |  |
 |  | `wxWindows`                                                           |  |
+
+<div class="table-scroll"></div>
 
 The automated nightly test suite defines the `FEATURES` environment variable before launching the unit test applications. In this way, unit test applications can also use run-time detected features to exclude specific tests from the test suite.
 

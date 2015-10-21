@@ -4,7 +4,6 @@ title: C++ Toolkit test
 nav: pages/ch_build
 ---
 
-YYYYY
 
 5\. Working with Makefiles
 ========================================
@@ -185,6 +184,8 @@ Table 1. Path Specification Makefile Macros
 | **`sysconfdir`**     | `--sysconfdir`                                                   | Read-only single-machine data (default)                                                                                       |
 | **`top_srcdir`**     | **`@top_srcdir@`**                                               | Path to the whole NCBI C++ package                                                                                            |
 
+<div class="table-scroll"></div>
+
 <a name="ch_build.expendable_proj"></a>
 
 ### Expendable Projects
@@ -246,6 +247,8 @@ Table 2. Optional Packages, Features, and Projects
 | `objects`            | libraries to serialize ASN.1/XML objects     | `--with-objects`                                                                                                                 |
 | `serial`             | ASN.1/XML serialization library and datatool | `--without-serial`                                                                                                               |
 | `local_lbsm`         | IPC with locally running LBSMD               | `--without-local-lbsm`                                                                                                           |
+
+<div class="table-scroll"></div>
 
 <a name="ch_build.std_build_targets"></a>
 
@@ -339,11 +342,11 @@ Table 3. Flags
 | **`LIB_OR_DLL`**    | **`@LIB_OR_DLL@`**                                        | Specify whether to build a library as static or dynamic                                    |
 | **`STATIC`**        | **`@STATIC@`**                                            | Library suffix to force static linkage (see [example](ch_proj.html#ch_proj.make_proj_app)) |
 
+<div class="table-scroll"></div>
+
 <a name="ch_build.T4"></a>
 
 Table 4. System and third-party packages
-
-<div id="DIVSCROLLSTART">DIVSCROLLSTART</div>
 
 | Macro                  | Source                  | Synopsis                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 |------------------------|-------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -367,8 +370,7 @@ Table 4. System and third-party packages
 | **`SYBASE_LIBS`**      | **`$SYBASE_LIBS`**      | SYBASE libraries                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | **`THREAD_LIBS`**      | **`$THREAD_LIBS`**      | Thread library (system)                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 
-<div id="DIVSCROLLEND">DIVSCROLLEND</div>
-
+<div class="table-scroll"></div>
 
 ***Note:*** The values of the user-specified environment variables **`$FAST_CFLAGS`** and **`$FAST_CXXFLAGS`** will substitute the regular optimization flag `-O` (or `-O2`, etc.). For example, if in the environment: **`$FAST_CXXFLAGS`**=`-fast -speedy` and **`$CXXFLAGS`**=`-warn -O3 -std`, then in makefile: **`$(FAST_CXXFLAGS)`**=`-warn -fast -speedy -std`.
 

@@ -123,6 +123,8 @@ Table 1. Invocation flags
 | `-query str` | string                                            | Generate ID list from specified [Entrez](http://www.ncbi.nlm.nih.gov/books/NBK21081/) query.                                                                                                                                  |
 | `-qf file`   | file                                              | Generate ID list from [Entrez](http://www.ncbi.nlm.nih.gov/books/NBK21081/) query in specified file.                                                                                                                          |
 
+<div class="table-scroll"></div>
+
 ***Note***: You must specify exactly one of the options indicating what to look up: `-gi, -in, -flat, -fasta, -query, -qf`.
 
 <a name="ch_demo.id1_fetch.html_ref_fmt"></a>
@@ -146,6 +148,8 @@ Table 2. Output data formats
 | quality | Quality scores                                                                                                                     | Lookup type must be entry (default); data not always available.  |
 | xml     | XML                                                                                                                                | Isomorphic to ASN.1 output.                                      |
 
+<div class="table-scroll"></div>
+
 <a name="ch_demo.id1_fetch.html_ref_lt"></a>
 
 #### Lookup Types
@@ -165,6 +169,8 @@ Table 3. Lookup types
 | revisions | Summary of changes to the sequence data or annotations |
 | state     | The sequence's status                                  |
 
+<div class="table-scroll"></div>
+
 <a name="ch_demo.id1_fetch.html_ref_maxplex"></a>
 
 #### Output Complexity Levels
@@ -182,6 +188,8 @@ Table 4. Maximum output complexity level values
 | entry      | Entire entry (default)      |
 | nuc-prot   | Minimal nuc-prot            |
 | pub-set    | Minimal pub-set             |
+
+<div class="table-scroll"></div>
 
 <a name="ch_demo.id1_fetch.html_ref_flat"></a>
 
@@ -271,6 +279,8 @@ Table 5. FASTA sequence ID format values
 | TrEMBL                                                                              | `tr\|accession\|name`                                                          | `tr\|Q90RT2\|Q90RT2_9HIV1`                                         |
 | genome pipeline [<sup>3</sup>](#ch_demo.TF.3)                                       | `gpp\|accession\|name`                                                         | `gpp\|GPC_123456789\|`                                             |
 | named annotation track [<sup>3</sup>](#ch_demo.TF.3)                                | `nat\|accession\|name`                                                         | `nat\|AT_123456789.1\|`                                            |
+
+<div class="table-scroll"></div>
 
 <a name="ch_demo.TF.1"></a>
 

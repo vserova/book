@@ -791,6 +791,8 @@ Table 1. Restrictions on arguments to the CCgiCookie constructor
 | domain (optional) | No spaces; must be printable ASCII; cannot contain , or ;   |
 | path (optional)   | Case sensitive                                              |
 
+<div class="table-scroll"></div>
+
 <a name="ch_cgi.cgi_diag.html"></a>
 
 CGI Diagnostic Handling
@@ -812,6 +814,8 @@ Table 2. Effect of setting the diag-destination parameter
 |--------|------------------------------------------------------------------|
 | stderr | Send diagnostics to the standard error stream (default behavior) |
 | asbody | Send diagnostics to the client in place of normal output         |
+
+<div class="table-scroll"></div>
 
 However, an application can make other options available by calling [RegisterDiagFactory](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=RegisterDiagFactory) from its ***Init*** routine. In particular, calling
 
@@ -1326,6 +1330,8 @@ Table 7. HTTP Status Codes
 | 504         | Gateway Timeout                                                     |
 | 505         | HTTP Version Not Supported                                          |
 
+<div class="table-scroll"></div>
+
 ***Note:*** Status code 404 should be reserved for situations when the requested resource does not exist. It should not be used as a "catch-all" such as when the client simply uses invalid parameters.
 
 <a name="ch_cgi.FCGI_Redirection_and_Debugging_C"></a>
@@ -1381,6 +1387,8 @@ This results in the following files:
 | `myapp.cpp`  | This is the sample application source code and should be adapted or replaced by your application.                                             |
 | `myapp.html` | This is an HTML template that goes with the sample code - it can be deleted or adapted to your application.                                   |
 
+<div class="table-scroll"></div>
+
 Building creates both a FastCGI-enabled application and a regular CGI application:
 
 <a name="ch_cgi.T.nc_filepurposefmyappfcgithis_is"></a>
@@ -1389,6 +1397,8 @@ Building creates both a FastCGI-enabled application and a regular CGI applicatio
 |---------------|--------------------------------------------------------------------------------|
 | `fmyapp.fcgi` | This is the FastCGI version of your application (hence the `.fcgi` extension). |
 | `myapp.cgi`   | This is the regular CGI version of your application.                           |
+
+<div class="table-scroll"></div>
 
 <a name="ch_cgi.Connecting_the_FCGI_proxy_to_the"></a>
 

@@ -766,6 +766,8 @@ The following configuration parameters can be used to fine-tune ***CServer***-de
 | **`CSERVER_CATCH_UNHANDLED_EXCEPTIONS`**                  | Controls whether ***CServer*** should catch exceptions.                  | true    |
 | **`NCBI_CONFIG__THREADPOOL__CATCH_UNHANDLED_EXCEPTIONS`** | Controls whether ***CThreadInPool\_ForServer*** should catch exceptions. | true    |
 
+<div class="table-scroll"></div>
+
 See the [connection library configuration reference](ch_libconfig.html#ch_libconfig.libconfig_connect) for more information on configuration parameters.
 
 <a name="ch_grid.Other_Resources"></a>
@@ -1010,6 +1012,8 @@ NCBI NetSchedule control utility. This program can be used to operate NetSchedul
 </tbody>
 </table>
 
+<div class="table-scroll"></div>
+
 <a name="ch_grid.ns_remote_job_contro"></a>
 
 ### ns\_remote\_job\_control
@@ -1160,6 +1164,8 @@ OPTIONS:
 </tr>
 </tbody>
 </table>
+
+<div class="table-scroll"></div>
 
 <a name="ch_grid._Alternate_list_input"></a>
 

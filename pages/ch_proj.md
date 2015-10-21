@@ -620,6 +620,8 @@ Table 1. Build Directories
 | `/netopt/ncbi_tools/c++/GCC-Debug/build `  | GCC          | Debug                       |
 | `/netopt/ncbi_tools/c++/GCC-Release/build` | GCC          | Release                     |
 
+<div class="table-scroll"></div>
+
 In the example above, we specified the GNU compiler debug environment: `$NCBI/c++/GCC-Debug/build`. For a list of currently supported compilers, see the [release notes](https://ncbiconfluence.ncbi.nlm.nih.gov/display/CXX/Release+Notes#ReleaseNotes-release_notes.Platforms_OSs__compi). Running the **new\_project** script will generate a ready-to-use makefile in the directory you just created. For a more detailed description of this and other scripts to assist you in the set-up of your working environment, see [Starting a new C++ project](#ch_proj.start_new_proj).
 
 <a name="ch_proj.outside_tree_makefile"></a>

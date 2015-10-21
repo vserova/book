@@ -223,6 +223,8 @@ The archives that were available at the time of this writing (October 2014) were
 | trunk                                                   | https://svn.ncbi.nlm.nih.gov/repos/toolkit/trunk/internal/c++                        |
 | trunk-core<br/>(or just core) | https://svn.ncbi.nlm.nih.gov/repos/toolkit/trunk/c++                                 |
 
+<div class="table-scroll"></div>
+
 Run the script with no arguments to find the most up-to-date list of supported archives.
 
 For example, to retrieve the current TRUNK version of the "core" part of the C++ Toolkit tree (the part without the GUI and INTERNAL projects), run:
@@ -270,6 +272,8 @@ Table 1. **svn\_core** Arguments
 | `--with-objects`     | Check out the `objects`, `objmgr`, and `objtools` directories and generate serialization code from the ASN.1 specifications. If this flag is not present, those directories are still checked out (unless overridden by the `--without-objects` flag) but no serialization code is generated. | n/a                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | `--without-objects`  | Do not check out the `objects`, `objmgr`, and `objtools` directories or generate ASN.1 serialization code. (On Unix platforms the code generation can be done later, during the build.)                                                                                                       | n/a                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 
+<div class="table-scroll"></div>
+
 Some directories are always checked out, regardless of command-line arguments. These are shown in [Table 2](#ch_getcode_svn.T2). (All paths are relative to the repository path `https://svn.ncbi.nlm.nih.gov/repos/toolkit/trunk/c++`.)
 
 <a name="ch_getcode_svn.T2"></a>
@@ -300,6 +304,8 @@ Table 2. List of the directories that are always checked out
 | `(include\|src)/util`             | yes        |
 | `scripts`                         | yes        |
 
+<div class="table-scroll"></div>
+
 Other directories may or may not be checked out, depending on the `<branch>` and `<platform>` options. These are shown in [Table 3](#ch_getcode_svn.T3).
 
 <a name="ch_getcode_svn.T3"></a>
@@ -321,6 +327,8 @@ Table 3. Directories that may be checked out depending on branch and platform op
 | `src/connect/daemons`     | yes        | `<platform>` = all or unix           |
 | `src/connect/mitsock`     | yes        | `<platform>` = mac                   |
 | `src/dll`                 | yes        | `<platform>` = all or mac or msvc    |
+
+<div class="table-scroll"></div>
 
 Still other directories may be checked out depending on the `--with/--without-<feature>` options. These are shown in [Table 4](#ch_getcode_svn.T4).
 
@@ -359,6 +367,8 @@ Table 4. Directories that may be checked out depending on --with/--without optio
 | `(include\|src)/internal/txclient`               | yes        | `--with-internal`                           |
 | `(include\|src)/internal/txserver`               | yes        | `--with-internal`                           |
 | `(include\|src)/internal/txxmldoc`               | yes        | `--with-internal`                           |
+
+<div class="table-scroll"></div>
 
 <a name="ch_getcode_svn.import_project_sh"></a>
 

@@ -914,6 +914,8 @@ Table 2. User-defined localization variables
 | NCBI\_PM\_PATH  | $NCBI/pubmed[64]                     | Path to the NCBI PubMed package             |
 | ORBACUS\_PATH   | $NCBI/corba/OB-4.0.1                 | Path to the ORBacus CORBA package           |
 
+<div class="table-scroll"></div>
+
 <a name="ch_config.TF.1"></a>
 
 Note: It is also possible to make configure look elsewhere for Sybase by means of --with-sybase-local[=DIR]. If you specify a directory, it will override SYBASE\_PATH; otherwise, the default will change to /export/home/sybase/clients/current, but SYBASE\_PATH will still take priority. Also, the option --with-sybase-new will change the default version of Sybase from 12.0 to 12.5 and adapt to its layout.
@@ -959,6 +961,8 @@ Table 3. Derived localization variables for makefiles
 | NCBI\_PM\_PATH     | $NCBI\_PM\_PATH                                                                                                   | Path to the PubMed package.       |
 | ORBACUS\_INCLUDE   | -I$ORBACUS\_PATH/include -I$ORBACUS\_PATH/{Release\\|Debug}[MT][64]/inc                                           | \#include ORBacus CORBA headers   |
 | ORBACUS\_LIBPATH   | -L$ORBACUS\_PATH/{Release\\|Debug}[MT][64]/lib                                                                    | Link with ORBacus CORBA libs.     |
+
+<div class="table-scroll"></div>
 
 ***Note:*** The file `src/build-system/config.site` may also be [edited](#ch_config.SiteSpecific_Third_Party_Libra) to simplify localization of third party libraries, especially for users outside NCBI.
 
@@ -1185,6 +1189,8 @@ Use this key for the examples in the “Building with Unix” sections:
 | gui/                   | selects the GUI libraries target in the flat makefile                                     |
 | gui/app/               | selects the sub-tree containing the primary Genome Workbench executable and its helpers   |
 | all\_r                 | selects a recursive build of all targets at this and lower levels in the source tree      |
+
+<div class="table-scroll"></div>
 
 The [import\_project](ch_getcode_svn.html#ch_getcode_svn.import_project_sh) script builds a single project in the working directory while referencing the rest of a pre-built Toolkit for all other Toolkit components. For example, to build only the `app/id2_fetch` application and have the rest of the pre-built Toolkit available, use these commands:
 
@@ -1531,6 +1537,8 @@ Table 4. Project Tree Builder INI file (Local Site)
 |              | Location.Lib                                                                                                                                                            | Location of datatool executable for LIB projects.                                                                                                                                           |
 |              | CommandLine                                                                                                                                                             | Partial command line for datatool.                                                                                                                                                          |
 
+<div class="table-scroll"></div>
+
 Toolkit project makefiles can list (in a pseudo-macro entry called '`REQUIRES`') a set of requirements that must be met in order for the project to be built. For example, a project can be built only on Unix, or only in multi-thread mode, or if a specific external library is available. Depending on which of the requirements are met, the Toolkit configurator may exclude some projects in some (or all) build configurations or define preprocessor and/or makefile macros.
 
 Some of the Toolkit projects can be built differently depending on the availability of non-Toolkit components. For them, there is a list of macros - defined in '`Defines`' entry - that define conditional compilation. To establish a link between such a macro and a specific component, the configuration file also has sections with the names of the macro. For each build configuration, project tree builder creates a header file (see '`DefinesPath`' entry) and defines these macros there depending on the availability of corresponding components.
@@ -1575,6 +1583,8 @@ Any section name can have one or several optional suffixes, so it can take the f
 | `static` or `dll`    | type of runtime libraries                              |
 | `debug` or `release` | build configuration type                               |
 | `ConfigurationName`  | build configuration name (e.g. DebugDLL, or ReleaseMT) |
+
+<div class="table-scroll"></div>
 
 Settings in sections with more detailed names (ones that appear later on this list) override ones in sections with less detailed names (ones that appear earlier).
 
@@ -1632,6 +1642,8 @@ To add files to a project, add entries to the '`AddToProject`' section. The sect
 | `ResourceFiles`    | MS Windows resource files                                                 |
 | `SourceFiles`      | additional (usually MS Windows specific) source files (without extension) |
 
+<div class="table-scroll"></div>
+
 By default, all header files found in the project's include and source directories are added to the MSVS project. If that's not exactly what you need, the list of headers can be overridden using the '`HeadersInInclude`' and '`HeadersInSrc`' entries. There, file names should be entered with their extension; an exclamation mark means negation; and wildcards are allowed. For example, the entry:
 
 `HeadersInInclude = *.h file1.hpp !file2.h`
@@ -1651,6 +1663,8 @@ All directories given in the '`IncludeDirs`' entry should be specified relative 
 | `..\\..\\somedir`                                                                       | `..\..\..\..\..\somedir`                                                                          |
 | `..\\..\\..\\somedir`                                                                   | `..\..\..\..\..\..\somedir`                                                                       |
 | `..\\..\\..\\..\\somedir`, etc.                                                         | `..\..\..\..\..\..\..\somedir`, etc.                                                              |
+
+<div class="table-scroll"></div>
 
 Although '`IncludeDirs`' does not support absolute paths, it is possible to add absolute paths by changing the '`AdditionalOptions`' entry in the '`[Compiler]`' section (see [Build Tool Settings](#ch_config.Adjusting_build_tool)).
 
@@ -1731,6 +1745,8 @@ In the Toolkit, such compound DLLs are described using a set of special makefile
 | HOSTED\_LIBS | names of the included static libraries            |
 | DEPENDENCIES | dependencies on other static or dynamic libraries |
 | CPPFLAGS     | additional compiler flags, specific for this DLL  |
+
+<div class="table-scroll"></div>
 
 <a name="ch_config.FineTuning_with_Envi"></a>
 
@@ -1857,6 +1873,8 @@ where:
 | \<type\>   | is one of the predefined project types                                               |
 | [builddir] | is the location of the C++ Toolkit libraries                                         |
 | [flags]    | selects a recursive build of all targets at this and lower levels in the source tree |
+
+<div class="table-scroll"></div>
 
 For example, if the Toolkit is built in the `U:\cxx` folder, then this command:
 

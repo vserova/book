@@ -160,6 +160,8 @@ Table 1. Command line parameters available for use to any program that uses CNcb
 | `-logfile`  | Redirect program's log into the specified file                  | `theapp -logfile theapp_log`  |
 | `-conffile` | Read the program's configuration data from the specified file   | `theapp -conffile theapp_cfg` |
 
+<div class="table-scroll"></div>
+
 -   to obtain a general description of the program as well as description of all available command line parameters (`-h` flag),
 
 -   to redirect the program's [diagnostic messages](ch_core.html#ch_core.diag) into a specified file (`-logfile` key),
@@ -198,6 +200,8 @@ Table 2. Enabling Tracing
 |-----------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
 | call:<br/>`SetDiagTrace(eDT_Enable);` | define **`DIAG_TRACE`** entry in the **`DEBUG`** section:<br/>`[DEBUG]`<br/>`DIAG_TRACE=1` | define **`DIAG_TRACE`** environment variable:<br/>`set DIAG_TRACE=1` |
 
+<div class="table-scroll"></div>
+
 Please note, when enabling trace from a configuration file, some trace messages could be lost: before configuration file is found and read the application may assume that the trace was disabled. The only way to enable tracing from the very beginning is by setting the environment variable.
 
 <a name="ch_debug.diagnostic_messages"></a>
@@ -213,6 +217,8 @@ Table 3. Changing severity level for diagnostic messages
 | C++ toolkit API                                                                                                                                                                                                                | Configuration file                                                                                                                                                                                                                                          | Environment                                                                                                                                                                                                 |
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | call:<br/>`SetDiagPostLevel(EDiagSev postSev);`<br/>Valid arguments are **`eDiag_Info`**, **`eDiag_Warning`**, **`eDiag_Error`**, **`eDiag_Critical`**, **`eDiag_Fatal`**. | define **`DIAG_POST_LEVEL`** entry in the **`DEBUG`** section:<br/>`[DEBUG]`<br/>`DIAG_POST_LEVEL=Info`<br/>Valid values are `Info`, `Warning`, `Error`, `Critical`, `Fatal`. | define **`DIAG_POST_LEVEL`** environment variable:<br/>`set DIAG_POST_LEVEL=Info`<br/>Valid values are `Info`, `Warning`, `Error`, `Critical`, `Fatal`. |
+
+<div class="table-scroll"></div>
 
 Only those messages, which severity is equal or exceeds the threshold will be posted. By default, messages posted with `Fatal` severity level also abort execution of the program. This can be changed by ***SetDiagDieLevel(EDiagSev dieSev)*** API function.
 
@@ -230,6 +236,8 @@ Table 4. Setting up trace options for connection library
 |----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Connection parameters:** | define **`DEBUG_PRINTOUT`** entry in the **`CONN`** section:<br/>`[CONN]`<br/>`DEBUG_PRINTOUT=TRUE`<br/>Valid values are `TRUE`, or `YES`, or `SOME`. | define **`CONN_DEBUG_PRINTOUT`** environment variable:<br/>`set CONN_DEBUG_PRINTOUT=TRUE`<br/>Valid values are `TRUE`, or `YES`, or `SOME`. |
 | **All data:**              | define **`DEBUG_PRINTOUT`** entry in the **`CONN`** section:<br/>`[CONN]`<br/>`DEBUG_PRINTOUT=ALL`<br/>Valid values are `ALL`, or `DATA`.             | define **`CONN_DEBUG_PRINTOUT`** environment variable:<br/>`set CONN_DEBUG_PRINTOUT=ALL`<br/>Valid values are `ALL`, or `DATA`.             |
+
+<div class="table-scroll"></div>
 
 <a name="ch_debug.toolkit_diagnostics"></a>
 
@@ -1282,6 +1290,8 @@ Table 5. Platform Independent Exception Macros
 | **`STD_CATCH_XX(name, subcode, message)`**     | `catch(std::exception)` | Provides uniform handling of all exceptions derived from ***std::exception*** using the given error code name, subcode, and message. Does not catch exceptions *not* derived from ***std::exception***.   |
 | **`STD_CATCH_ALL_X(subcode, message)`**        | `catch(...)`            | Calls **`STD_CATCH_ALL_XX()`** using the currently selected error code name.                                                                                                                              |
 | **`STD_CATCH_ALL_XX(name, subcode, message)`** | `catch(...)`            | Applies **`STD_CATCH_XX()`** to ***std::exception*** derived objects. Catches non-standard exceptions and generates an "Unknown exception" message using the given error code name, subcode, and message. |
+
+<div class="table-scroll"></div>
 
 The **`catch`** macros provide uniform, routine exception handling with minimal effort from the programmer. We provide convenient **`STD_CATCH_*()`** macros to print formatted messages to the application's [diagnostic stream](ch_core.html#ch_core.diag). For example, if ***F()*** throws an exception of the form:
 
