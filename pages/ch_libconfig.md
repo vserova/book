@@ -951,6 +951,10 @@ Table 16. Common NetCache and NetSchedule client API configuration parameters (n
 
 Table 17. NetCache client API configuration parameters (netcache\_api)
 
+<div class="DIVSCROLLSTART">SCROLL START</div>
+
+
+
 | Purpose                                                                                                                                                                                                                                                                                                                                                                                                                        | [Registry section]<br/>Registry name<br/><br/>Environment variable                                                                                     | Valid values                                                                                                      | Default                                                            |
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
 | Enable input caching (provides for slow blob retrieval).                                                                                                                                                                                                                                                                                                                                                                       | **`[netcache_api]`**<br/>**`cache_input`**<br/><br/>N/A                                                                                                | Boolean [<sup>b</sup>](#ch_libconfig.TF.47)                                                                       | false                                                              |
@@ -979,6 +983,9 @@ Table 17. NetCache client API configuration parameters (netcache\_api)
 | Synonym for **`[netcache_api]/tmp_dir`**.                                                                                                                                                                                                                                                                                                                                                                                      | **`[netcache_api]`**<br/>**`tmp_path`**<br/><br/>N/A                                                                                                   |                                                                                               |                                                |
 | A true value enables an alternative method for checking if a blob exists. ***Note:*** This option is available only for backward compatibility and should not be used.                                                                                                                                                                                                                                                         | **`[netcache_api]`**<br/>**`use_hasb_fallback`**<br/><br/>**`NCBI_CONFIG__NETCACHE_API__USE_HASB_FALLBACK`** [<sup>a</sup>](#ch_libconfig.TF.46)       | Boolean [<sup>b</sup>](#ch_libconfig.TF.47)                                                                       | false                                                              |
 | Defines LBSM affinity name to use for floor assignment, etc.                                                                                                                                                                                                                                                                                                                                                                   | **`[netcache_api]`**<br/>**`use_lbsm_affinity`**<br/><br/>N/A                                                                                          | a valid affinity                                                                                                  | (none)                                                             |
+
+<div class="DIVSCROLLEND">SCROLL END</div>
+
 
 <a name="ch_libconfig.TF.46"></a>
 
@@ -1027,5 +1034,19 @@ Table 19. seqfetch.cgi application configuration parameters
 |---------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------|----------------------|
 | Point to the current script.          | **`[SeqFetch]`**<br/>**`Viewer_fcgi_path`**<br/><br/>**`SEQFETCH_VIEWER_FCGI_PATH`**   | a valid path       | /sviewer/viewer.fcgi |
 | Name the current load-balanced proxy. | **`[SeqFetch]`**<br/>**`Viewer_fcgi_proxy`**<br/><br/>**`SEQFETCH_VIEWER_FCGI_PROXY`** | a valid proxy name | sviewer\_lb          |
+
+
+
+
+<script language="javascript">
+  alert('hi');
+  var x = document.getElementsByClassName("DIVSCROLLSTART");
+  x[0].outerHTML = '<div class="table-scroll">';
+  var y = document.getElementsByClassName("DIVSCROLLEND");
+  y[0].outerHTML = "</div>";
+  alert('lo');
+</script>
+
+
 
 
