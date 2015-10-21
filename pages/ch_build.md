@@ -343,7 +343,7 @@ Table 3. Flags
 
 Table 4. System and third-party packages
 
-<div id="DIVSCROLLSTART"/>
+<div id="DIVSCROLLSTART">DIVSCROLLSTART</div>
 
 | Macro                  | Source                  | Synopsis                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 |------------------------|-------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -367,7 +367,7 @@ Table 4. System and third-party packages
 | **`SYBASE_LIBS`**      | **`$SYBASE_LIBS`**      | SYBASE libraries                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | **`THREAD_LIBS`**      | **`$THREAD_LIBS`**      | Thread library (system)                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 
-<div id="DIVSCROLLEND"/>
+<div id="DIVSCROLLEND">DIVSCROLLEND</div>
 
 
 ***Note:*** The values of the user-specified environment variables **`$FAST_CFLAGS`** and **`$FAST_CXXFLAGS`** will substitute the regular optimization flag `-O` (or `-O2`, etc.). For example, if in the environment: **`$FAST_CXXFLAGS`**=`-fast -speedy` and **`$CXXFLAGS`**=`-warn -O3 -std`, then in makefile: **`$(FAST_CXXFLAGS)`**=`-warn -fast -speedy -std`.
