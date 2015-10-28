@@ -4,7 +4,9 @@ title: C++ Toolkit test
 nav: pages/fm
 ---
 To cite this book:
+
 Vakatov D, editor. The NCBI C++ Toolkit Book [Internet]. Bethesda (MD): National Center for Biotechnology Information (US); 2004-. 
+
 [http://toolkitbook.github.io/book/](http://toolkitbook.github.io/book/)
 
 Book Information
