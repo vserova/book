@@ -71,6 +71,9 @@ tr.option {color:white;}
 .nvgtn {
 	padding-top:5px;
 }
+
+#tkb_public {padding-top:20px;}
+
 /******  END - Styles for new header ******/
 
 /******** Make large tables in <div class="container"> scrollable like in the old book *******/
