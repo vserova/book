@@ -1,1 +1,1 @@
-see http://toolkitbook.github.io/book/
+The book is published here: http://toolkitbook.github.io/book/
