@@ -369,7 +369,7 @@ The following sections discuss library-specific configuration parameters.
 <a name="ch_libconfig.T7"></a>
 
 Table 7. Connection library configuration parameters
-<div class="table-scroll">
+
 | Purpose |[Registry section]<br/>Registry name<br/><br/>Environment variable (See [Note 2](#ch_libconfig.TF.22)) | Valid values | Default |
 |---------|-------------------------------------------------------------------------------------------------------|--------------|----------|
 | Service-specific parameters follow this form.<br/>(See [Note 1](#ch_libconfig.TF.21))| **`[<service>]`**<br/>**`CONN_<param_name>`**<br/><br/>**`<service>_CONN_<param_name>`** | xxx | xxx |
@@ -409,7 +409,8 @@ Table 7. Connection library configuration parameters
 | Maximum time worker nodes are allowed to live without a single NetSchedule server. | **`[server]`**<br/>**`max_wait_for_servers`**<br/><br/>**`NCBI_CONFIG__SERVER__MAX_WAIT_FOR_SERVERS`**  [<sup>e</sup>](#ch_libconfig.TF.19) | unsigned int | 24 \* 60 \* 60 seconds |
 | Causes the worker node to shut down if any jobs fail. | **`[server]`**<br/>**`stop_on_job_errors`**<br/><br/>**`NCBI_CONFIG__SERVER__STOP_ON_JOB_ERRORS`**  [<sup>e</sup>](#ch_libconfig.TF.19) | Boolean  [<sup>b</sup>](#ch_libconfig.TF.16) | true |
 | Enable [CThreadInPool\_ForServer](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCThreadInPool__ForServer.html) to catch exceptions. | **`[ThreadPool]`**<br/>**`Catch_Unhandled_Exceptions`**<br/><br/>**`NCBI_CONFIG__THREADPOOL__CATCH_UNHANDLED_EXCEPTIONS`**  [<sup>e</sup>](#ch_libconfig.TF.19) | Boolean  [<sup>b</sup>](#ch_libconfig.TF.16) | true |
-</div>
+
+<div class="table-scroll"></div>
 
 <a name="ch_libconfig.TF.15"></a>
 
