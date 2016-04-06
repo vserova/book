@@ -370,6 +370,12 @@ The following sections discuss library-specific configuration parameters.
 
 Table 7. Connection library configuration parameters
 
+
+| Purpose |[Registry section]<br/>Registry name<br/><br/>Environment variable (See [Note 2](#ch_libconfig.TF.22)) | Valid values | Default |
+|---------|-------------------------------------------------------------------------------------------------------|--------------|----------|
+| Service-specific parameters follow this form.<br/>(See [Note 1](#ch_libconfig.TF.21))| **`[<service>]`**<br/>**`CONN_<param_name>`**<br/><br/>**`<service>_CONN_<param_name>`** | xxx | xxx |
+
+
 Purpose
 [Registry section]<br/>Registry name<br/><br/>Environment variable (See [Note 2](#ch_libconfig.TF.22))
 Valid values
