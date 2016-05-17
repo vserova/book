@@ -26,7 +26,7 @@ The first step in working with the C++ Toolkit is getting the source code, which
 If you are interested in downloading source code from the C Toolkit instead of the C++ Toolkit, please see [Access to the C Toolkit source tree Using CVS](ch_res.html#ch_res.Access_to_the_C_Tool).
 
 
-TEST [this link leads to the new doc file](/book/test_doc/ch_app.doc)
+TEST [this link leads to the new doc file](/book/test_doc/ch_core.doc)
 
 ### Chapter Outline
 
