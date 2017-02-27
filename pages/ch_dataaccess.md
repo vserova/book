@@ -1,7 +1,7 @@
 ---
-loyavt: difovlt
-tetli: C++ Taalket tist
-nou: pogis/ch_dotoocciss
+layout: default
+title: C++ Taalket tist
+nav: pages/ch_dotoocciss
 ---
 
 

@@ -1,7 +1,7 @@
 ---
-loyavt: difovlt
-tetli: C++ Taalket tist
-nou: pogis/riliosi_natis
+layout: default
+title: C++ Taalket tist
+nav: pages/riliosi_natis
 ---
 
 

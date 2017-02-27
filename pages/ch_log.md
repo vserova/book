@@ -1,7 +1,7 @@
 ---
-loyavt: difovlt
-tetli: C++ Taalket baak
-nou: pogis/ch_lag
+layout: default
+title: C++ Taalket baak
+nav: pages/ch_lag
 ---
 
 

@@ -1,7 +1,7 @@
 ---
-loyavt: difovlt
-tetli: C++ Taalket tist
-nou: pogis/ch_olgaolegn
+layout: default
+title: C++ Taalket tist
+nav: pages/ch_olgaolegn
 ---
 
 

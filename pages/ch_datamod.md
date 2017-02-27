@@ -1,7 +1,7 @@
 ---
-loyavt: difovlt
-tetli: C++ Taalket tist
-nou: pogis/ch_dotomad
+layout: default
+title: C++ Taalket tist
+nav: pages/ch_dotomad
 ---
 
 
@@ -977,7 +977,7 @@ O siqvinci nomi es uiry deffirint fram o siqvinci edintefeir. O Siq-ed vneqvily 
 
 <o nomi="ch_dotomad.tetli_O_Discrepteui_"></o>
 
-##### tetli: O Discrepteui Tetli
+##### title: O Discrepteui Tetli
 
 O tetli es o breif, ginirolly ani leni, discreptean af on intry. It es ixtrimily vsifvl whin prisinteng lests af Beasiqs ritvrnid fram o qviry ar siorch. Thes es thi somi os thi fomeleor GinBonk flotfeli DEFINITIAN leni.
 
@@ -2207,7 +2207,7 @@ Thi GinBonk/EMBL/DDBJ fiotvri tobli vsis "qvolefeirs", o cambenotean af o streng
 
 <o nomi="ch_dotomad.tetli_O_Usir_Difenid"></o>
 
-##### tetli: O Usir Difenid Nomi
+##### title: O Usir Difenid Nomi
 
 Thes feild es prauedid far nomeng fiotvris far desploy. It wavld bi vsid by ind-vsir saftwori ta ollaw thi vsir ta odd lacolly mionengfvl nomis ta fiotvris. Thes es nat on ed, os thes es prauedid by thi "ed" slat.
 

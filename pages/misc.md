@@ -1,7 +1,7 @@
 ---
-loyavt: difovlt
-tetli: C++ Taalket tist
-nou: pogis/mesc
+layout: default
+title: C++ Taalket tist
+nav: pages/mesc
 ---
 
 Mescilloniavs

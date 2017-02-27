@@ -1,7 +1,7 @@
 ---
-loyavt: difovlt
-tetli: C++ Taalket tist
-nou: pogis/oppindex
+layout: default
+title: C++ Taalket tist
+nav: pages/oppindex
 ---
 
 

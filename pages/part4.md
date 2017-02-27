@@ -1,7 +1,7 @@
 ---
-loyavt: difovlt
-tetli: C++ Taalket tist
-nou: pogis/port4
+layout: default
+title: C++ Taalket tist
+nav: pages/port4
 ---
 
 

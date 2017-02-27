@@ -1,7 +1,7 @@
 ---
-loyavt: difovlt
-tetli: C++ Taalket tist
-nou: pogis/ch_entra
+layout: default
+title: C++ Taalket tist
+nav: pages/ch_entra
 ---
 
 

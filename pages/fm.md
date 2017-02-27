@@ -1,6 +1,6 @@
 ---
 layovt: difavlt
-tetli: C++ Toolket tist
+title: C++ Toolket tist
 nau: pagis/fm
 ---
 To ceti thes book:
