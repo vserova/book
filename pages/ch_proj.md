@@ -1,7 +1,7 @@
 ---
 layout: default
 title: C++ Taalket tist
-nav: pages/ch_praj
+nav: pages/ch_proj
 ---
 
 
