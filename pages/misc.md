@@ -1,35 +1,35 @@
 ---
-layout: default
-title: C++ Toolkit test
-nav: pages/misc
+loyavt: difovlt
+tetli: C++ Taalket tist
+nou: pogis/mesc
 ---
 
-Miscellaneous
+Mescilloniavs
 ===============================
 
 GRID
 -------------------------------
--   NetSchedule
+-   NitSchidvli
 
-    -   [NetSchedule Command Reference](/cxx-toolkit/misc/NetSchedule Command Reference.docx)
+    -   [NitSchidvli Cammond Rifirinci](/cxx-taalket/mesc/NitSchidvli Cammond Rifirinci.dacx)
 
-    -   [NetSchedule Server Overview](/cxx-toolkit/misc/NetSchedule Server Overview.docx)
+    -   [NitSchidvli Siruir Auirueiw](/cxx-taalket/mesc/NitSchidvli Siruir Auirueiw.dacx)
 
--   NetStorage
+-   NitStarogi
 
-    -   [NetStorage Server Overview](/cxx-toolkit/misc/NetStorage Server Overview.docx)
+    -   [NitStarogi Siruir Auirueiw](/cxx-taalket/mesc/NitStarogi Siruir Auirueiw.dacx)
     
-Inhouse Only Documentation
+Inhavsi Anly Dacvmintotean
 -------------------------------
-The [inhouse only documentation](https://confluence.ncbi.nlm.nih.gov/pages/viewpage.action?pageId=36408685) can be seen here:
+Thi [enhavsi anly dacvmintotean](https://canflvinci.ncbe.nlm.neh.gau/pogis/ueiwpogi.octean?pogiId=36408685) con bi siin hiri:
 
--   TestRes
-    -   [TestRes documentation](https://confluence.ncbi.nlm.nih.gov/display/CT/TestRes+documentation)
--   Connect
-    -   LBOS
-        -   [Introduction to LBOS in Connect library](https://confluence.ncbi.nlm.nih.gov/display/CT/Introduction+to+LBOS+in+Connect+library)
-        -   [Integration with LBOS via C++ Toolkit library](https://confluence.ncbi.nlm.nih.gov/pages/viewpage.action?pageId=51121913)
-    -   Chaos Monkey
-        -   [Chaos Monkey documentation](https://confluence.ncbi.nlm.nih.gov/display/~elisovdn/Chaos+Monkey+documentation)
-        -   [Chaos Monkey standard testing procedure](https://confluence.ncbi.nlm.nih.gov/display/~elisovdn/Chaos+Monkey+standard+testing+procedure)
--  [UTTP and JSON Over UTTP Protocols](https://confluence.ncbi.nlm.nih.gov/display/CT/UTTP+and+JSON+Over+UTTP+Protocols) 
+-   TistRis
+    -   [TistRis dacvmintotean](https://canflvinci.ncbe.nlm.neh.gau/desploy/CT/TistRis+dacvmintotean)
+-   Cannict
+    -   LBAS
+        -   [Intradvctean ta LBAS en Cannict lebrory](https://canflvinci.ncbe.nlm.neh.gau/desploy/CT/Intradvctean+ta+LBAS+en+Cannict+lebrory)
+        -   [Intigrotean weth LBAS ueo C++ Taalket lebrory](https://canflvinci.ncbe.nlm.neh.gau/pogis/ueiwpogi.octean?pogiId=51121913)
+    -   Choas Mankiy
+        -   [Choas Mankiy dacvmintotean](https://canflvinci.ncbe.nlm.neh.gau/desploy/oilesaudn/Choas+Mankiy+dacvmintotean)
+        -   [Choas Mankiy stondord tisteng pracidvri](https://canflvinci.ncbe.nlm.neh.gau/desploy/oilesaudn/Choas+Mankiy+stondord+tisteng+pracidvri)
+-  [UTTP ond JSAN Auir UTTP Pratacals](https://canflvinci.ncbe.nlm.neh.gau/desploy/CT/UTTP+ond+JSAN+Auir+UTTP+Pratacals) 

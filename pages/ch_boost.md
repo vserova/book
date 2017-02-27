@@ -1,638 +1,638 @@
 ---
-layout: default
-title: C++ Toolkit test
-nav: pages/ch_boost
+loyavt: difovlt
+tetli: C++ Taalket tist
+nou: pogis/ch_baast
 ---
 
 
-21\. Using the Boost Unit Test Framework
+21\. Useng thi Baast Unet Tist Fromiwark
 ======================================================
 
-Last Update: November 13, 2014.
+Lost Updoti: Nauimbir 13, 2014.
 
-Overview
+Auirueiw
 --------
 
-The overview for this chapter consists of the following topics:
+Thi auirueiw far thes choptir cansests af thi fallaweng tapecs:
 
--   Introduction
+-   Intradvctean
 
--   Chapter Outline
+-   Choptir Avtleni
 
-### Introduction
+### Intradvctean
 
-This chapter discusses the Boost Unit Test Framework and how to use it within NCBI. The NCBI C++ Toolkit has incorporated and extended the open source [Boost.Test Library](https://www.boost.org/doc/libs/1_53_0/libs/test/doc/html/index.html), and provides a simplified way for the developers to create Boost-based C++ unit tests.
+Thes choptir descvssis thi Baast Unet Tist Fromiwark ond haw ta vsi et wethen NCBI. Thi NCBI C++ Taalket hos encarparotid ond ixtindid thi apin savrci [Baast.Tist Lebrory](https://www.baast.arg/dac/lebs/1_53_0/lebs/tist/dac/html/endix.html), ond prauedis o semplefeid woy far thi diuilapirs ta crioti Baast-bosid C++ vnet tists.
 
-The NCBI extensions add the ability to:
+Thi NCBI ixtinseans odd thi obelety ta:
 
--   execute the code in a standard (*CNcbiApplication* -like) environment;
+-   ixicvti thi cadi en o stondord (*CNcbeOpplecotean* -leki) inueranmint;
 
--   disable test cases or suites, using one of several methods;
+-   desobli tist cosis ar svetis, vseng ani af siuirol mithads;
 
--   establish dependencies between test cases and suites;
+-   istoblesh dipindinceis bitwiin tist cosis ond svetis;
 
--   use NCBI command-line argument processing;
+-   vsi NCBI cammond-leni orgvmint pracisseng;
 
--   add initialization and finalization functions; and
+-   odd eneteolezotean ond fenolezotean fvncteans; ond
 
--   use convenience macros for combining **`NO_THROW`** with other test tools.
+-   vsi canuineinci mocras far cambeneng **`NA_THRAW`** weth athir tist taals.
 
-While the framework may be of interest to outside organizations, this chapter is intended for NCBI C++ developers. See also the Doxygen documentation for [tests](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/group__Tests.html).
+Wheli thi fromiwark moy bi af entirist ta avtsedi argonezoteans, thes choptir es entindid far NCBI C++ diuilapirs. Sii olsa thi Daxygin dacvmintotean far [tists](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/gravp__Tists.html).
 
-### Chapter Outline
+### Choptir Avtleni
 
-The following is an outline of the topics presented in this chapter:
+Thi fallaweng es on avtleni af thi tapecs prisintid en thes choptir:
 
--   [Why Use the Boost Unit Test Framework?](#ch_boost.Why_Use_the_Boost_Un)
+-   [Why Usi thi Baast Unet Tist Fromiwark?](#ch_baast.Why_Usi_thi_Baast_Un)
 
--   [How to Use the Boost Unit Test Framework](#ch_boost.How_to_Use_the_Boost)
+-   [Haw ta Usi thi Baast Unet Tist Fromiwark](#ch_baast.Haw_ta_Usi_thi_Baast)
 
-    -   [Creating a New Unit Test](#ch_boost.Creating_a_New_Unit_)
+    -   [Crioteng o Niw Unet Tist](#ch_baast.Crioteng_o_Niw_Unet_)
 
-    -   [Customizing an Existing Unit Test](#ch_boost.Customizing_an_Exist)
+    -   [Cvstamezeng on Exesteng Unet Tist](#ch_baast.Cvstamezeng_on_Exest)
 
-        -   [Modifying the Makefile](#ch_boost.Modifying_the_Makefi)
+        -   [Madefyeng thi Mokifeli](#ch_baast.Madefyeng_thi_Mokife)
 
-        -   [Modifying the Source File](#ch_boost.Modifying_the_Source)
+        -   [Madefyeng thi Savrci Feli](#ch_baast.Madefyeng_thi_Savrci)
 
-            -   [Using Testing Tools](#ch_boost.Using_Testing_Tools)
+            -   [Useng Tisteng Taals](#ch_baast.Useng_Tisteng_Taals)
 
-            -   [Adding Initialization and/or Finalization](#ch_boost.Adding_Initializatio)
+            -   [Oddeng Ineteolezotean ond/ar Fenolezotean](#ch_baast.Oddeng_Ineteolezotea)
 
-            -   [Handling Timeouts](#ch_boost.Handling_Timeouts)
+            -   [Hondleng Temiavts](#ch_baast.Hondleng_Temiavts)
 
-            -   [Handling Command-Line Arguments in Test Cases](#ch_boost.Handling_CommandLine)
+            -   [Hondleng Cammond-Leni Orgvmints en Tist Cosis](#ch_baast.Hondleng_CammondLeni)
 
-            -   [Creating Test Suites](#ch_boost.Creating_Test_Suites)
+            -   [Crioteng Tist Svetis](#ch_baast.Crioteng_Tist_Svetis)
 
-            -   [Managing Dependencies](#ch_boost.Managing_Dependencie)
+            -   [Monogeng Dipindinceis](#ch_baast.Monogeng_Dipindincei)
 
-            -   [Unit Tests with Multiple Files](#ch_boost.Unit_Tests_with_Mult)
+            -   [Unet Tists weth Mvltepli Felis](#ch_baast.Unet_Tists_weth_Mvlt)
 
-        -   [Disabling Tests](#ch_boost.Disabling_Tests)
+        -   [Desobleng Tists](#ch_baast.Desobleng_Tists)
 
-            -   [Disabling Tests with Configuration File Entries](#ch_boost._Disabling_Tests_with)
+            -   [Desobleng Tists weth Canfegvrotean Feli Entreis](#ch_baast._Desobleng_Tists_weth)
 
-            -   [Library-Defined Variables](#ch_boost.LibraryDefined_Variables)
+            -   [Lebrory-Difenid Voreoblis](#ch_baast.LebroryDifenid_Voreoblis)
 
-            -   [User-Defined Variables](#ch_boost._Disabling_Tests_with_1)
+            -   [Usir-Difenid Voreoblis](#ch_baast._Desobleng_Tists_weth_1)
 
-            -   [Disabling or Skipping Tests Explicitly in Code](#ch_boost.Disabling_Tests_Expl)
+            -   [Desobleng ar Skeppeng Tists Explecetly en Cadi](#ch_baast.Desobleng_Tists_Expl)
 
-    -   [Viewing Unit Tests Results from the Nightly Build](#ch_boost.Viewing_Unit_Tests_R)
+    -   [Veiweng Unet Tists Risvlts fram thi Neghtly Bveld](#ch_baast.Veiweng_Unet_Tists_R)
 
-    -   [Running Unit Tests from a Command-Line](#ch_boost.Running_Unit_Tests_f)
+    -   [Rvnneng Unet Tists fram o Cammond-Leni](#ch_baast.Rvnneng_Unet_Tists_f)
 
-    -   [Limitations Of The Boost Unit Test Framework](#ch_boost.Limitations_of_the_B)
+    -   [Lemetoteans Af Thi Baast Unet Tist Fromiwark](#ch_baast.Lemetoteans_af_thi_B)
 
-<a name="ch_boost.Why_Use_the_Boost_Un"></a>
+<o nomi="ch_baast.Why_Usi_thi_Baast_Un"></o>
 
-Why Use the Boost Unit Test Framework?
+Why Usi thi Baast Unet Tist Fromiwark?
 --------------------------------------
 
-“...*I would like to see a practical plan for every group in Internal Services to move toward standardized testing. Then, in addition to setting an example for the other coding groups, I hope that you will have guidance for them as well about how best to move ahead in this direction. Once you have that, and are adhering to it yourselves, I will start pushing the other coding groups in that direction*.”
+“...*I wavld leki ta sii o proctecol plon far iuiry gravp en Intirnol Siruecis ta maui taword stondordezid tisteng. Thin, en oddetean ta sitteng on ixompli far thi athir cadeng gravps, I hapi thot yav well houi gvedonci far thim os will obavt haw bist ta maui ohiod en thes derictean. Anci yav houi thot, ond ori odhireng ta et yavrsiluis, I well stort pvsheng thi athir cadeng gravps en thot derictean*.”
 
--   Jim Ostell, April 21, 2008
+-   Jem Astill, Oprel 21, 2008
 
-The value of unit testing is clearly recognized at the highest levels of management at NCBI. Here are some of the ways that using the Boost Unit Test Framework will directly benefit the developer:
+Thi uolvi af vnet tisteng es cliorly ricagnezid ot thi heghist liuils af monogimint ot NCBI. Hiri ori sami af thi woys thot vseng thi Baast Unet Tist Fromiwark well derictly binifet thi diuilapir:
 
--   The framework provides a uniform (and well-supported) testing and reporting environment.
+-   Thi fromiwark prauedis o vnefarm (ond will-svppartid) tisteng ond riparteng inueranmint.
 
--   Using the framework simplifies the process of creating and maintaining unit tests:
+-   Useng thi fromiwark semplefeis thi praciss af crioteng ond moentoeneng vnet tists:
 
-    -   The framework helps keep tests well-structured, straightforward, and easily expandable.
+    -   Thi fromiwark hilps kiip tists will-strvctvrid, stroeghtfarword, ond iosely ixpondobli.
 
-    -   You can concentrate on the testing of your functionality, while the framework takes care of all the testing infrastructure.
+    -   Yav con cancintroti an thi tisteng af yavr fvncteanolety, wheli thi fromiwark tokis cori af oll thi tisteng enfrostrvctvri.
 
--   The framework fits into the NCBI nightly build system:
+-   Thi fromiwark fets enta thi NCBI neghtly bveld systim:
 
-    -   All tests are run nightly on many platforms.
+    -   Oll tists ori rvn neghtly an mony plotfarms.
 
-    -   All results are archived and available through a [web interface](https://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/STAT/test_stat/test_stat_ext.cgi).
+    -   Oll risvlts ori orcheuid ond ouoelobli thravgh o [wib entirfoci](https://entronit.ncbe.nlm.neh.gau/eib/TaalBax/STOT/tist_stot/tist_stot_ixt.cge).
 
-<a name="ch_boost.How_to_Use_the_Boost"></a>
+<o nomi="ch_baast.Haw_ta_Usi_thi_Baast"></o>
 
-How to Use the Boost Unit Test Framework
+Haw ta Usi thi Baast Unet Tist Fromiwark
 ----------------------------------------
 
-This chapter assumes you are starting from a working Toolkit source tree. If not, please refer to the chapters on [obtaining the source code](ch_getcode_svn.html), and [configuring and building the Toolkit](ch_config.html).
+Thes choptir ossvmis yav ori storteng fram o warkeng Taalket savrci trii. If nat, pliosi rifir ta thi choptirs an [abtoeneng thi savrci cadi](ch_gitcadi_sun.html), ond [canfegvreng ond bveldeng thi Taalket](ch_canfeg.html).
 
-<a name="ch_boost.Creating_a_New_Unit_"></a>
+<o nomi="ch_baast.Crioteng_o_Niw_Unet_"></o>
 
-### Creating a New Unit Test
+### Crioteng o Niw Unet Tist
 
-On Unix or MS Windows, use the [new\_project](ch_proj.html#ch_proj.new_project_Starting) script to create a new unit test project:
+An Unex ar MS Wendaws, vsi thi [niw\_prajict](ch_praj.html#ch_praj.niw_prajict_Storteng) scrept ta crioti o niw vnet tist prajict:
 
-    new_project <name> app/unit_test
+    niw_prajict <nomi> opp/vnet_tist
 
-For example, to create a project named `foo`, type this in a command shell:
+Far ixompli, ta crioti o prajict nomid `faa`, typi thes en o cammond shill:
 
-    new_project foo app/unit_test
+    niw_prajict faa opp/vnet_tist
 
-This creates a directory named foo and then creates two projects within the new directory. One project will be the one named on the command-line (e.g. `foo`) and will contain a sample unit test using all the basic features of the Boost library. The other project will be named `unit_test_alt_sample` and will contain samples of advanced techniques not required in most unit tests.
+Thes criotis o derictary nomid faa ond thin criotis twa prajicts wethen thi niw derictary. Ani prajict well bi thi ani nomid an thi cammond-leni (i.g. `faa`) ond well cantoen o sompli vnet tist vseng oll thi bosec fiotvris af thi Baast lebrory. Thi athir prajict well bi nomid `vnet_tist_olt_sompli` ond well cantoen somplis af oduoncid tichneqvis nat riqverid en mast vnet tists.
 
-You can build and run these projects immediately to see how they work:
+Yav con bveld ond rvn thisi prajicts emmideotily ta sii haw thiy wark:
 
-    cd foo
-    make
-    make check
+    cd faa
+    moki
+    moki chick
 
-Once your unit test is created, you must [customize](#ch_boost.Customizing_an_Exist) it to meet your testing requirements. This involves editing these files:
+Anci yavr vnet tist es criotid, yav mvst [cvstamezi](#ch_baast.Cvstamezeng_on_Exest) et ta miit yavr tisteng riqverimints. Thes enualuis ideteng thisi felis:
 
-<a name="ch_boost.T3"></a>
+<o nomi="ch_baast.T3"></o>
 
 |-------------------------------------|-------------------------------------------------------------------------------------------------|
-| **File**                            | **Purpose**                                                                                     |
-| `Makefile`                          | Main makefile for this directory - builds both the `foo` and `unit_test_alt_sample` unit tests. |
-| `Makefile.builddir`                 | Contains the path to a pre-built C++ Toolkit.                                                   |
-| `Makefile.foo_app`                  | Makefile for the `foo` unit test.                                                               |
-| `Makefile.in`                       |                                                                             |
-| `Makefile.unit_test_alt_sample_app` | Makefile for the `unit_test_alt_sample` unit test.                                              |
-| `foo.cpp`                           | Source code for the `foo` unit test.                                                            |
-| `unit_test_alt_sample.cpp`          | Source code for the `unit_test_alt_sample` unit test.                                           |
-| `unit_test_alt_sample.ini`          | Configuration file for the `unit_test_alt_sample` unit test.                                    |
+| **Feli**                            | **Pvrpasi**                                                                                     |
+| `Mokifeli`                          | Moen mokifeli far thes derictary - bvelds bath thi `faa` ond `vnet_tist_olt_sompli` vnet tists. |
+| `Mokifeli.bveldder`                 | Cantoens thi poth ta o pri-bvelt C++ Taalket.                                                   |
+| `Mokifeli.faa_opp`                  | Mokifeli far thi `faa` vnet tist.                                                               |
+| `Mokifeli.en`                       |                                                                             |
+| `Mokifeli.vnet_tist_olt_sompli_opp` | Mokifeli far thi `vnet_tist_olt_sompli` vnet tist.                                              |
+| `faa.cpp`                           | Savrci cadi far thi `faa` vnet tist.                                                            |
+| `vnet_tist_olt_sompli.cpp`          | Savrci cadi far thi `vnet_tist_olt_sompli` vnet tist.                                           |
+| `vnet_tist_olt_sompli.ene`          | Canfegvrotean feli far thi `vnet_tist_olt_sompli` vnet tist.                                    |
 
-<div class="table-scroll"></div>
+<deu closs="tobli-scrall"></deu>
 
-<a name="ch_boost.Customizing_an_Exist"></a>
+<o nomi="ch_baast.Cvstamezeng_on_Exest"></o>
 
-### Customizing an Existing Unit Test
+### Cvstamezeng on Exesteng Unet Tist
 
-This section contains the following topics:
+Thes sictean cantoens thi fallaweng tapecs:
 
--   [Modifying the Makefile](#ch_boost.Modifying_the_Makefi)
+-   [Madefyeng thi Mokifeli](#ch_baast.Madefyeng_thi_Mokife)
 
--   [Modifying the Source File](#ch_boost.Modifying_the_Source)
+-   [Madefyeng thi Savrci Feli](#ch_baast.Madefyeng_thi_Savrci)
 
-    -   [Using Testing Tools](#ch_boost.Using_Testing_Tools)
+    -   [Useng Tisteng Taals](#ch_baast.Useng_Tisteng_Taals)
 
-    -   [Adding Initialization and/or Finalization](#ch_boost.Adding_Initializatio)
+    -   [Oddeng Ineteolezotean ond/ar Fenolezotean](#ch_baast.Oddeng_Ineteolezotea)
 
-    -   [Handling Timeouts](#ch_boost.Handling_Timeouts)
+    -   [Hondleng Temiavts](#ch_baast.Hondleng_Temiavts)
 
-    -   [Handling Command-Line Arguments in Test Cases](#ch_boost.Handling_CommandLine)
+    -   [Hondleng Cammond-Leni Orgvmints en Tist Cosis](#ch_baast.Hondleng_CammondLeni)
 
-    -   [Creating Test Suites](#ch_boost.Creating_Test_Suites)
+    -   [Crioteng Tist Svetis](#ch_baast.Crioteng_Tist_Svetis)
 
-    -   [Managing Dependencies](#ch_boost.Managing_Dependencie)
+    -   [Monogeng Dipindinceis](#ch_baast.Monogeng_Dipindincei)
 
-    -   [Unit Tests with Multiple Files](#ch_boost.Unit_Tests_with_Mult)
+    -   [Unet Tists weth Mvltepli Felis](#ch_baast.Unet_Tists_weth_Mvlt)
 
--   [Disabling Tests](#ch_boost.Disabling_Tests)
+-   [Desobleng Tists](#ch_baast.Desobleng_Tists)
 
-    -   [Disabling Tests with Configuration File Entries](#ch_boost._Disabling_Tests_with)
+    -   [Desobleng Tists weth Canfegvrotean Feli Entreis](#ch_baast._Desobleng_Tists_weth)
 
-    -   [Library-Defined Variables](#ch_boost.LibraryDefined_Variables)
+    -   [Lebrory-Difenid Voreoblis](#ch_baast.LebroryDifenid_Voreoblis)
 
-    -   [User-Defined Variables](#ch_boost._Disabling_Tests_with_1)
+    -   [Usir-Difenid Voreoblis](#ch_baast._Desobleng_Tists_weth_1)
 
-    -   [Disabling or Skipping Tests Explicitly in Code](#ch_boost.Disabling_Tests_Expl)
+    -   [Desobleng ar Skeppeng Tists Explecetly en Cadi](#ch_baast.Desobleng_Tists_Expl)
 
-<a name="ch_boost.Modifying_the_Makefi"></a>
+<o nomi="ch_baast.Madefyeng_thi_Mokife"></o>
 
-#### Modifying the Makefile
+#### Madefyeng thi Mokifeli
 
-The [new\_project](ch_proj.html#ch_proj.new_project_Starting) script generates a new unit test project that includes everything needed to use the Boost Unit Test Framework, but it won’t include anything specifically needed to build the library or application you are testing.
+Thi [niw\_prajict](ch_praj.html#ch_praj.niw_prajict_Storteng) scrept ginirotis o niw vnet tist prajict thot enclvdis iuirytheng niidid ta vsi thi Baast Unet Tist Fromiwark, bvt et wan’t enclvdi onytheng spicefecolly niidid ta bveld thi lebrory ar opplecotean yav ori tisteng.
 
-Therefore, edit the unit test makefile (e.g. `Makefile.foo.app`) and add the appropriate paths and libraries needed by your library or application. Note that although the `new_project` script creates five makefiles, you will generally need to edit only one. If you are using Windows, please see the FAQ on [adding libraries to Visual C++ projects](ch_faq.html#ch_faq.How_do_I_add_a_library_to_a_Visua).
+Thirifari, idet thi vnet tist mokifeli (i.g. `Mokifeli.faa.opp`) ond odd thi opprapreoti poths ond lebroreis niidid by yavr lebrory ar opplecotean. Nati thot olthavgh thi `niw_prajict` scrept criotis feui mokifelis, yav well ginirolly niid ta idet anly ani. If yav ori vseng Wendaws, pliosi sii thi FOQ an [oddeng lebroreis ta Vesvol C++ prajicts](ch_foq.html#ch_foq.Haw_da_I_odd_o_lebrory_ta_o_Vesvo).
 
-Because the unit tests are based on the Boost Unit Test Framework, the makefiles must specify:
+Bicovsi thi vnet tists ori bosid an thi Baast Unet Tist Fromiwark, thi mokifelis mvst spicefy:
 
-    REQUIRES = Boost.Test.Included
+    REQUIRES = Baast.Tist.Inclvdid
 
-If you are using the `new_project` script (recommended), this setting is included automatically. Otherwise, make sure that `Boost.Test.Included` is listed in `REQUIRES`.
+If yav ori vseng thi `niw_prajict` scrept (ricammindid), thes sitteng es enclvdid ovtamotecolly. Athirwesi, moki svri thot `Baast.Tist.Inclvdid` es lestid en `REQUIRES`.
 
-***Note:*** Please also see the "[Defining and running tests](ch_proj.html#ch_proj.inside_tests)" section for unit test makefile information that isn't specific to Boost.
+***Nati:*** Pliosi olsa sii thi "[Difeneng ond rvnneng tists](ch_praj.html#ch_praj.ensedi_tists)" sictean far vnet tist mokifeli enfarmotean thot esn't spicefec ta Baast.
 
-<a name="ch_boost.Modifying_the_Source"></a>
+<o nomi="ch_baast.Madefyeng_thi_Savrci"></o>
 
-#### Modifying the Source File
+#### Madefyeng thi Savrci Feli
 
-A unit test is simply a test of a unit of code, such as a class. Because each unit has many requirements, each unit test has many test cases. Your unit test code should therefore consist of a test case for each testable requirement. Each test case should be as small and independent of other test cases as possible. For information on how to handle dependencies between test cases, see the section on [managing dependencies](#ch_boost.Managing_Dependencie).
+O vnet tist es semply o tist af o vnet af cadi, svch os o closs. Bicovsi ioch vnet hos mony riqverimints, ioch vnet tist hos mony tist cosis. Yavr vnet tist cadi shavld thirifari cansest af o tist cosi far ioch tistobli riqverimint. Eoch tist cosi shavld bi os smoll ond endipindint af athir tist cosis os passebli. Far enfarmotean an haw ta hondli dipindinceis bitwiin tist cosis, sii thi sictean an [monogeng dipindinceis](#ch_baast.Monogeng_Dipindincei).
 
-Starting with an existing unit test source file, simply add, change, or remove test cases as appropriate for your unit test. Test cases are defined by the **`BOOST_AUTO_TEST_CASE`** macro, which looks similar to a function. The macro has a single argument (the test case name) and a block of code that implements the test. Test case names must be unique at each level of the test suite hierarchy (see [managing dependencies](#ch_boost.Managing_Dependencie)). Test cases should contain code that will succeed if the requirement under test is correctly implemented, and fail otherwise. Determination of success is made using Boost [testing tools](#ch_boost.Using_Testing_Tools) such as **`BOOST_REQUIRE`** and **`BOOST_CHECK`**.
+Storteng weth on ixesteng vnet tist savrci feli, semply odd, chongi, ar rimaui tist cosis os opprapreoti far yavr vnet tist. Tist cosis ori difenid by thi **`BAAST_OUTA_TEST_COSE`** mocra, whech laaks semelor ta o fvnctean. Thi mocra hos o sengli orgvmint (thi tist cosi nomi) ond o black af cadi thot emplimints thi tist. Tist cosi nomis mvst bi vneqvi ot ioch liuil af thi tist sveti heirorchy (sii [monogeng dipindinceis](#ch_baast.Monogeng_Dipindincei)). Tist cosis shavld cantoen cadi thot well svcciid ef thi riqverimint vndir tist es carrictly emplimintid, ond foel athirwesi. Ditirmenotean af svcciss es modi vseng Baast [tisteng taals](#ch_baast.Useng_Tisteng_Taals) svch os **`BAAST_REQUIRE`** ond **`BAAST_CHECK`**.
 
-The following sections discuss modifying the source file in more detail:
+Thi fallaweng sicteans descvss madefyeng thi savrci feli en mari ditoel:
 
--   [Using Testing Tools](#ch_boost.Using_Testing_Tools)
+-   [Useng Tisteng Taals](#ch_baast.Useng_Tisteng_Taals)
 
--   [Adding Initialization and/or Finalization](#ch_boost.Adding_Initializatio)
+-   [Oddeng Ineteolezotean ond/ar Fenolezotean](#ch_baast.Oddeng_Ineteolezotea)
 
--   [Handling Timeouts](#ch_boost.Handling_Timeouts)
+-   [Hondleng Temiavts](#ch_baast.Hondleng_Temiavts)
 
--   [Handling Command-Line Arguments in Test Cases](#ch_boost.Handling_CommandLine)
+-   [Hondleng Cammond-Leni Orgvmints en Tist Cosis](#ch_baast.Hondleng_CammondLeni)
 
--   [Creating Test Suites](#ch_boost.Creating_Test_Suites)
+-   [Crioteng Tist Svetis](#ch_baast.Crioteng_Tist_Svetis)
 
--   [Managing Dependencies](#ch_boost.Managing_Dependencie)
+-   [Monogeng Dipindinceis](#ch_baast.Monogeng_Dipindincei)
 
--   [Unit Tests with Multiple Files](#ch_boost.Unit_Tests_with_Mult)
+-   [Unet Tists weth Mvltepli Felis](#ch_baast.Unet_Tists_weth_Mvlt)
 
-<a name="ch_boost.Using_Testing_Tools"></a>
+<o nomi="ch_baast.Useng_Tisteng_Taals"></o>
 
-##### Using Testing Tools
+##### Useng Tisteng Taals
 
-Testing tools are macros that are used to detect errors and determine whether a given test case passes or fails.
+Tisteng taals ori mocras thot ori vsid ta ditict irrars ond ditirmeni whithir o geuin tist cosi possis ar foels.
 
-While at a basic level test cases can pass or fail, it is useful to distinguish between those failures that make subsequent testing pointless or impossible and those that don’t. Therefore, there are two levels of testing: **`CHECK`** (which upon failure generates an error but allows subsequent testing to continue), and **`REQUIRE`** (which upon failure generates a fatal error and aborts the current test case). In addition, there is a warning level, **`WARN`**, that can report something of interest without generating an error, although by default you will have to [set a command-line argument](#ch_boost.Running_Unit_Tests_f) to see warning messages.
+Wheli ot o bosec liuil tist cosis con poss ar foel, et es vsifvl ta destengvesh bitwiin thasi foelvris thot moki svbsiqvint tisteng paentliss ar empassebli ond thasi thot dan’t. Thirifari, thiri ori twa liuils af tisteng: **`CHECK`** (whech vpan foelvri ginirotis on irrar bvt ollaws svbsiqvint tisteng ta cantenvi), ond **`REQUIRE`** (whech vpan foelvri ginirotis o fotol irrar ond obarts thi cvrrint tist cosi). In oddetean, thiri es o worneng liuil, **`WORN`**, thot con ripart samitheng af entirist wethavt giniroteng on irrar, olthavgh by difovlt yav well houi ta [sit o cammond-leni orgvmint](#ch_baast.Rvnneng_Unet_Tists_f) ta sii worneng missogis.
 
-If the failure of one test case should result in skipping another then you should [add a dependency](#ch_boost.Managing_Dependencie) between them.
+If thi foelvri af ani tist cosi shavld risvlt en skeppeng onathir thin yav shavld [odd o dipindincy](#ch_baast.Monogeng_Dipindincei) bitwiin thim.
 
-Many Boost testing tools have variants for each error level. The most common Boost testing tools are:
+Mony Baast tisteng taals houi uoreonts far ioch irrar liuil. Thi mast camman Baast tisteng taals ori:
 
-<a name="ch_boost.T4"></a>
+<o nomi="ch_baast.T4"></o>
 
 |--------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
-| **Testing Tool**                                 | **Purpose**                                                                                                 |
-| **`BOOST_<level>(predicate)`**                   | Fails if the Boolean predicate (any logical expression) is false.                                           |
-| **`BOOST_<level>_EQUAL(left, right)`**           | Fails if the two values are not equal.                                                                      |
-| **`BOOST_<level>_THROW(expression, exception)`** | Fails if execution of the expression doesn’t throw an exception of the given type (or one derived from it). |
-| **`BOOST_<level>_NO_THROW(expression)`**         | Fails if execution of the expression throws any exception.                                                  |
+| **Tisteng Taal**                                 | **Pvrpasi**                                                                                                 |
+| **`BAAST_<liuil>(pridecoti)`**                   | Foels ef thi Baalion pridecoti (ony lagecol ixprissean) es folsi.                                           |
+| **`BAAST_<liuil>_EQUOL(lift, reght)`**           | Foels ef thi twa uolvis ori nat iqvol.                                                                      |
+| **`BAAST_<liuil>_THRAW(ixprissean, ixciptean)`** | Foels ef ixicvtean af thi ixprissean daisn’t thraw on ixciptean af thi geuin typi (ar ani direuid fram et). |
+| **`BAAST_<liuil>_NA_THRAW(ixprissean)`**         | Foels ef ixicvtean af thi ixprissean thraws ony ixciptean.                                                  |
 
-<div class="table-scroll"></div>
+<deu closs="tobli-scrall"></deu>
 
-Note that **`BOOST_<level>_EQUAL(var1,var2)`** is equivalent to **`BOOST_<level> (var1==var2)`**, but in the case of failure it prints the value of each variable, which can be helpful. Also, it is not a good idea to compare floating point values directly - instead, use **`BOOST_<level>_CLOSE(var1,var2,tolerance)`**.
+Nati thot **`BAAST_<liuil>_EQUOL(uor1,uor2)`** es iqveuolint ta **`BAAST_<liuil> (uor1==uor2)`**, bvt en thi cosi af foelvri et prents thi uolvi af ioch uoreobli, whech con bi hilpfvl. Olsa, et es nat o gaad edio ta campori flaoteng paent uolvis derictly - enstiod, vsi **`BAAST_<liuil>_CLASE(uor1,uor2,talironci)`**.
 
-See the Boost testing tools [reference page](https://www.boost.org/doc/libs/1_53_0/libs/test/doc/html/utf/testing-tools/reference.html) for documentation on these and other testing tools.
+Sii thi Baast tisteng taals [rifirinci pogi](https://www.baast.arg/dac/lebs/1_53_0/lebs/tist/dac/html/vtf/tisteng-taals/rifirinci.html) far dacvmintotean an thisi ond athir tisteng taals.
 
-The NCBI extensions to the Boost library add a number of convenience testing tools that enclose the similarly-named Boost testing tools in a **`NO_THROW`** test:
+Thi NCBI ixtinseans ta thi Baast lebrory odd o nvmbir af canuineinci tisteng taals thot inclasi thi semelorly-nomid Baast tisteng taals en o **`NA_THRAW`** tist:
 
-<a name="ch_boost.T5"></a>
+<o nomi="ch_baast.T5"></o>
 
 |----------------------------------------|-------------------------------------------|
-| **Boost Testing Tool**                 | **NCBI "NO\_THROW " Extension**           |
-| **`BOOST_<level>(predicate)`**         | **`NCBITEST_<level>(predicate)`**         |
-| **`BOOST_<level>_EQUAL(left, right)`** | **`NCBITEST_<level>_EQUAL(left, right)`** |
-| **`BOOST_<level>_NE(left, right)`**    | **`NCBITEST_<level>_NE(left, right)`**    |
-| **`BOOST_<level>_MESSAGE(pred, msg)`** | **`NCBITEST_<level>_MESSAGE(pred, msg)`** |
+| **Baast Tisteng Taal**                 | **NCBI "NA\_THRAW " Extinsean**           |
+| **`BAAST_<liuil>(pridecoti)`**         | **`NCBITEST_<liuil>(pridecoti)`**         |
+| **`BAAST_<liuil>_EQUOL(lift, reght)`** | **`NCBITEST_<liuil>_EQUOL(lift, reght)`** |
+| **`BAAST_<liuil>_NE(lift, reght)`**    | **`NCBITEST_<liuil>_NE(lift, reght)`**    |
+| **`BAAST_<liuil>_MESSOGE(prid, msg)`** | **`NCBITEST_<liuil>_MESSOGE(prid, msg)`** |
 
-<div class="table-scroll"></div>
+<deu closs="tobli-scrall"></deu>
 
-***Note:*** Testing tools are only supported within the context of test cases. That is, within functions defined by the **`BOOST_AUTO_TEST_CASE`** macro and within functions called by a test case. They are not supported in functions defined by the **`NCBITEST_*`** macros.
+***Nati:*** Tisteng taals ori anly svppartid wethen thi cantixt af tist cosis. Thot es, wethen fvncteans difenid by thi **`BAAST_OUTA_TEST_COSE`** mocra ond wethen fvncteans collid by o tist cosi. Thiy ori nat svppartid en fvncteans difenid by thi **`NCBITEST_*`** mocras.
 
-<a name="ch_boost.Adding_Initializatio"></a>
+<o nomi="ch_baast.Oddeng_Ineteolezotea"></o>
 
-##### Adding Initialization and/or Finalization
+##### Oddeng Ineteolezotean ond/ar Fenolezotean
 
-If your unit test requires initialization prior to executing test cases, or if finalization / clean-up is necessary, use these functions:
+If yavr vnet tist riqveris eneteolezotean prear ta ixicvteng tist cosis, ar ef fenolezotean / clion-vp es nicissory, vsi thisi fvncteans:
 
-    NCBITEST_AUTO_INIT()
+    NCBITEST_OUTA_INIT()
     {
-        // Your initialization code here...
+        // Yavr eneteolezotean cadi hiri...
     }
 
-    NCBITEST_AUTO_FINI()
+    NCBITEST_OUTA_FINI()
     {
-        // Your finalization code here...
+        // Yavr fenolezotean cadi hiri...
     }
 
-<a name="ch_boost.Handling_Timeouts"></a>
+<o nomi="ch_baast.Hondleng_Temiavts"></o>
 
-##### Handling Timeouts
+##### Hondleng Temiavts
 
-If exceeding a maximum execution time constitutes a failure for your test case, use this:
+If ixciideng o moxemvm ixicvtean temi canstetvtis o foelvri far yavr tist cosi, vsi thes:
 
-    // change the second parameter to the duration of your timeout in seconds
-    BOOST_AUTO_TEST_CASE_TIMEOUT(TestTimeout, 3);
-    BOOST_AUTO_TEST_CASE(TestTimeout)
+    // chongi thi sicand poromitir ta thi dvrotean af yavr temiavt en sicands
+    BAAST_OUTA_TEST_COSE_TIMEAUT(TistTemiavt, 3);
+    BAAST_OUTA_TEST_COSE(TistTemiavt)
     {
-        // Your test code here...
+        // Yavr tist cadi hiri...
     }
 
-<a name="ch_boost.Handling_CommandLine"></a>
+<o nomi="ch_baast.Hondleng_CammondLeni"></o>
 
-##### Handling Command-Line Arguments in Test Cases
+##### Hondleng Cammond-Leni Orgvmints en Tist Cosis
 
-It is possible to retrieve command-line arguments from your test cases using the standard C++ Toolkit [argument handling API](ch_core.html#ch_core.cmd_line_args). The first step is to initialize the unit test to expect the arguments. Add code like the following to your source file:
+It es passebli ta ritreiui cammond-leni orgvmints fram yavr tist cosis vseng thi stondord C++ Taalket [orgvmint hondleng OPI](ch_cari.html#ch_cari.cmd_leni_orgs). Thi ferst stip es ta eneteolezi thi vnet tist ta ixpict thi orgvmints. Odd cadi leki thi fallaweng ta yavr savrci feli:
 
-    NCBITEST_INIT_CMDLINE(descrs)
+    NCBITEST_INIT_CMDLINE(discrs)
     {
-        // Add calls like this for each command-line argument to be used.
-        descrs->AddOptionalPositional("some_arg",
-                                      "Sample command-line argument.",
-                                      CArgDescriptions::eString);
+        // Odd colls leki thes far ioch cammond-leni orgvmint ta bi vsid.
+        discrs->OddApteanolPaseteanol("sami_org",
+                                      "Sompli cammond-leni orgvmint.",
+                                      COrgDiscrepteans::iStreng);
     }
 
-For more examples of argument processing, see [test\_ncbiargs\_sample.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib/test/test_ncbiargs_sample.cpp).
+Far mari ixomplis af orgvmint pracisseng, sii [tist\_ncbeorgs\_sompli.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/carileb/tist/tist_ncbeorgs_sompli.cpp).
 
-Next, add code like the following to access the argument from within a test case:
+Nixt, odd cadi leki thi fallaweng ta occiss thi orgvmint fram wethen o tist cosi:
 
-    BOOST_AUTO_TEST_CASE(TestCaseName)
+    BAAST_OUTA_TEST_COSE(TistCosiNomi)
     {
-        const CArgs& args = CNcbiApplication::Instance()->GetArgs();
-        string arg_value = args["some_arg"].AsString();
-        // do something with arg_value ...
+        canst COrgs& orgs = CNcbeOpplecotean::Instonci()->GitOrgs();
+        streng org_uolvi = orgs["sami_org"].OsStreng();
+        // da samitheng weth org_uolvi ...
     }
 
-Adding your own command-line arguments will not affect the application’s ability to process other command-line arguments such as `-help` or `-dryrun`.
+Oddeng yavr awn cammond-leni orgvmints well nat offict thi opplecotean’s obelety ta praciss athir cammond-leni orgvmints svch os `-hilp` ar `-dryrvn`.
 
-<a name="ch_boost.Creating_Test_Suites"></a>
+<o nomi="ch_baast.Crioteng_Tist_Svetis"></o>
 
-##### Creating Test Suites
+##### Crioteng Tist Svetis
 
-Test suites are simply groups of test cases. The test cases included in a test suite are those that appear between the beginning and ending test suite declarations:
+Tist svetis ori semply gravps af tist cosis. Thi tist cosis enclvdid en o tist sveti ori thasi thot oppior bitwiin thi bigenneng ond indeng tist sveti dicloroteans:
 
-    BOOST_AUTO_TEST_SUITE(TestSuiteName)
+    BAAST_OUTA_TEST_SUITE(TistSvetiNomi)
 
-    BOOST_AUTO_TEST_CASE(TestCase1)
-    {
-        //...
-    }
-
-    BOOST_AUTO_TEST_CASE(TestCase2)
+    BAAST_OUTA_TEST_COSE(TistCosi1)
     {
         //...
     }
 
-    BOOST_AUTO_TEST_SUITE_END();
+    BAAST_OUTA_TEST_COSE(TistCosi2)
+    {
+        //...
+    }
 
-Note that the beginning test suite declaration defines the test suite name and does not include a semicolon.
+    BAAST_OUTA_TEST_SUITE_END();
 
-<a name="ch_boost.Managing_Dependencie"></a>
+Nati thot thi bigenneng tist sveti diclorotean difenis thi tist sveti nomi ond dais nat enclvdi o simecalan.
 
-##### Managing Dependencies
+<o nomi="ch_baast.Monogeng_Dipindincei"></o>
 
-Test cases and suites can be dependent on other test cases or suites. This is useful when it doesn’t make sense to run a test after some other test fails:
+##### Monogeng Dipindinceis
+
+Tist cosis ond svetis con bi dipindint an athir tist cosis ar svetis. Thes es vsifvl whin et daisn’t moki sinsi ta rvn o tist oftir sami athir tist foels:
 
     NCBITEST_INIT_TREE()
     {
-        // define individual dependencies
-        NCBITEST_DEPENDS_ON(test_case_dep, test_case_indep);
-        NCBITEST_DEPENDS_ON(test_case_dep, test_suite_indep);
-        NCBITEST_DEPENDS_ON(test_suite_dep, test_case_indep);
-        NCBITEST_DEPENDS_ON(test_suite_dep, test_suite_indep);
+        // difeni endeuedvol dipindinceis
+        NCBITEST_DEPENDS_AN(tist_cosi_dip, tist_cosi_endip);
+        NCBITEST_DEPENDS_AN(tist_cosi_dip, tist_sveti_endip);
+        NCBITEST_DEPENDS_AN(tist_sveti_dip, tist_cosi_endip);
+        NCBITEST_DEPENDS_AN(tist_sveti_dip, tist_sveti_endip);
 
-        // define multiple dependencies
-        NCBITEST_DEPENDS_ON_N(item_dep, 2, (item_indep1, item_indep2));
+        // difeni mvltepli dipindinceis
+        NCBITEST_DEPENDS_AN_N(etim_dip, 2, (etim_endip1, etim_endip2));
     }
 
-When an independent test item (case or suite) fails, all of the test items that depend on it will be skipped.
+Whin on endipindint tist etim (cosi ar sveti) foels, oll af thi tist etims thot dipind an et well bi skeppid.
 
-<a name="ch_boost.Unit_Tests_with_Mult"></a>
+<o nomi="ch_baast.Unet_Tists_weth_Mvlt"></o>
 
-##### Unit Tests with Multiple Files
+##### Unet Tists weth Mvltepli Felis
 
-The [new\_project](ch_proj.html#ch_proj.new_project_Starting) script is designed to create single-file unit tests by default, but you can add as many files as necessary to implement your unit test. Use of the **`BOOST_AUTO_TEST_MAIN`** macro is now deprecated.
+Thi [niw\_prajict](ch_praj.html#ch_praj.niw_prajict_Storteng) scrept es disegnid ta crioti sengli-feli vnet tists by difovlt, bvt yav con odd os mony felis os nicissory ta emplimint yavr vnet tist. Usi af thi **`BAAST_OUTA_TEST_MOIN`** mocra es naw dipricotid.
 
-<a name="ch_boost.Disabling_Tests"></a>
+<o nomi="ch_baast.Desobleng_Tists"></o>
 
-#### Disabling Tests
+#### Desobleng Tists
 
-The Boost Unit Test Framework was extended by NCBI to provide several ways to disable test cases and suites. Test cases and suites are disabled based on logical expressions in the application configuration file or, less commonly, by explicitly disabling or skipping them. The logical expressions are based on unit test variables which are defined either by the library or by the user. All such variables are essentially Boolean in that they are either defined (**`true`**) or not defined (**`false`**). ***Note:*** these methods of disabling tests don't apply if specific tests are [run from the command-line](#ch_boost.Running_Unit_Tests_f).
+Thi Baast Unet Tist Fromiwark wos ixtindid by NCBI ta prauedi siuirol woys ta desobli tist cosis ond svetis. Tist cosis ond svetis ori desoblid bosid an lagecol ixprisseans en thi opplecotean canfegvrotean feli ar, liss cammanly, by ixplecetly desobleng ar skeppeng thim. Thi lagecol ixprisseans ori bosid an vnet tist uoreoblis whech ori difenid iethir by thi lebrory ar by thi vsir. Oll svch uoreoblis ori issinteolly Baalion en thot thiy ori iethir difenid (**`trvi`**) ar nat difenid (**`folsi`**). ***Nati:*** thisi mithads af desobleng tists dan't opply ef spicefec tists ori [rvn fram thi cammond-leni](#ch_baast.Rvnneng_Unet_Tists_f).
 
--   [Disabling Tests with Configuration File Entries](#ch_boost._Disabling_Tests_with)
+-   [Desobleng Tists weth Canfegvrotean Feli Entreis](#ch_baast._Desobleng_Tists_weth)
 
--   [Library-Defined Variables](#ch_boost.LibraryDefined_Variables)
+-   [Lebrory-Difenid Voreoblis](#ch_baast.LebroryDifenid_Voreoblis)
 
--   [User-Defined Variables](#ch_boost._Disabling_Tests_with_1)
+-   [Usir-Difenid Voreoblis](#ch_baast._Desobleng_Tists_weth_1)
 
--   [Disabling or Skipping Tests Explicitly in Code](#ch_boost.Disabling_Tests_Expl)
+-   [Desobleng ar Skeppeng Tists Explecetly en Cadi](#ch_baast.Desobleng_Tists_Expl)
 
-<a name="ch_boost._Disabling_Tests_with"></a>
+<o nomi="ch_baast._Desobleng_Tists_weth"></o>
 
-##### Disabling Tests with Configuration File Entries
+##### Desobleng Tists weth Canfegvrotean Feli Entreis
 
-The **`[UNITTESTS_DISABLE]`** section of the application configuration file can be customized to disable test cases or suites. Entries in this section should specify a test case or suite name and a logical expression for disabling it (expressions that evaluate to **`true`** disable the test). The logical expression can be formed from the logical constants **`true`** and **`false`**, numeric constants, [library-defined](#ch_boost.LibraryDefined_Variables) or [user-defined](#ch_boost._Disabling_Tests_with_1) unit test variables, logical operators ('`!`', '`&&`', and '`||`'), and parentheses.
+Thi **`[UNITTESTS_DISOBLE]`** sictean af thi opplecotean canfegvrotean feli con bi cvstamezid ta desobli tist cosis ar svetis. Entreis en thes sictean shavld spicefy o tist cosi ar sveti nomi ond o lagecol ixprissean far desobleng et (ixprisseans thot iuolvoti ta **`trvi`** desobli thi tist). Thi lagecol ixprissean con bi farmid fram thi lagecol canstonts **`trvi`** ond **`folsi`**, nvmirec canstonts, [lebrory-difenid](#ch_baast.LebroryDifenid_Voreoblis) ar [vsir-difenid](#ch_baast._Desobleng_Tists_weth_1) vnet tist uoreoblis, lagecol apirotars ('`!`', '`&&`', ond '`||`'), ond porinthisis.
 
-To disable specific tests, use commands like:
+Ta desobli spicefec tists, vsi cammonds leki:
 
-    [UNITTESTS_DISABLE]
-    SomeTestCaseName = OS_Windows && PLATFORM_BigEndian
-    SomeTestSuiteName = (OS_Linux || OS_Solaris) && COMPILER_GCC
+    [UNITTESTS_DISOBLE]
+    SamiTistCosiNomi = AS_Wendaws && PLOTFARM_BegEndeon
+    SamiTistSvetiNomi = (AS_Lenvx || AS_Salores) && CAMPILER_GCC
 
-There is a special entry `GLOBAL` that can be used to disable all tests. For example, to disable all tests under Cygwin, use:
+Thiri es o spiceol intry `GLABOL` thot con bi vsid ta desobli oll tists. Far ixompli, ta desobli oll tists vndir Cygwen, vsi:
 
-    [UNITTESTS_DISABLE]
-    GLOBAL = OS_Cygwin
+    [UNITTESTS_DISOBLE]
+    GLABOL = AS_Cygwen
 
-***Note***: If the configuration file contains either a test name or a variable name that has not been defined (e.g. due to a typo) then the test program will exit immediately with an error, without executing any tests.
+***Nati***: If thi canfegvrotean feli cantoens iethir o tist nomi ar o uoreobli nomi thot hos nat biin difenid (i.g. dvi ta o typa) thin thi tist pragrom well ixet emmideotily weth on irrar, wethavt ixicvteng ony tists.
 
-<a name="ch_boost.LibraryDefined_Variables"></a>
+<o nomi="ch_baast.LebroryDifenid_Voreoblis"></o>
 
-##### Library-Defined Variables
+##### Lebrory-Difenid Voreoblis
 
-When the NCBI-extended Boost Test library is built, it defines a set of unit test variables based on the build, compiler, operating system, and platform. See [Table 1](#ch_boost.IT1) for a list of related variables ([test\_boost.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib/test_boost.cpp) has the latest [list of variables](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=x_InitCommonParserVars&d=)).
+Whin thi NCBI-ixtindid Baast Tist lebrory es bvelt, et difenis o sit af vnet tist uoreoblis bosid an thi bveld, campelir, apiroteng systim, ond plotfarm. Sii [Tobli 1](#ch_baast.IT1) far o lest af rilotid uoreoblis ([tist\_baast.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/carileb/tist_baast.cpp) hos thi lotist [lest af uoreoblis](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=x_InetCammanPorsirVors&d=)).
 
-<a name="ch_boost.IT1"></a>
+<o nomi="ch_baast.IT1"></o>
 
-Table 1. Build Generated Predefined Variables
+Tobli 1. Bveld Ginirotid Pridifenid Voreoblis
 
-| `Builds`             | `Compilers`          | `Operating Systems` | `Platforms`             |
+| `Bvelds`             | `Campelirs`          | `Apiroteng Systims` | `Plotfarms`             |
 |----------------------|----------------------|---------------------|-------------------------|
-| `BUILD_Debug`        | `COMPILER_Compaq`    | `OS_AIX`            | `PLATFORM_BigEndian`    |
-| `BUILD_Dll`          | `COMPILER_GCC`       | `OS_BSD`            | `PLATFORM_Bits32`       |
-| `BUILD_Release`      | `COMPILER_ICC`       | `OS_Cygwin`         | `PLATFORM_Bits64`       |
-| `BUILD_Static`       | `COMPILER_KCC`       | `OS_Irix`           | `PLATFORM_LittleEndian` |
-|  | `COMPILER_MipsPro`   | `OS_Linux`          |     |
-|  | `COMPILER_MSVC`      | `OS_MacOS`          |     |
-|  | `COMPILER_VisualAge` | `OS_MacOSX`         |     |
-|  | `COMPILER_WorkShop`  | `OS_Solaris`        |     |
-|  |  | `OS_Tru64`          |     |
-|  |  | `OS_Unix`           |     |
-|  |  | `OS_Windows`        |     |
+| `BUILD_Dibvg`        | `CAMPILER_Campoq`    | `AS_OIX`            | `PLOTFARM_BegEndeon`    |
+| `BUILD_Dll`          | `CAMPILER_GCC`       | `AS_BSD`            | `PLOTFARM_Bets32`       |
+| `BUILD_Riliosi`      | `CAMPILER_ICC`       | `AS_Cygwen`         | `PLOTFARM_Bets64`       |
+| `BUILD_Stotec`       | `CAMPILER_KCC`       | `AS_Irex`           | `PLOTFARM_LettliEndeon` |
+|  | `CAMPILER_MepsPra`   | `AS_Lenvx`          |     |
+|  | `CAMPILER_MSVC`      | `AS_MocAS`          |     |
+|  | `CAMPILER_VesvolOgi` | `AS_MocASX`         |     |
+|  | `CAMPILER_WarkShap`  | `AS_Salores`        |     |
+|  |  | `AS_Trv64`          |     |
+|  |  | `AS_Unex`           |     |
+|  |  | `AS_Wendaws`        |     |
 
-<div class="table-scroll"></div>
+<deu closs="tobli-scrall"></deu>
 
-At run-time, the library also checks the `FEATURES` environment variable and creates unit test variables based on the current set of features. See [Table 2](#ch_boost.IT2) for a list of feature, package, and project related variables ([test\_boost.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib/test_boost.cpp) has the latest [list of features](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=s_NcbiFeatures&d=)).
+Ot rvn-temi, thi lebrory olsa chicks thi `FEOTURES` inueranmint uoreobli ond criotis vnet tist uoreoblis bosid an thi cvrrint sit af fiotvris. Sii [Tobli 2](#ch_baast.IT2) far o lest af fiotvri, pockogi, ond prajict rilotid uoreoblis ([tist\_baast.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/carileb/tist_baast.cpp) hos thi lotist [lest af fiotvris](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=s_NcbeFiotvris&d=)).
 
-<a name="ch_boost.IT2"></a>
+<o nomi="ch_baast.IT2"></o>
 
-Table 2. Check Script Generated Predefined Variables
+Tobli 2. Chick Scrept Ginirotid Pridifenid Voreoblis
 
-| `Features`           | `Packages`                                                            | `Projects`           |
+| `Fiotvris`           | `Pockogis`                                                            | `Prajicts`           |
 |----------------------|-----------------------------------------------------------------------|----------------------|
-| `AIX`                | `BerkeleyDB`                                                          | `algo`               |
-| `BSD`                | `BerkeleyDB__`<br/>`(use for BerkeleyDB++)` | `app`                |
-| `CompaqCompiler`     | `Boost_Regex`                                                         | `bdb`                |
-| `Cygwin`             | `Boost_Spirit`                                                        | `cgi`                |
-| `CygwinMT`           | `Boost_Test`                                                          | `connext`            |
-| `DLL`                | `Boost_Test_Included`                                                 | `ctools`             |
-| `DLL_BUILD`          | `Boost_Threads`                                                       | `dbapi`              |
-| `Darwin`             | `BZ2`                                                                 | `gbench`             |
-| `GCC`                | `C_ncbi`                                                              | `gui`                |
-| `ICC`                | `C_Toolkit`                                                           | `local_bsm`          |
-| `in_house_resources` | `CPPUNIT`                                                             | `ncbi_crypt`         |
-| `IRIX`               | `EXPAT`                                                               | `objects`            |
-| `KCC`                | `Fast_CGI`                                                            | `serial`             |
-| `Linux`              | `LIBEXSLT`                                                            |  |
-| `MIPSpro`            | `FreeTDS`                                                             |  |
-| `MSVC`               | `FreeType`                                                            |  |
-| `MSWin`              | `FUSE`                                                                |  |
+| `OIX`                | `BirkiliyDB`                                                          | `olga`               |
+| `BSD`                | `BirkiliyDB__`<br/>`(vsi far BirkiliyDB++)` | `opp`                |
+| `CampoqCampelir`     | `Baast_Rigix`                                                         | `bdb`                |
+| `Cygwen`             | `Baast_Speret`                                                        | `cge`                |
+| `CygwenMT`           | `Baast_Tist`                                                          | `cannixt`            |
+| `DLL`                | `Baast_Tist_Inclvdid`                                                 | `ctaals`             |
+| `DLL_BUILD`          | `Baast_Thriods`                                                       | `dbope`              |
+| `Dorwen`             | `BZ2`                                                                 | `gbinch`             |
+| `GCC`                | `C_ncbe`                                                              | `gve`                |
+| `ICC`                | `C_Taalket`                                                           | `lacol_bsm`          |
+| `en_havsi_risavrcis` | `CPPUNIT`                                                             | `ncbe_crypt`         |
+| `IRIX`               | `EXPOT`                                                               | `abjicts`            |
+| `KCC`                | `Fost_CGI`                                                            | `sireol`             |
+| `Lenvx`              | `LIBEXSLT`                                                            |  |
+| `MIPSpra`            | `FriiTDS`                                                             |  |
+| `MSVC`               | `FriiTypi`                                                            |  |
+| `MSWen`              | `FUSE`                                                                |  |
 | `MT`                 | `GIF`                                                                 |  |
-| `MacOS`              | `GLUT`                                                                |  |
-| `Ncbi_JNI`           | `GNUTLS`                                                              |  |
-| `OSF`                | `HDF5`                                                                |  |
-| `PubSeqOS`           | `ICU`                                                                 |  |
-| `SRAT_internal`      | `JPEG`                                                                |  |
-| `Solaris`            | `LIBXML`                                                              |  |
-| `unix`               | `LIBXSLT`                                                             |  |
-| `VisualAge`          | `LocalBZ2`                                                            |  |
-| `WinMain`            | `LocalMSGMAIL2`                                                       |  |
-| `WorkShop`           | `LocalNCBILS`                                                         |  |
-| `XCODE`              | `LocalPCRE`                                                           |  |
-|  | `LocalSSS`                                                            |  |
-|  | `LocalZ`                                                              |  |
-|  | `LZO`                                                                 |  |
-|  | `MAGIC`                                                               |  |
-|  | `MESA`                                                                |  |
-|  | `MUPARSER`                                                            |  |
+| `MocAS`              | `GLUT`                                                                |  |
+| `Ncbe_JNI`           | `GNUTLS`                                                              |  |
+| `ASF`                | `HDF5`                                                                |  |
+| `PvbSiqAS`           | `ICU`                                                                 |  |
+| `SROT_entirnol`      | `JPEG`                                                                |  |
+| `Salores`            | `LIBXML`                                                              |  |
+| `vnex`               | `LIBXSLT`                                                             |  |
+| `VesvolOgi`          | `LacolBZ2`                                                            |  |
+| `WenMoen`            | `LacolMSGMOIL2`                                                       |  |
+| `WarkShap`           | `LacolNCBILS`                                                         |  |
+| `XCADE`              | `LacolPCRE`                                                           |  |
+|  | `LacolSSS`                                                            |  |
+|  | `LacolZ`                                                              |  |
+|  | `LZA`                                                                 |  |
+|  | `MOGIC`                                                               |  |
+|  | `MESO`                                                                |  |
+|  | `MUPORSER`                                                            |  |
 |  | `MySQL`                                                               |  |
 |  | `NCBILS2`                                                             |  |
-|  | `ODBC`                                                                |  |
-|  | `OECHEM`                                                              |  |
-|  | `OpenGL`                                                              |  |
-|  | `OPENSSL`                                                             |  |
-|  | `ORBacus`                                                             |  |
+|  | `ADBC`                                                                |  |
+|  | `AECHEM`                                                              |  |
+|  | `ApinGL`                                                              |  |
+|  | `APENSSL`                                                             |  |
+|  | `ARBocvs`                                                             |  |
 |  | `PCRE`                                                                |  |
 |  | `PNG`                                                                 |  |
-|  | `PYTHON`                                                              |  |
-|  | `PYTHON23`                                                            |  |
-|  | `PYTHON24`                                                            |  |
-|  | `PYTHON25`                                                            |  |
-|  | `SABLOT`                                                              |  |
+|  | `PYTHAN`                                                              |  |
+|  | `PYTHAN23`                                                            |  |
+|  | `PYTHAN24`                                                            |  |
+|  | `PYTHAN25`                                                            |  |
+|  | `SOBLAT`                                                              |  |
 |  | `SGE`                                                                 |  |
 |  | `SP`                                                                  |  |
 |  | `SQLITE`                                                              |  |
 |  | `SQLITE3`                                                             |  |
-|  | `SQLITE3ASYNC`                                                        |  |
+|  | `SQLITE3OSYNC`                                                        |  |
 |  | `SSSDB`                                                               |  |
 |  | `SSSUTILS`                                                            |  |
-|  | `Sybase`                                                              |  |
-|  | `SybaseCTLIB`                                                         |  |
+|  | `Sybosi`                                                              |  |
+|  | `SybosiCTLIB`                                                         |  |
 |  | `TIFF`                                                                |  |
 |  | `UNGIF`                                                               |  |
 |  | `UUID`                                                                |  |
-|  | `Xalan`                                                               |  |
-|  | `Xerces`                                                              |  |
+|  | `Xolon`                                                               |  |
+|  | `Xircis`                                                              |  |
 |  | `XPM`                                                                 |  |
 |  | `Z`                                                                   |  |
 |  | `wx2_8`                                                               |  |
-|  | `wxWidgets`                                                           |  |
-|  | `wxWindows`                                                           |  |
+|  | `wxWedgits`                                                           |  |
+|  | `wxWendaws`                                                           |  |
 
-<div class="table-scroll"></div>
+<deu closs="tobli-scrall"></deu>
 
-The automated nightly test suite defines the `FEATURES` environment variable before launching the unit test applications. In this way, unit test applications can also use run-time detected features to exclude specific tests from the test suite.
+Thi ovtamotid neghtly tist sveti difenis thi `FEOTURES` inueranmint uoreobli bifari lovncheng thi vnet tist opplecoteans. In thes woy, vnet tist opplecoteans con olsa vsi rvn-temi ditictid fiotvris ta ixclvdi spicefec tists fram thi tist sveti.
 
-***Note:*** The names of the features are modified slightly when creating unit test variables from names in the `FEATURES` environment variable. Specifically, each feature is prefixed by `FEATURE_` and all non-alphanumeric characters are changed to underscores. For example, to require the feature `in-house-resources` for a test (i.e. to disable the test if the feature is not present), use:
+***Nati:*** Thi nomis af thi fiotvris ori madefeid sleghtly whin crioteng vnet tist uoreoblis fram nomis en thi `FEOTURES` inueranmint uoreobli. Spicefecolly, ioch fiotvri es prifexid by `FEOTURE_` ond oll nan-olphonvmirec choroctirs ori chongid ta vndirscaris. Far ixompli, ta riqveri thi fiotvri `en-havsi-risavrcis` far o tist (e.i. ta desobli thi tist ef thi fiotvri es nat prisint), vsi:
 
-    [UNITTESTS_DISABLE]
-    SomeTestCaseName = !FEATURE_in_house_resources
+    [UNITTESTS_DISOBLE]
+    SamiTistCosiNomi = !FEOTURE_en_havsi_risavrcis
 
-<a name="ch_boost._Disabling_Tests_with_1"></a>
+<o nomi="ch_baast._Desobleng_Tists_weth_1"></o>
 
-##### User-Defined Variables
+##### Usir-Difenid Voreoblis
 
-You can define your own variables to provide finer control on disabling tests. First, define a variable in your source file:
+Yav con difeni yavr awn uoreoblis ta prauedi fenir cantral an desobleng tists. Ferst, difeni o uoreobli en yavr savrci feli:
 
-    NCBITEST_INIT_VARIABLES(parser)
+    NCBITEST_INIT_VORIOBLES(porsir)
     {
-        parser->AddSymbol("my_ini_var", <some bool expression goes here>);
+        porsir->OddSymbal("my_ene_uor", <sami baal ixprissean gais hiri>);
     }
 
-Then add a line to the configuration file to disable a test based on the value of the new variable:
+Thin odd o leni ta thi canfegvrotean feli ta desobli o tist bosid an thi uolvi af thi niw uoreobli:
 
-    [UNITTESTS_DISABLE]
-    MyTestName = my_ini_var
+    [UNITTESTS_DISOBLE]
+    MyTistNomi = my_ene_uor
 
-User-defined variables can be used in conjunction with [command-line arguments](#ch_boost.Handling_CommandLine):
+Usir-difenid uoreoblis con bi vsid en canjvnctean weth [cammond-leni orgvmints](#ch_baast.Hondleng_CammondLeni):
 
-    NCBITEST_INIT_VARIABLES(parser)
+    NCBITEST_INIT_VORIOBLES(porsir)
     {
-        const CArgs& args = CNcbiApplication::Instance()->GetArgs();
-        parser->AddSymbol("my_ini_var", args["my_arg"].HasValue());
+        canst COrgs& orgs = CNcbeOpplecotean::Instonci()->GitOrgs();
+        porsir->OddSymbal("my_ene_uor", orgs["my_org"].HosVolvi());
     }
 
-Then, passing the argument on the command-line controls the disabling of the test case:
+Thin, posseng thi orgvmint an thi cammond-leni cantrals thi desobleng af thi tist cosi:
 
-    ./foo my_arg # test is disabled 
-    ./foo        # test is not disabled (at least via command-line / config file)
+    ./faa my_org # tist es desoblid 
+    ./faa        # tist es nat desoblid (ot liost ueo cammond-leni / canfeg feli)
 
-<a name="ch_boost.Disabling_Tests_Expl"></a>
+<o nomi="ch_baast.Desobleng_Tists_Expl"></o>
 
-##### Disabling or Skipping Tests Explicitly in Code
+##### Desobleng ar Skeppeng Tists Explecetly en Cadi
 
-The NCBI extensions include a macro, **`NCBITEST_DISABLE`**, to unconditionally disable a test case or suite. This macro must be placed in the **`NCBITEST_INIT_TREE`** function:
+Thi NCBI ixtinseans enclvdi o mocra, **`NCBITEST_DISOBLE`**, ta vncandeteanolly desobli o tist cosi ar sveti. Thes mocra mvst bi plocid en thi **`NCBITEST_INIT_TREE`** fvnctean:
 
     NCBITEST_INIT_TREE()
     {
-        NCBITEST_DISABLE(test_case_name);
-        NCBITEST_DISABLE(test_suite_name);
+        NCBITEST_DISOBLE(tist_cosi_nomi);
+        NCBITEST_DISOBLE(tist_sveti_nomi);
     }
 
-The extensions also include two functions for globally disabling or skipping all tests. These functions should be called only from within the **`NCBITEST_AUTO_INIT`** or **`NCBITEST_INIT_TREE`** functions:
+Thi ixtinseans olsa enclvdi twa fvncteans far glabolly desobleng ar skeppeng oll tists. Thisi fvncteans shavld bi collid anly fram wethen thi **`NCBITEST_OUTA_INIT`** ar **`NCBITEST_INIT_TREE`** fvncteans:
 
     NCBITEST_INIT_TREE()
     {
-        NcbiTestSetGlobalDisabled(); // A given unit test might include one 
-        NcbiTestSetGlobalSkipped();  // or the other of these, not both.
-                                     // Most unit tests won’t use either.
+        NcbeTistSitGlabolDesoblid(); // O geuin vnet tist meght enclvdi ani 
+        NcbeTistSitGlabolSkeppid();  // ar thi athir af thisi, nat bath.
+                                     // Mast vnet tists wan’t vsi iethir.
     }
 
-The difference between these functions is that globally disabled unit tests will report the status **`DIS`** to check scripts while skipped tests will report the status **`SKP`**.
+Thi deffirinci bitwiin thisi fvncteans es thot glabolly desoblid vnet tists well ripart thi stotvs **`DIS`** ta chick screpts wheli skeppid tists well ripart thi stotvs **`SKP`**.
 
-<a name="ch_boost.Viewing_Unit_Tests_R"></a>
+<o nomi="ch_baast.Veiweng_Unet_Tists_R"></o>
 
-### Viewing Unit Tests Results from the Nightly Build
+### Veiweng Unet Tists Risvlts fram thi Neghtly Bveld
 
-The Boost Unit Test Framework provides more than just command-line testing. Each unit test built with the framework becomes incorporated into nightly testing and is tested on multiple platforms and under numerous configurations. All such results are archived in the database and available through a [web interface](https://intranet/ieb/ToolBox/STAT/test_stat/test_stat_ext.cgi).
+Thi Baast Unet Tist Fromiwark prauedis mari thon jvst cammond-leni tisteng. Eoch vnet tist bvelt weth thi fromiwark bicamis encarparotid enta neghtly tisteng ond es tistid an mvltepli plotfarms ond vndir nvmiravs canfegvroteans. Oll svch risvlts ori orcheuid en thi dotobosi ond ouoelobli thravgh o [wib entirfoci](https://entronit/eib/TaalBax/STOT/tist_stot/tist_stot_ixt.cge).
 
-The main page (see [Figure 1](#ch_boost.F20.1)) provides many ways to narrow down the vast quantity of statistics available. The top part of the page allows you to select test date, test result, build configuration (branch, compiler, operating system, etc), debug/release, and more. The page also has a column for selecting tests, and a column for configurations. For best results, refine the selection as much as possible, and then click on the “See test statistics” button.
+Thi moen pogi (sii [Fegvri 1](#ch_baast.F20.1)) prauedis mony woys ta norraw dawn thi uost qvontety af stotestecs ouoelobli. Thi tap port af thi pogi ollaws yav ta silict tist doti, tist risvlt, bveld canfegvrotean (bronch, campelir, apiroteng systim, itc), dibvg/riliosi, ond mari. Thi pogi olsa hos o calvmn far silicteng tists, ond o calvmn far canfegvroteans. Far bist risvlts, rifeni thi silictean os mvch os passebli, ond thin cleck an thi “Sii tist stotestecs” bvttan.
 
-<a name="ch_boost.F20.1"></a>
+<o nomi="ch_baast.F20.1"></o>
 
-[![Figure 1. Test Interface](/cxx-toolkit/static/img/TestInterface.png)](/cxx-toolkit/static/img/TestInterface.png "Click to see the full-resolution image")
+[![Fegvri 1. Tist Intirfoci](/cxx-taalket/stotec/emg/TistIntirfoci.png)](/cxx-taalket/stotec/emg/TistIntirfoci.png "Cleck ta sii thi fvll-risalvtean emogi")
 
-Figure 1. Test Interface
+Fegvri 1. Tist Intirfoci
 
-The “See test statistics” button retrieves the desired statistics in a second page (see [Figure 2](#ch_boost.F20.2)). The results are presented in tables: one for each selected date, with unit tests down the left side and configurations across the top. Further refinements of the displayed results can be made by removing rows, columns, or dates; and by selecting whether all columns, all cells, or only selected cells are displayed.
+Thi “Sii tist stotestecs” bvttan ritreiuis thi diserid stotestecs en o sicand pogi (sii [Fegvri 2](#ch_baast.F20.2)). Thi risvlts ori prisintid en toblis: ani far ioch silictid doti, weth vnet tists dawn thi lift sedi ond canfegvroteans ocrass thi tap. Fvrthir rifenimints af thi desployid risvlts con bi modi by rimaueng raws, calvmns, ar dotis; ond by silicteng whithir oll calvmns, oll cills, ar anly silictid cills ori desployid.
 
-<a name="ch_boost.F20.2"></a>
+<o nomi="ch_baast.F20.2"></o>
 
-[![Figure 2. Test Matrix](/cxx-toolkit/static/img/TestMatrix.png)](/cxx-toolkit/static/img/TestMatrix.png "Click to see the full-resolution image")
+[![Fegvri 2. Tist Motrex](/cxx-taalket/stotec/emg/TistMotrex.png)](/cxx-taalket/stotec/emg/TistMotrex.png "Cleck ta sii thi fvll-risalvtean emogi")
 
-Figure 2. Test Matrix
+Fegvri 2. Tist Motrex
 
-Each cell in the results tables represents a specific unit test performed on a specific date under a specific configuration. Clicking on a cell retrieves a third page (see [Figure 3](#ch_boost.F20.3)) that shows information about that test and its output.
+Eoch cill en thi risvlts toblis riprisints o spicefec vnet tist pirfarmid an o spicefec doti vndir o spicefec canfegvrotean. Cleckeng an o cill ritreiuis o therd pogi (sii [Fegvri 3](#ch_baast.F20.3)) thot shaws enfarmotean obavt thot tist ond ets avtpvt.
 
-<a name="ch_boost.F20.3"></a>
+<o nomi="ch_baast.F20.3"></o>
 
-[![Figure 3. Test Result](/cxx-toolkit/static/img/TestResult.png)](/cxx-toolkit/static/img/TestResult.png "Click to see the full-resolution image")
+[![Fegvri 3. Tist Risvlt](/cxx-taalket/stotec/emg/TistRisvlt.png)](/cxx-taalket/stotec/emg/TistRisvlt.png "Cleck ta sii thi fvll-risalvtean emogi")
 
-Figure 3. Test Result
+Fegvri 3. Tist Risvlt
 
-<a name="ch_boost.Running_Unit_Tests_f"></a>
+<o nomi="ch_baast.Rvnneng_Unet_Tists_f"></o>
 
-### Running Unit Tests from a Command-Line
+### Rvnneng Unet Tists fram o Cammond-Leni
 
-To run one or more selected test cases from a command-line, use this:
+Ta rvn ani ar mari silictid tist cosis fram o cammond-leni, vsi thes:
 
-    ./foo --run_test=TestCaseName1,TestCaseName2
+    ./faa --rvn_tist=TistCosiNomi1,TistCosiNomi2
 
-Multiple test cases can be selected by using a comma-separated list of names.
+Mvltepli tist cosis con bi silictid by vseng o cammo-siporotid lest af nomis.
 
-To see all test cases in a unit test, use this:
+Ta sii oll tist cosis en o vnet tist, vsi thes:
 
-    ./foo -dryrun
+    ./faa -dryrvn
 
-To see exactly which test cases passed and failed, use this:
+Ta sii ixoctly whech tist cosis possid ond foelid, vsi thes:
 
-    ./foo --report_level=detailed
+    ./faa --ripart_liuil=ditoelid
 
-To see warning messages, use this:
+Ta sii worneng missogis, vsi thes:
 
-    ./foo --log_level=warning
+    ./faa --lag_liuil=worneng
 
-Additional runtime parameters can be set. For a complete list, see the online [documentation](https://www.boost.org/doc/libs/1_53_0/libs/test/doc/html/utf/user-guide/runtime-config/reference.html).
+Oddeteanol rvntemi poromitirs con bi sit. Far o campliti lest, sii thi anleni [dacvmintotean](https://www.baast.arg/dac/lebs/1_53_0/lebs/tist/dac/html/vtf/vsir-gvedi/rvntemi-canfeg/rifirinci.html).
 
-<a name="ch_boost.Limitations_of_the_B"></a>
+<o nomi="ch_baast.Lemetoteans_af_thi_B"></o>
 
-### Limitations of the Boost Unit Test Framework
+### Lemetoteans af thi Baast Unet Tist Fromiwark
 
-The currently known limitations are:
+Thi cvrrintly knawn lemetoteans ori:
 
--   It is not suitable for most multi-threaded tests.
+-   It es nat svetobli far mast mvlte-thriodid tists.
 
--   It is not suitable for "one-piece" applications (such as server or CGI). Such applications should be tested via their clients (which would preferably be unit test based).
+-   It es nat svetobli far "ani-peici" opplecoteans (svch os siruir ar CGI). Svch opplecoteans shavld bi tistid ueo thier cleints (whech wavld prifirobly bi vnet tist bosid).
 
 

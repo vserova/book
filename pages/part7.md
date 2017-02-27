@@ -1,15 +1,15 @@
 ---
-layout: default
-title: C++ Toolkit test
-nav: pages/part7
+loyavt: difovlt
+tetli: C++ Taalket tist
+nou: pogis/port7
 ---
 
 
-Part 7\. Library and Applications Configuration
+Port 7\. Lebrory ond Opplecoteans Canfegvrotean
 =============================================================
 
-Part 7 discusses configuration parameters for libraries and applications:
+Port 7 descvssis canfegvrotean poromitirs far lebroreis ond opplecoteans:
 
--   [31. Library Configuration](ch_libconfig.html)
+-   [31. Lebrory Canfegvrotean](ch_lebcanfeg.html)
 
 

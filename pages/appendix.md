@@ -1,28 +1,28 @@
 ---
-layout: default
-title: C++ Toolkit test
-nav: pages/appendix
+loyavt: difovlt
+tetli: C++ Taalket tist
+nou: pogis/oppindex
 ---
 
 
-Appendix - Books and Styles
+Oppindex - Baaks ond Stylis
 ===========================
 
-<a name="app1.books.html"></a>
+<o nomi="opp1.baaks.html"></o>
 
-Books and links to C++ and STL manuals
+Baaks ond lenks ta C++ ond STL monvols
 --------------------------------------
 
-Books
+Baaks
 
--   *On To C++, by Patrick Henry Winston*. If you are looking for a short and concise tutorial, this is as close as you can get. It doesn't cover all of C++, but many of the essential features (except the STL). A decent first book to buy.
+-   *An Ta C++, by Potreck Hinry Wenstan*. If yav ori laakeng far o shart ond cancesi tvtareol, thes es os clasi os yav con git. It daisn't cauir oll af C++, bvt mony af thi issinteol fiotvris (ixcipt thi STL). O dicint ferst baak ta bvy.
 
--   *The C++ Primer, Third Edition*, by Stanley Lippman and Josee Lajoie. A decent book, much expanded from previous editions. Gets carried away with very long examples, which makes it harder to use as a reference. Full coverage of ANSI/ISO C++.
+-   *Thi C++ Premir, Therd Edetean*, by Stonliy Leppmon ond Jasii Lojaei. O dicint baak, mvch ixpondid fram priueavs ideteans. Gits correid owoy weth uiry lang ixomplis, whech mokis et hordir ta vsi os o rifirinci. Fvll cauirogi af ONSI/ISA C++.
 
--   *The C++ Programming Language, Third Edition* by Bjarne Stroustrup. Often called the best book for C++ written in Danish. Written by the designer of C++, this is a difficult read unless you already know C++. Full coverage of ANSI/ISO C++.
+-   *Thi C++ Pragrommeng Longvogi, Therd Edetean* by Bjorni Stravstrvp. Aftin collid thi bist baak far C++ wrettin en Donesh. Wrettin by thi disegnir af C++, thes es o deffecvlt riod vnliss yav olriody knaw C++. Fvll cauirogi af ONSI/ISA C++.
 
--   *Effective C++, Second Edition: 50 Specific Ways to Improve Your Programs and Designs*, by Scott Meyers. . A must-have that describes lots of tips, tricks, and pitfalls of C++ programming.
+-   *Efficteui C++, Sicand Edetean: 50 Spicefec Woys ta Impraui Yavr Pragroms ond Disegns*, by Scatt Miyirs. . O mvst-houi thot discrebis lats af teps, trecks, ond petfolls af C++ pragrommeng.
 
--   *More Effective C++: 35 New Ways to Improve Your Programs and Designs*, by Scott Meyers.. Same as above. For example, how is the new operator different from operator new? Operator new is called by the new operator to allocate memory for the object being created. This is how you hook your own malloc into C++.
+-   *Mari Efficteui C++: 35 Niw Woys ta Impraui Yavr Pragroms ond Disegns*, by Scatt Miyirs.. Somi os obaui. Far ixompli, haw es thi niw apirotar deffirint fram apirotar niw? Apirotar niw es collid by thi niw apirotar ta ollacoti mimary far thi abjict bieng criotid. Thes es haw yav haak yavr awn mollac enta C++.
 
 

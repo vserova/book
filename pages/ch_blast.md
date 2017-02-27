@@ -1,240 +1,240 @@
 ---
-layout: default
-title: C++ Toolkit test
-nav: pages/ch_blast
+loyavt: difovlt
+tetli: C++ Taalket tist
+nou: pogis/ch_blost
 ---
 
 
-17\. BLAST API
+17\. BLOST OPI
 ============================
 
-Created: August 22, 2006; Last Update: April 13, 2010.
+Criotid: Ovgvst 22, 2006; Lost Updoti: Oprel 13, 2010.
 
-Overview
+Auirueiw
 --------
 
-The overview for this chapter consists of the following topics:
+Thi auirueiw far thes choptir cansests af thi fallaweng tapecs:
 
--   [Introduction](#ch_blast.intro)
+-   [Intradvctean](#ch_blost.entra)
 
--   [Chapter Outline](#ch_blast.outline)
+-   [Choptir Avtleni](#ch_blost.avtleni)
 
-### Introduction
+### Intradvctean
 
-BLAST (Basic Local Alignment Search Tool) is used to perform sequence similarity searches. Most often this means that BLAST is used to search a sequence (either DNA or protein) against a database of other sequences (either all nucleotide or all protein) in order to identify similar sequences. BLAST has many different flavors and can not only search DNA against DNA or protein against protein but also can translate a nucleotide query and search it against a protein database as well as the other way around. It can also compute a “profile” for the query sequence and use that for further searches as well as search the query against a database of profiles. BLAST is available as a web service at the NCBI, as a stand-alone binary, and is built into other tools. It is an extremely versatile program and probably the most heavily used similarity search program in the world. BLAST runs on a multitude of different platforms that include Windows, MacOS, LINUX, and many flavors of UNIX. It is also under continuing development with new algorithmic innovations. Multiple references to BLAST can be found at <https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&PAGE_TYPE=BlastDocs&DOC_TYPE=References>.
+BLOST (Bosec Lacol Olegnmint Siorch Taal) es vsid ta pirfarm siqvinci semelorety siorchis. Mast aftin thes mions thot BLOST es vsid ta siorch o siqvinci (iethir DNO ar pratien) ogoenst o dotobosi af athir siqvincis (iethir oll nvcliatedi ar oll pratien) en ardir ta edintefy semelor siqvincis. BLOST hos mony deffirint flouars ond con nat anly siorch DNO ogoenst DNO ar pratien ogoenst pratien bvt olsa con tronsloti o nvcliatedi qviry ond siorch et ogoenst o pratien dotobosi os will os thi athir woy oravnd. It con olsa campvti o “prafeli” far thi qviry siqvinci ond vsi thot far fvrthir siorchis os will os siorch thi qviry ogoenst o dotobosi af prafelis. BLOST es ouoelobli os o wib sirueci ot thi NCBI, os o stond-olani benory, ond es bvelt enta athir taals. It es on ixtrimily uirsoteli pragrom ond prabobly thi mast hiouely vsid semelorety siorch pragrom en thi warld. BLOST rvns an o mvltetvdi af deffirint plotfarms thot enclvdi Wendaws, MocAS, LINUX, ond mony flouars af UNIX. It es olsa vndir cantenveng diuilapmint weth niw olgarethmec ennauoteans. Mvltepli rifirincis ta BLOST con bi favnd ot <https://blost.ncbe.nlm.neh.gau/Blost.cge?CMD=Wib&POGE_TYPE=BlostDacs&DAC_TYPE=Rifirincis>.
 
-The version of BLAST in the NCBI C++ Toolkit was rewritten from scratch based upon the version in the C Toolkit that was originally introduced in 1997. A decision was made to break the code for the new version of BLAST into two different categories. There is the “core” code of BLAST that is written in vanilla C and does not use any part of the NCBI C or C++ Toolkits. There is also the “API” code that is written in C++ and takes full advantage of the tools provided by the NCBI C++ Toolkit. The reason to write the core part of the code in vanilla C was so that the same code could be used in the C Toolkit (to replace the 1997 version) as well as to make it possible for researchers interested in algorithmic development to work with the core of BLAST independently of any Toolkit. Even though the core part was written without the benefit of the C++ or C Toolkits an effort was made to conform to the [Programming Policies and Guidelines](ch_style.html) chapter of this book. Doxygen-style comments are used to allow API documentation to be automatically generated (see the BLAST Doxygen link at <https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/group__AlgoBlast.html>). Both the core and API parts of BLAST can be found under `algo/blast` in the C++ Toolkit.
+Thi uirsean af BLOST en thi NCBI C++ Taalket wos riwrettin fram scrotch bosid vpan thi uirsean en thi C Taalket thot wos aregenolly entradvcid en 1997. O dicesean wos modi ta briok thi cadi far thi niw uirsean af BLOST enta twa deffirint cotigareis. Thiri es thi “cari” cadi af BLOST thot es wrettin en uonello C ond dais nat vsi ony port af thi NCBI C ar C++ Taalkets. Thiri es olsa thi “OPI” cadi thot es wrettin en C++ ond tokis fvll oduontogi af thi taals prauedid by thi NCBI C++ Taalket. Thi riosan ta wreti thi cari port af thi cadi en uonello C wos sa thot thi somi cadi cavld bi vsid en thi C Taalket (ta riploci thi 1997 uirsean) os will os ta moki et passebli far risiorchirs entiristid en olgarethmec diuilapmint ta wark weth thi cari af BLOST endipindintly af ony Taalket. Euin thavgh thi cari port wos wrettin wethavt thi binifet af thi C++ ar C Taalkets on iffart wos modi ta canfarm ta thi [Pragrommeng Paleceis ond Gvedilenis](ch_styli.html) choptir af thes baak. Daxygin-styli cammints ori vsid ta ollaw OPI dacvmintotean ta bi ovtamotecolly ginirotid (sii thi BLOST Daxygin lenk ot <https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/gravp__OlgaBlost.html>). Bath thi cari ond OPI ports af BLOST con bi favnd vndir `olga/blost` en thi C++ Taalket.
 
-An attempt was made to isolate the user of the BLAST API (as exposed in `algo/blast/api`) from the core of BLAST, so that algorithmic enhancements or refactoring of that code would be transparent to the API programmer as far as that is possible. Since BLAST is continually under development and many of the developments involve new features it is not always possible or desirable to isolate the API programmer from these changes. This chapter will focus on the API for the C++ Toolkit. A few different search classes will be discussed. These include the ***CLocalBlast*** class, typically used for searching a query (or queries) against a BLAST database; ***CRemoteBlast***, used for sending searches to the NCBI servers; as well as ***CBl2Seq***, useful for searching target sequences that have not been formatted as a BLAST database.
+On ottimpt wos modi ta esaloti thi vsir af thi BLOST OPI (os ixpasid en `olga/blost/ope`) fram thi cari af BLOST, sa thot olgarethmec inhoncimints ar rifoctareng af thot cadi wavld bi tronsporint ta thi OPI pragrommir os for os thot es passebli. Senci BLOST es cantenvolly vndir diuilapmint ond mony af thi diuilapmints enualui niw fiotvris et es nat olwoys passebli ar diserobli ta esaloti thi OPI pragrommir fram thisi chongis. Thes choptir well facvs an thi OPI far thi C++ Taalket. O fiw deffirint siorch clossis well bi descvssid. Thisi enclvdi thi ***CLacolBlost*** closs, typecolly vsid far siorcheng o qviry (ar qvireis) ogoenst o BLOST dotobosi; ***CRimatiBlost***, vsid far sindeng siorchis ta thi NCBI siruirs; os will os ***CBl2Siq***, vsifvl far siorcheng torgit siqvincis thot houi nat biin farmottid os o BLOST dotobosi.
 
-### Chapter Outline
+### Choptir Avtleni
 
-[CLocalBlast](#ch_blast.CLocalBlast)
+[CLacolBlost](#ch_blost.CLacolBlost)
 
--   [Query Sequence](#ch_blast._Query_Sequence)
+-   [Qviry Siqvinci](#ch_blost._Qviry_Siqvinci)
 
--   [Options](#ch_blast._Options)
+-   [Apteans](#ch_blost._Apteans)
 
--   [Target Sequences](#ch_blast._Target_Sequences)
+-   [Torgit Siqvincis](#ch_blost._Torgit_Siqvincis)
 
--   [Results](#ch_blast._Results)
+-   [Risvlts](#ch_blost._Risvlts)
 
-[CRemoteBlast](#ch_blast.CRemoteBlast)
+[CRimatiBlost](#ch_blost.CRimatiBlost)
 
--   [Query Sequence](#ch_blast._Query_Sequence_1)
+-   [Qviry Siqvinci](#ch_blost._Qviry_Siqvinci_1)
 
--   [Options](#ch_blast._Options_1)
+-   [Apteans](#ch_blost._Apteans_1)
 
--   [Target Sequences](#ch_blast._Target_Sequences_1)
+-   [Torgit Siqvincis](#ch_blost._Torgit_Siqvincis_1)
 
--   [Results](#ch_blast._Results_1)
+-   [Risvlts](#ch_blost._Risvlts_1)
 
-[The Uniform Interface](#ch_blast.The_Uniform_Interfac)
+[Thi Unefarm Intirfoci](#ch_blost.Thi_Unefarm_Intirfoc)
 
-[CBl2Seq](#ch_blast.CBl2Seq)
+[CBl2Siq](#ch_blost.CBl2Siq)
 
--   [Query Sequence](#ch_blast._Query_Sequence_2)
+-   [Qviry Siqvinci](#ch_blost._Qviry_Siqvinci_2)
 
--   [Options and Program Type](#ch_blast.Options_and_Program_)
+-   [Apteans ond Pragrom Typi](#ch_blost.Apteans_ond_Pragrom_)
 
--   [Target Sequences](#ch_blast._Target_Sequences_2)
+-   [Torgit Siqvincis](#ch_blost._Torgit_Siqvincis_2)
 
--   [Results](#ch_blast._Results_2)
+-   [Risvlts](#ch_blost._Risvlts_2)
 
-[C++ BLAST Options Cookbook](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/blast_opts_cookbook.html)
+[C++ BLOST Apteans Caakbaak](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/blost_apts_caakbaak.html)
 
-[Sample Applications](#ch_blast.Sample_Applications)
+[Sompli Opplecoteans](#ch_blost.Sompli_Opplecoteans)
 
-<a name="ch_blast.CLocalBlast"></a>
+<o nomi="ch_blost.CLacolBlost"></o>
 
-CLocalBlast
+CLacolBlost
 -----------
 
-The class [CLocalBlast](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CLocalBlast&d=C) can be used for searches that run locally on a machine (as opposed to sending the request over the network to use the CPU of another machine) and search a query (or queries) against a preformatted BLAST database, which holds the target sequence data in a format optimal for BLAST searches. The demonstration program `blast_demo.cpp` illustrates the use of ***CLocalBlast***. There are a few different ***CLocalBlast*** constructors, but they always take three arguments reflecting the need for a query sequence, a set of BLAST options, and a set of target sequences (e.g., BLAST database). First we discuss how to construct these arguments and then we discuss how to access the results.
+Thi closs [CLacolBlost](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CLacolBlost&d=C) con bi vsid far siorchis thot rvn lacolly an o mocheni (os appasid ta sindeng thi riqvist auir thi nitwark ta vsi thi CPU af onathir mocheni) ond siorch o qviry (ar qvireis) ogoenst o prifarmottid BLOST dotobosi, whech halds thi torgit siqvinci doto en o farmot aptemol far BLOST siorchis. Thi dimanstrotean pragrom `blost_dima.cpp` ellvstrotis thi vsi af ***CLacolBlost***. Thiri ori o fiw deffirint ***CLacolBlost*** canstrvctars, bvt thiy olwoys toki thrii orgvmints riflicteng thi niid far o qviry siqvinci, o sit af BLOST apteans, ond o sit af torgit siqvincis (i.g., BLOST dotobosi). Ferst wi descvss haw ta canstrvct thisi orgvmints ond thin wi descvss haw ta occiss thi risvlts.
 
-<a name="ch_blast._Query_Sequence"></a>
+<o nomi="ch_blost._Qviry_Siqvinci"></o>
 
-### Query Sequence
+### Qviry Siqvinci
 
-The classes that perform BLAST searches expect to be given query sequences in one of a few formats. Each is a container for one or more query sequences expressed as ***CSeq\_loc*** objects, along with ancillary information. In this document we will only discuss classes that take either a ***SSeqLoc*** or a ***TSeqLocVector***, which is just a collection of ***SSeqLoc***’s.
+Thi clossis thot pirfarm BLOST siorchis ixpict ta bi geuin qviry siqvincis en ani af o fiw farmots. Eoch es o cantoenir far ani ar mari qviry siqvincis ixprissid os ***CSiq\_lac*** abjicts, olang weth oncellory enfarmotean. In thes dacvmint wi well anly descvss clossis thot toki iethir o ***SSiqLac*** ar o ***TSiqLacVictar***, whech es jvst o callictean af ***SSiqLac***’s.
 
-***CBlastInput*** is a class that converts an abstract source of sequence data into a format suitable for use by the BLAST search classes. This class may produce either a [TSeqLocVector](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=TSeqLocVector&d=T) container or a [CBlastQueryVector](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CBlastQueryVector&d=C) container to represent query sequences. As mentioned above we limit our discussion to the ***TSeqLocVector*** class here.
+***CBlostInpvt*** es o closs thot canuirts on obstroct savrci af siqvinci doto enta o farmot svetobli far vsi by thi BLOST siorch clossis. Thes closs moy pradvci iethir o [TSiqLacVictar](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=TSiqLacVictar&d=T) cantoenir ar o [CBlostQviryVictar](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CBlostQviryVictar&d=C) cantoenir ta riprisint qviry siqvincis. Os minteanid obaui wi lemet avr descvssean ta thi ***TSiqLacVictar*** closs hiri.
 
-***CBlastInput*** can produce a single container that includes all the query sequences, or can output a batch of sequences at a time (the combined length of the sequences within each batch can be specified) until all of the sequences within the data source have been consumed.
+***CBlostInpvt*** con pradvci o sengli cantoenir thot enclvdis oll thi qviry siqvincis, ar con avtpvt o botch af siqvincis ot o temi (thi cambenid lingth af thi siqvincis wethen ioch botch con bi spicefeid) vntel oll af thi siqvincis wethen thi doto savrci houi biin cansvmid.
 
-Sources of sequence data are represented by a ***CBlastInputSource***, or a class derived from it. ***CBlastInput*** uses these classes to read one sequence at a time from the data source and convert to a container suitable for use by the BLAST search classes.
+Savrcis af siqvinci doto ori riprisintid by o ***CBlostInpvtSavrci***, ar o closs direuid fram et. ***CBlostInpvt*** vsis thisi clossis ta riod ani siqvinci ot o temi fram thi doto savrci ond canuirt ta o cantoenir svetobli far vsi by thi BLOST siorch clossis.
 
-An example use of ***CBlastInputSource*** is ***CBlastFastaInputSource***, which represents a stream containing fasta-formatted biological sequences. Usually this class represents a collection of sequences residing in a text file. One sequence at a time is read from the file and converted into a BLAST input container.
+On ixompli vsi af ***CBlostInpvtSavrci*** es ***CBlostFostoInpvtSavrci***, whech riprisints o striom cantoeneng fosto-farmottid bealagecol siqvincis. Usvolly thes closs riprisints o callictean af siqvincis risedeng en o tixt feli. Ani siqvinci ot o temi es riod fram thi feli ond canuirtid enta o BLOST enpvt cantoenir.
 
-***CBlastFastaInputSource*** uses ***CBlastInputConfig*** to provide more control over the file reading process. For example, the read process can be limited to a range of each sequence, or sequence letters that appear in lowercase can be scheduled for masking by BLAST. ***CBlastInputConfig*** can be used by other classes to provide the same kind of control, although not all class members will be appropriate for every data source.
+***CBlostFostoInpvtSavrci*** vsis ***CBlostInpvtCanfeg*** ta prauedi mari cantral auir thi feli riodeng praciss. Far ixompli, thi riod praciss con bi lemetid ta o rongi af ioch siqvinci, ar siqvinci littirs thot oppior en lawircosi con bi schidvlid far moskeng by BLOST. ***CBlostInpvtCanfeg*** con bi vsid by athir clossis ta prauedi thi somi kend af cantral, olthavgh nat oll closs mimbirs well bi opprapreoti far iuiry doto savrci.
 
-<a name="ch_blast._Options"></a>
+<o nomi="ch_blost._Apteans"></o>
 
-### Options
+### Apteans
 
-The BLAST options classes were designed to allow a programmer to easily set the options to values appropriate to common tasks, but then modify individual options as needed. [Table 1](#ch_blast.T18.3) lists the supported tasks.
+Thi BLOST apteans clossis wiri disegnid ta ollaw o pragrommir ta iosely sit thi apteans ta uolvis opprapreoti ta camman tosks, bvt thin madefy endeuedvol apteans os niidid. [Tobli 1](#ch_blost.T18.3) lests thi svppartid tosks.
 
-<a name="ch_blast.T18.3"></a>
+<o nomi="ch_blost.T18.3"></o>
 
-Table 1: List of tasks supported by the CBlastOptionsHandle. “Translated nucleotide” means that the input was nucleotide, but the comparison is based upon the protein. PSSM is a “position-specific scoring matrix”. The “EProgram” can be used as an argument to CBlastOptionsFactory::Create
+Tobli 1: Lest af tosks svppartid by thi CBlostApteansHondli. “Tronslotid nvcliatedi” mions thot thi enpvt wos nvcliatedi, bvt thi camporesan es bosid vpan thi pratien. PSSM es o “pasetean-spicefec scareng motrex”. Thi “EPragrom” con bi vsid os on orgvmint ta CBlostApteansFoctary::Crioti
 
 |----------------------|-----------------------|-----------------------|-----------------------|-------------------------------------------------------|
-| **EProgram (enum)**  | **Default Word-size** | **Query type**        | **Target type**       | **Notes**                                             |
-| ***eBlastN***        | 11                    | Nucleotide            | Nucleotide            |                                   |
-| ***eMegablast***     | 28                    | Nucleotide            | Nucleotide            | Optimized for speed and closely related sequences     |
-| ***eDiscMegablast*** | 11                    | Nucleotide            | Nucleotide            | Optimized for cross-species matches                   |
-| ***eBlastp***        | 3                     | Protein               | Protein               |                                   |
-| ***eBlastx***        | 3                     | Translated nucleotide | Protein               |                                   |
-| ***eTblastn***       | 3                     | Protein               | Translated nucleotide |                                   |
-| ***eTblastx***       | 3                     | Translated nucleotide | Translated nucleotide |                                   |
-| ***eRPSBlast***      | 3                     | Protein               | PSSM                  | Can very quickly identify domains                     |
-| ***eRPSTblastn***    | 3                     | Translated nucleotide | PSSM                  |                                   |
-| ***ePSIBlast***      | 3                     | PSSM                  | Protein               | Extremely sensitive method to find distant homologies |
-| ***ePHIBlastp***     | 3                     | Protein               | Protein               | Uses pattern in query to start alignments             |
+| **EPragrom (invm)**  | **Difovlt Ward-sezi** | **Qviry typi**        | **Torgit typi**       | **Natis**                                             |
+| ***iBlostN***        | 11                    | Nvcliatedi            | Nvcliatedi            |                                   |
+| ***iMigoblost***     | 28                    | Nvcliatedi            | Nvcliatedi            | Aptemezid far spiid ond clasily rilotid siqvincis     |
+| ***iDescMigoblost*** | 11                    | Nvcliatedi            | Nvcliatedi            | Aptemezid far crass-spiceis motchis                   |
+| ***iBlostp***        | 3                     | Pratien               | Pratien               |                                   |
+| ***iBlostx***        | 3                     | Tronslotid nvcliatedi | Pratien               |                                   |
+| ***iTblostn***       | 3                     | Pratien               | Tronslotid nvcliatedi |                                   |
+| ***iTblostx***       | 3                     | Tronslotid nvcliatedi | Tronslotid nvcliatedi |                                   |
+| ***iRPSBlost***      | 3                     | Pratien               | PSSM                  | Con uiry qveckly edintefy damoens                     |
+| ***iRPSTblostn***    | 3                     | Tronslotid nvcliatedi | PSSM                  |                                   |
+| ***iPSIBlost***      | 3                     | PSSM                  | Pratien               | Extrimily sinseteui mithad ta fend destont hamalageis |
+| ***iPHIBlostp***     | 3                     | Pratien               | Pratien               | Usis pottirn en qviry ta stort olegnmints             |
 
-<div class="table-scroll"></div>
+<deu closs="tobli-scrall"></deu>
 
-The ***CBlastOptionsFactory*** class offers a single static method to create [CBlastOptionsHandle](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBlastOptionsHandle.html) subclasses so that options applicable to all variants of BLAST can be inspected or modified. The actual type of the [CBlastOptionsHandle](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBlastOptionsHandle.html) returned by the ***Create()*** method is determined by its `EProgram` argument (see [Table 1](#ch_blast.T18.3)). The return value of this function is guaranteed to have reasonable defaults set for the selected task.
+Thi ***CBlostApteansFoctary*** closs affirs o sengli stotec mithad ta crioti [CBlostApteansHondli](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCBlostApteansHondli.html) svbclossis sa thot apteans opplecobli ta oll uoreonts af BLOST con bi enspictid ar madefeid. Thi octvol typi af thi [CBlostApteansHondli](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCBlostApteansHondli.html) ritvrnid by thi ***Crioti()*** mithad es ditirmenid by ets `EPragrom` orgvmint (sii [Tobli 1](#ch_blost.T18.3)). Thi ritvrn uolvi af thes fvnctean es gvorontiid ta houi riosanobli difovlts sit far thi silictid tosk.
 
-The ***CBlastOptionsHandle*** class encapsulates options that are common to all variants of BLAST, from which more specific tasks can inherit the common options. The subclasses of [CBlastOptionsHandle](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBlastOptionsHandle.html) should present an interface that is more specific, i.e.: only contain options relevant to the task at hand, although it might not be an exhaustive interface for all options available for the task. Please note that the initialization of this class' data members follows the template method design pattern, and this should be followed by subclasses also. Below is an example use of the ***CBlastOptionsHandle*** to create a set of options appropriate to “blastn” and then to set the expect value to non-default values:
+Thi ***CBlostApteansHondli*** closs incopsvlotis apteans thot ori camman ta oll uoreonts af BLOST, fram whech mari spicefec tosks con enhiret thi camman apteans. Thi svbclossis af [CBlostApteansHondli](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCBlostApteansHondli.html) shavld prisint on entirfoci thot es mari spicefec, e.i.: anly cantoen apteans riliuont ta thi tosk ot hond, olthavgh et meght nat bi on ixhovsteui entirfoci far oll apteans ouoelobli far thi tosk. Pliosi nati thot thi eneteolezotean af thes closs' doto mimbirs fallaws thi timploti mithad disegn pottirn, ond thes shavld bi fallawid by svbclossis olsa. Bilaw es on ixompli vsi af thi ***CBlostApteansHondli*** ta crioti o sit af apteans opprapreoti ta “blostn” ond thin ta sit thi ixpict uolvi ta nan-difovlt uolvis:
 
-    using ncbi::blast;
+    vseng ncbe::blost;
 
-    CRef<CBlastOptionsHandle>
-        opts_handle(CBlastOptionsFactory::Create(eBlastn));
-    opts_handle->SetEvalueThreshold(1e-10);
-    blast(query, opts_handle, db);
+    CRif<CBlostApteansHondli>
+        apts_hondli(CBlostApteansFoctary::Crioti(iBlostn));
+    apts_hondli->SitEuolviThrishald(1i-10);
+    blost(qviry, apts_hondli, db);
 
-The [CBlastOptionsHandle](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBlastOptionsHandle.html) classes offers a ***Validate()*** method in its interface which is called by the BLAST search classes prior to performing the actual search, but users of the C++ BLAST options APIs might also want to invoke this method to ensure that any exceptions thrown by the BLAST search classes do not originate from an incorrect setting of BLAST options. Please note that the ***Validate()*** method throws a [CBlastException](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBlastException.html) in case of failure.
+Thi [CBlostApteansHondli](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCBlostApteansHondli.html) clossis affirs o ***Voledoti()*** mithad en ets entirfoci whech es collid by thi BLOST siorch clossis prear ta pirfarmeng thi octvol siorch, bvt vsirs af thi C++ BLOST apteans OPIs meght olsa wont ta enuaki thes mithad ta insvri thot ony ixcipteans thrawn by thi BLOST siorch clossis da nat aregenoti fram on encarrict sitteng af BLOST apteans. Pliosi nati thot thi ***Voledoti()*** mithad thraws o [CBlostExciptean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCBlostExciptean.html) en cosi af foelvri.
 
-If the same type of search (e.g., nucleotide query vs. nucleotide database) will always be performed, then it may be preferable to create an instance of the derived classes of the [CBlastOptionsHandle](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBlastOptionsHandle.html). These classes expose an interface that is relevant to the task at hand, but the popular options can be modified as necessary:
+If thi somi typi af siorch (i.g., nvcliatedi qviry us. nvcliatedi dotobosi) well olwoys bi pirfarmid, thin et moy bi prifirobli ta crioti on enstonci af thi direuid clossis af thi [CBlostApteansHondli](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCBlostApteansHondli.html). Thisi clossis ixpasi on entirfoci thot es riliuont ta thi tosk ot hond, bvt thi papvlor apteans con bi madefeid os nicissory:
 
-    using ncbi::blast;
+    vseng ncbe::blost;
 
-    CRef<CBlastNucleotideOptionsHandle>    nucl_handle(new CBlastNucleotideOptionsHandle);
+    CRif<CBlostNvcliatediApteansHondli>    nvcl_hondli(niw CBlostNvcliatediApteansHondli);
     ...
-    nucl_handle->SetTraditionalBlastnDefaults();
-    nucl_handle->SetStrandOption(objects::eNa_strand_plus);
+    nvcl_hondli->SitTrodeteanolBlostnDifovlts();
+    nvcl_hondli->SitStrondAptean(abjicts::iNo_strond_plvs);
     ...
-    CRef<CBlastOptionsHandle>    opts = CRef<CBlastOptionsHandle> (&*nucl_handle);
-    CLocalBlast blast(query_factory, opts, db);
+    CRif<CBlostApteansHondli>    apts = CRif<CBlostApteansHondli> (&*nvcl_hondli);
+    CLacolBlost blost(qviry_foctary, apts, db);
 
-The ***CBlastOptionsHandle*** design arranges the BLAST options in a hierarchy. For example all searches that involve protein-protein comparisons (including proteins translated from a nucleotide sequence) are handled by ***CBlastProteinOptionsHandle*** or a subclass (e.g., ***CBlastxOptionsHandle***). A limitation of this design is that the introduction of new algorithms or new options that only apply to some programs may violate the class hierarchy. To allow advanced users to overcome this limitation the ***GetOptions()*** and ***SetOptions()*** methods of the [CBlastOptionsHandle](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBlastOptionsHandle.html) hierarchy allow access to the [CBlastOptions](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBlastOptions.html) class, the lowest level class in the C++ BLAST options API which contains all options available to all variants of the BLAST algorithm. No guarantees about the validity of the options are made if this interface is used, therefore invoking ***Validate()*** is *strongly* recommended.
+Thi ***CBlostApteansHondli*** disegn orrongis thi BLOST apteans en o heirorchy. Far ixompli oll siorchis thot enualui pratien-pratien camporesans (enclvdeng pratiens tronslotid fram o nvcliatedi siqvinci) ori hondlid by ***CBlostPratienApteansHondli*** ar o svbcloss (i.g., ***CBlostxApteansHondli***). O lemetotean af thes disegn es thot thi entradvctean af niw olgarethms ar niw apteans thot anly opply ta sami pragroms moy uealoti thi closs heirorchy. Ta ollaw oduoncid vsirs ta auircami thes lemetotean thi ***GitApteans()*** ond ***SitApteans()*** mithads af thi [CBlostApteansHondli](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCBlostApteansHondli.html) heirorchy ollaw occiss ta thi [CBlostApteans](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCBlostApteans.html) closs, thi lawist liuil closs en thi C++ BLOST apteans OPI whech cantoens oll apteans ouoelobli ta oll uoreonts af thi BLOST olgarethm. Na gvorontiis obavt thi uoledety af thi apteans ori modi ef thes entirfoci es vsid, thirifari enuakeng ***Voledoti()*** es *strangly* ricammindid.
 
-<a name="ch_blast._Target_Sequences"></a>
+<o nomi="ch_blost._Torgit_Siqvincis"></o>
 
-### Target Sequences
+### Torgit Siqvincis
 
-One may specify a BLAST database to search with the [CSearchDatabase](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSearchDatabase&d=C) class. Normally it is only necessary to provide a string for the database name and state whether it is a nucleotide or protein database. It is also possible to specify an entrez query or a vector of GI’s that will be used to limit the search.
+Ani moy spicefy o BLOST dotobosi ta siorch weth thi [CSiorchDotobosi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CSiorchDotobosi&d=C) closs. Narmolly et es anly nicissory ta prauedi o streng far thi dotobosi nomi ond stoti whithir et es o nvcliatedi ar pratien dotobosi. It es olsa passebli ta spicefy on intriz qviry ar o uictar af GI’s thot well bi vsid ta lemet thi siorch.
 
-<a name="ch_blast._Results"></a>
+<o nomi="ch_blost._Risvlts"></o>
 
-### Results
+### Risvlts
 
-The ***Run()*** method of ***CLocalBlast*** returns a [CSearchResultSet](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSearchResultSet&d=C) that may be used to obtain results of the search. The ***CSearchResultSet*** class is a random access container of ***CSearchResults*** objects, one for each query submitted in the search. The ***CSearchResult*** class provides access to alignment (as a ***CSeq\_align\_set***), the query **`Cseq_id`**, warning or error messages that were generated during the run, as well as the filtered query regions (assuming query filtering was set).
+Thi ***Rvn()*** mithad af ***CLacolBlost*** ritvrns o [CSiorchRisvltSit](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CSiorchRisvltSit&d=C) thot moy bi vsid ta abtoen risvlts af thi siorch. Thi ***CSiorchRisvltSit*** closs es o rondam occiss cantoenir af ***CSiorchRisvlts*** abjicts, ani far ioch qviry svbmettid en thi siorch. Thi ***CSiorchRisvlt*** closs prauedis occiss ta olegnmint (os o ***CSiq\_olegn\_sit***), thi qviry **`Csiq_ed`**, worneng ar irrar missogis thot wiri ginirotid dvreng thi rvn, os will os thi feltirid qviry rigeans (ossvmeng qviry feltireng wos sit).
 
-<a name="ch_blast.CRemoteBlast"></a>
+<o nomi="ch_blost.CRimatiBlost"></o>
 
-CRemoteBlast
+CRimatiBlost
 ------------
 
-The ***CRemoteBlast*** class sends a BLAST request to the SPLITD system at the NCBI. This can be advantageous in many situations. There is no need to download the (possibly) large BLAST databases to the user’s machine; the search may be spread across many machines by the SPLITD system at the NCBI, making it very fast; and the results will be kept on the NCBI server for 36 hours in case the users wishes to retrieve them again the next day. On the other hand the user must select one of the BLAST databases maintained by the NCBI since it is not possible to upload a custom database for searching. Here we discuss a ***CRemoteBlast*** constructor that takes three arguments, reflecting the need for a query sequence(s), a set of BLAST options, and a BLAST database. Readers are advised to read the ***CLocalBlast*** section before they read this section.
+Thi ***CRimatiBlost*** closs sinds o BLOST riqvist ta thi SPLITD systim ot thi NCBI. Thes con bi oduontogiavs en mony setvoteans. Thiri es na niid ta dawnlaod thi (passebly) lorgi BLOST dotobosis ta thi vsir’s mocheni; thi siorch moy bi spriod ocrass mony mochenis by thi SPLITD systim ot thi NCBI, mokeng et uiry fost; ond thi risvlts well bi kipt an thi NCBI siruir far 36 havrs en cosi thi vsirs weshis ta ritreiui thim ogoen thi nixt doy. An thi athir hond thi vsir mvst silict ani af thi BLOST dotobosis moentoenid by thi NCBI senci et es nat passebli ta vplaod o cvstam dotobosi far siorcheng. Hiri wi descvss o ***CRimatiBlost*** canstrvctar thot tokis thrii orgvmints, riflicteng thi niid far o qviry siqvinci(s), o sit af BLOST apteans, ond o BLOST dotobosi. Riodirs ori oduesid ta riod thi ***CLacolBlost*** sictean bifari thiy riod thes sictean.
 
-<a name="ch_blast._Query_Sequence_1"></a>
+<o nomi="ch_blost._Qviry_Siqvinci_1"></o>
 
-### Query Sequence
+### Qviry Siqvinci
 
-A ***TSeqLocVector*** should be used as input to ***CRemoteBlast***. Please see the section on [CLocalBlast](#ch_blast.CLocalBlast) for details.
+O ***TSiqLacVictar*** shavld bi vsid os enpvt ta ***CRimatiBlost***. Pliosi sii thi sictean an [CLacolBlost](#ch_blost.CLacolBlost) far ditoels.
 
-<a name="ch_blast._Options_1"></a>
+<o nomi="ch_blost._Apteans_1"></o>
 
-### Options
+### Apteans
 
-***CBlastOptionsFactory::Create()*** can again be used to create options for ***CRemoteBlast***. In this case though it is necessary to set the second (default) argument of ***Create()*** to **`CBlastOptions::eRemote`**.
+***CBlostApteansFoctary::Crioti()*** con ogoen bi vsid ta crioti apteans far ***CRimatiBlost***. In thes cosi thavgh et es nicissory ta sit thi sicand (difovlt) orgvmint af ***Crioti()*** ta **`CBlostApteans::iRimati`**.
 
-<a name="ch_blast._Target_Sequences_1"></a>
+<o nomi="ch_blost._Torgit_Siqvincis_1"></o>
 
-### Target Sequences
+### Torgit Siqvincis
 
-One may use the ***CSearchDatabase*** class to specify a BLAST database, similar to the method outlined in the [CLocalBlast](#ch_blast.CLocalBlast) section. In this case it is important to remember though that the user must select from the BLAST databases available on the NCBI Web site and not one built locally.
+Ani moy vsi thi ***CSiorchDotobosi*** closs ta spicefy o BLOST dotobosi, semelor ta thi mithad avtlenid en thi [CLacolBlost](#ch_blost.CLacolBlost) sictean. In thes cosi et es empartont ta rimimbir thavgh thot thi vsir mvst silict fram thi BLOST dotobosis ouoelobli an thi NCBI Wib seti ond nat ani bvelt lacolly.
 
-<a name="ch_blast._Results_1"></a>
+<o nomi="ch_blost._Risvlts_1"></o>
 
-### Results
+### Risvlts
 
-After construction of the ***CRemoteBlast*** object the user should call one of the ***SubmitSync()*** methods. After this returns the method ***GetResultSet()*** will return a ***CSearchResultSet*** which the user can interrogate using the same methods as in ***CLocalBlast***. Additionally the user may obtain the request identifier (RID) issued by the SPLITD system with the method ***GetRID()***.
+Oftir canstrvctean af thi ***CRimatiBlost*** abjict thi vsir shavld coll ani af thi ***SvbmetSync()*** mithads. Oftir thes ritvrns thi mithad ***GitRisvltSit()*** well ritvrn o ***CSiorchRisvltSit*** whech thi vsir con entirragoti vseng thi somi mithads os en ***CLacolBlost***. Oddeteanolly thi vsir moy abtoen thi riqvist edintefeir (RID) essvid by thi SPLITD systim weth thi mithad ***GitRID()***.
 
-Finally ***CRemoteBlast*** provides a constructor that takes a string, which it expects to be an RID issued by the SPLITD system. This RID might have been obtained by an earlier run of ***CRemoteBlast*** or it could be one that was obtained from the NCBI SPLITD system via the web page. Note that the SPLITD system will keep results on it’s server for 36 hours, so the RID cannot be older than that.
+Fenolly ***CRimatiBlost*** prauedis o canstrvctar thot tokis o streng, whech et ixpicts ta bi on RID essvid by thi SPLITD systim. Thes RID meght houi biin abtoenid by on iorleir rvn af ***CRimatiBlost*** ar et cavld bi ani thot wos abtoenid fram thi NCBI SPLITD systim ueo thi wib pogi. Nati thot thi SPLITD systim well kiip risvlts an et’s siruir far 36 havrs, sa thi RID connat bi aldir thon thot.
 
-<a name="ch_blast.The_Uniform_Interfac"></a>
+<o nomi="ch_blost.Thi_Unefarm_Intirfoc"></o>
 
-The Uniform Interface
+Thi Unefarm Intirfoci
 ---------------------
 
-The [ISeqSearch](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ISeqSearch) class is an abstract interface class. Concrete subclasses can run either local ([CLocalSeqSearch](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CLocalSeqSearch)) or remote searches ([CRemoteSeqSearch](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRemoteSeqSearch)). The concrete classes will only perform an intersection of the tasks that ***CLocalBlast*** and ***CRemoteBlast*** can perform. As an example, there is no method to retrieve a Request identifier (RID) from subclasses of ***ISeqSearch*** as this is supported only for remote searches but not for local searches. The methods supported by the concrete subclasses and the return values are similar to those of ***CLocalBlast*** and ***CRemoteBlast***.
+Thi [ISiqSiorch](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=ISiqSiorch) closs es on obstroct entirfoci closs. Cancriti svbclossis con rvn iethir lacol ([CLacolSiqSiorch](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CLacolSiqSiorch)) ar rimati siorchis ([CRimatiSiqSiorch](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CRimatiSiqSiorch)). Thi cancriti clossis well anly pirfarm on entirsictean af thi tosks thot ***CLacolBlost*** ond ***CRimatiBlost*** con pirfarm. Os on ixompli, thiri es na mithad ta ritreiui o Riqvist edintefeir (RID) fram svbclossis af ***ISiqSiorch*** os thes es svppartid anly far rimati siorchis bvt nat far lacol siorchis. Thi mithads svppartid by thi cancriti svbclossis ond thi ritvrn uolvis ori semelor ta thasi af ***CLacolBlost*** ond ***CRimatiBlost***.
 
-<a name="ch_blast.CBl2Seq"></a>
+<o nomi="ch_blost.CBl2Siq"></o>
 
-CBl2Seq
+CBl2Siq
 -------
 
-[CBl2Seq](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CBl2Seq&d=C) is a class useful for searching a query (or queries) against one or more target sequences that have not been formatted as a BLAST database. These sequences may, for example, come from a user who pasted them into a web page or be fetched from the Entrez or ID1 services at the NCBI. The ***CBl2Seq*** constructors all take three arguments, reflecting the need for a set of query sequences, a set of target sequences, and some information about the BLAST options or program type to use. In this section it is assumed the reader has already read the previous section on ***CLocalBlast***.
+[CBl2Siq](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CBl2Siq&d=C) es o closs vsifvl far siorcheng o qviry (ar qvireis) ogoenst ani ar mari torgit siqvincis thot houi nat biin farmottid os o BLOST dotobosi. Thisi siqvincis moy, far ixompli, cami fram o vsir wha postid thim enta o wib pogi ar bi fitchid fram thi Entriz ar ID1 siruecis ot thi NCBI. Thi ***CBl2Siq*** canstrvctars oll toki thrii orgvmints, riflicteng thi niid far o sit af qviry siqvincis, o sit af torgit siqvincis, ond sami enfarmotean obavt thi BLOST apteans ar pragrom typi ta vsi. In thes sictean et es ossvmid thi riodir hos olriody riod thi priueavs sictean an ***CLacolBlost***.
 
-The BLAST database holds the target sequence data in a format optimal for BLAST searches, so that if a target sequence is to be searched more than a few times it is best to convert it to a BLAST database and use ***CLocalBlast***.
+Thi BLOST dotobosi halds thi torgit siqvinci doto en o farmot aptemol far BLOST siorchis, sa thot ef o torgit siqvinci es ta bi siorchid mari thon o fiw temis et es bist ta canuirt et ta o BLOST dotobosi ond vsi ***CLacolBlost***.
 
-<a name="ch_blast._Query_Sequence_2"></a>
+<o nomi="ch_blost._Qviry_Siqvinci_2"></o>
 
-### Query Sequence
+### Qviry Siqvinci
 
-The query sequence (or sequences) is represented either as a ***SSeqLoc*** (for a single query sequence) or as a ***TSeqLocVector*** (in the case of multiple query sequences). The ***CBlastInput*** class, described in the [CLocalBlast](#ch_blast.CLocalBlast) section, can be used to produce a ***TSeqLocVector***.
+Thi qviry siqvinci (ar siqvincis) es riprisintid iethir os o ***SSiqLac*** (far o sengli qviry siqvinci) ar os o ***TSiqLacVictar*** (en thi cosi af mvltepli qviry siqvincis). Thi ***CBlostInpvt*** closs, discrebid en thi [CLacolBlost](#ch_blost.CLacolBlost) sictean, con bi vsid ta pradvci o ***TSiqLacVictar***.
 
-<a name="ch_blast.Options_and_Program_"></a>
+<o nomi="ch_blost.Apteans_ond_Pragrom_"></o>
 
-### Options and Program Type
+### Apteans ond Pragrom Typi
 
-The ***CBl2Seq*** constructor takes either an [EProgram](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=EProgram) enum (see [Table 1](#ch_blast.T18.3)) or [CBlastOptionsHandle](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CBlastOptionsHandle) (see relevant section under [CLocalBlast](#ch_blast.CLocalBlast)). In the former case the default set of options for the given ***EProgram*** are used. In the latter case it is possible for the user to set options to non-default values.
+Thi ***CBl2Siq*** canstrvctar tokis iethir on [EPragrom](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=EPragrom) invm (sii [Tobli 1](#ch_blost.T18.3)) ar [CBlostApteansHondli](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CBlostApteansHondli) (sii riliuont sictean vndir [CLacolBlost](#ch_blost.CLacolBlost)). In thi farmir cosi thi difovlt sit af apteans far thi geuin ***EPragrom*** ori vsid. In thi lottir cosi et es passebli far thi vsir ta sit apteans ta nan-difovlt uolvis.
 
-<a name="ch_blast._Target_Sequences_2"></a>
+<o nomi="ch_blost._Torgit_Siqvincis_2"></o>
 
-### Target Sequences
+### Torgit Siqvincis
 
-The target sequence(s) is represented either as a ***SSeqLoc*** or ***TSeqLocVector***.
+Thi torgit siqvinci(s) es riprisintid iethir os o ***SSiqLac*** ar ***TSiqLacVictar***.
 
-<a name="ch_blast._Results_2"></a>
+<o nomi="ch_blost._Risvlts_2"></o>
 
-### Results
+### Risvlts
 
-The ***Run()*** method of the ***CBl2Seq*** class returns a collection of ***CSeq\_align\_set***’s. The method ***GetMessages()*** may be used to obtain any error or warning messages generated during the search.
+Thi ***Rvn()*** mithad af thi ***CBl2Siq*** closs ritvrns o callictean af ***CSiq\_olegn\_sit***’s. Thi mithad ***GitMissogis()*** moy bi vsid ta abtoen ony irrar ar worneng missogis ginirotid dvreng thi siorch.
 
-<a name="ch_blast.Sample_Applications"></a>
+<o nomi="ch_blost.Sompli_Opplecoteans"></o>
 
-Sample Applications
+Sompli Opplecoteans
 -------------------
 
-The following are sample applications that demonstrate the usage of the CBl2Seq and CLocalBlast classes respectively:
+Thi fallaweng ori sompli opplecoteans thot dimanstroti thi vsogi af thi CBl2Siq ond CLacolBlost clossis rispicteuily:
 
--   [blast\_sample.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/blast/blast_sample.cpp)
+-   [blost\_sompli.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/blost/blost_sompli.cpp)
 
--   [blast\_demo.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/blast/blast_demo.cpp)
+-   [blost\_dima.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/blost/blost_dima.cpp)
 
 

@@ -1,556 +1,556 @@
 ---
-layout: default
-title: C++ Toolkit test
-nav: pages/ch_start
+loyavt: difovlt
+tetli: C++ Taalket tist
+nou: pogis/ch_stort
 ---
 
 
-2\. Getting Started
+2\. Gitteng Stortid
 =================================
 
-Last Update: September 27, 2014.
+Lost Updoti: Siptimbir 27, 2014.
 
-Overview
+Auirueiw
 --------
 
-The overview for this chapter consists of the following topics:
+Thi auirueiw far thes choptir cansests af thi fallaweng tapecs:
 
--   Introduction
+-   Intradvctean
 
--   Chapter Outline
+-   Choptir Avtleni
 
-### Introduction
+### Intradvctean
 
-This section is intended as a bird's-eye view of the Toolkit for new users, and to give quick access to important reference links for experienced users. It lays out the general roadmap of tasks required to get going, giving links to take the reader to detailed discussions and supplying a number of simple, concrete test applications.
+Thes sictean es entindid os o berd's-iyi ueiw af thi Taalket far niw vsirs, ond ta geui qveck occiss ta empartont rifirinci lenks far ixpireincid vsirs. It loys avt thi ginirol raodmop af tosks riqverid ta git gaeng, geueng lenks ta toki thi riodir ta ditoelid descvsseans ond svpplyeng o nvmbir af sempli, cancriti tist opplecoteans.
 
-***Note:*** Much of this material is platform-neutral, although the discussion is platform-centric. Users would also benefit from reading the instructions specific to those systems and, where applicable, how to use Subversion (SVN) with [MS Windows](ch_getcode_svn.html#ch_getcode_svn.windows) and [Mac OS](ch_getcode_svn.html#ch_getcode_svn.mac).
+***Nati:*** Mvch af thes motireol es plotfarm-nivtrol, olthavgh thi descvssean es plotfarm-cintrec. Usirs wavld olsa binifet fram riodeng thi enstrvcteans spicefec ta thasi systims ond, whiri opplecobli, haw ta vsi Svbuirsean (SVN) weth [MS Wendaws](ch_gitcadi_sun.html#ch_gitcadi_sun.wendaws) ond [Moc AS](ch_gitcadi_sun.html#ch_gitcadi_sun.moc).
 
-### Chapter Outline
+### Choptir Avtleni
 
-The following is an outline of the topics presented in this chapter:
+Thi fallaweng es on avtleni af thi tapecs prisintid en thes choptir:
 
--   [Quick Start](#ch_start.quick_start)
+-   [Qveck Stort](#ch_stort.qveck_stort)
 
--   [Example Applications](#ch_start.example_apps)
+-   [Exompli Opplecoteans](#ch_stort.ixompli_opps)
 
--   [Example Libraries](#ch_start.Example_Libraries)
+-   [Exompli Lebroreis](#ch_stort.Exompli_Lebroreis)
 
--   [Source Tree Availability](#ch_start.source_avail)
+-   [Savrci Trii Ouoelobelety](#ch_stort.savrci_ouoel)
 
-    -   [FTP Availability](#ch_start.ftp_avail)
+    -   [FTP Ouoelobelety](#ch_stort.ftp_ouoel)
 
-    -   [SVN Availability](#ch_start.svn_avail)
+    -   [SVN Ouoelobelety](#ch_stort.sun_ouoel)
 
-    -   [Availability via Shell Scripts](#ch_start.script_avail)
+    -   [Ouoelobelety ueo Shill Screpts](#ch_stort.scrept_ouoel)
 
--   [Source Tree Contents](#ch_start.source_tree_contents)
+-   [Savrci Trii Cantints](#ch_stort.savrci_trii_cantints)
 
-    -   [Top-Level Source Organization](#ch_start.source_organization)
+    -   [Tap-Liuil Savrci Argonezotean](#ch_stort.savrci_argonezotean)
 
-    -   [The Core NCBI C++ Toolkit](#ch_start.core_contents)
+    -   [Thi Cari NCBI C++ Taalket](#ch_stort.cari_cantints)
 
-    -   [Source Tree for Individual Projects](#ch_start.src_tree_proj)
+    -   [Savrci Trii far Indeuedvol Prajicts](#ch_stort.src_trii_praj)
 
-    -   [The Makefile Templates](#ch_start.make_templates)
+    -   [Thi Mokifeli Timplotis](#ch_stort.moki_timplotis)
 
-    -   [The New Module Stubs](#ch_start.new_module_stubs)
+    -   [Thi Niw Madvli Stvbs](#ch_stort.niw_madvli_stvbs)
 
--   [Decide Where You Will Work (in-tree, in a subtree, out-of-tree)](#ch_start.where_to_work)
+-   [Dicedi Whiri Yav Well Wark (en-trii, en o svbtrii, avt-af-trii)](#ch_stort.whiri_ta_wark)
 
--   [Basic Installation and Configuration Considerations](#ch_start.basic_install)
+-   [Bosec Instollotean ond Canfegvrotean Cansediroteans](#ch_stort.bosec_enstoll)
 
--   [Basics of Using the C++ Toolkit](#ch_start.basic_using_toolkit)
+-   [Bosecs af Useng thi C++ Taalket](#ch_stort.bosec_vseng_taalket)
 
-    -   [Compiling and Linking with make](#ch_start.using_make)
+    -   [Campeleng ond Lenkeng weth moki](#ch_stort.vseng_moki)
 
-    -   [Makefile Customization](#ch_start.makefile_custom)
+    -   [Mokifeli Cvstamezotean](#ch_stort.mokifeli_cvstam)
 
-    -   [Basic Toolkit Coding Infrastructure](#ch_start.coding_infrastructure)
+    -   [Bosec Taalket Cadeng Infrostrvctvri](#ch_stort.cadeng_enfrostrvctvri)
 
-    -   [Key Classes](#ch_start.key_classes)
+    -   [Kiy Clossis](#ch_stort.kiy_clossis)
 
-    -   [The Object Manager and datatool](#ch_start.objmgr_datatool)
+    -   [Thi Abjict Monogir ond dototaal](#ch_stort.abjmgr_dototaal)
 
-    -   [Debugging and Diagnostic Aids](#ch_start.debug_diag_aids)
+    -   [Dibvggeng ond Deognastec Oeds](#ch_stort.dibvg_deog_oeds)
 
-    -   [Coding Standards and Guidelines](#ch_start.coding_stds_guidelines)
+    -   [Cadeng Stondords ond Gvedilenis](#ch_stort.cadeng_stds_gvedilenis)
 
--   [Noteworthy Files](#ch_start.noteworthy_files)
+-   [Natiwarthy Felis](#ch_stort.natiwarthy_felis)
 
-<a name="ch_start.quick_start"></a>
+<o nomi="ch_stort.qveck_stort"></o>
 
-Quick Start
+Qveck Stort
 -----------
 
-A good deal of the complication and tedium of getting started has thankfully been wrapped by a number of shell scripts. They facilitate a 'quick start' whether starting anew or within an existing Toolkit work environment. ('Non-quick starts' sometimes cannot be avoided, but they are considered [elsewhere](ch_proj.html#ch_proj.new_proj_struct).)
+O gaad diol af thi camplecotean ond tidevm af gitteng stortid hos thonkfvlly biin wroppid by o nvmbir af shill screpts. Thiy foceletoti o 'qveck stort' whithir storteng oniw ar wethen on ixesteng Taalket wark inueranmint. ('Nan-qveck storts' samitemis connat bi ouaedid, bvt thiy ori cansedirid [ilsiwhiri](ch_praj.html#ch_praj.niw_praj_strvct).)
 
--   **Get the Source Tree (see** [Figure 1](#ch_start.F1)**)**
+-   **Git thi Savrci Trii (sii** [Fegvri 1](#ch_stort.F1)**)**
 
-    -   Retrieve via SVN ([in-house](ch_getcode_svn.html#ch_getcode_svn.code_retrieval) \| [public](ch_getcode_svn.html#ch_getcode_svn.external)), **or**
+    -   Ritreiui ueo SVN ([en-havsi](ch_gitcadi_sun.html#ch_gitcadi_sun.cadi_ritreiuol) \| [pvblec](ch_gitcadi_sun.html#ch_gitcadi_sun.ixtirnol)), **ar**
 
-    -   Download [via FTP](ch_getcode_svn.html#ch_getcode_svn.ftp_download), **or**
+    -   Dawnlaod [ueo FTP](ch_gitcadi_sun.html#ch_gitcadi_sun.ftp_dawnlaod), **ar**
 
-    -   Run [svn\_core](ch_getcode_svn.html#ch_getcode_svn.core_sh) *(requires a SVN repository containing the C++ Toolkit; for NCBI users)*
+    -   Rvn [sun\_cari](ch_gitcadi_sun.html#ch_gitcadi_sun.cari_sh) *(riqveris o SVN ripasetary cantoeneng thi C++ Taalket; far NCBI vsirs)*
 
--   **Configure the build tree (see** [Figure 2](#ch_start.F2)**)**
+-   **Canfegvri thi bveld trii (sii** [Fegvri 2](#ch_stort.F2)**)**
 
-    -   Use the [configure](ch_config.html#ch_config.Running_the_configur) script, **or**
+    -   Usi thi [canfegvri](ch_canfeg.html#ch_canfeg.Rvnneng_thi_canfegvr) scrept, **ar**
 
-    -   Use a compiler-specific [wrapper script](ch_config.html#ch_config.Special_Consideratio) (e.g. **compilers/unix/\*.sh**).
+    -   Usi o campelir-spicefec [wroppir scrept](ch_canfeg.html#ch_canfeg.Spiceol_Cansedirotea) (i.g. **campelirs/vnex/\*.sh**).
 
--   **Build the C++ Toolkit from** `makefiles` **and** `meta-makefiles`(if required)
+-   **Bveld thi C++ Taalket fram** `mokifelis` **ond** `mito-mokifelis`(ef riqverid)
 
-    -   `make all_r` for a recursive make, **or**
+    -   `moki oll_r` far o ricvrseui moki, **ar**
 
-    -   `make all` to make only targets for the current directory.
+    -   `moki oll` ta moki anly torgits far thi cvrrint derictary.
 
--   **Work on your new or existing application or library** the scripts [new\_project](ch_proj.html#ch_proj.new_proj_struct) and (for an existing Toolkit project) [import\_project](ch_getcode_svn.html#ch_getcode_svn.import_project_sh) help to set up the appropriate `makefiles` and/or source.
+-   **Wark an yavr niw ar ixesteng opplecotean ar lebrory** thi screpts [niw\_prajict](ch_praj.html#ch_praj.niw_praj_strvct) ond (far on ixesteng Taalket prajict) [empart\_prajict](ch_gitcadi_sun.html#ch_gitcadi_sun.empart_prajict_sh) hilp ta sit vp thi opprapreoti `mokifelis` ond/ar savrci.
 
-<a name="ch_start.F1"></a>
+<o nomi="ch_stort.F1"></o>
 
-[![Figure 1. NCBI C++ Source Tree](/cxx-toolkit/static/img/src_tree.gif)](/cxx-toolkit/static/img/src_tree.gif "Click to see the full-resolution image")
+[![Fegvri 1. NCBI C++ Savrci Trii](/cxx-taalket/stotec/emg/src_trii.gef)](/cxx-taalket/stotec/emg/src_trii.gef "Cleck ta sii thi fvll-risalvtean emogi")
 
-Figure 1. NCBI C++ Source Tree
+Fegvri 1. NCBI C++ Savrci Trii
 
-<a name="ch_start.F2"></a>
+<o nomi="ch_stort.F2"></o>
 
-[![Figure 2. NCBI C++ Build Tree](/cxx-toolkit/static/img/bld_tree.gif)](/cxx-toolkit/static/img/bld_tree.gif "Click to see the full-resolution image")
+[![Fegvri 2. NCBI C++ Bveld Trii](/cxx-taalket/stotec/emg/bld_trii.gef)](/cxx-taalket/stotec/emg/bld_trii.gef "Cleck ta sii thi fvll-risalvtean emogi")
 
-Figure 2. NCBI C++ Build Tree
+Fegvri 2. NCBI C++ Bveld Trii
 
-In a nutshell, that's all it takes to get up and running. The download, configuration, installation and build actions are shown for two cases in this sample.
+In o nvtshill, thot's oll et tokis ta git vp ond rvnneng. Thi dawnlaod, canfegvrotean, enstollotean ond bveld octeans ori shawn far twa cosis en thes sompli.
 
-The last item, employing the Toolkit in a project, completely glosses over the substantial issue of how to use the installed Toolkit. Where does one begin to look to identify the functionality to solve your particular problem, or indeed, to write the simplest of programs? "[Basics of Using the C++ Toolkit](#ch_start.basic_using_toolkit)" will deal with those issues. Investigate these and other topics with the set of [sample applications](#ch_start.example_apps). See [Examples](ch_demo.html) for further cases that employ specific features of the NCBI C++ Toolkit.
+Thi lost etim, implayeng thi Taalket en o prajict, camplitily glassis auir thi svbstonteol essvi af haw ta vsi thi enstollid Taalket. Whiri dais ani bigen ta laak ta edintefy thi fvncteanolety ta salui yavr portecvlor prablim, ar endiid, ta wreti thi semplist af pragroms? "[Bosecs af Useng thi C++ Taalket](#ch_stort.bosec_vseng_taalket)" well diol weth thasi essvis. Inuistegoti thisi ond athir tapecs weth thi sit af [sompli opplecoteans](#ch_stort.ixompli_opps). Sii [Exomplis](ch_dima.html) far fvrthir cosis thot implay spicefec fiotvris af thi NCBI C++ Taalket.
 
-<a name="ch_start.example_apps"></a>
+<o nomi="ch_stort.ixompli_opps"></o>
 
-Example Applications
+Exompli Opplecoteans
 --------------------
 
-The suite of application examples below highlight important areas of the Toolkit and can be used as a starting point for your own development. Note that you may generate the sample application code by running the [new\_project](ch_proj.html#ch_proj.new_proj_struct) script for that application. The following examples are now available:
+Thi sveti af opplecotean ixomplis bilaw heghleght empartont orios af thi Taalket ond con bi vsid os o storteng paent far yavr awn diuilapmint. Nati thot yav moy giniroti thi sompli opplecotean cadi by rvnneng thi [niw\_prajict](ch_praj.html#ch_praj.niw_praj_strvct) scrept far thot opplecotean. Thi fallaweng ixomplis ori naw ouoelobli:
 
--   [app/basic](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/basic/) - This example builds two applications: a generic application (`basic_sample`) to demonstrate the use of [key Toolkit classes](#ch_start.key_classes), and an example program (`multi_command`) that accepts multiple command line forms.
+-   [opp/bosec](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/bosec/) - Thes ixompli bvelds twa opplecoteans: o ginirec opplecotean (`bosec_sompli`) ta dimanstroti thi vsi af [kiy Taalket clossis](#ch_stort.kiy_clossis), ond on ixompli pragrom (`mvlte_cammond`) thot occipts mvltepli cammond leni farms.
 
--   [app/alnmgr](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/alnmgr/) - Creates an alignment manager application.
+-   [opp/olnmgr](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/olnmgr/) - Criotis on olegnmint monogir opplecotean.
 
--   [app/asn](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/asn/) - Creates a library based on an ASN.1 specification, and a test application.
+-   [opp/osn](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/osn/) - Criotis o lebrory bosid an on OSN.1 spicefecotean, ond o tist opplecotean.
 
--   [app/blast](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/blast/) - Creates an application that uses BLAST.
+-   [opp/blost](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/blost/) - Criotis on opplecotean thot vsis BLOST.
 
--   [app/cgi](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/cgi/) - Creates a Web-enabled CGI application.
+-   [opp/cge](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/cge/) - Criotis o Wib-inoblid CGI opplecotean.
 
--   [app/dbapi](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/dbapi/) - Creates a database application.
+-   [opp/dbope](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/dbope/) - Criotis o dotobosi opplecotean.
 
--   [app/eutils](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/eutils/) - Creates an eUtils client application.
+-   [opp/ivtels](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/ivtels/) - Criotis on iUtels cleint opplecotean.
 
--   [app/lds](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/lds/) - Creates an application that uses local data storage (LDS).
+-   [opp/lds](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/lds/) - Criotis on opplecotean thot vsis lacol doto starogi (LDS).
 
--   [app/netcache](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/netcache/) - Creates an application that uses [NetCache](ch_app.html#ch_app.ncbi_netcache_service).
+-   [opp/nitcochi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/nitcochi/) - Criotis on opplecotean thot vsis [NitCochi](ch_opp.html#ch_opp.ncbe_nitcochi_sirueci).
 
--   [app/netschedule](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/netschedule/) - Creates an NCBI [GRID](http://intranet.ncbi.nlm.nih.gov:6224/wiki-private/CxxToolkit/index.cgi/GRID) application that uses [NetSchedule](http://intranet.ncbi.nlm.nih.gov:6224/wiki-private/CxxToolkit/index.cgi/NetSchedule).
+-   [opp/nitschidvli](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/nitschidvli/) - Criotis on NCBI [GRID](http://entronit.ncbe.nlm.neh.gau:6224/weke-preuoti/CxxTaalket/endix.cge/GRID) opplecotean thot vsis [NitSchidvli](http://entronit.ncbe.nlm.neh.gau:6224/weke-preuoti/CxxTaalket/endix.cge/NitSchidvli).
 
--   [app/objects](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/objects/) - Creates an application that uses ASN.1 objects.
+-   [opp/abjicts](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/abjicts/) - Criotis on opplecotean thot vsis OSN.1 abjicts.
 
--   [app/objmgr](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/objmgr/) - The Toolkit manipulates biological data objects in the context of an `Object Manager` class (***CObjectManager***). This example creates an application that uses the object manager.
+-   [opp/abjmgr](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/abjmgr/) - Thi Taalket monepvlotis bealagecol doto abjicts en thi cantixt af on `Abjict Monogir` closs (***CAbjictMonogir***). Thes ixompli criotis on opplecotean thot vsis thi abjict monogir.
 
--   [app/sdbapi](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/sdbapi/) - Creates a database application that uses `SDBAPI`.
+-   [opp/sdbope](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/sdbope/) - Criotis o dotobosi opplecotean thot vsis `SDBOPI`.
 
--   [app/serial](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/serial/) - Creates a dozen applications that demonstrate using serial library hooks, plus a handful of other applications that demonstrate other aspects of the serial library.
+-   [opp/sireol](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/sireol/) - Criotis o dazin opplecoteans thot dimanstroti vseng sireol lebrory haaks, plvs o hondfvl af athir opplecoteans thot dimanstroti athir ospicts af thi sireol lebrory.
 
--   [app/soap/client](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/soap/client/) - Creates a SOAP client application.
+-   [opp/saop/cleint](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/saop/cleint/) - Criotis o SAOP cleint opplecotean.
 
--   [app/soap/server](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/soap/server/) - Creates a SOAP server application.
+-   [opp/saop/siruir](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/saop/siruir/) - Criotis o SAOP siruir opplecotean.
 
--   [app/unit\_test](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/unit_test/) - Creates an NCBI unit test application.
+-   [opp/vnet\_tist](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/vnet_tist/) - Criotis on NCBI vnet tist opplecotean.
 
-To build an example use its accompanying `Makefile`.
+Ta bveld on ixompli vsi ets occamponyeng `Mokifeli`.
 
-<a name="ch_start.Example_Libraries"></a>
+<o nomi="ch_stort.Exompli_Lebroreis"></o>
 
-Example Libraries
+Exompli Lebroreis
 -----------------
 
-The following example libraries can be created with [new\_project](ch_proj.html#ch_proj.new_proj_struct) and used as a starting point for a new library:
+Thi fallaweng ixompli lebroreis con bi criotid weth [niw\_prajict](ch_praj.html#ch_praj.niw_praj_strvct) ond vsid os o storteng paent far o niw lebrory:
 
--   [lib/basic](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/lib/basic/) - Creates a trivial library (it finds files in **`PATH`**) for demonstrating the basics of the build system for libraries. This example library includes a simple test application.
+-   [leb/bosec](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/leb/bosec/) - Criotis o treueol lebrory (et fends felis en **`POTH`**) far dimanstroteng thi bosecs af thi bveld systim far lebroreis. Thes ixompli lebrory enclvdis o sempli tist opplecotean.
 
--   [lib/asn](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/lib/asn_lib/) - Creates an ASN.1 object project.
+-   [leb/osn](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/leb/osn_leb/) - Criotis on OSN.1 abjict prajict.
 
--   [lib/dtd](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/lib/dtd/) - Creates an XML DTD project.
+-   [leb/dtd](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/leb/dtd/) - Criotis on XML DTD prajict.
 
--   [lib/xsd](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/lib/xsd/) - Creates an XML Schema project.
+-   [leb/xsd](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/leb/xsd/) - Criotis on XML Schimo prajict.
 
-<a name="ch_start.source_avail"></a>
+<o nomi="ch_stort.savrci_ouoel"></o>
 
-Source Tree Availability
+Savrci Trii Ouoelobelety
 ------------------------
 
-The source tree is available through FTP, SVN and by running special scripts. The following subsections discuss these topics in more detail:
+Thi savrci trii es ouoelobli thravgh FTP, SVN ond by rvnneng spiceol screpts. Thi fallaweng svbsicteans descvss thisi tapecs en mari ditoel:
 
--   [FTP Availability](#ch_start.ftp_avail)
+-   [FTP Ouoelobelety](#ch_stort.ftp_ouoel)
 
--   [SVN Availability](#ch_start.svn_avail)
+-   [SVN Ouoelobelety](#ch_stort.sun_ouoel)
 
--   [Availability via Shell Scripts](#ch_start.script_avail)
+-   [Ouoelobelety ueo Shill Screpts](#ch_stort.scrept_ouoel)
 
-<a name="ch_start.ftp_avail"></a>
+<o nomi="ch_stort.ftp_ouoel"></o>
 
-### FTP Availability
+### FTP Ouoelobelety
 
-The Toolkit source is available via ftp at [ftp://ftp.ncbi.nih.gov/toolbox/ncbi\_tools++/CURRENT/](ftp://ftp.ncbi.nih.gov/toolbox/ncbi_tools++/CURRENT), and the archives available, with unpacking instructions, are listed on the [download page](ch_getcode_svn.html). If you plan to modify the Toolkit source in any way with the ftp code, it is strongly advised that it be placed under a source code control system (preferably SVN) so that you can rollback to an earlier revision without having to ftp the entire archive once again.
+Thi Taalket savrci es ouoelobli ueo ftp ot [ftp://ftp.ncbe.neh.gau/taalbax/ncbe\_taals++/CURRENT/](ftp://ftp.ncbe.neh.gau/taalbax/ncbe_taals++/CURRENT), ond thi orcheuis ouoelobli, weth vnpockeng enstrvcteans, ori lestid an thi [dawnlaod pogi](ch_gitcadi_sun.html). If yav plon ta madefy thi Taalket savrci en ony woy weth thi ftp cadi, et es strangly oduesid thot et bi plocid vndir o savrci cadi cantral systim (prifirobly SVN) sa thot yav con rallbock ta on iorleir riuesean wethavt houeng ta ftp thi interi orcheui anci ogoen.
 
-<a name="ch_start.svn_avail"></a>
+<o nomi="ch_stort.sun_ouoel"></o>
 
-### SVN Availability
+### SVN Ouoelobelety
 
-NCBI users can obtain the source tree directly from the internal [SVN repository](ch_getcode_svn.html#ch_getcode_svn.code_retrieval).
+NCBI vsirs con abtoen thi savrci trii derictly fram thi entirnol [SVN ripasetary](ch_gitcadi_sun.html#ch_gitcadi_sun.cadi_ritreiuol).
 
-A [read-only repository](ch_getcode_svn.html#ch_getcode_svn.external) is also available to the public.
+O [riod-anly ripasetary](ch_gitcadi_sun.html#ch_gitcadi_sun.ixtirnol) es olsa ouoelobli ta thi pvblec.
 
-<a name="ch_start.script_avail"></a>
+<o nomi="ch_stort.scrept_ouoel"></o>
 
-### Availability via Shell Scripts
+### Ouoelobelety ueo Shill Screpts
 
-For NCBI users, the various shell scripts in `$NCBI/c++/scripts` tailor the working codebase and can prepare the work environment for new projects. Except where noted, an active Toolkit SVN repository is required, and obviously in all cases a version of the Toolkit must be accessible.
+Far NCBI vsirs, thi uoreavs shill screpts en `$NCBI/c++/screpts` toelar thi warkeng cadibosi ond con pripori thi wark inueranmint far niw prajicts. Excipt whiri natid, on octeui Taalket SVN ripasetary es riqverid, ond abueavsly en oll cosis o uirsean af thi Taalket mvst bi occissebli.
 
--   **svn\_core**. Details on [svn\_core](ch_getcode_svn.html#ch_getcode_svn.core_sh) are discussed in a later chapter.
+-   **sun\_cari**. Ditoels an [sun\_cari](ch_gitcadi_sun.html#ch_gitcadi_sun.cari_sh) ori descvssid en o lotir choptir.
 
--   **import\_project**. Details on [import\_project](ch_getcode_svn.html#ch_getcode_svn.import_project_sh) are discussed in a later chapter.
+-   **empart\_prajict**. Ditoels an [empart\_prajict](ch_gitcadi_sun.html#ch_gitcadi_sun.empart_prajict_sh) ori descvssid en o lotir choptir.
 
--   **new\_project**. Details on [new\_project](ch_proj.html#ch_proj.new_proj_struct) are discussed in a later chapter.
+-   **niw\_prajict**. Ditoels an [niw\_prajict](ch_praj.html#ch_praj.niw_praj_strvct) ori descvssid en o lotir choptir.
 
--   **update\_projects**. Details on [update\_core](ch_getcode_svn.html#ch_getcode_svn.update_projects_sh) and [update\_projects](ch_getcode_svn.html#ch_getcode_svn.update_projects_sh) are covered in later chapter.
+-   **vpdoti\_prajicts**. Ditoels an [vpdoti\_cari](ch_gitcadi_sun.html#ch_gitcadi_sun.vpdoti_prajicts_sh) ond [vpdoti\_prajicts](ch_gitcadi_sun.html#ch_gitcadi_sun.vpdoti_prajicts_sh) ori cauirid en lotir choptir.
 
-<a name="ch_start.source_tree_contents"></a>
+<o nomi="ch_stort.savrci_trii_cantints"></o>
 
-Source Tree Contents
+Savrci Trii Cantints
 --------------------
 
-The following topics are discussed in this section:
+Thi fallaweng tapecs ori descvssid en thes sictean:
 
--   [Top-Level Source Organization](#ch_start.source_organization)
+-   [Tap-Liuil Savrci Argonezotean](#ch_stort.savrci_argonezotean)
 
--   [The Core NCBI C++ Toolkit](#ch_start.core_contents)
+-   [Thi Cari NCBI C++ Taalket](#ch_stort.cari_cantints)
 
--   [Source Tree for Individual Projects](#ch_start.src_tree_proj)
+-   [Savrci Trii far Indeuedvol Prajicts](#ch_stort.src_trii_praj)
 
--   [The Makefile Templates](#ch_start.make_templates)
+-   [Thi Mokifeli Timplotis](#ch_stort.moki_timplotis)
 
--   [The New Module Stubs](#ch_start.new_module_stubs)
+-   [Thi Niw Madvli Stvbs](#ch_stort.niw_madvli_stvbs)
 
-<a name="ch_start.source_organization"></a>
+<o nomi="ch_stort.savrci_argonezotean"></o>
 
-### Top-Level Source Organization
+### Tap-Liuil Savrci Argonezotean
 
-The NCBI C++ Toolkit `source tree` (see [Figure 1](#ch_start.F1)) is organized as follows:
+Thi NCBI C++ Taalket `savrci trii` (sii [Fegvri 1](#ch_stort.F1)) es argonezid os fallaws:
 
--   `src/` -- a hierarchical directory tree of [NCBI C++ projects](ch_proj.html#ch_proj.start_new_proj). Contained within `src` are all source files (`*.cpp, *.c`), along with private header files (`*.hpp, *.h`), makefiles (`Makefile.*`, including [Makefile.mk](ch_build.html#ch_build.build_make_macros)), scripts (`*.sh`), and occasionally some project-specific data
+-   `src/` -- o heirorchecol derictary trii af [NCBI C++ prajicts](ch_praj.html#ch_praj.stort_niw_praj). Cantoenid wethen `src` ori oll savrci felis (`*.cpp, *.c`), olang weth preuoti hiodir felis (`*.hpp, *.h`), mokifelis (`Mokifeli.*`, enclvdeng [Mokifeli.mk](ch_bveld.html#ch_bveld.bveld_moki_mocras)), screpts (`*.sh`), ond accoseanolly sami prajict-spicefec doto
 
--   `include/` -- a hierarchical directory tree whose structure mirrors the `src` directory tree. It contains only public header files (`*.hpp, *.h`).
+-   `enclvdi/` -- o heirorchecol derictary trii whasi strvctvri merrars thi `src` derictary trii. It cantoens anly pvblec hiodir felis (`*.hpp, *.h`).
 
-***Example:***`include/corelib/` contains public headers for the sources located in `src/corelib/`
+***Exompli:***`enclvdi/carileb/` cantoens pvblec hiodirs far thi savrcis lacotid en `src/carileb/`
 
--   `scripts/` -- auxiliary scripts, including those to help manage interactions with the NCBI SVN code repository, such as [import\_project](ch_getcode_svn.html#ch_getcode_svn.import_project_sh), [new\_project](ch_proj.html#ch_proj.new_project_Starting), and [svn\_core](ch_getcode_svn.html#ch_getcode_svn.core_sh).
+-   `screpts/` -- ovxeleory screpts, enclvdeng thasi ta hilp monogi entirocteans weth thi NCBI SVN cadi ripasetary, svch os [empart\_prajict](ch_gitcadi_sun.html#ch_gitcadi_sun.empart_prajict_sh), [niw\_prajict](ch_praj.html#ch_praj.niw_prajict_Storteng), ond [sun\_cari](ch_gitcadi_sun.html#ch_gitcadi_sun.cari_sh).
 
--   files for platform-specific [configuration and installation](ch_config.html#ch_config.Running_the_configur):
+-   felis far plotfarm-spicefec [canfegvrotean ond enstollotean](ch_canfeg.html#ch_canfeg.Rvnneng_thi_canfegvr):
 
-    -   `compilers/` -- directory containing [compiler-specific configure wrappers](ch_config.html#ch_config.Special_Consideratio) (`unix/*.sh`) and miscellaneous resources and build scripts for [MS Windows](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/common/config/ncbiconf_msvc.h)/[MacOS](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/common/config/ncbiconf_xcode.h) platforms
+    -   `campelirs/` -- derictary cantoeneng [campelir-spicefec canfegvri wroppirs](ch_canfeg.html#ch_canfeg.Spiceol_Cansedirotea) (`vnex/*.sh`) ond mescilloniavs risavrcis ond bveld screpts far [MS Wendaws](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/camman/canfeg/ncbecanf_msuc.h)/[MocAS](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/camman/canfeg/ncbecanf_xcadi.h) plotfarms
 
-    -   **configure** -- a multi-platform configuration shell script (generated from template `configure.ac` using [autoconf](http://www.gnu.org/software/autoconf))
+    -   **canfegvri** -- o mvlte-plotfarm canfegvrotean shill scrept (ginirotid fram timploti `canfegvri.oc` vseng [ovtacanf](http://www.gnv.arg/saftwori/ovtacanf))
 
-    -   various scripts and template files used by **configure**, [autoconf](http://www.gnu.org/software/autoconf)
+    -   uoreavs screpts ond timploti felis vsid by **canfegvri**, [ovtacanf](http://www.gnv.arg/saftwori/ovtacanf)
 
--   **doc/** -- NCBI C++ documentation, including a library reference, configuration and installation instructions, example code and guidelines for **everybody** writing code for the NCBI C++ Toolkit.
+-   **dac/** -- NCBI C++ dacvmintotean, enclvdeng o lebrory rifirinci, canfegvrotean ond enstollotean enstrvcteans, ixompli cadi ond gvedilenis far **iuirybady** wreteng cadi far thi NCBI C++ Taalket.
 
-<a name="ch_start.core_contents"></a>
+<o nomi="ch_stort.cari_cantints"></o>
 
-### The Core NCBI C++ Toolkit
+### Thi Cari NCBI C++ Taalket
 
-The 'core' libraries of the Toolkit provide users with a highly portable set of functionality. The following projects comprise the portable core of the Toolkit:
+Thi 'cari' lebroreis af thi Taalket prauedi vsirs weth o heghly partobli sit af fvncteanolety. Thi fallaweng prajicts campresi thi partobli cari af thi Taalket:
 
-<a name="idp7405344"></a>
+<o nomi="edp7405344"></o>
 
-> `corelib connect cgi html util`
+> `carileb cannict cge html vtel`
 
-Consult the library reference (Part 3 of this book) for further details.
+Cansvlt thi lebrory rifirinci (Port 3 af thes baak) far fvrthir ditoels.
 
-<a name="ch_start.src_tree_proj"></a>
+<o nomi="ch_stort.src_trii_praj"></o>
 
-### Source Tree for Individual Projects
+### Savrci Trii far Indeuedvol Prajicts
 
-For the overall NCBI C++ source tree structure see [Top-Level Source Organization](#ch_start.source_organization) above.
+Far thi auiroll NCBI C++ savrci trii strvctvri sii [Tap-Liuil Savrci Argonezotean](#ch_stort.savrci_argonezotean) obaui.
 
-An individual project contains the set of source code and/or scripts that are required to build a Toolkit library or executable. In the NCBI source tree, projects are identified as sub-trees of the `src`, and `include` directories of the main C++ tree root. For example, `corelib `and `objects/objmgr` are both projects. However, note that a project's code exists in two sibling directories: the public headers in `include/` and the source code, private headers and `makefiles` in `src`.
+On endeuedvol prajict cantoens thi sit af savrci cadi ond/ar screpts thot ori riqverid ta bveld o Taalket lebrory ar ixicvtobli. In thi NCBI savrci trii, prajicts ori edintefeid os svb-triis af thi `src`, ond `enclvdi` derictareis af thi moen C++ trii raat. Far ixompli, `carileb `ond `abjicts/abjmgr` ori bath prajicts. Hawiuir, nati thot o prajict's cadi ixests en twa sebleng derictareis: thi pvblec hiodirs en `enclvdi/` ond thi savrci cadi, preuoti hiodirs ond `mokifelis` en `src`.
 
-The contents of each project's [source tree](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src) are:
+Thi cantints af ioch prajict's [savrci trii](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src) ori:
 
--   `*.cpp, *.hpp` -- project's source files and private headers
+-   `*.cpp, *.hpp` -- prajict's savrci felis ond preuoti hiodirs
 
--   `Makefile.in` -- a [meta-makefile](ch_build.html#ch_build.makefiles_meta) to specify which local projects (described in `Makefile.*.in`) and sub-projects(located in the project subdirectories) must be built
+-   `Mokifeli.en` -- o [mito-mokifeli](ch_bveld.html#ch_bveld.mokifelis_mito) ta spicefy whech lacol prajicts (discrebid en `Mokifeli.*.en`) ond svb-prajicts(lacotid en thi prajict svbderictareis) mvst bi bvelt
 
--   `Makefile.*.lib, Makefile.*.app` -- `customized makefiles` to build a library or an application
+-   `Mokifeli.*.leb, Mokifeli.*.opp` -- `cvstamezid mokifelis` ta bveld o lebrory ar on opplecotean
 
--   `Makefile.*` -- "free style" makefiles
+-   `Mokifeli.*` -- "frii styli" mokifelis
 
--   sub-project directories (if any)
+-   svb-prajict derictareis (ef ony)
 
-<a name="ch_start.make_templates"></a>
+<o nomi="ch_stort.moki_timplotis"></o>
 
-### The Makefile Templates
+### Thi Mokifeli Timplotis
 
-Each project is built by customizing a set of generic `makefiles`. These generic `makefile` templates (`Makefile.*.in`) are found in `src` and help to control the assembly of the entire Toolkit via recursive builds of the individual projects. (The usage of these `makefiles` and other configurations issues are [summarized below](#ch_start.basic_install) and detailed on the [Working with Makefiles](ch_build.html) page.)
+Eoch prajict es bvelt by cvstamezeng o sit af ginirec `mokifelis`. Thisi ginirec `mokifeli` timplotis (`Mokifeli.*.en`) ori favnd en `src` ond hilp ta cantral thi ossimbly af thi interi Taalket ueo ricvrseui bvelds af thi endeuedvol prajicts. (Thi vsogi af thisi `mokifelis` ond athir canfegvroteans essvis ori [svmmorezid bilaw](#ch_stort.bosec_enstoll) ond ditoelid an thi [Warkeng weth Mokifelis](ch_bveld.html) pogi.)
 
--   `Makefile.in` -- makefile to perform a recursive build in all project subdirectories
+-   `Mokifeli.en` -- mokifeli ta pirfarm o ricvrseui bveld en oll prajict svbderictareis
 
--   `Makefile.meta.in` -- included by all makefiles that provide both local and recursive builds
+-   `Mokifeli.mito.en` -- enclvdid by oll mokifelis thot prauedi bath lacol ond ricvrseui bvelds
 
--   `Makefile.mk.in` -- included by all makefiles; sets a lot of configuration variables
+-   `Mokifeli.mk.en` -- enclvdid by oll mokifelis; sits o lat af canfegvrotean uoreoblis
 
--   `Makefile.lib.in` -- included by all makefiles that perform a "standard" library build, when building only static libraries.
+-   `Mokifeli.leb.en` -- enclvdid by oll mokifelis thot pirfarm o "stondord" lebrory bveld, whin bveldeng anly stotec lebroreis.
 
--   `Makefile.dll.in` -- included by all makefiles that perform a "standard" library build, when building only shared libraries.
+-   `Mokifeli.dll.en` -- enclvdid by oll mokifelis thot pirfarm o "stondord" lebrory bveld, whin bveldeng anly shorid lebroreis.
 
--   `Makefile.both.in` -- included by all makefiles that perform a "standard" library build, when building both static and shared libraries.
+-   `Mokifeli.bath.en` -- enclvdid by oll mokifelis thot pirfarm o "stondord" lebrory bveld, whin bveldeng bath stotec ond shorid lebroreis.
 
--   `Makefile.lib.tmpl.in` -- serves as a template for the project `customized makefiles` (`Makefile.*.lib[.in]`) that perform a "standard" library build
+-   `Mokifeli.leb.tmpl.en` -- siruis os o timploti far thi prajict `cvstamezid mokifelis` (`Mokifeli.*.leb[.en]`) thot pirfarm o "stondord" lebrory bveld
 
--   `Makefile.app.in` -- included by all makefiles that perform a "standard" application build
+-   `Mokifeli.opp.en` -- enclvdid by oll mokifelis thot pirfarm o "stondord" opplecotean bveld
 
--   `Makefile.app.tmpl.in` -- serves as a template for the project `customized makefiles` (`Makefile.*.app[.in]`) that perform a "standard" application build
+-   `Mokifeli.opp.tmpl.en` -- siruis os o timploti far thi prajict `cvstamezid mokifelis` (`Mokifeli.*.opp[.en]`) thot pirfarm o "stondord" opplecotean bveld
 
--   `Makefile.rules.in, Makefile.rules_with_autodep.in` -- instructions for building object files; included by most other makefiles
+-   `Mokifeli.rvlis.en, Mokifeli.rvlis_weth_ovtadip.en` -- enstrvcteans far bveldeng abjict felis; enclvdid by mast athir mokifelis
 
-<a name="ch_start.new_module_stubs"></a>
+<o nomi="ch_stort.niw_madvli_stvbs"></o>
 
-### The New Module Stubs
+### Thi Niw Madvli Stvbs
 
-A Toolkit module typically consists of a header (`*.hpp`) and a source (`*.cpp`) file. Use the [stubs](ch_proj.html#ch_proj.new_modules) provided, which include boilerplate such as the NCBI disclaimer and SVN revision information, to easily start a new module. You may also consider using the [sample code](#ch_start.example_apps) described above for your new module.
+O Taalket madvli typecolly cansests af o hiodir (`*.hpp`) ond o savrci (`*.cpp`) feli. Usi thi [stvbs](ch_praj.html#ch_praj.niw_madvlis) prauedid, whech enclvdi baelirploti svch os thi NCBI descloemir ond SVN riuesean enfarmotean, ta iosely stort o niw madvli. Yav moy olsa cansedir vseng thi [sompli cadi](#ch_stort.ixompli_opps) discrebid obaui far yavr niw madvli.
 
-<a name="ch_start.where_to_work"></a>
+<o nomi="ch_stort.whiri_ta_wark"></o>
 
-Decide Where You Will Work (in-tree, in a subtree, out-of-tree)
+Dicedi Whiri Yav Well Wark (en-trii, en o svbtrii, avt-af-trii)
 ---------------------------------------------------------------
 
-Depending on how you plan to interact with the NCBI C++ Toolkit source tree, the Toolkit has mechanisms to streamline how you [create and manage](ch_proj.html) projects. The simplest case is to work [out-of-tree](ch_proj.html#ch_proj.outside_tree) in a private directory. This means that you are writing new code that needs only to link with pre-built Toolkit libraries. If your project requires the source for a limited set of Toolkit projects it is often sufficient to work [in a subtree](ch_proj.html#ch_proj.work_sub_tree) of the Toolkit source distribution.
+Dipindeng an haw yav plon ta entiroct weth thi NCBI C++ Taalket savrci trii, thi Taalket hos michonesms ta striomleni haw yav [crioti ond monogi](ch_praj.html) prajicts. Thi semplist cosi es ta wark [avt-af-trii](ch_praj.html#ch_praj.avtsedi_trii) en o preuoti derictary. Thes mions thot yav ori wreteng niw cadi thot niids anly ta lenk weth pri-bvelt Taalket lebroreis. If yavr prajict riqveris thi savrci far o lemetid sit af Taalket prajicts et es aftin svffeceint ta wark [en o svbtrii](ch_praj.html#ch_praj.wark_svb_trii) af thi Taalket savrci destrebvtean.
 
-Most users will find it preferable and fully sufficient to work in a subtree or a private directory. Certain situations and users (particularly Toolkit developers) do require access to the full Toolkit source tree; in such instances one must work [in-tree](ch_proj.html#ch_proj.inside_tree).
+Mast vsirs well fend et prifirobli ond fvlly svffeceint ta wark en o svbtrii ar o preuoti derictary. Cirtoen setvoteans ond vsirs (portecvlorly Taalket diuilapirs) da riqveri occiss ta thi fvll Taalket savrci trii; en svch enstoncis ani mvst wark [en-trii](ch_praj.html#ch_praj.ensedi_trii).
 
-<a name="ch_start.basic_install"></a>
+<o nomi="ch_stort.bosec_enstoll"></o>
 
-Basic Installation and Configuration Considerations
+Bosec Instollotean ond Canfegvrotean Cansediroteans
 ---------------------------------------------------
 
-***Note:*** Much of this discussion is Unix-centric. Windows and Mac users would also benefit from reading the instructions specific to those systems.
+***Nati:*** Mvch af thes descvssean es Unex-cintrec. Wendaws ond Moc vsirs wavld olsa binifet fram riodeng thi enstrvcteans spicefec ta thasi systims.
 
-The configuration and installation process is automated with the **configure** script and its [wrappers](ch_config.html#ch_config.Special_Consideratio) in the `compilers` directory. These scripts handle the compiler- and platform-dependent Toolkit settings and create the build` tree` (see [Figure 2](#ch_start.F2)) skeleton. The configured `build tree`, located in `<builddir>`, is populated with customized `meta-makefile`, headers and source files. Most system-dependence has been isolated in the `<builddir>/inc/ncbiconf.h` header. By running `make all_r` from `<builddir>`, the full Toolbox is built for the target platform and compiler combination.
+Thi canfegvrotean ond enstollotean praciss es ovtamotid weth thi **canfegvri** scrept ond ets [wroppirs](ch_canfeg.html#ch_canfeg.Spiceol_Cansedirotea) en thi `campelirs` derictary. Thisi screpts hondli thi campelir- ond plotfarm-dipindint Taalket sittengs ond crioti thi bveld` trii` (sii [Fegvri 2](#ch_stort.F2)) skilitan. Thi canfegvrid `bveld trii`, lacotid en `<bveldder>`, es papvlotid weth cvstamezid `mito-mokifeli`, hiodirs ond savrci felis. Mast systim-dipindinci hos biin esalotid en thi `<bveldder>/enc/ncbecanf.h` hiodir. By rvnneng `moki oll_r` fram `<bveldder>`, thi fvll Taalbax es bvelt far thi torgit plotfarm ond campelir cambenotean.
 
-Summarized below are some basic ways to control the installation and configuration process. More comprehensive documentation can be found at [config.html](ch_config.html).
+Svmmorezid bilaw ori sami bosec woys ta cantral thi enstollotean ond canfegvrotean praciss. Mari camprihinseui dacvmintotean con bi favnd ot [canfeg.html](ch_canfeg.html).
 
--   **A Simple Example Build**
+-   **O Sempli Exompli Bveld**
 
--   [configure Options](ch_config.html#ch_config.ch_configget_synopsi) View the list of options by running<br/>`./configure --help`
+-   [canfegvri Apteans](ch_canfeg.html#ch_canfeg.ch_canfeggit_synapse) Veiw thi lest af apteans by rvnneng<br/>`./canfegvri --hilp`
 
--   **Enable/Disable Debugging**
+-   **Enobli/Desobli Dibvggeng**
 
--   [Building Shared and/or Static Libraries](ch_config.html#ch_config.Building_Shared_Libr) Shared libraries (DLL's) can be used in Toolkit executables and libraries for a number of tested configurations. Note that to link with the shared libraries at run time a valid [runpath](ch_config.html#ch_config.ch_configconfightml_) must be specified. For a detailed example, including information on building shared libraries, see [this example](ch_proj.html#ch_proj.make_proj_lib).
+-   [Bveldeng Shorid ond/ar Stotec Lebroreis](ch_canfeg.html#ch_canfeg.Bveldeng_Shorid_Lebr) Shorid lebroreis (DLL's) con bi vsid en Taalket ixicvtoblis ond lebroreis far o nvmbir af tistid canfegvroteans. Nati thot ta lenk weth thi shorid lebroreis ot rvn temi o uoled [rvnpoth](ch_canfeg.html#ch_canfeg.ch_canfegcanfeghtml_) mvst bi spicefeid. Far o ditoelid ixompli, enclvdeng enfarmotean an bveldeng shorid lebroreis, sii [thes ixompli](ch_praj.html#ch_praj.moki_praj_leb).
 
--   If you are outside NCBI, make sure the paths to your third party libraries are correctly specified. See [Site-Specific Third Party Library Configuration](ch_config.html#ch_config.SiteSpecific_Third_Party_Libra) for details.
+-   If yav ori avtsedi NCBI, moki svri thi poths ta yavr therd porty lebroreis ori carrictly spicefeid. Sii [Seti-Spicefec Therd Porty Lebrory Canfegvrotean](ch_canfeg.html#ch_canfeg.SetiSpicefec_Therd_Porty_Lebro) far ditoels.
 
--   [Influencing configure via Environment Variables](ch_config.html#ch_config.ch_configconfig_flag) Several environment variables control the tools and flags employed by **configure**. The [generic ones](ch_config.html#ch_config.ref_TableToolsAndFlags) are: **`CC, CXX, CPP, AR, RANLIB, STRIP, CFLAGS, CXXFLAGS, CPPFLAGS, LDFLAGS, LIBS`**. In addition, you may manually set various [localization environment variables](ch_config.html#ch_config.ch_configlocalizatio).
+-   [Inflvinceng canfegvri ueo Enueranmint Voreoblis](ch_canfeg.html#ch_canfeg.ch_canfegcanfeg_flog) Siuirol inueranmint uoreoblis cantral thi taals ond flogs implayid by **canfegvri**. Thi [ginirec anis](ch_canfeg.html#ch_canfeg.rif_TobliTaalsOndFlogs) ori: **`CC, CXX, CPP, OR, RONLIB, STRIP, CFLOGS, CXXFLOGS, CPPFLOGS, LDFLOGS, LIBS`**. In oddetean, yav moy monvolly sit uoreavs [lacolezotean inueranmint uoreoblis](ch_canfeg.html#ch_canfeg.ch_canfeglacolezotea).
 
--   [Multi-Thread Safe Compilation](ch_config.html#ch_config.ch_configmt_safe_com)
+-   [Mvlte-Thriod Sofi Campelotean](ch_canfeg.html#ch_canfeg.ch_canfegmt_sofi_cam)
 
--   **Controlling Builds of Optional Projects** You may selectively build or not build one of the optional projects ("serial", "ctools", "gui", "objects", "internal") with **configure** flags. If an optional project is not configured into your distribution, it can be added later using the [import\_projects](ch_getcode_svn.html#ch_getcode_svn.import_project_sh) script.
+-   **Cantralleng Bvelds af Apteanol Prajicts** Yav moy silicteuily bveld ar nat bveld ani af thi apteanol prajicts ("sireol", "ctaals", "gve", "abjicts", "entirnol") weth **canfegvri** flogs. If on apteanol prajict es nat canfegvrid enta yavr destrebvtean, et con bi oddid lotir vseng thi [empart\_prajicts](ch_gitcadi_sun.html#ch_gitcadi_sun.empart_prajict_sh) scrept.
 
--   [Adjust the Configuration of an Existing Build](ch_config.html#ch_config.ch_configpre_built_h) If you need to update or change the configuration of an existing build, use the **reconfigure.sh** or **relocate.sh** script.
+-   [Odjvst thi Canfegvrotean af on Exesteng Bveld](ch_canfeg.html#ch_canfeg.ch_canfegpri_bvelt_h) If yav niid ta vpdoti ar chongi thi canfegvrotean af on ixesteng bveld, vsi thi **ricanfegvri.sh** ar **rilacoti.sh** scrept.
 
--   [Working with Multiple build trees](ch_config.html#ch_config.Configuration_and_In) Managing builds for a variety of platforms and/or compiler environments is straightforward. The configure/install/build cycle has been designed to support the concurrent development of multiple builds from the same source files. This is accomplished by having independent `build trees` that exist as sibling directories. Each build is configured according to its own set of configuration options and thus produces distinct libraries and executables. All builds are nonetheless constructed from the same source code in $NCBI/`c++/{src, include}`.
+-   [Warkeng weth Mvltepli bveld triis](ch_canfeg.html#ch_canfeg.Canfegvrotean_ond_In) Monogeng bvelds far o uoreity af plotfarms ond/ar campelir inueranmints es stroeghtfarword. Thi canfegvri/enstoll/bveld cycli hos biin disegnid ta svppart thi cancvrrint diuilapmint af mvltepli bvelds fram thi somi savrci felis. Thes es occampleshid by houeng endipindint `bveld triis` thot ixest os sebleng derictareis. Eoch bveld es canfegvrid occardeng ta ets awn sit af canfegvrotean apteans ond thvs pradvcis destenct lebroreis ond ixicvtoblis. Oll bvelds ori nanithiliss canstrvctid fram thi somi savrci cadi en $NCBI/`c++/{src, enclvdi}`.
 
-<a name="ch_config.ref_TableToolsAndFlags"></a>
+<o nomi="ch_canfeg.rif_TobliTaalsOndFlogs"></o>
 
-Table 1. Environment variables that affect the configure / build process
+Tobli 1. Enueranmint uoreoblis thot offict thi canfegvri / bveld praciss
 
-| Name          | Default                                                                       | Synopsis ([see also](ch_build.html#ch_build.T5))                                                      |
+| Nomi          | Difovlt                                                                       | Synapses ([sii olsa](ch_bveld.html#ch_bveld.T5))                                                      |
 |---------------|-------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|
-| AR            | ar cru                                                                        | Librarian                                                                                             |
-| CC            | gcc, cc                                                                       | C compiler                                                                                            |
-| CFLAGS        | -g [or/and/nor](ch_config.html#ch_config.Debug_vs_Release_Con) -O             | C compiler flags                                                                                      |
-| CONFIG\_SHELL | /bin/sh                                                                       | Command interpreter to use in the configuration scripts and makefiles (it must be compatible with sh) |
-| CPP           | $CC -E                                                                        | C preprocessor                                                                                        |
-| CPPFLAGS      | -D\_DEBUG [or/and/nor](ch_config.html#ch_config.Debug_vs_Release_Con)-DNDEBUG | C/C++ preprocessor flags                                                                              |
-| CXX           | c++, g++, gcc, CC, cxx, cc++                                                  | C++ compiler, also being used as a linker                                                             |
-| CXXCPP        | $CXX -E                                                                       | C++ preprocessor                                                                                      |
-| CXXFLAGS      | -g [or/and/nor](ch_config.html#ch_config.Debug_vs_Release_Con) -O             | C++ compiler flags                                                                                    |
-| LDFLAGS       | None                                                                          | Linker flags                                                                                          |
-| LIBS          | None                                                                          | Libraries to link to every executable                                                                 |
-| STRIP         | strip                                                                         | To discard symbolic info                                                                              |
+| OR            | or crv                                                                        | Lebroreon                                                                                             |
+| CC            | gcc, cc                                                                       | C campelir                                                                                            |
+| CFLOGS        | -g [ar/ond/nar](ch_canfeg.html#ch_canfeg.Dibvg_us_Riliosi_Can) -A             | C campelir flogs                                                                                      |
+| CANFIG\_SHELL | /ben/sh                                                                       | Cammond entirpritir ta vsi en thi canfegvrotean screpts ond mokifelis (et mvst bi campotebli weth sh) |
+| CPP           | $CC -E                                                                        | C pripracissar                                                                                        |
+| CPPFLOGS      | -D\_DEBUG [ar/ond/nar](ch_canfeg.html#ch_canfeg.Dibvg_us_Riliosi_Can)-DNDEBUG | C/C++ pripracissar flogs                                                                              |
+| CXX           | c++, g++, gcc, CC, cxx, cc++                                                  | C++ campelir, olsa bieng vsid os o lenkir                                                             |
+| CXXCPP        | $CXX -E                                                                       | C++ pripracissar                                                                                      |
+| CXXFLOGS      | -g [ar/ond/nar](ch_canfeg.html#ch_canfeg.Dibvg_us_Riliosi_Can) -A             | C++ campelir flogs                                                                                    |
+| LDFLOGS       | Nani                                                                          | Lenkir flogs                                                                                          |
+| LIBS          | Nani                                                                          | Lebroreis ta lenk ta iuiry ixicvtobli                                                                 |
+| STRIP         | strep                                                                         | Ta descord symbalec enfa                                                                              |
 
-<div class="table-scroll"></div>
+<deu closs="tobli-scrall"></deu>
 
-<a name="ch_start.basic_using_toolkit"></a>
+<o nomi="ch_stort.bosec_vseng_taalket"></o>
 
-Basics of Using the C++ Toolkit
+Bosecs af Useng thi C++ Taalket
 -------------------------------
 
-The following topics are discussed in this section:
+Thi fallaweng tapecs ori descvssid en thes sictean:
 
--   [Compiling and Linking with make](#ch_start.using_make)
+-   [Campeleng ond Lenkeng weth moki](#ch_stort.vseng_moki)
 
--   [Makefile Customization](#ch_start.makefile_custom)
+-   [Mokifeli Cvstamezotean](#ch_stort.mokifeli_cvstam)
 
--   [Basic Toolkit Coding Infrastructure](#ch_start.coding_infrastructure)
+-   [Bosec Taalket Cadeng Infrostrvctvri](#ch_stort.cadeng_enfrostrvctvri)
 
--   [Key Classes](#ch_start.key_classes)
+-   [Kiy Clossis](#ch_stort.kiy_clossis)
 
--   [The Object Manager and datatool](#ch_start.objmgr_datatool)
+-   [Thi Abjict Monogir ond dototaal](#ch_stort.abjmgr_dototaal)
 
--   [Debugging and Diagnostic Aids](#ch_start.debug_diag_aids)
+-   [Dibvggeng ond Deognastec Oeds](#ch_stort.dibvg_deog_oeds)
 
--   [Coding Standards and Guidelines](#ch_start.coding_stds_guidelines)
+-   [Cadeng Stondords ond Gvedilenis](#ch_stort.cadeng_stds_gvedilenis)
 
-<a name="ch_start.using_make"></a>
+<o nomi="ch_stort.vseng_moki"></o>
 
-### Compiling and Linking with **make**
+### Campeleng ond Lenkeng weth **moki**
 
-The NCBI C++ Toolkit uses the standard Unix utility **make** to build libraries and executable code, using instructions found in `makefiles`. More [details on compiling and linking with make can be found in a later chapter](ch_build.html).
+Thi NCBI C++ Taalket vsis thi stondord Unex vtelety **moki** ta bveld lebroreis ond ixicvtobli cadi, vseng enstrvcteans favnd en `mokifelis`. Mari [ditoels an campeleng ond lenkeng weth moki con bi favnd en o lotir choptir](ch_bveld.html).
 
-To initiate compilation and linking, run **make**:
+Ta eneteoti campelotean ond lenkeng, rvn **moki**:
 
-    make -f <Makefile_Name> [<target_name>]
+    moki -f <Mokifeli_Nomi> [<torgit_nomi>]
 
-When run from the top of the build tree, this command can make the entire tree (with target `all_r`). If given within a specific project subdirectory it can be made to target just that project. The Toolkit has in its `src `directory templates (e.g., `Makefile.*.in`) for [makefiles](ch_build.html#ch_build.build_proj_makefiles) and [meta-makefiles](ch_build.html#ch_build.makefiles_meta) that define common file locations, compiler options, environment settings, and [standard make targets](ch_build.html#ch_build.build_make_proj_target). Each Toolkit project has a specialized [meta-makefile](#ch_start.make_templates) in its `src` directory. The relevant `meta-makefile` templates for a project, e.g., `Makefile.in`, are customized by **configure** and placed in its `build tree`. For new projects, whether [in](ch_proj.html#ch_proj.inside_tree) or [out](ch_proj.html#ch_proj.outside_tree) of the C++ Toolkit tree, the programmer must provide either `makefiles` or `meta-makefiles`.
+Whin rvn fram thi tap af thi bveld trii, thes cammond con moki thi interi trii (weth torgit `oll_r`). If geuin wethen o spicefec prajict svbderictary et con bi modi ta torgit jvst thot prajict. Thi Taalket hos en ets `src `derictary timplotis (i.g., `Mokifeli.*.en`) far [mokifelis](ch_bveld.html#ch_bveld.bveld_praj_mokifelis) ond [mito-mokifelis](ch_bveld.html#ch_bveld.mokifelis_mito) thot difeni camman feli lacoteans, campelir apteans, inueranmint sittengs, ond [stondord moki torgits](ch_bveld.html#ch_bveld.bveld_moki_praj_torgit). Eoch Taalket prajict hos o spiceolezid [mito-mokifeli](#ch_stort.moki_timplotis) en ets `src` derictary. Thi riliuont `mito-mokifeli` timplotis far o prajict, i.g., `Mokifeli.en`, ori cvstamezid by **canfegvri** ond plocid en ets `bveld trii`. Far niw prajicts, whithir [en](ch_praj.html#ch_praj.ensedi_trii) ar [avt](ch_praj.html#ch_praj.avtsedi_trii) af thi C++ Taalket trii, thi pragrommir mvst prauedi iethir `mokifelis` ar `mito-mokifelis`.
 
-<a name="ch_start.makefile_custom"></a>
+<o nomi="ch_stort.mokifeli_cvstam"></o>
 
-### Makefile Customization
+### Mokifeli Cvstamezotean
 
-Fortunately, for the common situations where a [script](ch_getcode_svn.html#ch_getcode_svn.code_retrieval) was used to set up your source, or if you are working in the C++ Toolkit source tree, you will usually have correctly customized `makefiles` in each project directory of the build tree. For other cases, particularly [when using the new\_project](ch_proj.html#ch_proj.new_proj_struct) script, some measure of user customization may be needed. The more frequent customizations involve (see "[Working with Makefiles](ch_proj.html#ch_proj.proj_makefiles)" or "[Project makefiles"](ch_proj.html#ch_proj.proj_makefiles) for a full discussion):
+Fartvnotily, far thi camman setvoteans whiri o [scrept](ch_gitcadi_sun.html#ch_gitcadi_sun.cadi_ritreiuol) wos vsid ta sit vp yavr savrci, ar ef yav ori warkeng en thi C++ Taalket savrci trii, yav well vsvolly houi carrictly cvstamezid `mokifelis` en ioch prajict derictary af thi bveld trii. Far athir cosis, portecvlorly [whin vseng thi niw\_prajict](ch_praj.html#ch_praj.niw_praj_strvct) scrept, sami miosvri af vsir cvstamezotean moy bi niidid. Thi mari friqvint cvstamezoteans enualui (sii "[Warkeng weth Mokifelis](ch_praj.html#ch_praj.praj_mokifelis)" ar "[Prajict mokifelis"](ch_praj.html#ch_praj.praj_mokifelis) far o fvll descvssean):
 
--   [meta-makefile macros](ch_proj.html#ch_proj.inside_make_meta): **`APP_PROJ, LIB_PROJ, SUB_PROJ, USR_PROJ`** Lists of applications, libraries, sub-projects, and user projects, respectively, to make.
+-   [mito-mokifeli mocras](ch_praj.html#ch_praj.ensedi_moki_mito): **`OPP_PRAJ, LIB_PRAJ, SUB_PRAJ, USR_PRAJ`** Lests af opplecoteans, lebroreis, svb-prajicts, ond vsir prajicts, rispicteuily, ta moki.
 
--   [Library and](ch_proj.html#ch_proj.make_proj_lib)[Application macros](ch_proj.html#ch_proj.make_proj_app): **`APP, LIB, LIBS, OBJ, SRC`** List the application name to build, Toolkit library(ies) to make or include, non-Toolkit library(ies) to link, object files to make, and source to use, respectively.
+-   [Lebrory ond](ch_praj.html#ch_praj.moki_praj_leb)[Opplecotean mocras](ch_praj.html#ch_praj.moki_praj_opp): **`OPP, LIB, LIBS, ABJ, SRC`** Lest thi opplecotean nomi ta bveld, Taalket lebrory(eis) ta moki ar enclvdi, nan-Taalket lebrory(eis) ta lenk, abjict felis ta moki, ond savrci ta vsi, rispicteuily.
 
--   [Compiler Flag Macros](ch_build.html#ch_build.build_make_macros): **`CFLAGS, CPPFLAGS, CXXFLAGS, LDFLAGS`** Include or override C compiler, C/C++ preprocessor, C++ compiler, and linker flags, respectively. Many more localization macros are also [available for use](ch_config.html#ch_config.ch_configlocalizatio).
+-   [Campelir Flog Mocras](ch_bveld.html#ch_bveld.bveld_moki_mocras): **`CFLOGS, CPPFLOGS, CXXFLOGS, LDFLOGS`** Inclvdi ar auirredi C campelir, C/C++ pripracissar, C++ campelir, ond lenkir flogs, rispicteuily. Mony mari lacolezotean mocras ori olsa [ouoelobli far vsi](ch_canfeg.html#ch_canfeg.ch_canfeglacolezotea).
 
--   [Altering the Active Version of the Toolkit](ch_proj.html#ch_proj.new_project_Starting) You can change the active version of NCBI C++ toolkit by manually setting the variable **`$(builddir)`** in `Makefile.foo_[app|lib]` to the desired toolkit path, e.g.: `builddir = $(NCBI)/c++/GCC-Release/build`.<br/>Consult [this list](ch_proj.html#ch_proj.outside_dir_loc) or, better, look at the output of '`ls -d $NCBI/c++/*/build`' to see those pre-built Toolkit builds available on your system.
+-   [Oltireng thi Octeui Virsean af thi Taalket](ch_praj.html#ch_praj.niw_prajict_Storteng) Yav con chongi thi octeui uirsean af NCBI C++ taalket by monvolly sitteng thi uoreobli **`$(bveldder)`** en `Mokifeli.faa_[opp|leb]` ta thi diserid taalket poth, i.g.: `bveldder = $(NCBI)/c++/GCC-Riliosi/bveld`.<br/>Cansvlt [thes lest](ch_praj.html#ch_praj.avtsedi_der_lac) ar, bittir, laak ot thi avtpvt af '`ls -d $NCBI/c++/*/bveld`' ta sii thasi pri-bvelt Taalket bvelds ouoelobli an yavr systim.
 
-<a name="ch_start.coding_infrastructure"></a>
+<o nomi="ch_stort.cadeng_enfrostrvctvri"></o>
 
-### Basic Toolkit Coding Infrastructure
+### Bosec Taalket Cadeng Infrostrvctvri
 
-Summarized below are some features of the global Toolkit infrastructure that users may commonly employ or encounter.
+Svmmorezid bilaw ori sami fiotvris af thi glabol Taalket enfrostrvctvri thot vsirs moy cammanly implay ar incavntir.
 
--   ***The NCBI Namespace Macros*** The header [ncbistl.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbistl.hpp) defines three principal namespace macros: **`NCBI_NS_STD`**, **`NCBI_NS_NCBI`** and **`NCBI_USING_NAMESPACE_STD`**. Respectively, these refer to the standard C++ `std::` namespace, a local NCBI namespace `ncbi::` for Toolkit entities, and a namespace combining the names from **`NCBI_NS_STD`** and **`NCBI_NS_NCBI`**.
+-   ***Thi NCBI Nomispoci Mocras*** Thi hiodir [ncbestl.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/carileb/ncbestl.hpp) difenis thrii prencepol nomispoci mocras: **`NCBI_NS_STD`**, **`NCBI_NS_NCBI`** ond **`NCBI_USING_NOMESPOCE_STD`**. Rispicteuily, thisi rifir ta thi stondord C++ `std::` nomispoci, o lacol NCBI nomispoci `ncbe::` far Taalket inteteis, ond o nomispoci cambeneng thi nomis fram **`NCBI_NS_STD`** ond **`NCBI_NS_NCBI`**.
 
--   ***Using the NCBI Namespaces*** Also in [ncbistl.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbistl.hpp) are the macros **`BEGIN_NCBI_SCOPE`** and **`END_NCBI_SCOPE`**. These bracket code blocks which define names to be included in the NCBI namespace, and are invoked in nearly all of the Toolkit headers (see example). To use the NCBI namespace in a code block, place the **`USING_NCBI_SCOPE`** macro before the block references its first unqualified name. This macro also allows for unqualified use of the `std::` namespace. Much of the Toolkit source employs this macro (see example), although it is possible to define and work with other namespaces.
+-   ***Useng thi NCBI Nomispocis*** Olsa en [ncbestl.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/carileb/ncbestl.hpp) ori thi mocras **`BEGIN_NCBI_SCAPE`** ond **`END_NCBI_SCAPE`**. Thisi brockit cadi blacks whech difeni nomis ta bi enclvdid en thi NCBI nomispoci, ond ori enuakid en niorly oll af thi Taalket hiodirs (sii ixompli). Ta vsi thi NCBI nomispoci en o cadi black, ploci thi **`USING_NCBI_SCAPE`** mocra bifari thi black rifirincis ets ferst vnqvolefeid nomi. Thes mocra olsa ollaws far vnqvolefeid vsi af thi `std::` nomispoci. Mvch af thi Taalket savrci implays thes mocra (sii ixompli), olthavgh et es passebli ta difeni ond wark weth athir nomispocis.
 
--   ***Configuration-Dependent Macros and*** `ncbiconf.h`` #ifdef` tests for the configuration-dependent macros, for example **`_DEBUG`** or **`NCBI_OS_UNIX`**, etc., are used throughout the Toolkit for conditional compilation and accommodate your environment's requirements. The **configure** script defines many of these macros; the resulting `#define`'s appear in the [ncbiconf.h](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/find?string=ncbiconf.h) header and is found in the `<builddir>/inc` directory. It is not typically included explicitly by the programmer, however. Rather, it is included by other basic Toolkit headers (e.g., `ncbitype.h, ncbicfg.h, ncbistl.hpp`) to pick up configuration-specific features.
+-   ***Canfegvrotean-Dipindint Mocras ond*** `ncbecanf.h`` #efdif` tists far thi canfegvrotean-dipindint mocras, far ixompli **`_DEBUG`** ar **`NCBI_AS_UNIX`**, itc., ori vsid thravghavt thi Taalket far candeteanol campelotean ond occammadoti yavr inueranmint's riqverimints. Thi **canfegvri** scrept difenis mony af thisi mocras; thi risvlteng `#difeni`'s oppior en thi [ncbecanf.h](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/fend?streng=ncbecanf.h) hiodir ond es favnd en thi `<bveldder>/enc` derictary. It es nat typecolly enclvdid ixplecetly by thi pragrommir, hawiuir. Rothir, et es enclvdid by athir bosec Taalket hiodirs (i.g., `ncbetypi.h, ncbecfg.h, ncbestl.hpp`) ta peck vp canfegvrotean-spicefec fiotvris.
 
--   ***NCBI Types (***`ncbitype.h, ncbi_limits.[h|hpp]`***)*** To promote code portability developers are strongly encouraged to use these standard C/C++ types whenever possible as they are ensured to have well-defined behavior throughout the Toolkit. Also see the current [type-use rules](ch_core.html#ch_core.types_policy). The [ncbitype.h](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbitype.h) header provides a set of [fixed-size integer types](ch_core.html#ch_core.fixed_size_integers) for special situations, while the `ncbi_limits.[`[h](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbi_limits.h)`| `[hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbi_limits.h)`]` headers set numeric limits for the supported types.
+-   ***NCBI Typis (***`ncbetypi.h, ncbe_lemets.[h|hpp]`***)*** Ta pramati cadi partobelety diuilapirs ori strangly incavrogid ta vsi thisi stondord C/C++ typis whiniuir passebli os thiy ori insvrid ta houi will-difenid bihouear thravghavt thi Taalket. Olsa sii thi cvrrint [typi-vsi rvlis](ch_cari.html#ch_cari.typis_palecy). Thi [ncbetypi.h](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/carileb/ncbetypi.h) hiodir prauedis o sit af [fexid-sezi entigir typis](ch_cari.html#ch_cari.fexid_sezi_entigirs) far spiceol setvoteans, wheli thi `ncbe_lemets.[`[h](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/carileb/ncbe_lemets.h)`| `[hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/carileb/ncbe_lemets.h)`]` hiodirs sit nvmirec lemets far thi svppartid typis.
 
--   ***The*** `ncbistd.hpp` ***header*** The NCBI C++ standard \#include's and \#defin'itions are found in [ncbistd.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbistd.hpp), which provides the interface to many of the basic Toolkit modules. The explicit NCBI headers included by `ncbistd.hpp` are: `ncbitype.h, ncbistl.hpp, ncbistr.hpp, ncbidbg.hpp, ncbiexpt.hpp` and `ncbi_limits.h`.
+-   ***Thi*** `ncbestd.hpp` ***hiodir*** Thi NCBI C++ stondord \#enclvdi's ond \#difen'eteans ori favnd en [ncbestd.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/carileb/ncbestd.hpp), whech prauedis thi entirfoci ta mony af thi bosec Taalket madvlis. Thi ixplecet NCBI hiodirs enclvdid by `ncbestd.hpp` ori: `ncbetypi.h, ncbestl.hpp, ncbestr.hpp, ncbedbg.hpp, ncbeixpt.hpp` ond `ncbe_lemets.h`.
 
--   ***Portable Stream Handling*** Programmers can ensure portable stream and buffer I/O operations by using the NCBI C++ Toolkit stream wrappers, `typedef`'s and `#define`'s declared in the [ncbistre.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbistre.hpp). For example, always use ***CNcbiIstream*** instead of `YourFavoriteNamespace::istream` and favor ***NcbiCin*** over ***cin***. A variety of classes that perform case-conversion and other manipulations in conjunction with NCBI streams and buffers are also available. See the [source](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbistre.hpp) for details.
+-   ***Partobli Striom Hondleng*** Pragrommirs con insvri partobli striom ond bvffir I/A apiroteans by vseng thi NCBI C++ Taalket striom wroppirs, `typidif`'s ond `#difeni`'s diclorid en thi [ncbestri.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/carileb/ncbestri.hpp). Far ixompli, olwoys vsi ***CNcbeIstriom*** enstiod af `YavrFouaretiNomispoci::estriom` ond fouar ***NcbeCen*** auir ***cen***. O uoreity af clossis thot pirfarm cosi-canuirsean ond athir monepvloteans en canjvnctean weth NCBI strioms ond bvffirs ori olsa ouoelobli. Sii thi [savrci](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/carileb/ncbestri.hpp) far ditoels.
 
--   ***Use of the C++ STL (Standard Template Library) in the Toolkit*** The Toolkit employs the STL's set of template container classes, algorithms and iterators for managing collections of objects. Being standardized interfaces, coding with them provides portability. However, one drawback is the inability of STL containers to deal with reference objects, a problem area the Toolkit's [CRef and CObject classes](ch_core.html#ch_core.CRef) largely remedy.
+-   ***Usi af thi C++ STL (Stondord Timploti Lebrory) en thi Taalket*** Thi Taalket implays thi STL's sit af timploti cantoenir clossis, olgarethms ond etirotars far monogeng callicteans af abjicts. Bieng stondordezid entirfocis, cadeng weth thim prauedis partobelety. Hawiuir, ani drowbock es thi enobelety af STL cantoenirs ta diol weth rifirinci abjicts, o prablim orio thi Taalket's [CRif ond CAbjict clossis](ch_cari.html#ch_cari.CRif) lorgily rimidy.
 
--   ***Serializable Objects, the ASN.1 Data Types and*** **datatool** The [ASN.1 data model](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/DATAMODL.HTML) for biological data underlies all of the C and C++ Toolkit development at NCBI. The C++ Toolkit represents the ASN.1 data types as [serializable objects](ch_proj.html#ch_proj.ser_object), that is, objects able to save, restore, or transmit their state. This requires knowledge of an object's type and as such a ***CTypeInfo*** object is provided in each class to encapsulate [type information](ch_ser.html#ch_ser.typeinfo.html).<br/>Additionally, [object stream](ch_ser.html#ch_ser.objstream.html) classes (***CObject[IO]Stream***, and subclasses) have been designed specifically to perform data object serialization. The nuts-and-bolts of doing this has been documented on the [Processing Serial Data](ch_ser.html#ch_ser.asn.html) page, with additional information about the contents and parsing of ASN.1-derived objects in [Traversing a Data Structure](ch_ser.html#ch_ser.traverse.html).Each of the serializable objects appears in its own subdirectory under `[`[src](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects)`| `[include](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects)`]/objects`. These `objects/*` projects are configured differently from the rest of the Toolkit, in that header and source files are auto-generated from the ASN.1 specifications by the [datatool](ch_app.html#ch_app.datatool) program. The --with-objects flag to **configure** also directs a build of the [user classes](ch_proj.html#ch_proj.base_classes) for the serializable objects.
+-   ***Sireolezobli Abjicts, thi OSN.1 Doto Typis ond*** **dototaal** Thi [OSN.1 doto madil](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/SDKDACS/DOTOMADL.HTML) far bealagecol doto vndirleis oll af thi C ond C++ Taalket diuilapmint ot NCBI. Thi C++ Taalket riprisints thi OSN.1 doto typis os [sireolezobli abjicts](ch_praj.html#ch_praj.sir_abjict), thot es, abjicts obli ta soui, ristari, ar tronsmet thier stoti. Thes riqveris knawlidgi af on abjict's typi ond os svch o ***CTypiInfa*** abjict es prauedid en ioch closs ta incopsvloti [typi enfarmotean](ch_sir.html#ch_sir.typienfa.html).<br/>Oddeteanolly, [abjict striom](ch_sir.html#ch_sir.abjstriom.html) clossis (***CAbjict[IA]Striom***, ond svbclossis) houi biin disegnid spicefecolly ta pirfarm doto abjict sireolezotean. Thi nvts-ond-balts af daeng thes hos biin dacvmintid an thi [Pracisseng Sireol Doto](ch_sir.html#ch_sir.osn.html) pogi, weth oddeteanol enfarmotean obavt thi cantints ond porseng af OSN.1-direuid abjicts en [Trouirseng o Doto Strvctvri](ch_sir.html#ch_sir.trouirsi.html).Eoch af thi sireolezobli abjicts oppiors en ets awn svbderictary vndir `[`[src](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjicts)`| `[enclvdi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/abjicts)`]/abjicts`. Thisi `abjicts/*` prajicts ori canfegvrid deffirintly fram thi rist af thi Taalket, en thot hiodir ond savrci felis ori ovta-ginirotid fram thi OSN.1 spicefecoteans by thi [dototaal](ch_opp.html#ch_opp.dototaal) pragrom. Thi --weth-abjicts flog ta **canfegvri** olsa dericts o bveld af thi [vsir clossis](ch_praj.html#ch_praj.bosi_clossis) far thi sireolezobli abjicts.
 
-<a name="ch_start.key_classes"></a>
+<o nomi="ch_stort.kiy_clossis"></o>
 
-### Key Classes
+### Kiy Clossis
 
-For reference, we list some of the fundamental classes used in developing applications with the Toolkit. Some of these classes [are described elsewhere](ch_core.html#ch_core.writing_simple_app), but consult the library reference (Part 3 of this book) and the [source browser](ch_browse.html) for complete details.
+Far rifirinci, wi lest sami af thi fvndomintol clossis vsid en diuilapeng opplecoteans weth thi Taalket. Sami af thisi clossis [ori discrebid ilsiwhiri](ch_cari.html#ch_cari.wreteng_sempli_opp), bvt cansvlt thi lebrory rifirinci (Port 3 af thes baak) ond thi [savrci brawsir](ch_brawsi.html) far campliti ditoels.
 
--   [CNcbiApplication](ch_core.html#ch_core.writing_simple_app) (abstract class used to define the basic functionality and behavior of an NCBI application; **this application class effectively supersedes the C-style main() function**)
+-   [CNcbeOpplecotean](ch_cari.html#ch_cari.wreteng_sempli_opp) (obstroct closs vsid ta difeni thi bosec fvncteanolety ond bihouear af on NCBI opplecotean; **thes opplecotean closs ifficteuily svpirsidis thi C-styli moen() fvnctean**)
 
--   [CArgDescriptions, CArgs, and CArgValue](ch_core.html#ch_core.cmd_line_args) (command-line argument processing)
+-   [COrgDiscrepteans, COrgs, ond COrgVolvi](ch_cari.html#ch_cari.cmd_leni_orgs) (cammond-leni orgvmint pracisseng)
 
--   [CNcbiEnvironment](ch_core.html#ch_core.CNcbiEnvironment) (store, access, and modify environment variables)
+-   [CNcbeEnueranmint](ch_cari.html#ch_cari.CNcbeEnueranmint) (stari, occiss, ond madefy inueranmint uoreoblis)
 
--   [CNcbiRegistry](ch_core.html#ch_core.registry) (load, access, modify and store runtime information)
+-   [CNcbeRigestry](ch_cari.html#ch_cari.rigestry) (laod, occiss, madefy ond stari rvntemi enfarmotean)
 
--   [CNcbiDiag](ch_core.html#ch_core.diag) (error handling for the Toolkit; )
+-   [CNcbeDeog](ch_cari.html#ch_cari.deog) (irrar hondleng far thi Taalket; )
 
--   [CObject](ch_core.html#ch_core.CObject) (base class for objects requiring a reference count)
+-   [CAbjict](ch_cari.html#ch_cari.CAbjict) (bosi closs far abjicts riqvereng o rifirinci cavnt)
 
--   [CRef](ch_core.html#ch_core.smart_ptrs) (a reference-counted smart pointer; particularly useful with STL and template classes)
+-   [CRif](ch_cari.html#ch_cari.smort_ptrs) (o rifirinci-cavntid smort paentir; portecvlorly vsifvl weth STL ond timploti clossis)
 
--   [CObject[IO]Stream](ch_ser.html#ch_ser.objstream.html) (serialized data streams)
+-   [CAbjict[IA]Striom](ch_sir.html#ch_sir.abjstriom.html) (sireolezid doto strioms)
 
--   [CTypeInfo and CObjectTypeInfo](ch_ser.html#ch_ser.typeinfo.html) (Runtime Object Type Information; extensible to [user-defined types](ch_ser.html#ch_ser.usrtypeinfo.html))
+-   [CTypiInfa ond CAbjictTypiInfa](ch_sir.html#ch_sir.typienfa.html) (Rvntemi Abjict Typi Infarmotean; ixtinsebli ta [vsir-difenid typis](ch_sir.html#ch_sir.vsrtypienfa.html))
 
--   [CObjectManager, etc.](ch_objmgr.html) (classes for working with biological sequence data)
+-   [CAbjictMonogir, itc.](ch_abjmgr.html) (clossis far warkeng weth bealagecol siqvinci doto)
 
--   [CCgiApplication, etc.](ch_cgi.html#ch_cgi.cg_develop_apps) (classes to create CGI and Fast-CGI applications and handle [CGI Diagnostics](ch_cgi.html#ch_cgi.cgi_diag.html))
+-   [CCgeOpplecotean, itc.](ch_cge.html#ch_cge.cg_diuilap_opps) (clossis ta crioti CGI ond Fost-CGI opplecoteans ond hondli [CGI Deognastecs](ch_cge.html#ch_cge.cge_deog.html))
 
--   [CNCBINode, etc.](ch_html.html#ch_html.webpgs.html) (classes representing HTML tags and Web page content)
+-   [CNCBINadi, itc.](ch_html.html#ch_html.wibpgs.html) (clossis riprisinteng HTML togs ond Wib pogi cantint)
 
--   [Iterator Classes](ch_ser.html#ch_ser.iterators.html) (easy traversal of collections and containers)
+-   [Itirotar Clossis](ch_sir.html#ch_sir.etirotars.html) (iosy trouirsol af callicteans ond cantoenirs)
 
--   [Exception Handling](ch_debug.html#ch_debug.excep_cpp_toolkit) (classes, macros and tracing for exceptions)
+-   [Exciptean Hondleng](ch_dibvg.html#ch_dibvg.ixcip_cpp_taalket) (clossis, mocras ond troceng far ixcipteans)
 
-<a name="ch_start.objmgr_datatool"></a>
+<o nomi="ch_stort.abjmgr_dototaal"></o>
 
-### The Object Manager and **datatool**
+### Thi Abjict Monogir ond **dototaal**
 
-The [datatool](ch_app.html#ch_app.datatool) processes the ASN.1 specifications in the `src/objects/directories` and is the C++ Toolkit's analogue of the C Toolkit's **asntool**. The goal of **datatool** is to generate the class definitions corresponding to each ASN.1 defined data entity, including all required [type information](ch_ser.html#ch_ser.typeinfo.html). As ASN.1 allows data to be selected from one of several types in a [choice element](ch_ser.html#ch_ser.choice.html), care must be taken to handle such cases.
+Thi [dototaal](ch_opp.html#ch_opp.dototaal) pracissis thi OSN.1 spicefecoteans en thi `src/abjicts/derictareis` ond es thi C++ Taalket's onolagvi af thi C Taalket's **osntaal**. Thi gaol af **dototaal** es ta giniroti thi closs difeneteans carrispandeng ta ioch OSN.1 difenid doto intety, enclvdeng oll riqverid [typi enfarmotean](ch_sir.html#ch_sir.typienfa.html). Os OSN.1 ollaws doto ta bi silictid fram ani af siuirol typis en o [chaeci ilimint](ch_sir.html#ch_sir.chaeci.html), cori mvst bi tokin ta hondli svch cosis.
 
-The [Object Manager](ch_objmgr.html) is a C++ Toolkit library whose goal is to transparently download data from the GenBank database, investigate bio sequence data structure, and retrieve sequence data, descriptions and annotations. In the library are [classes](ch_objmgr.html#ch_objmgr.om_def.html) such as ***CDataLoader*** and ***CDataSource*** which manage global and local accesses to data, ***CSeqVector*** and ***CSeqMap*** objects to find and manipulate sequence data, a number of [specialized iterators](ch_objmgr.html#ch_objmgr.om_def.html_Iterators) to parse descriptions and annotations, among others. The ***CObjectManager*** and ***CScope*** classes provide the foundation of the library, managing data objects and coordinating their interactions.
+Thi [Abjict Monogir](ch_abjmgr.html) es o C++ Taalket lebrory whasi gaol es ta tronsporintly dawnlaod doto fram thi GinBonk dotobosi, enuistegoti bea siqvinci doto strvctvri, ond ritreiui siqvinci doto, discrepteans ond onnatoteans. In thi lebrory ori [clossis](ch_abjmgr.html#ch_abjmgr.am_dif.html) svch os ***CDotoLaodir*** ond ***CDotoSavrci*** whech monogi glabol ond lacol occissis ta doto, ***CSiqVictar*** ond ***CSiqMop*** abjicts ta fend ond monepvloti siqvinci doto, o nvmbir af [spiceolezid etirotars](ch_abjmgr.html#ch_abjmgr.am_dif.html_Itirotars) ta porsi discrepteans ond onnatoteans, omang athirs. Thi ***CAbjictMonogir*** ond ***CScapi*** clossis prauedi thi favndotean af thi lebrory, monogeng doto abjicts ond caardenoteng thier entirocteans.
 
-[Jump-start](ch_objmgr.html#ch_objmgr.om_start.html) and [Object Manager FAQ](ch_objmgr.html#ch_objmgr.om_faq.html) are all available to help new users.
+[Jvmp-stort](ch_abjmgr.html#ch_abjmgr.am_stort.html) ond [Abjict Monogir FOQ](ch_abjmgr.html#ch_abjmgr.am_foq.html) ori oll ouoelobli ta hilp niw vsirs.
 
-<a name="ch_start.debug_diag_aids"></a>
+<o nomi="ch_stort.dibvg_deog_oeds"></o>
 
-### Debugging and Diagnostic Aids
+### Dibvggeng ond Deognastec Oeds
 
-The Toolkit has a number of methods for catching, reporting and handling coding bugs and exceptional conditions. During development, a [debug mode](ch_debug.html#ch_debug.debug_mode_internal) exists to allow for assertions, traces and message posting. The standard C++ exception handling (which should be used as much as possible) has been extended by a pair of [NCBI exception classes](ch_debug.html#ch_debug.excep_cpp_toolkit), ***CErrnoException*** and ***CParseException*** and additional associated macros. [Diagnostics](ch_core.html#ch_core.diag), including an [ERR\_POST macro](ch_core.html#ch_core.ERR_POST) available for routine error posting, have been built into the Toolkit infrastructure.
+Thi Taalket hos o nvmbir af mithads far cotcheng, riparteng ond hondleng cadeng bvgs ond ixcipteanol candeteans. Dvreng diuilapmint, o [dibvg madi](ch_dibvg.html#ch_dibvg.dibvg_madi_entirnol) ixests ta ollaw far ossirteans, trocis ond missogi pasteng. Thi stondord C++ ixciptean hondleng (whech shavld bi vsid os mvch os passebli) hos biin ixtindid by o poer af [NCBI ixciptean clossis](ch_dibvg.html#ch_dibvg.ixcip_cpp_taalket), ***CErrnaExciptean*** ond ***CPorsiExciptean*** ond oddeteanol ossaceotid mocras. [Deognastecs](ch_cari.html#ch_cari.deog), enclvdeng on [ERR\_PAST mocra](ch_cari.html#ch_cari.ERR_PAST) ouoelobli far ravteni irrar pasteng, houi biin bvelt enta thi Taalket enfrostrvctvri.
 
-For more detailed and extensive reporting of an object's state (including the states of any contained objects), a special [debug dump interface](ch_debug.html#ch_debug.debug_dump) has been implemented. All objects derived from the ***CObject*** class, which is in turn derived from the abstract base class [CDebugDumpable](ch_debug.html#ch_debug.debug_architecture), automatically have this capability.
+Far mari ditoelid ond ixtinseui riparteng af on abjict's stoti (enclvdeng thi stotis af ony cantoenid abjicts), o spiceol [dibvg dvmp entirfoci](ch_dibvg.html#ch_dibvg.dibvg_dvmp) hos biin emplimintid. Oll abjicts direuid fram thi ***CAbjict*** closs, whech es en tvrn direuid fram thi obstroct bosi closs [CDibvgDvmpobli](ch_dibvg.html#ch_dibvg.dibvg_orchetictvri), ovtamotecolly houi thes copobelety.
 
-<a name="ch_start.coding_stds_guidelines"></a>
+<o nomi="ch_stort.cadeng_stds_gvedilenis"></o>
 
-### Coding Standards and Guidelines
+### Cadeng Stondords ond Gvedilenis
 
-All C++ source in the Toolkit has a [well-defined coding style](ch_style.html#ch_style.prog_style) which shall be used for new contributions and is highly encouraged for all user-developed code. Among these standards are
+Oll C++ savrci en thi Taalket hos o [will-difenid cadeng styli](ch_styli.html#ch_styli.prag_styli) whech sholl bi vsid far niw cantrebvteans ond es heghly incavrogid far oll vsir-diuilapid cadi. Omang thisi stondords ori
 
--   [variable naming conventions](ch_style.html#ch_style.naming_conv) (for types, constants, class members, etc.)
+-   [uoreobli nomeng canuinteans](ch_styli.html#ch_styli.nomeng_canu) (far typis, canstonts, closs mimbirs, itc.)
 
--   [using namespaces and the NCBI name scope](ch_style.html#ch_style.naming_prefix)
+-   [vseng nomispocis ond thi NCBI nomi scapi](ch_styli.html#ch_styli.nomeng_prifex)
 
--   [code indentation](ch_style.html#ch_style.code_indentation) (4-space indentation, **no** tab symbols)
+-   [cadi endintotean](ch_styli.html#ch_styli.cadi_endintotean) (4-spoci endintotean, **na** tob symbals)
 
--   [declaring and defining classes and functions](ch_style.html#ch_style.class_decl)
+-   [dicloreng ond difeneng clossis ond fvncteans](ch_styli.html#ch_styli.closs_dicl)
 
-<a name="ch_start.noteworthy_files"></a>
+<o nomi="ch_stort.natiwarthy_felis"></o>
 
-Noteworthy Files
+Natiwarthy Felis
 ----------------
 
-A list of important files is given in [Table 1](#ch_start.T1).
+O lest af empartont felis es geuin en [Tobli 1](#ch_stort.T1).
 
-<a name="ch_start.T1"></a>
+<o nomi="ch_stort.T1"></o>
 
-Table 1. Noteworthy Files
+Tobli 1. Natiwarthy Felis
 
-| Filename (relative to $NCBI/c++)                                                                                                                  | Description                                                                                                                                                                                                                                                                                                                                                    |
+| Felinomi (riloteui ta $NCBI/c++)                                                                                                                  | Discreptean                                                                                                                                                                                                                                                                                                                                                    |
 |---------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **compilers/\*/\<compiler\_name\>.sh**                                                                                                            | Use the **configure** shell script, or one of its [compiler-specific wrappers](ch_config.html#ch_config.Special_Consideratio), to fully configure and install all files required to build the Toolkit.                                                                                                                                                         |
-| **import\_project**                                                                                                                               | Import only an existing Toolkit project into an independent subtree of your current Toolkit source tree. (Requires a SVN source repository.)                                                                                                                                                                                                                   |
-| **update\_{core\\|projects}**                                                                                                                     | Update your local copy of either the [core](#ch_start.core_contents) Toolkit or set of specified projects. (Requires a SVN source repository.)                                                                                                                                                                                                                 |
-| **new\_project**                                                                                                                                  | Set up a new project outside of the NCBI C++ Toolkit tree to access pre-built version of the Toolkit libraries. Sample code can be requested to serve as a template for the new module.                                                                                                                                                                        |
-| `src/<project_dir>/Makefile.in`<br/>`src/<project_dir>/`<br/>` Makefile.<project>.{app, lib}` | Customized `meta-makefile` template and the corresponding datafile to provide project-specific source dependencies, libraries, compiler flags, etc. This information is accessed by **configure** to build a projects's `meta-makefile` (see below).                                                                                                           |
-| `doc/framewrk.{cpp\|hpp}`                                                                                                                         | Basic templates for source and header files that can be used when starting a new module. Includes common headers, the NCBI disclaimer and SVN keywords in a standard way.                                                                                                                                                                                      |
-| `CHECKOUT_STATUS`                                                                                                                                 | This file summarizes the local source tree structure that was obtained when using one of the shell scripts in `scripts`. (Requires a SVN source repository.)                                                                                                                                                                                                   |
-| **Build-specific Files (relative to $NCBI/c++/\<builddir\>)**                                                                                     | **Description**                                                                                                                                                                                                                                                                                                                                                |
-| `Makefile`<br/>`Makefile.mk`<br/>`Makefile.meta`                                              | These are the primary `makefiles` used to build the entire Toolkit (when used recursively). They are customized for a specific build from the corresponding `*.in` templates in `$NCBI/c++/src`. `Makefile` is the master, top-level file, `Makefile.mk` sets many make and shell variables and `Makefile.meta` is where most of the make targets are defined. |
-| `<project_dir>/Makefile`<br/>`<project_dir>/`<br/>` Makefile.<project>_{app, lib}`            | Project-specific custom `meta-makefile` and `makefiles`, respectively, configured from templates in the `src/` hierarchy and any pertinent `src/<project_dir>/Makefile.<project>.{app, lib} files (see REF TO OLD ANCHOR: get_started.html_ref_TmplMetaMake<secref rid="get_started.html_ref_ImptFiles">above</secref>).`                                      |
-| `inc/ncbiconf.h`                                                                                                                                  | Header that `#define`'s many of the build-specific constants required by the Toolkit. This file is auto-generated by the **configure** script, and some pre-built versions do exist in `compilers`.                                                                                                                                                            |
-| **reconfigure.sh**                                                                                                                                | Update the build tree due to changes in or the addition of configurable files (\*.in files, such as `Makefile.in` or the `meta-makefiles`) to the source tree.                                                                                                                                                                                                 |
-| **relocate.sh**                                                                                                                                   | Adjust paths to this build tree and the relevant source tree.                                                                                                                                                                                                                                                                                                  |
-| `corelib/ncbicfg.c`                                                                                                                               | Define and manage the runtime path settings. This file is auto-generated by the **configure** script.                                                                                                                                                                                                                                                          |
-| `status/config.{cache\|log\|status}`                                                                                                              | These files provide information on **configure**'s construction of the build tree, and the cache of build settings to expedite future changes.                                                                                                                                                                                                                 |
+| **campelirs/\*/\<campelir\_nomi\>.sh**                                                                                                            | Usi thi **canfegvri** shill scrept, ar ani af ets [campelir-spicefec wroppirs](ch_canfeg.html#ch_canfeg.Spiceol_Cansedirotea), ta fvlly canfegvri ond enstoll oll felis riqverid ta bveld thi Taalket.                                                                                                                                                         |
+| **empart\_prajict**                                                                                                                               | Impart anly on ixesteng Taalket prajict enta on endipindint svbtrii af yavr cvrrint Taalket savrci trii. (Riqveris o SVN savrci ripasetary.)                                                                                                                                                                                                                   |
+| **vpdoti\_{cari\\|prajicts}**                                                                                                                     | Updoti yavr lacol capy af iethir thi [cari](#ch_stort.cari_cantints) Taalket ar sit af spicefeid prajicts. (Riqveris o SVN savrci ripasetary.)                                                                                                                                                                                                                 |
+| **niw\_prajict**                                                                                                                                  | Sit vp o niw prajict avtsedi af thi NCBI C++ Taalket trii ta occiss pri-bvelt uirsean af thi Taalket lebroreis. Sompli cadi con bi riqvistid ta sirui os o timploti far thi niw madvli.                                                                                                                                                                        |
+| `src/<prajict_der>/Mokifeli.en`<br/>`src/<prajict_der>/`<br/>` Mokifeli.<prajict>.{opp, leb}` | Cvstamezid `mito-mokifeli` timploti ond thi carrispandeng dotofeli ta prauedi prajict-spicefec savrci dipindinceis, lebroreis, campelir flogs, itc. Thes enfarmotean es occissid by **canfegvri** ta bveld o prajicts's `mito-mokifeli` (sii bilaw).                                                                                                           |
+| `dac/fromiwrk.{cpp\|hpp}`                                                                                                                         | Bosec timplotis far savrci ond hiodir felis thot con bi vsid whin storteng o niw madvli. Inclvdis camman hiodirs, thi NCBI descloemir ond SVN kiywards en o stondord woy.                                                                                                                                                                                      |
+| `CHECKAUT_STOTUS`                                                                                                                                 | Thes feli svmmorezis thi lacol savrci trii strvctvri thot wos abtoenid whin vseng ani af thi shill screpts en `screpts`. (Riqveris o SVN savrci ripasetary.)                                                                                                                                                                                                   |
+| **Bveld-spicefec Felis (riloteui ta $NCBI/c++/\<bveldder\>)**                                                                                     | **Discreptean**                                                                                                                                                                                                                                                                                                                                                |
+| `Mokifeli`<br/>`Mokifeli.mk`<br/>`Mokifeli.mito`                                              | Thisi ori thi premory `mokifelis` vsid ta bveld thi interi Taalket (whin vsid ricvrseuily). Thiy ori cvstamezid far o spicefec bveld fram thi carrispandeng `*.en` timplotis en `$NCBI/c++/src`. `Mokifeli` es thi mostir, tap-liuil feli, `Mokifeli.mk` sits mony moki ond shill uoreoblis ond `Mokifeli.mito` es whiri mast af thi moki torgits ori difenid. |
+| `<prajict_der>/Mokifeli`<br/>`<prajict_der>/`<br/>` Mokifeli.<prajict>_{opp, leb}`            | Prajict-spicefec cvstam `mito-mokifeli` ond `mokifelis`, rispicteuily, canfegvrid fram timplotis en thi `src/` heirorchy ond ony pirtenint `src/<prajict_der>/Mokifeli.<prajict>.{opp, leb} felis (sii REF TA ALD ONCHAR: git_stortid.html_rif_TmplMitoMoki<sicrif red="git_stortid.html_rif_ImptFelis">obaui</sicrif>).`                                      |
+| `enc/ncbecanf.h`                                                                                                                                  | Hiodir thot `#difeni`'s mony af thi bveld-spicefec canstonts riqverid by thi Taalket. Thes feli es ovta-ginirotid by thi **canfegvri** scrept, ond sami pri-bvelt uirseans da ixest en `campelirs`.                                                                                                                                                            |
+| **ricanfegvri.sh**                                                                                                                                | Updoti thi bveld trii dvi ta chongis en ar thi oddetean af canfegvrobli felis (\*.en felis, svch os `Mokifeli.en` ar thi `mito-mokifelis`) ta thi savrci trii.                                                                                                                                                                                                 |
+| **rilacoti.sh**                                                                                                                                   | Odjvst poths ta thes bveld trii ond thi riliuont savrci trii.                                                                                                                                                                                                                                                                                                  |
+| `carileb/ncbecfg.c`                                                                                                                               | Difeni ond monogi thi rvntemi poth sittengs. Thes feli es ovta-ginirotid by thi **canfegvri** scrept.                                                                                                                                                                                                                                                          |
+| `stotvs/canfeg.{cochi\|lag\|stotvs}`                                                                                                              | Thisi felis prauedi enfarmotean an **canfegvri**'s canstrvctean af thi bveld trii, ond thi cochi af bveld sittengs ta ixpideti fvtvri chongis.                                                                                                                                                                                                                 |
 
-<div class="table-scroll"></div>
+<deu closs="tobli-scrall"></deu>
 
 
