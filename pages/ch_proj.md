@@ -148,7 +148,7 @@ Before creating the new project, you must decide if you need to work within a C+
 
 -   [Work in a Separate Directory](#ch_proj.outside_tree)
 
-Regardless of where you build your new project, it must adopt and maintain a particular structure. Specifically, each project's [source tree](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src) relative to `$NCBI/c++` should contain:
+Regardless of where you build your new project, it must adopt and maintain a particular structure. Specifically, each project's [source tree](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src) relative to `$NCBI/c++` should contain:
 
 -   `include/*.hpp` -- project's public headers
 
@@ -653,7 +653,7 @@ and running:
 
 Of course, it wasn't necessary to set up the directories and makefiles to accomplish this much, as this example does not use any of the C++ classes or resources defined in the NCBI C++ Toolkit. But having accomplished this, you are now prepared to write an actual application, such as described in [Writing a simple application project](ch_core.html#ch_core.writing_simple_app)
 
-Most real applications will at a minimum, require that you `#include `[ncbistd.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbistd.hpp) in your header file. In addition to defining some basic NCBI C++ Toolkit objects and templates, this header file in turn includes other header files that define the C Toolkit data types, NCBI namespaces, debugging macros, and exception classes. A set of [template](#ch_proj.new_modules) files are also provided for your use in developing new applications.
+Most real applications will at a minimum, require that you `#include `[ncbistd.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbistd.hpp) in your header file. In addition to defining some basic NCBI C++ Toolkit objects and templates, this header file in turn includes other header files that define the C Toolkit data types, NCBI namespaces, debugging macros, and exception classes. A set of [template](#ch_proj.new_modules) files are also provided for your use in developing new applications.
 
 <a name="ch_proj.work_sub_tree"></a>
 
@@ -669,10 +669,10 @@ where:
 
 -   **`builddir`** (optional) specifies what version of the pre-built NCBI C++ Toolkit libraries to link to.
 
-As a result of executing this shell script, you will have a new directory created with the pathname `./[internal/]c++/` whose structure contains "slices" of the original SVN tree. Specifically, you will find:
+As a result of executing this shell script, you will have a new directory created with the pathname `trunk/[internal/]c++/` whose structure contains "slices" of the original SVN tree. Specifically, you will find:
 
-    ./[internal/]c++/include/subtree_name
-    ./[internal/]c++/src/subtree_name
+    trunk/[internal/]c++/include/subtree_name
+    trunk/[internal/]c++/src/subtree_name
 
 The `src` and `include` directories will contain all of the requested subtree's source and header files along with any hierarchically defined subdirectories. In addition, the script will create new makefiles with the suffix *\*\_app*. These makefiles are generated from the original [customized makefiles](#ch_proj.make_proj_app) (`Makefile.*.app`) located in the original `src` subtrees. The customized makefiles were designed to work only in conjunction with the build directories in the larger NCBI C++ tree; the newly created makefiles can be used directly in your new working directories.
 
@@ -682,13 +682,12 @@ You can re-run **import\_project** to add multiple projects to your tree.
 
     import_project internal/demo/misc/xmlwrapp
     import_project -topdir trunk/internal/c++ misc/xmlwrapp
-    pushd trunk/internal/c++/src/misc/xmlwrapp
-    make
+	import_project -topdir trunk/internal/c++ -nocheckout .
+	pushd trunk/internal/c++/src
+    make -f Makefile.flat
     popd
-    pushd trunk/internal/c++/src/internal/demo/misc/xmlwrapp
-    make
 
-In this case, your public projects will be located in the `internal` tree. You must build in each imported subtree, in order from most-dependent to least-dependent so that the imported libraries will be linked to rather than the pre-built libraries.
+The third `import_project` command in this example produces a unified `Makefile.flat` covering both subtrees.  Without this command, it would be necessary to build them individually, starting with the libraries, so that the demos would link to imported rather than prebuilt libraries.
 
 The NCBI C++ Toolkit project directories, along with the libraries they implement and the logical modules they entail, are summarized in the [Library Reference](part3.html).
 
@@ -766,7 +765,7 @@ Thus, you will also need to create a `meta-makefile` in the newly created `src/m
 
 <a name="ch_proj.F1"></a>
 
-[![Figure 1. Meta makefiles and the makefiles they generate](/book/static/img/cpptree.jpg)](/book/static/img/cpptree.jpg "Click to see the full-resolution image")
+[![Figure 1. Meta makefiles and the makefiles they generate](/cxx-toolkit/static/img/cpptree.jpg)](/cxx-toolkit/static/img/cpptree.jpg "Click to see the full-resolution image")
 
 Figure 1. Meta makefiles and the makefiles they generate
 
@@ -894,7 +893,7 @@ In addition, any of the make variables defined in `build/Makefile.mk`, such as *
     CPPFLAGS = $(ORIG_CPPFLAGS) -UFOO -DP1_PROJECT -I$(NCBI_C_INCLUDE)
     LINK     = purify $(ORIG_LINK)
 
-For an example from the Toolkit, see [Makefile.corelib.lib](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib/Makefile.corelib.lib).
+For an example from the Toolkit, see [Makefile.corelib.lib](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib/Makefile.corelib.lib).
 
 For a more detailed example, including information about shared libraries, see [example 1 above](#ch_proj.make_proj_lib).
 
@@ -918,53 +917,65 @@ For example, if C Toolkit libraries should also be included in the linking, use:
 
     LIBS = $(NCBI_C_LIBPATH) -lncbi $(ORIG_LIBS)
 
-The project's application makefile can also redefine the compiler and linker, along with other flags and tools affecting the build process, as described above for `Makefile.*.lib` files. For an example from the Toolkit, see [Makefile.coretest.app](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib/test/Makefile.coretest.app), and for a documented example, see [example 2 above](#ch_proj.make_proj_app).
+The project's application makefile can also redefine the compiler and linker, along with other flags and tools affecting the build process, as described above for `Makefile.*.lib` files. For an example from the Toolkit, see [Makefile.coretest.app](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib/test/Makefile.coretest.app), and for a documented example, see [example 2 above](#ch_proj.make_proj_app).
 
 <a name="ch_proj.inside_tests"></a>
 
 #### Defining and running tests
 
-The definition and execution of unit tests is controlled by the **`CHECK_CMD`** macro in the test application's makefile, `Makefile.app_name.app`. If this macro is not defined (or commented out), then no test will be executed. If **`CHECK_CMD`** is defined, then the test it specifies will be included in the automated test suite and can also be invoked independently by running "`make check`".
+The definition and execution of unit tests is controlled by the **`CHECK_CMD`** macro in the test application's makefile, `Makefile.app_name.app`. If this macro is not defined (or commented out), then no test will be executed. If **`CHECK_CMD`** is defined, then the test it specifies will be included in the automated test suite and can also be invoked independently by running "`make check`" in the folder where the test makefile is situated. You also can run an individual test (if more than one test is located in the folder) by running: "`make check APP_PROJ=name_of_the_test_to_run`".
 
 To include an application into the test suite it is necessary to add just one line into its makefile `Makefile.app_name.app`:
 
     CHECK_CMD =
 
-or
+Where nothing specified by the **`CHECK_CMD`** macro, the program specified by the makefile variable **`APP`** will be executed (without any arguments). For more advanced usage you can specify something like:
 
     CHECK_CMD = command line to run application test
+    CHECK_CMD = command line to run application test /CHECK_NAME=app_test_name
 
-For the first form, where no command line is specified by the **`CHECK_CMD`** macro, the program specified by the makefile variable **`APP`** will be executed (without any parameters).
+Note, that you can use optional **`/CHECK_NAME`** to add alias for specified command line, especially if it is long. This alias will be used instead for reporting and collecting statistics. Application's makefile can have some **`CHECK_CMD`** lines for different tests in the same directory, or for the same test but with different arguments. So assigning unique **`CHECK_NAME`** for each command line could be very useful. Note, that test name should include only letters, digits, "_" and "-".
 
-For the second form: If your application is executed by a script specified in a **`CHECK_CMD`** command line, and it doesn't read from `STDIN`, then the script should invoke it like this:
+Regarding command line, it could be an application name from **`APP`** line with added required arguments, or some script name instead. See below for more details.
 
-    $CHECK_EXEC app_name arg1 arg2 ...
+***Note:*** Executing applications / scripts in the **`CHECK_CMD`** definition should **NOT** use "`.`" or any relative path, because (depending from platform) it could be executed not from a current directory, but from some directory added to **`$PATH`** by test suite.
 
-If your application *does* read from `STDIN`, then **`CHECK_CMD`** scripts should invoke it like this:
+In addition there are some optional macro than can help with setting up tests:
 
-    $CHECK_EXEC_STDIN app_name arg1 arg2 ...
+| Macro          | Usage | Description |
+|----------------|-------|-------------|
+| CHECK_COPY     | CHECK_COPY = file1 file2 dir1 dir2 | If your test program needs additional files (for example, a configuration file, data files, or helper scripts referenced in **`CHECK_CMD`**), then set **`CHECK_COPY`** to point to them. Before the tests are run, all specified files and directories will be copied to the build or special check directory (which is platform-dependent). Note that all paths to copied files and directories must be relative to the application source directory.|
+| CHECK_TIMEOUT  | CHECK_TIMEOUT = 200                | By default, the application's execution time is limited to 200 seconds. But you can change it using this macro. If application continues execution after specified time, it will be terminated and test marked as TIMEOUT. |
+| CHECK_REQUIRES | CHECK_REQUIRES = req1 req2 ...     | Counterpart for makefiles's **`REQUIRES`** macro. If last one specifies features and projects required to build the current project, that **`CHECK_REQUIRES`** could have additional requirements to allow to run a built test. See [project makefiles](ch_proj.html#ch_proj.proj_makefiles) section. |
+| WATCHERS       | WATCHERS = username1 username2 | Allow to get email notifications from a build system about all compilation errors and failed tests for the current application. Each user name is an email alias. |
 
-***Note:*** Applications / scripts in the **`CHECK_CMD`** definition should **not** use "`.`", for example:
 
-    $CHECK_EXEC ./app_name arg1 arg2 ... # Do not prefix app_name with ./
+Some words about using helper scripts to execute tests. All such scripts should observe some rules:
 
-Scripts invoked via **`CHECK_CMD`** should pass an exit code to the testing framework via the **`exitcode`** variable, for example:
+-   All testing application executed inside script should be run using timeout guard. To use it, you should prepend it call with **`$CHECK_EXEC`** or **`$CHECK_EXEC_STDIN`** (shell notation). First one is used if `app_name` doesn't read from `STDIN`, second one if does. On succesful run both macro returns exit code from the application.
 
-    exitcode=$?
+    `$CHECK_EXEC app_name arg1 arg2 ... ; exitcode=$?`
 
-If your test program needs additional files (for example, a configuration file, data files, or helper scripts referenced in **`CHECK_CMD`**), then set **`CHECK_COPY`** to point to them:
+-   It should return an exit code to the testing framework, for example, using shell `exit` command.
 
-    CHECK_COPY = file1 file2 dir1 dir2
+    `exit $exitcode`
+    
+-   Note, that if you run testing application several times from the script, that **`CHECK_TIMEOUT`** applies to whole script.
 
-Before the tests are run, all specified files and directories will be copied to the build or special check directory (which is platform-dependent). Note that all paths to copied files and directories must be relative to the application source directory.
 
-By default, the application's execution time is limited to 200 seconds. You can set a new limit using:
+We expect that all tests finishes in the specified timeout and do all necessary cleanup itself, if not, the test suite trying to kill what it can, probably some junk files or directories could be left on a file system.
 
-    CHECK_TIMEOUT = <time in seconds>
+The test suite set some environment variables that could affect tests execution or be used inside testing application or helping scripts:
 
-If application continues execution after specified time, it will be terminated and test marked as FAILED.
-
-If you'd like to get nightly test results automatically emailed to you, add your email address to the **`WATCHERS`** macro in the makefile. Note that the **`WATCHERS`** macro has replaced the **`CHECK_AUTHORS`** macro which had a similar purpose.
+| Environment variable | Description |
+|----------------------|-------------|
+| NCBI_CHECK_SETLIMITS | By default on Unix platforms the test suite sets limits for virtual memory to 4 GiB for regular runs and 16 GiB if run under memory checking tool like `valgrind`. To disable setting any limits, you can set **`NCBI_CHECK_SETLIMITS=0`** before running checks, it is not possible to increase limits from **`CHECK_CMD`** tests. So this method to disable limits don't work for our regular automatic builds and tests, only for yours own. |
+| NCBI_TEST_DATA | Path to test data directory, that could store big data for the applications, that is not appropriate for placing into C++ Toolkit SVN. |
+| FEATURES | Lists available features and projects, uses space as delimiter. See [project makefiles](ch_proj.html#ch_proj.proj_makefiles) section. |
+| CHECK_SIGNATURE | Current build signature, that include compiler, version, machine name and etc. |
+| CFG_BIN | Path to **`/bin`** directory, containing all binaries from the current build. |
+| CFG_LIB | Path to **`/lib`** directory, containing all static and dynamic libraries from the current build. |
+| PATH | The test suite modify it, adding some paths: "`.`", **`CFG_BIN`**, **`CFG_LIB`** and "`scripts/common/impl`". |
 
 For information about using Boost for unit testing, see the "[Boost Unit Test Framework](ch_boost.html)" chapter.
 
@@ -972,7 +983,7 @@ For information about using Boost for unit testing, see the "[Boost Unit Test Fr
 
 #### The configure scripts
 
-A number of [compiler-specific wrappers](ch_config.html#ch_config.Special_Consideratio) for different platforms are described in the chapter on [configuring and building](ch_config.html). Each of these wrappers performs some pre-initialization for the tools and flags used in the **configure** script before running it. The compiler-specific wrappers are in the [c++/compilers](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/compilers) directory. The **configure** script serves two very different types of function: (1) it tests the selected compiler and environment for a multitude of features and generates `#include` and `#define` statements accordingly, and (2) it reads the `Makefile.in` files in the `src` directories and creates the corresponding `build` subtrees and makefiles accordingly.
+A number of [compiler-specific wrappers](ch_config.html#ch_config.Special_Consideratio) for different platforms are described in the chapter on [configuring and building](ch_config.html). Each of these wrappers performs some pre-initialization for the tools and flags used in the **configure** script before running it. The compiler-specific wrappers are in the [c++/compilers](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/compilers) directory. The **configure** script serves two very different types of function: (1) it tests the selected compiler and environment for a multitude of features and generates `#include` and `#define` statements accordingly, and (2) it reads the `Makefile.in` files in the `src` directories and creates the corresponding `build` subtrees and makefiles accordingly.
 
 Frequently during development it is necessary to make minor adjustments to the `Makefile.in` files, such as adding new projects or subprojects to the list of targets. In these contexts however, the compiler, environment, and source directory structures remain unchanged, and **configure** is actually doing much more work than is necessary. In fact, there is even some risk of failing to re-create the same configuration environment if the user does not exactly duplicate the same set of configure flags when re-running **configure**. In these situations, it is preferable to run an auxiliary script named [config.status](ch_config.html#ch_config.ch_configpre_built_h), located at the top level of the `build` directory in a subdirectory named `status`.
 
@@ -1000,7 +1011,7 @@ The following topics are discussed in this section:
 
 #### Serializable Objects
 
-All of the ASN.1 data types defined in the C Toolkit have been re-implemented in the C++ Toolkit as serializable objects. Header files for these classes can be found in the [include/objects](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects) directories, and their implementations are located in the [src/objects](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects) directories. and
+All of the ASN.1 data types defined in the C Toolkit have been re-implemented in the C++ Toolkit as serializable objects. Header files for these classes can be found in the [include/objects](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects) directories, and their implementations are located in the [src/objects](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects) directories. and
 
 The implementation of these classes as serializable objects has a number of implications. It must be possible to use expressions like: `instream >> myObject` and `outstream << myObject, `where specializations are entailed for the `serial format` of the iostreams (ASN.1, XML, etc.), as well as for the internal structure of the object. The C++ Toolkit deploys several [object stream classes](ch_ser.html#ch_ser.objstream.html) that specialize in various formats, and which know how to access and apply the [type information](ch_ser.html#ch_ser.typeinfo.html)that is associated with the serializable object.
 
@@ -1010,13 +1021,13 @@ The type information for each class is defined in a separate static [CTypeInfo](
 
 #### Locating and browsing serializable objects in the C++ Toolkit
 
-The top level of the [include/objects](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects) subtree is a set of subdirectories, where each subdirectory includes the public header files for a separately compiled library. Similarly, the [src/objects](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects) subtree includes a set of subtrees containing the source files for these libraries. Finally, your `build/objects` directory will contain a corresponding set of build subtrees where these libraries are actually built.
+The top level of the [include/objects](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects) subtree is a set of subdirectories, where each subdirectory includes the public header files for a separately compiled library. Similarly, the [src/objects](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects) subtree includes a set of subtrees containing the source files for these libraries. Finally, your `build/objects` directory will contain a corresponding set of build subtrees where these libraries are actually built.
 
 If you checked out the entire C++ SVN tree, you may be surprised to find that initially, the `include/objects` subtrees are empty, and the subdirectories in the `src/objects` subtree contain only ASN.1 modules. This is because both the header files and source files are auto-generated from the ASN.1 specifications by the [datatool](ch_app.html#ch_app.datatool) program. As described in [Working within the C++ source tree](#ch_proj.inside_tree), you can build everything by running `make all_r` in the build directory.
 
 ***Note:*** If you would like to have the `objects` libraries built locally, you **must** use the `--with-objects` flag when running the **configure** script.
 
-You can also access the pre-generated serializable objects in the public area, using the source browsers to locate the objects you are particularly interested in. For example, if you are seeking the new class definition for the `Bioseq struct` defined in the C Toolkit, you can search for the ***CBioseq*** class, using either the [LXR](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident) identifier search tool, or the Doxygen [class hierarchy](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/hierarchy.html) browser. Starting with the name of the data object as it appears in the ASN.1 module, two simple rules apply in deriving the new C++ class name:
+You can also access the pre-generated serializable objects in the public area, using the source browsers to locate the objects you are particularly interested in. For example, if you are seeking the new class definition for the `Bioseq struct` defined in the C Toolkit, you can search for the ***CBioseq*** class, using either the [LXR](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident) identifier search tool, or the Doxygen [class hierarchy](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/hierarchy.html) browser. Starting with the name of the data object as it appears in the ASN.1 module, two simple rules apply in deriving the new C++ class name:
 
 -   The one letter 'C' (for class) prefix should precede the ASN.1 name
 
@@ -1038,7 +1049,7 @@ Given the potential for this complexity of interactions, a critical design issue
 
 <a name="ch_proj.F2"></a>
 
-[![Figure 2. Example of complex relationships between base classes and user classes](/book/static/img/user_base.gif)](/book/static/img/user_base.gif "Click to see the full-resolution image")
+[![Figure 2. Example of complex relationships between base classes and user classes](/cxx-toolkit/static/img/user_base.gif)](/cxx-toolkit/static/img/user_base.gif "Click to see the full-resolution image")
 
 Figure 2. Example of complex relationships between base classes and user classes
 
@@ -1112,7 +1123,7 @@ and in the source file, `Seq_inst.cpp`, we implement
         // implementation goes here
     }
 
-These files are in the [include/objects/seq](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/seq) and [src/objects/seq](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seq) subdirectories, respectively. Once you have made the modifications to the files, you need to recompile the `seq` library, `libseq.a`, i.e.:
+These files are in the [include/objects/seq](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/seq) and [src/objects/seq](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seq) subdirectories, respectively. Once you have made the modifications to the files, you need to recompile the `seq` library, `libseq.a`, i.e.:
 
     cd path_to_compile_dir/GCC-Debug/build/objects/seq
     make

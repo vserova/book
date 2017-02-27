@@ -5,12 +5,12 @@ nav: pages/ch_algoalign
 ---
 
 
-18\. Biological Sequence Alignment
+19\. Biological Sequence Alignment
 ================================================
 
 Last Update: October 18, 2013.
 
-The Global Alignment Library [`xalgoalign`:[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/algo/align) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/algo/align)]
+The Global Alignment Library [`xalgoalign`:[include](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/algo/align) \| [src](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/algo/align)]
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 The overview for this chapter consists of the following topics:
@@ -63,7 +63,7 @@ The following is an outline of the chapter topics:
 
     -   [Formatter object](#ch_algoalign.nw_formatter)
 
-**Demo Cases** [[src/app/nw\_aligner](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/app/nw_aligner)] [[src/app/splign/](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/app/splign/)]
+**Demo Cases** [[src/app/nw\_aligner](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/app/nw_aligner)] [[src/app/splign/](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/app/splign/)]
 
 <a name="ch_algoalign.generic_global_alignment"></a>
 
@@ -72,7 +72,7 @@ Computing pairwise global sequence alignments
 
 Generic **pairwise** global alignment functionality is provided by ***CNWAligner***.
 
-***NOTE:*** ***CNWAligner*** is not a multiple sequence aligner. An example of using ***CNWAligner*** can be seen [here](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/app/nw_aligner).
+***NOTE:*** ***CNWAligner*** is not a multiple sequence aligner. An example of using ***CNWAligner*** can be seen [here](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/app/nw_aligner).
 
 This functionality is discussed in the following topics:
 

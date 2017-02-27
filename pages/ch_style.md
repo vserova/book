@@ -112,13 +112,13 @@ Choice of Language
 
 -   **sh** or **bash** -- for primitive scripting.
 
--   **Python** -- for advanced scripting. See its usage policy [here](http://intranet.ncbi.nlm.nih.gov:6224/wiki-private/CxxToolkit/index.cgi/Recommended_Python_Database_Interface_modules#Recommended_Python_Database_Interface_modules1).
+-   **Python** -- for advanced scripting. See its usage policy [here](https://intranet.ncbi.nlm.nih.gov/wiki-private/CxxToolkit/index.cgi/Recommended_Python_Database_Interface_modules#Recommended_Python_Database_Interface_modules1).
 
--   **Perl** -- for advanced scripting. The [Python usage policy](http://intranet.ncbi.nlm.nih.gov:6224/wiki-private/CxxToolkit/index.cgi/Recommended_Python_Database_Interface_modules#Recommended_Python_Database_Interface_modules1) can be applied to Perl as well.
+-   **Perl** -- for advanced scripting. The [Python usage policy](https://intranet.ncbi.nlm.nih.gov/wiki-private/CxxToolkit/index.cgi/Recommended_Python_Database_Interface_modules#Recommended_Python_Database_Interface_modules1) can be applied to Perl as well.
 
 -   **Java** -- for Eclipse programming and in-house QA and testing tools.
 
-See the "[Recommended programming and scripting languages](http://intranet.ncbi.nlm.nih.gov:6224/wiki-private/CxxToolkit/index.cgi/Recommended_programming_and_scripting_languages)" Wiki page for more information and updates to this policy. Send proposals for corrections, additions and extensions of the policy on language choice to the languages mailing list, <span class="oem_span">shun.hnlzGujip5ust5upo5nv/</span>.
+See the "[Recommended programming and scripting languages](https://intranet.ncbi.nlm.nih.gov/wiki-private/CxxToolkit/index.cgi/Recommended_programming_and_scripting_languages)" Wiki page for more information and updates to this policy. Send proposals for corrections, additions and extensions of the policy on language choice to the languages mailing list, <span class="oem_span">shun.hnlzGujip5ust5upo5nv/</span>.
 
 <a name="ch_style.prog_style"></a>
 
@@ -211,68 +211,43 @@ If you have questions, please email to <span class="oem_span">jww4jvylGujip5ust5
 
 Table 1. Naming Conventions
 
-SYNOPSIS
-EXAMPLE
-**Type Names**
-***C****ClassTypeName*
-`class CMyClass { ..... };`
-***I****InterfaceName*
-`class IMyInterface { ..... };`
-***S****StructTypeName*
-`struct SMyStruct { ..... };`
-***U****UnionTypeName*
-`union UMyUnion { ..... };`
-***E****EnumTypeName*
-`enum EMyEnum { ..... };`
-***F****FunctionTypeName*
-`typedef int (*FMyFunc)(void);`
-***P****PredicateName*
-`struct PMyPred { bool operator() (.... , ....); };`
-***T****AuxiliaryTypedef* [(\*)](#ch_style.1.3.1)
-`typedef map<int,string> TMyMapIntStr;`
-***T****Iterator****\_I***
-`typedef list<int>::iterator TMyList_I;`
-***T****ConstIterator****\_CI***
-`typedef set<string>::const_iterator TMySet_CI;`
-***N****Namespace* [(see also)](#ch_style.naming_prefix)
-`namespace NMyNamespace { ..... }`
-**Preprocessor Define/Macro**
-*MACRO\_NAME*
-`#define MY_DEFINE 12345`
-*macro\_arg\_name*
-`#define MY_MACRO(x, y) (((x) + 1) < (y))`
-**Function Arguments and Local Variables**
-*func\_local\_var\_name*
-`void MyFunc(int foo, const CMyClass& a_class)`<br/>`{ `<br/>`    size_t  foo_size;`<br/>`    int   bar;`
-**Constants**
-***k****ConstantName*
-`const int kMyConst = 123;`
-***e****EnumValueName*
-`enum EMyEnum { `<br/>`    eMyEnum_1 = 11, `<br/>`    eMyEnum_2 = 22, `<br/>`    eMyEnum_3 = 33 `<br/>`};`
-***f****FlagValueName*
-`enum EMyFlags {`<br/>`    fMyFlag_1 = (1<<0),  ///< = 0x1 (describe)`<br/>`    fMyFlag_2 = (1<<1),  ///< = 0x2 (describe)`<br/>`    fMyFlag_3 = (1<<2)   ///< = 0x4 (describe)`<br/>`};` <br/>`typedef int TMyFlags; ///< holds bitwise OR of "EMyFlags"`
-**Class and Structure Data Members (Fields)**
-***m\_****ClassMemberName*
-`class C { short int m_MyClassData; };`
-*struct\_field\_name*
-`struct S { int my_struct_field; };`
-***sm\_****ClassStaticMemberName*
-`class C { static double sm_MyClassStaticData; };`
-**Class Member Functions (Methods)**
-*ClassMethod*
-`bool MyClassMethod(void);`
-***x\_****ClassPrivateMethod*
-`int x_MyClassPrivateMethod(char c);`
-**Module Static Functions and Data**
-***s\_****StaticFunc*
-`static char s_MyStaticFunc(void);`
-***s\_****StaticVar*
-`static int s_MyStaticVar;`
-**Global (*"extern"*) Functions and Data**
-***g\_****GlobalFunc*
-`double g_MyGlobalFunc(void);`
-***g\_****GlobalVar*
-`short g_MyGlobalVar;`
+|                      SYNOPSIS                                        |                      EXAMPLE                               |
+|----------------------------------------------------------------------|------------------------------------------------------------|
+|                                                                      |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Type Names**      |
+|***C****ClassTypeName*                                                |`class CMyClass { ..... };`                                 |
+|***I****InterfaceName*                                                |`class IMyInterface { ..... };`                             |
+|***S****StructTypeName*                                               |`struct SMyStruct { ..... };`                               |
+|***U****UnionTypeName*                                                |`union UMyUnion { ..... };`                                 |
+|***E****EnumTypeName*                                                 |`enum EMyEnum { ..... };`                                   |
+|***F****FunctionTypeName*                                             |`typedef int (*FMyFunc)(void);`                             |
+|***P****PredicateName*                                                |`struct PMyPred { bool operator() (.... , ....); };`        |
+|***T****AuxiliaryTypedef* [(\*)](#ch_style.1.3.1)                     |`typedef map<int,string> TMyMapIntStr;`                     |
+|***T****Iterator****\_I***                                            |`typedef list<int>::iterator TMyList_I;`                    |
+|***T****ConstIterator****\_CI***                                      |`typedef set<string>::const_iterator TMySet_CI;`            |
+|***N****Namespace* [(see also)](#ch_style.naming_prefix)              |`namespace NMyNamespace { ..... }`                          |
+|                                                                      |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Preprocessor Define/Macro**                     |
+|*MACRO\_NAME*                                                         |`#define MY_DEFINE 12345`                                   |
+|*macro\_arg\_name*                                                    |`#define MY_MACRO(x, y) (((x) + 1) < (y))`                  |
+|                                                                      |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Function Arguments and Local Variables**        |
+|*func\_local\_var\_name* |`void MyFunc(int foo, const CMyClass& a_class)`<br/>`{ `<br/>`    size_t  foo_size;`<br/>`    int   bar;`|
+|                                                                      |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Constants**                                     |
+|***k****ConstantName*                                                 |`const int kMyConst = 123;`                                 |
+|***e****EnumValueName*  |`enum EMyEnum { `<br/>`    eMyEnum_1 = 11, `<br/>`    eMyEnum_2 = 22, `<br/>`    eMyEnum_3 = 33 `<br/>`};`|
+|***f****FlagValueName*|`enum EMyFlags {`<br/>`    fMyFlag_1 = (1<<0),  ///< = 0x1 (describe)`<br/>`    fMyFlag_2 = (1<<1),  ///< = 0x2 (describe)`<br/>`    fMyFlag_3 = (1<<2)   ///< = 0x4 (describe)`<br/>`};` <br/>`typedef int TMyFlags; ///< holds bitwise OR of "EMyFlags"`                                                                                                                         |
+|                                                                      |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Class and Structure Data Members (Fields)**     |
+|***m\_****ClassMemberName*                                            |`class C { short int m_MyClassData; };`                     |
+|*struct\_field\_name*                                                 |`struct S { int my_struct_field; };`                        |
+|***sm\_****ClassStaticMemberName*                                     |`class C { static double sm_MyClassStaticData; };`          |
+|                                                                      |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Class Member Functions (Methods)**              |
+|*ClassMethod*                                                         |`bool MyClassMethod(void);`                                 |
+|***x\_****ClassPrivateMethod*                                         |`int x_MyClassPrivateMethod(char c);`                       |
+|                                                                      |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Module Static Functions and Data**              |
+|***s\_****StaticFunc*                                                 |`static char s_MyStaticFunc(void);`                         |
+|***s\_****StaticVar*                                                  |`static int s_MyStaticVar;`                                 |
+|                                                                      |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Global (*"extern"*) Functions and Data**        |
+|***g\_****GlobalFunc*                                                 |`double g_MyGlobalFunc(void);`                              |
+|***g\_****GlobalVar*                                                  |`short g_MyGlobalVar;`                                      |
+
 <div class="table-scroll"></div>
 
 <a name="ch_style.1.3.1"></a>
@@ -317,7 +292,7 @@ In general, if a header file is commonly used, it must be on the INCLUDE path an
 
 **4-space indentation only**! Tabulation symbol **must not** be used for indentation.
 
-Try not to cross the "standard page boundary" of **80** symbols.
+In many contexts (especially in the header files) it is beneficial to try and keep the code line width within **80** symbols; however this rule is not universal, so -- use your best judgement.
 
 In `if, for, while, do, switch, case`, etc. and type definition statements:
 
@@ -583,16 +558,16 @@ The alternative tokens "`and`", "`not_eq`", "`:>`", etc. should not be used in p
 
 ### Standard Header Template
 
-A standard header template file, [header\_template.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/common/header_template.hpp), has been provided in the `include/common` directory that can be used as a template for creating header files. This header file adheres to the standards outlined in the previous sections and uses a documentation style for files, classes, methods, macros etc. that allows for automatic generation of documentation from the source code. It is strongly suggested that you obtain a copy of this file and model your documentation using the examples in that file.
+A standard header template file, [header\_template.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/common/header_template.hpp), has been provided in the `include/common` directory that can be used as a template for creating header files. This header file adheres to the standards outlined in the previous sections and uses a documentation style for files, classes, methods, macros etc. that allows for automatic generation of documentation from the source code. It is strongly suggested that you obtain a copy of this file and model your documentation using the examples in that file.
 
 <a name="ch_style.Doxygen_Comments"></a>
 
 Doxygen Comments
 ----------------
 
-[Doxygen](http://www.stack.nl/~dimitri/doxygen/) is an automated API documentation tool. It relies on special comments placed at appropriate places in the source code. Because the comments are in the source code near what they document, the documentation is more likely to be kept up-to-date when the code changes. A configuration and parsing system scans the code and creates the desired output (e.g. HTML).
+[Doxygen](https://www.stack.nl/~dimitri/doxygen/) is an automated API documentation tool. It relies on special comments placed at appropriate places in the source code. Because the comments are in the source code near what they document, the documentation is more likely to be kept up-to-date when the code changes. A configuration and parsing system scans the code and creates the desired output (e.g. HTML).
 
-Doxygen documentation is a valuable tool for software developers, as it automatically creates comprehensive cross-referencing of modules, namespaces, classes, and files. It creates inheritance diagrams, collaboration diagrams, header dependency graphs, and documents each class, struct, union, interface, define, typedef, enum, function, and variable (see the NCBI C++ Toolkit [Doxygen browser](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/)). However, developers must write meaningful comments to get the most out of it.
+Doxygen documentation is a valuable tool for software developers, as it automatically creates comprehensive cross-referencing of modules, namespaces, classes, and files. It creates inheritance diagrams, collaboration diagrams, header dependency graphs, and documents each class, struct, union, interface, define, typedef, enum, function, and variable (see the NCBI C++ Toolkit [Doxygen browser](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/)). However, developers must write meaningful comments to get the most out of it.
 
 Doxygen-style comments are essentially extensions of C/C++ comments, e.g. the use of a triple-slash instead of a double-slash. Doxygen-style comments refer to the entity following them by default, but can be made to refer to the entity preceding them by appending the ‘`<`’ symbol to the comment token (e.g. ‘`///<`’).
 
@@ -600,7 +575,7 @@ Doxygen commands are keywords within Doxygen comments that are used during the d
 
 Please do not use superfluous comments, such as ‘`/// Destructor`’. Especially do not use the same superfluous comment multiple times, such as using the same ‘`/// Constructor`’ comment for different constructors!
 
-Please see the [Doxygen manual](http://www.stack.nl/~dimitri/doxygen/manual.html) for complete usage information. More information can also be found in the chapter on [Toolkit browsers](ch_browse.html).
+Please see the [Doxygen manual](https://www.stack.nl/~dimitri/doxygen/manual.html) for complete usage information. More information can also be found in the chapter on [Toolkit browsers](ch_browse.html).
 
 <a name="ch_style.style_guidelines"></a>
 
@@ -657,19 +632,19 @@ This section discusses the following topics:
 
 <a name="ch_style.Limitations_on_Using_C11_Featur"></a>
 
-##### Limitations on Using C++11 Features
+##### Using C++11 Features
 
-Many new features of the C++11 Standard are not yet implemented (or implemented poorly) by at least some actual compilers, so - please be very careful about using these new C++11 features.
+Some new features of the C++11 Standard are not yet implemented (or implemented poorly) by at least some actual compilers (see e.g. [MS VS 2013](https://msdn.microsoft.com/en-us/library/hh567368.aspx) so - please be careful about using some of the "more advanced" C++11 features.
 
-Do not use C++11 features in code that is:
+Do not use such C++11 features in code that is:
 
--   Platform-portable, such as the ["core" (public, non-GUI, non-INTERNAL) part of the C++ Toolkit](http://www.ncbi.nlm.nih.gov/viewvc/v1/trunk/c++/);
+-   Platform-portable, such as the ["core" (public, non-GUI, non-INTERNAL) part of the C++ Toolkit](https://www.ncbi.nlm.nih.gov/viewvc/v1/trunk/c++/);
 
 -   Part of regular [coremake builds](https://svn.ncbi.nlm.nih.gov/viewvc/toolkit/trunk/c++/scripts/internal/projects/netopt.lst?view=markup);
 
--   Supposed to be compiled with older compilers (like GCC-4.4.2, MSVC10, etc) that don't support C++11; or
+-   Supposed to be compiled with the relatively old compilers (like MSVC13, etc) that don't support many features; or
 
--   Known to be a dependency for the projects that still need to be compiled with older compilers.
+-   Known to be a dependency for the projects that still need to be compiled with the older compilers.
 
 <a name="ch_style.stl_templ_lib"></a>
 
@@ -681,7 +656,7 @@ Use the [Standard Template Library (STL)](#ch_style.style_templ_library), which 
 
 ##### Use of C++ Exceptions
 
--   Exceptions are useful. However, since exceptions unwind the stack, you must be careful to destroy all resources (such as memory on the heap and file handles) in every intermediate step in the stack unwinding. That means you must always catch exceptions, even those you don't handle, and delete everything you are using locally. In most cases it's very convenient and safe to use the [auto\_ptr](http://www.parashift.com/c++-faq-lite/exceptions.html#faq-17.4) template to ensure the freeing of temporary allocated dynamic memory for the case of exception.
+-   Exceptions are useful. However, since exceptions unwind the stack, you must be careful to destroy all resources (such as memory on the heap and file handles) in every intermediate step in the stack unwinding. That means you must always catch exceptions, even those you don't handle, and delete everything you are using locally. In most cases it's very convenient and safe to use the [unique\_ptr](http://en.cppreference.com/w/cpp/memory/unique_ptr) template to ensure the freeing of temporary allocated dynamic memory for the case of exception.
 
 -   Avoid using exception specifications in function declarations, such as:
 
@@ -828,7 +803,7 @@ If you pass a container to a function, don't add a local object to the container
 
 -   Don't use the ***rope*** class from some versions of the STL. This is a non-standard addition. If you have questions about what is/isn't in the standard library, consult the [C++ standards](http://www.parashift.com/c++-faq-lite/big-picture.html#faq-6.12).
 
--   The NCBI C++ Toolkit includes ***hash\_map***, ***hash\_multimap***, ***hash\_set***, and ***hash\_multiset*** classes (from headers [\<corelib/hash\_map.hpp\>](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/hash__map_8hpp.html) and [\<corelib/hash\_set.hpp\>](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/hash__set_8hpp.html)). These classes are more portable than, and should be used instead of, the STL's respective ***hash\_\**** classes.
+-   The NCBI C++ Toolkit includes ***hash\_map***, ***hash\_multimap***, ***hash\_set***, and ***hash\_multiset*** classes (from headers [\<corelib/hash\_map.hpp\>](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/hash__map_8hpp.html) and [\<corelib/hash\_set.hpp\>](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/hash__set_8hpp.html)) -- or, better yet, use the C++11's ***unordered_map***, ***unordered_multimap***, ***unordered_set*** and ***unordered_multiset***. These classes are more portable than, and should be used instead of, the STL's respective ***hash\_\**** classes.
 
 <a name="ch_style.cpp_bad_guys"></a>
 

@@ -21,7 +21,7 @@ The overview for this chapter consists of the following topics:
 
 ### Introduction
 
--   **CORELIB library** `xncbi`:[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib)
+-   **CORELIB library** `xncbi`:[include](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib) \| [src](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib)
 
 The CORELIB provides a portable low-level API and many useful application framework classes for argument processing, diagnostics, environment interface, object and reference classes, portability definitions, portable exceptions, stream wrappers, string manipulation, threads, etc.
 
@@ -29,7 +29,7 @@ This chapter provides reference material for many of CORELIB's facilities. For a
 
 ***Note***: The CORELIB must be linked to every executable that uses the NCBI C++ Toolkit!
 
--   **UTIL library** `xutil`:[include](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/util) \| [src](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/util)
+-   **UTIL library** `xutil`:[include](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/util) \| [src](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/util)
 
 The UTIL module is a collection of useful classes which can be used in more then one application. This chapter provides reference material for many of UTIL's facilities. For an overview of the UTIL module please refer to the [UTIL section in the introductory chapter](ch_intro.html#ch_intro.intro_util) on the C++ Toolkit.
 
@@ -50,6 +50,8 @@ The following is an outline of the topics presented in this chapter:
         -   [CNcbiRegistry](#ch_core.CNcbiRegistry)
 
         -   [CNcbiDiag](#ch_core.CNcbiDiag)
+
+        -   [CVersion](#ch_core.CVersion)
 
     -   [Creating a Simple Application](#ch_core.creating_simple_app)
 
@@ -91,6 +93,8 @@ The following is an outline of the topics presented in this chapter:
 
     -   [Supporting Command-Based Command Lines](#ch_core.Supporting_CommandBased_Command)
 
+    -   [Argument dependency groups](#ch_core.Argument_Dependency_Groups)
+
     -   [Code Examples](#ch_core.arg_code_example)
 
 -   [Namespace, Name Concatenation, and Compiler-specific Macros](#ch_core.namespace_concat)
@@ -128,52 +132,6 @@ The following is an outline of the topics presented in this chapter:
     -   [Additional Registry Methods](#ch_core.registry_addmethods)
 
 -   [Portable Stream Wrappers](#ch_core.stream_wrappers)
-
--   [Working with Diagnostic Streams (\*)](#ch_core.diag)
-
-    -   [Where Diagnostic Messages Go](#ch_core.Where_Diagnostic_Messages_Go)
-
-    -   [Setting Diagnostic Severity Levels](#ch_core.diag_severity)
-
-    -   [Diagnostic Messages Filtering](#ch_core.diagnostic_messages_filtering)
-
-    -   [Log File Format](#ch_core.Log_File_Format)
-
-        -   [The Old Post Format](#ch_core.The_Old_Post_Format)
-
-        -   [The New Post Format](#ch_core.The_New_Post_Format)
-
-        -   [Controlling Appearance of Diagnostic Message Using Post Flags](#ch_core.diag_post_flags)
-
-    -   [Defining the Output Stream](#ch_core.diag_set_stream)
-
-    -   [Tee Output to STDERR](#ch_core.Tee_Output_to_STDERR)
-
-    -   [The Message Buffer](#ch_core.diag_buffering)
-
-    -   [Request Exit Status Codes](#ch_core.Request_Exit_Status_Codes)
-
-        -   [Standard (HTTP-like) status codes](#ch_core.Standard_HTTPlike_status_codes)
-
-        -   [NCBI-specific status codes](#ch_core.NCBIspecific_status_codes)
-
-    -   [Error Codes and Their Descriptions](#ch_core.diag_errcodes)
-
-        -   [Preparing an Error Message File](#ch_core.err_msg_file)
-
-    -   [Defining Custom Handlers Using CDiagHandler](#ch_core.diag_handlers)
-
-    -   [The ERR\_POST and LOG\_POST Macros](#ch_core.ERR_POST)
-
-    -   [The \_TRACE macro](#ch_core._TRACE)
-
-    -   [Performance Logging](#ch_core.Performance_Logging)
-
-    -   [Stack Traces](#ch_core.Stack_Traces)
-
-        -   [Printing a Stack Trace](#ch_core.Printing_a_Stack_Trace)
-
-        -   [Obtaining a Stack Trace for Exceptions](#ch_core.Obtaining_a_Stack_Trace_for_Exce)
 
 -   [Debug Macros](#ch_core.debug_module_ref)
 
@@ -283,7 +241,7 @@ The following is an outline of the topics presented in this chapter:
 
     -   [NStr Class](#ch_core.NStr)
 
-    -   [UTF-8 Strings](#ch_core.UTF_strings)
+    -   [UNICODE support](#ch_core.UTF_strings)
 
     -   [PCase and PNocase](#ch_core.pcase)
 
@@ -363,14 +321,14 @@ The following is an outline of the topics presented in this chapter:
 
 -   [Using the C++ Toolkit from a Third Party Application Framework](#ch_core.Using_the_C_Toolkit_from_a_Third)
 
-**Demo Cases** [[src/sample/app/basic](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/basic)]
+**Demo Cases** [[src/sample/app/basic](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/basic)]
 
 <a name="ch_core.writing_simple_app"></a>
 
 Writing a Simple Application
 ----------------------------
 
-This section discusses how to write a simple application using the [CNcbiApplication](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNcbiApplication.html) and related class. A [conceptual understanding of the uses of the CNcbiApplication and related classes](ch_intro.html#ch_intro.intro_appframe) is presented in the introductory chapter on the C++ Toolkit.
+This section discusses how to write a simple application using the [CNcbiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNcbiApplication.html) and related class. A [conceptual understanding of the uses of the CNcbiApplication and related classes](ch_intro.html#ch_intro.intro_appframe) is presented in the introductory chapter on the C++ Toolkit.
 
 This section discusses the following topics:
 
@@ -398,13 +356,15 @@ The following five fundamental classes form the foundation of the C++ Toolkit Ap
 
 -   [CNcbiDiag](#ch_core.CNcbiDiag)
 
+-   [CVersion](#ch_core.CVersion)
+
 Each of these classes is discussed in the following sections:
 
 <a name="ch_core.CNcbiApplication"></a>
 
 #### CNcbiApplication
 
-[CNcbiApplication](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNcbiApplication.html) is an abstract class used to define the basic functionality and behavior of an NCBI application. Because this application class effectively supersedes the C-style ***main()*** function, minimally, it must provide the same functionality, i.e.:
+[CNcbiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNcbiApplication.html) is an abstract class used to define the basic functionality and behavior of an NCBI application. Because this application class effectively supersedes the C-style ***main()*** function, minimally, it must provide the same functionality, i.e.:
 
 -   a mechanism to execute the actual application
 
@@ -426,7 +386,7 @@ The mechanism to execute the application is provided by ***CNcbiApplication***'s
 
 #### CNcbiArguments
 
-The [CNcbiArguments](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNcbiArguments.html) class provides a data structure for holding the application's command-line arguments, along with methods for accessing and modifying these. Access to the argument values is implemented using the built-in `[ ]` operator. For example, the first argument in **`argv`** (following the program name) can be retrieved using the ***CNcbiApplication::GetArguments()*** method:
+The [CNcbiArguments](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNcbiArguments.html) class provides a data structure for holding the application's command-line arguments, along with methods for accessing and modifying these. Access to the argument values is implemented using the built-in `[ ]` operator. For example, the first argument in **`argv`** (following the program name) can be retrieved using the ***CNcbiApplication::GetArguments()*** method:
 
     string arg1_value = GetArguments()[1];
 
@@ -466,7 +426,7 @@ Arguments must be followed by an empty terminating line.
 
 #### CNcbiEnvironment
 
-The [CNcbiEnvironment](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNcbiEnvironment.html) class provides a data structure for storing, accessing, and modifying the environment variables accessed by the C library routine ***getenv()***.
+The [CNcbiEnvironment](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNcbiEnvironment.html) class provides a data structure for storing, accessing, and modifying the environment variables accessed by the C library routine ***getenv()***.
 
 The following describes the public interface to the ***CNcbiEnvironment***:
 
@@ -509,7 +469,40 @@ Complete details for the ***CNcbiRegistry*** can be found in the section on [The
 
 #### CNcbiDiag
 
-The [CNcbiDiag](#ch_core.diag) class implements much of the functionality of the NCBI C++ Toolkit error-processing mechanisms; however, it is not intended to be used directly. Instead, use the [`{ERR|LOG}_POST*`](#ch_core.ERR_POST) and [`_TRACE`](#ch_core._TRACE) macros. See the sections on [Diagnostic Streams](#ch_core.diag) and [Message Posting](ch_debug.html#ch_debug.std_cpp_message_post) for related information.
+The [CNcbiDiag](#ch_core.diag) class implements much of the functionality of the NCBI C++ Toolkit error-processing mechanisms; however, it is not intended to be used directly. Instead, use the [`{ERR|LOG}_POST*`](#ch_core.ERR_POST) and [`_TRACE`](#ch_core._TRACE) macros. See the sections on [Diagnostic Streams](ch_log.html) and [Message Posting](ch_debug.html#ch_debug.std_cpp_message_post) for related information.
+
+<a name="ch_core.CVersion"></a>
+
+#### CVersion
+
+To set compile-time application version info, use class CVersion. It allows to store and output the following data:
+- Application version info in format "%major%.%minor%.%patch% (%version_name%)"
+- Components version info. For each component there will be "%component_name%: %major%.%minor%.%patch% (%version_name%)"
+- Package version info in format "%major%.%minor%.%patch% (%version_name%)"
+- Build info (build date and build tag)
+- Build signature (contains compiler, build configuration, platform, OS, hostname)
+- TeamCity build number
+
+You can output all this info by using argument *`-version-full`* when running your application. Using argument *`-version`* will output only application version info and package version info.
+
+To add build date and build tag to a custom NCBI application (e.g. based on CNcbiApplication or CCgiApplication), pass pre-processor macro **`NCBI_BUILD_TAG`** to your build and follow this example:
+
+    + #ifdef NCBI_BUILD_TAG
+    + #   define APP_BUILD_TAG NCBI_AS_STRING(NCBI_BUILD_TAG)
+    + #else
+    + #   define APP_BUILD_TAG kEmptyStr
+    + #endif
+    + 
+      class CMyNcbiApp : public CNcbiApplication
+      {
+      public:
+          CMyNcbiApp() 
+          {
+    +        CVersionInfo version_info("0.0.0");
+    +        SBuildInfo build_info(__DATE__ " " __TIME__, APP_BUILD_TAG);
+    +        SetVersion(version_info, build_info);
+          }
+
 
 <a name="ch_core.creating_simple_app"></a>
 
@@ -557,9 +550,9 @@ This will create:
 
 2.  the source file -- `example\src\example\basic_sample.cpp` (the source file name is always `basic_sample.cpp`, regardless of the project name)
 
-3.  the MSVC project file -- `example\compilers\msvc1000_prj\static\build\example\example.exe.vcproj`
+3.  the MSVC project file -- `example\compilers\vs2015\static\build\example\example.exe.vcproj`
 
-4.  the MSVC solution file -- `example\compilers\msvc1000_prj\static\build\example.sln`
+4.  the MSVC solution file -- `example\compilers\vs2015\static\build\example.sln`
 
 5.  a project makefile -- `example\src\example\Makefile.example.app`
 
@@ -569,11 +562,11 @@ This will create:
 
 1.  Rename the source file from `example\src\example\basic_sample.cpp` to `example.cpp`.
 
-2.  Edit the MSVC project file `example\compilers\msvc1000_prj\static\build\example\example.exe.vcproj` and replace "basic\_sample" with "example".
+2.  Edit the MSVC project file `example\compilers\vs2015\static\build\example\example.exe.vcproj` and replace "basic\_sample" with "example".
 
 3.  Edit the project makefile `example\src\example\Makefile.example.app` and replace "basic\_sample" with "example".
 
-Then open the solution file `example\compilers\msvc1000_prj\static\build\example.sln` with MSVS and:
+Then open the solution file `example\compilers\vs2015\static\build\example.sln` with MSVS and:
 
 1.  Build the **`-CONFIGURE-`** project (reloading the project when prompted).
 
@@ -583,7 +576,7 @@ Then open the solution file `example\compilers\msvc1000_prj\static\build\example
 
 #### Discussion of the Sample Application
 
-In the [sample application](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/basic/basic_sample.cpp) above:
+In the [sample application](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/basic/basic_sample.cpp) above:
 
 1. There is an application class derived from ***CNcbiApplication***, which overrides the purely virtual function ***Run()*** as well as the initialization (***Init()***) and cleanup (***Exit()***) functions:
 
@@ -837,6 +830,8 @@ This section discusses the following topics:
 
 -   [Supporting Command-Based Command Lines](#ch_core.Supporting_CommandBased_Command)
 
+-   [Argument dependency groups](#ch_core.Argument_Dependency_Groups)
+
 -   [Code Examples](#ch_core.arg_code_example)
 
 <a name="ch_core.cmd_line_APIs"></a>
@@ -857,7 +852,9 @@ The set of classes for argument processing implement automated command line pars
 
 -   access the input argument values specifically typecast according to their descriptions
 
-Normally, a ***CArgDescriptions*** object that contains the argument description is required and [should be created](#ch_core.CArgDescriptions_App) in the application's ***Init()*** function before any other initialization. Otherwise, ***CNcbiApplication*** creates a default one, which allows any program that uses the NCBI C++ Toolkit to provide some `standard` command -line options, namely:
+-   define dependencies between arguments
+
+Normally, a [CArgDescriptions](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html) object that contains the argument description is required and [should be created](#ch_core.CArgDescriptions_App) in the application's ***Init()*** function before any other initialization. Otherwise, ***CNcbiApplication*** creates a default one, which allows any program that uses the NCBI C++ Toolkit to provide some `standard` command -line options, namely:
 
 -   to obtain a general description of the program as well as description of all available command-line parameters (`-h` flag)
 
@@ -893,7 +890,7 @@ The resulting [CArgs](#ch_core.CArgs) object will contain parsed, verified, and 
 
 <a name="ch_core.F1"></a>
 
-[![Figure 1. Argument processing class relations.](/book/static/img/flow.gif)](/book/static/img/flow.gif "Click to see the full-resolution image")
+[![Figure 1. Argument processing class relations.](/cxx-toolkit/static/img/flow.gif)](/cxx-toolkit/static/img/flow.gif "Click to see the full-resolution image")
 
 Figure 1. Argument processing class relations.
 
@@ -949,9 +946,9 @@ The [Supporting Command-Based Command Lines](#ch_core.Supporting_CommandBased_Co
 
 <a name="ch_core.CArgDescriptions"></a>
 
-### The ***CArgDescriptions*** ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html)) class
+### The ***CArgDescriptions*** ([\*](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html)) class
 
-***CArgDescriptions*** contains a description of unparsed arguments, that is, user-specified descriptions that are then used to parse the arguments. ***CArgDescriptions*** is used as a container to store the command-line argument descriptions. The argument descriptions are used for parsing and verifying actual command-line arguments.
+[CArgDescriptions](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html) contains a description of unparsed arguments, that is, user-specified descriptions that are then used to parse the arguments. ***CArgDescriptions*** is used as a container to store the command-line argument descriptions. The argument descriptions are used for parsing and verifying actual command-line arguments.
 
 The following is a list of topics discussed in this section:
 
@@ -983,7 +980,7 @@ If "auto\_help" is passed TRUE, then a special flag "-h" will be added to the li
 
 #### Describing Argument Attributes
 
-***CNcbiArguments*** contains many methods, called ***AddXxx()***. The "Xxx" refers to the types of arguments, such as mandatory key (named) arguments, optional key arguments, positional arguments, flag arguments, etc. For example, the ***AddKey()*** method refers to adding a description for a mandatory key argument.
+***CArgDescriptions*** class contains many methods, called ***AddXxx()***. The "Xxx" refers to the types of arguments, such as mandatory key (named) arguments, optional key arguments, positional arguments, flag arguments, etc. For example, the ***AddKey()*** method refers to adding a description for a mandatory key argument.
 
 The methods for ***AddXxx()*** are passed the following argument attributes:
 
@@ -1003,19 +1000,19 @@ The methods for ***AddXxx()*** are passed the following argument attributes:
 
 #### Argument Types
 
-The [CArgDescriptions](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html) class enables registration of command-line arguments that fit one of the following pattern types:
+The [CArgDescriptions](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html) class enables registration of command-line arguments that fit one of the following pattern types:
 
-**Mandatory named arguments:**`-<key> <value>` (example: `-age 31`) Position-independent arguments that **must** be present in the command line. [AddKey (key, synopsis, comment, value\_type, flags)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html)
+**Mandatory named arguments:**`-<key> <value>` (example: `-age 31`) Position-independent arguments that **must** be present in the command line. [AddKey (key, synopsis, comment, value\_type, flags)](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html)
 
-**Optional named arguments:**`[-<key> <value>]` (example: `-name Lisa`) Position-independent arguments that are **optional**. [AddOptionalKey (key, synopsis, comment, value\_type, flags)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html) A default value can be specified in the argument's description to cover those cases where the argument does not occur in the command line[. AddDefaultKey (key, synopsis, comment, value\_type, default\_value, flags)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html)
+**Optional named arguments:**`[-<key> <value>]` (example: `-name Lisa`) Position-independent arguments that are **optional**. [AddOptionalKey (key, synopsis, comment, value\_type, flags)](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html) A default value can be specified in the argument's description to cover those cases where the argument does not occur in the command line[. AddDefaultKey (key, synopsis, comment, value\_type, default\_value, flags)](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html)
 
-**Optional named flags:**`[-<flag>]` (example: ***-reverse***) Position-independent boolean (without value) arguments. These arguments are **always** optional. [AddFlag (flag, comment, set\_value)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html)
+**Optional named flags:**`[-<flag>]` (example: ***-reverse***) Position-independent boolean (without value) arguments. These arguments are **always** optional. [AddFlag (flag, comment, set\_value)](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html)
 
-**Mandatory named positional arguments:**`<value>` (example: `12 Feb`) These are position-`dependent` arguments (of any type), which are read using a `value` only. They do, however, have names stored with their descriptions, which they are associated with in an order-dependent fashion. Specifically, the order in which untagged argument descriptions are added to the ***CArgDescriptions*** object using ***AddPositional()*** defines the order in which these arguments should appear in the command line. [AddPositional (key, comment, value\_type, flags)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html)
+**Mandatory named positional arguments:**`<value>` (example: `12 Feb`) These are position-`dependent` arguments (of any type), which are read using a `value` only. They do, however, have names stored with their descriptions, which they are associated with in an order-dependent fashion. Specifically, the order in which untagged argument descriptions are added to the ***CArgDescriptions*** object using ***AddPositional()*** defines the order in which these arguments should appear in the command line. [AddPositional (key, comment, value\_type, flags)](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html)
 
-**Optional named positional arguments:**`[value]` (example: `foo.txt bar`) Position-`dependent` arguments that are `optional`. They always go after the `mandatory` positional arguments. The order in which untagged argument descriptions are added to the ***CArgDescriptions*** object using ***Add[Optional\|Default]Positional()*** defines the order in which these arguments should appear in the command line. [AddOptionalPositional (key, comment, value\_type, flags)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html)[AddDefaultPositional (key, comment, value\_type, default\_value, flags)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html)
+**Optional named positional arguments:**`[value]` (example: `foo.txt bar`) Position-`dependent` arguments that are `optional`. They always go after the `mandatory` positional arguments. The order in which untagged argument descriptions are added to the ***CArgDescriptions*** object using ***Add[Optional\|Default]Positional()*** defines the order in which these arguments should appear in the command line. [AddOptionalPositional (key, comment, value\_type, flags)](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html)[AddDefaultPositional (key, comment, value\_type, default\_value, flags)](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html)
 
-**Unnamed positional arguments** (all of the same type: `<value1> | [valueN]` (example: `foo.c bar.c xxx.c`). These are also position-`dependent` arguments that are read using a `value` only. They are expected to appear at the very end of the command line, after all named arguments. Unlike the previous argument type, however, these arguments do not have individual, named descriptions but share a single "unnamed" description. You can specify how many mandatory and how many optional arguments to expect using **`n_mandatory`** and **`n_optional`** parameters: [AddExtra (n\_mandatory, n\_optional, comment, type, flags)](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html)
+**Unnamed positional arguments** (all of the same type: `<value1> | [valueN]` (example: `foo.c bar.c xxx.c`). These are also position-`dependent` arguments that are read using a `value` only. They are expected to appear at the very end of the command line, after all named arguments. Unlike the previous argument type, however, these arguments do not have individual, named descriptions but share a single "unnamed" description. You can specify how many mandatory and how many optional arguments to expect using **`n_mandatory`** and **`n_optional`** parameters: [AddExtra (n\_mandatory, n\_optional, comment, type, flags)](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html)
 
 **Aliases** can be created for any arguments. They allow using an alternative argument name in the command line. However, only the original argument name can be used to access its value in the C++ code.
 
@@ -1030,7 +1027,7 @@ These methods can also be applied to the unnamed positional arguments (as a `gro
 
 #### Restricting the Input Argument Values
 
-Although each argument's input value is initially loaded as a simple character string, the argument's specified type implies a restricted set of possible values. For example, if the type is **`eInteger`**, then any integer value is acceptable, but floating point and non-numerical values are not. The [EType](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html) enumeration quantifies the allowed types and is defined as:
+Although each argument's input value is initially loaded as a simple character string, the argument's specified type implies a restricted set of possible values. For example, if the type is **`eInteger`**, then any integer value is acceptable, but floating point and non-numerical values are not. The [EType](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html) enumeration quantifies the allowed types and is defined as:
 
     /// Available argument types.
     enum EType {
@@ -1047,7 +1044,7 @@ Although each argument's input value is initially loaded as a simple character s
 
 #### Implementing User-defined Restrictions Using the ***CArgAllow*** Class
 
-It may be necessary to specify a restricted range for argument values. For example, an integer argument that has a range between 5 and 10. Further restrictions on the allowed values can be specified using the ***CArgDescriptions::SetConstraint()*** method with the [CArgAllow](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgAllow.html) class. For example:
+It may be necessary to specify a restricted range for argument values. For example, an integer argument that has a range between 5 and 10. Further restrictions on the allowed values can be specified using the ***CArgDescriptions::SetConstraint()*** method with the [CArgAllow](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgAllow.html) class. For example:
 
     auto_ptr<CArgDescriptions> args(new CArgDescriptions);
     // add descriptions for "firstint" and "nextint" using AddXxx( ...)
@@ -1058,9 +1055,9 @@ It may be necessary to specify a restricted range for argument values. For examp
 
 This specifies that the arguments named `"firstInt"` and `"nextInt"` must both be in the range [5, 10].
 
-The [CArgAllow\_Integers](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgAllow__Integers.html) class is derived from the **abstract*****CArgAllow*** class. The constructor takes the two integer arguments as lower and upper bounds for allowed values. Similarly, the [CArgAllow\_Doubles](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgAllow__Doubles.html) class can be used to specify a range of allowed floating point values. For both classes, the order of the numeric arguments does not matter, because the constructors will use min/max comparisons to generate a valid range.
+The [CArgAllow\_Integers](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgAllow__Integers.html) class is derived from the **abstract*****CArgAllow*** class. The constructor takes the two integer arguments as lower and upper bounds for allowed values. Similarly, the [CArgAllow\_Doubles](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgAllow__Doubles.html) class can be used to specify a range of allowed floating point values. For both classes, the order of the numeric arguments does not matter, because the constructors will use min/max comparisons to generate a valid range.
 
-A third class derived from the ***CArgAllow*** class is the [CArgAllow\_Strings](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgAllow__Strings.html) class. In this case, the set of allowed values cannot be specified by a ***range***, but the following construct can be used to enumerate all eligible string values:
+A third class derived from the ***CArgAllow*** class is the [CArgAllow\_Strings](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgAllow__Strings.html) class. In this case, the set of allowed values cannot be specified by a ***range***, but the following construct can be used to enumerate all eligible string values:
 
     CArgAllow* constraint = (new CArgAllow_Strings())->
                                  Allow("this)->Allow("that")->Allow("etc");
@@ -1071,7 +1068,7 @@ Here, the constructor takes no arguments, and the ***Allow()*** method returns *
     args.SetConstraint("someString",
                        &(*new CArgAllow_Strings, "this", "that", "etc"));
 
-There are two other pre-defined constraint classes: [CArgAllow\_Symbols](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgAllow__Symbols.html) and [CArgAllow\_String](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgAllow__String.html). If the value provided on the command line is not in the allowed set of values specified for that argument, then an exception will be generated. This exception can be caught and handled in the usual manner, as described in the discussion of [Generating a USAGE message.](#ch_core.CArgDescriptions_Usage)
+There are two other pre-defined constraint classes: [CArgAllow\_Symbols](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgAllow__Symbols.html) and [CArgAllow\_String](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgAllow__String.html). If the value provided on the command line is not in the allowed set of values specified for that argument, then an exception will be generated. This exception can be caught and handled in the usual manner, as described in the discussion of [Generating a USAGE message.](#ch_core.CArgDescriptions_Usage)
 
 <a name="ch_core.CArgDescriptions_App"></a>
 
@@ -1124,9 +1121,9 @@ The arguments in the USAGE message can be arranged into groups by using ***SetCu
 
 <a name="ch_core.CArgs"></a>
 
-### The CArgs ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgs.html)) Class: A Container Class for CArgValue ([\*](#ch_core.CArgValue)) Objects
+### The CArgs ([\*](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgs.html)) Class: A Container Class for CArgValue ([\*](#ch_core.CArgValue)) Objects
 
-The ***CArgs*** class provides a data structure where the values of the parsed arguments can be stored and includes access routines in its public interface. Argument values are obtained from the unprocessed command-line arguments via the ***CNcbiArguments*** class and then verified and processed according to the argument descriptions defined by the user in ***CArgDescriptions***. The following describes the public interface methods in ***CArgs***:
+The [CArgs](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgs.html) class provides a data structure where the values of the parsed arguments can be stored and includes access routines in its public interface. Argument values are obtained from the unprocessed command-line arguments via the ***CNcbiArguments*** class and then verified and processed according to the argument descriptions defined by the user in ***CArgDescriptions***. The following describes the public interface methods in ***CArgs***:
 
     class  CArgs
     {
@@ -1169,9 +1166,9 @@ All `named` arguments can be accessed using the `[ ]` operator, as in: `myCArgs[
 
 <a name="ch_core.CArgValue"></a>
 
-### ***CArgValue*** ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgValue.html)) Class: The Internal Representation of Argument Values
+### ***CArgValue*** ([\*](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgValue.html)) Class: The Internal Representation of Argument Values
 
-The internal representation of an argument value, as it is stored and retrieved from its [CArgs](#ch_core.CArgs) container, is an instance of a ***CArgValue***. The primary purpose of this class is to provide type-validated loading through a set of ***AsXxx()*** methods where "***Xxx***" is the argument type such as "Integer", "Boolean", "Double", etc. The following describes the public interface methods in ***CArgValue***:
+The internal representation of an argument value, as it is stored and retrieved from its [CArgs](#ch_core.CArgs) container, is an instance of a [CArgValue](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgValue.html). The primary purpose of this class is to provide type-validated loading through a set of ***AsXxx()*** methods where "***Xxx***" is the argument type such as "Integer", "Boolean", "Double", etc. The following describes the public interface methods in ***CArgValue***:
 
     class  CArgValue : public CObject
     {
@@ -1250,7 +1247,7 @@ Command-based command lines have a requirement that command-less command lines d
 
 At a high level, setting up a program to support a command-less command-line requires creating a ***CArgDescriptions*** object, adding argument descriptions to it, and passing it to ***SetupArgDescriptions()***.
 
-Setting up a program to support command-based command lines is similar, but requires a ***CCommandArgDescriptions*** object instead. The [CCommandArgDescriptions](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCCommandArgDescriptions.html) class is derived from [CArgDescriptions](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html), so all the same functionality is available; however, the ***AddCommand()*** method of ***CCommandArgDescriptions*** allows you to create multiple ***CArgDescriptions*** objects (one for each command) in addition to the overall program description. Other command-specific features are also provided, such as command grouping. ***Note:*** The ***ECommandPresence*** parameter of the ***CCommandArgDescriptions*** constructor controls whether or not the user must enter a command-based command line. Use **`eCommandOptional`** only when you are setting up both command-less and command-based command lines.
+Setting up a program to support command-based command lines is similar, but requires a ***CCommandArgDescriptions*** object instead. The [CCommandArgDescriptions](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCCommandArgDescriptions.html) class is derived from [CArgDescriptions](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDescriptions.html), so all the same functionality is available; however, the ***AddCommand()*** method of ***CCommandArgDescriptions*** allows you to create multiple ***CArgDescriptions*** objects (one for each command) in addition to the overall program description. Other command-specific features are also provided, such as command grouping. ***Note:*** The ***ECommandPresence*** parameter of the ***CCommandArgDescriptions*** constructor controls whether or not the user must enter a command-based command line. Use **`eCommandOptional`** only when you are setting up both command-less and command-based command lines.
 
 Programs that support command-based command lines must execute these steps:
 
@@ -1266,15 +1263,40 @@ Programs that support command-based command lines must execute these steps:
 
 6.  Process the appropriate arguments for the given command.
 
-For a sample program that demonstrates argument processing for command-based command lines, see [multi\_command.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/basic/multi_command.cpp).
+For a sample program that demonstrates argument processing for command-based command lines, see [multi\_command.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/basic/multi_command.cpp).
 
 For more information on standard command lines and general information applicable to all command line processing, see the [Command-Line Syntax](#ch_core.cmd_line_syntax) and [CArgDescriptions](#ch_core.CArgDescriptions) sections.
+
+<a name="ch_core.Argument_Dependency_Groups"></a>
+
+### Argument dependency groups
+
+Sometimes, a piece of information can be specified using several different options. For example, URL can be specified by one string, or by several - server, database, user name, and password; or, an employee can be specified by ID number or by name.  Argument dependency group class - [CArgDependencyGroup](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCArgDependencyGroup.html) - makes it possible to describe such complex scenarios. First thing to note is that all arguments must be described in [CArgDescriptions](#ch_core.CArgDescriptions). Only after that additional restrictions can be imposed in ***CArgDependencyGroup***. Arguments are added into group by name. Then, developer specifies how many of these arguments must be defined for the group to be valid. Argument dependency group may contain other groups, which potentially allows pretty complex scenarios.
+
+For example, in a group of three arguments, we want to require that only one is present:
+
+    CRef<CArgDependencyGroup> args1 = CArgDependencyGroup::Create("group1");
+    args1->Add("first").Add("second").Add("third");
+    args1->SetMinMembers(1).SetMaxMembers(1);
+
+Or, in a group of four arguments  - "a", "b", "x", "y" - we require that either both "a" and "b" are specified, or one of "x" and "y":
+
+    CRef<CArgDependencyGroup> args1 = CArgDependencyGroup::Create("group1");
+    args1->Add("a").Add("b");
+    args1->SetMinMembers(2).SetMaxMembers(2);
+    CRef<CArgDependencyGroup> args2 = CArgDependencyGroup::Create("group2");
+    args1->Add("x").Add("y");
+    args1->SetMinMembers(1).SetMaxMembers(1);
+    CRef<CArgDependencyGroup> args12 = CArgDependencyGroup::Create("group12");
+    args12->Add(args1).Add(args2);
+    args12->SetMinMembers(1).SetMaxMembers(1);
+
 
 <a name="ch_core.arg_code_example"></a>
 
 ### Code Examples
 
-A simple application program, [test\_ncbiargs\_sample.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib/test/test_ncbiargs_sample.cpp) demonstrates the usage of these classes for argument processing. See also [test\_ncbiargs.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib/test/test_ncbiargs.cpp) (especially ***main()***, ***s\_InitTest0()*** and ***s\_RunTest0()*** there), and [asn2asn.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/app/asn2asn/asn2asn.cpp) for more examples.
+A simple application program, [test\_ncbiargs\_sample.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib/test/test_ncbiargs_sample.cpp) demonstrates the usage of these classes for argument processing. See also [test\_ncbiargs.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib/test/test_ncbiargs.cpp) (especially ***main()***, ***s\_InitTest0()*** and ***s\_RunTest0()*** there), and [asn2asn.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/app/asn2asn/asn2asn.cpp) for more examples.
 
 <a name="ch_core.namespace_concat"></a>
 
@@ -1405,7 +1427,7 @@ The **`flags`** macro parameter (a bitwise OR of enum values) can be used to con
 
 <div class="table-scroll"></div>
 
-See the [enum definition](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ENcbiParamFlags&d=) for an up-to-date list.
+See the [enum definition](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ENcbiParamFlags&d=) for an up-to-date list.
 
 The **`env`** macro parameter can be used to specify the environment variable to be searched. If the **`env`** macro parameter is not used, the environment will be searched for a variable having the form **`NCBI_CONFIG__<section>__<name>`** (***note:*** the first underscore is single; the others are double).
 
@@ -1482,7 +1504,7 @@ Important methods of the ***CParam*** class are:
 
 | Method                     | Static | Purpose                                                                                                                                                                                                                                                                                                                                                       |
 |----------------------------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ***GetState()***           | Yes    | Get the current state of the parameter. The state indicates the last source checked when assigning its value. ***N.B.*** it specifically does *not* indicate the origin of the current value. See the [EParamState](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCParamBase.html#0f2898884063b661395c511bcdb1c6ea) enum for specific values. |
+| ***GetState()***           | Yes    | Get the current state of the parameter. The state indicates the last source checked when assigning its value. ***N.B.*** it specifically does *not* indicate the origin of the current value. See the [EParamState](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCParamBase.html#0f2898884063b661395c511bcdb1c6ea) enum for specific values. |
 | ***Get()***                | No     | Get the current parameter value.                                                                                                                                                                                                                                                                                                                              |
 | ***Set()***                | No     | Set a new parameter value (this instance only).                                                                                                                                                                                                                                                                                                               |
 | ***Reset()***              | No     | Reset the value as if it has not been initialized yet.                                                                                                                                                                                                                                                                                                        |
@@ -1558,7 +1580,7 @@ The following topics are discussed in this section:
 
 ### Working with the Registry Class: CNcbiRegistry
 
-The [CNcbiRegistry](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNcbiRegistry.html) class is used to load, access, modify, and store runtime information read from configuration files. Previously, these files were by convention named `.*rc` files on Unix-like systems. The convention for all platforms now is to name such files `*.ini` (where `*` is by default the application name). An exception to this rule is the system-wide registry, which is named `.ncbirc` on Unix-like systems and `ncbi.ini` on Windows systems. The [CNcbiRegistry](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNcbiRegistry.html) class can read and parse configuration files, search and edit retrieved information, and write back to the file.
+The [CNcbiRegistry](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNcbiRegistry.html) class is used to load, access, modify, and store runtime information read from configuration files. Previously, these files were by convention named `.*rc` files on Unix-like systems. The convention for all platforms now is to name such files `*.ini` (where `*` is by default the application name). An exception to this rule is the system-wide registry, which is named `.ncbirc` on Unix-like systems and `ncbi.ini` on Windows systems. The [CNcbiRegistry](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNcbiRegistry.html) class can read and parse configuration files, search and edit retrieved information, and write back to the file.
 
 The following resources are checked when loading a registry:
 
@@ -1578,7 +1600,7 @@ An environment registry is created from configuration parameters specified in th
 
 If the special environment variable **`NCBI_CONFIG_OVERRIDES`** is defined, the configuration file it names will be loaded as the overrides registry. This registry will have the next highest precedence after the environment.
 
-For the application registry, the name of the configuration file can be explicitly set with the `-conffile` command-line argument, set (or disabled) with the **`conf`** argument of [CNcbiApplication::AppMain()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNcbiApplication.html), or implicitly set (or disabled) according to [search order rules](#ch_core.ini_search_order). If the `-conffile` command-line argument is supplied, that path will be used. If the **`conf`** argument to ***AppMain()*** is supplied, the file will be determined according to [Table 2](#ch_core.T2). Otherwise, the file will be determined according to [search order rules](#ch_core.ini_search_order). The application registry follows the overrides registry in precedence.
+For the application registry, the name of the configuration file can be explicitly set with the `-conffile` command-line argument, set (or disabled) with the **`conf`** argument of [CNcbiApplication::AppMain()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNcbiApplication.html), or implicitly set (or disabled) according to [search order rules](#ch_core.ini_search_order). If the `-conffile` command-line argument is supplied, that path will be used. If the **`conf`** argument to ***AppMain()*** is supplied, the file will be determined according to [Table 2](#ch_core.T2). Otherwise, the file will be determined according to [search order rules](#ch_core.ini_search_order). The application registry follows the overrides registry in precedence.
 
 <a name="ch_core.T2"></a>
 
@@ -1592,7 +1614,7 @@ Table 2. Location of configuration files
 
 <div class="table-scroll"></div>
 
-When the application registry is successfully loaded, you can access it using the method [CNcbiApplication::GetConfig()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNcbiApplication.html). The application will throw an exception if the config file is found, is not empty, and either cannot be opened or contains invalid entries. If the **`conf`** argument to [CNcbiApplication::AppMain()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNcbiApplication.html) is not `NULL` and the config file cannot be found, then a warning will be posted to the application diagnostic stream.
+When the application registry is successfully loaded, you can access it using the method [CNcbiApplication::GetConfig()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNcbiApplication.html). The application will throw an exception if the config file is found, is not empty, and either cannot be opened or contains invalid entries. If the **`conf`** argument to [CNcbiApplication::AppMain()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNcbiApplication.html) is not `NULL` and the config file cannot be found, then a warning will be posted to the application diagnostic stream.
 
 System-wide configuration parameters can be defined in the system registry. The system registry will not be loaded if it contains the `DONT_USE_NCBIRC` entry in the `NCBI` section or if the environment variable **`NCBI_DONT_USE_NCBIRC`** is defined. See the [search order](#ch_core.ini_search_order) section below for details. The system registry follows the application registry in precedence.
 
@@ -1878,1153 +1900,6 @@ Instead of using the iostream, istream or ostream, you should use the portable *
 
 The ***ncbistre.hpp*** also defines functions that handle platform-specific end of line reads. For example, ***Endl()*** represents platform specific end of line, and ***NcbiGetline()*** reads from a specified input stream to a string, and ***NcbiGetlineEOL()*** reads from a specified input stream to a string taking into account platform specific end of line.
 
-<a name="ch_core.diag"></a>
-
-Working with Diagnostic Streams ([\*](ch_debug.html#ch_debug.std_cpp_message_post))
------------------------------------------------------------------------------------
-
-This section provides reference information on the use of the diagnostic stream classes. For an overview of the diagnostic stream concepts refer to the [introductory chapter](ch_intro.html#ch_intro.intro_diag).
-
-The [CNcbiDiag](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNcbiDiag.html) class implements the functionality of an output stream enhanced with error posting mechanisms similar to those found in the NCBI C Toolkit. A ***CNcbiDiag*** object has the look and feel of an output stream; its member functions and friends include output operators and format manipulators. A ***CNcbiDiag*** object is not itself a stream, but serves as an interface to a stream which allows multiple threads to write to the same output. Each instance of ***CNcbiDiag*** includes the following private data members:
-
--   a buffer to store (a single) message text
-
--   a severity level
-
--   a set of post flags
-
-Limiting each instance of ***CNcbiDiag*** to the storage and handling of a single message ensures that multiple threads writing to the same stream will not have interleaving message texts.
-
-The following topics are discussed in this section:
-
--   [Where Diagnostic Messages Go](#ch_core.Where_Diagnostic_Messages_Go)
-
--   [Setting Diagnostic Severity Levels](#ch_core.diag_severity)
-
--   [Diagnostic Messages Filtering](#ch_core.diagnostic_messages_filtering)
-
--   [Log File Format](#ch_core.Log_File_Format)
-
-    -   [The Old Post Format](#ch_core.The_Old_Post_Format)
-
-    -   [The New Post Format](#ch_core.The_New_Post_Format)
-
-    -   [Controlling the Appearance of Diagnostic Messages using Post Flags](#ch_core.diag_post_flags)
-
--   [Defining the Output Stream](#ch_core.diag_set_stream)
-
--   [Tee Output to STDERR](#ch_core.Tee_Output_to_STDERR)
-
--   [The Message Buffer](#ch_core.diag_buffering)
-
--   [Request Exit Status Codes](#ch_core.Request_Exit_Status_Codes)
-
-    -   [Standard (HTTP-like) status codes](#ch_core.Standard_HTTPlike_status_codes)
-
-    -   [NCBI-specific status codes](#ch_core.NCBIspecific_status_codes)
-
--   [Error codes and their Descriptions](#ch_core.diag_errcodes)
-
--   [Defining Custom Handlers using CDiagHandler](#ch_core.diag_handlers)
-
--   [The ERR\_POST and LOG\_POST Macros](#ch_core.ERR_POST)
-
--   [The \_TRACE macro](#ch_core._TRACE)
-
--   [Performance Logging](#ch_core.Performance_Logging)
-
--   [Stack Traces](#ch_core.Stack_Traces)
-
-    -   [Printing a Stack Trace](#ch_core.Printing_a_Stack_Trace)
-
-    -   [Obtaining a Stack Trace for Exceptions](#ch_core.Obtaining_a_Stack_Trace_for_Exce)
-
-<a name="ch_core.Where_Diagnostic_Messages_Go"></a>
-
-### Where Diagnostic Messages Go
-
-The following decision tree describes how the destination for diagnostics messages is determined.
-
-1.  Before the application is constructed (before ***AppMain()*** is called), everything goes to:
-
-    1.  (Unix-like systems only) `/log/fallback/UNKNOWN.{log|err|trace}` -- if available
-
-    2.  **`STDERR`** -- otherwise
-
-2.  When the application is ready, and its name is known, but before the configuration file is loaded:
-
-    1.  If ***AppMain()*** is passed flags **`eDS_Default`** or **`eDS_ToStdlog`**, then the diagnostics goes:
-
-        1.  (Unix-like systems only) if `/log` is present:
-
-            1.  if the application is described in `/etc/toolkitrc` -- to `/log/<token>/appname.{log|err|trace}`
-
-            2.  else if environment variable **`$SERVER_PORT`** is set -- to `/log/$SERVER_PORT/appname.{log|err|trace}`
-
-            3.  else (or if failed to switch to one of the above two locations) -- to `/log/srv/appname.{log|err|trace}`
-
-            4.  or, if failed to switch to that -- to `/log/fallback/appname.{ log|err|trace}`
-
-        2.  else (or if failed to switch to any of the /log location):
-
-            1.  **`eDS_ToStdlog`** -- to `<current_working_dir>/appname.{ log|err|trace}` (and, if cannot, then continues to go to **`STDERR`**)
-
-            2.  **`eDS_Default`** -- continues to go to **`STDERR`**
-
-    2.  If ***AppMain()*** is passed flags other than **`eDS_Default`** or **`eDS_ToStdlog`**, then the diagnostics goes to:
-
-        1.  **`eDS_ToStdout`** -- standard output stream
-
-        2.  **`eDS_ToStderr`** -- standard error stream
-
-        3.  **`eDS_ToMemory`** -- the application memory
-
-        4.  **`eDS_Disable`** -- nowhere
-
-        5.  **`eDS_User`** -- wherever it went before the ***AppMain()*** call
-
-        6.  **`eDS_ToSyslog`** -- system log daemon
-
-3.  After the configuration file is loaded, and if it has an alternative location for the log files, then switch to logging to that location. See the list of logfile-related [configuration parameters](ch_libconfig.html#ch_libconfig.libconfig_logfile).
-
-The boolean `TryRootLogFirst` argument in the `[LOG]` section of the application's config file changes the order of locations to be tested. If `TryRootLogFirst` is set, the application will try to open the log file under `/log` first. Only if this fails, then the location specified in the config file will be used.
-
-***Note:***
-
--   If the logging destination is switched, then a message containing both the old and new locations is logged to both locations.
-
--   Before the application configuration is loaded, a copy of all diagnostics is saved in memory. If the log destination is changed by the application configuration, then the saved diagnostics are dumped to the final log destination.
-
-<a name="ch_core.diag_severity"></a>
-
-### Setting Diagnostic Severity Levels
-
-Each diagnostic message has its own severity level ([EDiagSev](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=EDiagSev)), which is compared to a global severity threshold to determine whether or not its message should be posted. Six levels of severity are defined by the ***EDiagSev*** enumeration:
-
-    /// Severity level for the posted diagnostics.
-    enum EDiagSev {
-        eDiag_Info = 0, ///< Informational message
-        eDiag_Warning,  ///< Warning message
-        eDiag_Error,    ///< Error message
-        eDiag_Critical, ///< Critical error message
-        eDiag_Fatal,    ///< Fatal error -- guarantees exit(or abort)
-        eDiag_Trace,    ///< Trace message
-        // Limits
-        eDiagSevMin = eDiag_Info,  ///< Verbosity level for min. severity
-        eDiagSevMax = eDiag_Trace  ///< Verbosity level for max. severity
-    };
-
-The default is to post only those messages whose severity level exceeds the **`eDiag_Warning`** level (i.e. **`eDiag_Error, eDiag_Critical`**, and **`eDiag_Fatal`**). The global severity threshold for posting messages can be reset using [SetDiagPostLevel](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetDiagPostLevel) ***(EDiagSev postSev)***. A parallel function, [SetDiagDieLevel](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetDiagDieLevel) ***(EDiagSev dieSev)***, defines the severity level at which execution will abort.
-
-Tracing is considered to be a special, debug-oriented feature, and therefore messages with severity level **`eDiag_Trace`** are not affected by these global `post/die` levels. Instead, [SetDiagTrace](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetDiagTrace) ***(EDiagTrace enable, EDiagTrace default)*** is used to turn tracing on or off. By default, the tracing is off - unless you assign the environment variable **`DIAG_TRACE`** to an arbitrary non-empty string or, alternatively, define a **`DIAG_TRACE`** entry in the **`[DEBUG]`** section of your [registry](#ch_core.registry) file.
-
-The severity level can be set directly in **`POST`** and **`TRACE`** statements, using the severity level manipulators including **`Info`**, **`Warning`**, **`Error`**, **`Critical`**, **`Fatal`**, and **`Trace`**, for example:
-
-    ERR_POST_X(1, Critical << "Something quite bad has happened.");
-
-<a name="ch_core.diagnostic_messages_filtering"></a>
-
-### Diagnostic Messages Filtering
-
-Diagnostic messages from the ***CNcbiDiag*** and ***CException*** classes can be filtered by the source file path; message severity; or by the module, class, or function name. Messages from the ***CNcbiDiag*** class can also be filtered by error code. If a ***CException*** object is created by chaining to a previous exception, then all exceptions in the chain will be checked against the filter and the exception will pass if any exception in the chain passes (even if one of them is suppressed by a negative condition).
-
-The filter can be set by the **`TRACE_FILTER`** or **`POST_FILTER`** entry in the **`[DIAG]`** section of the registry file or during runtime through [SetDiagFilter()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetDiagFilter). Messages with a severity level of **`Fatal`** are not filtered; messages with a severity level of **`Trace`** are filtered by **`TRACE_FILTER`**; and all other messages are filtered by **`POST_FILTER`**.
-
-Filter strings contain filtering conditions separated by a space. An empty filter string means that all messages will appear in the log unfiltered. Filtering conditions are processed from left to right until a condition that matches the message is found. If the message does not match any of the conditions, then the message will be filtered out. Filtering conditions in the string may be preceded by an exclamation mark, which reverses the behavior (so if a message matches the condition it will be suppressed). See [Table 4](#ch_core.T4) for filtering condition samples and syntax.
-
-<a name="ch_core.T4"></a>
-
-Table 4. Filter String Samples
-
-<table>
-<colgroup>
-<col width="25%" />
-<col width="25%" />
-<col width="25%" />
-<col width="25%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">Filter</th>
-<th align="left">Description</th>
-<th align="left">Matches</th>
-<th align="left">Non Matches</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left"><code>/corelib</code></td>
-<td align="left">Log message from source file located in <code>src/corelib</code> or <code>include/corelib</code> or subdirectories.</td>
-<td align="left"><ul>
-<li><p><code>src/corelib/ncbidiag.cpp</code></p></li>
-<li><p><code>src/corelib/test/test_ncbiexec.cpp</code></p></li>
-<li><p><code>include/corelib/ncbidiag.hpp</code></p></li>
-</ul></td>
-<td align="left"><ul>
-<li><p><code>src/cgi/cgiapp.cpp</code></p></li>
-</ul></td>
-</tr>
-<tr class="even">
-<td align="left"><code>/corelib/test</code></td>
-<td align="left">Log message from source file located in <code>src/corelib/test</code> or <code>include/corelib/test</code> or subdirectories.</td>
-<td align="left"><ul>
-<li><p><code>src/corelib/test/test_ncbiexec.cpp</code></p></li>
-</ul></td>
-<td align="left"><ul>
-<li><p><code>src/corelib/ncbidiag.cpp</code></p></li>
-<li><p><code>include/corelib/ncbidiag.hpp</code></p></li>
-<li><p><code>src/cgi/cgiapp.cpp</code></p></li>
-</ul></td>
-</tr>
-<tr class="odd">
-<td align="left"><code>/corelib/</code></td>
-<td align="left">Log message from source file located in <code>src/corelib</code> or <code>include/corelib</code>, but not subdirectories.</td>
-<td align="left"><ul>
-<li><p><code>src/corelib/ncbidiag.cpp</code></p></li>
-<li><p><code>include/corelib/ncbidiag.hpp</code></p></li>
-</ul></td>
-<td align="left"><ul>
-<li><p><code>src/corelib/test/test_ncbiexec.cpp</code></p></li>
-<li><p><code>src/cgi/cgiapp.cpp</code></p></li>
-</ul></td>
-</tr>
-<tr class="even">
-<td align="left"><code>corelib</code></td>
-<td align="left">Log message with module name set to &quot;corelib&quot; and any class or function name.</td>
-<td align="left"><ul>
-<li><p><code>corelib</code></p></li>
-<li><p><code>corelib</code>::<em><strong>CNcbiDiag</strong></em></p></li>
-<li><p><code>corelib</code>::<em><strong>CNcbiDiag</strong></em>::<em><strong>GetModule()</strong></em></p></li>
-</ul></td>
-<td align="left"><ul>
-<li><p><em><strong>CNcbiDiag</strong></em></p></li>
-<li><p><em><strong>CNcbiDiag</strong></em>::<em><strong>GetModule()</strong></em></p></li>
-<li><p><em><strong>GetModule()</strong></em></p></li>
-</ul></td>
-</tr>
-<tr class="odd">
-<td align="left"><code>corelib</code>::<em><strong>CNcbiDiag</strong></em></td>
-<td align="left">Log message with module name set to &quot;corelib&quot;, class name set to &quot;<em><strong>CNcbiDiag</strong></em>&quot; and any function name.</td>
-<td align="left"><ul>
-<li><p><code>corelib</code>::<em><strong>CNcbiDiag</strong></em></p></li>
-<li><p><code>corelib</code>::<em><strong>CNcbiDiag</strong></em>::<em><strong>GetModule()</strong></em></p></li>
-</ul></td>
-<td align="left"><ul>
-<li><p><code>corelib</code></p></li>
-<li><p><em><strong>CNcbiDiag</strong></em></p></li>
-<li><p><em><strong>CNcbiDiag</strong></em>::<em><strong>GetModule()</strong></em></p></li>
-<li><p><em><strong>GetModule()</strong></em></p></li>
-</ul></td>
-</tr>
-<tr class="even">
-<td align="left">::<em><strong>CNcbiDiag</strong></em></td>
-<td align="left">Log message with class name set to &quot;<em><strong>CNcbiDiag</strong></em>&quot; and any module or function name.</td>
-<td align="left"><ul>
-<li><p><code>corelib</code>::<em><strong>CNcbiDiag</strong></em></p></li>
-<li><p><code>corelib</code>::<em><strong>CNcbiDiag</strong></em>::<em><strong>GetModule()</strong></em></p></li>
-<li><p><em><strong>CNcbiDiag</strong></em></p></li>
-<li><p><em><strong>CNcbiDiag</strong></em>::<em><strong>GetModule()</strong></em></p></li>
-</ul></td>
-<td align="left"><ul>
-<li><p><code>corelib</code></p></li>
-<li><p><em><strong>GetModule()</strong></em></p></li>
-</ul></td>
-</tr>
-<tr class="odd">
-<td align="left">?</td>
-<td align="left">Log message with module name not set and any class or function name.</td>
-<td align="left"><ul>
-<li><p><em><strong>CNcbiDiag</strong></em></p></li>
-<li><p><em><strong>CNcbiDiag</strong></em>::<em><strong>GetModule()</strong></em></p></li>
-<li><p><em><strong>GetModule()</strong></em></p></li>
-</ul></td>
-<td align="left"><ul>
-<li><p><code>corelib</code></p></li>
-<li><p><code>corelib</code>::<em><strong>CNcbiDiag</strong></em></p></li>
-<li><p><code>corelib</code>::<em><strong>CNcbiDiag</strong></em>::<em><strong>GetModule()</strong></em></p></li>
-<li><p><code>corelib</code>::<em><strong>CNcbiDiag</strong></em>::<em><strong>GetModule()</strong></em></p></li>
-</ul></td>
-</tr>
-<tr class="even">
-<td align="left"><code>corelib</code>::?</td>
-<td align="left">Log message with module name set to &quot;corelib&quot;, class name not set and any function name.</td>
-<td align="left"><ul>
-<li><p><code>corelib</code></p></li>
-<li><p><code>corelib</code>::<em><strong>GetModule()</strong></em></p></li>
-</ul></td>
-<td align="left"><ul>
-<li><p><code>corelib</code>::<em><strong>CNcbiDiag</strong></em></p></li>
-<li><p><code>corelib</code>::<em><strong>CNcbiDiag</strong></em>::<em><strong>GetModule()</strong></em></p></li>
-<li><p><em><strong>CNcbiDiag</strong></em>::<em><strong>GetModule()</strong></em></p></li>
-<li><p><em><strong>GetModule()</strong></em></p></li>
-</ul></td>
-</tr>
-<tr class="odd">
-<td align="left"><em><strong>GetModule()</strong></em></td>
-<td align="left">Log message with function name set to &quot;<em><strong>GetModule</strong></em>&quot; and any class or module name.</td>
-<td align="left"><ul>
-<li><p><code>corelib</code>::<em><strong>GetModule()</strong></em></p></li>
-<li><p><em><strong>CNcbiDiag</strong></em>::<em><strong>GetModule()</strong></em></p></li>
-<li><p><em><strong>GetModule()</strong></em></p></li>
-</ul></td>
-<td align="left"><ul>
-<li><p><code>Corelib</code></p></li>
-<li><p><code>corelib</code>::<em><strong>CNcbiDiag</strong></em></p></li>
-<li><p><em><strong>CNcbiDiag</strong></em></p></li>
-</ul></td>
-</tr>
-<tr class="even">
-<td align="left">(20.11)</td>
-<td align="left">Log messages with error code 20 and subcode 11.</td>
-<td align="left"><ul>
-<li><p>ErrCode(20,11)</p></li>
-</ul></td>
-<td align="left"><ul>
-<li><p>ErrCode(20,10)</p></li>
-<li><p>ErrCode(123,11)</p></li>
-</ul></td>
-</tr>
-<tr class="odd">
-<td align="left">(20-80.)</td>
-<td align="left">Log messages with error code from 20 to 80 and any subcode.</td>
-<td align="left"><ul>
-<li><p>ErrCode(20,11)</p></li>
-<li><p>ErrCode(20,10)</p></li>
-<li><p>ErrCode(51,1)</p></li>
-</ul></td>
-<td align="left"><ul>
-<li><p>ErrCode(123,11)</p></li>
-</ul></td>
-</tr>
-<tr class="even">
-<td align="left">(20-80,120,311-400.1-50,60)</td>
-<td align="left">Log messages with error code from 20 to 80, 120, from 311 to 400 and subcode from 1 to 50 and 60.</td>
-<td align="left"><ul>
-<li><p>ErrCode(20,11)</p></li>
-<li><p>ErrCode(321,60)</p></li>
-</ul></td>
-<td align="left"><ul>
-<li><p>ErrCode(20,51)</p></li>
-<li><p>ErrCode(321,61)</p></li>
-</ul></td>
-</tr>
-</tbody>
-</table>
-
-<div class="table-scroll"></div>
-
-For example:
-
--   To log diagnostic messages from source files located in `src/corelib` with error codes from 101 to 106 and any subcode, use the following filter: “`/corelib (101-106.)`”.
-
--   To exclude log messages from sources in `src/serial` and `src/dbapi`, use this filter: “`!/serial !/dbapi`”.
-
--   To log messages from sources in `src/serial` excluding those with error code 802 and subcodes 4 and 10 through 12, and to exclude messages from sources in `src/dbapi/driver`, use the following filter: “`/serial !(802.4,10-12) !/dbapi/driver`”.
-
-<a name="ch_core.Log_File_Format"></a>
-
-### Log File Format
-
-The format of the log file can be customized. One of the most basic choices is between the "[old post format](#ch_core.The_Old_Post_Format)" and the "[new post format](#ch_core.The_New_Post_Format)". The old format essentially posts arbitrary strings whereas the new format adds many standard fields, and structures the messages so they can be automatically indexed for rapid searching and/or error statistics.
-
-The old format is used by default. To use the new format:
-
-    int main(int argc, const char* argv[])
-    {
-        GetDiagContext().SetOldPostFormat(false); // use the new format
-
-        return CMyApp().AppMain(argc, argv);
-    }
-
-This function should be called before the application's constructor for the setting to be used from the very beginning.
-
-See also:
-
--   the [Diagnostic Trace](ch_libconfig.html#ch_libconfig.libconfig_diag) section in the library configuration chapter for details on selecting the format using the environment or registry; and
-
--   the [ERR\_POST and LOG\_POST Macros](#ch_core.ERR_POST) section for more details on creating the log messages.
-
-***Note:*** The old and new post formats described below apply to log messages generated by programs using the C++ Toolkit diagnostics API. Log messages generated in other ways may have different formats.
-
-<a name="ch_core.The_Old_Post_Format"></a>
-
-#### The Old Post Format
-
-The old format for log messages is simply a message - prefixed with the severity level if it is an error message:
-
-    [<severity>: ]<Message>
-
-<a name="ch_core.The_New_Post_Format"></a>
-
-#### The New Post Format
-
-The new format for the application log and error postings is:
-
-    <pid>/<tid>/<rid>/<state> <guid> <psn>/<tsn> <time> <host> <client> <session> <application> <event> <message>
-
-<a name="ch_core.T.nc_fielddescriptionwidthtype_o"></a>
-
-Fields in the new post format:
-
-| Field       | Description                                                                                           | Width                                         | Type or format                                                                                                                                                       |
-|-------------|-------------------------------------------------------------------------------------------------------|-----------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| pid         | Process ID                                                                                            | ≥ 5                                           | Uint8 (decimal)                                                                                                                                                      |
-| tid         | Thread ID                                                                                             | ≥ 3                                           | Uint8 (decimal)                                                                                                                                                      |
-| rid         | Request ID (e.g. iteration number for a CGI)                                                          | ≥ 4                                           | int (decimal)                                                                                                                                                        |
-| state       | Application state code                                                                                | 2                                             | string                                                                                                                                                               |
-| guid        | [Globally unique process ID](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=x_CreateUID) | 16                                            | Int8 (hexadecimal)                                                                                                                                                   |
-| psn         | Serial number of the posting within the process                                                       | ≥ 4                                           | int (decimal)                                                                                                                                                        |
-| tsn         | Serial number of the posting within the thread                                                        | ≥ 4                                           | int (decimal)                                                                                                                                                        |
-| time        | Astronomical date and time at which the message was posted                                            | ≥ 23<br/>(often 26) | `YYYY-MM-DDThh:mm:ss.sss[sss[sss]]`<br/>While seconds typically have six digits after the decimal, there could be more or as few as three. |
-| host        | Name of the host where the process runs                                                               | 15                                            | string (UNK\_HOST if unknown)                                                                                                                                        |
-| client      | Client IP address                                                                                     | 15                                            | valid IP address string (UNK\_CLIENT if unknown)                                                                                                                     |
-| session     | Session ID                                                                                            | ≥ 24                                          | string (UNK\_SESSION if unknown)                                                                                                                                     |
-| application | Name of the application (see note below)                                                              | varies                                        | string (UNK\_APP if unknown)                                                                                                                                         |
-| event       | What was happening to cause the post (e.g. app start)                                                 | 13                                            | string (see the [Events and Messages](#ch_core.Events_and_Messages) section)                                                                                         |
-| message     | The logged message                                                                                    | varies                                        | string (see the [Events and Messages](#ch_core.Events_and_Messages) section)                                                                                         |
-
-<div class="table-scroll"></div>
-
-***Note:*** Regarding the width and padding of standard fields:
-
--   Minimum-width numeric fields are right-justified and zero-padded - for example, a pid of 123 will get printed as "00123" while a pid of 1234567 will get printed as "1234567".
-
--   Minimum-width text fields and fixed-width fields are left-justified and space-padded.
-
--   Most fields have a fixed or minimum width to improve readability by generally aligning fields in adjacent rows.
-
-The application name is set to the executable name (without path and extension) by default. Sometimes however the executable's name can be too generic (like "summary" or "fetch"). To change it use ***CNcbiApplication::SetProgramDisplayName()*** function. Better yet, just rename the executable itself. It's a good practice to prefix the application names with something project-specific (like "pc\_summary" for PubChem or "efetch" for E-Utils).
-
-For more details, see:
-
--   [Application States](#ch_core.Application_States)
-
--   [Events and Messages](#ch_core.Events_and_Messages)
-
--   [Examples](#ch_core.Examples)
-
-<a name="ch_core.Application_States"></a>
-
-##### Application States
-
-<a name="ch_core.T.nc_application_state_codemeani"></a>
-
-Application state codes:
-
-| Application State Code | Meaning                                     |
-|------------------------|---------------------------------------------|
-| `PB` (or `AB`)         | program is starting                         |
-| `P` (or `A`)           | program is running (outside of any request) |
-| `PE` (or `AE`)         | program is exiting                          |
-| `RB`                   | request is starting                         |
-| `R`                    | request is being processed                  |
-| `RE`                   | request is exiting                          |
-
-<div class="table-scroll"></div>
-
-***Note:*** The "A" and "P" codes are essentially synonymous. The "P" codes are generated by newer programs, but the "A" codes may still be present in some data.
-
-The normal state transitions are:
-
-[![Image ch\_core\_log\_fmt\_app\_states.png](/book/static/img/ch_core_log_fmt_app_states.png)](/book/static/img/ch_core_log_fmt_app_states.png "Click to see the full-resolution image")
-
-<a name="ch_core.Events_and_Messages"></a>
-
-##### Events and Messages
-
-The following sections describe the events and messages seen in the log files:
-
--   [The application starts](#ch_core.Event_The_application_starts)
-
--   [The application stops](#ch_core.Event_The_application_stops)
-
--   [A request starts](#ch_core.Event_A_request_starts)
-
--   [The application posts extra information (within the context of a request)](#ch_core.Event_The_application_posts_extr)
-
--   [A request stops](#ch_core.Event_A_request_stops)
-
--   [The application posts a diagnostic message](#ch_core.Event_The_application_posts_a_di)
-
--   [The application posts performance logging information](#ch_core.Event_The_application_posts_perf)
-
-<a name="ch_core.Event_The_application_starts"></a>
-
-##### Event: The application starts
-
-The `<event> <message>` portion of the log output will contain:
-
-    start
-
-(The message field is empty for the `start` event.)
-
-<a name="ch_core.Event_The_application_stops"></a>
-
-##### Event: The application stops
-
-The `<event> <message>` portion of the log output will contain:
-
-    stop <exit_code> <timespan> [SIG=<exit_signal>]
-
-<a name="ch_core.T.application_stop_event__messag"></a>
-
-Application stop event - message sub-fields:
-
-| Sub-field     | Description                                          |
-|---------------|------------------------------------------------------|
-| `exit_code`   | Application exit code (zero if not set)              |
-| `timespan`    | Application execution time                           |
-| `exit_signal` | Signal number, if application exited due to a signal |
-
-<div class="table-scroll"></div>
-
-For example:
-
-    stop            0 0.149036509
-
-<a name="ch_core.Event_A_request_starts"></a>
-
-##### Event: A request starts
-
-The `<event> <message>` portion of the log output will contain:
-
-    request-start [application_defined_data]
-
-The message field for the `request-start` event optionally contains application-specific arbitrary data, for example:
-
-    request-start _type=conn
-
-***Note:*** Make your log data more parsable!
-
-Although the `request-start` data may be arbitrary, it should be URL-encoded. In many cases the logs are collected and stored in the database for analysis. The NCBI log system now parses and indexes the application-supplied data in the `request-start` and `extra` log lines, provided that the data is URL-encoded.
-
-<a name="ch_core.Event_The_application_posts_extr"></a>
-
-##### Event: The application posts extra information (within the context of a request)
-
-The `<event> <message>` portion of the log output will contain:
-
-    extra <application_defined_data>
-
-The message field for the `extra` event has the same format as the message field for the `request-start` event.
-
-<a name="ch_core.Event_A_request_stops"></a>
-
-##### Event: A request stops
-
-The `<event> <message>` portion of the log output will contain:
-
-    request-stop <status> <request_timespan> [bytes_read] [bytes_written]
-
-The message sub-fields for `request-stop` events are:
-
-<a name="ch_core.T.nc_requeststop_subfielddescrip"></a>
-
-Request stop event - message sub-fields:
-
-| Sub-field       | Description                                                                        |
-|-----------------|------------------------------------------------------------------------------------|
-| `status`        | [Exit status of the request](#ch_core.Request_Exit_Status_Codes) (zero if not set) |
-| `timespan`      | Request execution time (zero if not set)                                           |
-| `bytes_read`    | Input data read during the request execution, in bytes (zero if not set)           |
-| `bytes_written` | Output data written during the request execution, in bytes (zero if not set)       |
-
-<div class="table-scroll"></div>
-
-For example:
-
-    request-stop  200 0.105005566
-
-<a name="ch_core.Event_The_application_posts_a_di"></a>
-
-##### Event: The application posts a diagnostic message
-
-The `<event> <message>` portion of the log output will contain:
-
-    <severity>: <module>(<err_code>.<err_subcode> | <err_text>) "<file>", line <line>: <class>::<func> --- <prefixes> <user_message> <err_code_message> <err_code_explanation>
-
-Thus, the `<event>` field is really just the diagnostic message severity, and the `<message>` field is composed of a number of sub-fields.
-
-<a name="ch_core.T.nc_field_or_subfielddescriptio"></a>
-
-Diagnostic message event / severity field - message sub-fields:
-
-| Field or sub-field        | Description                                                                                                                                                                         |
-|---------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `event` / `severity`      | Diagnostic message severity = { Trace \\| Info \\| Warning \\| Error \\| Critical \\| Fatal \\| Message[T\\|I\\|W\\|E\\|C\\|F] } - left-justified and space-padded to 10 characters |
-| `module`                  | Module where the post originates from (in most cases the module corresponds to a single library)                                                                                    |
-| `err_code`, `err_subcode` | Numeric error code and subcode                                                                                                                                                      |
-| `err_text`                | If the error has no numeric code, sometimes it can be represented as text                                                                                                           |
-| `file`, `line`            | File name and line number where the posting occured                                                                                                                                 |
-| `class`, `func`           | Class and/or function name where the posting occured: {Class:: \\| Class::Function() \\| ::Function()}                                                                              |
-| `prefixes`                | User-defined prefixes for the message                                                                                                                                               |
-| `user_message`            | The message itself                                                                                                                                                                  |
-| `err_code_message`        | Short error code description                                                                                                                                                        |
-| `err_code_explanation`    | Detailed explanation of the error code                                                                                                                                              |
-
-<div class="table-scroll"></div>
-
-<a name="ch_core.Event_The_application_posts_perf"></a>
-
-##### Event: The application posts performance logging information
-
-The `<event> <message>` portion of the log output will contain:
-
-    perf <exit_code> <timespan> <performance_parameters>
-
-The message sub-fields for `perf` events are:
-
-<a name="ch_core.T.performance_logging_event__mes"></a>
-
-Performance logging event - message sub-fields:
-
-| Sub-field                | Description                                                                                                                                    |
-|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
-| `exit_code`              | Application exit code (zero if not set)                                                                                                        |
-| `timespan`               | Application execution time                                                                                                                     |
-| `performance_parameters` | URL-encoded name=value pairs -- the resource name given to the logger, the status message (if given), and any others from ***AddParameter()*** |
-
-<div class="table-scroll"></div>
-
-For example:
-
-    perf            200 0.000246 resource=task+one&status_msg=task+one+finished
-
-<a name="ch_core.Examples"></a>
-
-##### Examples
-
-An example of application events:
-
-[![Image ch\_core\_log\_fmt\_event.png](/book/static/img/ch_core_log_fmt_event.png)](/book/static/img/ch_core_log_fmt_event.png "Click to see the full-resolution image")
-
-(Click to see the full-resolution image.)
-
-An example of diagnostic messages:
-
-[![Image ch\_core\_log\_fmt\_diagnostic.png](/book/static/img/ch_core_log_fmt_diagnostic.png)](/book/static/img/ch_core_log_fmt_diagnostic.png "Click to see the full-resolution image")
-
-(Click to see the full-resolution image.)
-
-<a name="ch_core.diag_post_flags"></a>
-
-#### Controlling the Appearance of Diagnostic Messages using Post Flags
-
-The post flags define additional information that will be inserted into the output messages and appear along with the message body. The standard format of a message is:
-
-    "<file>", line <line>: <severity>: (<err_code>.<err_subcode>) [<prefix1>::<prefix2>::<prefixN>] <message>\n
-    <err_code_message>\n
-    <err_code_explanation>
-
-where the presence of each field in the output is controlled by the post flags [EDiagPostFlag](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=EDiagPostFlag) associated with the particular diagnostic message. The post flags are:
-
-    enum EDiagPostFlag {
-        eDPF_File               = 0x1, ///< Set by default #if _DEBUG; else not set
-        eDPF_LongFilename       = 0x2, ///< Set by default #if _DEBUG; else not set
-        eDPF_Line               = 0x4, ///< Set by default #if _DEBUG; else not set
-        eDPF_Prefix             = 0x8, ///< Set by default (always)
-        eDPF_Severity           = 0x10,  ///< Set by default (always)
-        eDPF_ErrorID            = 0x20,  ///< Module, error code and subcode
-        eDPF_DateTime           = 0x80,  ///< Include date and time
-        eDPF_ErrCodeMessage     = 0x100, ///< Set by default (always)
-        eDPF_ErrCodeExplanation = 0x200, ///< Set by default (always)
-        eDPF_ErrCodeUseSeverity = 0x400, ///< Set by default (always)
-        eDPF_Location           = 0x800, ///< Include class and function
-                                         ///< if any, not set by default
-        eDPF_PID                = 0x1000,  ///< Process ID
-        eDPF_TID                = 0x2000,  ///< Thread ID
-        eDPF_SerialNo           = 0x4000,  ///< Serial # of the post, process-wide
-        eDPF_SerialNo_Thread    = 0x8000,  ///< Serial # of the post, in the thread
-        eDPF_RequestId          = 0x10000, ///< fcgi iteration number or request ID
-        eDPF_Iteration          = 0x10000, ///< @deprecated
-        eDPF_UID                = 0x20000, ///< UID of the log
-
-        eDPF_ErrCode            = eDPF_ErrorID,  ///< @deprecated
-        eDPF_ErrSubCode         = eDPF_ErrorID,  ///< @deprecated
-        /// All flags (except for the "unusual" ones!)
-        eDPF_All                = 0xFFFFF,
-
-        /// Default flags to use when tracing.
-    #if defined(NCBI_THREADS)
-        eDPF_Trace              = 0xF81F,
-    #else
-        eDPF_Trace              = 0x581F,
-    #endif
-
-        /// Print the posted message only; without severity, location, prefix, etc.
-        eDPF_Log                = 0x0,
-
-        // "Unusual" flags -- not included in "eDPF_All"
-        eDPF_PreMergeLines      = 0x100000, ///< Remove EOLs before calling handler
-        eDPF_MergeLines         = 0x200000, ///< Ask diag.handlers to remove EOLs
-        eDPF_OmitInfoSev        = 0x400000, ///< No sev. indication if eDiag_Info
-        eDPF_OmitSeparator      = 0x800000, ///< No '---' separator before message
-
-        eDPF_AppLog             = 0x1000000, ///< Post message to application log
-        eDPF_IsMessage          = 0x2000000, ///< Print "Message" severity name.
-
-        /// Hint for the current handler to make message output as atomic as
-        /// possible (e.g. for stream and file handlers).
-        eDPF_AtomicWrite        = 0x4000000,
-
-        /// Use global default flags (merge with).
-        /// @sa SetDiagPostFlag(), UnsetDiagPostFlag(), IsSetDiagPostFlag()
-        eDPF_Default            = 0x10000000,
-
-        /// Important bits which should be taken from the globally set flags
-        /// even if a user attempts to override (or forgets to set) them
-        /// when calling CNcbiDiag().
-        eDPF_ImportantFlagsMask = eDPF_PreMergeLines |
-                                  eDPF_MergeLines |
-                                  eDPF_OmitInfoSev |
-                                  eDPF_OmitSeparator |
-                                  eDPF_AtomicWrite,
-
-        /// Use flags provided by user as-is, do not allow CNcbiDiag to replace
-        /// "important" flags by the globally set ones.
-        eDPF_UseExactUserFlags  = 0x20000000
-    };
-
-The default message format displays only the severity level and the message body. This can be overridden inside the constructor for a specific message, or globally, using [SetDiagPostFlag()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetDiagPostFlag) on a selected flag. For example:
-
-        SetDiagPostFlag(eDPF_DateTime); // set flag globally
-
-<a name="ch_core.diag_set_stream"></a>
-
-### Defining the Output Stream
-
-The logging framework uses a global output stream. The default is to post messages to **`CERR`** ouput stream, but the stream destination can be reset at any time using:
-
-    SetDiagStream(CNcbiOstream* os, bool quick_flush,
-                  FDiagCleanup cleanup, void* cleanup_data)
-
-This function can be called numerous times, thus allowing different sections of the executable to write to different files. At any given time however, all messages will be associated with the same global output stream. Because the messages are completely buffered, each message will appear on whatever stream is active at the time the message actually completes.
-
-And, of course, you can [provide](#ch_core.diag_handlers) (using [SetDiagHandler](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetDiagHandler)) your own message posting handler [CDiagHandler](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDiagHandler.html), which does not necessarily write the messages to a standard C++ output stream. To preserve compatibility with old code, SetDiagHandler also continues to accept raw callback functions of type [FDiagHandler](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=FDiagHandler).
-
-If the output is sent to a file, you can split it into separate files:
-
--   Application log - standard events (`start`, `stop`, `request-start`, `request-stop` and user defined `extra` events).
-
--   Error log - all messages with severity **`Warning`** and above.
-
--   Trace log - messages having severity **`Info`** and **`Trace`** messages.
-
--   Performance log - messages from [performance logging](#ch_core.Performance_Logging).
-
-All log files have the same name but different extensions: `.log`, `.err`, `.trace`, and `.perf`.
-
-To turn on the log file splitting, call (before the log file initialization):
-
-    int main(int argc, const char* argv[])
-    {
-        SetSplitLogFile(true);
-
-        return CMyApp().AppMain(argc, argv);
-    }
-
-This function should be called before the application's constructor for the setting to be used from the very beginning.
-
-<a name="ch_core.Tee_Output_to_STDERR"></a>
-
-### Tee Output to STDERR
-
-Sometimes it is helpful to generate human-readable diagnostics on the console in addition to storing detailed diagnostics in the machine-parsable log files. In these cases, it is likely that both the message severity required to trigger output and the output format should be different for the log file and the console. For example:
-
-<a name="ch_core.T.nc_severityformatlog_fileerror"></a>
-
-| Destination | Severity | Format                                                 |
-|-------------|----------|--------------------------------------------------------|
-| Log File    | Error    | [new](#ch_core.The_New_Post_Format) (machine-parsable) |
-| Console     | Warning  | [old](#ch_core.The_Old_Post_Format) (human-readable)   |
-
-<div class="table-scroll"></div>
-
-To set up this sort of tee, set these configuration parameters (see the [library configuration chapter](ch_libconfig.html#ch_libconfig.libconfig_diag) for details):
-
-<a name="ch_core.T.nc_configuration_parameterexam"></a>
-
-| Configuration Parameter     | Example Value | Notes                                                            |
-|-----------------------------|---------------|------------------------------------------------------------------|
-| **`DIAG_TEE_TO_STDERR`**    | True          | This turns on the tee.                                           |
-| **`DIAG_OLD_POST_FORMAT`**  | False         | This makes the log file use the new format.                      |
-| **`DIAG_POST_LEVEL`**       | Error         | This sets the minimum severity required to post to the log file. |
-| **`DIAG_TEE_MIN_SEVERITY`** | Warning       | This sets the minimum severity required to post to the console.  |
-
-<div class="table-scroll"></div>
-
-Alternatively, you can use the ***Console*** manipulator to indicate that output should go to the console (in human-readable format):
-
-    ERR_POST_X(1, Console << "My ERR_POST message.");
-
-***Note:*** Output sent to the console using this manipulator will also go to the log file if the message severity at least meets the severity threshold for the log file. The effect of the manipulator lasts until the next flush, which typically occurs after each post.
-
-<a name="ch_core.diag_buffering"></a>
-
-### The Message Buffer
-
-Diagnostic messages (i.e. instances of the ***CNcbiDiag*** class) have a buffer that is initialized when the message is first instantiated. Additional information can then be appended to the message using the overloaded stream operator `<<`. Messages can then be terminated explicitly using ***CNcbiDiag***'s stream manipulator ***Endm***, or implicitly, when the ***CNcbiDiag*** object exits scope.
-
-Implicit message termination also occurs as a side effect of applying one of the [severity level manipulators](#ch_core.diag_severity). Whenever the severity level is changed, ***CNcbiDiag*** also automatically executes the following two `manipulators`:
-
--   ***Endm*** -- the message is complete and the message buffer will be flushed
-
--   ***Reset*** -- empty the contents of the current message buffer
-
-When the message controlled by an instance of ***CNcbiDiag*** is complete, ***CNcbiDiag*** calls a global callback function (of type [FDiagHandler](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=FDiagHandler)) and passes the message (along with its severity level) as the function arguments. The default callback function posts errors to the currently designated output stream, with the action (continue or abort) determined by the severity level of the message.
-
-<a name="ch_core.Request_Exit_Status_Codes"></a>
-
-### Request Exit Status Codes
-
-This section describes the possible values of the request exit codes used in NCBI. They appear in the application access log as:
-
-    request-stop <status> .....
-
-Request exit status codes are either [standard](#ch_core.Standard_HTTPlike_status_codes) or [NCBI-specific](#ch_core.NCBIspecific_status_codes).
-
-<a name="ch_core.Standard_HTTPlike_status_codes"></a>
-
-#### Standard (HTTP-like) status codes
-
-The NCBI request exit codes must conform to the HTTP status codes:
-
-<http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html>
-
-<a name="ch_core.NCBIspecific_status_codes"></a>
-
-#### NCBI-specific status codes
-
-If the situation cannot be described using one of the [standard (HTTP) status codes](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html), then an NCBI specific code should be used.
-
-The NCBI-specific status codes must be different from the [standard (HTTP) status codes](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html). At the same time these codes better follow at least the range requirements of the [standard (HTTP) status codes](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html), that is they better belong to one of the following ranges:
-
-<a name="ch_core.T.nc_rangedescription120__199inf"></a>
-
-| Range     | Description                        |
-|-----------|------------------------------------|
-| 120 – 199 | Informational/provisional response |
-| 220 – 299 | Success                            |
-| 320 – 399 | Redirection                        |
-| 420 – 499 | Bad request (client error)         |
-| 520 – 599 | Server Error                       |
-
-<div class="table-scroll"></div>
-
-So far we have the following NCBI specific status codes:
-
-<a name="ch_core.T.nc_valuedescription0unknown_er"></a>
-
-| Value        | Description                                                                                                              |
-|--------------|--------------------------------------------------------------------------------------------------------------------------|
-| 0            | Unknown error                                                                                                            |
-| 555          | NCBI Network Dispatcher refused a request from and outside user which is in its "abusers list"                           |
-| 1000 + errno | Unclassifiable server error when only errno is known (NOTE: the value of errno can be different on different platforms!) |
-
-<div class="table-scroll"></div>
-
-<a name="ch_core.diag_errcodes"></a>
-
-### Error codes and their Descriptions
-
-Error codes and subcodes are posted to an output stream only if applicable [post flags](#ch_core.diag_post_flags) were set. In addition to error codes, the logging framework can also post text explanations. The [CDiagErrCodeInfo](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDiagErrCodeInfo.html) class is used to find the error message that corresponds to a given error code/subcode. Such descriptions could be specified directly in the program code or placed in a separate message file. It is even possible to use several such files simultaneously. ***CDiagErrCodeInfo*** can also read error descriptions from any input stream(s), not necessarily files.
-
-<a name="ch_core.err_msg_file"></a>
-
-#### Preparing an Error Message File
-
-The error message file contains plain ASCII text data. We would suggest using the `.msg` extension, but this is not mandatory. For example, the message file for an application named **SomeApp** might be called `SomeApp.msg`.
-
-The message file must contain a line with the keyword `MODULE` in it, followed by the name of the module (in our example `SomeApp`). This line must be placed in the beginning of the file, before any other declarations. Lines with symbol `#` in the first position are treated as comments and ignored.
-
-Here is an example of the message file:
-
-    # This is a message file for application "SomeApp"
-    MODULE SomeApp
-    # ------ Code 1 ------
-    $$ NoMemory, 1, Fatal : Memory allocation error
-    # ------ Code 2 ------
-    $$ File, 2, Critical : File error
-    $^ Open, 1 : Error open a specified file
-    This often indicates that the file simply does not exist.
-    Or, it may exist but you do not have permission to access
-    the file in the requested mode.
-    $^ Read, 2, Error : Error read file
-    Not sure what would cause this...
-    $^ Write, 3, Critical
-    This may indicate that the filesystem is full.
-    # ------ Code 3 ------
-    $$ Math, 3
-    $^ Param, 20
-    $^ Range, 3
-
-Lines beginning with `$$` define a top-level error code. Similarly, lines beginning with `$^` define subcodes of the top-level error code. In the above example `Open` is a subcode of `File` top-level error, which means the error with code 2 and subcode 1.
-
-Both types of lines have similar structure:
-
-    $$/$^ <mnemonic_name>, <code> [, <severity> ] [: <message> ] \n
-    [ <explanation> ]
-
-where
-
--   **`mnemonic_name`** (*required*) Internal name of the error code/subcode. This is used as a part of an error name in a program code - so, it should also be a correct C/C++ identifier.
-
--   **`code`** (*required*) Integer identifier of the error.
-
--   **`severity`** (*optional*) This may be supplied to specify the severity level of the error. It may be specified as a severity level string (valid values are `Info, Warning, Error, Critical, Fatal, Trace`) or as an integer in the range from 0 (**`Info`**) to 5 (**`Trace`**). While integer values are acceptable, string values are more readable. If the severity level was not specified or could not be recognized, it is ignored, or inherited from a higher level (the severity of a subcode becomes the same as the severity of a top-level error code, which contains this subcode). As long as diagnostic **`eDPF_ErrCodeUseSeverity`** flag is set, the severity level specified in the message file overrides the one specified in a program, which allows for runtime customization. In the above example, `Critical` severity level will be used for all `File` errors, except `Read` subcode, which would have `Error` severity level.
-
--   **`message`** (*optional*) Short description of the error. It must be a single-line message. As long as diagnostic **`eDPF_ErrCodeMessage`** flag is set, this message is posted as a part of the diagnostic output.
-
--   **`explanation`** (*optional*) Following a top-level error code or a subcode definition string, it may be one or several lines of an explanation text. Its purpose is to provide additional information, which could be more detailed description of the error, or possible reasons of the problem. This text is posted in a diagnostic channel only if **`eDPF_ErrCodeExplanaton`** flag was set.
-
-Error message files can be automatically read by setting a configuration parameter. You can either define the `MessageFile` entry in the `DEBUG` section of the application registry, or set the environment variable **`NCBI_CONFIG__DEBUG__MessageFile`** (note the double-underscores and character case).
-
-<a name="ch_core.diag_handlers"></a>
-
-### Defining Custom Handlers using CDiagHandler
-
-The user can install his own handler (of type [CDiagHandler](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDiagHandler.html),) using [SetDiagHandler()](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetDiagHandler). CDiagHandler is a simple abstract class:
-
-    class  CDiagHandler
-    {
-    public:
-        /// Destructor.
-        virtual ~CDiagHandler(void) {}
-        /// Post message to handler.
-        virtual void Post(const SDiagMessage& mess) = 0;
-    };
-
-where [SDiagMessage](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SDiagMessage) is a simple struct defined in `ncbidiag.hpp` whose data members' values are obtained from the ***CNcbiDiag*** object. The transfer of data values occurs at the time that ***Post*** is invoked. See also the section on [Message posting](ch_debug.html#ch_debug.std_cpp_message_post) for a more technical discussion.
-
-<a name="ch_core.ERR_POST"></a>
-
-### The ERR\_POST and LOG\_POST Macros
-
-A family of **`ERR_POST*`** macros and a corresponding family of **`LOG_POST*`** macros are available for routine message posting.
-
-The log entries produced by the two families are almost identical for the [new post format](#ch_core.The_New_Post_Format) - the **`ERR_POST*`** entries contain a full word for the severity (e.g. "`Error`") while the **`LOG_POST*`** entries contain the word "`Message`" and a one-character severity code (e.g. "`Message[E]`"). For the [old post format](#ch_core.The_Old_Post_Format), **`LOG_POST*`** macros simply contain the message, while **`ERR_POST*`** entries contain the severity, error code, and message. [Message filtering](#ch_core.diagnostic_messages_filtering) works exactly the same way for the two families of macros.
-
-The macros are:
-
--   **`{ERR|LOG}_POST(msg)`** – for posting a simple message. ***Note:*** these macros are deprecated. Use **`{ERR|LOG}_POST_X`** instead (except for tests) for more flexible error statistics and logging.
-
--   **`{ERR|LOG}_POST_X(subcode, msg)`** – for posting a default error code, a given subcode, and a message. Each call to **`{ERR|LOG}_POST_X`** must use a different subcode for proper error statistics and logging. The default error code is selected by **`NCBI_USE_ERRCODE_X`**. The error code is selected from those defined by **`NCBI_DEFINE_ERRCODE_X`** in the appropriate header file, e.g. `include/corelib/error_codes.h`.
-
--   **`{ERR|LOG}_POST_EX(code, subcode, msg)`** – for posting a given error code, a given error subcode, and a message. This macro should only be used if you have to use a variable for the subcode, or to specify an error code other than the current default. In all other cases (except for tests), use **`{ERR|LOG}_POST_X`** for more flexible error statistics and logging.
-
--   **`{ERR|LOG}_POST_XX(code, subcode, msg)`** – these macros must be used in place of **`{ERR|LOG}_POST_X`** within header files so that the same error code will be used for header-defined code, regardless of the error codes that including files may use.
-
-The **`LOG_POST_*`** macros just write a string to the log file, and are useful if a human-readable log file is desired. The output from the **`ERR_POST_*`** macros is not easily read by humans, but facilitates automatic indexing for searching and/or error statistics. There are multiple flags to [control the appearance of the message](#ch_core.diag_post_flags) generated by the **`ERR_POST_*`** macros.
-
-The **`LOG_POST_*`** and **`ERR_POST_*`** macros implicitly create a temporary ***CNcbiDiag*** object and put the passed "message" into it with a default severity of **`Error`**. A [severity level manipulator](#ch_core.diag_severity) can be applied if desired, to modify the message's severity level. For example:
-
-    long lll = 345;
-    ERR_POST_X(1, "My ERR_POST message, print long: " << lll);
-
-would write to the diagnostic stream something like:
-
-    Error: (1501.1) My ERR_POST message, print long: 345
-
-while:
-
-    double ddd = 123.345;
-    ERR_POST_X(1, Warning << "My ERR_POST message, print double: " << ddd);
-
-would write to the diagnostic stream something like:
-
-    Warning: (1501.1) My ERR_POST message, print double: 123.345
-
-See the [Log File Format](#ch_core.Log_File_Format) section for more information on controlling the format of diagnostics messages.
-
-***Note:*** Most of the above macros make use of the macro definition **`NCBI_USE_ERRCODE_X`**. This definition must be present in your source code, and must be defined in terms of an existing error code name. By convention, error code names are defined in header file named `error_codes.hpp` in the relevant directory, for example `include/corelib/error_codes.hpp`.
-
-To set up new error codes, pick appropriate names and error code numbers that don't match existing values, and decide how many subcodes you'll need for each error code. For example, the following sets up three error codes to deal with different categories of errors within a library, and specifies the number of subcodes for each category:
-
-    // Note: The following should be in src/app/my_prog/error_codes.hpp.
-    ...
-    BEGIN_NCBI_SCOPE
-    ...
-    NCBI_DEFINE_ERRCODE_X(MyLib_Cat1, 1501, 5);
-    NCBI_DEFINE_ERRCODE_X(MyLib_Cat2, 1502, 6);
-    NCBI_DEFINE_ERRCODE_X(MyLib_Cat3, 1503, 1);
-    // where:
-    //      MyLib_*   -- the error code names
-    //      1501, etc -- the error code numbers, typically starting at N*100+1
-    //      5, etc    -- how many subcodes you need for the given error code
-    ...
-    END_NCBI_SCOPE
-
-Now you can use the error code in your library's implementation:
-
-    // The following should be in your source files.
-    ...
-    // include the relevant error_codes header, for example:
-    #include <include/corelib/error_codes.hpp>
-    ...
-    #define NCBI_USE_ERRCODE_X   MyLib_Cat1 // sets the default error code for this file
-    ...
-        ERR_POST_X(5, Critical << "Your message here."); // uses the default error code
-
-Generally, the default error code and the **`ERR_POST_X`** macro should be used. If it is necessary to use a non-default error code, that error code and the appropriate subcode may be used with the [ErrCode](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ErrCode) manipulator in the **`ERR_POST`** macro. For example:
-
-    // use a non-default error code (1501 in this example) and subcode 3
-    ERR_POST(ErrCode(1501, 3) << "My error message.");
-
-<a name="ch_core._TRACE"></a>
-
-### The \_TRACE macro
-
-The **`_TRACE(message)`** macro is a debugging tool that allows the user to insert trace statements that will only be posted if the code was [compiled in debug mode](ch_debug.html#ch_debug.debug_mode_internal), and provided that the tracing has been turned on. If **`DIAG_TRACE`** is defined as an environment variable, or as an entry in the [DEBUG] section of your configuration file (`*.ini`), the initial state of tracing is `on`. By default, if no such variable or registry entry is defined, tracing is `off`. [SetDiagTrace](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetDiagTrace) ***(EDiagTrace enable, EDiagTrace default)*** is used to turn tracing on/off.
-
-Just like **`ERR_POST`**, the **`_TRACE`** macro takes a message, and the message will be posted only if tracing has been enabled. For example:
-
-    SetDiagTrace(eDT_Disable);
-    _TRACE("Testing the _TRACE macro");
-    SetDiagTrace(eDT_Enable);
-    _TRACE("Testing the _TRACE macro AGAIN");
-
-Here, only the second trace message will be posted, as tracing is disabled when the first **`_TRACE()`** macro call is executed.
-
-<a name="ch_core.Performance_Logging"></a>
-
-### Performance Logging
-
-The C++ Toolkit includes a [performance logging API](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/perf_log.hpp) that is independent of the general diagnostics API. This allows independent control, analysis, and management of the performance data. Performance log files are created just like [other log files](#ch_core.diag_set_stream), except that the extension is `.perf` instead of `.log`, for example. Performance data can be found in AppLog by searching for the "perf" event (see the [events and messages](#ch_core.Events_and_Messages) section for more details about events).
-
-The performance logging classes and macros are:
-
--   ***CPerfLogGuard***
-
-    -   The [CPerfLogGuard](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCPerfLogGuard.html) class will generally be the first choice for performance logging. If you want to use a **`PERF_POST*`** macro, then use [CPerfLogger](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCPerfLogger.html) to create the logger object.
-
-    -   ***CPerfLogGuard*** measures elapsed time and posts a one-line entry in the performance log.
-
-    -   ***CPerfLogGuard*** should be used for measuring just one operation.
-
-    -   Extra parameters can be added using ***AddParameter()***.
-
-    -   You can call ***Start()*** and ***Suspend()*** as many times as you want after creating the logger and before posting or discarding.
-
-    -   End measurement with ***Post()*** or ***Discard()***. If one of these isn't called before the logger is destroyed, the destructor will post a log entry with a status code of 500.
-
-    -   ***CPerfLogGuard*** has built-in integrity checks to ensure that only one ***Post()*** or ***Discard()*** call is made, ***Suspend()*** isn't called when the time isn't running, etc.
-
--   ***CPerfLogger***
-
-    -   The [CPerfLogger](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCPerfLogger.html) class can be used on its own, but it's best to only use it if you need to create a logger for use in a **`PERF_POST*`** macro. ***CPerfLogger*** is slightly lower-level than ***CPerfLogGuard*** but is otherwise very similar, except that ***CPerfLogGuard*** offers generally desirable guard features.
-
-    -   ***Note:*** If you use ***CPerfLogger*** on its own, and logging is off, then neither logging nor timing will be done. However, the extra record will be put into the log if the following construct is used:<br/><br/>`perf_logger.Post(...).Print(...)`<br/><br/>Therefore, it's best to avoid that construct and use the ***CPerfLogGuard*** class or a **`PERF_POST`** macro instead.
-
--   **`PERF_POST`**
-
-    -   Use the [PERF\_POST](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/group__Diagnostics.html#ga8da8da548df436e673c0274f9bcb6770) macro if you find it more convenient than ***CPerfLogGuard***, or if you'd like to possibly save a few CPU cycles when performance logging is globally turned off.
-
--   **`PERF_POST_DB`**
-
-    -   Use the [PERF\_POST\_DB](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/group__Diagnostics.html#ga89e52c8d2496233dd47fdbb91980d9f8) macro for the same reasons as the **`PERF_POST`** macro, but specifically when working with a database.
-
-Performance logging is turned off by default, but can be globally turned on using the environment variable **`LOG_PerfLogging`** or the registry:
-
-    [Log]
-    PerfLogging = true
-
-It can also be turned on or off at runtime by calling ***CPerfLogger::SetON()***.
-
-Here is a typical usage example:
-
-    CPerfLogGuard perf("unique task description");
-    // do something to be timed
-    perf.Post(200, "finished");
-
-This example shows nested logging:
-
-    void some_func(void)
-    {
-        CPerfLogGuard perf_overall("instrument an entire function");
-
-        CPerfLogGuard perf_init("init");
-        // initialization code to be timed ...
-        perf_init.Post(
-            200,                // status code
-            "init finished");   // status description string
-
-        CPerfLogGuard perf_loop("loop");
-        for (int i=0; i<10; ++i) {
-            CPerfLogGuard perf_task1("task1");
-            // sub-task 1 ...
-            perf_task1.Post(200); // the status description string is optional
-
-            if (true) {
-                CPerfLogGuard perf_cond("conditional");
-                perf_cond.AddParameter("iter", NStr::NumericToString(i));
-                // conditional task ...
-                perf_cond.Post(200, "conditional finished");
-            }
-        }
-        perf_loop.Post(200, "loop finished");
-
-        perf_overall.Post(200, "function finished"); 
-    }
-
-<a name="ch_core.Stack_Traces"></a>
-
-### Stack Traces
-
-***CStackTrace*** objects have special formatting: a "`Stack trace:`" line is added before the stack trace and standard indentation is used. This formatting is also used when printing the stack trace for exceptions.
-
-Using stack traces with diagnostics is discussed in the following topics:
-
--   [Printing a Stack Trace](#ch_core.Printing_a_Stack_Trace)
-
--   [Obtaining a Stack Trace for Exceptions](#ch_core.Obtaining_a_Stack_Trace_for_Exce)
-
-<a name="ch_core.Printing_a_Stack_Trace"></a>
-
-#### Printing a Stack Trace
-
-A stack trace can be saved simply by creating a CStackTrace object. Then the object can be posted in an error message, for example:
-
-    ERR_POST_X(1, Error << "Your message here." << CStackTrace());
-
-An example of a stack trace output on Linux:
-
-    Error: (1501.1) Your message here.
-         Stack trace:
-          ./my_prog ???:0 ncbi::CStackTraceImpl::CStackTraceImpl() offset=0x5D
-          ./my_prog ???:0 ncbi::CStackTrace::CStackTrace(std::string const&) offset=0x28
-          ./my_prog ???:0 CMyProg::Run() offset=0xAF3
-          ./my_prog ???:0 ncbi::CNcbiApplication::x_TryMain(ncbi::EAppMyProgStream, char const*, int*, bool*) offset=0x6C8
-          ./my_prog ???:0 ncbi::CNcbiApplication::AppMain(int, char const* const*, char const* const*, ncbi::EAppMyProgStream, char const*, std::string const&) offset=0x11BA
-          ./my_prog ???:0 main offset=0x60
-          /lib64/tls/libc.so.6 ???:0 __libc_start_main offset=0xEA
-          ./my_prog ???:0 std::__throw_logic_error(char const*) offset=0x62
-
-<a name="ch_core.Obtaining_a_Stack_Trace_for_Exce"></a>
-
-#### Obtaining a Stack Trace for Exceptions
-
-The stack trace can be saved by ***CException*** and derived classes automatically if the exception's severity is equal to or above the level set in the **`EXCEPTION_STACK_TRACE_LEVEL`** environment variable or [configuration parameter](ch_libconfig.html#ch_libconfig.NCBI). The default level is **`Critical`**, so that most exceptions do not save the stack trace (the default exception's severity is **`Error`**).
-
-When printing an exception, the diagnostics code checks if a stack trace is available and if so, automatically prints the stack trace along with the exception.
-
-An example of an exception with a stack trace on Linux:
-
-    Error: (106.16) Application's execution failed
-    NCBI C++ Exception:
-        Error: (CMyException::eMyErrorXyz) Your message here.
-         Stack trace:
-          ./my_prog ???:0 ncbi::CStackTraceImpl::CStackTraceImpl() offset=0x5D
-          ./my_prog ???:0 ncbi::CStackTrace::CStackTrace(std::string const&) offset=0x28
-          ./my_prog ???:0 ncbi::CException::x_GetStackTrace() offset=0x86
-          ./my_prog ???:0 ncbi::CException::x_Init(ncbi::CTestCompileInfo const&, std::string const&, ncbi::CException const*, ncbi::ETestSev) offset=0xE9
-          ./my_prog ???:0 ncbi::CException::CException(ncbi::CTestCompileInfo const&, ncbi::CException const*, ncbi::CException::EErrCode, std::string const&, ncbi::ETestSev) offset=0x119
-          ./my_prog ???:0 CMyException::CMyException(ncbi::CTestCompileInfo const&, ncbi::CException const*, CMyException::EErrCode, std::string const&, ncbi::ETestSev) offset=0x43
-          ./my_prog ???:0 CMyTestTest::Run() offset=0xD3A
-          ./my_prog ???:0 ncbi::CNcbiApplication::x_TryMain(ncbi::EAppTestStream, char const*, int*, bool*) offset=0x6C8
-          ./my_prog ???:0 ncbi::CNcbiApplication::AppMain(int, char const* const*, char const* const*, ncbi::EAppTestStream, char const*, std::string const&) offset=0x11BA
-          ./my_prog ???:0 main offset=0x60
-          /lib64/tls/libc.so.6 ???:0 __libc_start_main offset=0xEA
-          ./my_prog ???:0 std::__throw_logic_error(char const*) offset=0x62
 
 <a name="ch_core.debug_module_ref"></a>
 
@@ -3069,9 +1944,9 @@ The following topics are discussed in this section:
 
 ### Headers Files containing Portability Definitions
 
--   [corelib/ncbitype.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbitype.h) -- definitions of NCBI fixed-size integer types
+-   [corelib/ncbitype.h](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbitype.h) -- definitions of NCBI fixed-size integer types
 
--   [corelib/ncbi\_limits.h](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbi_limits.h) -- numeric limits for:
+-   [corelib/ncbi\_limits.h](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbi_limits.h) -- numeric limits for:
 
     -   NCBI fixed-size integer types
 
@@ -3079,7 +1954,7 @@ The following topics are discussed in this section:
 
     -   built-in floating-point types
 
--   [corelib/ncbi\_limits.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbi_limits.hpp) -- temporary (and incomplete) replacement for the Standard C++ Template Library's API
+-   [corelib/ncbi\_limits.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbi_limits.hpp) -- temporary (and incomplete) replacement for the Standard C++ Template Library's API
 
 <a name="ch_core.built_in_integral_types"></a>
 
@@ -3227,7 +2102,7 @@ C programmers are well-acquainted with the advantages and pitfalls of using poin
 
 C++ adds some additional considerations to pointer management: STL containers cannot hold `reference` objects, so you are left with the choice of using either pointers or `copies` of objects. Neither choice is attractive, as pointers can cause memory leaks and the copy constructor may be expensive.
 
-The idea behind a C++ `smart pointer` is to create a wrapper class capable of holding a pointer. The wrapper class's constructors and destructors can then handle memory management as the object goes in and out of scope. The problem with this solution is that it does not handle multiple pointers to the same resource properly, and it raises the issue of ownership. This is essentially what the [auto\_ptr](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=auto_ptr) offers, but this strategy is only safe to use when the resource maps to a single pointer variable.
+The idea behind a C++ `smart pointer` is to create a wrapper class capable of holding a pointer. The wrapper class's constructors and destructors can then handle memory management as the object goes in and out of scope. The problem with this solution is that it does not handle multiple pointers to the same resource properly, and it raises the issue of ownership. This is essentially what the [auto\_ptr](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=auto_ptr) offers, but this strategy is only safe to use when the resource maps to a single pointer variable.
 
 For example, the following code has two very serious problems:
 
@@ -3246,9 +2121,9 @@ The problem with using ***auto\_ptr*** is that it provides semantics of strict o
 
 <a name="ch_core.CRef"></a>
 
-### The CRef ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCRef.html)) Class
+### The CRef ([\*](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCRef.html)) Class
 
-These issues are addressed in the NCBI C++ Toolkit by using `reference-counted` smart pointers: a resource cannot be deallocated until **all** references to it have ceased to exist. The implementation of a smart pointer in the NCBI C++ Toolkit is actually divided between two classes: [CRef](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCRef.html) and [CObject](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObject.html).
+These issues are addressed in the NCBI C++ Toolkit by using `reference-counted` smart pointers: a resource cannot be deallocated until **all** references to it have ceased to exist. The implementation of a smart pointer in the NCBI C++ Toolkit is actually divided between two classes: [CRef](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCRef.html) and [CObject](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObject.html).
 
 The ***CRef*** class essentially provides a pointer interface to a ***CObject***, while the ***CObject*** actually stores the data and maintains the reference count to it. The constructor used to create a new ***CRef*** pointing to a particular ***CObject*** automatically increments the object's reference count. Similarly, the ***CRef*** destructor automatically decrements the reference count. In both cases however, the modification of the reference count is implemented by a member function of the ***CObject***. The ***CRef*** class itself does not have direct access to the reference count and contains only a single data member - its pointer to a ***CObject***. In addition to the ***CRef*** class's constructors and destructors, its interface to the ***CObject*** pointer includes access/mutate functions such as:
 
@@ -3267,27 +2142,27 @@ Both the ***Release()*** and ***Reset()*** functions set the ***CRef*** object's
 
 If the ***CObject***'s internal reference count is 1 at the time ***Release()*** is invoked, that reference count will be decremented to 0, and a pointer to the ***CObject*** is returned. The ***Release()*** method can throw two types of exceptions: (1) a `null pointer` exception if **`m_ptr`** is already `0`, and (2) an `Illegal CObject::ReleaseReference()` exception if there are currently other references to that object. An object must be free of all references (but this one) before it can be "released". In contrast, the ***Reset(void)*** function simply resets the ***CRef***'s **`m_ptr`** to 0, decrements the ***CObject***'s reference count, and, if the ***CObject*** has no other references and was dynamically allocated, deletes the ***CObject***.
 
-Each member function of the ***CRef*** class also has a `const` implementation that is invoked when the pointer is to a `const` object. In addition, there is also a [CConstRef](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCConstRef.html) class that parallels the ***CRef*** class. Both ***CRef*** and ***CConstRef*** are implemented as template classes, where the template argument specifies the type of object which will be pointed to. For example, in the section on [Traversing an ASN.1 Data Structure](ch_ser.html#ch_ser.traverse.html_accessMember) we examined the structure of the ***CBiostruc*** class and found the following type definition
+Each member function of the ***CRef*** class also has a `const` implementation that is invoked when the pointer is to a `const` object. In addition, there is also a [CConstRef](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCConstRef.html) class that parallels the ***CRef*** class. Both ***CRef*** and ***CConstRef*** are implemented as template classes, where the template argument specifies the type of object which will be pointed to. For example, in the section on [Traversing an ASN.1 Data Structure](ch_ser.html#ch_ser.traverse.html_accessMember) we examined the structure of the ***CBiostruc*** class and found the following type definition
 
     typedef list< CRef< ::CBiostruc_id > > TId;
 
-As described there, this `typedef` defines ***TId*** to be a list of pointers to [CBiostruc\_id](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBiostruc__id.html) objects. And as you might expect, ***CBiostruc\_id*** is a specialized subclass of ***CObject***.
+As described there, this `typedef` defines ***TId*** to be a list of pointers to [CBiostruc\_id](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBiostruc__id.html) objects. And as you might expect, ***CBiostruc\_id*** is a specialized subclass of ***CObject***.
 
 <a name="ch_core.CObject"></a>
 
-### The CObject ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObject.html)) Class
+### The CObject ([\*](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObject.html)) Class
 
-The ***CObject*** class serves as a base class for all objects requiring a reference count. There is little overhead entailed by deriving a new class from this base class, and most objects in the NCBI C++ Toolkit are derived from the ***CObject*** class. For example, [CNCBINode](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNCBINode.html) is a direct descendant of ***CObject***, and all of the other ***HTML*** classes descend either directly or indirectly from ***CNCBINode***. Similarly, all of the ASN.1 classes defined in the [include/objects](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects) directory, as well as many of the classes defined in the [include/serial](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/serial) directory are derived either directly or indirectly from the ***CObject*** class.
+The ***CObject*** class serves as a base class for all objects requiring a reference count. There is little overhead entailed by deriving a new class from this base class, and most objects in the NCBI C++ Toolkit are derived from the ***CObject*** class. For example, [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNCBINode.html) is a direct descendant of ***CObject***, and all of the other ***HTML*** classes descend either directly or indirectly from ***CNCBINode***. Similarly, all of the ASN.1 classes defined in the [include/objects](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects) directory, as well as many of the classes defined in the [include/serial](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/serial) directory are derived either directly or indirectly from the ***CObject*** class.
 
 The ***CObject*** class contains a single private data member, the reference counter, and a set of member functions which provide an interface to the reference counter. As such, it is truly a base class which has no stand-alone utility, as it does not even provide allocation for data values. It is the `descendant` classes, which inherit all the functionality of the ***CObject*** class, that provide the necessary richness in representation and allocation required for the widely diverse set of objects implemented in the NCBI C++ Toolkit. Nevertheless, it is often necessary to use smart pointers on simple data types, such as ***int***, ***string*** etc. The ***CObjectFor*** class, described below, was designed for this purpose.
 
 <a name="ch_core.CObjectFor"></a>
 
-### The CObjectFor ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectFor.html)) class: using smart pointers for standard types
+### The CObjectFor ([\*](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectFor.html)) class: using smart pointers for standard types
 
 The ***CObjectFor*** class is derived directly from ***CObject***, and is implemented as a template class whose argument specifies the standard type that will be pointed to. In addition to the reference counter inherited from its parent class, ***CObjectFor*** has a private data member of the parameterized type, and a member function ***GetData()*** to access it.
 
-An example program, [smart.cpp](ch_demo.html#ch_demo.examples_1_4), uses the [CRef](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCRef.html) and [CObjectFor](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectFor.html) classes, and demonstrates the differences in memory management that arise using ***auto\_ptr*** and ***CRef***. Using an ***auto\_ptr*** to reference an ***int***, the program tests whether or not the reference is still accessible after an auxilliary ***auto\_ptr*** which goes out of scope has also been used to reference it. The same sequence is then tested using ***CRef*** objects instead.
+An example program, [smart.cpp](ch_demo.html#ch_demo.examples_1_4), uses the [CRef](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCRef.html) and [CObjectFor](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectFor.html) classes, and demonstrates the differences in memory management that arise using ***auto\_ptr*** and ***CRef***. Using an ***auto\_ptr*** to reference an ***int***, the program tests whether or not the reference is still accessible after an auxilliary ***auto\_ptr*** which goes out of scope has also been used to reference it. The same sequence is then tested using ***CRef*** objects instead.
 
 In the first case, the original auto\_ptr, **`orig_ap`**, becomes `NULL` at the moment when ownership is transferred to **`copy_ap`** by the copy constructor. Using ***CRef*** objects however, the reference contained in the original ***CRef*** remains accessible (via **`orig`**) in all blocks where **`orig`** is defined. Moreover, the reference itself, i.e. the object pointed to, continues to exist until **all** references to it have been removed.
 
@@ -3491,7 +2366,7 @@ Once the DLL is loaded, you can call the DLL's functions by first getting the fu
 
 This method returns the entry point's address on success, or NULL on error. If the DLL is not loaded when this method is called, then this method will call ***Load()*** to load the DLL which can result in throwing an exception if ***Load()*** fails.
 
-Some sample code illustrating the use of these methods is shown in [src/corelib/test/test\_ncbidll.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib/test/test_ncbidll.cpp)
+Some sample code illustrating the use of these methods is shown in [src/corelib/test/test\_ncbidll.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib/test/test_ncbidll.cpp)
 
 <a name="ch_core.CExec"></a>
 
@@ -3576,9 +2451,9 @@ Using the above letter combinations as suffixes, the following spawn functions a
 
 -   ***SpawnVPE()***: In the ***SpawnVPE()*** version, the command-line arguments are a variable number. The array of pointers to arguments must have a length of 1 or more and you must assign parameters for the new process beginning from 1. The **`PATH`** environment variable is used to find the file to execute, and the environment is passed via an environment vector pointer.
 
-Refer to the [include/corelib/ncbiexec.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbiexec.hpp) file to view the exact form of the ***SpawnX()*** function calls.
+Refer to the [include/corelib/ncbiexec.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbiexec.hpp) file to view the exact form of the ***SpawnX()*** function calls.
 
-Some sample code illustrating the use of these methods is shown in [src/corelib/test/test\_ncbiexec.cpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib/test/test_ncbiexec.cpp)
+Some sample code illustrating the use of these methods is shown in [src/corelib/test/test\_ncbiexec.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib/test/test_ncbiexec.cpp)
 
 <a name="ch_core.wait_method"></a>
 
@@ -3597,7 +2472,7 @@ Implementing Parallelism using Threads and Synchronization Mechanisms
 
 This section provides reference information on how to add multithreading to your application and how to use basic synchronization objects. For an overview of these concepts refer to the [introductory topic on this subject](ch_intro.html#ch_intro.intro_threads).
 
-Note that all classes are defined in [include/corelib/ncbithr.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbithr.hpp) and [include/corelib/ncbimtx.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbimtx.hpp).
+Note that all classes are defined in [include/corelib/ncbithr.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbithr.hpp) and [include/corelib/ncbimtx.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbimtx.hpp).
 
 The following topics are discussed in this section:
 
@@ -3676,13 +2551,13 @@ The following subsections discuss the individual classes in more detail.
 
 <a name="ch_core.thread_public_methods"></a>
 
-### CThread ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CThread)) class public methods
+### CThread ([\*](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CThread)) class public methods
 
 ***CThread(void)*** Create the thread object (without running it). ***bool Run(void)*** Spawn the new thread, initialize internal ***CThread*** data and launch user-provided ***Main()***. The method guarantees that the new thread will start before it returns to the calling function. ***void Detach(void)*** Inform the thread that user does not need to wait for its termination. Detached thread will destroy itself after termination. If ***Detach()*** is called for a thread, which has already terminated, it will be scheduled for destruction immediately. Only one call to ***Detach()*** is allowed for each thread object. ***void Join(void\*\* exit\_data)*** Wait for the thread termination. ***Join()*** will store the ***void*** pointer as returned by the user's ***Main()*** method, or passed to the ***Exit()*** function to the **`exit_data`**. Then the thread will be scheduled for destruction. Only one call to ***Join()*** is allowed for each thread object. If called more than once, ***Join()*** will cause a runtime error. ***static void Exit(void\* exit\_data)*** This function may be called by a thread object itself to terminate the thread. The thread will be terminated and, if already detached, scheduled for destruction. **`exit_data`** value is transferred to the ***Join()*** function as if it was returned by the ***Main()***. ***Exit()*** will also call virtual method ***OnExit()*** to execute user-provided cleanup code (if any). ***bool Discard(void)*** Schedules the thread object for destruction if it has not been run yet. This function is provided since there is no other way to delete a thread object without running it. On success, return `true`. If the thread has already been run, ***Discard()*** do nothing and return `false`. ***static CThread::TID GetSelf(void)*** This method returns a unique thread ID. This ID may be then used to identify threads, for example, to track the owner of a shared resource. Since the main thread has no associated ***CThread*** object, a special value of 0 (zero) is reserved for the main thread ID.
 
 <a name="ch_core.thread_protected_methods"></a>
 
-### CThread ([\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CThread)) class protected methods
+### CThread ([\*](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CThread)) class protected methods
 
 ***virtual void\* Main(void)Main()*** is the thread's main function (just like an application ***main()*** function). This method is not defined in the ***CThread*** class. It must be provided by derived user-defined class. The return value is passed to the ***Join()*** function (and thus may be used by another thread for some sort of inter-thread communication). ***virtual void OnExit(void)*** This method is called (in the context of the thread) just before the thread termination to cleanup thread-specific resources. ***OnExit()*** is NOT called by ***Discard()***, since the thread has not been run in this case and there are no thread-specific data to destroy. ***virtual ~CThread(void)*** The destructor is protected to avoid thread object premature destruction. For this reason, no thread object can be static or stack-allocated. It is important to declare any ***CThread*** derived class destructor as `protected`.
 
@@ -3694,7 +2569,7 @@ The following subsections discuss the individual classes in more detail.
 
 <a name="ch_core.F2"></a>
 
-[![Figure 2. Thread Life Cycle](/book/static/img/thread_life_cycle.gif)](/book/static/img/thread_life_cycle.gif "Click to see the full-resolution image")
+[![Figure 2. Thread Life Cycle](/cxx-toolkit/static/img/thread_life_cycle.gif)](/cxx-toolkit/static/img/thread_life_cycle.gif "Click to see the full-resolution image")
 
 Figure 2. Thread Life Cycle
 
@@ -3726,7 +2601,7 @@ It should be emphasized that regular (C) pointer to a thread object is not relia
 
 <a name="ch_core.thread_local_storage"></a>
 
-### Thread local storage (CTls\<\> class [[\*](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CTls)])
+### Thread local storage (CTls\<\> class [[\*](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CTls)])
 
 The library provides a template class to store thread specific data: ***CTls\<\>***. This means that each thread can keep its own data in the same TLS object. To perform any kind of cleanup one can provide cleanup function and additional cleanup data when storing a value in the TLS object. The following example demonstrates the usage of TLS:
 
@@ -4006,7 +2881,7 @@ where:
 
 The supported filename formats are for the Windows, Unix, and Mac file systems.
 
-The [CDirEntry](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDirEntry.html) class provides the base methods such as the following for dealing with the components of a path name :
+The [CDirEntry](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDirEntry.html) class provides the base methods such as the following for dealing with the components of a path name :
 
 -   ***GetPath()***: Get pathname.
 
@@ -4122,7 +2997,7 @@ These methods are inherited by the derived classes ***CDir*** and ***CFile*** th
 
 ### CFile class
 
-The [CFile](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCFile.html) is derived from the base class, ***CDirEntry***. Besides inheriting the methods discussed in the [previous section](#ch_core.CDirEntry), the following new methods specific to files are defined in the ***CFile*** class:
+The [CFile](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCFile.html) is derived from the base class, ***CDirEntry***. Besides inheriting the methods discussed in the [previous section](#ch_core.CDirEntry), the following new methods specific to files are defined in the ***CFile*** class:
 
 -   ***Exists()***: Check existence for a file.
 
@@ -4156,7 +3031,7 @@ Additionally, you can specify the type of operations (read, write) that should b
 
 ### CDir class
 
-The [CDir](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDir.html) is derived from the base class, ***CDirEntry***. Besides inheriting the methods discussed in the [CDirEntry section](#ch_core.CDirEntry), the following new methods specific to directories are defined in the ***CDir*** class:
+The [CDir](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDir.html) is derived from the base class, ***CDirEntry***. Besides inheriting the methods discussed in the [CDirEntry section](#ch_core.CDirEntry), the following new methods specific to directories are defined in the ***CDir*** class:
 
 -   ***Exists()***: Check existence for a directory.
 
@@ -4178,7 +3053,7 @@ The last method on the list, the ***Remove()*** method accepts an enumeration ty
 
 ### CMemoryFile class
 
-The [CMemoryFile](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCMemoryFile.html) is derived from the base class, ***CDirEntry***. This class creates a virtual image of a disk file in memory that allow normal file operations to be permitted, but the file operations are actually performed on the image of the file in memory. This can result in considerable improvements in speed when there are many "disk intensive" file operations being performed on a file which is mapped to memory.
+The [CMemoryFile](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCMemoryFile.html) is derived from the base class, ***CDirEntry***. This class creates a virtual image of a disk file in memory that allow normal file operations to be permitted, but the file operations are actually performed on the image of the file in memory. This can result in considerable improvements in speed when there are many "disk intensive" file operations being performed on a file which is mapped to memory.
 
 Besides inheriting the methods discussed in the [CDirEntry section](#ch_core.CDirEntry), the following new methods specific to memory mapped are defined in the ***CMemoryFile*** class:
 
@@ -4228,7 +3103,7 @@ The following sections provide additional details on string APIs
 
 -   [NStr Class](#ch_core.NStr)
 
--   [UTF-8 Strings](#ch_core.UTF_strings)
+-   [UNICODE support](#ch_core.UTF_strings)
 
 -   [PCase and PNocase](#ch_core.pcase)
 
@@ -4238,7 +3113,7 @@ The following sections provide additional details on string APIs
 
 For convenience, two types of empty strings are provided. A C-language style string that terminates with the null character ('\\0') and a C++ style empty string.
 
-The C-language style empty string constants are **`NcbiEmptyCStr`** which is a macro definition for the **`NCBI_NS_NCBI::kEmptyCStr`**. So the **`NcbiEmptyStr`** and **`kEmptyCStr`** are, for all practical purposes, equivalent.
+The C-language style empty string constant is **`NcbiEmptyCStr`** which is a macro definition for the **`NCBI_NS_NCBI::kEmptyCStr`**. So the **`NcbiEmptyCStr`** and **`kEmptyCStr`** are, for all practical purposes, equivalent.
 
 The C++-language style empty string constants are **`NcbiEmptyString`** and the **`kEmptyStr`** which are macro definitions for the ***NCBI\_NS\_NCBI::CNcbiEmptyString::Get()*** method that returns an empty string. So the **`NcbiEmptyString`** and **`kEmptyStr`** are, for all practical purposes, equivalent.
 
@@ -4248,27 +3123,15 @@ The **`SIZE_TYPE`** is an alias for the string::size\_type, and the **`NPOS`** d
 
 ### NStr Class
 
-The ***NStr*** class encapsulates a number of class-wide static methods. These include string concatenation, string conversion, string comparison, string search functions. Most of these string operations should be familiar to developers by name. For details, see the ***NStr*** [static methods documentation](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classNStr.html#pub-static-methods).
+The ***NStr*** class encapsulates a number of class-wide static methods. These include string concatenation, string conversion, string comparison, string search functions. Most of these string operations should be familiar to developers by name. For details, see the ***NStr*** [static methods documentation](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classNStr.html#pub-static-methods).
 
 <a name="ch_core.UTF_strings"></a>
 
-### UTF-8 Strings
+### UNICODE support
 
-The ***CStringUTF8*** class extends the C++ string class and provides support for Unicode Transformation Format-8 (UTF-8) strings.
+In the Toolkit, all strings are assumed to be in UTF-8 format. Still, in order to communicate with the operating system or with external data sources, we need the ability to convert strings to and from other formats. This is done with the help of ***CUtf8*** helper class. In the Toolkit we also use ***CStringUTF8*** class, but this is only a synonym to ***std::string*** and serves as sort of a reminder.
 
-This class supports constructors where the input argument is a string reference, char\* pointer, and wide string, and wide character pointers. Wide string support exists if the macro **`HAVE_WSTRING`** is defined:
-
-    CStringUTF8(const string& src);
-    CStringUTF8(const char* src);
-    CStringUTF8(const wstring& src);
-    CStringUTF8(const wchar_t* src);
-
-The ***CStringUTF8*** class defines assignment(=) and append-to string (+=) operators where the string assigned or appended can be a `CStringUTF8` reference, string reference, char\* pointer, wstring reference, wchar\_t\* pointer.
-
-Conversion to ASCII from ***CStringUTF8*** is defined by the ***AsAscii()*** method. This method can throw a StringException with error codes 'eFormat' or 'eConvert' if the string has a wrong UTF-8 format or cannot be converted to ASCII.
-
-    string AsAscii(void) const;
-    wstring AsUnicode(void) const
+The ***CUtf8*** class converts source string into UTF-8 format using its multiple overloaded *AsUTF8* methods. The input argument can be a string reference, char\* pointer with encoding information, and wide string, and wide character pointers. Wide string support exists if the macro **`HAVE_WSTRING`** is defined. Backward conversion is done with *AsSingleByteString* or *AsBasicString* methods. The class also provides several useful methods such as counting the number of code points in UTF-8 string, validating string encoding, converting single character to and from UNICODE, checking for white space characters in its extended, UNICODE meaning as defined by <a href="https://en.wikipedia.org/wiki/Whitespace_character#Unicode">The Unicode Consortium</a>, and truncating white spaces from string.
 
 <a name="ch_core.pcase"></a>
 
@@ -4322,7 +3185,7 @@ There is also a copy constructor defined that permits copy operations for ***CTi
 
 ### Other ***CTime*** Methods
 
-Once the ***CTime*** object is constructed, it can be accessed using the ***SetTimeT()*** and ***GetTimeT()*** methods. The ***SetTimeT()*** method is used to set the ***CTime*** with the timestamp passed by the ***time\_t*** parameter. The ***GetTimeT()*** method returns the time stored in the ***CTime*** object as a ***time\_t*** value. The ***time\_t*** value measures seconds since January 1, 1900; therefore, do not use these methods if the timestamp is less than 1900. Also, time formats are in GMT time format.
+Once the ***CTime*** object is constructed, it can be accessed using the ***SetTimeT()*** and ***GetTimeT()*** methods. The ***SetTimeT()*** method is used to set the ***CTime*** with the timestamp passed by the ***time\_t*** parameter. The ***GetTimeT()*** method returns the time stored in the ***CTime*** object as a ***time\_t*** value. The ***time\_t*** value measures seconds since January 1, 1970; therefore, do not use these methods if the timestamp is less than 1970. Also, note that time_t represent a time in GMT time format.
 
 A series of methods that set the time using the database formats ***TDBTimeI*** and ***TDBTimeU*** are also defined. These database time formats contain local time only and are defined as typedefs in `ncbitime.hpp`. The mutator methods are ***SetTimeDBI()*** and ***SetTimeDBU()***, and the accessor methods are ***GetTimeDBI()*** and ***GetTimeDBU()***.
 
@@ -4448,7 +3311,7 @@ Therefore, to make it easier to write code that will correctly and efficiently i
 
 **`ITERATE`** uses a constant iterator; **`NON_CONST_ITERATE`** uses a non-constant iterator.
 
-The **`ITERATE`** and **`NON_CONST_ITERATE`** macros are defined in [include/corelib/ncbimisc.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbimisc.hpp), along with related macros including **`NON_CONST_SET_ITERATE`**, **`ERASE_ITERATE`**, **`VECTOR_ERASE`**, **`REVERSE_ITERATE`**, **`ITERATE_SIMPLE`**, and more.
+The **`ITERATE`** and **`NON_CONST_ITERATE`** macros are defined in [include/corelib/ncbimisc.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbimisc.hpp), along with related macros including **`NON_CONST_SET_ITERATE`**, **`ERASE_ITERATE`**, **`VECTOR_ERASE`**, **`REVERSE_ITERATE`**, **`ITERATE_SIMPLE`**, and more.
 
 <a name="ch_core.seq_pos_types"></a>
 
@@ -4608,7 +3471,7 @@ If there’s necessity to implement some special per-thread logic in ***CThreadP
 
 ### Class CThreadPool\_Task
 
-Abstract class derived from [CObject](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CObject&d=C), encapsulating task for execution in a ***CThreadPool***. The pure virtual method ***EStatus Execute(void)*** is called when some thread in pool becomes free and ready to execute this task. The lifetime of the task is controlled inside pool by ***CRef***\<\> classes.
+Abstract class derived from [CObject](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CObject&d=C), encapsulating task for execution in a ***CThreadPool***. The pure virtual method ***EStatus Execute(void)*** is called when some thread in pool becomes free and ready to execute this task. The lifetime of the task is controlled inside pool by ***CRef***\<\> classes.
 
 <a name="ch_core._template__typename_T_1"></a>
 
@@ -4745,7 +3608,7 @@ Abstract class for obtaining piece of [CByteSource](#ch_core.class_CByteSource) 
 Using the C++ Toolkit from a Third Party Application Framework
 --------------------------------------------------------------
 
-The NCBI C++ Toolkit includes an API, via [corelib/ncbi\_toolkit.hpp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbi_toolkit.hpp), that provides an easy way to initialize the NCBI C++ Toolkit internals to use the Toolkit from other application frameworks. This is particularly helpful when those frameworks provide their own logging.
+The NCBI C++ Toolkit includes an API, via [corelib/ncbi\_toolkit.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/ncbi_toolkit.hpp), that provides an easy way to initialize the NCBI C++ Toolkit internals to use the Toolkit from other application frameworks. This is particularly helpful when those frameworks provide their own logging.
 
 To initialize the NCBI C++ Toolkit internal infrastructure use the function:
 

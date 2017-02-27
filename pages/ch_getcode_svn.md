@@ -25,9 +25,6 @@ The first step in working with the C++ Toolkit is getting the source code, which
 
 If you are interested in downloading source code from the C Toolkit instead of the C++ Toolkit, please see [Access to the C Toolkit source tree Using CVS](ch_res.html#ch_res.Access_to_the_C_Tool).
 
-
-TEST [this link leads to the new doc file](/book/test_doc/ch_core.doc)
-
 ### Chapter Outline
 
 The following is an outline of the topics presented in this chapter:
@@ -69,7 +66,7 @@ Public Access to the Source Code via FTP
 
 -   [FTP Download Now](ftp://ftp.ncbi.nih.gov/toolbox/ncbi_tools++/CURRENT)
 
--   **Available FTP Archives**: Select the archive for your system. When the dialog box appears, choose the destination in your file system for the downloaded archive. ***Note:*** With some browsers, you may need to right-click-and-hold with your mouse and use the `'Save Link As...', 'Copy to Folder...'`, or similar options from the drop-down menu to properly save the archive. For a current list of the source code archives for different operating system/compiler combinations consult the current Release Notes available at <ftp://ftp.ncbi.nih.gov/toolbox/ncbi_tools++/CURRENT/RELEASE_NOTES.html>
+-   **Available FTP Archives**: Select the archive for your system. When the dialog box appears, choose the destination in your file system for the downloaded archive. ***Note:*** With some browsers, you may need to right-click-and-hold with your mouse and use the `'Save Link As...', 'Copy to Folder...'`, or similar options from the drop-down menu to properly save the archive. For a current list of the source code archives for different operating system/compiler combinations consult [the current Release Notes](release_notes.html).
 
 -   **Unpack the Source Archive**
 
@@ -90,11 +87,11 @@ Read-Only Access to the Source Code via Subversion
 
 The following options for read-only access to the C++ Toolkit Subversion repository are available to the public:
 
--   Checking out the source tree directly from the repository (e.g. svn co <http://anonsvn.ncbi.nlm.nih.gov/repos/v1/trunk/c++>).
+-   Checking out the source tree directly from the repository (e.g. svn co <https://anonsvn.ncbi.nlm.nih.gov/repos/v1/trunk/c++>).
 
--   Browsing the repository with an HTTP browser (e.g. <http://www.ncbi.nlm.nih.gov/viewvc/v1/trunk/c++>).
+-   Browsing the repository with an HTTP browser (e.g. <https://www.ncbi.nlm.nih.gov/viewvc/v1/trunk/c++>).
 
--   Accessing the repository with a WebDAV client (also using <http://anonsvn.ncbi.nlm.nih.gov/repos/v1/trunk/c++> – although some clients may require dav:// instead of http://).
+-   Accessing the repository with a WebDAV client (also using <https://anonsvn.ncbi.nlm.nih.gov/repos/v1/trunk/c++> – although some clients may require dav:// instead of http://).
 
 <a name="ch_getcode_svn.code_retrieval"></a>
 
@@ -320,10 +317,11 @@ Table 3. Directories that may be checked out depending on branch and platform op
 | `compilers`               | yes        | `<platform>` = all                   |
 | `compilers`               | ***no***   | `<platform>` != all                  |
 | `compilers/cygwin`        | yes        | `<platform>` = cygwin                |
-| `compilers/msvc1000_prj`  | yes        | `<platform>` = msvc                  |
+| `compilers/vs2013`        | yes        | `<platform>` = msvc                  |
+| `compilers/vs2015`        | yes        | `<platform>` = msvc                  |
 | `compilers/unix`          | yes        | `<platform>` = cygwin or mac or unix |
 | `compilers/xCode`         | yes        | `<platform>` = max                   |
-| `compilers/xcode90_prj`   | yes        | `<platform>` = mac                   |
+| `compilers/xcode30_prj`   | yes        | `<platform>` = mac                   |
 | `doc`                     | yes        | `<branch>` = development             |
 | `include/connect/daemons` | yes        | `<platform>` = all or unix           |
 | `src/check`               | yes        | `<platform>` != mac                  |

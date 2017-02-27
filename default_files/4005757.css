@@ -77,7 +77,8 @@ tr.option {color:white;}
 /******  END - Styles for new header ******/
 
 /******  Footer styling  *******/
-.footer_title {padding:15px;}
+.footer_title {padding:5px;}
+.footer_title H1 {color: #724128;}
 
 /******** Make large tables in <div class="container"> scrollable like in the old book *******/
 
@@ -1147,7 +1148,7 @@ text-align: left;
 }
 
 /* Added style and scroll bars to preformatted pieces of text */
-pre {
+pre.highlight {
   background: #eee;
   border: 1px solid #C0C0C0;
   overflow: auto;

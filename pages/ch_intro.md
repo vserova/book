@@ -190,7 +190,7 @@ A new application is written by deriving a class from the ***CNcbiApplication***
 
 <a name="ch_intro.F1"></a>
 
-![Figure 1. The CNcbiApplication class](/book/static/img/CNcbiApplication.gif)
+![Figure 1. The CNcbiApplication class](/cxx-toolkit/static/img/CNcbiApplication.gif)
 
 Figure 1. The ***CNcbiApplication*** class
 
@@ -447,7 +447,7 @@ The CONNECT module provides a higher level of abstraction to connection programm
 
 <a name="ch_intro.F2"></a>
 
-![Figure 2. Connection stream classes](/book/static/img/CConn_IOStream.gif)
+![Figure 2. Connection stream classes](/cxx-toolkit/static/img/CConn_IOStream.gif)
 
 Figure 2. Connection stream classes
 
@@ -542,7 +542,7 @@ More [details on the database driver architecture](ch_dbapi.html#ch_dbapi.dbapi_
 The GUI Module
 --------------
 
-The C++ Toolkit does not include its own GUI Module. Instead, Toolkit-based GUI applications make use of third party GUI packages. Depending on the requirements, we recommend either [wxWidgets](http://www.wxwidgets.org/) or [FOX](http://www.fox-toolkit.org/).
+The C++ Toolkit does not include its own GUI Module. Instead, Toolkit-based GUI applications make use of third party GUI packages. Depending on the requirements, we recommend either [wxWidgets](https://www.wxwidgets.org/) or [FOX](http://www.fox-toolkit.org/).
 
 More details on developing GUI application in conjunction with the C++ Toolkit are presented in a [later chapter](ch_gui.html).
 
@@ -571,7 +571,7 @@ The base class for all nodes in the graph structure for an HTML document is the 
 
 <a name="ch_intro.F3"></a>
 
-![Figure 3. HTML classes derived from CNCBINode](/book/static/img/CNCBINode.gif)
+![Figure 3. HTML classes derived from CNCBINode](/cxx-toolkit/static/img/CNCBINode.gif)
 
 Figure 3. HTML classes derived from ***CNCBINode***
 
@@ -579,7 +579,7 @@ The text node classes ***CHTMLText*** and ***CHTMLPlainText*** are intended to b
 
 <a name="ch_intro.F4"></a>
 
-![Figure 4. The CHTMLNode class and its derived classes](/book/static/img/CHTMLNode.gif)
+![Figure 4. The CHTMLNode class and its derived classes](/cxx-toolkit/static/img/CHTMLNode.gif)
 
 Figure 4. The ***CHTMLNode*** class and its derived classes
 
@@ -589,7 +589,7 @@ Important classes of HTML elements used in forms to input data are the input ele
 
 <a name="ch_intro.F5"></a>
 
-![Figure 5. The CHTML\_input class and its derived classes](/book/static/img/CHTML_input.gif)
+![Figure 5. The CHTML\_input class and its derived classes](/cxx-toolkit/static/img/CHTML_input.gif)
 
 Figure 5. The ***CHTML\_input*** class and its derived classes
 
@@ -603,7 +603,7 @@ The HTML classes can be used to dynamically generate pages. In addition to the c
 
 <a name="ch_intro.F6"></a>
 
-![Figure 6. HTML page classes](/book/static/img/CHTMLPage.gif)
+![Figure 6. HTML page classes](/cxx-toolkit/static/img/CHTMLPage.gif)
 
 Figure 6. HTML page classes
 
@@ -622,13 +622,13 @@ The Object Manager module is a library of C++ classes, which facilitate access t
 
 The Object Manager has been designed to present an interface to users and to minimize their exposure to the details of interacting with biological databases and their underlying data structures. The Object Manager, therefore, coordinates the use of biological sequence data objects, particularly the management of the details of loading data from different data sources.
 
-The NCBI databases and software tools are designed around a particular model of biological sequence data. The data model must be very flexible because the nature of this data is not yet fully understood, and its fundamental properties and relationships are constantly being revised. NCBI uses [Abstract Syntax Notation One](http://asn1.elibel.tm.fr) (ASN.1) as a formal language to describe [biological sequence data and its associated information](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/INDEX.HTML).
+The NCBI databases and software tools are designed around a particular model of biological sequence data. The data model must be very flexible because the nature of this data is not yet fully understood, and its fundamental properties and relationships are constantly being revised. NCBI uses [Abstract Syntax Notation One](http://asn1.elibel.tm.fr) (ASN.1) as a formal language to describe [biological sequence data and its associated information](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/INDEX.HTML).
 
 The bio sequence data may be huge and downloading all of this data may not be practical or desirable. Therefore, the Object Manager transparently transmits only the data that is really needed and not all of it at once. There is a [datatool](ch_app.html#ch_app.datatool) that generates corresponding data objects (source code and header files) from the object's ASN.1 specification. The Object Manager is able to manipulate these objects.
 
-Biological sequences are identified by a [Seq\_id](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/SEQLOC.HTML), which may have different forms.
+Biological sequences are identified by a [Seq\_id](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/SEQLOC.HTML), which may have different forms.
 
-The most general container object of bio sequence data, as defined in the NCBI data model, is [Seq\_entry](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/SEQSET.HTML). A great deal of NCBI software is designed to accept a Seq\_entry as the primary unit of data. In general, the Seq\_entry is defined recursively as a tree of Seq\_entry objects, where each node contains either [Bioseq](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/BIOSEQ.HTML) or list of other Seq\_entry objects and additional data like sequence description, sequence annotations.
+The most general container object of bio sequence data, as defined in the NCBI data model, is [Seq\_entry](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/SEQSET.HTML). A great deal of NCBI software is designed to accept a Seq\_entry as the primary unit of data. In general, the Seq\_entry is defined recursively as a tree of Seq\_entry objects, where each node contains either [Bioseq](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/BIOSEQ.HTML) or list of other Seq\_entry objects and additional data like sequence description, sequence annotations.
 
 Two important concepts in the Object Manager are `scope` and `reference resolution`. The client defines a scope as the sources of data where the system uses only "allowed" sources to look for data. Scopes may contain several variants of the same bio sequence (Seq\_entry). Since sequences refer to each other, the scope sets may have some data that is common to both scopes. In this case changing data in one scope should be reflected in all other scopes, which "look" at the same data.
 
@@ -649,7 +649,7 @@ The SERIAL Module
 
 Click here to see [Full Documentation on the Data Serialization Library](ch_ser.html).
 
-Serial library provides means for loading, accessing, manipulating, and serialization of data in a formatted way. It supports serialization in [ASN.1](http://asn1.elibel.tm.fr) (text or BER encoding), [XML](http://www.w3.org/XML), and [JSON](http://json.org) formats.
+Serial library provides means for loading, accessing, manipulating, and serialization of data in a formatted way. It supports serialization in [ASN.1](http://asn1.elibel.tm.fr) (text or BER encoding), [XML](https://www.w3.org/XML), and [JSON](http://json.org) formats.
 
 The structure of data is described by some sort of formal language. In our case it can be ASN.1, DTD or XML Schema. Based on such specification, [DATATOOL](ch_app.html#ch_app.datatool) application, which is part of the NCBI C++ Toolkit, generates a collection of data storage classes that can be used to store and serialize data. The design purpose was to make these classes as lightweight as possible, moving all details of serialization into specialized classes - [“object streams”](ch_ser.html#ch_ser.objstream.html_intro). Structure of the data is described with the help of [“type information”](ch_ser.html#ch_ser.typeinfo.html). Data objects contain data and type information only. Any such data storage object can be viewed as a node tree that provides random access to its data. Serial library provides means to[traversing](ch_ser.html#ch_ser.typeinfo.html_cobjinfo) this data tree without knowing its structure in advance – using only type information; C++ code generated by DATATOOL makes it possible to access any child node directly.
 
@@ -738,7 +738,7 @@ The ***CDebugDumpViewer*** class also permits the enabling and disabling of debu
 
 ### Diff API
 
-The Diff API includes the ***CDiff*** class for character-based diffs and the ***CDiffText*** class for line-based diffs. The API is based on the open source [Diff, Match and Patch Library](http://code.google.com/p/google-diff-match-patch/) and the [Diff Template Library](http://code.google.com/p/dtl-cpp/).
+The Diff API includes the ***CDiff*** class for character-based diffs and the ***CDiffText*** class for line-based diffs. The API is based on the open source [Diff, Match and Patch Library](https://code.google.com/p/google-diff-match-patch/) and the [Diff Template Library](https://code.google.com/p/dtl-cpp/).
 
 To use the Diff API, include `xdiff` in the **`LIB`** line of your application makefile, and include `<util/diff/diff.hpp>` in your source.
 
@@ -792,7 +792,7 @@ The following sample code shows how to perform both character- and line-based di
 
 For more detailed usage, see the test program:
 
-<http://www.ncbi.nlm.nih.gov/viewvc/v1/trunk/c%2B%2B/src/util/diff/test/>
+<https://www.ncbi.nlm.nih.gov/viewvc/v1/trunk/c%2B%2B/src/util/diff/test/>
 
 <a name="ch_intro.Floating_Point_Comparison"></a>
 
@@ -819,9 +819,9 @@ should be rewritten as:
 
 Note that compared variables must be of the same floating point type, otherwise a compile error will be generated.
 
-For further details on this function, see its Doxygen [documentation](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/floating__point_8hpp.html#a178b404beec22ce1c48057b7a4036c23).
+For further details on this function, see its Doxygen [documentation](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/floating__point_8hpp.html#a178b404beec22ce1c48057b7a4036c23).
 
-For technical details on the subject, including what it means to be close, see "[Comparing floating point numbers](http://www.cygnus-software.com/papers/comparingfloats/comparingfloats.htm)" by Bruce Dawson.
+For technical details on the subject, including what it means to be close, see "[Comparing floating point numbers](https://randomascii.wordpress.com/category/floating-point/)" by Bruce Dawson.
 
 <a name="ch_intro.intro_lightstring"></a>
 
@@ -881,7 +881,7 @@ The ***CSmallDns*** has two methods that are responsible for providing the DNS n
 
 ### Regular Expressions
 
-The UTIL module defines the [CRegexp](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCRegexp.html) class that supports defining, compiling, and searching against the "Perl compatible" flavor of regular expressions (PCRE). Note that PCRE, as implemented in `$(PCRE_LIBS)`, is not actually 100% compatible with the flavor of regular expressions implemented in Perl interpreters.
+The UTIL module defines the [CRegexp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCRegexp.html) class that supports defining, compiling, and searching against the "Perl compatible" flavor of regular expressions (PCRE). Note that PCRE, as implemented in `$(PCRE_LIBS)`, is not actually 100% compatible with the flavor of regular expressions implemented in Perl interpreters.
 
 A simple example of using ***CRegexp***:
 
@@ -921,7 +921,7 @@ The UTIL module defines a number of portable classes that provide additional str
 
 <a name="ch_intro.F7"></a>
 
-![Figure 7. Relationship between CByteSource and its derived classes](/book/static/img/CByteSource.gif)
+![Figure 7. Relationship between CByteSource and its derived classes](/cxx-toolkit/static/img/CByteSource.gif)
 
 Figure 7. Relationship between ***CByteSource*** and its derived classes
 
@@ -949,7 +949,7 @@ The UTIL module defines class ***CSyncQueue*** which implements a thread-safe qu
 
 There is also ***CSyncQueue::TAccessGuard*** class which can lock the queue for some bulk operations if during them queue should not be changed by other threads.
 
-For more details on ***CSyncQueue*** look here: <http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/CSyncQueueDescription.html>.
+For more details on ***CSyncQueue*** look here: <https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/CSyncQueueDescription.html>.
 
 <a name="ch_intro.intro_thrpools"></a>
 

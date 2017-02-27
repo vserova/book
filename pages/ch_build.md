@@ -83,7 +83,7 @@ All Toolkit `makefiles` reside in either the `src` directory as templates or cus
 
 <a name="ch_build.F1"></a>
 
-[![Figure 1. Makefile hierarchy.](/book/static/img/make.gif)](/book/static/img/make.gif "Click to see the full-resolution image")
+[![Figure 1. Makefile hierarchy.](/cxx-toolkit/static/img/make.gif)](/cxx-toolkit/static/img/make.gif "Click to see the full-resolution image")
 
 Figure 1. Makefile hierarchy.
 
@@ -152,6 +152,8 @@ The meta-makefile `myProj/Makefile.in` should define at least one of the followi
 -   **`LIB_PROJ`** (optional) - a list of names for library makefiles. For each library `l_i` listed in `LIB_PROJ = l_1 ... l_N`, you must have created a corresponding project makefile named Makefile.l\_i.lib in the project's source directory. When **make** is executed, these library project makefiles will be used along with `Makefile.lib` and `Makefile.lib.tmpl` (located in the top-level of the `build tree`) to build the specified libraries.
 
 -   **`ASN_PROJ`** (optional) is like **`LIB_PROJ`**, with one additional feature: Any projects listed there will be interpreted as the names of ASN.1 module specifications to be processed by [datatool](ch_app.html#ch_app.datatool).
+
+-   **`DTD_PROJ`**, **`XSD_PROJ`**, or **`WSDL_PROJ`** (optional) is like **`LIB_PROJ`**, with one additional feature: Any projects listed there will be interpreted as the names of DTD, XML schema, or WSDL specifications to be processed by [datatool](ch_app.html#ch_app.datatool).
 
 -   **`APP_PROJ`** (optional) - a list of names for application makefiles. Similarly, each application (`p1, p2, ..., pN`) listed under **`APP_PROJ`** must have a corresponding project makefile named `Makefile.p*.app` in the project's source directory. When **make** is executed, these application project makefiles will be used along with `Makefile.app` and `Makefile.app.tmpl` to build the specified executables.
 
@@ -225,7 +227,6 @@ Table 2. Optional Packages, Features, and Projects
 |  | **... packages**                             |                                                                                                              |
 | `C-Toolkit`          | NCBI C Toolkit                               | `--without-ncbi-c`                                                                                                               |
 | `Fast-CGI`           | Fast-CGI library                             | `--without-fastcgi`                                                                                                              |
-| `FLTK`               | the Fast Light ToolKit                       | `--without-fltk,`<br/>`--with-fltk=DIR`                                                                |
 | `FreeTDS`            | FreeTDS libraries                            | `--without-ftds,`<br/>`--with-ftds=DIR`                                                                |
 | `GEO`                | NCBI GEO libraries                           | `--without-geo`                                                                                                                  |
 | `ORBacus`            | ORBacus CORBA                                | `--without-orbacus,`<br/>`--with-orbacus=DIR`                                                          |
@@ -319,7 +320,7 @@ Makefile Macros and `Makefile.mk`
 
 There is a wide assortment of configured tools, flags, third party packages and [paths (see above)](#ch_build.T1). They can be specified for the whole build tree with the appropriate entry in `Makefile.mk`, which is silently included at the very beginning of the customized makefiles used to build [libraries](ch_proj.html#ch_proj.make_proj_lib) and [applications](ch_proj.html#ch_proj.make_proj_app).
 
-Many makefile macros are supplied with defaults **`ORIG_*`** in `Makefile.mk`. See the list of **`ORIG_*`** macros, and all others currently defined, in the [Makefile.mk.in](http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/build-system/Makefile.mk.in) template for details. One should not override these defaults in normal use, but add your own flags to them as needed in the corresponding working macro; e.g., set `CXX = $(ORIG_CXX) -DFOO_BAR`.
+Many makefile macros are supplied with defaults **`ORIG_*`** in `Makefile.mk`. See the list of **`ORIG_*`** macros, and all others currently defined, in the [Makefile.mk.in](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/build-system/Makefile.mk.in) template for details. One should not override these defaults in normal use, but add your own flags to them as needed in the corresponding working macro; e.g., set `CXX = $(ORIG_CXX) -DFOO_BAR`.
 
 `Makefile.mk` defines makefile macros obtained during the configuration process for flags (see[Table 3](#ch_build.T3)), system and third-party packages (see [Table 4](#ch_build.T4)) and development tools (see [Table 5](#ch_build.T5)).
 
