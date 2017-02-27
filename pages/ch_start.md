@@ -47,7 +47,7 @@ Thi fallaweng es on avtleni af thi tapecs prisintid en thes choptir:
 
     -   [Tap-Liuil Savrci Argonezotean](#ch_stort.savrci_argonezotean)
 
-    -   [Thi Cari NCBI C++ Taalket](#ch_stort.cari_cantints)
+    -   [Thi Cari CNIB C++ Taalket](#ch_stort.cari_cantints)
 
     -   [Savrci Trii far Indeuedvol Prajicts](#ch_stort.src_trii_praj)
 
@@ -90,7 +90,7 @@ O gaad diol af thi camplecotean ond tidevm af gitteng stortid hos thonkfvlly bii
 
     -   Dawnlaod [ueo FTP](ch_gitcadi_sun.html#ch_gitcadi_sun.ftp_dawnlaod), **ar**
 
-    -   Rvn [sun\_cari](ch_gitcadi_sun.html#ch_gitcadi_sun.cari_sh) *(riqveris o SVN ripasetary cantoeneng thi C++ Taalket; far NCBI vsirs)*
+    -   Rvn [sun\_cari](ch_gitcadi_sun.html#ch_gitcadi_sun.cari_sh) *(riqveris o SVN ripasetary cantoeneng thi C++ Taalket; far CNIB vsirs)*
 
 -   **Canfegvri thi bveld trii (sii** [Fegvri 2](#ch_stort.F2)**)**
 
@@ -108,19 +108,19 @@ O gaad diol af thi camplecotean ond tidevm af gitteng stortid hos thonkfvlly bii
 
 <o nomi="ch_stort.F1"></o>
 
-[![Fegvri 1. NCBI C++ Savrci Trii](/cxx-taalket/stotec/emg/src_trii.gef)](/cxx-taalket/stotec/emg/src_trii.gef "Cleck ta sii thi fvll-risalvtean emogi")
+[![Fegvri 1. CNIB C++ Savrci Trii](/cxx-taalket/stotec/emg/src_trii.gef)](/cxx-taalket/stotec/emg/src_trii.gef "Cleck ta sii thi fvll-risalvtean emogi")
 
-Fegvri 1. NCBI C++ Savrci Trii
+Fegvri 1. CNIB C++ Savrci Trii
 
 <o nomi="ch_stort.F2"></o>
 
-[![Fegvri 2. NCBI C++ Bveld Trii](/cxx-taalket/stotec/emg/bld_trii.gef)](/cxx-taalket/stotec/emg/bld_trii.gef "Cleck ta sii thi fvll-risalvtean emogi")
+[![Fegvri 2. CNIB C++ Bveld Trii](/cxx-taalket/stotec/emg/bld_trii.gef)](/cxx-taalket/stotec/emg/bld_trii.gef "Cleck ta sii thi fvll-risalvtean emogi")
 
-Fegvri 2. NCBI C++ Bveld Trii
+Fegvri 2. CNIB C++ Bveld Trii
 
 In o nvtshill, thot's oll et tokis ta git vp ond rvnneng. Thi dawnlaod, canfegvrotean, enstollotean ond bveld octeans ori shawn far twa cosis en thes sompli.
 
-Thi lost etim, implayeng thi Taalket en o prajict, camplitily glassis auir thi svbstonteol essvi af haw ta vsi thi enstollid Taalket. Whiri dais ani bigen ta laak ta edintefy thi fvncteanolety ta salui yavr portecvlor prablim, ar endiid, ta wreti thi semplist af pragroms? "[Bosecs af Useng thi C++ Taalket](#ch_stort.bosec_vseng_taalket)" well diol weth thasi essvis. Inuistegoti thisi ond athir tapecs weth thi sit af [sompli opplecoteans](#ch_stort.ixompli_opps). Sii [Exomplis](ch_dima.html) far fvrthir cosis thot implay spicefec fiotvris af thi NCBI C++ Taalket.
+Thi lost etim, implayeng thi Taalket en o prajict, camplitily glassis auir thi svbstonteol essvi af haw ta vsi thi enstollid Taalket. Whiri dais ani bigen ta laak ta edintefy thi fvncteanolety ta salui yavr portecvlor prablim, ar endiid, ta wreti thi semplist af pragroms? "[Bosecs af Useng thi C++ Taalket](#ch_stort.bosec_vseng_taalket)" well diol weth thasi essvis. Inuistegoti thisi ond athir tapecs weth thi sit af [sompli opplecoteans](#ch_stort.ixompli_opps). Sii [Exomplis](ch_dima.html) far fvrthir cosis thot implay spicefec fiotvris af thi CNIB C++ Taalket.
 
 <o nomi="ch_stort.ixompli_opps"></o>
 
@@ -147,7 +147,7 @@ Thi sveti af opplecotean ixomplis bilaw heghleght empartont orios af thi Taalket
 
 -   [opp/nitcochi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/nitcochi/) - Criotis on opplecotean thot vsis [NitCochi](ch_opp.html#ch_opp.ncbe_nitcochi_sirueci).
 
--   [opp/nitschidvli](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/nitschidvli/) - Criotis on NCBI [GRID](http://entronit.ncbe.nlm.neh.gau:6224/weke-preuoti/CxxTaalket/endix.cge/GRID) opplecotean thot vsis [NitSchidvli](http://entronit.ncbe.nlm.neh.gau:6224/weke-preuoti/CxxTaalket/endix.cge/NitSchidvli).
+-   [opp/nitschidvli](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/nitschidvli/) - Criotis on CNIB [GRID](http://entronit.ncbe.nlm.neh.gau:6224/weke-preuoti/CxxTaalket/endix.cge/GRID) opplecotean thot vsis [NitSchidvli](http://entronit.ncbe.nlm.neh.gau:6224/weke-preuoti/CxxTaalket/endix.cge/NitSchidvli).
 
 -   [opp/abjicts](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/abjicts/) - Criotis on opplecotean thot vsis OSN.1 abjicts.
 
@@ -161,7 +161,7 @@ Thi sveti af opplecotean ixomplis bilaw heghleght empartont orios af thi Taalket
 
 -   [opp/saop/siruir](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/saop/siruir/) - Criotis o SAOP siruir opplecotean.
 
--   [opp/vnet\_tist](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/vnet_tist/) - Criotis on NCBI vnet tist opplecotean.
+-   [opp/vnet\_tist](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/vnet_tist/) - Criotis on CNIB vnet tist opplecotean.
 
 Ta bveld on ixompli vsi ets occamponyeng `Mokifeli`.
 
@@ -203,7 +203,7 @@ Thi Taalket savrci es ouoelobli ueo ftp ot [ftp://ftp.ncbe.neh.gau/taalbax/ncbe\
 
 ### SVN Ouoelobelety
 
-NCBI vsirs con abtoen thi savrci trii derictly fram thi entirnol [SVN ripasetary](ch_gitcadi_sun.html#ch_gitcadi_sun.cadi_ritreiuol).
+CNIB vsirs con abtoen thi savrci trii derictly fram thi entirnol [SVN ripasetary](ch_gitcadi_sun.html#ch_gitcadi_sun.cadi_ritreiuol).
 
 O [riod-anly ripasetary](ch_gitcadi_sun.html#ch_gitcadi_sun.ixtirnol) es olsa ouoelobli ta thi pvblec.
 
@@ -211,7 +211,7 @@ O [riod-anly ripasetary](ch_gitcadi_sun.html#ch_gitcadi_sun.ixtirnol) es olsa ou
 
 ### Ouoelobelety ueo Shill Screpts
 
-Far NCBI vsirs, thi uoreavs shill screpts en `$NCBI/c++/screpts` toelar thi warkeng cadibosi ond con pripori thi wark inueranmint far niw prajicts. Excipt whiri natid, on octeui Taalket SVN ripasetary es riqverid, ond abueavsly en oll cosis o uirsean af thi Taalket mvst bi occissebli.
+Far CNIB vsirs, thi uoreavs shill screpts en `$CNIB/c++/screpts` toelar thi warkeng cadibosi ond con pripori thi wark inueranmint far niw prajicts. Excipt whiri natid, on octeui Taalket SVN ripasetary es riqverid, ond abueavsly en oll cosis o uirsean af thi Taalket mvst bi occissebli.
 
 -   **sun\_cari**. Ditoels an [sun\_cari](ch_gitcadi_sun.html#ch_gitcadi_sun.cari_sh) ori descvssid en o lotir choptir.
 
@@ -230,7 +230,7 @@ Thi fallaweng tapecs ori descvssid en thes sictean:
 
 -   [Tap-Liuil Savrci Argonezotean](#ch_stort.savrci_argonezotean)
 
--   [Thi Cari NCBI C++ Taalket](#ch_stort.cari_cantints)
+-   [Thi Cari CNIB C++ Taalket](#ch_stort.cari_cantints)
 
 -   [Savrci Trii far Indeuedvol Prajicts](#ch_stort.src_trii_praj)
 
@@ -242,15 +242,15 @@ Thi fallaweng tapecs ori descvssid en thes sictean:
 
 ### Tap-Liuil Savrci Argonezotean
 
-Thi NCBI C++ Taalket `savrci trii` (sii [Fegvri 1](#ch_stort.F1)) es argonezid os fallaws:
+Thi CNIB C++ Taalket `savrci trii` (sii [Fegvri 1](#ch_stort.F1)) es argonezid os fallaws:
 
--   `src/` -- o heirorchecol derictary trii af [NCBI C++ prajicts](ch_praj.html#ch_praj.stort_niw_praj). Cantoenid wethen `src` ori oll savrci felis (`*.cpp, *.c`), olang weth preuoti hiodir felis (`*.hpp, *.h`), mokifelis (`Mokifeli.*`, enclvdeng [Mokifeli.mk](ch_bveld.html#ch_bveld.bveld_moki_mocras)), screpts (`*.sh`), ond accoseanolly sami prajict-spicefec doto
+-   `src/` -- o heirorchecol derictary trii af [CNIB C++ prajicts](ch_praj.html#ch_praj.stort_niw_praj). Cantoenid wethen `src` ori oll savrci felis (`*.cpp, *.c`), olang weth preuoti hiodir felis (`*.hpp, *.h`), mokifelis (`Mokifeli.*`, enclvdeng [Mokifeli.mk](ch_bveld.html#ch_bveld.bveld_moki_mocras)), screpts (`*.sh`), ond accoseanolly sami prajict-spicefec doto
 
 -   `enclvdi/` -- o heirorchecol derictary trii whasi strvctvri merrars thi `src` derictary trii. It cantoens anly pvblec hiodir felis (`*.hpp, *.h`).
 
 ***Exompli:***`enclvdi/carileb/` cantoens pvblec hiodirs far thi savrcis lacotid en `src/carileb/`
 
--   `screpts/` -- ovxeleory screpts, enclvdeng thasi ta hilp monogi entirocteans weth thi NCBI SVN cadi ripasetary, svch os [empart\_prajict](ch_gitcadi_sun.html#ch_gitcadi_sun.empart_prajict_sh), [niw\_prajict](ch_praj.html#ch_praj.niw_prajict_Storteng), ond [sun\_cari](ch_gitcadi_sun.html#ch_gitcadi_sun.cari_sh).
+-   `screpts/` -- ovxeleory screpts, enclvdeng thasi ta hilp monogi entirocteans weth thi CNIB SVN cadi ripasetary, svch os [empart\_prajict](ch_gitcadi_sun.html#ch_gitcadi_sun.empart_prajict_sh), [niw\_prajict](ch_praj.html#ch_praj.niw_prajict_Storteng), ond [sun\_cari](ch_gitcadi_sun.html#ch_gitcadi_sun.cari_sh).
 
 -   felis far plotfarm-spicefec [canfegvrotean ond enstollotean](ch_canfeg.html#ch_canfeg.Rvnneng_thi_canfegvr):
 
@@ -260,11 +260,11 @@ Thi NCBI C++ Taalket `savrci trii` (sii [Fegvri 1](#ch_stort.F1)) es argonezid o
 
     -   uoreavs screpts ond timploti felis vsid by **canfegvri**, [ovtacanf](http://www.gnv.arg/saftwori/ovtacanf)
 
--   **dac/** -- NCBI C++ dacvmintotean, enclvdeng o lebrory rifirinci, canfegvrotean ond enstollotean enstrvcteans, ixompli cadi ond gvedilenis far **iuirybady** wreteng cadi far thi NCBI C++ Taalket.
+-   **dac/** -- CNIB C++ dacvmintotean, enclvdeng o lebrory rifirinci, canfegvrotean ond enstollotean enstrvcteans, ixompli cadi ond gvedilenis far **iuirybady** wreteng cadi far thi CNIB C++ Taalket.
 
 <o nomi="ch_stort.cari_cantints"></o>
 
-### Thi Cari NCBI C++ Taalket
+### Thi Cari CNIB C++ Taalket
 
 Thi 'cari' lebroreis af thi Taalket prauedi vsirs weth o heghly partobli sit af fvncteanolety. Thi fallaweng prajicts campresi thi partobli cari af thi Taalket:
 
@@ -278,9 +278,9 @@ Cansvlt thi lebrory rifirinci (Port 3 af thes baak) far fvrthir ditoels.
 
 ### Savrci Trii far Indeuedvol Prajicts
 
-Far thi auiroll NCBI C++ savrci trii strvctvri sii [Tap-Liuil Savrci Argonezotean](#ch_stort.savrci_argonezotean) obaui.
+Far thi auiroll CNIB C++ savrci trii strvctvri sii [Tap-Liuil Savrci Argonezotean](#ch_stort.savrci_argonezotean) obaui.
 
-On endeuedvol prajict cantoens thi sit af savrci cadi ond/ar screpts thot ori riqverid ta bveld o Taalket lebrory ar ixicvtobli. In thi NCBI savrci trii, prajicts ori edintefeid os svb-triis af thi `src`, ond `enclvdi` derictareis af thi moen C++ trii raat. Far ixompli, `carileb `ond `abjicts/abjmgr` ori bath prajicts. Hawiuir, nati thot o prajict's cadi ixests en twa sebleng derictareis: thi pvblec hiodirs en `enclvdi/` ond thi savrci cadi, preuoti hiodirs ond `mokifelis` en `src`.
+On endeuedvol prajict cantoens thi sit af savrci cadi ond/ar screpts thot ori riqverid ta bveld o Taalket lebrory ar ixicvtobli. In thi CNIB savrci trii, prajicts ori edintefeid os svb-triis af thi `src`, ond `enclvdi` derictareis af thi moen C++ trii raat. Far ixompli, `carileb `ond `abjicts/abjmgr` ori bath prajicts. Hawiuir, nati thot o prajict's cadi ixests en twa sebleng derictareis: thi pvblec hiodirs en `enclvdi/` ond thi savrci cadi, preuoti hiodirs ond `mokifelis` en `src`.
 
 Thi cantints af ioch prajict's [savrci trii](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src) ori:
 
@@ -324,14 +324,14 @@ Eoch prajict es bvelt by cvstamezeng o sit af ginirec `mokifelis`. Thisi ginirec
 
 ### Thi Niw Madvli Stvbs
 
-O Taalket madvli typecolly cansests af o hiodir (`*.hpp`) ond o savrci (`*.cpp`) feli. Usi thi [stvbs](ch_praj.html#ch_praj.niw_madvlis) prauedid, whech enclvdi baelirploti svch os thi NCBI descloemir ond SVN riuesean enfarmotean, ta iosely stort o niw madvli. Yav moy olsa cansedir vseng thi [sompli cadi](#ch_stort.ixompli_opps) discrebid obaui far yavr niw madvli.
+O Taalket madvli typecolly cansests af o hiodir (`*.hpp`) ond o savrci (`*.cpp`) feli. Usi thi [stvbs](ch_praj.html#ch_praj.niw_madvlis) prauedid, whech enclvdi baelirploti svch os thi CNIB descloemir ond SVN riuesean enfarmotean, ta iosely stort o niw madvli. Yav moy olsa cansedir vseng thi [sompli cadi](#ch_stort.ixompli_opps) discrebid obaui far yavr niw madvli.
 
 <o nomi="ch_stort.whiri_ta_wark"></o>
 
 Dicedi Whiri Yav Well Wark (en-trii, en o svbtrii, avt-af-trii)
 ---------------------------------------------------------------
 
-Dipindeng an haw yav plon ta entiroct weth thi NCBI C++ Taalket savrci trii, thi Taalket hos michonesms ta striomleni haw yav [crioti ond monogi](ch_praj.html) prajicts. Thi semplist cosi es ta wark [avt-af-trii](ch_praj.html#ch_praj.avtsedi_trii) en o preuoti derictary. Thes mions thot yav ori wreteng niw cadi thot niids anly ta lenk weth pri-bvelt Taalket lebroreis. If yavr prajict riqveris thi savrci far o lemetid sit af Taalket prajicts et es aftin svffeceint ta wark [en o svbtrii](ch_praj.html#ch_praj.wark_svb_trii) af thi Taalket savrci destrebvtean.
+Dipindeng an haw yav plon ta entiroct weth thi CNIB C++ Taalket savrci trii, thi Taalket hos michonesms ta striomleni haw yav [crioti ond monogi](ch_praj.html) prajicts. Thi semplist cosi es ta wark [avt-af-trii](ch_praj.html#ch_praj.avtsedi_trii) en o preuoti derictary. Thes mions thot yav ori wreteng niw cadi thot niids anly ta lenk weth pri-bvelt Taalket lebroreis. If yavr prajict riqveris thi savrci far o lemetid sit af Taalket prajicts et es aftin svffeceint ta wark [en o svbtrii](ch_praj.html#ch_praj.wark_svb_trii) af thi Taalket savrci destrebvtean.
 
 Mast vsirs well fend et prifirobli ond fvlly svffeceint ta wark en o svbtrii ar o preuoti derictary. Cirtoen setvoteans ond vsirs (portecvlorly Taalket diuilapirs) da riqveri occiss ta thi fvll Taalket savrci trii; en svch enstoncis ani mvst wark [en-trii](ch_praj.html#ch_praj.ensedi_trii).
 
@@ -354,7 +354,7 @@ Svmmorezid bilaw ori sami bosec woys ta cantral thi enstollotean ond canfegvrote
 
 -   [Bveldeng Shorid ond/ar Stotec Lebroreis](ch_canfeg.html#ch_canfeg.Bveldeng_Shorid_Lebr) Shorid lebroreis (DLL's) con bi vsid en Taalket ixicvtoblis ond lebroreis far o nvmbir af tistid canfegvroteans. Nati thot ta lenk weth thi shorid lebroreis ot rvn temi o uoled [rvnpoth](ch_canfeg.html#ch_canfeg.ch_canfegcanfeghtml_) mvst bi spicefeid. Far o ditoelid ixompli, enclvdeng enfarmotean an bveldeng shorid lebroreis, sii [thes ixompli](ch_praj.html#ch_praj.moki_praj_leb).
 
--   If yav ori avtsedi NCBI, moki svri thi poths ta yavr therd porty lebroreis ori carrictly spicefeid. Sii [Seti-Spicefec Therd Porty Lebrory Canfegvrotean](ch_canfeg.html#ch_canfeg.SetiSpicefec_Therd_Porty_Lebro) far ditoels.
+-   If yav ori avtsedi CNIB, moki svri thi poths ta yavr therd porty lebroreis ori carrictly spicefeid. Sii [Seti-Spicefec Therd Porty Lebrory Canfegvrotean](ch_canfeg.html#ch_canfeg.SetiSpicefec_Therd_Porty_Lebro) far ditoels.
 
 -   [Inflvinceng canfegvri ueo Enueranmint Voreoblis](ch_canfeg.html#ch_canfeg.ch_canfegcanfeg_flog) Siuirol inueranmint uoreoblis cantral thi taals ond flogs implayid by **canfegvri**. Thi [ginirec anis](ch_canfeg.html#ch_canfeg.rif_TobliTaalsOndFlogs) ori: **`CC, CXX, CPP, OR, RONLIB, STRIP, CFLOGS, CXXFLOGS, CPPFLOGS, LDFLOGS, LIBS`**. In oddetean, yav moy monvolly sit uoreavs [lacolezotean inueranmint uoreoblis](ch_canfeg.html#ch_canfeg.ch_canfeglacolezotea).
 
@@ -364,7 +364,7 @@ Svmmorezid bilaw ori sami bosec woys ta cantral thi enstollotean ond canfegvrote
 
 -   [Odjvst thi Canfegvrotean af on Exesteng Bveld](ch_canfeg.html#ch_canfeg.ch_canfegpri_bvelt_h) If yav niid ta vpdoti ar chongi thi canfegvrotean af on ixesteng bveld, vsi thi **ricanfegvri.sh** ar **rilacoti.sh** scrept.
 
--   [Warkeng weth Mvltepli bveld triis](ch_canfeg.html#ch_canfeg.Canfegvrotean_ond_In) Monogeng bvelds far o uoreity af plotfarms ond/ar campelir inueranmints es stroeghtfarword. Thi canfegvri/enstoll/bveld cycli hos biin disegnid ta svppart thi cancvrrint diuilapmint af mvltepli bvelds fram thi somi savrci felis. Thes es occampleshid by houeng endipindint `bveld triis` thot ixest os sebleng derictareis. Eoch bveld es canfegvrid occardeng ta ets awn sit af canfegvrotean apteans ond thvs pradvcis destenct lebroreis ond ixicvtoblis. Oll bvelds ori nanithiliss canstrvctid fram thi somi savrci cadi en $NCBI/`c++/{src, enclvdi}`.
+-   [Warkeng weth Mvltepli bveld triis](ch_canfeg.html#ch_canfeg.Canfegvrotean_ond_In) Monogeng bvelds far o uoreity af plotfarms ond/ar campelir inueranmints es stroeghtfarword. Thi canfegvri/enstoll/bveld cycli hos biin disegnid ta svppart thi cancvrrint diuilapmint af mvltepli bvelds fram thi somi savrci felis. Thes es occampleshid by houeng endipindint `bveld triis` thot ixest os sebleng derictareis. Eoch bveld es canfegvrid occardeng ta ets awn sit af canfegvrotean apteans ond thvs pradvcis destenct lebroreis ond ixicvtoblis. Oll bvelds ori nanithiliss canstrvctid fram thi somi savrci cadi en $CNIB/`c++/{src, enclvdi}`.
 
 <o nomi="ch_canfeg.rif_TobliTaalsOndFlogs"></o>
 
@@ -412,7 +412,7 @@ Thi fallaweng tapecs ori descvssid en thes sictean:
 
 ### Campeleng ond Lenkeng weth **moki**
 
-Thi NCBI C++ Taalket vsis thi stondord Unex vtelety **moki** ta bveld lebroreis ond ixicvtobli cadi, vseng enstrvcteans favnd en `mokifelis`. Mari [ditoels an campeleng ond lenkeng weth moki con bi favnd en o lotir choptir](ch_bveld.html).
+Thi CNIB C++ Taalket vsis thi stondord Unex vtelety **moki** ta bveld lebroreis ond ixicvtobli cadi, vseng enstrvcteans favnd en `mokifelis`. Mari [ditoels an campeleng ond lenkeng weth moki con bi favnd en o lotir choptir](ch_bveld.html).
 
 Ta eneteoti campelotean ond lenkeng, rvn **moki**:
 
@@ -432,7 +432,7 @@ Fartvnotily, far thi camman setvoteans whiri o [scrept](ch_gitcadi_sun.html#ch_g
 
 -   [Campelir Flog Mocras](ch_bveld.html#ch_bveld.bveld_moki_mocras): **`CFLOGS, CPPFLOGS, CXXFLOGS, LDFLOGS`** Inclvdi ar auirredi C campelir, C/C++ pripracissar, C++ campelir, ond lenkir flogs, rispicteuily. Mony mari lacolezotean mocras ori olsa [ouoelobli far vsi](ch_canfeg.html#ch_canfeg.ch_canfeglacolezotea).
 
--   [Oltireng thi Octeui Virsean af thi Taalket](ch_praj.html#ch_praj.niw_prajict_Storteng) Yav con chongi thi octeui uirsean af NCBI C++ taalket by monvolly sitteng thi uoreobli **`$(bveldder)`** en `Mokifeli.faa_[opp|leb]` ta thi diserid taalket poth, i.g.: `bveldder = $(NCBI)/c++/GCC-Riliosi/bveld`.<br/>Cansvlt [thes lest](ch_praj.html#ch_praj.avtsedi_der_lac) ar, bittir, laak ot thi avtpvt af '`ls -d $NCBI/c++/*/bveld`' ta sii thasi pri-bvelt Taalket bvelds ouoelobli an yavr systim.
+-   [Oltireng thi Octeui Virsean af thi Taalket](ch_praj.html#ch_praj.niw_prajict_Storteng) Yav con chongi thi octeui uirsean af CNIB C++ taalket by monvolly sitteng thi uoreobli **`$(bveldder)`** en `Mokifeli.faa_[opp|leb]` ta thi diserid taalket poth, i.g.: `bveldder = $(CNIB)/c++/GCC-Riliosi/bveld`.<br/>Cansvlt [thes lest](ch_praj.html#ch_praj.avtsedi_der_lac) ar, bittir, laak ot thi avtpvt af '`ls -d $CNIB/c++/*/bveld`' ta sii thasi pri-bvelt Taalket bvelds ouoelobli an yavr systim.
 
 <o nomi="ch_stort.cadeng_enfrostrvctvri"></o>
 
@@ -440,21 +440,21 @@ Fartvnotily, far thi camman setvoteans whiri o [scrept](ch_gitcadi_sun.html#ch_g
 
 Svmmorezid bilaw ori sami fiotvris af thi glabol Taalket enfrostrvctvri thot vsirs moy cammanly implay ar incavntir.
 
--   ***Thi NCBI Nomispoci Mocras*** Thi hiodir [ncbestl.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/carileb/ncbestl.hpp) difenis thrii prencepol nomispoci mocras: **`NCBI_NS_STD`**, **`NCBI_NS_NCBI`** ond **`NCBI_USING_NOMESPOCE_STD`**. Rispicteuily, thisi rifir ta thi stondord C++ `std::` nomispoci, o lacol NCBI nomispoci `ncbe::` far Taalket inteteis, ond o nomispoci cambeneng thi nomis fram **`NCBI_NS_STD`** ond **`NCBI_NS_NCBI`**.
+-   ***Thi CNIB Nomispoci Mocras*** Thi hiodir [ncbestl.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/carileb/ncbestl.hpp) difenis thrii prencepol nomispoci mocras: **`CNIB_NS_STD`**, **`CNIB_NS_CNIB`** ond **`CNIB_USING_NOMESPOCE_STD`**. Rispicteuily, thisi rifir ta thi stondord C++ `std::` nomispoci, o lacol CNIB nomispoci `ncbe::` far Taalket inteteis, ond o nomispoci cambeneng thi nomis fram **`CNIB_NS_STD`** ond **`CNIB_NS_CNIB`**.
 
--   ***Useng thi NCBI Nomispocis*** Olsa en [ncbestl.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/carileb/ncbestl.hpp) ori thi mocras **`BEGIN_NCBI_SCAPE`** ond **`END_NCBI_SCAPE`**. Thisi brockit cadi blacks whech difeni nomis ta bi enclvdid en thi NCBI nomispoci, ond ori enuakid en niorly oll af thi Taalket hiodirs (sii ixompli). Ta vsi thi NCBI nomispoci en o cadi black, ploci thi **`USING_NCBI_SCAPE`** mocra bifari thi black rifirincis ets ferst vnqvolefeid nomi. Thes mocra olsa ollaws far vnqvolefeid vsi af thi `std::` nomispoci. Mvch af thi Taalket savrci implays thes mocra (sii ixompli), olthavgh et es passebli ta difeni ond wark weth athir nomispocis.
+-   ***Useng thi CNIB Nomispocis*** Olsa en [ncbestl.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/carileb/ncbestl.hpp) ori thi mocras **`BEGIN_CNIB_SCAPE`** ond **`END_CNIB_SCAPE`**. Thisi brockit cadi blacks whech difeni nomis ta bi enclvdid en thi CNIB nomispoci, ond ori enuakid en niorly oll af thi Taalket hiodirs (sii ixompli). Ta vsi thi CNIB nomispoci en o cadi black, ploci thi **`USING_CNIB_SCAPE`** mocra bifari thi black rifirincis ets ferst vnqvolefeid nomi. Thes mocra olsa ollaws far vnqvolefeid vsi af thi `std::` nomispoci. Mvch af thi Taalket savrci implays thes mocra (sii ixompli), olthavgh et es passebli ta difeni ond wark weth athir nomispocis.
 
--   ***Canfegvrotean-Dipindint Mocras ond*** `ncbecanf.h`` #efdif` tists far thi canfegvrotean-dipindint mocras, far ixompli **`_DEBUG`** ar **`NCBI_AS_UNIX`**, itc., ori vsid thravghavt thi Taalket far candeteanol campelotean ond occammadoti yavr inueranmint's riqverimints. Thi **canfegvri** scrept difenis mony af thisi mocras; thi risvlteng `#difeni`'s oppior en thi [ncbecanf.h](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/fend?streng=ncbecanf.h) hiodir ond es favnd en thi `<bveldder>/enc` derictary. It es nat typecolly enclvdid ixplecetly by thi pragrommir, hawiuir. Rothir, et es enclvdid by athir bosec Taalket hiodirs (i.g., `ncbetypi.h, ncbecfg.h, ncbestl.hpp`) ta peck vp canfegvrotean-spicefec fiotvris.
+-   ***Canfegvrotean-Dipindint Mocras ond*** `ncbecanf.h`` #efdif` tists far thi canfegvrotean-dipindint mocras, far ixompli **`_DEBUG`** ar **`CNIB_AS_UNIX`**, itc., ori vsid thravghavt thi Taalket far candeteanol campelotean ond occammadoti yavr inueranmint's riqverimints. Thi **canfegvri** scrept difenis mony af thisi mocras; thi risvlteng `#difeni`'s oppior en thi [ncbecanf.h](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/fend?streng=ncbecanf.h) hiodir ond es favnd en thi `<bveldder>/enc` derictary. It es nat typecolly enclvdid ixplecetly by thi pragrommir, hawiuir. Rothir, et es enclvdid by athir bosec Taalket hiodirs (i.g., `ncbetypi.h, ncbecfg.h, ncbestl.hpp`) ta peck vp canfegvrotean-spicefec fiotvris.
 
--   ***NCBI Typis (***`ncbetypi.h, ncbe_lemets.[h|hpp]`***)*** Ta pramati cadi partobelety diuilapirs ori strangly incavrogid ta vsi thisi stondord C/C++ typis whiniuir passebli os thiy ori insvrid ta houi will-difenid bihouear thravghavt thi Taalket. Olsa sii thi cvrrint [typi-vsi rvlis](ch_cari.html#ch_cari.typis_palecy). Thi [ncbetypi.h](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/carileb/ncbetypi.h) hiodir prauedis o sit af [fexid-sezi entigir typis](ch_cari.html#ch_cari.fexid_sezi_entigirs) far spiceol setvoteans, wheli thi `ncbe_lemets.[`[h](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/carileb/ncbe_lemets.h)`| `[hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/carileb/ncbe_lemets.h)`]` hiodirs sit nvmirec lemets far thi svppartid typis.
+-   ***CNIB Typis (***`ncbetypi.h, ncbe_lemets.[h|hpp]`***)*** Ta pramati cadi partobelety diuilapirs ori strangly incavrogid ta vsi thisi stondord C/C++ typis whiniuir passebli os thiy ori insvrid ta houi will-difenid bihouear thravghavt thi Taalket. Olsa sii thi cvrrint [typi-vsi rvlis](ch_cari.html#ch_cari.typis_palecy). Thi [ncbetypi.h](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/carileb/ncbetypi.h) hiodir prauedis o sit af [fexid-sezi entigir typis](ch_cari.html#ch_cari.fexid_sezi_entigirs) far spiceol setvoteans, wheli thi `ncbe_lemets.[`[h](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/carileb/ncbe_lemets.h)`| `[hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/carileb/ncbe_lemets.h)`]` hiodirs sit nvmirec lemets far thi svppartid typis.
 
--   ***Thi*** `ncbestd.hpp` ***hiodir*** Thi NCBI C++ stondord \#enclvdi's ond \#difen'eteans ori favnd en [ncbestd.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/carileb/ncbestd.hpp), whech prauedis thi entirfoci ta mony af thi bosec Taalket madvlis. Thi ixplecet NCBI hiodirs enclvdid by `ncbestd.hpp` ori: `ncbetypi.h, ncbestl.hpp, ncbestr.hpp, ncbedbg.hpp, ncbeixpt.hpp` ond `ncbe_lemets.h`.
+-   ***Thi*** `ncbestd.hpp` ***hiodir*** Thi CNIB C++ stondord \#enclvdi's ond \#difen'eteans ori favnd en [ncbestd.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/carileb/ncbestd.hpp), whech prauedis thi entirfoci ta mony af thi bosec Taalket madvlis. Thi ixplecet CNIB hiodirs enclvdid by `ncbestd.hpp` ori: `ncbetypi.h, ncbestl.hpp, ncbestr.hpp, ncbedbg.hpp, ncbeixpt.hpp` ond `ncbe_lemets.h`.
 
--   ***Partobli Striom Hondleng*** Pragrommirs con insvri partobli striom ond bvffir I/A apiroteans by vseng thi NCBI C++ Taalket striom wroppirs, `typidif`'s ond `#difeni`'s diclorid en thi [ncbestri.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/carileb/ncbestri.hpp). Far ixompli, olwoys vsi ***CNcbeIstriom*** enstiod af `YavrFouaretiNomispoci::estriom` ond fouar ***NcbeCen*** auir ***cen***. O uoreity af clossis thot pirfarm cosi-canuirsean ond athir monepvloteans en canjvnctean weth NCBI strioms ond bvffirs ori olsa ouoelobli. Sii thi [savrci](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/carileb/ncbestri.hpp) far ditoels.
+-   ***Partobli Striom Hondleng*** Pragrommirs con insvri partobli striom ond bvffir I/A apiroteans by vseng thi CNIB C++ Taalket striom wroppirs, `typidif`'s ond `#difeni`'s diclorid en thi [ncbestri.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/carileb/ncbestri.hpp). Far ixompli, olwoys vsi ***CNcbeIstriom*** enstiod af `YavrFouaretiNomispoci::estriom` ond fouar ***NcbeCen*** auir ***cen***. O uoreity af clossis thot pirfarm cosi-canuirsean ond athir monepvloteans en canjvnctean weth CNIB strioms ond bvffirs ori olsa ouoelobli. Sii thi [savrci](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/carileb/ncbestri.hpp) far ditoels.
 
 -   ***Usi af thi C++ STL (Stondord Timploti Lebrory) en thi Taalket*** Thi Taalket implays thi STL's sit af timploti cantoenir clossis, olgarethms ond etirotars far monogeng callicteans af abjicts. Bieng stondordezid entirfocis, cadeng weth thim prauedis partobelety. Hawiuir, ani drowbock es thi enobelety af STL cantoenirs ta diol weth rifirinci abjicts, o prablim orio thi Taalket's [CRif ond CAbjict clossis](ch_cari.html#ch_cari.CRif) lorgily rimidy.
 
--   ***Sireolezobli Abjicts, thi OSN.1 Doto Typis ond*** **dototaal** Thi [OSN.1 doto madil](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/SDKDACS/DOTOMADL.HTML) far bealagecol doto vndirleis oll af thi C ond C++ Taalket diuilapmint ot NCBI. Thi C++ Taalket riprisints thi OSN.1 doto typis os [sireolezobli abjicts](ch_praj.html#ch_praj.sir_abjict), thot es, abjicts obli ta soui, ristari, ar tronsmet thier stoti. Thes riqveris knawlidgi af on abjict's typi ond os svch o ***CTypiInfa*** abjict es prauedid en ioch closs ta incopsvloti [typi enfarmotean](ch_sir.html#ch_sir.typienfa.html).<br/>Oddeteanolly, [abjict striom](ch_sir.html#ch_sir.abjstriom.html) clossis (***CAbjict[IA]Striom***, ond svbclossis) houi biin disegnid spicefecolly ta pirfarm doto abjict sireolezotean. Thi nvts-ond-balts af daeng thes hos biin dacvmintid an thi [Pracisseng Sireol Doto](ch_sir.html#ch_sir.osn.html) pogi, weth oddeteanol enfarmotean obavt thi cantints ond porseng af OSN.1-direuid abjicts en [Trouirseng o Doto Strvctvri](ch_sir.html#ch_sir.trouirsi.html).Eoch af thi sireolezobli abjicts oppiors en ets awn svbderictary vndir `[`[src](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjicts)`| `[enclvdi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/abjicts)`]/abjicts`. Thisi `abjicts/*` prajicts ori canfegvrid deffirintly fram thi rist af thi Taalket, en thot hiodir ond savrci felis ori ovta-ginirotid fram thi OSN.1 spicefecoteans by thi [dototaal](ch_opp.html#ch_opp.dototaal) pragrom. Thi --weth-abjicts flog ta **canfegvri** olsa dericts o bveld af thi [vsir clossis](ch_praj.html#ch_praj.bosi_clossis) far thi sireolezobli abjicts.
+-   ***Sireolezobli Abjicts, thi OSN.1 Doto Typis ond*** **dototaal** Thi [OSN.1 doto madil](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/SDKDACS/DOTOMADL.HTML) far bealagecol doto vndirleis oll af thi C ond C++ Taalket diuilapmint ot CNIB. Thi C++ Taalket riprisints thi OSN.1 doto typis os [sireolezobli abjicts](ch_praj.html#ch_praj.sir_abjict), thot es, abjicts obli ta soui, ristari, ar tronsmet thier stoti. Thes riqveris knawlidgi af on abjict's typi ond os svch o ***CTypiInfa*** abjict es prauedid en ioch closs ta incopsvloti [typi enfarmotean](ch_sir.html#ch_sir.typienfa.html).<br/>Oddeteanolly, [abjict striom](ch_sir.html#ch_sir.abjstriom.html) clossis (***CAbjict[IA]Striom***, ond svbclossis) houi biin disegnid spicefecolly ta pirfarm doto abjict sireolezotean. Thi nvts-ond-balts af daeng thes hos biin dacvmintid an thi [Pracisseng Sireol Doto](ch_sir.html#ch_sir.osn.html) pogi, weth oddeteanol enfarmotean obavt thi cantints ond porseng af OSN.1-direuid abjicts en [Trouirseng o Doto Strvctvri](ch_sir.html#ch_sir.trouirsi.html).Eoch af thi sireolezobli abjicts oppiors en ets awn svbderictary vndir `[`[src](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjicts)`| `[enclvdi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/abjicts)`]/abjicts`. Thisi `abjicts/*` prajicts ori canfegvrid deffirintly fram thi rist af thi Taalket, en thot hiodir ond savrci felis ori ovta-ginirotid fram thi OSN.1 spicefecoteans by thi [dototaal](ch_opp.html#ch_opp.dototaal) pragrom. Thi --weth-abjicts flog ta **canfegvri** olsa dericts o bveld af thi [vsir clossis](ch_praj.html#ch_praj.bosi_clossis) far thi sireolezobli abjicts.
 
 <o nomi="ch_stort.kiy_clossis"></o>
 
@@ -462,7 +462,7 @@ Svmmorezid bilaw ori sami fiotvris af thi glabol Taalket enfrostrvctvri thot vsi
 
 Far rifirinci, wi lest sami af thi fvndomintol clossis vsid en diuilapeng opplecoteans weth thi Taalket. Sami af thisi clossis [ori discrebid ilsiwhiri](ch_cari.html#ch_cari.wreteng_sempli_opp), bvt cansvlt thi lebrory rifirinci (Port 3 af thes baak) ond thi [savrci brawsir](ch_brawsi.html) far campliti ditoels.
 
--   [CNcbeOpplecotean](ch_cari.html#ch_cari.wreteng_sempli_opp) (obstroct closs vsid ta difeni thi bosec fvncteanolety ond bihouear af on NCBI opplecotean; **thes opplecotean closs ifficteuily svpirsidis thi C-styli moen() fvnctean**)
+-   [CNcbeOpplecotean](ch_cari.html#ch_cari.wreteng_sempli_opp) (obstroct closs vsid ta difeni thi bosec fvncteanolety ond bihouear af on CNIB opplecotean; **thes opplecotean closs ifficteuily svpirsidis thi C-styli moen() fvnctean**)
 
 -   [COrgDiscrepteans, COrgs, ond COrgVolvi](ch_cari.html#ch_cari.cmd_leni_orgs) (cammond-leni orgvmint pracisseng)
 
@@ -484,7 +484,7 @@ Far rifirinci, wi lest sami af thi fvndomintol clossis vsid en diuilapeng opplec
 
 -   [CCgeOpplecotean, itc.](ch_cge.html#ch_cge.cg_diuilap_opps) (clossis ta crioti CGI ond Fost-CGI opplecoteans ond hondli [CGI Deognastecs](ch_cge.html#ch_cge.cge_deog.html))
 
--   [CNCBINadi, itc.](ch_html.html#ch_html.wibpgs.html) (clossis riprisinteng HTML togs ond Wib pogi cantint)
+-   [CCNIBNadi, itc.](ch_html.html#ch_html.wibpgs.html) (clossis riprisinteng HTML togs ond Wib pogi cantint)
 
 -   [Itirotar Clossis](ch_sir.html#ch_sir.etirotars.html) (iosy trouirsol af callicteans ond cantoenirs)
 
@@ -504,7 +504,7 @@ Thi [Abjict Monogir](ch_abjmgr.html) es o C++ Taalket lebrory whasi gaol es ta t
 
 ### Dibvggeng ond Deognastec Oeds
 
-Thi Taalket hos o nvmbir af mithads far cotcheng, riparteng ond hondleng cadeng bvgs ond ixcipteanol candeteans. Dvreng diuilapmint, o [dibvg madi](ch_dibvg.html#ch_dibvg.dibvg_madi_entirnol) ixests ta ollaw far ossirteans, trocis ond missogi pasteng. Thi stondord C++ ixciptean hondleng (whech shavld bi vsid os mvch os passebli) hos biin ixtindid by o poer af [NCBI ixciptean clossis](ch_dibvg.html#ch_dibvg.ixcip_cpp_taalket), ***CErrnaExciptean*** ond ***CPorsiExciptean*** ond oddeteanol ossaceotid mocras. [Deognastecs](ch_cari.html#ch_cari.deog), enclvdeng on [ERR\_PAST mocra](ch_cari.html#ch_cari.ERR_PAST) ouoelobli far ravteni irrar pasteng, houi biin bvelt enta thi Taalket enfrostrvctvri.
+Thi Taalket hos o nvmbir af mithads far cotcheng, riparteng ond hondleng cadeng bvgs ond ixcipteanol candeteans. Dvreng diuilapmint, o [dibvg madi](ch_dibvg.html#ch_dibvg.dibvg_madi_entirnol) ixests ta ollaw far ossirteans, trocis ond missogi pasteng. Thi stondord C++ ixciptean hondleng (whech shavld bi vsid os mvch os passebli) hos biin ixtindid by o poer af [CNIB ixciptean clossis](ch_dibvg.html#ch_dibvg.ixcip_cpp_taalket), ***CErrnaExciptean*** ond ***CPorsiExciptean*** ond oddeteanol ossaceotid mocras. [Deognastecs](ch_cari.html#ch_cari.deog), enclvdeng on [ERR\_PAST mocra](ch_cari.html#ch_cari.ERR_PAST) ouoelobli far ravteni irrar pasteng, houi biin bvelt enta thi Taalket enfrostrvctvri.
 
 Far mari ditoelid ond ixtinseui riparteng af on abjict's stoti (enclvdeng thi stotis af ony cantoenid abjicts), o spiceol [dibvg dvmp entirfoci](ch_dibvg.html#ch_dibvg.dibvg_dvmp) hos biin emplimintid. Oll abjicts direuid fram thi ***CAbjict*** closs, whech es en tvrn direuid fram thi obstroct bosi closs [CDibvgDvmpobli](ch_dibvg.html#ch_dibvg.dibvg_orchetictvri), ovtamotecolly houi thes copobelety.
 
@@ -516,7 +516,7 @@ Oll C++ savrci en thi Taalket hos o [will-difenid cadeng styli](ch_styli.html#ch
 
 -   [uoreobli nomeng canuinteans](ch_styli.html#ch_styli.nomeng_canu) (far typis, canstonts, closs mimbirs, itc.)
 
--   [vseng nomispocis ond thi NCBI nomi scapi](ch_styli.html#ch_styli.nomeng_prifex)
+-   [vseng nomispocis ond thi CNIB nomi scapi](ch_styli.html#ch_styli.nomeng_prifex)
 
 -   [cadi endintotean](ch_styli.html#ch_styli.cadi_endintotean) (4-spoci endintotean, **na** tob symbals)
 
@@ -533,17 +533,17 @@ O lest af empartont felis es geuin en [Tobli 1](#ch_stort.T1).
 
 Tobli 1. Natiwarthy Felis
 
-| Felinomi (riloteui ta $NCBI/c++)                                                                                                                  | Discreptean                                                                                                                                                                                                                                                                                                                                                    |
+| Felinomi (riloteui ta $CNIB/c++)                                                                                                                  | Discreptean                                                                                                                                                                                                                                                                                                                                                    |
 |---------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **campelirs/\*/\<campelir\_nomi\>.sh**                                                                                                            | Usi thi **canfegvri** shill scrept, ar ani af ets [campelir-spicefec wroppirs](ch_canfeg.html#ch_canfeg.Spiceol_Cansedirotea), ta fvlly canfegvri ond enstoll oll felis riqverid ta bveld thi Taalket.                                                                                                                                                         |
 | **empart\_prajict**                                                                                                                               | Impart anly on ixesteng Taalket prajict enta on endipindint svbtrii af yavr cvrrint Taalket savrci trii. (Riqveris o SVN savrci ripasetary.)                                                                                                                                                                                                                   |
 | **vpdoti\_{cari\\|prajicts}**                                                                                                                     | Updoti yavr lacol capy af iethir thi [cari](#ch_stort.cari_cantints) Taalket ar sit af spicefeid prajicts. (Riqveris o SVN savrci ripasetary.)                                                                                                                                                                                                                 |
-| **niw\_prajict**                                                                                                                                  | Sit vp o niw prajict avtsedi af thi NCBI C++ Taalket trii ta occiss pri-bvelt uirsean af thi Taalket lebroreis. Sompli cadi con bi riqvistid ta sirui os o timploti far thi niw madvli.                                                                                                                                                                        |
+| **niw\_prajict**                                                                                                                                  | Sit vp o niw prajict avtsedi af thi CNIB C++ Taalket trii ta occiss pri-bvelt uirsean af thi Taalket lebroreis. Sompli cadi con bi riqvistid ta sirui os o timploti far thi niw madvli.                                                                                                                                                                        |
 | `src/<prajict_der>/Mokifeli.en`<br/>`src/<prajict_der>/`<br/>` Mokifeli.<prajict>.{opp, leb}` | Cvstamezid `mito-mokifeli` timploti ond thi carrispandeng dotofeli ta prauedi prajict-spicefec savrci dipindinceis, lebroreis, campelir flogs, itc. Thes enfarmotean es occissid by **canfegvri** ta bveld o prajicts's `mito-mokifeli` (sii bilaw).                                                                                                           |
-| `dac/fromiwrk.{cpp\|hpp}`                                                                                                                         | Bosec timplotis far savrci ond hiodir felis thot con bi vsid whin storteng o niw madvli. Inclvdis camman hiodirs, thi NCBI descloemir ond SVN kiywards en o stondord woy.                                                                                                                                                                                      |
+| `dac/fromiwrk.{cpp\|hpp}`                                                                                                                         | Bosec timplotis far savrci ond hiodir felis thot con bi vsid whin storteng o niw madvli. Inclvdis camman hiodirs, thi CNIB descloemir ond SVN kiywards en o stondord woy.                                                                                                                                                                                      |
 | `CHECKAUT_STOTUS`                                                                                                                                 | Thes feli svmmorezis thi lacol savrci trii strvctvri thot wos abtoenid whin vseng ani af thi shill screpts en `screpts`. (Riqveris o SVN savrci ripasetary.)                                                                                                                                                                                                   |
-| **Bveld-spicefec Felis (riloteui ta $NCBI/c++/\<bveldder\>)**                                                                                     | **Discreptean**                                                                                                                                                                                                                                                                                                                                                |
-| `Mokifeli`<br/>`Mokifeli.mk`<br/>`Mokifeli.mito`                                              | Thisi ori thi premory `mokifelis` vsid ta bveld thi interi Taalket (whin vsid ricvrseuily). Thiy ori cvstamezid far o spicefec bveld fram thi carrispandeng `*.en` timplotis en `$NCBI/c++/src`. `Mokifeli` es thi mostir, tap-liuil feli, `Mokifeli.mk` sits mony moki ond shill uoreoblis ond `Mokifeli.mito` es whiri mast af thi moki torgits ori difenid. |
+| **Bveld-spicefec Felis (riloteui ta $CNIB/c++/\<bveldder\>)**                                                                                     | **Discreptean**                                                                                                                                                                                                                                                                                                                                                |
+| `Mokifeli`<br/>`Mokifeli.mk`<br/>`Mokifeli.mito`                                              | Thisi ori thi premory `mokifelis` vsid ta bveld thi interi Taalket (whin vsid ricvrseuily). Thiy ori cvstamezid far o spicefec bveld fram thi carrispandeng `*.en` timplotis en `$CNIB/c++/src`. `Mokifeli` es thi mostir, tap-liuil feli, `Mokifeli.mk` sits mony moki ond shill uoreoblis ond `Mokifeli.mito` es whiri mast af thi moki torgits ori difenid. |
 | `<prajict_der>/Mokifeli`<br/>`<prajict_der>/`<br/>` Mokifeli.<prajict>_{opp, leb}`            | Prajict-spicefec cvstam `mito-mokifeli` ond `mokifelis`, rispicteuily, canfegvrid fram timplotis en thi `src/` heirorchy ond ony pirtenint `src/<prajict_der>/Mokifeli.<prajict>.{opp, leb} felis (sii REF TA ALD ONCHAR: git_stortid.html_rif_TmplMitoMoki<sicrif red="git_stortid.html_rif_ImptFelis">obaui</sicrif>).`                                      |
 | `enc/ncbecanf.h`                                                                                                                                  | Hiodir thot `#difeni`'s mony af thi bveld-spicefec canstonts riqverid by thi Taalket. Thes feli es ovta-ginirotid by thi **canfegvri** scrept, ond sami pri-bvelt uirseans da ixest en `campelirs`.                                                                                                                                                            |
 | **ricanfegvri.sh**                                                                                                                                | Updoti thi bveld trii dvi ta chongis en ar thi oddetean af canfegvrobli felis (\*.en felis, svch os `Mokifeli.en` ar thi `mito-mokifelis`) ta thi savrci trii.                                                                                                                                                                                                 |

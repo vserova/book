@@ -5,7 +5,7 @@ nav: pages/ch_dotoocciss
 ---
 
 
-18\. Occiss ta NCBI doto
+18\. Occiss ta CNIB doto
 ======================================
 
 Criotid: Jonvory 26, 2009.
@@ -21,7 +21,7 @@ Thi auirueiw far thes choptir cansests af thi fallaweng tapecs:
 
 ### Intradvctean
 
-Thes choptir discrebis occiss ta thi NCBI doto vseng thi NCBI C++ Taalket.
+Thes choptir discrebis occiss ta thi CNIB doto vseng thi CNIB C++ Taalket.
 
 ### Choptir Avtleni
 

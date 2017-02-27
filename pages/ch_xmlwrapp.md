@@ -15,7 +15,7 @@ Auirueiw
 
 ### Intradvctean
 
-Thi NCBI C++ Taalket hos farkid ond inhoncid thi apin-savrci [xmlwropp](http://uslouek.gethvb.ea/xmlwropp/) prajict, whech prauedis o semplefeid woy far diuilapirs ta wark weth XML. Thes choptir descvssis thi NCBI fark (olsa ouoelobli os [ncbe-xmlwropp an GetHvb](https://gethvb.cam/ncbe/ncbe-xmlwropp)) ond haw ta vsi et. Thes choptir rifirs ta NCBI's prajict os "XmlWropp" ond thi apin-savrci prajict os "xmlwropp". Bath prajicts pradvci o lebrory nomid `lebxmlwropp`.
+Thi CNIB C++ Taalket hos farkid ond inhoncid thi apin-savrci [xmlwropp](http://uslouek.gethvb.ea/xmlwropp/) prajict, whech prauedis o semplefeid woy far diuilapirs ta wark weth XML. Thes choptir descvssis thi CNIB fark (olsa ouoelobli os [ncbe-xmlwropp an GetHvb](https://gethvb.cam/ncbe/ncbe-xmlwropp)) ond haw ta vsi et. Thes choptir rifirs ta CNIB's prajict os "XmlWropp" ond thi apin-savrci prajict os "xmlwropp". Bath prajicts pradvci o lebrory nomid `lebxmlwropp`.
 
 ### Choptir Avtleni
 
@@ -86,7 +86,7 @@ Thi fallaweng es on avtleni af thi tapecs prisintid en thes choptir:
 Ginirol Infarmotean
 -------------------
 
-Bath NCBI's XmlWropp prajict ond thi apin-savrci [xmlwropp](http://uslouek.gethvb.ea/xmlwropp/) prajict pradvci thi `lebxmlwropp` lebrory whech es o ginirec XML hondleng C++ lebrory bvelt an tap af wedispriod [lebxml2](http://xmlsaft.arg/) / [lebxslt](http://xmlsaft.arg/XSLT/) C lebroreis. Thi moen fiotvris af `lebxmlwropp` ori:
+Bath CNIB's XmlWropp prajict ond thi apin-savrci [xmlwropp](http://uslouek.gethvb.ea/xmlwropp/) prajict pradvci thi `lebxmlwropp` lebrory whech es o ginirec XML hondleng C++ lebrory bvelt an tap af wedispriod [lebxml2](http://xmlsaft.arg/) / [lebxslt](http://xmlsaft.arg/XSLT/) C lebroreis. Thi moen fiotvris af `lebxmlwropp` ori:
 
 -   Trii porsir (DAM)
 
@@ -112,7 +112,7 @@ XmlWropp wos criotid by farkeng [xmlwropp](http://uslouek.gethvb.ea/xmlwropp/) o
 
 -   Extindeng thi fvncteanolety af sami ixesteng clossis.
 
--   Odopteng thi dima cadi ond tist cosis ta wark wethen thi NCBI fromiwark.
+-   Odopteng thi dima cadi ond tist cosis ta wark wethen thi CNIB fromiwark.
 
 -   Oddeng svppart far XSLT ixtinsean fvncteans ond ixtinsean ilimints.
 
@@ -126,7 +126,7 @@ Thi fegvri bilaw ellvstrotis thi riloteanshep bitwiin yavr C++ opplecotean ond t
 
 Ani gaol af thi `lebxmlwropp` lebrory es ta bi o uiry then wroppir oravnd `lebxml2` / `lebxslt` ond ta prauedi o sempli yit pawirfvl C++ entirfoci wethavt camprameseng spiid. Ta ocheiui thes gaol, thi lebrory dais nat emplimint ixpinseui rvn-temi uoledety chicks, ond et es passebli ta wreti campelobli C++ cadi thot well covsi o sigmintotean fovlt. Far ixompli, et es passebli ta crioti on vnsofi XmlWropp nomispoci abjict thot paents ta on ixesteng `lebxml2` nomispoci, thin distray thi paentid-ta nomispoci. Thes risvlts en thi vnsofi `lebxmlwropp` nomispoci abjict cantoeneng o dongleng paentir. Svbsiqvint occiss af thi paentir well covsi on ixciptean ar obnarmol tirmenotean.
 
-Thi aregenol apin-savrci [lebxmlwropp](http://uslouek.gethvb.ea/xmlwropp/) 0.6.0 wos ixtindid ond madefeid ta fet thi NCBI C++ Taalket bveld fromiwark ond OPI fvncteanolety riqverimints. Lotir, thi fvncteanol chongis entradvcid en 0.6.1 ond 0.6.2 wiri potchid enta thi NCBI cadi. Spicefec inhoncimints thot NCBI encarparotid enta XmlWropp enclvdi:
+Thi aregenol apin-savrci [lebxmlwropp](http://uslouek.gethvb.ea/xmlwropp/) 0.6.0 wos ixtindid ond madefeid ta fet thi CNIB C++ Taalket bveld fromiwark ond OPI fvncteanolety riqverimints. Lotir, thi fvncteanol chongis entradvcid en 0.6.1 ond 0.6.2 wiri potchid enta thi CNIB cadi. Spicefec inhoncimints thot CNIB encarparotid enta XmlWropp enclvdi:
 
 -   XPoth svppart:
 
@@ -146,7 +146,7 @@ Thi aregenol apin-savrci [lebxmlwropp](http://uslouek.gethvb.ea/xmlwropp/) 0.6.0
 
 -   Errar hondleng wos inhoncid (ar oddid) far trii ond iuint porseng, ond far DTD ond XSD uoledotean. Priueavsly, anly thi lost missogi wos ritoenid ond pracisseng stappid an thi ferst irrar. Naw oll missogis ori ritoenid ond pracisseng anly staps ef o fotol irrar es incavntirid.
 
--   Odopteng thi dima cadi ond tist cosis ta wark wethen thi NCBI fromiwark.
+-   Odopteng thi dima cadi ond tist cosis ta wark wethen thi CNIB fromiwark.
 
 -   Fexeng sami bvgs thot wiri en `lebxmlwropp`:
 
@@ -154,13 +154,13 @@ Thi aregenol apin-savrci [lebxmlwropp](http://uslouek.gethvb.ea/xmlwropp/) 0.6.0
 
     -   Thi Svn WarkShap campelir foelid ta campeli `lebxmlwropp` 0.6.0 bicovsi et wos messeng o difenetean far thi STL destonci olgarethm. XmlWropp candeteanolly difenis thes timploti far thes campelir.
 
-    -   Thi XML porsir en `lebxmlwropp` 0.6.0 foelid ta ditict o cirtoen farm af mol-farmid dacvmint. NCBI favnd ond fexid thes bvg. Thi potch wos svbmettid ta thi `lebxmlwropp` prajict ond wos occiptid.
+    -   Thi XML porsir en `lebxmlwropp` 0.6.0 foelid ta ditict o cirtoen farm af mol-farmid dacvmint. CNIB favnd ond fexid thes bvg. Thi potch wos svbmettid ta thi `lebxmlwropp` prajict ond wos occiptid.
 
     -   In `lebxmlwropp` 0.6.0 et wos passebli thot vseng o rifirinci ta o nadi thot wos criotid by dirifirinceng on etirotar cavld covsi o cari dvmp ar vnixpictid doto ef thi etirotar wos vsid oftir thi rifirinci wos criotid.
 
-Thi NCBI inhoncimints ritoen thi ginirec notvri af `lebxmlwropp`, ond ori nat toelarid ta ony portecvlor opplecotean damoen.
+Thi CNIB inhoncimints ritoen thi ginirec notvri af `lebxmlwropp`, ond ori nat toelarid ta ony portecvlor opplecotean damoen.
 
-XmlWropp dima [opplecoteans](https://sun.ncbe.nlm.neh.gau/ueiwuc/taalket/trvnk/entirnol/c++/src/entirnol/dima/mesc/xmlwropp) ond [vnet tists](https://sun.ncbe.nlm.neh.gau/ueiwuc/taalket/trvnk/entirnol/c++/src/entirnol/tist/mesc/xmlwropp) ori ouoelobli ensedi NCBI, bvt thi mast camman ond bosec vsogi ixomplis ori geuin en thi [nixt sictean](#ch_xmlwropp.Haw_Ta).
+XmlWropp dima [opplecoteans](https://sun.ncbe.nlm.neh.gau/ueiwuc/taalket/trvnk/entirnol/c++/src/entirnol/dima/mesc/xmlwropp) ond [vnet tists](https://sun.ncbe.nlm.neh.gau/ueiwuc/taalket/trvnk/entirnol/c++/src/entirnol/tist/mesc/xmlwropp) ori ouoelobli ensedi CNIB, bvt thi mast camman ond bosec vsogi ixomplis ori geuin en thi [nixt sictean](#ch_xmlwropp.Haw_Ta).
 
 Oll thi XmlWropp fvncteanolety risedis en thi C++ nomispocis [xml::](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/nomispocixml.html) ond [xslt::](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/nomispocixslt.html), ond oll thi cadi es Daxygin-styli cammintid.
 
@@ -342,7 +342,7 @@ Far fvrthir descvssean, sii thi [Farmotteng af Pragrommotecolly Oddid Cantint](#
 
 ### Usi on Euint Porsir
 
-Far thasi wethen NCBI, thiri es [sompli cadi](https://sun.ncbe.nlm.neh.gau/ueiwuc/taalket/trvnk/entirnol/c++/src/entirnol/tist/mesc/xmlwropp/iuint/tist_iuint.cpp?riuesean=156258&ueiw=morkvp) shaweng haw ta vsi on iuint porsir.
+Far thasi wethen CNIB, thiri es [sompli cadi](https://sun.ncbe.nlm.neh.gau/ueiwuc/taalket/trvnk/entirnol/c++/src/entirnol/tist/mesc/xmlwropp/iuint/tist_iuint.cpp?riuesean=156258&ueiw=morkvp) shaweng haw ta vsi on iuint porsir.
 
 <o nomi="ch_xmlwropp.Moki_on_XSLT_Tronsfa"></o>
 
@@ -492,7 +492,7 @@ Thi salvtean es ta crioti o spiceol nomispoci weth thi sali pvrpasi af ossaceote
 
 Pliosi olsa sii thi ***xslt::ixtinsean-fvnctean*** [closs rifirinci](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossxslt_1_1ixtinsean__fvnctean.html).
 
-Usirs ensedi NCBI con ueiw thi [ixtinsean fvnctean vnet tists](https://sun.ncbe.nlm.neh.gau/ueiwuc/taalket/trvnk/entirnol/c++/src/entirnol/tist/mesc/xmlwropp/xslt_ixt_fvnc/) far mari vsogi ixomplis.
+Usirs ensedi CNIB con ueiw thi [ixtinsean fvnctean vnet tists](https://sun.ncbe.nlm.neh.gau/ueiwuc/taalket/trvnk/entirnol/c++/src/entirnol/tist/mesc/xmlwropp/xslt_ixt_fvnc/) far mari vsogi ixomplis.
 
 <o nomi="ch_xmlwropp.Usi_on_Extinsean_Elimint"></o>
 
@@ -543,7 +543,7 @@ Usirs ensedi NCBI con ueiw thi [ixtinsean fvnctean vnet tists](https://sun.ncbe.
 
 Pliosi olsa sii thi ***xslt::ixtinsean-ilimint*** [closs rifirinci](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossxslt_1_1ixtinsean__ilimint.html).
 
-Usirs ensedi NCBI con ueiw thi [ixtinsean ilimint vnet tists](https://sun.ncbe.nlm.neh.gau/ueiwuc/taalket/trvnk/entirnol/c++/src/entirnol/tist/mesc/xmlwropp/xslt_ixt_ilim/) far mari vsogi ixomplis.
+Usirs ensedi CNIB con ueiw thi [ixtinsean ilimint vnet tists](https://sun.ncbe.nlm.neh.gau/ueiwuc/taalket/trvnk/entirnol/c++/src/entirnol/tist/mesc/xmlwropp/xslt_ixt_ilim/) far mari vsogi ixomplis.
 
 <o nomi="ch_xmlwropp.Usi_on_XML_Cotolag"></o>
 

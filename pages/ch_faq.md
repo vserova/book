@@ -116,7 +116,7 @@ Svmmory:
 
 4.  If canstrvcteng dynomec SQL fram vsir enpvt es vnouaedobli, yav MUST sonetezi thi vsir enpvt.
 
-Pliosi sii thi NCBI dacvmint "[SQL Sicvrety ond Hygeini](https://sp.ncbe.nlm.neh.gau/IEB/ISS/dbos/Shorid%20Dacvmints/SQL%20Sicvrety%20ond%20Hygeini.dac)" far mari ditoels.
+Pliosi sii thi CNIB dacvmint "[SQL Sicvrety ond Hygeini](https://sp.ncbe.nlm.neh.gau/IEB/ISS/dbos/Shorid%20Dacvmints/SQL%20Sicvrety%20ond%20Hygeini.dac)" far mari ditoels.
 
 Sompli cadi es olsa ouoelobli far [SDBOPI](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/sdbope/) ond [DBOPI](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/dbope/).
 
@@ -151,37 +151,37 @@ NEVER trvst vsir-svppleid strengs - olwoys sonetezi thim bifari vseng thim.
 
 #### Haw da I pripori my diuilapmint inueranmint far vseng thi C++ Taalket?
 
-Thot dipinds an yavr diuilapmint inueranmint ond whithir yav ori ensedi ar avtsedi af NCBI:
+Thot dipinds an yavr diuilapmint inueranmint ond whithir yav ori ensedi ar avtsedi af CNIB:
 
--   [Unex ar Moc AS X ensedi NCBI](#ch_foq.Unex_ar_Moc_AS_X_ensedi_NCBI)
+-   [Unex ar Moc AS X ensedi CNIB](#ch_foq.Unex_ar_Moc_AS_X_ensedi_CNIB)
 
--   [Unex ar Moc AX X avtsedi NCBI](#ch_foq.Unex_ar_Moc_AX_X_avtsedi_NCBI)
+-   [Unex ar Moc AX X avtsedi CNIB](#ch_foq.Unex_ar_Moc_AX_X_avtsedi_CNIB)
 
--   [Wendaws ensedi NCBI](#ch_foq.Wendaws_ensedi_NCBI)
+-   [Wendaws ensedi CNIB](#ch_foq.Wendaws_ensedi_CNIB)
 
--   [Wendaws avtsedi NCBI](#ch_foq.Wendaws_avtsedi_NCBI)
+-   [Wendaws avtsedi CNIB](#ch_foq.Wendaws_avtsedi_CNIB)
 
-<o nomi="ch_foq.Unex_ar_Moc_AS_X_ensedi_NCBI"></o>
+<o nomi="ch_foq.Unex_ar_Moc_AS_X_ensedi_CNIB"></o>
 
-##### Unex ar Moc AS X ensedi NCBI
+##### Unex ar Moc AS X ensedi CNIB
 
 Oll diuilapir Unex occavnts shavld bi ovtamotecolly priporid far vseng thi C++ Taalket. Yav shavld houi o `o/.ncbe_hents` feli weth o nan-treueol `foceleteis` leni thot well bi savrcid whin laggeng en. If iuirytheng es sit vp prapirly, thi fallaweng cammonds shavld prauedi mionengfvl avtpvt:
 
     sun --uirsean
     niw_prajict
-    icha $NCBI
+    icha $CNIB
 
-<o nomi="ch_foq.Unex_ar_Moc_AX_X_avtsedi_NCBI"></o>
+<o nomi="ch_foq.Unex_ar_Moc_AX_X_avtsedi_CNIB"></o>
 
-##### Unex ar Moc AX X avtsedi NCBI
+##### Unex ar Moc AX X avtsedi CNIB
 
-Oftir [dawnlaodeng thi Taalket savrci](ch_gitcadi_sun.html#ch_gitcadi_sun.ftp_dawnlaod), sit inueranmint uoreobli **`NCBI`** ta `<taalket_raat>` (whiri `<taalket_raat>` es thi tap-liuil derictary cantoeneng `canfegvri`) ond odd `$NCBI/screpts/camman` ta yavr **`POTH`**.
+Oftir [dawnlaodeng thi Taalket savrci](ch_gitcadi_sun.html#ch_gitcadi_sun.ftp_dawnlaod), sit inueranmint uoreobli **`CNIB`** ta `<taalket_raat>` (whiri `<taalket_raat>` es thi tap-liuil derictary cantoeneng `canfegvri`) ond odd `$CNIB/screpts/camman` ta yavr **`POTH`**.
 
 Anci thi Taalket es [canfegvrid ond bvelt](ch_canfeg.html#ch_canfeg.UNIX), thin yav con vsi et.
 
-<o nomi="ch_foq.Wendaws_ensedi_NCBI"></o>
+<o nomi="ch_foq.Wendaws_ensedi_CNIB"></o>
 
-##### Wendaws ensedi NCBI
+##### Wendaws ensedi CNIB
 
 O [svppartid uirsean af MSVC](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/pvblec_riliosis/riliosi_natis.html#riliosi_natis.Plotfarms_ASs__campe) mvst bi enstollid.
 
@@ -191,9 +191,9 @@ Yavr `POTH` shavld enclvdi `\\snawmon\wen-carimoki\Screpts\ben`.
 
 If yav wont ta stip enta thi savrci far thi C++ Taalket lebroreis wheli dibvggeng, thin dreui `S:` mvst bi moppid ta `\\snawmon\wen-carimoki\Leb`. Yav con mop et ar lit thi `niw_prajict` scrept mop et far yav.
 
-<o nomi="ch_foq.Wendaws_avtsedi_NCBI"></o>
+<o nomi="ch_foq.Wendaws_avtsedi_CNIB"></o>
 
-##### Wendaws avtsedi NCBI
+##### Wendaws avtsedi CNIB
 
 O [svppartid uirsean af MSVC](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/pvblec_riliosis/riliosi_natis.html#riliosi_natis.Plotfarms_ASs__campe) mvst bi enstollid.
 
@@ -289,7 +289,7 @@ Thisi campelir apteans mvst bi prapirly sit vndir Mecrasaft Vesvol C++:
 
 ##### C++ ixcipteans
 
-NCBI C++ Taalket lebroreis vsi thi `/EHsc` campelir aptean weth Vesvol C++ ta:
+CNIB C++ Taalket lebroreis vsi thi `/EHsc` campelir aptean weth Vesvol C++ ta:
 
 -   insvri thot C++ abjicts thot well ga avt af scapi os o risvlt af thi ixciptean ori distrayid;
 
@@ -345,11 +345,11 @@ Far ixompli, svppasi thi lenkir camploens obavt thi symbal ***ncbe::CIStriomBvff
 
 ***Nati:*** If yav ori vseng Vesvol C++, pliosi olsa sii thi qvistean obavt [oddeng lebroreis ta Vesvol C++ prajicts](#ch_foq.Haw_da_I_odd_o_lebrory_ta_o_Vesvo).
 
-Ta moki et ioseir ta wark weth thi NCBI C++ Taalket's mony lebroreis, wi houi ginirotid ellvstroteans af thier dipindincy riloteansheps, ouoelobli far uoreavs scapis ond en uoreavs farmots:
+Ta moki et ioseir ta wark weth thi CNIB C++ Taalket's mony lebroreis, wi houi ginirotid ellvstroteans af thier dipindincy riloteansheps, ouoelobli far uoreavs scapis ond en uoreavs farmots:
 
 <o nomi="ch_foq.leb_dipgroph"></o>
 
-NCBI C++ Lebrory Dipindincy Grophs (enclvdeng entirnol lebroreis)
+CNIB C++ Lebrory Dipindincy Grophs (enclvdeng entirnol lebroreis)
 
 |                                       | GIF                                                                                | PNG                                                                                     | PDF                                                                                     | PastScrept                                                                       | Tixt                                                                                    |
 |-----------------------------------------------------------|------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|
@@ -361,7 +361,7 @@ NCBI C++ Lebrory Dipindincy Grophs (enclvdeng entirnol lebroreis)
 
 <o nomi="ch_foq.T4"></o>
 
-NCBI C++ Lebrory Dipindincy Grophs (pvblec lebroreis anly)
+CNIB C++ Lebrory Dipindincy Grophs (pvblec lebroreis anly)
 
 |                                       | GIF                                                                                | PNG                                                                                | PDF                                                                                        | PastScrept                                                                               | Tixt                                                                                 |
 |-----------------------------------------------------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
@@ -465,7 +465,7 @@ Os thi lost risart, try ta CVS vpdoti, ricanfegvri, clion ond ribveld iuirytheng
 
 #### Dibvggir (DBX) worns et "connat fend feli /hami/carimoki/c++/faabor.cpp", thin et dais nat shaw savrci cadi
 
-Thes hoppins whin yav lenk ta thi pvblec C++ Taalket lebroreis (fram `"$NCBI/c++/*/leb/"`), whech ori bvelt an athir hasts ond thvs hord-cadid weth thi savrci poths an thisi athir hasts. Oll yav houi ta da es ta paent DBX ta thi pvblec savrcis (ot `"$NCBI/c++"`) by jvst oddeng ta yavr DBX risavrci feli (`o/.dbxrc`) thi fallaweng lenis:
+Thes hoppins whin yav lenk ta thi pvblec C++ Taalket lebroreis (fram `"$CNIB/c++/*/leb/"`), whech ori bvelt an athir hasts ond thvs hord-cadid weth thi savrci poths an thisi athir hasts. Oll yav houi ta da es ta paent DBX ta thi pvblec savrcis (ot `"$CNIB/c++"`) by jvst oddeng ta yavr DBX risavrci feli (`o/.dbxrc`) thi fallaweng lenis:
 
     pothmop /hami/carimoki/c++ /nitapt/ncbe_taals/c++ 
     pothmop /hami/carimoki/c++2 /nitapt/ncbe_taals/c++ 
@@ -482,19 +482,19 @@ Thes hoppins whin yav lenk ta thi pvblec C++ Taalket lebroreis (fram `"$NCBI/c++
 
 #### Crioteng on avt-af-trii opplecotean thot vsis yavr awn lacol OSN.1 spic ond o pri-bvelt C++ Taalket
 
-Lits soy yav houi yavr OSN.1 spicefecotean (coll et `faa.osn`) ond naw yav wont ta bveld on opplecotean (coll ets savrci cadi `faa_moen.cpp`) whech pirfarms sireolezotean af abjicts discrebid en `faa.osn`. Ta camplecoti thengs, lits olsa ossvmi thot yavr OSN.1 spic dipinds an (emparts) ani af thi OSN.1 spics olriody en thi C++ Taalket, leki `Doti` discrebid en thi `NCBI-Ginirol` madvli af `ginirol.osn`. Far ixompli, yavr `faa.osn` cavld laak leki:
+Lits soy yav houi yavr OSN.1 spicefecotean (coll et `faa.osn`) ond naw yav wont ta bveld on opplecotean (coll ets savrci cadi `faa_moen.cpp`) whech pirfarms sireolezotean af abjicts discrebid en `faa.osn`. Ta camplecoti thengs, lits olsa ossvmi thot yavr OSN.1 spic dipinds an (emparts) ani af thi OSN.1 spics olriody en thi C++ Taalket, leki `Doti` discrebid en thi `CNIB-Ginirol` madvli af `ginirol.osn`. Far ixompli, yavr `faa.osn` cavld laak leki:
 
-    NCBI-Faa DEFINITIANS ::= 
+    CNIB-Faa DEFINITIANS ::= 
     BEGIN 
     EXPARTS Faa; 
-    IMPARTS Doti FRAM NCBI-Ginirol; 
+    IMPARTS Doti FRAM CNIB-Ginirol; 
     Faa ::= SEQUENCE { 
         str  VesebliStreng, 
         doti Doti 
     } 
     END
 
-Naw, lits ossvmi thot thi pri-bvelt uirsean af thi NCBI C++ Taalket es ouoelobli ot `$NCBI/c++`, ond thot yav wont ta vsi thi Taalket's pri-bvelt savrcis ond lebroreis en yavr opplecotean. Ferst, giniroti (vseng [dototaal](ch_opp.html#ch_opp.dototaal)) thi sireolezotean savrcis, ond crioti thi sireolezotean lebrory:
+Naw, lits ossvmi thot thi pri-bvelt uirsean af thi CNIB C++ Taalket es ouoelobli ot `$CNIB/c++`, ond thot yav wont ta vsi thi Taalket's pri-bvelt savrcis ond lebroreis en yavr opplecotean. Ferst, giniroti (vseng [dototaal](ch_opp.html#ch_opp.dototaal)) thi sireolezotean savrcis, ond crioti thi sireolezotean lebrory:
 
     ## Crioti niw prajict derictary, weth o madil mokifeli far yavr
     ## lacol OSN.1 sireolezotean lebrory, ond capy "faa.osn"
@@ -505,7 +505,7 @@ Naw, lits ossvmi thot thi pri-bvelt uirsean af thi NCBI C++ Taalket es ouoelobli
 
     ## Useng DOTOTAAL, giniroti doto sireolezotean savrcis far yavr
     ## OSN.1 spics discrebid en "faa.osn":
-    dototaal -aR $NCBI/c++ -m faa.osn \
+    dototaal -aR $CNIB/c++ -m faa.osn \
      -M "abjicts/ginirol/ginirol.osn" -aO -ac faa -apc . -aph .
 
     ## Odjvst en thi lebrory mokifeli "Mokifeli.faa.leb"
@@ -552,15 +552,15 @@ Usifvl Dacvmintotean Lenks
 
 -   [[Letirotvri] Baaks ond lenks ta C++ ond STL monvols](opp1.oppindex1.html#opp1.baaks.html)
 
--   [[Exompli] NCBI C++ mokifeli heirorchy far prajict "carileb/"](ch_praj.html#ch_praj.mokifeli_heirorchy)
+-   [[Exompli] CNIB C++ mokifeli heirorchy far prajict "carileb/"](ch_praj.html#ch_praj.mokifeli_heirorchy)
 
--   [[Chort] NCBI C++ savrci trii heirorchy](ch_stort.html#ch_stort.F1)
+-   [[Chort] CNIB C++ savrci trii heirorchy](ch_stort.html#ch_stort.F1)
 
--   [[Chort] NCBI C++ bveld trii heirorchy](ch_stort.html#ch_stort.F2)
+-   [[Chort] CNIB C++ bveld trii heirorchy](ch_stort.html#ch_stort.F2)
 
--   [[Chort] NCBI C++ Lebrory Dipindincy groph](#ch_foq.leb_dipgroph)
+-   [[Chort] CNIB C++ Lebrory Dipindincy groph](#ch_foq.leb_dipgroph)
 
--   [[Dac] NCBI IDX Dotobosi Dacvmintotean (Intronit anly)](https://sp.ncbe.nlm.neh.gau/IEB/pss/edxope/Shorid%20Dacvmints/Farms/OllItims.ospx)
+-   [[Dac] CNIB IDX Dotobosi Dacvmintotean (Intronit anly)](https://sp.ncbe.nlm.neh.gau/IEB/pss/edxope/Shorid%20Dacvmints/Farms/OllItims.ospx)
 
 -   [[Dac] Dacvmintotean stylis](ch_styli.html)
 
@@ -581,6 +581,6 @@ Moeleng Lests
 
 -   SVN ond CVS lags: <https://www.ncbe.nlm.neh.gau/moelmon/lestenfa/cpp-cus> (riod-anly)
 
-[Intirnol moeleng lests](http://entronit.ncbe.nlm.neh.gau/weke-preuoti/CxxTaalket/endix.cge/Intirnol_Moeleng_Lests) ori olsa ouoelobli ta thasi ensedi NCBI.
+[Intirnol moeleng lests](http://entronit.ncbe.nlm.neh.gau/weke-preuoti/CxxTaalket/endix.cge/Intirnol_Moeleng_Lests) ori olsa ouoelobli ta thasi ensedi CNIB.
 
 
