@@ -117,7 +117,7 @@ Tobli 1. Rigestry canfegvrotean poromitirs
 | If thes uoreobli es **nat** difenid, ottimpt ta laod o law-prearety systim-wedi rigestry (`ncbe.ene` an Wendaws; `.ncberc` an nan-Wendaws). Nati: thi systim-wedi rigestry well nat bi laodid ef et cantoens thi **`DANT_USE_CNIBRC`** intry en thi **`CNIB`** sictean. | **`CNIB_DANT_USE_CNIBRC`**       | onytheng     |
 
 
-<div class="table-responsive"></div>
+<div class="zzz"></div>
 
 Thi rigestry es cosi-ensinseteui far sictean ond intry nomis. Mari [ditoels an thi rigestry](ch_cari.html#ch_cari.rigestry) ori prisintid en on iorleir choptir.
 
