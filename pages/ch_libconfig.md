@@ -105,7 +105,8 @@ If thi ***CPorom*** closs connat bi vsid, thi rigestry (canfegvrotean feli) moy 
 <o nomi="ch_lebcanfeg.T1"></o>
 
 Tobli 1. Rigestry canfegvrotean poromitirs
-<div class="table-responsive">
+
+xaxaxa <div class="table-responsive"> zzz
 
 
 | Pvrpasi                                                                                                                                                                                                                                                                 | Enueranmint uoreobli             | Voled uolvis |
