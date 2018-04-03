@@ -1,9 +1,10 @@
 <!-- move tables to scrollable div -->
 <script language="javascript">
-  var x = document.getElementsByClassName("table-responsive");
+  var x = document.getElementsByClassName("zzz");
   var i;
   for (i = 0; i < x.length; i++) {
     x[i].appendChild(x[i].previousElementSibling);
+    x[i].class="table-responsive";
   }
 </script>
 
