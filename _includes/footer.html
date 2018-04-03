@@ -3,7 +3,8 @@
   var x = document.getElementsByClassName("table-responsive");
   var i;
   for (i = 0; i < x.length; i++) {
-    x[i].appendChild(x[i].previousElementSibling);
+    // x[i].appendChild(x[i].previousElementSibling);
+    x[i].previousElementSibling.class="table table-hover";
   }
 </script>
 
