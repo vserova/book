@@ -86,7 +86,7 @@ nav, aside {
   background: #F2EAD3;
 }
 
-nav, aside, main {
+nav, aside {
   text-transform: uppercase;
   color: lightslategray;
   display: flex;
