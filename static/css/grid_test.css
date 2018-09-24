@@ -62,11 +62,11 @@ a, a:link    { color: var(--link-color) }
 .container {
   display: grid;
   grid-template-areas:
-    "header header header"
-    "nav content side"
-    "footer footer footer";
+    "header header"
+    "content side"
+    "footer footer";
   height: 100vh;
-  grid-template-columns: 200px 1fr 200px;
+  grid-template-columns: 1fr 200px;
   grid-template-rows: auto 1fr auto;
   grid-gap: 10px;
 }
@@ -92,11 +92,6 @@ nav, aside {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-nav {
-  grid-area: nav;
-  margin-left: 0.5rem;
 }
 
 main {
@@ -127,7 +122,7 @@ footer {
     grid-template-columns: 1fr;
     grid-template-rows: auto minmax(75px, auto) 1fr minmax(75px, auto) auto;
   }
-  nav, aside {
+  aside {
     margin: 0;
   }
 }
