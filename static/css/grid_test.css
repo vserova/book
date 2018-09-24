@@ -63,10 +63,11 @@ a, a:link    { color: var(--link-color) }
   display: grid;
   grid-template-areas:
     "header header header"
+    "nav content side"
     "footer footer footer";
   height: 100vh;
-  grid-template-columns: 1fr 300px;
-  grid-template-rows: 1fr auto;
+  grid-template-columns: 200px 1fr 200px;
+  grid-template-rows: auto 1fr auto;
   grid-gap: 10px;
 }
 
@@ -119,6 +120,7 @@ footer {
   .container {
     grid-template-areas:
       "header"
+      "nav"
       "content"
       "side"
       "footer";
