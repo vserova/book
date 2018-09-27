@@ -64,6 +64,8 @@ aside {
   grid-area: side;
   margin-right: 0.5rem;
   background-color: var(--primary);
+  grid-column-start: 2;
+  position: fixed;
 }
 
 footer {
