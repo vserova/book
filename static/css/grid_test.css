@@ -58,15 +58,13 @@ main {
   width: 100%;
   margin-left: 0.5rem;
   background-color: var(--primary);
-  overflow: auto;
 }
 
 aside {
   grid-area: side;
   margin-right: 0.5rem;
   background-color: var(--primary);
-  grid-column-start: 2;
-  position: fixed;
+  position: sticky;
 }
 
 footer {
