@@ -57,18 +57,18 @@ main {
   grid-area: content;
   width: 100%;
   margin-left: 0.5rem;
-  color: var(--primary);
+  background-color: var(--primary);
 }
 
 aside {
   grid-area: side;
   margin-right: 0.5rem;
-  color: var(--primary);
+  background-color: var(--primary);
 }
 
 footer {
   grid-area: footer;
-  color: var(--primary);
+  background-color: var(--primary);
 }
 
 @media (max-width: 768px) {
