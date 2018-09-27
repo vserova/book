@@ -75,22 +75,11 @@ header {
   grid-area: header;
 }
 
-nav, aside {
-  background: #F2EAD3;
-}
-
-nav, aside {
-  text-transform: uppercase;
-  color: lightslategray;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 main {
   grid-area: content;
   width: 100%;
-  background: #F9F5F0;
+  margin-left: 0.5rem;
 }
 
 aside {
@@ -99,7 +88,6 @@ aside {
 }
 
 footer {
-  background: #321313;
   grid-area: footer;
   color: var(--primary);
 }
