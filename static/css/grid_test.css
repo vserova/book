@@ -50,6 +50,7 @@ body {
 
 header {
   grid-area: header;
+  position: fixed;
 }
 
 
@@ -64,6 +65,7 @@ aside {
   grid-area: side;
   margin-right: 0.5rem;
   background-color: var(--primary);
+  position: fixed;
 }
 
 footer {
