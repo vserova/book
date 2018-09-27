@@ -52,7 +52,7 @@ a, a:link    { color: var(--link-color) }
 .hidden {
     display: none !important;
 }
-.text-center, footer, header {
+.text-center, footer {
   text-align: center;
 }
 
@@ -72,14 +72,10 @@ a, a:link    { color: var(--link-color) }
 }
 
 header {
-  background: #F4991A;
   grid-area: header;
   padding: 1rem 0;
-
   padding: 0 1rem;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 nav, aside {
