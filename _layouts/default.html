@@ -30,7 +30,7 @@
 	    <link rel="stylesheet" href="/book/static/css/min-base.css" type="text/css">
 	    <!-- collapse test  -->
 	    <link rel="stylesheet" href="/book/static/css/footer-collapse.css" type="text/css">
-	    <script type="text/javascript" src="/book/default_files/footer-collapse.js"></script>
+	    <!-- script type="text/javascript" src="/book/default_files/footer-collapse.js"></script -->
 	    
         
     </head>
@@ -63,6 +63,27 @@
 	       
 	 <button class="collapsible">Open Collapsible</button>      
 	 <div class="footer_content">{% include footer.html %}</div>	
+
+<!-- collapse js -->	       
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    } 
+  });
+}
+</script>
+	       
+	       
+	       
        </div>
       </div>
 	  
