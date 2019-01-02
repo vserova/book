@@ -28,6 +28,8 @@
         <link type="text/css" rel="stylesheet" href="/book/default_files/3529739_002.css" media="print">
 
 	    <link rel="stylesheet" href="/book/static/css/min-base.css" type="text/css">
+	    <link rel="stylesheet" href="/book/static/css/footer-collapse.css" type="text/css">
+	    
         
     </head>
 <body style="width: auto; float: none;">
@@ -56,7 +58,9 @@
         </div> 
        </div> 
        <div class="container">
-         {% include footer.html %}	
+	       
+	 <button class="collapsible">Open Collapsible</button>      
+	 <div class="footer_content">{% include footer.html %}</div>	
        </div>
       </div>
 	  
