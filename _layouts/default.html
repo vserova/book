@@ -27,6 +27,39 @@
 <link type="text/css" rel="stylesheet" href="/book/default_files/4005757.css">
 <link type="text/css" rel="stylesheet" href="/book/default_files/3529739_002.css" media="print">
 
+	
+<!-- new table style begin -->
+	
+		<script type="text/javascript" language="javascript" src="/book/static/js/jquery-3.js"></script>
+	<script type="text/javascript" language="javascript" src="/book/static/js/jquery.js"></script>
+
+<style type="text/css">
+
+div.dataTables_wrapper {
+ width: 90%;
+ margin: 0 auto;
+}
+
+div.dataTables_length, div.dataTables_filter, div.dataTables_info, div.dataTables_paginate {
+ display: None;
+}
+
+</style>
+
+
+	<script type="text/javascript" class="init">
+	
+$(document).ready(function() {
+	$('table').DataTable( {
+		"scrollY": 500,
+		"scrollX": true                 
+	} );
+} );
+
+	</script>
+
+<!-- new table style end -->
+	
 </head>
 
     <body class=" CppTkbPage">
