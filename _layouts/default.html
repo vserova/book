@@ -39,13 +39,13 @@ div.dataTables_wrapper {
  margin: 0 auto;
 }
 
+</style>
+
+<!-- 
 div.dataTables_length, div.dataTables_filter, div.dataTables_info, div.dataTables_paginate {
  display: None;
 }
-
-</style>
-
-
+ -->
 	<script type="text/javascript" class="init">
 	
 $(document).ready(function() {
@@ -53,7 +53,10 @@ $(document).ready(function() {
 		scrollY: '50vh',
 		scrollX: true,
 		scrollCollapse: true,
-        	paging:         false		
+		searching: false,
+		ordering: false,
+		info: false,
+        	paging: false		
 	} );
 } );
 
