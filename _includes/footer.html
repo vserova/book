@@ -3,6 +3,7 @@
   var x = document.getElementsByClassName("table-scroll");
   var i;
   for (i = 0; i < x.length; i++) {
+    x[i].previousElementSibling.id = "make_it_scrollable";
     x[i].appendChild(x[i].previousElementSibling);
   }
 </script>
