@@ -1,3 +1,16 @@
+/*** aside test **/
+
+.left-toc {
+    width: 248px;
+    padding-left: 40px;
+    position: -webkit-sticky;
+    position: sticky;
+    padding-top: 56px;
+    height: 100vh;
+    border-right: 1px solid #e0e7e8;
+    top: 45px;
+}
+
 /******  Styles for new header ******/
 
 #toolkit_header {
