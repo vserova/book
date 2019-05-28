@@ -128,3 +128,23 @@ ol, ul {
 .portlet ul li a:hover, .portlet ul li a:active {
 	border-bottom: 0;
 }
+
+
+p, table, pre, fieldset, dl {
+	margin: 0.6923em 0;
+}
+table {
+	border-collapse: collapse;
+	margin: 0;
+}
+thead {
+	border-bottom: 1px solid #eee;
+}
+th {
+	text-align: center;
+	background-color: #f0f0f0;
+}
+th, td {
+	padding: 0.2em;
+	border: 1px solid #ddd;
+}
