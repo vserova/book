@@ -1,0 +1,22 @@
+.portlet_title, .sensor_title {
+	margin-right: 2em;
+}
+.portlet_title {
+	margin-right: 2em;
+	font-size: 1.4em;
+	color: #985735;
+	font-weight: bold;
+	display: inline;
+}
+.portlet_head {
+	margin-bottom: 0.46em;
+	position: relative;
+}
+.portlet {
+	border-top: .4em solid #97b0c8;
+	padding-top: 0.46em;
+	margin: .769em 0 2.154em 0;
+	overflow: visible;
+	line-height: 1.23em;
+	zoom: 1;
+}
