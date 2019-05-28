@@ -10097,11 +10097,11 @@ h2::before {
 }
 
 .left-toc {
-	width: 248px;
-	padding-left: 40px;
+	width: 300px;
+	padding-left: 3px;
 	position: -webkit-sticky;
 	position: sticky;
-	padding-top: 56px;
+	padding-top: 3px;
 	height: 100vh;
 	border-right: 1px solid #e0e7e8;
 	top: 45px
