@@ -30,6 +30,7 @@
 	-moz-box-shadow: 0.4em 0.4em 0.5em rgba(0,0,0,.3);
 	box-shadow: 0.4em 0.4em 0.5em rgba(0,0,0,0.3);
 }
+/*
 .col {
 	margin-right: 1%;
 	margin-bottom: 2em;
@@ -40,7 +41,12 @@
 .twelve_col {
 	width: 98.99%;
 }
+
+*/
 /* @media screen and (max-width:1200px) */
+
+
+/*
 body > .grid > .twelve_col {
 	width: 100%;
 }
@@ -103,6 +109,8 @@ body {
 	-webkit-border-radius: 6px;
 	border-radius: 6px;
 }
+
+*/
 #footer #external-disclaimer {
 	padding: 0.682em;
 	line-height: 1em;
