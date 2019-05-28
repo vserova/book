@@ -143,8 +143,10 @@ thead {
 th {
 	text-align: center;
 	background-color: #f0f0f0;
+	padding: 0.2em;
+	border: 1px solid #ddd;
 }
-th, td {
+td {
 	padding: 0.2em;
 	border: 1px solid #ddd;
 }
