@@ -66,7 +66,20 @@ $(document).ready(function() {
       <script type="text/javascript" src="/book/static/js/jquery_002.js"></script>
       <script type="text/javascript" src="/book/static/js/controllers.js"></script>
 -->
-      
+
+<script type="text/javascript" class="init">	
+  function doSBClose() {
+  	document.getElementById("showNav").style.display = "flex";
+	document.getElementById("left-column").style.display = "none";
+  }
+  function doSBOpen() {
+          document.getElementById("sphinxsidebar").style.display = "block";
+	  document.getElementById("left-column").style.display = "flex"; 
+	  document.getElementById("showNav").style.display = "none";
+  }
+</script>
+	
+		
 <!-- sidebar test end -->
 		
 </head>
@@ -88,7 +101,7 @@ $(document).ready(function() {
     <div id="left-column">
       <aside id="sidebar" class="sidebar">
         <div class="sphinxsidebar" id="sphinxsidebar">
-          <div id="sphinxsidebarwrapper" class="sphinxsidebarwrapper"><a href="javascript:void(0)" class="closeNav" id="closeNav"><<< Minimize sidebar</a>
+          <div id="sphinxsidebarwrapper" class="sphinxsidebarwrapper"><a href="javascript:doSBClose()" class="closeNav" id="closeNav"><<< Minimize sidebar</a>
 
 {% include sidebar.html %}
 
@@ -98,7 +111,7 @@ $(document).ready(function() {
     </div>
 
     <div id="main-column" class="main-column">
-    <span id="showNav" class="showNav">Sidebar</span>
+    <a href="javascript:doSBOpen()"><span id="showNav" class="showNav">Sidebar</span></a>
     <!-- sidebar end -->
 
     <div class="document">
