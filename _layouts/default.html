@@ -47,8 +47,23 @@ div.dataTables_length, div.dataTables_filter, div.dataTables_info, div.dataTable
  display: None;
 }
  -->
-	<script type="text/javascript" class="init">
-	
+<script type="text/javascript" class="init">	
+$(document).ready(function() {
+	$('table').DataTable( {
+		scrollY: '50vh',
+		scrollX: true,
+		scrollCollapse: true,
+		searching: false,
+		ordering: false,
+		info: false,
+        	paging: false		
+	} );
+} );
+</script>
+
+		<!--
+
+<script type="text/javascript" class="init">	
 $(document).ready(function() {
 	$('div.section > table').DataTable( {
 		scrollY: '50vh',
@@ -60,9 +75,10 @@ $(document).ready(function() {
         	paging: false		
 	} );
 } );
+</script>
 
-	</script>
 
+-->
 <!-- new table style end -->
 		
 <!-- sidebar test begin -->
