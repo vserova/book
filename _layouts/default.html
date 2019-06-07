@@ -64,111 +64,72 @@ $(document).ready(function() {
 
 <!-- new table style end -->
 		
-<!-- sidebar test-->
+<!-- sidebar test begin -->
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="robots" content="noindex,nofollow">
-      <link rel="stylesheet" href="/book/static/css/guides.css" type="text/css">
-      <!-- link rel="stylesheet" href="/book/static/css/pygments.css" type="text/css" -->
-      <link rel="stylesheet" href="/book/static/css/navbar.min.css" type="text/css">
-		
-      <link rel="stylesheet" href="/book/static/css/sidebar.css" type="text/css">
-      <link rel="stylesheet" href="/book/static/css/footer.css" type="text/css">
+
+      <link rel="stylesheet" href="/book/static/css/bookpage.css" type="text/css">
+      <script type="text/javascript" src="/book/static/js/jquery_002.js"></script>
+      <script type="text/javascript" src="/book/static/js/controller.js"></script>
+      
+<!-- sidebar test end -->
 		
 </head>
 <body>
-      <!-- Header test start -->
-	<!--
-<div id="navbar" data-navprops="{&quot;links&quot;: [{&quot;url&quot;: &quot;https://docs.mongodb.com/manual/&quot;,&quot;text&quot;: &quot;Server&quot;},{&quot;url&quot;: &quot;https://docs.mongodb.com/ecosystem/drivers/&quot;,&quot;text&quot;: &quot;Drivers&quot;},{&quot;url&quot;: &quot;https://docs.mongodb.com/cloud/&quot;,&quot;text&quot;: &quot;Cloud&quot;},{&quot;url&quot;: &quot;https://docs.mongodb.com/tools/&quot;,&quot;text&quot;: &quot;Tools&quot;},{&quot;url&quot;: &quot;https://docs.mongodb.com/guides/&quot;,&quot;text&quot;: &quot;Guides&quot;,&quot;active&quot;: true}]}">
-	<nav class="navbar">
-		<div class="navbar__left">
-			<a href="https://www.mongodb.com/"><img src="https://docs.mongodb.com/images/mongodb-logo.png" class="navbar-brand" alt="MongoDB Logo"></a>
-			<span class="navbar-seperator"></span>
-			<div class="navbar-dropdown">
-				<span class="navbar-dropdown__label">Documentation</span>
-				<div class="navbar-dropdown__menu navbar-dropdown__menu--hidden">
-					<ul class="menu">
-						<li class="menu__item"><a href="https://docs.mongodb.com/">Docs Home</a></li>
-						<li class="menu__item">
-							<div>
-								<span class="submenu__title submenu__title--open">Documentation</span>
-								<ul class="submenu submenu--shown">
-									<li class="submenu__item"><a href="https://docs.mongodb.com/manual/">MongoDB Server</a></li>
-									<li class="submenu__item"><a href="https://docs.mongodb.com/stitch/">MongoDB Stitch</a></li>
-									<li class="submenu__item">
-										<div>
-										<span class="submenu__title">Drivers</span>
-										<ul class="submenu submenu--hidden">
-											<li class="submenu__item"><a href="http://mongoc.org/libmongoc/current/">C</a></li>
-											<li class="submenu__item"><a href="https://mongodb.github.io/mongo-cxx-driver/">C++11</a></li>
-											<li class="submenu__item"><a href="https://docs.mongodb.com/ecosystem/drivers/csharp/">C#</a></li>
-											<li class="submenu__item"><a href="http://mongodb.github.io/mongo-java-driver/">Java</a></li>
-											<li class="submenu__item"><a href="https://mongodb.github.io/node-mongodb-native/">Node.js</a></li>
-											<li class="submenu__item"><a href="https://docs.mongodb.com/ecosystem/drivers/perl/">Perl</a></li>
-											<li class="submenu__item"><a href="https://docs.mongodb.com/ecosystem/drivers/php/">PHP</a></li>
-											<li class="submenu__item"><a href="https://docs.mongodb.com/ecosystem/drivers/python/">Python</a></li>
-											<li class="submenu__item"><a href="https://docs.mongodb.com/ecosystem/drivers/ruby/">Ruby</a></li>
-											<li class="submenu__item"><a href="https://docs.mongodb.com/ecosystem/drivers/scala/">Scala</a></li>
-										</ul>
-										</div>
-									</li>
-									<li class="submenu__item submenu__item--nested">
-										<div>
-											<span class="submenu__title submenu__title--open">Cloud</span>
-											<ul class="submenu submenu--shown">
-												<li class="submenu__item"><a href="https://docs.atlas.mongodb.com/">MongoDB Atlas</a></li>
-												<li class="submenu__item"><a href="https://docs.cloudmanager.mongodb.com/">MongoDB Cloud Manager</a></li>
-												<li class="submenu__item"><a href="https://docs.opsmanager.mongodb.com/current/">MongoDB Ops Manager</a></li>
-											</ul>
-										</div>
-									</li>
-									<li class="submenu__item submenu__item--nested">
-										<div>
-											<span class="submenu__title submenu__title--open">Tools</span>
-											<ul class="submenu submenu--shown">
-												<li class="submenu__item"><a href="https://docs.mongodb.com/bi-connector/current/">MongoDB BI Connector</a></li>
-												<li class="submenu__item"><a href="https://docs.mongodb.com/charts/saas/">MongoDB Charts</a></li>
-												<li class="submenu__item"><a href="https://docs.mongodb.com/compass/current/">MongoDB Compass</a></li>
-												<li class="submenu__item"><a href="https://docs.mongodb.com/kubernetes-operator/stable/">MongoDB Enterprise Kubernetes Operator</a></li>
-												<li class="submenu__item"><a href="https://docs.mongodb.com/spark-connector/current/">MongoDB Spark Connector</a></li>
-											</ul>
-										</div>
-									</li>
-									<li class="submenu__item"><a href="https://docs.mongodb.com/guides/">Guides</a></li>
-								</ul>
-							</div><
-							/li>
-							<li class="menu__item menu__item--secondary"><a href="https://www.mongodb.com/">Company</a></li>
-							<li class="menu__item menu__item--secondary"><a href="https://university.mongodb.com/">Learn</a></li>
-							<li class="menu__item menu__item--secondary"><a href="https://www.mongodb.com/community">Community</a></li>
-							<li class="menu__item menu__item--secondary"><a href="https://www.mongodb.com/what-is-mongodb">What is MongoDB</a></li>
-							<li class="menu__item menu__item--secondary"><a href="https://www.mongodb.com/download-center?jmp=docs">Get MongoDB</a></li>
-							<li class="menu__item menu__item--secondary"><a href="https://www.mongodb.com/contact?jmp=docs">Contact Us</a></li>
-							</ul>
-						</div>
-				</div>
-			</div>
-			<div class="navbar__right">
-				<div class="navbar-links"><a href="https://docs.mongodb.com/manual/" class="navbar-links__item">Server</a><a href="https://docs.mongodb.com/ecosystem/drivers/" class="navbar-links__item">Drivers</a><a href="https://docs.mongodb.com/cloud/" class="navbar-links__item">Cloud</a><a href="https://docs.mongodb.com/tools/" class="navbar-links__item">Tools</a><a href="https://docs.mongodb.com/guides/" class="navbar-links__item navbar-links__item--active">Guides</a></div><div class="navbar-download"><a href="https://www.mongodb.com/download-center?utm_source=guides&amp;utm_campaign=download-mongodb-navbar-cta&amp;utm_medium=docs" class="navbar-download__text">Get MongoDB</a></div><input type="search" class="navbar-search" placeholder="Search Documentation" aria-label="Search Documentation" style="width: 340px;"></div></nav></div>
-      
--->
-	<div id="navbar"><nav class="navbar"><h1>logo and search</h1></nav></div>
-      <!-- Header test end -->	
-	<div class="content">
-         <aside class="left-toc hide-first-toc-level">
-             {% include sidebar.html %}
-         </aside>
-         <div class="left-nav-space"></div>
-         <div id="main-column" class="main-column">
-            <div class="body" data-pagename="server/import">
-               <div class="section">
-			{{ content }}
-               </div>
-               <div class="footer">
-                  {% include footer.html %}
-               </div>
+	
+  <!-- Header start -->
+  <div id="navbar">
+    <nav class="navbar">
+      <h3> some header </h3>
+    </nav>
+  </div>	
+  <!-- Header end -->	
+
+  <!-- content start -->	
+	
+  <div class="content">
+    
+    <!-- sidebar start -->
+    <div id="left-column">
+      <aside id="sidebar" class="sidebar">
+        <div class="sphinxsidebar" id="sphinxsidebar">
+          <div id="sphinxsidebarwrapper" class="sphinxsidebarwrapper"><a href="javascript:void(0)" class="closeNav" id="closeNav"><<< Minimize sidebar</a>
+
+{% include sidebar.html %}
+
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <div id="main-column" class="main-column">
+    <span id="showNav" class="showNav">Sidebar</span>
+    <!-- sidebar end -->
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+
+	    <!-- main content start -->    
+            <div class="section">
+{{ content }}
             </div>
-         </div>
+	    <!-- main content end -->    
+		  
+	    <!-- footer start -->    
+            <div class="footer">
+{% include footer.html %}
+            </div>
+	    <!-- footer end -->    
+		  
+          </div>
+        </div>
       </div>
-   </body>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+	    
+</body>
 </html>	
 	
