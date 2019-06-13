@@ -134,10 +134,10 @@ div.document {
 div#docs-header {
 	width: 950px
 }
-/*
+
 .content {
-	font-size: 16px;
-	line-height: 24px;
+/*	font-size: 16px;  */
+/*	line-height: 24px;  */
 	display: -ms-flexbox;
 	display: flex;
 	margin: 45px auto 0
@@ -160,7 +160,7 @@ div#docs-header {
 	display: inline-block;
 	overflow-x: scroll
 }
-*/
+
 #left-column {
 	-ms-flex-negative: 1;
 	flex-shrink: 1;
@@ -177,7 +177,7 @@ div#docs-header {
 
 .footer {
 	width: auto;
-	font-size: 80%;
+/*	font-size: 80%; */
 	border: none;
 	padding: 20px 0
 }
