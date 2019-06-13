@@ -138,38 +138,29 @@ div#docs-header {
 .content {
 /*	font-size: 16px;  */
 /*	line-height: 24px;  */
-	display: -ms-flexbox;
 	display: flex;
 	margin: 45px auto 0
 }
 
 .content .main-column {
-	-ms-flex-order: 1;
 	order: 1;
 	min-height: 600px;
 	width: 68%;
 	max-width: 800px;
-	-ms-flex-positive: 2;
 	flex-grow: 2;
 	margin: 40px 15px;
 	transition: margin-left .4s cubic-bezier(.02, .01, .47, 1);
-	-ms-flex-align: center;
 	align-items: center;
-	-ms-flex-pack: center;
 	justify-content: center;
 	display: inline-block;
 	overflow-x: scroll
 }
 
 #left-column {
-	-ms-flex-negative: 1;
 	flex-shrink: 1;
-	-ms-flex-positive: 0;
 	flex-grow: 0;
-	-ms-flex-preferred-size: 330px;
-	flex-basis: 330px;
-	min-width: 330px;
-	display: -ms-flexbox;
+	flex-basis: 400px;
+	min-width: 400px;
 	display: flex;
 	overflow-y: auto;
 	border-right: 1px solid #e0e7e8
@@ -226,7 +217,7 @@ div.sphinxsidebar {
 div.sphinxsidebarwrapper {
 	padding: 0;
 	min-height: 100%;
-	width: 330px;
+	width: 400px;
 	right: 0
 }
 
@@ -276,7 +267,6 @@ div.sphinxsidebar ul {
 .navbar {
 	background-color: #fff;
 	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .1);
-	display: -ms-flexbox;
 	display: flex;
 	height: 45px;
 	position: fixed;
@@ -286,12 +276,10 @@ div.sphinxsidebar ul {
 }
 
 .navbar__left {
-	-ms-flex-align: center;
 	align-items: center;
-	display: -ms-flexbox;
 	display: flex;
 	padding-left: 20px;
-	width: 330px
+	width: 400px
 }
 
 
