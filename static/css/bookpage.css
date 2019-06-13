@@ -189,10 +189,10 @@ div#docs-header {
 	font-size: 14px;
 	margin-top: 70px;
 	text-align: center;
-	background-color: #13aa52;
+	background-color: navy;
 	color: #fff;
 	left: 30px;
-	border: 1.5px solid #13aa52;
+	border: 1.5px solid navy;
 	padding: 5px 10px;
 	transform: rotate(90deg);
 	transform-origin: left top 0;
