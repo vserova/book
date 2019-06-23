@@ -304,7 +304,7 @@ tr.option {color:white;}
 
 .res_logo { 
 	width:25em; 
-	left: 112px; 
+	left: 10px; 
 	top: 5px; 
 	position: absolute; 
 }
@@ -354,7 +354,7 @@ tr.option {color:white;}
 
 .ncbi_logo{
 	position:absolute; 
-	right: 100px;
+	right: 30px;
 	top: 10px;
 	max-height: 24px;
 }
