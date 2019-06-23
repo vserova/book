@@ -159,8 +159,8 @@ div#docs-header {
 #left-column {
 	flex-shrink: 1;
 	flex-grow: 0;
-	flex-basis: 400px;
-	min-width: 400px;
+	flex-basis: 350px;
+	min-width: 350px;
 	display: flex;
 	overflow-y: auto;
 	border-right: 1px solid #e0e7e8
@@ -217,7 +217,7 @@ div.sphinxsidebar {
 div.sphinxsidebarwrapper {
 	padding: 0;
 	min-height: 100%;
-	width: 400px;
+	width: 350px;
 	right: 0
 }
 
@@ -289,7 +289,7 @@ div.sphinxsidebar ul {
 	align-items: center;
 	display: flex;
 	padding-left: 20px;
-	width: 400px
+	width: 350px
 }
 
 
@@ -308,7 +308,7 @@ tr.option {color:white;}
 #toolkit_header {
 	color:white;
 	font-family: times new roman;
-    	font-size: 1.2em;
+    	font-size: 1.5em;
     	line-height: 1.5;
 }
 
