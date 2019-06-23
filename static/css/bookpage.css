@@ -139,7 +139,7 @@ div#docs-header {
 /*	font-size: 16px;  */
 /*	line-height: 24px;  */
 	display: flex;
-	margin: 45px auto 0
+	margin: 201px auto 0
 }
 
 .content .main-column {
@@ -208,7 +208,7 @@ div#docs-header {
 div.sphinxsidebar {
 	font-size: 16px;
 	line-height: 20px;
-	top: 45px;
+	top: 201px;
 	bottom: 0;
 	position: fixed;
 	overflow-y: auto
@@ -265,10 +265,10 @@ div.sphinxsidebar ul {
 
 
 .navbar {
-	background-color: #fff;
+	background-color: #205081;
 	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .1);
 	display: flex;
-	height: 45px;
+	height: 201px;
 	position: fixed;
 	top: 0;
 	width: 100%;
@@ -284,6 +284,81 @@ div.sphinxsidebar ul {
 
 
 
+//--------------------------------
 
 
+.search{
+	width:50%;
+}
 
+.search td {border-style:none;}
+.search tr {border-style:none;}
+tr.option {color:white;}
+
+#toolkit_header {
+	color:white;
+	font-family: times new roman;
+    	font-size: 1.2em;
+    	line-height: 1.5;
+}
+
+.res_logo { 
+	width:25em; 
+	left: 112px; 
+	top: 5px; 
+	position: absolute; 
+}
+	
+.res_logo h1{font-weight:normal;margin:0}
+.res_logo h1 a,.res_logo h1 a:hover,.res_logo h1 a:visited { 
+	text-decoration:none;
+	margin: 0 0 0 0;
+}
+
+#search_box{
+    border-top:thin solid  #e5e5e5;
+    border-right:thin solid #e5e5e5;
+    border-bottom:0;
+    border-left:thin solid  #e5e5e5;
+    box-shadow:0px 1px 1px 1px #e5e5e5;
+    float:left;
+    height:27px;
+    margin:1.0em 0 0 .8em; 
+    outline:0;
+    padding:.4em 0 .4em .6em; 
+    width:70%; 
+    min-width:150px;
+    max-width:400px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+#button-holder{
+    background-color:#f1f1f1;
+    border-top:thin solid #e5e5e5;
+    box-shadow:1px 1px 1px 1px #e5e5e5;
+    cursor:pointer;
+    float:left;
+    height:27px;
+    margin:0.8em 0 0 0;
+    text-align:center;
+    width:50px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+#button-holder img{
+    margin:4px;
+    width:20px; 
+}
+
+.ncbi_logo{
+	position:absolute; 
+	left: 10px;
+	top: 10px;
+	max-height: 24px;
+}
+
+.nvgtn {
+    padding-top: 100px;
+}
