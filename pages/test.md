@@ -1,1089 +1,961 @@
 ---
 layout: default
-title: Library Configuration
-nav: pages/test
+title: Introduction to the C++ Toolkit
+nav: pages/ch_intro
 ---
 
 
 {{ page.title }}
-========================================
+=================================================
 
 ## Introduction
 
-This chapter describes the run-time configuration parameters of the NCBI C++ Toolkit libraries. Such parameters change the default behavior of applications built using the Toolkit.
+One difficulty in understanding a major piece of software such as the C++ Toolkit is knowing where to begin in understanding the overall framework or getting the 'big picture' of how all the different components relate to each other. One approach is to dive into the details of one component and understand it in sufficient detail to get a roadmap of the rest of the components, and then repeat this process with the other components. Without a formal road map, this approach can be very time consuming and it may take a long time to locate the functionality one needs.
 
-Configuration parameters can be set by environment variables, entered into a configuration file, defined by code, or any combination of those methods. ***Note:*** If a parameter is specified in both a configuration file and the environment, the environment takes precedence. The methods supported by each library and application are described below.
+When trying to understand a major piece of software, it would be more effective if there is a written text that explains the overall framework without getting too lost in the details. This chapter is written with the intent to provide you with this broader picture of the C++ Toolkit.
+
+This chapter provides an introduction to the major components that make up the Toolkit. You can use this chapter as a roadmap for the rest of the chapters that follow.
 
 ## Chapter Outline
 
 The following is an outline of the topics presented in this chapter:
 
--   [Defining and Using Parameters](#ch_libconfig.Defining_and_Using)
+-   [The CORELIB Module](#ch_intro.intro_corelib)
 
-    -   [CParam](#ch_libconfig.CParam)
+    -   [Application Framework](#ch_intro.intro_appframe)
 
-    -   [Registry](#ch_libconfig.libconfig_registry)
+    -   [Argument processing](#ch_intro.intro_args)
 
-    -   [Environment](#ch_libconfig.Environment)
+    -   [Diagnostics](#ch_intro.intro_diag)
 
--   [Non-Specific Parameters](#ch_libconfig.NonSpecific_Parameters)
+    -   [Environment Interface](#ch_intro.intro_env)
 
-    -   [Logging](#ch_libconfig.libconfig_logfile)
+    -   [Files and Directories](#ch_intro.intro_files_dirs)
 
-    -   [Diagnostic Trace](#ch_libconfig.libconfig_diag)
+    -   [MT Test wrappers](#ch_intro.intro_mt_test)
 
-    -   [Run-Time](#ch_libconfig.libconfig_runtime)
+    -   [Object and Ref classes](#ch_intro.intro_cref)
 
-    -   [Abnormal Program Termination](#ch_libconfig.libconfig_term)
+    -   [Portability definitions](#ch_intro.intro_pdef)
 
-    -   [NCBI](#ch_libconfig.NCBI)
+    -   [Portable Exception Handling](#ch_intro.intro_pexcep)
 
--   [Library-Specific Parameters](#ch_libconfig.LibrarySpecific_Parameters)
+    -   [Portable Process Pipes](#ch_intro.intro_pipe)
 
-    -   [Connection](#ch_libconfig.libconfig_connect)
+    -   [Registry](#ch_intro.intro_reg)
 
-    -   [CGI and FCGI](#ch_libconfig.libconfig_cgi)
+    -   [STL Use Hints](#ch_intro.intro_stl)
 
-    -   [Serial](#ch_libconfig.Serial)
+    -   [String Manipulations](#ch_intro.intro_str)
 
-    -   [Objects, Object Manager, Object Tools](#ch_libconfig.Objects_Object_Manager_Obje)
+    -   [Template Utilities](#ch_intro.intro_tempu)
 
-    -   [cSRA](#ch_libconfig.cSRA)
+    -   [Threads](#ch_intro.intro_threads)
 
-        -   [sraread library](#ch_libconfig.sraread_library)
+    -   [Time](#ch_intro.intro_time)
 
-        -   [ncbi\_xloader\_csra library](#ch_libconfig.ncbi_xloader_csra_library)
+-   [The ALGORITHM Module](#ch_intro.intro_algo)
 
-    -   [BAM](#ch_libconfig.BAM)
-    
-    -   [DBAPI](#ch_libconfig.DBAPI)
+-   [The CGI Module](#ch_intro.intro_cgi)
 
-    -   [Eutils](#ch_libconfig.Eutils)
+-   [The CONNECT Module](#ch_intro.intro_conn)
 
--   [Distributed Computing (GRID) Specific Parameters](#ch_libconfig.Internal_GridSpecifi)
+    -   [Socket classes](#ch_intro.intro_socket)
 
-    -   [NetCache and NetSchedule](#ch_libconfig.NetCache_and_NetSchedule)
+    -   [Connector and Connection Handles](#ch_intro.intro_connector)
 
-    -   [Worker Node](#ch_libconfig.WorkerNode)
+    -   [Connection Streams](#ch_intro.intro_streams)
 
--   [Application-Specific Parameters](#ch_libconfig.Internal_ApplicationSpecifi)
+    -   [Sendmail API](#ch_intro.intro_sendmail)
 
-    -   [Seqfetch.cgi](#ch_libconfig.Seqfetchcgi)
+    -   [Threaded Server](#ch_intro.intro_threadedserver)
 
-<a name="ch_libconfig.Defining_and_Using"></a>
+-   [The CTOOL Module](#ch_intro.intro_ctool)
 
-Defining and Using Parameters
------------------------------
+-   [The DBAPI Module](#ch_intro.intro_dbapi)
 
-The following sections discuss the methods that libraries can use to define configuration parameters, and the corresponding methods that client applications can use to specify values for those parameters.
+    -   [Database User Classes](#ch_intro.intro_dbapi_user)
 
--   [CParam](#ch_libconfig.CParam)
+    -   [Database Driver Architecture](#ch_intro.intro_dbapi_driver)
 
--   [Registry](#ch_libconfig.libconfig_registry)
+-   [The GUI Module](#ch_intro.intro_gui)
 
--   [Environment](#ch_libconfig.Environment)
+-   [The HTML Module](#ch_intro.intro_html)
 
-<a name="ch_libconfig.CParam"></a>
+    -   [Relationships between HTML classes](#ch_intro.intro_html_classes)
 
-### CParam
+    -   [HTML Processing](#ch_intro.intro_html_processing)
 
-***Note:*** The preferred way for libraries to define their configuration parameters is with the macros in the [CParam](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CParam) class (e.g. **`NCBI_PARAM_DECL`**). More [details on the CParam class and its macros](ch_core.html#ch_core.Configuration_Parame) are presented in an earlier chapter. Libraries that use CParam can get configuration parameters using either the registry or the environment. Also, the CParam value can be stored and accessed on different levels: globally (application wide) and/or per-thread (TLS-like) and/or locally (cached within a CParam instance). Note that the name of an environment variable linked to a [CParam](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CParam) can be customized or follow the default naming convention, so you have to look up the actual name used in the tables below before setting a configuration parameter using the environment.
+-   [The OBJECT MANAGER Module](#ch_intro.intro_objmgr)
 
-<a name="ch_libconfig.libconfig_registry"></a>
+-   [The SERIAL Module](#ch_intro.intro_ser)
+
+-   [The UTIL Module](#ch_intro.intro_util)
+
+    -   [Checksum](#ch_intro.intro_checksum)
+
+    -   [Console Debug Dump Viewer](#ch_intro.intro_dumpv)
+
+    -   [Diff API](#ch_intro.Diff_API)
+
+    -   [Floating Point Comparison](#ch_intro.Floating_Point_Comparison)
+
+    -   [Lightweight Strings](#ch_intro.intro_lightstring)
+
+    -   [Linked Sets](#ch_intro.intro_linkedset)
+
+    -   [Random Number Generator](#ch_intro.intro_random)
+
+    -   [Range Support](#ch_intro.intro_range)
+
+    -   [Registry based DNS](#ch_intro.intro_regdns)
+
+    -   [Regular Expressions](#ch_intro.Regular_Expressions)
+
+    -   [Resizing Iterator](#ch_intro.intro_resizeiterator)
+
+    -   [Rotating Log Streams](#ch_intro.intro_rotatelog)
+
+    -   [Stream Support](#ch_intro.intro_streamsupport)
+
+    -   [String Search](#ch_intro.intro_strsearch)
+
+    -   [Synchronized and blocking queue](#ch_intro.Synchronized_and_blo)
+
+    -   [Thread Pools](#ch_intro.intro_thrpools)
+
+    -   [UTF 8 Conversion](#ch_intro.intro_utf8)
+
+<a name="ch_intro.intro_corelib"></a>
+
+The CORELIB Module
+------------------
+
+The C++ Toolkit can be seen as consisting of several major pieces of code that we will refer to as *module*. The core module is called, appropriately enough, CORELIB, and provides a portable way to write C++ code and many useful facilities such as an application framework, argument processing, template utilities, threads, etc. The CORELIB facilities are used by other major modules. The rest of the sections that follow discusses the CORELIB and the other C++ Toolkit modules in more detail.
+
+The following is a list of the CORELIB facilities. Note that each facility may be implemented by a number of C++ classes spread across many files.
+
+-   [Application Framework](#ch_intro.intro_appframe)
+
+-   [Argument processing](#ch_intro.intro_args)
+
+-   [Diagnostics](#ch_intro.intro_diag)
+
+-   [Environment Interface](#ch_intro.intro_env)
+
+-   [Files and Directories](#ch_intro.intro_files_dirs)
+
+-   [MT Test wrappers](#ch_intro.intro_mt_test)
+
+-   [Object and Ref classes](#ch_intro.intro_cref)
+
+-   [Portability definitions](#ch_intro.intro_pdef)
+
+-   [Portable Exception Handling](#ch_intro.intro_pexcep)
+
+-   [Portable Process Pipes](#ch_intro.intro_pipe)
+
+-   [Registry](#ch_intro.intro_reg)
+
+-   [STL Use Hints](#ch_intro.intro_stl)
+
+-   [String Manipulations](#ch_intro.intro_str)
+
+-   [Template Utilities](#ch_intro.intro_tempu)
+
+-   [Threads](#ch_intro.intro_threads)
+
+-   [Time](#ch_intro.intro_time)
+
+A brief description of each of each of these facilities are presented in the subsections that follow:
+
+<a name="ch_intro.intro_appframe"></a>
+
+### Application Framework
+
+The Application framework primarily consists of an abstract class called ***[CNcbiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiApplication)*** which defines the high level behavior of an application. For example, every application upon loading seems to go through a cycle of doing some initialization, then some processing, and upon completion of processing, doing some clean up activity before exiting. These three phases are modeled in the ***[CNcbiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiApplication)*** class as interface methods ***[Init()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Init)***, ***[Run()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Run)***, and ***[Exit()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Exit)***.
+
+A new application is written by deriving a class from the ***[CNcbiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiApplication)*** base class and writing an implementation of the ***[Init()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Init)***, ***[Run()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Run)***, and ***[Exit()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Exit)*** methods. Execution control to the new application is passed by calling the application object's ***[AppMain()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AppMain)*** method inherited from the ***[CNcbiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiApplication)*** base class (see [Figure 1](#ch_intro.F1)). The ***[AppMain()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AppMain)*** method is similar to the ***[main()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=main)*** method used in C/C++ programs and calls the ***[Init()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Init)***, ***[Run()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Run)***, and ***[Exit()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Exit)*** methods.
+
+<a name="ch_intro.F1"></a>
+
+![Figure 1. The CNcbiApplication class](/cxx-toolkit/static/img/CNcbiApplication.gif)
+
+Figure 1. The ***[CNcbiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiApplication)*** class
+
+More details on [using the CNcbiApplication class](ch_core.html#ch_core.writing_simple_app) are presented in a later chapter.
+
+<a name="ch_intro.intro_args"></a>
+
+### Argument processing
+
+In a C++ program, control is transferred from the command line to the program via the ***[main()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=main)*** function. The ***[main()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=main)*** function is passed a count of the number of arguments (int argc), and an array of character strings containing arguments to the program (`char** argv`). As long as the argument types are simple, one can simply set up a loop to iterate through the array of argument values and process them. However, with time applications evolve and grow more complex. Often there is a need to do some more complex argument checking. For example, the application may want to enforce a check on the number and position of arguments, check the argument type (int, string, etc.), check for constraints on argument values, check for flags, check for arguments that follow a keyword (***-logfile mylogfile.log***), check for mandatory arguments, display usage help on the arguments, etc.
+
+To make the above tasks easier, the CORELIB provides a number of portable classes that encapsulate the functionality of argument checking and processing. The main classes that provide this functionality are the ***[CArgDescriptions](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CArgDescriptions)***, ***[CArgs](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CArgs)***, ***[CArgValue](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CArgValue)*** classes.
+
+Argument descriptions such as the expected number, type, position, mandatory and optional attributes are setup during an application's initilization such as the application object's ***[Init()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Init)*** method (see [previous section](#ch_intro.intro_appframe)) by calling the ***[CArgDescriptions](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CArgDescriptions)*** class methods. Then, the arguments are extracted by calling the ***[CArgs](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CArgs)*** class methods.
+
+More details on [argument processing](ch_core.html#ch_core.cmd_line_args) are presented in a later chapter.
+
+<a name="ch_intro.intro_diag"></a>
+
+### Diagnostics
+
+It is very useful for an application to post messages about its internal state or other diagnostic information to a file, console or for that matter any output stream. The CORELIB provides a portable diagnostics facility that enables an application to post diagnostic messages of various severity levels to an output stream. This diagnostic facility is provided by the ***[CNcbiDiag](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiDiag)*** class. You can set the diagnostic stream to the standard error output stream (`NcbiErr`) or to any other output stream.
+
+You can set the severity level of the message to Information, Warning, Error, Critical, Fatal, or Trace. You can alter the severity level at any time during the use of the diagnostic stream.
+
+More details on [diagnostic streams](ch_core.html#ch_core.CNcbiDiag) and [processing of diagnostic messages](ch_debug.html#ch_debug.std_cpp_message_post) are presented in later chapters.
+
+<a name="ch_intro.intro_env"></a>
+
+### Environment Interface
+
+An application can read the environment variable settings (such as PATH) that are in affect when the application is run. CORELIB defines a portable ***[CNcbiEnvironment](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiEnvironment)*** class that stores the environment variable settings and provides applications with methods to get the environment variable values.
+
+More details on the [environment interface](ch_core.html#ch_core.CNcbiEnvironment) are presented in a later chapter.
+
+<a name="ch_intro.intro_files_dirs"></a>
+
+### Files and Directories
+
+An application may need access to information about a file or directory. The CORELIB provides a number of portable classes to model a system file and directory. Some of the important classes are ***[CFile](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CFile)*** for modeling a file, ***[CDir](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDir)*** for modeling a directory, and ***[CMemoryFile](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CMemoryFile)*** for memory mapped file.
+
+For example, if you create a ***[CFile](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CFile)*** object corresponding to a system file, you can get the file's attribute settings such as file size, permission settings, or check the existence of a file. You can get the directory where the file is located, the base name of the file, and the file's extension. There are also a number of useful functions that are made available through these classes to parse a file path or build a file path from the component parts such as a directory, base name, and extension.
+
+More details on [file and directory classes](ch_core.html#ch_core.files_dirs) are presented in later chapters.
+
+<a name="ch_intro.intro_mt_test"></a>
+
+### MT Test wrappers
+
+The ***[CNcbiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiApplication)*** class which was [discussed earlier](#ch_intro.intro_appframe) provides a framework for writing portable applications. For writing portable multi-threaded applications, the CORELIB provides a ***[CThreadedApp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CThreadedApp)*** class derived from ***[CNcbiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiApplication)*** class which provides a framework for building multi-threaded applications.
+
+Instead of using the ***[Init()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Init)***, ***[Run()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Run)***, ***[Exit()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Exit)*** methods for the ***[CNcbiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiApplication)*** class, the ***[CThreadedApp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CThreadedApp)*** class defines specialized methods such as ***[Thread\_Init()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Thread_Init)***, ***[Thread\_Run()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Thread_Run)***, ***[Thread\_Exit()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Thread_Exit)***, ***[Thread\_Destroy()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Thread_Destroy)*** for controlling thread behavior. These methods operate on a specific thread identified by a thread index parameter.
+
+<a name="ch_intro.intro_cref"></a>
+
+### Object and Ref classes
+
+A major cause of errors in C/C++ programs is due to dynamic allocation of memory. Stated simply, memory for objects allocated using the new operator must be released by a corresponding delete operator. Failure to delete allocated memory results in memory leaks. There may also be programming errors caused by references to objects that have never been allocated or improperly allocated. One reason these types of problems crop up are because a programmer may dynamically allocate memory as needed, but may not deallocate it due to unanticipated execution paths.
+
+The C++ standard provides the use of a template class, auto\_ptr , that wraps memory management inside constructors and destructors. Because a destructor is called for every constructed object, memory allocation and deallocation can be kept symmetrical with respect to each other. However, the auto\_ptr does not properly handle the issue of ownership when multiple auto pointers, point to the same object. What is needed is a reference counted smart pointer that keeps a count of the number of pointers pointing to the same object. An object can only be released when its reference count drops to zero.
+
+The CORELIB implements a portable reference counted smart pointer through the ***[CRef](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRef)*** and ***[CObject](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CObject)*** classes. The ***[CRef](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRef)*** class provides the interface methods to access the pointer and the ***[CObject](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CObject)*** is used to store the object and the reference count.
+
+More [CObject classes](ch_core.html#ch_core.smart_ptrs) are presented in a later chapter.
+
+<a name="ch_intro.intro_pdef"></a>
+
+### Portability definitions
+
+To help with portability, the CORELIB uses only those C/C++ standard types that have some guarantees about size and representation. In particular, use of long, long long, float is not recommended for portable code.
+
+To help with portability, integer types such as `Int1`, `Uint1`, `Int2`, `Uint2`, `Int4`, `Uint4`, `Int8`, `Uint8` have been defined with constant limits. For example, a signed integer of two bytes size is defined as type `Int2` with a minimum size of `kMin_I2` and a maximum size of `kMax_I2`. There are minimum and maximum limit constants defined for each of the different integer types.
+
+More details on [standard portable data types](ch_core.html#ch_core.std_ncbi_types) are presented in a later chapter.
+
+<a name="ch_intro.intro_pexcep"></a>
+
+### Portable Exception Handling
+
+C++ defines a structured exception handling mechanism to catch and process errors in a block of code. When the error occurs an exception is thrown and caught by an exception handler. The exception handler can then try to recover from the error, or process the error. In the C++ standard, there is only one exception class (std::exception), that stores a text message that can be printed out. The information reported by the std::exception may not be enough for a complex system. The CORELIB defines a portable ***[CException](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CException)*** class derived from std::exception class that remedies the short comings of the standard exception class
+
+The CORELIB defines a portable ***[CException](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CException)*** class derived from std::exception class. The ***[CException](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CException)*** class in turn serves as a base class for many other exception classes specific to an application area such as the ***[CCoreException](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCoreException)***, ***[CAppException](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CAppException)***, ***[CArgException](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CArgException)***, ***[CFileException](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CFileException)***, and so on. Each of these derived classes can add facilities specific to the application area they deal with.
+
+These exception classes provides many useful facilities such as a unique identification for every exception that is thrown, the location (file name and line number) where the exception occurred, references to lower-level exceptions that have already been thrown so that a more complete picture of the chain of exceptions is available, ability to report the exception data into an arbitrary output channel such as a diagnostic stream, and format the message differently for each channel.
+
+More details on [exceptions and exception handling](ch_debug.html#ch_debug.ncbi_cpp_exceptions) are presented in a later chapter.
+
+<a name="ch_intro.intro_pipe"></a>
+
+### Portable Process Pipes
+
+A pipe is a common mechanism used to establish communications between two separate processes. The pipe serves as a communication channel between processes.
+
+The CORELIB defines the ***[CPipe](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CPipe)*** class that provides a portable inter-process communications facility between a parent process and its child process. The pipe is created by specifying the command and arguments used to start the child process and specifying the type of data channels (text or binary) that will connect the processes. Data is sent across the pipe using the ***[CPipe](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CPipe)*** read and write methods.
+
+<a name="ch_intro.intro_reg"></a>
 
 ### Registry
 
-If the [CParam](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CParam) class cannot be used, the registry (configuration file) may be used to load, access, modify and store the values read from a configuration file. For libraries that use the registry, client applications can set the library configuration parameters using either the registry or the environment. In these cases the environment variable must follow the default naming convention.
+***N.B.*** The preferred way to define configuration parameters for an application is to use the macros in the ***[CParam](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CParam)*** class (e.g. **`NCBI_PARAM_DECL`**). More [details on the CParam class and its macros](ch_core.html#ch_core.Configuration_Parame) are presented in a later chapter. If the ***[CParam](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CParam)*** class cannot be used, then the registry may be used instead.
 
-[These environment variables](#ch_libconfig.T1) can be used to specify where to look for the registry.
+The settings for an application may be read from a configuration or initialization file (the "registry"). This configuration file may define the parameters needed by the application. For example, many Unix programs read their parameter settings from configuration files. Similarly, Windows programs may read and store information in an internal registry database, or an initialization file.
 
-<a name="ch_libconfig.T1"></a>
+The ***[CNcbiRegistry](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiRegistry)*** class provides a portable facility to access, modify and store runtime information read from a configuration file. The configuration file consists of sections. A section is defined by a section header of the form [***section-header-name***]. Within each section, the parameters are defined using (name, value) pairs and represented as ***name=value*** strings. The syntax closely resembles the '`.ini`' files used in Windows and also by Unix tools such as Samba.
 
-Table 1. Registry configuration parameters
+More details on the [Registry](ch_core.html#ch_core.CNcbiRegistry) are presented in a later chapter.
 
-| Purpose      | Environment variable | Valid values |
-|--------------|----------------------|--------------|
-| If this variable is defined, the value is an extra-high-priority configuration file whose entries override those from other configuration files.  | **`NCBI_CONFIG_OVERRIDES`**      | a valid path |
-| If this variable is defined, use it exclusively as the registry search path.             | **`NCBI_CONFIG_PATH`**     | a valid path |
-| If this variable is **not** defined, append the current directory and home directory to the registry search path (after **`NCBI_CONFIG_PATH`**).  | **`NCBI_DONT_USE_LOCAL_CONFIG`** | anything     |
-| If this variable is defined, append the value to the registry search path (after the home directory).       | **`NCBI`**     | a valid path |
-| For Windows: If this variable is defined, append the value to the registry search path (after **`NCBI`**). For non-Windows, this variable is not checked and `/etc` is appended to the registry search path (after **`NCBI`**).     | **`SYSTEMROOT`**     | a valid path |
-| If this variable is **not** defined, attempt to load a low-priority system-wide registry (`ncbi.ini` on Windows; `.ncbirc` on non-Windows). Note: the system-wide registry will not be loaded if it contains the **`DONT_USE_NCBIRC`** entry in the **`NCBI`** section. | **`NCBI_DONT_USE_NCBIRC`** | anything     |
+<a name="ch_intro.intro_stl"></a>
 
-<div class="table-scroll"></div>
+### STL Use Hints
 
-The registry is case-insensitive for section and entry names. More [details on the registry](ch_core.html#ch_core.registry) are presented in an earlier chapter.
+To minimize naming conflicts, all NCBI code is placed in the ncbi name space. The CORELIB defines a number of portable macros to help manage name space definitions. For example, you can use the **`BEGIN_NAME_SPACE`** macro at the start of a section of code to place that code in the specified name space. The **`END_NAME_SPACE`** macros is used to indicate the end the of the name space definition. To declare the use of the NCBI namespace, the macros **`USING_NCBI_SCOPE`** is used.
 
-<a name="ch_libconfig.Environment"></a>
+A number of macros have been defined to handle non-standard behavior of C++ compilers. For example, a macro **`BREAK`** is defined, that is used to break out of a loop, instead of using the break statement directly. This is done to handle a bug in the Sun WorkShop (pre 5.3 version) compiler that fails to call destructors for objects created in for-loop initializers. Another example is that some compilers (example, Sun Pro 4.2) do not understand the using namespace std; statement. Therefore, for portable code, the using namespace statement should be prohibited.
 
-### Environment
+More details on the [use of portable macros](ch_style.html#ch_style.using_NCBI_namespace) are presented in a later chapter.
 
-For configuration parameters defined by either [CParam](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CParam) or the registry, there is an equivalent environment variable having the form **`NCBI_CONFIG__<section>__<name>`** (note the double-underscores preceding **`<section>`** and **`<name>`**). The equivalent form is all uppercase.
+<a name="ch_intro.intro_str"></a>
 
-***Note:*** Registry section and entry names may contain some characters that are difficult or impossible to use in environment variable names on some platforms.  To obtain corresponding environment variable names, you can and should make some formal substitutions as detailed below.  For example, the equivalent environment variable for **`[FastCGI]`**<br/>**`WatchFile.Name`** is **`NCBI_CONFIG__FASTCGI__WATCHFILE_DOT_NAME`**.
+### String Manipulations
 
-|**Character** |**Substitution**|
-|--------------------------------------|----------------|
-|**`'.'`** (dot, full stop, period)    |**`_DOT_`**     |
-|**`'-'`** (hyphen, minus)             |**`_HYPHEN_`**  |
-|**`'/'`** (\[forward\] slash, solidus)|**`_SLASH_`**   |
-|**`' '`** (space)                     |**`_SPACE_`**   |
+C++ defines the standard string class that provides operations on strings. However, compilers may exhibit non-portable string behavior especially with regards to multi-threaded programs. The CORELIB provides portable string manipulation facilities through the ***[NStr](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=NStr)*** class that provides a number of class-wide functions for string manipulation.
 
-***Note:*** Environment variables are case-sensitive on many platforms. Therefore, when setting a configuration parameter via the environment, be sure to use the case shown in the tables below.
+***[NStr](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=NStr)*** portable functions include the string-to-X and X-to-string conversion functions where X is a data type including a pointer type, string comparisons with and without case, pattern searches within a string, string truncation, substring replacements, string splitting and join operations, string tokenization, etc.
 
-Some configuration parameters can only be set with an environment variable - for example, **`DIAG_SILENT_ABORT`**. In such cases, there is no corresponding registry entry.
+<a name="ch_intro.intro_tempu"></a>
 
-<a name="ch_libconfig.NonSpecific_Parameters"></a>
+### Template Utilities
 
-Non-Specific Parameters
------------------------
+The C++ Template classes support a number of useful template classes for data structures such as vectors, lists, sets, maps, and so on.
 
-The following sections discuss configuration parameters that are not library-specific.
+The CORELIB defines a number of useful utility template classes. Some examples are template classes and functions for checking for equality of objects through a pointer, checking for non-null values of pointers, getting and setting map elements, deleting all elements from a container of pointers where the container can be a list, vector, set, multiset, map or multimap.
 
--   [Logging](#ch_libconfig.libconfig_logfile)
+More details on the [template utilities](ch_core.html#ch_core.template_utils) are presented in a later chapter.
 
--   [Diagnostic Trace](#ch_libconfig.libconfig_diag)
+<a name="ch_intro.intro_threads"></a>
 
--   [Run-Time](#ch_libconfig.libconfig_runtime)
+### Threads
 
--   [Abnormal Program Termination](#ch_libconfig.libconfig_term)
+Applications can run faster, if they are structured to exploit any inherent parallelism in the application's code execution paths. Code execution paths in an application can be assigned to separate threads. When the application is run on a multiprocessor system, there can be significant improvements in performance especially when threads run in parallel on separate processors.
 
--   [NCBI](#ch_libconfig.NCBI)
+The CORELIB defines a portable ***[CThread](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CThread)*** class that can be used to provide basic thread functionality such as thread creation, thread execution, thread termination, and thread cleanup.
 
-<a name="ch_libconfig.libconfig_logfile"></a>
+To create user defined threads you need to derive your class from ***[CThread](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CThread)***, and override the thread's ***[Main()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Main)*** method and, and if necessary the ***[OnExit()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=OnExit)*** method for thread-specific cleanup. Next, you create a thread object by instantiating the class you derived from ***[CThread](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CThread)***. Now you are ready to launch thread execution by calling the thread's ***[Run()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Run)*** method. The ***[Run()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Run)*** method starts thread execution and the thread will continue to run until it terminates. If you want the thread to run independently of the parent thread you call the thread's ***[Detach()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Detach)*** method. If you want to wait till the thread terminates, you call the thread's ***[Join()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Join)*** method.
 
-### Logging
+Synchronization between threads is provided through mutexes and read/write locks.
 
-The application log consists of diagnostic messages. Some of them are available only in debug builds. Others - namely, those produced by the **`ERR_POST`** or **`LOG_POST`** macros - can be redirected into a file. Normally, the name and location of the application log is specified using the **`logfile`** command-line argument.
+More details on [threads](ch_core.html#ch_core.threads) and [synchronization](ch_core.html#ch_core.mutexes) are presented in a later chapter.
 
-Log messages have different levels of severity. Setting the logging level is described in the next chapter [Diagnostic Trace](#ch_libconfig.libconfig_diag)
+<a name="ch_intro.intro_time"></a>
 
-[These parameters](#ch_libconfig.T2) tune the usage and behavior of the application log file.
+### Time
 
-<a name="ch_libconfig.T2"></a>
+The ***[CTime](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CTime)*** class provides a portable interface to date and time functions. ***[CTime](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CTime)*** can operate with both local and UTC time, and can be used to store data and time at a particular moment or elapsed time. The time epoch is defined as Jan 1, 1900 so you cannot use ***[CTime](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CTime)*** for storing timestamps before Jan 1, 1900.
 
-Table 2. Log file configuration parameters
+The ***[CTime](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CTime)*** class can adjust for daylight savings time. For display purposes, the time format can be set to a variety of time formats specified by a format string. For example, "M/D/Y h:m:s" for a timestamp of "5/6/03 14:07:09". Additional time format specifiers are defined for full month name (B), abbreviated month name (b), nanosecond (S), timezone format (Z), full weekday name (W) and abbreviated weekday name (w).
 
-| Purpose   | [Registry section]<br/>Registry name<br/><br/>Environment variable              | Valid values          | Default    |
-|-----------|---------------------------------------------------------------------------------|-----------------------|------------|
-| If true, post log messages when configuration parameters are read by one of the ***ncbi::g\_GetConfig\*()*** functions. Messages include the parameter; the value; and whether the value came from the application registry, the environment, or a default value.     | [N/A]<br/>N/A<br/><br/>**`NCBI_CONFIG__NCBI__CONFIG_DUMP_VARIABLES`**           | Boolean  [<sup>b</sup>](#ch_libconfig.TF.2)    | (none)     |
-| Used by logging framework if the real client IP can not be obtained.                  | **`[LOG]`**<br/>**`Client_Ip`**<br/><br/>**`NCBI_LOG_CLIENT_IP`**               | a valid IPv4 or IPv6 address      | ""   |
-| Reset the log file to the specified file.       | **`[LOG]`**<br/>**`File`**<br/><br/>**`NCBI_CONFIG__LOG__FILE`**  [<sup>c</sup>](#ch_libconfig.TF.3)     | a valid file name     | ""   |
-| Defines the default hit ID, which is used for application and for any request which has no explicit hit ID set.      | **`[Log]`**<br/>**`Hit_Id`**<br/><br/>**`NCBI_LOG_HIT_ID`** | any valid PHID string | "" |
-| Same as **`NCBI_LOG_HIT_ID`**, but passed through HTTP headers. Has priority over **`NCBI_LOG_HIT_ID`**. | **`[Log]`**<br/>**`Http_Hit_Id`**<br/><br/>**`HTTP_NCBI_PHID`** | any valid PHID string | "" |
-| Same as **`NCBI_LOG_SESSION_ID`**, but passed through HTTP headers. Has priority over **`NCBI_LOG_SESSION_ID`**. | **`[Log]`**<br/>**`Http_Session_Id`**<br/><br/>**`HTTP_NCBI_SID`** | any valid session ID string | "UNK_SESSION" |
-| Specify when to use the **`File`**, **`NoCreate`**, **`Truncate`**, and **`TryRootLogFirst`** registry parameters shown in this table. ***Note:*** those parameters will only be used if the log file has not been set already or if **`IgnoreEnvArg`** is set to true.     | **`[LOG]`**<br/>**`IgnoreEnvArg`**<br/><br/>**`NCBI_CONFIG__LOG__IGNOREENVARG`**  [<sup>c</sup>](#ch_libconfig.TF.3) | Boolean  [<sup>a</sup>](#ch_libconfig.TF.1)    | false      |
-| Specify the maximum number of sub-PHIDs that can be reported to the AppLog by a single request.              | **`[Log]`**<br/>**`Issued_SubHit_Limit`**<br/><br/>**`LOG_ISSUED_SUBHIT_LIMIT`**      | unsigned integer        | 200    |
-| Log all app arguments *before* application run. The extra message starts with a "LogAppArguments=true" pair.     | **`[LOG]`**<br/>**`LogAppArguments`**<br/><br/>**`DIAG_LOG_APP_ARGUMENTS`** [sic]  | Boolean  [<sup>a</sup>](#ch_libconfig.TF.1) | ""   |
-| Log all environment variables as an 'extra' *before* application run. The extra message starts with a "LogAppEnvironment=true" pair.     | **`[LOG]`**<br/>**`LogAppEnvironment`**<br/><br/>**`DIAG_LOG_APP_ENVIRONMENT`** [sic]  | Boolean  [<sup>a</sup>](#ch_libconfig.TF.1) | ""   |
-| Log all environment variables as an 'extra' *after* application run. The extra message starts with a "LogAppEnvironment=true" pair.     | **`[LOG]`**<br/>**`LogAppEnvironmentOnStop`**<br/><br/>**`DIAG_LOG_APP_ENVIRONMENT_ON_STOP`** [sic]  | Boolean  [<sup>a</sup>](#ch_libconfig.TF.1) | ""   |
-| Log application executable path *before* application run. The extra message starts with a "LogAppPath=true" pair.     | **`[LOG]`**<br/>**`LogAppPath`**<br/><br/>**`DIAG_LOG_APP_PATH`** [sic]  | Boolean  [<sup>a</sup>](#ch_libconfig.TF.1) | ""   |
-| Log all registry variables as an 'extra' *before* application run. The extra message starts with a "LogAppRegistry=true" pair.     | **`[LOG]`**<br/>**`LogAppRegistry`**<br/><br/>**`DIAG_LOG_APP_REGISTRY`** [sic]                  | Boolean  [<sup>a</sup>](#ch_libconfig.TF.1) | ""   |
-| Log all registry variables as an 'extra' *after* application run. The extra message starts with a "LogAppRegistry=true" pair.     | **`[LOG]`**<br/>**`LogAppRegistryOnStop`**<br/><br/>**`DIAG_LOG_APP_REGISTRY_ON_STOP`** [sic]  | Boolean  [<sup>a</sup>](#ch_libconfig.TF.1) | ""   |
-| Log memory and CPU consumed by application as an 'extra' *after* application run, just before stop. The extra message starts with a "LogAppResUsage=true" pair.     | **`[LOG]`**<br/>**`LogAppResUsageOnStop`**<br/><br/>**`DIAG_LOG_APP_RESUSAGE_ON_STOP`** [sic]  | Boolean  [<sup>a</sup>](#ch_libconfig.TF.1) | ""   |
-| Set **`[LOG]LogAppRegistry`**, **`[LOG]LogAppRegistryOnStop`**, **`[LOG]LogAppEnvironment`**, **`[LOG]LogAppEnvironmentOnStop`**, **`[LOG]LogAppArguments`**, **`[LOG]LogAppPath`** to the one specified value   | **`[LOG]`**<br/>**`LogAppRunContext`**<br/><br/>**`DIAG_LOG_APP_RUN_CONTEXT`** [sic]  | Boolean  [<sup>a</sup>](#ch_libconfig.TF.1) | ""   |
-| The listed environment variables will be logged as an 'extra' after each 'request-start' message. The extra message starts with a "LogEnvironment=true" pair.     | **`[LOG]`**<br/>**`LogEnvironment`**<br/><br/>**`DIAG_LOG_ENVIRONMENT`** [sic]  | space separated list of environment variable names  | ""   |
-| The listed registry entries will be logged as an 'extra' after each 'request-start' message. The extra message starts with a "LogRegistry=true" pair.             | **`[LOG]`**<br/>**`LogRegistry`**<br/><br/>**`DIAG_LOG_REGISTRY`** [sic]        | space separated list of registry section:name values      | ""   |
-| Do not create the log file if it does not exist already.           | **`[Log]`**<br/>**`NoCreate`**<br/><br/>**`NCBI_CONFIG__LOG__NOCREATE`**  [<sup>c</sup>](#ch_libconfig.TF.3)   | Boolean  [<sup>b</sup>](#ch_libconfig.TF.2)    | false      |
-| Specifies what to do if an invalid page hit ID is encountered. Valid PHIDs match the regex: `[A-Za-z0-9:@_-]+(\.[0-9]+)*` | **`[Log]`**<br/>**`On_Bad_Hit_Id`**<br/><br/>**`LOG_ON_BAD_HIT_ID`**            | "Allow", "AllowAndReport", "Ignore", "IgnoreAndReport", "Throw" | "AllowAndReport" |
-| Specifies what to do if an invalid session ID is encountered. Valid session IDs match the format specified by **`LOG_SESSION_ID_FORMAT`**.| **`[Log]`**<br/>**`On_Bad_Session_Id`**<br/><br/>**`LOG_ON_BAD_SESSION_ID`** | "Allow", "AllowAndReport", "Ignore", "IgnoreAndReport", "Throw" | "AllowAndReport" |
-| Turn performance logging on or off (globally).                | **`[Log]`**<br/>**`PerfLogging`**<br/><br/>**`LOG_PerfLogging`**  [<sup>c</sup>](#ch_libconfig.TF.3)     | Boolean  [<sup>b</sup>](#ch_libconfig.TF.2)| false |
-| Defines the default session ID, which is used for any request which has no explicit session ID set.      | **`[Log]`**<br/>**`Session_Id`**<br/><br/>**`NCBI_LOG_SESSION_ID`** | any valid session ID string | "UNK_SESSION" |
-| Specifies which format rule to check session IDs against:<br/>for "Ncbi" use `^[0-9]{16}_[0-9]{4,}SID$`<br/>for "Standard" use `^[A-Za-z0-9_.:@-]+$`<br/>for "Other" use `^.*$` (i.e. anything is valid). | **`[Log]`**<br/>**`Session_Id_Format`**<br/><br/>**`LOG_SESSION_ID_FORMAT`**    | "Ncbi", "Standard", "Other" | "Standard" |
-| If this parameter is defined, use the [CSysLog](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSysLog) facility setting when posting.    | **`[LOG]`**<br/>**`SysLogFacility`**<br/><br/>**`NCBI_CONFIG__LOG__SYSLOGFACILITY`**  [<sup>c</sup>](#ch_libconfig.TF.3)   | any non-empty string  | (none)     |
-| Truncate the log file – i.e. discard the contents when opening an existing file.      | **`[Log]`**<br/>**`Truncate`**<br/><br/>**`LOG_TRUNCATE`**   | Boolean  [<sup>b</sup>](#ch_libconfig.TF.2)    | false      |
-| Specify whether to try creating the log file under `/log` before trying other locations (e.g. a location specified by the registry or by **`NCBI_CONFIG__LOG__FILE`**).              | **`[LOG]`**<br/>**`TryRootLogFirst`**<br/><br/>**`NCBI_CONFIG__LOG__TRYROOTLOGFIRST`**  [<sup>c</sup>](#ch_libconfig.TF.3) | Boolean  [<sup>a</sup>](#ch_libconfig.TF.1)    | false      |
-| If true, default to logging warnings when unsafe static array types are copied.       | **`[NCBI]`**<br/>**`STATIC_ARRAY_COPY_WARNING`**<br/><br/>**`NCBI_STATIC_ARRAY_COPY_WARNING`**    | Boolean  [<sup>b</sup>](#ch_libconfig.TF.2)    | false      |
-| If true, log warnings for unsafe static array types.               | **`[NCBI]`**<br/>**`STATIC_ARRAY_UNSAFE_TYPE_WARNING`**<br/><br/>**`NCBI_STATIC_ARRAY_UNSAFE_TYPE_WARNING`**  | Boolean  [<sup>b</sup>](#ch_libconfig.TF.2)    | true |
+A class ***[CStopWatch](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CStopWatch)*** is also available that acts as a stop watch and measures elapsed time via the ***[Elapsed()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Elapsed)*** method, after its ***[Start()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Start)*** method is called.
 
-<div class="table-scroll"></div>
+More details on the [CTime class](ch_core.html#ch_core.portable_time_class) are presented in a later chapter.
 
-<a name="ch_libconfig.TF.1"></a>
+<a name="ch_intro.intro_algo"></a>
 
-<sup>a</sup> case-insensitive: true, t, yes, y, false, f, no, n
+The ALGORITHM Module
+--------------------
 
-<a name="ch_libconfig.TF.2"></a>
+The ALGORITHM module is a collection of rigorously defined, often computationally intensive algorithms performed on sequences. It is divided into three groups:
 
-<sup>b</sup> case-insensitive: true, t, yes, y, 1, false, f, no, n, 0
+-   ALIGN. A set of global alignment algorithms, including generic Needleman-Wunsch, a linear-space Hirschberg's algorithm and a spliced (cDna/mRna-to-Genomic) alignment algorithm.
 
-<a name="ch_libconfig.TF.3"></a>
+-   BLAST. Basic Local Alignment Tool code and interface.
 
-<sup>c</sup> [environment variable name](#ch_libconfig.Environment) formed from registry section and entry name
+-   SEQUENCE. Various algorithms on biological sequences, including antigenic determinant prediction, CPG-island finder, ORF finder, string matcher and others.
 
-<a name="ch_libconfig.libconfig_diag"></a>
+<a name="ch_intro.intro_cgi"></a>
 
-### Diagnostic Trace
+The CGI Module
+--------------
 
-Severity level is the same for all macros (ERR_POST*, LOG_POST*, _TRACE). DIAG_TRACE enables _TRACE output regardless of the severity level. So, if your severity level is Warning and DIAG_TRACE is set, you will see Warnings (and above) and Traces but not Infos. This chapter tells more about logging severity: [Setting Diagnostic Severity Levels](ch_log.html#ch_core.diag_severity)
+The CGI module provides an integrated framework for writing CGI applications. It consists of classes that implement the CGI (Common Gateway Interface). These classes are used to retrieve and parse an HTTP request, and then compose and deliver an HTTP response.
 
-These parameters tune the visibility and contents of diagnostic messages produced by **`_TRACE`**, **`LOG_POST`** or **`ERR_POST`** macros.
+The CGI module consists of a number of classes. The interaction between these classes is fairly complex, and therefore, not covered in this introductory chapter. We will attempt to only identify the major classes in this overview, and cover the details of their interaction in later chapters. Among the more important of the CGI classes are the ***[CCgiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiApplication)***, ***[CCgiContext](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiContext)***, ***[CCgiRequest](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiRequest)***, ***[CCgiResponse](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiResponse)***, and ***[CCgiCookie](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiCookie)***.
 
-See [Table 3](#ch_libconfig.T3).
+The ***[CCgiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiApplication)*** is used to define the CGI application and is derived from the ***[CNcbiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiApplication)*** [discussed earlier](#ch_intro.intro_appframe). You write a CGI application by deriving application class from ***[CCgiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiApplication)*** and providing an adoption of the ***[Init()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Init)***, ***[Run()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Run)***, and ***[Exit()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Exit)*** methods inherited from the ***[CNcbiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiApplication)*** class. Details on [how to implement the Init(), Run() and Exit() methods for a CGI application](ch_cgi.html#ch_cgi.cgi_app_class) are provided in a later chapter.
 
-<a name="ch_libconfig.T3"></a>
+The ***[CCgiRequest](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiRequest)*** class is designed to receive and parse the request, and the ***[CCgiResponse](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiResponse)*** class outputs the response to an output stream.
 
-Table 3. Diagnostic trace configuration parameters
+The ***[CCgiCookie](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiCookie)*** class models a *cookie*. A cookie is a name, value string pair that can be stored on the user's web browser in an attempt to remember a session state. All incoming ***[CCgiCookies](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiCookies)*** are parsed and stored by the ***[CCgiRequest](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiRequest)*** object, and the outgoing cookies are sent along with the response by the ***[CCgiResponse](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiResponse)*** object.
 
-| Purpose         | [Registry section]<br/>Registry name<br/><br/>Environment variable      | Valid values  | Default  |
-|-----------------|-------------------------------------------------------------------------|---------------|----------|
-| Specify the severity level threshold for posting diagnostic messages – i.e. less severe messages will not be posted. Special case:  Trace -- print all messages and show Trace level messages. ***Note:*** If the parameter is set then the function ***ncbi***::[SetDiagPostLevel()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetDiagPostLevel) is ignored - except for setting the level to **`eDiag_Trace`**, in which case Trace level messages will be shown anyway. | **`[DEBUG]`**<br/>**`DIAG_POST_LEVEL`**<br/><br/>**`DIAG_POST_LEVEL`**  | CI  <sup>b</sup>: Info, Warning, Error, Critical, Fatal, Trace  | (none)   |
-| Messages with Trace level will be shown if this parameter is given any value.   | **`[DEBUG]`**<br/>**`DIAG_TRACE`**<br/><br/>**`DIAG_TRACE`** or **`NCBI_CONFIG__DEBUG__DIAG_TRACE`**  <sup>c</sup> | any non-empty string             | (none)   |
-| Specify a file that stores a mapping of error codes to their descriptions.                  | **`[DEBUG]`**<br/>**`MessageFile`**<br/><br/>**`NCBI_CONFIG__DEBUG__MESSAGEFILE`**  <sup>c</sup> | a valid file name                | (none)   |
-| Specify the minimum severity that will result in the stack trace being added to diagnostic messages.   | **`[DEBUG]`**<br/>**`Stack_Trace_Level`**<br/><br/>**`DEBUG_STACK_TRACE_LEVEL`**  | CI  <sup>b</sup>: Info, Warning, Error, Critical, Fatal, Trace             | Fatal   |
-| Specify the maximum number of entries to be listed in a stack trace. All stack trace entries above the specified level are not printed.              | **`[DEBUG]`**<br/>**`Stack_Trace_Max_Depth`**<br/><br/>**`DEBUG_STACK_TRACE_MAX_DEPTH`**   | a positive integer               | 200      |
-| Specify the maximum number of messages that can be posted to the AppLog within the AppLog period.              | **`[Diag]`**<br/>**`AppLog_Rate_Limit`**<br/><br/>**`DIAG_APPLOG_RATE_LIMIT`**      | unsigned integer or `OFF`        | 50000    |
-| Specify the AppLog period in seconds.                 | **`[Diag]`**<br/>**`AppLog_Rate_Period`**<br/><br/>**`DIAG_APPLOG_RATE_PERIOD`**    | unsigned integer                 | 10 |
-| Specify whether context properties should be automatically printed when set or changed.     | **`[Diag]`**<br/>**`AutoWrite_Context`**<br/><br/>**`DIAG_AUTOWRITE_CONTEXT`**      | Boolean  <sup>a</sup>             | false    |
-| Specify the maximum number of diagnostic messages to collect. Messages beyond the limit will result in erasing the oldest message.                   | **`[Diag]`**<br/>**`Collect_Limit`**<br/><br/>**`DIAG_COLLECT_LIMIT`**  | size\_t       | 1000     |
-| Disable all Applog messages (start/stop, request start/stop, extra). | **`[Diag]`**<br/>**`Disable_AppLog_Messages`**<br/><br/>**`DIAG_DISABLE_APPLOG_MESSAGES`** | Boolean  <sup>a</sup> | false |
-| Specify the maximum number of messages that can be posted to the ErrLog within the ErrLog period.              | **`[Diag]`**<br/>**`ErrLog_Rate_Limit`**<br/><br/>**`DIAG_ERRLOG_RATE_LIMIT`**      | unsigned integer or `OFF`        | 5000     |
-| Specify the ErrLog period in seconds.                 | **`[Diag]`**<br/>**`ErrLog_Rate_Period`**<br/><br/>**`DIAG_ERRLOG_RATE_PERIOD`**    | unsigned integer                 | 1  |
-| Limit the log file size, and rotate the log when it reaches the limit.   | **`[Diag]`**<br/>**`Log_Size_Limit`**<br/><br/>**`DIAG_LOG_SIZE_LIMIT`**      | non-negative long integer        | 0  |
-| If "On", then replace newlines in diagnostic messages with a semicolon.<br/>**N.B.** Newlines are replaced in-place by ";" - they are _not_ escaped. | **`[Diag]`**<br/>**`Merge_Lines`**<br/><br/>**`DIAG_MERGE_LINES`**    | "Default", "Off", or "On" | "Default" (which means "Off") |
-| Use the old output format if the flag is set.         | **`[Diag]`**<br/>**`Old_Post_Format`**<br/><br/>**`DIAG_OLD_POST_FORMAT`**    | Boolean  <sup>a</sup>             | true     |
-| Specify a diagnostics post filter string (see an [earlier chapter](ch_core.html#ch_core.diagnostic_messages_filtering) for more detail on filtering).                   | **`[DIAG]`**<br/>**`POST_FILTER`**<br/><br/>**`NCBI_CONFIG__DIAG__POST_FILTER`**  <sup>c</sup>   | see the [syntax rules](ch_core.html#ch_core.diagnostic_messages_filtering) | (none)   |
-| Print the system TID rather than [CThread](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CThread)::[GetSelf()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetSelf).               | **`[Diag]`**<br/>**`Print_System_TID`**<br/><br/>**`DIAG_PRINT_SYSTEM_TID`**  | Boolean  <sup>a</sup>             | false    |
-| Specify the minimum severity that will activate **`Tee_To_Stderr`**. See the [Tee Output to STDERR](ch_core.html#ch_core.Tee_Output_to_STDERR) section.                 | **`[Diag]`**<br/>**`Tee_Min_Severity`**<br/><br/>**`DIAG_TEE_MIN_SEVERITY`**  | CI  <sup>b</sup>: Info, Warning, Error, Critical, Fatal, Trace  | Warning (debug); Error (release) |
-| Duplicate messages to **`stderr`**. See the [Tee Output to STDERR](ch_core.html#ch_core.Tee_Output_to_STDERR) section.            | **`[Diag]`**<br/>**`Tee_To_Stderr`**<br/><br/>**`DIAG_TEE_TO_STDERR`**  | Boolean  <sup>a</sup>             | false    |
-| Specify a diagnostics trace filter string (see an [earlier chapter](ch_core.html#ch_core.diagnostic_messages_filtering) for more detail on filtering).                  | **`[DIAG]`**<br/>**`TRACE_FILTER`**<br/><br/>**`NCBI_CONFIG__DIAG__TRACE_FILTER`**  <sup>c</sup> | see the [syntax rules](ch_core.html#ch_core.diagnostic_messages_filtering) | (none)   |
-| Specify the maximum number of messages that can be posted to the TraceLog within the TraceLog period.          | **`[Diag]`**<br/>**`TraceLog_Rate_Limit`**<br/><br/>**`DIAG_TRACELOG_RATE_LIMIT`**  | unsigned integer or `OFF`        | 5000     |
-| Specify the TraceLog period in seconds.               | **`[Diag]`**<br/>**`TraceLog_Rate_Period`**<br/><br/>**`DIAG_TRACELOG_RATE_PERIOD`**      | unsigned integer                 | 1  |
-| If true and AppLog severity is not locked, print the current GMT time in diagnostic messages; otherwise print local time.         | **`[Diag]`**<br/>**`UTC_Timestamp`**<br/><br/>**`DIAG_UTC_TIMESTAMP`**  | Boolean  <sup>a</sup>             | false    |
+The CGI application executes in a 'context' defined by the ***[CCgiContext](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiContext)*** class. The ***[CCgiContext](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiContext)*** class provides a wrapper for the ***[CCgiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiApplication)***, ***[CCgiRequest](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiRequest)*** and ***[CCgiResponse](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiResponse)*** objects and drives the processing of input requests.
 
-<div class="table-scroll"></div>
+More details on [CGI classes and their interactions](ch_cgi.html#ch_cgi.cgi_class_overview) are presented in a later chapter.
 
-<a name="ch_libconfig.TF.4"></a>
+<a name="ch_intro.intro_conn"></a>
 
-<sup>a</sup> case-insensitive: true, t, yes, y, 1, false, f, no, n, 0
+The CONNECT Module
+------------------
 
-<a name="ch_libconfig.TF.5"></a>
+The CONNECT module implements a variety of interfaces and classes dealing with making connections to (mostly) network services. The core of the Connection Library is written in C which provides a low level interface to the communication protocols. The CONNECT module provides C++ interfaces so that the objects have diagnostic and error handling capabilities that are consistent with the rest of the Toolkit. The standard sockets (SOCK) API is implemented on a variety of platforms such as Unix, MS-Windows, MacOS, Darwin. The CONNECT module provides a higher level access to the SOCK API by using C++ wrapper classes.
 
-<sup>b</sup> CI = case-insensitive
+The following is a list of topics presented in this section:
 
-<a name="ch_libconfig.TF.6"></a>
+-   [Socket classes](#ch_intro.intro_socket)
 
-<sup>c</sup> [environment variable name](#ch_libconfig.Environment) formed from registry section and entry name
+-   [Connector and Connection Handles](#ch_intro.intro_connector)
 
-<a name="ch_libconfig.libconfig_runtime"></a>
+-   [Connection Streams](#ch_intro.intro_streams)
 
-### Run-Time
+-   [Sendmail API](#ch_intro.intro_sendmail)
 
-[Run-time configuration parameters](#ch_libconfig.T4) allow specifying memory size limit, CPU time limit, and memory allocation behavior. ***Note:*** not all operating systems support these parameters.
+-   [Threaded Server](#ch_intro.intro_threadedserver)
 
-<a name="ch_libconfig.T4"></a>
+<a name="ch_intro.intro_socket"></a>
 
-Table 4. Run-time configuration parameters
+### Socket classes
 
-| Purpose    | [Registry section]<br/>Registry name<br/><br/>Environment variable                | Valid values       | Default |
-|------------|-----------------------------------------------------------------------------------|--------------------|---------|
-| Controls whether to enable `libbackward`'s support for printing stack traces on segmentation faults and the like; the default is based on the build-time flag `--with-backward-cpp-sig`.<br/><br/>**NB:** Code bypassing `CNcbiApplication` but interested in this feature should explicitly call `CStackTrace::s_HonorSignalHandlingConfiguration()`. | **`[Debug]`**<br/>**`Trace_Fatal_Signals`**<br/><br/>**`DEBUG_TRACE_FATAL_SIGNALS`** | Boolean  <sup>a</sup> | varies by build-time configuration, but false for standard builds |
-| Set a CPU time limit for the application in seconds. | **`[NCBI]`**<br/>**`CpuTimeLimit`**<br/><br/>**`NCBI_CONFIG__NCBI__CPUTIMELIMIT`**  [<sup>b</sup>](#ch_libconfig.TF.7) | non-negative integer                  | 0 (unlimited) |
-| Set a memory size limit for the application.   | **`[NCBI]`**<br/>**`MemorySizeLimit`**<br/><br/>**`NCBI_CONFIG__NCBI__MEMORYSIZELIMIT`**  [<sup>b</sup>](#ch_libconfig.TF.7) | A positive integer percent (e.g. "70%") or an optionally suffixed non-negative real number (e.g. "123456789", "100MiB", or "1.25 G").<br/><br/>A percent limit is relative to the total system memory.<br/><br/>No suffix means the given value is in MiB; a "B" suffix means the value is in bytes.<br/><br/>If there is a suffix, there can be spaces between the number and the suffix. The default units are decimal (i.e. powers of 1000) - e.g. "MB". The final "B" is optional for decimal units (e.g. "M"). You can use "i" to indicate binary units (i.e. powers of 1024) – e.g. "MiB".<br/><br/>Supported suffix characters are: "K", "M", "G", "T", "P", and "E".<br/><br/>Suffixes are not case-sensitive. | 0 (unlimited) |
-| Specify the method for filling allocated memory.     | **`[NCBI]`**<br/>**`MEMORY_FILL`**<br/><br/>**`NCBI_MEMORY_FILL`**                | CI  [<sup>c</sup>](#ch_libconfig.TF.8): none, zero, pattern                  | pattern |
+The C++ classes that implement the socket interface are ***[CSocket](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSocket)***, ***[CDatagramSocket](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDatagramSocket)***, ***[CListeningSocket](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CListeningSocket)***, and ***[CSocketAPI](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSocketAPI)***. The socket defines an end point for a connection which consists of an IP address (or host name) of the end point, port number and transport protocol used (TCP, UDP).
 
-<div class="table-scroll"></div>
+The ***[CSocket](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSocket)*** class encapsulates the descriptions of both local and remote end points. The local end point, which is the end point on the client issuing a connection request, is specified by parameters to the ***[CSocket](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSocket)*** constructor. The remote end point on which the network service is running is specified by parameters to the ***[Connect()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Connect)*** method for the ***[CSocket](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSocket)*** class. The ***[CSocket](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSocket)*** class defines additional methods to manage the connection such as ***[Reconnect()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Reconnect)*** to reconnect to the same end point as the ***[Connect()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Connect)*** method; the ***[Shutdown()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Shutdown)*** method to terminate the connection; the ***[Wait()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Wait)*** method to wait on several sockets at once; the ***[Read()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Read)*** and ***[Write()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Write)*** methods to read and write data via the socket; and a number of other support methods.
 
-<sup>a</sup> case-insensitive: true, t, yes, y, 1, false, f, no, n, 0
+***[CSocket](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSocket)*** is designed for connection-oriented services such as those running over the TCP transport protocol. For connectionless, or datagram services, such as those running over the UDP transport protocol, you must use the ***[CDatagramSocket](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDatagramSocket)*** class. The local end point is specified by parameters to the ***[CDatagramSocket](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDatagramSocket)*** constructor. The remote end point is specified by parameters to the ***[Connect()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Connect)*** method for the ***[CDatagramSocket](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDatagramSocket)*** class. Unlike the case of the connection-oriented services, this ***[Connect()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Connect)*** method only specifies the default destination address, and does not restrict the source address of the incoming messages. The methods ***[Send()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Send)*** and ***[Recv()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Recv)*** are used to send the datagram, and the method ***[SetBroadcast()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetBroadcast)*** sets the socket to broadcast messages sent to the datagram socket. The ***[CDatagramSocket](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDatagramSocket)*** is derived from the ***[CSocket](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSocket)*** class but methods such as ***[Shutdown()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Shutdown)*** and ***[Reconnect()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Reconnect)*** that apply to connection-oriented services are not available to users of the ***[CDatagramSocket](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDatagramSocket)*** class.
 
-<a name="ch_libconfig.TF.7"></a>
+The ***[CListeningSocket](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CListeningSocket)*** is used by server-side applications to listen for connection requests. The ***[CListeningSocket](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CListeningSocket)*** constructor specifies the port to listen to and the size of the connection request queue. You can change the port that the server application listens to any time by using the ***[Listen()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Listen)*** method. The ***[Accept()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Accept)*** method accepts the connection request, and returns a ***[CSocket](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSocket)*** object through which data is transferred.
 
-<sup>b</sup> [environment variable name](#ch_libconfig.Environment) formed from registry section and entry name
+The ***[CSocketAPI](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSocketAPI)*** is a C++ wrapper for class-wide common socket utility functions available for sockets such as the ***[gethostname()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=gethostname)***, ***[gethostbyaddr()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=gethostbyaddr)***, ***[ntoa()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ntoa)***, ***aton()***, and so on.
 
-<a name="ch_libconfig.TF.8"></a>
+<a name="ch_intro.intro_connector"></a>
 
-<sup>c</sup> CI = case-insensitive
+### Connector and Connection Handles
 
-<a name="ch_libconfig.libconfig_term"></a>
+The SOCK interface is a relatively low-level interface for connection services. The CONNECT module provides a generalization of this interface to connection services using a connection type and specialized connectors.
 
-### Abnormal Program Termination
+A connection is modeled by a connection type and a connector type. The connector type models the end point of the connection, and the connection type, the actual connection. Together, the connector and connection objects are used to define the following types of connections: file, ftp, http, memory, pipe, service, and socket.
 
-[These parameters](#ch_libconfig.T5) specify how to handle abnormal situations when executing a program.
+The connector is described by a connector handle, CONNECTOR. CONNECTOR is a typedef and defined as a pointer to an internal data structure.
 
-<a name="ch_libconfig.T5"></a>
+The connection is described by a connection handle CONN. CONN is a typedef and defined as a pointer to an internal structure. The CONN type is used as a parameter to a number of functions that handle the connection such as ***[CONN\_Create()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CONN_Create)***, ***[CONN\_ReInit()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CONN_ReInit)***, ***[CONN\_Read()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CONN_Read)***, ***[CONN\_Write()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CONN_Write)***, etc.
 
-Table 5. Abnormal program termination configuration parameters
+For socket connectors, for example, the CONNECTOR handle is created by a call to the ***[SOCK\_CreateConnector()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SOCK_CreateConnector)*** function and passed the host name to connect to, the port number on the host to connect to, and maximum number of retries. The CONNECTOR handle is then passed as an argument to the ***[CONN\_Create()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CONN_Create)*** which returns a CONNECTION handle. The CONNECTION handle is then used with the connection functions (that have the prefix CONN\_) to process the connection. The connection so created is bi-directional (full duplex) and input and output data can be processed simultaneously.
 
-| Purpose       | [Registry section]<br/>Registry name<br/><br/>Environment variable      | Valid values  | Default |
-|---------------|-------------------------------------------------------------------------|---------------|---------|
-| If this parameter is defined, abort the program if a CException is thrown.       | **`[DEBUG]`**<br/>**`ABORT_ON_THROW`**<br/><br/>**`NCBI_CONFIG__DEBUG__ABORT_ON_THROW`**  [<sup>c</sup>](#ch_libconfig.TF.11) | any non-empty string      | (none)  |
-| Specify whether the NCBI application framework should catch exceptions that are not otherwise caught.                  | **`[Debug]`**<br/>**`Catch_Unhandled_Exceptions`**<br/><br/>**`DEBUG_CATCH_UNHANDLED_EXCEPTIONS`**   | Boolean  [<sup>a</sup>](#ch_libconfig.TF.9)  | true    |
-| Specify whether ncbi::Abort() will call \_ASSERT(false). ***Note:*** this only applies to MSVC.     | **`[Diag]`**<br/>**`Assert_On_Abort`**<br/><br/>**`DIAG_ASSERT_ON_ABORT`**         | Boolean  [<sup>a</sup>](#ch_libconfig.TF.9)  | false   |
-| If this parameter is true, abort the program if a CObjectException is thrown.    | **`[NCBI]`**<br/>**`ABORT_ON_COBJECT_THROW`**<br/><br/>**`NCBI_ABORT_ON_COBJECT_THROW`** | Boolean  [<sup>a</sup>](#ch_libconfig.TF.9)  | false   |
-| If this parameter is true, abort the program on an attempt to access or release a NULL pointer stored in a CRef object.                   | **`[NCBI]`**<br/>**`ABORT_ON_NULL`**<br/><br/>**`NCBI_ABORT_ON_NULL`**             | Boolean  [<sup>a</sup>](#ch_libconfig.TF.9)  | false   |
-| Specify what to do when ncbi::Abort() is called. When the variable is set to a "yes" value, Abort() will call exit(255). When the variable is set to a "no" value, Abort() will call abort(). When the variable is not set, Abort() will call exit(255) for release builds and abort() for debug builds - unless compiled with MSVC and the **`DIAG_ASSERT_ON_ABORT`** parameter is true, in which case Abort() will call \_ASSERT(false). | [N/A]<br/>N/A<br/><br/>**`DIAG_SILENT_ABORT`**                  | Boolean  [<sup>b</sup>](#ch_libconfig.TF.10) | (none)  |
+The other connector types are similar to the socket connector type. In the case of a file connector, the connector handle is created by calling the ***[FILE\_CreateConnector()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=FILE_CreateConnector)*** function and passed an input file and an output file (optionally, one of these can be NULL). This connector could be used for both reading and writing files, when input comes from one file, and output goes to another file. This differs from normal file I/O when a single handle is used to access only one file, but resembles data exchange via sockets, instead. In the case of the HTTP connection, the ***[HTTP\_CreateConnector](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=HTTP_CreateConnector)*** type is called and passed a pointer to network information structure, a pointer to a user-header consisting of HTTP tag-values, and a bitmask representing flags that affect the HTTP response.
 
-<div class="table-scroll"></div>
+The general service connector is the most complex connector in the library, and can model any type of service. It can be used for data transfer between an application and a named service. The data can be sent via HTTP or directly as a byte stream (using SOCK directly). In the former case it uses the HTTP connectors and in the latter the SOCK connectors. The general service connector is used when the other connector types are not adequate for implementing the task on hand.
 
-<a name="ch_libconfig.TF.9"></a>
+More details on [connector classes](ch_conn.html#ch_conn.conn_def) are presented in a later chapter.
 
-<sup>a</sup> case-insensitive: true, t, yes, y, 1, false, f, no, n, 0
+<a name="ch_intro.intro_streams"></a>
 
-<a name="ch_libconfig.TF.10"></a>
+### Connection Streams
 
-<sup>b</sup> case-insensitive: y, 1, n, 0
+The CONNECT module provides a higher level of abstraction to connection programming in the form of C++ connection stream classes derived from the ***[CNcbiIostream](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiIostream)*** class, which is in turn typedef'd as ***std***::***iostream***. This makes the familiar stream I/O operators and manipulators available to the connection stream. In addition, ***[CConn\_IOStream](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CConn_IOStream)*** performs more error checking than ***std***::***iostream*** and it allows input operations to be tied to the output operations so that any input attempt first flushes the output queue from the internal buffers.
 
-<a name="ch_libconfig.TF.11"></a>
+[Figure 2](#ch_intro.F2) shows the most common connection stream classes derived from ***[CConn\_IOStream](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CConn_IOStream)*** - ***[CConn\_HttpStream](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CConn_HttpStream)***, ***[CConn\_MemoryStream](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CConn_MemoryStream)***, ***[CConn\_ServiceStream](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CConn_ServiceStream)***, and ***[CConn\_SocketStream](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CConn_SocketStream)***.
 
-<sup>c</sup> [environment variable name](#ch_libconfig.Environment) formed from registry section and entry name
+<a name="ch_intro.F2"></a>
 
-<a name="ch_libconfig.NCBI"></a>
+![Figure 2. Connection stream classes](/cxx-toolkit/static/img/CConn_IOStream.gif)
 
-### NCBI
+Figure 2. Connection stream classes
 
-[These parameters](#ch_libconfig.T.NCBI_C_Toolkitwide_config) tune generic NCBI C++ Toolkit-wide behavior.
+***[CConn\_HttpStream](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CConn_HttpStream)*** models a stream of data between and HTTP client and an HTTP server (such as a web server). The server end of the stream is identified by a URL of the form `http[s]://host[:port]/path[?query]`.
 
-<a name="ch_libconfig.T.NCBI_C_Toolkitwide_config"></a>
+***[CConn\_MemoryStream](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CConn_MemoryStream)*** stream models data transfer in memory similar to the C++ strstream class.
 
-Table 6. NCBI C++ Toolkit-wide configuration parameters
+***[CConn\_ServiceStream](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CConn_ServiceStream)*** stream models data transfer with a named service that can be found via dispatcher/load-balancing daemon and implemented as either HTTP CGI, standalone server, or NCBI service.
 
-| Purpose     | [Registry section]<br/>Registry name<br/><br/>Environment variable     | Valid values            | Default           |
-|-------------|------------------------------------------------------------------------|-------------------------|-------------------|
-| Specify whether throwing an exception of at least Critical severity will cause an immediate abort().     | **`[EXCEPTION]`**<br/>**`Abort_If_Critical`**<br/><br/>**`EXCEPTION_ABORT_IF_CRITICAL`**     | Boolean  [<sup>a</sup>](#ch_libconfig.TF.12)      | false             |
-| Specify the minimum severity that will result in the stack trace being added to exceptions.  | **`[EXCEPTION]`**<br/>**`Stack_Trace_Level`**<br/><br/>**`EXCEPTION_STACK_TRACE_LEVEL`**     | CI  [<sup>b</sup>](#ch_libconfig.TF.13): Trace, Info, Warning, Error, Critical, Fatal | Critical          |
-| A single path to check for common data files via [g\_FindDataFile()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=g_FindDataFile). Takes a lower precedence than paths in **`NCBI_DATA_PATH`**. | **`[NCBI]`**<br/>**`Data`**<br/><br/>**`NCBI_CONFIG__NCBI__DATA`**  [<sup>c</sup>](#ch_libconfig.TF.14)   | a valid path            | ""                |
-| A list of paths (delimited in the style of the OS) to check for common data files via [g\_FindDataFile()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=g_FindDataFile). | **`[NCBI]`**<br/>**`DataPath`**<br/><br/>**`NCBI_DATA_PATH`** | a delimited list of valid paths            | ""                |
-| Specify how read-only files are treated on Windows during a remove request.                  | **`[NCBI]`**<br/>**`DeleteReadOnlyFiles`**<br/><br/>**`NCBI_CONFIG__DELETEREADONLYFILES`**   | Boolean  [<sup>a</sup>](#ch_libconfig.TF.12)      | false             |
-| Specify whether the API classes should have logging turned on.            | **`[NCBI]`**<br/>**`FileAPILogging`**<br/><br/>**`NCBI_CONFIG__FILEAPILOGGING`** | Boolean  [<sup>a</sup>](#ch_libconfig.TF.12)      | [DEFAULT\_LOGGING\_VALUE](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=DEFAULT_LOGGING_VALUE)    |
-| Declare how umask settings on Unix affect creating files/directories in the File API.        | **`[NCBI]`**<br/>**`FileAPIHonorUmask`**<br/><br/>**`NCBI_CONFIG__FILEAPIHONORUMASK`** | Boolean  [<sup>a</sup>](#ch_libconfig.TF.12)      | false             |
-| Specify whether to load plugins from DLLs.             | **`[NCBI]`**<br/>**`Load_Plugins_From_DLLs`**<br/><br/>**`NCBI_LOAD_PLUGINS_FROM_DLLS`**     | Boolean  [<sup>a</sup>](#ch_libconfig.TF.12)      | [LOAD\_PLUGINS\_FROM\_DLLS\_BY\_DEFAULT](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=LOAD_PLUGINS_FROM_DLLS_BY_DEFAULT) |
-| Specify the directory to use for temporary files.      | **`[NCBI]`**<br/>**`TmpDir`**<br/><br/>**`NCBI_CONFIG__NCBI__TMPDIR`**  [<sup>c</sup>](#ch_libconfig.TF.14)     | a valid path            | ""                |
-| Specify the file name of a Unicode-to-ASCII translation table.            | **`[NCBI]`**<br/>**`UnicodeToAscii`**<br/><br/>**`NCBI_CONFIG__NCBI__UNICODETOASCII`**  [<sup>c</sup>](#ch_libconfig.TF.14) | a valid path            | ""                |
-| Safety switch to turn async write off (making write blocking) for all CAsyncWriteCache instances.  | **`[NCBI]`**<br/>**`cache_async_write`**<br/><br/>**`NCBI_CONFIG__NCBI__CACHEASYNCWRITE`**   | Boolean  [<sup>a</sup>](#ch_libconfig.TF.12)      | false |
+***[CConn\_SocketStream](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CConn_SocketStream)*** models a stream of bytes in a bi-directional TCP connection between two end points specified by a host/port pair. As the name suggests the socket stream uses the socket interface directly.
 
+More details on [connection stream classes](ch_conn.html#ch_conn.cpp_connection_streams) are presented in a later chapter.
 
-<div class="table-scroll"></div>
+<a name="ch_intro.intro_sendmail"></a>
 
-<a name="ch_libconfig.TF.12"></a>
+### Sendmail API
 
-<sup>a</sup> case-insensitive: true, t, yes, y, 1, false, f, no, n, 0
+The CONNECT module provides an API that provides access to SMTP protocol. SMTP (Simple Mail Transfer Protocol) is a standard email relaying protocol used by many popular MTAs (Message Transfer Agents), such as sendmail, smail, etc, found on many systems. SMTP passes (relays) email messages between hosts in the Internet all the way from sender to recipient.
 
-<a name="ch_libconfig.TF.13"></a>
+To initiate the use of the sendmail API, you must call the ***SendMailInfo\_Int()*** function that initializes structure ***[SSendMailInfo](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SSendMailInfo)***, passed by a pointer. Your code then modifies the structure to contain proper information such as that expected in a mail header (To, From, CC, BCC fields) and other communication settings from their default values set at initialization. Then, you can send email using the ***[CORE\_SendMail()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CORE_SendMail)*** or ***[CORE\_SendMailEx()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CORE_SendMailEx)*** functions.
 
-<sup>b</sup> CI = case-insensitive
+<a name="ch_intro.intro_threadedserver"></a>
 
-<a name="ch_libconfig.TF.14"></a>
+### Threaded Server
 
-<sup>c</sup> [environment variable name](#ch_libconfig.Environment) formed from registry section and entry name
+The CONNECT module provides support for multithreaded servers through the ***CThreadedServer*** class. The ***CThreadedServer*** class is an abstract class for network servers and uses thread pools. This class maintains a pool of threads, called worker threads, to process incoming connections. Each connection gets assigned to one of the worker threads, allowing the server to handle multiple requests in parallel while still checking for new requests.
 
-<a name="ch_libconfig.LibrarySpecific_Parameters"></a>
+You must derive your threaded server from the ***CThreadedServer*** class and define the ***[Process()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Process)*** method to indicate what to do with each incoming connection. The ***[Process()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Process)*** method runs asynchronously by using a separate thread for each request.
 
-Library-Specific Parameters
----------------------------
+More details on threaded server classes are presented in a later chapter.
 
-The following sections discuss library-specific configuration parameters.
+<a name="ch_intro.intro_ctool"></a>
 
--   [Connection](#ch_libconfig.libconfig_connect)
+The CTOOL Module
+----------------
 
--   [CGI and FCGI](#ch_libconfig.libconfig_cgi)
+The CTOOL module provides bridge mechanisms and conversion functions. More specifically, the CTOOL module provides a number of useful functions such as a bridge between the NCBI C++ Toolkit and the older C Toolkit for error handling, an ASN.1 connections stream that builds on top of the [connection stream](#ch_intro.intro_connector), and an ASN converter that provides templates for converting ASN.1-based objects between NCBI's C and C++ in-memory layouts.
 
--   [Serial](#ch_libconfig.Serial)
+The ASN.1 connections support is provides through functions ***[CreateAsnConn()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateAsnConn)*** for creating an ASN stream connection; ***[CreateAsnConn\_ServiceEx()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateAsnConn_ServiceEx)*** for creating a service connection using the service name, type and connection parameters; and ***[CreateAsnConn\_Service()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateAsnConn_Service)*** which is a specialized case of ***[CreateAsnConn\_ServiceEx()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateAsnConn_ServiceEx)*** with some parameters set to zero.
 
--   [Objects, Object Manager, Object Tools](#ch_libconfig.Objects_Object_Manager_Obje)
+<a name="ch_intro.intro_dbapi"></a>
 
--   [DBAPI](#ch_libconfig.DBAPI)
+The DBAPI Module
+----------------
 
--   [Eutils](#ch_libconfig.Eutils)
+The DBAPI module supports object oriented access to databases by providing user classes that model a database as a data source to which a connection can be made, and on which ordinary SQL queries or stored procedure SQL queries can be issued. The results obtained can be navigated using a result class or using the 'cursor' mechanism that is common to many databases.
 
-<a name="ch_libconfig.libconfig_connect"></a>
+The user classes are used by a programmer to access the database. The user classes depend upon a database driver to allow low level access to the underlying relational database management system (RDBMS). Each type of RDBMS can be expected to have a different driver that provides this low level hook into the database. The database drivers are architected to provide a uniform interface to the user classes so that the database driver can be changed to connect to a different database without affecting the program code that makes use of the user classes. For a list of the database drivers for different database that are supported, see the [Supported DBAPI Drivers section](ch_dbapi.html#ch_dbapi.dbapi_drivers).
 
-### Connection
+The following is a list of topics presented in this section:
 
-[These parameters](#ch_libconfig.T7) affect various aspects of internet connections established by the connection library. See the [Networking and IPC](ch_conn.html#ch_conn.Connection_related_parameters) chapter for a description of the corresponding network information structure.
+-   [Database User Classes](#ch_intro.intro_dbapi_user)
 
-<a name="ch_libconfig.T7"></a>
+-   [Database Driver Architecture](#ch_intro.intro_dbapi_driver)
 
-Table 7. Connection library configuration parameters
+<a name="ch_intro.intro_dbapi_user"></a>
 
-| Purpose |[Registry section]<br/>Registry name<br/><br/>Environment variable (See [Note 2](#ch_libconfig.TF.22)) | Valid values | Default |
-|---------|-------------------------------------------------------------------------------------------------------|--------------|-------------|
-| **Service-specific parameters follow this form.<br/>(See [Note 1](#ch_libconfig.TF.21))**| **`[<service>]`**<br/>**`CONN_<param_name>`**<br/><br/>**`<service>_CONN_<param_name>`** |   |   |
-| **Global parameters follow this form.<br/>(See [Note 1](#ch_libconfig.TF.21))** |**`[CONN]`**<br/>**`<param_name>`**<br/><br/>**`CONN_<param_name>`** |      |   |
-| Specify arguments for the given service.<br/>(See [Note 1](#ch_libconfig.TF.21)) | **`[<service>]`**<br/>**`CONN_ARGS`**<br/><br/>**`<service>_CONN_ARGS`** | (service-dependent) | "" |
-| Specify how much debug information will be output.<br/>(See [Note 1](#ch_libconfig.TF.21)) |**`[<service>]`**<br/>**`CONN_DEBUG_PRINTOUT`**<br/><br/>**`<service>_CONN_DEBUG_PRINTOUT`** |CI  [<sup>a</sup>](#ch_libconfig.TF.15):<br/>*to get some*: 1, on, yes, true, some<br/>*to get all*: data, all<br/>*to get none*: anything else | "" |
-| If this parameter is true, the network dispatcher will be disabled.<br/>(See [Note 1](#ch_libconfig.TF.21)) | **`[<service>]`**<br/>**`CONN_DISPD_DISABLE`**<br/><br/>**`<service>_CONN_DISPD_DISABLE`** | Boolean  [<sup>c</sup>](#ch_libconfig.TF.17) | true |
-| Sets the DTAB (delegation table) for routing via NAMERD.<br/>(See [Note 1](#ch_libconfig.TF.21)) | **`[<service>]`**<br/>**`CONN_DTAB`**<br/><br/>**`<service>_CONN_DTAB`** | [string](https://confluence.ncbi.nlm.nih.gov/pages/viewpage.action?pageId=47415379) | "" |
-| If this parameter is true, the Firewall mode will be enabled.<br/>(See [Note 1](#ch_libconfig.TF.21)) | **`[<service>]`**<br/>**`CONN_FIREWALL`**<br/><br/>**`<service>_CONN_FIREWALL`** | Boolean  [<sup>c</sup>](#ch_libconfig.TF.17) | not set |
-| Set the dispatcher host name.<br/>(See [Note 1](#ch_libconfig.TF.21)) | **`[<service>]`**<br/>**`CONN_HOST`**<br/><br/>**`<service>_CONN_HOST`** | a valid host name | www.ncbi.nlm.nih.gov |
-| Set the HTTP proxy server.<br/>(See [Note 1](#ch_libconfig.TF.21)) | **`[<service>]`**<br/>**`CONN_HTTP_PROXY_HOST`**<br/><br/>**`<service>_CONN_HTTP_PROXY_HOST`** | a valid proxy host | "" |
-| Set the HTTP proxy server port number. This will be set to zero if **`<service>_CONN_HTTP_PROXY_HOST`** is not set.<br/>(See [Note 1](#ch_libconfig.TF.21)) | **`[<service>]`**<br/>**`CONN_HTTP_PROXY_PORT`**<br/><br/>**`<service>_CONN_HTTP_PROXY_PORT`** | unsigned short | 0 |
-| Set a custom user header. This is rarely used, and then typically for debugging purposes.<br/>(See [Note 1](#ch_libconfig.TF.21)) | **`[<service>]`**<br/>**`CONN_HTTP_USER_HEADER`**<br/><br/>**`<service>_CONN_HTTP_USER_HEADER`** | a valid HTTP header | "" |
-| Prohibit the use of a local load balancer. ***Note:*** This parameter is discouraged for performance reasons - please use **`<service>_CONN_LBSMD_DISABLE`** instead.<br/>(See [Note 1](#ch_libconfig.TF.21)) | **`[<service>]`**<br/>**`CONN_LB_DISABLE`**<br/><br/>**`<service>_CONN_LB_DISABLE`** | Boolean  [<sup>c</sup>](#ch_libconfig.TF.17) | false |
-| Prohibit the use of a local load balancer. This should be used instead of **`<service>_CONN_LB_DISABLE`**.<br/>(See [Note 1](#ch_libconfig.TF.21)) | **`[<service>]`**<br/>**`CONN_LBSMD_DISABLE`**<br/><br/>**`<service>_CONN_LBSMD_DISABLE`** | Boolean  [<sup>c</sup>](#ch_libconfig.TF.17) | false |
-| Enable linkerd-based service name resolution.<br/>(See [Note 1](#ch_libconfig.TF.21))<br/>**Note:** You must also set `<service>_CONN_LBSMD_DISABLE=1` for this to take effect. | **`[<service>]`**<br/>**`CONN_LINKERD_ENABLE`**<br/><br/>**`<service>_CONN_LINKERD_ENABLE`** | Boolean  [<sup>c</sup>](#ch_libconfig.TF.17) | false |
-| Enable the use of locally configured services.<br />See **`<service>_CONN_LOCAL_SERVER_<n>`**.<br/>(See [Note 1](#ch_libconfig.TF.21)) | **`[<service>]`**<br/>**`CONN_LOCAL_ENABLE`**<br/><br/>**`<service>_CONN_LOCAL_ENABLE`** | Boolean  [<sup>c</sup>](#ch_libconfig.TF.17) | false |
-| Create a service entry for **`service`**, where **`n`** is a number from 0 to 100 (not necessarily sequential). The value must be a valid server descriptor, as it would be configured for the load balancing daemon ([LBSMD](ch_app.html#ch_app.Load_Balancing_Servi)). This is a quick way of configuring locally used services (usually, for the sole purposes of debugging / development) without the need to edit the actual LBSMD tables (which become visible for the whole NCBI). See **`<service>_CONN_LOCAL_ENABLE`**. ***Note:*** This parameter has no corresponding global parameter.<br/>(See [Note 1](#ch_libconfig.TF.21)) |  **`[<service>]`**<br/>**`CONN_LOCAL_SERVER_<n>`**<br/><br/>**`<service>_CONN_LOCAL_SERVER_<n>`** | any non-empty string | not set |
-| Maximum number of attempts to establish connection. Zero means use the default.<br/>(See [Note 1](#ch_libconfig.TF.21)) | **`[<service>]`**<br/>**`CONN_MAX_TRY`**<br/><br/>**`<service>_CONN_MAX_TRY`** | unsigned short | 3 |
-| Enable namerd-based service name resolution.<br/>(See [Note 1](#ch_libconfig.TF.21))<br/>**Note:** You must also set `<service>_CONN_LBSMD_DISABLE=1` for this to take effect. | **`[<service>]`**<br/>**`CONN_NAMERD_ENABLE`**<br/><br/>**`<service>_CONN_NAMERD_ENABLE`** | Boolean  [<sup>c</sup>](#ch_libconfig.TF.17) | false |
-| Enable namerd-based service name resolution specifically for the case when linkerd-based service name resolution has failed (use **`<service>_CONN_NAMERD_ENABLE`** to enable namerd-based resolution generally).<br/>(See [Note 1](#ch_libconfig.TF.21)) | **`[<service>]`**<br/>**`CONN_NAMERD_FOR_LINKERD_ENABLE`**<br/><br/>**`<service>_CONN_NAMERD_FOR_LINKERD_ENABLE`** | Boolean  [<sup>c</sup>](#ch_libconfig.TF.17) | false |
-| Specify a password for the connection (only used with **`<service>_CONN_USER`**).<br/>(See [Note 1](#ch_libconfig.TF.21)) | **`[<service>]`**<br/>**`CONN_PASS`**<br/><br/>**`<service>_CONN_PASS`** | the user's password | "" |
-| Set the path to the service.<br/>(See [Note 1](#ch_libconfig.TF.21)) | **`[<service>]`**<br/>**`CONN_PATH`**<br/><br/>**`<service>_CONN_PATH`** | a valid service path | /Service/dispd.cgi |
-| Set the dispatcher port number.<br/>(See [Note 1](#ch_libconfig.TF.21)) | **`[<service>]`**<br/>**`CONN_PORT`**<br/><br/>**`<service>_CONN_PORT`** | unsigned short | 0 |
-| Set a non-transparent CERN-like firewall proxy server.<br/>(See [Note 1](#ch_libconfig.TF.21)) | **`[<service>]`**<br/>**`CONN_PROXY_HOST`**<br/><br/>**`<service>_CONN_PROXY_HOST`** | a valid proxy host | "" |
-| Set the HTTP request method.<br/>(See [Note 1](#ch_libconfig.TF.21)) | **`[<service>]`**<br/>**`CONN_REQ_METHOD`**<br/><br/>**`<service>_CONN_REQ_METHOD`** | CI [<sup>a</sup>](#ch_libconfig.TF.15): any, get, post | ANY |
-| Redirect connections to **`<service>`** to the specified alternative service. See [Service Redirection](ch_conn.html#ch_conn.Service_Redirection).<br/>(See [Note 1](#ch_libconfig.TF.21)) | **`[<service>]`**<br/>**`CONN_SERVICE_NAME`**<br/><br/>**`<service>_CONN_SERVICE_NAME`** | a replacement for the service name | (none) |
-| Set to true if the client is stateless.<br/>(See [Note 1](#ch_libconfig.TF.21)) | **`[<service>]`**<br/>**`CONN_STATELESS`**<br/><br/>**`<service>_CONN_STATELESS`** | Boolean  [<sup>c</sup>](#ch_libconfig.TF.17) | false |
-| Zero means no waiting but polling (may not work well with all connections); "infinite" means no timeout (i.e. to wait for I/O indefinitely); other values are the maximum number of seconds to wait before failing.<br/>(See [Note 1](#ch_libconfig.TF.21).) | **`[<service>]`**<br/>**`CONN_TIMEOUT`**<br/><br/>**`<service>_CONN_TIMEOUT`** | floating point \>= 0.0 (1 microsecond precision)  [<sup>f</sup>](#ch_libconfig.TF.20) or "infinite" | 30.0 |
-| Specify a username for the connection (see **`<service>_CONN_PASS`**). Only necessary for connections requiring authentication.<br/>(See [Note 1](#ch_libconfig.TF.21)) | **`[<service>]`**<br/>**`CONN_USER`**<br/><br/>**`<service>_CONN_USER`** | a username with access rights for the connection | (none) |
-| Set the level of logging detail that GNUTLS should produce about secure transactions. Log levels greater than 7 also dump scrambled data from GNUTLS. | **`[CONN]`**<br/>**`GNUTLS_LOGLEVEL`**<br/><br/>**`CONN_GNUTLS_LOGLEVEL`** | 0 to 10 | 0 |
-| A true value enables HTTP connections to dump headers of error server responses only (successful responses do not get logged). | **`[CONN]`**<br/>**`HTTP_ERROR_HEADER_ONLY`**<br/><br/>**`CONN_HTTP_ERROR_HEADER_ONLY`** | Boolean  [<sup>c</sup>](#ch_libconfig.TF.17) | false | 
-| A true value enables HTTP connections to follow https to http transitions (http to https transitions are secure and therefore don't need to be enabled). | **`[CONN]`**<br/>**`HTTP_UNSAFE_REDIRECTS`**<br/><br/>**`CONN_HTTP_UNSAFE_REDIRECTS`** | Boolean  [<sup>c</sup>](#ch_libconfig.TF.17) | false |
-| Set a default referer (applies to all HTTP connections). | **`[CONN]`**<br/>**`HTTP_REFERER`**<br/><br/>**`CONN_HTTP_REFERER`** | a valid referer | (none) |
-| A list of identifiers to be treated as local services defined in the registry / environment. This parameter is optional and is used only for reverse address-to-name lookups. | **`[CONN]`**<br/>**`LOCAL_SERVICES`**<br/><br/>**`CONN_LOCAL_SERVICES`** | whitespace-delimited  [<sup>d</sup>](#ch_libconfig.TF.18) list of identifiers | (none) |
-| Set the mail gateway host. | **`[CONN]`**<br/>**`MX_HOST`**<br/><br/>**`CONN_MX_HOST`** | a valid host name | `localhost` on Unix platforms except Cygwin; `mailgw` on all other platforms | 
-| Set the mail gateway port. | **`[CONN]`**<br/>**`MX_PORT`**<br/><br/>**`CONN_MX_PORT`** | 1 to 65535 | 25 (SMTP) |
-| Set the mail gateway communication timeout in seconds. | **`[CONN]`**<br/>**`MX_TIMEOUT`**<br/><br/>**`CONN_MX_TIMEOUT`** | floating point \>= 0.0 (zero means default) | 120 | 
-| Use `poll(2)` instead of `select(2)` to wait for available data for reading/writing.  This is necessary if the number of open file descriptors exceeds 1024. | **`[CONN]`**<br/>**`PIPE_USE_POLL`**<br/><br/>**`CONN_PIPE_USE_POLL`** | Boolean  [<sup>c</sup>](#ch_libconfig.TF.17) | false |
-| Enable [CServer](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCServer.html) to catch exceptions. | **`[server]`**<br/>**`Catch_Unhandled_Exceptions`**<br/><br/>**`CSERVER_CATCH_UNHANDLED_EXCEPTIONS`** | Boolean  [<sup>b</sup>](#ch_libconfig.TF.16) | true |
-| Enable [CThreadInPool\_ForServer](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCThreadInPool__ForServer.html) to catch exceptions. | **`[ThreadPool]`**<br/>**`Catch_Unhandled_Exceptions`**<br/><br/>**`NCBI_CONFIG__THREADPOOL__CATCH_UNHANDLED_EXCEPTIONS`**  [<sup>e</sup>](#ch_libconfig.TF.19) | Boolean  [<sup>b</sup>](#ch_libconfig.TF.16) | true |
+### Database User Classes
 
+The interface to the database is provided by a number of C++ classes such as the ***IDataSource, IDbConnection, IStatement, ICallableStatement, ICursor, IResultSet, IResultSetMetaData*** . The user does not use these interfaces directly. Instead, the DBAPI module provides concrete classes that implement these interface classes. The corresponding concrete classes for the above mentioned interfaces are ***CDataSource, CDbConnection, CStatement, CCallableStatement, CCursor, CResultSet, CResultSetMetaData***.
 
-<div class="table-scroll"></div>
+Before accessing to a specific database, the user must register the driver with the ***[CDriverManager](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDriverManager)*** class which maintains the drivers registered for the application. The user does this by using the ***[CDriverManager](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDriverManager)*** class' factory method ***[GetInstance()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetInstance)*** to create an instance of the ***[CDriverManager](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDriverManager)*** class and registering the driver with this driver manager object. For details on how this can be done, see the [Choosing the Driver](ch_dbapi.html#ch_dbapi.dbapi_choose_driver) section.
 
+After the driver has been registered, the user classes can be used to access that database. There are a number of ways this can be done, but the most common method is to call the ***[IDataSource](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IDataSource)*** factory method ***[CreateDs()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateDs)*** to create an instance of the data source. Next, the ***[CreateConnection()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateConnection)*** method for the data source is called, to return a connection object that implements the ***[IConnection](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IConnection)*** interface. Next, the connection object's ***[Connect()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Connect)*** method is called with the user name, password, server name, database name to make the connection to the database. Next, the connection object's ***[CreateStatement()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateStatement)*** method is called to create a statement object that implements the ***[IStatement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IStatement)*** interface. Next, the statement object's ***[Execute()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Execute)*** method is called to execute the query. Note that additional calls to the ***[IConnection](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IConnection)***::***[CreateStatement()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateStatement)*** results in cloning the connection for each statement which means that these connections inherit the database which was specified in the ***[Connect()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Connect)*** or ***[SetDatabase()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetDatabase)*** method.
 
-<a name="ch_libconfig.TF.15"></a>
+Executing the statement objects' ***[Execute()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Execute)*** method returns the result set which is stored in the statement object and can be accessed using the statement object's ***[GetResultSet()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetResultSet)*** method. You can then call the statement object's ***[HasRows()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=HasRows)*** method which returns a Boolean true if there are rows to be processed. The type of the result can be obtained by calling the ***IResultSet::GetResultType() method***. The ***[IStatement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IStatement)***::***[ExecuteUpdate()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ExecuteUpdate)*** method is used for SQL statements that do not return rows (UPDATE or DELETE SQL statement), in which case the method ***[IStatement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IStatement)***::***[GetRowCount()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetRowCount)*** returns the number of updated or deleted rows.
 
-<sup>a</sup> CI = case-insensitive
+Calling the ***[IStatement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IStatement)***::***[GetResultSet()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetResultSet)*** returns the rows via the result set object that implements the ***[IResultSet](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IResultSet)*** interface. The method ***[IResultSet](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IResultSet)***::***[Next()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Next)*** is used to fetch each row in the result set and returns a false when no more fetch data is available; otherwise, it returns a true. All column data, except BLOB data is represented by a ***[CVariant](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CVariant)*** object. The method ***[IResultSet](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IResultSet)***::***[GetVariant()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetVariant)*** takes the column number as its parameter where the first column has the start value of 1.
 
-<a name="ch_libconfig.TF.16"></a>
+The ***[CVariant](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CVariant)*** class is used to describe the fields of a record which can be of any data type. The ***[CVariant](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CVariant)*** has a set of accessory methods (***GetXXX()***) to extract a value of a particular type. For example, the ***GetInt4(), GetByte(), GetString()***, methods will extract an Int4, Byte data value from the ***[CVariant](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CVariant)*** object. If data extraction is not possible because of incompatible types, the ***[CVariantException](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CVariantException)*** is thrown. The ***[CVariant](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CVariant)*** has a set of factory methods for creating objects of a particular data type, such as ***[CVariant](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CVariant)***::***[BigInt()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=BigInt)*** for Int8, ***[CVariant](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CVariant)***::***[SmallDateTime()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SmallDateTime)*** for NCBI's ***[CTime](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CTime)***, and so on.
 
-<sup>b</sup> case-insensitive: true, t, yes, y, 1, false, f, no, n, 0
+For sample code illustrating the above mentioned steps, see the [Data Source and Connections](ch_dbapi.html#ch_dbapi.dbapi_src_cnxns) and [Main Loop](ch_dbapi.html#ch_dbapi.dbapi_main_loop) sections.
 
-<a name="ch_libconfig.TF.17"></a>
+<a name="ch_intro.intro_dbapi_driver"></a>
 
-<sup>c</sup> case-insensitive: true values are { 1, on, yes, true }; false is anything else
+### Database Driver Architecture
 
-<a name="ch_libconfig.TF.18"></a>
+The driver can use two different methods to access the particular RDBMS. If RDBMS provides a client library (`CTLib`) for a given computer system, then the driver utilizes this library. If there is no client library, then the driver connects to RDBMS through a special gateway server which is running on a computer system where such library does exist.
 
-<sup>d</sup> whitespace can be any number of spaces and/or tabs
+The database driver architecture has two major groups of the driver's objects: the RDBMS independent objects, and the RDBMS dependent objects specific to a RDBMS. From a user's perspective, the most important RDBMS dependent object is the driver context object. A connection to the database is made by calling the driver context's ***[Connect()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Connect)*** method. All driver contexts implement the same interface defined in the ***[I\_DriverContext](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=I_DriverContext)*** class.
 
-<a name="ch_libconfig.TF.19"></a>
+If the application needs to connect to RDBMS libraries from different vendors, there is a problem trying to link statically with the RDBMS libraries from different vendors. The reason for this is that most of these libraries are written in C, and may use the same names which cause name collisions. Therefore, the ***[C\_DriverMgr](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=C_DriverMgr)*** is used to overcome this problem and allow the creation of a mixture of statically linked and dynamically loaded drivers and use them together in one executable.
 
-<sup>e</sup> [environment variable name](#ch_libconfig.Environment) formed from registry section and entry name
+The low level connection to an RDBMS is specific to that RDBMS. To provide RDBMS independence, the connection information is wrapped in an RDBMS independent object ***[CDB\_Connection](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDB_Connection)***. The commands and the results are also wrapped in an RDBMS independent object. The user is responsible for deleting these RDBMS independent objects because the life spans of the RDBMS dependent and RDBMS independent objects are not necessarily the same.
 
-<a name="ch_libconfig.TF.20"></a>
+Once you have the ***[CDB\_Connection](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDB_Connection)*** object, you can use it as a factory for the different types of command objects. The command object's ***[Result()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Result)*** method can be called to get the results. To send and to receive the data through the driver you must use the driver provided datatypes such as ***CDB\_BigInt, CDB\_Float, CDB\_SmallDateTime***. These driver data types are all derived from ***[CDB\_Object](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDB_Object)*** class.
 
-<sup>f</sup> although very precise values may be specified, practical host limitations my result in less precise effective values
+More [details on the database driver architecture](ch_dbapi.html#ch_dbapi.dbapi_driver_ref) is presented in a later chapter.
 
-<a name="ch_libconfig.TF.21"></a>
+<a name="ch_intro.intro_gui"></a>
 
-***Note 1:*** All service-specific parameters shown in [Table 7](#ch_libconfig.T7) (except one) have corresponding global parameters - i.e. parameters that apply to all services. For these global parameters, the registry section name is **`CONN`**; the registry entry name doesn't have the **`CONN_`** prefix; and the environment variable doesn't have the **`<service>_`** prefix. For example, the service-specific parameter specified by the **`CONN_ARGS`** entry in a given **`[<service>]`** section of the registry (or by the **`<service>_CONN_ARGS`** environment variable) corresponds to the global parameter specified by the **`ARGS`** entry in the **`[CONN]`** section of the registry (or by the **`CONN_ARGS`** environment variable). When both a service-specific parameter and its corresponding global parameter are set, the service-specific parameter takes precedence.
+The GUI Module
+--------------
 
-<a name="ch_libconfig.TF.22"></a>
+The C++ Toolkit does not include its own GUI Module. Instead, Toolkit-based GUI applications make use of third party GUI packages - we recommend [wxWidgets](https://www.wxwidgets.org/).
 
-***Note 2:*** Environment variable names for service-specific parameters are formed by capitalizing the service name.
+More details on developing GUI application in conjunction with the C++ Toolkit are presented in a [later chapter](ch_gui.html).
 
-<a name="ch_libconfig.libconfig_cgi"></a>
+<a name="ch_intro.intro_html"></a>
 
-### CGI and FCGI
+The HTML Module
+---------------
 
-The folowing sections show parameters that tune CGI and FCGI applications and CGI load balancing.
+The HTML module implements a number of HTML classes that are intended for use in CGI and other programs. The HTML classes can be used to generate HTML code dynamically.
 
--   [CGI](#ch_libconfig.CGI)
+The HTML classes can be used to represent HTML page internally in memory as a graph. Each HTML element or tag is represented by a node in the graph. The attributes for an HTML element are represented as attributes in the node. A node in the graph can have other elements as children. For example, for an HTML page, the top HTML element will be described by an HTML node in the graph. The HTML node will have the HEAD and BODY nodes as its children. The BODY node will have text data and other HTML nodes as its children. The graph structure representation of an HTML page allows easy additions, deletions and modification of the page elements.
 
--   [FCGI](#ch_libconfig.FCGI)
+Note that while the HTML classes can be used to represent the HTML page internally in memory as a graph there is no provision for parsing of existing HTML pages to generate these classes.
 
--   [CGI Load Balancing](#ch_libconfig.CGI_Load_balancing_configur)
+The following is a list of topics presented in this section:
 
-<a name="ch_libconfig.CGI"></a>
+-   [Relationships between HTML classes](#ch_intro.intro_html_classes)
 
-#### CGI
+-   [HTML Processing](#ch_intro.intro_html_processing)
 
-[These parameters](#ch_libconfig.T8) tune the behavior of CGI applications.
+<a name="ch_intro.intro_html_classes"></a>
 
-<a name="ch_libconfig.T8"></a>
+### Relationships between HTML classes
 
-Table 8. CGI-related configuration parameters
+The base class for all nodes in the graph structure for an HTML document is the ***[CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode)***. The ***[CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode)*** class is derived from ***[CObject](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CObject)*** and provides the ability to add, delete, and modify the nodes in the graph. The ability to add and modify nodes is inherited by all the classes derived from ***[CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode)*** (see [Figure 3](#ch_intro.F3)). The classes derived from ***[CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode)*** represent the HTML elements on an HTML page. You can easily identify the HTML element that a class handles from the class names such as ***[CHTMLText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLText)***, ***CHTMLButtonList***, etc.
 
-| Purpose       | [Registry section]<br/>Registry name<br/><br/>Environment variable          | Valid values  | Default  |
-|---------------|-----------------------------------------------------------------------------|---------------|----------|
-| Set to the user agent string you would like to be used by the web server.                 | [N/A]<br/>N/A<br/><br/>**`HTTP_USER_AGENT`**             | A valid user agent string.       | (none)   |
-| Allow `SIGPIPE` in a plain (non-FastCGI) C++ Toolkit CGI (i.e. `CCgiApplication`-derived). | **`[CGI]`**<br/>**`Allow_Sigpipe`**<br/><br/>**`CGI_ALLOW_SIGPIPE`** | Boolean  [<sup>c</sup>](#ch_libconfig.TF.25) | false |
-| Add to the user agent list of bot names. This parameter affect only [CCgiUserAgent](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiUserAgent)::[IsBot()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IsBot).            | **`[CGI]`**<br/>**`Bots`**<br/><br/>**`NCBI_CONFIG__CGI__BOTS`**  [<sup>f</sup>](#ch_libconfig.TF.28) | Delimited list  [<sup>b</sup>](#ch_libconfig.TF.24) of bot names, e.g. "Googlebot Scooter WebCrawler Slurp".  | (none)   |
-| When true (and when using HTTP/1.1), produce the CGI response in chunks, with the size set by `[CGI].ChunkSize`. | **`[CGI]`**<br/>**`ChunkedTransfer`**<br/><br/>**`CGI_CHUNKED_TRANSFER`** | "Disable" or "Enable" | "Disable" |
-| Set the size of the chunks when producing chunked CGI responses per `[CGI].ChunkedTransfer`. | **`[CGI]`**<br/>**`ChunkSize`**<br/><br/>**`CGI_CHUNK_SIZE`** | positive integer | 4096 |
-| According to RFC-2109, cookies should not be encoded. Instead, they should be just quoted. However, for backward compatibility with code that decodes incoming cookies, both quoted cookies and encoded cookies can be parsed. This setting controls which method of encoding/decoding is used.            | **`[CGI]`**<br/>**`Cookie_Encoding`**<br/><br/>**`CGI_COOKIE_ENCODING`**    | "Url", "Quote"                   | "Url"    |
-| Severity level for cookie-related error messages.   | **`[CGI]`**<br/>**`Cookie_Error_Severity`**<br/><br/>**`CGI_Cookie_Error_Severity`**           | CI  [<sup>e</sup>](#ch_libconfig.TF.27): Info, Warning, Error, Critical, Fatal, Trace      | Error    |
-| Defines which characters cannot be used in cookie names.               | **`[CGI]`**<br/>**`Cookie_Name_Banned_Symbols`**<br/><br/>**`CGI_Cookie_Name_Banned_Symbols`** | A string of banned characters.   | "  ,;="   |
-| See **`CGI_CORS_Enable`**. Specify the value of the ***Access-Control-Allow-Credentials*** header, which indicates whether or not the response to the request can be exposed when the credentials flag is true.  [<sup>g</sup>](#ch_libconfig.TF_8_G)                 | **`[CGI]`**<br/>**`CORS_Allow_Credentials`**<br/><br/>**`CGI_CORS_ALLOW_CREDENTIALS`**         | either do not set, or use the string "true"         | (not set)      |
-| See **`CGI_CORS_Enable`**. Specify the value of the ***Access-Control-Allow-Headers*** header, which is used in response to a preflight request to indicate which HTTP headers can be used when making the actual request.  [<sup>g</sup>](#ch_libconfig.TF_8_G)      | **`[CGI]`**<br/>**`CORS_Allow_Headers`**<br/><br/>**`CGI_CORS_ALLOW_HEADERS`**                 | string        | "X-Requested-With"   |
-| See **`CGI_CORS_Enable`**. Specify the value of the ***Access-Control-Allow-Methods*** header, which specifies the method or methods allowed when accessing the resource (in response to a preflight request).  [<sup>g</sup>](#ch_libconfig.TF_8_G)                  | **`[CGI]`**<br/>**`CORS_Allow_Methods`**<br/><br/>**`CGI_CORS_ALLOW_METHODS`**                 | string        | "GET, POST, OPTIONS" |
-| See **`CGI_CORS_Enable`**. Specify the value of the ***Access-Control-Allow-Origin*** header. Should be a space-separated list of domain suffixes (e.g. 'foo.com bar.org') that are permitted to access the resource. The Origin header sent by the client is matched against the list. If there's no match, CORS is not enabled. If matched, the client provided Origin is copied to the outgoing ***Access-Control-Allow-Origin***. To allow any origin set the value to '\*' (this should be a single character, not part of the list).     | **`[CGI]`**<br/>**`CORS_Allow_Origin`**<br/><br/>**`CGI_CORS_ALLOW_ORIGIN`**                   | string - either "\*" or a valid origin              | "ncbi.nlm.nih.gov"   |
-| Set to true to enable Cross-Origin Resource Sharing (CORS), and use non-empty parameters for given headers (e.g. **`CORS_Allow_Origin`** etc) to set the value for those headers. If false or not set, cross-origin request headers will cause an error.             | **`[CGI]`**<br/>**`CORS_Enable`**<br/><br/>**`CGI_CORS_Enable`**            | Boolean  [<sup>c</sup>](#ch_libconfig.TF.25)         | false    |
-| See **`CGI_CORS_Enable`**. Specify the value of the ***Access-Control-Expose-Headers*** header, which lets a server whitelist headers that browsers are allowed to access.  [<sup>g</sup>](#ch_libconfig.TF_8_G)                | **`[CGI]`**<br/>**`CORS_Expose_Headers`**<br/><br/>**`CGI_CORS_EXPOSE_HEADERS`**               | string        | "" |
-| See **`CGI_CORS_Enable`**. Param to enable JQuery JSONP hack to allow Cross-Origin Resource Sharing for browsers that don't support CORS (e.g. IE versions earlier than 11). If it is set to true and the HTTP request contains entry "callback" whose value starts with "JQuery\_" (case-insensitive, configurable - see **`CGI_CORS_JQUERY_CALLBACK_PREFIX`**), then:<br/>1. Set the response Content-Type to "text/javascript"; and<br/>2. Wrap the response content into: "JQuery\_foobar(original\_content)"                | **`[CGI]`**<br/>**`CORS_JQuery_Callback_Enable`**<br/><br/>**`CGI_CORS_JQUERY_CALLBACK_ENABLE`**     | Boolean  [<sup>c</sup>](#ch_libconfig.TF.25)         | false    |
-| See **`CGI_CORS_Enable`**. Specify a prefix other than "JQuery\_" for the JQuery JSONP callback name (see **`CGI_CORS_JQUERY_CALLBACK_ENABLE`**). Use the symbol '\*' if any name is good.                  | **`[CGI]`**<br/>**`CORS_JQuery_Callback_Prefix`**<br/><br/>**`CGI_CORS_JQUERY_CALLBACK_PREFIX`**     | string        | "\*"     |
-| See **`CGI_CORS_Enable`**. Specify the value of the ***Access-Control-Max-Age*** header, which indicates how long the results of a preflight request can be cached.  [<sup>g</sup>](#ch_libconfig.TF_8_G)    | **`[CGI]`**<br/>**`CORS_Max_Age`**<br/><br/>**`CGI_CORS_MAX_AGE`**          | string (seconds)                 | "" |
-| Set to true to make the application count the amount of data read/sent. The numbers are then printed in request stop log messages.                 | **`[CGI]`**<br/>**`Count_Transfered`**<br/><br/>**`CGI_COUNT_TRANSFERED`**  | Boolean  [<sup>c</sup>](#ch_libconfig.TF.25)         | true     |
-| Set the name of an environment variable, which in turn specifies a prefix that will be added to all diagnostic messages issued during HTTP request processing.        | **`[CGI]`**<br/>**`DiagPrefixEnv`**<br/><br/>**`NCBI_CONFIG__CGI__DIAGPREFIXENV`**  [<sup>f</sup>](#ch_libconfig.TF.28) | a valid environment variable name                   | (none)   |
-| When true, discard the session tracking ID if it's set to "UNK_SESSION". For example, if "UNK_SESSION" is set through `HTTP_NCBI_SID` (which would generally be a bad practice), this will result in it being replaced with a valid SID. | **`[CGI]`**<br/>**`Discard_UNK_SESSION`**<br/><br/>**`NCBI_CGI_DISCARD_UNK_SESSION`** | Boolean [<sup>c</sup>](#ch_libconfig.TF.25) | false |
-| When true, and when the request method is `GET` and the `ncbi_help[=format]` URL parameter is passed, return a help message to the CGI client. The following sources are checked in the given order for the help message content (all sources except the last are files located with the CGI):<br />&bull; `<cginame>.help.<format>`<br />&bull; `help.<format>`<br />&bull; `<cginame>.help.<accept_hdr_subtype><accept_hdr_mediarangeparams>`<br />&bull; `help.<accept_hdr_subtype><accept_hdr_mediarangeparams>`<br />&bull; `<cginame>.help.html`<br />&bull; `<cginame>.help.xml`<br />&bull; `<cginame>.help.json`<br />&bull; `help.html`<br />&bull; `help.xml`<br />&bull; `help.json`<br />&bull; an XML representation of the result of `GetArgDescriptions()` | **`[CGI]`**<br/>**`EnableHelpRequest`**<br/><br/>**`CGI_ENABLE_HELP_REQUEST`** | Boolean  [<sup>c</sup>](#ch_libconfig.TF.25) | true |
-| When the request method is "GET" and the `[CGI].EnableVersionRequest` configuration parameter is true and the `ncbi_version` URL parameter is supplied and empty or "short" or "full", then the CGI application version is returned to the CGI client.  Alternatively, the `[CGI].EnableVersionRequest` configuration parameter can name a URL parameter that will substitute for `ncbi_version`. In both cases, the short version is returned unless "full" is specified.<br/>By default, the version is returned as content type "text/plain", but this can be overridden by supplying either "xml" or "json" as the subtype in an Accept header.<br/>A non-empty `ncbi_version` (or overridden URL parameter) with a value other than "short" or "full" will result in an error, as will an Accept header subtype other than "xml" or "json". | **`[CGI]`**<br/>**`EnableVersionRequest`**<br/><br/>**`CGI_ENABLE_VERSION_REQUEST`** | either Boolean [<sup>c</sup>](#ch_libconfig.TF.25) or the name of a URL parameter | false |
-| ***This parameter applies only to HEAD requests:***<br/><br/>**If false**, no exception is thrown and the application continues to run, but the output stream is blocked so that no more data can be sent to the client. If any attempts are made to write response content after the headers have been written, then an error will be posted to the log (but only the first time).<br/><br/>**If true**, the CGI application framework will throw [CCgiHeadException](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiHeadException) after writing the headers. ***Note:*** This exception must percolate up to [CCgiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiApplication)::[Run()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Run) for this option to work correctly, typically by catching and rethrowing it in [ProcessRequest()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ProcessRequest). In this case the application will exit immediately after writing the headers with HTTP status code 200. | **`[CGI]`**<br/>**`ExceptionAfterHEAD`**<br/><br/>**`NCBI_CONFIG__CGI__EXCEPTIONAFTERHEAD`**  [<sup>f</sup>](#ch_libconfig.TF.28)   | Boolean  [<sup>c</sup>](#ch_libconfig.TF.25)         | false    |
-| Set to true to disable the creation of a tracking cookie during session initialization.   | **`[CGI]`**<br/>**`DisableTrackingCookie`**<br/><br/>**`NCBI_CONFIG__CGI__DISABLETRACKINGCOOKIE`**  [<sup>f</sup>](#ch_libconfig.TF.28)   | Boolean  [<sup>c</sup>](#ch_libconfig.TF.25)         | false    |
-| Set to true to enable logging.   | **`[CGI]`**<br/>**`Log`**<br/><br/>**`NCBI_CONFIG__CGI__LOG`**  [<sup>f</sup>](#ch_libconfig.TF.28)   | CI  [<sup>e</sup>](#ch_libconfig.TF.27):<br/>On =\> enabled;<br/>True =\> enabled;<br/>OnError =\> enabled for errors;<br/>OnDebug =\> enabled (debug builds only)  | disabled |
-| An ampersand-delimited string of GET and/or POST arguments to exclude from the log (helps limit the size of the log file)       | **`[CGI]`**<br/>**`LOG_EXCLUDE_ARGS`**<br/><br/>**`CGI_LOG_EXCLUDE_ARGS`**  | valid format: arg1&arg2...       | (none)   |
-| Allows specifying limits for multiple GET and/or POST arguments in one parameter string.  | **`[CGI]`**<br/>**`LOG_LIMIT_ARGS`**<br/><br/>**`CGI_LOG_LIMIT_ARGS`**      | valid format: arg1:size1&arg2:size2...&\*:size<br/>special argument:<br/>\* means all unspecified arguments;<br/>special limits:<br/>-2 means exclude;<br/>-1 means no limit | \*:1000000     |
-| Enable logging of CGI request parameters. Only the specified parameters will be logged.   | **`[CGI]`**<br/>**`LogArgs`**<br/><br/>**`NCBI_CONFIG__CGI__LOGARGS`**  [<sup>f</sup>](#ch_libconfig.TF.28) | Delimited list  [<sup>a</sup>](#ch_libconfig.TF.23) of environment variables (optionally aliased on output for shortening logs, e.g. envvar=1).     | (none)   |
-| Set to true to merge log lines.  | **`[CGI]`**<br/>**`Merge_Log_Lines`**<br/><br/>**`CGI_MERGE_LOG_LINES`**    | Boolean  [<sup>c</sup>](#ch_libconfig.TF.25)         | true     |
-| Specify additional mobile device names. This parameter affect only [CCgiUserAgent](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiUserAgent)::[IsMobileDevice()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IsMobileDevice).    | **`[CGI]`**<br/>**`MobileDevices`**<br/><br/>**`NCBI_CONFIG__CGI__MobileDevices`**  [<sup>f</sup>](#ch_libconfig.TF.28) | Delimited list  [<sup>b</sup>](#ch_libconfig.TF.24) of additional device names.            | (none)   |
-| Add to the user agent list of names that aren't bots. This parameter affect only [CCgiUserAgent](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiUserAgent)::[IsBot()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IsBot).                  | **`[CGI]`**<br/>**`NotBots`**<br/><br/>**`NCBI_CONFIG__CGI__NotBots`**  [<sup>f</sup>](#ch_libconfig.TF.28) | Delimited list  [<sup>b</sup>](#ch_libconfig.TF.24) of names that aren't bots.             | (none)   |
-| Add to the user agent list of names that aren't mobile devices. This parameter affect only [CCgiUserAgent](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiUserAgent)::[IsMobileDevice()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IsMobileDevice).                  | **`[CGI]`**<br/>**`NotMobileDevices`**<br/><br/>**`NCBI_CONFIG__CGI__NotMobileDevices`**  [<sup>f</sup>](#ch_libconfig.TF.28) | Delimited list  [<sup>b</sup>](#ch_libconfig.TF.24) of names that aren't mobile devices.   | (none)   |
-| Add to the user agent list of names that aren't phone devices. This parameter affect only [CCgiUserAgent](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiUserAgent)::[IsPhoneDevice()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IsPhoneDevice). | **`[CGI]`**<br/>**`NotPhoneDevices`**<br/><br/>**`NCBI_CONFIG__CGI__NotPhoneDevices`**  [<sup>f</sup>](#ch_libconfig.TF.28)   | Delimited list  [<sup>b</sup>](#ch_libconfig.TF.24) of names that aren't phone devices.    | (none)   |
-| Add to the user agent list of names that aren't tablet devices. This parameter affect only [CCgiUserAgent](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiUserAgent)::[IsTabletDevice()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IsTabletDevice).                  | **`[CGI]`**<br/>**`NotTabletDevices`**<br/><br/>**`NCBI_CONFIG__CGI__NotTabletDevices`**  [<sup>f</sup>](#ch_libconfig.TF.28) | Delimited list  [<sup>b</sup>](#ch_libconfig.TF.24) of names that aren't tablet devices.   | (none)   |
-| Control error handling of incoming cookies (doesn't affect outgoing cookies set by application).             | **`[CGI]`**<br/>**`On_Bad_Cookie`**<br/><br/>**`CGI_ON_BAD_COOKIE`**        | CI  [<sup>e</sup>](#ch_libconfig.TF.27): Throw, SkipAndError, Skip, StoreAndError, Store   | Store    |
-| Specify additional phone device names. This parameter affect only [CCgiUserAgent](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiUserAgent)::[IsPhoneDevice()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IsPhoneDevice).      | **`[CGI]`**<br/>**`PhoneDevices`**<br/><br/>**`NCBI_CONFIG__CGI__PhoneDevices`**  [<sup>f</sup>](#ch_libconfig.TF.28)   | Delimited list  [<sup>b</sup>](#ch_libconfig.TF.24) of additional device names.            | (none)   |
-| Specifies whether to print the referer during [LogRequest()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=LogRequest).      | **`[CGI]`**<br/>**`Print_Http_Referer`**<br/><br/>**`CGI_PRINT_HTTP_REFERER`**                 | Boolean  [<sup>c</sup>](#ch_libconfig.TF.25)         | true     |
-| Specifies whether to print the URL during [LogRequest()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=LogRequest).          | **`[CGI]`**<br/>**`Print_Self_Url`**<br/><br/>**`CGI_PRINT_SELF_URL`**      | Boolean  [<sup>c</sup>](#ch_libconfig.TF.25)         | true     |
-| Specifies whether to print the user agent during [LogRequest()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=LogRequest).   | **`[CGI]`**<br/>**`Print_User_Agent`**<br/><br/>**`CGI_PRINT_USER_AGENT`**  | Boolean  [<sup>c</sup>](#ch_libconfig.TF.25)         | true     |
-| Set the size of CGI request buffer that is printed when the request cannot be parsed.     | **`[CGI]`**<br/>**`RequestErrBufSize`**<br/><br/>**`NCBI_CONFIG__CGI__REQUESTERRBUFSIZE`**  [<sup>f</sup>](#ch_libconfig.TF.28)     | buffer size in bytes             | 256      |
-| Specify the registry section name for the result cache.                | **`[CGI]`**<br/>**`ResultCacheSectionName`**<br/><br/>**`NCBI_CONFIG__CGI__RESULTCACHESECTIONNAME`**  [<sup>f</sup>](#ch_libconfig.TF.28) | valid section name               | result\_cache  |
-| Enable statistics logging.       | **`[CGI]`**<br/>**`StatLog`**<br/><br/>**`NCBI_CONFIG__CGI__STATLOG`**  [<sup>f</sup>](#ch_libconfig.TF.28) | Boolean  [<sup>d</sup>](#ch_libconfig.TF.26)         | false    |
-| Specify additional tablet device names. This parameter affect only [CCgiUserAgent](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiUserAgent)::[IsTabletDevice()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IsTabletDevice).    | **`[CGI]`**<br/>**`TabletDevices`**<br/><br/>**`NCBI_CONFIG__CGI__TabletDevices`**  [<sup>f</sup>](#ch_libconfig.TF.28) | Delimited list  [<sup>b</sup>](#ch_libconfig.TF.24) of additional device names.            | (none)   |
-| Controls whether the output stream will throw for bad states.          | **`[CGI]`**<br/>**`ThrowOnBadOutput`**<br/><br/>**`NCBI_CONFIG__CGI__THROWONBADOUTPUT`**  [<sup>f</sup>](#ch_libconfig.TF.28) | Boolean  [<sup>c</sup>](#ch_libconfig.TF.25)         | true     |
-| Log start time, end time, and elapsed time.         | **`[CGI]`**<br/>**`TimeStamp`**<br/><br/>**`NCBI_CONFIG__CGI__TIMESTAMP`**  [<sup>f</sup>](#ch_libconfig.TF.28)   | Boolean  [<sup>d</sup>](#ch_libconfig.TF.26)         | false    |
-| Disable statistics logging if the CGI request took less than the specified number of seconds.                | **`[CGI]`**<br/>**`TimeStatCutOff`**<br/><br/>**`NCBI_CONFIG__CGI__TIMESTATCUTOFF`**  [<sup>f</sup>](#ch_libconfig.TF.28)     | non-negative integer (zero enables logging)         | 0  |
-| Specify the domain for the tracking cookie.         | **`[CGI]`**<br/>**`TrackingCookieDomain`**<br/><br/>**`NCBI_CONFIG__CGI__TRACKINGCOOKIEDOMAIN`**  [<sup>f</sup>](#ch_libconfig.TF.28)     | valid domain  | .nih.gov |
-| Specify the tracking cookie name.                   | **`[CGI]`**<br/>**`TrackingCookieName`**<br/><br/>**`NCBI_CONFIG__CGI__TRACKINGCOOKIENAME`**  [<sup>f</sup>](#ch_libconfig.TF.28)   | valid cookie name                | ncbi\_sid      |
-| Specify the path for the tracking cookie.           | **`[CGI]`**<br/>**`TrackingCookiePath`**<br/><br/>**`NCBI_CONFIG__CGI__TRACKINGCOOKIEPATH`**  [<sup>f</sup>](#ch_libconfig.TF.28)   | valid path    | /  |
-| Defines the **name** of the NCBI tracking cookie (session ID cookie).  | **`[CGI]`**<br/>**`TrackingTagName`**<br/><br/>**`CGI_TrackingTagName`**    | Any valid cookie name.           | "NCBI-SID"     |
-| Specify a set of fields (e.g. HTTP headers when the protocol is HTTP) to be taken from incoming requests and passed to outgoing requests.<br/>For more details, see the [NCBI Context Fields](https://confluence.ncbi.nlm.nih.gov/display/CD/NCBI+Context+Fields) Confluence page.  | **`[Context]`**<br/>**`Fields`**<br/><br/>**`NCBI_CONTEXT_FIELDS`** | A space-delimited, case-insensitive list of glob patterns. | "" |
+<a name="ch_intro.F3"></a>
 
-<div class="table-scroll"></div>
+![Figure 3. HTML classes derived from CNCBINode](/cxx-toolkit/static/img/CNCBINode.gif)
 
-<a name="ch_libconfig.TF.23"></a>
+Figure 3. HTML classes derived from ***[CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode)***
 
-<sup>a</sup> List may be delimited by semicolon, space, tab, or comma.
+The text node classes ***[CHTMLText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLText)*** and ***[CHTMLPlainText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPlainText)*** are intended to be used directly by the user. Both ***[CHTMLText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLText)*** and ***[CHTMLPlainText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPlainText)*** are used to insert text into the generated html, with the difference that ***[CHTMLPlainText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPlainText)*** class performs HTML encoding before generation. A number of other classes such as ***[CHTMLNode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLNode)***, ***[CHTMLElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLElement)***, ***[CHTMLOpenElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLOpenElement)***, and ***[CHTMLListElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLListElement)*** are base classes for the elements actually used to construct an HTML page, such as ***CHTML\_head***, ***[CHTML\_form](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_form)*** (see [Figure 4](#ch_intro.F4)).
 
-<a name="ch_libconfig.TF.24"></a>
+<a name="ch_intro.F4"></a>
 
-<sup>b</sup> List may be delimited by newlines or any of the special characters: semicolon, space, tab, vertical bar, or tilde. If the list contains one or more newlines then only newlines will be used as delimiters and the values in the list will be the content of the lines including any special characters. If the list does not contain any newline characters then all special characters will act as independent delimiters. Therefore, if any value in the list needs to include any of the special characters, then newlines must be used as the delimiter.
+![Figure 4. The CHTMLNode class and its derived classes](/cxx-toolkit/static/img/CHTMLNode.gif)
 
-<a name="ch_libconfig.TF.25"></a>
+Figure 4. The ***[CHTMLNode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLNode)*** class and its derived classes
 
-<sup>c</sup> case-insensitive: true, t, yes, y, 1, false, f, no, n, 0
+The ***[CHTMLNode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLNode)*** class is the base class for ***[CHTMLElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLElement)*** and ***[CHTMLOpenElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLOpenElement)*** and is used for describing the HTML elements that are found in an HTML page such as HEAD, BODY, H1, BR, etc. The ***[CHTMLElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLElement)*** tag describes those tags that have a close tag and are well formed. The ***[CHTMLOpenElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLOpenElement)*** class describes tags that are often found without the corresponding close tag such as the BR element that inserts a line break. The ***[CHTMLListElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLListElement)*** class is used in lists such as the OL element.
 
-<a name="ch_libconfig.TF.26"></a>
+Important classes of HTML elements used in forms to input data are the input elements such as checkboxes, radio buttons, text fields, etc. The ***[CHTML\_input](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_input)*** class derived from the ***CHTML\_OpenElement*** class serves as the base class for a variety of input elements (see [Figure 5](#ch_intro.F5)).
 
-<sup>d</sup> case-insensitive: true, t, yes, y, false, f, no, n
+<a name="ch_intro.F5"></a>
 
-<a name="ch_libconfig.TF.27"></a>
+![Figure 5. The CHTML\_input class and its derived classes](/cxx-toolkit/static/img/CHTML_input.gif)
 
-<sup>e</sup> CI = case-insensitive
+Figure 5. The ***[CHTML\_input](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_input)*** class and its derived classes
 
-<a name="ch_libconfig.TF.28"></a>
+More [details on HTML classes and their relationships](ch_html.html#ch_html.html_classes) is presented in a later chapter.
 
-<sup>f</sup> [environment variable name](#ch_libconfig.Environment) formed from registry section and entry name
+<a name="ch_intro.intro_html_processing"></a>
 
-<a name="ch_libconfig.TF_8_G"></a>
+### HTML Processing
 
-<sup>g</sup> some information from [HTTP access control (CORS)](https://developer.mozilla.org/en-US/docs/HTTP/Access_control_CORS) by Mozilla Contributors, adapted under [CC-BY-SA](https://creativecommons.org/licenses/by-sa/2.5/)
+The HTML classes can be used to dynamically generate pages. In addition to the classes described in the previous section, there are a number of page classes that are designed to help with HTML processing. The page classes serve as generalized containers for collections of other HTML components, which are mapped to the page. [Figure 6](#ch_intro.F6) describes the important classes in page class hierarchy.
 
-<a name="ch_libconfig.FCGI"></a>
+<a name="ch_intro.F6"></a>
 
-#### FCGI
+![Figure 6. HTML page classes](/cxx-toolkit/static/img/CHTMLPage.gif)
 
-[These parameters](#ch_libconfig.T9) tune the behavior of FCGI applications.
+Figure 6. HTML page classes
 
-<a name="ch_libconfig.T9"></a>
+The ***[CHTMLBasicPage](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLBasicPage)*** class is as a base class whose features are inherited by the ***[CHTMLPage](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPage)*** derived class - it is not intended for direct usage. Through the methods of this class, you can access or set the CgiApplication, Style, and TagMap stored in the class.
 
-Table 9. FCGI-related configuration parameters
+The ***[CHTMLPage](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPage)*** class when used with the appropriate HTML template file, can generate the 'bolier plate' web pages such as a standard corporate web page, with a corporate logo, a hook for an application-specific logo, a top menubar of links to several databases served by a query program, a links sidebar for application-specific links to relevant sites, a VIEW tag for an application's web interface, a bottom menubar for help links, disclaimers, and other boiler plate links. The template file is a simple HTML text file with named tags (\<@tagname@\>) which allow the insertion of new HTML blocks into a pre-formatted page.
 
-| Purpose          | [Registry section]<br/>Registry name<br/><br/>Environment variable            | Valid values           | Default |
-|------------------|-------------------------------------------------------------------------------|------------------------|---------|
-| A true value enables logging of current iteration, max iterations, and process ID during the FastCGI run.       | **`[FastCGI]`**<br/>**`Debug`**<br/><br/>**`NCBI_CONFIG__FASTCGI__DEBUG`**  [<sup>b</sup>](#ch_libconfig.TF.30)     | Boolean  [<sup>a</sup>](#ch_libconfig.TF.29)                  | false   |
-| A true value enables termination of a FastCGI application by the presence of the request entry "exitfastcgi".   | **`[FastCGI]`**<br/>**`HonorExitRequest`**<br/><br/>**`NCBI_CONFIG__FASTCGI__HONOREXITREQUEST`**  [<sup>b</sup>](#ch_libconfig.TF.30) | Boolean  [<sup>a</sup>](#ch_libconfig.TF.29)                  | false   |
-| Specify the number of requests that the FCGI application will process before exiting.        | **`[FastCGI]`**<br/>**`Iterations`**<br/><br/>**`NCBI_CONFIG__FASTCGI__ITERATIONS`**  [<sup>b</sup>](#ch_libconfig.TF.30) | positive integer       | 10      |
-| Make the FastCGI application run as a stand-alone server on a local port. The value is a Unix domain socket or a MS Windows named pipe, or a colon followed by a port number | **`[FastCGI]`**<br/>**`StandaloneServer`**<br/><br/>**`FCGI_STANDALONE_SERVER`**                 | valid local port or named socket          | (none)  |
-| Make the FastCGI application stop if an error is encountered.             | **`[FastCGI]`**<br/>**`StopIfFailed`**<br/><br/>**`NCBI_CONFIG__FASTCGI__STOPIFFAILED`**  [<sup>b</sup>](#ch_libconfig.TF.30)   | Boolean  [<sup>a</sup>](#ch_libconfig.TF.29)                  | false   |
-| Make the FastCGI application stop if the memory limit is exceeded.        | **`[FastCGI]`**<br/>**`TotalMemoryLimit`**<br/><br/>**`NCBI_CONFIG__FASTCGI__TOTALMEMORYLIMIT`** | An optionally suffixed non-negative real number (e.g. "123456789", "100MiB", or "1.25 G").<br/><br/>No suffix (or a "B" suffix) means the given value is in bytes.<br/><br/>If there is a suffix, there can be spaces between the number and the suffix. The default units are decimal (i.e. powers of 1000) - e.g. "MB". The final "B" is optional for decimal units (e.g. "M"). You can use "i" to indicate binary units (i.e. powers of 1024) – e.g. "MiB".<br/><br/>Valid suffix characters are: "K", "M", "G", "T", "P", and "E".<br/><br/>Suffixes are not case-sensitive. | 0 (unlimited) |
-| Make the FastCGI application exit if the named file changes.              | **`[FastCGI]`**<br/>**`WatchFile.Name`**<br/><br/>**`NCBI_CONFIG__FASTCGI__WATCHFILE_DOT_NAME`**  [<sup>b</sup>](#ch_libconfig.TF.30) | valid file name        | (none)  |
-| The number of bytes to read from the watch file to see if it has changed. | **`[FastCGI]`**<br/>**`WatchFile.Limit`**<br/><br/>**`NCBI_CONFIG__FASTCGI__WATCHFILE_DOT_LIMIT`**  [<sup>b</sup>](#ch_libconfig.TF.30)     | positive integer (non-positives trigger default)             | 1024    |
-| The period in seconds between checking the watch file for changes.        | **`[FastCGI]`**<br/>**`WatchFile.Timeout`**<br/><br/>**`NCBI_CONFIG__FASTCGI__WATCHFILE_DOT_TIMEOUT`**  [<sup>b</sup>](#ch_libconfig.TF.30) | positive integer (non-positives trigger default, which is to disable the watch file checking)      | 0 |
+More [details on CHTMLBasicPage, CHTMLPage and related classes](ch_html.html#ch_html.page_classes) is presented in a later chapter.
 
-<div class="table-scroll"></div>
+<a name="ch_intro.intro_objmgr"></a>
 
-<a name="ch_libconfig.TF.29"></a>
+The OBJECT MANAGER Module
+-------------------------
 
-<sup>a</sup> case-insensitive: true, t, yes, y, false, f, no, n
+The Object Manager module is a library of C++ classes, which facilitate access to biological sequence data. It makes it possible to transparently download data from the GenBank database, investigate biological sequence data structure, retrieve sequence data, descriptions and annotations.
 
-<a name="ch_libconfig.TF.30"></a>
+The Object Manager has been designed to present an interface to users and to minimize their exposure to the details of interacting with biological databases and their underlying data structures. The Object Manager, therefore, coordinates the use of biological sequence data objects, particularly the management of the details of loading data from different data sources.
 
-<sup>b</sup> [environment variable name](#ch_libconfig.Environment) formed from registry section and entry name
+The NCBI databases and software tools are designed around a particular model of biological sequence data. The data model must be very flexible because the nature of this data is not yet fully understood, and its fundamental properties and relationships are constantly being revised. NCBI uses [Abstract Syntax Notation One](http://asn1.elibel.tm.fr) (ASN.1) as a formal language to describe [biological sequence data and its associated information](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/INDEX.HTML).
 
-<a name="ch_libconfig.CGI_Load_balancing_configur"></a>
+The bio sequence data may be huge and downloading all of this data may not be practical or desirable. Therefore, the Object Manager transparently transmits only the data that is really needed and not all of it at once. There is a [datatool](ch_app.html#ch_app.datatool) that generates corresponding data objects (source code and header files) from the object's ASN.1 specification. The Object Manager is able to manipulate these objects.
 
-#### CGI Load Balancing
+Biological sequences are identified by a [Seq\_id](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/SEQLOC.HTML), which may have different forms.
 
-[These parameters](#ch_libconfig.T10) tune the CGI load balancer.
+The most general container object of bio sequence data, as defined in the NCBI data model, is [Seq\_entry](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/SEQSET.HTML). A great deal of NCBI software is designed to accept a Seq\_entry as the primary unit of data. In general, the Seq\_entry is defined recursively as a tree of Seq\_entry objects, where each node contains either [Bioseq](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/BIOSEQ.HTML) or list of other Seq\_entry objects and additional data like sequence description, sequence annotations.
 
-<a name="ch_libconfig.T10"></a>
+Two important concepts in the Object Manager are `scope` and `reference resolution`. The client defines a scope as the sources of data where the system uses only "allowed" sources to look for data. Scopes may contain several variants of the same bio sequence (Seq\_entry). Since sequences refer to each other, the scope sets may have some data that is common to both scopes. In this case changing data in one scope should be reflected in all other scopes, which "look" at the same data.
 
-Table 10. CGI load balancing configuration parameters
+The other concept a client uses is `reference resolution`. Reference resolution is used in situations where different biological sequences can refer to each other. For example, a sequence of amino acids may be the same as sequence of amino acids in another sequence. The data retrieval system should be able to resolve such references automatically answering what amino acids are actually here. Optionally, at the client's request, such automatic resolution may be turned off.
 
-| Purpose                   | [Registry section]<br/>Registry name<br/><br/>Environment variable       | Valid values  | Default     |
-|---------------------------|--------------------------------------------------------------------------|---------------|-------------|
-| Specify the internet domain.    | **`[CGI-LB]`**<br/>**`Domain`**<br/><br/>**`NCBI_CONFIG__CGI-LB__DOMAIN`**  [<sup>b</sup>](#ch_libconfig.TF.32)     | a valid domain      | .ncbi.nlm.nih.gov |
-| Specify the host IP address.    | **`[CGI-LB]`**<br/>**`Host`**<br/><br/>**`NCBI_CONFIG__CGI-LB__HOST`**  [<sup>b</sup>](#ch_libconfig.TF.32)   | a valid host IP     | (none)      |
-| Specify the cookie expiration period in seconds.  | **`[CGI-LB]`**<br/>**`LifeSpan`**<br/><br/>**`NCBI_CONFIG__CGI-LB__LIFESPAN`**  [<sup>b</sup>](#ch_libconfig.TF.32) | integer | 0     |
-| Specify the name of the load balancing cookie in the HTTP response. | **`[CGI-LB]`**<br/>**`Name`**<br/><br/>**`NCBI_CONFIG__CGI-LB__NAME`**  [<sup>b</sup>](#ch_libconfig.TF.32)   | a valid cookie name | (none)      |
-| Specify the cookie path.  | **`[CGI-LB]`**<br/>**`Path`**<br/><br/>**`NCBI_CONFIG__CGI-LB__PATH`**  [<sup>b</sup>](#ch_libconfig.TF.32)   | a valid path  | (none)      |
-| Specify the cookie security mode.     | **`[CGI-LB]`**<br/>**`Secure`**<br/><br/>**`NCBI_CONFIG__CGI-LB__SECURE`**  [<sup>b</sup>](#ch_libconfig.TF.32)     | Boolean  [<sup>a</sup>](#ch_libconfig.TF.31) | false |
+The Object Manager provides a consistent view of the data despite modifications to the data. For example, the data may change during a client's session because new biological data has been uploaded to the database while the client is still processing the old data. In this case, when the client for additional data, the system should retrieve the original bio sequence data, and not the most recent one. However, if the database changes between a client's sessions, then the next time the client session is started, the most recent data is retrieved, unless the client specifically asks for the older data.
 
-<div class="table-scroll"></div>
+The Object Manager is thread safe, and supports multithreading which makes it possible to work with bio sequence data from multiple threads.
 
-<a name="ch_libconfig.TF.31"></a>
+The Object Manager includes numerous classes for accessing bio sequence data such as ***[CDataLoader](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDataLoader)*** and ***[CDataSource](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDataSource)*** which manage global and local accesses to data, ***[CSeqVector](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeqVector)*** and ***[CSeqMap](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeqMap)*** objects to find and manipulate sequence data, a number of [specialized iterators](ch_objmgr.html#ch_objmgr.om_def.html_Iterators) to parse descriptions and annotations, among others. The ***[CObjectManager](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CObjectManager)*** and ***[CScope](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CScope)*** classes provide the foundation of the library, managing data objects and coordinating their interactions.
 
-<sup>a</sup> case-insensitive: true, t, yes, y, false, f, no, n
+More [details on the Object Manager and related classes](ch_objmgr.html) is presented in a later chapter.
 
-<a name="ch_libconfig.TF.32"></a>
+<a name="ch_intro.intro_ser"></a>
 
-<sup>b</sup> [environment variable name](#ch_libconfig.Environment) formed from registry section and entry name
+The SERIAL Module
+-----------------
 
-<a name="ch_libconfig.Serial"></a>
+Click here to see [Full Documentation on the Data Serialization Library](ch_ser.html).
 
-### Serial
+Serial library provides means for loading, accessing, manipulating, and serialization of data in a formatted way. It supports serialization in [ASN.1](http://asn1.elibel.tm.fr) (text or BER encoding), [XML](https://www.w3.org/XML), and [JSON](http://json.org) formats.
 
-[These parameters](#ch_libconfig.T.Serial_library_configurat) tune the behavior of the Serial library.
+The structure of data is described by some sort of formal language. In our case it can be ASN.1, DTD or XML Schema. Based on such specification, [DATATOOL](ch_app.html#ch_app.datatool) application, which is part of the NCBI C++ Toolkit, generates a collection of data storage classes that can be used to store and serialize data. The design purpose was to make these classes as lightweight as possible, moving all details of serialization into specialized classes - [“object streams”](ch_ser.html#ch_ser.objstream.html_intro). Structure of the data is described with the help of [“type information”](ch_ser.html#ch_ser.typeinfo.html). Data objects contain data and type information only. Any such data storage object can be viewed as a node tree that provides random access to its data. Serial library provides means to[traversing](ch_ser.html#ch_ser.typeinfo.html_cobjinfo) this data tree without knowing its structure in advance – using only type information; C++ code generated by DATATOOL makes it possible to access any child node directly.
 
-<a name="ch_libconfig.T.Serial_library_configurat"></a>
+[“Object streams”](ch_ser.html#ch_ser.objstream.html_intro) are intermediaries between data storage objects and input or output stream. They perform encoding or decoding of data according to format specifications. Guided by the type information embedded into data object, on reading they allocate memory when needed, fill in data, and validate that all mandatory data is present; on writing they guarantee that all relevant data is written and that the resulting document is well-formed. All it takes to read or write a top-level data object is one function call – all the details are handled by an object stream.
 
-Table 11. Serial library configuration parameters
+Closely related to serialization is the task of converting data from one format into another. One approach could be reading data object completely into memory and then writing it in another format. The only problem is that the size of data can be huge. To simplify this task and to avoid storing data in memory, serial library provides [“object stream copier”](ch_ser.html#ch_ser.objstream.html_objcopy) class. It reads data by small chunks and writes it immediately after reading. In addition to small memory footprint, it also works much faster.
 
-| Purpose     | [Registry section]<br/>Registry name<br/><br/>Environment variable              | Valid values        | Default  |
-|-------------|---------------------------------------------------------------------------------|---------------------|----------|
-| Skip unknown data members in the input stream, or throw an exception.         | [N/A]<br/>N/A<br/><br/>**`SERIAL_SKIP_UNKNOWN_MEMBERS`**     | CI  [<sup>a</sup>](#ch_libconfig.TF.33): yes, no, never, always               | no (throw)     |
-| If true, causes [CObjectOStream](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CObjectOStream)::[WriteDouble()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=WriteDouble) to use fast conversion.   | **`[SERIAL]`**<br/>**`FastWriteDouble`**<br/><br/>**`NCBI_CONFIG__SERIAL__FastWriteDouble`**  [<sup>b</sup>](#ch_libconfig.TF.34) | Boolean  [<sup>c</sup>](#ch_libconfig.TF.35)               | true     |
-| While reading binary ASN.1 data allow VisibleString tag where UTF-8 string tag is expected by specification.      | **`[SERIAL]`**<br/>**`READ_ANY_UTF8STRING_TAG`**<br/><br/>**`SERIAL_READ_ANY_UTF8STRING_TAG`**     | Boolean  [<sup>c</sup>](#ch_libconfig.TF.35)               | true     |
-| While reading binary ASN.1 data allow UTF-8 string tag where VisibleString tag is expected by specification.      | **`[SERIAL]`**<br/>**`READ_ANY_VISIBLESTRING_TAG`**<br/><br/>**`SERIAL_READ_ANY_VISIBLESTRING_TAG`**     | 0 (disallow, throws an exception);<br/>1 (allow, but warn once);<br/>2 (allow without warning)       | 1  |
-| If true, use memory-mapped file access, which associates a file’s content with a portion of the virtual address space of a process. This can result in a modest performance increase (probably &lt; 15%). | **`[SERIAL]`**<br/>**`READ_MMAPBYTESOURCE`**<br/><br/>**`SERIAL_READ_MMAPBYTESOURCE`** | Boolean  [<sup>c</sup>](#ch_libconfig.TF.35) | false |
-| Specify how to handle unknown variants when reading Object streams.           | **`[SERIAL]`**<br/>**`SKIP_UNKNOWN_MEMBERS`**<br/><br/>**`NCBI_CONFIG__SERIAL__SKIP_UNKNOWN_MEMBERS`**  [<sup>b</sup>](#ch_libconfig.TF.34)   | CI  [<sup>a</sup>](#ch_libconfig.TF.33):<br/>no (throw an exception),<br/>never (even if set to skip later),<br/>yes (skip),<br/>always (even if set to not skip later) | no |
-| Specify how to handle unknown variants when reading Object streams.           | **`[SERIAL]`**<br/>**`SKIP_UNKNOWN_VARIANTS`**<br/><br/>**`NCBI_CONFIG__SERIAL__SKIP_UNKNOWN_VARIANTS`**  [<sup>b</sup>](#ch_libconfig.TF.34) | CI  [<sup>a</sup>](#ch_libconfig.TF.33):<br/>no (throw an exception),<br/>never (even if set to skip later),<br/>yes (skip),<br/>always (even if set to not skip later) | no |
-| Throw an exception on an attempt to access an uninitialized data member.      | **`[SERIAL]`**<br/>**`VERIFY_DATA_GET`**<br/><br/>**`SERIAL_VERIFY_DATA_GET`**  | CI  [<sup>a</sup>](#ch_libconfig.TF.33): yes, no, never, always, defvalue, defvalue\_always      | yes      |
-| Throw an exception if a mandatory data member is missing in the input stream. | **`[SERIAL]`**<br/>**`VERIFY_DATA_READ`**<br/><br/>**`SERIAL_VERIFY_DATA_READ`**                   | CI  [<sup>a</sup>](#ch_libconfig.TF.33): yes, no, never, always, defvalue, defvalue\_always      | yes      |
-| Throw an exception on an attempt to write an uninitialized data member.       | **`[SERIAL]`**<br/>**`VERIFY_DATA_WRITE`**<br/><br/>**`SERIAL_VERIFY_DATA_WRITE`**                 | CI  [<sup>a</sup>](#ch_libconfig.TF.33): yes, no, never, always, defvalue, defvalue\_always      | yes      |
-| While writing binary ASN.1 data issue UTF8 string tag as determined by specification, otherwise issue plain string tag. | **`[SERIAL]`**<br/>**`WRITE_UTF8STRING_TAG`**<br/><br/>**`SERIAL_WRITE_UTF8STRING_TAG`**           | Boolean  [<sup>c</sup>](#ch_libconfig.TF.35)               | false    |
-| Specifies what to do if an invalid character is read.      | **`[SERIAL]`**<br/>**`WRONG_CHARS_READ`**<br/><br/>**`NCBI_CONFIG__SERIAL__WRONG_CHARS_READ`**  [<sup>b</sup>](#ch_libconfig.TF.34)     | "ALLOW",<br/>"REPLACE",<br/>"REPLACE\_AND\_WARN",<br/>"THROW",<br/>"ABORT"             | "REPLACE\_AND\_WARN" |
-| Specifies what to do if an invalid character is written.   | **`[SERIAL]`**<br/>**`WRONG_CHARS_WRITE`**<br/><br/>**`NCBI_CONFIG__SERIAL__WRONG_CHARS_WRITE`**  [<sup>b</sup>](#ch_libconfig.TF.34)   | "ALLOW",<br/>"REPLACE",<br/>"REPLACE\_AND\_WARN",<br/>"THROW",<br/>"ABORT"             | "REPLACE\_AND\_WARN" |
+Input data can be very large in size; also, reading it completely into memory could not be the goal of processing. Having a large file of data, one might want to investigate information containers only of a particular type. Serial library provides a variety of means for doing this. The list includes [read](ch_ser.html#ch_ser.objstream.html_readhooks) and [write](ch_ser.html#ch_ser.objstream.html_writehooks) hooks, several types of [stream iterators](ch_ser.html#ch_ser.stream_iterators), and [filter templates](ch_ser.html#ch_ser.serial_filter). It is worth to note that, when using read hooks to read child nodes, one might end up with an invalid top-level data object; or, when using write hooks, one might begin with an invalid object and fill in missing data on the fly – in hooks.
 
-<div class="table-scroll"></div>
+In essence, “hook” is a callback function that client application provides to serial library. Client application installs the hook, then reads (or writes) data object, and somewhere from the depths of serialization processing, the library calls this hook function at appropriate times, for example, when a data chunk of specified type is about to be read. It is also possible to install [context-specific hooks](ch_ser.html#ch_ser.stack_path_hooks). Such hooks are triggered when serializing a particular object type in a particular context; for example, for all objects of class A which are contained in object B.
 
-<a name="ch_libconfig.TF.33"></a>
+<a name="ch_intro.intro_util"></a>
 
-<sup>a</sup> CI = case-insensitive
+The UTIL Module
+---------------
 
-<a name="ch_libconfig.TF.34"></a>
+The UTIL module is collection of some very useful utility classes that implement I/O related functions, algorithms, container classes; text related and thread related functions. Individual facilities include classes to compute checksums, implement interval search trees, lightweight strings, string search, linked sets, random number generation, UTF-8 conversions, registry based DNS, rotating log streams, thread pools, and many others.
 
-<sup>b</sup> [environment variable name](#ch_libconfig.Environment) formed from registry section and entry name
+The following sections give an overview of the utility classes:
 
-<a name="ch_libconfig.TF.35"></a>
+-   [Checksum](#ch_intro.intro_checksum)
 
-<sup>c</sup> case-insensitive: true, t, yes, y, 1, false, f, no, n, 0
+-   [Console Debug Dump Viewer](#ch_intro.intro_dumpv)
 
-<a name="ch_libconfig.Objects_Object_Manager_Obje"></a>
+-   [Diff API](#ch_intro.Diff_API)
 
-### Objects, Object Manager, Object Tools
+-   [Floating Point Comparison](#ch_intro.Floating_Point_Comparison)
 
-[These parameters](#ch_libconfig.T.Objectsrelated_configurat) tune the behavior of the Objects-related libraries, including the Object Manager and loader and reader libraries.
+-   [Lightweight Strings](#ch_intro.intro_lightstring)
 
-<a name="ch_libconfig.T.Objectsrelated_configurat"></a>
+-   [Range Support](#ch_intro.intro_range)
 
-Table 13. Objects-related configuration parameters
+-   [Linked Sets](#ch_intro.intro_linkedset)
 
-| Purpose         | [Registry section]<br/>Registry name<br/><br/>Environment variable      | Valid values  | Default                 |
-|-----------------|-------------------------------------------------------------------------|---------------|-------------------------|
-| Specify whether the blob stream processor should try to use string packing.                 | [N/A]<br/>N/A<br/><br/>**`NCBI_SERIAL_PACK_STRINGS`**                   | Boolean  [<sup>d</sup>](#ch_libconfig.TF.40)              | true |
-| The Object Manager will attach WGS master descriptors to Bioseq data by default. Setting this parameter to false will disable this behavior.         | **`[GENBANK]`**<br/>**`ADD_WGS_MASTER`**<br/><br/>**`GENBANK_ADD_WGS_MASTER`**             | Boolean  [<sup>a</sup>](#ch_libconfig.TF.37)              | true |
-| A non-zero value turns on debugging messages about GenBank loader's interaction with cache. | **`[GENBANK]`**<br/>**`CACHE_DEBUG`**<br/><br/>**`GENBANK_CACHE_DEBUG`**                   | \>=0, currently only zero and non-zero are distinguished | 0    |
-| Specify whether an attempt should be made to recompress the cache.       | **`[GENBANK]`**<br/>**`CACHE_RECOMPRESS`**<br/><br/>**`GENBANK_CACHE_RECOMPRESS`**         | Boolean  [<sup>a</sup>](#ch_libconfig.TF.37)              | true |
-| A non-zero value turns on debugging messages about opening/closing connections to ID1/ID2 services.            | **`[GENBANK]`**<br/>**`CONN_DEBUG`**<br/><br/>**`GENBANK_CONN_DEBUG`**  | \>=0, currently only zero and non-zero are distinguished | 0    |
-| Disable attaching WGS master descriptors when retrieving ASN.1 blobs using the CPubseqReader class. | **`[GENBANK/PUBSEQOS]`**<br/>**`EXCLUDE_WGS_MASTER`**<br/><br/>**`NCBI_CONFIG__GENBANK_PUBSEQOS__EXCLUDE_WGS_MASTER`** | Boolean  [<sup>b</sup>](#ch_libconfig.TF.38) | false |
-| Disable attaching WGS master descriptors when retrieving ASN.1 blobs using the CPubseq2Reader class. | **`[GENBANK/PUBSEQOS2]`**<br/>**`EXCLUDE_WGS_MASTER`**<br/><br/>**`NCBI_CONFIG__GENBANK_PUBSEQOS2__EXCLUDE_WGS_MASTER`** | Boolean  [<sup>b</sup>](#ch_libconfig.TF.38) | false |
-| Set the severity level for ID1 debug tracing.         | **`[GENBANK]`**<br/>**`ID1_DEBUG`**<br/><br/>**`GENBANK_ID1_DEBUG`**    | int:<br/>0 = none,<br/>1 = error,<br/>2 = open,<br/>4 = conn,<br/>5 = asn,<br/>8 = asn data      | 0    |
-| Specify the ID1 reader service name. ***Note:*** The services can be redirected using generic [Service Redirection](ch_conn.html#ch_conn.Service_Redirection) technique. Has precedence over **`[NCBI].SERVICE_NAME_ID1`** | **`[GENBANK]`**<br/>**`ID1_SERVICE_NAME`**<br/><br/>**`GENBANK_ID1_SERVICE_NAME`** | a valid reader service name | ID1<br/>(see [API](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=DEFAULT_SERVICE)) |
-| Specify the ID2 reader service name. ***Note:*** The services can be redirected using generic [Service Redirection](ch_conn.html#ch_conn.Service_Redirection) technique. Has precedence over **`[GENBANK].ID2_SERVICE_NAME`** | **`[GENBANK]`**<br/>**`ID2_CGI_NAME`**<br/><br/>**`GENBANK_ID2_CGI_NAME`** | a valid reader service name | ID2<br/>(see [API](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=DEFAULT_SERVICE)) |
-| Set the severity level for ID2 debug tracing.         | **`[GENBANK]`**<br/>**`ID2_DEBUG`**<br/><br/>**`GENBANK_ID2_DEBUG`**    | int:<br/>0 = none,<br/>1 = error,<br/>2 = open,<br/>4 = conn,<br/>5 = asn,<br/>8 = blob,<br/>9 = blob data | debug: none<br/>release: error<br/>(see [API](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=DEFAULT_DEBUG_LEVEL)) |
-| Number of chunks allowed in a single request.         | **`[GENBANK]`**<br/>**`ID2_MAX_CHUNKS_REQUEST_SIZE`**<br/><br/>**`GENBANK_ID2_MAX_CHUNKS_REQUEST_SIZE`**      | int:<br/>0 = unlimited request size;<br/>1 = do not use packets or get-chunks requests              | 100  |
-| Maximum number of requests packed in a single ID2 packet.                | **`[GENBANK]`**<br/>**`ID2_MAX_IDS_REQUEST_SIZE`**<br/><br/>**`GENBANK_ID2_MAX_IDS_REQUEST_SIZE`**            | \>=0               | 100  |
-| Specify the ID2 reader service name. ***Note:*** The services can be redirected using generic [Service Redirection](ch_conn.html#ch_conn.Service_Redirection) technique. Has precedence over **`[NCBI].SERVICE_NAME_ID2`** | **`[GENBANK]`**<br/>**`ID2_SERVICE_NAME`**<br/><br/>**`GENBANK_ID2_SERVICE_NAME`** | a valid reader service name | ID2<br/>(see [API](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=DEFAULT_SERVICE)) |
-| Prioritized list of drivers to try for the reader or writer.<br />Less precedence than **`[GENBANK].READER_NAME`** or **`[GENBANK].WRITER_NAME`**. | **`[GENBANK]`**<br/>**`LOADER_METHOD`**<br/><br/>**`GENBANK_LOADER_METHOD`** | list items are semicolon-delimited;<br/>each item is a colon-delimited list of drivers.<br/>valid drivers:<br/>id1, id2, cache, pubseqos | `#if defined(HAVE_PUBSEQ_OS)`<br />"ID2:PUBSEQOS:ID1"<br />`else`<br />"ID2:ID1"<br />`#endif`<br />(see [API](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=DEFAULT_DRV_ORDER)) |
-| The maximum number of connections the reader can establish to the data source. This is run-time limited to 1 for single threaded clients and for all clients using the cache or gi reader, and to 5 for multi-threaded clients using the id1, id2, pubseqos, and pubseqos2 readers.      | **`[GENBANK]`**<br/>**`MAX_NUMBER_OF_CONNECTIONS`**                | int                | 3 for id1 and id2; 2 for pubseqos and pubseqos2               |
-| See **`MAX_NUMBER_OF_CONNECTIONS`**                   | **`[GENBANK]`**<br/>**`NO_CONN`**               |                   |     |
-| See **`OPEN_TIMEOUT_INCREMENT`**   | **`[GENBANK]`**<br/>**`OPEN_INCREMENT`**        |                   |     |
-| See **`OPEN_TIMEOUT_MAX`**         | **`[GENBANK]`**<br/>**`OPEN_MAX`**              |                   |     |
-| See **`OPEN_TIMEOUT_MULTIPLIER`**  | **`[GENBANK]`**<br/>**`OPEN_MULTIPLIER`**       |                   |     |
-| The **`OPEN_TIMEOUT*`** parameters describe the timeout for opening a GenBank connection. The timeout allows the server a reasonable time to respond while providing a means to quickly abandon unresponsive servers.            | **`[GENBANK]`**<br/>**`OPEN_TIMEOUT`**<br/><br/>**`NCBI_CONFIG__GENBANK__OPEN_TIMEOUT`**  [<sup>c</sup>](#ch_libconfig.TF.39)     | any floating point value \>= 0.0      | 5 seconds               |
-| **`OPEN_TIMEOUT_MULTIPLIER`** and **`OPEN_TIMEOUT_INCREMENT`** specify the way the open timeout is increased if no response is received (next\_open\_timeout = prev\_open\_timeout \* multiplier + increment).                   | **`[GENBANK]`**<br/>**`OPEN_TIMEOUT_INCREMENT`**<br/><br/>**`NCBI_CONFIG__GENBANK__OPEN_TIMEOUT_INCREMENT`**  [<sup>c</sup>](#ch_libconfig.TF.39)    | any floating point value \>= 0.0      | 0 seconds               |
-| The limit of increasing the open timeout using **`OPEN_TIMEOUT_MULTIPLIER`** and **`OPEN_TIMEOUT_INCREMENT`**. | **`[GENBANK]`**<br/>**`OPEN_TIMEOUT_MAX`**<br/><br/>**`NCBI_CONFIG__GENBANK__OPEN_TIMEOUT_MAX`**  [<sup>c</sup>](#ch_libconfig.TF.39)                | floating point \>= 0.0                | 30 seconds              |
-| See **`OPEN_TIMEOUT_INCREMENT`**   | **`[GENBANK]`**<br/>**`OPEN_TIMEOUT_MULTIPLIER`**<br/><br/>**`NCBI_CONFIG__GENBANK__OPEN_TIMEOUT_MULTIPLIER`**  [<sup>c</sup>](#ch_libconfig.TF.39)  | floating point \>= 0.0                | 1.5  |
-| Whether to open first connection immediately or not.  | **`[GENBANK]`**<br/>**`preopen`**<br/><br/>**`NCBI_CONFIG__GENBANK__PREOPEN`**  [<sup>c</sup>](#ch_libconfig.TF.39)               | Boolean  [<sup>b</sup>](#ch_libconfig.TF.38)              | true |
-| Turns on different levels of debug messages in PubSeqOS reader. A value \>=2 means debug opening connections while \>=5 means debug results of Seq-id resolution requests. ***Note:*** only applies to debug builds.             | **`[GENBANK]`**<br/>**`PUBSEQOS_DEBUG`**<br/><br/>**`GENBANK_PUBSEQOS_DEBUG`**             | int                | 0    |
-| Prioritized list of drivers to try for the reader. Has precedence over **`[GENBANK].LOADER_METHOD`**. | **`[GENBANK]`**<br/>**`READER_NAME`**<br/><br/>**`GENBANK_READER_NAME`** | See **`[GENBANK].LOADER_METHOD`**. | See **`[GENBANK].LOADER_METHOD`**. |
-| Specify the level of reader statistics to collect.    | **`[GENBANK]`**<br/>**`READER_STATS`**<br/><br/>**`GENBANK_READER_STATS`**                 | int:<br/>0 = none,<br/>1 = verbose         | 0    |
-| Specify whether the reader manager should automatically register ID1, ID2, and cache.       | **`[GENBANK]`**<br/>**`REGISTER_READERS`**<br/><br/>**`GENBANK_REGISTER_READERS`**         | Boolean  [<sup>a</sup>](#ch_libconfig.TF.37)              | true |
-| On some platforms, equal strings can share their character data, reducing the required memory. Set this parameter to true to have the GenBank loader try to use this feature if it is available.              | **`[GENBANK]`**<br/>**`SNP_PACK_STRINGS`**<br/><br/>**`GENBANK_SNP_PACK_STRINGS`**         | Boolean  [<sup>a</sup>](#ch_libconfig.TF.37)              | true |
-| In ID1/PubSeqOS readers present SNP data as ID2-split entries to reduce memory usage.       | **`[GENBANK]`**<br/>**`SNP_SPLIT`**<br/><br/>**`GENBANK_SNP_SPLIT`**    | Boolean  [<sup>a</sup>](#ch_libconfig.TF.37)              | true |
-| Storing all the SNPs as plain ASN.1 objects would require a huge amount of memory. The SNP table is a compact way of storing SNPs to reduce memory consumption. Set this parameter to true to have the object manager try to use the SNP table.     | **`[GENBANK]`**<br/>**`SNP_TABLE`**<br/><br/>**`GENBANK_SNP_TABLE`**    | Boolean  [<sup>a</sup>](#ch_libconfig.TF.37)              | true |
-| Set to a positive integer to enable dumping (to stderr in text ASN.1 form) all the SNPs that don't fit into the SNP table. ***Note:*** this is only available in debug mode.               | **`[GENBANK]`**<br/>**`SNP_TABLE_DUMP`**<br/><br/>**`GENBANK_SNP_TABLE_DUMP`**             | Boolean  [<sup>a</sup>](#ch_libconfig.TF.37)              | false                   |
-| Set this parameter to true to dump (to stdout) some statistics on the process of storing SNPs into the SNP table. This option may help determine why not all the SNPs could fit in the table.                 | **`[GENBANK]`**<br/>**`SNP_TABLE_STAT`**<br/><br/>**`GENBANK_SNP_TABLE_STAT`**             | Boolean  [<sup>a</sup>](#ch_libconfig.TF.37)              | false                   |
-| Specify whether to use a memory pool.                 | **`[GENBANK]`**<br/>**`USE_MEMORY_POOL`**<br/><br/>**`GENBANK_USE_MEMORY_POOL`**           | Boolean  [<sup>a</sup>](#ch_libconfig.TF.37)              | true |
-| The **`WAIT_TIME*`** parameters describe the wait time before opening new GenBank connections in case of communication errors. The wait time is necessary to allow network and/or GenBank servers to recover. **`WAIT_TIME`** is the initial wait after the first error. See also: GenBank reader configuration. | **`[GENBANK]`**<br/>**`WAIT_TIME`**<br/><br/>**`NCBI_CONFIG__GENBANK__WAIT_TIME`**  [<sup>c</sup>](#ch_libconfig.TF.39)           | floating point \>= 0.0                | 1 second                |
-| Specifies for how many sequential communication errors the response should be to use wait time, before trying to open a new connection instead.      | **`[GENBANK]`**<br/>**`WAIT_TIME_ERRORS`**<br/><br/>**`NCBI_CONFIG__GENBANK__WAIT_TIME_ERRORS`**  [<sup>c</sup>](#ch_libconfig.TF.39)                | int                | 2 errors                |
-| **`WAIT_TIME_MULTIPLIER`** and **`WAIT_TIME_INCREMENT`** specify the way wait time is increased if errors continue to happen (next\_wait\_time = prev\_wait\_time \* multiplier + increment).                 | **`[GENBANK]`**<br/>**`WAIT_TIME_INCREMENT`**<br/><br/>**`NCBI_CONFIG__GENBANK__WAIT_TIME_INCREMENT`**  [<sup>c</sup>](#ch_libconfig.TF.39)          | any floating point value \>= 0.0      | 1 second                |
-| The limit of increasing wait time using **`WAIT_TIME_MULTIPLIER`** and **`WAIT_TIME_INCREMENT`**.              | **`[GENBANK]`**<br/>**`WAIT_TIME_MAX`**<br/><br/>**`NCBI_CONFIG__GENBANK__WAIT_TIME_MAX`**  [<sup>c</sup>](#ch_libconfig.TF.39)   | floating point \>= 0.0                | 30 seconds              |
-| See **`WAIT_TIME_INCREMENT`**      | **`[GENBANK]`**<br/>**`WAIT_TIME_MULTIPLIER`**<br/><br/>**`NCBI_CONFIG__GENBANK__WAIT_TIME_MULTIPLIER`**  [<sup>c</sup>](#ch_libconfig.TF.39)        | any floating point value \>= 0.0      | 1.5  |
-| Prioritized list of drivers to try for the writer. Has precedence over **`[GENBANK].LOADER_METHOD`**. | **`[GENBANK]`**<br/>**`WRITER_NAME`**<br/><br/>**`GENBANK_WRITER_NAME`** | See **`[GENBANK].LOADER_METHOD`**. | See **`[GENBANK].LOADER_METHOD`**. |
-| Database lock control. By default LDS2 databases are read-only, so they are cached in memory. If an explicit mode is set in the code, this config parameter is ignored. ***Note:*** To set locks the database must be writable. | **`[LDS2]`**<br/>**`DataLoader_Lock`**<br/><br/>**`LDS2_DATALOADER_LOCK`** | "lock", "nolock", or "cache" | "cache" |
-| If true, replace ranges that cannot be mapped with a NULL location instead of using the neighbor's fuzz. | **`[Mapper]`**<br/>**`NonMapping_As_Null`**<br/><br/>**`MAPPER_NONMAPPING_AS_NULL`** | Boolean  [<sup>a</sup>](#ch_libconfig.TF.37) | false |
-| Specify the ID1 reader service name. ***Note:*** The services can be redirected using generic [Service Redirection](ch_conn.html#ch_conn.Service_Redirection) technique. Less precedence than **`[GENBANK].ID1_SERVICE_NAME`**. | **`[NCBI]`**<br/>**`SERVICE_NAME_ID1`**<br/><br/>**`GENBANK_SERVICE_NAME_ID1`** | a valid reader service name | ID1<br/>(see [API](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=DEFAULT_SERVICE)) |
-| Specify the ID2 reader service name. ***Note:*** The services can be redirected using generic [Service Redirection](ch_conn.html#ch_conn.Service_Redirection) technique. Less precedence than **`[GENBANK].ID2_SERVICE_NAME`**. | **`[NCBI]`**<br/>**`SERVICE_NAME_ID2`**<br/><br/>**`GENBANK_SERVICE_NAME_ID2`** | a valid reader service name | ID2<br/>(see [API](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=DEFAULT_SERVICE)) |
-| If non-zero, reserve Dense-seg vectors using predefined pre-read hook.   | **`[OBJECTS]`**<br/>**`DENSE_SEG_RESERVE`**<br/><br/>**`OBJECTS_DENSE_SEG_RESERVE`**       | Boolean  [<sup>a</sup>](#ch_libconfig.TF.37)              | true |
-| Specify whether Seq-id general trees are packed.      | **`[OBJECTS]`**<br/>**`PACK_GENERAL`**<br/><br/>**`OBJECTS_PACK_GENERAL`**                 | Boolean  [<sup>a</sup>](#ch_libconfig.TF.37)              | true |
-| Specify whether Seq-id text-seq trees are packed.     | **`[OBJECTS]`**<br/>**`PACK_TEXTID`**<br/><br/>**`OBJECTS_PACK_TEXTID`**                   | Boolean  [<sup>a</sup>](#ch_libconfig.TF.37)              | true |
-| Specify whether empty Seq-descr's will be allowed (or throw if not).     | **`[OBJECTS]`**<br/>**`SEQ_DESCR_ALLOW_EMPTY`**<br/><br/>**`OBJECTS_SEQ_DESCR_ALLOW_EMPTY`**                  | Boolean  [<sup>a</sup>](#ch_libconfig.TF.37)              | false                   |
-| If non-zero, reserve Seq-graph vectors using predefined pre-read hook.   | **`[OBJECTS]`**<br/>**`SEQ_GRAPH_RESERVE`**<br/><br/>**`OBJECTS_SEQ_GRAPH_RESERVE`**       | Boolean  [<sup>a</sup>](#ch_libconfig.TF.37)              | true |
-| If non-zero, reserve Seq-table vectors using predefined pre-read hook.   | **`[OBJECTS]`**<br/>**`SEQ_TABLE_RESERVE`**<br/><br/>**`OBJECTS_SEQ_TABLE_RESERVE`**       | Boolean  [<sup>a</sup>](#ch_libconfig.TF.37)              | true |
-| Sets the maximum number of master TSE blobs that will be cached.         | **`[OBJMGR]`**<br/>**`BLOB_CACHE`**<br/><br/>**`OBJMGR_BLOB_CACHE`**    | unsigned int       | 10   |
-| Specify whether the scope can be auto-released.       | **`[OBJMGR]`**<br/>**`SCOPE_AUTORELEASE`**<br/><br/>**`OBJMGR_SCOPE_AUTORELEASE`**         | Boolean  [<sup>a</sup>](#ch_libconfig.TF.37)              | true |
-| Specify the size of the scope auto-release.           | **`[OBJMGR]`**<br/>**`SCOPE_AUTORELEASE_SIZE`**<br/><br/>**`OBJMGR_SCOPE_AUTORELEASE_SIZE`**                  | unsigned int       | 10   |
-| Specify whether the new FASTA implementation will be used.               | **`[READ_FASTA]`**<br/>**`USE_NEW_IMPLEMENTATION`**<br/><br/>**`NCBI_CONFIG__READ_FASTA__USE_NEW_IMPLEMENTATION`**  [<sup>c</sup>](#ch_libconfig.TF.39)                 | Boolean  [<sup>a</sup>](#ch_libconfig.TF.37)              | true |
-| If true, try to avoid GIs where possible, even if there's no accessions to prefer. | **`[SeqId]`**<br/>**`AvoidGi`**<br/><br/>**`SEQ_ID_AVOID_GI`** | Boolean  [<sup>a</sup>](#ch_libconfig.TF.37) | false |
-| If true, give GIs worse (higher) score to prefer accessions in CSeq_id ranking methods. | **`[SeqId]`**<br/>**`PreferAccessionOverGi`**<br/><br/>**`SEQ_ID_PREFER_ACCESSION_OVER_GI`** | Boolean  [<sup>a</sup>](#ch_libconfig.TF.37) | false |
+-   [Random Number Generator](#ch_intro.intro_random)
 
-<div class="table-scroll"></div>
+-   [Registry based DNS](#ch_intro.intro_regdns)
 
-<a name="ch_libconfig.TF.37"></a>
+-   [Regular Expressions](#ch_intro.Regular_Expressions)
 
-<sup>a</sup> case-insensitive: true, t, yes, y, 1, false, f, no, n, 0
+-   [Resizing Iterator](#ch_intro.intro_resizeiterator)
 
-<a name="ch_libconfig.TF.38"></a>
+-   [Rotating Log Streams](#ch_intro.intro_rotatelog)
 
-<sup>b</sup> case-insensitive: true, t, yes, y, false, f, no, n
+-   [Stream Support](#ch_intro.intro_streamsupport)
 
-<a name="ch_libconfig.TF.39"></a>
+-   [String Search](#ch_intro.intro_strsearch)
 
-<sup>c</sup> [environment variable name](#ch_libconfig.Environment) formed from registry section and entry name
+-   [Synchronized and blocking queue](#ch_intro.Synchronized_and_blo)
 
-<a name="ch_libconfig.TF.40"></a>
+-   [Thread Pools](#ch_intro.intro_thrpools)
 
-<sup>d</sup> case-insensitive: true values are { yes \| 1 }; anything else is false
+-   [UTF 8 Conversion](#ch_intro.intro_utf8)
 
-<a name="ch_libconfig.cSRA"></a>
+<a name="ch_intro.intro_checksum"></a>
 
-### cSRA
+### Checksum
 
-<a name="ch_libconfig.sraread_library"></a>
+The Checksum class implements CRC32 (Cyclic Redundancy Checksum 32-bit) calculation. The CRC32 is a 32-bit polynomial checksum that has many applications such as verifying the integrity of a piece of data. The ***[CChecksum](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CChecksum)*** class implements the CRC32 checksum that can be used to compute the CRC of a sequence of byte values.
 
-#### sraread library
+The checksum calculation is set up by creating a ***[CChecksum](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CChecksum)*** object using the ***[CChecksum](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CChecksum)*** constructor and passing it the type of CRC to be calculated. Currently only CRC32 is defined, so you must pass it the enumeration constant eCRC32 also defined in the class.
 
-***Note:*** This section applies only inside NCBI.
+Data on which the checksum is to be computed is passed to the ***CChecksum's****[AddLine()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddLine)*** or ***[AddChars()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddChars)*** method as a character array. As data is passed to these methods, the CRC is computed and stored in the class. You can get the value of the computed CRC using the ***[GetChecksum()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetChecksum)*** method. Alternatively, you can use the ***WriteChecksum()*** method and pass it a ***[CNcbiOstream](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiOstream)*** object and have the CRC written to the output stream in the following syntax:
 
-The following parameters tune the behavior of the `sraread` library:
+/\* Original file checksum: lines: *nnnn*, chars: *nnnn*, CRC32: *xxxxxxxx* \*/
 
-<a name="ch_libconfig.T.nc_purposeregistry_sect_1"></a>
+<a name="ch_intro.intro_dumpv"></a>
 
-| Purpose        | [Registry section]<br/>Registry name<br/><br/>Environment variable | Valid values | Default |
-|----------------|--------------------------------------------------------------------|--------------|---------|
-| If true, will add CIGAR info to Seq-align's returned by cSRA iterators.      | **`[csra]`**<br/>**`cigar_in_align_ext`**<br/><br/>**`CSRA_CIGAR_IN_ALIGN_EXT`**     | Boolean      | true    |
-| If true, will clip the read ranges returned by cSRA short read iterators according to quality. | **`[csra]`**<br/>**`clip_by_quality`**<br/><br/>**`CSRA_CLIP_BY_QUALITY`**     | Boolean      | true    |
-| If true, will add mate info to Seq-align's returned by cSRA iterators. | **`[csra]`**<br/>**`explicit_mate_info`**<br/><br/>**`CSRA_EXPLICIT_MATE_INFO`**     | Boolean      | false   |
-| If true, cSRA short read iterators will also include technical reads.  | **`[csra]`**<br/>**`include_technical_reads`**<br/><br/>**`CSRA_INCLUDE_TECHNICAL_READS`** | Boolean      | true    |
+### Console Debug Dump Viewer
 
-<div class="table-scroll"></div>
+The UTIL module implements a simple Console Debug Dump Viewer that enables the printing of object information on the console, through a simple console interface. Objects that can be debugged must be inherited from ***[CDebugDumpable](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDebugDumpable)*** class. The ***[CObject](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CObject)*** is derived from ***[CDebugDumpable](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDebugDumpable)***, and since most other objects are derived from ***[CObject](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CObject)*** this makes these objects 'debuggable'.
 
-<a name="ch_libconfig.ncbi_xloader_csra_library"></a>
+The Console Debug Dump Viewer is implemented by the ***[CDebugDumpViewer](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDebugDumpViewer)*** class. This class implements a breakpoint method called ***[Bpt()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Bpt)***. This method is called with the name of the object and a pointer to the object to be debugged. This method prompts the user for commands that the user can type from the console:
 
-#### ncbi\_xloader\_csra library
+    Console Debug Dump Viewer
+    Stopped at  testfile.cpp(120)
+    current object: myobj = xxxxxx
+    Available commands:
+       t[ypeid]  address
+       d[ump]    address  depth
+       go
 
-***Note:*** This section applies only inside NCBI.
+The ***[CDebugDumpViewer](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDebugDumpViewer)*** class also permits the enabling and disabling of debug dump breakpoints from the [registry](#ch_intro.intro_reg).
 
-The following parameters tune the behavior of the `ncbi_xloader_csra` library:
+<a name="ch_intro.Diff_API"></a>
 
-<a name="ch_libconfig.T.nc_purposeregistry_sect_2"></a>
+### Diff API
 
-| Purpose             | [Registry section]<br/>Registry name<br/><br/>Environment variable     | Valid values | Default |
-|---------------------|------------------------------------------------------------------------|--------------|---------|
-| If \>= 9, log alignment chunks.<br/>If \>= 5, log major function calls.<br/>If \>= 2, log refseq stats.<br/>If \>= 1, log summary data. | **`[csra_loader]`**<br/>**`debug`**<br/><br/>**`CSRA_LOADER_DEBUG`**   | int    | 0 |
-| The max number of SRR files to keep open.                 | **`[csra_loader]`**<br/>**`gc_size`**<br/><br/>**`CSRA_LOADER_GC_SIZE`**     | size\_t      | 10      |
-| If \> 0, defines the max number of separate spot groups.  | **`[csra_loader]`**<br/>**`max_separate_spot_groups`**<br/><br/>**`CSRA_LOADER_MAX_SEPARATE_SPOT_GROUPS`** | int    | 0 |
-| If \> 0, defines the minimum quality threshold for loading alignment and pileup chunks.         | **`[csra_loader]`**<br/>**`pileup_graphs`**<br/><br/>**`CSRA_LOADER_PILEUP_GRAPHS`**     | int    | 0 |
-| If true, fetch quality graphs along with short reads.     | **`[csra_loader]`**<br/>**`quality_graphs`**<br/><br/>**`CSRA_LOADER_QUALITY_GRAPHS`**   | Boolean      | false   |
+The Diff API includes the ***[CDiff](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDiff)*** class for character-based diffs and the ***[CDiffText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDiffText)*** class for line-based diffs. The API is based on the open source [Diff, Match and Patch Library](https://code.google.com/p/google-diff-match-patch/) and the [Diff Template Library](https://code.google.com/p/dtl-cpp/).
 
-<div class="table-scroll"></div>
+To use the Diff API, include `xdiff` in the **`LIB`** line of your application makefile, and include `<util/diff/diff.hpp>` in your source.
 
-<a name="ch_libconfig.BAM"></a>
+The following sample code shows how to perform both character- and line-based diffs:
 
-### BAM
+    // Print difference list in human readable format
+    static void s_PrintDiff(const string& msg, const string& s1, const string& s2,
+        const CDiffList& diff)
+    {
+        NcbiCout << msg << NcbiEndl
+            << "Comparing '" << s1 << "' to '" << s2 << "':" << NcbiEndl;
+        ITERATE(CDiffList::TList, it, diff.GetList()) {
+            string op;
+            size_t n1 = 0;
+            size_t n2 = 0;
 
-#### bamread library
+            if (it->IsDelete()) {
+                op = "-";
+                n1 = it->GetLine().first;
+            } else if (it->IsInsert()) {
+                op = "+";
+                n2 = it->GetLine().second;
+            } else {
+                op = "=";
+                n1 = it->GetLine().first;
+                n2 = it->GetLine().second;
+            }
+            NCbiCout << op << " ("
+                 << n1 << "," << n2 << ")"
+                 << ": " << "'" << it->GetString() << "'" << NCbiEndl;
+        }
+    }
 
+    // Perform a character-based diff:
+    { {
+        CTempString s1("how now");
+        CTempString s2("brown cow");
+        CDiff d;
+        CDiffList& diffs(d.Diff(s1, s2));
+        s_PrintDiff("Line-based diff:", s1, s2, diffs);
+    } }
 
-| Purpose             | [Registry section]<br/>Registry name     | Valid values | Default       |
-|---------------------|------------------------------------------------------------------------|--------------|---------------|
-|Specifies directory where BAM and BAM index files are looked for.   |**`[bam]`**<br/>**`dir_path`**               |Directory name     |               |
-|Specifies BAM file name. If dir_path is also specified, then the file name is relative to the dir_path. | **`[bam]`**<br/>**`bam_name`**           | File Name |               |
-|Specifies BAM index file name. If dir_path is also specified, then the file name is relative to the dir_path. If index_name is not set then index file name is derived form BAM file name by adding ".bai" extension. | **`[bam]`**<br/>**`index_name`**        |File Name |               |
-|Enables CIGAR string in Seq-align Traceback ext object | **`[bam]`**<br/>**`cigar_in_align_ext`** |Boolean | true          |
-|Enables skipping of CIGAR string with ambiguous match | **`[bam]`**<br/>**`omit_ambiguous_match_cigar`** |Boolean | false         |
-|Enables 2nd generation of BAM parsing code | **`[bam]`**<br/>**`use_raw_index`** |Boolean | false         |
+    // Perform a line-based diff:
+    { {
+        CTempString s1("group 1\nasdf asf\ntttt\nasdf asd");
+        CTempString s2("group 2\nqwerty\n\nasdf\nasf asd");
+        CDiffText d;
+        CDiffList& diffs(d.Diff(s1, s2));
+        s_PrintDiff("Line-based diff:", s1, s2, diffs);
+    } }
 
+For more detailed usage, see the test program:
 
-#### ncbi\_xloader\_bam library
+<https://www.ncbi.nlm.nih.gov/viewvc/v1/trunk/c%2B%2B/src/util/diff/test/>
 
-| Purpose      | [Registry section]<br/>Registry name       | Valid values          | Default       |
-|--------------|--------------------------------------------------------------------------|-----------------------|---------------|
-|Enables debugging log messages (if not zero), the higher the number, the more messages are logged. |**`[bamloader]`**<br/>**`debug`**         |Number (0-3)   | 0             |
-|Specified file name for CIdMapperConfig used to map BAM sequence ids into CSeq_id.   |**`[bamloader]`**<br/>**`mapper_file`**   |File Name    |               |
-|Generate pileup graphs for alignments       |**`[bamloader]`**<br/>**`pileup_graphs`**                                          |Boolean     | true          |
-| Do not create pileup graphs from the set (ACGT,match,insert) if the graph is completely zero. |**`[bamloader]`**<br/>**`skip_empty_pileup_graphs`** |Boolean     | true          |
-| Use fast estimation for coverage graph if possible.     |**`[bamloader]`**<br/>**`estimated_coverage_graph`**                  |Boolean     | true          |
-|Do not open BAM files at time of loader registration, open them only when alignments or graphs are requested. |**`[bamloader]`**<br/>**`preopen`**       |Boolean     | false         |
+<a name="ch_intro.Floating_Point_Comparison"></a>
 
+### Floating Point Comparison
 
+For technical reasons, direct comparison of "close" floating point values is simply not reliable on most computers in use today. Therefore, in cases where the values being compared might be close, it is advisable to apply a tolerance when making comparisons to avoid unexpected results.
 
-<a name="ch_libconfig.DBAPI"></a>
+The UTIL module defines a function, ***[g\_FloatingPoint\_Compare()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=g_FloatingPoint_Compare)***, that implements floating point comparison using a tolerance. In practice this means that code like:
 
-### DBAPI
+        if (a < b) {
+            if (c == d ) {
+                if (e > f) {
 
-[These parameters](#ch_libconfig.T.DBAPI_configuration_param) tune the behavior of the DBAPI library.
+should be rewritten as:
 
-<a name="ch_libconfig.T.DBAPI_configuration_param"></a>
+    #include <util/floating_point.hpp>
+    //...
+        if (g_FloatingPoint_Compare(a, eFP_LessThan, b,
+                                    eFP_WithPercent, percent) {
+            if (g_FloatingPoint_Compare(c, eFP_EqualTo, d,
+                                        eFP_WithFraction, fraction) {
+                if (g_FloatingPoint_Compare(e, eFP_GreaterThan, f,
+                                            eFP_WithPercent, percent) {
 
-Table 14. DBAPI configuration parameters
+Note that compared variables must be of the same floating point type, otherwise a compile error will be generated.
 
-| Purpose     | [Registry section]<br/>Registry name<br/><br/>Environment variable       | Valid values          | Default       |
-|-------------|--------------------------------------------------------------------------|-----------------------|---------------|
-| If **`RESET_SYBASE`** is true, the Sybase client path will be set to the value in the **`SYBASE`** variable.            | [N/A]<br/>N/A<br/><br/>**`RESET_SYBASE`**                  | Boolean  [<sup>a</sup>](#ch_libconfig.TF.41)                 | (none)              |
-| If **`RESET_SYBASE`** is true, the Sybase client path will be set to the value in the **`SYBASE`** variable.            | [N/A]<br/>N/A<br/><br/>**`SYBASE`**     | a path containing a Sybase client        | (none)              |
-| The version of the TDS protocol to use with the CTLIB driver.  | **`[CTLIB]`**<br/>**`TDS_VERSION`**<br/><br/>**`CTLIB_TDS_VERSION`**          | an installed TDS version                 | 125 (see [API](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=NCBI_CTLIB_TDS_VERSION)) |
-| The version of the TDS protocol to use with the FTDS driver.   | **`[FTDS]`**<br/>**`TDS_VERSION`**<br/><br/>**`FTDS_TDS_VERSION`**            | 0 (auto-detect),<br/>50 (Sybase or Open Server),<br/>70 (SQL Server) | 0                   |
-| Whether [connecting with Kerberos authentication](ch_dbapi.html#ch_dbapi.Using_Kerberos_with_DBAPI) is supported. If true, and the username and password are empty strings, then DBAPI will attempt to use Kerberos to connect to the database. The user must ensure that the database will allow them to connect via Kerberos and that their Kerberos ticket is not expired.      | **`[dbapi]`**<br/>**`can_use_kerberos`**<br/><br/>**`NCBI_CONFIG__DBAPI__CAN_USE_KERBEROS`**  [<sup>c</sup>](#ch_libconfig.TF.43)       | Boolean  [<sup>b</sup>](#ch_libconfig.TF.42)                 | false               |
-| Whether to encrypt login data.              | **`[dbapi]`**<br/>**`conn_use_encrypt_data`**<br/><br/>**`NCBI_CONFIG__DBAPI__CONN_USE_ENCRYPT_DATA`**  [<sup>c</sup>](#ch_libconfig.TF.43)   | Boolean  [<sup>b</sup>](#ch_libconfig.TF.42)                 | false               |
-| The maximum number of simultaneously open connections to database servers.        | **`[dbapi]`**<br/>**`max_connection`**<br/><br/>**`NCBI_CONFIG__DBAPI__MAX_CONNECTION`**  [<sup>c</sup>](#ch_libconfig.TF.43)           | unsigned int          | 100                 |
-| The maximum number of connection attempts that will be made for any server.       | **`[DB_CONNECTION_FACTORY]`**<br/>**`MAX_CONN_ATTEMPTS`**<br/><br/>**`NCBI_CONFIG__DB_CONNECTION_FACTORY__MAX_CONN_ATTEMPTS`**  [<sup>c</sup>](#ch_libconfig.TF.43)   | unsigned int          | 1                   |
-| The maximum number of validation attempts that will be made for each connection.  | **`[DB_CONNECTION_FACTORY]`**<br/>**`MAX_VALIDATION_ATTEMPTS`**<br/><br/>**`NCBI_CONFIG__DB_CONNECTION_FACTORY__MAX_VALIDATION_ATTEMPTS`**  [<sup>c</sup>](#ch_libconfig.TF.43)   | unsigned int          | 1                   |
-| The maximum number of servers to try to connect to for each service name (this is only meaningful if the number of servers running this service exceeds this value).             | **`[DB_CONNECTION_FACTORY]`**<br/>**`MAX_SERVER_ALTERNATIVES`**<br/><br/>**`NCBI_CONFIG__DB_CONNECTION_FACTORY__MAX_SERVER_ALTERNATIVES`**  [<sup>c</sup>](#ch_libconfig.TF.43)   | unsigned int          | 32                  |
-| The maximum number of connections to be made to one particular server (when several connections to the same service name are requested) before an attempt to connect to another server will be made. A value of 0 means connect to the same server indefinitely.                | **`[DB_CONNECTION_FACTORY]`**<br/>**`MAX_DISPATCHES`**<br/><br/>**`NCBI_CONFIG__DB_CONNECTION_FACTORY__MAX_DISPATCHES`**  [<sup>c</sup>](#ch_libconfig.TF.43)   | unsigned int          | 0                   |
-| The timeout, in seconds, to be used for all connection attempts (0 means to use either the default value or a value set specifically for the driver context). | **`[DB_CONNECTION_FACTORY]`**<br/>**`CONNECTION_TIMEOUT`**<br/><br/>**`NCBI_CONFIG__DB_CONNECTION_FACTORY__CONNECTION_TIMEOUT`**  [<sup>c</sup>](#ch_libconfig.TF.43) | unsigned int          | 30                  |
-| The timeout, in seconds, to be used while logging into the server for all connection attempts (0 means to use either the default value or a value set specifically for the driver context).         | **`[DB_CONNECTION_FACTORY]`**<br/>**`LOGIN_TIMEOUT`**<br/><br/>**`NCBI_CONFIG__DB_CONNECTION_FACTORY__LOGIN_TIMEOUT`**  [<sup>c</sup>](#ch_libconfig.TF.43)     | unsigned int          | 30                  |
-| If DBAPI resolved the passed name as a service name and then couldn't connect to any server associated with that service name, then this parameter determines whether DBAPI should also try to resolve the passed name as a server name (a database alias from  "interfaces" file or a DNS name). See also: [database load balancing](ch_dbapi.html#ch_dbapi.Database_loadbalanci). | **`[DB_CONNECTION_FACTORY]`**<br/>**`TRY_SERVER_AFTER_SERVICE`**<br/><br/>**`NCBI_CONFIG__DB_CONNECTION_FACTORY__TRY_SERVER_AFTER_SERVICE`**  [<sup>c</sup>](#ch_libconfig.TF.43) | Boolean  [<sup>a</sup>](#ch_libconfig.TF.41)                 | false               |
-| See '[PRAGMA cache\_size](https://www.sqlite.org/pragma.html#pragma_cache_size)' in the SQLite documentation.            | **`[LDS2]`**<br/>**`SQLiteCacheSize`**<br/><br/>**`LDS2_SQLITE_CACHE_SIZE`**  | any valid cache size for an SQLite database                 | 2000                |
-| The parameter tells if the **`SET XACT_ABORT ON`** option should be sent to the server as the first thing when a new connection is created.<br/>The parameter is applicable for the MS SQL servers only. The Sybase servers do not support this option and DBAPI will not try to send it regardless of the parameter value.<br/>See more on MS SQL server [documentation](https://msdn.microsoft.com/en-us/library/ms188792(v=sql.100).aspx). | **`[dbapi]`**<br/>**`set_xact_abort`**<br/><br/>**`NCBI_CONFIG__DBAPI__SET_XACT_ABORT`** [<sup>c</sup>](#ch_libconfig.TF.43) | Boolean [<sup>b</sup>](#ch_libconfig.TF.42) | true |
+For further details on this function, see its Doxygen [documentation](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/floating__point_8hpp.html#a178b404beec22ce1c48057b7a4036c23).
 
-<div class="table-scroll"></div>
+For technical details on the subject, including what it means to be close, see "[Comparing floating point numbers](https://randomascii.wordpress.com/category/floating-point/)" by Bruce Dawson.
 
-<a name="ch_libconfig.TF.41"></a>
+<a name="ch_intro.intro_lightstring"></a>
 
-<sup>a</sup> case-insensitive: true, t, yes, y, false, f, no, n
+### Lightweight Strings
 
-<a name="ch_libconfig.TF.42"></a>
+Class ***[CTempString](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CTempString)*** implements a light-weight string on top of a storage buffer whose lifetime management is known and controlled.
 
-<sup>b</sup> case-insensitive: true, t, yes, y, 1, false, f, no, n, 0
+***[CTempString](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CTempString)*** is designed to perform no memory allocation but provide a string interaction interface congruent with std::basic\_string\<char\>.
 
-<a name="ch_libconfig.TF.43"></a>
+As such, CTempString provides a const-only access interface to its underlying storage. Care has been taken to avoid allocations and other expensive operations wherever possible.
 
-<sup>c</sup> [environment variable name](#ch_libconfig.Environment) formed from registry section and entry name
+***[CTempString](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CTempString)*** has constructors from std::string and C-style string, which do not copy the string data but keep char pointer and string length.
 
-<a name="ch_libconfig.Eutils"></a>
+This way the construction and destruction are very efficient.
 
-### Eutils
+Take into account, that the character string array kept by ***[CTempString](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CTempString)*** object must remain valid and unchanged during whole lifetime of the ***[CTempString](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CTempString)*** object.
 
-[These parameters](#ch_libconfig.T.eutils_library_configurat) tune the behavior of the Eutils library.
+It's convenient to use the class ***[CTempString](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CTempString)*** as an argument of API functions so that no allocation or deallocation will take place on of the function call.
 
-<a name="ch_libconfig.T.eutils_library_configurat"></a>
+<a name="ch_intro.intro_linkedset"></a>
 
-Table 15. eutils library configuration parameters
+### Linked Sets
 
-| Purpose     | [Registry section]<br/>Registry name<br/><br/>Environment variable | Valid values | Default               |
-|-------------|--------------------------------------------------------------------|--------------|-----------------------|
-| Specify the base URL for Eutils requests. | **`[Eutils]`**<br/>**`Base_URL`**<br/><br/>**`EUTILS_BASE_URL`**   | a valid URL  | https://www.ncbi.nlm.nih.gov/books/NBK25501/ (see [API](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=kDefaultEUtils_Base_URL)) |
+The UTIL module defines a template container class, ***[CLinkedMultiset](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CLinkedMultiset)***, that can hold a linked list of multiset container types.
 
-<div class="table-scroll"></div>
+The ***[CLinkedMultiset](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CLinkedMultiset)*** defines iterator methods ***[begin()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=begin)***, ***[end()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=end)***, ***[find()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=find)***, ***lower\_bound()***, ***upper\_bound()***, to help traverse the container. The method ***[get()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=get)***, fetches the contained value, the method ***[insert()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=insert)*** inserts a new value into the container, and the method ***[erase()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=erase)***, removes the specified value from the container.
 
-<a name="ch_libconfig.Internal_GridSpecifi"></a>
+<a name="ch_intro.intro_random"></a>
 
-Distributed Computing (GRID) Specific Parameters
--------------------------------
+### Random Number Generator
 
-The following sections discuss configuration parameters that are specific to NCBI Distributed Computing (GRID).
+The UTIL module defines the ***[CRandom](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRandom)*** class that can be used for generating 32-bit unsigned random numbers. The random number generator algorithm is the Lagged Fibonacci Generator (LFG) algorithm.
 
-***Note:*** This section only applies within NCBI.
+The random number generator is initialized with a seed value, and then the ***[GetRandom()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetRandom)*** method is called to get the next random number. You can also specify that the random number value that is returned be in a specified range of values.
 
--   [NetCache and NetSchedule](#ch_libconfig.NetCache_and_NetSchedule)
+<a name="ch_intro.intro_range"></a>
 
--   [Worker Node](#ch_libconfig.WorkerNode)
+### Range Support
 
-<a name="ch_libconfig.NetCache_and_NetSchedule"></a>
+The UTIL module provides a number of container classes that support a *range* which models an interval consisting of a set of ordered values. the ***[CRange](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRange)*** class stores information about an interval, **[*from*, *to*]**, where the ***from*** and ***to*** points are inclusive. This is sometimes called a *closed interval*.
 
-### NetCache and NetSchedule
+Another class, the ***[CRangeMap](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRangeMap)*** class, is similar to the ***[CRange](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRange)*** class but allows for the storing and retrieving of data using the interval as key. The time for iterating over the interval is proportional to the amount of intervals produced by the iterator and may not be efficient in some cases.
 
-[Table 16](#ch_libconfig.1.2) describes configuration parameters that are common to both [NetCache](ch_app.html#ch_app.ncbi_netcache_service) and [NetSchedule](https://intranet.ncbi.nlm.nih.gov/wiki-private/CxxToolkit/index.cgi/NetSchedule) client APIs. These parameters are found in the `netservice_api` registry section.
+Another class, the ***[CIntervalTree](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CIntervalTree)*** class, has the same functionality as the ***[CRangeMap](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRangeMap)*** class but uses a different algorithm; that is, one based on McCreight's algorithm. Unlike the ***[CRangeMap](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRangeMap)*** class, the ***[CIntervalTree](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CIntervalTree)*** class allows several values to have the same key interval. This class is faster and its speed is not affected by the type of data but it uses more memory (about three times as much as ***[CRangeMap](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRangeMap)***) and, as a result, is less efficient when the amount of interval in the set is quite big. For example, the ***[CIntervalTree](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CIntervalTree)*** class becomes less efficient than ***[CRangeMap](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRangeMap)*** when the total memory becomes greater than processor cache.
 
-<a name="ch_libconfig.1.2"></a>
+More [details on range classes](ch_core.html#ch_core.template_typename_Co) are presented in a later chapter.
 
-Table 16. Common NetCache and NetSchedule client API configuration parameters (netservice\_api)
+<a name="ch_intro.intro_regdns"></a>
 
-| Purpose     | [Registry section]<br/>Registry name<br/><br/>Environment variable                 | Valid values   | Default         |
-|-------------|------------------------------------------------------------------------------------|----------------|-----------------|
-| Fail the request if the network I/O is inactive (blocked waiting for the communication channel to become readable or writable) for more than the specified timeout in seconds. Applies to all socket operations after the initial connection is established (see **`NCBI_CONFIG__NETSERVICE_API__CONNECTION_TIMEOUT`**). Can be overridden by **`NCBI_CONFIG__NETCACHE_API__COMMUNICATION_TIMEOUT`** or **`NCBI_CONFIG__NETSCHEDULE_API__COMMUNICATION_TIMEOUT`**.   | **`[netservice_api]`**<br/>**`communication_timeout`**<br/><br/>**`NCBI_CONFIG__NETSERVICE_API__COMMUNICATION_TIMEOUT`**  [<sup>a</sup>](#ch_libconfig.TF.44) | floating point \>= 0.0 (zero means default)   | 12.0 (see [API](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=COMMUNICATION_TIMEOUT_DEFAULT&d=) for up-to-date default) |
-| Turn on socket-specific logging, such as status and transferred data. | **`[netservice_api]`**<br/>**`connection_data_logging`**<br/><br/>**`NCBI_CONFIG__NETSERVICE_API__CONNECTION_DATA_LOGGING`**  [<sup>a</sup>](#ch_libconfig.TF.44) | Boolean  [<sup>b</sup>](#ch_libconfig.TF.45) | false |
-| The maximum number of times the API will retry a communication command on a socket. Setting connection\_max\_retries to zero will prevent NetCache API from retrying the connection and command execution. | **`[netservice_api]`**<br/>**`connection_max_retries`**<br/><br/>**`NCBI_CONFIG__NETSERVICE_API__CONNECTION_MAX_RETRIES`**  [<sup>a</sup>](#ch_libconfig.TF.44)     | unsigned int   | 4               |
-| The timeout in seconds for establishing a **new** connection to a server. Can be overridden by **`NCBI_CONFIG__NETCACHE_API__CONNECTION_TIMEOUT`** or **`NCBI_CONFIG__NETSCHEDULE_API__CONNECTION_TIMEOUT`**.                | **`[netservice_api]`**<br/>**`connection_timeout`**<br/><br/>N/A                   | floating point \> 0.0, millisecond precision, minimum 0.001 (1 millisecond) | 2.0 (see API for up-to-date default)                  |
-| The number of connections to keep in the local connection pool. If zero, the server will grow the connection pool as necessary to accomodate new connections. Otherwise, when all connections in the pool are used, new connections will be created and destroyed. | **`[netservice_api]`**<br/>**`max_connection_pool_size`**<br/><br/>**`NCBI_CONFIG__NETSERVICE_API__MAX_CONNECTION_POOL_SIZE`**  [<sup>a</sup>](#ch_libconfig.TF.44) | non-negative int                  | 0 (meaning unlimited)              |
-| The maximum number of attempts to resolve the LBSMD service name. If not resolved within this limit an exception is thrown.   | **`[netservice_api]`**<br/>**`max_find_lbname_retries`**<br/><br/>**`NCBI_CONFIG__NETSERVICE_API__MAX_FIND_LBNAME_RETRIES`**  [<sup>a</sup>](#ch_libconfig.TF.44)   | positive int   | 3               |
-| The delay in seconds between retrying a command; the total time should not exceed **`NCBI_CONFIG__NETCACHE_API__MAX_CONNECTION_TIME`**.          | **`[netservice_api]`**<br/>**`retry_delay`**<br/><br/>**`NCBI_CONFIG__NETSERVICE_API__RETRY_DELAY`**  [<sup>a</sup>](#ch_libconfig.TF.44)   | floating point \>= 0.0            | 1.0 (see [API](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=RETRY_DELAY_DEFAULT) for up-to-date default)   |
-| Close connections with zero timeout to prevent sockets in TIME\_WAIT on the client side. By default, the Linux kernel delays releasing ports for a certain period after close() because there might be a delayed arrival of packets. Setting this parameter to true disables that behavior and therefore allows faster recycling of ports. This is important when the server is handling a large number of connections due to the limited number of ports available. | **`[netservice_api]`**<br/>**`use_linger2`**<br/><br/>**`NCBI_CONFIG__NETSERVICE_API__USE_LINGER2`**  [<sup>a</sup>](#ch_libconfig.TF.44)   | Boolean  [<sup>b</sup>](#ch_libconfig.TF.45)   | false           |
+### Registry based DNS
 
-<div class="table-scroll"></div>
+The UTIL module defines the ***CSmallDns*** class that implements a simple [registry](#ch_intro.intro_reg) based DNS server. The ***CSmallDns*** class provides DNS name to IP address translations similar to a standard DNS server, except that the database used to store DNS name to IP address mappings is a non-standard local database. The database of DNS names and IP address mappings are kept in a registry-like file named by local\_hosts\_file using section [LOCAL\_DNS].
 
-<a name="ch_libconfig.TF.44"></a>
+The ***CSmallDns*** has two methods that are responsible for providing the DNS name to IP address translations: the ***[LocalResolveDNS](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=LocalResolveDNS)*** method and the ***[LocalBackResolveDNS](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=LocalBackResolveDNS)*** method. The ***[LocalResolveDNS](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=LocalResolveDNS)*** method does 'forward' name resolution. That is, given a host name, it returns a string containing the IP address in the dotted decimal notation. The ***[LocalBackResolveDNS](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=LocalBackResolveDNS)*** method does a 'reverse lookup'. That is, given an IP address as a dotted decimal notation string, it returns the host name stored in the registry.
 
-<sup>a</sup> [environment variable name](#ch_libconfig.Environment) formed from registry section and entry name
+<a name="ch_intro.Regular_Expressions"></a>
 
-<a name="ch_libconfig.TF.45"></a>
+### Regular Expressions
 
-<sup>b</sup> case-insensitive: true, t, yes, y, 1, false, f, no, n, 0
+The UTIL module defines the [CRegexp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCRegexp.html) class that supports defining, compiling, and searching against the "Perl compatible" flavor of regular expressions (PCRE). Note that PCRE, as implemented in `$(PCRE_LIBS)`, is not actually 100% compatible with the flavor of regular expressions implemented in Perl interpreters.
 
-[Table 17](#ch_libconfig.1.2.1) describes configuration parameters for NetCache client applications. These parameters are found in the `netcache_api` registry section. ***Note:*** The `netcache_api` registry section was formerly called `netcache_client`.
+A simple example of using ***[CRegexp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRegexp)***:
 
-<a name="ch_libconfig.1.2.1"></a>
+    #include <util/xregexp/regexp.hpp>
+    ...
+        CRegexp regex("^(bye|exit|quit)$", CRegexp::fCompile_ignore_case);
+        bool time2quit = regex.IsMatch(line);
 
-Table 17. NetCache client API configuration parameters (netcache\_api)
+To use ***[CRegexp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRegexp)***, link with the `xregexp` library:
 
-| Purpose     | [Registry section]<br/>Registry name<br/><br/>Environment variable     | Valid values   | Default                  |
-|-------------|------------------------------------------------------------------------|----------------|--------------------------|
-| Enable input caching (provides for slow blob retrieval).             | **`[netcache_api]`**<br/>**`cache_input`**<br/><br/>N/A                | Boolean  [<sup>b</sup>](#ch_libconfig.TF.47)          | false |
-| Only applies when using [CNetICacheClient](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNetICacheClient). Provides a "namespace" for blobs. Thus, blobs are uniquely identified by the { key, version, subkey, cache\_name } combination.        | **`[netcache_api]`**<br/>**`cache_name`**<br/><br/>N/A                 | up to 36 characters (case-sensitive and no spaces)   | (none)                   |
-| Enable output caching (provides for saving a blob with pauses more than "communication\_timeout").         | **`[netcache_api]`**<br/>**`cache_output`**<br/><br/>N/A               | Boolean  [<sup>b</sup>](#ch_libconfig.TF.47)          | false |
-| The name of your application, as identified to NetCache.             | **`[netcache_api]`**<br/>**`client`**<br/><br/>N/A  | your application's name           | (none)                   |
-| Synonym for **`[netcache_api]/client`**, which is preferred.         | **`[netcache_api]`**<br/>**`client_name`**<br/><br/>N/A                |               |      |
-| Can be used to override **`NCBI_CONFIG__NETSERVICE_API__COMMUNICATION_TIMEOUT`**. Please see that entry for details.          | **`[netcache_api]`**<br/>**`communication_timeout`**<br/><br/>N/A      | floating point \>= 0.0 (zero means use the default from **`NCBI_CONFIG__NETSERVICE_API__COMMUNICATION_TIMEOUT`**) | (none)                   |
-| Can be used to override **`[netservice_api]/connection_timeout`**. Please see that entry for details.      | **`[netcache_api]`**<br/>**`connection_timeout`**<br/><br/>N/A         | floating point \>= 0.0, minimum 0.001 (zero means use the default from **`[netservice_api]/connection_timeout`**) | (none)                   |
-| Depending on the value, enables mirroring: if true, mirroring is unconditionally enabled, if false, it is disabled completely. The special value "if\_key\_mirrored" is used to enable mirroring for the blobs that already have mirroring extensions in their keys.                  | **`[netcache_api]`**<br/>**`enable_mirroring`**<br/><br/>N/A           | Boolean  [<sup>c</sup>](#ch_libconfig.TF.48), or "if\_key\_mirrored"     | "if\_key\_mirrored"      |
-| The host:port address for the NetCache server that will be used for blob creation if none of the servers configured via LBSM were able to create the blob. This is only for new blob requests.            | **`[netcache_api]`**<br/>**`fallback_server`**<br/><br/>**`NCBI_CONFIG__NETCACHE_API__FALLBACK_SERVER`**  [<sup>a</sup>](#ch_libconfig.TF.46)     | a valid server | ""    |
-| Sets a communication timeout (in seconds) for accessing the first server in a service while submitting a job. If the first server does not reply within the specified amount of time, the next server will be tried, but the second and all subsequent servers will be given the full communication\_timeout to reply. If LBSM services are not used or there's only one server in the service, this parameter does not apply. | **`[netcache_api]`**<br/>**`first_server_timeout`**<br/><br/>**`NCBI_CONFIG__NETCACHE_API__FIRST_SERVER_TIMEOUT`**  [<sup>a</sup>](#ch_libconfig.TF.46) | floating point \>= 0.0 (zero means use default)      | **`[netschedule_api]/communication_timeout`** if defined, or 300ms |
-| In conjunction with **`[netcache_api]/port`**, a synonym for **`[netcache_api]/service_name`**, which is preferred.           | **`[netcache_api]`**<br/>**`host`**<br/><br/>N/A    |               |      |
-| Max total time for each NetCache transaction.     | **`[netcache_api]`**<br/>**`max_connection_time`**<br/><br/>N/A        | floating point \>= 0.0 (zero means to ignore)        | 0.0   |
-| In conjunction with **`[netcache_api]/host`**, a synonym for **`[netcache_api]/service_name`**, which is preferred.           | **`[netcache_api]`**<br/>**`port`**<br/><br/>N/A    |               |      |
-| A trigger for LBSM query (query LBSM once per the specified number of NetCache operations).                | **`[netcache_api]`**<br/>**`rebalance_requests`**<br/><br/>N/A         | integer \>= 0 (zero means to not rebalance based on requests)           | 5000 requests            |
-| Another trigger for LBSM query (query LBSM at least once per the specified number of seconds)              | **`[netcache_api]`**<br/>**`rebalance_time`**<br/><br/>N/A             | floating point \>= 0.0 (zero means to not rebalance based on time)      | 10.0 seconds             |
-| Synonym for **`[netcache_api]/host`**, which is preferred.           | **`[netcache_api]`**<br/>**`server`**<br/><br/>N/A  |               |      |
-| Synonym for **`[netcache_api]/service_name`**.    | **`[netcache_api]`**<br/>**`service`**<br/><br/>N/A |               |      |
-| The LBSM name that specifies which servers to use. The service name is only used when creating blobs.      | **`[netcache_api]`**<br/>**`service_name`**<br/><br/>N/A               | any registered LBSM service       | (none)                   |
-| This is one condition that will trigger server throttling and is defined as a string having the form "A / B" where A and B are integers. Throttling will be triggered if there are A failures in the last B operations.<br/>             | **`[netcache_api]`**<br/>**`throttle_by_connection_error_rate`**<br/><br/>N/A             | a string having the form "A / B" where A and B are integers             | "0 / 0" (ignored)        |
-| This is another condition that will trigger server throttling and is defined as follows. Server throttling will be triggered if this number of consecutive connection failures happens.<br/>       | **`[netcache_api]`**<br/>**`throttle_by_consecutive_connection_failures`**<br/><br/>N/A   | integer        | 0 (ignored)              |
-| Do not release server throttling until the server appears in LBSMD.  | **`[netcache_api]`**<br/>**`throttle_hold_until_active_in_lb`**<br/><br/>N/A              | Boolean  [<sup>c</sup>](#ch_libconfig.TF.48)          | false |
-| Indicates when server throttling will be released.                   | **`[netcache_api]`**<br/>**`throttle_relaxation_period`**<br/><br/>N/A | integer time period in seconds    | 0 (throttling is disabled)     |
-| Where to save blob caches.     | **`[netcache_api]`**<br/>**`tmp_dir`**<br/><br/>N/A | a valid directory                 | (none)                   |
-| Synonym for **`[netcache_api]/tmp_dir`**.         | **`[netcache_api]`**<br/>**`tmp_path`**<br/><br/>N/A                   |               |      |
-| A true value enables an alternative method for checking if a blob exists. ***Note:*** This option is available only for backward compatibility and should not be used.                 | **`[netcache_api]`**<br/>**`use_hasb_fallback`**<br/><br/>**`NCBI_CONFIG__NETCACHE_API__USE_HASB_FALLBACK`**  [<sup>a</sup>](#ch_libconfig.TF.46) | Boolean  [<sup>b</sup>](#ch_libconfig.TF.47)          | false |
-| Defines LBSM affinity name to use for floor assignment, etc.         | **`[netcache_api]`**<br/>**`use_lbsm_affinity`**<br/><br/>N/A          | a valid affinity                  | (none)                   |
-| If this parameter is set to true, blob key contains service name and server (listed in the blob key) is not present in that service, then do not try to connect to that server. If set to 'auto' and key has a "Check-Server" hint set to NO, then assume 'server_check = no'; otherwise, assume 'server_check = yes'. Otherwise, unconditionally try to connect to the server. | **`[netcache_api]`**<br/>**`server_check`** | true/false/auto | auto |
-| This is a hint for the blob readers that use 'server_check = auto'. If set to true, blob readers are advised to pre-check the server which is listed in the blob key. | **`[netcache_api]`**<br/>**`server_check_hint`** | true/false | true |
+    LIB  = xregexp $(PCRE_LIB) xncbi
+    LIBS = $(PCRE_LIBS) $(ORIG_LIBS)
 
-<div class="table-scroll"></div>
+***Note:*** ***[CRegexp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRegexp)*** has no replacement functionality - i.e. there is no API support for replacing matched text with provided text or matched groups.
 
-<a name="ch_libconfig.TF.46"></a>
+<a name="ch_intro.intro_resizeiterator"></a>
 
-<sup>a</sup> [environment variable name](#ch_libconfig.Environment) formed from registry section and entry name
+### Resizing Iterator
 
-<a name="ch_libconfig.TF.47"></a>
+The UTIL module defines two template classes, the ***[CResizingIterator](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CResizingIterator)*** and the ***[CConstResizingIterator](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CConstResizingIterator)*** classes that handle sequences represented as packed sequences of elements of different sizes For example, a vector \<char\> might actually hold 2-bit values, such as nucleotides, or 32-bit integer values.
 
-<sup>b</sup> case-insensitive: true, t, yes, y, 1, false, f, no, n, 0
+The purpose of these iterator classes is to provide iterator semantics for data values that can be efficiently represented as a packed sequence of elements regardless of the size.
 
-<a name="ch_libconfig.TF.48"></a>
+<a name="ch_intro.intro_rotatelog"></a>
 
-<sup>c</sup> case-insensitive: true, t, yes, y, false, f, no, n
+### Rotating Log Streams
 
-[Table 18](#ch_libconfig.T18) describes configuration parameters for NetSchedule client applications. These parameters are found in the `netschedule_api` registry section.
+The UTIL module defines the ***[CRotatingLogStream](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRotatingLogStream)*** class that can be used to implement a rotating log file. The idea being that once the log of messages gets too large, a 'rotation' operation can be performed. The default rotation is to rename the existing log file by appending it with a timestamp, and opening a new log.
 
-<a name="ch_libconfig.T18"></a>
+The rotating log can be specified as a file, with an upper limit (in bytes) to how big the log will grow. The ***[CRotatingLogStream](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRotatingLogStream)*** defines a method called ***[Rotate()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Rotate)*** that implements the default rotation.
 
-Table 18. NetSchedule client API configuration parameters (netschedule\_api)
+<a name="ch_intro.intro_streamsupport"></a>
 
-| Purpose           | [Registry section]<br/>Registry name<br/><br/>Environment variable   | Valid values   | Default      |
-|-------------------|----------------------------------------------------------------------|----------------|--------------|
-| Name of the queue (DO NOT use default queue for your application).         | **`[netschedule_api]`**<br/>**`queue_name`**<br/><br/>N/A      | your application's queue name     | (none) |
-| The name of your application, as identified to NetSchedule.                | **`[netschedule_api]`**<br/>**`client_name`**<br/><br/>N/A     | your application's name           | (none) |
-| Can be used to override **`NCBI_CONFIG__NETSERVICE_API__COMMUNICATION_TIMEOUT`**. Please see that entry for details. | **`[netschedule_api]`**<br/>**`communication_timeout`**<br/><br/>N/A | floating point \>= 0.0 (zero means use the default from **`NCBI_CONFIG__NETSERVICE_API__COMMUNICATION_TIMEOUT`**) | 12.0 seconds |
-| Can be used to override **`[netservice_api]/connection_timeout`**. Please see that entry for details.    | **`[netschedule_api]`**<br/>**`connection_timeout`**<br/><br/>N/A    | floating point \>= 0.0 (zero means use the default from **`[netservice_api]/connection_timeout`**)    | 2.0 seconds  |
-| Use affinity information when requesting jobs.  | **`[netschedule_api]`**<br/>**`use_affinities`** | true/false | false |
-| Initial set of preferred affinities. Initial (comma/space separated) list of preferred affinities. Example: job_type_a, job_type_b | **`[netschedule_api]`**<br/>**`affinity_list`** | comma/space separated list | "" |
-| A prioritized lists of affinities, which overrides the default job processing order. Cannot be used with affinity_list. Example: high_priority_job, mid_priority_job, low_priority_job | **`[netschedule_api]`**<br/>**`affinity_ladder`** | comma/space separated list | "" |
-| Use affinity information and accept new affinities automatically. Cannot be used with affinity_ladder.  | **`[netschedule_api]`**<br/>**`claim_new_affinities`** | true/false | false |
-| Allow the worker node to process jobs without affinities as well as jobs with "non-preferred" affinities. Cannot be used in combination with 'claim_new_affinities'.  | **`[netschedule_api]`**<br/>**`process_any_job`** | true/false | false |
+### Stream Support
 
-<div class="table-scroll"></div>
+The UTIL module defines a number of portable classes that provide additional stream support beyond that provided by the standard C++ streams. The ***[CByteSource](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CByteSource)*** class acts as an abstract base class (see [Figure 7](#ch_intro.F7)), for a number of stream classes derived from it. As the name of the other classes derived from ***[CByteSource](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CByteSource)*** suggests, each of these classes provides the methods from reading from the named source. To list a few examples: ***[CFileByteSource](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CFileByteSource)*** is a specialized class for reading from a named file; ***[CMemoryByteSource](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CMemoryByteSource)*** is a specialized class for reading from a memory buffer; ***CResultByteSource*** is a specialized class for reading database results; ***[CStreamByteSource](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CStreamByteSource)*** is a specialized class from reading from the C++ input stream (istream); ***[CFStreamByteSource](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CFStreamByteSource)*** is a specialized class from reading from the C++ input file stream (ifstream).
 
-<a name="ch_libconfig.WorkerNode"></a>
+<a name="ch_intro.F7"></a>
 
-### Worker Node
+![Figure 7. Relationship between CByteSource and its derived classes](/cxx-toolkit/static/img/CByteSource.gif)
 
-[Table 19](#ch_libconfig.T19) describes configuration parameters for Worker Nodes.
+Figure 7. Relationship between ***[CByteSource](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CByteSource)*** and its derived classes
 
-<a name="ch_libconfig.T19"></a>
+The classes such as ***[CSubFileByteSource](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSubFileByteSource)*** are used to define a slice of the source stream in terms of a start position and a length. The read operations are then confined to this slice.
 
-Table 19. Worker Node configuration parameters
+Additional classes, the ***[CIStreamBuffer](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CIStreamBuffer)*** and the ***[COStreamBuffer](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=COStreamBuffer)*** have been defined for standard input and output buffer streams. These can be used in situations where a compiler's implementation of the standard input and output stream buffering is inefficient.
 
-| Purpose           | [Registry section]<br/>Registry name<br/><br/>Environment variable   | Valid values   | Default      |
-|-------------------|----------------------------------------------------------------------|----------------|--------------|
-| Deprecated. | **`[server]`**<br/>**`allow_implicit_job_return`**<br/><br/>**`NCBI_CONFIG__SERVER__ALLOW_IMPLICIT_JOB_RETURN`**  [<sup>e</sup>](#ch_libconfig.TF.19) | Boolean  [<sup>b</sup>](#ch_libconfig.TF.16) | false |
-| Maximum time worker nodes are allowed to live without a single NetSchedule server. | **`[server]`**<br/>**`max_wait_for_servers`**<br/><br/>**`NCBI_CONFIG__SERVER__MAX_WAIT_FOR_SERVERS`**  [<sup>e</sup>](#ch_libconfig.TF.19) | unsigned int | 24 \* 60 \* 60 seconds |
-| Causes the worker node to shut down if any jobs fail. | **`[server]`**<br/>**`stop_on_job_errors`**<br/><br/>**`NCBI_CONFIG__SERVER__STOP_ON_JOB_ERRORS`**  [<sup>e</sup>](#ch_libconfig.TF.19) | Boolean  [<sup>b</sup>](#ch_libconfig.TF.16) | true |
-| Maximum number of jobs(threads) can be served simultaneously.  This parameter defines job parallelism. For computationally intensive algorithms this value should not be more than number of CPUs if set to 'auto', the node will determine the number of CPUs on the system and use this number.  | **`[server]`**<br/>**`max_threads`** | | auto |
-| Initial number of threads created for incoming jobs | **`[server]`**<br/>**`init_threads`** | | 1 |
-| TCP/IP and UDP port number for control messages (like shutdown, version) and job notifications. It runs special control thread for incoming administrative requests (from netschedule_control and netschedule_admin) Can take a ports range (ex. 9300-9310). In this case the system will try to find an available port in the given range | **`[server]`**<br/>**`control_port`** | | |
-| Server side logging. A worker node can ask its context if this flag is set to true | **`[server]`**<br/>**`log`** | | |
-| Internal.  Delay in seconds node task dispatcher waits for free space in the job queue. Lower value usually gives better response to shutdown command (CPU traded off) | **`[server]`**<br/>**`thread_pool_timeout`** | | |
-| Time worker node spends waiting for new jobs without connecting to the netschedule server queue. Server sends UPD requests to wake the node up. Bigger values of this parameter reduces the netschedule server load in expense of job delivery latency (because of potential loss of UDP packages) | **`[server]`**<br/>**`job_wait_timeout`** | | |
-| The max total number of jobs after which the node will shutdown itself.  Restarting the node periodically is useful due to accumulating heap fragmentation possible leaks etc.  | **`[server]`**<br/>**`max_total_jobs `** | | 0 - means unlimited number of jobs. |
-| The max number of failed jobs after which the node will shutdown itself.  | **`[server]`**<br/>**`max_failed_jobs `** | | 0 - means unlimited number of failed jobs. |
-| When true, server transforms into a daemon, detached from the current program group (for UNIX only) | **`[server]`**<br/>**`daemon`** | | |
-| The list of worker nodes which this node will check before attempting to retrieve a job from the NetSchedule queue. If at least one of these worker nodes has an ideal thread, this node will not connect to the queue for a job. This node and all nodes from the given list must be connected to the same NetSchedule service, the same queue and must run the same job.  If the list is empty (defult) then this node is a master.  | **`[server]`**<br/>**`master_nodes `** | | empty - this node is a master. |
-| List of network hosts which are allowed admin access to the worker node if this worker node is controled by grid_node_watcher.sh don't forget to to add "localhost" to this list.  | **`[server]`**<br/>**`admin_hosts `** | | |
-| Time delay (in seconds) between the node enters an idle mode (all jobs are done and there are no new jobs in the queue) and the idle task gets executed.  Can not be less then 1 sec.  | **`[server]`**<br/>**`idle_run_delay `** | | 30 |
-| Specifies if an idle task works in an exclusive mode, which means that no real job will be processed until the idle task is running.  | **`[server]`**<br/>**`idle_exclusive `** | | true |
-| The node will automatically shut itself down if it is idle for a continuous period of time longer than this (in seconds): | **`[server]`**<br/>**`auto_shutdown_if_idle `** | | 0 - means never auto shutdown |
-| Specifies if the framework should reuse an instance of the job class.  Setting this parameter to true means that only one instance of the job class will be create per each execution thread. False means that an instance of job class will be created per each incoming job.  | **`[server]`**<br/>**`reuse_job_object `** | | false |
-| Allows the node to detect infinite loops in job execution. If a job is being executed for more then the specified time, it is assumed to be stuck in an infinite loop.  It this happens, the node enters shutdown mode, and when all other jobs, which may be running on this node, are done, the node terminates.  | **`[server]`**<br/>**`infinite_loop_time`** | | 0, which means that the node will not detect infinite loops. |
-| Time in seconds. Specifies how often the node should check states of jobs it is processing. It is used as a feedback from the client to see if it wants  to cancel the job execution | **`[server]`**<br/>**`check_status_period `** | | |
-| Sets the maximum limit for total memory consumption by this worker node.  When this limit is reached, the worker node shuts down.  | **`[server]`**<br/>**`total_memory_limit `** | | |
-| Sets the maximum limit for total runtime of this worker node (in seconds).  When this limit is reached, the worker node shuts down.  | **`[server]`**<br/>**`total_time_limit `** | | 0, which means there is no limit. |
-| Default timeout before the job is terminated in case of pullback.  This value can be overridden by the '--timeout' option specified with 'grid_cli suspend --pullback'.  | **`[server]`**<br/>**`default_pullback_timeout`** | | |
+More details on the stream classes are presented in a later chapter.
 
-<div class="table-scroll"></div>
+<a name="ch_intro.intro_strsearch"></a>
 
-See the [Distributed Computing](ch_grid.html) chapter for more information on NetCache and NetSchedule.
+### String Search
 
-Configuration parameters for NetCache daemons are described in the file:
+The UTIL module defines the ***[CBoyerMooreMatcher](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CBoyerMooreMatcher)*** class and the ***[CTextFsm](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CTextFsm)*** class which are used for searching for a single pattern over varying texts.
 
-<https://www.ncbi.nlm.nih.gov/viewvc/v1/trunk/c++/src/app/netcache/netcached.ini?view=log>
+The ***[CBoyerMooreMatcher](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CBoyerMooreMatcher)*** class, as the name suggests, uses the Boyer-Moore algorithm for string searches. The ***[CTextFsm](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CTextFsm)*** is a template class that performs the search using a finite state automaton for a specified to be matched data type. Since the matched data type is often a string, the ***[CTextFsa](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CTextFsa)*** class is defined as a convenience by instantiating the ***[CTextFsm](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CTextFsm)*** with the matched type template parameter set to string.
 
-<a name="ch_libconfig.Internal_ApplicationSpecifi"></a>
+The search can be setup as a case sensitive or case insensitive search. The default is case sensitive search. In the case of the ***[CBoyerMooreMatcher](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CBoyerMooreMatcher)*** class, the search can be setup for any pattern match or a whole word match. A whole word match means that a pattern was found to be between white spaces. The default is any pattern match.
 
-Application-Specific Parameters
--------------------------------
+<a name="ch_intro.Synchronized_and_blo"></a>
 
-The following sections discuss configuration parameters that are specific to selected applications.
+### Synchronized and blocking queue
 
--   [Seqfetch.cgi](#ch_libconfig.Seqfetchcgi)
+The UTIL module defines class ***[CSyncQueue](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSyncQueue)*** which implements a thread-safe queue that has “blocking” semantics: when queue is empty ***[Pop()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Pop)*** method will effectively block execution until some elements will be added to the queue; when queue have reached its maximum size ***[Push()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Push)*** method will block execution until some elements will be extracted from queue. All these operations can be controlled by timeout. Besides that ***[CSyncQueue](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSyncQueue)*** is not bound to first-in-first-out queue paradigm. It has underlying stl container (deque by default) which will define the nature of queue. This container is set via template parameter to ***[CSyncQueue](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSyncQueue)*** and can be deque, vector, list, CSyncQueue\_set, CSyncQueue\_multiset and CSyncQueue\_priority\_queue (the latter three are small addons to STL set, multiset and priority\_queue for the sake of compatibility with ***[CSyncQueue](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSyncQueue)***).
 
-<a name="ch_libconfig.Seqfetchcgi"></a>
+There is also ***[CSyncQueue](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSyncQueue)***::***TAccessGuard*** class which can lock the queue for some bulk operations if during them queue should not be changed by other threads.
 
-### Seqfetch.cgi
+For more details on ***[CSyncQueue](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSyncQueue)*** look here: <https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/CSyncQueueDescription.html>.
 
-***Note:*** This applies only inside NCBI.
+<a name="ch_intro.intro_thrpools"></a>
 
-[These parameters](#ch_libconfig.T.seqfetchcgi_application_c) tune the behavior of the [`seqfetch.cgi`](https://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/CPP_DOC/lxr/source/src/internal/cppcore/seqfetch_cgi/) application.
+### Thread Pools
 
-<a name="ch_libconfig.T.seqfetchcgi_application_c"></a>
+The UTIL module defines a number of classes implementing pool of threads.
 
-Table 19. seqfetch.cgi application configuration parameters
+***[CThreadPool](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CThreadPool)*** is the main class. It executes any tasks derived from the ***[CThreadPool\_Task](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CThreadPool_Task)*** class. The number of threads in pool is controlled by special holder of this policy — object derived from ***[CThreadPool\_Controller](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CThreadPool_Controller)*** (default implementation is ***[CThreadPool\_Controller\_PID](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CThreadPool_Controller_PID)*** based on Proportional-Integral-Derivative algortithm). All threads executing by ***[CThreadPool](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CThreadPool)*** are the instances of ***[CThreadPool\_Thread](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CThreadPool_Thread)*** class or its derivatives.
 
-| Purpose | [Registry section]<br/>Registry name<br/><br/>Environment variable   | Valid values | Default  |
-|---------|----------------------------------------------------------------------|--------------|----------|
-| Point to the current script.    | **`[SeqFetch]`**<br/>**`Viewer_fcgi_path`**<br/><br/>**`SEQFETCH_VIEWER_FCGI_PATH`**   | a valid path | /sviewer/viewer.fcgi |
-| Name the current load-balanced proxy. | **`[SeqFetch]`**<br/>**`Viewer_fcgi_proxy`**<br/><br/>**`SEQFETCH_VIEWER_FCGI_PROXY`** | a valid proxy name | sviewer\_lb    |
+More [details on threaded pool classes](ch_core.html#ch_core.Thread_Pools) are presented in a later chapter.
 
-<div class="table-scroll"></div>
+<a name="ch_intro.intro_utf8"></a>
+
+### UTF 8 Conversion
+
+The UTIL module provides a number of functions to convert between UTF-8 representation, ASCII 7-bit representation and Unicode representations. For example, ***[StringToCode()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=StringToCode)*** converts the first UTF-8 character in a string to a Unicode symbol, and ***[StringToVector()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=StringToVector)*** converts a UTF-8 string into a vector of Unicode symbols.
+
+The result of a conversion can be success, out of range, or a two character sequence of the skip character (0xFF) followed by another character.
 
 

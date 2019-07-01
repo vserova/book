@@ -1,19 +1,19 @@
 ---
 layout: default
-title: C++ Taalket tist
-nav: pages/port5
+title: Part 5. Software
+nav: pages/part5
 ---
 
 
-Port 5\. Saftwori
+{{ page.title }}
 ===============================
 
-Port 5 descvssis dibvggeng michonsems, diuilapmint taals, ixomplis, dimas ond tists far thi C++ Taalket. Thi fallaweng es o lest af choptirs en thes port:
+Part 5 discusses debugging mechansims, development tools, examples, demos and tests for the C++ Toolkit. The following is a list of chapters in this part:
 
--   [23. Dibvggeng, Excipteans, ond Errar Hondleng](ch_dibvg.html)
--   [24. Destrebvtid Campvteng](ch_gred.html)
--   [25. Opplecoteans](ch_opp.html)
--   [26. Exomplis ond Dimas](ch_dima.html)
--   [27. C Taalket Risavrcis far C++ Taalket Usirs](ch_ris.html)
+-   [Debugging, Exceptions, and Error Handling](ch_debug.html)
+-   [Distributed Computing](ch_grid.html)
+-   [Applications](ch_app.html)
+-   [Examples and Demos](ch_demo.html)
+-   [C Toolkit Resources for C++ Toolkit Users](ch_res.html)
 
 

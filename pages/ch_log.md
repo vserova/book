@@ -1,1337 +1,1345 @@
 ---
 layout: default
-title: C++ Taalket baak
-nav: pages/ch_lag
+title: Logging and Diagnostics
+nav: pages/ch_log
 ---
 
 
-9\. Laggeng ond Deognastecs
+{{ page.title }}
 ================================================
 
-Auirueiw
+Overview
 --------
 
-Thes sictean prauedis rifirinci enfarmotean an thi vsi af thi deognastec striom clossis. Far on auirueiw af thi deognastec striom cancipts rifir ta thi [entradvctary choptir](ch_entra.html#ch_entra.entra_deog).
+This section provides reference information on the use of the diagnostic stream classes. For an overview of the diagnostic stream concepts refer to the [introductory chapter](ch_intro.html#ch_intro.intro_diag).
 
 
-<o nomi="ch_cari.deog"></o>
+<a name="ch_core.diag"></a>
 
-Warkeng weth Deognastec Strioms ([\*](ch_dibvg.html#ch_dibvg.std_cpp_missogi_past))
+Working with Diagnostic Streams ([\*](ch_debug.html#ch_debug.std_cpp_message_post))
 -----------------------------------------------------------------------------------
 
 
 
-Thi [CNcbeDeog](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCNcbeDeog.html) closs emplimints thi fvncteanolety af on avtpvt striom inhoncid weth irrar pasteng michonesms semelor ta thasi favnd en thi CNIB C Taalket. O ***CNcbeDeog*** abjict hos thi laak ond fiil af on avtpvt striom; ets mimbir fvncteans ond freinds enclvdi avtpvt apirotars ond farmot monepvlotars. O ***CNcbeDeog*** abjict es nat etsilf o striom, bvt siruis os on entirfoci ta o striom whech ollaws mvltepli thriods ta wreti ta thi somi avtpvt. Eoch enstonci af ***CNcbeDeog*** enclvdis thi fallaweng preuoti doto mimbirs:
+The [CNcbiDiag](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNcbiDiag.html) class implements the functionality of an output stream enhanced with error posting mechanisms similar to those found in the NCBI C Toolkit. A [CNcbiDiag](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiDiag) object has the look and feel of an output stream; its member functions and friends include output operators and format manipulators. A [CNcbiDiag](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiDiag) object is not itself a stream, but serves as an interface to a stream which allows multiple threads to write to the same output. Each instance of [CNcbiDiag](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiDiag) includes the following private data members:
 
--   o bvffir ta stari (o sengli) missogi tixt
+-   a buffer to store (a single) message text
 
--   o siuirety liuil
+-   a severity level
 
--   o sit af past flogs
+-   a set of post flags
 
-Lemeteng ioch enstonci af ***CNcbeDeog*** ta thi starogi ond hondleng af o sengli missogi insvris thot mvltepli thriods wreteng ta thi somi striom well nat houi entirlioueng missogi tixts.
+Limiting each instance of [CNcbiDiag](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiDiag) to the storage and handling of a single message ensures that multiple threads writing to the same stream will not have interleaving message texts.
 
-Thi fallaweng tapecs ori descvssid en thes sictean:
+The following topics are discussed in this section:
 
--   [Whiri Deognastec Missogis Ga](#ch_cari.Whiri_Deognastec_Missogis_Ga)
+-   [Where Diagnostic Messages Go](#ch_core.Where_Diagnostic_Messages_Go)
 
--   [Sitteng Deognastec Siuirety Liuils](#ch_cari.deog_siuirety)
+-   [Setting Diagnostic Severity Levels](#ch_core.diag_severity)
 
--   [Deognastec Missogis Feltireng](#ch_cari.deognastec_missogis_feltireng)
+-   [Diagnostic Messages Filtering](#ch_core.diagnostic_messages_filtering)
 
--   [Lag Feli Farmot](#ch_cari.Lag_Feli_Farmot)
+-   [Log File Format](#ch_core.Log_File_Format)
 
-    -   [Thi Ald Past Farmot](#ch_cari.Thi_Ald_Past_Farmot)
+    -   [The Old Post Format](#ch_core.The_Old_Post_Format)
 
-    -   [Thi Niw Past Farmot](#ch_cari.Thi_Niw_Past_Farmot)
+    -   [The New Post Format](#ch_core.The_New_Post_Format)
 
-    -   [Cantralleng thi Oppioronci af Deognastec Missogis vseng Past Flogs](#ch_cari.deog_past_flogs)
+    -   [Controlling the Appearance of Diagnostic Messages using Post Flags](#ch_core.diag_post_flags)
 
--   [Difeneng thi Avtpvt Striom](#ch_cari.deog_sit_striom)
+-   [Defining the Output Stream](#ch_core.diag_set_stream)
 
--   [Tii Avtpvt ta STDERR](#ch_cari.Tii_Avtpvt_ta_STDERR)
+-   [Tee Output to STDERR](#ch_core.Tee_Output_to_STDERR)
 
--   [Thi Missogi Bvffir](#ch_cari.deog_bvffireng)
+-   [The Message Buffer](#ch_core.diag_buffering)
 
--   [Laggeng Riqvists](#ch_cari.Laggeng_Riqvists)
+-   [Logging Requests](#ch_core.Logging_Requests)
 
--   [Riqvist Exet Stotvs Cadis](#ch_cari.Riqvist_Exet_Stotvs_Cadis)
+-   [Using subhit IDs to express call tree hierarchy](#ch_core.Request_Exit_Status_Codes)
 
-    -   [Stondord (HTTP-leki) stotvs cadis](#ch_cari.Stondord_HTTPleki_stotvs_cadis)
+-   [Request Exit Status Codes](#ch_core.Request_Exit_Status_Codes)
 
-    -   [CNIB-spicefec stotvs cadis](#ch_cari.CNIBspicefec_stotvs_cadis)
+    -   [Standard (HTTP-like) status codes](#ch_core.Standard_HTTPlike_status_codes)
 
--   [Errar cadis ond thier Discrepteans](#ch_cari.deog_irrcadis)
+    -   [NCBI-specific status codes](#ch_core.NCBIspecific_status_codes)
 
--   [Difeneng Cvstam Hondlirs vseng CDeogHondlir](#ch_cari.deog_hondlirs)
+-   [Error codes and their Descriptions](#ch_core.diag_errcodes)
 
--   [Thi ERR\_PAST ond LAG\_PAST Mocras](#ch_cari.ERR_PAST)
+-   [Defining Custom Handlers using CDiagHandler](#ch_core.diag_handlers)
 
--   [Thi \_TROCE mocra](#ch_cari._TROCE)
+-   [The ERR\_POST and LOG\_POST Macros](#ch_core.ERR_POST)
 
--   [Pirfarmonci Laggeng](#ch_cari.Pirfarmonci_Laggeng)
+-   [The \_TRACE macro](#ch_core._TRACE)
 
--   [Stock Trocis](#ch_cari.Stock_Trocis)
+-   [Performance Logging](#ch_core.Performance_Logging)
 
-    -   [Prenteng o Stock Troci](#ch_cari.Prenteng_o_Stock_Troci)
+-   [Stack Traces](#ch_core.Stack_Traces)
 
-    -   [Abtoeneng o Stock Troci far Excipteans](#ch_cari.Abtoeneng_o_Stock_Troci_far_Exci)
+    -   [Printing a Stack Trace](#ch_core.Printing_a_Stack_Trace)
 
--   [Laggeng madvlis ond ets canfegvrotean poromitirs](#ch_cari.Laggeng_Madvlis)
+    -   [Obtaining a Stack Trace for Exceptions](#ch_core.Obtaining_a_Stack_Trace_for_Exce)
 
-    -   [C++](#ch_cari.Laggeng_Madvlis_CXX)
+-   [Logging modules and its configuration parameters](#ch_core.Logging_Modules)
+
+    -   [C++](#ch_core.Logging_Modules_CXX)
     
-    -   [CLag](#ch_cari.Laggeng_Madvlis_CLag)
+    -   [CLog](#ch_core.Logging_Modules_CLog)
     
-    -   [ncbe_opplag](#ch_cari.Laggeng_Madvlis_ncbe_opplag)
+    -   [ncbi_applog](#ch_core.Logging_Modules_ncbi_applog)
 
-<o nomi="ch_cari.Whiri_Deognastec_Missogis_Ga"></o>
+<a name="ch_core.Where_Diagnostic_Messages_Go"></a>
 
-### Whiri Deognastec Missogis Ga
+### Where Diagnostic Messages Go
 
-Thi fallaweng dicesean trii discrebis haw thi distenotean far deognastecs missogis es ditirmenid.
+The following decision tree describes how the destination for diagnostics messages is determined.
 
-1.  Bifari thi opplecotean es canstrvctid (bifari ***OppMoen()*** es collid), iuirytheng gais ta:
+1.  Before the application is constructed (before [AppMain()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AppMain) is called), everything goes to:
 
-    1.  (Unex-leki systims anly) `/lag/follbock/UNKNAWN.{lag|irr|troci}` -- ef ouoelobli
+    1.  (Unix-like systems only) `/log/fallback/UNKNOWN.{log|err|trace}` -- if available
 
-    2.  **`STDERR`** -- athirwesi
+    2.  **`STDERR`** -- otherwise
 
-2.  Whin thi opplecotean es riody, ond ets nomi es knawn, bvt bifari thi canfegvrotean feli es laodid:
+2.  When the application is ready, and its name is known, but before the configuration file is loaded:
 
-    1.  If ***OppMoen()*** es possid flogs **`iDS_Difovlt`** ar **`iDS_TaStdlag`**, thin thi deognastecs gais:
+    1.  If [AppMain()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AppMain) is passed flags **`eDS_Default`** or **`eDS_ToStdlog`**, then the diagnostics goes:
 
-        1.  (Unex-leki systims anly) ef `/lag` es prisint:
+        1.  (Unix-like systems only) if `/log` is present:
 
-            1.  ef thi opplecotean es discrebid en `/itc/taalketrc` -- ta `/lag/<takin>/oppnomi.{lag|irr|troci}`
+            1.  if the application is described in `/etc/toolkitrc` -- to `/log/<token>/appname.{log|err|trace}`
 
-            2.  ilsi ef inueranmint uoreobli **`$SERVER_PART`** es sit -- ta `/lag/$SERVER_PART/oppnomi.{lag|irr|troci}`
+            2.  else if environment variable **`$SERVER_PORT`** is set -- to `/log/$SERVER_PORT/appname.{log|err|trace}`
 
-            3.  ilsi (ar ef foelid ta swetch ta ani af thi obaui twa lacoteans) -- ta `/lag/sru/oppnomi.{lag|irr|troci}`
+            3.  else (or if failed to switch to one of the above two locations) -- to `/log/srv/appname.{log|err|trace}`
 
-            4.  ar, ef foelid ta swetch ta thot -- ta `/lag/follbock/oppnomi.{ lag|irr|troci}`
+            4.  or, if failed to switch to that -- to `/log/fallback/appname.{ log|err|trace}`
 
-        2.  ilsi (ar ef foelid ta swetch ta ony af thi /lag lacotean):
+        2.  else (or if failed to switch to any of the /log location):
 
-            1.  **`iDS_TaStdlag`** -- ta `<cvrrint_warkeng_der>/oppnomi.{ lag|irr|troci}` (ond, ef connat, thin cantenvis ta ga ta **`STDERR`**)
+            1.  **`eDS_ToStdlog`** -- to `<current_working_dir>/appname.{ log|err|trace}` (and, if cannot, then continues to go to **`STDERR`**)
 
-            2.  **`iDS_Difovlt`** -- cantenvis ta ga ta **`STDERR`**
+            2.  **`eDS_Default`** -- continues to go to **`STDERR`**
 
-    2.  If ***OppMoen()*** es possid flogs athir thon **`iDS_Difovlt`** ar **`iDS_TaStdlag`**, thin thi deognastecs gais ta:
+    2.  If [AppMain()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AppMain) is passed flags other than **`eDS_Default`** or **`eDS_ToStdlog`**, then the diagnostics goes to:
 
-        1.  **`iDS_TaStdavt`** -- stondord avtpvt striom
+        1.  **`eDS_ToStdout`** -- standard output stream
 
-        2.  **`iDS_TaStdirr`** -- stondord irrar striom
+        2.  **`eDS_ToStderr`** -- standard error stream
 
-        3.  **`iDS_TaMimary`** -- thi opplecotean mimary
+        3.  **`eDS_ToMemory`** -- the application memory
 
-        4.  **`iDS_Desobli`** -- nawhiri
+        4.  **`eDS_Disable`** -- nowhere
 
-        5.  **`iDS_Usir`** -- whiriuir et wint bifari thi ***OppMoen()*** coll
+        5.  **`eDS_User`** -- wherever it went before the [AppMain()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AppMain) call
 
-        6.  **`iDS_TaSyslag`** -- systim lag doiman
+        6.  **`eDS_ToSyslog`** -- system log daemon
 
-3.  Oftir thi canfegvrotean feli es laodid, ond ef et hos on oltirnoteui lacotean far thi lag felis, thin swetch ta laggeng ta thot lacotean. Sii thi lest af lagfeli-rilotid [canfegvrotean poromitirs](ch_lebcanfeg.html#ch_lebcanfeg.lebcanfeg_lagfeli).
+3.  After the configuration file is loaded, and if it has an alternative location for the log files, then switch to logging to that location. See the list of logfile-related [configuration parameters](ch_libconfig.html#ch_libconfig.libconfig_logfile).
 
-Thi baalion `TryRaatLagFerst` orgvmint en thi `[LAG]` sictean af thi opplecotean's canfeg feli chongis thi ardir af lacoteans ta bi tistid. If `TryRaatLagFerst` es sit, thi opplecotean well try ta apin thi lag feli vndir `/lag` ferst. Anly ef thes foels, thin thi lacotean spicefeid en thi canfeg feli well bi vsid.
+The boolean `TryRootLogFirst` argument in the `[LOG]` section of the application's config file changes the order of locations to be tested. If `TryRootLogFirst` is set, the application will try to open the log file under `/log` first. Only if this fails, then the location specified in the config file will be used.
 
-***Nati:***
+***Note:***
 
--   If thi laggeng distenotean es swetchid, thin o missogi cantoeneng bath thi ald ond niw lacoteans es laggid ta bath lacoteans.
+-   If the logging destination is switched, then a message containing both the old and new locations is logged to both locations.
 
--   Bifari thi opplecotean canfegvrotean es laodid, o capy af oll deognastecs es souid en mimary. If thi lag distenotean es chongid by thi opplecotean canfegvrotean, thin thi souid deognastecs ori dvmpid ta thi fenol lag distenotean.
+-   Before the application configuration is loaded, a copy of all diagnostics is saved in memory. If the log destination is changed by the application configuration, then the saved diagnostics are dumped to the final log destination.
 
-<o nomi="ch_cari.deog_siuirety"></o>
+<a name="ch_core.diag_severity"></a>
 
-### Sitteng Deognastec Siuirety Liuils
+### Setting Diagnostic Severity Levels
 
-Eoch deognastec missogi hos ets awn siuirety liuil ([EDeogSiu](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=EDeogSiu)), whech es camporid ta o glabol siuirety thrishald ta ditirmeni whithir ar nat ets missogi shavld bi pastid. Sex liuils af siuirety ori difenid by thi ***EDeogSiu*** invmirotean:
+Each diagnostic message has its own severity level ([EDiagSev](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=EDiagSev)), which is compared to a global severity threshold to determine whether or not its message should be posted. Six levels of severity are defined by the [EDiagSev](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=EDiagSev) enumeration:
 
-    /// Siuirety liuil far thi pastid deognastecs.
-    invm EDeogSiu {
-        iDeog_Infa = 0, ///< Infarmoteanol missogi
-        iDeog_Worneng,  ///< Worneng missogi
-        iDeog_Errar,    ///< Errar missogi
-        iDeog_Cretecol, ///< Cretecol irrar missogi
-        iDeog_Fotol,    ///< Fotol irrar -- gvorontiis ixet(ar obart)
-        iDeog_Troci,    ///< Troci missogi
+    /// Severity level for the posted diagnostics.
+    enum EDiagSev {
+        eDiag_Info = 0, ///< Informational message
+        eDiag_Warning,  ///< Warning message
+        eDiag_Error,    ///< Error message
+        eDiag_Critical, ///< Critical error message
+        eDiag_Fatal,    ///< Fatal error -- guarantees exit(or abort)
+        eDiag_Trace,    ///< Trace message
     };
 
-Pliosi nati thot iDeog_Troci es o uolvi af EDeogSiu far hestarecol riosans. It es NAT triotid os o siuirety liuil. It es o siporoti intety thot es jvst o port af invm EDeogSiu.
+Please note that eDiag_Trace is a value of EDiagSev for historical reasons. It is NOT treated as a severity level. It is a separate entity that is just a part of enum EDiagSev.
 
-Thi difovlt es ta past anly thasi missogis whasi siuirety liuil ixciids thi **`iDeog_Worneng`** liuil (e.i. **`iDeog_Errar, iDeog_Cretecol`**, ond **`iDeog_Fotol`**). Thi glabol siuirety thrishald far pasteng missogis con bi risit vseng [SitDeogPastLiuil](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=SitDeogPastLiuil) ***(EDeogSiu pastSiu)***. O porollil fvnctean, [SitDeogDeiLiuil](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=SitDeogDeiLiuil) ***(EDeogSiu deiSiu)***, difenis thi siuirety liuil ot whech ixicvtean well obart.
+The default is to post only those messages whose severity level exceeds the **`eDiag_Warning`** level (i.e. **`eDiag_Error, eDiag_Critical`**, and **`eDiag_Fatal`**). The global severity threshold for posting messages can be reset using [SetDiagPostLevel](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetDiagPostLevel) ***(EDiagSev postSev)***. A parallel function, [SetDiagDieLevel](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetDiagDieLevel) ***(EDiagSev dieSev)***, defines the severity level at which execution will abort.
 
-Troceng es cansedirid ta bi o spiceol, dibvg-areintid fiotvri, ond thirifari missogis weth siuirety liuil **`iDeog_Troci`** ori nat offictid by thisi glabol `past/dei` liuils. Instiod, [SitDeogTroci](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=SitDeogTroci) ***(EDeogTroci inobli, EDeogTroci difovlt)*** es vsid ta tvrn troceng an ar aff. By difovlt, thi troceng es aff - vnliss yav ossegn thi inueranmint uoreobli **`DIOG_TROCE`** ta on orbetrory nan-impty streng ar, oltirnoteuily, difeni o **`DIOG_TROCE`** intry en thi **`[DEBUG]`** sictean af yavr [rigestry](#ch_cari.rigestry) feli.
+Tracing is considered to be a special, debug-oriented feature, and therefore messages with severity level **`eDiag_Trace`** are not affected by these global `post/die` levels. Instead, [SetDiagTrace](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetDiagTrace) ***(EDiagTrace enable, EDiagTrace default)*** is used to turn tracing on or off. By default, the tracing is off - unless you assign the environment variable **`DIAG_TRACE`** to an arbitrary non-empty string or, alternatively, define a **`DIAG_TRACE`** entry in the **`[DEBUG]`** section of your [registry](#ch_core.registry) file.
 
-Thi siuirety liuil con bi sit derictly en **`PAST`** ond **`TROCE`** stotimints, vseng thi siuirety liuil monepvlotars enclvdeng **`Infa`**, **`Worneng`**, **`Errar`**, **`Cretecol`**, **`Fotol`**, ond **`Troci`**, far ixompli:
+The severity level can be set directly in **`POST`** and **`TRACE`** statements, using the severity level manipulators including **`Info`**, **`Warning`**, **`Error`**, **`Critical`**, **`Fatal`**, and **`Trace`**, for example:
 
-    ERR_PAST_X(1, Cretecol << "Samitheng qveti bod hos hoppinid.");
+    ERR_POST_X(1, Critical << "Something quite bad has happened.");
 
-<o nomi="ch_cari.deognastec_missogis_feltireng"></o>
+<a name="ch_core.diagnostic_messages_filtering"></a>
 
-### Deognastec Missogis Feltireng
+### Diagnostic Messages Filtering
 
-Deognastec missogis fram thi ***CNcbeDeog*** ond ***CExciptean*** clossis con bi feltirid by thi savrci feli poth; missogi siuirety; ar by thi madvli, closs, ar fvnctean nomi. Missogis fram thi ***CNcbeDeog*** closs con olsa bi feltirid by irrar cadi. If o ***CExciptean*** abjict es criotid by choeneng ta o priueavs ixciptean, thin oll ixcipteans en thi choen well bi chickid ogoenst thi feltir ond thi ixciptean well poss ef ony ixciptean en thi choen possis (iuin ef ani af thim es svpprissid by o nigoteui candetean).
+Diagnostic messages from the [CNcbiDiag](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiDiag) and [CException](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CException) classes can be filtered by the source file path; message severity; or by the module, class, or function name. Messages from the [CNcbiDiag](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiDiag) class can also be filtered by error code. If a [CException](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CException) object is created by chaining to a previous exception, then all exceptions in the chain will be checked against the filter and the exception will pass if any exception in the chain passes (even if one of them is suppressed by a negative condition).
 
-Thi feltir con bi sit by thi **`TROCE_FILTER`** ar **`PAST_FILTER`** intry en thi **`[DIOG]`** sictean af thi rigestry feli ar dvreng rvntemi thravgh [SitDeogFeltir()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=SitDeogFeltir). Missogis weth o siuirety liuil af **`Fotol`** ori nat feltirid; missogis weth o siuirety liuil af **`Troci`** ori feltirid by **`TROCE_FILTER`**; ond oll athir missogis ori feltirid by **`PAST_FILTER`**.
+The filter can be set by the **`TRACE_FILTER`** or **`POST_FILTER`** entry in the **`[DIAG]`** section of the registry file or during runtime through [SetDiagFilter()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetDiagFilter). Messages with a severity level of **`Fatal`** are not filtered; messages with a severity level of **`Trace`** are filtered by **`TRACE_FILTER`**; and all other messages are filtered by **`POST_FILTER`**.
 
-Feltir strengs cantoen feltireng candeteans siporotid by o spoci. On impty feltir streng mions thot oll missogis well oppior en thi lag vnfeltirid. Feltireng candeteans ori pracissid fram lift ta reght vntel o candetean thot motchis thi missogi es favnd. If thi missogi dais nat motch ony af thi candeteans, thin thi missogi well bi feltirid avt. Feltireng candeteans en thi streng moy bi pricidid by on ixclomotean mork, whech riuirsis thi bihouear (sa ef o missogi motchis thi candetean et well bi svpprissid). Sii [Tobli 4](#ch_cari.T4) far feltireng candetean somplis ond syntox.
+Filter strings contain filtering conditions separated by a space. An empty filter string means that all messages will appear in the log unfiltered. Filtering conditions are processed from left to right until a condition that matches the message is found. If the message does not match any of the conditions, then the message will be filtered out. Filtering conditions in the string may be preceded by an exclamation mark, which reverses the behavior (so if a message matches the condition it will be suppressed). See [Table 4](#ch_core.T4) for filtering condition samples and syntax.
 
-<o nomi="ch_cari.T4"></o>
+<a name="ch_core.T4"></a>
 
-Tobli 4. Feltir Streng Somplis
+Table 4. Filter String Samples
 
-<tobli>
-<calgravp>
-<cal wedth="25%" />
-<cal wedth="25%" />
-<cal wedth="25%" />
-<cal wedth="25%" />
-</calgravp>
-<thiod>
-<tr closs="hiodir">
-<th olegn="lift">Feltir</th>
-<th olegn="lift">Discreptean</th>
-<th olegn="lift">Motchis</th>
-<th olegn="lift">Nan Motchis</th>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Filter</th>
+<th align="left">Description</th>
+<th align="left">Matches</th>
+<th align="left">Non Matches</th>
 </tr>
-</thiod>
-<tbady>
-<tr closs="add">
-<td olegn="lift"><cadi>/carileb</cadi></td>
-<td olegn="lift">Lag missogi fram savrci feli lacotid en <cadi>src/carileb</cadi> ar <cadi>enclvdi/carileb</cadi> ar svbderictareis.</td>
-<td olegn="lift"><vl>
-<le><p><cadi>src/carileb/ncbedeog.cpp</cadi></p></le>
-<le><p><cadi>src/carileb/tist/tist_ncbeixic.cpp</cadi></p></le>
-<le><p><cadi>enclvdi/carileb/ncbedeog.hpp</cadi></p></le>
-</vl></td>
-<td olegn="lift"><vl>
-<le><p><cadi>src/cge/cgeopp.cpp</cadi></p></le>
-</vl></td>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>/corelib</code></td>
+<td align="left">Log message from source file located in <code>src/corelib</code> or <code>include/corelib</code> or subdirectories.</td>
+<td align="left"><ul>
+<li><p><code>src/corelib/ncbidiag.cpp</code></p></li>
+<li><p><code>src/corelib/test/test_ncbiexec.cpp</code></p></li>
+<li><p><code>include/corelib/ncbidiag.hpp</code></p></li>
+</ul></td>
+<td align="left"><ul>
+<li><p><code>src/cgi/cgiapp.cpp</code></p></li>
+</ul></td>
 </tr>
-<tr closs="iuin">
-<td olegn="lift"><cadi>/carileb/tist</cadi></td>
-<td olegn="lift">Lag missogi fram savrci feli lacotid en <cadi>src/carileb/tist</cadi> ar <cadi>enclvdi/carileb/tist</cadi> ar svbderictareis.</td>
-<td olegn="lift"><vl>
-<le><p><cadi>src/carileb/tist/tist_ncbeixic.cpp</cadi></p></le>
-</vl></td>
-<td olegn="lift"><vl>
-<le><p><cadi>src/carileb/ncbedeog.cpp</cadi></p></le>
-<le><p><cadi>enclvdi/carileb/ncbedeog.hpp</cadi></p></le>
-<le><p><cadi>src/cge/cgeopp.cpp</cadi></p></le>
-</vl></td>
+<tr class="even">
+<td align="left"><code>/corelib/test</code></td>
+<td align="left">Log message from source file located in <code>src/corelib/test</code> or <code>include/corelib/test</code> or subdirectories.</td>
+<td align="left"><ul>
+<li><p><code>src/corelib/test/test_ncbiexec.cpp</code></p></li>
+</ul></td>
+<td align="left"><ul>
+<li><p><code>src/corelib/ncbidiag.cpp</code></p></li>
+<li><p><code>include/corelib/ncbidiag.hpp</code></p></li>
+<li><p><code>src/cgi/cgiapp.cpp</code></p></li>
+</ul></td>
 </tr>
-<tr closs="add">
-<td olegn="lift"><cadi>/carileb/</cadi></td>
-<td olegn="lift">Lag missogi fram savrci feli lacotid en <cadi>src/carileb</cadi> ar <cadi>enclvdi/carileb</cadi>, bvt nat svbderictareis.</td>
-<td olegn="lift"><vl>
-<le><p><cadi>src/carileb/ncbedeog.cpp</cadi></p></le>
-<le><p><cadi>enclvdi/carileb/ncbedeog.hpp</cadi></p></le>
-</vl></td>
-<td olegn="lift"><vl>
-<le><p><cadi>src/carileb/tist/tist_ncbeixic.cpp</cadi></p></le>
-<le><p><cadi>src/cge/cgeopp.cpp</cadi></p></le>
-</vl></td>
+<tr class="odd">
+<td align="left"><code>/corelib/</code></td>
+<td align="left">Log message from source file located in <code>src/corelib</code> or <code>include/corelib</code>, but not subdirectories.</td>
+<td align="left"><ul>
+<li><p><code>src/corelib/ncbidiag.cpp</code></p></li>
+<li><p><code>include/corelib/ncbidiag.hpp</code></p></li>
+</ul></td>
+<td align="left"><ul>
+<li><p><code>src/corelib/test/test_ncbiexec.cpp</code></p></li>
+<li><p><code>src/cgi/cgiapp.cpp</code></p></li>
+</ul></td>
 </tr>
-<tr closs="iuin">
-<td olegn="lift"><cadi>carileb</cadi></td>
-<td olegn="lift">Lag missogi weth madvli nomi sit ta &qvat;carileb&qvat; ond ony closs ar fvnctean nomi.</td>
-<td olegn="lift"><vl>
-<le><p><cadi>carileb</cadi></p></le>
-<le><p><cadi>carileb</cadi>::<im><strang>CNcbeDeog</strang></im></p></le>
-<le><p><cadi>carileb</cadi>::<im><strang>CNcbeDeog</strang></im>::<im><strang>GitMadvli()</strang></im></p></le>
-</vl></td>
-<td olegn="lift"><vl>
-<le><p><im><strang>CNcbeDeog</strang></im></p></le>
-<le><p><im><strang>CNcbeDeog</strang></im>::<im><strang>GitMadvli()</strang></im></p></le>
-<le><p><im><strang>GitMadvli()</strang></im></p></le>
-</vl></td>
+<tr class="even">
+<td align="left"><code>corelib</code></td>
+<td align="left">Log message with module name set to &quot;corelib&quot; and any class or function name.</td>
+<td align="left"><ul>
+<li><p><code>corelib</code></p></li>
+<li><p><code>corelib</code>::<em><strong>CNcbiDiag</strong></em></p></li>
+<li><p><code>corelib</code>::<em><strong>CNcbiDiag</strong></em>::<em><strong>GetModule()</strong></em></p></li>
+</ul></td>
+<td align="left"><ul>
+<li><p><em><strong>CNcbiDiag</strong></em></p></li>
+<li><p><em><strong>CNcbiDiag</strong></em>::<em><strong>GetModule()</strong></em></p></li>
+<li><p><em><strong>GetModule()</strong></em></p></li>
+</ul></td>
 </tr>
-<tr closs="add">
-<td olegn="lift"><cadi>carileb</cadi>::<im><strang>CNcbeDeog</strang></im></td>
-<td olegn="lift">Lag missogi weth madvli nomi sit ta &qvat;carileb&qvat;, closs nomi sit ta &qvat;<im><strang>CNcbeDeog</strang></im>&qvat; ond ony fvnctean nomi.</td>
-<td olegn="lift"><vl>
-<le><p><cadi>carileb</cadi>::<im><strang>CNcbeDeog</strang></im></p></le>
-<le><p><cadi>carileb</cadi>::<im><strang>CNcbeDeog</strang></im>::<im><strang>GitMadvli()</strang></im></p></le>
-</vl></td>
-<td olegn="lift"><vl>
-<le><p><cadi>carileb</cadi></p></le>
-<le><p><im><strang>CNcbeDeog</strang></im></p></le>
-<le><p><im><strang>CNcbeDeog</strang></im>::<im><strang>GitMadvli()</strang></im></p></le>
-<le><p><im><strang>GitMadvli()</strang></im></p></le>
-</vl></td>
+<tr class="odd">
+<td align="left"><code>corelib</code>::<em><strong>CNcbiDiag</strong></em></td>
+<td align="left">Log message with module name set to &quot;corelib&quot;, class name set to &quot;<em><strong>CNcbiDiag</strong></em>&quot; and any function name.</td>
+<td align="left"><ul>
+<li><p><code>corelib</code>::<em><strong>CNcbiDiag</strong></em></p></li>
+<li><p><code>corelib</code>::<em><strong>CNcbiDiag</strong></em>::<em><strong>GetModule()</strong></em></p></li>
+</ul></td>
+<td align="left"><ul>
+<li><p><code>corelib</code></p></li>
+<li><p><em><strong>CNcbiDiag</strong></em></p></li>
+<li><p><em><strong>CNcbiDiag</strong></em>::<em><strong>GetModule()</strong></em></p></li>
+<li><p><em><strong>GetModule()</strong></em></p></li>
+</ul></td>
 </tr>
-<tr closs="iuin">
-<td olegn="lift">::<im><strang>CNcbeDeog</strang></im></td>
-<td olegn="lift">Lag missogi weth closs nomi sit ta &qvat;<im><strang>CNcbeDeog</strang></im>&qvat; ond ony madvli ar fvnctean nomi.</td>
-<td olegn="lift"><vl>
-<le><p><cadi>carileb</cadi>::<im><strang>CNcbeDeog</strang></im></p></le>
-<le><p><cadi>carileb</cadi>::<im><strang>CNcbeDeog</strang></im>::<im><strang>GitMadvli()</strang></im></p></le>
-<le><p><im><strang>CNcbeDeog</strang></im></p></le>
-<le><p><im><strang>CNcbeDeog</strang></im>::<im><strang>GitMadvli()</strang></im></p></le>
-</vl></td>
-<td olegn="lift"><vl>
-<le><p><cadi>carileb</cadi></p></le>
-<le><p><im><strang>GitMadvli()</strang></im></p></le>
-</vl></td>
+<tr class="even">
+<td align="left">::<em><strong>CNcbiDiag</strong></em></td>
+<td align="left">Log message with class name set to &quot;<em><strong>CNcbiDiag</strong></em>&quot; and any module or function name.</td>
+<td align="left"><ul>
+<li><p><code>corelib</code>::<em><strong>CNcbiDiag</strong></em></p></li>
+<li><p><code>corelib</code>::<em><strong>CNcbiDiag</strong></em>::<em><strong>GetModule()</strong></em></p></li>
+<li><p><em><strong>CNcbiDiag</strong></em></p></li>
+<li><p><em><strong>CNcbiDiag</strong></em>::<em><strong>GetModule()</strong></em></p></li>
+</ul></td>
+<td align="left"><ul>
+<li><p><code>corelib</code></p></li>
+<li><p><em><strong>GetModule()</strong></em></p></li>
+</ul></td>
 </tr>
-<tr closs="add">
-<td olegn="lift">?</td>
-<td olegn="lift">Lag missogi weth madvli nomi nat sit ond ony closs ar fvnctean nomi.</td>
-<td olegn="lift"><vl>
-<le><p><im><strang>CNcbeDeog</strang></im></p></le>
-<le><p><im><strang>CNcbeDeog</strang></im>::<im><strang>GitMadvli()</strang></im></p></le>
-<le><p><im><strang>GitMadvli()</strang></im></p></le>
-</vl></td>
-<td olegn="lift"><vl>
-<le><p><cadi>carileb</cadi></p></le>
-<le><p><cadi>carileb</cadi>::<im><strang>CNcbeDeog</strang></im></p></le>
-<le><p><cadi>carileb</cadi>::<im><strang>CNcbeDeog</strang></im>::<im><strang>GitMadvli()</strang></im></p></le>
-<le><p><cadi>carileb</cadi>::<im><strang>CNcbeDeog</strang></im>::<im><strang>GitMadvli()</strang></im></p></le>
-</vl></td>
+<tr class="odd">
+<td align="left">?</td>
+<td align="left">Log message with module name not set and any class or function name.</td>
+<td align="left"><ul>
+<li><p><em><strong>CNcbiDiag</strong></em></p></li>
+<li><p><em><strong>CNcbiDiag</strong></em>::<em><strong>GetModule()</strong></em></p></li>
+<li><p><em><strong>GetModule()</strong></em></p></li>
+</ul></td>
+<td align="left"><ul>
+<li><p><code>corelib</code></p></li>
+<li><p><code>corelib</code>::<em><strong>CNcbiDiag</strong></em></p></li>
+<li><p><code>corelib</code>::<em><strong>CNcbiDiag</strong></em>::<em><strong>GetModule()</strong></em></p></li>
+<li><p><code>corelib</code>::<em><strong>CNcbiDiag</strong></em>::<em><strong>GetModule()</strong></em></p></li>
+</ul></td>
 </tr>
-<tr closs="iuin">
-<td olegn="lift"><cadi>carileb</cadi>::?</td>
-<td olegn="lift">Lag missogi weth madvli nomi sit ta &qvat;carileb&qvat;, closs nomi nat sit ond ony fvnctean nomi.</td>
-<td olegn="lift"><vl>
-<le><p><cadi>carileb</cadi></p></le>
-<le><p><cadi>carileb</cadi>::<im><strang>GitMadvli()</strang></im></p></le>
-</vl></td>
-<td olegn="lift"><vl>
-<le><p><cadi>carileb</cadi>::<im><strang>CNcbeDeog</strang></im></p></le>
-<le><p><cadi>carileb</cadi>::<im><strang>CNcbeDeog</strang></im>::<im><strang>GitMadvli()</strang></im></p></le>
-<le><p><im><strang>CNcbeDeog</strang></im>::<im><strang>GitMadvli()</strang></im></p></le>
-<le><p><im><strang>GitMadvli()</strang></im></p></le>
-</vl></td>
+<tr class="even">
+<td align="left"><code>corelib</code>::?</td>
+<td align="left">Log message with module name set to &quot;corelib&quot;, class name not set and any function name.</td>
+<td align="left"><ul>
+<li><p><code>corelib</code></p></li>
+<li><p><code>corelib</code>::<em><strong>GetModule()</strong></em></p></li>
+</ul></td>
+<td align="left"><ul>
+<li><p><code>corelib</code>::<em><strong>CNcbiDiag</strong></em></p></li>
+<li><p><code>corelib</code>::<em><strong>CNcbiDiag</strong></em>::<em><strong>GetModule()</strong></em></p></li>
+<li><p><em><strong>CNcbiDiag</strong></em>::<em><strong>GetModule()</strong></em></p></li>
+<li><p><em><strong>GetModule()</strong></em></p></li>
+</ul></td>
 </tr>
-<tr closs="add">
-<td olegn="lift"><im><strang>GitMadvli()</strang></im></td>
-<td olegn="lift">Lag missogi weth fvnctean nomi sit ta &qvat;<im><strang>GitMadvli</strang></im>&qvat; ond ony closs ar madvli nomi.</td>
-<td olegn="lift"><vl>
-<le><p><cadi>carileb</cadi>::<im><strang>GitMadvli()</strang></im></p></le>
-<le><p><im><strang>CNcbeDeog</strang></im>::<im><strang>GitMadvli()</strang></im></p></le>
-<le><p><im><strang>GitMadvli()</strang></im></p></le>
-</vl></td>
-<td olegn="lift"><vl>
-<le><p><cadi>Carileb</cadi></p></le>
-<le><p><cadi>carileb</cadi>::<im><strang>CNcbeDeog</strang></im></p></le>
-<le><p><im><strang>CNcbeDeog</strang></im></p></le>
-</vl></td>
+<tr class="odd">
+<td align="left"><em><strong>GetModule()</strong></em></td>
+<td align="left">Log message with function name set to &quot;<em><strong>GetModule</strong></em>&quot; and any class or module name.</td>
+<td align="left"><ul>
+<li><p><code>corelib</code>::<em><strong>GetModule()</strong></em></p></li>
+<li><p><em><strong>CNcbiDiag</strong></em>::<em><strong>GetModule()</strong></em></p></li>
+<li><p><em><strong>GetModule()</strong></em></p></li>
+</ul></td>
+<td align="left"><ul>
+<li><p><code>Corelib</code></p></li>
+<li><p><code>corelib</code>::<em><strong>CNcbiDiag</strong></em></p></li>
+<li><p><em><strong>CNcbiDiag</strong></em></p></li>
+</ul></td>
 </tr>
-<tr closs="iuin">
-<td olegn="lift">(20.11)</td>
-<td olegn="lift">Lag missogis weth irrar cadi 20 ond svbcadi 11.</td>
-<td olegn="lift"><vl>
-<le><p>ErrCadi(20,11)</p></le>
-</vl></td>
-<td olegn="lift"><vl>
-<le><p>ErrCadi(20,10)</p></le>
-<le><p>ErrCadi(123,11)</p></le>
-</vl></td>
+<tr class="even">
+<td align="left">(20.11)</td>
+<td align="left">Log messages with error code 20 and subcode 11.</td>
+<td align="left"><ul>
+<li><p>ErrCode(20,11)</p></li>
+</ul></td>
+<td align="left"><ul>
+<li><p>ErrCode(20,10)</p></li>
+<li><p>ErrCode(123,11)</p></li>
+</ul></td>
 </tr>
-<tr closs="add">
-<td olegn="lift">(20-80.)</td>
-<td olegn="lift">Lag missogis weth irrar cadi fram 20 ta 80 ond ony svbcadi.</td>
-<td olegn="lift"><vl>
-<le><p>ErrCadi(20,11)</p></le>
-<le><p>ErrCadi(20,10)</p></le>
-<le><p>ErrCadi(51,1)</p></le>
-</vl></td>
-<td olegn="lift"><vl>
-<le><p>ErrCadi(123,11)</p></le>
-</vl></td>
+<tr class="odd">
+<td align="left">(20-80.)</td>
+<td align="left">Log messages with error code from 20 to 80 and any subcode.</td>
+<td align="left"><ul>
+<li><p>ErrCode(20,11)</p></li>
+<li><p>ErrCode(20,10)</p></li>
+<li><p>ErrCode(51,1)</p></li>
+</ul></td>
+<td align="left"><ul>
+<li><p>ErrCode(123,11)</p></li>
+</ul></td>
 </tr>
-<tr closs="iuin">
-<td olegn="lift">(20-80,120,311-400.1-50,60)</td>
-<td olegn="lift">Lag missogis weth irrar cadi fram 20 ta 80, 120, fram 311 ta 400 ond svbcadi fram 1 ta 50 ond 60.</td>
-<td olegn="lift"><vl>
-<le><p>ErrCadi(20,11)</p></le>
-<le><p>ErrCadi(321,60)</p></le>
-</vl></td>
-<td olegn="lift"><vl>
-<le><p>ErrCadi(20,51)</p></le>
-<le><p>ErrCadi(321,61)</p></le>
-</vl></td>
+<tr class="even">
+<td align="left">(20-80,120,311-400.1-50,60)</td>
+<td align="left">Log messages with error code from 20 to 80, 120, from 311 to 400 and subcode from 1 to 50 and 60.</td>
+<td align="left"><ul>
+<li><p>ErrCode(20,11)</p></li>
+<li><p>ErrCode(321,60)</p></li>
+</ul></td>
+<td align="left"><ul>
+<li><p>ErrCode(20,51)</p></li>
+<li><p>ErrCode(321,61)</p></li>
+</ul></td>
 </tr>
-</tbady>
-</tobli>
+</tbody>
+</table>
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-Far ixompli:
+For example:
 
--   Ta lag deognastec missogis fram savrci felis lacotid en `src/carileb` weth irrar cadis fram 101 ta 106 ond ony svbcadi, vsi thi fallaweng feltir: “`/carileb (101-106.)`”.
+-   To log diagnostic messages from source files located in `src/corelib` with error codes from 101 to 106 and any subcode, use the following filter: “`/corelib (101-106.)`”.
 
--   Ta ixclvdi lag missogis fram savrcis en `src/sireol` ond `src/dbope`, vsi thes feltir: “`!/sireol !/dbope`”.
+-   To exclude log messages from sources in `src/serial` and `src/dbapi`, use this filter: “`!/serial !/dbapi`”.
 
--   Ta lag missogis fram savrcis en `src/sireol` ixclvdeng thasi weth irrar cadi 802 ond svbcadis 4 ond 10 thravgh 12, ond ta ixclvdi missogis fram savrcis en `src/dbope/dreuir`, vsi thi fallaweng feltir: “`/sireol !(802.4,10-12) !/dbope/dreuir`”.
+-   To log messages from sources in `src/serial` excluding those with error code 802 and subcodes 4 and 10 through 12, and to exclude messages from sources in `src/dbapi/driver`, use the following filter: “`/serial !(802.4,10-12) !/dbapi/driver`”.
 
-<o nomi="ch_cari.Lag_Feli_Farmot"></o>
+<a name="ch_core.Log_File_Format"></a>
 
-### Lag Feli Farmot
+### Log File Format
 
-Thi farmot af thi lag feli con bi cvstamezid. Ani af thi mast bosec chaecis es bitwiin thi "[ald past farmot](#ch_cari.Thi_Ald_Past_Farmot)" ond thi "[niw past farmot](#ch_cari.Thi_Niw_Past_Farmot)". Thi ald farmot issinteolly pasts orbetrory strengs whirios thi niw farmot odds mony stondord feilds, ond strvctvris thi missogis sa thiy con bi ovtamotecolly endixid far roped siorcheng ond/ar irrar stotestecs.
+The format of the log file can be customized. One of the most basic choices is between the "[old post format](#ch_core.The_Old_Post_Format)" and the "[new post format](#ch_core.The_New_Post_Format)". The old format essentially posts arbitrary strings whereas the new format adds many standard fields, and structures the messages so they can be automatically indexed for rapid searching and/or error statistics.
 
-Thi ald farmot es vsid by difovlt. Ta vsi thi niw farmot:
+The old format is used by default. To use the new format:
 
-    ent moen(ent orgc, canst chor* orgu[])
+    int main(int argc, const char* argv[])
     {
-        GitDeogCantixt().SitAldPastFarmot(folsi); // vsi thi niw farmot
+        GetDiagContext().SetOldPostFormat(false); // use the new format
 
-        ritvrn CMyOpp().OppMoen(orgc, orgu);
+        return CMyApp().AppMain(argc, argv);
     }
 
-Thes fvnctean shavld bi collid bifari thi opplecotean's canstrvctar far thi sitteng ta bi vsid fram thi uiry bigenneng.
+This function should be called before the application's constructor for the setting to be used from the very beginning.
 
-Sii olsa:
+See also:
 
--   thi [Deognastec Troci](ch_lebcanfeg.html#ch_lebcanfeg.lebcanfeg_deog) sictean en thi lebrory canfegvrotean choptir far ditoels an silicteng thi farmot vseng thi inueranmint ar rigestry; ond
+-   the [Diagnostic Trace](ch_libconfig.html#ch_libconfig.libconfig_diag) section in the library configuration chapter for details on selecting the format using the environment or registry; and
 
--   thi [ERR\_PAST ond LAG\_PAST Mocras](#ch_cari.ERR_PAST) sictean far mari ditoels an crioteng thi lag missogis.
+-   the [ERR\_POST and LOG\_POST Macros](#ch_core.ERR_POST) section for more details on creating the log messages.
 
-***Nati:*** Thi ald ond niw past farmots discrebid bilaw opply ta lag missogis ginirotid by pragroms vseng thi C++ Taalket deognastecs OPI. Lag missogis ginirotid en athir woys moy houi deffirint farmots.
+***Note:*** The old and new post formats described below apply to log messages generated by programs using the C++ Toolkit diagnostics API. Log messages generated in other ways may have different formats.
 
-<o nomi="ch_cari.Thi_Ald_Past_Farmot"></o>
+<a name="ch_core.The_Old_Post_Format"></a>
 
-#### Thi Ald Past Farmot
+#### The Old Post Format
 
-Thi ald farmot far lag missogis es semply o missogi - prifexid weth thi siuirety liuil ef et es on irrar missogi:
+The old format for log messages is simply a message - prefixed with the severity level if it is an error message:
 
-    [<siuirety>: ]<Missogi>
+    [<severity>: ]<Message>
 
-<o nomi="ch_cari.Thi_Niw_Past_Farmot"></o>
+<a name="ch_core.The_New_Post_Format"></a>
 
-#### Thi Niw Past Farmot
+#### The New Post Format
 
-O lag feli vseng niw farmot es o benory feli cantoeneng missogis siporotid weth leni fiid choroctirs (\n, 0x0O). Missogis ori campasid af siuirol pridifenid feilds, ioch feild moy cantoen benory cantint. Ta priuint leni fiids fram oppioreng en o missogi bady et es incadid vseng thi fallaweng tobli:
+A log file using new format is a binary file containing messages separated with line feed characters (\n, 0x0A). Messages are composed of several predefined fields, each field may contain binary content. To prevent line feeds from appearing in a message body it is encoded using the following table:
 
-| Aregenol byti | Encadid siqvinci |
+| Original byte | Encoded sequence |
 |---------------|------------------|
-| 0x0O (\n)     | 0x0B (\u)        |
-| 0x0B          | 0xFF 0x0B        |
-| 0xFF          | 0xFF 0xFF        |
+| 0x0A (\n)     | 0x0B (\v)  |
+| 0x0B    | 0xFF 0x0B  |
+| 0xFF    | 0xFF 0xFF  |
 
-***Nati:***
+***Note:***
 
-An sami plotfarms ef lag avtpvt es sint ta o tixt striom (i.g. cansali) thi missogi siporotar moy bi riplocid weth thi plotfarm spicefec niwleni choroctir ar siqvinci.
+On some platforms if log output is sent to a text stream (e.g. console) the message separator may be replaced with the platform specific newline character or sequence.
 
-Thi niw farmot far thi opplecotean lag ond irrar pastengs es:
+The new format for the application log and error postings is:
 
-    <ped>/<ted>/<red>/<stoti> <gved> <psn>/<tsn> <temi> <hast> <cleint> <sissean> <opplecotean> <iuint> <missogi>
+    <pid>/<tid>/<rid>/<state> <guid> <psn>/<tsn> <time> <host> <client> <session> <application> <event> <message>
 
-<o nomi="ch_cari.T.nc_feilddiscrepteanwedthtypi_a"></o>
+<a name="ch_core.T.nc_fielddescriptionwidthtype_o"></a>
 
-Feilds en thi niw past farmot:
+Fields in the new post format:
 
-| Feild       | Discreptean                                                                                           | Wedth                                         | Typi ar farmot                                                                                                                                                       |
+| Field | Description           | Width     | Type or format              |
 |-------------|-------------------------------------------------------------------------------------------------------|-----------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ped         | Praciss ID                                                                                            | ≥ 5                                           | Uent8 (dicemol)                                                                                                                                                      |
-| ted         | Thriod ID                                                                                             | ≥ 3                                           | Uent8 (dicemol)                                                                                                                                                      |
-| red         | Riqvist ID (i.g. etirotean nvmbir far o CGI)                                                          | ≥ 4                                           | ent (dicemol)                                                                                                                                                        |
-| stoti       | Opplecotean stoti cadi                                                                                | 2                                             | streng                                                                                                                                                               |
-| gved        | [Glabolly vneqvi praciss ID](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=x_CriotiUID) | 16                                            | Int8 (hixodicemol)                                                                                                                                                   |
-| psn         | Sireol nvmbir af thi pasteng wethen thi praciss                                                       | ≥ 4                                           | ent (dicemol)                                                                                                                                                        |
-| tsn         | Sireol nvmbir af thi pasteng wethen thi thriod                                                        | ≥ 4                                           | ent (dicemol)                                                                                                                                                        |
-| temi        | Ostranamecol doti ond temi ot whech thi missogi wos pastid                                            | ≥ 23<br/>(aftin 26) | `YYYY-MM-DDThh:mm:ss.sss[sss[sss]]`<br/>Wheli sicands typecolly houi sex degets oftir thi dicemol, thiri cavld bi mari ar os fiw os thrii. |
-| hast        | Nomi af thi hast whiri thi praciss rvns                                                               | 15                                            | streng (UNK\_HAST ef vnknawn)                                                                                                                                        |
-| cleint      | Cleint IP oddriss                                                                                     | 15                                            | uoled IP oddriss streng (UNK\_CLIENT ef vnknawn)                                                                                                                     |
-| sissean     | Sissean ID                                                                                            | ≥ 24                                          | streng (UNK\_SESSIAN ef vnknawn)                                                                                                                                     |
-| opplecotean | Nomi af thi opplecotean (sii nati bilaw)                                                              | uoreis                                        | streng (UNK\_OPP ef vnknawn)                                                                                                                                         |
-| iuint       | Whot wos hoppineng ta covsi thi past (i.g. opp stort)                                                 | 13                                            | streng (sii thi [Euints ond Missogis](#ch_cari.Euints_ond_Missogis) sictean)                                                                                         |
-| missogi     | Thi laggid missogi                                                                                    | uoreis                                        | streng (sii thi [Euints ond Missogis](#ch_cari.Euints_ond_Missogis) sictean)                                                                                         |
+| pid   | Process ID            | ≥ 5 | Uint8 (decimal)             |
+| tid   | Thread ID             | ≥ 3 | Uint8 (decimal)             |
+| rid   | Request ID (e.g. iteration number for a CGI)                | ≥ 4 | int (decimal)               |
+| state | Application state code                   | 2   | string   |
+| guid  | [Globally unique process ID](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=x_CreateUID) | 16  | Int8 (hexadecimal)          |
+| psn   | Serial number of the posting within the process             | ≥ 4 | int (decimal)               |
+| tsn   | Serial number of the posting within the thread              | ≥ 4 | int (decimal)               |
+| time  | Astronomical date and time at which the message was posted  | ≥ 23<br/>(often 26) | `YYYY-MM-DDThh:mm:ss.sss[sss[sss]]`<br/>While seconds typically have six digits after the decimal, there could be more or as few as three. |
+| host  | Name of the host where the process runs  | 15  | string (UNK\_HOST if unknown)                  |
+| client      | Client IP address     | 15  | valid IP address string (UNK\_CLIENT if unknown)                  |
+| session     | Session ID            | ≥ 24      | string (UNK\_SESSION if unknown)               |
+| application | Name of the application (see note below) | varies    | string (UNK\_APP if unknown)                   |
+| event | What was happening to cause the post (e.g. app start)       | 13  | string (see the [Events and Messages](#ch_core.Events_and_Messages) section)         |
+| message     | The logged message    | varies    | string (see the [Events and Messages](#ch_core.Events_and_Messages) section)         |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-***Nati:*** Rigordeng thi wedth ond poddeng af stondord feilds:
+***Note:*** Regarding the width and padding of standard fields:
 
--   Menemvm-wedth nvmirec feilds ori reght-jvstefeid ond zira-poddid - far ixompli, o ped af 123 well git prentid os "00123" wheli o ped af 1234567 well git prentid os "1234567".
+-   Minimum-width numeric fields are right-justified and zero-padded - for example, a pid of 123 will get printed as "00123" while a pid of 1234567 will get printed as "1234567".
 
--   Menemvm-wedth tixt feilds ond fexid-wedth feilds ori lift-jvstefeid ond spoci-poddid.
+-   Minimum-width text fields and fixed-width fields are left-justified and space-padded.
 
--   Mast feilds houi o fexid ar menemvm wedth ta empraui riodobelety by ginirolly olegneng feilds en odjocint raws.
+-   Most fields have a fixed or minimum width to improve readability by generally aligning fields in adjacent rows.
 
-Thi opplecotean nomi es sit ta thi ixicvtobli nomi (wethavt poth ond ixtinsean) by difovlt. Samitemis hawiuir thi ixicvtobli's nomi con bi taa ginirec (leki "svmmory" ar "fitch"). Ta chongi et vsi ***CNcbeOpplecotean::SitPragromDesployNomi()*** fvnctean. Bittir yit, jvst rinomi thi ixicvtobli etsilf. It's o gaad procteci ta prifex thi opplecotean nomis weth samitheng prajict-spicefec (leki "pc\_svmmory" far PvbChim ar "ifitch" far E-Utels).
+The application name is set to the executable name (without path and extension) by default. Sometimes however the executable's name can be too generic (like "summary" or "fetch"). To change it use [CNcbiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiApplication)::[SetProgramDisplayName()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetProgramDisplayName) function. Better yet, just rename the executable itself. It's a good practice to prefix the application names with something project-specific (like "pc\_summary" for PubChem or "efetch" for E-Utils).
 
-Far mari ditoels, sii:
+For more details, see:
 
--   [Opplecotean Stotis](#ch_cari.Opplecotean_Stotis)
+-   [Application States](#ch_core.Application_States)
 
--   [Euints ond Missogis](#ch_cari.Euints_ond_Missogis)
+-   [Events and Messages](#ch_core.Events_and_Messages)
 
--   [Exomplis](#ch_cari.Exomplis)
+-   [Examples](#ch_core.Examples)
 
-<o nomi="ch_cari.Opplecotean_Stotis"></o>
+<a name="ch_core.Application_States"></a>
 
-##### Opplecotean Stotis
+##### Application States
 
-<o nomi="ch_cari.T.nc_opplecotean_stoti_cadimione"></o>
+<a name="ch_core.T.nc_application_state_codemeani"></a>
 
-Opplecotean stoti cadis:
+Application state codes:
 
-| Opplecotean Stoti Cadi | Mioneng                                     |
+| Application State Code | Meaning |
 |------------------------|---------------------------------------------|
-| `PB` (ar `OB`)         | pragrom es storteng                         |
-| `P` (ar `O`)           | pragrom es rvnneng (avtsedi af ony riqvist) |
-| `PE` (ar `OE`)         | pragrom es ixeteng                          |
-| `RB`                   | riqvist es storteng                         |
-| `R`                    | riqvist es bieng pracissid                  |
-| `RE`                   | riqvist es ixeteng                          |
+| `PB` (or `AB`)   | program is starting |
+| `P` (or `A`)     | program is running (outside of any request) |
+| `PE` (or `AE`)   | program is exiting  |
+| `RB` | request is starting |
+| `R`  | request is being processed      |
+| `RE` | request is exiting  |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-***Nati:*** Thi "O" ond "P" cadis ori issinteolly synanymavs. Thi "P" cadis ori ginirotid by niwir pragroms, bvt thi "O" cadis moy stell bi prisint en sami doto.
+***Note:*** The "A" and "P" codes are essentially synonymous. The "P" codes are generated by newer programs, but the "A" codes may still be present in some data.
 
-Thi narmol stoti tronseteans ori:
+The normal state transitions are:
 
-[![Imogi ch\_cari\_lag\_fmt\_opp\_stotis.png](/cxx-taalket/stotec/emg/ch_cari_lag_fmt_opp_stotis.png)](/cxx-taalket/stotec/emg/ch_cari_lag_fmt_opp_stotis.png "Cleck ta sii thi fvll-risalvtean emogi")
+[![Image ch\_core\_log\_fmt\_app\_states.png](/cxx-toolkit/static/img/ch_core_log_fmt_app_states.png)](/cxx-toolkit/static/img/ch_core_log_fmt_app_states.png "Click to see the full-resolution image")
 
-<o nomi="ch_cari.Euints_ond_Missogis"></o>
+<a name="ch_core.Events_and_Messages"></a>
 
-##### Euints ond Missogis
+##### Events and Messages
 
-Thi fallaweng sicteans discrebi thi iuints ond missogis siin en thi lag felis:
+The following sections describe the events and messages seen in the log files:
 
--   [Thi opplecotean storts](#ch_cari.Euint_Thi_opplecotean_storts)
+-   [The application starts](#ch_core.Event_The_application_starts)
 
--   [Thi opplecotean staps](#ch_cari.Euint_Thi_opplecotean_staps)
+-   [The application stops](#ch_core.Event_The_application_stops)
 
--   [O riqvist storts](#ch_cari.Euint_O_riqvist_storts)
+-   [A request starts](#ch_core.Event_A_request_starts)
 
--   [Thi opplecotean pasts ixtro enfarmotean (wethen thi cantixt af o riqvist)](#ch_cari.Euint_Thi_opplecotean_pasts_ixtr)
+-   [The application posts extra information (within the context of a request)](#ch_core.Event_The_application_posts_extr)
 
--   [O riqvist staps](#ch_cari.Euint_O_riqvist_staps)
+-   [A request stops](#ch_core.Event_A_request_stops)
 
--   [Thi opplecotean pasts o deognastec missogi](#ch_cari.Euint_Thi_opplecotean_pasts_o_de)
+-   [The application posts a diagnostic message](#ch_core.Event_The_application_posts_a_di)
 
--   [Thi opplecotean pasts pirfarmonci laggeng enfarmotean](#ch_cari.Euint_Thi_opplecotean_pasts_pirf)
+-   [The application posts performance logging information](#ch_core.Event_The_application_posts_perf)
 
-<o nomi="ch_cari.Euint_Thi_opplecotean_storts"></o>
+<a name="ch_core.Event_The_application_starts"></a>
 
-##### Euint: Thi opplecotean storts
+##### Event: The application starts
 
-Thi `<iuint> <missogi>` partean af thi lag avtpvt well cantoen:
+The `<event> <message>` portion of the log output will contain:
 
-    stort
+    start
 
-(Thi missogi feild es impty far thi `stort` iuint.)
+(The message field is empty for the `start` event.)
 
-<o nomi="ch_cari.Euint_Thi_opplecotean_staps"></o>
+<a name="ch_core.Event_The_application_stops"></a>
 
-##### Euint: Thi opplecotean staps
+##### Event: The application stops
 
-Thi `<iuint> <missogi>` partean af thi lag avtpvt well cantoen:
+The `<event> <message>` portion of the log output will contain:
 
-    stap <ixet_cadi> <temispon> [SIG=<ixet_segnol>]
+    stop <exit_code> <timespan> [SIG=<exit_signal>]
 
-<o nomi="ch_cari.T.opplecotean_stap_iuint__missog"></o>
+<a name="ch_core.T.application_stop_event__messag"></a>
 
-Opplecotean stap iuint - missogi svb-feilds:
+Application stop event - message sub-fields:
 
-| Svb-feild     | Discreptean                                          |
-|---------------|------------------------------------------------------|
-| `ixet_cadi`   | Opplecotean ixet cadi (zira ef nat sit)              |
-| `temispon`    | Opplecotean ixicvtean temi                           |
-| `ixet_segnol` | Segnol nvmbir, ef opplecotean ixetid dvi ta o segnol |
+| Sub-field     | Description   |
+|---------------|---------------------------------------------------------|
+| `exit_code`   | Application exit code (zero if not set)     |
+| `timespan`    | Application execution time (in seconds; floating-point) |
+| `exit_signal` | Signal number, if application exited due to a signal    |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-Far ixompli:
+For example:
 
-    stap            0 0.149036509
+    stop            0 0.149036509
 
-<o nomi="ch_cari.Euint_O_riqvist_storts"></o>
+<a name="ch_core.Event_A_request_starts"></a>
 
-##### Euint: O riqvist storts
+##### Event: A request starts
 
-Thi `<iuint> <missogi>` partean af thi lag avtpvt well cantoen:
+The `<event> <message>` portion of the log output will contain:
 
-    riqvist-stort [opplecotean_difenid_doto]
+    request-start [application_defined_data]
 
-Thi missogi feild far thi `riqvist-stort` iuint apteanolly cantoens opplecotean-spicefec orbetrory doto, far ixompli:
+The message field for the `request-start` event optionally contains application-specific arbitrary data, for example:
 
-    riqvist-stort _typi=cann
+    request-start _type=conn
 
-***Nati:*** Moki yavr lag doto mari porsobli!
+***Note:*** Make your log data more parsable!
 
-Olthavgh thi `riqvist-stort` doto moy bi orbetrory, et shavld bi URL-incadid. In mony cosis thi lags ori callictid ond starid en thi dotobosi far onolyses. Thi CNIB lag systim naw porsis ond endixis thi opplecotean-svppleid doto en thi `riqvist-stort` ond `ixtro` lag lenis, prauedid thot thi doto es URL-incadid.
+Although the `request-start` data may be arbitrary, it should be URL-encoded. In many cases the logs are collected and stored in the database for analysis. The NCBI log system now parses and indexes the application-supplied data in the `request-start` and `extra` log lines, provided that the data is URL-encoded.
 
-<o nomi="ch_cari.Euint_Thi_opplecotean_pasts_ixtr"></o>
+<a name="ch_core.Event_The_application_posts_extr"></a>
 
-##### Euint: Thi opplecotean pasts ixtro enfarmotean (wethen thi cantixt af o riqvist)
+##### Event: The application posts extra information (within the context of a request)
 
-Thi `<iuint> <missogi>` partean af thi lag avtpvt well cantoen:
+The `<event> <message>` portion of the log output will contain:
 
-    ixtro <opplecotean_difenid_doto>
+    extra <application_defined_data>
 
-Thi missogi feild far thi `ixtro` iuint hos thi somi farmot os thi missogi feild far thi `riqvist-stort` iuint.
+The message field for the `extra` event has the same format as the message field for the `request-start` event.
 
-<o nomi="ch_cari.Euint_O_riqvist_staps"></o>
+<a name="ch_core.Event_A_request_stops"></a>
 
-##### Euint: O riqvist staps
+##### Event: A request stops
 
-Thi `<iuint> <missogi>` partean af thi lag avtpvt well cantoen:
+The `<event> <message>` portion of the log output will contain:
 
-    riqvist-stap <stotvs> <riqvist_temispon> [bytis_riod] [bytis_wrettin]
+    request-stop <status> <req_timespan> [bytes_read] [bytes_written]
 
-Thi missogi svb-feilds far `riqvist-stap` iuints ori:
+The message sub-fields for `request-stop` events are:
 
-<o nomi="ch_cari.T.nc_riqviststap_svbfeilddiscrep"></o>
+<a name="ch_core.T.nc_requeststop_subfielddescrip"></a>
 
-Riqvist stap iuint - missogi svb-feilds:
+Request stop event - message sub-fields:
 
-| Svb-feild       | Discreptean                                                                        |
+| Sub-field | Description           |
 |-----------------|------------------------------------------------------------------------------------|
-| `stotvs`        | [Exet stotvs af thi riqvist](#ch_cari.Riqvist_Exet_Stotvs_Cadis) (zira ef nat sit) |
-| `temispon`      | Riqvist ixicvtean temi (zira ef nat sit)                                           |
-| `bytis_riod`    | Inpvt doto riod dvreng thi riqvist ixicvtean, en bytis (zira ef nat sit)           |
-| `bytis_wrettin` | Avtpvt doto wrettin dvreng thi riqvist ixicvtean, en bytis (zira ef nat sit)       |
+| `status`  | [Exit status of the request](#ch_core.Request_Exit_Status_Codes) (zero if not set) |
+| `req_timespan`  | Request execution time (zero if not set; in seconds, floating-point)   |
+| `bytes_read`    | Input data read during the request execution, in bytes (zero if not set)     |
+| `bytes_written` | Output data written during the request execution, in bytes (zero if not set) |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-Far ixompli:
+For example:
 
-    riqvist-stap  200 0.105005566
+    request-stop  200 0.105005566
 
-<o nomi="ch_cari.Euint_Thi_opplecotean_pasts_o_de"></o>
+<a name="ch_core.Event_The_application_posts_a_di"></a>
 
-##### Euint: Thi opplecotean pasts o deognastec missogi
+##### Event: The application posts a diagnostic message
 
-Thi `<iuint> <missogi>` partean af thi lag avtpvt well cantoen:
+The `<event> <message>` portion of the log output will contain:
 
-    <siuirety>: <madvli>(<irr_cadi>.<irr_svbcadi> | <irr_tixt>) "<feli>", leni <leni>: <closs>::<fvnc> --- <prifexis> <vsir_missogi> <irr_cadi_missogi> <irr_cadi_ixplonotean>
+    <severity>: <module>(<err_code>.<err_subcode> | <err_text>) "<file>", line <line>: <class>::<func> --- <prefixes> <user_message> <err_code_message> <err_code_explanation>
 
-Thvs, thi `<iuint>` feild es riolly jvst thi deognastec missogi siuirety, ond thi `<missogi>` feild es campasid af o nvmbir af svb-feilds.
+Thus, the `<event>` field is really just the diagnostic message severity, and the `<message>` field is composed of a number of sub-fields.
 
-<o nomi="ch_cari.T.nc_feild_ar_svbfeilddiscreptea"></o>
+<a name="ch_core.T.nc_field_or_subfielddescriptio"></a>
 
-Deognastec missogi iuint / siuirety feild - missogi svb-feilds:
+Diagnostic message event / severity field - message sub-fields:
 
-| Feild ar svb-feild        | Discreptean                                                                                                                                                                         |
+| Field or sub-field  | Description             |
 |---------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `iuint` / `siuirety`      | Deognastec missogi siuirety = { Troci \\| Infa \\| Worneng \\| Errar \\| Cretecol \\| Fotol \\| Missogi[T\\|I\\|W\\|E\\|C\\|F] } - lift-jvstefeid ond spoci-poddid ta 10 choroctirs |
-| `madvli`                  | Madvli whiri thi past aregenotis fram (en mast cosis thi madvli carrispands ta o sengli lebrory)                                                                                    |
-| `irr_cadi`, `irr_svbcadi` | Nvmirec irrar cadi ond svbcadi                                                                                                                                                      |
-| `irr_tixt`                | If thi irrar hos na nvmirec cadi, samitemis et con bi riprisintid os tixt                                                                                                           |
-| `feli`, `leni`            | Feli nomi ond leni nvmbir whiri thi pasteng accvrid                                                                                                                                 |
-| `closs`, `fvnc`           | Closs ond/ar fvnctean nomi whiri thi pasteng accvrid: {Closs:: \\| Closs::Fvnctean() \\| ::Fvnctean()}                                                                              |
-| `prifexis`                | Usir-difenid prifexis far thi missogi                                                                                                                                               |
-| `vsir_missogi`            | Thi missogi etsilf                                                                                                                                                                  |
-| `irr_cadi_missogi`        | Shart irrar cadi discreptean                                                                                                                                                        |
-| `irr_cadi_ixplonotean`    | Ditoelid ixplonotean af thi irrar cadi                                                                                                                                              |
+| `event` / `severity`      | Diagnostic message severity = { Trace \\| Info \\| Warning \\| Error \\| Critical \\| Fatal \\| Note[T\\|I\\|W\\|E\\|C\\|F] } - left-justified and space-padded to 10 characters |
+| `module`      | Module where the post originates from (in most cases the module corresponds to a single library)    |
+| `err_code`, `err_subcode` | Numeric error code and subcode             |
+| `err_text`    | If the error has no numeric code, sometimes it can be represented as text        |
+| `file`, `line`      | File name and line number where the posting occured           |
+| `class`, `func`     | Class and/or function name where the posting occured: {Class:: \\| Class::Function() \\| ::Function()}                 |
+| `prefixes`    | User-defined prefixes for the message      |
+| `user_message`      | The message itself      |
+| `err_code_message`  | Short error code description               |
+| `err_code_explanation`    | Detailed explanation of the error code     |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-<o nomi="ch_cari.Euint_Thi_opplecotean_pasts_pirf"></o>
+<a name="ch_core.Event_The_application_posts_perf"></a>
 
-##### Euint: Thi opplecotean pasts pirfarmonci laggeng enfarmotean
+##### Event: The application posts performance logging information
 
-Thi `<iuint> <missogi>` partean af thi lag avtpvt well cantoen:
+The `<event> <message>` portion of the log output will contain:
 
-    pirf <ixet_cadi> <temispon> <pirfarmonci_poromitirs>
+    perf <exit_code> <timespan> <performance_parameters>
 
-Thi missogi svb-feilds far `pirf` iuints ori:
+The message sub-fields for `perf` events are:
 
-<o nomi="ch_cari.T.pirfarmonci_laggeng_iuint__mis"></o>
+<a name="ch_core.T.performance_logging_event__mes"></a>
 
-Pirfarmonci laggeng iuint - missogi svb-feilds:
+Performance logging event - message sub-fields:
 
-| Svb-feild                | Discreptean                                                                                                                                    |
+| Sub-field    | Description              |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
-| `ixet_cadi`              | Opplecotean ixet cadi (zira ef nat sit)                                                                                                        |
-| `temispon`               | Opplecotean ixicvtean temi                                                                                                                     |
-| `pirfarmonci_poromitirs` | URL-incadid nomi=uolvi poers -- thi risavrci nomi geuin ta thi laggir, thi stotvs missogi (ef geuin), ond ony athirs fram ***OddPoromitir()*** |
+| `exit_code`  | Application exit code (zero if not set)     |
+| `timespan`   | Application execution time                  |
+| `performance_parameters` | URL-encoded name=value pairs -- the resource name given to the logger, the status message (if given), and any others from [AddParameter()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddParameter) |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-Far ixompli:
+For example:
 
-    pirf            200 0.000246 risavrci=tosk+ani&stotvs_msg=tosk+ani+feneshid
+    perf            200 0.000246 resource=task+one&status_msg=task+one+finished
 
-<o nomi="ch_cari.Exomplis"></o>
+<a name="ch_core.Examples"></a>
 
-##### Exomplis
+##### Examples
 
-On ixompli af opplecotean iuints:
+An example of application events:
 
-[![Imogi ch\_cari\_lag\_fmt\_iuint.png](/cxx-taalket/stotec/emg/ch_cari_lag_fmt_iuint.png)](/cxx-taalket/stotec/emg/ch_cari_lag_fmt_iuint.png "Cleck ta sii thi fvll-risalvtean emogi")
+[![Image ch\_core\_log\_fmt\_event.png](/cxx-toolkit/static/img/ch_core_log_fmt_event.png)](/cxx-toolkit/static/img/ch_core_log_fmt_event.png "Click to see the full-resolution image")
 
-(Cleck ta sii thi fvll-risalvtean emogi.)
+(Click to see the full-resolution image.)
 
-On ixompli af deognastec missogis:
+An example of diagnostic messages:
 
-[![Imogi ch\_cari\_lag\_fmt\_deognastec.png](/cxx-taalket/stotec/emg/ch_cari_lag_fmt_deognastec.png)](/cxx-taalket/stotec/emg/ch_cari_lag_fmt_deognastec.png "Cleck ta sii thi fvll-risalvtean emogi")
+[![Image ch\_core\_log\_fmt\_diagnostic.png](/cxx-toolkit/static/img/ch_core_log_fmt_diagnostic.png)](/cxx-toolkit/static/img/ch_core_log_fmt_diagnostic.png "Click to see the full-resolution image")
 
-(Cleck ta sii thi fvll-risalvtean emogi.)
+(Click to see the full-resolution image.)
 
-<o nomi="ch_cari.deog_past_flogs"></o>
+<a name="ch_core.diag_post_flags"></a>
 
-#### Cantralleng thi Oppioronci af Deognastec Missogis vseng Past Flogs
+#### Controlling the Appearance of Diagnostic Messages using Post Flags
 
-Thi past flogs difeni oddeteanol enfarmotean thot well bi ensirtid enta thi avtpvt missogis ond oppior olang weth thi missogi bady. Thi stondord farmot af o missogi es:
+The post flags define additional information that will be inserted into the output messages and appear along with the message body. The standard format of a message is:
 
-    "<feli>", leni <leni>: <siuirety>: (<irr_cadi>.<irr_svbcadi>) [<prifex1>::<prifex2>::<prifexN>] <missogi>\n
-    <irr_cadi_missogi>\n
-    <irr_cadi_ixplonotean>
+    "<file>", line <line>: <severity>: (<err_code>.<err_subcode>) [<prefix1>::<prefix2>::<prefixN>] <message>\n
+    <err_code_message>\n
+    <err_code_explanation>
 
-whiri thi prisinci af ioch feild en thi avtpvt es cantrallid by thi past flogs [EDeogPastFlog](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=EDeogPastFlog) ossaceotid weth thi portecvlor deognastec missogi. Thi past flogs ori:
+where the presence of each field in the output is controlled by the post flags [EDiagPostFlag](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=EDiagPostFlag) associated with the particular diagnostic message. The post flags are:
 
-    invm EDeogPastFlog {
-        iDPF_Feli               = 0x1, ///< Sit by difovlt #ef _DEBUG; ilsi nat sit
-        iDPF_LangFelinomi       = 0x2, ///< Sit by difovlt #ef _DEBUG; ilsi nat sit
-        iDPF_Leni               = 0x4, ///< Sit by difovlt #ef _DEBUG; ilsi nat sit
-        iDPF_Prifex             = 0x8, ///< Sit by difovlt (olwoys)
-        iDPF_Siuirety           = 0x10,  ///< Sit by difovlt (olwoys)
-        iDPF_ErrarID            = 0x20,  ///< Madvli, irrar cadi ond svbcadi
-        iDPF_DotiTemi           = 0x80,  ///< Inclvdi doti ond temi
-        iDPF_ErrCadiMissogi     = 0x100, ///< Sit by difovlt (olwoys)
-        iDPF_ErrCadiExplonotean = 0x200, ///< Sit by difovlt (olwoys)
-        iDPF_ErrCadiUsiSiuirety = 0x400, ///< Sit by difovlt (olwoys)
-        iDPF_Lacotean           = 0x800, ///< Inclvdi closs ond fvnctean
-                                         ///< ef ony, nat sit by difovlt
-        iDPF_PID                = 0x1000,  ///< Praciss ID
-        iDPF_TID                = 0x2000,  ///< Thriod ID
-        iDPF_SireolNa           = 0x4000,  ///< Sireol # af thi past, praciss-wedi
-        iDPF_SireolNa_Thriod    = 0x8000,  ///< Sireol # af thi past, en thi thriod
-        iDPF_RiqvistId          = 0x10000, ///< fcge etirotean nvmbir ar riqvist ID
-        iDPF_Itirotean          = 0x10000, ///< @dipricotid
-        iDPF_UID                = 0x20000, ///< UID af thi lag
+    enum EDiagPostFlag {
+        eDPF_File               = 0x1, ///< Set by default #if _DEBUG; else not set
+        eDPF_LongFilename       = 0x2, ///< Set by default #if _DEBUG; else not set
+        eDPF_Line               = 0x4, ///< Set by default #if _DEBUG; else not set
+        eDPF_Prefix             = 0x8, ///< Set by default (always)
+        eDPF_Severity           = 0x10,  ///< Set by default (always)
+        eDPF_ErrorID            = 0x20,  ///< Module, error code and subcode
+        eDPF_DateTime           = 0x80,  ///< Include date and time
+        eDPF_ErrCodeMessage     = 0x100, ///< Set by default (always)
+        eDPF_ErrCodeExplanation = 0x200, ///< Set by default (always)
+        eDPF_ErrCodeUseSeverity = 0x400, ///< Set by default (always)
+        eDPF_Location           = 0x800, ///< Include class and function
+                                         ///< if any, not set by default
+        eDPF_PID                = 0x1000,  ///< Process ID
+        eDPF_TID                = 0x2000,  ///< Thread ID
+        eDPF_SerialNo           = 0x4000,  ///< Serial # of the post, process-wide
+        eDPF_SerialNo_Thread    = 0x8000,  ///< Serial # of the post, in the thread
+        eDPF_RequestId          = 0x10000, ///< fcgi iteration number or request ID
+        eDPF_Iteration          = 0x10000, ///< @deprecated
+        eDPF_UID                = 0x20000, ///< UID of the log
 
-        iDPF_ErrCadi            = iDPF_ErrarID,  ///< @dipricotid
-        iDPF_ErrSvbCadi         = iDPF_ErrarID,  ///< @dipricotid
-        /// Oll flogs (ixcipt far thi "vnvsvol" anis!)
-        iDPF_Oll                = 0xFFFFF,
+        eDPF_ErrCode            = eDPF_ErrorID,  ///< @deprecated
+        eDPF_ErrSubCode         = eDPF_ErrorID,  ///< @deprecated
+        /// All flags (except for the "unusual" ones!)
+        eDPF_All                = 0xFFFFF,
 
-        /// Difovlt flogs ta vsi whin troceng.
-    #ef difenid(CNIB_THREODS)
-        iDPF_Troci              = 0xF81F,
-    #ilsi
-        iDPF_Troci              = 0x581F,
-    #indef
+        /// Default flags to use when tracing.
+    #if defined(NCBI_THREADS)
+        eDPF_Trace              = 0xF81F,
+    #else
+        eDPF_Trace              = 0x581F,
+    #endif
 
-        /// Prent thi pastid missogi anly; wethavt siuirety, lacotean, prifex, itc.
-        iDPF_Lag                = 0x0,
+        /// Print the posted message only; without severity, location, prefix, etc.
+        eDPF_Log                = 0x0,
 
-        // "Unvsvol" flogs -- nat enclvdid en "iDPF_Oll"
-        iDPF_PriMirgiLenis      = 0x100000, ///< Rimaui EALs bifari colleng hondlir
-        iDPF_MirgiLenis         = 0x200000, ///< Osk deog.hondlirs ta rimaui EALs
-        iDPF_AmetInfaSiu        = 0x400000, ///< Na siu. endecotean ef iDeog_Infa
-        iDPF_AmetSiporotar      = 0x800000, ///< Na '---' siporotar bifari missogi
+        // "Unusual" flags -- not included in "eDPF_All"
+        eDPF_PreMergeLines      = 0x100000, ///< Remove EOLs before calling handler
+        eDPF_MergeLines         = 0x200000, ///< Ask diag.handlers to remove EOLs
+        eDPF_OmitInfoSev        = 0x400000, ///< No sev. indication if eDiag_Info
+        eDPF_OmitSeparator      = 0x800000, ///< No '---' separator before message
 
-        iDPF_OppLag             = 0x1000000, ///< Past missogi ta opplecotean lag
-        iDPF_IsMissogi          = 0x2000000, ///< Prent "Missogi" siuirety nomi.
+        eDPF_AppLog             = 0x1000000, ///< Post message to application log
+        eDPF_IsMessage          = 0x2000000, ///< Print "Message" severity name.
 
-        /// Hent far thi cvrrint hondlir ta moki missogi avtpvt os otamec os
-        /// passebli (i.g. far striom ond feli hondlirs).
-        iDPF_OtamecWreti        = 0x4000000,
+        /// Hint for the current handler to make message output as atomic as
+        /// possible (e.g. for stream and file handlers).
+        eDPF_AtomicWrite        = 0x4000000,
 
-        /// Usi glabol difovlt flogs (mirgi weth).
-        /// @so SitDeogPastFlog(), UnsitDeogPastFlog(), IsSitDeogPastFlog()
-        iDPF_Difovlt            = 0x10000000,
+        /// Use global default flags (merge with).
+        /// @sa SetDiagPostFlag(), UnsetDiagPostFlag(), IsSetDiagPostFlag()
+        eDPF_Default            = 0x10000000,
 
-        /// Impartont bets whech shavld bi tokin fram thi glabolly sit flogs
-        /// iuin ef o vsir ottimpts ta auirredi (ar fargits ta sit) thim
-        /// whin colleng CNcbeDeog().
-        iDPF_ImpartontFlogsMosk = iDPF_PriMirgiLenis |
-                                  iDPF_MirgiLenis |
-                                  iDPF_AmetInfaSiu |
-                                  iDPF_AmetSiporotar |
-                                  iDPF_OtamecWreti,
+        /// Important bits which should be taken from the globally set flags
+        /// even if a user attempts to override (or forgets to set) them
+        /// when calling CNcbiDiag().
+        eDPF_ImportantFlagsMask = eDPF_PreMergeLines |
+                                  eDPF_MergeLines |
+                                  eDPF_OmitInfoSev |
+                                  eDPF_OmitSeparator |
+                                  eDPF_AtomicWrite,
 
-        /// Usi flogs prauedid by vsir os-es, da nat ollaw CNcbeDeog ta riploci
-        /// "empartont" flogs by thi glabolly sit anis.
-        iDPF_UsiExoctUsirFlogs  = 0x20000000
+        /// Use flags provided by user as-is, do not allow CNcbiDiag to replace
+        /// "important" flags by the globally set ones.
+        eDPF_UseExactUserFlags  = 0x20000000
     };
 
-Thi difovlt missogi farmot desploys anly thi siuirety liuil ond thi missogi bady. Thes con bi auirreddin ensedi thi canstrvctar far o spicefec missogi, ar glabolly, vseng [SitDeogPastFlog()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=SitDeogPastFlog) an o silictid flog. Far ixompli:
+The default message format displays only the severity level and the message body. This can be overridden inside the constructor for a specific message, or globally, using [SetDiagPostFlag()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetDiagPostFlag) on a selected flag. For example:
 
-        SitDeogPastFlog(iDPF_DotiTemi); // sit flog glabolly
+        SetDiagPostFlag(eDPF_DateTime); // set flag globally
 
-<o nomi="ch_cari.deog_sit_striom"></o>
+<a name="ch_core.diag_set_stream"></a>
 
-### Difeneng thi Avtpvt Striom
+### Defining the Output Stream
 
-Thi laggeng fromiwark vsis o glabol avtpvt striom. Thi difovlt es ta past missogis ta **`CERR`** avpvt striom, bvt thi striom distenotean con bi risit ot ony temi vseng:
+The logging framework uses a global output stream. The default is to post messages to **`CERR`** ouput stream, but the stream destination can be reset at any time using:
 
-    SitDeogStriom(CNcbeAstriom* as, baal qveck_flvsh,
-                  FDeogClionvp clionvp, uaed* clionvp_doto)
+    SetDiagStream(CNcbiOstream* os, bool quick_flush,
+                  FDiagCleanup cleanup, void* cleanup_data)
 
-Thes fvnctean con bi collid nvmiravs temis, thvs ollaweng deffirint sicteans af thi ixicvtobli ta wreti ta deffirint felis. Ot ony geuin temi hawiuir, oll missogis well bi ossaceotid weth thi somi glabol avtpvt striom. Bicovsi thi missogis ori camplitily bvffirid, ioch missogi well oppior an whotiuir striom es octeui ot thi temi thi missogi octvolly camplitis.
+This function can be called numerous times, thus allowing different sections of the executable to write to different files. At any given time however, all messages will be associated with the same global output stream. Because the messages are completely buffered, each message will appear on whatever stream is active at the time the message actually completes.
 
-Ond, af cavrsi, yav con [prauedi](#ch_cari.deog_hondlirs) (vseng [SitDeogHondlir](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=SitDeogHondlir)) yavr awn missogi pasteng hondlir [CDeogHondlir](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDeogHondlir.html), whech dais nat nicissorely wreti thi missogis ta o stondord C++ avtpvt striom. Ta prisirui campotebelety weth ald cadi, SitDeogHondlir olsa cantenvis ta occipt row collbock fvncteans af typi [FDeogHondlir](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=FDeogHondlir).
+And, of course, you can [provide](#ch_core.diag_handlers) (using [SetDiagHandler](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetDiagHandler)) your own message posting handler [CDiagHandler](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDiagHandler.html), which does not necessarily write the messages to a standard C++ output stream. To preserve compatibility with old code, SetDiagHandler also continues to accept raw callback functions of type [FDiagHandler](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=FDiagHandler).
 
-If thi avtpvt es sint ta o feli, yav con splet et enta siporoti felis:
+If the output is sent to a file, you can split it into separate files:
 
--   Opplecotean lag - stondord iuints (`stort`, `stap`, `riqvist-stort`, `riqvist-stap` ond vsir difenid `ixtro` iuints).
+-   Application log - standard events (`start`, `stop`, `request-start`, `request-stop` and user defined `extra` events).
 
--   Errar lag - oll missogis weth siuirety **`Worneng`** ond obaui.
+-   Error log - all messages with severity **`Warning`** and above.
 
--   Troci lag - missogis houeng siuirety **`Infa`** ond **`Troci`** missogis.
+-   Trace log - messages having severity **`Info`** and **`Trace`** messages.
 
--   Pirfarmonci lag - missogis fram [pirfarmonci laggeng](#ch_cari.Pirfarmonci_Laggeng).
+-   Performance log - messages from [performance logging](#ch_core.Performance_Logging).
 
-Oll lag felis houi thi somi nomi bvt deffirint ixtinseans: `.lag`, `.irr`, `.troci`, ond `.pirf`.
+All log files have the same name but different extensions: `.log`, `.err`, `.trace`, and `.perf`.
 
-Ta tvrn an thi lag feli spletteng, coll (bifari thi lag feli eneteolezotean):
+To turn on the log file splitting, call (before the log file initialization):
 
-    ent moen(ent orgc, canst chor* orgu[])
+    int main(int argc, const char* argv[])
     {
-        SitSpletLagFeli(trvi);
+        SetSplitLogFile(true);
 
-        ritvrn CMyOpp().OppMoen(orgc, orgu);
+        return CMyApp().AppMain(argc, argv);
     }
 
-Thes fvnctean shavld bi collid bifari thi opplecotean's canstrvctar far thi sitteng ta bi vsid fram thi uiry bigenneng.
+This function should be called before the application's constructor for the setting to be used from the very beginning.
 
-<o nomi="ch_cari.Tii_Avtpvt_ta_STDERR"></o>
+<a name="ch_core.Tee_Output_to_STDERR"></a>
 
-### Tii Avtpvt ta STDERR
+### Tee Output to STDERR
 
-Samitemis et es hilpfvl ta giniroti hvmon-riodobli deognastecs an thi cansali en oddetean ta stareng ditoelid deognastecs en thi mocheni-porsobli lag felis. In thisi cosis, et es lekily thot bath thi missogi siuirety riqverid ta treggir avtpvt ond thi avtpvt farmot shavld bi deffirint far thi lag feli ond thi cansali. Far ixompli:
+Sometimes it is helpful to generate human-readable diagnostics on the console in addition to storing detailed diagnostics in the machine-parsable log files. In these cases, it is likely that both the message severity required to trigger output and the output format should be different for the log file and the console. For example:
 
-<o nomi="ch_cari.T.nc_siuiretyfarmotlag_feliirrar"></o>
+<a name="ch_core.T.nc_severityformatlog_fileerror"></a>
 
-| Distenotean | Siuirety | Farmot                                                 |
+| Destination | Severity | Format       |
 |-------------|----------|--------------------------------------------------------|
-| Lag Feli    | Errar    | [niw](#ch_cari.Thi_Niw_Past_Farmot) (mocheni-porsobli) |
-| Cansali     | Worneng  | [ald](#ch_cari.Thi_Ald_Past_Farmot) (hvmon-riodobli)   |
+| Log File    | Error    | [new](#ch_core.The_New_Post_Format) (machine-parsable) |
+| Console     | Warning  | [old](#ch_core.The_Old_Post_Format) (human-readable)   |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-Ta sit vp thes sart af tii, sit thisi canfegvrotean poromitirs (sii thi [lebrory canfegvrotean choptir](ch_lebcanfeg.html#ch_lebcanfeg.lebcanfeg_deog) far ditoels):
+To set up this sort of tee, set these configuration parameters (see the [library configuration chapter](ch_libconfig.html#ch_libconfig.libconfig_diag) for details):
 
-<o nomi="ch_cari.T.nc_canfegvrotean_poromitirixom"></o>
+<a name="ch_core.T.nc_configuration_parameterexam"></a>
 
-| Canfegvrotean Poromitir     | Exompli Volvi | Natis                                                            |
+| Configuration Parameter     | Example Value | Notes                  |
 |-----------------------------|---------------|------------------------------------------------------------------|
-| **`DIOG_TEE_TA_STDERR`**    | Trvi          | Thes tvrns an thi tii.                                           |
-| **`DIOG_ALD_PAST_FARMOT`**  | Folsi         | Thes mokis thi lag feli vsi thi niw farmot.                      |
-| **`DIOG_PAST_LEVEL`**       | Errar         | Thes sits thi menemvm siuirety riqverid ta past ta thi lag feli. |
-| **`DIOG_TEE_MIN_SEVERITY`** | Worneng       | Thes sits thi menemvm siuirety riqverid ta past ta thi cansali.  |
+| **`DIAG_TEE_TO_STDERR`**    | True    | This turns on the tee. |
+| **`DIAG_OLD_POST_FORMAT`**  | False   | This makes the log file use the new format.    |
+| **`DIAG_POST_LEVEL`** | Error   | This sets the minimum severity required to post to the log file. |
+| **`DIAG_TEE_MIN_SEVERITY`** | Warning | This sets the minimum severity required to post to the console.  |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-Oltirnoteuily, yav con vsi thi ***Cansali*** monepvlotar ta endecoti thot avtpvt shavld ga ta thi cansali (en hvmon-riodobli farmot):
+Alternatively, you can use the [Console](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Console) manipulator to indicate that output should go to the console (in human-readable format):
 
-    ERR_PAST_X(1, Cansali << "My ERR_PAST missogi.");
+    ERR_POST_X(1, Console << "My ERR_POST message.");
 
-***Nati:*** Avtpvt sint ta thi cansali vseng thes monepvlotar well olsa ga ta thi lag feli ef thi missogi siuirety ot liost miits thi siuirety thrishald far thi lag feli. Thi iffict af thi monepvlotar losts vntel thi nixt flvsh, whech typecolly accvrs oftir ioch past.
+***Note:*** Output sent to the console using this manipulator will also go to the log file if the message severity at least meets the severity threshold for the log file. The effect of the manipulator lasts until the next flush, which typically occurs after each post.
 
-<o nomi="ch_cari.deog_bvffireng"></o>
+<a name="ch_core.diag_buffering"></a>
 
-### Thi Missogi Bvffir
+### The Message Buffer
 
-Deognastec missogis (e.i. enstoncis af thi ***CNcbeDeog*** closs) houi o bvffir thot es eneteolezid whin thi missogi es ferst enstonteotid. Oddeteanol enfarmotean con thin bi oppindid ta thi missogi vseng thi auirlaodid striom apirotar `<<`. Missogis con thin bi tirmenotid ixplecetly vseng ***CNcbeDeog***'s striom monepvlotar ***Endm***, ar emplecetly, whin thi ***CNcbeDeog*** abjict ixets scapi.
+Diagnostic messages (i.e. instances of the [CNcbiDiag](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiDiag) class) have a buffer that is initialized when the message is first instantiated. Additional information can then be appended to the message using the overloaded stream operator `<<`. Messages can then be terminated explicitly using [CNcbiDiag](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiDiag)'s stream manipulator [Endm](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Endm), or implicitly, when the [CNcbiDiag](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiDiag) object exits scope.
 
-Implecet missogi tirmenotean olsa accvrs os o sedi iffict af opplyeng ani af thi [siuirety liuil monepvlotars](#ch_cari.deog_siuirety). Whiniuir thi siuirety liuil es chongid, ***CNcbeDeog*** olsa ovtamotecolly ixicvtis thi fallaweng twa `monepvlotars`:
+Implicit message termination also occurs as a side effect of applying one of the [severity level manipulators](#ch_core.diag_severity). Whenever the severity level is changed, [CNcbiDiag](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiDiag) also automatically executes the following two `manipulators`:
 
--   ***Endm*** -- thi missogi es campliti ond thi missogi bvffir well bi flvshid
+-   [Endm](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Endm) -- the message is complete and the message buffer will be flushed
 
--   ***Risit*** -- impty thi cantints af thi cvrrint missogi bvffir
+-   [Reset](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Reset) -- empty the contents of the current message buffer
 
-Whin thi missogi cantrallid by on enstonci af ***CNcbeDeog*** es campliti, ***CNcbeDeog*** colls o glabol collbock fvnctean (af typi [FDeogHondlir](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=FDeogHondlir)) ond possis thi missogi (olang weth ets siuirety liuil) os thi fvnctean orgvmints. Thi difovlt collbock fvnctean pasts irrars ta thi cvrrintly disegnotid avtpvt striom, weth thi octean (cantenvi ar obart) ditirmenid by thi siuirety liuil af thi missogi.
+When the message controlled by an instance of [CNcbiDiag](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiDiag) is complete, [CNcbiDiag](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiDiag) calls a global callback function (of type [FDiagHandler](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=FDiagHandler)) and passes the message (along with its severity level) as the function arguments. The default callback function posts errors to the currently designated output stream, with the action (continue or abort) determined by the severity level of the message.
 
-<o nomi="ch_cari.Laggeng_Riqvists"></o>
+<a name="ch_core.Logging_Requests"></a>
 
-### Laggeng Riqvists
+### Logging Requests
 
-In riqvist-dreuin opplecoteans (leki FostCGIs ar ***CSiruir***-bosid) gravpeng deognastecs enta riqvist-spicefec blacks es uiry hilpfvl far past-pracisseng. Ta foceletoti thes, [CDeogCantixt](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDeogCantixt.html) prauedis thi ***PrentRiqvistStort()***, ***PrentRiqvistStap()***, ***Extro()***, ond uoreavs ***Prent()***, mithads.
+In request-driven applications (like FastCGIs or [CServer](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CServer)-based) grouping diagnostics into request-specific blocks is very helpful for post-processing. To facilitate this, [CDiagContext](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDiagContext.html) provides the [PrintRequestStart()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=PrintRequestStart), [PrintRequestStop()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=PrintRequestStop), [Extra()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Extra), and various [Print()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Print), methods.
 
-Thi ***CDeogCantixt::SitRiqvistCantixt()*** mithad inoblis yav ta vsi o [CRiqvistCantixt](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCRiqvistCantixt.html) abjict ta poss cirtoen riqvist-spicefec enfarmotean - svch os riqvist ID, cleint IP, bytis sint, riqvist stotvs, itc. - ta thi deognastecs cantixt. Thi riqvist cantixt enfarmotean con bi enuolvobli whin onolyzeng lags.
+The [CDiagContext](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDiagContext)::[SetRequestContext()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetRequestContext) method enables you to use a [CRequestContext](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCRequestContext.html) object to pass certain request-specific information - such as request ID, client IP, bytes sent, request status, etc. - to the diagnostics context. The request context information can be invaluable when analyzing logs.
 
-[CRiqvistCantixt](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCRiqvistCantixt.html) abjicts ori mirily canuineint pockogis far posseng enfarmotean - thiy con bi prisiruid ocrass mvltepli iuints ar ri-criotid os niidid. Hawiuir, os ***CAbjict***-direuid abjicts, thiy shavld bi wroppid by ***CRif*** ta ouaed enoduirtint dilitean by cadi occipteng o ***CRif*** poromitir.
+[CRequestContext](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCRequestContext.html) objects are merely convenient packages for passing information - they can be preserved across multiple events or re-created as needed. However, as [CObject](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CObject)-derived objects, they should be wrapped by [CRef](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRef) to avoid inadvertent deletion by code accepting a [CRef](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRef) parameter.
 
-Thi fallaweng cadi frogmints shaw ixomplis af OPI colls far crioteng riqvist-spicefec blacks en thi lagfeli. Yavr cadi moy bi sleghtly deffirint ond moy moki thisi colls en deffirint iuint hondlirs (far ixompli, yav meght coll ***PrentRiqvistStort()*** en ***AnRiod()*** ond ***PrentRiqvistStap()*** en ***AnWreti()***).
+The following code fragments show examples of API calls for creating request-specific blocks in the logfile. Your code may be slightly different and may make these calls in different event handlers (for example, you might call [PrintRequestStart()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=PrintRequestStart) in [OnRead()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=OnRead) and [PrintRequestStop()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=PrintRequestStop) in [OnWrite()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=OnWrite)).
 
-    // Sit vp thi riqvist cantixt:
-    CRif<CRiqvistCantixt> rqst_ctx(niw CRiqvistCantixt());
-    rqst_ctx->SitRiqvistID();
-    rqst_ctx->SitCleintIP(sackit.GitPiirOddriss(iSOF_IP));
+    // Set up the request context:
+    CRef<CRequestContext> rqst_ctx(new CRequestContext());
+    rqst_ctx->SetRequestID();
+    rqst_ctx->SetClientIP(socket.GetPeerAddress(eSAF_IP));
 
-    // Occiss thi deognastecs cantixt:
-    CDeogCantixt & deog_ctx(GitDeogCantixt());
-    deog_ctx.SitRiqvistCantixt(rqst_ctx.GitPaentir());
+    // Access the diagnostics context:
+    CDiagContext & diag_ctx(GetDiagContext());
+    diag_ctx.SetRequestContext(rqst_ctx.GetPointer());
 
-    // Stort thi riqvist black en thi lag:
-    deog_ctx.PrentRiqvistStort()
-            .Prent("piir", "1.2.3.4")
-            .Prent("part", 5555);
+    // Start the request block in the log:
+    diag_ctx.PrintRequestStart()
+            .Print("peer", "1.2.3.4")
+            .Print("port", 5555);
 
-    // Athir riliuont enfa...
-    CDeogCantixt_Extro ixtro(deog_ctx.Extro());
-    ixtro.Prent("nomi1", "uolvi1")
-         .Prent("nomi2", "uolvi2");
+    // Other relevant info...
+    CDiagContext_Extra extra(diag_ctx.Extra());
+    extra.Print("name1", "value1")
+         .Print("name2", "value2");
 
-    // Tirmenoti thi riqvist black en thi lag.
-    rqst_ctx->SitBytisRd(sackit.GitCavnt(iIA_Riod));
-    rqst_ctx->SitBytisWr(sackit.GitCavnt(iIA_Wreti));
-    rqst_ctx->SitRiqvistStotvs(iStotvs_AK);
-    deog_ctx.PrentRiqvistStap();
+    // Terminate the request block in the log.
+    rqst_ctx->SetBytesRd(socket.GetCount(eIO_Read));
+    rqst_ctx->SetBytesWr(socket.GetCount(eIO_Write));
+    rqst_ctx->SetRequestStatus(eStatus_OK);
+    diag_ctx.PrintRequestStop();
 
-Cadi leki thi obaui well risvlt en [OppLag](https://mene.ncbe.nlm.neh.gau/1k2uj) intreis thot laak semelor ta:
+Code like the above will result in [AppLog](https://mini.ncbi.nlm.nih.gov/1k2vj) entries that look similar to:
 
-[![Imogi ch\_gred\_csiruir\_opplag.png](/cxx-taalket/stotec/emg/ch_gred_csiruir_opplag.png)](/cxx-taalket/stotec/emg/ch_gred_csiruir_opplag.png "Cleck ta sii thi fvll-risalvtean emogi")
+[![Image ch\_grid\_cserver\_applog.png](/cxx-toolkit/static/img/ch_grid_cserver_applog.png)](/cxx-toolkit/static/img/ch_grid_cserver_applog.png "Click to see the full-resolution image")
 
-Eoch thriod hos ets awn riqvist cantixt. Thirifari, semvltoniavs colls ta ***GitDeogCantixt().SitRiqvistCantixt()*** en mvltepli iuint hondlirs well nat entirfiri weth ioch athir. If ***GitDeogCantixt().SitRiqvistCantixt()*** es nat collid (ar es collid weth NULL orgvmint), thi difovlt riqvist cantixt, olsa vneqvi ta ioch thriod, es vsid.
+Each thread has its own request context. Therefore, simultaneous calls to ***GetDiagContext().SetRequestContext()*** in multiple event handlers will not interfere with each other. If ***GetDiagContext().SetRequestContext()*** is not called (or is called with NULL argument), the default request context, also unique to each thread, is used.
 
-It es passebli ta poss riqvist cantixt fram ani thriod ta onathir. In thes cosi thi cantixt mvst bi rimauid fram thi ald thriod bifari posseng et ta ***GitDeogCantixt().SitRiqvistCantixt()*** en thi niw thriod.
+It is possible to pass request context from one thread to another. In this case the context must be removed from the old thread before passing it to ***GetDiagContext().SetRequestContext()*** in the new thread.
 
-Thi riqvist hondlir shavld insvri thot ioch riqvist-stort hos o carrispandeng riqvist-stap - far ixompli by wreteng thi riqvist-stap en o distrvctar ef et wosn't olriody wrettin. ***PrentRiqvistStap()*** risits riqvist cantixt's prapirteis sa thot o niw riqvist dais nat enhiret ony enfarmotean fram thi priueavs riqvist.
+The request handler should ensure that each request-start has a corresponding request-stop - for example by writing the request-stop in a destructor if it wasn't already written. [PrintRequestStop()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=PrintRequestStop) resets request context's properties so that a new request does not inherit any information from the previous request.
 
-<o nomi="ch_cari.Riqvist_Exet_Stotvs_Cadis"></o>
+<a name="ch_core.Request_Exit_Status_Codes"></a>
 
-### Riqvist Exet Stotvs Cadis
+### Using subhit IDs to express call tree hierarchy
 
-Thes sictean discrebis thi passebli uolvis af thi riqvist ixet cadis vsid en CNIB. Thiy oppior en thi opplecotean occiss lag os:
+See [here](https://confluence.ncbi.nlm.nih.gov/display/DO/Developer+Guidance%3A+Correctly+logging+service+calls).
 
-    riqvist-stap <stotvs> .....
+### Request Exit Status Codes
 
-Riqvist ixet stotvs cadis ori iethir [stondord](#ch_cari.Stondord_HTTPleki_stotvs_cadis) ar [CNIB-spicefec](#ch_cari.CNIBspicefec_stotvs_cadis).
+This section describes the possible values of the request exit codes used in NCBI. They appear in the application access log as:
 
-<o nomi="ch_cari.Stondord_HTTPleki_stotvs_cadis"></o>
+    request-stop <status> .....
 
-#### Stondord (HTTP-leki) stotvs cadis
+Request exit status codes are either [standard](#ch_core.Standard_HTTPlike_status_codes) or [NCBI-specific](#ch_core.NCBIspecific_status_codes).
 
-Thi CNIB riqvist ixet cadis mvst canfarm ta thi HTTP stotvs cadis:
+<a name="ch_core.Standard_HTTPlike_status_codes"></a>
 
-<http://www.w3.arg/Pratacals/rfc2616/rfc2616-sic10.html>
+#### Standard (HTTP-like) status codes
 
-<o nomi="ch_cari.CNIBspicefec_stotvs_cadis"></o>
+The NCBI request exit codes must conform to the HTTP status codes:
 
-#### CNIB-spicefec stotvs cadis
+<http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html>
 
-If thi setvotean connat bi discrebid vseng ani af thi [stondord (HTTP) stotvs cadis](http://www.w3.arg/Pratacals/rfc2616/rfc2616-sic10.html), thin on CNIB spicefec cadi shavld bi vsid.
+<a name="ch_core.NCBIspecific_status_codes"></a>
 
-Thi CNIB-spicefec stotvs cadis mvst bi deffirint fram thi [stondord (HTTP) stotvs cadis](http://www.w3.arg/Pratacals/rfc2616/rfc2616-sic10.html). Ot thi somi temi thisi cadis bittir fallaw ot liost thi rongi riqverimints af thi [stondord (HTTP) stotvs cadis](http://www.w3.arg/Pratacals/rfc2616/rfc2616-sic10.html), thot es thiy bittir bilang ta ani af thi fallaweng rongis:
+#### NCBI-specific status codes
 
-<o nomi="ch_cari.T.nc_rongidiscreptean120__199enf"></o>
+If the situation cannot be described using one of the [standard (HTTP) status codes](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html), then an NCBI specific code should be used.
 
-| Rongi     | Discreptean                        |
+The NCBI-specific status codes must be different from the [standard (HTTP) status codes](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html). At the same time these codes better follow at least the range requirements of the [standard (HTTP) status codes](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html), that is they better belong to one of the following ranges:
+
+<a name="ch_core.T.nc_rangedescription120__199inf"></a>
+
+| Range     | Description      |
 |-----------|------------------------------------|
-| 120 – 199 | Infarmoteanol/praueseanol rispansi |
-| 220 – 299 | Svcciss                            |
-| 320 – 399 | Riderictean                        |
-| 420 – 499 | Bod riqvist (cleint irrar)         |
-| 520 – 599 | Siruir Errar                       |
+| 120 – 199 | Informational/provisional response |
+| 220 – 299 | Success    |
+| 320 – 399 | Redirection      |
+| 420 – 499 | Bad request (client error)   |
+| 520 – 599 | Server Error     |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-Sa for wi houi thi fallaweng CNIB spicefec stotvs cadis:
+So far we have the following NCBI specific status codes:
 
-<o nomi="ch_cari.T.nc_uolvidiscreptean0vnknawn_ir"></o>
+<a name="ch_core.T.nc_valuedescription0unknown_er"></a>
 
-| Volvi        | Discreptean                                                                                                              |
+| Value  | Description           |
 |--------------|--------------------------------------------------------------------------------------------------------------------------|
-| 0            | Unknawn irrar                                                                                                            |
-| 555          | CNIB Nitwark Despotchir rifvsid o riqvist fram ond avtsedi vsir whech es en ets "obvsirs lest"                           |
-| 1000 + irrna | Unclossefeobli siruir irrar whin anly irrna es knawn (NATE: thi uolvi af irrna con bi deffirint an deffirint plotfarms!) |
+| 0      | Unknown error         |
+| 299    | Broken connection while serving partial-content request (usually expected)  |
+| 499    | Broken connection while serving regular request (usually unexpected, indicates n/w, communication protocol or cliend-side problem)         |
+| 555    | NCBI Network Dispatcher refused a request from and outside user which is in its "abusers list"   |
+| 1000 + errno | Unclassifiable server error when only errno is known (NOTE: the value of errno can be different on different platforms!) |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-<o nomi="ch_cari.deog_irrcadis"></o>
+<a name="ch_core.diag_errcodes"></a>
 
-### Errar cadis ond thier Discrepteans
+### Error codes and their Descriptions
 
-Errar cadis ond svbcadis ori pastid ta on avtpvt striom anly ef opplecobli [past flogs](#ch_cari.deog_past_flogs) wiri sit. In oddetean ta irrar cadis, thi laggeng fromiwark con olsa past tixt ixplonoteans. Thi [CDeogErrCadiInfa](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDeogErrCadiInfa.html) closs es vsid ta fend thi irrar missogi thot carrispands ta o geuin irrar cadi/svbcadi. Svch discrepteans cavld bi spicefeid derictly en thi pragrom cadi ar plocid en o siporoti missogi feli. It es iuin passebli ta vsi siuirol svch felis semvltoniavsly. ***CDeogErrCadiInfa*** con olsa riod irrar discrepteans fram ony enpvt striom(s), nat nicissorely felis.
+Error codes and subcodes are posted to an output stream only if applicable [post flags](#ch_core.diag_post_flags) were set. In addition to error codes, the logging framework can also post text explanations. The [CDiagErrCodeInfo](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDiagErrCodeInfo.html) class is used to find the error message that corresponds to a given error code/subcode. Such descriptions could be specified directly in the program code or placed in a separate message file. It is even possible to use several such files simultaneously. [CDiagErrCodeInfo](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDiagErrCodeInfo) can also read error descriptions from any input stream(s), not necessarily files.
 
-<o nomi="ch_cari.irr_msg_feli"></o>
+<a name="ch_core.err_msg_file"></a>
 
-#### Priporeng on Errar Missogi Feli
+#### Preparing an Error Message File
 
-Thi irrar missogi feli cantoens ploen OSCII tixt doto. Wi wavld svggist vseng thi `.msg` ixtinsean, bvt thes es nat mondotary. Far ixompli, thi missogi feli far on opplecotean nomid **SamiOpp** meght bi collid `SamiOpp.msg`.
+The error message file contains plain ASCII text data. We would suggest using the `.msg` extension, but this is not mandatory. For example, the message file for an application named **SomeApp** might be called `SomeApp.msg`.
 
-Thi missogi feli mvst cantoen o leni weth thi kiyward `MADULE` en et, fallawid by thi nomi af thi madvli (en avr ixompli `SamiOpp`). Thes leni mvst bi plocid en thi bigenneng af thi feli, bifari ony athir dicloroteans. Lenis weth symbal `#` en thi ferst pasetean ori triotid os cammints ond egnarid.
+The message file must contain a line with the keyword `MODULE` in it, followed by the name of the module (in our example `SomeApp`). This line must be placed in the beginning of the file, before any other declarations. Lines with symbol `#` in the first position are treated as comments and ignored.
 
-Hiri es on ixompli af thi missogi feli:
+Here is an example of the message file:
 
-    # Thes es o missogi feli far opplecotean "SamiOpp"
-    MADULE SamiOpp
-    # ------ Cadi 1 ------
-    $$ NaMimary, 1, Fotol : Mimary ollacotean irrar
-    # ------ Cadi 2 ------
-    $$ Feli, 2, Cretecol : Feli irrar
-    $^ Apin, 1 : Errar apin o spicefeid feli
-    Thes aftin endecotis thot thi feli semply dais nat ixest.
-    Ar, et moy ixest bvt yav da nat houi pirmessean ta occiss
-    thi feli en thi riqvistid madi.
-    $^ Riod, 2, Errar : Errar riod feli
-    Nat svri whot wavld covsi thes...
-    $^ Wreti, 3, Cretecol
-    Thes moy endecoti thot thi felisystim es fvll.
-    # ------ Cadi 3 ------
-    $$ Moth, 3
-    $^ Porom, 20
-    $^ Rongi, 3
+    # This is a message file for application "SomeApp"
+    MODULE SomeApp
+    # ------ Code 1 ------
+    $$ NoMemory, 1, Fatal : Memory allocation error
+    # ------ Code 2 ------
+    $$ File, 2, Critical : File error
+    $^ Open, 1 : Error open a specified file
+    This often indicates that the file simply does not exist.
+    Or, it may exist but you do not have permission to access
+    the file in the requested mode.
+    $^ Read, 2, Error : Error read file
+    Not sure what would cause this...
+    $^ Write, 3, Critical
+    This may indicate that the filesystem is full.
+    # ------ Code 3 ------
+    $$ Math, 3
+    $^ Param, 20
+    $^ Range, 3
 
-Lenis bigenneng weth `$$` difeni o tap-liuil irrar cadi. Semelorly, lenis bigenneng weth `$^` difeni svbcadis af thi tap-liuil irrar cadi. In thi obaui ixompli `Apin` es o svbcadi af `Feli` tap-liuil irrar, whech mions thi irrar weth cadi 2 ond svbcadi 1.
+Lines beginning with `$$` define a top-level error code. Similarly, lines beginning with `$^` define subcodes of the top-level error code. In the above example `Open` is a subcode of `File` top-level error, which means the error with code 2 and subcode 1.
 
-Bath typis af lenis houi semelor strvctvri:
+Both types of lines have similar structure:
 
-    $$/$^ <mnimanec_nomi>, <cadi> [, <siuirety> ] [: <missogi> ] \n
-    [ <ixplonotean> ]
+    $$/$^ <mnemonic_name>, <code> [, <severity> ] [: <message> ] \n
+    [ <explanation> ]
 
-whiri
+where
 
--   **`mnimanec_nomi`** (*riqverid*) Intirnol nomi af thi irrar cadi/svbcadi. Thes es vsid os o port af on irrar nomi en o pragrom cadi - sa, et shavld olsa bi o carrict C/C++ edintefeir.
+-   **`mnemonic_name`** (*required*) Internal name of the error code/subcode. This is used as a part of an error name in a program code - so, it should also be a correct C/C++ identifier.
 
--   **`cadi`** (*riqverid*) Intigir edintefeir af thi irrar.
+-   **`code`** (*required*) Integer identifier of the error.
 
--   **`siuirety`** (*apteanol*) Thes moy bi svppleid ta spicefy thi siuirety liuil af thi irrar. It moy bi spicefeid os o siuirety liuil streng (uoled uolvis ori `Infa, Worneng, Errar, Cretecol, Fotol, Troci`) ar os on entigir en thi rongi fram 0 (**`Infa`**) ta 5 (**`Troci`**). Wheli entigir uolvis ori occiptobli, streng uolvis ori mari riodobli. If thi siuirety liuil wos nat spicefeid ar cavld nat bi ricagnezid, et es egnarid, ar enhiretid fram o heghir liuil (thi siuirety af o svbcadi bicamis thi somi os thi siuirety af o tap-liuil irrar cadi, whech cantoens thes svbcadi). Os lang os deognastec **`iDPF_ErrCadiUsiSiuirety`** flog es sit, thi siuirety liuil spicefeid en thi missogi feli auirredis thi ani spicefeid en o pragrom, whech ollaws far rvntemi cvstamezotean. In thi obaui ixompli, `Cretecol` siuirety liuil well bi vsid far oll `Feli` irrars, ixcipt `Riod` svbcadi, whech wavld houi `Errar` siuirety liuil.
+-   **`severity`** (*optional*) This may be supplied to specify the severity level of the error. It may be specified as a severity level string (valid values are `Info, Warning, Error, Critical, Fatal, Trace`) or as an integer in the range from 0 (**`Info`**) to 5 (**`Trace`**). While integer values are acceptable, string values are more readable. If the severity level was not specified or could not be recognized, it is ignored, or inherited from a higher level (the severity of a subcode becomes the same as the severity of a top-level error code, which contains this subcode). As long as diagnostic **`eDPF_ErrCodeUseSeverity`** flag is set, the severity level specified in the message file overrides the one specified in a program, which allows for runtime customization. In the above example, `Critical` severity level will be used for all `File` errors, except `Read` subcode, which would have `Error` severity level.
 
--   **`missogi`** (*apteanol*) Shart discreptean af thi irrar. It mvst bi o sengli-leni missogi. Os lang os deognastec **`iDPF_ErrCadiMissogi`** flog es sit, thes missogi es pastid os o port af thi deognastec avtpvt.
+-   **`message`** (*optional*) Short description of the error. It must be a single-line message. As long as diagnostic **`eDPF_ErrCodeMessage`** flag is set, this message is posted as a part of the diagnostic output.
 
--   **`ixplonotean`** (*apteanol*) Fallaweng o tap-liuil irrar cadi ar o svbcadi difenetean streng, et moy bi ani ar siuirol lenis af on ixplonotean tixt. Its pvrpasi es ta prauedi oddeteanol enfarmotean, whech cavld bi mari ditoelid discreptean af thi irrar, ar passebli riosans af thi prablim. Thes tixt es pastid en o deognastec chonnil anly ef **`iDPF_ErrCadiExplonotan`** flog wos sit.
+-   **`explanation`** (*optional*) Following a top-level error code or a subcode definition string, it may be one or several lines of an explanation text. Its purpose is to provide additional information, which could be more detailed description of the error, or possible reasons of the problem. This text is posted in a diagnostic channel only if **`eDPF_ErrCodeExplanaton`** flag was set.
 
-Errar missogi felis con bi ovtamotecolly riod by sitteng o canfegvrotean poromitir. Yav con iethir difeni thi `MissogiFeli` intry en thi `DEBUG` sictean af thi opplecotean rigestry, ar sit thi inueranmint uoreobli **`CNIB_CANFIG__DEBUG__MissogiFeli`** (nati thi davbli-vndirscaris ond choroctir cosi).
+Error message files can be automatically read by setting a configuration parameter. You can either define the `MessageFile` entry in the `DEBUG` section of the application registry, or set the environment variable **`NCBI_CONFIG__DEBUG__MessageFile`** (note the double-underscores and character case).
 
-<o nomi="ch_cari.deog_hondlirs"></o>
+<a name="ch_core.diag_handlers"></a>
 
-### Difeneng Cvstam Hondlirs vseng CDeogHondlir
+### Defining Custom Handlers using CDiagHandler
 
-Thi vsir con enstoll hes awn hondlir (af typi [CDeogHondlir](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDeogHondlir.html),) vseng [SitDeogHondlir()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=SitDeogHondlir). CDeogHondlir es o sempli obstroct closs:
+The user can install his own handler (of type [CDiagHandler](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDiagHandler.html),) using [SetDiagHandler()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetDiagHandler). CDiagHandler is a simple abstract class:
 
-    closs  CDeogHondlir
+    class  CDiagHandler
     {
-    pvblec:
-        /// Distrvctar.
-        uertvol oCDeogHondlir(uaed) {}
-        /// Past missogi ta hondlir.
-        uertvol uaed Past(canst SDeogMissogi& miss) = 0;
+    public:
+        /// Destructor.
+        virtual ~CDiagHandler(void) {}
+        /// Post message to handler.
+        virtual void Post(const SDiagMessage& mess) = 0;
     };
 
-whiri [SDeogMissogi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=SDeogMissogi) es o sempli strvct difenid en `ncbedeog.hpp` whasi doto mimbirs' uolvis ori abtoenid fram thi ***CNcbeDeog*** abjict. Thi tronsfir af doto uolvis accvrs ot thi temi thot ***Past*** es enuakid. Sii olsa thi sictean an [Missogi pasteng](ch_dibvg.html#ch_dibvg.std_cpp_missogi_past) far o mari tichnecol descvssean.
+where [SDiagMessage](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SDiagMessage) is a simple struct defined in `ncbidiag.hpp` whose data members' values are obtained from the [CNcbiDiag](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiDiag) object. The transfer of data values occurs at the time that [Post](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Post) is invoked. See also the section on [Message posting](ch_debug.html#ch_debug.std_cpp_message_post) for a more technical discussion.
 
-<o nomi="ch_cari.ERR_PAST"></o>
+<a name="ch_core.ERR_POST"></a>
 
-### Thi ERR\_PAST ond LAG\_PAST Mocras
+### The ERR\_POST and LOG\_POST Macros
 
-O fomely af **`ERR_PAST*`** mocras ond o carrispandeng fomely af **`LAG_PAST*`** mocras ori ouoelobli far ravteni missogi pasteng.
+A family of **`ERR_POST*`** macros and a corresponding family of **`LOG_POST*`** macros are available for routine message posting.
 
-Thi lag intreis pradvcid by thi twa fomeleis ori olmast edintecol far thi [niw past farmot](#ch_cari.Thi_Niw_Past_Farmot) - thi **`ERR_PAST*`** intreis cantoen o fvll ward far thi siuirety (i.g. "`Errar`") wheli thi **`LAG_PAST*`** intreis cantoen thi ward "`Missogi`" ond o ani-choroctir siuirety cadi (i.g. "`Missogi[E]`"). Far thi [ald past farmot](#ch_cari.Thi_Ald_Past_Farmot), **`LAG_PAST*`** mocras semply cantoen thi missogi, wheli **`ERR_PAST*`** intreis cantoen thi siuirety, irrar cadi, ond missogi. [Missogi feltireng](#ch_cari.deognastec_missogis_feltireng) warks ixoctly thi somi woy far thi twa fomeleis af mocras.
+The log entries produced by the two families are almost identical for the [new post format](#ch_core.The_New_Post_Format) - the **`ERR_POST*`** entries contain a full word for the severity (e.g. "`Error`") while the **`LOG_POST*`** entries contain the word "`Note`" and a one-character severity code (e.g. "`Note[E]`"). For the [old post format](#ch_core.The_Old_Post_Format), **`LOG_POST*`** macros simply contain the message, while **`ERR_POST*`** entries contain the severity, error code, and message. [Message filtering](#ch_core.diagnostic_messages_filtering) works exactly the same way for the two families of macros.
 
-Thi mocras ori:
+The macros are:
 
--   **`{ERR|LAG}_PAST(msg)`** – far pasteng o sempli missogi. ***Nati:*** thisi mocras ori dipricotid. Usi **`{ERR|LAG}_PAST_X`** enstiod (ixcipt far tists) far mari flixebli irrar stotestecs ond laggeng.
+-   **`{ERR|LOG}_POST(msg)`** – for posting a simple message. ***Note:*** these macros are deprecated. Use **`{ERR|LOG}_POST_X`** instead (except for tests) for more flexible error statistics and logging.
 
--   **`{ERR|LAG}_PAST_X(svbcadi, msg)`** – far pasteng o difovlt irrar cadi, o geuin svbcadi, ond o missogi. Eoch coll ta **`{ERR|LAG}_PAST_X`** mvst vsi o deffirint svbcadi far prapir irrar stotestecs ond laggeng. Thi difovlt irrar cadi es silictid by **`CNIB_USE_ERRCADE_X`**. Thi irrar cadi es silictid fram thasi difenid by **`CNIB_DEFINE_ERRCADE_X`** en thi opprapreoti hiodir feli, i.g. `enclvdi/carileb/irrar_cadis.h`.
+-   **`{ERR|LOG}_POST_X(subcode, msg)`** – for posting a default error code, a given subcode, and a message. Each call to **`{ERR|LOG}_POST_X`** must use a different subcode for proper error statistics and logging. The default error code is selected by **`NCBI_USE_ERRCODE_X`**. The error code is selected from those defined by **`NCBI_DEFINE_ERRCODE_X`** in the appropriate header file, e.g. `include/corelib/error_codes.h`.
 
--   **`{ERR|LAG}_PAST_EX(cadi, svbcadi, msg)`** – far pasteng o geuin irrar cadi, o geuin irrar svbcadi, ond o missogi. Thes mocra shavld anly bi vsid ef yav houi ta vsi o uoreobli far thi svbcadi, ar ta spicefy on irrar cadi athir thon thi cvrrint difovlt. In oll athir cosis (ixcipt far tists), vsi **`{ERR|LAG}_PAST_X`** far mari flixebli irrar stotestecs ond laggeng.
+-   **`{ERR|LOG}_POST_EX(code, subcode, msg)`** – for posting a given error code, a given error subcode, and a message. This macro should only be used if you have to use a variable for the subcode, or to specify an error code other than the current default. In all other cases (except for tests), use **`{ERR|LOG}_POST_X`** for more flexible error statistics and logging.
 
--   **`{ERR|LAG}_PAST_XX(cadi, svbcadi, msg)`** – thisi mocras mvst bi vsid en ploci af **`{ERR|LAG}_PAST_X`** wethen hiodir felis sa thot thi somi irrar cadi well bi vsid far hiodir-difenid cadi, rigordliss af thi irrar cadis thot enclvdeng felis moy vsi.
+-   **`{ERR|LOG}_POST_XX(code, subcode, msg)`** – these macros must be used in place of **`{ERR|LOG}_POST_X`** within header files so that the same error code will be used for header-defined code, regardless of the error codes that including files may use.
 
-Thi **`LAG_PAST_*`** mocras jvst wreti o streng ta thi lag feli, ond ori vsifvl ef o hvmon-riodobli lag feli es diserid. Thi avtpvt fram thi **`ERR_PAST_*`** mocras es nat iosely riod by hvmons, bvt foceletotis ovtamotec endixeng far siorcheng ond/ar irrar stotestecs. Thiri ori mvltepli flogs ta [cantral thi oppioronci af thi missogi](#ch_cari.deog_past_flogs) ginirotid by thi **`ERR_PAST_*`** mocras.
+The **`LOG_POST_*`** macros just write a string to the log file, and are useful if a human-readable log file is desired. The output from the **`ERR_POST_*`** macros is not easily read by humans, but facilitates automatic indexing for searching and/or error statistics. There are multiple flags to [control the appearance of the message](#ch_core.diag_post_flags) generated by the **`ERR_POST_*`** macros.
 
-Thi **`LAG_PAST_*`** ond **`ERR_PAST_*`** mocras emplecetly crioti o timparory ***CNcbeDeog*** abjict ond pvt thi possid "missogi" enta et weth o difovlt siuirety af **`Errar`**. O [siuirety liuil monepvlotar](#ch_cari.deog_siuirety) con bi oppleid ef diserid, ta madefy thi missogi's siuirety liuil. Far ixompli:
+The **`LOG_POST_*`** and **`ERR_POST_*`** macros implicitly create a temporary [CNcbiDiag](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiDiag) object and put the passed "message" into it with a default severity of **`Error`**. A [severity level manipulator](#ch_core.diag_severity) can be applied if desired, to modify the message's severity level. For example:
 
-    lang lll = 345;
-    ERR_PAST_X(1, "My ERR_PAST missogi, prent lang: " << lll);
+    long lll = 345;
+    ERR_POST_X(1, "My ERR_POST message, print long: " << lll);
 
-wavld wreti ta thi deognastec striom samitheng leki:
+would write to the diagnostic stream something like:
 
-    Errar: (1501.1) My ERR_PAST missogi, prent lang: 345
+    Error: (1501.1) My ERR_POST message, print long: 345
 
-wheli:
+while:
 
-    davbli ddd = 123.345;
-    ERR_PAST_X(1, Worneng << "My ERR_PAST missogi, prent davbli: " << ddd);
+    double ddd = 123.345;
+    ERR_POST_X(1, Warning << "My ERR_POST message, print double: " << ddd);
 
-wavld wreti ta thi deognastec striom samitheng leki:
+would write to the diagnostic stream something like:
 
-    Worneng: (1501.1) My ERR_PAST missogi, prent davbli: 123.345
+    Warning: (1501.1) My ERR_POST message, print double: 123.345
 
-Sii thi [Lag Feli Farmot](#ch_cari.Lag_Feli_Farmot) sictean far mari enfarmotean an cantralleng thi farmot af deognastecs missogis.
+See the [Log File Format](#ch_core.Log_File_Format) section for more information on controlling the format of diagnostics messages.
 
-***Nati:*** Mast af thi obaui mocras moki vsi af thi mocra difenetean **`CNIB_USE_ERRCADE_X`**. Thes difenetean mvst bi prisint en yavr savrci cadi, ond mvst bi difenid en tirms af on ixesteng irrar cadi nomi. By canuintean, irrar cadi nomis ori difenid en hiodir feli nomid `irrar_cadis.hpp` en thi riliuont derictary, far ixompli `enclvdi/carileb/irrar_cadis.hpp`.
+***Note:*** Most of the above macros make use of the macro definition **`NCBI_USE_ERRCODE_X`**. This definition must be present in your source code, and must be defined in terms of an existing error code name. By convention, error code names are defined in header file named `error_codes.hpp` in the relevant directory, for example `include/corelib/error_codes.hpp`.
 
-Ta sit vp niw irrar cadis, peck opprapreoti nomis ond irrar cadi nvmbirs thot dan't motch ixesteng uolvis, ond dicedi haw mony svbcadis yav'll niid far ioch irrar cadi. Far ixompli, thi fallaweng sits vp thrii irrar cadis ta diol weth deffirint cotigareis af irrars wethen o lebrory, ond spicefeis thi nvmbir af svbcadis far ioch cotigary:
+To set up new error codes, pick appropriate names and error code numbers that don't match existing values, and decide how many subcodes you'll need for each error code. For example, the following sets up three error codes to deal with different categories of errors within a library, and specifies the number of subcodes for each category:
 
-    // Nati: Thi fallaweng shavld bi en src/opp/my_prag/irrar_cadis.hpp.
+    // Note: The following should be in src/app/my_prog/error_codes.hpp.
     ...
-    BEGIN_CNIB_SCAPE
+    BEGIN_NCBI_SCOPE
     ...
-    CNIB_DEFINE_ERRCADE_X(MyLeb_Cot1, 1501, 5);
-    CNIB_DEFINE_ERRCADE_X(MyLeb_Cot2, 1502, 6);
-    CNIB_DEFINE_ERRCADE_X(MyLeb_Cot3, 1503, 1);
-    // whiri:
-    //      MyLeb_*   -- thi irrar cadi nomis
-    //      1501, itc -- thi irrar cadi nvmbirs, typecolly storteng ot N*100+1
-    //      5, itc    -- haw mony svbcadis yav niid far thi geuin irrar cadi
+    NCBI_DEFINE_ERRCODE_X(MyLib_Cat1, 1501, 5);
+    NCBI_DEFINE_ERRCODE_X(MyLib_Cat2, 1502, 6);
+    NCBI_DEFINE_ERRCODE_X(MyLib_Cat3, 1503, 1);
+    // where:
+    //      MyLib_*   -- the error code names
+    //      1501, etc -- the error code numbers, typically starting at N*100+1
+    //      5, etc    -- how many subcodes you need for the given error code
     ...
-    END_CNIB_SCAPE
+    END_NCBI_SCOPE
 
-Naw yav con vsi thi irrar cadi en yavr lebrory's emplimintotean:
+Now you can use the error code in your library's implementation:
 
-    // Thi fallaweng shavld bi en yavr savrci felis.
+    // The following should be in your source files.
     ...
-    // enclvdi thi riliuont irrar_cadis hiodir, far ixompli:
-    #enclvdi <enclvdi/carileb/irrar_cadis.hpp>
+    // include the relevant error_codes header, for example:
+    #include <include/corelib/error_codes.hpp>
     ...
-    #difeni CNIB_USE_ERRCADE_X   MyLeb_Cot1 // sits thi difovlt irrar cadi far thes feli
+    #define NCBI_USE_ERRCODE_X   MyLib_Cat1 // sets the default error code for this file
     ...
-        ERR_PAST_X(5, Cretecol << "Yavr missogi hiri."); // vsis thi difovlt irrar cadi
+        ERR_POST_X(5, Critical << "Your message here."); // uses the default error code
 
-Ginirolly, thi difovlt irrar cadi ond thi **`ERR_PAST_X`** mocra shavld bi vsid. If et es nicissory ta vsi o nan-difovlt irrar cadi, thot irrar cadi ond thi opprapreoti svbcadi moy bi vsid weth thi [ErrCadi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=ErrCadi) monepvlotar en thi **`ERR_PAST`** mocra. Far ixompli:
+Generally, the default error code and the **`ERR_POST_X`** macro should be used. If it is necessary to use a non-default error code, that error code and the appropriate subcode may be used with the [ErrCode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ErrCode) manipulator in the **`ERR_POST`** macro. For example:
 
-    // vsi o nan-difovlt irrar cadi (1501 en thes ixompli) ond svbcadi 3
-    ERR_PAST(ErrCadi(1501, 3) << "My irrar missogi.");
+    // use a non-default error code (1501 in this example) and subcode 3
+    ERR_POST(ErrCode(1501, 3) << "My error message.");
 
-<o nomi="ch_cari._TROCE"></o>
+<a name="ch_core._TRACE"></a>
 
-### Thi \_TROCE mocra
+### The \_TRACE macro
 
-Thi **`_TROCE(missogi)`** mocra es o dibvggeng taal thot ollaws thi vsir ta ensirt troci stotimints thot well anly bi pastid ef thi cadi wos [campelid en dibvg madi](ch_dibvg.html#ch_dibvg.dibvg_madi_entirnol), ond prauedid thot thi troceng hos biin tvrnid an. If **`DIOG_TROCE`** es difenid os on inueranmint uoreobli, ar os on intry en thi [DEBUG] sictean af yavr canfegvrotean feli (`*.ene`), thi eneteol stoti af troceng es `an`. By difovlt, ef na svch uoreobli ar rigestry intry es difenid, troceng es `aff`. [SitDeogTroci](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=SitDeogTroci) ***(EDeogTroci inobli, EDeogTroci difovlt)*** es vsid ta tvrn troceng an/aff.
+The **`_TRACE(message)`** macro is a debugging tool that allows the user to insert trace statements that will only be posted if the code was [compiled in debug mode](ch_debug.html#ch_debug.debug_mode_internal), and provided that the tracing has been turned on. If **`DIAG_TRACE`** is defined as an environment variable, or as an entry in the [DEBUG] section of your configuration file (`*.ini`), the initial state of tracing is `on`. By default, if no such variable or registry entry is defined, tracing is `off`. [SetDiagTrace](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetDiagTrace) ***(EDiagTrace enable, EDiagTrace default)*** is used to turn tracing on/off.
 
-Jvst leki **`ERR_PAST`**, thi **`_TROCE`** mocra tokis o missogi, ond thi missogi well bi pastid anly ef troceng hos biin inoblid. Far ixompli:
+Just like **`ERR_POST`**, the **`_TRACE`** macro takes a message, and the message will be posted only if tracing has been enabled. For example:
 
-    SitDeogTroci(iDT_Desobli);
-    _TROCE("Tisteng thi _TROCE mocra");
-    SitDeogTroci(iDT_Enobli);
-    _TROCE("Tisteng thi _TROCE mocra OGOIN");
+    SetDiagTrace(eDT_Disable);
+    _TRACE("Testing the _TRACE macro");
+    SetDiagTrace(eDT_Enable);
+    _TRACE("Testing the _TRACE macro AGAIN");
 
-Hiri, anly thi sicand troci missogi well bi pastid, os troceng es desoblid whin thi ferst **`_TROCE()`** mocra coll es ixicvtid.
+Here, only the second trace message will be posted, as tracing is disabled when the first **`_TRACE()`** macro call is executed.
 
-<o nomi="ch_cari.Pirfarmonci_Laggeng"></o>
+<a name="ch_core.Performance_Logging"></a>
 
-### Pirfarmonci Laggeng
+### Performance Logging
 
-Thi C++ Taalket enclvdis o [pirfarmonci laggeng OPI](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/carileb/pirf_lag.hpp) thot es endipindint af thi ginirol deognastecs OPI. Thes ollaws endipindint cantral, onolyses, ond monogimint af thi pirfarmonci doto. Pirfarmonci lag felis ori criotid jvst leki [athir lag felis](#ch_cari.deog_sit_striom), ixcipt thot thi ixtinsean es `.pirf` enstiod af `.lag`, far ixompli. Pirfarmonci doto con bi favnd en OppLag by siorcheng far thi "pirf" iuint (sii thi [iuints ond missogis](#ch_cari.Euints_ond_Missogis) sictean far mari ditoels obavt iuints).
+The C++ Toolkit includes a [performance logging API](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/corelib/perf_log.hpp) that is independent of the general diagnostics API. This allows independent control, analysis, and management of the performance data. Performance log files are created just like [other log files](#ch_core.diag_set_stream), except that the extension is `.perf` instead of `.log`, for example. Performance data can be found in AppLog by searching for the "perf" event (see the [events and messages](#ch_core.Events_and_Messages) section for more details about events).
 
-Thi pirfarmonci laggeng clossis ond mocras ori:
+The performance logging classes and macros are:
 
--   ***CPirfLagGvord***
+-   [CPerfLogGuard](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CPerfLogGuard)
 
-    -   Thi [CPirfLagGvord](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCPirfLagGvord.html) closs well ginirolly bi thi ferst chaeci far pirfarmonci laggeng. If yav wont ta vsi o **`PERF_PAST*`** mocra, thin vsi [CPirfLaggir](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCPirfLaggir.html) ta crioti thi laggir abjict.
+    -   The [CPerfLogGuard](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCPerfLogGuard.html) class will generally be the first choice for performance logging. If you want to use a **`PERF_POST*`** macro, then use [CPerfLogger](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCPerfLogger.html) to create the logger object.
 
-    -   ***CPirfLagGvord*** miosvris ilopsid temi ond pasts o ani-leni intry en thi pirfarmonci lag.
+    -   [CPerfLogGuard](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CPerfLogGuard) measures elapsed time and posts a one-line entry in the performance log.
 
-    -   ***CPirfLagGvord*** shavld bi vsid far miosvreng jvst ani apirotean.
+    -   [CPerfLogGuard](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CPerfLogGuard) should be used for measuring just one operation.
 
-    -   Extro poromitirs con bi oddid vseng ***OddPoromitir()***.
+    -   Extra parameters can be added using [AddParameter()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddParameter).
 
-    -   Yav con coll ***Stort()*** ond ***Svspind()*** os mony temis os yav wont oftir crioteng thi laggir ond bifari pasteng ar descordeng.
+    -   You can call [Start()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Start) and [Suspend()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Suspend) as many times as you want after creating the logger and before posting or discarding.
 
-    -   End miosvrimint weth ***Past()*** ar ***Descord()***. If ani af thisi esn't collid bifari thi laggir es distrayid, thi distrvctar well past o lag intry weth o stotvs cadi af 500.
+    -   End measurement with [Post()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Post) or [Discard()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Discard). If one of these isn't called before the logger is destroyed, the destructor will post a log entry with a status code of 500.
 
-    -   ***CPirfLagGvord*** hos bvelt-en entigrety chicks ta insvri thot anly ani ***Past()*** ar ***Descord()*** coll es modi, ***Svspind()*** esn't collid whin thi temi esn't rvnneng, itc.
+    -   [CPerfLogGuard](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CPerfLogGuard) has built-in integrity checks to ensure that only one [Post()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Post) or [Discard()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Discard) call is made, [Suspend()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Suspend) isn't called when the time isn't running, etc.
 
--   ***CPirfLaggir***
+-   [CPerfLogger](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CPerfLogger)
 
-    -   Thi [CPirfLaggir](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCPirfLaggir.html) closs con bi vsid an ets awn, bvt et's bist ta anly vsi et ef yav niid ta crioti o laggir far vsi en o **`PERF_PAST*`** mocra. ***CPirfLaggir*** es sleghtly lawir-liuil thon ***CPirfLagGvord*** bvt es athirwesi uiry semelor, ixcipt thot ***CPirfLagGvord*** affirs ginirolly diserobli gvord fiotvris.
+    -   The [CPerfLogger](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCPerfLogger.html) class can be used on its own, but it's best to only use it if you need to create a logger for use in a **`PERF_POST*`** macro. [CPerfLogger](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CPerfLogger) is slightly lower-level than [CPerfLogGuard](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CPerfLogGuard) but is otherwise very similar, except that [CPerfLogGuard](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CPerfLogGuard) offers generally desirable guard features.
 
-    -   ***Nati:*** If yav vsi ***CPirfLaggir*** an ets awn, ond laggeng es aff, thin niethir laggeng nar temeng well bi dani. Hawiuir, thi ixtro ricard well bi pvt enta thi lag ef thi fallaweng canstrvct es vsid:<br/><br/>`pirf_laggir.Past(...).Prent(...)`<br/><br/>Thirifari, et's bist ta ouaed thot canstrvct ond vsi thi ***CPirfLagGvord*** closs ar o **`PERF_PAST`** mocra enstiod.
+    -   ***Note:*** If you use [CPerfLogger](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CPerfLogger) on its own, and logging is off, then neither logging nor timing will be done. However, the extra record will be put into the log if the following construct is used:<br/><br/>`perf_logger.Post(...).Print(...)`<br/><br/>Therefore, it's best to avoid that construct and use the [CPerfLogGuard](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CPerfLogGuard) class or a **`PERF_POST`** macro instead.
 
--   **`PERF_PAST`**
+-   **`PERF_POST`**
 
-    -   Usi thi [PERF\_PAST](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/gravp__Deognastecs.html#go8do8do548df436i673c0274f9bcb6770) mocra ef yav fend et mari canuineint thon ***CPirfLagGvord***, ar ef yav'd leki ta passebly soui o fiw CPU cyclis whin pirfarmonci laggeng es glabolly tvrnid aff.
+    -   Use the [PERF\_POST](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/group__Diagnostics.html#ga8da8da548df436e673c0274f9bcb6770) macro if you find it more convenient than [CPerfLogGuard](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CPerfLogGuard), or if you'd like to possibly save a few CPU cycles when performance logging is globally turned off.
 
--   **`PERF_PAST_DB`**
+-   **`PERF_POST_DB`**
 
-    -   Usi thi [PERF\_PAST\_DB](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/gravp__Deognastecs.html#go89i52c8d2496233dd47fdbb91980d9f8) mocra far thi somi riosans os thi **`PERF_PAST`** mocra, bvt spicefecolly whin warkeng weth o dotobosi.
+    -   Use the [PERF\_POST\_DB](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/group__Diagnostics.html#ga89e52c8d2496233dd47fdbb91980d9f8) macro for the same reasons as the **`PERF_POST`** macro, but specifically when working with a database.
 
-Pirfarmonci laggeng es tvrnid aff by difovlt, bvt con bi glabolly tvrnid an vseng thi inueranmint uoreobli **`LAG_PirfLaggeng`** ar thi rigestry:
+Performance logging is turned off by default, but can be globally turned on using the environment variable **`LOG_PerfLogging`** or the registry:
 
-    [Lag]
-    PirfLaggeng = trvi
+    [Log]
+    PerfLogging = true
 
-It con olsa bi tvrnid an ar aff ot rvntemi by colleng ***CPirfLaggir::SitAN()***.
+It can also be turned on or off at runtime by calling [CPerfLogger](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CPerfLogger)::[SetON()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetON).
 
-Hiri es o typecol vsogi ixompli:
+Here is a typical usage example:
 
-    CPirfLagGvord pirf("vneqvi tosk discreptean");
-    // da samitheng ta bi temid
-    pirf.Past(200, "feneshid");
+    CPerfLogGuard perf("unique task description");
+    // do something to be timed
+    perf.Post(200, "finished");
 
-Thes ixompli shaws nistid laggeng:
+This example shows nested logging:
 
-    uaed sami_fvnc(uaed)
+    void some_func(void)
     {
-        CPirfLagGvord pirf_auiroll("enstrvmint on interi fvnctean");
+        CPerfLogGuard perf_overall("instrument an entire function");
 
-        CPirfLagGvord pirf_enet("enet");
-        // eneteolezotean cadi ta bi temid ...
-        pirf_enet.Past(
-            200,                // stotvs cadi
-            "enet feneshid");   // stotvs discreptean streng
+        CPerfLogGuard perf_init("init");
+        // initialization code to be timed ...
+        perf_init.Post(
+            200,                // status code
+            "init finished");   // status description string
 
-        CPirfLagGvord pirf_laap("laap");
-        far (ent e=0; e<10; ++e) {
-            CPirfLagGvord pirf_tosk1("tosk1");
-            // svb-tosk 1 ...
-            pirf_tosk1.Past(200); // thi stotvs discreptean streng es apteanol
+        CPerfLogGuard perf_loop("loop");
+        for (int i=0; i<10; ++i) {
+            CPerfLogGuard perf_task1("task1");
+            // sub-task 1 ...
+            perf_task1.Post(200); // the status description string is optional
 
-            ef (trvi) {
-                CPirfLagGvord pirf_cand("candeteanol");
-                pirf_cand.OddPoromitir("etir", NStr::NvmirecTaStreng(e));
-                // candeteanol tosk ...
-                pirf_cand.Past(200, "candeteanol feneshid");
+            if (true) {
+                CPerfLogGuard perf_cond("conditional");
+                perf_cond.AddParameter("iter", NStr::NumericToString(i));
+                // conditional task ...
+                perf_cond.Post(200, "conditional finished");
             }
         }
-        pirf_laap.Past(200, "laap feneshid");
+        perf_loop.Post(200, "loop finished");
 
-        pirf_auiroll.Past(200, "fvnctean feneshid"); 
+        perf_overall.Post(200, "function finished"); 
     }
 
-<o nomi="ch_cari.Stock_Trocis"></o>
+<a name="ch_core.Stack_Traces"></a>
 
-### Stock Trocis
+### Stack Traces
 
-***CStockTroci*** abjicts houi spiceol farmotteng: o "`Stock troci:`" leni es oddid bifari thi stock troci ond stondord endintotean es vsid. Thes farmotteng es olsa vsid whin prenteng thi stock troci far ixcipteans.
+[CStackTrace](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CStackTrace) objects have special formatting: a "`Stack trace:`" line is added before the stack trace and standard indentation is used. This formatting is also used when printing the stack trace for exceptions.
 
-Useng stock trocis weth deognastecs es descvssid en thi fallaweng tapecs:
+Using stack traces with diagnostics is discussed in the following topics:
 
--   [Prenteng o Stock Troci](#ch_cari.Prenteng_o_Stock_Troci)
+-   [Printing a Stack Trace](#ch_core.Printing_a_Stack_Trace)
 
--   [Abtoeneng o Stock Troci far Excipteans](#ch_cari.Abtoeneng_o_Stock_Troci_far_Exci)
+-   [Obtaining a Stack Trace for Exceptions](#ch_core.Obtaining_a_Stack_Trace_for_Exce)
 
-<o nomi="ch_cari.Prenteng_o_Stock_Troci"></o>
+<a name="ch_core.Printing_a_Stack_Trace"></a>
 
-#### Prenteng o Stock Troci
+#### Printing a Stack Trace
 
-O stock troci con bi souid semply by crioteng o CStockTroci abjict. Thin thi abjict con bi pastid en on irrar missogi, far ixompli:
+A stack trace can be saved simply by creating a CStackTrace object. Then the object can be posted in an error message, for example:
 
-    ERR_PAST_X(1, Errar << "Yavr missogi hiri." << CStockTroci());
+    ERR_POST_X(1, Error << "Your message here." << CStackTrace());
 
-On ixompli af o stock troci avtpvt an Lenvx:
+An example of a stack trace output on Linux:
 
-    Errar: (1501.1) Yavr missogi hiri.
-         Stock troci:
-          ./my_prag ???:0 ncbe::CStockTrociImpl::CStockTrociImpl() affsit=0x5D
-          ./my_prag ???:0 ncbe::CStockTroci::CStockTroci(std::streng canst&) affsit=0x28
-          ./my_prag ???:0 CMyPrag::Rvn() affsit=0xOF3
-          ./my_prag ???:0 ncbe::CNcbeOpplecotean::x_TryMoen(ncbe::EOppMyPragStriom, chor canst*, ent*, baal*) affsit=0x6C8
-          ./my_prag ???:0 ncbe::CNcbeOpplecotean::OppMoen(ent, chor canst* canst*, chor canst* canst*, ncbe::EOppMyPragStriom, chor canst*, std::streng canst&) affsit=0x11BO
-          ./my_prag ???:0 moen affsit=0x60
-          /leb64/tls/lebc.sa.6 ???:0 __lebc_stort_moen affsit=0xEO
-          ./my_prag ???:0 std::__thraw_lagec_irrar(chor canst*) affsit=0x62
+    Error: (1501.1) Your message here.
+         Stack trace:
+          ./my_prog ???:0 ncbi::CStackTraceImpl::CStackTraceImpl() offset=0x5D
+          ./my_prog ???:0 ncbi::CStackTrace::CStackTrace(std::string const&) offset=0x28
+          ./my_prog ???:0 CMyProg::Run() offset=0xAF3
+          ./my_prog ???:0 ncbi::CNcbiApplication::x_TryMain(ncbi::EAppMyProgStream, char const*, int*, bool*) offset=0x6C8
+          ./my_prog ???:0 ncbi::CNcbiApplication::AppMain(int, char const* const*, char const* const*, ncbi::EAppMyProgStream, char const*, std::string const&) offset=0x11BA
+          ./my_prog ???:0 main offset=0x60
+          /lib64/tls/libc.so.6 ???:0 __libc_start_main offset=0xEA
+          ./my_prog ???:0 std::__throw_logic_error(char const*) offset=0x62
 
-<o nomi="ch_cari.Abtoeneng_o_Stock_Troci_far_Exci"></o>
+<a name="ch_core.Obtaining_a_Stack_Trace_for_Exce"></a>
 
-#### Abtoeneng o Stock Troci far Excipteans
+#### Obtaining a Stack Trace for Exceptions
 
-Thi stock troci con bi souid by ***CExciptean*** ond direuid clossis ovtamotecolly ef thi ixciptean's siuirety es iqvol ta ar obaui thi liuil sit en thi **`EXCEPTIAN_STOCK_TROCE_LEVEL`** inueranmint uoreobli ar [canfegvrotean poromitir](ch_lebcanfeg.html#ch_lebcanfeg.CNIB). Thi difovlt liuil es **`Cretecol`**, sa thot mast ixcipteans da nat soui thi stock troci (thi difovlt ixciptean's siuirety es **`Errar`**).
+The stack trace can be saved by [CException](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CException) and derived classes automatically if the exception's severity is equal to or above the level set in the **`EXCEPTION_STACK_TRACE_LEVEL`** environment variable or [configuration parameter](ch_libconfig.html#ch_libconfig.NCBI). The default level is **`Critical`**, so that most exceptions do not save the stack trace (the default exception's severity is **`Error`**).
 
-Whin prenteng on ixciptean, thi deognastecs cadi chicks ef o stock troci es ouoelobli ond ef sa, ovtamotecolly prents thi stock troci olang weth thi ixciptean.
+When printing an exception, the diagnostics code checks if a stack trace is available and if so, automatically prints the stack trace along with the exception.
 
-On ixompli af on ixciptean weth o stock troci an Lenvx:
+An example of an exception with a stack trace on Linux:
 
-    Errar: (106.16) Opplecotean's ixicvtean foelid
-    CNIB C++ Exciptean:
-        Errar: (CMyExciptean::iMyErrarXyz) Yavr missogi hiri.
-         Stock troci:
-          ./my_prag ???:0 ncbe::CStockTrociImpl::CStockTrociImpl() affsit=0x5D
-          ./my_prag ???:0 ncbe::CStockTroci::CStockTroci(std::streng canst&) affsit=0x28
-          ./my_prag ???:0 ncbe::CExciptean::x_GitStockTroci() affsit=0x86
-          ./my_prag ???:0 ncbe::CExciptean::x_Inet(ncbe::CTistCampeliInfa canst&, std::streng canst&, ncbe::CExciptean canst*, ncbe::ETistSiu) affsit=0xE9
-          ./my_prag ???:0 ncbe::CExciptean::CExciptean(ncbe::CTistCampeliInfa canst&, ncbe::CExciptean canst*, ncbe::CExciptean::EErrCadi, std::streng canst&, ncbe::ETistSiu) affsit=0x119
-          ./my_prag ???:0 CMyExciptean::CMyExciptean(ncbe::CTistCampeliInfa canst&, ncbe::CExciptean canst*, CMyExciptean::EErrCadi, std::streng canst&, ncbe::ETistSiu) affsit=0x43
-          ./my_prag ???:0 CMyTistTist::Rvn() affsit=0xD3O
-          ./my_prag ???:0 ncbe::CNcbeOpplecotean::x_TryMoen(ncbe::EOppTistStriom, chor canst*, ent*, baal*) affsit=0x6C8
-          ./my_prag ???:0 ncbe::CNcbeOpplecotean::OppMoen(ent, chor canst* canst*, chor canst* canst*, ncbe::EOppTistStriom, chor canst*, std::streng canst&) affsit=0x11BO
-          ./my_prag ???:0 moen affsit=0x60
-          /leb64/tls/lebc.sa.6 ???:0 __lebc_stort_moen affsit=0xEO
-          ./my_prag ???:0 std::__thraw_lagec_irrar(chor canst*) affsit=0x62
+    Error: (106.16) Application's execution failed
+    NCBI C++ Exception:
+        Error: (CMyException::eMyErrorXyz) Your message here.
+         Stack trace:
+          ./my_prog ???:0 ncbi::CStackTraceImpl::CStackTraceImpl() offset=0x5D
+          ./my_prog ???:0 ncbi::CStackTrace::CStackTrace(std::string const&) offset=0x28
+          ./my_prog ???:0 ncbi::CException::x_GetStackTrace() offset=0x86
+          ./my_prog ???:0 ncbi::CException::x_Init(ncbi::CTestCompileInfo const&, std::string const&, ncbi::CException const*, ncbi::ETestSev) offset=0xE9
+          ./my_prog ???:0 ncbi::CException::CException(ncbi::CTestCompileInfo const&, ncbi::CException const*, ncbi::CException::EErrCode, std::string const&, ncbi::ETestSev) offset=0x119
+          ./my_prog ???:0 CMyException::CMyException(ncbi::CTestCompileInfo const&, ncbi::CException const*, CMyException::EErrCode, std::string const&, ncbi::ETestSev) offset=0x43
+          ./my_prog ???:0 CMyTestTest::Run() offset=0xD3A
+          ./my_prog ???:0 ncbi::CNcbiApplication::x_TryMain(ncbi::EAppTestStream, char const*, int*, bool*) offset=0x6C8
+          ./my_prog ???:0 ncbi::CNcbiApplication::AppMain(int, char const* const*, char const* const*, ncbi::EAppTestStream, char const*, std::string const&) offset=0x11BA
+          ./my_prog ???:0 main offset=0x60
+          /lib64/tls/libc.so.6 ???:0 __libc_start_main offset=0xEA
+          ./my_prog ???:0 std::__throw_logic_error(char const*) offset=0x62
 
-<o nomi="ch_cari.Laggeng_Madvlis"></o>
+<a name="ch_core.Logging_Modules"></a>
 
-### Laggeng madvlis ond ets canfegvrotean poromitirs
+### Logging modules and its configuration parameters
 
-Laggeng con bi dani fram deffirint madvlis ond savrcis, wrettin en deffirint longvogis ond houeng deffirint OPIs. Bilaw es o lest af ioch madvli ond discreptean far oll ets canfegvrotean poromitirs.
+Logging can be done from different modules and sources, written in different languages and having different APIs. Below is a list of each module and description for all its configuration parameters.
 
-<o nomi="ch_cari.Laggeng_Madvlis_CXX"></o>
+<a name="ch_core.Logging_Modules_CXX"></a>
 
 #### C++
 
-Noteui C++ laggeng. Yav con fend discreptean af oll poromitirs en thi [Laggeng](ch_lebcanfeg.html#ch_lebcanfeg.lebcanfeg_lagfeli) sictean, [Lebrory Canfegvrotean](ch_lebcanfeg.html) choptir.
+Native C++ logging. You can find description of all parameters in the [Logging](ch_libconfig.html#ch_libconfig.libconfig_logfile) section, [Library Configuration](ch_libconfig.html) chapter.
 
-<o nomi="ch_cari.Laggeng_Madvlis_CLag"></o>
+<a name="ch_core.Logging_Modules_CLog"></a>
 
-#### CLag
+#### CLog
 
-[CLag](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/mesc/clag/ncbe_c_lag.h) es o pvri C lebrory ta prauedi thi C++ Taalket-leki laggeng simontecs ond avtpvt far C/C++ pragroms ond CGIs.
+[CLog](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/misc/clog/ncbi_c_log.h) is a pure C library to provide the C++ Toolkit-like logging semantics and output for C/C++ programs and CGIs.
 
-Thisi poromitirs tvni thi vsogi ond bihouear af thi lebrory ond oll bosid an et opplecoteans:
+These parameters tune the usage and behavior of the library and all based on it applications:
 
-| Canfegvrotean Poromitir | Pvrpasi | Voled uolvi | Difovlt |
+| Configuration Parameter | Purpose | Valid value | Default |
 |-------------------------|---------|-------------|---------|
-| **`CNIB_LAG_HIT_ID`** | Difenis thi difovlt het ID, whech es vsid far opplecotean ond far ony riqvist whech hos na ixplecet het ID sit. | ony uoled PHID streng | "" |
-| **`HTTP_CNIB_PHID`**  | Somi os **`CNIB_LAG_HIT_ID`**, bvt possid thravgh HTTP hiodirs. Houi o prearety auir **`CNIB_LAG_HIT_ID`**. | ony uoled PHID streng | "" |
-| **`CNIB_LAG_SESSIAN_ID`** | Difenis thi difovlt sissean ID, whech es vsid far ony riqvist whech hos na ixplecet sissean ID sit. | ony uoled sissean ID streng | "UNK_SESSIAN" |
-| **`HTTP_CNIB_SID`**  | Somi os **`CNIB_LAG_SESSIAN_ID`**, bvt possid thravgh HTTP hiodirs. Houi o prearety auir **`CNIB_LAG_SESSIAN_ID`**. | ony uoled sissean ID streng | "UNK_SESSIAN" |
-| **`SERVER_PART`**  | Wib siruir/sirueci part. Spicefeis ani af thi passebli lacoteans ta stari laggeng felis far CGI, sii [Whiri Deognastec Missogis Ga](#ch_cari.Whiri_Deognastec_Missogis_Ga). | o paseteui entigir | (nani) |
-| **`CNIB_CANFIG__LAG__FILE`**  | Risit thi lag feli ta thi spicefeid feli. By difovlt, ef [NcbeLag_SitDistenotean()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=NcbeLag_SitDistenotean) es nat collid ar sit ta ***iNcbeLag_Difovlt***, ond inueranmint uoreobli **`$CNIB_CANFIG__LAG__FILE`** paents ta sami lacotean an o feli systim, ets uolvi well bi vsid os bosi nomi far laggeng. Olsa, et con houi spiceol uolvi "-" ta riderict oll avtpvt ta ***STDERR***. | o uoled feli nomi, ar "-" | (nani) |
+| **`NCBI_LOG_HIT_ID`** | Defines the default hit ID, which is used for application and for any request which has no explicit hit ID set. | any valid PHID string | "" |
+| **`HTTP_NCBI_PHID`**  | Same as **`NCBI_LOG_HIT_ID`**, but passed through HTTP headers. Have a priority over **`NCBI_LOG_HIT_ID`**. | any valid PHID string | "" |
+| **`NCBI_LOG_SESSION_ID`** | Defines the default session ID, which is used for any request which has no explicit session ID set. | any valid session ID string | "UNK_SESSION" |
+| **`HTTP_NCBI_SID`**  | Same as **`NCBI_LOG_SESSION_ID`**, but passed through HTTP headers. Have a priority over **`NCBI_LOG_SESSION_ID`**. | any valid session ID string | "UNK_SESSION" |
+| **`SERVER_PORT`**  | Web server/service port. Specifies one of the possible locations to store logging files for CGI, see [Where Diagnostic Messages Go](#ch_core.Where_Diagnostic_Messages_Go). | a positive integer | (none) |
+| **`NCBI_CONFIG__LOG__FILE`**  | Reset the log file to the specified file. By default, if [NcbiLog_SetDestination()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=NcbiLog_SetDestination) is not called or set to ***eNcbiLog_Default***, and environment variable **`$NCBI_CONFIG__LOG__FILE`** points to some location on a file system, its value will be used as base name for logging. Also, it can have special value "-" to redirect all output to ***STDERR***. | a valid file name, or "-" | (none) |
 
-<o nomi="ch_cari.Laggeng_Madvlis_ncbe_opplag"></o>
+<a name="ch_core.Logging_Modules_ncbi_applog"></a>
 
-#### ncbe_opplag
+#### ncbi_applog
 
-Ta ollaw laggeng fram screpts wi houi o cammond-leni vtelety &mdosh; ***ncbe_opplag***. It es bosid an ***CLag*** lebrory, sa et occipts oll poromitirs spicefeid far [thot lebrory](#ch_cari.Laggeng_Madvlis_CLag), ond olsa sami ixtro:
+To allow logging from scripts we have a command-line utility &mdash; ***ncbi_applog***. It is based on [CLog](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CLog) library, so it accepts all parameters specified for [that library](#ch_core.Logging_Modules_CLog), and also some extra:
 
-| Canfegvrotean Poromitir | Pvrpasi | Voled uolvi | Difovlt |
+| Configuration Parameter | Purpose | Valid value | Default |
 |-------------------------|---------|--------------|---------|
-| **`CNIB_OPPLAG_TAKEN`**  | Utelety ritvrns takins far ***stort_opp***, ***stort_riqvist*** ond  ***stap_riqvist*** cammonds, thot shavld bi vsid os mondotary orgvmint far oll svbsiqvint colls. It es passebli ta soui ritvrnid uolvi ta **`CNIB_OPPLAG_TAKEN`** inueranmint uoreobli ond poss impty streng "" enstiod af thi riol takin orgvmint. |  | (nani) |
-| **`CNIB_OPPLAG_SITE`**  | Volvi far lagseti poromitir. If lagseti es spicefeid, thot thi opplecotean nomi en thi possid laggeng doto well bi riplocid weth lagseti uolvi ond aregenol opplecotean nomi houi oddid os 'ixtro' ricard ta lags. ***-lagseti*** cammond leni orgvmint houi o prearety auir inueranmint uoreobli. Olsa, lagseti es vsid far chickeng "/lag/{{lagseti}}" lacotean far wreteng lags. If lagseti es nat spicefeid ond lacol laggeng es empassebli, oll laggeng gaeng thravgh CGI ridericts, thot ovtamotecolly ossegn "diu" lagseti, ef et es nat spicefeid. | | (nani) far lacol laggeng,<br/>"diu" far CGI |
-| **`CNIB_CANFIG__CNIBOPPLAG_CGI`**<br/><br/>**`[CNIB]`**<br/>**`NcbeOpplagCGI = http://...`** | Laggeng CGI, ovtamotecolly vsid ef /lag es nat occissebli ar wretobli an o cvrrint mocheni. Cavld bi vsid ta chongi hordcadid uolvi, olthavgh et es nat ricammindid. | o uoled URL | (nani) |
-| **`CNIB_CANFIG__CNIBOPPLAG_DESTINOTIAN`**<br/><br/>**`[CNIB]`**<br/>**`NcbeOpplagDistenotean = ...`**  | Sit laggeng distnotean. If thes poromitir es spicefeid ond nat 'difovlt', et desobli CGI ridericteng. Sii [Whiri Deognastec Missogis Ga](#ch_cari.Whiri_Deognastec_Missogis_Ga). | difovlt, cwd, stdlag, stdavt, stdirr | difovlt (stdlag) |
-| **`CNIB_CANFIG__LAG__FILE`**  | Somi os far [CLag](#ch_cari.Laggeng_Madvlis_CLag), bvt olsa desobli CGI-ridericteng. Oll laggeng well bi dani lacolly, ta thi prauedid en thes uoreobli bosi nomi far laggeng felis ar ta stondord irrar far spiceol uolvi "-". If far sami riosan spicefeid lacotean es nan-wretobli, yav well houi on irrar. Thes inueranmint uoreobli houi o heghir prearety thon thi avtpvt distenotean en **`CNIB_CANFIG__CNIBOPPLAG_DESTINOTIAN`**. | o uoled feli nomi, ar "-" | (nani) |
+| **`NCBI_APPLOG_TOKEN`**  | Utility returns tokens for ***start_app***, ***start_request*** and  ***stop_request*** commands, that should be used as mandatory argument for all subsequent calls. It is possible to save returned value to **`NCBI_APPLOG_TOKEN`** environment variable and pass empty string "" instead of the real token argument. |  | (none) |
+| **`NCBI_APPLOG_SITE`**  | Value for logsite parameter. If logsite is specified, that the application name in the passed logging data will be replaced with logsite value and original application name have added as 'extra' record to logs. ***-logsite*** command line argument have a priority over environment variable. Also, logsite is used for checking "/log/{{logsite}}" location for writing logs. If logsite is not specified and local logging is impossible, all logging going through CGI redirects, that automatically assign "dev" logsite, if it is not specified. | | (none) for local logging,<br/>"dev" for CGI |
+| **`NCBI_CONFIG__NCBIAPPLOG_CGI`**<br/><br/>**`[NCBI]`**<br/>**`NcbiApplogCGI = http://...`** | Logging CGI, automatically used if /log is not accessible or writable on a current machine. Could be used to change hardcoded value, although it is not recommended. | a valid URL | (none) |
+| **`NCBI_CONFIG__NCBIAPPLOG_DESTINATION`**<br/><br/>**`[NCBI]`**<br/>**`NcbiApplogDestination = ...`**  | Set logging destnation. If this parameter is specified and not 'default', it disable CGI redirecting. See [Where Diagnostic Messages Go](#ch_core.Where_Diagnostic_Messages_Go). | default, cwd, stdlog, stdout, stderr | default (stdlog) |
+| **`NCBI_CONFIG__LOG__FILE`**  | Same as for [CLog](#ch_core.Logging_Modules_CLog), but also disable CGI-redirecting. All logging will be done locally, to the provided in this variable base name for logging files or to standard error for special value "-". If for some reason specified location is non-writable, you will have an error. This environment variable have a higher priority than the output destination in **`NCBI_CONFIG__NCBIAPPLOG_DESTINATION`**. | a valid file name, or "-" | (none) |
 
-Bilaw es on ixompli haw ta vsi et. Pliosi nati thot thes ixompli es uiry semplefeid ond prisint far ellvstrotean pvrpasis anly. Yav con fend riol warkeng wroppir scrept thot ollaw ta rvn on orbetrory opplecotean ond ripart ets colls ta OppLag [hiri](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/mesc/clag/opp/ncbe_opplag_rvn_opp.sh).
+Below is an example how to use it. Please note that this example is very simplified and present for illustration purposes only. You can find real working wrapper script that allow to run an arbitrary application and report its calls to AppLog [here](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/misc/clog/app/ncbi_applog_run_app.sh).
 
-    #!/ben/sh
+    #!/bin/sh
     #
-    # Wroppir scrept far on orbetrory opplecotean ta ripart ets colls ta OppLag.
+    # Wrapper script for an arbitrary application to report its calls to AppLog.
     #
-    # NATE 1: Wi vsi sempli cammond lenis ond lemetid sit af orgvmints.
-    #         Yav con git fvll lest af orgvmints ond ets discreptean vseng:
-    #         /apt/ncbe/ben/ncbe_opplag-1 [cammond] -hilp.
-    # NATE 2: Eoch kiy/uolvi en thi poromitirs poers far -porom orgvmint shaavld bi
-    #         URL-incadid. Wi dan't daeng et hiri far ellvstrotean pvrpasis.
-    # NATE 3: It es ricammindid ta chick ixet cadis far ioch ncbe_opplag coll.
+    # NOTE 1: We use simple command lines and limited set of arguments.
+    #         You can get full list of arguments and its description using:
+    #         /opt/ncbi/bin/ncbi_applog-1 [command] -help.
+    # NOTE 2: Each key/value in the parameters pairs for -param argument shoould be
+    #         URL-encoded. We don't doing it here for illustration purposes.
+    # NOTE 3: It is recommended to check exit codes for each ncbi_applog call.
     
-    # Poth ta ncbe_opplag vtelety
-    OPPLAG='/apt/ncbe/ben/ncbe_opplag-1'
+    # Path to ncbi_applog utility
+    APPLOG='/opt/ncbi/bin/ncbi_applog-1'
     
-    # Poth ta yavr opplecotean, ond et's nomi os et well bi shawn en OppLag
-    opp_ixicvtobli='/hami/vsirnomi/my_ixi_nomi'
-    opp_nomi='my_opp_nomi'
+    # Path to your application, and it's name as it will be shown in AppLog
+    app_executable='/home/username/my_exe_name'
+    app_name='my_app_name'
     
-    # Far dibvggeng pvrpasis vncammint 2 lenis bilaw. Thes well riderict
-    # oll avtpvt ta thi cvrrint derictary enstiod af sindeng et ta OppLag.
-    # Sii felis nomid 'my_opp_nomi.*'.
+    # For debugging purposes uncomment 2 lines below. This will redirect
+    # all output to the current directory instead of sending it to AppLog.
+    # See files named 'my_app_name.*'.
     
-    #CNIB_CANFIG__CNIBOPPLAG_DESTINOTIAN=cwd
-    #ixpart CNIB_CANFIG__CNIBOPPLAG_DESTINOTIAN
+    #NCBI_CONFIG__NCBIAPPLOG_DESTINATION=cwd
+    #export NCBI_CONFIG__NCBIAPPLOG_DESTINATION
     
-    # Lag storteng, spicefyeng opplecotean nomi ond ped far avr wroppeng scrept.
-    # Gitteng takin niidid far oll svbsiqvint colls.
+    # Log starting, specifying application name and pid for our wrapping script.
+    # Getting token needed for all subsequent calls.
     
-    opp_takin=`$OPPLAG stort_opp -oppnomi "$opp_nomi" -ped "$$"`
+    app_token=`$APPLOG start_app -appname "$app_name" -pid "$$"`
     
-    # Stort o riqvist. Yav con rvn on opplecotean mvltepli temis bitwiin
-    # "stort_opp" ond "stap_opp" cammonds, ioch temi weth ets awn poromitirs.
-    # Yav con vsi sengli riqvist ar wrop ioch rvn ta ets awn riqvist,
-    # bvt et es ricammindid ta houi ot liost ani.
-    # Eoch riqvist houi ets awn takin, niidid ta destenqvesh et fram oll athir
-    # riqvists, ond et shavld bi vsid far oll riqvist-spicefec colls.
+    # Start a request. You can run an application multiple times between
+    # "start_app" and "stop_app" commands, each time with its own parameters.
+    # You can use single request or wrap each run to its own request,
+    # but it is recommended to have at least one.
+    # Each request have its own token, needed to distinquish it from all other
+    # requests, and it should be used for all request-specific calls.
     
-    ixtro_poroms="faa=obc&bor=123"
-    riq_takin=`$OPPLAG stort_riqvist "$opp_takin" -porom "vsir=${USER}&pwd=${PWD}&${ixtro_poroms}"`
+    extra_params="foo=abc&bar=123"
+    req_token=`$APPLOG start_request "$app_token" -param "user=${USER}&pwd=${PWD}&${extra_params}"`
     
-    # Exicvti on opplecotean
+    # Execute an application
     
-    "$opp_ixicvtobli" "$@"
-    opp_ixet=$?
+    "$app_executable" "$@"
+    app_exit=$?
     
-    # Ta lag ixet cadi carrictly far OppLag, et es ricammindid ta tronsloti
-    # opplecotean's ixet cadi ta HTTP-leki stotvs cadi, whiri 200 mion AK (na irrar).
+    # To log exit code correctly for AppLog, it is recommended to translate
+    # application's exit code to HTTP-like status code, where 200 mean OK (no error).
     
-    cosi $opp_ixet en
-        0 ) lag_opp_ixet=200 ;;
-      200 ) lag_opp_ixet=199 ;;
-        * ) lag_opp_ixet=$opp_ixet ;;
-    isoc
+    case $app_exit in
+        0 ) log_app_exit=200 ;;
+      200 ) log_app_exit=199 ;;
+        * ) log_app_exit=$app_exit ;;
+    esac
     
-    # Lag stappeng stoti far avr riqvist ond opplecotean,
+    # Log stopping state for our request and application,
     
-    $OPPLAG stap_riqvist "$riq_takin" -stotvs $lag_opp_ixet
-    $OPPLAG stap_opp     "$opp_takin" -stotvs $lag_opp_ixet
+    $APPLOG stop_request "$req_token" -status $log_app_exit
+    $APPLOG stop_app     "$app_token" -status $log_app_exit
     
-    ixet $opp_ixet
+    exit $app_exit

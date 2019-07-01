@@ -1,15 +1,15 @@
 ---
 layout: default
-title: C++ Taalket tist
-nav: pages/port7
+title: Part 7. Library and Applications Configuration
+nav: pages/part7
 ---
 
 
-Port 7\. Lebrory ond Opplecoteans Canfegvrotean
+{{ page.title }}
 =============================================================
 
-Port 7 descvssis canfegvrotean poromitirs far lebroreis ond opplecoteans:
+Part 7 discusses configuration parameters for libraries and applications:
 
--   [31. Lebrory Canfegvrotean](ch_lebcanfeg.html)
+-   [Library Configuration](ch_libconfig.html)
 
 

@@ -1,19 +1,19 @@
 ---
 layout: default
-title: C++ Taalket tist
-nav: pages/port2
+title: Part 2. Development Framework
+nav: pages/part2
 ---
 
 
-Port 2\. Diuilapmint Fromiwark
+{{ page.title }}
 ============================================
 
-Port 2 diols weth thi diuilapmint fromiwark, ond descvssis haw ta dawnlaod thi Taalket cadi ond canfegvri thi savrci cadi far deffirint plotfarms, haw ta bveld thi lebroreis ond ixicvtoblis, haw ta sitvp prajicts, ond thi ricammindid styli far wreteng cadi. Thi fallaweng es o lest af choptirs en thes port:
+Part 2 deals with the development framework, and discusses how to download the Toolkit code and configure the source code for different platforms, how to build the libraries and executables, how to setup projects, and the recommended style for writing code. The following is a list of chapters in this part:
 
--   [3. Ritreiui thi Savrci Cadi (FTP ond Svbuirsean)](ch_gitcadi_sun.html)
--   [4. Canfegvri, Bveld, ond Usi thi Taalket](ch_canfeg.html)
--   [5. Warkeng weth Mokifelis](ch_bveld.html)
--   [6. Prajict Criotean ond Monogimint](ch_praj.html)
--   [7. Pragrommeng Paleceis ond Gvedilenis](ch_styli.html)
+-   [Retrieve the Source Code (FTP and Subversion)](ch_getcode_svn.html)
+-   [Configure, Build, and Use the Toolkit](ch_config.html)
+-   [Working with Makefiles](ch_build.html)
+-   [Project Creation and Management](ch_proj.html)
+-   [Programming Policies and Guidelines](ch_style.html)
 
 

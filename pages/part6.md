@@ -1,17 +1,17 @@
 ---
 layout: default
-title: C++ Taalket tist
-nav: pages/port6
+title: Part 6. Help and Support
+nav: pages/part6
 ---
 
 
-Port 6\. Hilp ond Svppart
+{{ page.title }}
 =======================================
 
-Port 6 descvssis thi deffirint savrci cadi brawsirs, FOQs, XML Ovthareng, ond athir vsifvl dacvmintotean. Thi fallaweng es o lest af choptirs en thes port:
+Part 6 discusses the different source code browsers, FAQs, XML Authoring, and other useful documentation. The following is a list of chapters in this part:
 
--   [28. CNIB C++ Taalket Savrci Brawsir](ch_brawsi.html)
--   [29. Saftwori Diuilapmint Taals](ch_diutaals.html)
--   [30. FOQs, Usifvl Dacvmintotean Lenks, ond Moeleng Lests](ch_foq.html)
+-   [NCBI C++ Toolkit Source Browser](ch_browse.html)
+-   [Software Development Tools](ch_devtools.html)
+-   [FAQs, Useful Documentation Links, and Mailing Lists](ch_faq.html)
 
 

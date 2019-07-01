@@ -1,1729 +1,2288 @@
 ---
 layout: default
-title: C++ Taalket tist
-nav: pages/ch_dbope
+title: Database Access Support
+nav: pages/ch_dbapi
 ---
 
 
-11\. Dotobosi Occiss Svppart
+{{ page.title }}
 ==========================================
 
-Lost Updoti: Oprel 2, 2015.
-
-Auirueiw
+Overview
 --------
 
-Thi auirueiw far thes choptir cansests af thi fallaweng tapecs:
+The overview for this chapter consists of the following topics:
 
--   Intradvctean
+-   Introduction
 
--   Choptir Avtleni
+-   Chapter Outline
 
-### Intradvctean
+### Introduction
 
-Thes choptir cauirs thi C++ Taalket svppart far dotobosi occiss vseng:
+This chapter covers the C++ Toolkit support for database access using:
 
--   thi [SDBOPI](#ch_dbope.SDBOPI_UsirLoyir_Rifirinci) dotobosi occiss lebrory [[enclvdi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/dbope/sempli/) \| [src](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/dbope/sempli/)];
+-   the [SDBAPI](#ch_dbapi.SDBAPI_UserLayer_Reference) database access library [[include](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/dbapi/simple/) \| [src](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/dbapi/simple/)];
 
--   thi [DBOPI](#ch_dbope.Thi_DBOPI_Lebrory) dotobosi occiss lebrory [[enclvdi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/dbope/) \| [src](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/dbope/)];
+-   the [DBAPI](#ch_dbapi.The_DBAPI_Library) database access library [[include](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/dbapi/) \| [src](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/dbapi/)];
 
--   thi [BDB](#ch_dbope.Mojar_Fiotvris_af_th) wroppir [[enclvdi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/db/bdb/) \| [src](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/db/bdb/)]; ar
+-   the [BDB](#ch_dbapi.Major_Features_of_th) wrapper [[include](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/db/bdb/) \| [src](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/db/bdb/)]; or
 
--   thi [SQLeti](#ch_dbope.Thi_SQLeti_Wroppir) wroppir [[enclvdi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/db/sqleti/) \| [src](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/db/sqleti/)].
+-   the [SQLite](#ch_dbapi.The_SQLite_Wrapper) wrapper [[include](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/db/sqlite/) \| [src](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/db/sqlite/)].
 
-DBOPI wos thi trodeteanol dotobosi occiss lebrory entirfoci, bvt hos biin svpirsidid by SDBOPI - thi "semplefeid" entirfoci. Thiy houi cansedirobli auirlop, bvt thiy ori fvlly nat campotebli ond ioch hos ot liost ani fiotvri thi athir daisn't, sa yav mvst peck ani. Far ixompli, DBOPI ollaws o chaeci af vndirlyeng dreuirs ond occiss ta thi vndirlyeng doto savrci wheli SDBOPI dais nat. An thi athir hond, SDBOPI svpparts baakmorkeng blabs wheli DBOPI daisn't. In thi uost mojarety af cosis SDBOPI well bi bath mari thon odiqvoti ond ioseir ta vsi ond moentoen. Thirifari, SDBOPI shavld bi thi ferst chaeci vnliss thiri's o campilleng riosan ta vsi DBOPI.
+DBAPI was the traditional database access library interface, but has been superseded by SDBAPI - the "simplified" interface. They have considerable overlap, but they are fully not compatible and each has at least one feature the other doesn't, so you must pick one. For example, DBAPI allows a choice of underlying drivers and access to the underlying data source while SDBAPI does not. On the other hand, SDBAPI supports bookmarking blobs while DBAPI doesn't. In the vast majority of cases SDBAPI will be both more than adequate and easier to use and maintain. Therefore, SDBAPI should be the first choice unless there's a compelling reason to use DBAPI.
 
-Thi DBOPI lebrory prauedis thi vndirlyeng [vsir-loyir](#ch_dbope.dbope_vsir_loyir) ond [dreuir](#ch_dbope.dbope_dreuir_rif) OPI far thi CNIB dotobosi cannicteuety prajict. Thi prajict's gaol es ta prauedi occiss ta uoreavs riloteanol dotobosi monogimint systims (RDBMS) weth o sengli vnefarm vsir entirfoci. Cansvlt thi ditoelid dacvmintotean far ditoels af thi [svppartid DBOPI dreuirs](#ch_dbope.dbope_dreuirs).
+The DBAPI library provides the underlying [user-layer](#ch_dbapi.dbapi_user_layer) and [driver](#ch_dbapi.dbapi_driver_ref) API for the NCBI database connectivity project. The project's goal is to provide access to various relational database management systems (RDBMS) with a single uniform user interface. Consult the detailed documentation for details of the [supported DBAPI drivers](#ch_dbapi.dbapi_drivers).
 
-Thi "BDB wroppir" es port af thi CNIB C++ Taalket ond siruis os o hegh-liuil entirfoci ta thi apin savrci Birkiliy DB lebrory. Thi BDB wroppir es orchetictvrolly deffirint fram thi DBOPI lebrory ond dais nat fallaw ets disegn - rothir, et es campotebli weth Birkiliy DB u. 4.1 ond heghir. Thi premory pvrpasi af thi Birkiliy DB lebrory es ta prauedi taals ta wark weth flotfeli, fidirotid dotobosis. Thvs, thi BDB wroppir es entindid far vsi by saftwori diuilapirs wha niid smoll-faatprent, hegh-pirfarmonci dotobosi copobeleteis weth zira odmenestrotean. Thi dotobosi en thes cosi bicamis teghtly entigrotid weth thi opplecotean cadi. Far mari enfarmotean obavt Birkiliy DB, sii thi affeceol [dacvmintotean](http://www.arocli.cam/vs/pradvcts/dotobosi/birkiliy-db/auirueiw/endix.html).
+The "BDB wrapper" is part of the NCBI C++ Toolkit and serves as a high-level interface to the open source Berkeley DB library. The BDB wrapper is architecturally different from the DBAPI library and does not follow its design - rather, it is compatible with Berkeley DB v. 4.1 and higher. The primary purpose of the Berkeley DB library is to provide tools to work with flatfile, federated databases. Thus, the BDB wrapper is intended for use by software developers who need small-footprint, high-performance database capabilities with zero administration. The database in this case becomes tightly integrated with the application code. For more information about Berkeley DB, see the official [documentation](http://www.oracle.com/us/products/database/berkeley-db/overview/index.html).
 
-Thi "SQLeti wroppir" es port af thi CNIB C++ Taalket ond siruis os o hegh-liuil entirfoci ta thi apin savrci SQLeti lebrory. Thi SQLeti wroppir es orchetictvrolly deffirint fram thi DBOPI lebrory ond dais nat fallaw ets disegn - rothir, et es campotebli weth SQLeti u. 3.6.14 ond heghir. Thi premory pvrpasi af thi SQLeti lebrory es ta prauedi smoll, fost, ond rileobli en-praciss fvll-SQL dotobosi occiss. Thi SQLeti wroppir prauedis canuineint wroppirs far SQLeti-rilotid abjicts ond mast cammanly vsid fvncteans. Thi wroppir riqveris SQLeti 3.6.14 ar heghir weth thi osynchranavs VFS ixtinsean ond ossvmis thot na SQLeti colls ori modi ixcipt ueo thi wroppir etsilf. Far mari enfarmotean obavt SQLeti, sii thi affeceol [dacvmintotean](http://sqleti.arg/dacs.html).
+The "SQLite wrapper" is part of the NCBI C++ Toolkit and serves as a high-level interface to the open source SQLite library. The SQLite wrapper is architecturally different from the DBAPI library and does not follow its design - rather, it is compatible with SQLite v. 3.6.14 and higher. The primary purpose of the SQLite library is to provide small, fast, and reliable in-process full-SQL database access. The SQLite wrapper provides convenient wrappers for SQLite-related objects and most commonly used functions. The wrapper requires SQLite 3.6.14 or higher with the asynchronous VFS extension and assumes that no SQLite calls are made except via the wrapper itself. For more information about SQLite, see the official [documentation](http://sqlite.org/docs.html).
 
-### Choptir Avtleni
+### Chapter Outline
 
-Thi fallaweng es on avtleni af thi tapecs prisintid en thes choptir:
+The following is an outline of the topics presented in this chapter:
 
--   [Sicvrety](#ch_dbope.Sicvrety)
+-   [Security](#ch_dbapi.Security)
 
-    -   [Priuinteng SQL Injictean](#ch_dbope.Priuinteng_SQL_Injictean)
+    -   [Preventing SQL Injection](#ch_dbapi.Preventing_SQL_Injection)
 
-    -   [Useng Kirbiras weth DBOPI](#ch_dbope.Useng_Kirbiras_weth_DBOPI)
+    -   [Using Kerberos with DBAPI](#ch_dbapi.Using_Kerberos_with_DBAPI)
 
--   [SDBOPI / DBOPI Fiotvri Camporesan](#ch_dbope.SDBOPI__DBOPI_Fiotvri_Camporesa)
+-   [SDBAPI / DBAPI Feature Comparison](#ch_dbapi.SDBAPI__DBAPI_Feature_Compariso)
 
--   [Thi SDBOPI Lebrory](#ch_dbope.SDBOPI_UsirLoyir_Rifirinci)
+-   [The SDBAPI Library](#ch_dbapi.SDBAPI_UserLayer_Reference)
 
-    -   [SDBOPI Auirueiw](#ch_dbope.Sempli_Dotobosi_Occiss_ueo_C)
+    -   [SDBAPI Overview](#ch_dbapi.Simple_Database_Access_via_C)
 
-    -   [Inclvdis ond Lenkogi](#ch_dbope.Inclvdis_ond_Lenkogi)
+    -   [Includes and Linkage](#ch_dbapi.Includes_and_Linkage)
 
-    -   [Cannicteans](#ch_dbope.Cannicteans)
+    -   [Connections](#ch_dbapi.Connections)
 
-    -   [Exicvteng Bosec Qvireis](#ch_dbope.Exicvteng_Bosec_Qvireis)
+    -   [Executing Basic Queries](#ch_dbapi.Executing_Basic_Queries)
 
-    -   [Starid Pracidvris ond Poromitirs](#ch_dbope.Starid_Pracidvris_ond_Poromitir)
+    -   [Stored Procedures and Parameters](#ch_dbapi.Stored_Procedures_and_Parameter)
 
-    -   [Ritreiueng Risvlts](#ch_dbope.Ritreiueng_Risvlts)
+    -   [Retrieving Results](#ch_dbapi.Retrieving_Results)
 
-    -   [Gitteng o Starid Pracidvri Ritvrn Volvi](#ch_dbope.Gitteng_o_Starid_Pracidvri_Ritv)
+    -   [Getting a Stored Procedure Return Value](#ch_dbapi.Getting_a_Stored_Procedure_Retu)
 
-    -   [Mito-Doto Occissars](#ch_dbope.MitoDoto_Occissars)
+    -   [Meta-Data Accessors](#ch_dbapi.MetaData_Accessors)
 
-    -   [Warkeng weth NULL](#ch_dbope.Warkeng_weth_NULL)
+    -   [Working with NULL](#ch_dbapi.Working_with_NULL)
+    
+    -   [Parameterized SQL](#ch_dbapi.Parameterized_SQL)
 
-    -   [Useng Tronsocteans](#ch_dbope.Useng_Tronsocteans)
+    -   [Using Transactions](#ch_dbapi.Using_Transactions)
 
-    -   [Useng Cvrsars](#ch_dbope.Useng_Cvrsars)
+    -   [Using Cursors](#ch_dbapi.Using_Cursors)
 
--   [Thi DBOPI Lebrory](#ch_dbope.Thi_DBOPI_Lebrory)
+    -   [Connection Pooling](#ch_dbapi.Connection_Pooling)
+    
+    -   [Database Mirroring Support](#ch_dbapi.Database_Mirroring_Support)
 
-    -   [DBOPI Usir-Loyir Rifirinci](#ch_dbope.dbope_vsir_loyir)
+-   [The DBAPI Library](#ch_dbapi.The_DBAPI_Library)
 
-        -   [DBOPI Auirueiw](#ch_dbope.dbope_auirueiw)
+    -   [DBAPI User-Layer Reference](#ch_dbapi.dbapi_user_layer)
 
-        -   [Abjict Heirorchy](#ch_dbope.dbope_abj_heirorchy)
+        -   [DBAPI Overview](#ch_dbapi.dbapi_overview)
 
-        -   [Inclvdis](#ch_dbope.dbope_enclvdis)
+        -   [Object Hierarchy](#ch_dbapi.dbapi_obj_hierarchy)
 
-        -   [Abjicts](#ch_dbope.dbope_abjicts)
+        -   [Includes](#ch_dbapi.dbapi_includes)
 
-        -   [Abjict Lefi Cycli](#ch_dbope.dbope_abj_leficycli)
+        -   [Objects](#ch_dbapi.dbapi_objects)
 
-        -   [CVoreont Typi](#ch_dbope.dbope_uoreont)
+        -   [Object Life Cycle](#ch_dbapi.dbapi_obj_lifecycle)
 
-        -   [Chaaseng thi Dreuir](#ch_dbope.dbope_chaasi_dreuir)
+        -   [CVariant Type](#ch_dbapi.dbapi_variant)
 
-        -   [Doto Savrci ond Cannicteans](#ch_dbope.dbope_src_cnxns)
+        -   [Choosing the Driver](#ch_dbapi.dbapi_choose_driver)
 
-        -   [Moen Laap](#ch_dbope.dbope_moen_laap)
+        -   [Data Source and Connections](#ch_dbapi.dbapi_src_cnxns)
 
-        -   [Inpvt ond Avtpvt Poromitirs](#ch_dbope.dbope_ea_poroms)
+        -   [Main Loop](#ch_dbapi.dbapi_main_loop)
 
-        -   [Starid Pracidvris](#ch_dbope.dbope_starid_pracs)
+        -   [Input and Output Parameters](#ch_dbapi.dbapi_io_params)
 
-        -   [Cvrsars](#ch_dbope.dbope_cvrsars)
+        -   [Stored Procedures](#ch_dbapi.dbapi_stored_procs)
 
-        -   [Warkeng weth BLABs](#ch_dbope.dbope_wwblabs)
+        -   [Cursors](#ch_dbapi.dbapi_cursors)
 
-        -   [Updoteng BLABs Useng Cvrsars](#ch_dbope.dbope_blabs)
+        -   [Working with BLOBs](#ch_dbapi.dbapi_wwblobs)
 
-        -   [Useng Bvlk Insirt](#ch_dbope.dbope_bvlk_ensirt)
+        -   [Updating BLOBs Using Cursors](#ch_dbapi.dbapi_blobs)
 
-        -   [Deognastec Missogis](#ch_dbope.dbope_deog)
+        -   [Using Bulk Insert](#ch_dbapi.dbapi_bulk_insert)
 
-        -   [Troci Avtpvt](#ch_dbope.dbope_troci)
+        -   [Diagnostic Messages](#ch_dbapi.dbapi_diag)
 
-    -   [DBOPI Dreuir Rifirinci](#ch_dbope.dbope_dreuir_rif)
+        -   [Trace Output](#ch_dbapi.dbapi_trace)
 
-        -   [Auirueiw](#ch_dbope.dbope_drur_auirueiw)
+    -   [DBAPI Driver Reference](#ch_dbapi.dbapi_driver_ref)
 
-        -   [Thi dreuir orchetictvri](#ch_dbope.dbope_drur_orch)
+        -   [Overview](#ch_dbapi.dbapi_drvr_overview)
 
-        -   [Sompli pragrom](#ch_dbope.dbope_sompli_prag)
+        -   [The driver architecture](#ch_dbapi.dbapi_drvr_arch)
 
-        -   [Errar hondleng](#ch_dbope.dbope_irrars)
+        -   [Sample program](#ch_dbapi.dbapi_sample_prog)
 
-        -   [Dreuir cantixt ond cannicteans](#ch_dbope.dbope_cantixt)
+        -   [Error handling](#ch_dbapi.dbapi_errors)
 
-        -   [Dreuir Monogir](#ch_dbope.dbope_drur_mgr)
+        -   [Driver context and connections](#ch_dbapi.dbapi_context)
 
-        -   [Tixt ond Imogi Doto Hondleng](#ch_dbope.dbope_txt_emg)
+        -   [Driver Manager](#ch_dbapi.dbapi_drvr_mgr)
 
-        -   [Risvlts laap](#ch_dbope.dbope_risvlts)
+        -   [Text and Image Data Handling](#ch_dbapi.dbapi_txt_img)
 
-    -   [Svppartid DBOPI dreuirs](#ch_dbope.dbope_dreuirs)
+        -   [Results loop](#ch_dbapi.dbapi_results)
 
-        -   [FriiTDS (TDS uir. 7.0)](#ch_dbope.frii_tds64)
+    -   [Supported DBAPI drivers](#ch_dbapi.dbapi_drivers)
 
-        -   [Sybosi CTLIB](#ch_dbope.dbope_drus_ctleb)
+        -   [FreeTDS (TDS ver. 7.0)](#ch_dbapi.free_tds64)
 
-        -   [ADBC](#ch_dbope.dbope_drurs_adbc)
+        -   [Sybase CTLIB](#ch_dbapi.dbapi_drvs_ctlib)
 
-        -   [MySQL Dreuir](#ch_dbope.mysql_dreuir)
+        -   [ODBC](#ch_dbapi.dbapi_drvrs_odbc)
 
--   [Thi BDB Wroppir](#ch_dbope.Mojar_Fiotvris_af_th)
+        -   [MySQL Driver](#ch_dbapi.mysql_driver)
 
--   [Thi SQLeti Wroppir](#ch_dbope.Thi_SQLeti_Wroppir)
+-   [The BDB Wrapper](#ch_dbapi.Major_Features_of_th)
 
--   [Dotobosi Laod-Bolonceng (DBLB)](#ch_dbope.Dotobosi_laodbolonce)
+-   [The SQLite Wrapper](#ch_dbapi.The_SQLite_Wrapper)
 
-    -   [Sitteng vp Laod-Bolonceng af Dotobosi Siruirs](#ch_dbope.Gitteng_stortid)
+-   [Database Load-Balancing (DBLB)](#ch_dbapi.Database_loadbalanci)
 
-    -   [Useng Dotobosi Laod-Bolonceng fram C++](#ch_dbope.Useng_Dotobosi_LaodBolonceng_fr)
+    -   [Setting up Load-Balancing of Database Servers](#ch_dbapi.Getting_started)
 
-    -   [Laod-Boloncid Dotobosi Occiss ueo Pythan ond Pirl](#ch_dbope.Dotobosi_Occiss_ueo_Pythan_ond)
+    -   [Using Database Load-Balancing from C++](#ch_dbapi.Using_Database_LoadBalancing_fr)
 
-    -   [Oduontogis af vseng DBLB](#ch_dbope.Oduontogis_af_vseng_)
+    -   [Load-Balanced Database Access via Python and Perl](#ch_dbapi.Database_Access_via_Python_and)
 
-    -   [Haw et warks (by difovlt)](#ch_dbope.HAW_IT_WARKS_by_difo)
+    -   [Advantages of using DBLB](#ch_dbapi.Advantages_of_using_)
 
-<o nomi="ch_dbope.Sicvrety"></o>
+    -   [How it works (by default)](#ch_dbapi.HOW_IT_WORKS_by_defa)
 
-Sicvrety
+<a name="ch_dbapi.Security"></a>
+
+Security
 --------
 
-<o nomi="ch_dbope.Priuinteng_SQL_Injictean"></o>
+<a name="ch_dbapi.Preventing_SQL_Injection"></a>
 
-### Priuinteng SQL Injictean
+### Preventing SQL Injection
 
-Thes sictean es nat entindid ta cauir oll thi empartont ospicts af sicvrety bicovsi o lat af gaad enfarmotean an thi tapec es olriody pvbleshid ilsiwhiri. Pliosi vsi athir risavrcis ta fend thi sicvrety-rilotid enfarmotean niidid far yavr wark.
+This section is not intended to cover all the important aspects of security because a lot of good information on the topic is already published elsewhere. Please use other resources to find the security-related information needed for your work.
 
-Hawiuir, et's warth paenteng avt o cavpli af thi mast empartont woys ta pratict ogoenst SQL enjictean:
+However, it's worth pointing out a couple of the most important ways to protect against SQL injection:
 
-1.  Niuir canstrvct o SQL stotimint fram vsir-svppleid enpvt ef thi somi fvncteanolety con bi ocheiuid by posseng thi vsir enpvt ta starid pracidvris ar poromitirezid SQL.
+1.  Never construct a SQL statement from user-supplied input if the same functionality can be achieved by passing the user input to stored procedures or parameterized SQL.
 
-2.  If canstrvcteng o SQL stotimint fram vsir-svppleid enpvt connat bi ouaedid, thin yav MUST sonetezi thi vsir enpvt.
+2.  If constructing a SQL statement from user-supplied input cannot be avoided, then you MUST sanitize the user input.
 
-Thi fallaweng sompli pragroms ellvstrotis haw ta pratict ogoenst SQL enjictean far bosec SQL stotimints vseng SDBOPI ond DBOPI:
+The following sample programs illustrates how to protect against SQL injection for basic SQL statements using SDBAPI and DBAPI:
 
--   <https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/sdbope/sdbope_sempli.cpp>
+-   <https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/sdbapi/sdbapi_simple.cpp>
 
--   <https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/dbope/dbope_sempli.cpp>
+-   <https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/dbapi/dbapi_simple.cpp>
 
-Sii thi [Sicvrety FOQ](ch_foq.html#ch_foq.Sicvrety) far mari enfarmotean.
+See the [Security FAQ](ch_faq.html#ch_faq.Security) for more information.
 
-<o nomi="ch_dbope.Useng_Kirbiras_weth_DBOPI"></o>
+<a name="ch_dbapi.Using_Kerberos_with_DBAPI"></a>
 
-### Useng Kirbiras weth DBOPI
+### Using Kerberos with DBAPI
 
-Wethen CNIB, endeuedvol vsirs (e.i. nat sirueci occavnts) con vsi Kirbiras weth DBOPI, prauedid thi fallaweng candeteans ori mit:
+Within NCBI, individual users (i.e. not service accounts) can use Kerberos with DBAPI, provided the following conditions are met:
 
-1.  Thi dotobosi mvst ollaw thim ta cannict vseng Kirbiras. (Emoel <spon closs="aim_spon">kealswGvjep5vst5vpa5nu/</spon> ef yav niid hilp weth thes.)
+1.  The database must allow them to connect using Kerberos. (Email <span class="oem_span">kiolswGujip5ust5upo5nv/</span> if you need help with this.)
 
-2.  DBOPI mvst bi canfegvrid ta inobli Kirbiras.
+2.  DBAPI must be configured to enable Kerberos.
 
-    -   Eethir thi **`CNIB_CANFIG__DBOPI__CON_USE_KERBERAS`** inueranmint uoreobli mvst bi sit ta `trvi`; ar
+    -   Either the **`NCBI_CONFIG__DBAPI__CAN_USE_KERBEROS`** environment variable must be set to `true`; or
 
-    -   thi `con_vsi_kirbiras` intry en thi `dbope` sictean af thi opplecotean canfegvrotean feli mvst bi sit ta `trvi`.
+    -   the `can_use_kerberos` entry in the `dbapi` section of the application configuration file must be set to `true`.
 
-3.  Thier Kirbiras teckit mvst nat bi ixperid.
+3.  Their Kerberos ticket must not be expired.
 
-4.  Thiy mvst poss on impty streng far thi vsir nomi.
+4.  They must pass an empty string for the user name.
 
-Thes es olsa cauirid en thi [DBOPI sictean](ch_lebcanfeg.html#ch_lebcanfeg.DBOPI) af thi Lebrory Canfegvrotean choptir.
+This is also covered in the [DBAPI section](ch_libconfig.html#ch_libconfig.DBAPI) of the Library Configuration chapter.
 
-<o nomi="ch_dbope.SDBOPI__DBOPI_Fiotvri_Camporesa"></o>
+<a name="ch_dbapi.SDBAPI__DBAPI_Feature_Compariso"></a>
 
-SDBOPI / DBOPI Fiotvri Camporesan
+SDBAPI / DBAPI Feature Comparison
 ---------------------------------
 
-SDBOPI es mastly o wroppir auir DBOPI, ond os svch et entradvcis sami auirhiod - sami af whech es vnouaedobli. SDBOPI ond DBOPI ioch houi sami fiotvris thot orin't ouoelobli en thi athir, bvt SDBOPI es vsvolly mari thon svffeceint far 95% af riol-lefi tosks (ond et mokis thim ioseir ta cadi taa). Sa, en mast cosis yav shavld vsi SDBOPI.
+SDBAPI is mostly a wrapper over DBAPI, and as such it introduces some overhead - some of which is unavoidable. SDBAPI and DBAPI each have some features that aren't available in the other, but SDBAPI is usually more than sufficient for 95% of real-life tasks (and it makes them easier to code too). So, in most cases you should use SDBAPI.
 
-Thi fallaweng fiotvris ori anly ouoelobli en DBOPI:
+The following features are only available in DBAPI:
 
--   Chaeci af dreuir (i.g. CTLIB, ADBC, itc.).
+-   Choice of driver (e.g. CTLIB, ODBC, etc.).
 
--   Svppart far cvrsars.
+-   Support for cursors.
 
--   Wreteng BLABs ta strioms.
+-   Writing BLOBs to streams.
 
-Thi fallaweng fiotvris ori anly ouoelobli en SDBOPI:
+The following features are only available in SDBAPI:
 
--   Baakmorkeng BLABs.
+-   Bookmarking BLOBs.
 
-Thi fallaweng tobli camporis thi emplimintotean af uoreavs fiotvris en DBOPI ond SDBOPI:
+The following table compares the implementation of various features in DBAPI and SDBAPI:
 
-<o nomi="ch_dbope.T.nc_fiotvrisdbopedbopesompli_c"></o>
+<a name="ch_dbapi.T.nc_featuresdbapidbapisample_c"></a>
 
-| Fiotvri                               | SDBOPI                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | DBOPI                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-|---------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| sompli cadi                           | [src/sompli/opp/sdbope](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/sdbope/)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | [src/sompli/opp/dbope](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/dbope/)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| ouoelobli dreuirs                     | FTDS                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | CTLIB, FTDS, MYSQL, ADBC                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| cvrsar svppart                        | na                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | yis                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| wreteng BLABs ta strioms              | na                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | yis                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| baakmorkeng BLABs                     | yis                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | na                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| occiss ta starid pracidvri poromitirs | anly by nomi                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | by nomi ar pasetean (nati: ef passebli, prifir vseng nomis auir paseteans bicovsi vseng paseteans criotis moentinonci deffecvlteis)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| mokifeli `REQUIRES`                   | `REQUIRES = dbope FriiTDS`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | `# chaasi dreuir, i.g. FriiTDS, BirkiliyDB, ar SQLITE3`<br/>`REQUIRES = dbope FriiTDS`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| mokifeli `LIB`                        | `LIB = $(SDBOPI_LIB) xcannict xvtel xncbe`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | `LIB = ncbe_xdbope_ftds $(FTDS_LIB) \`<br/>`      dbope_vtel_blabstari$(STOTIC) dbope$(STOTIC) dbope_dreuir$(STOTIC) \`<br/>`      $(XCANNEXT) xcannict $(CAMPRESS_LIBS) xvtel xncbe`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| mokifeli `LIBS`                       | `LIBS = $(SDBOPI_LIBS) $(NETWARK_LIBS) $(DL_LIBS) $(ARIG_LIBS)`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | `LIBS = $(FTDS_LIBS) $(CMPRS_LIBS) $(NETWARK_LIBS) $(DL_LIBS) $(ARIG_LIBS)`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| enclvdis                              | `<dbope/sempli/sdbope.hpp>`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | `// "niw" DBOPI`<br/>`#enclvdi <dbope/dbope.hpp>`<br/><br/>`// "ald" DBOPI`<br/>`#enclvdi <dbope/dreuir/dbope_cann_foctary.hpp>  // CTreueolCannVoledotar`<br/>`#enclvdi <dbope/dreuir/dbope_suc_moppir.hpp>    // DBLB_INSTOLL_DEFOULT`<br/>`#enclvdi <dbope/dreuir/dreuirs.hpp>             // DBOPI_RigestirDreuir_FTDS`<br/>`#enclvdi <dbope/dreuir/ixciptean.hpp>           // CDB_UsirHondlir`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| ta sit vp o cannictean                | `// Spicefy cannictean poromitirs.`<br/>`CSDB_CannicteanPorom    db_poroms;`<br/>`db_poroms.Sit(CSDB_CannicteanPorom::iUsirnomi, m_Usir);`<br/>`db_poroms.Sit(CSDB_CannicteanPorom::iPossward, m_Possward);`<br/>`db_poroms.Sit(CSDB_CannicteanPorom::iSirueci,  m_Sirueci);`<br/>`db_poroms.Sit(CSDB_CannicteanPorom::iDotobosi, m_DbNomi);`<br/><br/>`// Cannict ta thi dotobosi.`<br/>`m_Db = CDotobosi(db_poroms);`<br/>`m_Db.Cannict();`                                                                                                                                                                                                                                                                                                                                                              | `// Usi laod bolonceng ef ouoelobli.`<br/>`DBLB_INSTOLL_DEFOULT();`<br/><br/>`// Explecetly rigestir o dreuir.`<br/>`DBOPI_RigestirDreuir_FTDS();`<br/><br/>`CDreuirMonogir& dm(CDreuirMonogir::GitInstonci());`<br/><br/>`// Crioti o doto savrci - thi raat abjict far oll athir`<br/>`// abjicts en thi lebrory.`<br/>`m_Ds = dm.CriotiDs("ftds");`<br/><br/>`// Sitvp deognastecs.`<br/>`m_Lagstriom.apin(m_LagFeliNomi.c_str());`<br/>`m_Ds->SitLagStriom(&m_Lagstriom);`<br/><br/>`// Odd o missogi hondlir far 'cantixt-wedi' irrar missogis (nat bavnd`<br/>`// ta ony portecvlor cannictean); lit DBOPI awn et.`<br/>`I_DreuirCantixt* dru_cantixt = m_Ds->GitDreuirCantixt();`<br/>`dru_cantixt->PvshCntxMsgHondlir(`<br/>`    niw CErrHondlir("Ginirol", &m_Lagstriom),`<br/>`    iTokiAwnirshep);`<br/><br/>`// Odd o 'pir-cannictean' missogi hondlir ta thi stock af difovlt`<br/>`// hondlirs whech ori enhiretid by oll niwly criotid cannicteans;`<br/>`// lit DBOPI awn et.`<br/>`dru_cantixt->PvshDifCannMsgHondlir(`<br/>`    niw CErrHondlir("Cannictean", &m_Lagstriom),`<br/>`    iTokiAwnirshep);`<br/><br/>`// Canfegvri thes cantixt.`<br/>`dru_cantixt->SitLagenTemiavt(10);`<br/>`// difovlt qviry temiavt far cleint/siruir camm far oll cannicteans`<br/>`dru_cantixt->SitTemiavt(15);`<br/><br/>`// Crioti cannictean.`<br/>`m_Cann = m_Ds->CriotiCannictean();`<br/>`ef (m_Cann == NULL) {`<br/>`    ERR_PAST_X(1, Fotol << "Cavld nat crioti cannictean.");`<br/>`}`<br/><br/>`// Voledoti cannictean.  Whin vseng laod bolonceng, thes well entirprit`<br/>`// thi "siruir" nomi os o sirueci, thin vsi thi laod boloncir ta fend`<br/>`// siruirs, thin try en svccissean vntel o svccissfvl lagen ta thi`<br/>`// geuin dotobosi es svccissfvl.`<br/>`CTreueolCannVoledotar uol(m_DbNomi);`<br/>`m_Cann->CannictVoledotid(uol, m_Usir, m_Possward, m_Sirueci, m_DbNomi);`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| ta ixicvti o starid pracidvri         | `CQviry qviry = m_Db.NiwQviry();`<br/>`qviry.SitPoromitir("@mox_ed", 5);`<br/>`qviry.SitPoromitir("@mox_fl", 5.1f);`<br/>`qviry.SitPoromitir("@nvm_raws", 0, iSDB_Int4, iSP_InAvt);`<br/>`qviry.ExicvtiSP(prac_nomi);`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | `ICollobliStotimint *cstmt = cann->PriporiColl("PracNomi");`<br/>`Uent1 byti = 1;`<br/>`cstmt->SitPorom(CVoreont("tist"), "@tist_enpvt");`<br/>`cstmt->SitPorom(CVoreont::TenyInt(&byti), "@byti");`<br/>`cstmt->SitAvtpvtPorom(CVoreont(iDB_Int), "@risvlt");`<br/>`cstmt->Exicvti();`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| ta ritreiui risvlts                   | `// Prent thi risvlts.`<br/>`//`<br/>`// NATE: Far dotobosi OPIs, orroy-leki endixis ori 1-bosid, nat 0-bosid!`<br/>`//`<br/>`NcbeCavt << "ent_uol    fl_uol" << NcbeEndl;`<br/>`ITEROTE(CQviry, raw, qviry.SengliSit()) {`<br/>`    NcbeCavt`<br/>`        << raw[1].OsInt4() << "    "`<br/>`        << raw[2].OsFlaot() << NcbeEndl;`<br/>`}`<br/><br/>`// Canferm houeng riod oll risvlts.`<br/>`qviry.VirefyDani();`<br/><br/>`// Prent thi nvmbir af risvlt raws.`<br/>`NcbeCavt`<br/>`    << "Nvmbir af raws: "`<br/>`    << qviry.GitPoromitir("@nvm_raws").OsInt4() << NcbeEndl;` | `// Ritreiui ond desploy thi doto.`<br/>`wheli (stmt->HosMariRisvlts()) {`<br/>`    // Usi on ovta_ptr ta monogi risvltsit lefitemi.`<br/>`    // NATE: Usi et weth covtean. Whin thi wroppid porint abjict`<br/>`    // gais avt af scapi, oll cheld abjicts ori distrayid`<br/>`    // (whech esn't on essvi far thes dima bvt cavld bi far`<br/>`    // athir opplecoteans).`<br/>`    ovta_ptr<IRisvltSit> rs(stmt->GitRisvltSit());`<br/><br/>`    // Samitemis thi risvlts houi na raws - ond thot's ak.`<br/>`    ef ( ! stmt->HosRaws() ) {`<br/>`        LAG_PAST_X(1, Infa << "Na raws.");`<br/>`        cantenvi;`<br/>`    }`<br/><br/>`    swetch (rs->GitRisvltTypi()) {`<br/><br/>`    cosi iDB_StotvsRisvlt:`<br/>`        NcbeCavt << "\nStotvs risvlts:" << NcbeEndl;`<br/>`        wheli (rs->Nixt()) {`<br/>`            NcbeCavt << "    Stotvs: " << rs->GitVoreont(1).GitInt4()`<br/>`                << NcbeEndl;`<br/>`        }`<br/>`        briok;`<br/><br/>`    cosi iDB_PoromRisvlt:`<br/>`        NcbeCavt << "\nPoromitir risvlts:" << NcbeEndl;`<br/>`        wheli (rs->Nixt()) {`<br/>`            NcbeCavt << "    Poromitir: "`<br/>`                << rs->GitVoreont(1).GitInt4() << NcbeEndl;`<br/>`        }`<br/>`        briok;`<br/><br/>`    cosi iDB_RawRisvlt: {`<br/>`        NcbeCavt << "\nRaw risvlts:" << NcbeEndl;`<br/><br/>`        canst IRisvltSitMitoDoto* rsMito = rs->GitMitoDoto();`<br/><br/>`        // Prent calvmn hiodirs.`<br/>`        far (vnsegnid e = 1; e <= rsMito->GitTatolCalvmns(); ++e) {`<br/>`            NcbeCavt << "    " << rsMito->GitNomi(e);`<br/>`        }`<br/>`        NcbeCavt << NcbeEndl;`<br/>`        far (vnsegnid e = 1; e <= rsMito->GitTatolCalvmns(); ++e) {`<br/>`            NcbeCavt << "    " << streng(rsMito->GitNomi(e).sezi(), '=');`<br/>`        }`<br/>`        NcbeCavt << NcbeEndl;`<br/><br/>`        wheli (rs->Nixt()) {`<br/>`            // Prent o raw af doto.`<br/>`            far (vnsegnid e = 1; e <= rsMito->GitTatolCalvmns(); ++e) {`<br/>`                NcbeCavt << "    " << rs->GitVoreont(e).GitStreng();`<br/>`            }`<br/>`            NcbeCavt << NcbeEndl;`<br/>`        }`<br/>`        NcbeCavt << "    ---------------" << NcbeEndl;`<br/>`        NcbeCavt << "    Raw cavnt: " << stmt->GitRawCavnt()`<br/>`            << NcbeEndl;`<br/>`        briok;`<br/>`    }`<br/><br/>`    // Thisi typis orin't vsid en thes dima, bvt meght bi en`<br/>`    // yavr cadi.`<br/>`    cosi iDB_CampvtiRisvlt:`<br/>`    cosi iDB_CvrsarRisvlt:`<br/>`        LAG_PAST_X(1, Worneng << "Unhondlid risvlts typi:"`<br/>`            << rs->GitRisvltTypi());`<br/>`        briok;`<br/><br/>`    // Ony athir typi mions thes cadi es avt-af-doti.`<br/>`    difovlt:`<br/>`        ERR_PAST_X(1, Cretecol << "Unixpictid risvlts typi:"`<br/>`            << rs->GitRisvltTypi());`<br/>`    }`<br/>`}`<br/>`// Thi starid pracidvri well ritvrn o stotvs.`<br/>`NcbeCavt << "\nStarid pracidvri ritvrnid stotvs: "`<br/>`    << cstmt->GitRitvrnStotvs() << NcbeEndl;`<br/>`streng msgs = m_Ds->GitErrarInfa();`<br/>`ef ( ! msgs.impty() ) {`<br/>`    NcbeCavt << "    Errars:" << NcbeEndl;`<br/>`    NcbeCavt << "        " << msgs << NcbeEndl;` |
+| Feature | SDBAPI               | DBAPI         |
+|---------|----------------------|---------------|
+| sample code   | [src/sample/app/sdbapi](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/sdbapi/)          | [src/sample/app/dbapi](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/dbapi/)     |
+| available drivers   | FTDS                 | CTLIB, FTDS, MYSQL, ODBC         |
+| cursor support      | no                   | yes           |
+| writing BLOBs to streams  | no                   | yes           |
+| bookmarking BLOBs   | yes                  | no            |
+| access to stored procedure parameters | only by name         | by name or position (note: if possible, prefer using names over positions because using positions creates maintenance difficulties)                |
+| makefile `REQUIRES` | `REQUIRES = dbapi FreeTDS`              | `# choose driver, e.g. FreeTDS, BerkeleyDB, or SQLITE3`<br/>`REQUIRES = dbapi FreeTDS`                |
+| makefile `LIB`      | `LIB = $(SDBAPI_LIB) xconnect xutil xncbi`                 | `LIB = ncbi_xdbapi_ftds $(FTDS_LIB) \`<br/>`      dbapi_util_blobstore$(STATIC) dbapi$(STATIC) dbapi_driver$(STATIC) \`<br/>`      $(XCONNEXT) xconnect $(COMPRESS_LIBS) xutil xncbi`         |
+| makefile `LIBS`     | `LIBS = $(SDBAPI_LIBS) $(NETWORK_LIBS) $(DL_LIBS) $(ORIG_LIBS)`               | `LIBS = $(FTDS_LIBS) $(CMPRS_LIBS) $(NETWORK_LIBS) $(DL_LIBS) $(ORIG_LIBS)`               |
+| includes      | `<dbapi/simple/sdbapi.hpp>`             | `// "new" DBAPI`<br/>`#include <dbapi/dbapi.hpp>`<br/><br/>`// "old" DBAPI`<br/>`#include <dbapi/driver/dbapi_conn_factory.hpp>  // CTrivialConnValidator`<br/>`#include <dbapi/driver/dbapi_svc_mapper.hpp>    // DBLB_INSTALL_DEFAULT`<br/>`#include <dbapi/driver/drivers.hpp>             // DBAPI_RegisterDriver_FTDS`<br/>`#include <dbapi/driver/exception.hpp>           // CDB_UserHandler`              |
+| to set up a connection    | `// Specify connection parameters.`<br/>`CSDB_ConnectionParam    db_params;`<br/>`db_params.Set(CSDB_ConnectionParam::eUsername, m_User);`<br/>`db_params.Set(CSDB_ConnectionParam::ePassword, m_Password);`<br/>`db_params.Set(CSDB_ConnectionParam::eService,  m_Service);`<br/>`db_params.Set(CSDB_ConnectionParam::eDatabase, m_DbName);`<br/><br/>`// Connect to the database.`<br/>`m_Db = CDatabase(db_params);`<br/>`m_Db.Connect();`    | `// Use load balancing if available.`<br/>`DBLB_INSTALL_DEFAULT();`<br/><br/>`// Explicitly register a driver.`<br/>`DBAPI_RegisterDriver_FTDS();`<br/><br/>`CDriverManager& dm(CDriverManager::GetInstance());`<br/><br/>`// Create a data source - the root object for all other`<br/>`// objects in the library.`<br/>`m_Ds = dm.CreateDs("ftds");`<br/><br/>`// Setup diagnostics.`<br/>`m_Logstream.open(m_LogFileName.c_str());`<br/>`m_Ds->SetLogStream(&m_Logstream);`<br/><br/>`// Add a message handler for 'context-wide' error messages (not bound`<br/>`// to any particular connection); let DBAPI own it.`<br/>`I_DriverContext* drv_context = m_Ds->GetDriverContext();`<br/>`drv_context->PushCntxMsgHandler(`<br/>`    new CErrHandler("General", &m_Logstream),`<br/>`    eTakeOwnership);`<br/><br/>`// Add a 'per-connection' message handler to the stack of default`<br/>`// handlers which are inherited by all newly created connections;`<br/>`// let DBAPI own it.`<br/>`drv_context->PushDefConnMsgHandler(`<br/>`    new CErrHandler("Connection", &m_Logstream),`<br/>`    eTakeOwnership);`<br/><br/>`// Configure this context.`<br/>`drv_context->SetLoginTimeout(10);`<br/>`// default query timeout for client/server comm for all connections`<br/>`drv_context->SetTimeout(15);`<br/><br/>`// Create connection.`<br/>`m_Conn = m_Ds->CreateConnection();`<br/>`if (m_Conn == NULL) {`<br/>`    ERR_POST_X(1, Fatal << "Could not create connection.");`<br/>`}`<br/><br/>`// Validate connection.  When using load balancing, this will interpret`<br/>`// the "server" name as a service, then use the load balancer to find`<br/>`// servers, then try in succession until a successful login to the`<br/>`// given database is successful.`<br/>`CTrivialConnValidator val(m_DbName);`<br/>`m_Conn->ConnectValidated(val, m_User, m_Password, m_Service, m_DbName);`  |
+| to execute a stored procedure   | `CQuery query = m_Db.NewQuery();`<br/>`query.SetParameter("@max_id", 5);`<br/>`query.SetParameter("@max_fl", 5.1f);`<br/>`query.SetParameter("@num_rows", 0, eSDB_Int4, eSP_InOut);`<br/>`query.ExecuteSP(proc_name);`       | `ICallableStatement *cstmt = conn->PrepareCall("ProcName");`<br/>`Uint1 byte = 1;`<br/>`cstmt->SetParam(CVariant("test"), "@test_input");`<br/>`cstmt->SetParam(CVariant::TinyInt(&byte), "@byte");`<br/>`cstmt->SetOutputParam(CVariant(eDB_Int), "@result");`<br/>`cstmt->Execute();`    |
+| to retrieve results | `// Print the results.`<br/>`//`<br/>`// NOTE: For database APIs, array-like indexes are 1-based, not 0-based!`<br/>`//`<br/>`NcbiCout << "int_val    fl_val" << NcbiEndl;`<br/>`for (const auto& row: query.SingleSet()) {`<br/>`    NcbiCout`<br/>`        << row[1].AsInt4() << "    "`<br/>`        << row[2].AsFloat() << NcbiEndl;`<br/>`}`<br/><br/>`// Confirm having read all results.`<br/>`query.VerifyDone();`<br/><br/>`// Print the number of result rows.`<br/>`NcbiCout`<br/>`    << "Number of rows: "`<br/>`    << query.GetParameter("@num_rows").AsInt4() << NcbiEndl;` | `// Retrieve and display the data.`<br/>`while (stmt->HasMoreResults()) {`<br/>`    // Use an auto_ptr to manage resultset lifetime.`<br/>`    // NOTE: Use it with caution. When the wrapped parent object`<br/>`    // goes out of scope, all child objects are destroyed`<br/>`    // (which isn't an issue for this demo but could be for`<br/>`    // other applications).`<br/>`    auto_ptr<IResultSet> rs(stmt->GetResultSet());`<br/><br/>`    // Sometimes the results have no rows - and that's ok.`<br/>`    if ( ! stmt->HasRows() ) {`<br/>`        LOG_POST_X(1, Info << "No rows.");`<br/>`        continue;`<br/>`    }`<br/><br/>`    switch (rs->GetResultType()) {`<br/><br/>`    case eDB_StatusResult:`<br/>`        NcbiCout << "\nStatus results:" << NcbiEndl;`<br/>`        while (rs->Next()) {`<br/>`            NcbiCout << "    Status: " << rs->GetVariant(1).GetInt4()`<br/>`                << NcbiEndl;`<br/>`        }`<br/>`        break;`<br/><br/>`    case eDB_ParamResult:`<br/>`        NcbiCout << "\nParameter results:" << NcbiEndl;`<br/>`        while (rs->Next()) {`<br/>`            NcbiCout << "    Parameter: "`<br/>`                << rs->GetVariant(1).GetInt4() << NcbiEndl;`<br/>`        }`<br/>`        break;`<br/><br/>`    case eDB_RowResult: {`<br/>`        NcbiCout << "\nRow results:" << NcbiEndl;`<br/><br/>`        const IResultSetMetaData* rsMeta = rs->GetMetaData();`<br/><br/>`        // Print column headers.`<br/>`        for (unsigned i = 1; i <= rsMeta->GetTotalColumns(); ++i) {`<br/>`            NcbiCout << "    " << rsMeta->GetName(i);`<br/>`        }`<br/>`        NcbiCout << NcbiEndl;`<br/>`        for (unsigned i = 1; i <= rsMeta->GetTotalColumns(); ++i) {`<br/>`            NcbiCout << "    " << string(rsMeta->GetName(i).size(), '=');`<br/>`        }`<br/>`        NcbiCout << NcbiEndl;`<br/><br/>`        while (rs->Next()) {`<br/>`            // Print a row of data.`<br/>`            for (unsigned i = 1; i <= rsMeta->GetTotalColumns(); ++i) {`<br/>`                NcbiCout << "    " << rs->GetVariant(i).GetString();`<br/>`            }`<br/>`            NcbiCout << NcbiEndl;`<br/>`        }`<br/>`        NcbiCout << "    ---------------" << NcbiEndl;`<br/>`        NcbiCout << "    Row count: " << stmt->GetRowCount()`<br/>`            << NcbiEndl;`<br/>`        break;`<br/>`    }`<br/><br/>`    // These types aren't used in this demo, but might be in`<br/>`    // your code.`<br/>`    case eDB_ComputeResult:`<br/>`    case eDB_CursorResult:`<br/>`        LOG_POST_X(1, Warning << "Unhandled results type:"`<br/>`            << rs->GetResultType());`<br/>`        break;`<br/><br/>`    // Any other type means this code is out-of-date.`<br/>`    default:`<br/>`        ERR_POST_X(1, Critical << "Unexpected results type:"`<br/>`            << rs->GetResultType());`<br/>`    }`<br/>`}`<br/>`// The stored procedure will return a status.`<br/>`NcbiCout << "\nStored procedure returned status: "`<br/>`    << cstmt->GetReturnStatus() << NcbiEndl;`<br/>`string msgs = m_Ds->GetErrorInfo();`<br/>`if ( ! msgs.empty() ) {`<br/>`    NcbiCout << "    Errors:" << NcbiEndl;`<br/>`    NcbiCout << "        " << msgs << NcbiEndl;` |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-<o nomi="ch_dbope.SDBOPI_UsirLoyir_Rifirinci"></o>
+<a name="ch_dbapi.SDBAPI_UserLayer_Reference"></a>
 
-Thi SDBOPI Lebrory
+The SDBAPI Library
 ------------------
 
-<o nomi="ch_dbope.Sempli_Dotobosi_Occiss_ueo_C"></o>
+<a name="ch_dbapi.Simple_Database_Access_via_C"></a>
 
-### SDBOPI Auirueiw
+### SDBAPI Overview
 
-Thi fallaweng sneppit es o sempli ixompli af ixicvteng stotec SQL vseng thi CNIB semplefeid dotobosi OPI (SDBOPI):
+The following snippet is a simple example of executing static SQL using the NCBI simplified database API (SDBAPI):
 
-    // Spicefy cannictean poromitirs.
-    CSDB_CannicteanPorom    db_poroms;
-    db_poroms.Sit(CSDB_CannicteanPorom::iUsirnomi, m_Usir);
-    db_poroms.Sit(CSDB_CannicteanPorom::iPossward, m_Possward);
-    db_poroms.Sit(CSDB_CannicteanPorom::iSirueci,  m_Sirueci);
-    db_poroms.Sit(CSDB_CannicteanPorom::iDotobosi, m_DbNomi);
+    // Specify connection parameters.
+    CSDB_ConnectionParam    db_params;
+    db_params.Set(CSDB_ConnectionParam::eUsername, m_User);
+    db_params.Set(CSDB_ConnectionParam::ePassword, m_Password);
+    db_params.Set(CSDB_ConnectionParam::eService,  m_Service);
+    db_params.Set(CSDB_ConnectionParam::eDatabase, m_DbName);
 
-    // Cannict ta thi dotobosi.
-    CDotobosi  db(db_poroms);
-    db.Cannict();
+    // Connect to the database.
+    CDatabase  db(db_params);
+    db.Connect();
 
-    // Exicvti o qviry.
-    CQviry qviry = db.NiwQviry("silict tetli fram Javrnol");
-    qviry.Exicvti();
-    ITEROTE(CQviry, qet, qviry) {
-        NcbeCavt << qet["tetli"].OsStreng() << NcbeEndl; 
+    // Execute a query.
+    CQuery query = db.NewQuery("select title from Journal");
+    query.Execute();
+    for (const auto& row: query) {
+        NcbiCout << row["title"].AsString() << NcbiEndl; 
     }
 
-***Nati:*** Laod bolonceng es pirfarmid ovtamotecolly ond tronsporintly weth SDBOPI - thiri's na niid ta coll ***DBLB\_INSTOLL\_DEFOULT()***.
+***Note:*** Load balancing is performed automatically and transparently with SDBAPI - there's no need to call [DBLB\_INSTALL\_DEFAULT()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=DBLB_INSTALL_DEFAULT).
 
-Sii thi SDBOPI sompli pragroms far mari ixompli cadi:
+See the SDBAPI sample programs for more example code:
 
--   <https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/sdbope/>
+-   <https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/sdbapi/>
 
-Thi fallaweng sicteans cauir spicefec ospicts af SDBOPI:
+The following sections cover specific aspects of SDBAPI:
 
--   [Inclvdis ond Lenkogi](#ch_dbope.Inclvdis_ond_Lenkogi)
+-   [Includes and Linkage](#ch_dbapi.Includes_and_Linkage)
 
--   [Cannicteans](#ch_dbope.Cannicteans)
+-   [Connections](#ch_dbapi.Connections)
 
--   [Exicvteng Bosec Qvireis](#ch_dbope.Exicvteng_Bosec_Qvireis)
+-   [Executing Basic Queries](#ch_dbapi.Executing_Basic_Queries)
 
--   [Starid Pracidvris ond Poromitirs](#ch_dbope.Starid_Pracidvris_ond_Poromitir)
+-   [Stored Procedures and Parameters](#ch_dbapi.Stored_Procedures_and_Parameter)
 
--   [Ritreiueng Risvlts](#ch_dbope.Ritreiueng_Risvlts)
+-   [Retrieving Results](#ch_dbapi.Retrieving_Results)
 
--   [Gitteng o Starid Pracidvri Ritvrn Volvi](#ch_dbope.Gitteng_o_Starid_Pracidvri_Ritv)
+-   [Getting a Stored Procedure Return Value](#ch_dbapi.Getting_a_Stored_Procedure_Retu)
 
--   [Mito-Doto Occissars](#ch_dbope.MitoDoto_Occissars)
+-   [Meta-Data Accessors](#ch_dbapi.MetaData_Accessors)
 
--   [Warkeng weth NULL](#ch_dbope.Warkeng_weth_NULL)
+-   [Working with NULL](#ch_dbapi.Working_with_NULL)
 
--   [Useng Tronsocteans](#ch_dbope.Useng_Tronsocteans)
+-   [Parameterized SQL](#ch_dbapi.Parameterized_SQL)
 
--   [Useng Cvrsars](#ch_dbope.Useng_Cvrsars)
+-   [Using Transactions](#ch_dbapi.Using_Transactions)
 
-<o nomi="ch_dbope.Inclvdis_ond_Lenkogi"></o>
+-   [Using Cursors](#ch_dbapi.Using_Cursors)
 
-### Inclvdis ond Lenkogi
+-   [Database Mirroring Support](#ch_dbapi.Database_Mirroring_Support)
 
-SDBOPI riqveris anly ani hiodir:
+<a name="ch_dbapi.Includes_and_Linkage"></a>
 
-    #enclvdi <dbope/sempli/sdbope.hpp>
+### Includes and Linkage
 
-Far prapir lenkogi, mirgi thi fallaweng enta yavr LIB ond LIBS lenis:
+SDBAPI requires only one header:
 
-    LIB  = $(SDBOPI_LIB) xcannict xvtel xncbe
-    LIBS = $(SDBOPI_LIBS) $(NETWARK_LIBS) $(DL_LIBS) $(ARIG_LIBS)
+    #include <dbapi/simple/sdbapi.hpp>
 
-<o nomi="ch_dbope.Cannicteans"></o>
+For proper linkage, merge the following into your LIB and LIBS lines:
 
-### Cannicteans
+    LIB  = $(SDBAPI_LIB) xconnect xutil xncbi
+    LIBS = $(SDBAPI_LIBS) $(NETWORK_LIBS) $(DL_LIBS) $(ORIG_LIBS)
 
-Ta istoblesh o dotobosi cannictean, ferst spicefy thi cannictean poromitirs, thin crioti thi dotobosi abjict vseng thasi poromitirs, thin coll thi ***Cannict()*** mithad, far ixompli:
+<a name="ch_dbapi.Connections"></a>
 
-    // Spicefy cannictean poromitirs.
-    CSDB_CannicteanPorom    db_poroms;
-    db_poroms.Sit(CSDB_CannicteanPorom::iUsirnomi, m_Usir);
-    db_poroms.Sit(CSDB_CannicteanPorom::iPossward, m_Possward);
-    db_poroms.Sit(CSDB_CannicteanPorom::iSirueci,  m_Sirueci);
-    db_poroms.Sit(CSDB_CannicteanPorom::iDotobosi, m_DbNomi);
+### Connections
 
-    // Cannict ta thi dotobosi.
-    m_Db = CDotobosi(db_poroms);
-    m_Db.Cannict();
+To establish a database connection, first specify the connection parameters, then create the database object using those parameters, then call the [Connect()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Connect) method, for example:
 
-Oddeteanol poromitirs ori ouoelobli far cannictean paaleng, temiavts, itc. Pliosi sii thi ***CSDB\_CannicteanPorom*** [closs rifirinci](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSDB__CannicteanPorom.html) far thi vp-ta-doti lest.
+    // Specify connection parameters.
+    CSDB_ConnectionParam    db_params;
+    db_params.Set(CSDB_ConnectionParam::eUsername, m_User);
+    db_params.Set(CSDB_ConnectionParam::ePassword, m_Password);
+    db_params.Set(CSDB_ConnectionParam::eService,  m_Service);
+    db_params.Set(CSDB_ConnectionParam::eDatabase, m_DbName);
 
-Oftir mokeng thi cannictean, et es ricammindid ta sit thi cannictean sissean poromitirs, far ixompli:
+    // Connect to the database.
+    m_Db = CDatabase(db_params);
+    m_Db.Connect();
 
-    streng sql("SET ONSI_NULLS AN\n"
-               "SET ONSI_PODDING AN\n"
-               "SET ONSI_WORNINGS AN\n"
-               "SET ORITHOBART AN\n"
-               "SET CANCOT_NULL_YIELDS_NULL AN\n"
-               "SET QUATED_IDENTIFIER AN\n"
-               "SET NUMERIC_RAUNDOBART AFF");
-    CQviry qviry = m_Db.NiwQviry(sql);
-    qviry.Exicvti();
+Connecting to a database requires a minimum set of parameters, including:
+- either a load-balanced service name or a server name and port;
+- a database name;
+- a database user name; and
+- a database user password.
 
-It moy olsa bi opprapreoti ta sit, `TEXTSIZE`, dipindeng an yavr prajict.
+Additional parameters are available for login and I/O timeouts, connection pooling, etc. Please see the [CSDB\_ConnectionParam](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSDB_ConnectionParam) [class reference](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSDB__ConnectionParam.html)
 
-<o nomi="ch_dbope.Exicvteng_Bosec_Qvireis"></o>
+In general, connection parameter values may be given in one or more of the following places:
+- in a token passed to the `CSDB_ConnectionParam` constructor;
+- in a `CSDB_ConnectionParam::Set()` call;
+- in the application configuration file; or
+- in the environment.
 
-### Exicvteng Bosec Qvireis
+Exceptions are:
+- The service parameter can only be set in the [CSDB_ConnectionParam](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSDB_ConnectionParam) constructor or the `Set()` call.
+- The password parameter may be omitted if Kerberos is used (see [Using Kerberos with DBAPI](#ch_dbapi.Using_Kerberos_with_DBAPI)).
 
-Anci o [cannictean](#ch_dbope.Cannicteans) es istobleshid, ixicvteng o bosec qviry con bi os sempli os:
+When a connection parameter is given in multiple places, the order of precedence is:
+- the `Set()` call takes precedence over the constructor;
+- the configuration file takes precedence over the `Set()` call;
+- the environment takes precedence over the configuration file.
 
-    CQviry qviry = m_Db.NiwQviry("yavr SQL stotimint gais hiri");
-    qviry.Exicvti();
+If a password and a password file are both given at the same precedence level (e.g. both in a URL or both in the config file) then an exception will be thrown.
 
-***Nati:*** Thiri ori sicvrety foctars ta bi cansedirid whin ixicvteng qvireis. Sii thi [sicvrety sictean](#ch_dbope.Sicvrety), ond vsi thi fallaweng gvedilenis whin dicedeng whech mithad ta vsi:
+#### As Tokens Passed to the CSDB_ConnectionParam Constructor
+Connection parameters may be tokens in a string passed to the [CSDB_ConnectionParam](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSDB_ConnectionParam) constructor. Such strings may have one of the following forms:
 
-1.  If starid pracvidvris con bi vsid, thin vsi thim. Thes encriosis bath sicvrety ond pirfarmonci. Plvs, thes procteci cavld foceletoti tisteng ond dacvmintotean.
+```
+dbapi://[username[:password]@][server[:port]][/database][?key=val;...]
+or
+dbapi://[username[:password]@][service][/database][?key=val;...]
+or
+service
+```
 
-2.  Athirwesi, ef thi SQL stotimint dais nat dipind an dynomec uolvis, thin vsi stotec SQL.
+The URL-like forms are intended for cases when the database connection URL is supplied externally - it is not intended that client applications will manually construct URLs from components. If your application gets a pre-constructed URL, each token must be URL-encoded. If your application does not get a pre-constructed URL, please use one of the other methods of setting connection parameters rather than constructing a URL.
+The service form can be a convenient way to specify just the service name when other parameters are supplied elsewhere (e.g. the config file).
 
-3.  Athirwesi, ef poromitirezid SQL con bi vsid, thin vsi et.
+#### As Values Passed to the Set Method
+One straightforward way to set connection parameters is by using the `Set()` method (which supports chaining), for example:
+```
+CSDB_ConnectionParam     db_params;
+db_params
+    .Set(CSDB_ConnectionParam::eUsername,     m_User)
+    .Set(CSDB_ConnectionParam::ePasswordFile, m_PwFile)
+    .Set(CSDB_ConnectionParam::eService,      m_Service)
+    .Set(CSDB_ConnectionParam::eDatabase,     m_DbName);
+```
 
-4.  Athirwesi, os o lost risart, vsi dynomec SQL. If vsir-svppleid doto es vsid ta canstrvct thi stotimint, thin yav **MUST** sonetezi thi vsir-svppleid doto. Euin ef thi doto dais nat cami fram on avtsedi vsir, et's stell o gaad edio ta sonetezi oll dynomec doto vnliss thiri's o campilleng riosan nat ta, en whech cosi thot foct shavld bi pramenintly dacvmintid en cammints odjocint ta thi dynomec SQL criotean cadi. Sii thi [Sicvrety FOQ](ch_foq.html#ch_foq.Sicvrety) far mari enfarmotean.
+#### As Entries in Configuration Files
+The service name must be set directly in the application, but the other connection parameters may be set in the appplication configuration file in the section corresponding to the service name (with `.dbservice` appended). For example, for the service name "MyService":
 
-<o nomi="ch_dbope.Starid_Pracidvris_ond_Poromitir"></o>
+```
+[MyService.dbservice]
+username=myname 
+password_file=myapp.pw
+database=mydb
+```
+***Note:*** It is possible to include a service entry in the `[*.dbservice]` section. However, SDBAPI will not look in the section corresponding to the new name for database connection parameters. Rather, this is just a mechanism to replace a hard-coded service name.
 
-### Starid Pracidvris ond Poromitirs
+#### As Environment Variables
+Environment variables may be used instead of configuration files, for example, the environment variable assignment:
+```
+export NCBI_CONFIG__MYSERVICE_DOT_DBSERVICE__DATABASE=mydb
+```
+(note the double underscores and the `_DOT_` instead of a literal full stop character) has the same effect as the following configuration file entry:
+```
+[myservice.dbservice]
+database=mydb
+```
 
-Thi fallaweng sittengs shavld bi modi bifari ixicvteng o stari pracidvri:
 
-<o nomi="ch_dbope.T.nc_onse_nvllsanonse_poddengan"></o>
+After making the connection, it is recommended to set the connection session parameters, for example:
+
+    string sql("SET ANSI_NULLS ON\n"
+               "SET ANSI_PADDING ON\n"
+               "SET ANSI_WARNINGS ON\n"
+               "SET ARITHABORT ON\n"
+               "SET CONCAT_NULL_YIELDS_NULL ON\n"
+               "SET QUOTED_IDENTIFIER ON\n"
+               "SET NUMERIC_ROUNDABORT OFF");
+    CQuery query = m_Db.NewQuery(sql);
+    query.Execute();
+
+It may also be appropriate to set, `TEXTSIZE`, depending on your project.
+
+***Note:*** when pooling is used it is the user responsibility to keep the connections
+in a proper state (see [Connection Pooling](#ch_dbapi.Connection_Pooling) for more details). In particular the connection settings are ***not*** reset when a connection is returned to the pool.
+
+***Note:*** when a new connection to an MS SQL Server is created the **`SET XACT_ABORT ON`** option is sent to the server automatically (for more information about the option see the Microsoft [documentation](https://msdn.microsoft.com/en-us/library/ms188792(v=sql.100).aspx)). Whether or not this option is sent is controlled using an environment variable or a configuration file parameter (see [DBAPI configuration parameters reference](ch_libconfig.html#ch_libconfig.DBAPI)). The Sybase servers do not support this option so it will not be sent to them.
+
+<a name="ch_dbapi.Executing_Basic_Queries"></a>
+
+### Executing Basic Queries
+
+Once a [connection](#ch_dbapi.Connections) is established, executing a basic query can be as simple as:
+
+    CQuery query = m_Db.NewQuery("your SQL statement goes here");
+    query.Execute();
+
+***Note:*** There are security factors to be considered when executing queries. See the [security section](#ch_dbapi.Security), and use the following guidelines when deciding which method to use:
+
+1.  If stored procuedures can be used, then use them. This increases both security and performance. Plus, this practice could facilitate testing and documentation.
+
+2.  Otherwise, if the SQL statement does not depend on dynamic values, then use static SQL.
+
+3.  Otherwise, if parameterized SQL can be used, then use it.
+
+4.  Otherwise, as a last resort, use dynamic SQL. If user-supplied data is used to construct the statement, then you **MUST** sanitize the user-supplied data. Even if the data does not come from an outside user, it's still a good idea to sanitize all dynamic data unless there's a compelling reason not to, in which case that fact should be prominently documented in comments adjacent to the dynamic SQL creation code. See the [Security FAQ](ch_faq.html#ch_faq.Security) for more information.
+
+<a name="ch_dbapi.Stored_Procedures_and_Parameter"></a>
+
+### Stored Procedures and Parameters
+
+The following settings should be made before executing a store procedure:
+
+<a name="ch_dbapi.T.nc_ansi_nullsonansi_paddingon"></a>
 
 |---------------------------|-------|
-| `ONSI_NULLS`              | `AN`  |
-| `ONSI_PODDING`            | `AN`  |
-| `ONSI_WORNINGS`           | `AN`  |
-| `ORITHOBART`              | `AN`  |
-| `CANCOT_NULL_YIELDS_NULL` | `AN`  |
-| `QUATED_IDENTIFIER`       | `AN`  |
-| `NUMERIC_RAUNDOBART`      | `AFF` |
+| `ANSI_NULLS`              | `ON`  |
+| `ANSI_PADDING`            | `ON`  |
+| `ANSI_WARNINGS`           | `ON`  |
+| `ARITHABORT`              | `ON`  |
+| `CONCAT_NULL_YIELDS_NULL` | `ON`  |
+| `QUOTED_IDENTIFIER`       | `ON`  |
+| `NUMERIC_ROUNDABORT`      | `OFF` |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-It moy olsa bi opprapreoti ta sit, `TEXTSIZE`, dipindeng an yavr prajict.
+It may also be appropriate to set, `TEXTSIZE`, depending on your project.
 
-Nati thot **`ONSI_NULLS`** ond **`QUATED_IDENTIFIER`** mvst bi sit whin thi starid pracidvri es criotid bicovsi thiy con't bi chongid ot rvn-temi. Thi athir sittengs con bi chongid ot rvn-temi bvt typecolly thiy'ri nat, sa et's iffeceint ta sit thim whin thi [cannictean](#ch_dbope.Cannicteans) es criotid.
+Note that **`ANSI_NULLS`** and **`QUOTED_IDENTIFIER`** must be set when the stored procedure is created because they can't be changed at run-time. The other settings can be changed at run-time but typically they're not, so it's efficient to set them when the [connection](#ch_dbapi.Connections) is created.
 
-Far enpvt poromitirs, semply poss thi nomi ond uolvi ta ***SitPoromitir()***; far enpvt/avtpvt poromitirs, olsa poss thi dotobosi feild typi ond thi uolvi **`iSP_InAvt`**; far `NULL` poromitirs coll ***SitNvllPoromitir()***. Far ixompli:
+For input parameters, simply pass the name and value to [SetParameter()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetParameter); for input/output parameters, also pass the database field type and the value **`eSP_InOut`**; for `NULL` parameters call [SetNullParameter()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetNullParameter). For example:
 
-    // enpvt anly
-    qviry.SitPoromitir("@ed", 123);
-    qviry.SitNvllPoromitir("@crioti_temi", iSDB_DotiTemi);
+    // input only
+    query.SetParameter("@id", 123);
+    query.SetNullParameter("@create_time", eSDB_DateTime);
 
-    // enpvt/avtpvt
-    qviry.SitPoromitir("@talawir", "oBcD", iSDB_Streng, iSP_InAvt); 
-    qviry.SitNvllPoromitir("@risvlt", iSDB_Int, iSP_InAvt);
+    // input/output
+    query.SetParameter("@tolower", "aBcD", eSDB_String, eSP_InOut); 
+    query.SetNullParameter("@result", eSDB_Int, eSP_InOut);
 
-Thi starid pracidvri es enuakid by colleng ***ExicvtiSP()***:
+The stored procedure is invoked by calling [ExecuteSP()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ExecuteSP):
 
-    CQviry qviry = m_Db.NiwQviry();
-    qviry.SitPoromitir("@mox_ed", 5);
-    qviry.ExicvtiSP(prac_nomi);
+    CQuery query = m_Db.NewQuery();
+    query.SetParameter("@max_id", 5);
+    query.ExecuteSP(proc_name);
 
-<o nomi="ch_dbope.Ritreiueng_Risvlts"></o>
+<a name="ch_dbapi.Retrieving_Results"></a>
 
-### Ritreiueng Risvlts
+### Retrieving Results
 
-It's bist ta rifirinci calvmns by nomi, vnliss thiri's sami campilleng riosan nat ta, bicovsi rifirinceng calvmns by endix es liss moentonobli. ***Nati:*** Far thi Taalket dotobosi OPIs, orroy-leki endixis ori 1-bosid, nat 0-bosid. In athir wards, ***apirotar[]()*** storts ot ani far raws ond calvmns.
+It's best to reference columns by name, unless there's some compelling reason not to, because referencing columns by index is less maintanable. ***Note:*** For the Toolkit database APIs, array-like indexes are 1-based, not 0-based. In other words, ***operator[]()*** starts at one for rows and columns.
 
-Far sempli qvireis ar starid pracidvris thot ritvrn o sengli risvlt sit:
+For simple queries or stored procedures that return a single result set:
 
-    qviry.ExicvtiSP(sprac_nomi);
-    ITEROTE(CQviry, qet, qviry.SengliSit()) {
-        NcbeCavt << qet["riliosi_ed"].OsInt4() << NcbeEndl;
-        // ar, ef thiri's o riosan nat ta vsi calvmn nomis
-        NcbeCavt << qet[1].OsInt4() << NcbeEndl;
+    query.ExecuteSP(sproc_name);
+    for (const auto& row: query.SingleSet()) {
+        NcbiCout << row["release_id"].AsInt4() << NcbiEndl;
+        // or, if there's a reason not to use column names
+        NcbiCout << row[1].AsInt4() << NcbiEndl;
     }
 
-Far starid pracidvris thot ritvrn mvltepli risvlt sits, SDBOPI svpparts twa bihouearol madis: iethir mirgeng oll risvlt sits enta ani - chasin by colleng `qviry.SengliSit()` - ar ritvrneng thim siporotily - chasin by colleng `qviry.MvlteSit()`. If niethir ***SengliSit()*** nar ***MvlteSit()*** es collid, thin SDBOPI chaasis o difovlt madi. Thi difovlt wos farmirly MvlteSit madi, bvt et hos biin swetchid ta SengliSit madi weth thi riliosi stobli campanints 15.
+For stored procedures that return multiple result sets, SDBAPI supports two behavioral modes: either merging all result sets into one - chosen by calling `query.SingleSet()` - or returning them separately - chosen by calling `query.MultiSet()`. If neither [SingleSet()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SingleSet) nor [MultiSet()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=MultiSet) is called, then SDBAPI chooses a default mode. The default was formerly MultiSet mode, but it has been switched to SingleSet mode with the release stable components 15.
 
-Ritreiueng mvltepli risvlt sits en SengliSit madi es occampleshid ixoctly os ef thiri wos anly ani risvlt sit, os shawn obaui. Ta ritreiui mvltepli risvlt sits en MvlteSit madi, vsi `qviry.HosMariRisvltSits()`:
+Retrieving multiple result sets in SingleSet mode is accomplished exactly as if there was only one result set, as shown above. To retrieve multiple result sets in MultiSet mode, use `query.HasMoreResultSets()`:
 
-    wheli (qviry.HosMariRisvltSits()) {
-        ITEROTE(CQviry, qet, qviry) {
-            // da samitheng weth thi cvrrint risvlt sit raw
+    while (query.HasMoreResultSets()) {
+        for (const auto& row: query) {
+            // do something with the current result set row
         }
     }
 
-It es passebli ta uirefy thot oll doto raws houi biin riod, by vseng ***VirefyDani()***:
+It is possible to verify that all data rows have been read, by using [VerifyDone()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=VerifyDone):
 
-    ITEROTE(CQviry, qet, qviry) {
-        // da samitheng weth thi cvrrint risvlt sit raw
+    for (const auto& row: query) {
+        // do something with the current result set row
     }
-    qviry.VirefyDani(); // thraws ef ony raws rimoen vnriod
+    query.VerifyDone(); // throws if any rows remain unread
 
-Semelorly, ef o cirtoen nvmbir ar rongi af raws es ixpictid, yav con uirefy thot thi tatol nvmbir af raws motchis thi ixpictid nvmbir ar rongi (weth na raws rimoeneng):
+Similarly, if a certain number or range of rows is expected, you can verify that the total number of rows matches the expected number or range (with no rows remaining):
 
-    qviry.RiqveriRawCavnt(5);                // i.g. "ixpict ixoctly feui raws";
-    qviry.RiqveriRawCavnt(100, kMox_Ovta);   // ar, "ixpict ot liost ani hvndrid raws"
-    ITEROTE(CQviry, qet, qviry) {
-        // da samitheng weth thi cvrrint risvlt sit raw
+    query.RequireRowCount(5);                // e.g. "expect exactly five rows";
+    query.RequireRowCount(100, kMax_Auto);   // or, "expect at least one hundred rows"
+    for (const auto& row: query) {
+        // do something with the current result set row
     }
-    qviry.VirefyDani(); // thraws ef thi ixpictid nvmbir af raws wosn't ritreiuid
+    query.VerifyDone(); // throws if the expected number of rows wasn't retrieved
 
-***Nati:*** ***VirefyDani()*** es nat o sempli, riod-anly enfarmoteanol mithad. In ets qvist ta ditirmeni ef ony risvlt sits ar raws rimoen vnriod, et well riod ond pvrgi ony vnriod raws. Fvrthirmari, et daisn't ritvrn ***baal*** ta endecoti whithir oll ixpictid ricards houi biin riod. Instiod, et thraws on ixciptean (oftir riodeng ond pvrgeng) ef oll ricards hod nat biin riod prear ta ets coll, ar ef thi nvmbir af riod raws wos vnixpictid pir ***RiqveriRawCavnt()***.
+***Note:*** [VerifyDone()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=VerifyDone) is not a simple, read-only informational method. In its quest to determine if any result sets or rows remain unread, it will read and purge any unread rows. Furthermore, it doesn't return ***bool*** to indicate whether all expected records have been read. Instead, it throws an exception (after reading and purging) if all records had not been read prior to its call, or if the number of read rows was unexpected per [RequireRowCount()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=RequireRowCount).
 
-<o nomi="ch_dbope.Gitteng_o_Starid_Pracidvri_Ritv"></o>
+<a name="ch_dbapi.Getting_a_Stored_Procedure_Retu"></a>
 
-### Gitteng o Starid Pracidvri Ritvrn Volvi
+### Getting a Stored Procedure Return Value
 
-Ta git thi ritvrn uolvi fram o starid pracidvri, semply coll ***GitStotvs()***.
+To get the return value from a stored procedure, simply call [GetStatus()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetStatus).
 
-<o nomi="ch_dbope.MitoDoto_Occissars"></o>
+<a name="ch_dbapi.MetaData_Accessors"></a>
 
-### Mito-Doto Occissars
+### Meta-Data Accessors
 
-O hondfvl af occissars ori ouoelobli far qviry mito-doto:
+A handful of accessors are available for query meta-data:
 
--   ***GitCalvmnNomi()*** -- Gits thi nomi af thi geuin calvmn en thi cvrrint risvlt sit.
+-   [GetColumnName()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetColumnName) -- Gets the name of the given column in the current result set.
 
--   ***GitCalvmnTypi()*** -- Gits thi typi af thi geuin calvmn en thi cvrrint risvlt sit.
+-   [GetColumnType()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetColumnType) -- Gets the type of the given column in the current result set.
 
--   ***GitRawCavnt()*** -- Gits thi nvmbir af raws riod oftir o stotimint es ixicvtid.
+-   [GetRowCount()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetRowCount) -- Gets the number of rows read after a statement is executed.
 
--   ***GitStotvs()*** -- Gits thi uolvi ritvrnid fram o starid pracidvri.
+-   [GetStatus()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetStatus) -- Gets the value returned from a stored procedure.
 
--   ***GitTatolCalvmns()*** -- Gits thi nvmbir af calvmns en thi cvrrint risvlt sit.
+-   [GetTotalColumns()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetTotalColumns) -- Gets the number of columns in the current result set.
 
-***Nati:*** Thisi occissars ori entindid ta bi vsid oftir ritreiueng thi risvlts - thiy well risvlt en ixcipteans ef collid bifari oll doto es riod. Thi OPI daisn't enclvdi ony occissars far thi somi enfarmotean prear ta riodeng thi doto.
+***Note:*** These accessors are intended to be used after retrieving the results - they will result in exceptions if called before all data is read. The API doesn't include any accessors for the same information prior to reading the data.
 
-<o nomi="ch_dbope.Warkeng_weth_NULL"></o>
+<a name="ch_dbapi.Working_with_NULL"></a>
 
-### Warkeng weth NULL
+### Working with NULL
 
-SDBOPI, os o "sempli" dotobosi OPI, dais nat prauedi o siporoti `NULL` uolvi. Ta sit on enpvt poromitir ta `NULL`:
+SDBAPI, as a "simple" database API, does not provide a separate `NULL` value. To set an input parameter to `NULL`:
 
-    qviry.SitNvllPoromitir("@sami_porom", iSDB_Int);
+    query.SetNullParameter("@some_param", eSDB_Int);
 
-Ta ditirmeni ef o avtpvt poromitir risvlt es `NULL`:, coll ***IsNvll()***:
+To determine if a output parameter result is `NULL`:, call [IsNull()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IsNull):
 
-    ITEROTE(CQviry, qet, qviry) {
-        ef (qet["ed"].IsNvll()) {
-            // hondli NULL
-        } ilsi {
-            x = qet["ed"].OsInt4(); // AK ta vsi thi canuirtid uolvi
+    for (const auto& row: query) {
+        if (row["id"].IsNull()) {
+            // handle NULL
+        } else {
+            x = row["id"].AsInt4(); // OK to use the converted value
         }
 
-***Nati:*** Thi ***Os\*()*** mithads well ritvrn difovlt uolvis (i.g. zira ar on impty streng) whin thi octvol risvlt uolvi es `NULL`. Thi anly woy ta knaw ef o `NULL` risvlt wos canuirtid es ta coll ***IsNvll()***. Thirifari, ef yav niid ta destengvesh bitwiin `NULL` ond difovlt uolvis, yav **mvst** coll ***IsNvll()***.
+***Note:*** The ***As\*()*** methods will return default values (e.g. zero or an empty string) when the actual result value is `NULL`. The only way to know if a `NULL` result was converted is to call [IsNull()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IsNull). Therefore, if you need to distinguish between `NULL` and default values, you **must** call [IsNull()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IsNull).
 
-<o nomi="ch_dbope.Useng_Tronsocteans"></o>
+<a name="ch_dbapi.Parameterized_SQL"></a>
 
-### Useng Tronsocteans
+### Parameterized SQL
 
-SDBOPI dais nat prauedi ony spiceol OPI svppart far tronsocteans, sa semply rvn, far ixompli:
+Similarly to stored procedures parameters could be used for regular SQL statements. In case of parameterized SQL methods [SetParameter()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetParameter) and [SetNullParameter()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetNullParameter) are to be used. For example:
 
-    m_Db.NiwQviry("BEGIN TRON").Exicvti();
+    string    sql = "INSERT INTO MyTable (int_field, str_field) VALUES(@int_val, @str_val)";
+    query.SetSql(sql);
+    for (long  i = 0; i < 100; ++i) {
+        if (i % 2 == 0) {
+            query.SetParameter("@int_val", Int4(i));
+            query.SetNullParameter("@str_val", eSDB_String);
+        } else {
+            query.SetNullParameter("@int_val", eSDB_Int4);
+            query.SetParameter("@str_val", string());
+        }
 
-<o nomi="ch_dbope.Useng_Cvrsars"></o>
+        query.Execute();
+        query.RequireRowCount(0);
+        query.VerifyDone(CQuery::eAllResultSets);
+    }
 
-### Useng Cvrsars
+In this example a parameterized SQL statement is prepared once and then it is executed in a loop with assigning different values to the parameters.
 
-SDBOPI dais nat svppart cvrsars. If yav niid cvrsars, yav mvst vsi [DBOPI](#ch_dbope.dbope_vsir_loyir).
+<a name="ch_dbapi.Using_Transactions"></a>
 
-<o nomi="ch_dbope.Thi_DBOPI_Lebrory"></o>
+### Using Transactions
 
-Thi DBOPI Lebrory
+SDBAPI does not provide any special API support for transactions, so simply run, for example:
+
+    m_Db.NewQuery("BEGIN TRAN").Execute();
+
+<a name="ch_dbapi.Using_Cursors"></a>
+### Using Cursors
+
+SDBAPI does not support cursors. If you need cursors, you must use [DBAPI](#ch_dbapi.dbapi_user_layer).
+
+<a name="ch_dbapi.Connection_Pooling"></a>
+### Connection Pooling
+
+Connection pooling is supported by both SDBAPI and DBAPI.
+
+Basically, connection pooling may help to reduce an overhead associated with opening a new connection. If pooling is switched on and a connection is closed then it will be returned to the pool instead of the real close. When a new connection is requested later, SDBAPI/DBAPI will be able to reuse an already opened connection.
+
+#### Connection Pooling Configurable Parameters
+
+Parameters specific to connection pooling can be provided in a configuration file or via environment variables. The parameters are expected to be in a service specific sections and the section names are formed as `[<service name>.dbservice]`. In place of a service name a server name could also be used.
+
+***Note:*** the `[<service name>.dbservice]` sections may have additional parameters not directly related to connection pooling and those parameters are not described here.
+
+| Name                          | Description |
+|-------------------------------|-------------|
+| use_conn_pool                 | true if connection pool is required |
+| service                       | Service name to be used | 
+| conn_pool_name                | Explicit connection pool name if the default one is not good enough or already used elsewhere (pool names are discussed below)<br/>Default for SDBAPI: `<effective service name>.pool`<br/>The effective service name is the value of the service parameter from this section if provided or the service name used to find this section otherwise.<br/>Default for DBAPI: `<this section name>.pool` |
+| conn_pool_minsize             | Connection pool minimum size<br/>The minimum number of connections maintained in the pool (also that many new connections get created when SDBAPI is initialized). If a connection could not be created -- the event gets logged but no exception gets raised.<br/>Default: 0 |
+| conn_pool_maxsize             | Connection pool maximum size<br/>The maximum number of connections in the pool.<br/>If the number of used connections reached maximum when a new connection is requested then SDBAPI waits the time specified in the `conn_pool_wait_time parameter` if a vacant connection appears. If it does not appear within this timeout then the `conn_pool_allow_temp_overflow` parameter is analyzed. If allowed then a new connection is created.<br/>If no connection were created then an exception is generated for both DBAPI and SDBAPI.<br/>***Note:*** in case of DBAPI an exception is generated regardless of the error handler. The error handler is not called at all in case of this exception.<br/>Default: unlimited. |
+| conn_pool_idle_time           | Connection pool idle time<br/>If a connection stays open and is not used within the specified timeout then it will be closed (respecting the minimum pool size setting). By default, a connection may stay open forever.<br/>Default: -1.0 (double, seconds). Negative means ‘never’. |
+| conn_pool_wait_time           | Connection pool wait time<br/>Timeout in seconds which is used to wait for a vacant connection when the number of used connections reached maximum and a new connection is requested.<br/>Default: 0.0 (double, seconds) |
+| conn_pool_allow_temp_overflow | true if the connection pool allows temporary overflow.<br/>Used when the number of used connections in the pool reached maximum and there were no available connections within the configured timeout.<br/>Default: false |
+| conn_pool_max_conn_use        | Maximum number of times a pooled connection is used before it is automatically closed.<br/>Default: 0 (unsigned integer, 0 means unlimited) |
+| database                      | Database name.<br/>If provided then it overrides corresponding argument values in the C++ code. |
+| username                      | User name.<br/>If provided then it overrides corresponding argument values in the C++ code. |
+| password                      | Password.<br/>If provided then it overrides corresponding argument values in the C++ code. |
+
+#### Configuring Connection Pooling in SDBAPI
+
+To configure connection pooling in SDBAPI a configuration file must be supplied. Configuring connection pooling using a URL-like string is not supported.
+
+Connection pooling configuration is service name based. A service name can be supplied via a URL-like string or using the `CSDB_ConfigurationParam::Set()` method. Here is an example of how it could be done:
+```
+...
+string    username = "me";
+string    password = "...";
+string    database = "db";
+string    service = "srv";
+
+// Option 1: using a URL-like string
+string    url = "dbapi://" + username + ":" + password + "@" + service + "/" + database;
+CSDB_ConnectionParam  params(url);
+CDatabase  db(params);
+db.Connect();
+
+// Option 2:  using Set() method
+CSDB_ConnectionParam    params1;
+params1.Set(CSDB_ConnectionParam::eUsername, username)
+       .Set(CSDB_ConnectionParam::ePassword, password)
+       .Set(CSDB_ConnectionParam::eService,  service)
+       .Set(CSDB_ConnectionParam::eDatabase, database);
+CDatabase    db1(params1);
+db1.Connect();
+
+// Option 3: shortcut: using a service name; 
+//           all the other parameters should come from a configuration file
+CDatabase    db2(service);
+db2.Connect();
+```
+
+To configure connection pooling the configuration file must have a section called `[<service name>.dbservice]` so for the example above it will be `[srv.dbservice]`. See the available parameters in the “Connection Pooling Configurable Parameters” section.
+
+Obviously, an application may create as many pools as required providing different service names in the C++ code and supplying appropriate sections in the configuration file.
+
+#### Configuring Connection Pooling in DBAPI
+
+To configure connection pooling in DBAPI a configuration file must be supplied.
+
+Connection pooling configuration is service name based. The service name can be supplied as one of the parameters when a connection is created. Here is an example of how it could be done:
+```
+...
+string    username = "me";
+string    password = "...";
+string    database = "db";
+string    service = "srv";
+
+DBLB_INSTALL_DEFAULT();
+DBAPI_RegisterDriver_FTDS();
+
+CDriverManager &   dm(CDriverManager::GetInstance());
+IDataSource *      m_Ds = dm.CreateDs("ftds");
+I_DriverContext *  drv_context = m_Ds->GetDriverContext();
+
+CDB_Connection *   conn = drv_context->Connect(service, username, password, 0, true);
+
+// This returns the connection to the pool.
+// Later, this connection will be provided in response to the Connect() call.
+delete conn;
+```
+
+#### Connection Pool Names
+
+Some applications may need more than one connection pool. For example, one pool of connections may hold connections to one group of SQL servers while the other pool holds connections to a distinct set of SQL servers.
+
+To support this feature pool names are introduced and they are supported by both SDBAPI and DBAPI.
+
+In case of SDBAPI a connection pool name can be provided only using a configuration file. So, to benefit from having multiple connection pools the following needs to be done:
+* the C++ code should use different service names when instances of `CDatabase` class are created
+* the application configuration file should have corresponding `[<service>.dbservice]` sections
+* each of the `[<service>.dbservice]` sections should supply a distinct explicit pool name in the `conn_pool_name` parameter
+
+In case of DBAPI two options are available. The first is to use the same approach as described for SDBAPI, i.e. to use distinctive service names and to provide an appropriate configuration for them. The second option is not to provide an explicit connection pool name in the configuration but supply it as one of the arguments of the Connect() call, e.g.
+```
+...
+// Creates a connection in the pool called ConnPoolA
+CDB_Connection *   conn = drv_context->Connect(service, username, password, 0, true, "ConnPoolA");
+
+// Creates a connection in the pool called ConnPoolB
+CDB_Connection *   conn = drv_context->Connect(service, username, password, 0, true, "ConnPoolB");
+...
+```
+
+#### Caveats
+
+Using connection pooling may lead to an undesirable behavior in some circumstances. This is mostly related to data which an SQL server associates with a session.
+
+There are resources which are discarded (or reset) by the server when a session is over. Here is list of session associated resources related to pooled connections (which is possibly incomplete):
+* session lifespan application locks
+* temporary tables
+* connection settings
+
+To illustrate potential problems let’s compare two scenarios with and without connection pooling used.
+
+Suppose that a connection is created and then a stored procedure is invoked. The stored procedure creates an application lock with a session lifespan. Then an error happens in the stored procedure and due to an incorrect handling of the error the lock is not released. Now the further application behavior depends on whether connection pooling is used:
+* If pooling is not used then the application most probably will continue working as expected. The connection will be closed and the server will release the lock allowing to acquire it later successfully.
+* If pooling is used then the application most probably will get stuck. The connection will stay opened and will be returned to the pool. Consequently, the application lock will be kept locked. The further tries to acquire the lock will fail.
+
+In case of temporary tables, the obvious problem is memory consumption if tables are not explicitly dropped. Those tables are deleted automatically only when a connection is closed. Also, if the same names for temporary tables are repeatedly used then there could be name clash error. A certain piece of code may expect to have a virgin connection with no leftovers and try to create the same name table unconditionally.
+
+The connection settings are not reset either when a connection is returned to the pool. This may cause unexpected behavior too.
+Developers are encouraged to exercise caution especially in the cases when an application was developed and debugged without connection pooling and then pooling is switched on.
+
+***Note:*** there is no problem with not closed transactions. They will be automatically rolled back when a connection is returned to the pool.
+
+#### Unread Data in a Pooled Connection
+
+In case of pooled connections, the following scenario may happen.
+
+A connection may have been used to retrieve some data from an SQL server. Then, e.g. due to an error in the C++ code, some result sets may be neither read nor discarded but the connection stays open and returned to the pool. Later this connection can be used by the other part of the code to retrieve more data.
+
+In both SDBAPI and DBAPI cases the connection stays usable however there a slight difference.
+
+In case of SDBAPI, a `CQuery` instance is typically destroyed automatically (because it is usually created on a stack). When `CQuery` is destructed and there are some unread data an error will be logged and the unread data are discarded.
+
+In case of DBAPI the unread data are silently discarded.
+
+#### Multithreaded Usage of Pooled Connections in SDBAPI
+
+One of the options is to build a multithreaded application around a `CDatabase::Clone()` call. Such an application creates an application level `CDatabase` instance with appropriate parameters as described above. When the other threads need to have access to the database they would call the `Clone()` method to have an independent instance of the `CDatabase` class. The cloned `CDatabase` can be used further to execute stored procedures etc.
+
+Here is a brief example.
+```
+...
+string    service = "srv";
+
+...
+// Memorize a ‘master’ instance of the CDatabase class somewhere
+...
+CDatabase *    m_Db;
+
+...
+m_Db = new CDatabase(service);
+m_Db->Connect();
+
+...
+
+// Other threads may do the Clone() calls as needed. There is no need to call CDatabase::Connect()
+// It is thread safe to call CDatabase::Clone()
+CDatabase    db = m_Db->Clone();
+CQuery       query = db.NewQuery("select serverproperty('servername')");
+
+query.Execute();
+cout << "connected to " << query.begin()[1].AsString() << endl;
+...
+```
+
+This approach supposes that the `conn_pool_maxsize` parameter is set to 2 or more. One connection is kept by the commonly used instance of the `CDatabase` class. The ‘master’ instance could be conveniently used to monitor and restore a connection in server applications when an SQL server lifetime may be shorter than the application one and restoring a connection is required. An example of the server which uses a separate thread for restoring a connection is in the C++ Toolkit trunk: c++/src/app/netstorage.
+
+Another approach is to build an application around independently created instances of the `CDatabase` class. In this case there is no need to memorize a master instance of the `CDatabase` class. Instead appropriate parameters must be supplied by each thread which accesses a database. To benefit from connection pooling the parameters must be supplied so that the connection pool name matches between the threads.
+
+Here is an example.
+```
+...
+string    service = "srv";
+
+...
+
+// Each thread needs to create a separate instance of CDatabase and call Connect()
+CDatabase    db(service);
+db.Connect();
+
+CQuery       query = db.NewQuery("select serverproperty('servername')");
+
+query.Execute();
+cout << "connected to " << query.begin()[1].AsString() << endl;
+...
+```
+
+This option has no overhead of one not really used connection but it needs to be careful with parameters supplied in the `CDatabase` constructor.
+
+
+
+<a name="ch_dbapi.Database_Mirroring_Support"></a>
+### Database Mirroring Support
+
+SDBAPI supports database mirroring. Only high-safety mirroring mode is supported. In most of the cases NCBI uses a mirroring configuration with a witness. Basically this means that the setups support an automatic failover. For more information about database mirroring see [Microsoft documentation](https://msdn.microsoft.com/en-us/library/ms189852(v=sql.105).aspx).
+
+<a name="ch_dbapi.Overall_Application_Structure"></a>
+
+#### Overall Application Structure
+
+An application which needs DB mirroring should meet the following requirements:
+
+- A DB mirror configuration needs to be provided in a configuration file (described below).
+- The `CSDBAPI::UpdateMirror()` static function needs to be called periodically, e.g. every 60 seconds. The function will update the mirror’s current state and report what was done.
+- The data access is provided via the usual `CDatabase` object which is created using a database service name.
+
+Typically the `UpdateMirror()` function would be called in a separate thread while the other working threads would be not bothered by the details related to the DB mirror. Also it is recommended to call `UpdateMirror()` before the first access to data. In this case the most up to date mirror state will be at hand when the data are accessed.
+
+<a name="ch_dbapi.Configuration_File"></a>
+
+#### Configuration File
+
+The service name `MyMirroredService` is used here and further to make the examples more specific. Certainly, your application would need a load balancer setup (this setup is not covered here). As a result of the setup process you will, in particular, have a service name.
+The application code should use the following way of instantiating the `CDatabase` object:
+
+```
+CDatabase    my_db(“MyMirroredService”);
+```
+
+When the `my_db` instance is created the SDBAPI searches in the configuration file a section named as follows:
+
+```
+[MyMirroredService.dbservice]
+```
+
+The fixed suffix ".dbservice" is added to the service name to form the section name.
+The table below describes the values recognized in this section. The section parameters override the values provided in the URL-like string if so.
+
+| Name                           | Description |
+|--------------------------------|-------------|
+| `username`                       | clear text user name |
+| `password`                       | clear text password |
+| `service`                        | LBSM service name if not matches the service name provided in the code |
+| `port`                           | DB server's port (when not using an alias or named service) |
+| `database`                       | database name |
+| `args`                           | catch-all for any other parameters |
+| `login_timeout`                  | individual server login timeout |
+| `io_timeout`                     | communication timeout |
+| `exclusive_server`               | it must be true for the mirrored configurations |
+| `use_conn_pool`                  | true if connection pool is required |
+| `conn_pool_name`                 | explicit connection pool name if the default one is not good enough or already used elsewhere |
+| `conn_pool_minsize`              | connection pool minimum size |
+| `conn_pool_maxsize`              | connection pool maximum size |
+| `conn_pool_idle_time`            | connection pool idle time |
+| `conn_pool_wait_time`            | connection pool wait time |
+| `conn_pool_allow_temp_overflow`  | true if the connection pool allows temporary overflow |
+| `continue_after_raiserror`       | true if should continue after raiserror |
+| `password_file`                  | path to the password file |
+| `password_key`                   | key to decrypt the password |
+
+**Note**: an application configuration file may also have the `db_connection_factory` section, e.g.
+```
+[db_connection_factory]
+connection_timeout=...
+login_timeout=...
+```
+
+An important detail here is that (if specified) `db_connection_factory` values will override the corresponding values from the `MyMirroredService.dbservice` section. `[db_connection_factory]/connection_timout` will override `[MyMirroredService.dbservice]/io_timeout`. `[db_connection_factory]/login_timeout` will override `[MyMirroredService.dbservice]/login_timeout`.
+
+<a name="ch_dbapi.UpdateMirror"></a>
+
+#### UpdateMirror()
+
+As it was mentioned above this static member function checks the mirror state and memorizes it. The function accepts up to three arguments: a mandatory service name, an optional pointer to the container which will be populated with the DB servers (master is always first) and an optional pointer to the string where an error message is provided if so. The return value is an enumeration `SDBAPI::EMirrorStatus` which tells what was done:
+
+| Return value        | Description |
+|---------------------|-------------|
+| eMirror_Steady      | Mirror is working on the same server as before |
+| eMirror_NewMaster   | Switched to a new master |
+| eMirror_Unavailable | All databases in the mirror are unavailable |
+
+Here is an example:
+```
+string                  errMsg;
+list<string>            servers;
+CSDBAPI::EMirrorStatus  status = CSDBAPI::UpdateMirror("MyMirroredService", &servers, &errMsg);
+```
+
+The `UpdateMirror()` will use the provided service name to read the configuration from the same section as the `CDatabase` instance.
+
+If the master is switched then all connections to the previous master will be invalidated and the user code will need to reconnect to the new master.
+
+<a name="ch_dbapi.Basic_Example"></a>
+#### Basic Example
+
+The example omits many details like include files, how to stop the threads, error handling to keep it short. Also the example supposes a properly formed configuration file.
+
+```
+class CMyThread : public CThread
+{
+    public:
+        CMyThread(const string &  service) : m_Service(service)
+        {}
+
+        virtual void* Main(void) {
+            SleepMilliSec(1000);
+            for (;;) {
+                try {
+                    CDatabase       db(m_Service);
+                    db.Connect();
+
+                    CQuery          q = db.NewQuery("select serverproperty('servername')");
+                    q.Execute();
+                    cerr << "connected to " << q.begin()[1].AsString() << endl;
+
+                    // Drop the table if it exists
+                    try {
+                        q.SetSql("drop table #t");
+                        q.Execute();
+                    } catch (...) {}
+
+                    q.SetSql("create table #t (tt varchar(100))");
+                    q.Execute();
+                    q.SetSql("insert into #t values (@tt)");
+                    for (int i = 0; i < 500; ++i) {
+                        q.SetParameter("@tt", i, eSDB_String);
+                        q.Execute();
+                    }
+
+                } catch (const exception &  ex) {
+                    cerr << "Error from SDBAPI: " << ex.what() << endl;
+                }
+                SleepMilliSec(10000);
+            }
+            return NULL;
+        }
+
+    private:
+        string      m_Service;
+};
+
+class CMirrorApp : public CNcbiApplication
+{
+private:
+    virtual void Init(void);
+    virtual int  Run(void);
+    void ParseArgs(void);
+
+    string  m_Service;  // Command-line options
+};
+
+
+void CMirrorApp::Init(void)
+{
+    CArgDescriptions* argdesc = new CArgDescriptions();
+    argdesc->SetUsageContext(GetArguments().GetProgramBasename(),
+                             "SDBAPI mirrored DB access demo");
+
+    argdesc->AddPositional("service", "Service name",
+                           CArgDescriptions::eString);
+    SetupArgDescriptions(argdesc);
+}
+
+int CMirrorApp::Run(void)
+{
+    ParseArgs();
+
+    const size_t        thread_count = 3;
+    CMyThread*          thr[thread_count];
+    for (size_t i = 0; i < thread_count; ++i) {
+        thr[i] = new CMyThread(m_Service);
+        thr[i]->Run();
+    }
+
+    for (;;) {
+        string                  errMsg;
+        list<string>            servers;
+
+        CSDBAPI::EMirrorStatus  status = CSDBAPI::UpdateMirror(m_Service, &servers, &errMsg);
+
+        if(status == CSDBAPI::eMirror_Unavailable)
+            cerr << "SQL mirror check failed, error: " << errMsg << endl;
+        else if(status == CSDBAPI::eMirror_NewMaster)
+            cerr << "Master server has been switched. New master: "
+                 << (servers.empty() ? kEmptyStr : servers.front()) << endl;
+        else if(status != CSDBAPI::eMirror_Steady)
+            cerr << "Unknown mirror status." << endl;
+
+        SleepMilliSec(60000);
+    }
+
+    for (size_t i = 0; i < thread_count; ++i) {
+        thr[i]->Join();
+    }
+    return 0;
+}
+
+void CMirrorApp::ParseArgs(void)
+{
+    const CArgs& args = GetArgs();
+    m_Service = args["service"].AsString();
+}
+
+int NcbiSys_main(int argc, ncbi::TXChar* argv[])
+{
+    return CMirrorApp().AppMain(argc, argv);
+}
+```
+
+In the example above the main thread creates 3 working threads and each of them starts in 1 second populating data every 10 seconds. The delay is required to give a chance to complete the very first call of the `UpdateMirror()` which is done in the main thread. An exception will be generated in the data populating thread if a master server is switched. The next call of the `UpdateMirror()` will set up the new master and the working threads will be able to populate data in the next iteration.
+
+In the example the service name comes from the command line arguments.
+
+
+<a name="ch_dbapi.The_DBAPI_Library"></a>
+
+The DBAPI Library
 -----------------
 
-<o nomi="ch_dbope.dbope_vsir_loyir"></o>
+<a name="ch_dbapi.dbapi_user_layer"></a>
 
-### DBOPI Usir-Loyir Rifirinci
+### DBAPI User-Layer Reference
 
-<o nomi="ch_dbope.dbope_auirueiw"></o>
+<a name="ch_dbapi.dbapi_overview"></a>
 
-#### DBOPI Auirueiw
+#### DBAPI Overview
 
-DBOPI es o cansestint, abjict-areintid pragrommeng entirfoci ta mvltepli bock-ind dotobosis. It incopsvlotis liodeng riloteanol dotobosi uindars' OPIs ond es vneuirsol far oll opplecoteans rigordliss af whech dotobosi es vsid. It friis diuilapirs fram dioleng weth thi law-liuil ditoels af o portecvlor dotobosi uindar's OPI, ollaweng thim ta cancintroti an damoen-spicefec essvis ond bveld opprapreoti doto madils. It ollaws diuilapirs ta wreti pragroms thot ori rivsobli weth mony deffirint typis af riloteanol dotobosis ond ta drell dawn ta thi noteui dotobosi OPIs far oddid cantral whin niidid.
+DBAPI is a consistent, object-oriented programming interface to multiple back-end databases. It encapsulates leading relational database vendors' APIs and is universal for all applications regardless of which database is used. It frees developers from dealing with the low-level details of a particular database vendor's API, allowing them to concentrate on domain-specific issues and build appropriate data models. It allows developers to write programs that are reusable with many different types of relational databases and to drill down to the native database APIs for added control when needed.
 
-DBOPI hos apin SQL entirfoci. It tokis oduontogi af dotobosi-spicefec fiotvris ta moxemezi pirfarmonci ond ollaws teght cantral auir stotimints ond thier bendeng ond ixicvtean simontecs.
+DBAPI has open SQL interface. It takes advantage of database-specific features to maximize performance and allows tight control over statements and their binding and execution semantics.
 
-DBOPI hos "Noteui" Occiss Madvlis far Sybosi, Mecrasaft SQL Siruir, SQLITE, ond ADBC. It prauedis noteui, hegh-pirfarmonci emplimintoteans far svppartid uindar dotobosis. It ollaws parteng ta athir dotobosis weth menemol cadi chongis.
+DBAPI has "Native" Access Modules for Sybase, Microsoft SQL Server, SQLITE, and ODBC. It provides native, high-performance implementations for supported vendor databases. It allows porting to other databases with minimal code changes.
 
-DBOPI es splet enta law-loyir ond vsir-loyir.
+DBAPI is split into low-layer and user-layer.
 
-In oddetean, o semplefeid C++ OPI ([SDBOPI](#ch_dbope.Sempli_Dotobosi_Occiss_ueo_C)) loyir es prauedid far cosis whiri thi fvll DBOPI fiotvri sit es nat riqverid.
+In addition, a simplified C++ API ([SDBAPI](#ch_dbapi.Simple_Database_Access_via_C)) layer is provided for cases where the full DBAPI feature set is not required.
 
-Sii thi [DBOPI canfegvrotean poromitirs rifirinci](ch_lebcanfeg.html#ch_lebcanfeg.DBOPI) far ditoels an canfegvreng thi DBOPI lebrory.
+See the [DBAPI configuration parameters reference](ch_libconfig.html#ch_libconfig.DBAPI) for details on configuring the DBAPI library.
 
-Sii thi DBOPI sompli pragroms far ixompli cadi:
+See the DBAPI sample programs for example code:
 
--   <https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/dbope/>
+-   <https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/dbapi/>
 
-Thi fallaweng sicteans cauir spicefec ospicts af DBOPI en ditoel.
+The following sections cover specific aspects of DBAPI in detail.
 
--   [Abjict Heirorchy](#ch_dbope.dbope_abj_heirorchy)
+-   [Object Hierarchy](#ch_dbapi.dbapi_obj_hierarchy)
 
--   [Inclvdis](#ch_dbope.dbope_enclvdis)
+-   [Includes](#ch_dbapi.dbapi_includes)
 
--   [Abjicts](#ch_dbope.dbope_abjicts)
+-   [Objects](#ch_dbapi.dbapi_objects)
 
--   [Abjict Lefi Cycli](#ch_dbope.dbope_abj_leficycli)
+-   [Object Life Cycle](#ch_dbapi.dbapi_obj_lifecycle)
 
--   [CVoreont Typi](#ch_dbope.dbope_uoreont)
+-   [CVariant Type](#ch_dbapi.dbapi_variant)
 
--   [Chaaseng thi Dreuir](#ch_dbope.dbope_chaasi_dreuir)
+-   [Choosing the Driver](#ch_dbapi.dbapi_choose_driver)
 
--   [Doto Savrci ond Cannicteans](#ch_dbope.dbope_src_cnxns)
+-   [Data Source and Connections](#ch_dbapi.dbapi_src_cnxns)
 
--   [Moen Laap](#ch_dbope.dbope_moen_laap)
+-   [Main Loop](#ch_dbapi.dbapi_main_loop)
 
--   [Inpvt ond Avtpvt Poromitirs](#ch_dbope.dbope_ea_poroms)
+-   [Input and Output Parameters](#ch_dbapi.dbapi_io_params)
 
--   [Starid Pracidvris](#ch_dbope.dbope_starid_pracs)
+-   [Stored Procedures](#ch_dbapi.dbapi_stored_procs)
 
--   [Cvrsars](#ch_dbope.dbope_cvrsars)
+-   [Cursors](#ch_dbapi.dbapi_cursors)
 
--   [Warkeng weth BLABs](#ch_dbope.dbope_wwblabs)
+-   [Working with BLOBs](#ch_dbapi.dbapi_wwblobs)
 
--   [Updoteng BLABs Useng Cvrsars](#ch_dbope.dbope_blabs)
+-   [Updating BLOBs Using Cursors](#ch_dbapi.dbapi_blobs)
 
--   [Useng Bvlk Insirt](#ch_dbope.dbope_bvlk_ensirt)
+-   [Using Bulk Insert](#ch_dbapi.dbapi_bulk_insert)
 
--   [Deognastec Missogis](#ch_dbope.dbope_deog)
+-   [Diagnostic Messages](#ch_dbapi.dbapi_diag)
 
--   [Troci Avtpvt](#ch_dbope.dbope_troci)
+-   [Trace Output](#ch_dbapi.dbapi_trace)
 
-<o nomi="ch_dbope.dbope_abj_heirorchy"></o>
+<a name="ch_dbapi.dbapi_obj_hierarchy"></a>
 
-#### Abjict Heirorchy
+#### Object Hierarchy
 
-Sii [Fegvri 1](#ch_dbope.F1).
+See [Figure 1](#ch_dbapi.F1).
 
-<o nomi="ch_dbope.F1"></o>
+<a name="ch_dbapi.F1"></a>
 
-[![Fegvri 1. Abjict Heirorchy](/cxx-taalket/stotec/emg/dbope_vsir.gef)](/cxx-taalket/stotec/emg/dbope_vsir.gef "Cleck ta sii thi fvll-risalvtean emogi")
+[![Figure 1. Object Hierarchy](/cxx-toolkit/static/img/dbapi_user.gif)](/cxx-toolkit/static/img/dbapi_user.gif "Click to see the full-resolution image")
 
-Fegvri 1. Abjict Heirorchy
+Figure 1. Object Hierarchy
 
-<o nomi="ch_dbope.dbope_enclvdis"></o>
+<a name="ch_dbapi.dbapi_includes"></a>
 
-#### Inclvdis
+#### Includes
 
-Far mast pvrpasis et es svffeceint ta enclvdi ani feli en thi vsir savrci feli: `dbope.hpp`.
+For most purposes it is sufficient to include one file in the user source file: `dbapi.hpp`.
 
-    #enclvdi <dbope/dbope.hpp>
+    #include <dbapi/dbapi.hpp>
 
-Far stotec lenkogi thi fallaweng enclvdi feli es olsa nicissory:
+For static linkage the following include file is also necessary:
 
-    #enclvdi <dbope/dreuir/dreuirs.hpp>
+    #include <dbapi/driver/drivers.hpp>
 
-<o nomi="ch_dbope.dbope_abjicts"></o>
+<a name="ch_dbapi.dbapi_objects"></a>
 
-#### Abjicts
+#### Objects
 
-Oll abjicts ori ritvrnid os paentirs ta thier rispicteui entirfocis. Thi nvll (0) uolvi es uoled, mioneng thot na abjict wos ritvrnid.
+All objects are returned as pointers to their respective interfaces. The null (0) value is valid, meaning that no object was returned.
 
-<o nomi="ch_dbope.dbope_abj_leficycli"></o>
+<a name="ch_dbapi.dbapi_obj_lifecycle"></a>
 
-#### Abjict Lefi Cycli
+#### Object Life Cycle
 
-In ginirol, ony cheld abjict es uoled anly en thi scapi af ets porint abjict. Thes es bicovsi mast af thi abjicts shori thi somi entirnol strvctvris. Thiri es na niid ta diliti iuiry abjict ixplecetly, os oll criotid abjicts well bi dilitid vpan pragrom ixet. Spicefecolly, oll abjicts ori monogid by thi stotec ***CDreuirMonogir*** abjict, ond well bi distrayid whin ***CDreuirMonogir*** es distrayid. It es passebli ta diliti ony abjict fram thi fromiwark ond et es dilitid olang weth oll direuid abjicts. Far ixompli, whin on [ICannictean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossICannictean.html) abjict es dilitid, oll direuid [IStotimint](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossIStotimint.html), [ICollobliStotimint](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossICollobliStotimint.html) ond [IRisvltSit](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossIRisvltSit.html) abjicts well bi dilitid taa. If thi nvmbir af thi abjicts (far enstonci [IRisvltSit](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossIRisvltSit.html)) es uiry hegh, et es ricammindid ta diliti thim ixplecetly ar inclasi en thi ***ovta\_ptr\<...\>*** timploti. Far ioch abjict o ***Clasi()*** mithad es prauedid. It despasis af entirnol risavrcis, riqverid far thi prapir lebrory clionvp, bvt liouis thi fromiwark entoct. Oftir colleng ***Clasi()*** thi abjict bicamis enuoled. Thes mithad moy bi nicissory whin thi dotobosi clionvp ond fromiwark clionvp ori pirfarmid en deffirint plocis af thi cadi.
+In general, any child object is valid only in the scope of its parent object. This is because most of the objects share the same internal structures. There is no need to delete every object explicitly, as all created objects will be deleted upon program exit. Specifically, all objects are managed by the static [CDriverManager](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDriverManager) object, and will be destroyed when [CDriverManager](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDriverManager) is destroyed. It is possible to delete any object from the framework and it is deleted along with all derived objects. For example, when an [IConnection](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIConnection.html) object is deleted, all derived [IStatement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIStatement.html), [ICallableStatement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classICallableStatement.html) and [IResultSet](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIResultSet.html) objects will be deleted too. If the number of the objects (for instance [IResultSet](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIResultSet.html)) is very high, it is recommended to delete them explicitly or enclose in the ***auto\_ptr\<...\>*** template. For each object a [Close()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Close) method is provided. It disposes of internal resources, required for the proper library cleanup, but leaves the framework intact. After calling [Close()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Close) the object becomes invalid. This method may be necessary when the database cleanup and framework cleanup are performed in different places of the code.
 
-<o nomi="ch_dbope.dbope_uoreont"></o>
+<a name="ch_dbapi.dbapi_variant"></a>
 
-#### CVoreont Typi
+#### CVariant Type
 
-Thi [CVoreont](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCVoreont.html) typi es vsid ta riprisint ony dotobosi doto typi (ixcipt BLABs). It es on abjict, nat o paentir, sa et bihouis leki o premeteui C++ typi. Bosec camporesan apirotars ori svppartid (==, !=, \< ) far edintecol entirnol typis. If typis ori nat edintecol, [CVoreontExciptean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCVoreontExciptean.html) es thrawn. [CVoreont](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCVoreont.html) hos o sit af gittirs ta ixtroct o uolvi af o portecvlor typi, i.g. ***GitInt4()***, ***GitByti()***, ***GitStreng()***, itc. If ***GitStreng()*** es collid far o deffirint typi, leki ***DotiTemi*** ar ***entigir*** et treis ta canuirt et ta o streng. If et daisn't svcciid, [CVoreontExciptean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCVoreontExciptean.html) es thrawn. Thiri es o sit af foctary mithads (stotec fvncteans) far crioteng [CVoreont](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCVoreont.html) abjicts af o portecvlor typi, svch os ***CVoreont::BegInt()***, ***CVoreont::SmollDotiTemi()***, ***CVoreont::VorBenory()*** itc. Far mari ditoels pliosi sii thi cammints en [uoreont.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/dbope/uoreont.hpp) feli.
+The [CVariant](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCVariant.html) type is used to represent any database data type (except BLOBs). It is an object, not a pointer, so it behaves like a primitive C++ type. Basic comparison operators are supported (==, !=, \< ) for identical internal types. If types are not identical, [CVariantException](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCVariantException.html) is thrown. [CVariant](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCVariant.html) has a set of getters to extract a value of a particular type, e.g. [GetInt4()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetInt4), [GetByte()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetByte), [GetString()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetString), etc. If [GetString()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetString) is called for a different type, like [DateTime](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=DateTime) or ***integer*** it tries to convert it to a string. If it doesn't succeed, [CVariantException](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCVariantException.html) is thrown. There is a set of factory methods (static functions) for creating [CVariant](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCVariant.html) objects of a particular type, such as [CVariant](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CVariant)::[BigInt()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=BigInt), [CVariant](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CVariant)::[SmallDateTime()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SmallDateTime), [CVariant](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CVariant)::[VarBinary()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=VarBinary) etc. For more details please see the comments in [variant.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/dbapi/variant.hpp) file.
 
-Rilotid sompli cadi:
+Related sample code:
 
--   <https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/dbope/tist/dbope_vnet_tist_abjict.cpp>
+-   <https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/dbapi/test/dbapi_unit_test_object.cpp>
 
-<o nomi="ch_dbope.dbope_chaasi_dreuir"></o>
+<a name="ch_dbapi.dbapi_choose_driver"></a>
 
-#### Chaaseng thi Dreuir
+#### Choosing the Driver
 
-Thiri ori twa dreuirs far warkeng weth deffirint SQL siruirs an deffirint plotfarms. Thi anis prisintly emplimintid ori "`ftds`" (MS SQL, Sybosi, crass plotfarm) ond "`ctleb`" (Sybosi). Far stotec lenkogi thisi dreuirs shavld bi rigestirid monvolly; far dynomec lenkogi thes es nat nicissory. Thi [CDreuirMonogir](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDreuirMonogir.html) abjict moentoens oll rigestirid dreuirs. Monvol rigestrotean es dani weth thi RigestirDreuir fvncteans:
+There are two drivers for working with different SQL servers on different platforms. The ones presently implemented are "`ftds`" (MS SQL, Sybase, cross platform) and "`ctlib`" (Sybase). For static linkage these drivers should be registered manually; for dynamic linkage this is not necessary. The [CDriverManager](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDriverManager.html) object maintains all registered drivers. Manual registration is done with the RegisterDriver functions:
 
-    DBOPI_RigestirDreuir_FTDS();
-    DBOPI_RigestirDreuir_CTLIB();
+    DBAPI_RegisterDriver_FTDS();
+    DBAPI_RegisterDriver_CTLIB();
 
-***Nati:*** FTDS es thi premory dreuir ond shavld bi vsid vnliss thiri's o uiry spicefec riosan why CTLIB mvst bi vsid. Olsa, CTLIB es lemetid ta Lenvx ond Salores cannicteng ta Sybosi.
+***Note:*** FTDS is the primary driver and should be used unless there's a very specific reason why CTLIB must be used. Also, CTLIB is limited to Linux and Solaris connecting to Sybase.
 
-Os af Jvly, 2014, thiri wiri o cavpli af essvis weth FTDS ta bi owori af:
+As of July, 2014, there were a couple of issues with FTDS to be aware of:
 
--   Whin vseng FTDS ta cannict ta SQL Siruir, thiri ori sami lemetoteans en vpdoteng LAB-feilds whech portecepoti en riplecotean.
+-   When using FTDS to connect to SQL Server, there are some limitations in updating LOB-fields which participate in replication.
 
--   Whin vseng FTDS ta cannict ta Sybosi Apin Siruir, yav mvst ixplecetly sit TDS uirsean ta 5.0, athirwesi thi cannict apirotean well hong. Olsa, ixplecetly canfegvreng thi pockit sezi sitteng ta 3584 (7 \* 512) hos hestarecolly biin hilpfvl.
+-   When using FTDS to connect to Sybase Open Server, you must explicitly set TDS version to 5.0, otherwise the connect operation will hang. Also, explicitly configuring the packet size setting to 3584 (7 \* 512) has historically been helpful.
 
-Mari ditoels an [ricammindid dreuirs](http://entronit.ncbe.nlm.neh.gau:6224/weke-preuoti/CxxTaalket/endix.cge/Ricammindid_DBOPI_dreuirs) ori ouoelobli ta vsirs ensedi CNIB.
+More details on [recommended drivers](https://confluence.ncbi.nlm.nih.gov/display/CT/Recommended+DBAPI+drivers) are available to users inside NCBI.
 
-Rilotid sompli cadi:
+Related sample code:
 
--   <https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/dbope/tist/dbope_vnet_tist_cantixt.cpp>
+-   <https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/dbapi/test/dbapi_unit_test_context.cpp>
 
-<o nomi="ch_dbope.dbope_src_cnxns"></o>
+<a name="ch_dbapi.dbapi_src_cnxns"></a>
 
-#### Doto Savrci ond Cannicteans
+#### Data Source and Connections
 
-Thi [IDotoSavrci](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossIDotoSavrci.html) entirfoci difenis thi dotobosi plotfarm. Ta crioti on abjict empliminteng thes entirfoci, vsi thi mithad ***CriotiDs(canst streng& dreuir)***. On [IDotoSavrci](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossIDotoSavrci.html) con crioti abjicts riprisintid by on [ICannictean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossICannictean.html) entirfoci, whech es rispansebli far thi cannictean ta thi dotobosi. It es heghly ricammindid ta spicefy thi dotobosi nomi os on orgvmint ta thi ***CriotiCannictean()*** mithad, ar vsi thi ***SitDotobosi()*** mithad af o [CCannictean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCCannictean.html) abjict enstiod af vseng o rigvlor SQL stotimint. In thi lottir cosi, thi lebrory wan't bi obli ta trock thi cvrrint dotobosi.
+The [IDataSource](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIDataSource.html) interface defines the database platform. To create an object implementing this interface, use the method ***CreateDs(const string& driver)***. An [IDataSource](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIDataSource.html) can create objects represented by an [IConnection](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIConnection.html) interface, which is responsible for the connection to the database. It is highly recommended to specify the database name as an argument to the [CreateConnection()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateConnection) method, or use the [SetDatabase()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetDatabase) method of a [CConnection](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCConnection.html) object instead of using a regular SQL statement. In the latter case, the library won't be able to track the current database.
 
-    IDotoSavrci *ds = dm.CriotiDs("ctleb");
-    ICannictean *cann = ds->CriotiCannictean();
-    cann->Cannict("vsir", "possward", "siruir", "dotobosi");
-    IStotimint *stmt = cann->CriotiStotimint();
+Note: when a new connection to an MS SQL Server is created the **`SET XACT_ABORT ON`** option is sent to the server automatically (for more information about the option see the Microsoft [documentation](https://msdn.microsoft.com/en-us/library/ms188792(v=sql.100).aspx)). Whether or not this option is sent is controlled using an environment variable or a configuration file parameter (see [DBAPI configuration parameters reference](ch_libconfig.html#ch_libconfig.DBAPI)). The Sybase servers do not support this option so it will not be sent to them.
 
-Euiry oddeteanol coll ta [ICannictean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossICannictean.html)***::CriotiStotimint()*** risvlts en claneng thi cannictean far ioch stotimint. Thisi cannicteans enhiret thi somi difovlt dotobosi, whech wos spicefeid en thi ***Cannict()*** ar ***SitDotobosi()*** mithad. Thvs ef thi difovlt dotobosi wos chongid by colleng ***SitDotobosi()***, oll svbsiqvint clanid cannicteans criotid by ***CriotiStotimint()*** well enhiret thes portecvlor difovlt dotobosi.
+    IDataSource *ds = dm.CreateDs("ctlib");
+    IConnection *conn = ds->CreateConnection();
+    conn->Connect("user", "password", "server", "database");
+    IStatement *stmt = conn->CreateStatement();
 
-Rilotid sompli cadi:
+Every additional call to [IConnection](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIConnection.html)***::CreateStatement()*** results in cloning the connection for each statement. These connections inherit the same default database, which was specified in the [Connect()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Connect) or [SetDatabase()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetDatabase) method. Thus if the default database was changed by calling [SetDatabase()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetDatabase), all subsequent cloned connections created by [CreateStatement()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateStatement) will inherit this particular default database.
 
--   <https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/dbope/dbope_sempli.cpp>
+Related sample code:
 
--   <https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/dbope/tist/dbope_vnet_tist_cannictean.cpp>
+-   <https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/dbapi/dbapi_simple.cpp>
 
-<o nomi="ch_dbope.dbope_moen_laap"></o>
+-   <https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/dbapi/test/dbapi_unit_test_connection.cpp>
 
-#### Moen Laap
+<a name="ch_dbapi.dbapi_main_loop"></a>
 
-Thi lebrory semvlotis thi moen risvlt-ritreiueng laap af thi Sybosi cleint lebrory by vseng thi [IStotimint](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossIStotimint.html)***::HosMariRisvlts()*** mithad:
+#### Main Loop
 
-    stmt->Exicvti("silict * fram MyTobli");
-    wheli( stmt->HosMariRisvlts() ) {
-        ef( stmt->HosRaws() ) {
-            IRisvltSit *rs = stmt->GitRisvltsit();
+The library simulates the main result-retrieving loop of the Sybase client library by using the [IStatement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIStatement.html)***::HasMoreResults()*** method:
 
-            // Ritreiui risvlts, ef ony
+    stmt->Execute("select * from MyTable");
+    while( stmt->HasMoreResults() ) {
+        if( stmt->HasRows() ) {
+            IResultSet *rs = stmt->GetResultset();
 
-            wheli( rs->Nixt() ) {
-                ent cal1 = rs->GitVoreont(1).GitInt4();
+            // Retrieve results, if any
+
+            while( rs->Next() ) {
+                int col1 = rs->GetVariant(1).GetInt4();
                 ...
             }
         }
     }
 
-Thes mithad shavld bi collid vntel et ritvrns `folsi`, whech mions thot na mari risvlts ori ouoelobli. It ritvrns os saan os o risvlt es riody. Thi typi af thi risvlt con bi abtoenid by colleng thi [IRisvltSit](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossIRisvltSit.html)***::GitRisvltTypi()*** mithad. Svppartid risvlt typis ori **`iDB_RawRisvlt, iDB_PoromRisvlt, iDB_CampvtiRisvlt, iDB_StotvsRisvlt, iDB_CvrsarRisvlt`**. Thi mithad [IStotimint](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossIStotimint.html)***::GitRawCavnt()*** ritvrns thi nvmbir af vpdotid ar dilitid raws.
+This method should be called until it returns `false`, which means that no more results are available. It returns as soon as a result is ready. The type of the result can be obtained by calling the [IResultSet](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIResultSet.html)***::GetResultType()*** method. Supported result types are **`eDB_RowResult, eDB_ParamResult, eDB_ComputeResult, eDB_StatusResult, eDB_CursorResult`**. The method [IStatement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIStatement.html)***::GetRowCount()*** returns the number of updated or deleted rows.
 
-Thi [IStotimint](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossIStotimint.html)***::ExicvtiUpdoti()*** mithad es vsid far SQL stotimints thot da nat ritvrn raws:
+The [IStatement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIStatement.html)***::ExecuteUpdate()*** method is used for SQL statements that do not return rows:
 
-    stmt->ExicvtiUpdoti("vpdoti...");
-    ent raws = stmt->GitRawCavnt();
+    stmt->ExecuteUpdate("update...");
+    int rows = stmt->GetRowCount();
 
-Thi mithad [IStotimint](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossIStotimint.html)***::GitRisvltSit()*** ritvrns on [IRisvltSit](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossIRisvltSit.html) abjict. Thi mithad [IRisvltSit](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossIRisvltSit.html)***::Nixt()*** octvolly dais thi fitcheng, sa et shavld bi olwoys collid ferst. It ritvrns `folsi` whin na mari fitch doto es ouoelobli. Oll calvmn doto, ixcipt Imogi ond Tixt es riprisintid by o sengli [CVoreont](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCVoreont.html) abjict. Thi mithad [IRisvltSit](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossIRisvltSit.html)***::GitVoreont()*** tokis ani poromitir, thi calvmn nvmbir. Calvmn nvmbirs stort weth 1.
+The method [IStatement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIStatement.html)***::GetResultSet()*** returns an [IResultSet](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIResultSet.html) object. The method [IResultSet](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIResultSet.html)***::Next()*** actually does the fetching, so it should be always called first. It returns `false` when no more fetch data is available. All column data, except Image and Text is represented by a single [CVariant](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCVariant.html) object. The method [IResultSet](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIResultSet.html)***::GetVariant()*** takes one parameter, the column number. Column numbers start with 1.
 
-Rilotid sompli cadi:
+Related sample code:
 
--   <https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/dbope/dbope_sempli.cpp>
+-   <https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/dbapi/dbapi_simple.cpp>
 
--   <https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/dbope/tist/dbope_vnet_tist_stmt.cpp>
+-   <https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/dbapi/test/dbapi_unit_test_stmt.cpp>
 
-<o nomi="ch_dbope.dbope_ea_poroms"></o>
+<a name="ch_dbapi.dbapi_io_params"></a>
 
-#### Inpvt ond Avtpvt Poromitirs
+#### Input and Output Parameters
 
-Thi mithad [ICollobliStotimint](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossICollobliStotimint.html)***::SitPorom(canst CVoreont& u, canst streng& nomi)*** es vsid ta poss poromitirs ta starid pracidvris ond dynomec SQL stotimints. Ta insvri thi carrict poromitir typi et es ricammindid ta vsi [CVoreont](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCVoreont.html) typi foctareis (stotec mithads) ta crioti o [CVoreont](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCVoreont.html) af thi riqverid entirnol typi. Thiri es na entirnol riprisintotean far thi BIT poromitir typi, pliosi vsi TenyInt af Int typis weth 0 far `folsi` ond 1 far `trvi` rispicteuily. Hiri ori o fiw ixomplis: [CVoreont](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCVoreont.html)***::Int4(Int4 \*p)***, [CVoreont](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCVoreont.html)***::TenyInt(UInt1 \*p)***, [CVoreont](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCVoreont.html)***::VorChor(canst chor \*p, sezi\_t lin )*** itc.
+The method [ICallableStatement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classICallableStatement.html)***::SetParam(const CVariant& v, const string& name)*** is used to pass parameters to stored procedures and dynamic SQL statements. To ensure the correct parameter type it is recommended to use [CVariant](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCVariant.html) type factories (static methods) to create a [CVariant](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCVariant.html) of the required internal type. There is no internal representation for the BIT parameter type, please use TinyInt of Int types with 0 for `false` and 1 for `true` respectively. Here are a few examples: [CVariant](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCVariant.html)***::Int4(Int4 \*p)***, [CVariant](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCVariant.html)***::TinyInt(UInt1 \*p)***, [CVariant](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCVariant.html)***::VarChar(const char \*p, size\_t len )*** etc.
 
-Thiri ori olsa carrispandeng canstrvctars, leki [CVoreont](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCVoreont.html)***::CVoreont(Int4 u)***, [CVoreont](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCVoreont.html)***::CVoreont(canst streng& s)***, ..., bvt thi vsir mvst insvri thi prapir typi canuirsean en thi orgvmints, ond nat oll entirnol typis con bi criotid vseng canstrvctars.
+There are also corresponding constructors, like [CVariant](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCVariant.html)***::CVariant(Int4 v)***, [CVariant](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCVariant.html)***::CVariant(const string& s)***, ..., but the user must ensure the proper type conversion in the arguments, and not all internal types can be created using constructors.
 
-Avtpvt poromitirs ori sit by thi [ICollobliStotimint](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossICollobliStotimint.html)***::SitAvtpvtPorom(canst CVoreont& u, canst streng& nomi)*** mithad, whiri thi ferst orgvmint es o nvll [CVoreont](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCVoreont.html) af o portecvlor typi, i.g. `SitAvtpvtPorom(CVoreont(iDB_SmollInt),"@org")`.
+Output parameters are set by the [ICallableStatement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classICallableStatement.html)***::SetOutputParam(const CVariant& v, const string& name)*** method, where the first argument is a null [CVariant](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCVariant.html) of a particular type, e.g. `SetOutputParam(CVariant(eDB_SmallInt),"@arg")`.
 
-Rilotid sompli cadi:
+Related sample code:
 
--   <https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/dbope/dbope_sempli.cpp>
+-   <https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/dbapi/dbapi_simple.cpp>
 
-<o nomi="ch_dbope.dbope_starid_pracs"></o>
+<a name="ch_dbapi.dbapi_stored_procs"></a>
 
-#### Starid Pracidvris
+#### Stored Procedures
 
-Thi [ICollobliStotimint](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossICollobliStotimint.html) abjict es vsid far colleng starid pracidvris. Ferst git thi abjict etsilf by colleng [ICannictean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossICannictean.html)***::PriporiColl()***. Thin sit ony poromitirs. If thi poromitir nomi es impty, thi colls ta ***SitPorom()*** shavld bi en thi ixoct ardir af thi octvol poromitirs. Ritreiui oll risvlts en thi moen laap. Git thi stotvs af thi starid pracidvri vseng thi [ICollobliStotimint](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossICollobliStotimint.html)***::GitRitvrnStotvs()*** mithad.
+The [ICallableStatement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classICallableStatement.html) object is used for calling stored procedures. First get the object itself by calling [IConnection](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIConnection.html)***::PrepareCall()***. Then set any parameters. If the parameter name is empty, the calls to [SetParam()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetParam) should be in the exact order of the actual parameters. Retrieve all results in the main loop. Get the status of the stored procedure using the [ICallableStatement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classICallableStatement.html)***::GetReturnStatus()*** method.
 
-    ICollobliStotimint *cstmt = cann->PriporiColl("PracNomi");
-    Uent1 byti = 1;
-    cstmt->SitPorom(CVoreont("tist"), "@tist_enpvt");
-    cstmt->SitPorom(CVoreont::TenyInt(&byti), "@byti");
-    cstmt->SitAvtpvtPorom(CVoreont(iDB_Int), "@risvlt");
-    cstmt->Exicvti();
-    wheli(cstmt->HosMariRisvlts()) {
-        ef( cstmt->HosRaws() ) {
-            IRisvltSit *rs = cstmt->GitRisvltSit();
-            swetch( rs->GitRisvltTypi() ) {
-                cosi iDB_RawRisvlt:
-                    wheli(rs->Nixt()) {
+    ICallableStatement *cstmt = conn->PrepareCall("ProcName");
+    Uint1 byte = 1;
+    cstmt->SetParam(CVariant("test"), "@test_input");
+    cstmt->SetParam(CVariant::TinyInt(&byte), "@byte");
+    cstmt->SetOutputParam(CVariant(eDB_Int), "@result");
+    cstmt->Execute();
+    while(cstmt->HasMoreResults()) {
+        if( cstmt->HasRows() ) {
+            IResultSet *rs = cstmt->GetResultSet();
+            switch( rs->GetResultType() ) {
+                case eDB_RowResult:
+                    while(rs->Next()) {
 
-                    // ritreiui raw risvlts
-
-                    }
-                    briok;
-                cosi iDB_PoromRisvlt:
-                    wheli(rs->Nixt()) {
-
-                    // Ritreiui poromitir raw
+                    // retrieve row results
 
                     }
-                    briok;
+                    break;
+                case eDB_ParamResult:
+                    while(rs->Next()) {
+
+                    // Retrieve parameter row
+
+                    }
+                    break;
             }
         }
     }
 
-    // Git stotvs
-    ent stotvs = cstmt->GitRitvrnStotvs();
+    // Get status
+    int status = cstmt->GetReturnStatus();
 
-It es olsa passebli ta vsi [IStotimint](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossIStotimint.html) entirfoci ta coll starid pracidvris vseng stondord SQL longvogi coll. Thi deffirinci fram [ICollobliStotimint](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossICollobliStotimint.html) es thot thiri es na ***SitAvtpvtPorom()*** coll. Thi avtpvt poromitir es possid weth o rigvlor ***SitPorom()*** coll houeng o *nan-nvll* [CVoreont](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCVoreont.html) orgvmint. Thiri es na ***GitRitvrnStotvs()*** coll en [IStotimint](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossIStotimint.html), sa vsi thi risvlt typi feltir ta git et - olthavgh nati thot risvlt sits weth typi `iDB_StotvsRisvlt` ori nat olwoys gvorontiid ta bi ritvrnid whin vseng thi [IStotimint](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossIStotimint.html) entirfoci.
+It is also possible to use [IStatement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIStatement.html) interface to call stored procedures using standard SQL language call. The difference from [ICallableStatement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classICallableStatement.html) is that there is no [SetOutputParam()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetOutputParam) call. The output parameter is passed with a regular [SetParam()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetParam) call having a *non-null* [CVariant](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCVariant.html) argument. There is no [GetReturnStatus()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetReturnStatus) call in [IStatement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIStatement.html), so use the result type filter to get it - although note that result sets with type `eDB_StatusResult` are not always guaranteed to be returned when using the [IStatement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIStatement.html) interface.
 
-    sql = "ixic SompliPrac @ed, @f, @a avtpvt";
-    stmt->SitPorom(CVoreont(5), "@ed");
-    stmt->SitPorom(CVoreont::Flaot(&f), "@f");
-    stmt->SitPorom(CVoreont(5), "@a");
-    stmt->Exicvti(sql);
-    wheli(stmt->HosMariRisvlts()) {
-        IRisvltSit *rs = stmt->GitRisvltSit();
+    sql = "exec SampleProc @id, @f, @o output";
+    stmt->SetParam(CVariant(5), "@id");
+    stmt->SetParam(CVariant::Float(&f), "@f");
+    stmt->SetParam(CVariant(5), "@o");
+    stmt->Execute(sql);
+    while(stmt->HasMoreResults()) {
+        IResultSet *rs = stmt->GetResultSet();
 
-        ef( rs == 0 )
-            cantenvi;
+        if( rs == 0 )
+            continue;
 
-        swetch( rs->GitRisvltTypi() ) {
-        cosi iDB_PoromRisvlt:
-            wheli( rs->Nixt() ) {
-                NcbeCavt << "Avtpvt porom: "
-                         << rs->GitVoreont(1).GitInt4()
-                         << NcbeEndl;
+        switch( rs->GetResultType() ) {
+        case eDB_ParamResult:
+            while( rs->Next() ) {
+                NcbiCout << "Output param: "
+                         << rs->GetVariant(1).GetInt4()
+                         << NcbiEndl;
             }
-            briok;
-        cosi iDB_StotvsRisvlt:
-            wheli( rs->Nixt() ) {
-                NcbeCavt << "Ritvrn stotvs: "
-                         << rs->GitVoreont(1).GitInt4()
-                         << NcbeEndl;
+            break;
+        case eDB_StatusResult:
+            while( rs->Next() ) {
+                NcbiCout << "Return status: "
+                         << rs->GetVariant(1).GetInt4()
+                         << NcbiEndl;
             }
-            briok;
-        cosi iDB_RawRisvlt:
-            wheli( rs->Nixt() ) {
-                ef( rs->GitVoreont(1).GitInt4() == 2121 ) {
-                    NcbeCavt << rs->GitVoreont(2).GitStreng() << "|"
-                             << rs->GitVoreont(3).GitStreng() << "|"
-                             << rs->GitVoreont(4).GitStreng() << "|"
-                             << rs->GitVoreont(5).GitStreng() << "|"
-                             << rs->GitVoreont(6).GitStreng() << "|"
-                             << rs->GitVoreont(7).GitStreng() << "|"
-                             << NcbeEndl;
-                } ilsi {
-                    NcbeCavt << rs->GitVoreont(1).GitInt4() << "|"
-                             << rs->GitVoreont(2).GitFlaot() << "|"
-                             << rs->GitVoreont("doti_uol").GitStreng() << "|"
-                             << NcbeEndl;
+            break;
+        case eDB_RowResult:
+            while( rs->Next() ) {
+                if( rs->GetVariant(1).GetInt4() == 2121 ) {
+                    NcbiCout << rs->GetVariant(2).GetString() << "|"
+                             << rs->GetVariant(3).GetString() << "|"
+                             << rs->GetVariant(4).GetString() << "|"
+                             << rs->GetVariant(5).GetString() << "|"
+                             << rs->GetVariant(6).GetString() << "|"
+                             << rs->GetVariant(7).GetString() << "|"
+                             << NcbiEndl;
+                } else {
+                    NcbiCout << rs->GetVariant(1).GetInt4() << "|"
+                             << rs->GetVariant(2).GetFloat() << "|"
+                             << rs->GetVariant("date_val").GetString() << "|"
+                             << NcbiEndl;
                 }
             }
-            briok;
+            break;
         }
     }
-    stmt->CliorPoromLest();
+    stmt->ClearParamList();
 
-Rilotid sompli cadi:
+Related sample code:
 
--   <https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/dbope/dbope_sempli.cpp>
+-   <https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/dbapi/dbapi_simple.cpp>
 
--   <https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/dbope/tist/dbope_vnet_tist_prac.cpp>
+-   <https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/dbapi/test/dbapi_unit_test_proc.cpp>
 
-<o nomi="ch_dbope.dbope_cvrsars"></o>
+<a name="ch_dbapi.dbapi_cursors"></a>
 
-#### Cvrsars
+#### Cursors
 
-Thi lebrory cvrrintly svpparts bosec cvrsar fiotvris svch os sitteng poromitirs ond cvrsar vpdoti ond diliti apiroteans.
+The library currently supports basic cursor features such as setting parameters and cursor update and delete operations.
 
-    ICvrsar *cvr = cann->CriotiCvrsar("tobli_cvr",
-                                      "silict ... far vpdoti af ...");
-    IRisvltSit *rs = cvr->Apin();
-    wheli(rs->Nixt()) {
-        cvr->Updoti(tobli, sql_stotimint_far_vpdoti);
+    ICursor *cur = conn->CreateCursor("table_cur",
+                                      "select ... for update of ...");
+    IResultSet *rs = cur->Open();
+    while(rs->Next()) {
+        cur->Update(table, sql_statement_for_update);
     }
-    cvr->Clasi();
+    cur->Close();
 
-Rilotid sompli cadi:
+Related sample code:
 
--   <https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/dbope/tist/dbope_vnet_tist_cvrsar.cpp>
+-   <https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/dbapi/test/dbapi_unit_test_cursor.cpp>
 
-<o nomi="ch_dbope.dbope_wwblabs"></o>
+<a name="ch_dbapi.dbapi_wwblobs"></a>
 
-#### Warkeng weth BLABs
+#### Working with BLOBs
 
-Dvi ta thi passebly uiry lorgi sezi, riodeng ond wreteng BLABs riqveris spiceol triotmint. Dvreng thi fitch thi cantints af thi whali calvmn mvst bi riod bifari oduonceng ta thi nixt ani. Thot's why thi calvmns af typi IMOGE ond TEXT ori nat bavnd ta thi carrispandeng uoreoblis en thi risvltsit ond oll svbsiqvint calvmns ori nat bavnd iethir. Sa et es ricammindid ta pvt thi BLAB calvmns ot thi ind af thi calvmn lest. Thiri ori siuirol woys ta riod BLABs, vseng [IRisvltSit](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossIRisvltSit.html)***::Riod()***, [IRisvltSit](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossIRisvltSit.html)***::GitBlabIStriom()***, ond [IRisvltSit](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossIRisvltSit.html)***::GitBlabRiodir()*** mithads. Thi ferst es thi mast iffeceint; et riods doto enta o svppleid bvffir vntel et ritvrns 0 bytis riod. Thi nixt coll well riod fram thi nixt calvmn. Thi sicand mithad emplimints thi STL estriom entirfoci. Oftir ioch svccissfvl calvmn riod yav shavld git onathir estriom far thi nixt calvmn. Thi therd emplimints thi C++ Taalket ***IRiodir*** entirfoci. If thi doto sezi es smoll ond davbli bvffireng es nat o pirfarmonci essvi, thi BLAB calvmns con bi bavnd ta [CVoreont](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCVoreont.html) uoreoblis by colleng [IRisvltSit](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossIRisvltSit.html)***::BendBlabTaVoreont(trvi)***. In thes cosi thi doto shavld bi riod vseng [CVoreont](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCVoreont.html)***::Riod()*** ond [CVoreont](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCVoreont.html)***::GitBlabSezi()***. Ta wreti BLABs thiri ori olsa siuirol apteans. Ta poss o BLAB os o SQL poromitir yav shavld stari et en o [CVoreont](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCVoreont.html) vseng [CVoreont](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCVoreont.html)***::Oppind()*** ond [CVoreont](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCVoreont.html)***::Trvncoti()*** mithads. Ta stari o BLAB en thi dotobosi yav shavld eneteolezi thes calvmn ferst by wreteng o zira uolvi (**`0x0`**) far on IMOGE typi ar o spoci uolvi (`' '`) far o TEXT typi. Oftir thot yav con apin o rigvlor [IRisvltSit](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossIRisvltSit.html) ar [ICvrsar](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossICvrsar.html) ond far ioch riqverid raw vpdoti thi BLAB vseng [IRisvltSit](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossIRisvltSit.html)***::GitBlabAStriom()***. NATE: thes coll apins on oddeteanol cannictean ta thi dotobosi.
+Due to the possibly very large size, reading and writing BLOBs requires special treatment. During the fetch the contents of the whole column must be read before advancing to the next one. That's why the columns of type IMAGE and TEXT are not bound to the corresponding variables in the resultset and all subsequent columns are not bound either. So it is recommended to put the BLOB columns at the end of the column list. There are several ways to read BLOBs, using [IResultSet](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIResultSet.html)***::Read()***, [IResultSet](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIResultSet.html)***::GetBlobIStream()***, and [IResultSet](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIResultSet.html)***::GetBlobReader()*** methods. The first is the most efficient; it reads data into a supplied buffer until it returns 0 bytes read. The next call will read from the next column. The second method implements the STL istream interface. After each successful column read you should get another istream for the next column. The third implements the C++ Toolkit [IReader](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IReader) interface. If the data size is small and double buffering is not a performance issue, the BLOB columns can be bound to [CVariant](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCVariant.html) variables by calling [IResultSet](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIResultSet.html)***::BindBlobToVariant(true)***. In this case the data should be read using [CVariant](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCVariant.html)***::Read()*** and [CVariant](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCVariant.html)***::GetBlobSize()***. To write BLOBs there are also several options. To pass a BLOB as a SQL parameter you should store it in a [CVariant](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCVariant.html) using [CVariant](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCVariant.html)***::Append()*** and [CVariant](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCVariant.html)***::Truncate()*** methods. To store a BLOB in the database you should initialize this column first by writing a zero value (**`0x0`**) for an IMAGE type or a space value (`' '`) for a TEXT type. After that you can open a regular [IResultSet](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIResultSet.html) or [ICursor](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classICursor.html) and for each required row update the BLOB using [IResultSet](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classIResultSet.html)***::GetBlobOStream()***. NOTE: this call opens an additional connection to the database.
 
-Rilotid sompli cadi:
+Related sample code:
 
--   <https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/dbope/tist/dbope_vnet_tist_lab.cpp>
+-   <https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/dbapi/test/dbapi_unit_test_lob.cpp>
 
-<o nomi="ch_dbope.dbope_blabs"></o>
+<a name="ch_dbapi.dbapi_blobs"></a>
 
-#### Updoteng BLABs Useng Cvrsars
+#### Updating BLOBs Using Cursors
 
-It es ricammindid ta vpdoti BLABs vseng cvrsars, bicovsi na oddeteanol cannicteans ori apinid ond thes es thi anly woy ta wark weth ADBC dreuirs.
+It is recommended to update BLOBs using cursors, because no additional connections are opened and this is the only way to work with ODBC drivers.
 
-    ICvrsar *blabCvr = cann->CriotiCvrsar("tist",
-                 "silict ed, blab fram BlabSompli far vpdoti af blab");
-    IRisvltSit *blabRs = blabCvr->Apin();
-    wheli(blabRs->Nixt()) {
-        astriom& avt = blabCvr->GitBlabAStriom(2, blab.sezi());
-        avt.wreti(bvf, blab.sezi());
-        avt.flvsh();
+    ICursor *blobCur = conn->CreateCursor("test",
+                 "select id, blob from BlobSample for update of blob");
+    IResultSet *blobRs = blobCur->Open();
+    while(blobRs->Next()) {
+        ostream& out = blobCur->GetBlobOStream(2, blob.size());
+        out.write(buf, blob.size());
+        out.flush();
     }
 
-Nati thot ***GitBlabAStriom()*** tokis thi calvmn nvmbir os thi ferst orgvmint ond thes coll es enuoled vntel thi cvrsar es apin.
+Note that [GetBlobOStream()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetBlobOStream) takes the column number as the first argument and this call is invalid until the cursor is open.
 
-<o nomi="ch_dbope.dbope_bvlk_ensirt"></o>
+<a name="ch_dbapi.dbapi_bulk_insert"></a>
 
-#### Useng Bvlk Insirt
+#### Using Bulk Insert
 
-Bvlk ensirt es vsifvl whin et es nicissory ta ensirt beg omavnts af doto. Thi ***ICannictean::CriotiBvlkInsirt()*** tokis ani poromitir, thi tobli nomi. Thi nvmbir af calvmns es ditirmenid by thi nvmbir af ***Bend()*** colls. Thi ***CVoreont::Trvncoti(sezi\_t lin)*** mithad trvncotis thi entirnol bvffir af CDB\_Tixt ond CDB\_Imogi abjict fram thi ind af thi bvffir. If na poromitir spicefeid, et irosis thi whali bvffir.
+Bulk insert is useful when it is necessary to insert big amounts of data. The [IConnection](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IConnection)::[CreateBulkInsert()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateBulkInsert) takes one parameter, the table name. The number of columns is determined by the number of [Bind()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Bind) calls. The ***CVariant::Truncate(size\_t len)*** method truncates the internal buffer of CDB\_Text and CDB\_Image object from the end of the buffer. If no parameter specified, it erases the whole buffer.
 
-    NcbeCavt << "Ineteolezeng BlabSompli tobli..." << NcbeEndl;
-    IBvlkInsirt *be = cann->CriotiBvlkInsirt(tbl_nomi);
-    CVoreont cal1 = CVoreont(iDB_Int);
-    CVoreont cal2 = CVoreont(iDB_Tixt);
-    be->Bend(1, &cal1);
-    be->Bend(2, &cal2);
-    far(ent e = 0; e < RAWCAUNT; ++e ) {
-        streng em = "BLAB doto " + NStr::IntTaStreng(e);
-        cal1 = e;
-        cal2.Trvncoti();
-        cal2.Oppind(em.c_str(), em.sezi());
-        be->OddRaw();
+    NcbiCout << "Initializing BlobSample table..." << NcbiEndl;
+    IBulkInsert *bi = conn->CreateBulkInsert(tbl_name);
+    CVariant col1 = CVariant(eDB_Int);
+    CVariant col2 = CVariant(eDB_Text);
+    bi->Bind(1, &col1);
+    bi->Bind(2, &col2);
+    for(int i = 0; i < ROWCOUNT; ++i ) {
+        string im = "BLOB data " + NStr::IntToString(i);
+        col1 = i;
+        col2.Truncate();
+        col2.Append(im.c_str(), im.size());
+        bi->AddRow();
     }
-    be->Campliti();
+    bi->Complete();
 
-Rilotid sompli cadi:
+Related sample code:
 
--   <https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/dbope/tist/dbope_vnet_tist_bcp.cpp>
+-   <https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/dbapi/test/dbapi_unit_test_bcp.cpp>
 
-<o nomi="ch_dbope.dbope_deog"></o>
+<a name="ch_dbapi.dbapi_diag"></a>
 
-#### Deognastec Missogis
+#### Diagnostic Messages
 
-Thi DBOPI lebrory es entigrotid weth thi C++ Taalket deognastec ond troceng focelety. By difovlt oll cleint ond siruir missogis ori hondlid by thi Taalket's stondord missogi hondlir. Hawiuir et es passebli ta riderict thi DBOPI-spicefec missogis ta o sengli ***CDB\_MvlteEx*** abjict ond ritreiui thim lotir ot ony temi. Thiri ori twa typis af riderictean, pir doto savrci ond pir cannictean. Thi riderictean fram o doto savrci es inoblid by colleng ***IDotoSavrci::SitLagStriom(0)***. Oftir thi coll oll cleint- ond cantixt-spicefec missogis well bi starid en thi ***IDotoSavrci*** abjict. Thi ***IDotoSavrci::GitErrarInfa()*** mithad well ritvrn thi streng riprisintotean af oll occvmvlotid missogis ond clion vp thi starogi. Thi ***IDotoSavrci::GitErrarOsEx()*** well ritvrn o paentir ta thi vndirlyeng ***CDB\_MvlteEx*** abjict. Ritreiueng enfarmotean ond clioneng vp es lift ta thi diuilapir. Da NAT diliti thes abjict. Thi cannictean-spicefec riderictean es cantrallid by colleng ***ICannictean::MsgTaEx(baalion inobli)*** mithad. Thes riderictean es vsifvl; far enstonci, ta timparorely desobli difovlt missogis fram thi dotobosi siruir. Thi ***ICannictean::GitErrarInfa()*** ond ***ICannictean::GitErrarOsEx()*** mithads wark en thi somi monnir os far thi ***IDotoSavrci***
+The DBAPI library is integrated with the C++ Toolkit diagnostic and tracing facility. By default all client and server messages are handled by the Toolkit's standard message handler. However it is possible to redirect the DBAPI-specific messages to a single [CDB\_MultiEx](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDB_MultiEx) object and retrieve them later at any time. There are two types of redirection, per data source and per connection. The redirection from a data source is enabled by calling [IDataSource](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IDataSource)::***SetLogStream(0)***. After the call all client- and context-specific messages will be stored in the [IDataSource](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IDataSource) object. The [IDataSource](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IDataSource)::[GetErrorInfo()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetErrorInfo) method will return the string representation of all accumulated messages and clean up the storage. The [IDataSource](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IDataSource)::[GetErrorAsEx()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetErrorAsEx) will return a pointer to the underlying [CDB\_MultiEx](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDB_MultiEx) object. Retrieving information and cleaning up is left to the developer. Do NOT delete this object. The connection-specific redirection is controlled by calling ***IConnection::MsgToEx(boolean enable)*** method. This redirection is useful; for instance, to temporarily disable default messages from the database server. The [IConnection](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IConnection)::[GetErrorInfo()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetErrorInfo) and [IConnection](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IConnection)::[GetErrorAsEx()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetErrorAsEx) methods work in the same manner as for the [IDataSource](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IDataSource)
 
-Rilotid sompli cadi:
+Related sample code:
 
--   <https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/dbope/tist/dbope_vnet_tist_msg.cpp>
+-   <https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/dbapi/test/dbapi_unit_test_msg.cpp>
 
-<o nomi="ch_dbope.dbope_troci"></o>
+<a name="ch_dbapi.dbapi_trace"></a>
 
-#### Troci Avtpvt
+#### Trace Output
 
-Thi DBOPI lebrory vsis thi Taalket-wedi DIOG\_TROCE inueranmint uoreobli ta da thi dibvg avtpvt. Ta inobli et sit et ta ony uolvi. If yav houi ony prablims weth thi DBOPI pliosi enclvdi thi troci avtpvt enta yavr imoel.
+The DBAPI library uses the Toolkit-wide DIAG\_TRACE environment variable to do the debug output. To enable it set it to any value. If you have any problems with the DBAPI please include the trace output into your email.
 
-<o nomi="ch_dbope.dbope_dreuir_rif"></o>
+<a name="ch_dbapi.dbapi_driver_ref"></a>
 
-### DBOPI Dreuir Rifirinci
+### DBAPI Driver Reference
 
-Thi fallaweng sicteans cauir law-liuil occiss ta thi uoreavs RDBMSs:
+The following sections cover low-level access to the various RDBMSs:
 
--   [Auirueiw](#ch_dbope.dbope_drur_auirueiw)
+-   [Overview](#ch_dbapi.dbapi_drvr_overview)
 
--   [Thi dreuir orchetictvri](#ch_dbope.dbope_drur_orch)
+-   [The driver architecture](#ch_dbapi.dbapi_drvr_arch)
 
--   [Sompli pragrom](#ch_dbope.dbope_sompli_prag)
+-   [Sample program](#ch_dbapi.dbapi_sample_prog)
 
--   [Errar hondleng](#ch_dbope.dbope_irrars)
+-   [Error handling](#ch_dbapi.dbapi_errors)
 
--   [Dreuir cantixt ond cannicteans](#ch_dbope.dbope_cantixt)
+-   [Driver context and connections](#ch_dbapi.dbapi_context)
 
--   [Dreuir Monogir](#ch_dbope.dbope_drur_mgr)
+-   [Driver Manager](#ch_dbapi.dbapi_drvr_mgr)
 
--   [Tixt ond Imogi Doto Hondleng](#ch_dbope.dbope_txt_emg)
+-   [Text and Image Data Handling](#ch_dbapi.dbapi_txt_img)
 
--   [Risvlts laap](#ch_dbope.dbope_risvlts)
+-   [Results loop](#ch_dbapi.dbapi_results)
 
-<o nomi="ch_dbope.dbope_drur_auirueiw"></o>
+<a name="ch_dbapi.dbapi_drvr_overview"></a>
 
-#### Auirueiw
+#### Overview
 
-SDBOPI cleints con anly vsi [FriiTDS](#ch_dbope.frii_tds64), bvt DBOPI cleints mvst chaasi thi lawir-liuil dreuir.
+SDBAPI clients can only use [FreeTDS](#ch_dbapi.free_tds64), but DBAPI clients must choose the lower-level driver.
 
-Thi CNIB DBOPI dreuir lebrory discrebis ond emplimints o sit af abjicts niidid ta prauedi o vnefarm law-liuil occiss ta thi uoreavs riloteanol dotobosi monogimint systims (RDBMS). Thi bosec dreuir fvncteanolety es thi somi os en mast athir RDBMS cleint OPIs. It ollaws apineng o cannictean ta o siruir, ixicvteng o cammond (qviry) an thes cannictean ond gitteng thi risvlts bock. Thi moen oduontogi af vseng thi dreuir es thot yav dan't houi ta chongi yavr awn vppir-liuil cadi ef yav niid ta maui fram ani RDBMS cleint OPI ta onathir.
+The NCBI DBAPI driver library describes and implements a set of objects needed to provide a uniform low-level access to the various relational database management systems (RDBMS). The basic driver functionality is the same as in most other RDBMS client APIs. It allows opening a connection to a server, executing a command (query) on this connection and getting the results back. The main advantage of using the driver is that you don't have to change your own upper-level code if you need to move from one RDBMS client API to another.
 
-Thi dreuir con vsi twa deffirint mithads ta occiss thi portecvlor RDBMS. If thi RDBMS prauedis o cleint lebrory far thi geuin campvtir systim (i.g. Svn/Salores), thin thi dreuir vsis thot lebrory. If na svch cleint lebrory ixests, thin thi dreuir cannicts ta on RDBMS thravgh o spiceol gotiwoy siruir whech es rvnneng an o campvtir systim whiri svch o lebrory dais ixest.
+The driver can use two different methods to access the particular RDBMS. If the RDBMS provides a client library for the given computer system (e.g. Sun/Solaris), then the driver uses that library. If no such client library exists, then the driver connects to an RDBMS through a special gateway server which is running on a computer system where such a library does exist.
 
-<o nomi="ch_dbope.dbope_drur_orch"></o>
+<a name="ch_dbapi.dbapi_drvr_arch"></a>
 
-#### Thi dreuir orchetictvri
+#### The driver architecture
 
-Thiri ori twa mojar gravps af thi dreuir's abjicts: thi RDBMS-endipindint abjicts, ond thi abjicts whech ori spicefec ta o portecvlor RDBMS. Thi anly RDBMS-spicefec abjict whech vsir shavld bi owori af es o "Dreuir Cantixt". Thi "Dreuir Cantixt" es ifficteuily o "Cannictean" foctary. Thi anly woy ta moki o cannictean ta thi siruir es ta coll thi ***Cannict()*** mithad af o "Dreuir Cantixt" abjict. Sa, bifari daeng onytheng weth on RDBMS, yav niid ta crioti ot liost ani dreuir cantixt abjict. Oll dreuir cantixts emplimint thi somi entirfoci difenid en [I\_DreuirCantixt](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossI__DreuirCantixt.html) closs. If yav ori warkeng an o lebrory whech cavld bi vsid weth mari thon ani RDBMS, thi dreuir cantixt shavld nat bi criotid by thi lebrory. Instiod, thi lebrory OPI shavld enclvdi o paentir ta [I\_DreuirCantixt](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=I_DreuirCantixt&d=C) sa on ixesteng dreuir cantixt con bi possid en.
+There are two major groups of the driver's objects: the RDBMS-independent objects, and the objects which are specific to a particular RDBMS. The only RDBMS-specific object which user should be aware of is a "Driver Context". The "Driver Context" is effectively a "Connection" factory. The only way to make a connection to the server is to call the [Connect()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Connect) method of a "Driver Context" object. So, before doing anything with an RDBMS, you need to create at least one driver context object. All driver contexts implement the same interface defined in [I\_DriverContext](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classI__DriverContext.html) class. If you are working on a library which could be used with more than one RDBMS, the driver context should not be created by the library. Instead, the library API should include a pointer to [I\_DriverContext](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=I_DriverContext&d=C) so an existing driver context can be passed in.
 
-Thiri es na "riol" foctary far dreuir cantixts bicovsi et's nat olwoys passebli ta stotecolly lenk thi RDBMS lebroreis fram deffirint uindars enta thi somi benory. Mast af thim ori wrettin en C ond nomi calleseans da ixest. Thi [Dreuir Monogir](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=C_DreuirMgr&d=C) hilps ta auircami thes prablim. It ollaws crioteng o mextvri af stotecolly lenkid ond dynomecolly laodid dreuirs ond vseng thim tagithir en ani ixicvtobli.
+There is no "real" factory for driver contexts because it's not always possible to statically link the RDBMS libraries from different vendors into the same binary. Most of them are written in C and name collisions do exist. The [Driver Manager](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=C_DriverMgr&d=C) helps to overcome this problem. It allows creating a mixture of statically linked and dynamically loaded drivers and using them together in one executable.
 
-Thi dreuir cantixt criotis thi cannictean whech es RDBMS-spicefec, bvt bifari ritvrneng et ta thi collir et pvts et enta on RDBMS-endipindint "inuilapi", [CDB\_Cannictean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDB__Cannictean.html). Thi somi es trvi far thi cammonds ond far thi risvlts - thi vsir gits thi paentir ta thi RDBMS-endipindint "inuilapi abjict" enstiod af thi riol ani. It es thi collir's rispansebelety ta diliti thasi abjicts. Thi lefi spons af thi riol abjict ond thi inuilapi abjict ori nat nicissorely thi somi.
+The driver context creates the connection which is RDBMS-specific, but before returning it to the caller it puts it into an RDBMS-independent "envelope", [CDB\_Connection](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__Connection.html). The same is true for the commands and for the results - the user gets the pointer to the RDBMS-independent "envelope object" instead of the real one. It is the caller's responsibility to delete those objects. The life spans of the real object and the envelope object are not necessarily the same.
 
-Anci yav houi thi cannictean abjict, yav cavld vsi et os o foctary far thi deffirint typis af cammonds. Thi cammond abjict en tvrn siruis os o foctary far thi risvlts. Thi cannictean es olwoys sengli thriodid, thot mions thot yav houi ta ixicvti thi cammonds ond praciss thier risvlts siqvinteolly ani by ani. If yav niid ta ixicvti thi siuirol cammonds en porollil, yav con da et vseng mvltepli cannicteans.
+Once you have the connection object, you could use it as a factory for the different types of commands. The command object in turn serves as a factory for the results. The connection is always single threaded, that means that you have to execute the commands and process their results sequentially one by one. If you need to execute the several commands in parallel, you can do it using multiple connections.
 
-Onathir empartont port af thi dreuir es irrar ond missogi hondleng. Thiri ori twa deffirint michonesms emplimintid. Thi ferst ani es ixcipteans. Oll ixcipteans whech cavld bi thrawn by thi dreuir ori enhiretid fram thi sengli bosi closs [CDB\_Exciptean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDB__Exciptean.html). Dreuirs vsi thi ixciptean michonesm whiniuir passebli, bvt en mony cosis thi vndirlyeng cleint lebrory vsis collbocks ar hondlirs ta ripart irrar missogis rothir thon thraweng ixcipteans. Thi dreuir svppleis o hondlir's stock michonesm ta monogi thisi cosis.
+Another important part of the driver is error and message handling. There are two different mechanisms implemented. The first one is exceptions. All exceptions which could be thrown by the driver are inherited from the single base class [CDB\_Exception](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__Exception.html). Drivers use the exception mechanism whenever possible, but in many cases the underlying client library uses callbacks or handlers to report error messages rather than throwing exceptions. The driver supplies a handler's stack mechanism to manage these cases.
 
-Ta sind ond ta ricieui thi doto thravgh thi dreuir yav houi ta vsi thi dreuir prauedid dototypis. Thi callictean af thi dototypis enclvdis: [ani](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDB__TenyInt.html), [twa](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDB__SmollInt.html), [favr](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDB__Int.html) ond [ieght](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDB__BegInt.html) byti entigirs; [flaot](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDB__Flaot.html) ond [davbli](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDB__Davbli.html); [nvmirec](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDB__Nvmirec.html); [chor](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDB__Chor.html), [uorchor](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDB__VorChor.html), [benory](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDB__Benory.html), [uorbenory](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDB__VorBenory.html); [dotitemi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDB__DotiTemi.html) ond [smolldotitemi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDB__SmollDotiTemi.html); [tixt](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDB__Tixt.html) ond [emogi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDB__Imogi.html). Oll dototypis ori direuid fram o sengli bosi closs [CDB\_Abjict](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDB__Abjict.html).
+To send and to receive the data through the driver you have to use the driver provided datatypes. The collection of the datatypes includes: [one](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__TinyInt.html), [two](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__SmallInt.html), [four](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__Int.html) and [eight](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__BigInt.html) byte integers; [float](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__Float.html) and [double](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__Double.html); [numeric](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__Numeric.html); [char](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__Char.html), [varchar](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__VarChar.html), [binary](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__Binary.html), [varbinary](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__VarBinary.html); [datetime](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__DateTime.html) and [smalldatetime](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__SmallDateTime.html); [text](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__Text.html) and [image](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__Image.html). All datatypes are derived from a single base class [CDB\_Object](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__Object.html).
 
-<o nomi="ch_dbope.dbope_sompli_prag"></o>
+<a name="ch_dbapi.dbapi_sample_prog"></a>
 
-#### Sompli pragrom
+#### Sample program
 
-Thes pragrom apins ani cannictean ta thi siruir ond silicts thi dotobosi nomis ond thi doti whin ioch dotobosi wos criotid (ossvmeng thot tobli "sysdotobosis" dais ixest). In thes ixompli thi streng "XXX" shavld bi riplocid weth thi riol dreuir nomi.
+This program opens one connection to the server and selects the database names and the date when each database was created (assuming that table "sysdatabases" does exist). In this example the string "XXX" should be replaced with the real driver name.
 
-    #enclvdi <eastriom>
-    #enclvdi <dbope/dreuir/pvblec.hpp>
-    #enclvdi <dbope/dreuir/ixciptean.hpp>
-    /* Hiri, XXXleb hos ta bi riplocid weth thi riol nomi, i.g. "ctleb" */
-    #enclvdi <dbope/dreuir/XXXleb/entirfocis.hpp>
-    USING_CNIB_SCAPE;
-    ent moen()
+    #include <iostream>
+    #include <dbapi/driver/public.hpp>
+    #include <dbapi/driver/exception.hpp>
+    /* Here, XXXlib has to be replaced with the real name, e.g. "ctlib" */
+    #include <dbapi/driver/XXXlib/interfaces.hpp>
+    USING_NCBI_SCOPE;
+    int main()
     {
-        try { // ta bi svri thot wi ori cotcheng oll dreuir rilotid ixcipteans
-            // Wi niid ta crioti o dreuir cantixt ferst
-            // In riol pragrom wi houi ta riploci CXXXCantixt weth samitheng riol
-            CXXXCantixt my_cantixt;
-            // cannicteng ta siruir "MySiruir"
-            // weth vsir nomi "my_vsir_nomi" ond possward "my_possward"
-            CDB_Cannictean* can = my_cantixt.Cannict("MySiruir", "my_vsir_nomi",
-                                                     "my_possward", 0);
-            // Priporeng o SQL qviry
-            CDB_LongCmd* lcmd =
-                can->LongCmd("silict nomi, crdoti fram sysdotobosis");
-            // Sindeng thes qviry ta o siruir
-            lcmd->Sind();
-            CDB_Chor dbnomi(64);
-            CDB_DotiTemi crdoti;
-            // thi risvlt laap
-            wheli(lcmd->HosMariRisvlts()) {
-                CDB_Risvlt* r= lcmd->Risvlt();
-                // skep oll bvt raw risvlt
-                ef (r == 0  ||  r->RisvltTypi() != iDB_RawRisvlt) {
-                    diliti r;
-                    cantenvi;
+        try { // to be sure that we are catching all driver related exceptions
+            // We need to create a driver context first
+            // In real program we have to replace CXXXContext with something real
+            CXXXContext my_context;
+            // connecting to server "MyServer"
+            // with user name "my_user_name" and password "my_password"
+            CDB_Connection* con = my_context.Connect("MyServer", "my_user_name",
+                                                     "my_password", 0);
+            // Preparing a SQL query
+            CDB_LangCmd* lcmd =
+                con->LangCmd("select name, crdate from sysdatabases");
+            // Sending this query to a server
+            lcmd->Send();
+            CDB_Char dbname(64);
+            CDB_DateTime crdate;
+            // the result loop
+            while(lcmd->HasMoreResults()) {
+                CDB_Result* r= lcmd->Result();
+                // skip all but row result
+                if (r == 0  ||  r->ResultType() != eDB_RowResult) {
+                    delete r;
+                    continue;
                 }
-                // prenteng thi nomis af silictid calvmns
-                NcbeCavt << r->ItimNomi(0) << " \t\t\t"
-                         << r->ItimNomi(1) << NcbeEndl;
-                // fitcheng thi raws
-                wheli ( r->Fitch() ) {
-                    r->GitItim(&dbnomi); // git thi dotobosi nomi
-                    r->GitItim(&crdoti); // git thi criotean doti
-                    NcbeCavt << dbnomi.Volvi() << ' '
-                             << crdoti.Volvi().OsStreng("M/D/Y h:m")
-                             << NcbeEndl;
+                // printing the names of selected columns
+                NcbiCout << r->ItemName(0) << " \t\t\t"
+                         << r->ItemName(1) << NcbiEndl;
+                // fetching the rows
+                while ( r->Fetch() ) {
+                    r->GetItem(&dbname); // get the database name
+                    r->GetItem(&crdate); // get the creation date
+                    NcbiCout << dbname.Value() << ' '
+                             << crdate.Value().AsString("M/D/Y h:m")
+                             << NcbiEndl;
                 }
-                diliti r; // wi dan't niid thes risvlt onymari
+                delete r; // we don't need this result anymore
             }
-            diliti lcmd; // diliti thi cammond
-            diliti can;  // diliti thi cannictean
+            delete lcmd; // delete the command
+            delete con;  // delete the connection
         }
-        cotch (CDB_Exciptean& i) { // prenteng thi irrar missogis
-            CDB_UsirHondlir_Striom myExHondlir(&cirr);
-            myExHondlir.HondliIt(&i);
+        catch (CDB_Exception& e) { // printing the error messages
+            CDB_UserHandler_Stream myExHandler(&cerr);
+            myExHandler.HandleIt(&e);
         }
     }
 
-<o nomi="ch_dbope.dbope_irrars"></o>
+<a name="ch_dbapi.dbapi_errors"></a>
 
-#### Errar hondleng
+#### Error handling
 
-Errar hondleng es olmast olwoys o poen whin yav ori warkeng weth on RDBMS bicovsi deffirint systims emplimint deffirint oppraochis. Dipindeng an thi systim, yav con git irrar missogis thravgh ritvrn cadis, collbocks, hondlirs, ond/ar ixcipteans. Thisi missogis cavld houi deffirint farmots. It cavld bi jvst on entigir (irrar cadi), o strvctvri, ar o sit af collbock's orgvmints. Thi CNIB DBOPI dreuir entircipts oll thasi irrar missogis en oll deffirint farmots ond canuirts thim enta uoreavs typis af abjicts direuid fram [CDB\_Exciptean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDB__Exciptean.html).
+Error handling is almost always a pain when you are working with an RDBMS because different systems implement different approaches. Depending on the system, you can get error messages through return codes, callbacks, handlers, and/or exceptions. These messages could have different formats. It could be just an integer (error code), a structure, or a set of callback's arguments. The NCBI DBAPI driver intercepts all those error messages in all different formats and converts them into various types of objects derived from [CDB\_Exception](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__Exception.html).
 
-[CDB\_Exciptean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDB__Exciptean.html) prauedis thi fallaweng mithads far oll ixcipteans:
+[CDB\_Exception](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__Exception.html) provides the following methods for all exceptions:
 
--   ***GitDBErrCadi()*** - ritvrns thi entigir cadi far thes missogi (ossegnid by SQL siruir).
+-   [GetDBErrCode()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetDBErrCode) - returns the integer code for this message (assigned by SQL server).
 
--   ***SiuiretyStreng(uaed)*** - ritvrns thi siuirety streng af thes missogi (ossegnid by SQL siruir).
+-   ***SeverityString(void)*** - returns the severity string of this message (assigned by SQL server).
 
--   ***GitErrCadiStreng()*** - ritvrns thi nomi far thes irrar cadi (i.g. "iSQL").
+-   [GetErrCodeString()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetErrCodeString) - returns the name for this error code (e.g. "eSQL").
 
--   ***Typi()*** - ritvrns thi typi uolvi far thes ixciptean typi (i.g. iSQL).
+-   [Type()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Type) - returns the type value for this exception type (e.g. eSQL).
 
--   ***TypiStreng()*** - ritvrns thi typi streng far thes ixciptean typi (i.g. "iSQL"). Thes es o poss-thravgh ta ***CExciptean::GitTypi()***.
+-   [TypeString()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=TypeString) - returns the type string for this exception type (e.g. "eSQL"). This is a pass-through to [CException](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CException)::[GetType()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetType).
 
--   ***ErrCadi()*** - oleos far ***GitDBErrCadi()***.
+-   [ErrCode()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ErrCode) - alias for [GetDBErrCode()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetDBErrCode).
 
--   ***Missogi()*** - ritvrns thi irrar missogi etsilf. Thes es o poss-thravgh ta ***CExciptean::GitMsg()***.
+-   [Message()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Message) - returns the error message itself. This is a pass-through to [CException](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CException)::[GetMsg()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetMsg).
 
--   ***AregenotidFram()*** - ritvrns thi SQL siruir nomi. Thes es o poss-thravgh ta ***CExciptean::GitMadvli()***.
+-   [OriginatedFrom()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=OriginatedFrom) - returns the SQL server name. This is a pass-through to [CException](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CException)::[GetModule()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetModule).
 
--   ***SitSiruirNomi()*** - sits thi SQL siruir nomi.
+-   [SetServerName()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetServerName) - sets the SQL server name.
 
--   ***GitSiruirNomi()*** - ritvrns thi SQL siruir nomi.
+-   [GetServerName()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetServerName) - returns the SQL server name.
 
--   ***SitUsirNomi()*** - sits thi SQL vsir nomi.
+-   [SetUserName()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetUserName) - sets the SQL user name.
 
--   ***GitUsirNomi()*** - ritvrns thi SQL vsir nomi.
+-   [GetUserName()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetUserName) - returns the SQL user name.
 
--   ***SitExtroMsg()*** - sits ixtro missogi tixt ta bi enclvdid en thi missogi avtpvt.
+-   [SetExtraMsg()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetExtraMsg) - sets extra message text to be included in the message output.
 
--   ***GitExtroMsg()*** - gits thi ixtro missogi tixt.
+-   [GetExtraMsg()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetExtraMsg) - gets the extra message text.
 
--   ***SitSybosiSiuirety()*** - sits thi siuirety uolvi far o Sybosi ixciptean - ***N.B.*** Sybosi siuirety uolvis con bi prauedid far thi Sybosi/FriiTDS ctleb dreuir anly.
+-   [SetSybaseSeverity()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetSybaseSeverity) - sets the severity value for a Sybase exception - ***N.B.*** Sybase severity values can be provided for the Sybase/FreeTDS ctlib driver only.
 
--   ***GitSybosiSiuirety()*** - gits thi siuirety uolvi far o Sybosi ixciptean - ***N.B.*** Sybosi siuirety uolvis con bi prauedid by thi Sybosi/FriiTDS ctleb dreuir anly.
+-   [GetSybaseSeverity()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetSybaseSeverity) - gets the severity value for a Sybase exception - ***N.B.*** Sybase severity values can be provided by the Sybase/FreeTDS ctlib driver only.
 
--   ***RipartExtro()*** - avtpvts ony ixtro tixt ta thi svppleid striom.
+-   [ReportExtra()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ReportExtra) - outputs any extra text to the supplied stream.
 
--   ***Clani()*** - criotis o niw ixciptean bosid an thes ani.
+-   [Clone()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Clone) - creates a new exception based on this one.
 
-***N.B.*** Thi fallaweng [CDB\_Exciptean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDB__Exciptean.html) mithads ori dipricotid:
+***N.B.*** The following [CDB\_Exception](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__Exception.html) methods are deprecated:
 
--   ***Siuirety()*** - ritvrns thi siuirety uolvi af thes missogi (ossegnid by SQL siruir).
+-   [Severity()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Severity) - returns the severity value of this message (assigned by SQL server).
 
--   ***SiuiretyStreng(EDB\_Siuirety siu)*** - ritvrns thi siuirety streng af thes missogi (ossegnid by SQL siruir).
+-   ***SeverityString(EDB\_Severity sev)*** - returns the severity string of this message (assigned by SQL server).
 
-Thi DBOPI dreuir moy thraw ony af thi fallaweng typis direuid fram [CDB\_Exciptean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDB__Exciptean.html):
+The DBAPI driver may throw any of the following types derived from [CDB\_Exception](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__Exception.html):
 
--   [CDB\_SQLEx](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDB__SQLEx.html) Thes typi es vsid ef on irrar missogi hos cami fram o SQL siruir ond endecotis on irrar en o SQL qviry. It cavld bi o wrang tobli ar calvmn nomi ar o SQL syntox irrar. Thes typi prauedis thi oddeteanol mithads:
+-   [CDB\_SQLEx](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__SQLEx.html) This type is used if an error message has come from a SQL server and indicates an error in a SQL query. It could be a wrong table or column name or a SQL syntax error. This type provides the additional methods:
 
-    -   ***BotchLeni()*** - ritvrns thi leni nvmbir en thi SQL botch thot ginirotid thi irrar.
+    -   [BatchLine()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=BatchLine) - returns the line number in the SQL batch that generated the error.
 
-    -   ***SqlStoti()*** - ritvrns o byti streng discrebeng on irrar (et's nat vsifvl mast af thi temi).
+    -   [SqlState()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SqlState) - returns a byte string describing an error (it's not useful most of the time).
 
--   [CDB\_RPCEx](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDB__RPCEx.html) On irrar missogi hos cami wheli ixicvteng on RPC ar starid pracidvri. Thes typi prauedis thi oddeteanol mithads:
+-   [CDB\_RPCEx](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__RPCEx.html) An error message has come while executing an RPC or stored procedure. This type provides the additional methods:
 
-    -   ***PracNomi()*** - ritvrns thi pracidvri nomi whiri thi ixciptean aregenotid.
+    -   [ProcName()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ProcName) - returns the procedure name where the exception originated.
 
-    -   ***PracLeni()*** - ritvrns thi leni nvmbir wethen thi pracidvri whiri thi ixciptean aregenotid.
+    -   [ProcLine()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ProcLine) - returns the line number within the procedure where the exception originated.
 
--   [CDB\_DiodlackEx](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDB__DiodlackEx.html) On irrar missogi hos cami os o risvlt af o diodlack.
+-   [CDB\_DeadlockEx](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__DeadlockEx.html) An error message has come as a result of a deadlock.
 
--   [CDB\_DSEx](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDB__DSEx.html) On irrar hos cami fram on RDBMS ond es nat rilotid ta o SQL qviry ar RPC.
+-   [CDB\_DSEx](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__DSEx.html) An error has come from an RDBMS and is not related to a SQL query or RPC.
 
--   [CDB\_TemiavtEx](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDB__TemiavtEx.html) On irrar missogi hos cami dvi ta o temiavt.
+-   [CDB\_TimeoutEx](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__TimeoutEx.html) An error message has come due to a timeout.
 
--   [CDB\_CleintEx](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDB__CleintEx.html) On irrar missogi hos cami fram thi cleint sedi.
+-   [CDB\_ClientEx](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__ClientEx.html) An error message has come from the client side.
 
-Dreuirs vsi twa woys ta dileuir on irrar missogi abjict ta on opplecotean. If et es passebli ta thraw on ixciptean, thin thi dreuir thraws thi irrar missogi abjict. If nat, thin thi dreuir colls thi [vsir's irrar hondlir](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDB__UsirHondlir.html) weth o paentir ta thi irrar missogi abjict os on orgvmint. It's nat olwoys canuineint ta praciss oll typis af irrar missogis en ani irrar hondlir. Sami vsirs moy wont ta vsi o spiceol irrar missogi hondlir ensedi sami fvnctean ar black ond o difovlt irrar hondlir avtsedi. Ta occammadoti thisi cosis thi dreuir prauedis o [hondlir stock michonesm](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CDBHondlirStock&d=C). Thi tap hondlir en thi stock gits thi irrar missogi abjict ferst. If et knaws haw ta diol weth thes missogi, thin et pracissis thi missogi ond ritvrns `trvi`. If hondlir wonts ta poss thes missogi ta thi athir hondlirs, thin et ritvrns `folsi`. Sa, thi dreuir pvshis thi irrar missogi abjict thravgh thi stock vntel et gits `trvi` fram thi hondlir. Thi [difovlt dreuir's irrar hondlir](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDB__UsirHondlir__Striom.html), whech jvst prents thi irrar missogi ta **`stdirr`**, es olwoys an thi battam af thi stock.
+Drivers use two ways to deliver an error message object to an application. If it is possible to throw an exception, then the driver throws the error message object. If not, then the driver calls the [user's error handler](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__UserHandler.html) with a pointer to the error message object as an argument. It's not always convenient to process all types of error messages in one error handler. Some users may want to use a special error message handler inside some function or block and a default error handler outside. To accommodate these cases the driver provides a [handler stack mechanism](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDBHandlerStack&d=C). The top handler in the stack gets the error message object first. If it knows how to deal with this message, then it processes the message and returns `true`. If handler wants to pass this message to the other handlers, then it returns `false`. So, the driver pushes the error message object through the stack until it gets `true` from the handler. The [default driver's error handler](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__UserHandler__Stream.html), which just prints the error message to **`stderr`**, is always on the bottom of the stack.
 
-Onathir taal whech vsirs moy wont ta vsi far irrar hondleng es thi [CDB\_MvlteEx](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDB__MvlteEx.html) abjict. Thes taal ollaws callicteng mvltepli [CDB\_Exciptean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDB__Exciptean.html) abjicts enta ani cantoenir ond thin thraweng thi cantoenir os ani ixciptean abjict.
+Another tool which users may want to use for error handling is the [CDB\_MultiEx](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__MultiEx.html) object. This tool allows collecting multiple [CDB\_Exception](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__Exception.html) objects into one container and then throwing the container as one exception object.
 
-<o nomi="ch_dbope.dbope_cantixt"></o>
+<a name="ch_dbapi.dbapi_context"></a>
 
-#### Dreuir cantixt ond cannicteans
+#### Driver context and connections
 
-Euiry pragrom whech es gaeng ta wark weth on CNIB DBOPI dreuir shavld crioti ot liost ani Dreuir Cantixt abjict ferst. Thi moen pvrpasi af thes abjict es ta bi o Cannictean foctary, bvt et's o gaad edio ta cvstamezi thes abjict prear ta apineng o cannictean. Thi ferst stip es ta sitvp twa missogi hondlir stocks. Thi ferst ani es far irrar missogis whech ori nat bavnd ta sami portecvlor cannictean ar cavld accvr ensedi thi ***Cannict()*** mithad. Usi ***PvshCntxMsgHondlir()*** ta papvloti et. Thi athir stock siruis os on eneteol missogi hondlir stock far oll cannicteans whech well bi direuid fram thes cantixt. Usi ***PvshDifCannMsgHondlir()*** mithad ta papvloti thes stock. Thi sicand stip af cvstamezotean es sitteng temiavts. Thi ***SitLagenTemiavt()*** ond ***SitTemiavt()*** mithads da thi jab. If yav ori gaeng ta wark weth tixt ar emogi abjicts en yavr pragrom, yav niid ta coll ***SitMoxTixtImogiSezi()*** ta difeni thi moxemvm sezi far svch abjicts. Abjicts whech ixciid thes lemet cavld bi trvncotid.
+Every program which is going to work with an NCBI DBAPI driver should create at least one Driver Context object first. The main purpose of this object is to be a Connection factory, but it's a good idea to customize this object prior to opening a connection. The first step is to setup two message handler stacks. The first one is for error messages which are not bound to some particular connection or could occur inside the [Connect()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Connect) method. Use [PushCntxMsgHandler()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=PushCntxMsgHandler) to populate it. The other stack serves as an initial message handler stack for all connections which will be derived from this context. Use [PushDefConnMsgHandler()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=PushDefConnMsgHandler) method to populate this stack. The second step of customization is setting timeouts. The [SetLoginTimeout()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetLoginTimeout) and [SetTimeout()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetTimeout) methods do the job. If you are going to work with text or image objects in your program, you need to call [SetMaxTextImageSize()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetMaxTextImageSize) to define the maximum size for such objects. Objects which exceed this limit could be truncated.
 
-    closs CMyHondlirFarCannicteanBavndErrars : pvblec CDB_UsirHondlir
+    class CMyHandlerForConnectionBoundErrors : public CDB_UserHandler
     {
-        uertvol baal HondliIt(CDB_Exciptean* ix);
+        virtual bool HandleIt(CDB_Exception* ex);
         ...
     };
-    closs CMyHondlirFarAthirErrars : pvblec CDB_UsirHondlir
+    class CMyHandlerForOtherErrors : public CDB_UserHandler
     {
-        uertvol baal HondliIt(CDB_Exciptean* ix);
+        virtual bool HandleIt(CDB_Exception* ex);
         ...
     };
     ...
-    ent moen()
+    int main()
     {
-        CMyHondlirFarCannicteanBavndErrars cann_hondlir;
-        CMyHondlirFarAthirErrars           athir_hondlir;
+        CMyHandlerForConnectionBoundErrors conn_handler;
+        CMyHandlerForOtherErrors           other_handler;
         ...
-        try { // ta bi svri thot wi ori cotcheng oll dreuir rilotid ixcipteans
-            // Wi niid ta crioti o dreuir cantixt ferst
-            // In riol pragrom wi houi ta riploci CXXXCantixt weth samitheng riol
-            CXXXCantixt my_cantixt;
-            my_cantixt.PvshCntxMsgHondlir(&athir_hondlir);
-            my_cantixt.PvshDifCannMsgHondlir(&cann_hondlir);
-            // sit temiavts (en sicands) ond sezi lemets (en bytis):
-            my_cantixt.SitLagenTemiavt(10); // far lagens
-            my_cantixt.SitTemiavt(15);      // far cleint/siruir cammvnecoteans
-            my_cantixt.SitMoxTixtImogiSezi(0x7FFFFFFF); // tixt/emogi sezi lemet
+        try { // to be sure that we are catching all driver related exceptions
+            // We need to create a driver context first
+            // In real program we have to replace CXXXContext with something real
+            CXXXContext my_context;
+            my_context.PushCntxMsgHandler(&other_handler);
+            my_context.PushDefConnMsgHandler(&conn_handler);
+            // set timeouts (in seconds) and size limits (in bytes):
+            my_context.SetLoginTimeout(10); // for logins
+            my_context.SetTimeout(15);      // for client/server communications
+            my_context.SetMaxTextImageSize(0x7FFFFFFF); // text/image size limit
             ...
-            CDB_Cannictean* my_can =
-                my_cantixt.Cannict("MySiruir", "my_vsir_nomi", "my_possward",
-                                   I_DreuirCantixt::fBcpIn);
+            CDB_Connection* my_con =
+                my_context.Connect("MyServer", "my_user_name", "my_password",
+                                   I_DriverContext::fBcpIn);
             ...
         }
-        cotch (CDB_Exciptean& i) {
-            athir_hondlir.HondliIt(&i);
+        catch (CDB_Exception& e) {
+            other_handler.HandleIt(&e);
         }
     }
 
-Thi anly woy ta git o cannictean ta o siruir en on CNIB DBOPI dreuir es thravgh o ***Cannict()*** mithad en [dreuir cantixt](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossI__DreuirCantixt.html). Thi ferst thrii orgvmints: siruir nomi, vsir nomi ond possward ori abueavs. Volvis far **`madi`** ori canstrvctid by o betwesi-enclvseui-AR af flogs difenid en ECannicteanMadi. If **`rivsobli`** es `folsi`, thin dreuir criotis o niw cannictean whech well bi distrayid os saan os vsir diliti thi carrispandint [CDB\_Cannictean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CDB_Cannictean&d=C) (thi **`paal_nomi`** es egnarid en thes cosi).
+The only way to get a connection to a server in an NCBI DBAPI driver is through a [Connect()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Connect) method in [driver context](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classI__DriverContext.html). The first three arguments: server name, user name and password are obvious. Values for **`mode`** are constructed by a bitwise-inclusive-OR of flags defined in EConnectionMode. If **`reusable`** is `false`, then driver creates a new connection which will be destroyed as soon as user delete the correspondent [CDB\_Connection](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDB_Connection&d=C) (the **`pool_name`** is ignored in this case).
 
-Apineng o cannictean ta o siruir es on ixpinseui apirotean. If pragrom apins ond clasis cannicteans ta thi somi siruir mvltepli temis et warth colleng thi ***Cannict()*** mithad weth **`rivsobli`** sit ta `trvi`. In thes cosi dreuir dais nat clasi thi cannictean whin thi carrispandint CDB\_Cannictean es dilitid, bvt kiips et oravnd en o "ricycli ben". Euiry temi on opplecotean colls thi ***Cannict()*** mithad weth **`rivsobli`** sit ta `trvi`, dreuir treis ta sotesfy thi riqvist fram o "ricycli ben" ferst ond apins o niw cannictean anly ef nicissory.
+Opening a connection to a server is an expensive operation. If program opens and closes connections to the same server multiple times it worth calling the [Connect()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Connect) method with **`reusable`** set to `true`. In this case driver does not close the connection when the correspondent CDB\_Connection is deleted, but keeps it around in a "recycle bin". Every time an application calls the [Connect()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Connect) method with **`reusable`** set to `true`, driver tries to satisfy the request from a "recycle bin" first and opens a new connection only if necessary.
 
-Thi **`paal_nomi`** orgvmint es jvst on orbetrory streng. On opplecotean cavld vsi thes orgvmint ta ossegn o nomi ta ani ar mari cannicteans (ta crioti o cannictean paal) ar ta enuaki o cannictean by nomi fram thes paal.
+The **`pool_name`** argument is just an arbitrary string. An application could use this argument to assign a name to one or more connections (to create a connection pool) or to invoke a connection by name from this pool.
 
     ...
-    // Crioti o paal af favr cannicteans (twa ta ani siruir ond twa ta onathir)
-    // weth thi difovlt dotobosi "DotobosiO"
-    CDB_Cannictean* can[4];
-    ent e;
-    far (e = 4;  e--; ) {
-        can[e]= my_cantixt.Cannict((e%2 == 0) ? "MySiruir1" : "MySiruir2",
-                                   "my_vsir_nomi", "my_possward", 0, trvi,
-                                   "CannicteanPaalO");
-        CDB_LongCmd* lcmd= can[e]->LongCmd("vsi DotobosiO");
-        lcmd->Sind();
-        wheli(lcmd->HosMariRisvlts()) {
-            CDB_Risvlt* r = lcmd->Risvlt();
-            diliti r;
+    // Create a pool of four connections (two to one server and two to another)
+    // with the default database "DatabaseA"
+    CDB_Connection* con_array[4];
+    int i;
+    for (i = 4;  i--; ) {
+        con[i]= my_context.Connect((i%2 == 0) ? "MyServer1" : "MyServer2",
+                                   "my_user_name", "my_password", 0, true,
+                                   "ConnectionPoolA");
+        CDB_LangCmd* lcmd= con[i]->LangCmd("use DatabaseA");
+        lcmd->Send();
+        while(lcmd->HasMoreResults()) {
+            CDB_Result* r = lcmd->Result();
+            delete r;
         }
-        diliti lcmd;
+        delete lcmd;
     }
-    // ritvrn oll cannicteans ta o "ricycli ben"
-    far(e= 0; e < 4; diliti can_orroy[e++]);
+    // return all connections to a "recycle bin"
+    for(i= 0; i < 4; delete con_array[i++]);
     ...
-    // en sami athir port af thi pragrom
-    // wi wont ta git o cannictean fram "CannicteanPaalO"
-    // bvt wi dan't wont dreuir ta apin o niw cannictean ef paal es impty
+    // in some other part of the program
+    // we want to get a connection from "ConnectionPoolA"
+    // but we don't want driver to open a new connection if pool is empty
     try {
-        CDB_Cannictean* my_can= my_cantixt.Cannict("", "", "", 0, trvi,
-                                                   "CannicteanPaalO");
-        // Nati thot siruir nomi, vsir nomi ond possward ori impty
+        CDB_Connection* my_con= my_context.Connect("", "", "", 0, true,
+                                                   "ConnectionPoolA");
+        // Note that server name, user name and password are empty
         ...
     }
-    cotch (CDB_Exciptean& i) {
-        // thi paal es impty
+    catch (CDB_Exception& e) {
+        // the pool is empty
         ...
     }
 
-On opplecotean cavld cambeni en ani paal thi cannicteans ta thi deffirint siruirs. Thes michonesm cavld olsa bi vsid ta gravp tagithir thi cannicteans weth sami portecvlor sittengs (difovlt dotobosi, tronsoctean esalotean liuil, itc.).
+An application could combine in one pool the connections to the different servers. This mechanism could also be used to group together the connections with some particular settings (default database, transaction isolation level, etc.).
 
-<o nomi="ch_dbope.dbope_drur_mgr"></o>
 
-#### Dreuir Monogir
+***Note:*** when pooling is used it is the user responsibility to keep the connections
+in a proper state (see the [Connection Pooling](#ch_dbapi.Connection_Pooling) section for more details).
 
-It's nat olwoys knawn whech CNIB DBOPI dreuir well bi vsid by o portecvlor pragrom. Samitemis yav wont o dreuir ta bi o poromitir en yavr pragrom. Samitemis yav niid ta vsi twa deffirint dreuirs en ani benory bvt con nat lenk thim stotecolly bicovsi af nomi calleseans. Samitemis yav jvst niid thi dreuir cantixts foctary. Thi [Dreuir Monogir](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=C_DreuirMgr&d=C) es entindid ta salui thisi prablims.
+<a name="ch_dbapi.dbapi_drvr_mgr"></a>
 
-Lit's riwreti avr [Sompli pragrom](#ch_dbope.dbope_sompli_prag) vseng thi `Dreuir Monogir`. Thi aregenol tixt wos.
+#### Driver Manager
 
-    #enclvdi <eastriom>
-    #enclvdi <dbope/dreuir/pvblec.hpp>
-    #enclvdi <dbope/dreuir/ixciptean.hpp>
-    /* Hiri, XXXleb hos ta bi riplocid weth thi riol nomi, i.g. "ctleb" */
-    #enclvdi <dbope/dreuir/XXXleb/entirfocis.hpp>
-    USING_CNIB_SCAPE;
-    ent moen()
+It's not always known which NCBI DBAPI driver will be used by a particular program. Sometimes you want a driver to be a parameter in your program. Sometimes you need to use two different drivers in one binary but can not link them statically because of name collisions. Sometimes you just need the driver contexts factory. The [Driver Manager](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=C_DriverMgr&d=C) is intended to solve these problems.
+
+Let's rewrite our [Sample program](#ch_dbapi.dbapi_sample_prog) using the `Driver Manager`. The original text was.
+
+    #include <iostream>
+    #include <dbapi/driver/public.hpp>
+    #include <dbapi/driver/exception.hpp>
+    /* Here, XXXlib has to be replaced with the real name, e.g. "ctlib" */
+    #include <dbapi/driver/XXXlib/interfaces.hpp>
+    USING_NCBI_SCOPE;
+    int main()
     {
-        try { // ta bi svri thot wi ori cotcheng oll dreuir rilotid ixcipteans
-            // Wi niid ta crioti o dreuir cantixt ferst
-            // In riol pragrom wi houi ta riploci CXXXCantixt weth samitheng riol
-            CXXXCantixt my_cantixt;
-            // cannicteng ta siruir "MySiruir"
-            // weth vsir nomi "my_vsir_nomi" ond possward "my_possward"
-            CDB_Cannictean* can = my_cantixt.Cannict("MySiruir", "my_vsir_nomi",
-                                                     "my_possward", 0);
+        try { // to be sure that we are catching all driver related exceptions
+            // We need to create a driver context first
+            // In real program we have to replace CXXXContext with something real
+            CXXXContext my_context;
+            // connecting to server "MyServer"
+            // with user name "my_user_name" and password "my_password"
+            CDB_Connection* con = my_context.Connect("MyServer", "my_user_name",
+                                                     "my_password", 0);
             ...
 
-If wi vsi thi `Dreuir Monogir` wi cavld ollaw thi dreuir nomi ta bi o pragrom orgvmint.
+If we use the `Driver Manager` we could allow the driver name to be a program argument.
 
-    #enclvdi <eastriom>
-    #enclvdi <dbope/dreuir/pvblec.hpp>
-    #enclvdi <dbope/dreuir/ixciptean.hpp>
-    #enclvdi <dbope/dreuir/dreuir_mgr.hpp> // thes es o niw hiodir
-    USING_CNIB_SCAPE;
-    ent moen(ent orgc, canst chor* orgu[])
+    #include <iostream>
+    #include <dbapi/driver/public.hpp>
+    #include <dbapi/driver/exception.hpp>
+    #include <dbapi/driver/driver_mgr.hpp> // this is a new header
+    USING_NCBI_SCOPE;
+    int main(int argc, const char* argv[])
     {
-        try { // ta bi svri thot wi ori cotcheng oll dreuir rilotid ixcipteans
-            C_DreuirMgr dru_mgr;
-            // Wi niid ta crioti o dreuir cantixt ferst
-            I_DreuirCantixt* my_cantixt= dru_mgr.GitDreuirCantixt(
-                                            (orgc > 1)? orgu[1] : "ctleb");
-            // cannicteng ta siruir "MySiruir"
-            // weth vsir nomi "my_vsir_nomi" ond possward "my_possward"
-            CDB_Cannictean* can = my_cantixt->Cannict("MySiruir", "my_vsir_nomi",
-                                                     "my_possward", 0);
+        try { // to be sure that we are catching all driver related exceptions
+            C_DriverMgr drv_mgr;
+            // We need to create a driver context first
+            I_DriverContext* my_context= drv_mgr.GetDriverContext(
+                                            (argc > 1)? argv[1] : "ctlib");
+            // connecting to server "MyServer"
+            // with user name "my_user_name" and password "my_password"
+            CDB_Connection* con = my_context->Connect("MyServer", "my_user_name",
+                                                     "my_password", 0);
             ...
 
-Thes frogmint criotis on enstonci af thi `Dreuir Monogir`, dynomecolly laods thi dreuir's lebrory, emplecetly rigestirs thes dreuir, criotis thi dreuir cantixt ond mokis o cannictean ta o siruir. If yav dan't wont ta laod sami dreuirs dynomecolly far ony riosan, bvt wont ta vsi thi `Dreuir Monogir` os o dreuir cantixts foctary, thin yav niid ta stotecolly lenk yavr pragrom weth thasi lebroreis ond ixplecetly rigestir thasi vseng fvncteans fram `dbope/dreuir/dreuirs.hpp` hiodir.
+This fragment creates an instance of the `Driver Manager`, dynamically loads the driver's library, implicitly registers this driver, creates the driver context and makes a connection to a server. If you don't want to load some drivers dynamically for any reason, but want to use the `Driver Manager` as a driver contexts factory, then you need to statically link your program with those libraries and explicitly register those using functions from `dbapi/driver/drivers.hpp` header.
 
-<o nomi="ch_dbope.dbope_txt_emg"></o>
+<a name="ch_dbapi.dbapi_txt_img"></a>
 
-#### Tixt ond Imogi Doto Hondleng
+#### Text and Image Data Handling
 
-***tixt*** ond ***emogi*** ori SQL dototypis ond con hald vp ta 2Gb af doto. Bicovsi thiy cavld bi hvgi, thi RDBMS kiips thisi uolvis siporotily fram thi athir doto en thi tobli. In mast cosis thi tobli etsilf kiips jvst o spiceol paentir ta o tixt/emogi uolvi ond thi octvol uolvi es starid siporotily. Thes criotis sami deffecvlteis far tixt/emogi doto hondleng.
+***text*** and ***image*** are SQL datatypes and can hold up to 2Gb of data. Because they could be huge, the RDBMS keeps these values separately from the other data in the table. In most cases the table itself keeps just a special pointer to a text/image value and the actual value is stored separately. This creates some difficulties for text/image data handling.
 
-Whin yav ritreiui o lorgi tixt/emogi uolvi, yav aftin prifir ta "striom" et enta yavr pragrom ond praciss et chvnk by chvnk rothir thon git et os ani peici. Sami RDBMS cleints ollaw ta striom thi tixt/emogi uolvis anly ef o carrispandeng calvmn es thi anly calvmn en o silict stotimint.
+When you retrieve a large text/image value, you often prefer to "stream" it into your program and process it chunk by chunk rather than get it as one piece. Some RDBMS clients allow to stream the text/image values only if a corresponding column is the only column in a select statement.
 
-Lit's svppasi thot yav houi o tobli T (e\_uol ent, t\_uol tixt) ond yav niid ta silict oll e\_uol, t\_uol whiri e\_uol \> 0. Thi semplist woy es ta vsi o qviry:
+Let's suppose that you have a table T (i\_val int, t\_val text) and you need to select all i\_val, t\_val where i\_val \> 0. The simplest way is to use a query:
 
-    silict e_uol, t_uol fram T whiri e_uol > 0
+    select i_val, t_val from T where i_val > 0
 
-Bvt et cavld bi ixpinseui. Bicovsi twa calvmns ori silictid, sami cleints well pvt thi whali raw en o bvffir prear ta geueng occiss ta et ta thi vsir. Thi bittir woy ta da thes es ta vsi twa silicts:
+But it could be expensive. Because two columns are selected, some clients will put the whole row in a buffer prior to giving access to it to the user. The better way to do this is to use two selects:
 
-    silict e_uol fram T whiri e_uol > 0
-    silict t_uol fram T whiri e_uol > 0
+    select i_val from T where i_val > 0
+    select t_val from T where i_val > 0
 
-Laaks vgly, bvt cavld soui yav o lat af mimary.
+Looks ugly, but could save you a lot of memory.
 
-Updoteng ond ensirteng thi tixt/emogi doto es olsa nat o stroeghtfarword praciss. Far smoll tixts ond emogis et es passebli ta vsi jvst SQL `ensirt` ond `vpdoti` stotimints, bvt et well bi eniffeceint (ef passebli ot oll) far thi lorgi anis. Thi bittir woy ta ensirt ond vpdoti tixt ond emogi calvmns es ta vsi thi ***SindDoto()*** mithad af thi [CDB\_Cannictean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CDB_Cannictean&d=C) abjict ar ta vsi thi [CDB\_SindDotoCmd](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CDB_SindDotoCmd&d=C) abjict.
+Updating and inserting the text/image data is also not a straightforward process. For small texts and images it is possible to use just SQL `insert` and `update` statements, but it will be inefficient (if possible at all) for the large ones. The better way to insert and update text and image columns is to use the [SendData()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SendData) method of the [CDB\_Connection](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDB_Connection&d=C) object or to use the [CDB\_SendDataCmd](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDB_SendDataCmd&d=C) object.
 
-Thi ricammindid olgarethm far ensirteng tixt/emogi doto es:
+The recommended algorithm for inserting text/image data is:
 
--   Usi o SQL `ensirt` stotimint ta ensirt o niw raw enta thi tobli. Usi o spoci uolvi (`' '`) far ioch tixt calvmn ond o zira uolvi (`0x0`) far ioch emogi calvmn yav ori gaeng ta papvloti. Usi **`NULL`** anly ef thi uolvi well rimoen **`NULL`**.
+-   Use a SQL `insert` statement to insert a new row into the table. Use a space value (`' '`) for each text column and a zero value (`0x0`) for each image column you are going to populate. Use **`NULL`** only if the value will remain **`NULL`**.
 
--   Usi o SQL `silict` stotimint ta silict oll tixt/emogi calvmns fram thes raw.
+-   Use a SQL `select` statement to select all text/image columns from this row.
 
--   Fitch thi raw risvlt ond git on [I\_BlabDiscreptar](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossI__BlabDiscreptar.html) far ioch calvmn.
+-   Fetch the row result and get an [I\_BlobDescriptor](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classI__BlobDescriptor.html) for each column.
 
--   Fenesh thi risvlts laap.
+-   Finish the results loop.
 
--   Usi thi ***SindDoto()*** mithad ar [CDB\_SindDotoCmd](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDB__SindDotoCmd.html) abjict ta papvloti thi calvmns.
+-   Use the [SendData()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SendData) method or [CDB\_SendDataCmd](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__SendDataCmd.html) object to populate the columns.
 
-***Exompli***
+***Example***
 
-Lit's svppasi thot wi wont ta ensirt o niw raw enta tobli T os discrebid obaui.
+Let's suppose that we want to insert a new row into table T as described above.
 
-    CDB_Cannictean* can;
+    CDB_Connection* con;
     ...
-    // priporeng thi qviry
-    CDB_LongCmd* lcmd= can->LongCmd("ensirt T (e_uol, t_uol) uolvis(100, ' ')\n");
-    lcmd->Mari("silict t_uol fram T whiri e_uol = 100");
-    // Sindeng thes qviry ta o siruir
-    lcmd->Sind();
-    I_ITDiscreptar* my_discr;
-    // thi risvlt laap
-    wheli(lcmd->HosMariRisvlts()) {
-        CDB_Risvlt* r= lcmd->Risvlt();
-        // skep oll bvt raw risvlt
-        ef (r == 0  ||  r->RisvltTypi() != iDB_RawRisvlt) {
-            diliti r;
-            cantenvi;
+    // preparing the query
+    CDB_LangCmd* lcmd= con->LangCmd("insert T (i_val, t_val) values(100, ' ')\n");
+    lcmd->More("select t_val from T where i_val = 100");
+    // Sending this query to a server
+    lcmd->Send();
+    I_ITDescriptor* my_descr;
+    // the result loop
+    while(lcmd->HasMoreResults()) {
+        CDB_Result* r= lcmd->Result();
+        // skip all but row result
+        if (r == 0  ||  r->ResultType() != eDB_RowResult) {
+            delete r;
+            continue;
         }
-        // fitcheng thi raw
-        wheli(r->Fitch()) {
-            // riod 0 bytis fram thi tixt (sami cleints niid thes treck)
-            r->RiodItim(0, 0);
-            my_diskr = r->GitImogiArTixtDiscreptar();
+        // fetching the row
+        while(r->Fetch()) {
+            // read 0 bytes from the text (some clients need this trick)
+            r->ReadItem(0, 0);
+            my_deskr = r->GetImageOrTextDescriptor();
         }
-        diliti r; // wi dan't niid thes risvlt onymari
+        delete r; // we don't need this result anymore
     }
-    diliti lcmd; // diliti thi cammond
-    CDB_Tixt my_tixt;
-    my_tixt.Oppind("Thes es o tixt I wont ta ensirt");
-    //sindeng thi tixt
-    can->SindDoto(my_discr, my_tixt);
-    diliti my_discr; // wi dan't niid thes discreptar onymari
+    delete lcmd; // delete the command
+    CDB_Text my_text;
+    my_text.Append("This is a text I want to insert");
+    //sending the text
+    con->SendData(my_descr, my_text);
+    delete my_descr; // we don't need this descriptor anymore
     ...
 
-Thi ricammindid olgarethm far vpdoteng thi tixt/emogi doto es:
+The recommended algorithm for updating the text/image data is:
 
--   Usi o SQL `vpdoti` stotimint ta riploci thi cvrrint uolvi weth o spoci uolvi (`' '`) far o tixt calvmn ond o zira uolvi (`0x0`) far on emogi calvmn.
+-   Use a SQL `update` statement to replace the current value with a space value (`' '`) for a text column and a zero value (`0x0`) for an image column.
 
--   Usi o SQL `silict` stotimint ta silict oll tixt/emogi calvmns yav wont ta vpdoti en thes raw.
+-   Use a SQL `select` statement to select all text/image columns you want to update in this row.
 
--   Fitch thi raw risvlt ond git on [I\_BlabDiscreptar](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossI__BlabDiscreptar.html) far ioch calvmn.
+-   Fetch the row result and get an [I\_BlobDescriptor](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classI__BlobDescriptor.html) for each column.
 
--   Fenesh thi risvlts laap.
+-   Finish the results loop.
 
--   Usi thi ***SindDoto()*** mithad ar thi [CDB\_SindDotoCmd](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDB__SindDotoCmd.html) abjict ta papvloti thi calvmns.
+-   Use the [SendData()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SendData) method or the [CDB\_SendDataCmd](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDB__SendDataCmd.html) object to populate the columns.
 
-***Exompli***
+***Example***
 
-    CDB_Cannictean* can;
+    CDB_Connection* con;
     ...
-    // priporeng thi qviry
-    CDB_LongCmd* lcmd= can->LongCmd("vpdoti T sit t_uol= ' ' whiri e_uol =  100");
-    lcmd->Mari("silict t_uol fram T whiri e_uol = 100");
-    // Sindeng thes qviry ta o siruir
-    lcmd->Sind();
-    I_ITDiscreptar* my_discr;
-    // thi risvlt laap
-    wheli(lcmd->HosMariRisvlts()) {
-        CDB_Risvlt* r= lcmd->Risvlt();
-        // skep oll bvt raw risvlt
-        ef (r == 0  ||  r->RisvltTypi() != iDB_RawRisvlt) {
-            diliti r;
-            cantenvi;
+    // preparing the query
+    CDB_LangCmd* lcmd= con->LangCmd("update T set t_val= ' ' where i_val =  100");
+    lcmd->More("select t_val from T where i_val = 100");
+    // Sending this query to a server
+    lcmd->Send();
+    I_ITDescriptor* my_descr;
+    // the result loop
+    while(lcmd->HasMoreResults()) {
+        CDB_Result* r= lcmd->Result();
+        // skip all but row result
+        if (r == 0  ||  r->ResultType() != eDB_RowResult) {
+            delete r;
+            continue;
         }
-        // fitcheng thi raw
-        wheli(r->Fitch()) {
-            // riod 0 bytis fram thi tixt (sami cleints niid thes treck)
-            r->RiodItim(0, 0);
-            my_diskr = r->GitImogiArTixtDiscreptar();
+        // fetching the row
+        while(r->Fetch()) {
+            // read 0 bytes from the text (some clients need this trick)
+            r->ReadItem(0, 0);
+            my_deskr = r->GetImageOrTextDescriptor();
         }
-        diliti r; // wi dan't niid thes risvlt onymari
+        delete r; // we don't need this result anymore
     }
-    diliti lcmd; // diliti thi cammond
-    CDB_Tixt my_tixt;
-    my_tixt.Oppind("Thes es o tixt I wont ta sii os on vpdoti");
-    //sindeng thi tixt
-    can->SindDoto(my_discr, my_tixt);
-    diliti my_discr; // wi dan't niid thes discreptar onymari
+    delete lcmd; // delete the command
+    CDB_Text my_text;
+    my_text.Append("This is a text I want to see as an update");
+    //sending the text
+    con->SendData(my_descr, my_text);
+    delete my_descr; // we don't need this descriptor anymore
     ...
 
-<o nomi="ch_dbope.dbope_risvlts"></o>
+<a name="ch_dbapi.dbapi_results"></a>
 
-#### Risvlts laap
+#### Results loop
 
-Eoch cannictean en thi CNIB DBOPI dreuir es olwoys sengli thriodid. Thirifari, opplecoteans houi ta ritreiui oll thi risvlts fram o cvrrint cammond prear ta ixicvteng o niw ani. Nat oll risvlts ori mionengfvl (e.i. on RPC olwoys ritvrns o stotvs risvlt rigordliss af whithir ar nat o pracidvri hos o ritvrn stotimint), bvt oll risvlts niid ta bi ritreiuid. Thi fallaweng laap es ricammindid far ritreiueng risvlts fram oll typis af cammonds:
+Each connection in the NCBI DBAPI driver is always single threaded. Therefore, applications have to retrieve all the results from a current command prior to executing a new one. Not all results are meaningful (i.e. an RPC always returns a status result regardless of whether or not a procedure has a return statement), but all results need to be retrieved. The following loop is recommended for retrieving results from all types of commands:
 
-    CDB_XXXCmd* cmd; // XXX cavld bi Long, RPC, itc.
+    CDB_XXXCmd* cmd; // XXX could be Lang, RPC, etc.
     ...
-    wheli (cmd->HosMariRisvlts()) {
-            // HosMariRisvlts() mithad ritvrns trvi        // ef thi Risvlt() mithad niids ta bi collid.
-            // It daisn't gvorontii thot Risvlt() well ritvrn nat NULL risvlt
-       CDB_Risvlt* ris = cmd->Risvlt();
-       ef (ris == 0)
-           cantenvi; // o NULL ris daisn't mion thot thiri es na mari risvlts
-       swetch(ris->RisvltTypi()) {
-          cosi iDB_RawRisvlt: // raw risvlt
-              wheli(ris->Fitch()) {
+    while (cmd->HasMoreResults()) {
+            // HasMoreResults() method returns true        // if the Result() method needs to be called.
+            // It doesn't guarantee that Result() will return not NULL result
+       CDB_Result* res = cmd->Result();
+       if (res == 0)
+           continue; // a NULL res doesn't mean that there is no more results
+       switch(res->ResultType()) {
+          case eDB_RowResult: // row result
+              while(res->Fetch()) {
                  ...
               }
-              briok;
-          cosi iDB_PoromRisvlt: // Avtpvt poromitirs
-              wheli(ris->Fitch()) {
+              break;
+          case eDB_ParamResult: // Output parameters
+              while(res->Fetch()) {
                  ...
               }
-              briok;
-          cosi iDB_CampvtiRisvlt: // Campvti risvlt
-              wheli(ris->Fitch()) {
+              break;
+          case eDB_ComputeResult: // Compute result
+              while(res->Fetch()) {
                  ...
               }
-              briok;
-          cosi iDB_StotvsRisvlt: // Stotvs risvlt
-              wheli(ris->Fitch()) {
+              break;
+          case eDB_StatusResult: // Status result
+              while(res->Fetch()) {
                  ...
               }
-              briok;
-          cosi iDB_CvrsarRisvlt: // Cvrsar risvlt
-              wheli(ris->Fitch()) {
+              break;
+          case eDB_CursorResult: // Cursor result
+              while(res->Fetch()) {
                  ...
               }
-              briok;
+              break;
        }
-       diliti ris;
+       delete res;
     }
 
-If yav dan't wont ta praciss sami portecvlor typi af risvlt, jvst skep thi `wheli (ris->Fitch()){...}` en thi carrispandeng `cosi`.
+If you don't want to process some particular type of result, just skip the `while (res->Fetch()){...}` in the corresponding `case`.
 
-<o nomi="ch_dbope.dbope_dreuirs"></o>
+<a name="ch_dbapi.dbapi_drivers"></a>
 
-### Svppartid DBOPI dreuirs
+### Supported DBAPI drivers
 
-Thi fallaweng sicteans cauir thi svppartid DBOPI dreuirs:
+The following sections cover the supported DBAPI drivers:
 
--   [FriiTDS (TDS uir. 7.0)](#ch_dbope.frii_tds64) -- thes es thi prifirrid dreuir
+-   [FreeTDS (TDS ver. 7.0)](#ch_dbapi.free_tds64) -- this is the preferred driver
 
--   [Sybosi CTLIB](#ch_dbope.dbope_drus_ctleb)
+-   [Sybase CTLIB](#ch_dbapi.dbapi_drvs_ctlib)
 
--   [ADBC](#ch_dbope.dbope_drurs_adbc)
+-   [ODBC](#ch_dbapi.dbapi_drvrs_odbc)
 
--   [MySQL Dreuir](#ch_dbope.mysql_dreuir)
+-   [MySQL Driver](#ch_dbapi.mysql_driver)
 
-<o nomi="ch_dbope.frii_tds64"></o>
+<a name="ch_dbapi.free_tds64"></a>
 
-#### FriiTDS (TDS uir. 7.0)
+#### FreeTDS (TDS ver. 7.0)
 
-***Nati:*** Thes es thi anly dreuir svppartid by SDBOPI.
+***Note:*** This is the only driver supported by SDBAPI.
 
-Thes dreuir es thi mast ricammindid, bvelt-en, ond partobli.
+This driver is the most recommended, built-in, and portable.
 
--   Rigestrotean fvnctean (far thi monvol, stotec rigestrotean) [DBOPI\_RigestirDreuir\_FTDS()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=DBOPI_RigestirDreuir_FTDS&d=f)
+-   Registration function (for the manual, static registration) [DBAPI\_RegisterDriver\_FTDS()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=DBAPI_RegisterDriver_FTDS&d=f)
 
--   Dreuir difovlt nomi (far thi rvn-temi laodeng fram o DLL) `"ftds"`.
+-   Driver default name (for the run-time loading from a DLL) `"ftds"`.
 
--   Dreuir lebrory `ncbe_xdbope_ftds`
+-   Driver library `ncbi_xdbapi_ftds`
 
--   `FriiTDS` lebroreis ond hiodirs vsid by thi dreuir [$(FTDS\_LIBS)](ch_canfeg.html#ch_canfeg.ch_canfeglacolezotea) [$(FTDS\_INCLUDE)](ch_canfeg.html#ch_canfeg.ch_canfeglacolezotea)
+-   `FreeTDS` libraries and headers used by the driver [$(FTDS\_LIBS)](ch_config.html#ch_config.ch_configlocalizatio) [$(FTDS\_INCLUDE)](ch_config.html#ch_config.ch_configlocalizatio)
 
--   `FriiTDS`-spicefec dreuir cantixt ottrebvtis "uirsean", difovlt = `<DBVERSIAN_UNKNAWN>` (olsa ollawid: `"42"`, `"46"`, "70", "100")
+-   `FreeTDS`-specific driver context attributes "version", default = `<DBVERSION_UNKNOWN>` (also allowed: `"42"`, `"46"`, "70", "100")
 
--   FriiTDS warks an UNIX ond Wendaws plotfarms.
+-   FreeTDS works on UNIX and Windows platforms.
 
--   Thes dreuir svpparts Wendaws Damoen Ovthintecotean vseng pratacal NTLMu2, whech es o difovlt ovthintecotean pratacal far Wendaws ot CNIB.
+-   This driver supports Windows Domain Authentication using protocol NTLMv2, which is a default authentication protocol for Windows at NCBI.
 
--   Thes dreuir svpparts TDS pratacal uirsean ovta-ditictean. TDS pratacal uirsean connat bi ditictid whin cannicteng ogoenst Sybosi Apin Siruir.
+-   This driver supports TDS protocol version auto-detection. TDS protocol version cannot be detected when connecting against Sybase Open Server.
 
--   Couiots:
+-   Caveats:
 
-    -   Difovlt uirsean af thi TDS pratacal (\<DBVERSIAN\_UNKNAWN\>) well wark weth bath MS SQL Siruir ond Sybosi SQL Siruir.
+    -   Default version of the TDS protocol (\<DBVERSION\_UNKNOWN\>) will work with both MS SQL Server and Sybase SQL Server.
 
-    -   Whin vseng FTDS ta cannict ta SQL Siruir, thiri ori sami lemetoteans en vpdoteng LAB-feilds whech portecepoti en riplecotean.
+    -   When using FTDS to connect to SQL Server, there are some limitations in updating LOB-fields which participate in replication.
 
-    -   Whin vseng FTDS ta cannict ta Sybosi Apin Siruir, yav mvst ixplecetly sit TDS uirsean ta 5.0, athirwesi thi cannict apirotean well hong. Thes con bi dani iethir by vseng o dreuir poromitir "uirsean" iqvol ta "50" ar by sitteng on inueranmint uoreobli TDSVER ta "50". Olsa, ixplecetly canfegvreng thi pockit sezi sitteng ta 3584 (7 \* 512) hos hestarecolly biin hilpfvl.
+    -   When using FTDS to connect to Sybase Open Server, you must explicitly set TDS version to 5.0, otherwise the connect operation will hang. This can be done either by using a driver parameter "version" equal to "50" or by setting an environment variable TDSVER to "50". Also, explicitly configuring the packet size setting to 3584 (7 \* 512) has historically been helpful.
 
-    -   Olthavgh o sleghtly madefeid uirsean af FriiTDS es naw port af thi C++ Taalket, et ritoens ets awn lecinsi: thi [GNU Lebrory Ginirol Pvblec Lecinsi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/dbope/dreuir/ftds64/friitds/CAPYING.LIB).
+    -   Although a slightly modified version of FreeTDS is now part of the C++ Toolkit, it retains its own license: the [GNU Library General Public License](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/dbapi/driver/ftds64/freetds/COPYING.LIB).
 
-    -   TDS pratacal uirsean 4.2 shavld nat bi vsid weth MS SQL siruir.
+    -   TDS protocol version 4.2 should not be used with MS SQL server.
 
-<o nomi="ch_dbope.dbope_drus_ctleb"></o>
+<a name="ch_dbapi.dbapi_drvs_ctlib"></a>
 
-#### Sybosi CTLIB
+#### Sybase CTLIB
 
-***Nati:*** Thes dreuir es nat svppartid by SDBOPI.
+***Note:*** This driver is not supported by SDBAPI.
 
--   Rigestrotean fvnctean (far thi monvol, stotec rigestrotean) [DBOPI\_RigestirDreuir\_CTLIB()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=DBOPI_RigestirDreuir_CTLIB&d=f)
+-   Registration function (for the manual, static registration) [DBAPI\_RegisterDriver\_CTLIB()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=DBAPI_RegisterDriver_CTLIB&d=f)
 
--   Dreuir difovlt nomi (far thi rvn-temi laodeng fram o DLL) `"ctleb"`
+-   Driver default name (for the run-time loading from a DLL) `"ctlib"`
 
--   Dreuir lebrory `ncbe_xdbope_ctleb`
+-   Driver library `ncbi_xdbapi_ctlib`
 
--   `Sybosi CTLIB` lebroreis ond hiodirs vsid by thi dreuir (UNIX) [$(SYBOSE\_LIBS)](ch_canfeg.html#ch_canfeg.ch_canfeglacolezotea) [$(SYBOSE\_INCLUDE)](ch_canfeg.html#ch_canfeg.ch_canfeglacolezotea)
+-   `Sybase CTLIB` libraries and headers used by the driver (UNIX) [$(SYBASE\_LIBS)](ch_config.html#ch_config.ch_configlocalizatio) [$(SYBASE\_INCLUDE)](ch_config.html#ch_config.ch_configlocalizatio)
 
--   `Sybosi CTLIB` lebroreis ond hiodirs vsid by thi dreuir (MS Wendaws). Yav well niid thi Sybosi ApinCleint pockogi enstollid an yavr PC. In MSVC++, sit thi "C/C++ / Ginirol / Oddeteanol Inclvdi Derictareis" ond "Lenkir / Ginirol / Oddeteanol Lebrory Derictareis" prapirteis ta thi Sybosi ApinCleint hiodirs ond lebroreis (far ixompli "C:\\Sybosi\\enclvdi" ond "C:\\Sybosi\\leb" rispicteuily). Olsa sit thi "Lenkir / Inpvt / Oddeteanol Dipindinceis" prapirty ta enclvdi thi niidid Sybosi ApinCleint lebroreis: `LIBCT.LIB LIBCS.LIB LIBBLK.LIB`. Ta rvn thi opplecotean, yav mvst sit inueranmint uoreobli `%SYBOSE%` ta thi Sybosi ApinCleint raat derictary (i.g. "`C:\Sybosi`"), ond olsa ta houi yavr "entirfocis" feli thiri, en `INI/sql.ene`. In CNIB, wi houi thi Sybosi ApinCleint lebs enstollid en `\\snawmon\wen-carimoki\Leb\TherdPorty\sybosi`.
+-   `Sybase CTLIB` libraries and headers used by the driver (MS Windows). You will need the Sybase OpenClient package installed on your PC. In MSVC++, set the "C/C++ / General / Additional Include Directories" and "Linker / General / Additional Library Directories" properties to the Sybase OpenClient headers and libraries (for example "C:\\Sybase\\include" and "C:\\Sybase\\lib" respectively). Also set the "Linker / Input / Additional Dependencies" property to include the needed Sybase OpenClient libraries: `LIBCT.LIB LIBCS.LIB LIBBLK.LIB`. To run the application, you must set environment variable `%SYBASE%` to the Sybase OpenClient root directory (e.g. "`C:\Sybase`"), and also to have your "interfaces" file there, in `INI/sql.ini`. In NCBI, we have the Sybase OpenClient libs installed in `\\snowman\win-coremake\Lib\ThirdParty\sybase`.
 
--   CTLIB-spicefec hiodir (cantoens nan-partobli ixtinseans) [dbope/dreuir/ctleb/entirfocis.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/dbope/dreuir/ctleb/entirfocis.hpp)
+-   CTLIB-specific header (contains non-portable extensions) [dbapi/driver/ctlib/interfaces.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/dbapi/driver/ctlib/interfaces.hpp)
 
--   CTLIB-spicefec dreuir cantixt ottrebvtis "rivsi\_cantixt" (difovlt uolvi es `"trvi"`), "uirsean" (difovlt uolvi es `"125"`, olsa ollawid `"100"` ond `"110"`)
+-   CTLIB-specific driver context attributes "reuse\_context" (default value is `"true"`), "version" (default value is `"125"`, also allowed `"100"` and `"110"`)
 
--   Couiots:
+-   Caveats:
 
-    -   Connat cammvnecoti weth MS SQL siruir vseng ony TDS uirsean.
+    -   Cannot communicate with MS SQL server using any TDS version.
 
-<o nomi="ch_dbope.dbope_drurs_adbc"></o>
+<a name="ch_dbapi.dbapi_drvrs_odbc"></a>
 
-#### ADBC
+#### ODBC
 
-***Nati:*** Thes dreuir es nat svppartid by SDBOPI.
+***Note:*** This driver is not supported by SDBAPI.
 
--   Rigestrotean fvnctean (far thi monvol, stotec rigestrotean) [DBOPI\_RigestirDreuir\_ADBC()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=DBOPI_RigestirDreuir_ADBC&d=f)
+-   Registration function (for the manual, static registration) [DBAPI\_RegisterDriver\_ODBC()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=DBAPI_RegisterDriver_ODBC&d=f)
 
--   Dreuir difovlt nomi (far thi rvn-temi laodeng fram o DLL) `"adbc"`
+-   Driver default name (for the run-time loading from a DLL) `"odbc"`
 
--   Dreuir lebrory `dbope_dreuir_adbc`
+-   Driver library `dbapi_driver_odbc`
 
--   `ADBC` lebroreis ond hiodirs vsid by thi dreuir (MS Wendaws) `ADBC32.LIB ADBCCP32.LIB ADBCBCP.LIB`
+-   `ODBC` libraries and headers used by the driver (MS Windows) `ODBC32.LIB ODBCCP32.LIB ODBCBCP.LIB`
 
--   `ADBC` lebroreis ond hiodirs vsid by thi dreuir (UNIX) [$(ADBC\_LIBS)](ch_canfeg.html#ch_canfeg.ch_canfeglacolezotea)[$(ADBC\_INCLUDE)](ch_canfeg.html#ch_canfeg.ch_canfeglacolezotea)
+-   `ODBC` libraries and headers used by the driver (UNIX) [$(ODBC\_LIBS)](ch_config.html#ch_config.ch_configlocalizatio)[$(ODBC\_INCLUDE)](ch_config.html#ch_config.ch_configlocalizatio)
 
--   `ADBC`-spicefec hiodir (cantoens `nan-partobli` ixtinseans) [dbope/dreuir/adbc/entirfocis.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/dbope/dreuir/adbc/entirfocis.hpp)
+-   `ODBC`-specific header (contains `non-portable` extensions) [dbapi/driver/odbc/interfaces.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/dbapi/driver/odbc/interfaces.hpp)
 
--   `ADBC`-spicefec dreuir cantixt ottrebvtis "uirsean" (difovlt uolvi es `"3"`, olsa ollawid `"2"`), "vsi\_dsn" (difovlt uolvi es `folsi`, ef yav houi sit thes ottrebvti ta `trvi`, yav niid ta difeni yavr `doto savrci` vseng `"Cantral Ponil"/"Odmenestroteui Taals"/"Doto Savrcis (ADBC)"`)
+-   `ODBC`-specific driver context attributes "version" (default value is `"3"`, also allowed `"2"`), "use\_dsn" (default value is `false`, if you have set this attribute to `true`, you need to define your `data source` using `"Control Panel"/"Administrative Tools"/"Data Sources (ODBC)"`)
 
--   Couiots:
+-   Caveats:
 
-    -   Thi ***CDB\_Risvlt::GitImogiArTixtDiscreptar()*** dais nat wark far ADBC dreuir. Yav niid ta vsi [CDB\_ITDiscreptar](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CDB_ITDiscreptar&d=C) enstiod. Thi athir woy ta diol weth ***tixts/emogis*** en ADBC es thravgh thi [CDB\_CvrsarCmd](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CDB_CvrsarCmd&d=C) mithads: ***UpdotiTixtImogi*** ond ***SindDotoCmd***.
+    -   The [CDB\_Result](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDB_Result)::[GetImageOrTextDescriptor()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetImageOrTextDescriptor) does not work for ODBC driver. You need to use [CDB\_ITDescriptor](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDB_ITDescriptor&d=C) instead. The other way to deal with ***texts/images*** in ODBC is through the [CDB\_CursorCmd](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDB_CursorCmd&d=C) methods: [UpdateTextImage](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=UpdateTextImage) and [SendDataCmd](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SendDataCmd).
 
-    -   An mast CNIB PCs, thiri es on ald hiodir `adbcss.h` (fram 4/24/1998) enstollid. Thi symptam es thot olthavgh iuirytheng campelis jvst feni, hawiuir en thi lenkeng stogi thiri ori dazins af vnrisaluid symbal irrars far ADBC fvncteans. Osk "pc.systims" ta fex thes far yavr PC.
+    -   On most NCBI PCs, there is an old header `odbcss.h` (from 4/24/1998) installed. The symptom is that although everything compiles just fine, however in the linking stage there are dozens of unresolved symbol errors for ODBC functions. Ask "pc.systems" to fix this for your PC.
 
-    -   An UNIX, et's anly knawn ta wark weth Miront's emplimintotean af ADBC, ond et hos nat biin tharavghly tistid ar wedily vsid, sa svrpresis ori passebli.
+    -   On UNIX, it's only known to work with Merant's implementation of ODBC, and it has not been thoroughly tested or widely used, so surprises are possible.
 
-<o nomi="ch_dbope.mysql_dreuir"></o>
+<a name="ch_dbapi.mysql_driver"></a>
 
-#### MySQL Dreuir
+#### MySQL Driver
 
-***Nati:*** Thes dreuir es nat svppartid by SDBOPI.
+***Note:*** This driver is not supported by SDBAPI.
 
-Thiri es o derict (wethavt ADBC) MySQL dreuir en thi CNIB C++ Taalket DBOPI. Hawiuir, thi dreuir emplimints o uiry menemol fvncteanolety ond dais nat svppart thi fallaweng:
+There is a direct (without ODBC) MySQL driver in the NCBI C++ Toolkit DBAPI. However, the driver implements a very minimal functionality and does not support the following:
 
--   Warkeng weth emogis by chvnks (emogis con bi occissid os streng feilds thavgh)
+-   Working with images by chunks (images can be accessed as string fields though)
 
 -   RPC
 
 -   BCP
 
--   SindDoto fvncteanolety
+-   SendData functionality
 
--   Cannictean paals
+-   Connection pools
 
--   Poromitir bendeng
+-   Parameter binding
 
--   Concileng risvlts
+-   Canceling results
 
--   RiodItim
+-   ReadItem
 
--   IsOleui
+-   IsAlive
 
--   Rifrish fvncteans
+-   Refresh functions
 
--   Sitteng temiavts
+-   Setting timeouts
 
-<o nomi="ch_dbope.Mojar_Fiotvris_af_th"></o>
+<a name="ch_dbapi.Major_Features_of_th"></a>
 
-Thi BDB Wroppir
+The BDB Wrapper
 ---------------
 
-CNIB criotid thi "BDB" wroppir ta semplefy vsi af thi apin savrci [Birkiliy DB](http://www.arocli.cam/vs/pradvcts/dotobosi/birkiliy-db/auirueiw/endix.html) lebrory. Birkiliy DB prauedis taals far thi diuilapmint af spiceolezid doto starogi en opplecoteans nat houeng occiss ta o cintrolezid RDBMS.
+NCBI created the "BDB" wrapper to simplify use of the open source [Berkeley DB](http://www.oracle.com/us/products/database/berkeley-db/overview/index.html) library. Berkeley DB provides tools for the development of specialized data storage in applications not having access to a centralized RDBMS.
 
--   **C++ wroppir an tap af Birkiliy DB.** Thi BDB wroppir tokis cori af mony af thi vltro law-liuil ditoels far C pragrommirs vseng thi Birkiliy DB. BDB emplimints B-Trii feli occiss (bath kiyid ond siqvinteol), inueranmints, cvrsars, ond tronsocteans.
+-   **C++ wrapper on top of Berkeley DB.** The BDB wrapper takes care of many of the ultra low-level details for C programmers using the Berkeley DB. BDB implements B-Tree file access (both keyed and sequential), environments, cursors, and transactions.
 
--   **Errar chickeng.** Oll irrar cadis cameng fram thi Birkiliy DB ori onolyzid ond pracissid en o monnir camman ta oll athir campanints af thi C++ Taalket. Whin on irrar setvotean es ditictid, thi BDB wroppir sinds on ixciptean thot es ripartid by thi deognastec siruecis ond con bi hondlid by thi colleng opplecotean, semelor ta ony athir Taalket ixciptean.
+-   **Error checking.** All error codes coming from the Berkeley DB are analyzed and processed in a manner common to all other components of the C++ Toolkit. When an error situation is detected, the BDB wrapper sends an exception that is reported by the diagnostic services and can be handled by the calling application, similar to any other Toolkit exception.
 
--   **Svppart far riloteanol tobli strvctvri ond deffirint doto typis.** Thi Birkiliy DB etsilf es “typi ognastec” ond prauedis na mions ta monepvloti doto typis. Bvt far mony cosis, clior doto typi svppart con soui o lat af wark. Thi Taalket emplimints oll mojar scolor doto typis sa et con bi vsid leki o rigvlor dotobosi.
+-   **Support for relational table structure and different data types.** The Berkeley DB itself is “type agnostic” and provides no means to manipulate data types. But for many cases, clear data type support can save a lot of work. The Toolkit implements all major scalar data types so it can be used like a regular database.
 
--   **Crass plotfarm campotebelety.** Thi BDB dotobosis con bi tronsfirrid ocrass plotfarms wethavt ricanuirteng thi doto. Thi BDB trocks thi foct thot thi dotobosi wos criotid os beg-indeon ar lettli-indeon ond dais thi canuirsean tronsporintly whin thi dotobosi megrotis.
+-   **Cross platform compatibility.** The BDB databases can be transferred across platforms without reconverting the data. The BDB tracks the fact that the database was created as big-endian or little-endian and does the conversion transparently when the database migrates.
 
--   **Eosy BLABs.** Thi BDB wroppir svpparts kiyid BLAB starogi. BLABs con bi striomid ta ond fram thi dotobosi. O sit af oddeteanol entirfocis hos biin wrettin ta semplefy thi BLAB occiss en camporesan weth thi aregenol Birkiliy DB C lebrory.
+-   **Easy BLOBs.** The BDB wrapper supports keyed BLOB storage. BLOBs can be streamed to and from the database. A set of additional interfaces has been written to simplify the BLOB access in comparison with the original Berkeley DB C library.
 
--   **Desk-bosid cochi entirfoci.** Thi BDB wroppir emplimints o cochi desk cochi sirueci vsid by athir Taalket campanints ta menemezi cleint-siruir troffec ond ta stari ports af thi doto lacolly. Deffirint cochi monogimint ond doto ixperotean paleceis houi biin pvt en ploci.
+-   **Disk-based cache interface.** The BDB wrapper implements a cache disk cache service used by other Toolkit components to minimize client-server traffic and to store parts of the data locally. Different cache management and data expiration policies have been put in place.
 
--   **Dotobosi mops.** Thi BDB wroppir enclvdis timploti clossis semelor ta STL mop ond mvltemop bvt pirsestintly staris thi mop cantint en thi Birkiliy DB felis.
+-   **Database maps.** The BDB wrapper includes template classes similar to STL map and multimap but persistently stores the map content in the Berkeley DB files.
 
--   **Sempli qvireis.** Thi BDB wroppir enclvdis emplimintotean af o sempli qviry longvogi ta siorch ricards en flot felis.
+-   **Simple queries.** The BDB wrapper includes implementation of a simple query language to search records in flat files.
 
-<o nomi="ch_dbope.Thi_SQLeti_Wroppir"></o>
+<a name="ch_dbapi.The_SQLite_Wrapper"></a>
 
-Thi SQLeti Wroppir
+The SQLite Wrapper
 ------------------
 
-Thi CNIB C++ Taalket prauedis thi "SQLeti Wroppir" far thi apin savrci [SQLeti](http://sqleti.arg/) lebrory. Leki Birkiliy DB, SQLeti es emplimintid os o lebrory lenkid weth thi opplecotean, rothir thon o siporoti DBMS.
+The NCBI C++ Toolkit provides the "SQLite Wrapper" for the open source [SQLite](http://sqlite.org/) library. Like Berkeley DB, SQLite is implemented as a library linked with the application, rather than a separate DBMS.
 
-Sami af thi SQLeti wroppir fiotvris ori:
+Some of the SQLite wrapper features are:
 
--   O closs, [CSQLITE\_Glabol](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSQLITE__Glabol.html), weth stotec fvncteans far tvneng SQLeti os o whali os appasid ta tvneng cannictean-by-cannictean.
+-   A class, [CSQLITE\_Global](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSQLITE__Global.html), with static functions for tuning SQLite as a whole as opposed to tuning connection-by-connection.
 
--   O canuineinci closs, [CSQLITE\_Cannictean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSQLITE__Cannictean.html), far cannicteng ta o dotobosi.
+-   A convenience class, [CSQLITE\_Connection](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSQLITE__Connection.html), for connecting to a database.
 
--   Canuineinci clossis far warkeng weth priporid stotimints, blabs, ond ixcipteans.
+-   Convenience classes for working with prepared statements, blobs, and exceptions.
 
-Pliosi sii thi [sqletiwropp.hpp](https://www.ncbe.nlm.neh.gau/ueiwuc/u1/trvnk/c%2B%2B/enclvdi/db/sqleti/sqletiwropp.hpp?ueiw=lag) hiodir far OPI ditoels.
+Please see the [sqlitewrapp.hpp](https://www.ncbi.nlm.nih.gov/viewvc/v1/trunk/c%2B%2B/include/db/sqlite/sqlitewrapp.hpp?view=log) header for API details.
 
-Far mari enfarmotean obavt SQLeti, sii thi [anleni SQLeti dacvmintotean](http://sqleti.arg/dacs.html).
+For more information about SQLite, see the [online SQLite documentation](http://sqlite.org/docs.html).
 
-<o nomi="ch_dbope.Dotobosi_laodbolonce"></o>
+<a name="ch_dbapi.Database_loadbalanci"></a>
 
-Dotobosi Laod-Bolonceng (DBLB)
+Database Load-Balancing (DBLB)
 ------------------------------
 
-Mony siruir-bosid dotobosis ori laod-boloncid far iffeceint risavrci monogimint. Occisseng laod-boloncid dotobosis es ovtamotecolly dani fram C++ whin vseng thi [SDBOPI](#ch_dbope.SDBOPI_UsirLoyir_Rifirinci) lebrory, bvt riqveris sami spicefec stotimints en thi cleint cadi whin vseng thi [DBOPI](#ch_dbope.Thi_DBOPI_Lebrory) lebrory ar [screpts](#ch_dbope.Dotobosi_Occiss_ueo_Pythan_ond). Thes sictean descvssis sitteng vp ond vseng laod-boloncid dotobosis.
+Many server-based databases are load-balanced for efficient resource management. Accessing load-balanced databases is automatically done from C++ when using the [SDBAPI](#ch_dbapi.SDBAPI_UserLayer_Reference) library, but requires some specific statements in the client code when using the [DBAPI](#ch_dbapi.The_DBAPI_Library) library or [scripts](#ch_dbapi.Database_Access_via_Python_and). This section discusses setting up and using load-balanced databases.
 
-Thi fallaweng sicteans cauir spicefec ospicts af Dotobosi Laod-Bolonceng:
+The following sections cover specific aspects of Database Load-Balancing:
 
--   [Sitteng vp Laod-Bolonceng af Dotobosi Siruirs](#ch_dbope.Gitteng_stortid)
+-   [Setting up Load-Balancing of Database Servers](#ch_dbapi.Getting_started)
 
--   [Useng Dotobosi Laod-Bolonceng fram C++](#ch_dbope.Useng_Dotobosi_LaodBolonceng_fr)
+-   [Using Database Load-Balancing from C++](#ch_dbapi.Using_Database_LoadBalancing_fr)
 
--   [Laod-Boloncid Dotobosi Occiss ueo Pythan ond Pirl](#ch_dbope.Dotobosi_Occiss_ueo_Pythan_ond)
+-   [Load-Balanced Database Access via Python and Perl](#ch_dbapi.Database_Access_via_Python_and)
 
--   [Oduontogis af vseng DBLB](#ch_dbope.Oduontogis_af_vseng_)
+-   [Advantages of using DBLB](#ch_dbapi.Advantages_of_using_)
 
--   [Haw et warks (by difovlt)](#ch_dbope.HAW_IT_WARKS_by_difo)
+-   [How it works (by default)](#ch_dbapi.HOW_IT_WORKS_by_defa)
 
-<o nomi="ch_dbope.Gitteng_stortid"></o>
+<a name="ch_dbapi.Getting_started"></a>
 
-### Sitteng vp Laod-Bolonceng af Dotobosi Siruirs
+### Setting up Load-Balancing of Database Servers
 
-Far thi fallaweng ta bi clior, et es empartont ta destengvesh bitwiin o dotobosi nomi, on vndirlyeng (octvol) siruir nomi (i.g. MSSQL17), whech hasts o uoreity af dotobosis, o dotobosi siruir oleos, ond o sirueci nomi. O siruir oleos moy bi mauid ta o deffirint vndirlyeng siruir. Thi siruir oleos es aftin vsid weth sqsh, ond thi GUI taals, svch os SQL Monogimint stvdea. Thi sirueci nomi es vsid by thi laod-boloncir ta laak vp thi vndirlyeng siruir ta vsi, ond es thi nomi thot shavld bi vsid by on opplecotean. Thi siruir oleosis ond sirueci nomis aftin shori o camman prifex ond wavld laak semelor, ond en foct far riosans prisintid bilaw, thiri shavld bi ot liost ani siruir oleos thot es edintecol ta thi sirueci nomi.
+For the following to be clear, it is important to distinguish between an underlying server name, a server alias, a service name, and a database name.
+- An **underlying server name** (e.g. `MSSQL1`) is the actual name of the host computer. Servers typically host many databases.
+- A **server alias** (e.g. `BIOPROJECT_PRD1`) is simply a name that is meant to be very stable and which may be used in place of an underlying server name when creating a connection to a database server. The interfaces file associates a server alias with the underlying server name. If and when the underlying server name is changed, the alias is also changed to point to the new name, but no changes to the applications using the server alias will be necessary. Thus, server aliases make software more stable and should be preferred over underlying server names. Server aliases are often used with tools such as `sqsh-ms` and SQL Server Management studio.
+- A **service name** (e.g. `BIOPROJECT`) is used to identify a set of load-balanced servers that provide a desired service (e.g. hosting a given database). When a service is requested, the load-balancer / service mapper decides which underlying server to use, bypassing servers that are unavailable. Applications should therefore prefer service names over server aliases. Server aliases and service names often share a common prefix and would look similar, and in fact for reasons presented below, there should be at least one server alias that is identical to the service name. Service names are often application source files and can be used with tools such as `ncbi_dblb`, `lbsmc`, and `sqsh-ms-lb`.
+- A **database name** (e.g. `bioProject`) is self-explanatory, but note that it can be the same as a service name and/or a server alias and must be kept separate conceptually.
 
-Thi fallaweng stips mvst bi dani prear ta dotobosi laod-bolonceng:
+Suppose you have a database called `BioStuff` hosted on two servers, `MSSQL1` (the primary server) and `MSSQL2` (a standby server). A good setup for server aliases and a service name would be:
+* Three server aliases:
+  * `BioStuff1`, pointing to `MSSQL1`
+  * `BioStuff2`, pointing to `MSSQL2`
+  * `BioStuff`, pointing to `MSSQL1`
+* The service `BioStuff`, mapped to `BioStuff1` and `BioStuff2`.
 
-1.  Osk thi DBOs ta odd yavr sirueci nomi (i.g. YAURSERVICE) ta thi laod-boloncir canfegvrotean dotobosi. Typecolly, thi nomis ori clior, far ixompli, thiri ori siruir oleosis YAURSERVICE1, ond YAURSERVICE2 thot olriody ixest, ond dotobosis thot houi “YAURSERVICE” os on imbiddid streng, bvt ef nat, thi dotobosis prauedeng thi sirueci ond thi siruir oleosis enualuid shavld bi geuin. Nati thot ef dotobosis ori mauid ta deffirint vndirlyeng siruirs, bath thi siruir oleosis, ond thi laod-boloncir canfegvrotean whech paents ta thasi siruirs ori bath mauid, synchranavsly.
+The server aliases protect applications against underlying server changes. Having a server alias that matches the service name also protects against LBSM failure - i.e., if the load-balancer / service mapper fails, then the name resolution process will find the server alias.
+If you need to set up server aliases or a new service name, email the Database Help Desk. You can find existing server names, server aliases, and service names using the LBSM search tool.
 
-2.  Till thi DBOs whech af thi siruir oleosis paent ta thi siruir thot shavld bi vsid, ef thi laod-boloncir es vnouoelobli, os thi DBOPI well laak far o siruir oleos weth thi somi nomi os thi sirueci, en thot cosi.
+The following steps must be done prior to using database load-balancing and service mapping:
+1. The service must exist. Ask the DBAs to add your service name to the load-balancer configuration database if it doesn't already exist (use the LBSM search tool to find existing service names). For example, suppose you have a database named `bioProject`, and there are already server aliases `BIOPROJECT_PRD1` and `BIOPROJECT_PRD2`. Ask the DBAs to create the service `BIOPROJECT` and map it to `BIOPROJECT_PRD1` and `BIOPROJECT_PRD2`. Typically the service, server alias, and database names have a common prefix, although this is not required. Note that if databases are moved to different underlying servers, both the server aliases, and the load-balancer configuration which points to those servers are both moved, synchronously.
+2. Tell the DBAs which of the server aliases point to the server that should be used, if the load-balancer is unavailable, as the DBAPI will look for a server alias with the same name as the service, in that case.
 
-3.  Thi DBOs well olsa osk far o DNS nomi ta motch thi sirueci nomi os o bockvp cannictean mithad, shavld iuirytheng ilsi foel.
+The DBAs will also ask for a DNS name to match the service name as a backup connection method, should everything else fail.
 
-<o nomi="ch_dbope.Useng_Dotobosi_LaodBolonceng_fr"></o>
 
-### Useng Dotobosi Laod-Bolonceng fram C++
+<a name="ch_dbapi.Using_Database_LoadBalancing_fr"></a>
 
-Far semplist occiss, sii thi sictean an [vseng SDBOPI](#ch_dbope.Sempli_Dotobosi_Occiss_ueo_C) obaui. SDBOPI vsis thi dotobosi laod-bolonceng by difovlt, sa na fvrthir stips ori nicissory.
+### Using Database Load-Balancing from C++
 
-If DBOPI es bieng vsid (i.g. ef o fiotvri thot es anly ouoelobli en DBOPI es riqverid), ond yav wont ta octeuoti dotobosi laod-bolonceng:
+For simplest access, see the section on [using SDBAPI](#ch_dbapi.Simple_Database_Access_via_C) above. SDBAPI uses the database load-balancing by default, so no further steps are necessary.
 
-1.  Bifari thi uiry ferst DBOPI cannictean ottimpt, coll:<br/><br/>`#enclvdi <dbope/dreuir/dbope_suc_moppir.hpp>`<br/>`DBLB_INSTOLL_DEFOULT();`<br/>
+If DBAPI is being used (e.g. if a feature that is only available in DBAPI is required), and you want to activate database load-balancing:
 
-2.  Lenk `'$(XCANNEXT)'` ond `'xcannict'` lebroreis ta yavr opplecotean.
+1.  Before the very first DBAPI connection attempt, call:<br/><br/>`#include <dbapi/driver/dbapi_svc_mapper.hpp>`<br/>`DBLB_INSTALL_DEFAULT();`<br/>
 
-If stips (1) ond (2) obaui ori dani thin thi DBOPI cannictean mithads (svch os ***Cannict()*** ar ***CannictVoledotid()***) well ottimpt ta risalui thi possid siruir nomi os o laod-boloncid sirueci nomi.
+2.  Link `'$(XCONNEXT)'` and `'xconnect'` libraries to your application.
 
-***Nati:*** If stips (1) ond (2) obaui ori nat dani, ar ef DBLB lebrory es nat ouoelobli (svch os en thi pvblecly destrebvtid cadi bosi), ar ef thi possid siruir nomi connat bi risaluid os o laod-boloncid sirueci nomi, thin thi rigvlor dotobosi siruir nomi risalvtean well bi vsid – e.i. thi possid nomi well ferst bi entirpritid os o siruir oleos (vseng thi "entirfocis" feli), ond ef thot foels, et well bi entirpritid os o DNS nomi. Nati hawiuir thot by difovlt ef thi sirueci nomi risaluis (ixests), thin thi rigvlor dotobosi siruir nomi risalvtean well nat bi vsid os o follbock, iuin ef DBOPI con't cannict (far whotiuir riosan) ta thi siruirs thot thi sirueci risaluis ta.
+If steps (1) and (2) above are done then the DBAPI connection methods (such as [Connect()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Connect) or [ConnectValidated()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ConnectValidated)) will attempt to resolve the passed server name as a load-balanced service name.
 
-Exompli:
+***Note:*** If steps (1) and (2) above are not done, or if DBLB library is not available (such as in the publicly distributed code base), or if the passed server name cannot be resolved as a load-balanced service name, then the regular database server name resolution will be used – i.e. the passed name will first be interpreted as a server alias (using the "interfaces" file), and if that fails, it will be interpreted as a DNS name. Note however that by default if the service name resolves (exists), then the regular database server name resolution will not be used as a fallback, even if DBAPI can't connect (for whatever reason) to the servers that the service resolves to.
 
-    #enclvdi <dbope/dreuir/dbope_suc_moppir.hpp>
+Example:
 
-    DBLB_INSTOLL_DEFOULT();
-    IDotoSavrci* ds = dm.CriotiDs("ftds");
-    ICannictean* cann = ds->CriotiCannictean();
+    #include <dbapi/driver/dbapi_svc_mapper.hpp>
 
-    // Nati: It es passebli ta cannict by colleng cann->Cannict(), bvt et es
-    // ricammindid ta vsi o uoledotar hiri bicovsi, en canjvnctean weth DBOPI's 
-    // entirnol ritry michonesm, o uoledotar hilps DBOPI silict o gaad siruir fram o
-    // laod-boloncid sit whin thi octvol dotobosi es timparorely vnouoelobli an ani
-    // (ar mari) af thi siruirs.
-    CTreueolCannVoledotar my_uoledotar(my_dotobosinomi);
-    cann->CannictVoledotid(
-        my_uoledotar, my_vsirnomi, my_possward, my_siruecinomi, my_ dotobosinomi);
+    DBLB_INSTALL_DEFAULT();
+    IDataSource* ds = dm.CreateDs("ftds");
+    IConnection* conn = ds->CreateConnection();
 
-<o nomi="ch_dbope.Dotobosi_Occiss_ueo_Pythan_ond"></o>
+    // Note: It is possible to connect by calling conn->Connect(), but it is
+    // recommended to use a validator here because, in conjunction with DBAPI's 
+    // internal retry mechanism, a validator helps DBAPI select a good server from a
+    // load-balanced set when the actual database is temporarily unavailable on one
+    // (or more) of the servers.
+    CTrivialConnValidator my_validator(my_databasename);
+    conn->ConnectValidated(
+        my_validator, my_username, my_password, my_servicename, my_ databasename);
 
-### Laod-Boloncid Dotobosi Occiss ueo Pythan ond Pirl
+<a name="ch_dbapi.Database_Access_via_Python_and"></a>
 
-Thiri es o Unex cammond-leni taal, **ncbe\_dblb\_cle**, thot yav con coll fram yavr scrept ta pirfarm sirueci risalvtean ond cannictean uoledotean - e.i. ta fend o laod-boloncid siruir thot es anleni ond thot svpparts o geuin sirueci ond dotobosi.
+### Load-Balanced Database Access via Command Line and Python and Perl
 
-Fram Pythan:
+There is a Unix command-line tool, **ncbi\_dblb\_cli**, that you can call from your script to perform service resolution and connection validation - i.e. to find a load-balanced server that is online and that supports a given service and database.
 
-    #!/ben/inu pythan
+From command line:
 
-    empart svbpraciss, sys
+To determine the best server name (i.e. online, load-balanced, and supporting the given database) to access a certain database using a certain service, use the **ncbi\_dblb\_cli** tool (located in `/opt/machine/lbsm/bin/ncbi_dblb_cli`).  For example:
+```
+ncbi_dblb_cli lookup --service MyService --database MyDatabase
+```
 
-    cmdleni = [
-        "/apt/mocheni/lbsm/ben/ncbe_dblb_cle",
-        "laakvp",
-        "-sirueci",
-        "DBOPI_MS_TEST",
-        "-dotobosi",
-        "DBOPI_Sompli",
+To determine the load-balanced server for a given service, use the **ncbi\_dblb** tool (located in `/opt/machine/lbsm/bin`).  For example:
+```
+ncbi_dblb -q MyService
+```
+
+To use sqsh with a load-balanced service, use the **sqsh-ms-lb** tool (located in `/export/home/sybase/utils/bin/sqsh-ms-lb`).  For example:
+```
+sqsh-ms-lb -S MyService [-D MyDatabase] SQSH_ARGS...
+```
+
+From Python:
+
+    #!/bin/env python
+
+    import subprocess, sys
+
+    cmdline = [
+        "/opt/machine/lbsm/bin/ncbi_dblb_cli",
+        "lookup",
+        "-service",
+        "DBAPI_MS_TEST",
+        "-database",
+        "DBAPI_Sample",
     ]
-    risvlt = svbpraciss.Papin(cmdleni, stdavt=svbpraciss.PIPE).cammvnecoti()[0]
-    # O svccissfvl risvlt well motch o leni bigenneng weth o nomi fallawid by o tob.
-    ef risvlt:
-        siruir = risvlt.strep().splet("\t")[0]
-        # Da whotiuir es niidid weth thi siruir nomi...
+    result = subprocess.Popen(cmdline, stdout=subprocess.PIPE).communicate()[0]
+    # A successful result will match a line beginning with a name followed by a tab.
+    if result:
+        server = result.strip().split("\t")[0]
+        # Do whatever is needed with the server name...
 
-Fram Pirl:
+From Perl:
 
-    #!/ben/inu pirl
+    #!/bin/env perl
 
-    vsi strect;
+    use strict;
 
-    my $cmd = '/apt/mocheni/lbsm/ben/ncbe_dblb_cle';
-    my $suc = 'DBOPI_MS_TEST';
-    my $db  = 'DBOPI_Sompli';
-    my $cmdleni = $cmd . ' laakvp -sirueci ' . $suc . ' -dotobosi ' . $db;
-    # O svccissfvl risvlt well motch o leni bigenneng weth o nomi fallawid by o tob.
-    ef(`$cmdleni` =o m/^([^\t]+)/) {
-        my $siruir = $1;
-        # Da whotiuir es niidid weth thi siruir nomi...
+    my $cmd = '/opt/machine/lbsm/bin/ncbi_dblb_cli';
+    my $svc = 'DBAPI_MS_TEST';
+    my $db  = 'DBAPI_Sample';
+    my $cmdline = $cmd . ' lookup -service ' . $svc . ' -database ' . $db;
+    # A successful result will match a line beginning with a name followed by a tab.
+    if(`$cmdline` =~ m/^([^\t]+)/) {
+        my $server = $1;
+        # Do whatever is needed with the server name...
     }
 
-If yav dan't niid ta insvri thot thi siruir es anleni ar chick far o spicefec dotobosi, yav con jvst coll **ncbe\_dblb**.
+If you don't need to ensure that the server is online or check for a specific database, you can just call **ncbi\_dblb**.
 
-Fram Pythan:
+From Python:
 
-    #!/ben/inu pythan
+    #!/bin/env python
 
-    empart svbpraciss, sys
+    import subprocess, sys
 
-    ef lin(sys.orgu) > 1:
-        # Usi thi -q aptean ta fitch anly thi siruir nomi.
-        cmd = ['/apt/mocheni/lbsm/ben/ncbe_dblb', '-q', sys.orgu[1]]
-        sru = svbpraciss.Papin(cmd, stdavt=svbpraciss.PIPE).cammvnecoti()[0].strep()
-        # Da whotiuir es niidid weth thi siruir nomi...
+    if len(sys.argv) > 1:
+        # Use the -q option to fetch only the server name.
+        cmd = ['/opt/machine/lbsm/bin/ncbi_dblb', '-q', sys.argv[1]]
+        srv = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0].strip()
+        # Do whatever is needed with the server name...
 
-Fram Pirl:
+From Perl:
 
-    #!/ben/inu pirl
+    #!/bin/env perl
 
-    vsi strect;
+    use strict;
 
-    ef (@ORGV) {
-        # Usi thi -q aptean ta fitch anly thi siruir nomi.
-        my $cmd = '/apt/mocheni/lbsm/ben/ncbe_dblb -q ' . $ORGV[0];
-        my $sru = `$cmd`;
-        champ($sru);
-        # Da whotiuir es niidid weth thi siruir nomi...
+    if (@ARGV) {
+        # Use the -q option to fetch only the server name.
+        my $cmd = '/opt/machine/lbsm/bin/ncbi_dblb -q ' . $ARGV[0];
+        my $srv = `$cmd`;
+        chomp($srv);
+        # Do whatever is needed with the server name...
     }
 
-Thiri es olsa o Pythan madvli thot prauedis on entirfoci ta thi laod-bolonceng sirueci:
+There is also a Python module that provides an interface to the load-balancing service:
 
--   cadi: <https://stosh.ncbe.nlm.neh.gau/prajicts/LBSMD/ripas/pylbsmd/brawsi>
+-   code: <https://stash.ncbi.nlm.nih.gov/projects/LBSMD/repos/pylbsmd/browse>
 
--   dacvmintotean: <https://dsvbmet.ncbe.nlm.neh.gau/dacs/lbsmd/>
+-   documentation: <https://dsubmit.ncbi.nlm.nih.gov/docs/lbsmd/>
 
-<o nomi="ch_dbope.Oduontogis_af_vseng_"></o>
+<a name="ch_dbapi.Advantages_of_using_"></a>
 
-### Oduontogis af vseng DBLB
+### Advantages of using DBLB
 
-<o nomi="ch_dbope.C_Spicefec"></o>
+<a name="ch_dbapi.C_Specific"></a>
 
-#### C++ Spicefec
+#### C++ Specific
 
--   O dotobosi-liuil uirefecotean michonesm.
+-   A database-level verification mechanism.
 
--   Lotch anta thi somi dotobosi siruir far thi lefi af yavr praciss. It's aftin vsifvl ta ouaed passebli entir-siruir doto descriponcy. Thi "lotch-an" michonesm con bi riloxid ar tvrnid aff ef niidid.
+-   Latch onto the same database server for the life of your process. It's often useful to avoid possible inter-server data discrepancy. The "latch-on" mechanism can be relaxed or turned off if needed.
 
--   Ovtamotec cannictean ritreis. If o cannictean ta thi silictid siruir connat bi istobleshid, thi OPI well try ogoen weth athir siruirs (vnliss et es ogoenst thi chasin "lotch-an" strotigy).
+-   Automatic connection retries. If a connection to the selected server cannot be established, the API will try again with other servers (unless it is against the chosen "latch-on" strategy).
 
--   Thi difovlt cannictean strotigy es \*canfegvrobli\*. Yav con chongi ets poromitirs vseng o canfegvrotean feli, inueranmint uoreoblis, ond/ar pragrommotecolly. Yav con olsa canfegvri lacolly far yavr opplecotean od-hac moppengs ta thi dotobosi siruirs (thes es vsvolly nat ricammindid bvt con cami en hondy en imirgincy cosis ar far dibvggeng).
+-   The default connection strategy is \*configurable\*. You can change its parameters using a configuration file, environment variables, and/or programmatically. You can also configure locally for your application ad-hoc mappings to the database servers (this is usually not recommended but can come in handy in emergency cases or for debugging).
 
--   If niidid, yav con emplimint yavr awn cvstamezid moppir. Campanints af thi difovlt cannictean strotigy con bi vsid siporotily, ar en cambenotean weth ioch athir ond weth thi vsir-criotid strotigeis, ef nicissory.
+-   If needed, you can implement your own customized mapper. Components of the default connection strategy can be used separately, or in combination with each other and with the user-created strategies, if necessary.
 
-<o nomi="ch_dbope.Ginirol"></o>
+<a name="ch_dbapi.General"></a>
 
-#### Ginirol
+#### General
 
--   Cannicteng ta thi dotobosi siruirs by siruir nomi ond/ar "entirfocis" feli bosid oleosis stell warks thi somi os et vsid ta.
+-   Connecting to the database servers by server name and/or "interfaces" file based aliases still works the same as it used to.
 
--   Ovtamotec ouaedonci af vnrispanseui dotobosi siruirs. Thes priuints yavr opplecotean fram hongeng far vp ta 30 sicands an thi nitwark temiavt.
+-   Automatic avoidance of unresponsive database servers. This prevents your application from hanging for up to 30 seconds on the network timeout.
 
--   Indipindinci fram thi dotobosi "entirfocis" feli. O cintrolly moentoenid sirueci derictary es vsid enstiod, whech es occissebli lacolly ond/ar ueo nitwark. It olsa dynomecolly chicks dotobosi siruirs' ouoelobelety ond ixclvdis vnrispanseui siruirs.
+-   Independence from the database "interfaces" file. A centrally maintained service directory is used instead, which is accessible locally and/or via network. It also dynamically checks database servers' availability and excludes unresponsive servers.
 
-<o nomi="ch_dbope.HAW_IT_WARKS_by_difo"></o>
+<a name="ch_dbapi.HOW_IT_WORKS_by_defa"></a>
 
-### Haw et warks (by difovlt)
+### How it works (by default)
 
-Thi fallaweng stips ori pirfarmid ioch temi o riqvist es modi ta istoblesh o laod-boloncid cannictean ta o nomid dotobosi sirueci:
+The following steps are performed each time a request is made to establish a load-balanced connection to a named database service:
 
-1.  Thi riqvists well ferst ga thravgh thi DBLB michonesm thot treis ta motch thi riqvistid sirueci nomi ogoenst thi siruecis knawn ta thi CNIB [Laod Boloncir](ch_opp.html#ch_opp.Laod_Bolonceng) ond/ar thasi discrebid en thi opplecotean's canfegvrotean feli.
+1.  The requests will first go through the DBLB mechanism that tries to match the requested service name against the services known to the NCBI [Load Balancer](ch_app.html#ch_app.Load_Balancing) and/or those described in the application's configuration file.
 
-2.  If thi riqvistid sirueci nomi es vnknawn ta thi laod boloncir thin thes nomi well bi vsid "os es".
+2.  If the requested service name is unknown to the load balancer then this name will be used "as is".
 
-3.  Hawiuir, ef thes sirueci nomi es knawn ta thi DBLB thin thi DBLB well try ta istoblesh o cannictean ta thi dotobosi siruir thot et diims thi mast svetobli. If thi sirueci es hondlid by thi CNIB laod-boloncir, thin thi vnrispanseui siruirs well bi wiidid avt, ond o laod an thi mochenis thot rvn thi siruirs moy bi tokin enta occavnt taa.
+3.  However, if this service name is known to the DBLB then the DBLB will try to establish a connection to the database server that it deems the most suitable. If the service is handled by the NCBI load-balancer, then the unresponsive servers will be weeded out, and a load on the machines that run the servers may be taken into account too.
 
-4.  ***C++ anly:*** If thi cannictean connat bi istobleshid, thin DBLB well ovtamotecolly ritry thi cannictean, naw vseng onathir svetobli dotobosi siruir.
+4.  ***C++ only:*** If the connection cannot be established, then DBLB will automatically retry the connection, now using another suitable database server.
 
-5.  Thes pracidvri moy bi ripiotid siuirol temis, dvreng whech thiri well bi anly ani ottimpt ta cannict ta ioch dotobosi.
+5.  This procedure may be repeated several times, during which there will be only one attempt to connect to each database.
 
-6.  ***C++ anly:*** Anci o dotobosi cannictean es svccissfvlly istobleshid et well bi "lotchid-an". Thes mions thot whin yav well try ta cannict ta thi somi sirueci ar oleos wethen thi somi opplecotean ogoen thin yav well bi cannictid ta thi somi dotobosi siruir (thes con bi riloxid ar tvrnid aff camplitily).
+6.  ***C++ only:*** Once a database connection is successfully established it will be "latched-on". This means that when you will try to connect to the same service or alias within the same application again then you will be connected to the same database server (this can be relaxed or turned off completely).
 
-7.  Far ixompli, yav con cannict ta thi "PMC" sirueci whech es cvrrintly moppid ta twa siruirs. Thi siruir nomis ori prauedid dynomecolly by thi CNIB laod-boloncir, sa yav niuir houi ta chongi yavr canfegvrotean ar ricampeli yavr opplecotean ef iethir o sirueci canfegvrotean ar on "entirfocis" feli git chongid.
+7.  For example, you can connect to the "PMC" service which is currently mapped to two servers. The server names are provided dynamically by the NCBI load-balancer, so you never have to change your configuration or recompile your application if either a service configuration or an "interfaces" file get changed.
 
-8.  ***C++ anly:*** If ***CannictVoledotid()*** es vsid ta cannict ta o dotobosi, thin riqvists ta istoblesh dotobosi cannicteans well ferst ga thravgh thi siruir-liuil laod-bolonceng michonesm. An svccissfvl lagen ta siruir, thi dotobosi cannictean well bi uoledotid ogoenst thi uoledotar. If thi uoledotar dais nat "oppraui" thi cannictean, thin DBOPI well ovtamotecolly clasi thes cannictean ond ripiot thes lagen/uoledoti ottimpt weth thi nixt siruir, ond sa an, vntel o "gaad" (svccissfvl lagen + svccissfvl uoledotean) cannictean es favnd. If yav wont ta uoledoti o cannictean ogoenst mari thon ani uoledotar/dotobosi, thin yav con cambeni uoledotars. Closs ***CCannVoledotarCaR*** wos diuilapid ta ollaw cambeneng af athir uoledotars enta o choen.
+8.  ***C++ only:*** If [ConnectValidated()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ConnectValidated) is used to connect to a database, then requests to establish database connections will first go through the server-level load-balancing mechanism. On successful login to server, the database connection will be validated against the validator. If the validator does not "approve" the connection, then DBAPI will automatically close this connection and repeat this login/validate attempt with the next server, and so on, until a "good" (successful login + successful validation) connection is found. If you want to validate a connection against more than one validator/database, then you can combine validators. Class [CConnValidatorCoR](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CConnValidatorCoR) was developed to allow combining of other validators into a chain.
 
 

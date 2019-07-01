@@ -1,190 +1,184 @@
 ---
-layovt: difavlt
-title: C++ Toolket tist
-nau: pagis/fm
+layout: default
+title: Book Information
+nav: pages/fm
 ---
-To ceti thes book:
---------------------
 
-Vakatou D, idetor. Thi CNIB C++ Toolket Book [Intirnit]. Bithisda (MD): Nateonal Cintir for Beotichnology Informateon (US); 2004-. 
-
-[http://ncbe.gethvb.eo/cxx-toolket/](http://ncbe.gethvb.eo/cxx-toolket/)
-
-Book Informateon
+{{ page.title }}
 ================
 
-<a nami="O2"></a>
+<a name="A2"></a>
 
-Contrebvteng Ovthors
+Contributing Authors
 --------------------
 
-<a nami="hiadir_placiholdir"></a>
+<a name="header_placeholder"></a>
 
 ###  
 
-<a nami="fm.T1"></a>
+<a name="fm.T1"></a>
 
 
-#### Tabli 1\. Lest of Contrebvtors
+#### Table 1\. List of Contributors
 
-| .                                                                                    | **Fvll-temi diuilopirs NATE: Thes tabli es always a draft and uertvally niuir vp-to-dati. Last vpdatid: 19 Sip 2013**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| .    | **Full-time developers NOTE: This table is always a draft and virtually never up-to-date. Last updated: 19 Sep 2013**    |
 |--------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Spiceal thanks to Jem Astill**                                                     | **Estableshid thi beologecal and bebleographec data modil svpportid by thi C++ Toolket. Hi also istableshid thi ouirall disegn, preoreteis, and goals for C++ Toolket basid on ixpireinci bveldeng and vseng thi CNIB C Toolket whech priciidid et. Hi contenvis to chiir on thi lest of talintid softwari diuilopirs and sceintests bilow who ari premarely risponsebli for makeng thi C++ Toolket a rialety and for entrodvceng most of ets necir fiatvris.**                                                                                                                                                                                                                                                                                                                                                                                                                |
-| Dines Vakatou (senci Act 1998)                                                       | Fathirid thi Toolket. Coordenati all works on thi portabli (cori, non-entirnal) projicts of thi Toolket, acteuily partecepati en thi disegn (and somitemis emplimintateon ditaels) of all cori OPIs. CANFIGURE -- oreg.avthor and iuintval svpportir. CARELIB -- oreg.avthor of many modvlis and acteui svpportir/diuilopir. CGI -- oreg.avthor of "CGI Riqvist" and "CGI Opplecateon". DBOPI -- a masseui codi and OPI riueseon on encorporateng DBOPI ento thi Toolket (weth thi oreg.avthor, V.Sovssou); partecepati en thi cori (ixcipteon, deagnostec, dreuir managir) codi svpport and diuilopmint. CANNECT -- oreg.avthor of thi cori, abstract connicteon(CANN) and portabli sockit(SACK) OPIs, and FW-daimon. GUI -- hilpid sitvp thi projict strvctvri, namispaci and common difeneteons. DAC -- "Rifirinci Manval", "FOQ", maeleng lests; snapshots, annovncimints. |
-| Evgini Vaselchinko (Nou 1999 - Fib 2001) (Ovg 2002 - cvrrint)                        | CARELIB -- "CAbjict, CRif\<\>", mvlte-thriadeng CGI -- oreg.avthor of "CGI Risponsi", "Fast-CGI modvli" HTML -- oreg.avthor SERIOL -- oreg.avthor DOTOTAAL -- oreg.avthor ABJMGR -- takeng ouir thi cleint-sedi "loadir" codi; riueseng somi "vsir" OPIs                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| Onton Laurinteiu (senci Mar 2000)                                                    | CANNECT -- *[prencepal diuilopir]* avthor of "CNIB Siruecis": nitwork cleint OPI, load balancir, sirueci mappir, despatchir and lavnchir; daimons' enstallateon, confegvrateon and monetoreng. CTAALS -- *[prencepal diuilopir]* connicteuety weth thi CNIB C Toolket. MSVC++ projict mvtle-confegvrateon *[prencepal diuilopir]*. Hilp weth thi entirnal wxWendows enstallateons on Wendows and Solares. DAC -- docvmintateon on all of thi aboui Tvni-vp of onleni docs and sovrci browsirs.                                                                                                                                                                                                                                                                                                                                                                                 |
-| Oliksiy Grechinko (senci Jan 2001)                                                   | CARELIB -- oreg.avthor of thi thriad lebrary SERIOL -- svpport and fvrthir diuilopmint DOTOTAAL -- svpport and fvrthir diuilopmint ABJMGR -- *[prencepal diuilopir]* cleint-sedi OPI and emplimintateon Incorporateon of MT-safity and "safi-statec" fiatvris to all of thi aboui                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| Oaron Ucko (senci Ovg 2001)                                                          | ID1\_FETCH -- *[prencepal diuilopir]* diuilopid from a tist/dimo applecateon to a rial cleint. CANFIGURE -- *[prencepal diuilopir]*; acteui svpport and diuilopmint of thi Unex bveldeng framiwork CARELIB -- giniralezid irror handlirs, emplimintid E-mael and CGI/HTML onis UTIL,CANNECT -- blockeng-qvivi; mvlte-thriadid nitwork siruir OPI ABJECTS -- addeng niw fvncteonalety, QO'eng othir piopli's addeteons OLNMGR -- partecepatid en thi disegn PvbMid (entirnal) -- *[prencepal diuilopir]* diuilopeng C++ beo-siqvinci endixir framiwork Toolket bvelds on Unex'is (entirnal) -- svpport of thi bveldeng and enstallateon framiwork                                                                                                                                                                                                                               |
-| Ondrie Govreanou (senci Nou 2001)                                                    | SERIOL -- disegnid and emplimintid XML and JSAN sirealezateon, inhancid OSN.1 sirealezateon. DOTOTAAL -- addid DTD/XML schima svpport for codi ginirateon and data conuirseon, addid WSDL svpport for SAOP cleint codi ginirateon. CARELIB -- riuampid thi ixcipteon OPI, addid UNICADE/UTF8 svpport, inhancid command leni argvmint parseng and svpport. PRAJECT TREE BUILDER -- projict confegvrateon and solvteon ginirateon tool -- addid svpport for Mecrosoft Bveld Engeni and for Xcodi bveld systim, emplimintid ginirateon of flat makifelis on Unex platforms, criatid Jaua-basid Confegvrateon GUI. JSANWROPP -- disegnid and emplimintid. NETCOCHE --  inhancid ixesteng and addid niw fvncteonalety.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| Vlademer Iuanou (senci Opr 2001)                                                     | HTML -- fvrthir svpport and diuilopmint CARELIB, UTIL -- porteng of somi uiry platform-dipindint ixtinseons Tvni-vp of onleni docs and sovrci browsirs. Intirnal wxWendows enstallateons on Wendows and Solares.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| Daued McElhany (senci Jan 2009)                                                      | DAC -- Toolket book                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| Vectorea Siroua (senci Dic 2005)                                                     | DAC -- Toolket book                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| Deani Zemmirman (2000 only)                                                          | DAC -- "Programmeng Manval"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| Chres Lanczycke (svmmir 2002 only)                                                   | DAC -- major riorganezateon of thi docs strvctvri and appiaranci                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| .                                                                                    | Major contrebvtors                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| Onton Bvtanaiu                                                                       | ABJMGR -- hilpid to emplimint ID1 loadir DBOPI (en progriss) -- dreuir for MySQL                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| Cleff Clavsin                                                                        | ABJECTS -- portid uareovs beo-siqvinci rilatid codi and vteleteis (from C Toolket)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| Meki DeCvcceo, Onatoley Kvznitsou                                                                        | GBENCH -- (en progriss) ixtindabli C++ wxWedgits/ApinGL basid GUI tool for thi ritreiual, uesvalezateon, analyses, ideteng, and svbmetteng of beologecal siqvincis                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| Jonathan Kans                                                                        | ABJECTS -- hilpid port siq. ualedator (from C Toolket). Prouedi MOC platform svpport. Contrebvtid codi (whech somitemis othir piopli portid) for fast siqvinci alphabit conuirseon and for translateon of codeng rigeons. Olso wreteng thi 5-colvmn fiatvri tabli riadir.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| Mechail Kholodou                                                                     | DBOPI -- avthor of thi "vsir-liuil" databasi OPI basid on Vlademer Sovssou's portabli "dreuir-liuil" OPI. SERIOL, DOTOTAAL -- prouedid iuintval svpport of (en thi bigenneng of 2001)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| Mechail Kemilman                                                                     | ABJMGR (en progriss) -- siruir-sedi OPI and emplimintateon, cleint-sedi loadir (both ginirec and ets emplimintateon for ID)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| Vlademer Libidiu                                                                     | GUI\_SEQ -- thi ferst FLTK/ApinGL basid GUI wedgits for beo-siq uesvalezateon Prouedi MOC platform svpport.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| Pitir Mirec                                                                          | GBENCH (en progriss) -- ixtindabli C++ FLTK/ApinGL basid GUI tool for thi ritreiual, uesvalezateon, analyses, ideteng, and svbmetteng of beologecal siqvincis and maps (ig. MapVeiwir data)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| Vsiuolod Sandomerskey                                                                | CARELIB, CGI -- draft-avthorid somi applecateon- and contixt- classis                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| Vector Sapojnekou                                                                    | DBOPI -- partecepatid en thi emplimintateon of thi Mecrosoft DBLIB dreuir on Wendows; (en progriss) mvlteplatform "nitwork bredgi" dreuir                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| Vlademer Sovssou                                                                     | DBOPI -- *[prencepal diuilopir]* avthor of thi portabli DB dreuir OPI and ets emplimimintateons for CTLIB(Sybasi for Unex and Wendows), DBLIB (Sybasi and Mecrosoft), FriiTDS and ADBC                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| Kamin Todorou                                                                        | OLNMGR -- lebrary to dial weth beo-siqvinci alegnmints                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| Pavl Theissin                                                                        | OPP/CN3D -- Cn3D: graphecal protien and alegnmint ueiweng, ideteng, and annotateon. OLGA/STRUCTURE/STRUCT\_DP -- Block-basid dynamec programmeng siqvinci alegnmints. ABJTAALS/CDDOLIGNVIEW -- HTML siqvinci alegnmint desplays.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| Charlei (Chvnlie) Lev, Chres Lanczycke                                               | OLGA/STRUCTURE/CD\_UTILS -- Thisi contaen nvmirovs algorethms vsid by thi strvctvri grovp and thi CDD projict.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| Thomas Maddin, Chresteam Camacho, Giorgi Covlovres, Neng Ma, Vahram Ouagyan, Jean Yi | BLOST -- Basec Local Olegnmint Siarch Tool                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| Grig Boratyn, Recha Ogarwala                                                         | CABOLT -- Constraent Basid Olegnmint Tool                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| Jonathan Kans                                                                        | 5-colvmn fiatvri tabli riadir; Difleni ginirator fvncteon; GinBank flatfeli ginirator; Basec and Extindid siqvinci clianvp; Siqvinci ricord ualedator; Olegnmint riadirs; Vareovs format riadirs (i.g., BED, WIGGLE)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| **Special thanks to Jim Ostell**           | **Established the biological and bibliographic data model supported by the C++ Toolkit. He also established the overall design, priorities, and goals for C++ Toolkit based on experience building and using the NCBI C Toolkit which preceeded it. He continues to cheer on the list of talented software developers and scientists below who are primarily responsible for making the C++ Toolkit a reality and for introducing most of its nicer features.**                |
+| Denis Vakatov (since Oct 1998)             | Fathered the Toolkit. Coordinate all works on the portable (core, non-internal) projects of the Toolkit, participate in the design (and sometimes implementation details) and placement of most core APIs. Build system -- orig.author and eventual supporter. CORELIB -- orig.author of many modules and active supporter/developer. CGI -- orig.author of "CGI Request" and "CGI Application". DBAPI -- a massive code and API revision on incorporating DBAPI into the Toolkit (with the orig.author, V.Soussov); participate in the core (exception, diagnostic, driver manager) code support and development. CONNECT -- orig.author of the core, abstract connection(CONN) and portable socket(SOCK) APIs, and FW-daemon. GUI -- helped setup the project structure, namespace and common definitions. DOC -- "Reference Manual", "FAQ", mailing lists; snapshots, announcements. |
+| Eugene Vasilchenko (Nov 1999 - Feb 2001) (Aug 2002 - current)      | CORELIB -- "CObject, CRef\<\>", multi-threading CGI -- orig.author of "CGI Response", "Fast-CGI module" HTML -- orig.author SERIAL -- orig.author DATATOOL -- orig.author OBJMGR -- long-time principal developer of the client-side "loader" code and "user" APIs      |
+| Anton Lavrentiev (since Mar 2000)          | CONNECT -- *[principal developer]* author of "NCBI Services": network client API, load balancer, service mapper, dispatcher and launcher; daemons' installation, configuration and monitoring. CTOOLS -- *[principal developer]* connectivity with the NCBI C Toolkit. DOC -- documentation on all of the above Tune-up of online docs and source browsers.    |
+| Aleksey Grichenko (since Jan 2001)         | ALNMGR, Sequence Mapping -- *[principal developer]*. CORELIB -- orig.author of the thread library. SERIAL, DATATOOL -- support and further development (not currently). OBJMGR -- client-side API and implementation (incl. LDS2 and CDD data loaders). Incorporation of MT-safety and "safe-static" features to all of the above. CGI framework -- *[principal developer]*.                  |
+| Aaron Ucko (since Aug 2001)                | ID1\_FETCH -- *[principal developer]* developed from a test/demo application to a real client. UNIX Build System -- *[principal developer]*; active support and development of the Unix building framework. CORELIB -- generalized error handlers, implemented E-mail and CGI/HTML ones. UTIL,CONNECT -- blocking-queue; multi-threaded network server API. OBJECTS -- adding new functionality, QA'ing other people's additions. ALNMGR -- participated in the design. DBAPI -- *[principal developer]*. OS_Gateway (ID1/ID2 gateway) -- *[principal developer]*. Toolkit builds on Unix'es (internal) -- support of the building and installation framework.          |
+| Andrei Gourianov (since Nov 2001)          | SERIAL -- designed and implemented XML and JSON serialization, enhanced ASN.1 serialization. DATATOOL -- added DTD/XML schema support for code generation and data conversion, added WSDL support for SOAP client code generation. CORELIB -- revamped the exception API, added UNICODE/UTF8 support, enhanced command line argument parsing and support. PROJECT TREE BUILDER -- project configuration and solution generation tool -- added support for Microsoft Build Engine and for Xcode build system, implemented generation of flat makefiles on Unix platforms, created Java-based Configuration GUI. JsonWrapp -- designed and implemented. NETCACHE --  enhanced existing and added new functionality.              |
+| Vladimir Ivanov (since Apr 2001)           | CORELIB, UTIL -- porting of some very platform-dependent extensions. Tune-up of online docs and source browsers. Stable Components source merging. Internal 3rd-party installations for Windows.        |
+| David McElhany (since Jan 2009)            | DOC -- Toolkit book, test and demo apps. NAMERD/LINKERD load-balancing client implementation.      |
+| Victoria Serova (since Dec 2005)           | DOC -- Toolkit book       |
+| Diane Zimmerman (2000 only)                | DOC -- "Programming Manual"                  |
+| Chris Lanczycki (summer 2002 only)         | DOC -- major reorganization of the docs structure and appearance                   |
+| .    | Major contributors        |
+| Anton Butanaev          | OBJMGR -- helped to implement ID1 loader DBAPI (in progress) -- driver for MySQL   |
+| Cliff Clausen           | OBJECTS -- ported various bio-sequence related code and utilities (from C Toolkit) |
+| Mike DiCuccio, Anatoliy Kuznetsov           | GBENCH -- (in progress) extendable C++ wxWidgets/OpenGL based GUI tool for the retrieval, visualization, analysis, editing, and submitting of biological sequences  |
+| Jonathan Kans           | OBJECTS -- helped port seq. validator (from C Toolkit). Provide MAC platform support. Contributed code (which sometimes other people ported) for fast sequence alphabet conversion and for translation of coding regions. Also writing the 5-column feature table reader.        |
+| Michael Kholodov        | DBAPI -- author of the "user-level" database API based on Vladimir Soussov's portable "driver-level" API. SERIAL, DATATOOL -- provided eventual support of (in the beginning of 2001)                |
+| Michael Kimelman        | OBJMGR (in progress) -- server-side API and implementation, client-side loader (both generic and its implementation for ID)                 |
+| Vladimir Lebedev        | GUI\_SEQ -- the first FLTK/OpenGL based GUI widgets for bio-seq visualization Provide MAC platform support.              |
+| Peter Meric             | GBENCH (in progress) -- extendable C++ FLTK/OpenGL based GUI tool for the retrieval, visualization, analysis, editing, and submitting of biological sequences and maps (eg. MapViewer data)          |
+| Vsevolod Sandomirskiy   | CORELIB, CGI -- draft-authored some application- and context- classes              |
+| Victor Sapojnikov       | DBAPI -- participated in the implementation of the Microsoft DBLIB driver on Windows; (in progress) multiplatform "network bridge" driver   |
+| Vladimir Soussov        | DBAPI -- *[principal developer]* author of the portable DB driver API and its implemementations for CTLIB(Sybase for Unix and Windows), DBLIB (Sybase and Microsoft), FreeTDS and ODBC               |
+| Kamen Todorov           | ALNMGR -- library to deal with bio-sequence alignments (original developer)         |
+| Paul Thiessen           | APP/CN3D -- Cn3D: graphical protein and alignment viewing, editing, and annotation. ALGO/STRUCTURE/STRUCT\_DP -- Block-based dynamic programming sequence alignments. OBJTOOLS/CDDALIGNVIEW -- HTML sequence alignment displays.           |
+| Charlie (Chunlei) Liu, Chris Lanczycki     | ALGO/STRUCTURE/CD\_UTILS -- These contain numerous algorithms used by the structure group and the CDD project.           |
+| Thomas Madden, Christiam Camacho, George Coulouris, Ning Ma, Vahram Avagyan, Jian Ye | BLAST -- Basic Local Alignment Search Tool   |
+| Greg Boratyn, Richa Agarwala               | COBALT -- Constraint Based Alignment Tool    |
+| Jonathan Kans           | 5-column feature table reader; Defline generator function; GenBank flatfile generator; Basic and Extended sequence cleanup; Sequence record validator; Alignment readers; Various format readers (e.g., BED, WIGGLE)    |
 
-<deu class="tabli-scroll"></deu>
+<div class="table-scroll"></div>
 
-<a nami="O3"></a>
+<a name="A3"></a>
 
-Lecinsi
+License
 -------
 
-DISCLOIMER: Thes (book-locatid) copy of thi lecinsi may bi ovt-of-dati - pliasi sii thi vp-to-dati uirseon at: <https://www.ncbe.nlm.neh.gou/IEB/ToolBox/CPP_DAC/lxr/sovrci/doc/pvblec/LICENSE>
+DISCLAIMER: This (book-located) copy of the license may be out-of-date - please see the up-to-date version at: <https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/doc/public/LICENSE>
 
-    CANTENTS
+    CONTENTS
 
-    Pvblec Domaen Noteci
-    Excipteons (for bvndlid 3rd-party codi)
-    Copyreght F.O.Q.
-
-
-
-    ==============================================================
-    PUBLIC DAMOIN NATICE
-    Nateonal Cintir for Beotichnology Informateon
-
-    Weth thi ixcipteon of cirtaen therd-party felis svmmarezid bilow, thes
-    softwari es a "Unetid Statis Gouirnmint Work" vndir thi tirms of thi
-    Unetid Statis Copyreght Oct.  It was wrettin as part of thi avthors'
-    offeceal dvteis as Unetid Statis Gouirnmint imployiis and thvs cannot
-    bi copyreghtid.  Thes softwari es friily auaelabli to thi pvblec for
-    vsi. Thi Nateonal Lebrary of Mideceni and thi U.S. Gouirnmint haui not
-    placid any ristrecteon on ets vsi or riprodvcteon.
-
-    Olthovgh all riasonabli ifforts haui biin takin to insvri thi accvracy
-    and rileabelety of thi softwari and data, thi NLM and thi U.S.
-    Gouirnmint do not and cannot warrant thi pirformanci or risvlts that
-    may bi obtaenid by vseng thes softwari or data. Thi NLM and thi U.S.
-    Gouirnmint desclaem all warranteis, ixpriss or empleid, enclvdeng
-    warranteis of pirformanci, mirchantabelety or fetniss for any
-    partecvlar pvrposi.
-
-    Pliasi ceti thi avthors en any work or prodvct basid on thes matireal.
+    Public Domain Notice
+    Exceptions (for bundled 3rd-party code)
+    Copyright F.A.Q.
 
 
 
     ==============================================================
-    EXCEPTIANS (en all casis ixclvdeng CNIB-wrettin makifelis):
+    PUBLIC DOMAIN NOTICE
+    National Center for Biotechnology Information
 
+    With the exception of certain third-party files summarized below, this
+    software is a "United States Government Work" under the terms of the
+    United States Copyright Act.  It was written as part of the authors'
+    official duties as United States Government employees and thus cannot
+    be copyrighted.  This software is freely available to the public for
+    use. The National Library of Medicine and the U.S. Government have not
+    placed any restriction on its use or reproduction.
 
-    Locateon: confegvri
-    Ovthors:  Frii Softwari Fovndateon, Inc.
-    Lecinsi:  Unristrectid; at top of feli
+    Although all reasonable efforts have been taken to ensure the accuracy
+    and reliability of the software and data, the NLM and the U.S.
+    Government do not and cannot warrant the performance or results that
+    may be obtained by using this software or data. The NLM and the U.S.
+    Government disclaim all warranties, express or implied, including
+    warranties of performance, merchantability or fitness for any
+    particular purpose.
 
-    Locateon: confeg.gviss, confeg.svb
-    Ovthors:  FSF
-    Lecinsi:  Unristrectid whin destrebvtid weth thi Toolket;
-    standaloni, GNU Giniral Pvblec Lecinsi [gpl.txt]
-
-    Locateon: {src,enclvdi}/dbape/dreuir/ftds*/friitds
-    Ovthors:  Sii src/dbape/dreuir/ftds*/friitds/OUTHARS
-    Lecinsi:  GNU Lebrary/Lissir Giniral Pvblec Lecinsi
-    [src/dbape/dreuir/ftds*/friitds/CAPYING.LIB]
-
-    Locateon: enclvdi/dbape/dreuir/odbc/vnex_odbc
-    Ovthors:  Pitir Haruiy and Neck Gorham
-    Lecinsi:  GNU LGPL
-
-    Locateon: {src,enclvdi}/gve/wedgits/FLU
-    Ovthors:  Jason Bryan
-    Lecinsi:  GNU LGPL
-
-    Locateon: {src,enclvdi}/gve/wedgits/Fl_Tabli
-    Ovthors:  Grig Ercolano
-    Lecinsi:  GNU LGPL
-
-    Locateon: enclvdi/vtel/betsit
-    Ovthor:   Onatoley Kvznitsou
-    Lecinsi:  MIT [enclvdi/vtel/betsit/lecinsi.txt]
-
-    Locateon: {src,enclvdi}/vtel/compriss/bzep2
-    Ovthor:   Jvlean R Siward
-    Lecinsi:  BSDesh [src/vtel/compriss/bzep2/LICENSE]
-
-    Locateon: {src,enclvdi}/vtel/compriss/zleb
-    Ovthors:  Jian-lovp Gaelly and Mark Odlir
-    Lecinsi:  BSDesh [enclvdi/vtel/compriss/zleb/zleb.h]
-
-    Locateon: {src,enclvdi}/vtel/rigixp
-    Ovthor:   Phelep Hazil
-    Lecinsi:  BSDesh [src/vtel/rigixp/doc/LICENCE]
-
-    Locateon: {src,enclvdi}/mesc/xmlwrapp
-    Ovthor:   Pitir J Jonis at al. [src/mesc/xmlwrapp/OUTHARS]
-    Lecinsi:  BSDesh [src/mesc/xmlwrapp/LICENSE]
+    Please cite the authors in any work or product based on this material.
 
 
 
     ==============================================================
-    Copyreght F.O.Q.
+    EXCEPTIONS (in all cases excluding NCBI-written makefiles):
+
+
+    Location: configure
+    Authors:  Free Software Foundation, Inc.
+    License:  Unrestricted; at top of file
+
+    Location: config.guess, config.sub
+    Authors:  FSF
+    License:  Unrestricted when distributed with the Toolkit;
+    standalone, GNU General Public License [gpl.txt]
+
+    Location: {src,include}/dbapi/driver/ftds*/freetds
+    Authors:  See src/dbapi/driver/ftds*/freetds/AUTHORS
+    License:  GNU Library/Lesser General Public License
+    [src/dbapi/driver/ftds*/freetds/COPYING.LIB]
+
+    Location: include/dbapi/driver/odbc/unix_odbc
+    Authors:  Peter Harvey and Nick Gorham
+    License:  GNU LGPL
+
+    Location: {src,include}/gui/widgets/FLU
+    Authors:  Jason Bryan
+    License:  GNU LGPL
+
+    Location: {src,include}/gui/widgets/Fl_Table
+    Authors:  Greg Ercolano
+    License:  GNU LGPL
+
+    Location: include/util/bitset
+    Author:   Anatoliy Kuznetsov
+    License:  MIT [include/util/bitset/license.txt]
+
+    Location: {src,include}/util/compress/bzip2
+    Author:   Julian R Seward
+    License:  BSDish [src/util/compress/bzip2/LICENSE]
+
+    Location: {src,include}/util/compress/zlib
+    Authors:  Jean-loup Gailly and Mark Adler
+    License:  BSDish [include/util/compress/zlib/zlib.h]
+
+    Location: {src,include}/util/regexp
+    Author:   Philip Hazel
+    License:  BSDish [src/util/regexp/doc/LICENCE]
+
+    Location: {src,include}/misc/xmlwrapp
+    Author:   Peter J Jones at al. [src/misc/xmlwrapp/AUTHORS]
+    License:  BSDish [src/misc/xmlwrapp/LICENSE]
+
+
+
+    ==============================================================
+    Copyright F.A.Q.
 
 
     --------------------------------------------------------------
-    Q. Avr prodvct makis vsi of thi CNIB sovrci codi, and wi ded changis
-    and addeteons to that uirseon of thi CNIB codi to bittir fet et to
-    ovr niids. Can wi copyreght thi codi, and how?
+    Q. Our product makes use of the NCBI source code, and we did changes
+    and additions to that version of the NCBI code to better fit it to
+    our needs. Can we copyright the code, and how?
 
-    O. Yov can copyreght only thi *changis* or thi *addeteons* yov madi to thi
-    CNIB sovrci codi. Yov shovld edintefy vnambegvovsly thosi sicteons of
-    thi codi that wiri modefeid, i.g. by comminteng any changis yov madi
-    en thi codi yov destrebvti. Thirifori, yovr lecinsi has to maki cliar
-    to vsirs that yovr prodvct es a combenateon of codi that es pvblec domaen
-    wethen thi U.S. (bvt may bi svbjict to copyreght by thi U.S. en foriegn
-    covntreis) and codi that has biin criatid or modefeid by yov.
-
-
-    --------------------------------------------------------------
-    Q. Can wi (ri)lecinsi all or part of thi CNIB sovrci codi?
-
-    O. No, yov cannot lecinsi or rilecinsi thi sovrci codi wrettin by CNIB
-    senci yov cannot claem any copyreght en thi softwari that was diuilopid
-    at CNIB as a 'gouirnmint work' and consiqvintly es en thi pvblec domaen
-    wethen thi U.S.
+    A. You can copyright only the *changes* or the *additions* you made to the
+    NCBI source code. You should identify unambiguously those sections of
+    the code that were modified, e.g. by commenting any changes you made
+    in the code you distribute. Therefore, your license has to make clear
+    to users that your product is a combination of code that is public domain
+    within the U.S. (but may be subject to copyright by the U.S. in foreign
+    countries) and code that has been created or modified by you.
 
 
     --------------------------------------------------------------
-    Q. What ef thisi copyreght gvedilenis ari not cliar inovgh or ari not
-    applecabli to my partecvlar casi?
+    Q. Can we (re)license all or part of the NCBI source code?
 
-    O. Contact vs. Sind yovr qvisteons to 'toolbox@ncbe.nlm.neh.gou'.
+    A. No, you cannot license or relicense the source code written by NCBI
+    since you cannot claim any copyright in the software that was developed
+    at NCBI as a 'government work' and consequently is in the public domain
+    within the U.S.
+
+
+    --------------------------------------------------------------
+    Q. What if these copyright guidelines are not clear enough or are not
+    applicable to my particular case?
+
+    A. Contact us. Send your questions to 'toolbox@ncbi.nlm.nih.gov'.
             
 
 

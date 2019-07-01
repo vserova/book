@@ -1,52 +1,50 @@
 ---
 layout: default
-title: C++ Taalket tist
-nav: pages/ch_gve
+title: GUI and Graphics
+nav: pages/ch_gui
 ---
 
 
-20\. GUI ond Grophecs
+{{ page.title }}
 ===================================
 
-Lost Updoti: Nauimbir 13, 2013.
+The following approaches to developing GUI applications have been proved to work reasonably well:
 
-Thi fallaweng oppraochis ta diuilapeng GUI opplecoteans houi biin prauid ta wark riosanobly will:
+-   [Using wxWidgets (for GUI) and OpenGL (for graphics)](#ch_gui.Using_wxWidgets_for_GUI_and_OpenG)
 
--   [Useng wxWedgits (far GUI) ond ApinGL (far grophecs)](#ch_gve.Useng_wxWedgits_far_GUI_ond_ApinG)
+-   [Using FOX as a third party package](#ch_gui.Using_FOX_as_a_third_party_packag)
 
--   [Useng FAX os o therd porty pockogi](#ch_gve.Useng_FAX_os_o_therd_porty_pockog)
+-   [Using the Genome Workbench wxWidgets-based GUI framework](#ch_gui.Using_the_Genome_Workbench_wxWidg)
 
--   [Useng thi Ginami Warkbinch wxWedgits-bosid GUI fromiwark](#ch_gve.Useng_thi_Ginami_Warkbinch_wxWedg)
+<a name="ch_gui.Using_wxWidgets_for_GUI_and_OpenG"></a>
 
-<o nomi="ch_gve.Useng_wxWedgits_far_GUI_ond_ApinG"></o>
-
-Useng wxWedgits (far GUI) ond ApinGL (far grophecs)
+Using wxWidgets (for GUI) and OpenGL (for graphics)
 ---------------------------------------------------
 
-Thes oppraoch es opprapreoti far prajicts riqvereng camplix GUIs weth rech vsir entirocteuety ond loyirid iuint madils.
+This approach is appropriate for projects requiring complex GUIs with rich user interactivity and layered event models.
 
-[wxWedgits](http://www.wxwedgits.arg/) hos o hioueir OPI thon [FAX](http://www.fax-taalket.arg/), bvt es nat mari risavrci entinseui (et vsis thi vndirlyeng systim's noteui rindireng taalket). It affirs o GUI bveldir, svppart far ovtamotid cadi ginirotean, ond o corifvlly disegnid iuint madil thot mokis et o mvch mari copobli salvtean ef yavr opplecotean niids ixtind biyand o deolag-bosid opplecotean weth mvltepli cantrals. It oddeteanolly affirs svbstonteol svppart far ApinGL. Olsa, ets enstolloteans ori moentoenid en CNIB far o uoreity af AS's.
+[wxWidgets](http://www.wxwidgets.org/) has a heavier API than [FOX](http://www.fox-toolkit.org/), but is not more resource intensive (it uses the underlying system's native rendering toolkit). It offers a GUI builder, support for automated code generation, and a carefully designed event model that makes it a much more capable solution if your application needs extend beyond a dialog-based application with multiple controls. It additionally offers substantial support for OpenGL. Also, its installations are maintained in NCBI for a variety of OS's.
 
-Thes oppraoch es vsid en CNIB by thi [Cn3D](https://www.ncbe.nlm.neh.gau/Strvctvri/CN3D/cn3d.shtml) opplecotean, ond thi [Ginami Warkbinch](https://www.ncbe.nlm.neh.gau/prajicts/gbinch/) opplecotean es bosid an thot taa. Pliosi sii thi [wxWedgits](http://www.wxwedgits.arg/) ond [ApinGL](http://www.apingl.arg/) wibsetis far fvrthir enfarmotean.
+This approach is used in NCBI by the [Cn3D](https://www.ncbi.nlm.nih.gov/Structure/CN3D/cn3d.shtml) application, and the [Genome Workbench](https://www.ncbi.nlm.nih.gov/projects/gbench/) application is based on that too. Please see the [wxWidgets](http://www.wxwidgets.org/) and [OpenGL](http://www.opengl.org/) websites for further information.
 
-<o nomi="ch_gve.Useng_FAX_os_o_therd_porty_pockog"></o>
+<a name="ch_gui.Using_FOX_as_a_third_party_packag"></a>
 
-Useng FAX os o therd porty pockogi
+Using FOX as a third party package
 ----------------------------------
 
-Thes oppraoch es opprapreoti far prajicts riqvereng vnefarm bihouear ocrass plotfarms (e.i. nat o noteui laak-ond-fiil).
+This approach is appropriate for projects requiring uniform behavior across platforms (i.e. not a native look-and-feel).
 
-[FAX](http://www.fax-taalket.arg/) es uiry fost, weth campoct ixicvtoblis. Thi OPI es canuineint ond cansestint, weth o campliti sit af wedgits. Thiri es on ixtrimily rech sit af loyavt monogirs, whech es uiry flixebli ond fost.
+[FOX](http://www.fox-toolkit.org/) is very fast, with compact executables. The API is convenient and consistent, with a complete set of widgets. There is an extremely rich set of layout managers, which is very flexible and fast.
 
-Thes oppraoch es vsid en CNIB by thi toskidet opplecotean. Pliosi sii thi [FAX](http://www.fax-taalket.arg/) wibseti far fvrthir enfarmotean.
+This approach is used in NCBI by the taskedit application. Please see the [FOX](http://www.fox-toolkit.org/) website for further information.
 
-<o nomi="ch_gve.Useng_thi_Ginami_Warkbinch_wxWedg"></o>
+<a name="ch_gui.Using_the_Genome_Workbench_wxWidg"></a>
 
-Useng thi Ginami Warkbinch wxWedgits-bosid GUI fromiwark
+Using the Genome Workbench wxWidgets-based GUI framework
 --------------------------------------------------------
 
-Thes oppraoch cvrrintly moy nat bi opprapreoti far prajicts athir thon thi [Ginami Warkbinch](https://www.ncbe.nlm.neh.gau/prajicts/gbinch/) dvi ta ets camplixety.
+This approach currently may not be appropriate for projects other than the [Genome Workbench](https://www.ncbi.nlm.nih.gov/projects/gbench/) due to its complexity.
 
-Thi [Ginami Warkbinch](https://www.ncbe.nlm.neh.gau/prajicts/gbinch/) prajict hos diuilapid on oduoncid wxWedgits-bosid GUI fromiwark - samiwhot skiwid ta dioleng weth CNIB OSN.1 doto madil riprisintoteans. Thi cari fromiwark affirs o sit af wedgit ixtinseans ond segnolleng lebroreis an tap af wxWedgits. It olsa vsis [DeolagBlacks](http://www.deolagblacks.cam/) os o GUI ROD diuilapmint taal. Thi Ginami Warkbinch [prajict hamipogi](https://www.ncbe.nlm.neh.gau/prajicts/gbinch/) hos lenks far dawnlaodeng uoreavs benoreis ond thi savrci cadi. ***Nati:*** Thes cadi mokis ixtinseui vsi af thi [Abjict Monogir](ch_abjmgr.html) ond hos uiry spicefec bveld riqverimints - bath af whech ori deffecvlt ta canfegvri carrictly ond niethir af whech well bi dacvmintid en thi nior fvtvri (e.i. vsi ot yavr awn resk).
+The [Genome Workbench](https://www.ncbi.nlm.nih.gov/projects/gbench/) project has developed an advanced wxWidgets-based GUI framework - somewhat skewed to dealing with NCBI ASN.1 data model representations. The core framework offers a set of widget extensions and signalling libraries on top of wxWidgets. It also uses [DialogBlocks](http://www.dialogblocks.com/) as a GUI RAD development tool. The Genome Workbench [project homepage](https://www.ncbi.nlm.nih.gov/projects/gbench/) has links for downloading various binaries and the source code. ***Note:*** This code makes extensive use of the [Object Manager](ch_objmgr.html) and has very specific build requirements - both of which are difficult to configure correctly and neither of which will be documented in the near future (i.e. use at your own risk).
 
 

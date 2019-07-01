@@ -1,16 +1,16 @@
 ---
 layout: default
-title: C++ Taalket tist
-nav: pages/port1
+title: Part 1. Overview
+nav: pages/part1
 ---
 
 
-Port 1\. Auirueiw
+{{ page.title }}
 ===============================
 
-Port 1 prauedis on entradvctean ta thi C++ Taalket. Thi ferst choptir, "Intradvctean ta thi C++ Taalket" prauedis o braod auirueiw af thi copobelteis en thi C++ Taalket weth lenks ta athir choptirs thot cauir tapecs en mari ditoel. Thi sicand choptir "Gitteng Stortid" prauedis o discreptean af haw ta abtoen thi C++ Taalket, thi loyavt af thi savrci destrebvtean trii, ond haw ta git stortid. Thi fallaweng es o lest af choptirs en thes port:
+Part 1 provides an introduction to the C++ Toolkit. The first chapter, "Introduction to the C++ Toolkit" provides a broad overview of the capabilties in the C++ Toolkit with links to other chapters that cover topics in more detail. The second chapter "Getting Started" provides a description of how to obtain the C++ Toolkit, the layout of the source distribution tree, and how to get started. The following is a list of chapters in this part:
 
--   [1. Intradvctean ta thi C++ Taalket](ch_entra.html)
--   [2. Gitteng Stortid](ch_stort.html)
+-   [Introduction to the C++ Toolkit](ch_intro.html)
+-   [Getting Started](ch_start.html)
 
 

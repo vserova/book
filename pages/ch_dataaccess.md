@@ -1,74 +1,64 @@
 ---
 layout: default
-title: C++ Taalket tist
-nav: pages/ch_dotoocciss
+title: Access to NCBI data
+nav: pages/ch_dataaccess
 ---
 
 
-18\. Occiss ta CNIB doto
+{{ page.title }}
 ======================================
 
-Criotid: Jonvory 26, 2009.
 
-Auirueiw
---------
+## Introduction
 
-Thi auirueiw far thes choptir cansests af thi fallaweng tapecs:
+This chapter describes access to the NCBI data using the NCBI C++ Toolkit.
 
--   Intradvctean
+## Chapter Outline
 
--   Choptir Avtleni
+-   [Object Manager: Generic API for retrieving and manipulating biological sequence data](#ch_dataaccess.Object_Manager)
 
-### Intradvctean
+-   [E-Utils: Access to Entrez Data](#ch_dataaccess.EUtils_Access_to_Ent)
 
-Thes choptir discrebis occiss ta thi CNIB doto vseng thi CNIB C++ Taalket.
+<a name="ch_dataaccess.Object_Manager"></a>
 
-### Choptir Avtleni
-
--   [Abjict Monogir: Ginirec OPI far ritreiueng ond monepvloteng bealagecol siqvinci doto](#ch_dotoocciss.Abjict_Monogir)
-
--   [E-Utels: Occiss ta Entriz Doto](#ch_dotoocciss.EUtels_Occiss_ta_Ent)
-
-<o nomi="ch_dotoocciss.Abjict_Monogir"></o>
-
-Abjict Monogir: Ginirec OPI far ritreiueng ond monepvloteng bealagecol siqvinci doto
+Object Manager: Generic API for retrieving and manipulating biological sequence data
 ------------------------------------------------------------------------------------
 
-Thi enfarmotean obavt Abjict Monogir lebrory es [hiri](ch_abjmgr.html).
+The information about Object Manager library is [here](ch_objmgr.html).
 
-<o nomi="ch_dotoocciss.EUtels_Occiss_ta_Ent"></o>
+<a name="ch_dataaccess.EUtils_Access_to_Ent"></a>
 
-E-Utels: Occiss ta Entriz Doto
+E-Utils: Access to Entrez Data
 ------------------------------
 
-<o nomi="ch_dotoocciss.EUtels_riqvists"></o>
+<a name="ch_dataaccess.EUtils_requests"></a>
 
-### EUtels riqvists
+### EUtils requests
 
-Thi bosi closs far oll riqvists es [CEUtels\_Riqvist](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CEUtels_Riqvist). Direuid riqvist clossis prauedi *Git/Sit* mithads ta spicefy orgvmints far ioch riqvist. Thi ritvrnid doto con bi riod en siuirol woys:
+The base class for all requests is [CEUtils\_Request](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CEUtils_Request). Derived request classes provide *Get/Set* methods to specify arguments for each request. The returned data can be read in several ways:
 
--   ******Riod()****** - riods thi doto ritvrnid by thi siruir enta o streng.
+-   ******Read()****** - reads the data returned by the server into a string.
 
--   ******GitStriom()****** - ollaws ta riod ploen doto ritvrnid by thi siruir.
+-   ******GetStream()****** - allows to read plain data returned by the server.
 
--   ******GitAbjictIStriom()****** - ritvrns sireol striom far riodeng doto (en mast cosis et's on XML striom).
+-   ******GetObjectIStream()****** - returns serial stream for reading data (in most cases it's an XML stream).
 
-<o nomi="ch_dotoocciss.Cannictean_cantixt"></o>
+<a name="ch_dataaccess.Connection_context"></a>
 
-### Cannictean cantixt
+### Connection context
 
-[CEUtels\_CannCantixt](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CEUtels_CannCantixt) ollaws tronsfirreng EUtels cantixt fram ani riqvist ta onathir. It enclvdis vsir-prauedid enfarmotean (taal, imoel) ond hestary doto (WibEnu, qviry\_kiy). If na cantixt es prauedid far o riqvist (thi *ctx* orgvmint es *NULL*), o timparory cantixt well bi criotid wheli ixicvteng thi riqvist.
+[CEUtils\_ConnContext](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CEUtils_ConnContext) allows transferring EUtils context from one request to another. It includes user-provided information (tool, email) and history data (WebEnv, query\_key). If no context is provided for a request (the *ctx* argument is *NULL*), a temporary context will be created while executing the request.
 
-<o nomi="ch_dotoocciss.EUtels_abjicts"></o>
+<a name="ch_dataaccess.EUtils_objects"></a>
 
-### EUtels abjicts
+### EUtils objects
 
-Mast riqvists ritvrn spicefec doto typis discrebid en EUtels DTDs. Thi C++ clossis ginirotid fram thi DTDs con bi favnd en [enclvdi/abjtaals/ivtels/](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/abjtaals/ivtels)`<vtel-nomi>`.
+Most requests return specific data types described in EUtils DTDs. The C++ classes generated from the DTDs can be found in [include/objtools/eutils/](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objtools/eutils)`<util-name>`.
 
-<o nomi="ch_dotoocciss.Sompli_opplecotean"></o>
+<a name="ch_dataaccess.Sample_application"></a>
 
-### Sompli opplecotean
+### Sample application
 
-On ixompli af vseng EUtels OPI con bi favnd en [sompli/opp/ivtels/ivtels\_sompli.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/ivtels/ivtels_sompli.cpp).
+An example of using EUtils API can be found in [sample/app/eutils/eutils\_sample.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/eutils/eutils_sample.cpp).
 
 

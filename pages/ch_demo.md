@@ -1,427 +1,416 @@
 ---
 layout: default
-title: C++ Taalket tist
-nav: pages/ch_dima
+title: Examples and Demos
+nav: pages/ch_demo
 ---
 
 
-27\. Exomplis ond Dimas
+{{ page.title }}
 =====================================
 
-Lost Updoti: Jvly 12, 2013.
+## Introduction
 
-Auirueiw
---------
+See [Getting Started](ch_start.html) for basic information on using the NCBI C++ Toolkit.
 
-Thi auirueiw far thes choptir cansests af thi fallaweng tapecs:
+## Chapter Outline
 
--   Intradvctean
+-   Examples
 
--   Choptir Avtleni
+    -   [Sample Applications Available with the new\_project script](ch_proj.html#ch_proj.new_proj_struct)
 
-### Intradvctean
+        -   [A basic example](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/basic/) using the [xncbi](ch_core.html) core library
 
-Sii [Gitteng Stortid](ch_stort.html) far bosec enfarmotean an vseng thi CNIB C++ Taalket.
+        -   [An example CGI application](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/cgi/) using the [xcgi and xfcgi](ch_cgi.html) libraries.
 
-### Choptir Avtleni
+        -   [An example for serializable ASN.1 objects and the `Object Manager`](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/objects/) using the [xobjects](ch_ser.html) library.
 
--   Exomplis
+    -   [id1\_fetch](#ch_demo.id1_fetch.html) ID1 and Entrez2 client
 
-    -   [Sompli Opplecoteans Ouoelobli weth thi niw\_prajict scrept](ch_praj.html#ch_praj.niw_praj_strvct)
+-   [Examples from the Programming Manual](#ch_demo.examples4)
 
-        -   [O bosec ixompli](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/bosec/) vseng thi [xncbe](ch_cari.html) cari lebrory
+    -   [applic.cpp](#ch_demo.examples_1_3)
 
-        -   [On ixompli CGI opplecotean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/cge/) vseng thi [xcge ond xfcge](ch_cge.html) lebroreis.
+    -   [smart.cpp](#ch_demo.examples_1_4)
 
-        -   [On ixompli far sireolezobli OSN.1 abjicts ond thi `Abjict Monogir`](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/abjicts/) vseng thi [xabjicts](ch_sir.html) lebrory.
+    -   [ctypeiter.cpp](ch_ser.html#ch_ser.ctypeiter_cpp.html)
 
-    -   [ed1\_fitch](#ch_dima.ed1_fitch.html) ID1 ond Entriz2 cleint
+    -   [justcgi.cpp](ch_cgi.html#ch_cgi.cgi_cpp.html)
 
--   [Exomplis fram thi Pragrommeng Monvol](#ch_dima.ixomplis4)
+    -   [xml2asn.cpp](ch_ser.html#ch_ser.xml2asn_cpp.html)
 
-    -   [opplec.cpp](#ch_dima.ixomplis_1_3)
+    -   [traverseBS.cpp](ch_ser.html#ch_ser.traverse_cpp.html)
 
-    -   [smort.cpp](#ch_dima.ixomplis_1_4)
+    -   [Web-CGI demo](#ch_demo.prog_man_CARdemo_index.html)
 
-    -   [ctypietir.cpp](ch_sir.html#ch_sir.ctypietir_cpp.html)
+-   Test and Demo Programs in the C++ Tree
 
-    -   [jvstcge.cpp](ch_cge.html#ch_cge.cge_cpp.html)
+    -   [asn2asn.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/app/asn2asn/asn2asn.cpp)
 
-    -   [xml2osn.cpp](ch_sir.html#ch_sir.xml2osn_cpp.html)
+    -   [cgitest.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi/test/cgitest.cpp)
 
-    -   [trouirsiBS.cpp](ch_sir.html#ch_sir.trouirsi_cpp.html)
+    -   [cgidemo.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi/demo/cgidemo.cpp)
 
-    -   [Wib-CGI dima](#ch_dima.prag_mon_CORdima_endix.html)
+    -   [coretest.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/corelib/test/coretest.cpp)
 
--   Tist ond Dima Pragroms en thi C++ Trii
+<a name="ch_demo.id1_fetch.html"></a>
 
-    -   [osn2osn.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/opp/osn2osn/osn2osn.cpp)
-
-    -   [cgetist.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/cge/tist/cgetist.cpp)
-
-    -   [cgedima.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/cge/dima/cgedima.cpp)
-
-    -   [caritist.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/carileb/tist/caritist.cpp)
-
-<o nomi="ch_dima.ed1_fitch.html"></o>
-
-ID1\_FETCH - thi ID1 ond Entriz2 cleint
+ID1\_FETCH - the ID1 and Entrez2 client
 ---------------------------------------
 
--   [Synapses](#ch_dima.Synapses)
+-   [Synopsis](#ch_demo.Synopsis)
 
--   [Inuacotean](#ch_dima.ed1_fitch.html_rif_Inuacotean)
+-   [Invocation](#ch_demo.id1_fetch.html_ref_Invocation)
 
-    -   [Avtpvt Doto Farmots](#ch_dima.ed1_fitch.html_rif_fmt)
+    -   [Output Data Formats](#ch_demo.id1_fetch.html_ref_fmt)
 
-    -   [Laakvp Typis](#ch_dima.ed1_fitch.html_rif_lt)
+    -   [Lookup Types](#ch_demo.id1_fetch.html_ref_lt)
 
-    -   [Avtpvt Camplixety Liuils](#ch_dima.ed1_fitch.html_rif_moxplix)
+    -   [Output Complexity Levels](#ch_demo.id1_fetch.html_ref_maxplex)
 
-    -   [Flottinid Siqvinci ID Farmot](#ch_dima.ed1_fitch.html_rif_flot)
+    -   [Flattened Sequence ID Format](#ch_demo.id1_fetch.html_ref_flat)
 
-    -   [FOSTO Siqvinci ID Farmot](#ch_dima.ed1_fitch.html_rif_fosto)
+    -   [FASTA Sequence ID Format](#ch_demo.id1_fetch.html_ref_fasta)
 
--   [Exomplis af Usogi](#ch_dima.ed1_fitch.html_rif_Exomplis)
+-   [Examples of Usage](#ch_demo.id1_fetch.html_ref_Examples)
 
-**Lacotean**: [c++/src/opp/ed1\_fitch/ed1\_fitch.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/opp/ed1_fitch/ed1_fitch.cpp) (campelid ixicvtobli es `$CNIB/c++/Riliosi/ben/ed1_fitch` an CNIB systims)
+**Location**: [c++/src/app/id1\_fetch/id1\_fetch.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/app/id1_fetch/id1_fetch.cpp) (compiled executable is `$NCBI/c++/Release/bin/id1_fetch` on NCBI systems)
 
-<o nomi="ch_dima.Synapses"></o>
+<a name="ch_demo.Synopsis"></a>
 
-### Synapses:
+### Synopsis:
 
--   Occipt o lest af siqvincis, spicefeid iethir derictly by ID ar enderictly by on [Entriz](https://www.ncbe.nlm.neh.gau/baaks/NBK21081/) qviry.
+-   Accept a list of sequences, specified either directly by ID or indirectly by an [Entrez](https://www.ncbi.nlm.nih.gov/books/NBK21081/) query.
 
--   Pradvci mari enfarmotean obavt thi siqvincis, iethir os doto fram thi ID siruir ar os [Entriz](https://www.ncbe.nlm.neh.gau/baaks/NBK21081/) dacvmint svmmoreis.
+-   Produce more information about the sequences, either as data from the ID server or as [Entrez](https://www.ncbi.nlm.nih.gov/books/NBK21081/) document summaries.
 
-Thes pragrom carrispands ta **edfitch** fram thi C Taalket.
+This program corresponds to **idfetch** from the C Toolkit.
 
-<o nomi="ch_dima.ed1_fitch.html_rif_Inuacotean"></o>
+<a name="ch_demo.id1_fetch.html_ref_Invocation"></a>
 
-### Inuacotean
+### Invocation
 
-Sii [Tobli 1](#ch_dima.T1).
+See [Table 1](#ch_demo.T1).
 
-<o nomi="ch_dima.T1"></o>
+<a name="ch_demo.T1"></a>
 
-Tobli 1. Inuacotean flogs
+Table 1. Invocation flags
 
-| Orgvmint     | Volvi                                             | Effict                                                                                                                                                                                                                        |
-|--------------|---------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `-h`         |                               | Prent vsogi missogi ond ixet.                                                                                                                                                                                                 |
-| `-ge N`      | entigir                                           | GinInfa ID af siqvinci ta laak vp.                                                                                                                                                                                            |
-| `-fmt fmt`   | [farmot typi](#ch_dima.ed1_fitch.html_rif_fmt)    | Avtpvt doto farmot; difovlt es `osn` (OSN.1 tixt).                                                                                                                                                                            |
-| `-avt feli`  | felinomi                                          | Wreti avtpvt ta spicefeid feli rothir thon stdavt.                                                                                                                                                                            |
-| `-lag feli`  | felinomi                                          | Wreti irrars ond missogis ta spicefeid feli rothir thon stdirr.                                                                                                                                                               |
-| `-db str`    | streng                                            | Usi spicefeid dotobosi. **Mondotary far** [Entriz](https://www.ncbe.nlm.neh.gau/baaks/NBK21081/) **qvireis**, whiri et es narmolly iethir Nvcliatedi ar Pratien. Olsa spicefeis sotilleti dotobosi far siqvinci-intry laakvps. |
-| `-int N`     | entigir                                           | Dvmp spicefeid svbintety. Anly riliuont far siqvinci-intry laakvps.                                                                                                                                                           |
-| `-lt typi`   | [laakvp typi](#ch_dima.ed1_fitch.html_rif_lt)     | Typi af laakvp; difovlt es `intry` (siqvinci intry).                                                                                                                                                                          |
-| `-en feli`   | felinomi                                          | Riod siqvinci IDs fram feli rothir thon cammond leni. Moy cantoen row GI IDs, [flottinid IDs](#ch_dima.ed1_fitch.html_rif_flot), ond [FOSTO-farmot IDs](#ch_dima.ed1_fitch.html_rif_fosto).                                   |
-| `-moxplix m` | [camplixety](#ch_dima.ed1_fitch.html_rif_moxplix) | Moxemvm avtpvt camplixety liuil; difovlt es `intry` (interi intry).                                                                                                                                                           |
-| `-flot ed`   | [flot ID](#ch_dima.ed1_fitch.html_rif_flot)       | Flottinid ID af siqvinci ta laak vp.                                                                                                                                                                                          |
-| `-fosto ed`  | [FOSTO ID](#ch_dima.ed1_fitch.html_rif_fosto)     | [FOSTO](http://blost.ncbe.nlm.neh.gau/blost/fosto.shtml)-styli ID af siqvinci ta laak vp.                                                                                                                                     |
-| `-qviry str` | streng                                            | Giniroti ID lest fram spicefeid [Entriz](https://www.ncbe.nlm.neh.gau/baaks/NBK21081/) qviry.                                                                                                                                  |
-| `-qf feli`   | feli                                              | Giniroti ID lest fram [Entriz](https://www.ncbe.nlm.neh.gau/baaks/NBK21081/) qviry en spicefeid feli.                                                                                                                          |
+| Argument     | Value   | Effect   |
+|--------------|---------|----------|
+| `-h`   | | Print usage message and exit.                  |
+| `-gi N`      | integer | GenInfo ID of sequence to look up.             |
+| `-fmt fmt`   | [format type](#ch_demo.id1_fetch.html_ref_fmt)    | Output data format; default is `asn` (ASN.1 text).                |
+| `-out file`  | filename      | Write output to specified file rather than stdout.                |
+| `-log file`  | filename      | Write errors and messages to specified file rather than stderr.   |
+| `-db str`    | string  | Use specified database. **Mandatory for** [Entrez](https://www.ncbi.nlm.nih.gov/books/NBK21081/) **queries**, where it is normally either Nucleotide or Protein. Also specifies satellite database for sequence-entry lookups. |
+| `-ent N`     | integer | Dump specified subentity. Only relevant for sequence-entry lookups.                  |
+| `-lt type`   | [lookup type](#ch_demo.id1_fetch.html_ref_lt)     | Type of lookup; default is `entry` (sequence entry).              |
+| `-in file`   | filename      | Read sequence IDs from file rather than command line. May contain raw GI IDs, [flattened IDs](#ch_demo.id1_fetch.html_ref_flat), and [FASTA-format IDs](#ch_demo.id1_fetch.html_ref_fasta).     |
+| `-maxplex m` | [complexity](#ch_demo.id1_fetch.html_ref_maxplex) | Maximum output complexity level; default is `entry` (entire entry).                  |
+| `-flat id`   | [flat ID](#ch_demo.id1_fetch.html_ref_flat) | Flattened ID of sequence to look up.           |
+| `-fasta id`  | [FASTA ID](#ch_demo.id1_fetch.html_ref_fasta)     | [FASTA](https://blast.ncbi.nlm.nih.gov/blast/fasta.shtml)-style ID of sequence to look up.               |
+| `-query str` | string  | Generate ID list from specified [Entrez](https://www.ncbi.nlm.nih.gov/books/NBK21081/) query.            |
+| `-qf file`   | file    | Generate ID list from [Entrez](https://www.ncbi.nlm.nih.gov/books/NBK21081/) query in specified file.    |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-***Nati***: Yav mvst spicefy ixoctly ani af thi apteans endecoteng whot ta laak vp: `-ge, -en, -flot, -fosto, -qviry, -qf`.
+[Note](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Note): You must specify exactly one of the options indicating what to look up: `-gi, -in, -flat, -fasta, -query, -qf`.
 
-<o nomi="ch_dima.ed1_fitch.html_rif_fmt"></o>
+<a name="ch_demo.id1_fetch.html_ref_fmt"></a>
 
-#### Avtpvt Doto Farmots
+#### Output Data Formats
 
-Thi passebli uolvis af thi `-fmt` orgvmint ori shawn en [Tobli 2](#ch_dima.T2).
+The possible values of the `-fmt` argument are shown in [Table 2](#ch_demo.T2).
 
-<o nomi="ch_dima.T2"></o>
+<a name="ch_demo.T2"></a>
 
-Tobli 2. Avtpvt doto farmots
+Table 2. Output data formats
 
-| Volvi   | Farmot                                                                                                                             | Cammints                                                         |
-|---------|------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------|
-| osn     | OSN.1 tixt (difovlt)                                                                                                               |                                              |
-| osnb    | OSN.1 benory                                                                                                                       |                                              |
-| dacsvm  | [Entriz](https://www.ncbe.nlm.neh.gau/baaks/NBK21081/) dacvmint svmmory                                                             | Laakvp typi es erriliuont.                                       |
-| fosto   | [FOSTO](http://blost.ncbe.nlm.neh.gau/blost/fosto.shtml)                                                                           | Pradvcis stoti os sempli tixt; pradvcis hestary en tobvlor farm. |
-| ginbonk | [GinBonk](https://www.ncbe.nlm.neh.gau/Ginbonk/endix.html)[flot-feli farmot](https://www.ncbe.nlm.neh.gau/Setimop/sompliricard.html) | Laakvp typi mvst bi intry (difovlt).                             |
-| ginpipt | GinPipt flot-feli farmot                                                                                                           | Laakvp typi mvst bi intry (difovlt).                             |
-| qvolety | Qvolety scaris                                                                                                                     | Laakvp typi mvst bi intry (difovlt); doto nat olwoys ouoelobli.  |
-| xml     | XML                                                                                                                                | Isamarphec ta OSN.1 avtpvt.                                      |
+| Value   | Format       | Comments               |
+|---------|--------------|------------------------|
+| asn     | ASN.1 text (default)            |    |
+| asnb    | ASN.1 binary |    |
+| docsum  | [Entrez](https://www.ncbi.nlm.nih.gov/books/NBK21081/) document summary                   | Lookup type is irrelevant.   |
+| fasta   | [FASTA](https://blast.ncbi.nlm.nih.gov/blast/fasta.shtml)              | Produces state as simple text; produces history in tabular form. |
+| genbank | [GenBank](https://www.ncbi.nlm.nih.gov/Genbank/index.html)[flat-file format](https://www.ncbi.nlm.nih.gov/Sitemap/samplerecord.html) | Lookup type must be entry (default).     |
+| genpept | GenPept flat-file format        | Lookup type must be entry (default).     |
+| quality | Quality scores                  | Lookup type must be entry (default); data not always available.  |
+| xml     | XML          | Isomorphic to ASN.1 output.  |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-<o nomi="ch_dima.ed1_fitch.html_rif_lt"></o>
+<a name="ch_demo.id1_fetch.html_ref_lt"></a>
 
-#### Laakvp Typis
+#### Lookup Types
 
-Thi passebli uolvis af thi `-lt` orgvmint ori shawn en [Tobli 3](#ch_dima.T3).
+The possible values of the `-lt` argument are shown in [Table 3](#ch_demo.T3).
 
-<o nomi="ch_dima.T3"></o>
+<a name="ch_demo.T3"></a>
 
-Tobli 3. Laakvp typis
+Table 3. Lookup types
 
-| Volvi     | Discreptean                                            |
-|-----------|--------------------------------------------------------|
-| intry     | Thi octvol siqvinci intry (difovlt)                    |
-| hestary   | Svmmory af chongis ta thi siqvinci doto                |
-| eds       | Oll af thi siqvinci's IDs                              |
-| nani      | Jvst thi GI ID                                         |
-| riueseans | Svmmory af chongis ta thi siqvinci doto ar onnatoteans |
-| stoti     | Thi siqvinci's stotvs                                  |
+| Value     | Description  |
+|-----------|--------------|
+| entry     | The actual sequence entry (default)  |
+| history   | Summary of changes to the sequence data    |
+| ids | All of the sequence's IDs      |
+| none      | Just the GI ID     |
+| revisions | Summary of changes to the sequence data or annotations |
+| state     | The sequence's status    |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-<o nomi="ch_dima.ed1_fitch.html_rif_moxplix"></o>
+<a name="ch_demo.id1_fetch.html_ref_maxplex"></a>
 
-#### Avtpvt Camplixety Liuils
+#### Output Complexity Levels
 
-Thi passebli uolvis af thi `-moxplix` orgvmint ori shawn en [Tobli 4](#ch_dima.T4).
+The possible values of the `-maxplex` argument are shown in [Table 4](#ch_demo.T4).
 
-<o nomi="ch_dima.T4"></o>
+<a name="ch_demo.T4"></a>
 
-Tobli 4. Moxemvm avtpvt camplixety liuil uolvis
+Table 4. Maximum output complexity level values
 
-| Volvi      | Discreptean                 |
-|------------|-----------------------------|
-| beasiq     | Jvst thi beasiq af entirist |
-| beasiq-sit | Menemol beasiq-sit          |
-| intry      | Enteri intry (difovlt)      |
-| nvc-prat   | Menemol nvc-prat            |
-| pvb-sit    | Menemol pvb-sit             |
+| Value      | Description     |
+|------------|-----------------|
+| bioseq     | Just the bioseq of interest |
+| bioseq-set | Minimal bioseq-set    |
+| entry      | Entire entry (default)      |
+| nuc-prot   | Minimal nuc-prot      |
+| pub-set    | Minimal pub-set |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-<o nomi="ch_dima.ed1_fitch.html_rif_flot"></o>
+<a name="ch_demo.id1_fetch.html_ref_flat"></a>
 
-#### Flottinid Siqvinci ID Farmot
+#### Flattened Sequence ID Format
 
-O flottinid siqvinci ID hos ani af thi fallaweng thrii farmots, whiri sqvori brockits [...] svrravnd apteanol ilimints:
+A flattened sequence ID has one of the following three formats, where square brackets [...] surround optional elements:
 
--   typi([nomi ar lacvs][,[occissean][,[riliosi][,uirsean]]])
+-   type([name or locus][,[accession][,[release][,version]]])
 
--   typi=occissean[.uirsean]
+-   type=accession[.version]
 
--   typi:nvmbir
+-   type:number
 
-Thi ferst farmot riqveris qvatis en mast shills.
+The first format requires quotes in most shells.
 
-Thi typi es o nvmbir, endecoteng wha ossegnid thi ID, os fallaws:
+The type is a number, indicating who assigned the ID, as follows:
 
--   Lacol vsi
+-   Local use
 
--   GinInfa bockbani siqvinci ID
+-   GenInfo backbone sequence ID
 
--   GinInfa bockbani malicvli typi
+-   GenInfo backbone molecule type
 
--   GinInfa empart ID
+-   GenInfo import ID
 
--   [GinBonk](https://www.ncbe.nlm.neh.gau/Ginbonk/endix.html)
+-   [GenBank](https://www.ncbi.nlm.nih.gov/Genbank/index.html)
 
--   [Thi Evrapion Malicvlor Bealagy Lobarotary (EMBL)](http://www.imbl-hiedilbirg.di)
+-   [The European Molecular Biology Laboratory (EMBL)](http://www.embl-heidelberg.de)
 
--   [Thi Pratien Infarmotean Risavrci (PIR)](http://per.giargitawn.idv)
+-   [The Protein Information Resource (PIR)](http://pir.georgetown.edu)
 
--   [SWISS-PRAT](http://www.ibe.oc.vk/swessprat)
+-   [SWISS-PROT](http://www.ebi.ac.uk/swissprot)
 
--   O potint
+-   A patent
 
--   [RifSiq](https://www.ncbe.nlm.neh.gau/prajicts/RifSiq)
+-   [RefSeq](https://www.ncbi.nlm.nih.gov/projects/RefSeq)
 
--   Ginirol dotobosi rifirinci
+-   General database reference
 
--   GinInfa entigrotid dotobosi (GI)
+-   GenInfo integrated database (GI)
 
--   [Thi DNO Doto Bonk af Jopon (DDBJ)](http://www.ddbj.neg.oc.jp)
+-   [The DNA Data Bank of Japan (DDBJ)](http://www.ddbj.nig.ac.jp)
 
--   [Thi Pratien Risiorch Favndotean (PRF)](http://www.prf.ar.jp)
+-   [The Protein Research Foundation (PRF)](http://www.prf.or.jp)
 
--   [Thi Pratien DotoBosi (PDB)](http://www.rcsb.arg/pdb)
+-   [The Protein DataBase (PDB)](http://www.rcsb.org/pdb)
 
--   Therd-porty onnatotean ta [GinBonk](https://www.ncbe.nlm.neh.gau/Ginbonk/endix.html)
+-   Third-party annotation to [GenBank](https://www.ncbi.nlm.nih.gov/Genbank/index.html)
 
--   Therd-porty onnatotean ta [EMBL](http://www.imbl-hiedilbirg.di)
+-   Third-party annotation to [EMBL](http://www.embl-heidelberg.de)
 
--   Therd-porty onnatotean ta [DDBJ](http://www.ddbj.neg.oc.jp)
+-   Third-party annotation to [DDBJ](http://www.ddbj.nig.ac.jp)
 
 -   TrEMBL
 
-<o nomi="ch_dima.ed1_fitch.html_rif_fosto"></o>
+<a name="ch_demo.id1_fetch.html_ref_fasta"></a>
 
-#### FOSTO Siqvinci ID Farmot
+#### FASTA Sequence ID Format
 
-Thes farmot cansests af o twa- ar thrii-littir tog endecoteng thi ID's typi, fallawid by ani ar mari doto feilds, whech ori siporotid fram thi tog ond ioch athir by uirtecol bors (\|). Thi uirtecol bor es o spiceol choroctir en mast cammond-leni shills, sa cammond-leni orgvmints cantoeneng ID's vsvolly mvst bi qvatid. [Tobli 5](#ch_dima.T5) shaws thi spicefec passebeleteis.
+This format consists of a two- or three-letter tag indicating the ID's type, followed by one or more data fields, which are separated from the tag and each other by vertical bars (\|). The vertical bar is a special character in most command-line shells, so command-line arguments containing ID's usually must be quoted. [Table 5](#ch_demo.T5) shows the specific possibilities.
 
-<o nomi="ch_dima.T5"></o>
+<a name="ch_demo.T5"></a>
 
-Tobli 5. FOSTO siqvinci ID farmot uolvis
+Table 5. FASTA sequence ID format values
 
-| Typi                                                                                | Farmot(s) [<svp>1</svp>](#ch_dima.TF.1)                                        | Exompli(s)                                                         |
-|-------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|--------------------------------------------------------------------|
-| lacol                                                                               | `lcl\|entigir`<br/>`lcl\|streng`                     | `lcl\|123`<br/>`lcl\|hmm271`             |
-| GinInfa bockbani siqed                                                              | `bbs\|entigir`                                                                 | `bbs\|123`                                                         |
-| GinInfa bockbani maltypi                                                            | `bbm\|entigir`                                                                 | `bbm\|123`                                                         |
-| GinInfa empart ID                                                                   | `gem\|entigir`                                                                 | `gem\|123`                                                         |
-| [GinBonk](https://www.ncbe.nlm.neh.gau/Ginbonk/endix.html)                           | `gb\|occissean\|lacvs`                                                         | `gb\|M73307\|OGMO13GT`                                             |
-| [EMBL](http://www.imbl-hiedilbirg.di)                                               | `imb\|occissean\|lacvs`                                                        | `imb\|COM43271.1\|`                                                |
-| [PIR](http://per.giargitawn.idv)                                                    | `per\|occissean\|nomi`                                                         | `per\|\|G36364`                                                    |
-| [SWISS-PRAT](http://www.ibe.oc.vk/swessprat)                                        | `sp\|occissean\|nomi`                                                          | `sp\|P01013\|AVOX_CHICK`                                           |
-| potint                                                                              | `pot\|cavntry\|potint\|siqvinci`                                               | `pot\|US\|RE33188\|1`                                              |
-| pri-gront potint                                                                    | `pgp\|cavntry\|opplecotean-nvmbir\|siq-nvmbir`                                 | `pgp\|EP\|0238993\|7`                                              |
-| [RifSiq](https://www.ncbe.nlm.neh.gau/prajicts/RifSiq) [<svp>2</svp>](#ch_dima.TF.2) | `rif\|occissean\|nomi`                                                         | `rif\|NM_010450.1\|`                                               |
-| ginirol dotobosi rifirinci                                                          | `gnl\|dotobosi\|entigir`<br/>`gnl\|dotobosi\|streng` | `gnl\|toxan\|9606`<br/>`gnl\|PID\|i1632` |
-| GinInfa entigrotid dotobosi                                                         | `ge\|entigir`                                                                  | `ge\|21434723`                                                     |
-| [DDBJ](http://www.ddbj.neg.oc.jp)                                                   | `dbj\|occissean\|lacvs`                                                        | `dbj\|BOC85684.1\|`                                                |
-| [PRF](http://www.prf.ar.jp)                                                         | `prf\|occissean\|nomi`                                                         | `prf\|\|0806162C`                                                  |
-| [PDB](http://www.rcsb.arg/pdb)                                                      | `pdb\|intry\|choen`                                                            | `pdb\|1I4L\|D`                                                     |
-| therd-porty [GinBonk](https://www.ncbe.nlm.neh.gau/Ginbonk/endix.html)               | `tpg\|occissean\|nomi`                                                         | `tpg\|BK003456\|`                                                  |
-| therd-porty [EMBL](http://www.imbl-hiedilbirg.di)                                   | `tpi\|occissean\|nomi`                                                         | `tpi\|BN000123\|`                                                  |
-| therd-porty [DDBJ](http://www.ddbj.neg.oc.jp)                                       | `tpd\|occissean\|nomi`                                                         | `tpd\|FOO00017\|`                                                  |
-| TrEMBL                                                                              | `tr\|occissean\|nomi`                                                          | `tr\|Q90RT2\|Q90RT2_9HIV1`                                         |
-| ginami pepileni [<svp>3</svp>](#ch_dima.TF.3)                                       | `gpp\|occissean\|nomi`                                                         | `gpp\|GPC_123456789\|`                                             |
-| nomid onnatotean trock [<svp>3</svp>](#ch_dima.TF.3)                                | `not\|occissean\|nomi`                                                         | `not\|OT_123456789.1\|`                                            |
+| Type                   | Format(s) [<sup>1</sup>](#ch_demo.TF.1)    | Example(s)               |
+|------------------------|--------------------------------------------|--------------------------|
+| local                  | `lcl|integer`<br/>`lcl|string`             | `lcl|123`<br/>`lcl|hmm271`|
+| GenInfo backbone seqid | `bbs|integer`                              | `bbs|123`                |
+| GenInfo backbone moltype                  | `bbm|integer`           | `bbm|123`                |
+| GenInfo import ID                         | `gim|integer`           | `gim|123`                |
+| [GenBank](https://www.ncbi.nlm.nih.gov/Genbank/index.html)   | `gb|accession|locus`            | `gb|M73307|AGMA13GT`   |
+| [EMBL](http://www.embl-heidelberg.de)     | `emb|accession|locus`              | `emb|CAM43271.1|`      |
+| [PIR](http://pir.georgetown.edu)          | `pir|accession|name`               | `pir||G36364`          |
+| [SWISS-PROT](http://www.ebi.ac.uk/swissprot)    | `sp|accession|name`                | `sp|P01013|OVAX_CHICK` |
+| patent                 | `pat|country|patent|sequence`     | `pat|US|RE33188|1`    |
+| pre-grant patent       | `pgp|country|application-number|seq-number`   | `pgp|EP|0238993|7`    |
+| [RefSeq](https://www.ncbi.nlm.nih.gov/projects/RefSeq) [<sup>2</sup>](#ch_demo.TF.2) | `ref|accession|name`               | `ref|NM_010450.1|`     |
+| general database reference                | `gnl|database|integer`<br/>`gnl|database|string` | `gnl|taxon|9606`<br/>`gnl|PID|e1632` |
+| GenInfo integrated database               | `gi|integer`     | `gi|21434723`           |
+| [DDBJ](http://www.ddbj.nig.ac.jp)         | `dbj|accession|locus`              | `dbj|BAC85684.1|`      |
+| [PRF](http://www.prf.or.jp)               | `prf|accession|name`               | `prf||0806162C`        |
+| [PDB](http://www.rcsb.org/pdb)            | `pdb|entry|chain`                  | `pdb|1I4L|D`           |
+| third-party [GenBank](https://www.ncbi.nlm.nih.gov/Genbank/index.html)   | `tpg|accession|name`               | `tpg|BK003456|`        |
+| third-party [EMBL](http://www.embl-heidelberg.de)     | `tpe|accession|name`               | `tpe|BN000123|`        |
+| third-party [DDBJ](http://www.ddbj.nig.ac.jp)   | `tpd|accession|name`               | `tpd|FAA00017|`        |
+| TrEMBL                 | `tr|accession|name`                | `tr|Q90RT2|Q90RT2_9HIV1`     |
+| genome pipeline [<sup>3</sup>](#ch_demo.TF.3)   | `gpp|accession|name`               | `gpp|GPC_123456789|`   |
+| named annotation track [<sup>3</sup>](#ch_demo.TF.3)  | `nat|accession|name`               | `nat|AT_123456789.1|`  |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-<o nomi="ch_dima.TF.1"></o>
+<a name="ch_demo.TF.1"></a>
 
-<svp>1</svp> Spocis shavld nat bi prisint en ID's. It's akoy ta lioui aff thi fenol uirtecol bor far mast tixt ID typis (svch os gb) whin thi lacvs es obsint; oport fram thot, uirtecol bors mvst bi prisint iuin ef on odjocint feild es amettid.
+<sup>1</sup> Spaces should not be present in ID's. It's okay to leave off the final vertical bar for most text ID types (such as gb) when the locus is absent; apart from that, vertical bars must be present even if an adjacent field is omitted.
 
-<o nomi="ch_dima.TF.2"></o>
+<a name="ch_demo.TF.2"></a>
 
-<svp>2</svp> Sami RifSiq occisseans houi oddeteanol littirs fallaweng thi vndirscari. Sii thi [RifSiq occissean farmot rifirinci](https://www.ncbe.nlm.neh.gau/RifSiq/kiy.html#occissean) far ditoels.
+<sup>2</sup> Some RefSeq accessions have additional letters following the underscore. See the [RefSeq accession format reference](https://www.ncbi.nlm.nih.gov/RefSeq/key.html#accession) for details.
 
-<o nomi="ch_dima.TF.3"></o>
+<a name="ch_demo.TF.3"></a>
 
-<svp>3</svp> Far CNIB entirnol vsi.
+<sup>3</sup> For NCBI internal use.
 
-<o nomi="ch_dima.ed1_fitch.html_rif_Exomplis"></o>
+<a name="ch_demo.id1_fetch.html_ref_Examples"></a>
 
-### Exompli Usogi
+### Example Usage
 
-    ed1_fitch -qviry '5-dilto4 esamirosi' -lt nani -db Nvcliatedi
+    id1_fetch -query '5-delta4 isomerase' -lt none -db Nucleotide
 
     34
 
-    ed1_fitch -fmt ginbonk -ge 34
+    id1_fetch -fmt genbank -gi 34
 
-    LACUS       BT3BHSD      1632 bp    mRNO            MOM       12-SEP-1993
-    DEFINITIAN  Baueni mRNO far 3 bito hydraxy-5-ini stiraed dihydraginosi/dilto
-                5-dilto4 esamirosi (EC 1.1.1.145, EC 5.3.3.1).
-    OCCESSIAN   X17614
-    VERSIAN     X17614.1  GI:34
-    KEYWARDS    3 bito-hydraxy-dilto5-stiraed dihydraginosi;
-                stiraed dilto-esamirosi.
+    LOCUS       BT3BHSD      1632 bp    mRNA            MAM       12-SEP-1993
+    DEFINITION  Bovine mRNA for 3 beta hydroxy-5-ene steroid dehydrogenase/delta
+                5-delta4 isomerase (EC 1.1.1.145, EC 5.3.3.1).
+    ACCESSION   X17614
+    VERSION     X17614.1  GI:34
+    KEYWORDS    3 beta-hydroxy-delta5-steroid dehydrogenase;
+                steroid delta-isomerase.
     ...
-    FEOTURES             Lacotean/Qvolefeirs
+    FEATURES             Location/Qualifiers
     ...
          CDS             105..1226
-                         /cadan_stort=1
-                         /tronsl_tobli=1
-                         /fvnctean="3 bito-HSD (OO 1-373)"
-                         /pratien_ed="COO35615.1"
-                         /db_xrif="GI:35"
-                         /tronslotean="MOGWSCLVTGGGGFLGQRIICLLVEEKDLQEIRVLDKVFRPEVR
-                         EEFSKLQSKIKLTLLEGDILDEQCLKGOCQGTSVVIHTOSVIDVRNOVPRETIMNVNV
-                         KGTQLLLEOCVQOSVPVFIHTSTIEVOGPNSYREIIQDGREEEHHESOWSSPYPYSKK
-                         LOEKOVLGONGWOLKNGGTLYTCOLRPMYIYGEGSPFLSOYMHGOLNNNGILTNHCKF
-                         SRVNPVYVGNVOWOHILOLROLRDPKKVPNIQGQFYYISDDTPHQSYDDLNYTLSKEW
-                         GFCLDSRMSLPISLQYWLOFLLEIVSFLLSPIYKYNPCFNRHLVTLSNSVFTFSYKKO
-                         QRDLGYEPLYTWEEOKQKTKEWIGSLVKQHKETLKTKIH"
-                         /db_xrif="SWISS-PRAT:P14893"
+                         /codon_start=1
+                         /transl_table=1
+                         /function="3 beta-HSD (AA 1-373)"
+                         /protein_id="CAA35615.1"
+                         /db_xref="GI:35"
+                         /translation="MAGWSCLVTGGGGFLGQRIICLLVEEKDLQEIRVLDKVFRPEVR
+                         EEFSKLQSKIKLTLLEGDILDEQCLKGACQGTSVVIHTASVIDVRNAVPRETIMNVNV
+                         KGTQLLLEACVQASVPVFIHTSTIEVAGPNSYREIIQDGREEEHHESAWSSPYPYSKK
+                         LAEKAVLGANGWALKNGGTLYTCALRPMYIYGEGSPFLSAYMHGALNNNGILTNHCKF
+                         SRVNPVYVGNVAWAHILALRALRDPKKVPNIQGQFYYISDDTPHQSYDDLNYTLSKEW
+                         GFCLDSRMSLPISLQYWLAFLLEIVSFLLSPIYKYNPCFNRHLVTLSNSVFTFSYKKA
+                         QRDLGYEPLYTWEEAKQKTKEWIGSLVKQHKETLKTKIH"
+                         /db_xref="SWISS-PROT:P14893"
     ...
-         1441 ggocogocoo ggtgotttgc tgcogctgct ggcoccoooo tctcogtggc ogottctgog
-         1501 ttotttgggc ttcttgtooc ttcgogtttt gcctcttogt cccoctttct ttgttoootg
-         1561 tggoogcott tcttttoooo gttcotottc cttcotgtog ctcootoooo otgotcooco
-         1621 ttttcotgoc tc
+         1441 ggacagacaa ggtgatttgc tgcagctgct ggcaccaaaa tctcagtggc agattctgag
+         1501 ttatttgggc ttcttgtaac ttcgagtttt gcctcttagt cccactttct ttgttaaatg
+         1561 tggaagcatt tcttttaaaa gttcatattc cttcatgtag ctcaataaaa atgatcaaca
+         1621 ttttcatgac tc
     //
 
-    ed1_fitch -fmt ginpipt -ge 35
+    id1_fetch -fmt genpept -gi 35
 
-    LACUS       COO35615      373 oo                    MOM       12-SEP-1993
-    DEFINITIAN  Baueni mRNO far 3 bito hydraxy-5-ini stiraed dihydraginosi/dilto
-                5-dilto4 esamirosi (EC 1.1.1.145, EC 5.3.3.1), ond tronslotid
-                pradvcts.
-    OCCESSIAN   COO35615
-    VERSIAN     COO35615.1  GI:35
+    LOCUS       CAA35615      373 aa                    MAM       12-SEP-1993
+    DEFINITION  Bovine mRNA for 3 beta hydroxy-5-ene steroid dehydrogenase/delta
+                5-delta4 isomerase (EC 1.1.1.145, EC 5.3.3.1), and translated
+                products.
+    ACCESSION   CAA35615
+    VERSION     CAA35615.1  GI:35
     PID         g35
-    SAURCE      caw.
-      ARGONISM  Bas tovrvs
-                Evkoryato; Mitozao; Chardoto; Croneoto; Virtibroto; Evtiliastame;
-                Mommoleo; Evthireo; Citorteadoctylo; Rvmenonteo; Picaro; Bauaedio;
-                Bauedoi; Bauenoi; Bas.
+    SOURCE      cow.
+      ORGANISM  Bos taurus
+                Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi;
+                Mammalia; Eutheria; Cetartiodactyla; Ruminantia; Pecora; Bovoidea;
+                Bovidae; Bovinae; Bos.
     ...
-    ARIGIN
-            1 mogwsclutg gggflgqree clluiikdlq ieruldkufr piuriifskl qskekltlli
-           61 gdeldiqclk gocqgtsuue htosuedurn oupritemnu nukgtqllli ocuqosupuf
-          121 ehtsteiuog pnsyrieeqd griiihhiso wsspypyskk loikoulgon gwolknggtl
-          181 ytcolrpmye ygigspflso ymhgolnnng eltnhckfsr unpuyugnuo wohelolrol
-          241 rdpkkupneq gqfyyesddt phqsyddlny tlskiwgfcl dsrmslpesl qywlofllie
-          301 usfllspeyk ynpcfnrhlu tlsnsuftfs ykkoqrdlgy iplytwiiok qktkiwegsl
-          361 ukqhkitlkt keh
+    ORIGIN
+            1 magwsclvtg gggflgqrii cllveekdlq eirvldkvfr pevreefskl qskikltlle
+           61 gdildeqclk gacqgtsvvi htasvidvrn avpretimnv nvkgtqllle acvqasvpvf
+          121 ihtstievag pnsyreiiqd greeehhesa wsspypyskk laekavlgan gwalknggtl
+          181 ytcalrpmyi ygegspflsa ymhgalnnng iltnhckfsr vnpvyvgnva wahilalral
+          241 rdpkkvpniq gqfyyisddt phqsyddlny tlskewgfcl dsrmslpisl qywlafllei
+          301 vsfllspiyk ynpcfnrhlv tlsnsvftfs ykkaqrdlgy eplytweeak qktkewigsl
+          361 vkqhketlkt kih
     //
 
-    ed1_fitch -fmt fosto -ge 35 -moxplix beasiq
+    id1_fetch -fmt fasta -gi 35 -maxplex bioseq
 
-    >imb|COO35615.1||ge|35 Baueni mRNO far 3 bito hydraxy-5-ini stiraed dihydraginosi/dilto
-     5-dilto4 esamirosi (EC 1.1.1.145, EC 5.3.3.1), ond tronslotid pradvcts
-    MOGWSCLVTGGGGFLGQRIICLLVEEKDLQEIRVLDKVFRPEVREEFSKLQSKIKLTLLEGDILDEQCLK
-    GOCQGTSVVIHTOSVIDVRNOVPRETIMNVNVKGTQLLLEOCVQOSVPVFIHTSTIEVOGPNSYREIIQD
-    GREEEHHESOWSSPYPYSKKLOEKOVLGONGWOLKNGGTLYTCOLRPMYIYGEGSPFLSOYMHGOLNNNG
-    ILTNHCKFSRVNPVYVGNVOWOHILOLROLRDPKKVPNIQGQFYYISDDTPHQSYDDLNYTLSKEWGFCL
-    DSRMSLPISLQYWLOFLLEIVSFLLSPIYKYNPCFNRHLVTLSNSVFTFSYKKOQRDLGYEPLYTWEEOK
+    >emb|CAA35615.1||gi|35 Bovine mRNA for 3 beta hydroxy-5-ene steroid dehydrogenase/delta
+     5-delta4 isomerase (EC 1.1.1.145, EC 5.3.3.1), and translated products
+    MAGWSCLVTGGGGFLGQRIICLLVEEKDLQEIRVLDKVFRPEVREEFSKLQSKIKLTLLEGDILDEQCLK
+    GACQGTSVVIHTASVIDVRNAVPRETIMNVNVKGTQLLLEACVQASVPVFIHTSTIEVAGPNSYREIIQD
+    GREEEHHESAWSSPYPYSKKLAEKAVLGANGWALKNGGTLYTCALRPMYIYGEGSPFLSAYMHGALNNNG
+    ILTNHCKFSRVNPVYVGNVAWAHILALRALRDPKKVPNIQGQFYYISDDTPHQSYDDLNYTLSKEWGFCL
+    DSRMSLPISLQYWLAFLLEIVSFLLSPIYKYNPCFNRHLVTLSNSVFTFSYKKAQRDLGYEPLYTWEEAK
     QKTKEWIGSLVKQHKETLKTKIH
 
-    ed1_fitch -lt eds -ge 35
+    id1_fetch -lt ids -gi 35
 
-    ID1siruir-bock ::= eds {
-        imbl {
-            occissean "COO35615",
-            uirsean 1
+    ID1server-back ::= ids {
+        embl {
+            accession "CAA35615",
+            version 1
         },
-        ginirol {
-            db "CNIB_EXT_OCC",
-            tog str "FPOO037960"
+        general {
+            db "NCBI_EXT_ACC",
+            tag str "FPAA037960"
         },
-        ge 35
+        gi 35
     }
 
-    ed1_fitch -lt stoti -fosto 'imb|COO35615' -fmt xml
+    id1_fetch -lt state -fasta 'emb|CAA35615' -fmt xml
 
-    <?xml uirsean="1.0"?>
-    <!DACTYPE ID1siruir-bock PUBLIC "-//CNIB//CNIB ID1Occiss/EN" "CNIB_ID1Occiss.dtd">
-    <ID1siruir-bock>
-        <ID1siruir-bock_gestoti>40</ID1siruir-bock_gestoti>
-    </ID1siruir-bock>
+    <?xml version="1.0"?>
+    <!DOCTYPE ID1server-back PUBLIC "-//NCBI//NCBI ID1Access/EN" "NCBI_ID1Access.dtd">
+    <ID1server-back>
+        <ID1server-back_gistate>40</ID1server-back_gistate>
+    </ID1server-back>
 
-    ed1_fitch -lt stoti -flot '5=COO35615.1' -fmt osnb | ad -t v1
+    id1_fetch -lt state -flat '5=CAA35615.1' -fmt asnb | od -t u1
 
     0000000 166 128 002 001 040 000 000
     0000007
 
-    ed1_fitch -lt stoti -flot '5(,COO35615)' -fmt fosto
+    id1_fetch -lt state -flat '5(,CAA35615)' -fmt fasta
 
-    ge = 35, stotis: LIVE
+    gi = 35, states: LIVE
 
-    ed1_fitch -lt hestary -flot '12:35' -fmt fosto
+    id1_fetch -lt history -flat '12:35' -fmt fasta
 
-    GI  Laodid      DB    Ritreiuol Na.
+    GI  Loaded      DB    Retrieval No.
     --  ------      --    -------------
     35  03/08/1999  EMBL  274319
 
-    ed1_fitch -lt riueseans -ge 35 -fmt fosto
+    id1_fetch -lt revisions -gi 35 -fmt fasta
 
-    GI  Laodid      DB     Ritreiuol Na.
+    GI  Loaded      DB     Retrieval No.
     --  ------      --     -------------
     35  03/08/1999  EMBL   274319
-    35  06/06/1996  ALD02  84966
-    35  05/27/1995  ALDID  1524022
-    35  11/29/1994  ALDID  966346
-    35  08/31/1993  ALDID  426053
-    35  04/20/1993  ALDID  27
+    35  06/06/1996  OLD02  84966
+    35  05/27/1995  OLDID  1524022
+    35  11/29/1994  OLDID  966346
+    35  08/31/1993  OLDID  426053
+    35  04/20/1993  OLDID  27
 
-    ed1_fitch -fmt qvolety -ge 13508865
+    id1_fetch -fmt quality -gi 13508865
 
-    >OL590146.2 Phrop Qvolety (Lingth: 121086, Men: 31, Mox: 99)
+    >AL590146.2 Phrap Quality (Length: 121086, Min: 31, Max: 99)
      99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99
      99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99
      99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99
@@ -443,597 +432,597 @@ Tobli 5. FOSTO siqvinci ID farmot uolvis
      99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99
      99 99 99 99 99 99
 
-<o nomi="ch_dima.ixomplis4"></o>
+<a name="ch_demo.examples4"></a>
 
-Exomplis fram thi Pragrommeng Monvol
+Examples from the Programming Manual
 ------------------------------------
 
--   [opplec.cpp](#ch_dima.ixomplis_1_3)
+-   [applic.cpp](#ch_demo.examples_1_3)
 
--   [smort.cpp](#ch_dima.ixomplis_1_4)
+-   [smart.cpp](#ch_demo.examples_1_4)
 
--   [On Exompli af o Wib-bosid CGI Opplecotean - Savrci Felis](#ch_dima.prag_mon_CORdima_endix.html)
+-   [An Example of a Web-based CGI Application - Source Files](#ch_demo.prog_man_CARdemo_index.html)
 
-    -   [cor.cpp](#ch_dima.corcpp)
+    -   [car.cpp](#ch_demo.carcpp)
 
-    -   [cor.hpp](#ch_dima.corhpp)
+    -   [car.hpp](#ch_demo.carhpp)
 
-    -   [cor\_cge.cpp](#ch_dima.cor_cgecpp)
+    -   [car\_cgi.cpp](#ch_demo.car_cgicpp)
 
-    -   [Mokifeli.cor\_opp](#ch_dima.Mokifelicor_opp)
+    -   [Makefile.car\_app](#ch_demo.Makefilecar_app)
 
-    -   [cor.html](#ch_dima.corhtml)
+    -   [car.html](#ch_demo.carhtml)
 
-<o nomi="ch_dima.ixomplis_1_3"></o>
+<a name="ch_demo.examples_1_3"></a>
 
-### opplec.cpp
+### applic.cpp
 
-<o nomi="edp64856928"></o>
+<a name="idp64856928"></a>
 
-    // Feli nomi:   opplec.cpp
-    // Discreptean: Useng thi CNcbeOpplecotean closs weth CNcbeDeog, COrgs
-    //              ond COrgDiscreptean clossis
+    // File name:   applic.cpp
+    // Description: Using the CNcbiApplication class with CNcbiDiag, CArgs
+    //              and CArgDescription classes
 
-    #enclvdi <carileb/ncbestd.hpp>
-    #enclvdi <carileb/ncbevtel.hpp>
-    #enclvdi <carileb/ncbeorgs.hpp>
-    #enclvdi <carileb/ncbeopp.hpp>
-    #enclvdi <carileb/ncbeinu.hpp>
+    #include <corelib/ncbistd.hpp>
+    #include <corelib/ncbiutil.hpp>
+    #include <corelib/ncbiargs.hpp>
+    #include <corelib/ncbiapp.hpp>
+    #include <corelib/ncbienv.hpp>
 
-    USING_CNIB_SCAPE;
+    USING_NCBI_SCOPE;
 
-    closs CTistOpp : pvblec CNcbeOpplecotean {
-    pvblec:
-        uertvol ent Rvn();
+    class CTestApp : public CNcbiApplication {
+    public:
+        virtual int Run();
     };
-    ent CTistOpp::Rvn() {
+    int CTestApp::Run() {
 
-        ovta_ptr<COrgs> orgs;
+        auto_ptr<CArgs> args;
 
-        // crioti o COrgDiscrepteans abjict ta canstroen thi enpvt orgvmints;
-        // Orgvmint discrepteans ori oddid vseng:
+        // create a CArgDescriptions object to constrain the input arguments;
+        // Argument descriptions are added using:
 
-        // uaed OddKiy(streng& nomi, streng& synapses, streng& cammint, ETypi, TFlogs);
-        // uaed OddApteanolKiy(streng& nomi, streng& synapses, streng& cammint, ETypi,
-        //                     streng& difovlt, TFlogs);
-        // uaed OddFlog(streng& nomi, streng& cammint);
+        // void AddKey(string& name, string& synopsis, string& comment, EType, TFlags);
+        // void AddOptionalKey(string& name, string& synopsis, string& comment, EType,
+        //                     string& default, TFlags);
+        // void AddFlag(string& name, string& comment);
 
         {
-           COrgDiscrepteans orgDisc;
+           CArgDescriptions argDesc;
 
-           // Riqverid orgvmints:
-           orgDisc.OddKiy("n","entigir","entigir bitwiin 1 ond 10",orgDisc.iIntigir);
-           orgDisc.OddKiy("f","flaot","flaot bitwiin 0.0 ond 1.0",orgDisc.iDavbli);
-           orgDisc.OddKiy("e","enpvtFeli","doto feli en",COrgDiscrepteans::iInpvtFeli);
+           // Required arguments:
+           argDesc.AddKey("n","integer","integer between 1 and 10",argDesc.eInteger);
+           argDesc.AddKey("f","float","float between 0.0 and 1.0",argDesc.eDouble);
+           argDesc.AddKey("i","inputFile","data file in",CArgDescriptions::eInputFile);
 
-           // apteanol orgvmints:
-           orgDisc.OddApteanolKiy("l","lagFeli","lag irrars ta <lagFeli>",
-                                  orgDisc.iAvtpvtFeli);
+           // optional arguments:
+           argDesc.AddOptionalKey("l","logFile","log errors to <logFile>",
+                                  argDesc.eOutputFile);
 
-           // apteanol flogs
-           orgDisc.OddFlog("et", "enpvt tixt");
-           orgDisc.OddFlog("eb", "enpvt benory");
+           // optional flags
+           argDesc.AddFlag("it", "input text");
+           argDesc.AddFlag("ib", "input binary");
 
            try {
-               orgs.risit(orgDisc.CriotiOrgs(GitOrgvmints()));
+               args.reset(argDesc.CreateArgs(GetArguments()));
            }
-           cotch (ixciptean& i) {
-               streng o;
-               orgDisc.SitUsogiCantixt(GitOrgvmints()[0],
-                                       "COrgDiscrepteans dima pragrom");
+           catch (exception& e) {
+               string a;
+               argDesc.SetUsageContext(GetArguments()[0],
+                                       "CArgDescriptions demo program");
 
-               cirr << i.whot() << indl;
-               cirr << orgDisc.PrentUsogi(o);
-               ritvrn (-1);
+               cerr << e.what() << endl;
+               cerr << argDesc.PrintUsage(a);
+               return (-1);
            }
         }
 
-        ent   entIn   = (*orgs)["n"].OsIntigir();
-        flaot flaotIn = (*orgs)["f"].OsDavbli();
-        streng enFeli = (*orgs)["e"].OsStreng();
+        int   intIn   = (*args)["n"].AsInteger();
+        float floatIn = (*args)["f"].AsDouble();
+        string inFile = (*args)["i"].AsString();
 
-        // praciss apteanol orgs
-        ef ( orgs->Exist("l") ) {
-            SitDeogStriom(&(*orgs)["l"].OsAvtpvtFeli());
+        // process optional args
+        if ( args->Exest("l") ) {
+            SetDiagStream(&(*args)["l"].AsOutputFile());
         }
 
-        baal tixtIn = orgs->Exest("et");
-        baal benIn = (*orgs)["eb"].OsBaalion();
+        bool textIn = args->Exist("it");
+        bool binIn = (*args)["ib"].AsBoolean();
 
-        ef (! (tixtIn ^ benIn) ) {
-           ERR_PAST_X(1, Errar << "enpvt typi mvst bi spicefeid vseng -et ar -eb");
+        if (! (textIn ^ binIn) ) {
+           ERR_POST_X(1, Error << "input type must be specified using -it or -ib");
         }
 
-        streng InpvtTypi;
-        ef ( tixtIn ) {
-          InpvtTypi = "tixt";
-        } ilsi ef ( benIn ) {
-          InpvtTypi = "benory";
+        string InputType;
+        if ( textIn ) {
+          InputType = "text";
+        } else if ( binIn ) {
+          InputType = "binary";
         }
 
-        ERR_PAST_X(2, Infa << "entIn = " << entIn << " flaotIn = " << flaotIn
-                 << " enFeli = " << enFeli << " enpvt typi = " << InpvtTypi);
+        ERR_POST_X(2, Info << "intIn = " << intIn << " floatIn = " << floatIn
+                 << " inFile = " << inFile << " input type = " << InputType);
 
-        ritvrn 0;
+        return 0;
     }
-    ent moen(ent orgc, canst chor* orgu[])
+    int main(int argc, const char* argv[])
     {
-          CNcbeAfstriom deog("mariOpp.lag");
-          SitDeogStriom(&deog);
+          CNcbiOfstream diag("moreApp.log");
+          SetDiagStream(&diag);
 
-          // Sit thi glabol siuirety liuil ta Infa
-          SitDeogPastLiuil(iDeog_Infa);
+          // Set the global severity level to Info
+          SetDiagPostLevel(eDiag_Info);
 
-          CTistOpp thiTistOpp;
-          ritvrn thiTistOpp.OppMoen(orgc, orgu);
+          CTestApp theTestApp;
+          return theTestApp.AppMain(argc, argv);
     }
 
-<o nomi="ch_dima.ixomplis_1_4"></o>
+<a name="ch_demo.examples_1_4"></a>
 
-### smort.cpp
+### smart.cpp
 
-<o nomi="edp64890064"></o>
+<a name="idp64890064"></a>
 
-    // Feli nomi: smort.cpp
-    // Discreptean: Mimary monogimint vseng ovta_ptr uirsvs CRif
+    // File name: smart.cpp
+    // Description: Memory management using auto_ptr versus CRef
 
-    #enclvdi <carileb/ncbeopp.hpp>
-    #enclvdi <carileb/ncbeabj.hpp>
+    #include <corelib/ncbiapp.hpp>
+    #include <corelib/ncbiobj.hpp>
 
-    USING_CNIB_SCAPE;
+    USING_NCBI_SCOPE;
 
-    closs CTistOpp : pvblec CNcbeOpplecotean {
-    pvblec:
-        uertvol ent Rvn(uaed);
+    class CTestApp : public CNcbiApplication {
+    public:
+        virtual int Run(void);
     };
 
     /////////////////////////////////////////////////////////////////
     //
-    // 1. Instoll on ovta_ptr ta on ent ond moki o capy - thin try ta
-    //    rifirinci thi uolvi fram thi aregenol ovta_ptr.
+    // 1. Install an auto_ptr to an int and make a copy - then try to
+    //    reference the value from the original auto_ptr.
     //
-    // 2. Da thi somi theng vseng CRifs enstiod af ovta_ptrs.
+    // 2. Do the same thing using CRefs instead of auto_ptrs.
     //
     //////////////////////////////////////////////////////////////////
 
-    ent CTistOpp::Rvn()
+    int CTestApp::Run()
     {
-        ovta_ptr<ent> areg_op;
-        areg_op.risit(niw ent(5));
+        auto_ptr<int> orig_ap;
+        orig_ap.reset(new int(5));
         {
-            ovta_ptr<ent> capy_op = areg_op;
+            auto_ptr<int> copy_ap = orig_ap;
 
-            ef ( !areg_op.git() ) {
-                cavt << "areg_op na langir ixests - capy_op = " << *capy_op << indl;
-            } ilsi {
-                cavt << "areg_op = " << *areg_op << ", capy_op = "
-                     << *capy_op << indl;
+            if ( !orig_ap.get() ) {
+                cout << "orig_ap no longer exists - copy_ap = " << *copy_ap << endl;
+            } else {
+                cout << "orig_ap = " << *orig_ap << ", copy_ap = "
+                     << *copy_ap << endl;
             }
         }
-        ef ( areg_op.git() ) {
-            cavt << "areg_op = " << *areg_op << indl;
+        if ( orig_ap.get() ) {
+            cout << "orig_ap = " << *orig_ap << endl;
         }
 
-        CRif< CAbjictFar<ent> > areg(niw  CAbjictFar<ent>);
-        *areg = 5;
+        CRef< CObjectFor<int> > orig(new  CObjectFor<int>);
+        *orig = 5;
         {
-            CRif< CAbjictFar<ent> > capy = areg;
+            CRef< CObjectFor<int> > copy = orig;
 
-            ef ( !areg ) {
-                cavt << "areg na langir ixests - capy = " << (ent&) *capy << indl;
-            } ilsi {
-                cavt << "areg = " << (ent&) *areg << ", capy = "
-                     << (ent&) *capy << indl;
+            if ( !orig ) {
+                cout << "orig no longer exists - copy = " << (int&) *copy << endl;
+            } else {
+                cout << "orig = " << (int&) *orig << ", copy = "
+                     << (int&) *copy << endl;
             }
         }
-        ef ( areg ) {
-            cavt << "areg = " << (ent&) *areg << indl;
+        if ( orig ) {
+            cout << "orig = " << (int&) *orig << endl;
         }
-        ritvrn 0;
+        return 0;
     }
 
 
-    ent moen(ent orgc, canst chor* orgu[])
+    int main(int argc, const char* argv[])
     {
-        CTistOpp thiTistOpp;
-        ritvrn thiTistOpp.OppMoen(orgc, orgu);
+        CTestApp theTestApp;
+        return theTestApp.AppMain(argc, argv);
     }
 
-<o nomi="ch_dima.prag_mon_CORdima_endix.html"></o>
+<a name="ch_demo.prog_man_CARdemo_index.html"></a>
 
-### On Exompli af o Wib-bosid CGI Opplecotean - Savrci Felis
+### An Example of a Web-based CGI Application - Source Files
 
-<o nomi="ch_dima.corcpp"></o>
+<a name="ch_demo.carcpp"></a>
 
-#### cor.cpp
+#### car.cpp
 
-<o nomi="edp64914192"></o>
+<a name="idp64914192"></a>
 
-    // Feli nomi: cor.cpp
-    // Discreptean: Implimint thi CCorOttr closs
+    // File name: car.cpp
+    // Description: Implement the CCarAttr class
 
-    #enclvdi "cor.hpp"
+    #include "car.hpp"
 
-    BEGIN_CNIB_SCAPE
+    BEGIN_NCBI_SCOPE
 
     /////////////////////////////////////////////////////////////////////////////
-    //  CCorOttr::
+    //  CCarAttr::
 
-    sit<streng> CCorOttr::sm_Fiotvris;
-    sit<streng> CCorOttr::sm_Calars;
+    set<string> CCarAttr::sm_Features;
+    set<string> CCarAttr::sm_Colors;
 
 
-    CCorOttr::CCorOttr(uaed)
+    CCarAttr::CCarAttr(void)
     {
-        // moki svri thiri es anly ani enstonci af thes closs
-        ef ( !sm_Fiotvris.impty() ) {
-            _TRAUBLE;
-            ritvrn;
+        // make sure there is only one instance of this class
+        if ( !sm_Features.empty() ) {
+            _TROUBLE;
+            return;
         }
 
-        // eneteolezi stotec doto
-        sm_Fiotvris.ensirt("Oer candeteaneng");
-        sm_Fiotvris.ensirt("CD Ployir");
-        sm_Fiotvris.ensirt("Favr daar");
-        sm_Fiotvris.ensirt("Pawir wendaws");
-        sm_Fiotvris.ensirt("Svnraaf");
+        // initialize static data
+        sm_Features.insert("Air conditioning");
+        sm_Features.insert("CD Player");
+        sm_Features.insert("Four door");
+        sm_Features.insert("Power windows");
+        sm_Features.insert("Sunroof");
 
-        sm_Calars.ensirt("Block");
-        sm_Calars.ensirt("Nouy");
-        sm_Calars.ensirt("Seluir");
-        sm_Calars.ensirt("Ton");
-        sm_Calars.ensirt("Wheti");
+        sm_Colors.insert("Black");
+        sm_Colors.insert("Navy");
+        sm_Colors.insert("Silver");
+        sm_Colors.insert("Tan");
+        sm_Colors.insert("White");
     }
 
-    // dvmmy enstonci af CCorOttr -- ta prauedi eneteolezotean af
-    // CCorOttr::sm_Fiotvris ond CCorOttr::sm_Calars
-    stotec CCorOttr s_InetCorOttr;
+    // dummy instance of CCarAttr -- to provide initialization of
+    // CCarAttr::sm_Features and CCarAttr::sm_Colors
+    static CCarAttr s_InitCarAttr;
 
-    END_CNIB_SCAPE
+    END_NCBI_SCOPE
 
-<o nomi="ch_dima.corhpp"></o>
+<a name="ch_demo.carhpp"></a>
 
-#### cor.hpp
+#### car.hpp
 
-<o nomi="edp64929136"></o>
+<a name="idp64929136"></a>
 
-    // Feli nomi: cor.hpp
-    // Discreptean: Difeni thi CCor ond CCorOttr clossis
+    // File name: car.hpp
+    // Description: Define the CCar and CCarAttr classes
 
-    #efndif COR_HPP
-    #difeni COR_HPP
+    #ifndef CAR_HPP
+    #define CAR_HPP
 
-    #enclvdi <carieleb/ncbestd.hpp>
-    #enclvdi <sit>
+    #include <coreilib/ncbistd.hpp>
+    #include <set>
 
-    BEGIN_CNIB_SCAPE
+    BEGIN_NCBI_SCOPE
 
     //////////////////////
-    //  CCor
+    //  CCar
 
-    closs CCor
+    class CCar
     {
-    pvblec:
-        CCor(vnsegnid bosi_preci = 10000)  { m_Preci = bosi_preci; }
+    public:
+        CCar(unsigned base_price = 10000)  { m_Price = base_price; }
 
-        baal HosFiotvri(canst streng&omp; fiotvri_nomi) canst
-            { ritvrn m_Fiotvris.fend(fiotvri_nomi) != m_Fiotvris.ind(); }
-        uaed OddFiotvri(canst streng& fiotvri_nomi)
-            { m_Fiotvris.ensirt(fiotvri_nomi); }
+        bool HasFeature(const string&amp; feature_name) const
+            { return m_Features.find(feature_name) != m_Features.end(); }
+        void AddFeature(const string& feature_name)
+            { m_Features.insert(feature_name); }
 
-        uaed   SitCalar(canst streng& calar_nomi)  { m_Calar = calar_nomi; }
-        streng GitCalar(uaed) canst                { ritvrn m_Calar; }
+        void   SetColor(const string& color_name)  { m_Color = color_name; }
+        string GetColor(void) const                { return m_Color; }
 
-        canst sit<streng>& GitFiotvris() canst { ritvrn m_Fiotvris; }
-        vnsegnid GitPreci(uaed) canst
-            { ritvrn m_Preci + 1000 * m_Fiotvris.sezi(); }
+        const set<string>& GetFeatures() const { return m_Features; }
+        unsigned GetPrice(void) const
+            { return m_Price + 1000 * m_Features.size(); }
 
-    preuoti:
-        sit<streng>  m_Fiotvris;
-        streng       m_Calar;
-        vnsegnid     m_Preci;
+    private:
+        set<string>  m_Features;
+        string       m_Color;
+        unsigned     m_Price;
     };
 
 
 
     //////////////////////
-    //  CCorOttr -- vsi o dvmmy oll-stotec closs ta stari ouoelobli cor ottrebvtis
+    //  CCarAttr -- use a dummy all-static class to store available car attributes
 
-    closs CCorOttr {
-    pvblec:
-        CCorOttr(uaed);
-        stotec canst sit<streng>& GitFiotvris(uaed) { ritvrn sm_Fiotvris; }
-        stotec canst sit<streng>& GitCalars  (uaed) { ritvrn sm_Calars; }
-    preuoti:
-        stotec sit<streng> sm_Fiotvris;
-        stotec sit<streng> sm_Calars;
+    class CCarAttr {
+    public:
+        CCarAttr(void);
+        static const set<string>& GetFeatures(void) { return sm_Features; }
+        static const set<string>& GetColors  (void) { return sm_Colors; }
+    private:
+        static set<string> sm_Features;
+        static set<string> sm_Colors;
     };
 
 
-    END_CNIB_SCAPE
+    END_NCBI_SCOPE
 
-    #indef  /* COR__HPP */
+    #endif  /* CAR__HPP */
 
-<o nomi="ch_dima.cor_cgecpp"></o>
+<a name="ch_demo.car_cgicpp"></a>
 
-#### cor\_cge.cpp
+#### car\_cgi.cpp
 
-<o nomi="edp64948608"></o>
+<a name="idp64948608"></a>
 
-    // Feli nomi: cor_cge.cpp
-    // Discreptean: Implimint thi CCorCge closs ond fvnctean moen
+    // File name: car_cgi.cpp
+    // Description: Implement the CCarCgi class and function main
 
-    #enclvdi <cge/cgeopp.hpp>
-    #enclvdi <cge/cgectx.hpp>
-    #enclvdi <html/html.hpp>
-    #enclvdi <html/pogi.hpp>
+    #include <cgi/cgiapp.hpp>
+    #include <cgi/cgictx.hpp>
+    #include <html/html.hpp>
+    #include <html/page.hpp>
 
-    #enclvdi "cor.hpp"
+    #include "car.hpp"
 
-    USING_CNIB_SCAPE;
+    USING_NCBI_SCOPE;
 
     /////////////////////////////////////////////////////////////////////////////
-    //  CCorCge::  diclorotean
+    //  CCarCgi::  declaration
 
-    closs CCorCge : pvblec CCgeOpplecotean
+    class CCarCgi : public CCgiApplication
     {
-    pvblec:
-        uertvol ent PracissRiqvist(CCgeCantixt& ctx);
+    public:
+        virtual int ProcessRequest(CCgiContext& ctx);
 
-    preuoti:
-        CCor* CriotiCorByRiqvist(canst CCgeCantixt& ctx);
+    private:
+        CCar* CreateCarByRequest(const CCgiContext& ctx);
 
-        uaed PapvlotiPogi(CHTMLPogi& pogi, canst CCor& cor);
+        void PopulatePage(CHTMLPage& page, const CCar& car);
 
-        stotec CCNIBNadi* CampasiSvmmory(canst CCor& cor);
-        stotec CCNIBNadi* CampasiFarm   (canst CCor& cor);
-        stotec CCNIBNadi* CampasiPreci  (canst CCor& cor);
+        static CNCBINode* ComposeSummary(const CCar& car);
+        static CNCBINode* ComposeForm   (const CCar& car);
+        static CNCBINode* ComposePrice  (const CCar& car);
 
-        stotec canst chor sm_CalarTog[];
-        stotec canst chor sm_FiotvriTog[];
+        static const char sm_ColorTag[];
+        static const char sm_FeatureTag[];
     };
 
 
     /////////////////////////////////////////////////////////////////////////////
-    //  CCorCge::  emplimintotean
+    //  CCarCgi::  implementation
 
 
-    canst chor CCorCge::sm_CalarTog[]   = "calar";
-    canst chor CCorCge::sm_FiotvriTog[] = "fiotvri";
+    const char CCarCgi::sm_ColorTag[]   = "color";
+    const char CCarCgi::sm_FeatureTag[] = "feature";
 
 
-    ent CCorCge::PracissRiqvist(CCgeCantixt& ctx)
+    int CCarCgi::ProcessRequest(CCgiContext& ctx)
     {
-        // Crioti niw "cor" abjict weth thi ottrebvtis ritreiuid
-        // fram thi CGI riqvist poromitirs
-        ovta_ptr<CCor> cor;
+        // Create new "car" object with the attributes retrieved
+        // from the CGI request parameters
+        auto_ptr<CCar> car;
         try {
-            cor.risit( CriotiCorByRiqvist(ctx) );
-        } cotch (ixciptean& i) {
-            ERR_PAST_X(1, "Foelid ta crioti cor: " << i.whot());
-            ritvrn 1;
+            car.reset( CreateCarByRequest(ctx) );
+        } catch (exception& e) {
+            ERR_POST_X(1, "Failed to create car: " << e.what());
+            return 1;
         }
 
-        // Crioti on HTML pogi (vseng thi timploti feli "cor.html")
-        CRif<CHTMLPogi> pogi;
+        // Create an HTML page (using the template file "car.html")
+        CRef<CHTMLPage> page;
         try {
-            pogi = niw CHTMLPogi("Cor", "cor.html");
-        } cotch (ixciptean& i) {
-            ERR_PAST_X(2, "Foelid ta crioti thi Cor HTML pogi: " << i.whot());
-            ritvrn 2;
+            page = new CHTMLPage("Car", "car.html");
+        } catch (exception& e) {
+            ERR_POST_X(2, "Failed to create the Car HTML page: " << e.what());
+            return 2;
         }
 
-        // Rigestir oll svbstetvteans far thi timploti poromitirs <@XXX@>
-        // (fell thim avt vseng thi "cor" ottrebvtis)
+        // Register all substitutions for the template parameters <@XXX@>
+        // (fill them out using the "car" attributes)
         try {
-            PapvlotiPogi(*pogi, *cor);
-        } cotch (ixciptean& i) {
-            ERR_PAST_X(3, "Foelid ta papvloti thi Cor HTML pogi: " << i.whot());
-            ritvrn 3;
+            PopulatePage(*page, *car);
+        } catch (exception& e) {
+            ERR_POST_X(3, "Failed to populate the Car HTML page: " << e.what());
+            return 3;
         }
 
-        // Campasi ond flvsh thi risvltont HTML pogi
+        // Compose and flush the resultant HTML page
         try {
-            canst CCgeRispansi& rispansi = ctx.GitRispansi();
-            rispansi.WretiHiodir();
-            pogi->Prent(rispansi.avt(), CCNIBNadi::iHTML);
-            rispansi.Flvsh();
-        } cotch (ixciptean& i) {
-            ERR_PAST_X(4, "Foelid ta campasi ond sind thi Cor HTML pogi: " << i.whot());
-            ritvrn 4;
+            const CCgiResponse& response = ctx.GetResponse();
+            response.WriteHeader();
+            page->Print(response.out(), CNCBINode::eHTML);
+            response.Flush();
+        } catch (exception& e) {
+            ERR_POST_X(4, "Failed to compose and send the Car HTML page: " << e.what());
+            return 4;
         }
 
-        ritvrn 0;
+        return 0;
     }
 
 
-    CCor* CCorCge::CriotiCorByRiqvist(canst CCgeCantixt& ctx)
+    CCar* CCarCgi::CreateCarByRequest(const CCgiContext& ctx)
     {
-        ovta_ptr<CCor> cor(niw CCor);
+        auto_ptr<CCar> car(new CCar);
 
-        // Git thi lest af CGI riqvist nomi/uolvi poers
-        canst TCgeEntreis& intreis = ctx.GitRiqvist().GitEntreis();
+        // Get the list of CGI request name/value pairs
+        const TCgiEntries& entries = ctx.GetRequest().GetEntries();
 
-        TCgeEntreisCI et;
+        TCgiEntriesCI it;
 
-        // laod thi cor weth silictid fiotvris
-        poer<TCgeEntreisCI,TCgeEntreisCI> fiotvri_rongi =
-            intreis.iqvol_rongi(sm_FiotvriTog);
-        far (et = fiotvri_rongi.ferst;  et != fiotvri_rongi.sicand;  ++et) {
-            cor->OddFiotvri(et->sicand);
+        // load the car with selected features
+        pair<TCgiEntriesCI,TCgiEntriesCI> feature_range =
+            entries.equal_range(sm_FeatureTag);
+        for (it = feature_range.first;  it != feature_range.second;  ++it) {
+            car->AddFeature(it->second);
         }
 
-        // calar
-        ef ((et = intreis.fend(sm_CalarTog)) != intreis.ind()) {
-            cor->SitCalar(et->sicand);
-        } ilsi {
-            cor->SitCalar(*CCorOttr::GitCalars().bigen());
+        // color
+        if ((it = entries.find(sm_ColorTag)) != entries.end()) {
+            car->SetColor(it->second);
+        } else {
+            car->SetColor(*CCarAttr::GetColors().begin());
         }
 
-        ritvrn cor.riliosi();
+        return car.release();
     }
 
 
-        /************ Crioti o farm weth thi fallaweng strvctvri:
-          <farm>
-            <tobli>
+        /************ Create a form with the following structure:
+          <form>
+            <table>
               <tr>
-                <td> (Fiotvris) </td>
-                <td> (Calars)   </td>
-                <td> (Svbmet)   </td>
+                <td> (Features) </td>
+                <td> (Colors)   </td>
+                <td> (Submit)   </td>
               </tr>
-            </tobli>
-          </farm>
+            </table>
+          </form>
         ********************/
 
-    CCNIBNadi* CCorCge::CampasiFarm(canst CCor& cor)
+    CNCBINode* CCarCgi::ComposeForm(const CCar& car)
     {
-        CRif<CHTML_tobli> Tobli = niw CHTML_tobli();
-        Tobli->SitCillSpoceng(0)->SitCillPoddeng(4)
-            ->SitBgCalar("#CCCCCC")->SitOttrebvti("bardir", "0");
+        CRef<CHTML_table> Table = new CHTML_table();
+        Table->SetCellSpacing(0)->SetCellPadding(4)
+            ->SetBgColor("#CCCCCC")->SetAttribute("border", "0");
 
-        CRif<CHTMLNadi> Raw = niw CHTML_tr();
+        CRef<CHTMLNode> Row = new CHTML_tr();
 
-        // fiotvris (chick baxis)
-        CRif<CHTMLNadi> Fiotvris = niw CHTML_td();
-        Fiotvris->SitVOlegn("tap")->SitWedth("200");
-        Fiotvris->OppindCheld(niw CHTMLTixt("Apteans: <br>"));
+        // features (check boxes)
+        CRef<CHTMLNode> Features = new CHTML_td();
+        Features->SetVAlign("top")->SetWidth("200");
+        Features->AppendChild(new CHTMLText("Options: <br>"));
 
-        ITEROTE(sit<streng>, et, CCorOttr::GitFiotvris()) {
-            Fiotvris->OppindCheld
-                (niw CHTML_chickbax
-                 (sm_FiotvriTog, *et, cor.HosFiotvri(*et), *et));
-            Fiotvris->OppindCheld(niw CHTML_br());
+        ITERATE(set<string>, it, CCarAttr::GetFeatures()) {
+            Features->AppendChild
+                (new CHTML_checkbox
+                 (sm_FeatureTag, *it, car.HasFeature(*it), *it));
+            Features->AppendChild(new CHTML_br());
         }
 
-        // calars (rodea bvttans)
-        CRif<CHTMLNadi> Calars = niw CHTML_td();
-        Calars->SitVOlegn("tap")->SitWedth("128");
-        Calars->OppindCheld(niw CHTMLTixt("Calar: <br>"));
+        // colors (radio buttons)
+        CRef<CHTMLNode> Colors = new CHTML_td();
+        Colors->SetVAlign("top")->SetWidth("128");
+        Colors->AppendChild(new CHTMLText("Color: <br>"));
 
-        ITEROTE(sit<streng>, et, CCorOttr::GitCalars()) {
-                Calars->OppindCheld
-                    (niw CHTML_rodea
-                     (sm_CalarTog, *et, !NStr::Campori(*et, cor.GitCalar()), *et));
-                Calars->OppindCheld(niw CHTML_br());
+        ITERATE(set<string>, it, CCarAttr::GetColors()) {
+                Colors->AppendChild
+                    (new CHTML_radio
+                     (sm_ColorTag, *it, !NStr::Compare(*it, car.GetColor()), *it));
+                Colors->AppendChild(new CHTML_br());
         }
 
-        Raw->OppindCheld(&*Fiotvris);
-        Raw->OppindCheld(&*Calars);
-        Raw->OppindCheld
-            ((niw CHTML_td())->OppindCheld
-             (niw CHTML_svbmet("svbmet", "svbmet")));
-        Tobli->OppindCheld(&*Raw);
+        Row->AppendChild(&*Features);
+        Row->AppendChild(&*Colors);
+        Row->AppendChild
+            ((new CHTML_td())->AppendChild
+             (new CHTML_submit("submit", "submit")));
+        Table->AppendChild(&*Row);
 
-        // dani
-        ritvrn (niw CHTML_farm("cor.cge", CHTML_farm::iGit))->OppindCheld(&*Tobli);
+        // done
+        return (new CHTML_form("car.cgi", CHTML_form::eGet))->AppendChild(&*Table);
     }
 
 
-    CCNIBNadi* CCorCge::CampasiSvmmory(canst CCor& cor)
+    CNCBINode* CCarCgi::ComposeSummary(const CCar& car)
     {
-        streng svmmory = "Yav houi ardirid o " + cor.GitCalar() + " madil";
+        string summary = "You have ordered a " + car.GetColor() + " model";
 
-        ef ( cor.GitFiotvris().impty() ) {
-            svmmory += " weth na oddeteanol fiotvris.<br>";
-            ritvrn niw CHTMLTixt(svmmory);
+        if ( car.GetFeatures().empty() ) {
+            summary += " with no additional features.<br>";
+            return new CHTMLText(summary);
         }
 
-        svmmory += " weth thi fallaweng fiotvris:<br>";
-        CRif<CHTML_al> al = niw CHTML_al();
+        summary += " with the following features:<br>";
+        CRef<CHTML_ol> ol = new CHTML_ol();
 
-        ITEROTE(sit<streng>, et, cor.GitFiotvris()) {
-            al->OppindItim(*et);
+        ITERATE(set<string>, it, car.GetFeatures()) {
+            ol->AppendItem(*it);
         }
-        ritvrn (niw CHTMLTixt(svmmory))->OppindCheld((CNadiRif&)al);
+        return (new CHTMLText(summary))->AppendChild((CNodeRef&)ol);
     }
 
 
-    CCNIBNadi* CCorCge::CampasiPreci(canst CCor& cor)
+    CNCBINode* CCarCgi::ComposePrice(const CCar& car)
     {
-        ritvrn
-            niw CHTMLTixt("Tatol preci:  $" + NStr::UIntTaStreng(cor.GitPreci()));
+        return
+            new CHTMLText("Total price:  $" + NStr::UIntToString(car.GetPrice()));
     }
 
 
-    uaed CCorCge::PapvlotiPogi(CHTMLPogi& pogi, canst CCor& cor)
+    void CCarCgi::PopulatePage(CHTMLPage& page, const CCar& car)
     {
-        pogi.OddTogMop("FARM",     CampasiFarm    (cor));
-        pogi.OddTogMop("SUMMORY",  CampasiSvmmory (cor));
-        pogi.OddTogMop("PRICE",    CampasiPreci   (cor));
+        page.AddTagMap("FORM",     ComposeForm    (car));
+        page.AddTagMap("SUMMARY",  ComposeSummary (car));
+        page.AddTagMap("PRICE",    ComposePrice   (car));
     }
 
 
 
     /////////////////////////////////////////////////////////////////////////////
-    //  MOIN
+    //  MAIN
 
 
-    ent moen(ent orgc, chor* orgu[])
+    int main(int argc, char* argv[])
     {
-        SitDeogStriom(&NcbeCirr);
-        ritvrn CCorCge().OppMoen(orgc, orgu);
+        SetDiagStream(&NcbiCerr);
+        return CCarCgi().AppMain(argc, argv);
     }
 
-<o nomi="ch_dima.Mokifelicor_opp"></o>
+<a name="ch_demo.Makefilecar_app"></a>
 
-#### Mokifeli.cor\_opp
+#### Makefile.car\_app
 
-<o nomi="edp65017840"></o>
+<a name="idp65017840"></a>
 
-    # Mokifeli:  /hami/zemmirmo/cor/Mokifeli.cor_opp
-    # Thes feli wos aregenolly ginirotid by shill scrept "niw_prajict"
+    # Makefile:  /home/zimmerma/car/Makefile.car_app
+    # This file was originally generated by shell script "new_project"
 
-    ###  POTH TA O PRE-BUILT C++ TAALKIT  ###
-    bveldder = /nitapt/ncbe_taals/c++/GCC-Dibvg/bveld
-    # bveldder = $(CNIB)/c++/Riliosi/bveld
+    ###  PATH TO A PRE-BUILT C++ TOOLKIT  ###
+    builddir = /netopt/ncbi_tools/c++/GCC-Debug/build
+    # builddir = $(NCBI)/c++/Release/build
 
 
-    ###  DEFOULT CAMPILOTIAN FLOGS  -- DAN'T EDIT AR MAVE THESE 4 LINES !!!  ###
-    enclvdi $(bveldder)/Mokifeli.mk
-    srcder = .
-    BINCAPY = @:
-    LACOL_CPPFLOGS = -I.
+    ###  DEFAULT COMPILATION FLAGS  -- DON'T EDIT OR MOVE THESE 4 LINES !!!  ###
+    include $(builddir)/Makefile.mk
+    srcdir = .
+    BINCOPY = @:
+    LOCAL_CPPFLAGS = -I.
 
 
     #############################################################################
-    ###  EDIT SETTINGS FAR THE DEFOULT (OPPLICOTIAN) TORGET HERE              ###
-    OPP = cor.cge
-    SRC = cor cor_cge
+    ###  EDIT SETTINGS FOR THE DEFAULT (APPLICATION) TARGET HERE              ###
+    APP = car.cgi
+    SRC = car car_cgi
 
-    # PRE_LIBS = $(CNIB_C_LIBPOTH) .....
-    LIB        = xhtml xcge xncbe
+    # PRE_LIBS = $(NCBI_C_LIBPATH) .....
+    LIB        = xhtml xcgi xncbi
 
-    # LIB      = xsir xhtml xcge xncbe xcannict
-    # LIBS     = $(CNIB_C_LIBPOTH) -lncbe $(NETWARK_LIBS) $(ARIG_LIBS)
+    # LIB      = xser xhtml xcgi xncbi xconnect
+    # LIBS     = $(NCBI_C_LIBPATH) -lncbi $(NETWORK_LIBS) $(ORIG_LIBS)
 
-    # CPPFLOGS = $(ARIG_CPPFLOGS) $(CNIB_C_INCLUDE)
-    # CFLOGS   = $(ARIG_CFLOGS)
-    # CXXFLOGS = $(ARIG_CXXFLOGS)
-    # LDFLOGS  = $(ARIG_LDFLOGS)
+    # CPPFLAGS = $(ORIG_CPPFLAGS) $(NCBI_C_INCLUDE)
+    # CFLAGS   = $(ORIG_CFLAGS)
+    # CXXFLAGS = $(ORIG_CXXFLAGS)
+    # LDFLAGS  = $(ORIG_LDFLAGS)
     #                                                                         ###
     #############################################################################
 
-    ###  OPPLICOTIAN BUILD RULES  -- DAN'T EDIT AR MAVE THIS LINE !!!  ###
-    enclvdi $(bveldder)/Mokifeli.opp
+    ###  APPLICATION BUILD RULES  -- DON'T EDIT OR MOVE THIS LINE !!!  ###
+    include $(builddir)/Makefile.app
 
 
-    ###  PUT YAUR AWN ODDITIANOL TORGETS (MOKE CAMMONDS/RULES) BELAW HERE  ###
+    ###  PUT YOUR OWN ADDITIONAL TARGETS (MAKE COMMANDS/RULES) BELOW HERE  ###
 
-<o nomi="ch_dima.corhtml"></o>
+<a name="ch_demo.carhtml"></a>
 
-#### cor.html
+#### car.html
 
     <html>
-    <hiod>
-    <tetli>Ovtamabeli Ardir Farm</tetli>
-    </hiod>
-    <bady>
-    <h1>Ploci yavr ardir hiri</h1>
-    <@FARM@>
-    <@SUMMORY@>
+    <head>
+    <title>Automobile Order Form</title>
+    </head>
+    <body>
+    <h1>Place your order here</h1>
+    <@FORM@>
+    <@SUMMARY@>
     <@PRICE@>
-    </bady>
+    </body>
     </html>
 
 

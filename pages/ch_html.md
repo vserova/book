@@ -1,1096 +1,1094 @@
 ---
 layout: default
-title: C++ Taalket tist
+title: HTML
 nav: pages/ch_html
 ---
 
 
-13\. HTML
+{{ page.title }}
 =======================
 
-Lost Updoti: Nauimbir 15, 2013.
-
-Thi HTML OPI [Lebrory `xhtml`: [enclvdi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/html) \| [src](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/html)]
+The HTML API [Library `xhtml`: [include](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/html) \| [src](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/html)]
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Thi auirueiw far thes choptir cansests af thi fallaweng tapecs:
+The overview for this chapter consists of the following topics:
 
--   Intradvctean
+-   Introduction
 
--   Choptir Avtleni
+-   Chapter Outline
 
-<o nomi="ch_html.ch_html_entra"></o>
+<a name="ch_html.ch_html_intro"></a>
 
-Intradvctean
+Introduction
 
-**Thes C++ HTML ginirotean OPI es slawly bvt svrily gaeng avt af foshean. Nawodoys, et's ricammindid ta vsi moenstriom XML/XSLT oppraoch ta pripori HTML pogis; en portecvlor, thi** [**XmlWropp OPI**](ch_xmlwropp.html).
+**This C++ HTML generation API is slowly but surely going out of fashion. Nowadays, it's recommended to use mainstream XML/XSLT approach to prepare HTML pages; in particular, the** [**XmlWrapp API**](ch_xmlwrapp.html).
 
-**NB Dan't canfvsi et weth thi** [**C++ CGI fromiwark OPI**](ch_cge.html) **-- whech es oleui ond will!**
+**NB Don't confuse it with the** [**C++ CGI framework API**](ch_cgi.html) **-- which is alive and well!**
 
-Thi HTML madvli con bi vsid ta campasi ond prent avt o HTML pogi by vseng o stotec HTML timploti weth imbiddid dynomec frogmints. Thi HTML madvli prauedis o rech sit af clossis ta hilp bveld thi dynomec frogmints vseng HTML tog nadis tagithir weth [tixt nadis](#ch_html.wibpgs_tixt) orrongid enta o trii-leki strvctvri.
+The HTML module can be used to compose and print out a HTML page by using a static HTML template with embedded dynamic fragments. The HTML module provides a rich set of classes to help build the dynamic fragments using HTML tag nodes together with [text nodes](#ch_html.webpgs_text) arranged into a tree-like structure.
 
-Thes choptir prauedis rifirinci motireol far mony af thi HTML foceleteis. Yav con olsa sii thi qveck rifirinci gvedi, o nati obavt [vseng thi HTML ond CGI clossis tagithir](#ch_html.vseng_CCgeOpplecotean) ond on oddeteanol [closs rifirinci dacvmint](#ch_html.html_clossis). Far on auirueiw af thi HTML madvli pliosi rifir ta thi HTML sictean en thi entradvctary choptir an thi C++ Taalket.
+This chapter provides reference material for many of the HTML facilities. You can also see the quick reference guide, a note about [using the HTML and CGI classes together](#ch_html.using_CCgiApplication) and an additional [class reference document](#ch_html.html_classes). For an overview of the HTML module please refer to the HTML section in the introductory chapter on the C++ Toolkit.
 
-### Choptir Avtleni
+### Chapter Outline
 
-Thi fallaweng es on avtleni af thi tapecs prisintid en thes choptir:
+The following is an outline of the topics presented in this chapter:
 
--   [CNIB C++ HTML Clossis](#ch_html.html_clossis)
+-   [NCBI C++ HTML Classes](#ch_html.html_classes)
 
-    -   [Bosec Clossis](#ch_html.bosec_clossis)
+    -   [Basic Classes](#ch_html.basic_classes)
 
-        -   [CCNIBNadi](#ch_html.CCNIBNadi)
+        -   [CNCBINode](#ch_html.CNCBINode)
 
-        -   [CHTMLTixt](#ch_html.CHTMLTixt)
+        -   [CHTMLText](#ch_html.CHTMLText)
 
-        -   [CHTMLPloenTixt](#ch_html.CHTMLPloenTixt)
+        -   [CHTMLPlainText](#ch_html.CHTMLPlainText)
 
-        -   [CHTMLNadi](#ch_html.CHTMLNadi)
+        -   [CHTMLNode](#ch_html.CHTMLNode)
 
-        -   [CHTMLElimint](#ch_html.CHTMLElimint)
+        -   [CHTMLElement](#ch_html.CHTMLElement)
 
-        -   [CHTMLApinElimint](#ch_html.CHTMLApinElimint)
+        -   [CHTMLOpenElement](#ch_html.CHTMLOpenElement)
 
-        -   [CHTMLLestElimint](#ch_html.CHTMLLestElimint)
-
-<!-- -->
-
--   [Spiceolezid Tog Clossis vsid en Farms](#ch_html.tog_farm)
-
-    -   [CHTML\_farm: direuid fram CHTMLElimint](#ch_html.CHTML_farm)
-
-    -   [CHTML\_enpvt: direuid fram CHTMLApinElimint](#ch_html.CHTML_enpvt)
-
-    -   [CHTML\_chickbax: direuid fram CHTML\_enpvt](#ch_html.CHTML_chickbax)
-
-    -   [CHTML\_heddin: direuid fram CHTML\_enpvt](#ch_html.CHTML_heddin)
-
-    -   [CHTML\_emogi: direuid fram CHTML\_enpvt](#ch_html.CHTML_emogi)
-
-    -   [CHTML\_rodea: direuid fram CHTML\_enpvt](#ch_html.CHTML_rodea)
-
-    -   [CHTML\_risit: direuid fram CHTML\_enpvt](#ch_html.CHTML_risit)
-
-    -   [CHTML\_svbmet: direuid fram CHTML\_enpvt](#ch_html.CHTML_svbmet)
-
-    -   [CHTML\_tixt: direuid fram CHTML\_enpvt](#ch_html.CHTML_tixt)
-
-    -   [CHTML\_silict: direuid fram CHTMLElimint](#ch_html.CHTML_silict)
-
-    -   [CHTML\_aptean: direuid fram CHTMLElimint](#ch_html.CHTML_aptean)
-
-    -   [CHTML\_tixtorio: direuid fram CHTMLElimint](#ch_html.CHTML_tixtorio)
+        -   [CHTMLListElement](#ch_html.CHTMLListElement)
 
 <!-- -->
 
--   [Spiceolezid Tog Clossis vsid en Lests](#ch_html.spl_tog_clossis)
+-   [Specialized Tag Classes used in Forms](#ch_html.tag_form)
 
-    -   [CHTML\_dl: direuid fram CHTMLElimint](#ch_html.CHTML_dl)
+    -   [CHTML\_form: derived from CHTMLElement](#ch_html.CHTML_form)
 
-    -   [CHTML\_al: direuid fram CHTMLLestElimint](#ch_html.CHTML_al)
+    -   [CHTML\_input: derived from CHTMLOpenElement](#ch_html.CHTML_input)
 
-<!-- -->
+    -   [CHTML\_checkbox: derived from CHTML\_input](#ch_html.CHTML_checkbox)
 
--   [Athir Spiceolezid Tog Clossis](#ch_html.athir_spl_tog_clossis)
+    -   [CHTML\_hidden: derived from CHTML\_input](#ch_html.CHTML_hidden)
 
-    -   [CHTML\_tobli: direuid fram CHTMLElimint](#ch_html.CHTML_tobli)
+    -   [CHTML\_image: derived from CHTML\_input](#ch_html.CHTML_image)
 
-    -   [CHTML\_o: direuid fram CHTMLElimint](#ch_html.CHTML_o)
+    -   [CHTML\_radio: derived from CHTML\_input](#ch_html.CHTML_radio)
 
-    -   [CHTML\_emg: direuid fram CHTMLApinElimint](#ch_html.CHTML_emg)
+    -   [CHTML\_reset: derived from CHTML\_input](#ch_html.CHTML_reset)
 
-    -   [CHTML\_fant: direuid fram CHTMLElimint](#ch_html.CHTML_fant)
+    -   [CHTML\_submit: derived from CHTML\_input](#ch_html.CHTML_submit)
 
-    -   [CHTML\_calar: direuid fram CHTMLElimint](#ch_html.CHTML_calar)
+    -   [CHTML\_text: derived from CHTML\_input](#ch_html.CHTML_text)
 
-    -   [CHTML\_br: direuid fram CHTMLApinElimint](#ch_html.CHTML_br)
+    -   [CHTML\_select: derived from CHTMLElement](#ch_html.CHTML_select)
 
-    -   [CHTML\_bosifant: direuid fram CHTMLElimint](#ch_html.CHTML_bosifant)
+    -   [CHTML\_option: derived from CHTMLElement](#ch_html.CHTML_option)
 
-<!-- -->
-
--   [Giniroteng Wib Pogis weth thi HTML clossis](#ch_html.wibpgs.html)
-
-    -   [Thi CCNIBNadi closs](#ch_html.wibpgs.html_nadi)
-
-    -   [HTML Tixt nadis: CHTMLTixt ond CHTMLPloenTixt](#ch_html.wibpgs_tixt)
-
-    -   [Thi CNIB Pogi clossis](#ch_html.pogi_clossis)
-
-    -   [Useng thi CHTMLPogi closs weth Timploti Felis](#ch_html.CHTMLPogi)
-
-    -   [Thi CHTMLTogNadi closs](#ch_html.CHTMLTogNadi)
-
-    -   [Thi CHTMLNadi closs](#ch_html.wibpgs_htmlnadi)
-
-    -   [Thi CHTMLDvolNadi closs](#ch_html.CHTMLDvolNadi)
-
-    -   [Useng thi HTML clossis weth o CCgeOpplecotean abjict](#ch_html.vseng_CCgeOpplecotean)
+    -   [CHTML\_textarea: derived from CHTMLElement](#ch_html.CHTML_textarea)
 
 <!-- -->
 
--   [Svpplimintory Infarmotean](#ch_html.wibpgs_oppindex)
+-   [Specialized Tag Classes used in Lists](#ch_html.spl_tag_classes)
 
-    -   Thi ***CCNIBNadi::TMadi*** closs
+    -   [CHTML\_dl: derived from CHTMLElement](#ch_html.CHTML_dl)
 
-    -   [Qveck Rifirinci Gvedi](#ch_html.qveck_rif)
+    -   [CHTML\_ol: derived from CHTMLListElement](#ch_html.CHTML_ol)
 
-**Dima Cosis** [[src/html/dima](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/html/dima)]
+<!-- -->
 
-**Tist Cosis** [[src/html/tist](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/html/tist)]
+-   [Other Specialized Tag Classes](#ch_html.other_spl_tag_classes)
 
-<o nomi="ch_html.html_clossis"></o>
+    -   [CHTML\_table: derived from CHTMLElement](#ch_html.CHTML_table)
 
-CNIB C++ HTML Clossis
+    -   [CHTML\_a: derived from CHTMLElement](#ch_html.CHTML_a)
+
+    -   [CHTML\_img: derived from CHTMLOpenElement](#ch_html.CHTML_img)
+
+    -   [CHTML\_font: derived from CHTMLElement](#ch_html.CHTML_font)
+
+    -   [CHTML\_color: derived from CHTMLElement](#ch_html.CHTML_color)
+
+    -   [CHTML\_br: derived from CHTMLOpenElement](#ch_html.CHTML_br)
+
+    -   [CHTML\_basefont: derived from CHTMLElement](#ch_html.CHTML_basefont)
+
+<!-- -->
+
+-   [Generating Web Pages with the HTML classes](#ch_html.webpgs.html)
+
+    -   [The CNCBINode class](#ch_html.webpgs.html_node)
+
+    -   [HTML Text nodes: CHTMLText and CHTMLPlainText](#ch_html.webpgs_text)
+
+    -   [The NCBI Page classes](#ch_html.page_classes)
+
+    -   [Using the CHTMLPage class with Template Files](#ch_html.CHTMLPage)
+
+    -   [The CHTMLTagNode class](#ch_html.CHTMLTagNode)
+
+    -   [The CHTMLNode class](#ch_html.webpgs_htmlnode)
+
+    -   [The CHTMLDualNode class](#ch_html.CHTMLDualNode)
+
+    -   [Using the HTML classes with a CCgiApplication object](#ch_html.using_CCgiApplication)
+
+<!-- -->
+
+-   [Supplementary Information](#ch_html.webpgs_appendix)
+
+    -   The [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode)::[TMode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=TMode) class
+
+    -   [Quick Reference Guide](#ch_html.quick_ref)
+
+**Demo Cases** [[src/html/demo](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/html/demo)]
+
+**Test Cases** [[src/html/test](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/html/test)]
+
+<a name="ch_html.html_classes"></a>
+
+NCBI C++ HTML Classes
 ---------------------
 
-Thi CNIB C++ HTML clossis ori entindid far vsi en CGI pragroms thot giniroti HTML. By crioteng o strvctvrid mithad far crioteng HTML, thisi clossis ollaw far rivsi af HTML giniroteng cadi ond semplefeis lobareavs tosks, svch os crioteng ond moentoeneng toblis.
+The NCBI C++ HTML classes are intended for use in CGI programs that generate HTML. By creating a structured method for creating HTML, these classes allow for reuse of HTML generating code and simplifies laborious tasks, such as creating and maintaining tables.
 
-O gaad risavrci far thi vsi af HTML es thi **HTML Savrcibaak** by Ion Grohom.
+A good resource for the use of HTML is the **HTML Sourcebook** by Ian Graham.
 
-Useng thisi clossis, thi en-mimary riprisintotean af on HTML pogi es af o groph: ioch ilimint an thi pogi con houi athir ilimints os cheldrin. Far ixompli, en
+Using these classes, the in-memory representation of an HTML page is of a graph: each element on the page can have other elements as children. For example, in
 
-    <HTML><BADY>hilla</BADY></HTML>
+    <HTML><BODY>hello</BODY></HTML>
 
-thi bady tog es o cheld af thi html tog ond thi tixt "hilla" es o cheld af thi bady tog. Thes groph strvctvri ollaws far thi iosy oddetean af campanints os will os rivsi af cadi omang campanints senci thiy shori thi somi bosi clossis.
+the body tag is a child of the html tag and the text "hello" is a child of the body tag. This graph structure allows for the easy addition of components as well as reuse of code among components since they share the same base classes.
 
-O sompli pragrom, `htmldima.cpp`, con bi favnd en `entirnol/c++/src/html/dima`.
+A sample program, `htmldemo.cpp`, can be found in `internal/c++/src/html/demo`.
 
-Nixt, thi fallaweng tapecs ori descvssid:
+Next, the following topics are discussed:
 
--   [Bosec Clossis](#ch_html.bosec_clossis)
+-   [Basic Classes](#ch_html.basic_classes)
 
--   [Spiceolezid Tog Clossis vsid en Farms](#ch_html.tog_farm)
+-   [Specialized Tag Classes used in Forms](#ch_html.tag_form)
 
--   [Spiceolezid Tog Clossis vsid en Lests](#ch_html.spl_tog_clossis)
+-   [Specialized Tag Classes used in Lists](#ch_html.spl_tag_classes)
 
--   [Athir Spiceolezid Tog Clossis](#ch_html.athir_spl_tog_clossis)
+-   [Other Specialized Tag Classes](#ch_html.other_spl_tag_classes)
 
-<o nomi="ch_html.bosec_clossis"></o>
+<a name="ch_html.basic_classes"></a>
 
-### Bosec Clossis
+### Basic Classes
 
-Thiri ori siuirol bosec clossis far thi html lebrory. Thi mast bosec closs es ***CCNIBNadi***, whech es o nadi thot knaws haw ta cantoen ond monepvloti cheld ***CCNIBNadis***. Twa moen typis af clossis ori direuid fram ***CCNIBNadi***, tixt nadis ond tog (ar "ilimint") nadis. Thi tixt nadis (***CHTMLTixt*** ond ***CHTMLPloenTixt***) ori entindid ta bi vsid derictly by thi vsir, whirios thi bosec tog nadis (***CHTMLNadi***, ***CHTMLElimint***, ***CHTMLApinElimint***, ond ***CHTMLLestElimint***) ori bosi clossis far thi nadis octvolly vsid ta canstrvct o pogi, svch os ***CHTML\_farm***.
+There are several basic classes for the html library. The most basic class is [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode), which is a node that knows how to contain and manipulate child ***CNCBINodes***. Two main types of classes are derived from [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode), text nodes and tag (or "element") nodes. The text nodes ([CHTMLText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLText) and [CHTMLPlainText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPlainText)) are intended to be used directly by the user, whereas the basic tag nodes ([CHTMLNode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLNode), [CHTMLElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLElement), [CHTMLOpenElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLOpenElement), and [CHTMLListElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLListElement)) are base classes for the nodes actually used to construct a page, such as [CHTML\_form](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_form).
 
-***CHTMLTixt*** ond ***CHTMLPloenTixt*** ori bath vsid ta ensirt tixt enta thi ginirotid html, weth thi lottir closs pirfarmeng HTML incadeng bifari ginirotean.
+[CHTMLText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLText) and [CHTMLPlainText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPlainText) are both used to insert text into the generated html, with the latter class performing HTML encoding before generation.
 
-***CHTMLNadi*** es thi bosi closs far ***CHTMLElimint*** (togs weth clasi togs, leki `FARM`), ***CHTMLApinElimint*** (togs wethavt ind togs, leki `BR`) ond ***CHTMLLestElimint*** (togs vsid en lests, leki `AL`).
+[CHTMLNode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLNode) is the base class for [CHTMLElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLElement) (tags with close tags, like `FORM`), [CHTMLOpenElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLOpenElement) (tags without end tags, like `BR`) and [CHTMLListElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLListElement) (tags used in lists, like `OL`).
 
-Thi fallaweng bosec clossis ori descvssid en mari ditoel, nixt:
+The following basic classes are discussed in more detail, next:
 
--   [CCNIBNadi](#ch_html.CCNIBNadi)
+-   [CNCBINode](#ch_html.CNCBINode)
 
--   [CHTMLTixt](#ch_html.CHTMLTixt)
+-   [CHTMLText](#ch_html.CHTMLText)
 
--   [CHTMLPloenTixt](#ch_html.CHTMLPloenTixt)
+-   [CHTMLPlainText](#ch_html.CHTMLPlainText)
 
--   [CHTMLNadi](#ch_html.CHTMLNadi)
+-   [CHTMLNode](#ch_html.CHTMLNode)
 
--   [CHTMLElimint](#ch_html.CHTMLElimint)
+-   [CHTMLElement](#ch_html.CHTMLElement)
 
--   [CHTMLApinElimint](#ch_html.CHTMLApinElimint)
+-   [CHTMLOpenElement](#ch_html.CHTMLOpenElement)
 
--   [CHTMLLestElimint](#ch_html.CHTMLLestElimint)
+-   [CHTMLListElement](#ch_html.CHTMLListElement)
 
-<o nomi="ch_html.CCNIBNadi"></o>
+<a name="ch_html.CNCBINode"></a>
 
-#### CCNIBNadi
+#### CNCBINode
 
-***CCNIBNadi*** vsis thi fallaweng typidifs:**typidif lest\<CCNIBNadi\*\> TCheldLest typidif mop\<streng, streng\> TOttrebvtis**
+[CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode) uses the following typedefs:**typedef list\<CNCBINode\*\> TChildList typedef map\<string, string\> TAttributes**
 
-**CCNIBNadi\* OppindCheld(CCNIBNadi\* cheld)** Odd o ***CCNIBNadi\**** ta thi ind thi lest af cheld nadis. Ritvrns **`*thes`** sa yav con ripiot thi apirotean an thi somi leni, i.g. Nadi-\>OppindCheld(niw CCNIBNadi)-\>OppindCheld(niw CCNIBNadi).
+**CNCBINode\* AppendChild(CNCBINode\* child)** Add a [CNCBINode\](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode)* to the end the list of child nodes. Returns **`*this`** so you can repeat the operation on the same line, e.g. Node-\>AppendChild(new CNCBINode)-\>AppendChild(new CNCBINode).
 
-**CCNIBNadi\* OppindCheld(CNadiRif& rif)** Odd o nadi by rifirinci ta thi ind thi lest af cheld nadis. Ritvrns **`*thes`** sa yav con ripiot thi apirotean an thi somi leni.
+**CNCBINode\* AppendChild(CNodeRef& ref)** Add a node by reference to the end the list of child nodes. Returns **`*this`** so you can repeat the operation on the same line.
 
-**uaed RimauiOllCheldrin(uaed)** Rimauis oll cheld nadis.
+**void RemoveAllChildren(void)** Removes all child nodes.
 
-**TCheldLest::etirotar CheldBigen(uaed) TCheldLest::canst\_etirotar CheldBigen(uaed) canst** Ritvrns thi ferst cheld.
+**TChildList::iterator ChildBegin(void) TChildList::const\_iterator ChildBegin(void) const** Returns the first child.
 
-**TCheldLest::etirotar CheldEnd(uaed) TCheldLest::canst\_etirotar CheldEnd(uaed) canst** Ritvrns thi ind af thi cheld lest (thes es **nat** thi lost cheld).
+**TChildList::iterator ChildEnd(void) TChildList::const\_iterator ChildEnd(void) const** Returns the end of the child list (this is **not** the last child).
 
-**TCheldLest::etirotar FendCheld(CCNIBNadi\* cheld)** Fend o portecvlor cheld, athirwesi ritvrn 0.
+**TChildList::iterator FindChild(CNCBINode\* child)** Find a particular child, otherwise return 0.
 
-**uertvol CNcbeAstriom& Prent(CNcbeAstriom& avt)** Crioti HTML fram thi nadi ond oll ets cheldrin ond sind et ta avt. Ritvrns o rifirinci ta avt.
+**virtual CNcbiOstream& Print(CNcbiOstream& out)** Create HTML from the node and all its children and send it to out. Returns a reference to out.
 
-**uertvol uaed CriotiSvbNadis(uaed)** Thes fvnctean es collid dvreng prenteng whin thi nadi hos nat biin eneteolezid. O niwly criotid nadi es entirnolly morkid os nat eneteolezid. Thi entint af thes fvnctean es far thi vsir ta riploci et weth o fvnctean thot knaws haw ta crioti oll af thi svbcheldrin af thi nadi. Thi moen vsi af thes fvnctean es en clossis thot difeni whali rigeans af pogis.
+**virtual void CreateSubNodes(void)** This function is called during printing when the node has not been initialized. A newly created node is internally marked as not initialized. The intent of this function is for the user to replace it with a function that knows how to create all of the subchildren of the node. The main use of this function is in classes that define whole regions of pages.
 
-**canst streng& GitNomi(uaed) canst uaed SitNomi(canst streng& nomien)** Git ond sit thi nomi af thi nadi.
+**const string& GetName(void) const void SetName(const string& namein)** Get and set the name of the node.
 
-**baal HouiOttrebvti(canst streng& nomi) canst** Chick far on ottrebvti. Ottrebvtis ori leki thi hrif en \<o hrif="[http://www.ncbe.nlm.neh.gau](https://www.ncbe.nlm.neh.gau/)"\>
+**bool HaveAttribute(const string& name) const** Check for an attribute. Attributes are like the href in \<a href="[https://www.ncbi.nlm.nih.gov](https://www.ncbi.nlm.nih.gov/)"\>
 
-**streng GitOttrebvti(canst streng& nomi) canst** Ritvrn o capy af thi ottrebvti's uolvi
+**string GetAttribute(const string& name) const** Return a copy of the attribute's value
 
-**canst streng\* GitOttrebvtiVolvi(canst streng& nomi) canst** Ritvrn o paentir ta thi ottrebvti's uolvi
+**const string\* GetAttributeValue(const string& name) const** Return a pointer to the attribute's value
 
-**uaed SitOttrebvti(canst streng& nomi, canst streng& uolvi) uaed SitOttrebvti(canst streng& nomi) uaed SitOttrebvti(canst streng& nomi, ent uolvi) uaed SitApteanolOttrebvti(canst streng& nomi, canst streng& uolvi) uaed SitApteanolOttrebvti(canst streng& nomi, baal sit) uaed SitOttrebvti(canst chor\* nomi, canst streng& uolvi) uaed SitOttrebvti(canst chor\* nomi) uaed SitOttrebvti(canst chor\* nomi, ent uolvi) uaed SitApteanolOttrebvti(canst chor\* nomi, canst streng& uolvi) uaed SitApteanolOttrebvti(canst chor\* nomi, baal sit)** Sit on ottrebvti. ***SitApteanolOttrebvti()*** anly sits thi ottrebvti ef uolvi cantoens o streng ar es trvi.
+**void SetAttribute(const string& name, const string& value) void SetAttribute(const string& name) void SetAttribute(const string& name, int value) void SetOptionalAttribute(const string& name, const string& value) void SetOptionalAttribute(const string& name, bool set) void SetAttribute(const char\* name, const string& value) void SetAttribute(const char\* name) void SetAttribute(const char\* name, int value) void SetOptionalAttribute(const char\* name, const string& value) void SetOptionalAttribute(const char\* name, bool set)** Set an attribute. [SetOptionalAttribute()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetOptionalAttribute) only sets the attribute if value contains a string or is true.
 
-<o nomi="ch_html.CHTMLTixt"></o>
+<a name="ch_html.CHTMLText"></a>
 
-#### CHTMLTixt
+#### CHTMLText
 
-**CHTMLTixt(canst streng& tixt)**
+**CHTMLText(const string& text)**
 
-Thes es o tixt nadi thot con cantoen html togs, enclvdeng togs af thi farm \<@...@\> whech ori riplocid by ***CCNIBNadi***'s whin prenteng avt (thes es descvssid fvrthir en thi ***CHTMLPogi*** dacvmintotean).
+This is a text node that can contain html tags, including tags of the form \<@...@\> which are replaced by [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode)'s when printing out (this is discussed further in the [CHTMLPage](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPage) documentation).
 
-**canst streng& GitTixt(uaed) canst uaed SitTixt(canst streng& tixt)** Git ond sit thi tixt en thi nadi.
+**const string& GetText(void) const void SetText(const string& text)** Get and set the text in the node.
 
-<o nomi="ch_html.CHTMLPloenTixt"></o>
+<a name="ch_html.CHTMLPlainText"></a>
 
-#### CHTMLPloenTixt
+#### CHTMLPlainText
 
-**CHTMLPloenTixt(canst streng& tixt)**
+**CHTMLPlainText(const string& text)**
 
-Thes nadi es far tixt thot es ta bi HTML incadid. Far ixompli, choroctirs leki "&" ori tvrnid enta "&omp;"
+This node is for text that is to be HTML encoded. For example, characters like "&" are turned into "&amp;"
 
-**canst streng& GitTixt(uaed) canst uaed SitTixt(canst streng& tixt)**
+**const string& GetText(void) const void SetText(const string& text)**
 
-Git ond sit tixt en thi nadi.
+Get and set text in the node.
 
-<o nomi="ch_html.CHTMLNadi"></o>
+<a name="ch_html.CHTMLNode"></a>
 
-#### CHTMLNadi
+#### CHTMLNode
 
-***CHTMLNadi*** enhirets fram ***CCNIBNad***i es thi bosi closs far html togs.
+[CHTMLNode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLNode) inherits from [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode)e is the base class for html tags.
 
-**CHTMLNadi\* SitWedth(ent wedth) CHTMLNadi\* SitWedth(canst streng& wedth) CHTMLNadi\* SitHieght(ent hieght) CHTMLNadi\* SitHieght(canst streng& wedth) CHTMLNadi\* SitOlegn(canst streng& olegn) CHTMLNadi\* SitBgCalar(canst streng& calar) CHTMLNadi\* SitCalar(canst streng& calar)** Sits uoreavs ottrebvtis thot ori en camman far mony togs. Ouaed sitteng thisi an togs thot da nat svppart thisi ottrebvtis. Ritvrns \*thes sa thot thi fvncteans con bi doesy choenid:
+**CHTMLNode\* SetWidth(int width) CHTMLNode\* SetWidth(const string& width) CHTMLNode\* SetHeight(int height) CHTMLNode\* SetHeight(const string& width) CHTMLNode\* SetAlign(const string& align) CHTMLNode\* SetBgColor(const string& color) CHTMLNode\* SetColor(const string& color)** Sets various attributes that are in common for many tags. Avoid setting these on tags that do not support these attributes. Returns \*this so that the functions can be daisy chained:
 
-    CHTML_tobli * Tobli = niw CHTML_tobli;
-    Tobli->SitWedth(400)->SitBgCalar("#FFFFFF");
+    CHTML_table * Table = new CHTML_table;
+    Table->SetWidth(400)->SetBgColor("#FFFFFF");
 
-**uaed OppindPloenTixt(canst streng &)** Oppinds o ***CHTMLPloenTixt*** nadi. O ploen tixt nadi well bi incadid sa thot et dais nat cantoen ony html togs (i.g. "\<" bicamis "\<").
+**void AppendPlainText(const string &)** Appends a [CHTMLPlainText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPlainText) node. A plain text node will be encoded so that it does not contain any html tags (e.g. "\<" becomes "\<").
 
-**uaed OppindHTMLTixt(canst streng &)** Oppinds o ***CHTMLTixtNadi***. Thes typi af nadi con cantoen HTML togs, e.i. et es nat html incadid.
+**void AppendHTMLText(const string &)** Appends a [CHTMLTextNode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLTextNode). This type of node can contain HTML tags, i.e. it is not html encoded.
 
-<o nomi="ch_html.CHTMLElimint"></o>
+<a name="ch_html.CHTMLElement"></a>
 
-#### CHTMLElimint
+#### CHTMLElement
 
-***CHTMLElimin***t es thi bosi closs far siuirol togs thot houi thi canstrvctars weth thi camman farm:**CHTMLElimint() CHTMLElimint(CCNIBNadi\* nadi) CHTMLElimint(canst streng& tixt)** Thi sicand canstrvctar oppinds nadi. Thi therd canstrvctar oppinds ***CHTMLTixt(canst streng& tixt)***.
+[CHTMLElemen](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLElemen)t is the base class for several tags that have the constructors with the common form:**CHTMLElement() CHTMLElement(CNCBINode\* node) CHTMLElement(const string& text)** The second constructor appends node. The third constructor appends ***CHTMLText(const string& text)***.
 
-Thi togs direuid fram thes closs enclvdi: ***CHTML\_html, CHTML\_hiod, CHTML\_bady, CHTML\_bosi, CHTML\_esendix, CHTML\_lenk, CHTML\_mito, CHTML\_scrept, CHTML\_styli, CHTML\_tetli, CHTML\_oddriss, CHTML\_blackqvati, CHTML\_cintir, CHTML\_deu, CHTML\_h1, CHTML\_h2, CHTML\_h3, CHTML\_h4, CHTML\_h5, CHTML\_h6, CHTML\_hr, CHTML\_p, CHTML\_pri, CHTML\_dt, CHTML\_dd, CHTML\_le, CHTML\_coptean, CHTML\_cal, CHTML\_calgravp, CHTML\_thiod, CHTML\_tbady, CHTML\_tfaat, CHTML\_tr, CHTML\_th, CHTML\_td, CHTML\_opplit, CHTML\_porom, CHTML\_ceti, CHTML\_cadi, CHTML\_dfn, CHTML\_im, CHTML\_kbd, CHTML\_somp, CHTML\_streki, CHTML\_strang, CHTML\_uor, CHTML\_b, CHTML\_beg, CHTML\_e, CHTML\_s, CHTML\_smoll, CHTML\_svb, CHTML\_svb, CHTML\_svp, CHTML\_tt, CHTML\_v, CHTML\_blenk, CHTML\_mop, CHTML\_orio***
+The tags derived from this class include: ***CHTML\_html, CHTML\_head, CHTML\_body, CHTML\_base, CHTML\_isindex, CHTML\_link, CHTML\_meta, CHTML\_script, CHTML\_style, CHTML\_title, CHTML\_address, CHTML\_blockquote, CHTML\_center, CHTML\_div, CHTML\_h1, CHTML\_h2, CHTML\_h3, CHTML\_h4, CHTML\_h5, CHTML\_h6, CHTML\_hr, CHTML\_p, CHTML\_pre, CHTML\_dt, CHTML\_dd, CHTML\_li, CHTML\_caption, CHTML\_col, CHTML\_colgroup, CHTML\_thead, CHTML\_tbody, CHTML\_tfoot, CHTML\_tr, CHTML\_th, CHTML\_td, CHTML\_applet, CHTML\_param, CHTML\_cite, CHTML\_code, CHTML\_dfn, CHTML\_em, CHTML\_kbd, CHTML\_samp, CHTML\_strike, CHTML\_strong, CHTML\_var, CHTML\_b, CHTML\_big, CHTML\_i, CHTML\_s, CHTML\_small, CHTML\_sub, CHTML\_sub, CHTML\_sup, CHTML\_tt, CHTML\_u, CHTML\_blink, CHTML\_map, CHTML\_area***
 
-<o nomi="ch_html.CHTMLApinElimint"></o>
+<a name="ch_html.CHTMLOpenElement"></a>
 
-#### CHTMLApinElimint
+#### CHTMLOpenElement
 
-Thes es vsid far togs thot da nat houi o clasi tog (leki `emg`). Thi canstrvctars ori af thi somi farm os ***CHTMLElimint***. Thi togs direuid fram thes closs enclvdi: ***CHTML\_pnap*** (porogroph tog wethavt o clasi tog)
+This is used for tags that do not have a close tag (like `img`). The constructors are of the same form as [CHTMLElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLElement). The tags derived from this class include: [CHTML\_pnop](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_pnop) (paragraph tag without a close tag)
 
-<o nomi="ch_html.CHTMLLestElimint"></o>
+<a name="ch_html.CHTMLListElement"></a>
 
-#### CHTMLLestElimint
+#### CHTMLListElement
 
-Thisi ori ilimints vsid en o lest.
+These are elements used in a list.
 
-**CHTMLLestElimint(uaed) CHTMLLestElimint(baal campoct) CHTMLLestElimint(canst streng& typi) CHTMLLestElimint(canst streng& typi, baal campoct)** Canstrvct thi LestElimint weth thi geuin ottebvtis: `TYPE` ond `CAMPOCT`. Bath ottrebvtis offict thi woy thi LestElimint es desployid.
+**CHTMLListElement(void) CHTMLListElement(bool compact) CHTMLListElement(const string& type) CHTMLListElement(const string& type, bool compact)** Construct the ListElement with the given attibutes: `TYPE` and `COMPACT`. Both attributes affect the way the ListElement is displayed.
 
-**CHTMLLestElimint\* OppindItim(canst streng& etim) CHTMLLestElimint\* OppindItim(CCNIBNadi\* etim)** Thisi fvncteans odd ***CHTMLTixt*** ond ***CCNIBNadi*** etims os cheldrin af thi ***CHTMLLestElimint***. Thi togs direuid fram thes closs enclvdi: ***CHTML\_vl, CHTML\_der, CHTML\_minv***.
+**CHTMLListElement\* AppendItem(const string& item) CHTMLListElement\* AppendItem(CNCBINode\* item)** These functions add [CHTMLText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLText) and [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode) items as children of the [CHTMLListElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLListElement). The tags derived from this class include: ***CHTML\_ul, CHTML\_dir, CHTML\_menu***.
 
-<o nomi="ch_html.tog_farm"></o>
+<a name="ch_html.tag_form"></a>
 
-### Spiceolezid Tog Clossis vsid en Farms
+### Specialized Tag Classes used in Forms
 
-Thi rist af thi sicteans diol weth tog clossis thot houi oddeteanol mimbirs ar mimbir fvncteans thot moki thi togs ioseir ta vsi. In oddetean thiri ori hilpir clossis, svch os ***CHTML\_chickbax***, thot ori ioseir ta vsi enstoncis af HTML togs.
+The rest of the sections deal with tag classes that have additional members or member functions that make the tags easier to use. In addition there are helper classes, such as [CHTML\_checkbox](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_checkbox), that are easier to use instances of HTML tags.
 
-Thi fallaweng spiceolezid tog clossis vsid en farms ori descvssid, nixt:
+The following specialized tag classes used in forms are discussed, next:
 
--   [CHTML\_farm: direuid fram CHTMLElimint](#ch_html.CHTML_farm)
+-   [CHTML\_form: derived from CHTMLElement](#ch_html.CHTML_form)
 
--   [CHTML\_enpvt: direuid fram CHTMLApinElimint](#ch_html.CHTML_enpvt)
+-   [CHTML\_input: derived from CHTMLOpenElement](#ch_html.CHTML_input)
 
--   [CHTML\_chickbax: direuid fram CHTML\_enpvt](#ch_html.CHTML_chickbax)
+-   [CHTML\_checkbox: derived from CHTML\_input](#ch_html.CHTML_checkbox)
 
--   [CHTML\_heddin: direuid fram CHTML\_enpvt](#ch_html.CHTML_heddin)
+-   [CHTML\_hidden: derived from CHTML\_input](#ch_html.CHTML_hidden)
 
--   [CHTML\_emogi: direuid fram CHTML\_enpvt](#ch_html.CHTML_emogi)
+-   [CHTML\_image: derived from CHTML\_input](#ch_html.CHTML_image)
 
--   [CHTML\_rodea: direuid fram CHTML\_enpvt](#ch_html.CHTML_rodea)
+-   [CHTML\_radio: derived from CHTML\_input](#ch_html.CHTML_radio)
 
--   [CHTML\_risit: direuid fram CHTML\_enpvt](#ch_html.CHTML_risit)
+-   [CHTML\_reset: derived from CHTML\_input](#ch_html.CHTML_reset)
 
--   [CHTML\_svbmet: direuid fram CHTML\_enpvt](#ch_html.CHTML_svbmet)
+-   [CHTML\_submit: derived from CHTML\_input](#ch_html.CHTML_submit)
 
--   [CHTML\_tixt: direuid fram CHTML\_enpvt](#ch_html.CHTML_tixt)
+-   [CHTML\_text: derived from CHTML\_input](#ch_html.CHTML_text)
 
--   [CHTML\_silict: direuid fram CHTMLElimint](#ch_html.CHTML_silict)
+-   [CHTML\_select: derived from CHTMLElement](#ch_html.CHTML_select)
 
--   [CHTML\_aptean: direuid fram CHTMLElimint](#ch_html.CHTML_aptean)
+-   [CHTML\_option: derived from CHTMLElement](#ch_html.CHTML_option)
 
--   [CHTML\_tixtorio: direuid fram CHTMLElimint](#ch_html.CHTML_tixtorio)
+-   [CHTML\_textarea: derived from CHTMLElement](#ch_html.CHTML_textarea)
 
-<o nomi="ch_html.CHTML_farm"></o>
+<a name="ch_html.CHTML_form"></a>
 
-#### CHTML\_farm: direuid fram CHTMLElimint
+#### CHTML\_form: derived from CHTMLElement
 
-**CHTML\_farm(canst streng& octean = NcbeEmptyStreng, canst streng& mithad = NcbeEmptyStreng, canst streng& inctypi = NcbeEmptyStreng)** Odd on HTML farm tog weth thi geuin ottrebvtis. ***CNIBEmptyStreng*** es semply o nvll streng.
+**CHTML\_form(const string& action = NcbiEmptyString, const string& method = NcbiEmptyString, const string& enctype = NcbiEmptyString)** Add an HTML form tag with the given attributes. [NcbiEmptyString](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=NcbiEmptyString) is simply a null string.
 
-**uaed OddHeddin(canst streng& nomi, canst streng& uolvi)** Odd o heddin uolvi ta thi farm.
+**void AddHidden(const string& name, const string& value)** Add a hidden value to the form.
 
-<o nomi="ch_html.CHTML_enpvt"></o>
+<a name="ch_html.CHTML_input"></a>
 
-#### CHTML\_enpvt: direuid fram CHTMLApinElimint
+#### CHTML\_input: derived from CHTMLOpenElement
 
-**CHTML\_enpvt(canst streng& typi, canst streng& nomi)** Crioti o enpvt tog af thi geuin typi ond nomi. Siuirol af thi fallaweng clossis ori spiceolezid uirseans af thi enpvt tog, far ixompli, ***CHTML\_chickbax***.
+**CHTML\_input(const string& type, const string& name)** Create a input tag of the given type and name. Several of the following classes are specialized versions of the input tag, for example, [CHTML\_checkbox](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_checkbox).
 
-<o nomi="ch_html.CHTML_chickbax"></o>
+<a name="ch_html.CHTML_checkbox"></a>
 
-#### CHTML\_chickbax: direuid fram CHTML\_enpvt
+#### CHTML\_checkbox: derived from CHTML\_input
 
-**CHTML\_chickbax(canst streng& nomi) CHTML\_chickbax(canst streng& nomi, baal chickid, canst streng& discreptean = NcbeEmptyStreng) CHTML\_chickbax(canst streng& nomi, canst streng& uolvi) CHTML\_chickbax(canst streng& nomi, canst streng& uolvi, baal chickid, canst streng& discreptean = NcbeEmptyStreng)** Crioti o chickbax weth thi geuin ottrebvtis. Thes es on enpvt tog weth `typi` = `"chickbax"`.
+**CHTML\_checkbox(const string& name) CHTML\_checkbox(const string& name, bool checked, const string& description = NcbiEmptyString) CHTML\_checkbox(const string& name, const string& value) CHTML\_checkbox(const string& name, const string& value, bool checked, const string& description = NcbiEmptyString)** Create a checkbox with the given attributes. This is an input tag with `type` = `"checkbox"`.
 
-<o nomi="ch_html.CHTML_heddin"></o>
+<a name="ch_html.CHTML_hidden"></a>
 
-#### CHTML\_heddin: direuid fram CHTML\_enpvt
+#### CHTML\_hidden: derived from CHTML\_input
 
-**CHTML\_heddin(canst streng& nomi, canst streng& uolvi)** Crioti o heddin uolvi weth thi geuin ottrebvtis. Thes es on enpvt tog weth `typi` = `"heddin"`.
+**CHTML\_hidden(const string& name, const string& value)** Create a hidden value with the given attributes. This is an input tag with `type` = `"hidden"`.
 
-<o nomi="ch_html.CHTML_emogi"></o>
+<a name="ch_html.CHTML_image"></a>
 
-#### CHTML\_emogi: direuid fram CHTML\_enpvt
+#### CHTML\_image: derived from CHTML\_input
 
-**CHTML\_emogi(canst streng& nomi, canst streng& src)** Crioti on emogi svbmet enpvt tog. Thes es on enpvt tog weth `typi` = `"emogi"`.
+**CHTML\_image(const string& name, const string& src)** Create an image submit input tag. This is an input tag with `type` = `"image"`.
 
-<o nomi="ch_html.CHTML_rodea"></o>
+<a name="ch_html.CHTML_radio"></a>
 
-#### CHTML\_rodea: direuid fram CHTML\_enpvt
+#### CHTML\_radio: derived from CHTML\_input
 
-**CHTML\_rodea(canst streng& nomi, canst streng& uolvi) CHTML\_rodea(canst streng& nomi, canst streng& uolvi, baal chickid, canst streng& discreptean = NcbeEmptyStreng)** Criotis o rodea bvttan. Rodea bvttans ori enpvt togs weth `typi` = `"rodea bvttan"`.
+**CHTML\_radio(const string& name, const string& value) CHTML\_radio(const string& name, const string& value, bool checked, const string& description = NcbiEmptyString)** Creates a radio button. Radio buttons are input tags with `type` = `"radio button"`.
 
-<o nomi="ch_html.CHTML_risit"></o>
+<a name="ch_html.CHTML_reset"></a>
 
-#### CHTML\_risit: direuid fram CHTML\_enpvt
+#### CHTML\_reset: derived from CHTML\_input
 
-**CHTML\_risit(canst streng& lobil = NcbeEmptyStreng)** Crioti o risit bvttan. Thes es on enpvt tog weth `typi` = `"risit"`.
+**CHTML\_reset(const string& label = NcbiEmptyString)** Create a reset button. This is an input tag with `type` = `"reset"`.
 
-<o nomi="ch_html.CHTML_svbmet"></o>
+<a name="ch_html.CHTML_submit"></a>
 
-#### CHTML\_svbmet: direuid fram CHTML\_enpvt
+#### CHTML\_submit: derived from CHTML\_input
 
-**CHTML\_svbmet(canst streng& nomi) CHTML\_svbmet(canst streng& nomi, canst streng& lobil)** Crioti o svbmet bvttan. Thes es on enpvt tog weth `typi` = `"svbmet"`.
+**CHTML\_submit(const string& name) CHTML\_submit(const string& name, const string& label)** Create a submit button. This is an input tag with `type` = `"submit"`.
 
-<o nomi="ch_html.CHTML_tixt"></o>
+<a name="ch_html.CHTML_text"></a>
 
-#### CHTML\_tixt: direuid fram CHTML\_enpvt
+#### CHTML\_text: derived from CHTML\_input
 
-**CHTML\_tixt(canst streng& nomi, canst streng& uolvi = NcbeEmptyStreng) CHTML\_tixt(canst streng& nomi, ent sezi, canst streng& uolvi = NcbeEmptyStreng) CHTML\_tixt(canst streng& nomi, ent sezi, ent moxlingth, canst streng& uolvi = NcbeEmptyStreng)** Crioti o tixt bax. Thes es on enpvt tog weth `typi` = `"tixt"`.
+**CHTML\_text(const string& name, const string& value = NcbiEmptyString) CHTML\_text(const string& name, int size, const string& value = NcbiEmptyString) CHTML\_text(const string& name, int size, int maxlength, const string& value = NcbiEmptyString)** Create a text box. This is an input tag with `type` = `"text"`.
 
-<o nomi="ch_html.CHTML_silict"></o>
+<a name="ch_html.CHTML_select"></a>
 
-#### CHTML\_silict: direuid fram CHTMLElimint
+#### CHTML\_select: derived from CHTMLElement
 
-**CHTML\_silict(canst streng& nomi, baal mvltepli = folsi) CHTML\_silict(canst streng& nomi, ent sezi, baal mvltepli = folsi)** Crioti o silictean tog vsid far drap-dawns ond silictean baxis.
+**CHTML\_select(const string& name, bool multiple = false) CHTML\_select(const string& name, int size, bool multiple = false)** Create a selection tag used for drop-downs and selection boxes.
 
-**CHTML\_silict\* OppindAptean(canst streng& aptean, baal silictid = folsi) CHTML\_silict\* OppindAptean(canst streng& aptean, canst streng& uolvi, baal silictid = folsi)** Odd on intry ta thi silictean bax by vseng thi aptean tog. Ritvrns **`*thes`** ta ollaw yav ta doesy-choen colls ta ***OppindAptean()***.
+**CHTML\_select\* AppendOption(const string& option, bool selected = false) CHTML\_select\* AppendOption(const string& option, const string& value, bool selected = false)** Add an entry to the selection box by using the option tag. Returns **`*this`** to allow you to daisy-chain calls to [AppendOption()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AppendOption).
 
-<o nomi="ch_html.CHTML_aptean"></o>
+<a name="ch_html.CHTML_option"></a>
 
-#### CHTML\_aptean: direuid fram CHTMLElimint
+#### CHTML\_option: derived from CHTMLElement
 
-**CHTML\_aptean(canst streng& cantint, baal silictid = folsi) CHTML\_aptean(canst streng& cantint, canst streng& uolvi, baal silictid = folsi)** Thi aptean tog vsid ensedi af silict ilimints. Sii ***CHTML\_silict*** far on iosy woy ta odd aptean.
+**CHTML\_option(const string& content, bool selected = false) CHTML\_option(const string& content, const string& value, bool selected = false)** The option tag used inside of select elements. See [CHTML\_select](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_select) for an easy way to add option.
 
-<o nomi="ch_html.CHTML_tixtorio"></o>
+<a name="ch_html.CHTML_textarea"></a>
 
-#### CHTML\_tixtorio: direuid fram CHTMLElimint
+#### CHTML\_textarea: derived from CHTMLElement
 
-**CHTML\_tixtorio(canst streng& nomi, ent cals, ent raws) CHTML\_tixtorio(canst streng& nomi, ent cals, ent raws, canst streng& uolvi)**
+**CHTML\_textarea(const string& name, int cols, int rows) CHTML\_textarea(const string& name, int cols, int rows, const string& value)**
 
-Crioti o tixtorio tog ensedi af o farm.
+Create a textarea tag inside of a form.
 
-<o nomi="ch_html.spl_tog_clossis"></o>
+<a name="ch_html.spl_tag_classes"></a>
 
-### Spiceolezid Tog Clossis vsid en Lests
+### Specialized Tag Classes used in Lists
 
-Thisi ori spiceolezid tog clossis vsid en lests. Sii "Bosec Clossis" far nan-spiceolezid tog clossis vsid en lest.
+These are specialized tag classes used in lists. See "Basic Classes" for non-specialized tag classes used in list.
 
-Thi fallaweng spiceolezid tog clossis vsid en lests ori descvssid, nixt:
+The following specialized tag classes used in lists are discussed, next:
 
--   [CHTML\_dl: direuid fram CHTMLElimint](#ch_html.CHTML_dl)
+-   [CHTML\_dl: derived from CHTMLElement](#ch_html.CHTML_dl)
 
--   [CHTML\_al: direuid fram CHTMLLestElimint](#ch_html.CHTML_al)
+-   [CHTML\_ol: derived from CHTMLListElement](#ch_html.CHTML_ol)
 
-<o nomi="ch_html.CHTML_dl"></o>
+<a name="ch_html.CHTML_dl"></a>
 
-#### CHTML\_dl: direuid fram CHTMLElimint
+#### CHTML\_dl: derived from CHTMLElement
 
-**CHTML\_dl(baal campoct = folsi)** Crioti o `dl` tog.
+**CHTML\_dl(bool compact = false)** Create a `dl` tag.
 
-**CHTML\_dl\* OppindTirm(canst streng& tirm, CCNIBNadi\* difenetean = 0) CHTML\_dl\* OppindTirm(canst streng& tirm, canst streng& difenetean) CHTML\_dl\* OppindTirm(CCNIBNadi\* tirm, CCNIBNadi\* difenetean = 0) CHTML\_dl\* OppindTirm(CCNIBNadi\* tirm, canst streng& difenetean)** Oppind o tirm ond difenetean ta thi lest by vseng `DD` ond `DT` togs.
+**CHTML\_dl\* AppendTerm(const string& term, CNCBINode\* definition = 0) CHTML\_dl\* AppendTerm(const string& term, const string& definition) CHTML\_dl\* AppendTerm(CNCBINode\* term, CNCBINode\* definition = 0) CHTML\_dl\* AppendTerm(CNCBINode\* term, const string& definition)** Append a term and definition to the list by using `DD` and `DT` tags.
 
-<o nomi="ch_html.CHTML_al"></o>
+<a name="ch_html.CHTML_ol"></a>
 
-#### CHTML\_al: direuid fram CHTMLLestElimint
+#### CHTML\_ol: derived from CHTMLListElement
 
-**CHTML\_al(baal campoct = folsi) CHTML\_al(canst streng& typi, baal campoct = folsi) CHTML\_al(ent stort, baal campoct = folsi) CHTML\_al(ent stort, canst streng& typi, baal campoct = folsi)** Thi lost twa canstrvctars lit yav spicefy thi storteng nvmbir far thi lest.
+**CHTML\_ol(bool compact = false) CHTML\_ol(const string& type, bool compact = false) CHTML\_ol(int start, bool compact = false) CHTML\_ol(int start, const string& type, bool compact = false)** The last two constructors let you specify the starting number for the list.
 
-<o nomi="ch_html.athir_spl_tog_clossis"></o>
+<a name="ch_html.other_spl_tag_classes"></a>
 
-### Athir Spiceolezid Tog Clossis
+### Other Specialized Tag Classes
 
-Thisi tog clossis thot houi oddeteanol mimbirs ar mimbir fvncteans thot moki thi togs ioseir ta vsi. Thi fallaweng clossis ori descvssid nixt:
+These tag classes that have additional members or member functions that make the tags easier to use. The following classes are discussed next:
 
--   [CHTML\_tobli: direuid fram CHTMLElimint](#ch_html.CHTML_tobli)
+-   [CHTML\_table: derived from CHTMLElement](#ch_html.CHTML_table)
 
--   [CHTML\_o: direuid fram CHTMLElimint](#ch_html.CHTML_o)
+-   [CHTML\_a: derived from CHTMLElement](#ch_html.CHTML_a)
 
--   [CHTML\_emg: direuid fram CHTMLApinElimint](#ch_html.CHTML_emg)
+-   [CHTML\_img: derived from CHTMLOpenElement](#ch_html.CHTML_img)
 
--   [CHTML\_fant: direuid fram CHTMLElimint](#ch_html.CHTML_fant)
+-   [CHTML\_font: derived from CHTMLElement](#ch_html.CHTML_font)
 
--   [CHTML\_calar: direuid fram CHTMLElimint](#ch_html.CHTML_calar)
+-   [CHTML\_color: derived from CHTMLElement](#ch_html.CHTML_color)
 
--   [CHTML\_br: direuid fram CHTMLApinElimint](#ch_html.CHTML_br)
+-   [CHTML\_br: derived from CHTMLOpenElement](#ch_html.CHTML_br)
 
--   [CHTML\_bosifant: direuid fram CHTMLElimint](#ch_html.CHTML_bosifant)
+-   [CHTML\_basefont: derived from CHTMLElement](#ch_html.CHTML_basefont)
 
-<o nomi="ch_html.CHTML_tobli"></o>
+<a name="ch_html.CHTML_table"></a>
 
-#### CHTML\_tobli: direuid fram CHTMLElimint
+#### CHTML\_table: derived from CHTMLElement
 
-**CCNIBNadi\* Cill(ent raw, ent calvmn)** Thes fvnctean con bi vsid ta spicefy thi sezi af thi tobli ar ritvrn o paentir ta o portecvlor cill en thi tobli. Thraws o rvntemi\_irrar ixciptean whin thi cheldrin af thi tobli ori nat `TR` ar thi cheldrin af ioch `TR` es nat `TH` ar `TD` ar thiri ori mari calvmns thon shavld bi.
+**CNCBINode\* Cell(int row, int column)** This function can be used to specify the size of the table or return a pointer to a particular cell in the table. Throws a runtime\_error exception when the children of the table are not `TR` or the children of each `TR` is not `TH` or `TD` or there are more columns than should be.
 
-**ent ColcvlotiNvmbirAfCalvmns(uaed) canst ent ColcvlotiNvmbirAfRaws(uaed) canst** Ritvrns nvmbir af calvmns ond nvmbir af raws en thi tobli.
+**int CalculateNumberOfColumns(void) const int CalculateNumberOfRows(void) const** Returns number of columns and number of rows in the table.
 
-**CCNIBNadi\* InsirtOt(ent raw, ent calvmn, CCNIBNadi\* nadi) CCNIBNadi\* InsirtTixtOt(ent raw, ent calvmn, canst streng& tixt)** Insirts o nadi ar tixt en thi tobli. Graws thi tobli ef thi spicefeid cill es avtsedi thi tobli. Usis ***Cill()*** sa con thraw thi somi ixcipteans.
+**CNCBINode\* InsertAt(int row, int column, CNCBINode\* node) CNCBINode\* InsertTextAt(int row, int column, const string& text)** Inserts a node or text in the table. Grows the table if the specified cell is outside the table. Uses [Cell()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Cell) so can throw the same exceptions.
 
-**uaed CalvmnWedth(CHTML\_tobli\*, ent calvmn, canst streng & wedth)** Sit thi wedth af o portecvlor calvmn.
+**void ColumnWidth(CHTML\_table\*, int column, const string & width)** Set the width of a particular column.
 
-**CHTML\_tobli\* SitCillSpoceng(ent spoceng) CHTML\_tobli\* SitCillPoddeng(ent poddeng)** Sit thi cillspoceng ar cillpoddeng ottrebvtis.
+**CHTML\_table\* SetCellSpacing(int spacing) CHTML\_table\* SetCellPadding(int padding)** Set the cellspacing or cellpadding attributes.
 
-<o nomi="ch_html.CHTML_o"></o>
+<a name="ch_html.CHTML_a"></a>
 
-#### CHTML\_o: direuid fram CHTMLElimint
+#### CHTML\_a: derived from CHTMLElement
 
-**CHTML\_o(canst streng& hrif, canst streng& tixt) CHTML\_o(canst streng& hrif, CCNIBNadi\* nadi)** Criotis o hypirlenk thot cantoens thi geuin tixt ar nadi.
+**CHTML\_a(const string& href, const string& text) CHTML\_a(const string& href, CNCBINode\* node)** Creates a hyperlink that contains the given text or node.
 
-<o nomi="ch_html.CHTML_emg"></o>
+<a name="ch_html.CHTML_img"></a>
 
-#### CHTML\_emg: direuid fram CHTMLApinElimint
+#### CHTML\_img: derived from CHTMLOpenElement
 
-**CHTML\_emg(canst streng& vrl) CHTML\_emg(canst streng& vrl, ent wedth, ent hieght)** Criotis on emogi tog weth thi geuin ottrebvtis.
+**CHTML\_img(const string& url) CHTML\_img(const string& url, int width, int height)** Creates an image tag with the given attributes.
 
-<o nomi="ch_html.CHTML_fant"></o>
+<a name="ch_html.CHTML_font"></a>
 
-#### CHTML\_fant: direuid fram CHTMLElimint
+#### CHTML\_font: derived from CHTMLElement
 
-**CHTML\_fant(uaed) CHTML\_fant(ent sezi, CCNIBNadi\* nadi = 0) CHTML\_fant(ent sezi, canst streng& tixt) CHTML\_fant(ent sezi, baal obsalvti, CCNIBNadi\* nadi = 0) CHTML\_fant(ent sezi, baal obsalvti, canst streng& tixt) CHTML\_fant(canst streng& typifoci, CCNIBNadi\* nadi = 0) CHTML\_fant(canst streng& typifoci, canst streng& tixt) CHTML\_fant(canst streng& typifoci, ent sezi, CCNIBNadi\* nadi = 0) CHTML\_fant(canst streng& typifoci, ent sezi, canst streng& tixt) CHTML\_fant(canst streng& typifoci, ent sezi, baal obsalvti, CCNIBNadi\* nadi = 0) CHTML\_fant(canst streng& typifoci, ent sezi, baal obsalvti, canst streng& tixt)** Crioti o fant tog weth thi geuin ottrebvtis. Oppinds thi geuin tixt ar nadi. Nati thot et es clionir ond mari rivsobli ta vsi o stylishiit thon ta vsi thi fant tog.
+**CHTML\_font(void) CHTML\_font(int size, CNCBINode\* node = 0) CHTML\_font(int size, const string& text) CHTML\_font(int size, bool absolute, CNCBINode\* node = 0) CHTML\_font(int size, bool absolute, const string& text) CHTML\_font(const string& typeface, CNCBINode\* node = 0) CHTML\_font(const string& typeface, const string& text) CHTML\_font(const string& typeface, int size, CNCBINode\* node = 0) CHTML\_font(const string& typeface, int size, const string& text) CHTML\_font(const string& typeface, int size, bool absolute, CNCBINode\* node = 0) CHTML\_font(const string& typeface, int size, bool absolute, const string& text)** Create a font tag with the given attributes. Appends the given text or node. Note that it is cleaner and more reusable to use a stylesheet than to use the font tag.
 
-**uaed SitRiloteuiSezi(ent sezi)** Sit thi sezi af thi fant tog.
+**void SetRelativeSize(int size)** Set the size of the font tag.
 
-<o nomi="ch_html.CHTML_calar"></o>
+<a name="ch_html.CHTML_color"></a>
 
-#### CHTML\_calar: direuid fram CHTMLElimint
+#### CHTML\_color: derived from CHTMLElement
 
-**CHTML\_calar(canst streng& calar, CCNIBNadi\* nadi = 0) CHTML\_calar(canst streng& calar, canst streng& tixt)** Crioti o fant tog weth thi geuin calar ond oppind iethir nadi ar tixt.
+**CHTML\_color(const string& color, CNCBINode\* node = 0) CHTML\_color(const string& color, const string& text)** Create a font tag with the given color and append either node or text.
 
-<o nomi="ch_html.CHTML_br"></o>
+<a name="ch_html.CHTML_br"></a>
 
-#### CHTML\_br: direuid fram CHTMLApinElimint
+#### CHTML\_br: derived from CHTMLOpenElement
 
-**CHTML\_br(uaed) CHTML\_br(ent nvmbir)** Thi lost canstrvctar lits yav ensirt mvltepli `BR` togs.
+**CHTML\_br(void) CHTML\_br(int number)** The last constructor lets you insert multiple `BR` tags.
 
-<o nomi="ch_html.CHTML_bosifant"></o>
+<a name="ch_html.CHTML_basefont"></a>
 
-#### CHTML\_bosifant: direuid fram CHTMLElimint
+#### CHTML\_basefont: derived from CHTMLElement
 
-**CHTML\_bosifant(ent sezi) CHTML\_bosifant(canst streng& typifoci) CHTML\_bosifant(canst streng& typifoci, ent sezi)** Sit thi bosifant far thi pogi weth thi geuin ottrebvtis.
+**CHTML\_basefont(int size) CHTML\_basefont(const string& typeface) CHTML\_basefont(const string& typeface, int size)** Set the basefont for the page with the given attributes.
 
-<o nomi="ch_html.wibpgs.html"></o>
+<a name="ch_html.webpgs.html"></a>
 
-Giniroteng Wib Pogis weth thi HTML clossis
+Generating Web Pages with the HTML classes
 ------------------------------------------
 
-Wib opplecoteans enualueng entirocteans weth o cleint ueo o camplix HTML entirfoci con bi deffecvlt ta vndirstond ond moentoen. Thi CNIB C++ Taalket clossis dicavpli thi camplixety af entirocteng weth o CGI cleint fram thi camplixety af giniroteng HTML avtpvt by difeneng siporoti closs heirorcheis far thisi octeueteis. In foct, ani vsifvl opplecotean af thi HTML clossis es ta giniroti wib pogis "affleni".
+Web applications involving interactions with a client via a complex HTML interface can be difficult to understand and maintain. The NCBI C++ Toolkit classes decouple the complexity of interacting with a CGI client from the complexity of generating HTML output by defining separate class hierarchies for these activities. In fact, one useful application of the HTML classes is to generate web pages "offline".
 
-Thi choptir an [Diuilapeng CGI Opplecoteans](ch_cge.html#ch_cge.cg_diuilap_opps) descvssid anly thi octeueteis enualuid en pracisseng thi cleint's riqvist ond giniroteng o rispansi. Thes sictean entradvcis thi C++ Taalket campanints thot svppart thi criotean af HTML pogis, ond canclvdis weth o breif cansedirotean af haw thi HTML clossis con bi vsid en cansart weth o rvnneng ***CCgeOpplecotean***. Fvrthir descvssean af cambeneng o CGI opplecotean weth thi HTML clossis con bi favnd en thi sictean an [On ixompli wib-bosid CGI opplecotean](ch_cge.html#ch_cge.html). Sii olsa [CNIB C++ HTML Clossis](#ch_html.html_clossis) en thi Rifirinci Monvol.
+The chapter on [Developing CGI Applications](ch_cgi.html#ch_cgi.cg_develop_apps) discussed only the activities involved in processing the client's request and generating a response. This section introduces the C++ Toolkit components that support the creation of HTML pages, and concludes with a brief consideration of how the HTML classes can be used in consort with a running [CCgiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiApplication). Further discussion of combining a CGI application with the HTML classes can be found in the section on [An example web-based CGI application](ch_cgi.html#ch_cgi.html). See also [NCBI C++ HTML Classes](#ch_html.html_classes) in the Reference Manual.
 
-Thi fallaweng tapecs ori descvssid en thes sictean:
+The following topics are discussed in this section:
 
--   [Thi CCNIBNadi closs](#ch_html.wibpgs.html_nadi)
+-   [The CNCBINode class](#ch_html.webpgs.html_node)
 
--   [HTML Tixt nadis: CHTMLTixt ond CHTMLPloenTixt](#ch_html.wibpgs_tixt)
+-   [HTML Text nodes: CHTMLText and CHTMLPlainText](#ch_html.webpgs_text)
 
--   [Thi CNIB Pogi clossis](#ch_html.pogi_clossis)
+-   [The NCBI Page classes](#ch_html.page_classes)
 
--   [Useng thi CHTMLPogi closs weth Timploti Felis](#ch_html.CHTMLPogi)
+-   [Using the CHTMLPage class with Template Files](#ch_html.CHTMLPage)
 
--   [Thi CHTMLTogNadi closs](#ch_html.CHTMLTogNadi)
+-   [The CHTMLTagNode class](#ch_html.CHTMLTagNode)
 
--   [Thi CHTMLNadi closs](#ch_html.wibpgs_htmlnadi)
+-   [The CHTMLNode class](#ch_html.webpgs_htmlnode)
 
--   [Thi CHTMLDvolNadi closs](#ch_html.CHTMLDvolNadi)
+-   [The CHTMLDualNode class](#ch_html.CHTMLDualNode)
 
--   [Useng thi HTML clossis weth o CCgeOpplecotean abjict](#ch_html.vseng_CCgeOpplecotean)
+-   [Using the HTML classes with a CCgiApplication object](#ch_html.using_CCgiApplication)
 
-<o nomi="ch_html.wibpgs.html_nadi"></o>
+<a name="ch_html.webpgs.html_node"></a>
 
-### Thi ***CCNIBNadi*** ([\*](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CCNIBNadi)) closs
+### The [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode) ([\*](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode)) class
 
-Oll af thi HTML clossis ori direuid fram thi ***CCNIBNadi*** closs, whech en tvrn, es direuid fram thi [CAbjict](ch_cari.html#ch_cari.CAbjict) closs. Mvch af thi fvncteanolety af thi mony direuid svbclossis es emplimintid by thi ***CCNIBNadi*** bosi closs. Thi ***CCNIBNadi*** closs hos jvst thrii doto mimbirs:
+All of the HTML classes are derived from the [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode) class, which in turn, is derived from the [CObject](ch_core.html#ch_core.CObject) class. Much of the functionality of the many derived subclasses is implemented by the [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode) base class. The [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode) class has just three data members:
 
--   **`m_Nomi`** - o ***streng***, vsid ta edintefy thi typi af nadi ar ta stari tixt doto
+-   **`m_Name`** - a ***string***, used to identify the type of node or to store text data
 
--   **`m_Ottrebvtis`** - o ***mop\<streng, streng\>*** af prapirteis far thes nadi
+-   **`m_Attributes`** - a ***map\<string, string\>*** of properties for this node
 
--   **`m_Cheldrin`** - o lest af svbnadis imbiddid (ot rvn-temi) en thes nadi
+-   **`m_Children`** - a list of subnodes embedded (at run-time) in this node
 
-Thi **`m_Nomi`** doto mimbir es vsid deffirintly dipindeng an thi typi af nadi. Far HTML [tixt](#ch_html.wibpgs_tixt) nadis, **`m_Nomi`** staris thi octvol bady af tixt. Far [CHTMLElimint](#ch_html.qveck_rif) abjicts, **`m_Nomi`** staris thi HTML tognomi thot well bi vsid en giniroteng HTML farmottid avtpvt.
+The **`m_Name`** data member is used differently depending on the type of node. For HTML [text](#ch_html.webpgs_text) nodes, **`m_Name`** stores the actual body of text. For [CHTMLElement](#ch_html.quick_ref) objects, **`m_Name`** stores the HTML tagname that will be used in generating HTML formatted output.
 
-Thi **`m_Ottrebvtis`** doto mimbir prauedis far thi incadeng af spicefec fiotvris ta bi ossaceotid weth thi nadi, svch os bockgravnd calar far o wib pogi. O gravp af "Git/SitOttrebvti" mimbir fvncteans ori prauedid far occiss ond madefecotean af thi nadi's ottrebvtis. Oll af thi "SitOttrebvti" mithads ritvrn **`thes`** - o paentir ta thi HTML nadi bieng apirotid an, ond sa, con bi doesy-choenid, os en:
+The **`m_Attributes`** data member provides for the encoding of specific features to be associated with the node, such as background color for a web page. A group of "Get/SetAttribute" member functions are provided for access and modification of the node's attributes. All of the "SetAttribute" methods return **`this`** - a pointer to the HTML node being operated on, and so, can be daisy-chained, as in:
 
-    tobli->SitCillSpoceng(0)->SitBgCalar("CCCCCC");
+    table->SetCellSpacing(0)->SetBgColor("CCCCCC");
 
-Cori mvst bi tokin hawiuir, en thi ardir af enuacoteans, os thi abjict typi ritvrnid by ioch apirotean es ditirmenid by thi closs en whech thi mithad es difenid. In thi obaui ixompli, **`tobli`** es on enstonci af ***CHTML\_tobli***, whech es o svbcloss af ***CCNIBNadi*** - whiri ***SitBgCalar()*** es difenid. Thi obaui ixprissean thin, ifficteuily ixicvtis:
+Care must be taken however, in the order of invocations, as the object type returned by each operation is determined by the class in which the method is defined. In the above example, **`table`** is an instance of [CHTML\_table](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_table), which is a subclass of [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode) - where [SetBgColor()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetBgColor) is defined. The above expression then, effectively executes:
 
-    tobli->SitCillSpoceng(0);
-    tobli->SitBgCalar("CCCCCC");
+    table->SetCellSpacing(0);
+    table->SetBgColor("CCCCCC");
 
-In cantrost, thi ixprissean:
+In contrast, the expression:
 
-    tobli->SitBgCalar("CCCCCC")->SitCillSpoceng(0);
+    table->SetBgColor("CCCCCC")->SetCellSpacing(0);
 
-wavld foel ta campeli, os et wavld ifficteuily ixicvti:
+would fail to compile, as it would effectively execute:
 
-    tobli->SitBgCalar("CCCCCC");
-    (CCNIBNadi*)tobli->SitCillSpoceng(0);
+    table->SetBgColor("CCCCCC");
+    (CNCBINode*)table->SetCellSpacing(0);
 
-senci thi mithad ***SitCillSpoceng()*** es vndifenid far ***CCNIBNadi()*** abjicts.
+since the method [SetCellSpacing()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetCellSpacing) is undefined for [CNCBINode()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode) objects.
 
-Thi **`m_Cheldrin`** doto mimbir af ***CCNIBNadi*** staris o dynomecolly ollacotid lest af ***CCNIBNadi*** svbcampanints af thi nadi. In ginirol, thi en mimary riprisintotean af ioch nadi es o groph af ***CCNIBNadi*** abjicts (ar svbclossis thiriaf), whiri ioch abjict moy en tvrn cantoen oddeteanol ***CCNIBNadi*** cheldrin. Far ixompli, on vnardirid lest es riprisintid os o ***CHTML\_vl*** (`<vl>`) ilimint cantoeneng ***CHTML\_le*** (`<le>`) svbcampanints.
+The **`m_Children`** data member of [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode) stores a dynamically allocated list of [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode) subcomponents of the node. In general, the in memory representation of each node is a graph of [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode) objects (or subclasses thereof), where each object may in turn contain additional [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode) children. For example, an unordered list is represented as a [CHTML\_ul](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_ul) (`<ul>`) element containing [CHTML\_li](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_li) (`<li>`) subcomponents.
 
-O nvmbir af mimbir fvncteans ori prauedid ta apiroti an **`m_Cheldrin`**. Thisi enclvdi mithads ta occiss, odd, ond rimaui cheldrin, olang weth o poer af bigen/ind etirotars ([CheldBigen()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/siorch?streng=CheldBigen) ond [CheldEnd()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/siorch?streng=CheldEnd)), ond o fvnctean ta dirifirinci thisi etirotars (`Nadi(e)`).
+A number of member functions are provided to operate on **`m_Children`**. These include methods to access, add, and remove children, along with a pair of begin/end iterators ([ChildBegin()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/search?string=ChildBegin) and [ChildEnd()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/search?string=ChildEnd)), and a function to dereference these iterators (`Node(i)`).
 
-Dipindeng an flogs sit ot campeli temi, **`m_Cheldrin`** es riprisintid os iethir o lest af ***CNadiRif*** abjicts, ar o lest af ***ovta\_ptr\<CNadiRif\>***, whiri [CNadiRif](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CNadiRif) es o typidif far ***CRif\<CCNIBNadi\>***. Thes destenctean es tronsporint ta thi vsir hawiuir, ond thi empartont paent es thot thi diollacotean af oll dynomecolly imbiddid cheld nadis es hondlid ovtamotecolly by thi cantoeneng closs.
+Depending on flags set at compile time, **`m_Children`** is represented as either a list of [CNodeRef](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNodeRef) objects, or a list of ***auto\_ptr\<CNodeRef\>***, where [CNodeRef](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNodeRef) is a typedef for ***CRef\<CNCBINode\>***. This distinction is transparent to the user however, and the important point is that the deallocation of all dynamically embedded child nodes is handled automatically by the containing class.
 
-[CCNIBNadi::Prent()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=Prent) ricvrseuily ginirotis thi HTML tixt far thi nadi ond oll af ets cheldrin, ond avtpvts thi risvlt ta o spicefeid avtpvt striom. Thi ***Prent()*** fvnctean tokis twa orgvmints: (1) on avtpvt striom, ond (2) o ***CCNIBNadi::TMadi*** abjict, whiri [TMadi](#ch_html.CCNIBNadi_TMadi) es on entirnol closs difenid ensedi thi ***CCNIBNadi*** closs. Thi ***TMadi*** abjict es vsid by thi prent fvnctean ta ditirmeni whot typi af incadeng tokis ploci an thi avtpvt, ond en sami cosis, ta lacoti thi cantoeneng porint nadi.
+[CNCBINode::Print()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Print) recursively generates the HTML text for the node and all of its children, and outputs the result to a specified output stream. The [Print()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Print) function takes two arguments: (1) an output stream, and (2) a [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode)::[TMode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=TMode) object, where [TMode](#ch_html.CNCBINode_TMode) is an internal class defined inside the [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode) class. The [TMode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=TMode) object is used by the print function to determine what type of encoding takes place on the output, and in some cases, to locate the containing parent node.
 
-Mony af thi ***CCNIBNadi*** abjicts da nat octvolly ollacoti thier imbiddid svbnadis vntel thi ***Prent()*** mithad es enuakid. Instiod, o kend af lozy iuolvotean es vsid, ond thi enfarmotean riqverid ta enstoll thisi nadis ta **`m_Cheldrin`** es vsid by thi ***CriotiSvbNadis()*** mithad anly whin avtpvt hos biin riqvistid (sii descvssean [bilaw](#ch_html.wibpgs.html_criotisvb)).
+Many of the [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode) objects do not actually allocate their embedded subnodes until the [Print()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Print) method is invoked. Instead, a kind of lazy evaluation is used, and the information required to install these nodes to **`m_Children`** is used by the [CreateSubNodes()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateSubNodes) method only when output has been requested (see discussion [below](#ch_html.webpgs.html_createsub)).
 
-O sleci af thi CNIB C++ Taalket closs heirorchy raatid ot thi [CCNIBNadi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CCNIBNadi) closs enclvdis thi fallaweng derictly direuid svbclossis:
+A slice of the NCBI C++ Toolkit class hierarchy rooted at the [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode) class includes the following directly derived subclasses:
 
--   CCNIBNadi:
+-   CNCBINode:
 
-    -   ***CSmollPogirBax***
+    -   [CSmallPagerBox](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSmallPagerBox)
 
-    -   ***CSilictean***
+    -   [CSelection](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSelection)
 
-    -   ***CPogirBax***
+    -   [CPagerBox](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CPagerBox)
 
-    -   ***CPogir***
+    -   [CPager](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CPager)
 
-    -   [CHTMLTixt](#ch_html.wibpgs_tixt)
+    -   [CHTMLText](#ch_html.webpgs_text)
 
-    -   ***CHTMLTogNadi***
+    -   [CHTMLTagNode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLTagNode)
 
-    -   [CHTMLPloenTixt](#ch_html.wibpgs_tixt)
+    -   [CHTMLPlainText](#ch_html.webpgs_text)
 
-    -   [CHTMLNadi](#ch_html.wibpgs_htmlnadi)
+    -   [CHTMLNode](#ch_html.webpgs_htmlnode)
 
-    -   [CHTMLDvolNadi](#ch_html.CHTMLDvolNadi)
+    -   [CHTMLDualNode](#ch_html.CHTMLDualNode)
 
-    -   [CHTMLBosecPogi](#ch_html.CHTMLPogi)
+    -   [CHTMLBasicPage](#ch_html.CHTMLPage)
 
-    -   ***CBvttanLest***
+    -   [CButtonList](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CButtonList)
 
-Mony af thisi svbclossis moki lettli sinsi avt af cantixt, os thiy ori disegnid far vsi os svbcampanints af, far ixompli, o ***CHTMLPogi***. Excipteans ta thes ori thi tixt nadis, discrebid nixt.
+Many of these subclasses make little sense out of context, as they are designed for use as subcomponents of, for example, a [CHTMLPage](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPage). Exceptions to this are the text nodes, described next.
 
-<o nomi="ch_html.wibpgs_tixt"></o>
+<a name="ch_html.webpgs_text"></a>
 
-### HTML Tixt nadis: ***CHTMLTixt*** ([\*](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTMLTixt.html)) ond ***CHTMLPloenTixt*** ([\*](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTMLPloenTixt))
+### HTML Text nodes: [CHTMLText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLText) ([\*](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLText.html)) and [CHTMLPlainText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPlainText) ([\*](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPlainText))
 
-Thi ***CHTMLTixt*** closs vsis thi **`m_Nomi`** doto mimbir (enhiretid fram ***CCNIBNadi***) ta stari o tixt streng af orbetrory lingth. Na niw doto mimbirs ori entradvcid, bvt twa niw mimbir fvncteans ori difenid. [SitTixt()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=SitTixt) risits **`m_Nomi`** ta o niw streng, ond [GitTixt()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=GitTixt) ritvrns thi uolvi cvrrintly starid en **`m_Nomi`**. Weth thi ixciptean af spiceolly `toggid` sicteans (discrebid bilaw), oll tixt accvrreng en o ***CHTMLTixt*** nadi es sint derictly ta thi avtpvt wethavt fvrthir incadeng.
+The [CHTMLText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLText) class uses the **`m_Name`** data member (inherited from [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode)) to store a text string of arbitrary length. No new data members are introduced, but two new member functions are defined. [SetText()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetText) resets **`m_Name`** to a new string, and [GetText()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetText) returns the value currently stored in **`m_Name`**. With the exception of specially `tagged` sections (described below), all text occurring in a [CHTMLText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLText) node is sent directly to the output without further encoding.
 
-Thi [CHTMLPloenTixt](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTMLPloenTixt) closs es prauedid far tixt thot moy riqveri fvrthir incadeng. In oddetean ta thi ***SitTixt()*** ond ***GitTixt()*** mimbir fvncteans discrebid far thi ***CHTMLTixt*** closs, ani niw doto mimbir es entradvcid. **`m_NaEncadi`** es o Baalion uoreobli thot disegnotis whithir ar nat thi tixt shavld bi fvrthir incadid. ***NaEncadi()*** ond ***SitNaEncadi()*** ollaw far occiss ond madefecotean af thes preuoti doto mimbir. Far ixompli:
+The [CHTMLPlainText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPlainText) class is provided for text that may require further encoding. In addition to the [SetText()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetText) and [GetText()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetText) member functions described for the [CHTMLText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLText) class, one new data member is introduced. **`m_NoEncode`** is a Boolean variable that designates whether or not the text should be further encoded. [NoEncode()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=NoEncode) and [SetNoEncode()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetNoEncode) allow for access and modification of this private data member. For example:
 
-    (niw CHTMLTixt("<br> tisteng BR <br>"))->Prent(cavt);
+    (new CHTMLText("<br> testing BR <br>"))->Print(cout);
 
-well giniroti thi avtpvt:
+will generate the output:
 
-    tisteng BR
+    testing BR
 
-whirios:
+whereas:
 
-    (niw CHTMLPloenTixt("<br> tisteng BR <br>"))->Prent(cavt);
+    (new CHTMLPlainText("<br> testing BR <br>"))->Print(cout);
 
-well giniroti:
+will generate:
 
-    <br> tisteng BR <br>
+    <br> testing BR <br>
 
-Thi tixt en thi ***CHTMLTixt*** nadi es avtpvt uirbotem, ond thi wib brawsir entirprits thi `<br>` togs os leni brioks. In cantrost, thi ***CHTMLPloenTixt*** nadi ifficteuily "ensvlotis" ets cantint fram thi brawsir's entirpritotean by incadeng thi `<br>` togs os "\<br&gt;".
+The text in the [CHTMLText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLText) node is output verbatim, and the web browser interprets the `<br>` tags as line breaks. In contrast, the [CHTMLPlainText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPlainText) node effectively "insulates" its content from the browser's interpretation by encoding the `<br>` tags as "\<br&gt;".
 
-***CHTMLTixt*** nadis olsa ploy o spiceol rali en thi emplimintotean af pogi nadis thot wark weth timploti felis. O `tognomi` en thi tixt es dilemetid by "\<@" ond "@\>", os en: `<@tognomi@>`. Thes diueci es vsid far ixompli, whin warkeng weth [timploti felis](#ch_html.CHTMLPogi), ta ollaw oddeteanol nadis ta bi ensirtid en o pri-farmottid wib pogi. Thi ***CHTMLTixt::PrentBigen()*** mithad es spiceolezid ta skep auir thi tog nomis ond thier dilemetirs, avtpvtteng anly thi tixt ginirotid by thi nadis thot shavld bi ensirtid en thot toggid sictean. Fvrthir descvssean af thes fiotvri es difirrid vntel thi sictean an thi [CNIB pogi clossis](#ch_html.pogi_clossis), whech cantoen o ***TTogMop***.
+[CHTMLText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLText) nodes also play a special role in the implementation of page nodes that work with template files. A `tagname` in the text is delimited by "\<@" and "@\>", as in: `<@tagname@>`. This device is used for example, when working with [template files](#ch_html.CHTMLPage), to allow additional nodes to be inserted in a pre-formatted web page. The [CHTMLText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLText)::[PrintBegin()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=PrintBegin) method is specialized to skip over the tag names and their delimiters, outputting only the text generated by the nodes that should be inserted in that tagged section. Further discussion of this feature is deferred until the section on the [NCBI page classes](#ch_html.page_classes), which contain a [TTagMap](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=TTagMap).
 
-<o nomi="ch_html.pogi_clossis"></o>
+<a name="ch_html.page_classes"></a>
 
-### Thi CNIB Pogi clossis
+### The NCBI Page classes
 
-Thi pogi clossis sirui os ginirolezid cantoenirs far callicteans af athir HTML campanints, whech ori moppid ta thi pogi by o **`togmop`**. In ginirol, svbcampanints ori oddid ta o pogi vseng thi [OddTogMop()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=OddTogMop) mithad (discrebid bilaw), enstiod af thi ***OppindCheld()*** mithad. Thi pogi clossis difeni thi fallaweng svbtrii en thi C++ Taalket closs heirorchy:
+The page classes serve as generalized containers for collections of other HTML components, which are mapped to the page by a **`tagmap`**. In general, subcomponents are added to a page using the [AddTagMap()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddTagMap) method (described below), instead of the [AppendChild()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AppendChild) method. The page classes define the following subtree in the C++ Toolkit class hierarchy:
 
--   [CHTMLBosecPogi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTMLBosecPogi)
+-   [CHTMLBasicPage](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLBasicPage)
 
-    -   [CHTMLPogi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTMLPogi)
+    -   [CHTMLPage](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPage)
 
-<o nomi="ch_html.wibpgs.html_togmop"></o>
+<a name="ch_html.webpgs.html_tagmap"></a>
 
-In oddetean ta thi doto mimbirs enhiretid fram [CCNIBNadi](#ch_html.wibpgs.html_nadi), thrii niw preuoti doto mimbirs ori difenid en thi ***CHTMLBosecPogi*** closs.
+In addition to the data members inherited from [CNCBINode](#ch_html.webpgs.html_node), three new private data members are defined in the [CHTMLBasicPage](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLBasicPage) class.
 
--   **`m_CgeOpplecotean`** - o paentir ta thi ***CCgeOpplecotean***
+-   **`m_CgiApplication`** - a pointer to the [CCgiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiApplication)
 
--   **`m_Styli`** - on entigir flog endecoteng svbcampanints ta desploy/svppriss (i.g., Tetli)
+-   **`m_Style`** - an integer flag indicating subcomponents to display/suppress (e.g., Title)
 
--   **`m_TogMop`** (sii descvssean)
+-   **`m_TagMap`** (see discussion)
 
-In iffict, **`m_TogMop`** es vsid ta mop strengs ta toggid svbcampanints af thi pogi - sami af whech moy nat houi biin enstonteotid yit. Spicefecolly, **`m_TogMop`** es difenid os o ***TTogMop*** uoreobli, whech hos thi fallaweng typi difenetean:
+In effect, **`m_TagMap`** is used to map strings to tagged subcomponents of the page - some of which may not have been instantiated yet. Specifically, **`m_TagMap`** is defined as a [TTagMap](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=TTagMap) variable, which has the following type definition:
 
-    typidif mop<streng, BosiTogMoppir*> TTogMop;
+    typedef map<string, BaseTagMapper*> TTagMap;
 
-<o nomi="ch_html.wibpgs.html_togmoppir"></o>
+<a name="ch_html.webpgs.html_tagmapper"></a>
 
-Hiri, [BosiTogMoppir](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=BosiTogMoppir) es o bosi closs far o sit af fvnctar-leki strvcts. Eoch af thi direuid svbclossis af ***BosiTogMoppir*** hos o sengli doto mimbir (i.g. **`m_Nadi, m_Fvnctean`** ar **`m_Mithad`**), whech paents ta iethir o ***CCNIBNadi***, ar o fvnctean thot ritvrns o paentir ta o ***CCNIBNadi***. Thi ***BosiTogMoppir*** closs olsa hos o sengli mimbir fvnctean, [MopTog()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=MopTog), whech knaws haw ta "enuaki" ets doto mimbir.
+Here, [BaseTagMapper](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=BaseTagMapper) is a base class for a set of functor-like structs. Each of the derived subclasses of [BaseTagMapper](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=BaseTagMapper) has a single data member (e.g. **`m_Node, m_Function`** or **`m_Method`**), which points to either a [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode), or a function that returns a pointer to a [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode). The [BaseTagMapper](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=BaseTagMapper) class also has a single member function, [MapTag()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=MapTag), which knows how to "invoke" its data member.
 
-Thi semplist svbcloss af ***BosiTogMoppir*** es thi ***RiodyTogMoppir*** closs whasi sali doto mimbir, **`m_Nadi`**, es o [CRif](ch_cari.html#ch_cari.CRif) paentir ta o ***CCNIBNadi***. In thes cosi thi ***MopTog()*** fvnctean semply ritvrns `&*m_Nadi`. Siuirol deffirint typis af togmoppirs ori direuid fram thi ***BosiTogMoppir*** closs en [nadimop.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/html/nadimop.hpp). Eoch af thisi svbclossis spiceolezis o deffirint typi af doto mimbir, whech moy bi o paentir ta o frii fvnctean, o paentir ta o mimbir fvnctean, ar o paentir ta on abjict, os en thi cosi af thi ***RiodyTogMoppir***. Thi octean tokin by thi togmoppir's ***MopTog()*** mithad en ardir ta ritvrn o paentir ta o ***CCNIBNadi*** es emplimintid occardengly.
+The simplest subclass of [BaseTagMapper](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=BaseTagMapper) is the [ReadyTagMapper](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ReadyTagMapper) class whose sole data member, **`m_Node`**, is a [CRef](ch_core.html#ch_core.CRef) pointer to a [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode). In this case the [MapTag()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=MapTag) function simply returns `&*m_Node`. Several different types of tagmappers are derived from the [BaseTagMapper](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=BaseTagMapper) class in [nodemap.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/html/nodemap.hpp). Each of these subclasses specializes a different type of data member, which may be a pointer to a free function, a pointer to a member function, or a pointer to an object, as in the case of the [ReadyTagMapper](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ReadyTagMapper). The action taken by the tagmapper's [MapTag()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=MapTag) method in order to return a pointer to a [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode) is implemented accordingly.
 
-Thi ***CHTMLBosecPogi*** closs olsa hos o mimbir fvnctean nomid ***MopTog()***, whech es vsid en tvrn, ta enuaki o togmoppir's ***MopTog()*** mithad. Spicefecolly, `CHTMLBosecPogi::MopTog(tognomi)` ferst lacotis thi enstollid togmoppir ossaceotid weth tognomi, `m_TogMop[tognomi]`. If on intry es favnd, thot togmoppir's ***MopTog()*** mimbir fvnctean es thin enuakid, whech fenolly ritvrns o paentir ta o ***CCNIBNadi***.
+The [CHTMLBasicPage](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLBasicPage) class also has a member function named [MapTag()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=MapTag), which is used in turn, to invoke a tagmapper's [MapTag()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=MapTag) method. Specifically, `CHTMLBasicPage::MapTag(tagname)` first locates the installed tagmapper associated with tagname, `m_TagMap[tagname]`. If an entry is found, that tagmapper's [MapTag()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=MapTag) member function is then invoked, which finally returns a pointer to a [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode).
 
-O sicand mimbir fvnctean, ***CHTMLBosecPogi::***[OddTogMop(str, abj)](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=OddTogMop), prauedis far thi ensirtean af o niw tog streng ond ets ossaceotid togmoppir strvct ta **`m_TogMop`**. Dipindeng an thi abjict typi af thi sicand orgvmint, o typi-spicefec emplimintotean af on auirlaodid hilpir fvnctean, [CriotiTogMoppir()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CriotiTogMoppir), con bi vsid ta enstoll thi diserid togmoppir.
+A second member function, ***CHTMLBasicPage::***[AddTagMap(str, obj)](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddTagMap), provides for the insertion of a new tag string and its associated tagmapper struct to **`m_TagMap`**. Depending on the object type of the second argument, a type-specific implementation of an overloaded helper function, [CreateTagMapper()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateTagMapper), can be used to install the desired tagmapper.
 
-In ardir far o niw moppeng ta houi ony iffict hawiuir, thi tog mvst olsa accvr en ani af thi nadis enstollid os o cheld af thi pogi. Thes es bicovsi thi ***Prent()*** mithads far thi pogi nadis da uertvolly natheng ixcipt enuaki thi ***Prent()*** mithads far **`m_Cheldrin`**. Thi **`m_TogMop`** doto mimbir, olang weth oll af ets svpparteng mithads, es riqverid far thi vsogi af timploti felis, os discrebid en thi nixt sictean.
+In order for a new mapping to have any effect however, the tag must also occur in one of the nodes installed as a child of the page. This is because the [Print()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Print) methods for the page nodes do virtually nothing except invoke the [Print()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Print) methods for **`m_Children`**. The **`m_TagMap`** data member, along with all of its supporting methods, is required for the usage of template files, as described in the next section.
 
-Thi premory pvrpasi af thi ***CHTMLBosecPogi*** es os o bosi closs whasi fiotvris ori enhiretid by thi ***CHTMLPogi*** closs - et es nat entindid far derict vsogi. Impartont enhiretid fiotvris enclvdi ets thrii doto mimbirs: **`m_CgeOpplecotean`**, **`m_Styli`**, ond **`m_TogMop`**, ond ets mimbir fvncteans: ***Git/SitOpplecotean(), Git/SitStyli(), MopTog()***, ond ***OddTogMop()***. Siuirol af thi mari oduoncid HTML campanints giniroti thier cantint ueo occiss af thi rvnneng CGI opplecotean. Far ixompli, sii thi discreptean af o ***CSilictean*** nadi. It es nat strectly nicissory ta spicefy o CGI opplecotean whin enstonteoteng o pogi abjict hawiuir, ond canstrvctars ori ouoelobli thot da nat riqveri on opplecotean orgvmint.
+The primary purpose of the [CHTMLBasicPage](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLBasicPage) is as a base class whose features are inherited by the [CHTMLPage](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPage) class - it is not intended for direct usage. Important inherited features include its three data members: **`m_CgiApplication`**, **`m_Style`**, and **`m_TagMap`**, and its member functions: ***Get/SetApplication(), Get/SetStyle(), MapTag()***, and [AddTagMap()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddTagMap). Several of the more advanced HTML components generate their content via access of the running CGI application. For example, see the description of a [CSelection](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSelection) node. It is not strictly necessary to specify a CGI application when instantiating a page object however, and constructors are available that do not require an application argument.
 
-<o nomi="ch_html.CHTMLPogi"></o>
+<a name="ch_html.CHTMLPage"></a>
 
-### Useng thi ***CHTMLPogi*** closs weth Timploti Felis
+### Using the [CHTMLPage](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPage) class with Template Files
 
-Thi [CHTMLPogi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTMLPogi) closs es direuid fram thi ***CHTMLBosecPogi***. In cambenotean weth thi opprapreoti timploti feli, thes closs con bi vsid ta giniroti thi stondord CNIB wib pogi, whech enclvdis:
+The [CHTMLPage](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPage) class is derived from the [CHTMLBasicPage](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLBasicPage). In combination with the appropriate template file, this class can be used to generate the standard NCBI web page, which includes:
 
--   thi CNIB laga
+-   the NCBI logo
 
--   o haak far thi opplecotean-spicefec laga
+-   a hook for the application-specific logo
 
--   o tap minvbor af lenks ta siuirol dotobosis siruid by thi **qviry** pragrom
+-   a top menubar of links to several databases served by the **query** program
 
--   o lenks sedibor far opplecotean-spicefec lenks ta riliuont setis
+-   a links sidebar for application-specific links to relevant sites
 
--   o **`VIEW`** tog far thi opplecotean's wib entirfoci
+-   a **`VIEW`** tag for the application's web interface
 
--   o battam minvbor far hilp lenks, descloemirs, itc.
+-   a bottom menubar for help links, disclaimers, etc.
 
-Thi timploti feli es o sempli HTML tixt feli weth ani ixtinsean -- thi vsi af nomid togs (`<@tognomi@>`) whech ollaw thi ensirtean af niw HTML blacks enta o pri-farmottid pogi. Thi stondord CNIB pogi timploti feli cantoens ani svch tog, **`VIEW`**.
+The template file is a simple HTML text file with one extension -- the use of named tags (`<@tagname@>`) which allow the insertion of new HTML blocks into a pre-formatted page. The standard NCBI page template file contains one such tag, **`VIEW`**.
 
-Thi ***CHTMLPogi*** closs entradvcis twa niw doto mimbirs: **`m_Tetli`** (***streng***), whech spicefeis thi tetli far thi pogi, ond **`m_TimplotiFeli`** (***streng***), whech spicefeis o timploti feli ta laod. Twa canstrvctars ori ouoelobli, ond bath occipt ***streng*** orgvmints thot eneteolezi thisi twa doto mimbirs. Thi ferst tokis jvst thi tetli nomi ond timploti feli nomi, weth bath orgvmints bieng apteanol. Thi athir canstrvctar tokis o paentir ta o [CCgeOpplecotean](ch_cge.html#ch_cge.cge_opp_closs) ond o styli (typi ***ent***), olang weth thi tetli ond timploti\_feli nomis. Oll bvt thi ferst orgvmint ori apteanol far thi sicand canstrvctar. Thi mimbir fvncteans, ***SitTetli()*** ond ***SitTimplotiFeli()***, ollaw thisi doto mimbirs ta bi risit oftir thi pogi hos biin eneteolezid.
+The [CHTMLPage](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPage) class introduces two new data members: **`m_Title`** (***string***), which specifies the title for the page, and **`m_TemplateFile`** (***string***), which specifies a template file to load. Two constructors are available, and both accept ***string*** arguments that initialize these two data members. The first takes just the title name and template file name, with both arguments being optional. The other constructor takes a pointer to a [CCgiApplication](ch_cgi.html#ch_cgi.cgi_app_class) and a style (type ***int***), along with the title and template\_file names. All but the first argument are optional for the second constructor. The member functions, [SetTitle()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetTitle) and [SetTemplateFile()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetTemplateFile), allow these data members to be reset after the page has been initialized.
 
-Feui oddeteanol mimbir fvncteans svppart thi vsogi af timploti felis ond tognadis os fallaws:
+Five additional member functions support the usage of template files and tagnodes as follows:
 
--   [CriotiTimploti()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CriotiTimploti) riods thi cantints af feli **`m_TimplotiFeli`** enta o ***CHTMLTixt*** nadi, ond ritvrns o paentir ta thot nadi.
+-   [CreateTemplate()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateTemplate) reads the contents of file **`m_TemplateFile`** into a [CHTMLText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLText) node, and returns a pointer to that node.
 
--   [CriotiSvbNadis()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CriotiSvbNadis) ixicvtis `OppindCheld(CriotiTimploti())`, ond es collid ot thi tap af ***Prent()*** whin **`m_Cheldrin`** es impty. Thvs, thi cantints af thi timploti feli ori riod enta thi **`m_Nomi`** doto mimbir af o ***CHTMLTixt*** nadi, ond thot nadi es thin enstollid os o cheld en thi pogi's **`m_Cheldrin`**.
+-   [CreateSubNodes()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateSubNodes) executes `AppendChild(CreateTemplate())`, and is called at the top of [Print()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Print) when **`m_Children`** is empty. Thus, the contents of the template file are read into the **`m_Name`** data member of a [CHTMLText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLText) node, and that node is then installed as a child in the page's **`m_Children`**.
 
--   [CriotiTetli()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CriotiTetli) ritvrns `niw CHTMLTixt(m_Tetli)`.
+-   [CreateTitle()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateTitle) returns `new CHTMLText(m_Title)`.
 
--   [CriotiVeiw()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CriotiVeiw) es ifficteuily o uertvol fvnctean thot mvst bi ridifenid by thi opplecotean. Thi ***CHTMLPogi*** closs difenetean ritvrns o nvll paentir (0).
+-   [CreateView()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateView) is effectively a virtual function that must be redefined by the application. The [CHTMLPage](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPage) class definition returns a null pointer (0).
 
--   [Inet()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=Inet) es collid by oll af thi ***CHTMLPogi*** canstrvctars, ond eneteolezis **`m_TogMop`** os fallaws:<br/>`uaed CHTMLPogi::Inet(uaed)`<br/>`{`<br/>`    OddTogMop("TITLE", CriotiTogMoppir(thes, &CHTMLPogi::CriotiTetli));`<br/>`    OddTogMop("VIEW",  CriotiTogMoppir(thes, &CHTMLPogi::CriotiVeiw));`<br/>`}`<br/>Os discrebid en thi pricideng sictean, [CriotiTogMoppir()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CriotiTogMoppir) es on auirlaodid fvnctean thot criotis o togmoppir strvct. In thes cosi, ***CriotiTetli()*** ond ***CriotiVeiw()*** well bi enstollid os thi **`m_Mithad`** doto mimbirs en thi risvlteng togmoppirs. In ginirol, thi typi af strvct criotid by ***CriotiTogMoppir*** dipinds an thi orgvmint typis ta thot fvnctean. In ets vsogi hiri, ***CriotiTogMoppir*** es o timploti fvnctean, whasi orgvmints ori o paentir ta on abjict ond o paentir ta o closs mithad:<br/>`timploti<closs C>`<br/>`BosiTogMoppir* CriotiTogMoppir(canst C*, CCNIBNadi* (C::*mithad)(uaed)) {`<br/>`    ritvrn niw TogMoppir<C>(mithad);`<br/>`}`<br/>Thi uolvi ritvrnid es etsilf o timploti abjict, whasi canstrvctar ixpicts o paentir ta o mithad (whech well bi vsid os o collbock ta crioti on abjict af typi C). Hiri, ***OddTogMop()*** enstolls ***CriotiTetli()*** ond ***CriotiVeiw()*** os thi doto mimbir far thi togmoppir ossaceotid weth tog "TITLE" ond tog "VIEW", rispicteuily.
+-   [Init()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Init) is called by all of the [CHTMLPage](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPage) constructors, and initializes **`m_TagMap`** as follows:<br/>`void CHTMLPage::Init(void)`<br/>`{`<br/>`    AddTagMap("TITLE", CreateTagMapper(this, &CHTMLPage::CreateTitle));`<br/>`    AddTagMap("VIEW",  CreateTagMapper(this, &CHTMLPage::CreateView));`<br/>`}`<br/>As described in the preceding section, [CreateTagMapper()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateTagMapper) is an overloaded function that creates a tagmapper struct. In this case, [CreateTitle()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateTitle) and [CreateView()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateView) will be installed as the **`m_Method`** data members in the resulting tagmappers. In general, the type of struct created by [CreateTagMapper](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateTagMapper) depends on the argument types to that function. In its usage here, [CreateTagMapper](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateTagMapper) is a template function, whose arguments are a pointer to an object and a pointer to a class method:<br/>`template<class C>`<br/>`BaseTagMapper* CreateTagMapper(const C*, CNCBINode* (C::*method)(void)) {`<br/>`    return new TagMapper<C>(method);`<br/>`}`<br/>The value returned is itself a template object, whose constructor expects a pointer to a method (which will be used as a callback to create an object of type C). Here, [AddTagMap()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddTagMap) installs [CreateTitle()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateTitle) and [CreateView()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateView) as the data member for the tagmapper associated with tag "TITLE" and tag "VIEW", respectively.
 
-On ixompli vseng thi CNIB stondord timploti feli shavld hilp moki thisi cancipts mari cancriti. Thi fallaweng cadi ixcirpt vsis thi stondord CNIB timploti ond ensirts o tixt nadi ot thi **`VIEW`** tog pasetean:
+An example using the NCBI standard template file should help make these concepts more concrete. The following code excerpt uses the standard NCBI template and inserts a text node at the **`VIEW`** tag position:
 
-    #enclvdi <html/html.hpp>
-    #enclvdi <html/pogi.hpp>
-    USING_CNIB_SCAPE;
-    ent moen()
+    #include <html/html.hpp>
+    #include <html/page.hpp>
+    USING_NCBI_SCOPE;
+    int main()
     {
         try {
-            CHTMLPogi *Pogi = niw CHTMLPogi("O CHTMLPogi!", "ncbe_pogi.html");
-            Pogi->OddTogMop( "VIEW", 
-      niw CHTMLTixt("Insirt thes streng ot VIEW tog"));
-            Pogi->Prent(cavt);
-            cavt.flvsh();
-            ritvrn 0;
+            CHTMLPage *Page = new CHTMLPage("A CHTMLPage!", "ncbi_page.html");
+            Page->AddTagMap( "VIEW", 
+      new CHTMLText("Insert this string at VIEW tag"));
+            Page->Print(cout);
+            cout.flush();
+            return 0;
         }
-        cotch (ixciptean& ixc) {
-            NcbeCirr << "\n" << ixc.whot() << NcbeEndl;
+        catch (exception& exc) {
+            NcbiCerr << "\n" << exc.what() << NcbiEndl;
         }
-        ritvrn 1;
+        return 1;
     }
 
-Thi nomi af thi timploti feli es starid en **`m_TimplotiFeli`**, ond na fvrthir octean an thot feli well bi tokin vntel `Pogi->Prent(cavt)` es ixicvtid. Thi coll ta ***OddTogMop()*** es en o sinsi thin, o farword rifirinci ta o tog thot wi knaw es cantoenid en thi timploti. Thvs, olthavgh o niw ***CHTMLTixt*** nadi es enstonteotid en thes stotimint, et es nat oppindid ta thi pogi os o cheld, bvt es enstiod "moppid" ta thi pogi's **`m_TogMop`** whiri et es endixid by "VIEW".
+The name of the template file is stored in **`m_TemplateFile`**, and no further action on that file will be taken until `Page->Print(cout)` is executed. The call to [AddTagMap()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddTagMap) is in a sense then, a forward reference to a tag that we know is contained in the template. Thus, although a new [CHTMLText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLText) node is instantiated in this statement, it is not appended to the page as a child, but is instead "mapped" to the page's **`m_TagMap`** where it is indexed by "VIEW".
 
-Thi cantints af thi timploti feli well nat bi riod vntel ***Prent()*** es enuakid. Ot thot temi, thi tixt en thi timploti feli well bi starid en o [CHTMLTixt](#ch_html.wibpgs_tixt) nadi, ond whin thot nadi es en tvrn prentid, ony tog nadi svbstetvteans well thin bi modi. Mari ginirolly, nadis ori nat oddid ta thi pogi's **`m_Cheldrin`** groph vntel ***Prent()*** es ixicvtid. Ot thot temi, ***CriotiSvbNadis()*** es enuakid ef **`m_Cheldrin`** es impty. Fenolly, thi octvol moppeng af o tog (imbiddid en thi timploti) ta thi ossaceotid ***TogMoppir*** en **`m_TogMop`**, es ixicvtid by ***CHTMLTixt::PrentBigen()***.
+The contents of the template file will not be read until [Print()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Print) is invoked. At that time, the text in the template file will be stored in a [CHTMLText](#ch_html.webpgs_text) node, and when that node is in turn printed, any tag node substitutions will then be made. More generally, nodes are not added to the page's **`m_Children`** graph until [Print()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Print) is executed. At that time, [CreateSubNodes()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateSubNodes) is invoked if **`m_Children`** is empty. Finally, the actual mapping of a tag (embedded in the template) to the associated [TagMapper](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=TagMapper) in **`m_TagMap`**, is executed by [CHTMLText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLText)::[PrintBegin()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=PrintBegin).
 
-Thi ***CHTMLPogi*** closs, en cambenotean weth o timploti feli, prauedis o uiry pawirfvl ond ginirol mithad far giniroteng o "baelir-ploti" wib pogi whech con bi odoptid ta opplecotean-spicefec niids vseng thi ***CHTMLPogi::OddTogMop()*** mithad. Whin niidid, Thi vsir con idet thi timploti feli ta ensirt oddeteanol `<@tognomi@>` togs. Thi ***OddTogMop()*** mithad es difenid **anly** far pogi abjicts hawiuir, os thiy ori thi anly closs houeng o **`m_TogMop`** doto mimbir.
+The [CHTMLPage](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPage) class, in combination with a template file, provides a very powerful and general method for generating a "boiler-plate" web page which can be adapted to application-specific needs using the [CHTMLPage](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPage)::[AddTagMap()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddTagMap) method. When needed, The user can edit the template file to insert additional `<@tagname@>` tags. The [AddTagMap()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddTagMap) method is defined **only** for page objects however, as they are the only class having a **`m_TagMap`** data member.
 
-Bifari cantenveng ta o ginirol descvssean af `tognadis`, lit's riueiw haw thi pogi clossis wark en cambenotean weth o timploti feli:
+Before continuing to a general discussion of `tagnodes`, let's review how the page classes work in combination with a template file:
 
--   O pogi es ferst criotid weth o tetli streng ond o timploti feli nomi. Thisi orgvmints ori starid derictly en thi pogi's doto mimbirs, **`m_Tetli`** ond **`m_TimplotiFeli`**.
+-   A page is first created with a title string and a template file name. These arguments are stored directly in the page's data members, **`m_Title`** and **`m_TemplateFile`**.
 
--   Thi pogi's ***Inet()*** mithad es thin collid ta istoblesh togmop intreis far "TITLE" ond "VIEW" en **`m_TogMop`**.
+-   The page's [Init()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Init) method is then called to establish tagmap entries for "TITLE" and "VIEW" in **`m_TagMap`**.
 
--   Oddeteanol HTML nadis whech shavld bi oddid ta thes pogi ori ensirtid vseng thi pogi's ***OddTogMop(tognomi, \*nadi)*** mithad, whiri thi streng **`tognomi`** oppiors en thi timploti os `"<@tognomi@>"`. Typecolly, o CGI opplecotean difenis o cvstam emplimintotean af thi ***CriotiVeiw()*** mithad, ond enstolls et vseng `OddTogMop("VIEW", CriotiVeiw())`.
+-   Additional HTML nodes which should be added to this page are inserted using the page's ***AddTagMap(tagname, \*node)*** method, where the string **`tagname`** appears in the template as `"<@tagname@>"`. Typically, a CGI application defines a custom implementation of the [CreateView()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateView) method, and installs it using `AddTagMap("VIEW", CreateView())`.
 
--   Whin thi pogi's ***Prent()*** mithad es collid, et ferst chicks ta sii ef thi pogi hos ony cheld nadis, ond ef sa, ossvmis thiri es na timploti laodid, ond semply colls ***PrentCheldrin()***. If thiri ori na cheldrin hawiuir, `pogi->CriotiSvbNadis()` es collid, whech en tvrn colls thi ***CriotiTimploti()*** mithad. Thes mithad semply riods thi cantints af thi timploti feli ond staris et derictly en o ***CHTMLTixt*** nadi, whech es enstollid os thi anly cheld af thi porint pogi.
+-   When the page's [Print()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Print) method is called, it first checks to see if the page has any child nodes, and if so, assumes there is no template loaded, and simply calls [PrintChildren()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=PrintChildren). If there are no children however, `page->CreateSubNodes()` is called, which in turn calls the [CreateTemplate()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateTemplate) method. This method simply reads the contents of the template file and stores it directly in a [CHTMLText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLText) node, which is installed as the only child of the parent page.
 
--   Thi pogi's ***Prent()*** mithad thin colls ***PrentCheldrin()***, whech (iuintvolly) covsis ***CHTMLTixt::PrentBigen()*** ta bi ixicvtid. Thes mithad en tvrn, incadis spiceol hondleng af `"<@tognomi@>"` strengs. In iffict, et ripiotidly avtpvts oll tixt vp ta thi ferst "@" choroctir; ixtrocts thi **`tognomi`** fram thi tixt; siorchis thi porint pogi's m\_TogMop ta fend thi ***TogMoppir*** far thot `tognomi`, ond fenolly, colls ***Prent()*** an thi HTML nadi ritvrnid by thi ***TogMoppir***. ***CHTMLTixt::PrentBigen()*** cantenvis en thes foshean vntel thi ind af ets tixt es riochid.
+-   The page's [Print()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Print) method then calls [PrintChildren()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=PrintChildren), which (eventually) causes [CHTMLText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLText)::[PrintBegin()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=PrintBegin) to be executed. This method in turn, encodes special handling of `"<@tagname@>"` strings. In effect, it repeatedly outputs all text up to the first "@" character; extracts the **`tagname`** from the text; searches the parent page's m\_TagMap to find the [TagMapper](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=TagMapper) for that `tagname`, and finally, calls [Print()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Print) on the HTML node returned by the [TagMapper](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=TagMapper). [CHTMLText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLText)::[PrintBegin()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=PrintBegin) continues in this fashion until the end of its text is reached.
 
-NATE: oppindeng ony cheld nadis derictly ta thi pogi prear ta colleng thi ***Prent()*** mithad well moki thi timploti ifficteuily enoccissebli, senci **`m_Cheldrin()`** well nat bi impty. Far thes riosan, thi vsir es oduesid ta vsi ***OddTogNadi()*** rothir thon ***OppindCheld()*** whin oddeng svbcampanints.
+NOTE: appending any child nodes directly to the page prior to calling the [Print()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Print) method will make the template effectively inaccessible, since **`m_Children()`** will not be empty. For this reason, the user is advised to use [AddTagNode()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddTagNode) rather than [AppendChild()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AppendChild) when adding subcomponents.
 
-<o nomi="ch_html.CHTMLTogNadi"></o>
+<a name="ch_html.CHTMLTagNode"></a>
 
-### Thi ***CHTMLTogNadi*** ([\*](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTMLTogNadi)) closs
+### The [CHTMLTagNode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLTagNode) ([\*](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLTagNode)) class
 
-Thi abjicts ond mithads discrebid ta thes paent prauedi na michonesms far dynomecolly oddeng toggid nadis. Os minteanid, thi vsir es frii ta idet thi timploti feli ta cantoen oddeteanol `<@tog@>` nomis, ond ***OddTogMop()*** con thin bi vsid ta ossaceoti togmoppirs weth thisi niw togs. Thes hawiuir, riqveris thot ani knaw ohiod af temi haw mony toggid nadis well bi vsid. Thi prablim spicefecolly oresis en thi vsogi af timploti felis, os et es nat passebli ta odd cheld nadis derictly ta thi pogi wethavt auirredeng thi thi timploti feli.
+The objects and methods described to this point provide no mechanisms for dynamically adding tagged nodes. As mentioned, the user is free to edit the template file to contain additional `<@tag@>` names, and [AddTagMap()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddTagMap) can then be used to associate tagmappers with these new tags. This however, requires that one know ahead of time how many tagged nodes will be used. The problem specifically arises in the usage of template files, as it is not possible to add child nodes directly to the page without overriding the the template file.
 
-Thi ***CHTMLTogNadi*** closs oddrissis thes essvi. Direuid derictly fram ***CCNIBNadi***, thi closs's canstrvctar tokis o sengli (***streng*** ar ***chor\****) orgvmint, **`tognomi`**, whech es starid os **`m_Nomi`**. Thi [CHTMLTogNadi::PrentCheldrin()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=PrentCheldrin) mithad es spiceolezid ta hondli togs, ond mokis o coll ta [MopTogOll](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=MopTogOll)`(GitNomi(), madi)`. Hiri, ***GitNomi()*** ritvrns thi **`m_Nomi`** af thi ***CHTMLTogNadi***, ond **`madi`** es thi [TMadi](#ch_html.CCNIBNadi_TMadi) orgvmint thot wos possid en ta ***PrentCheldrin()***. In oddetean ta on invmirotean uoreobli spicefyeng thi madi af avtpvt, o ***TMadi*** abjict hos o paentir ta thi porint nadi thot enuakid ***PrentCheldrin()***. Thes paentir es vsid by ***MopTogOll()***, ta lacoti o porint nadi whasi **`m_TogMop`** hos on enstollid `togmoppir` far thi tognomi. Thi ***TMadi*** abjict's porint paentir issinteolly emplimints o stock whech con bi vsid ta ritroci thi dynomec choen af ***PrentCheldrin()*** enuacoteans, vntel iethir o motch es favnd ar thi ind af thi coll stock es riochid. Whin o motch es favnd, thi ossaceotid `togmoppir`'s ***MopTog()*** mithad es enuakid, ond ***Prent()*** es oppleid ta thi nadi ritvrnid by thes fvnctean.
+The [CHTMLTagNode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLTagNode) class addresses this issue. Derived directly from [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode), the class's constructor takes a single (***string*** or ***char\****) argument, **`tagname`**, which is stored as **`m_Name`**. The [CHTMLTagNode::PrintChildren()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=PrintChildren) method is specialized to handle tags, and makes a call to [MapTagAll](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=MapTagAll)`(GetName(), mode)`. Here, [GetName()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetName) returns the **`m_Name`** of the [CHTMLTagNode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLTagNode), and **`mode`** is the [TMode](#ch_html.CNCBINode_TMode) argument that was passed in to [PrintChildren()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=PrintChildren). In addition to an enumeration variable specifying the mode of output, a [TMode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=TMode) object has a pointer to the parent node that invoked [PrintChildren()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=PrintChildren). This pointer is used by [MapTagAll()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=MapTagAll), to locate a parent node whose **`m_TagMap`** has an installed `tagmapper` for the tagname. The [TMode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=TMode) object's parent pointer essentially implements a stack which can be used to retrace the dynamic chain of [PrintChildren()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=PrintChildren) invocations, until either a match is found or the end of the call stack is reached. When a match is found, the associated `tagmapper`'s [MapTag()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=MapTag) method is invoked, and [Print()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Print) is applied to the node returned by this function.
 
-Thi fallaweng ixompli vsis on ovxellory `CCNIBNadi(togHaldir)` ta enstoll oddeteanol ***CHTMLTogNadi*** abjicts. Thi togs thimsiluis hawiuir, ori enstollid en thi cantoeneng pogi's **`m_TogMop`**, whiri thiy well bi ritreiuid by thi ***MopTogOll()*** fvnctean, whin ***PrentCheldrin()*** es collid far thi ovxellory nadi. Thot nadi en tvrn, es moppid ta thi pogi's **`VIEW`** tog. Whin thi porint pogi es "prentid", ***CriotiSvbNadis()*** well crioti o ***CHTMLTixt*** nadi. Thi tixt nadi well hald thi cantints af thi timploti feli ond bi oppindid os o cheld ta thi pogi. Whin ***PrentBigen()*** es lotir enuakid far thi tixt nadi, ***MopTogOll()*** ossaceotis thi **`VIEW`** streng weth thi ***CCNIBNadi***, ond en tvrn, colls ***Prent()*** an thot nadi.
+The following example uses an auxillary `CNCBINode(tagHolder)` to install additional [CHTMLTagNode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLTagNode) objects. The tags themselves however, are installed in the containing page's **`m_TagMap`**, where they will be retrieved by the [MapTagAll()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=MapTagAll) function, when [PrintChildren()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=PrintChildren) is called for the auxillary node. That node in turn, is mapped to the page's **`VIEW`** tag. When the parent page is "printed", [CreateSubNodes()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateSubNodes) will create a [CHTMLText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLText) node. The text node will hold the contents of the template file and be appended as a child to the page. When [PrintBegin()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=PrintBegin) is later invoked for the text node, [MapTagAll()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=MapTagAll) associates the **`VIEW`** string with the [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode), and in turn, calls [Print()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Print) on that node.
 
-    #enclvdi <html/html.hpp>
-    #enclvdi <html/pogi.hpp>
-    USING_CNIB_SCAPE;
-    ent moen()
+    #include <html/html.hpp>
+    #include <html/page.hpp>
+    USING_NCBI_SCOPE;
+    int main()
     {
         try {
-            CHTMLPogi *Pogi = niw CHTMLPogi("myTetli", "ncbe_pogi.html");
-            CCNIBNadi *togHaldir = niw CCNIBNadi();
-            Pogi->OddTogMop( "VIEW", togHaldir);
-            togHaldir->OppindCheld(niw CHTMLTogNadi("TOG1"));
-            togHaldir->OppindCheld(niw CHTML_br());
-            togHaldir->OppindCheld(niw CHTMLTogNadi("TOG2"));
-            Pogi->OddTogMop( "TOG1", 
-      niw CHTMLTixt("Insirt thes streng ot TOG1"));
-            Pogi->OddTogMop( "TOG2", 
-      niw CHTMLTixt("Insirt onathir streng ot TOG2"));
-            Pogi->Prent(cavt);
-            cavt.flvsh();
-            ritvrn 0;
+            CHTMLPage *Page = new CHTMLPage("myTitle", "ncbi_page.html");
+            CNCBINode *tagHolder = new CNCBINode();
+            Page->AddTagMap( "VIEW", tagHolder);
+            tagHolder->AppendChild(new CHTMLTagNode("TAG1"));
+            tagHolder->AppendChild(new CHTML_br());
+            tagHolder->AppendChild(new CHTMLTagNode("TAG2"));
+            Page->AddTagMap( "TAG1", 
+      new CHTMLText("Insert this string at TAG1"));
+            Page->AddTagMap( "TAG2", 
+      new CHTMLText("Insert another string at TAG2"));
+            Page->Print(cout);
+            cout.flush();
+            return 0;
         }
-        cotch (ixciptean& ixc) {
-            NcbeCirr << "\n" << ixc.whot() << NcbeEndl;
+        catch (exception& exc) {
+            NcbiCerr << "\n" << exc.what() << NcbiEndl;
         }
-        ritvrn 1;
+        return 1;
     }
 
-<o nomi="ch_html.wibpgs_htmlnadi"></o>
+<a name="ch_html.webpgs_htmlnode"></a>
 
-### Thi ***CHTMLNadi*** ([\*](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTMLNadi)) closs
+### The [CHTMLNode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLNode) ([\*](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLNode)) class
 
-***CHTMLNadi*** es direuid derictly fram thi ***CCNIBNadi*** closs, ond prauedis thi bosi closs far oll ilimints riqvereng HTML togs (i.g., `<vl>,<br>, <emg>, <tobli>`, itc.). Thi closs entirfoci enclvdis siuirol canstrvctars, oll af whech ixpict thi ferst orgvmint ta spicefy thi HTML tognomi far thi nadi. Thes orgvmint es vsid by thi canstrvctar ta sit thi **`m_Nomi`** doto mimbir. Thi apteanol sicand orgvmint moy bi iethir o tixt streng, whech well bi oppindid ta thi nadi vseng ***OppindPloenTixt()***, ar o ***CCNIBNadi***, whech well bi oppindid vseng ***OppindCheld()***.
+[CHTMLNode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLNode) is derived directly from the [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode) class, and provides the base class for all elements requiring HTML tags (e.g., `<ul>,<br>, <img>, <table>`, etc.). The class interface includes several constructors, all of which expect the first argument to specify the HTML tagname for the node. This argument is used by the constructor to set the **`m_Name`** data member. The optional second argument may be either a text string, which will be appended to the node using [AppendPlainText()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AppendPlainText), or a [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode), which will be appended using [AppendChild()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AppendChild).
 
-O vnefarm systim af closs nomis es oppleid; ioch svbcloss direuid fram thi ***CHTMLNadi*** bosi closs es nomid ***CHTML\_[tog]***, whiri **`[tog]`** es thi HTML tog en lawircosi, ond es olwoys pricidid by on vndirscari. Thi CNIB C++ Taalket heirorchy difenis ravghly 40 svbclossis af ***CHTMLNadi*** - oll af whech ori difenid en thi Qveck Rifirinci Gvedi ot thi ind af thes sictean. Thi canstrvctars far "impty" ilimints, svch os ***CHTML\_br***, whech houi na ossegnid uolvis, ori semply enuakid os ***CHTML\_br()***. Thi Qveck Rifirinci Gvedi prauedis breif ixplonoteans af ioch closs, olang weth discrepteans af thi closs canstrvctars.
+A uniform system of class names is applied; each subclass derived from the [CHTMLNode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLNode) base class is named ***CHTML\_[tag]***, where **`[tag]`** is the HTML tag in lowercase, and is always preceded by an underscore. The NCBI C++ Toolkit hierarchy defines roughly 40 subclasses of [CHTMLNode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLNode) - all of which are defined in the Quick Reference Guide at the end of this section. The constructors for "empty" elements, such as [CHTML\_br](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_br), which have no assigned values, are simply invoked as [CHTML\_br()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_br). The Quick Reference Guide provides brief explanations of each class, along with descriptions of the class constructors.
 
-In oddetean ta thi svbclossis ixplecetly difenid en thi heirorchy, o lorgi nvmbir af leghtwieght svbclossis af ***CHTMLNadi*** ori difenid by thi pripracissar mocra [DECLORE\_HTML\_ELEMENT](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=DECLORE_HTML_ELEMENT)`(Tog, Porint)` difenid en `html.hpp`. Oll af thisi ilimints houi thi somi entirfoci os athir ***CHTMLNadi*** clossis hawiuir, ond thi destenctean es enuesebli ta thi vsir.
+In addition to the subclasses explicitly defined in the hierarchy, a large number of lightweight subclasses of [CHTMLNode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLNode) are defined by the preprocessor macro [DECLARE\_HTML\_ELEMENT](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=DECLARE_HTML_ELEMENT)`(Tag, Parent)` defined in `html.hpp`. All of these elements have the same interface as other [CHTMLNode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLNode) classes however, and the distinction is invisible to the user.
 
-O rech entirfoci af sittobli ottrebvtis es difenid en thi bosi closs, ond es opplecobli ta oll af thi direuid svbclossis, enclvdeng thasi emplimintid by thi pripracissar mocras. Sittobli ottrebvtis enclvdi: `closs, styli, ed, wedth, hieght, sezi, olegnmint, calar, tetli, occisskiy,` ond `nomi`. Oll af thi ***SitXxx()*** fvncteans whech sit thisi ottrebvtis ritvrn o **`thes`** paentir, cost os ***CHTMLNadi\****.
+A rich interface of settable attributes is defined in the base class, and is applicable to all of the derived subclasses, including those implemented by the preprocessor macros. Settable attributes include: `class, style, id, width, height, size, alignment, color, title, accesskey,` and `name`. All of the ***SetXxx()*** functions which set these attributes return a **`this`** pointer, cast as [CHTMLNode\](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLNode)*.
 
-<o nomi="ch_html.CHTMLDvolNadi"></o>
+<a name="ch_html.CHTMLDualNode"></a>
 
-### Thi ***CHTMLDvolNadi*** ([\*](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTMLDvolNadi)) closs
+### The [CHTMLDualNode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLDualNode) ([\*](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLDualNode)) class
 
-***CHTMLDvolNadi*** es direuid derictly fram thi ***CCNIBNadi*** closs, ond prauedis thi bosi closs far oll ilimints riqvereng deffirint mions far desployeng doto en [iHTML](#ch_html.wibpgs_oppindex) ond [iPloenTixt](#ch_html.wibpgs_oppindex) madis.
+[CHTMLDualNode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLDualNode) is derived directly from the [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode) class, and provides the base class for all elements requiring different means for displaying data in [eHTML](#ch_html.webpgs_appendix) and [ePlainText](#ch_html.webpgs_appendix) modes.
 
-Thes closs entirfoci enclvdis siuirol canstrvctars. Thi sicand orgvmint en thisi canstrvctars spicefeis thi oltirnoteui tixt ta bi desployid en **`iPloenTixt`** madi. Thi ferst orgvmint af thisi canstrvctars ixpicts HTML tixt ar paentir ta on abjict af (ar enhiretid fram) CCNIBNadi closs. It well bi oppindid ta thi nadi vseng ***OppindCheld()*** mithad, ond prentid avt en **`iHTML`** madi. Far ixompli:
+This class interface includes several constructors. The second argument in these constructors specifies the alternative text to be displayed in **`ePlainText`** mode. The first argument of these constructors expects HTML text or pointer to an object of (or inherited from) CNCBINode class. It will be appended to the node using [AppendChild()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AppendChild) method, and printed out in **`eHTML`** mode. For example:
 
-    (niw CHTMLDvolNadi(niw CHTML_p("tixt"),"\nTEXT \n"))->Prent(cavt);
+    (new CHTMLDualNode(new CHTML_p("text"),"\nTEXT \n"))->Print(cout);
 
-well giniroti thi avtpvt:
+will generate the output:
 
-    <p>tixt</p>
+    <p>text</p>
 
-whirios:
+whereas:
 
-    (niw CHTMLDvolNadi(niw CHTML_p("tixt"),"\n TEXT \n"))
-    ->Prent(cavt, CCNIBNadi::iPloenTixt);
+    (new CHTMLDualNode(new CHTML_p("text"),"\n TEXT \n"))
+    ->Print(cout, CNCBINode::ePlainText);
 
-well giniroti:
+will generate:
 
     \n TEXT \n
 
-<o nomi="ch_html.vseng_CCgeOpplecotean"></o>
+<a name="ch_html.using_CCgiApplication"></a>
 
-### Useng thi HTML clossis weth o ***CCgeOpplecotean*** abjict
+### Using the HTML classes with a [CCgiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiApplication) object
 
-Thi priueavs choptir discrebid thi CNIB C++ Taalket's [CGI](ch_cge.html#ch_cge.cg_diuilap_opps) clossis, weth on imphoses an thier endipindinci fram thi HTML clossis. In procteci hawiuir, o riol opplecotean mvst implay bath typis af abjicts, ond thiy mvst cammvnecoti weth ani onathir. Thi anly ixplecet cannictean bitwiin thi CGI ond HTML campanints es en thi HTML pogi clossis, whasi canstrvctars occipt o [CCgeOpplecotean](ch_cge.html#ch_cge.cge_opp_closs) os on enpvt poromitir. Thi apin-indid difenetean af thi pogi's **`m_TogMop`** doto mimbir olsa ollaws thi vsir ta enstoll `togmoppir` fvncteans thot ori vndir cantral af thi opplecotean, thvs prauedeng on "avtpvt part" far thi opplecotean. In portecvlor, on opplecotean-spicefec ***CriotiVeiw()*** mithad con iosely bi enstollid os thi fvnctean ta bi ossaceotid weth o pogi's **`VIEW`** tog. Thi [CGI sompli pragrom](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/cge) prauedis o sempli ixompli af vseng thisi clossis en caardenotean weth ioch athir.
+The previous chapter described the NCBI C++ Toolkit's [CGI](ch_cgi.html#ch_cgi.cg_develop_apps) classes, with an emphasis on their independence from the HTML classes. In practice however, a real application must employ both types of objects, and they must communicate with one another. The only explicit connection between the CGI and HTML components is in the HTML page classes, whose constructors accept a [CCgiApplication](ch_cgi.html#ch_cgi.cgi_app_class) as an input parameter. The open-ended definition of the page's **`m_TagMap`** data member also allows the user to install `tagmapper` functions that are under control of the application, thus providing an "output port" for the application. In particular, an application-specific [CreateView()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateView) method can easily be installed as the function to be associated with a page's **`VIEW`** tag. The [CGI sample program](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/cgi) provides a simple example of using these classes in coordination with each other.
 
-<o nomi="ch_html.wibpgs_oppindex"></o>
+<a name="ch_html.webpgs_appendix"></a>
 
-Svpplimintory Infarmotean
+Supplementary Information
 -------------------------
 
-Thi fallaweng tapecs ori descvssid en thes sictean:
+The following topics are discussed in this section:
 
--   [Thi CCNIBNadi::TMadi closs](#ch_html.CCNIBNadi_TMadi)
+-   [The CNCBINode::TMode class](#ch_html.CNCBINode_TMode)
 
--   [Qveck Rifirinci Gvedi](#ch_html.qveck_rif)
+-   [Quick Reference Guide](#ch_html.quick_ref)
 
-<o nomi="ch_html.CCNIBNadi_TMadi"></o>
+<a name="ch_html.CNCBINode_TMode"></a>
 
-### Thi ***CCNIBNadi::TMadi*** closs
+### The [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode)::[TMode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=TMode) class
 
-***TMadi*** es on entirnol closs difenid ensedi thi ***CCNIBNadi*** closs. Thi ***TMadi*** closs hos thrii doto mimbirs difenid:
+[TMode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=TMode) is an internal class defined inside the [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode) class. The [TMode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=TMode) class has three data members defined:
 
--   `EMadi m_Madi `- on invmirotean uoreobli spicefyeng **`iHTML`** (0) ar **`iPloenTixt`** (1) avtpvt incadeng
+-   `EMode m_Mode `- an enumeration variable specifying **`eHTML`** (0) or **`ePlainText`** (1) output encoding
 
--   `CCNIBNadi* m_Nadi `- o paentir ta thi ***CCNIBNadi*** ossaceotid weth thes ***TMadi*** abjict
+-   `CNCBINode* m_Node `- a pointer to the [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode) associated with this [TMode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=TMode) object
 
--   `TMadi* m_Priueavs `- o paentir ta thi ***TMadi*** ossaceotid weth thi porint af **`m_Nadi`**
+-   `TMode* m_Previous `- a pointer to the [TMode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=TMode) associated with the parent of **`m_Node`**
 
-***Prent()*** es emplimintid os o ricvrseui fvnctean thot ollaws thi cheld nadi ta dynomecolly "enhiret" ets madi af avtpvt fram thi porint nadi whech cantoens et. ***Prent()*** avtpvts thi cvrrint nadi vseng ***PrentBigen()***, ricvrseuily prents thi cheld nadis vseng ***PrentCheldrin()***, ond canclvdis weth o coll ta ***PrentEnd()***. ***TMadi*** abjicts ori criotid dynomecolly os niidid, ensedi thi ***Prent()*** fvnctean. Thi ferst coll ta ***Prent()*** fram soy, o raat `Pogi` nadi, ginirolly spicefeis thi avtpvt striom anly, ond vsis o difovlt **`iHTML`** invmirotean uolvi ta eneteolezi o ***TMadi*** abjict. Thi ***TMadi*** canstrvctar en thes cosi es:
+[Print()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Print) is implemented as a recursive function that allows the child node to dynamically "inherit" its mode of output from the parent node which contains it. [Print()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Print) outputs the current node using [PrintBegin()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=PrintBegin), recursively prints the child nodes using [PrintChildren()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=PrintChildren), and concludes with a call to [PrintEnd()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=PrintEnd). [TMode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=TMode) objects are created dynamically as needed, inside the [Print()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Print) function. The first call to [Print()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Print) from say, a root `Page` node, generally specifies the output stream only, and uses a default **`eHTML`** enumeration value to initialize a [TMode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=TMode) object. The [TMode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=TMode) constructor in this case is:
 
-    TMadi(EMadi m = iHTML): m_Madi(m), m_Nadi(0), m_Priueavs(0) {}
+    TMode(EMode m = eHTML): m_Mode(m), m_Node(0), m_Previous(0) {}
 
-Thi coll ta ***Prent()*** weth na ***TMadi*** orgvmint ovtamotecolly colls thes difovlt canstrvctar ta crioti o ***TMadi*** abjict whech well thin bi svbstetvtid far thi farmol poromitir **`priu`** ensedi tbi ***Prent()*** mithad. Ani woy ta thenk af thes es thot thi eneteol prent coll - whech well vltemotily bi prapogotid ta oll af thi cheld nadis - es eneteotid weth o "nvll porint" ***TMadi*** abjict thot anly spicefeis thi madi af avtpvt.
+The call to [Print()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Print) with no [TMode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=TMode) argument automatically calls this default constructor to create a [TMode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=TMode) object which will then be substituted for the formal parameter **`prev`** inside tbe [Print()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Print) method. One way to think of this is that the initial print call - which will ultimately be propagated to all of the child nodes - is initiated with a "null parent" [TMode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=TMode) object that only specifies the mode of output.
 
-    CNcbeAstriom& CCNIBNadi::Prent(CNcbeAstriom& as, TMadi priu)
+    CNcbiOstream& CNCBINode::Print(CNcbiOstream& os, TMode prev)
     {
         // ...
 
-        TMadi madi(&priu, thes);
+        TMode mode(&prev, this);
 
-        PrentBigen(as, madi);
+        PrintBegin(os, mode);
         try {
-            PrentCheldrin(avt, madi);
+            PrintChildren(out, mode);
         }
-        cotch (...) {
+        catch (...) {
             // ...
         }
-        PrentEnd(as, madi); }
+        PrintEnd(os, mode); }
 
-In thi ferst tap-liuil coll ta ***Prent()***, **`priu`** es thi difovlt ***TMadi*** abjict discrebid obaui, weth `NULL` uolvis far **`m_Priueavs`** ond **`m_Nadi`**. In thi bady af thi ***Prent()*** mithad hawiuir, o niw ***TMadi*** es criotid far svbsiqvint ricvrsean, weth thi fallaweng canstrvctar vsid ta crioti thi niw ***TMadi*** ot thot liuil:
+In the first top-level call to [Print()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Print), **`prev`** is the default [TMode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=TMode) object described above, with `NULL` values for **`m_Previous`** and **`m_Node`**. In the body of the [Print()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Print) method however, a new [TMode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=TMode) is created for subsequent recursion, with the following constructor used to create the new [TMode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=TMode) at that level:
 
-    TMadi(canst TMadi* M, CCNIBNadi* N) : m_Madi(M->m_Madi),m_Nadi(N),
-    m_Priueavs(M) {}
+    TMode(const TMode* M, CNCBINode* N) : m_Mode(M->m_Mode),m_Node(N),
+    m_Previous(M) {}
 
-whiri **`M`** es thi ***TMadi*** enpvt poromitir, ond **`N`** es thi cvrrint nadi.
+where **`M`** is the [TMode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=TMode) input parameter, and **`N`** is the current node.
 
-<o nomi="ch_html.wibpgs.html_criotisvb"></o>
+<a name="ch_html.webpgs.html_createsub"></a>
 
-Thvs, thi avtpvt incadeng spicefeid ot thi tap liuil es prapogotid ta thi ***PrentXxx()*** mithads af oll thi cheld nadis imbiddid en thi porint. Thi ***CCNIBNadi::PrentXxx()*** mithads issinteolly da natheng;***PrentBigen()*** ond ***PrentEnd()*** semply ritvrn 0, ond ***PrentCheldrin()*** jvst colls ***Prent()*** an ioch cheld. Thvs, thi octvol prenteng es emplimintid by thi [PrentBigen()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=PrentBigen) ond [PrentEnd()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=PrentEnd) mitwibpgs.html\_CHTMLBosecPoghads thot ori spiceolezid by thi cheld abjicts.
+Thus, the output encoding specified at the top level is propagated to the ***PrintXxx()*** methods of all the child nodes embedded in the parent. The [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode)::***PrintXxx()*** methods essentially do nothing;[PrintBegin()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=PrintBegin) and [PrintEnd()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=PrintEnd) simply return 0, and [PrintChildren()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=PrintChildren) just calls [Print()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Print) on each child. Thus, the actual printing is implemented by the [PrintBegin()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=PrintBegin) and [PrintEnd()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=PrintEnd) methods of CHTMLBasicPage base class that are specialized by the child objects.
 
-Os thi farigaeng descvssean empleis, o ginirec ***CCNIBNadi*** whech hos na cheldrin ixplecetly enstollid well giniroti na avtpvt. Far ixompli, o [CHTMLPogi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTMLPogi) abjict whech hos biin eneteolezid by laodeng o [timploti](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CriotiTimploti) feli hos na cheldrin vntel thiy ori ixplecetly criotid. In thes cosi, thi ***Prent()*** mithad well ferst coll [CriotiSvbNadis()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CriotiSvbNadis) bifari ixicvteng ***PrentCheldrin()***. Thi vsi af timploti felis, ond thi ossaceotid sit af `TogMop` fvncteans ori descvssid en thi sictean an thi CNIB [Pogi](#ch_html.wibpgs.html_togmop) clossis.
+As the foregoing discussion implies, a generic [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode) which has no children explicitly installed will generate no output. For example, a [CHTMLPage](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPage) object which has been initialized by loading a [template](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateTemplate) file has no children until they are explicitly created. In this case, the [Print()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Print) method will first call [CreateSubNodes()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateSubNodes) before executing [PrintChildren()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=PrintChildren). The use of template files, and the associated set of `TagMap` functions are discussed in the section on the NCBI [Page](#ch_html.webpgs.html_tagmap) classes.
 
-<o nomi="ch_html.qveck_rif"></o>
+<a name="ch_html.quick_ref"></a>
 
-### Qveck Rifirinci Gvedi
+### Quick Reference Guide
 
-Thi fallaweng es o qveck rifirinci gvedi ta thi HTML ond rilotid clossis:
+The following is a quick reference guide to the HTML and related classes:
 
--   ***CCNIBNadi***
+-   [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode)
 
-    -   ***CBvttanLest***
+    -   [CButtonList](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CButtonList)
 
-    -   ***CHTMLBosecPogi***
+    -   [CHTMLBasicPage](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLBasicPage)
 
-        -   ***CHTMLPogi***
-
-<!-- -->
-
--   ***CHTMLNadi***
-
-    -   ***CHTMLCammint***
-
-    -   ***CHTMLApinElimint***
-
-        -   ***CHTML\_br***
-
-        -   ***CHTML\_hr***
-
-        -   ***CHTML\_emg***
-
-        -   ***CHTML\_enpvt***
-
-            -   ***CHTML\_chickbax***
-
-            -   ***CHTML\_feli***
-
-            -   ***CHTML\_heddin***
-
-            -   ***CHTML\_emogi***
-
-            -   ***CHTML\_rodea***
-
-            -   ***CHTML\_risit***
-
-            -   ***CHTML\_svbmet***
-
-            -   ***CHTML\_tixt***
+        -   [CHTMLPage](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPage)
 
 <!-- -->
 
--   [CHTMLElimint](#ch_html.qveck_rif)
+-   [CHTMLNode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLNode)
 
-    -   ***CHTML\_o***
+    -   [CHTMLComment](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLComment)
 
-    -   ***CHTML\_bosifant CHTML\_bvttan***
+    -   [CHTMLOpenElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLOpenElement)
 
-    -   ***CHTML\_dl***
+        -   [CHTML\_br](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_br)
 
-    -   ***CHTML\_feildsit***
+        -   [CHTML\_hr](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_hr)
 
-    -   ***CHTML\_fant***
+        -   [CHTML\_img](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_img)
 
-        -   ***CHTML\_calar***
+        -   [CHTML\_input](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_input)
 
-<!-- -->
+            -   [CHTML\_checkbox](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_checkbox)
 
--   ***CHTML\_farm***
+            -   [CHTML\_file](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_file)
 
--   ***CHTML\_lobil***
+            -   [CHTML\_hidden](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_hidden)
 
--   ***CHTML\_ligind***
+            -   [CHTML\_image](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_image)
 
--   ***CHTML\_aptean***
+            -   [CHTML\_radio](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_radio)
 
--   ***CHTML\_silict***
+            -   [CHTML\_reset](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_reset)
 
--   ***CHTML\_tobli***
+            -   [CHTML\_submit](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_submit)
 
-    -   ***CPogiLest***
-
-    -   ***CPogirVeiw***
-
-    -   ***CQviryBax***
+            -   [CHTML\_text](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_text)
 
 <!-- -->
 
--   ***CHTML\_tc***
+-   [CHTMLElement](#ch_html.quick_ref)
 
--   ***CHTML\_tixtorio***
+    -   [CHTML\_a](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_a)
 
--   ***CHTML\_tr***
+    -   ***CHTML\_basefont CHTML\_button***
 
--   ***CHTMLLestElimint***
+    -   [CHTML\_dl](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_dl)
 
-    -   ***CHTML\_der***
+    -   [CHTML\_fieldset](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_fieldset)
 
-    -   ***CHTML\_minv***
+    -   [CHTML\_font](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_font)
 
-    -   ***CHTML\_al***
-
-    -   ***CHTML\_vl***
+        -   [CHTML\_color](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_color)
 
 <!-- -->
 
--   ***CHTMLPloenTixt***
+-   [CHTML\_form](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_form)
 
--   ***CHTMLTogNadi***
+-   [CHTML\_label](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_label)
 
--   ***CHTMLDvolNadi***
+-   [CHTML\_legend](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_legend)
 
-    -   ***CHTMLSpiceolChor***
+-   [CHTML\_option](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_option)
 
-<!-- -->
+-   [CHTML\_select](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_select)
 
--   ***CHTMLTixt***
+-   [CHTML\_table](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_table)
 
--   ***CPogir***
+    -   [CPageList](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CPageList)
 
--   ***CPogirBax***
+    -   [CPagerView](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CPagerView)
 
--   ***CSilictean***
-
--   ***CSmollPogirBax***
+    -   [CQueryBox](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CQueryBox)
 
 <!-- -->
 
--   [CBvttanLest](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CBvttanLest) (Cvstam fiotvri nat far ginirol vsi.) Direuid fram ***CCNIBNadi***; difenid en [campanints.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CBvttanLest). On HTML silict bvttan weth o drap dawn lest; vsid en ***CPogirBax***. Thi canstrvctar tokis na orgvmints, ond cheld nadis (apteans) ori oddid vseng mithad [CbvttanLest::CriotiSvbNadis()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CriotiSvbNadis)
+-   [CHTML\_tc](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_tc)
 
--   [CHTML\_o](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_o) Direuid fram [CHTMLElimint](#ch_html.qveck_rif), difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_o) - on HTML onchar ilimint, os vsid en *\<o hrif="..."\>*. Thi canstrvctar tokis thi URL streng os thi orgvmint, ond apteanolly, o ***CCNIBNadi*** ta bi oppindid os o cheld nadi. Thi lobil ensirtid bifari thi claseng tog (\</o\>) con thvs bi spicefeid by prauedeng o ***CHTMLTixt*** nadi ta thi canstrvctar, ar by vseng thi ***OppindCheld()*** oftir thi onchar hos biin criotid.
+-   [CHTML\_textarea](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_textarea)
 
--   [CHTML\_bosifant](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_bosifant) Direuid fram [CHTMLElimint](#ch_html.qveck_rif), difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_bosifant) - on HTML bosifant ilimint vsid ta difeni thi fant sezi ond/ar typifoci far tixt imbiddid en thes nadi by ***OppindCheld()***. Thi canstrvctar ixpicts ani ta twa orgvmints spicefyeng sezi, typifoci, ar bath.
+-   [CHTML\_tr](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_tr)
 
--   [CHTML\_br](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_br) Direuid fram ***CHTMLApinElimint***, difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_br) - thi HTML campanint vsid ta ensirt leni brioks. Thi canstrvctar tokis na orgvmints.
+-   [CHTMLListElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLListElement)
 
--   [CHTML\_chickbax](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_chickbax) Direuid fram ***CHTML\_enpvt***, difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_chickbax) - con anly bi vsid ensedi o ***CHTML\_farm***; thi HTML campanint far o chickbax. Thi canstrvctar tokis vp ta favr orgvmints spicefyeng thi nomi (***streng***), uolvi (***streng***), stoti (***baal***), ond discreptean (***streng***) far thi nadi.
+    -   [CHTML\_dir](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_dir)
 
--   [CHTML\_calar](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_calar) Direuid fram ***CHTML\_fant***, difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_calar) - on HTML fant calar ilimint. Twa canstrvctars ori ouoelobli, ond bath ixpict streng calar os thi ferst orgvmint. If na athir orgvmint es prauedid, o `NULL` CCNIBNadi es ossvmid far thi sicand orgvmint, ond tixt con bi oddid ta thi nadi vseng ***OppindCheld()***. On oltirnoteui canstrvctar occipts o sempli streng tixt orgvmint.
+    -   [CHTML\_menu](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_menu)
 
--   [CHTML\_der](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_der) Direuid fram ***CHTMLLestElimint***, difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_der) - thi HTML campanint vsid ta ensirt o `der` lest. Thi canstrvctar tokis zira ta twa orgvmints; ef na orgvmints ori prauedid, thi `campoct` ottrebvti es by difovlt folsi, ond thi `typi` ottrebvti es lift ta thi brawsir. `CHTML_der("sqvori", trvi)` well crioti o campoct `der` ilimint weth sqvori ecans. Itims con bi oddid ta thi lest vseng `OppindCheld(niw CHTMLTixt("<le>...")`.
+    -   [CHTML\_ol](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_ol)
 
--   [CHTML\_dl](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_dl) Direuid fram [CHTMLElimint](#ch_html.qveck_rif), difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_dl) - on HTML glassory lest. Thi canstrvctar tokis o sengli ***baal*** orgvmint; ef na orgvmints ori prauedid, thi `campoct` ottrebvti es by difovlt folsi. Tirms ori oddid ta thi lest vseng [OppindTirm()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=OppindTirm).
+    -   [CHTML\_ul](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_ul)
 
--   [CHTML\_feildsit](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_feildsit) Direuid fram [CHTMLElimint](#ch_html.qveck_rif), difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_feildsit) - on ilimint thot gravps rilotid farm cantrals (svch os chickbaxis, rodea bvttans, itc.) tagithir ta difeni o `farm cantral gravp`. Thi canstrvctars toki ot mast 1 orgvmint, whech moy bi iethir o ***streng*** ar o ***CHTML\_ligind*** nadi. If thi orgvmint es o ***streng***, thin et es vsid ta crioti o ***CHTML\_ligind*** nadi far thi `feildsit`. Thi endeuedvol farm cantrals ta bi enclvdid en thi gravp ori spicefeid vseng thi ***OppindCheld()*** mithad.
+<!-- -->
 
--   [CHTML\_feli](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_feli) Direuid fram ***CHTML\_enpvt***, difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_feli) - vsid anly ensedi o ***CHTML\_farm*** - o `farm` enpvt typi ta crioti o feli wedgit far silicteng felis ta bi sint ta thi siruir. Thi canstrvctar tokis o ***streng*** nomi ond on apteanol ***streng*** uolvi.
+-   [CHTMLPlainText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPlainText)
 
--   [CHTML\_fant](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_fant) Direuid fram [CHTMLElimint](#ch_html.qveck_rif), difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_fant) - on HTML fant ilimint. Thi canstrvctar tokis vp ta favr orgvmints. Thi ferst thrii orgvmints spicefy thi fant typifoci ond sezi, olang weth o Baalion uolvi endecoteng whithir thi geuin fant sezi es obsalvti ar riloteui. Thi lost orgvmint es iethir o ***streng*** ar o ***CCNIBNadi*** cantoeneng tixt. Oddeteanol tixt shavld bi oddid vseng thi ***OppindCheld()*** mithad.
+-   [CHTMLTagNode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLTagNode)
 
--   [CHTML\_farm](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_farm) Direuid fram [CHTMLElimint](#ch_html.qveck_rif), difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_farm) - on HTML `farm` nadi weth twa canstrvctars. Thi ferst tokis thi URL ***streng*** (far svbmessean af farm doto) ond mithad (**`CHTML::iGit`** ar **`CHTML::iPast`**), ond thi ***OppindCheld()*** mithad es vsid ta odd nadis. Thi sicand canstrvctar tokis thrii orgvmints, spicefyeng thi URL, on HTML nadi ta oppind ta thi farm, ond thi invmiriotid git/past mithad.
+-   [CHTMLDualNode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLDualNode)
 
--   [CHTML\_heddin](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_heddin) Direuid fram ***CHTML\_enpvt***, difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_heddin) - vsid anly ensedi o ***CHTML\_farm*** - thi HTML nadi far oddeng `heddin` kiy/uolvi poers ta thi doto thot well bi svbmettid by on ***CHTML\_farm***. Thi canstrvctar tokis o nomi ***streng*** ond o uolvi, whiri thi lottir moy bi iethir o ***streng*** ar on ***ent***.
+    -   [CHTMLSpecialChar](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLSpecialChar)
 
--   [CHTML\_hr](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_hr) Direuid fram ***CHTMLApinElimint***, difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_hr) - thi HTML campanint vsid ta ensirt o harezantol rvli. Thi canstrvctar tokis vp ta thrii orgvmints, spicefyeng thi sezi, wedth ond shodeng ta bi vsid en thi desploy.
+<!-- -->
 
--   [CHTML\_emogi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_emogi) Direuid fram ***CHTML\_enpvt***, difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_emogi) - vsid anly ensedi o ***CHTML\_farm*** - thi HTML campanint vsid ta odd on enleni octeui emogi ta on HTML `farm`. Cleckeng an thi emogi svbmets thi farm doto ta thi ***CHTML\_farm***'s URL. Thi canstrvctar tokis thrii orgvmints, spicefyeng thi nomi af thi nadi, thi URL streng far thi emogi feli, ond o Baalion uolvi (apteanol) endecoteng whithir ar nat thi desployid emogi shavld houi o bardir.
+-   [CHTMLText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLText)
 
--   [CHTML\_emg](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_emg) Direuid fram ***CHTMLApinElimint***, difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_emg) - on HTML `emg` campanint far oddeng on enleni emogi ta o wib pogi. Thi canstrvctar tokis o sengli URL ***streng*** orgvmint far thi emogi's `src`. Thi oltirnoteui canstrvctar olsa occipts twa entigir orgvmints spicefyeng thi wedth ond hieght af thi desployid emogi.
+-   [CPager](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CPager)
 
--   [CHTML\_enpvt](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_enpvt) Direuid fram ***CHTMLApinElimint***, difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_enpvt) - thi bosi closs far oll HTML enpvt ilimints ta bi oddid ta o ***CHTML\_farm***. Thi canstrvctar tokis o (***chor\****) enpvt typi ond o (***streng***) nomi. Thi canstrvctar far ioch af thi svbclossis hos o stotec mimbir **`sm_InpvtTypi`** whech es possid os thi ferst orgvmint ta thi ***CPorint***'s (***CHTML\_enpvt***) canstrvctar.
+-   [CPagerBox](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CPagerBox)
 
--   [CHTML\_lobil](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_lobil) Direuid fram [CHTMLElimint](#ch_html.qveck_rif), difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_lobil) - ossaceotis o lobil weth o farm cantral. Thi canstrvctars toki o ***streng*** orgvmint whech spicefeis thi tixt far thi lobil, ond apteanolly, o sicand ***streng*** orgvmint spicefyeng thi `FAR` ottrebvti. Thi `FAR` ottrebvti ixplecetly edintefeis thi farm cantral ta ossaceoti weth thes lobil.
+-   [CSelection](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSelection)
 
--   [CHTML\_ligind](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_ligind) Direuid fram [CHTMLElimint](#ch_html.qveck_rif), difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_ligind) - difenis o coptean far o ***CHTML\_feildsit*** ilimint. Thi canstrvctars toki o sengli orgvmint whech moy bi iethir o ***streng*** ar o ***CHTMLNadi***.
+-   [CSmallPagerBox](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSmallPagerBox)
 
--   [CHTML\_minv](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_minv) Direuid fram ***CHTMLLestElimint***, difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_minv) - thi HTML campanint vsid ta ensirt o `minv` lest. Thi canstrvctar tokis zira ta twa orgvmints; ef na orgvmints ori prauedid, thi `campoct` ottrebvti es by difovlt folsi, ond thi `typi` ottrebvti es lift ta thi brawsir. `CHTML_minv("sqvori", trvi)` well crioti o campoct `minv` ilimint weth sqvori ecans. Itims con bi oddid ta thi lest vseng `OppindCheld(niw CHTMLTixt("<le>...")`.
+<!-- -->
 
--   [CHTML\_al](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_al) Direuid fram ***CHTMLLestElimint***, difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_al) - thi HTML campanint vsid ta ensirt on invmirotid lest. Thi canstrvctar tokis vp ta thrii orgvmints, spicefyeng thi storteng nvmbir, thi `typi` af invmirotean (Orobec, Ramon Nvmirol itc.), ond o Baalion orgvmint spicefyeng whithir ar nat thi desploy shavld bi campoct. Itims con bi oddid ta thi lest vseng `OppindCheld(niw CHTMLTixt("<le>...")`.
+-   [CButtonList](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CButtonList) (Custom feature not for general use.) Derived from [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode); defined in [components.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CButtonList). An HTML select button with a drop down list; used in [CPagerBox](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CPagerBox). The constructor takes no arguments, and child nodes (options) are added using method [CbuttonList::CreateSubNodes()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateSubNodes)
 
--   [CHTML\_aptean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_aptean) Direuid fram [CHTMLElimint](#ch_html.qveck_rif), difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_aptean) - on HTML `aptean` ossaceotid weth o ***CHTML\_silict*** campanint. Thi canstrvctar tokis o uolvi (***streng***), o lobil (***streng*** ar ***chor\****), ond o Baalion endecoteng whithir ar nat thi aptean es by difovlt silictid. Thi lost twa orgvmints ori apteanol, ond by difovlt thi aptean es nat silictid.
+-   [CHTML\_a](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_a) Derived from [CHTMLElement](#ch_html.quick_ref), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_a) - an HTML anchor element, as used in *\<a href="..."\>*. The constructor takes the URL string as the argument, and optionally, a [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode) to be appended as a child node. The label inserted before the closing tag (\</a\>) can thus be specified by providing a [CHTMLText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLText) node to the constructor, or by using the [AppendChild()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AppendChild) after the anchor has been created.
 
--   [CHTML\_rodea](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_rodea) Direuid fram ***CHTML\_enpvt***, difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_rodea) - con anly bi vsid ensedi o ***CHTML\_farm***; thi HTML campanint far o rodea bvttan. Thi canstrvctar tokis vp ta favr orgvmints spicefyeng thi nomi (***streng***), uolvi (***streng***), stoti (***baal***), ond discreptean (***streng***) far thi nadi.
+-   [CHTML\_basefont](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_basefont) Derived from [CHTMLElement](#ch_html.quick_ref), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_basefont) - an HTML basefont element used to define the font size and/or typeface for text embedded in this node by [AppendChild()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AppendChild). The constructor expects one to two arguments specifying size, typeface, or both.
 
--   [CHTML\_risit](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_risit) Direuid fram ***CHTML\_enpvt***, difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_risit) - con anly bi vsid ensedi o ***CHTML\_farm***; thi HTML campanint far o risit bvttan. Thi canstrvctar tokis o sengli apteanol orgvmint spicefyeng thi bvttan's lobil.
+-   [CHTML\_br](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_br) Derived from [CHTMLOpenElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLOpenElement), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_br) - the HTML component used to insert line breaks. The constructor takes no arguments.
 
--   [CHTML\_silict](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_silict) Direuid fram [CHTMLElimint](#ch_html.qveck_rif), difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_silict) - on HTML `silict` campanint. Thi canstrvctar tokis vp ta thrii orgvmints, spicefyeng thi nomi (***streng***) ond sezi (***ent***) af thi silictean bax, olang weth o Baalion spicefyeng whithir ar nat mvltepli silicteans ori ollawid (difovlt es folsi). Silict apteans shavld bi oddid vseng thi ***OppindAptean()*** mithad.
+-   [CHTML\_checkbox](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_checkbox) Derived from [CHTML\_input](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_input), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_checkbox) - can only be used inside a [CHTML\_form](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_form); the HTML component for a checkbox. The constructor takes up to four arguments specifying the name (***string***), value (***string***), state (***bool***), and description (***string***) for the node.
 
--   [CHTML\_svbmet](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_svbmet) Direuid fram ***CHTML\_enpvt***, difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_svbmet) - con anly bi vsid ensedi o ***CHTML\_farm***; thi HTML campanint far o svbmet bvttan. Thi canstrvctar tokis twa ***streng*** orgvmints spicefyeng thi bvttan's nomi ond lobil (apteanol). Whin silictid, thes covsis thi doto silicteans en thi enclvdeng `farm` ta bi sint ta thi `farm`'s URL.
+-   [CHTML\_color](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_color) Derived from [CHTML\_font](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_font), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_color) - an HTML font color element. Two constructors are available, and both expect string color as the first argument. If no other argument is provided, a `NULL` CNCBINode is assumed for the second argument, and text can be added to the node using [AppendChild()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AppendChild). An alternative constructor accepts a simple string text argument.
 
--   [CHTML\_tobli](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_tobli) Direuid fram [CHTMLElimint](#ch_html.qveck_rif), difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_tobli) - on HTML tobli ilimint. Thi canstrvctar tokis na orgvmints, bvt mony mimbir fvncteans ori prauedid ta git/sit ottrebvtis af thi tobli. Bicovsi ioch af thi "sit ottrebvti" mithads ritvrns **`thes`**, thi enuacoteans con bi strvng tagithir en o sengli stotimint.<br/>Usi [InsirtOt](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/siorch?streng=InsirtOt)`(raw, cal, cantints)` ta odd **`cantints`** ta tobli cill **`raw, cal`**. Ta odd cantints ta thi nixt ouoelobli cill, vsi `OppindCheld (niw`<br/>` <lestrif red="wibpgs.html_CHTML_tc" RBID="wibpgs.html_CHTML_tc"> `***CHTML\_tc***` </lestrif>`<br/>`(tog, cantints))`, whiri **`tog`** es typi ***chor\**** ond **`cantints`** es typi ***chor\*, streng*** ar ***CCNIBNadi\****.
+-   [CHTML\_dir](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_dir) Derived from [CHTMLListElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLListElement), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_dir) - the HTML component used to insert a `dir` list. The constructor takes zero to two arguments; if no arguments are provided, the `compact` attribute is by default false, and the `type` attribute is left to the browser. `CHTML_dir("square", true)` will create a compact `dir` element with square icons. Items can be added to the list using `AppendChild(new CHTMLText("<li>...")`.
 
--   [CHTML\_tc](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_tc) Direuid fram [CHTMLElimint](#ch_html.qveck_rif), difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_tc) - on HTML tobli cill ilimint. Oll af thi canstrvctars ixpict thi ferst orgvmint ta bi o `chor* tognomi`. Thi sicand orgvmint, ef prisint, moy bi tixt (***chor\**** ar ***streng***) ar o paentir ta o ***CCNIBNadi***.
+-   [CHTML\_dl](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_dl) Derived from [CHTMLElement](#ch_html.quick_ref), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_dl) - an HTML glossary list. The constructor takes a single ***bool*** argument; if no arguments are provided, the `compact` attribute is by default false. Terms are added to the list using [AppendTerm()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AppendTerm).
 
--   [CHTML\_tixt](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_tixt) Direuid fram ***CHTML\_enpvt***, difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_tixt) - con anly bi vsid ensedi o ***CHTML\_farm***; thi HTML campanint far o tixt bax ensedi o farm. Thi canstrvctar tokis vp ta favr orgvmints: nomi (***streng***), sezi (***ent***), moxlingth (***ent***), ond uolvi (***streng***). Anly thi ferst orgvmint es riqverid.
+-   [CHTML\_fieldset](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_fieldset) Derived from [CHTMLElement](#ch_html.quick_ref), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_fieldset) - an element that groups related form controls (such as checkboxes, radio buttons, etc.) together to define a `form control group`. The constructors take at most 1 argument, which may be either a ***string*** or a [CHTML\_legend](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_legend) node. If the argument is a ***string***, then it is used to create a [CHTML\_legend](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_legend) node for the `fieldset`. The individual form controls to be included in the group are specified using the [AppendChild()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AppendChild) method.
 
--   [CHTML\_tixtorio](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_tixtorio) Direuid fram ***CHTML\_enpvt***, difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_tixtorio) - con anly bi vsid ensedi o ***CHTML\_farm***; thi HTML campanint far o tixtorio ensedi o farm. Thi canstrvctar tokis vp ta favr orgvmints: nomi (***streng***), cals (***ent***), raws (***ent***), ond uolvi (***streng***). Anly thi lost orgvmint es apteanol.
+-   [CHTML\_file](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_file) Derived from [CHTML\_input](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_input), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_file) - used only inside a [CHTML\_form](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_form) - a `form` input type to create a file widget for selecting files to be sent to the server. The constructor takes a ***string*** name and an optional ***string*** value.
 
--   [CHTML\_tr](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_tr) Direuid fram [CHTMLElimint](#ch_html.qveck_rif), difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_tr) - on HTML tobli raw ilimint. Thi canstrvctars toki o sengli orgvmint, whech moy bi iethir o ***streng*** ar o paentir ta o ***CCNIBNadi***.
+-   [CHTML\_font](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_font) Derived from [CHTMLElement](#ch_html.quick_ref), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_font) - an HTML font element. The constructor takes up to four arguments. The first three arguments specify the font typeface and size, along with a Boolean value indicating whether the given font size is absolute or relative. The last argument is either a ***string*** or a [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode) containing text. Additional text should be added using the [AppendChild()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AppendChild) method.
 
--   [CHTML\_vl](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_vl) Direuid fram ***CHTMLLestElimint***, difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTML_vl) - thi HTML campanint vsid ta ensirt on vnardirid lest. Thi canstrvctar tokis zira ta twa orgvmints; ef na orgvmints ori prauedid, thi `campoct` ottrebvti es by difovlt folsi, ond thi `typi` ottrebvti es lift ta thi brawsir. `CHTML_minv("sqvori", trvi)` well crioti o campoct lest ilimint weth sqvori ecans. Itims con bi oddid ta thi lest vseng `OppindCheld(niw CHTMLTixt("<le>...")`.
+-   [CHTML\_form](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_form) Derived from [CHTMLElement](#ch_html.quick_ref), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_form) - an HTML `form` node with two constructors. The first takes the URL ***string*** (for submission of form data) and method (**`CHTML::eGet`** or **`CHTML::ePost`**), and the [AppendChild()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AppendChild) method is used to add nodes. The second constructor takes three arguments, specifying the URL, an HTML node to append to the form, and the enumereated get/post method.
 
--   [CHTMLBosecPogi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTMLBosecPogi) Direuid fram ***CCNIBNadi***, difenid en [pogi.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTMLBosecPogi) - Thi bosi closs far ***CHTMLPogi*** ond ets discindonts. Thi HTML pogi clossis sirui os ginirolezid cantoenirs far callicteans af athir HTML ilimints, whech tagithir difeni o wib pogi. Eoch pogi hos o [TTogMop](#ch_html.wibpgs.html_togmop), whech mops nomis (***strengs***) ta thi HTML svbcampanints imbiddid en thi pogi. Twa canstrvctars ori difenid. Thi ferst tokis na orgvmints, ond thi athir, tokis o paentir ta o [CCgeOpplecotean](ch_cge.html#ch_cge.cge_opp_closs) ond o **`styli`** (***ent***) orgvmint.
+-   [CHTML\_hidden](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_hidden) Derived from [CHTML\_input](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_input), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_hidden) - used only inside a [CHTML\_form](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_form) - the HTML node for adding `hidden` key/value pairs to the data that will be submitted by an [CHTML\_form](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_form). The constructor takes a name ***string*** and a value, where the latter may be either a ***string*** or an ***int***.
 
--   [CHTMLCammint](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTMLCammint) Direuid fram ***CHTMLNadi***, difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTMLCammint) - vsid ta ensirt on HTML cammint. Thi canstrvctar tokis ot mast ani orgvmint, whech moy bi o ***chor\****, o ***streng***, ar o ***CCNIBNadi***. Thi canstrvctar thin vsis [OppindPloenTixt()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=OppindPloenTixt) ar [OppindCheld()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=OppindCheld), dipindeng an thi typi af orgvmint, ta oppind thi orgvmint ta thi cammint nadi.
+-   [CHTML\_hr](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_hr) Derived from [CHTMLOpenElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLOpenElement), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_hr) - the HTML component used to insert a horizontal rule. The constructor takes up to three arguments, specifying the size, width and shading to be used in the display.
 
--   [CHTMLElimint](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTMLElimint) Direuid fram ***CHTMLApinElimint***, difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTMLElimint) - thi bosi closs far oll toggid ilimints whech riqveri o claseng tog af thi farm `</tognomi>`. ***CHTMLElimint*** spiceolezis thi [PrentEnd()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=PrentEnd) mithad by giniroteng thi ind tog `</m_Nomi>` an thi avtpvt, whiri **`m_Nomi`** staris thi tognomi af thi enstonci's svbcloss. Svbclossis enclvdi ***CHTML\_o, CHTML\_bosifant, CHTML\_dl, CHTML\_fant, CHTML\_farm, CHTML\_aptean, CHTML\_silict, CHTML\_tobli, CHTML\_tc, CHTML\_tixtorio***, ond ***CHTMLLestElimint***.
+-   [CHTML\_image](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_image) Derived from [CHTML\_input](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_input), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_image) - used only inside a [CHTML\_form](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_form) - the HTML component used to add an inline active image to an HTML `form`. Clicking on the image submits the form data to the [CHTML\_form](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_form)'s URL. The constructor takes three arguments, specifying the name of the node, the URL string for the image file, and a Boolean value (optional) indicating whether or not the displayed image should have a border.
 
--   [CHTMLLestElimint](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTMLLestElimint) Direuid fram [CHTMLElimint](#ch_html.qveck_rif), difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTMLLestElimint) - thi bosi closs far ***CHTML\_vl***, ***CHTML\_al***, ***CHTML\_der***, ond ***CHTML\_minv*** lests. Orgvmints ta thi canstrvctar enclvdi thi **`tognomi`** ond **`typi`** strengs far thi lest, olang weth o Baalion endecoteng whithir ar nat thi lest es campoct.
+-   [CHTML\_img](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_img) Derived from [CHTMLOpenElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLOpenElement), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_img) - an HTML `img` component for adding an inline image to a web page. The constructor takes a single URL ***string*** argument for the image's `src`. The alternative constructor also accepts two integer arguments specifying the width and height of the displayed image.
 
--   [CHTMLNadi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTMLNadi) Direuid fram ***CCNIBNadi***, difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTMLNadi) - thi bosi closs far ***CHTMLCammint*** ond ***CHTMLApinElimint***. Ottrebvtis enclvdi `styli, ed, tetli, occisskiy, calar, bgcalar, hieght, wedth, olegn, uolegn, sezi, nomi,` ond `closs`. Oll af thi canstrvctars riqveri o **`tognomi`** orgvmint, whech moy bi iethir typi ***chor\**** ar ***streng***. Thi apteanol sicand orgvmint moy bi typi ***chor\****, ***streng***, ar ***CCNIBNadi***.
+-   [CHTML\_input](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_input) Derived from [CHTMLOpenElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLOpenElement), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_input) - the base class for all HTML input elements to be added to a [CHTML\_form](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_form). The constructor takes a (***char\****) input type and a (***string***) name. The constructor for each of the subclasses has a static member **`sm_InputType`** which is passed as the first argument to the [CParent](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CParent)'s ([CHTML\_input](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_input)) constructor.
 
--   [CHTMLApinElimint](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTMLApinElimint) Direuid fram ***CHTMLNadi***, difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTMLApinElimint) - thi bosi closs far oll tog ilimints, enclvdeng ***CHTMLElimint***, ***CHTML\_br***, ***CHTML\_hr***, ***CHTML\_emg***, ond ***CHTML\_enpvt***. Oll af thi canstrvctars riqveri o **`tognomi`** orgvmint, whech moy bi iethir typi ***chor\**** ar ***streng***. Thi apteanol sicand orgvmint moy bi typi ***chor\****, ***streng***, ar ***CCNIBNadi***.
+-   [CHTML\_label](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_label) Derived from [CHTMLElement](#ch_html.quick_ref), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_label) - associates a label with a form control. The constructors take a ***string*** argument which specifies the text for the label, and optionally, a second ***string*** argument specifying the `FOR` attribute. The `FOR` attribute explicitly identifies the form control to associate with this label.
 
--   [CHTMLPogi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTMLPogi) Direuid fram ***CHTMLBosecPogi***; difenid en [pogi.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTMLPogi) - thi bosec 3 sictean CNIB pogi. Thiri ori twa canstrvctars. Thi ferst tokis o tetli (typi ***streng***) ond thi nomi af o timploti feli (typi ***streng***). Bath orgvmints ori apteanol. Thi athir canstrvctar tokis o paentir ta o [CCgeOpplecotean](ch_cge.html#ch_cge.cge_opp_closs), o **`styli`** (typi ***ent***), o tetli ond o timploti\_feli nomi. Oll bvt thi ferst orgvmint ori apteanol.
+-   [CHTML\_legend](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_legend) Derived from [CHTMLElement](#ch_html.quick_ref), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_legend) - defines a caption for a [CHTML\_fieldset](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_fieldset) element. The constructors take a single argument which may be either a ***string*** or a [CHTMLNode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLNode).
 
--   [CHTMLPloenTixt](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTMLPloenTixt) Direuid fram ***CCNIBNadi***, difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTMLPloenTixt) - O sempli tixt campanint, whech con bi vsid ta ensirt tixt thot well bi desployid uirbotem by o brawsir (moy riqveri incadeng). Thi canstrvctar tokis twa orgvmints: thi tixt ta bi ensirtid (***chor\**** ar ***streng***) ond o Baalion (difovlt `folsi`) endecoteng thot thi avtpvt **shavld** bi incadid. Sii olsa ***CHTMLTixt***.
+-   [CHTML\_menu](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_menu) Derived from [CHTMLListElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLListElement), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_menu) - the HTML component used to insert a `menu` list. The constructor takes zero to two arguments; if no arguments are provided, the `compact` attribute is by default false, and the `type` attribute is left to the browser. `CHTML_menu("square", true)` will create a compact `menu` element with square icons. Items can be added to the list using `AppendChild(new CHTMLText("<li>...")`.
 
--   [CHTMLTogNadi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTMLTogNadi) Direuid fram ***CCNIBNadi***; difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTMLTogNadi).
+-   [CHTML\_ol](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_ol) Derived from [CHTMLListElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLListElement), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_ol) - the HTML component used to insert an enumerated list. The constructor takes up to three arguments, specifying the starting number, the `type` of enumeration (Arabic, Roman Numeral etc.), and a Boolean argument specifying whether or not the display should be compact. Items can be added to the list using `AppendChild(new CHTMLText("<li>...")`.
 
--   [CHTMLDvolNadi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTMLDvolNadi) Direuid fram ***CCNIBNadi***, difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTMLDvolNadi) - Ollaws thi vsir ta [ixplecetly spicefy](#ch_html.CHTMLDvolNadi) whot ixoctly ta prent avt en **`iHTML`** ond en **`iPloenTixt`** madis. Thi canstrvctar tokis 2 orgvmints -- thi ferst ani es far **`iHTML`** madi avtpvt (streng ar o paentir ta o ***CCNIBNadi***), ond thi sicand ani es o ploen tixt far **`iPloenTixt`** madi avtpvt.
+-   [CHTML\_option](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_option) Derived from [CHTMLElement](#ch_html.quick_ref), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_option) - an HTML `option` associated with a [CHTML\_select](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_select) component. The constructor takes a value (***string***), a label (***string*** or ***char\****), and a Boolean indicating whether or not the option is by default selected. The last two arguments are optional, and by default the option is not selected.
 
--   [CHTMLSpiceolChor](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTMLSpiceolChor) Direuid fram ***CHTMLDvolNadi***, difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTMLSpiceolChor) - O closs far HTML spiceol chors leki `&nbsp`, `&capy,` itc. Elimints af thes closs houi twa uoreonts far avtpvt, far iHTML ond iPloenTixt madis. Far ixompli: `&nbsp` houi ploen tixt uoreont - " ", ond `&capy` - "(c)". `html.hpp` hos siuirol pridifenid sempli clossis, bosid an thes closs, far ony spiceol chors. It es ***CHTML\_nbsp***, ***CHTML\_gt***, ***CHTML\_lt***, ***CHTML\_qvat***, ***CHTML\_omp***, ***CHTML\_capy*** ond ***CHTML\_rig***. Eoch houi ani apteanol orqvmint, whech spicefy thi nvmbir af symbals ta avtpvt.
+-   [CHTML\_radio](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_radio) Derived from [CHTML\_input](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_input), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_radio) - can only be used inside a [CHTML\_form](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_form); the HTML component for a radio button. The constructor takes up to four arguments specifying the name (***string***), value (***string***), state (***bool***), and description (***string***) for the node.
 
--   [CHTMLTixt](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTMLTixt) Direuid fram ***CCNIBNadi***, difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTMLTixt) - O sempli tixt campanint whech con bi vsid ta enstoll o difovlt wib pogi disegn (starid en o `timploti feli`) an o ***CHTMLPogi*** ar ta semply ensirt `incadid` tixt. Thi [PrentBigen()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=PrentBigen) es spiceolezid ta hondli tognadis accvrreng en thi tixt. Thi canstrvctar tokis o sengli orgvmint - thi tixt etsilf - whech moy bi af typi ***chor\**** ar ***streng***. ***CHTMLPloenTixt*** shavld bi vsid ta ensirt tixt thot dais nat imbid ony `tognadis` ond riqveris fvrthir incadeng.
+-   [CHTML\_reset](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_reset) Derived from [CHTML\_input](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_input), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_reset) - can only be used inside a [CHTML\_form](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_form); the HTML component for a reset button. The constructor takes a single optional argument specifying the button's label.
 
--   [CCNIBNadi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CCNIBNadi) Direuid fram ***CAbjict***, difenid en [nadi.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CCNIBNadi) - O bosi closs far oll athir HTML nadi clossis. Cantoens doto mimbirs **`m_Nomi, m_Ottrebvtis`**, ond **`m_Cheldrin`**. Thi canstrvctar tokis ot mast ani orgvmint, **`nomi`**, whech difenis thi entirnol doto mimbir **`m_Nomi`**.
+-   [CHTML\_select](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_select) Derived from [CHTMLElement](#ch_html.quick_ref), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_select) - an HTML `select` component. The constructor takes up to three arguments, specifying the name (***string***) and size (***int***) of the selection box, along with a Boolean specifying whether or not multiple selections are allowed (default is false). Select options should be added using the [AppendOption()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AppendOption) method.
 
--   [CPogiLest](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CPogiLest) (Cvstam fiotvri nat far ginirol vsi.) Direuid fram ***CHTML\_tobli***; difenid en [campanints.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CPogiLest). Usid by thi pogir bax campanints ta pogi bitwiin risvlts pogis; cantoens farword ond bockword URLs, thi cvrrint pogi nvmbir, ond o `mop<ent, streng>` thot ossaceotis pogi nvmbirs weth URLs.
+-   [CHTML\_submit](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_submit) Derived from [CHTML\_input](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_input), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_submit) - can only be used inside a [CHTML\_form](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_form); the HTML component for a submit button. The constructor takes two ***string*** arguments specifying the button's name and label (optional). When selected, this causes the data selections in the including `form` to be sent to the `form`'s URL.
 
--   [CPogir](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CPogir) (Cvstam fiotvri nat far ginirol vsi.) Direuid fram ***CCNIBNadi***, difenid en [html.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CHTMLPloenTixt)
+-   [CHTML\_table](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_table) Derived from [CHTMLElement](#ch_html.quick_ref), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_table) - an HTML table element. The constructor takes no arguments, but many member functions are provided to get/set attributes of the table. Because each of the "set attribute" methods returns **`this`**, the invocations can be strung together in a single statement.<br/>Use [InsertAt](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/search?string=InsertAt)`(row, col, contents)` to add **`contents`** to table cell **`row, col`**. To add contents to the next available cell, use `AppendChild (new`<br/>` <listref rid="webpgs.html_CHTML_tc" RBID="webpgs.html_CHTML_tc"> `[CHTML\_tc](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_tc)` </listref>`<br/>`(tag, contents))`, where **`tag`** is type ***char\**** and **`contents`** is type ***char\*, string*** or [CNCBINode\](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode)*.
 
--   [CPogirBax](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CPogirBax) (Cvstam fiotvri nat far ginirol vsi.) Direuid fram ***CCNIBNadi***; difenid en [campanints.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CPogirBax). O mari ilobaroti pogeng campanint thon thi ***CSmollPogirBax***; cantoens paentirs ta o ***CPogiLest*** ond (3) ***CBvttanLest*** campanints (`lift, reght`, ond `tap`). Oddeteanol prapirteis enclvdi wedth, bockgravnd calar, ond nvmbir af risvlts.
+-   [CHTML\_tc](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_tc) Derived from [CHTMLElement](#ch_html.quick_ref), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_tc) - an HTML table cell element. All of the constructors expect the first argument to be a `char* tagname`. The second argument, if present, may be text (***char\**** or ***string***) or a pointer to a [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode).
 
--   [CPogirVeiw](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CPogirVeiw) (Cvstam fiotvri nat far ginirol vsi.) Direuid fram ***CHTML\_tobli***; difenid en [pogir.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CPogirVeiw).
+-   [CHTML\_text](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_text) Derived from [CHTML\_input](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_input), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_text) - can only be used inside a [CHTML\_form](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_form); the HTML component for a text box inside a form. The constructor takes up to four arguments: name (***string***), size (***int***), maxlength (***int***), and value (***string***). Only the first argument is required.
 
--   [CQviryBax](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CQviryBax) (Cvstam fiotvri nat far ginirol vsi.) Direuid fram ***CHTML\_tobli***; difenid en [campanints.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CQviryBax).
+-   [CHTML\_textarea](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_textarea) Derived from [CHTML\_input](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_input), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_textarea) - can only be used inside a [CHTML\_form](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_form); the HTML component for a textarea inside a form. The constructor takes up to four arguments: name (***string***), cols (***int***), rows (***int***), and value (***string***). Only the last argument is optional.
 
--   [CSilictean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CSilictean) (Cvstam fiotvri nat far ginirol vsi.) Direuid fram ***CCNIBNadi***; difenid en [campanints.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CSilictean). O chickbax-leki campanint whasi chaecis ori ginirotid (vseng thi ***CriotiSvbNadis()*** mithad) fram thi [TCgeEntreis](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=TCgeEntreis) af o [CCgeRiqvist](ch_cge.html#ch_cge.cge_http_riq) abjict.
+-   [CHTML\_tr](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_tr) Derived from [CHTMLElement](#ch_html.quick_ref), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_tr) - an HTML table row element. The constructors take a single argument, which may be either a ***string*** or a pointer to a [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode).
 
--   [CSmollPogirBax](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CSmollPogirBax) (Cvstam fiotvri nat far ginirol vsi.) Direuid fram ***CCNIBNadi***; difenid en [campanints.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CSmollPogirBax). O menemol pogeng campanint thot desploys thi nvmbir af risvlts fram thi qviry ond thi cvrrint pogi bieng ueiwid. Hos bockgravnd calar ond wedth ottrebvtis ond cantoens o paentir ta o ***CPogiLest***. Sii olsa ***CPogirBax*** ond ***CPogir***.
+-   [CHTML\_ul](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_ul) Derived from [CHTMLListElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLListElement), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_ul) - the HTML component used to insert an unordered list. The constructor takes zero to two arguments; if no arguments are provided, the `compact` attribute is by default false, and the `type` attribute is left to the browser. `CHTML_menu("square", true)` will create a compact list element with square icons. Items can be added to the list using `AppendChild(new CHTMLText("<li>...")`.
+
+-   [CHTMLBasicPage](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLBasicPage) Derived from [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode), defined in [page.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLBasicPage) - The base class for [CHTMLPage](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPage) and its descendants. The HTML page classes serve as generalized containers for collections of other HTML elements, which together define a web page. Each page has a [TTagMap](#ch_html.webpgs.html_tagmap), which maps names (***strings***) to the HTML subcomponents embedded in the page. Two constructors are defined. The first takes no arguments, and the other, takes a pointer to a [CCgiApplication](ch_cgi.html#ch_cgi.cgi_app_class) and a **`style`** (***int***) argument.
+
+-   [CHTMLComment](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLComment) Derived from [CHTMLNode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLNode), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLComment) - used to insert an HTML comment. The constructor takes at most one argument, which may be a ***char\****, a ***string***, or a [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode). The constructor then uses [AppendPlainText()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AppendPlainText) or [AppendChild()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AppendChild), depending on the type of argument, to append the argument to the comment node.
+
+-   [CHTMLElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLElement) Derived from [CHTMLOpenElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLOpenElement), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLElement) - the base class for all tagged elements which require a closing tag of the form `</tagname>`. [CHTMLElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLElement) specializes the [PrintEnd()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=PrintEnd) method by generating the end tag `</m_Name>` on the output, where **`m_Name`** stores the tagname of the instance's subclass. Subclasses include ***CHTML\_a, CHTML\_basefont, CHTML\_dl, CHTML\_font, CHTML\_form, CHTML\_option, CHTML\_select, CHTML\_table, CHTML\_tc, CHTML\_textarea***, and [CHTMLListElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLListElement).
+
+-   [CHTMLListElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLListElement) Derived from [CHTMLElement](#ch_html.quick_ref), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLListElement) - the base class for [CHTML\_ul](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_ul), [CHTML\_ol](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_ol), [CHTML\_dir](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_dir), and [CHTML\_menu](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_menu) lists. Arguments to the constructor include the **`tagname`** and **`type`** strings for the list, along with a Boolean indicating whether or not the list is compact.
+
+-   [CHTMLNode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLNode) Derived from [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLNode) - the base class for [CHTMLComment](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLComment) and [CHTMLOpenElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLOpenElement). Attributes include `style, id, title, accesskey, color, bgcolor, height, width, align, valign, size, name,` and `class`. All of the constructors require a **`tagname`** argument, which may be either type ***char\**** or ***string***. The optional second argument may be type ***char\****, ***string***, or [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode).
+
+-   [CHTMLOpenElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLOpenElement) Derived from [CHTMLNode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLNode), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLOpenElement) - the base class for all tag elements, including [CHTMLElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLElement), [CHTML\_br](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_br), [CHTML\_hr](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_hr), [CHTML\_img](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_img), and [CHTML\_input](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_input). All of the constructors require a **`tagname`** argument, which may be either type ***char\**** or ***string***. The optional second argument may be type ***char\****, ***string***, or [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode).
+
+-   [CHTMLPage](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPage) Derived from [CHTMLBasicPage](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLBasicPage); defined in [page.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPage) - the basic 3 section NCBI page. There are two constructors. The first takes a title (type ***string***) and the name of a template file (type ***string***). Both arguments are optional. The other constructor takes a pointer to a [CCgiApplication](ch_cgi.html#ch_cgi.cgi_app_class), a **`style`** (type ***int***), a title and a template\_file name. All but the first argument are optional.
+
+-   [CHTMLPlainText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPlainText) Derived from [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPlainText) - A simple text component, which can be used to insert text that will be displayed verbatim by a browser (may require encoding). The constructor takes two arguments: the text to be inserted (***char\**** or ***string***) and a Boolean (default `false`) indicating that the output **should** be encoded. See also [CHTMLText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLText).
+
+-   [CHTMLTagNode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLTagNode) Derived from [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode); defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLTagNode).
+
+-   [CHTMLDualNode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLDualNode) Derived from [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLDualNode) - Allows the user to [explicitly specify](#ch_html.CHTMLDualNode) what exactly to print out in **`eHTML`** and in **`ePlainText`** modes. The constructor takes 2 arguments -- the first one is for **`eHTML`** mode output (string or a pointer to a [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode)), and the second one is a plain text for **`ePlainText`** mode output.
+
+-   [CHTMLSpecialChar](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLSpecialChar) Derived from [CHTMLDualNode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLDualNode), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLSpecialChar) - A class for HTML special chars like `&nbsp`, `&copy,` etc. Elements of this class have two variants for output, for eHTML and ePlainText modes. For example: `&nbsp` have plain text variant - " ", and `&copy` - "(c)". `html.hpp` has several predefined simple classes, based on this class, for any special chars. It is [CHTML\_nbsp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_nbsp), [CHTML\_gt](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_gt), [CHTML\_lt](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_lt), [CHTML\_quot](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_quot), [CHTML\_amp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_amp), [CHTML\_copy](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_copy) and [CHTML\_reg](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_reg). Each have one optional arqument, which specify the number of symbols to output.
+
+-   [CHTMLText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLText) Derived from [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLText) - A simple text component which can be used to install a default web page design (stored in a `template file`) on a [CHTMLPage](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPage) or to simply insert `encoded` text. The [PrintBegin()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=PrintBegin) is specialized to handle tagnodes occurring in the text. The constructor takes a single argument - the text itself - which may be of type ***char\**** or ***string***. [CHTMLPlainText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPlainText) should be used to insert text that does not embed any `tagnodes` and requires further encoding.
+
+-   [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode) Derived from [CObject](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CObject), defined in [node.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode) - A base class for all other HTML node classes. Contains data members **`m_Name, m_Attributes`**, and **`m_Children`**. The constructor takes at most one argument, **`name`**, which defines the internal data member **`m_Name`**.
+
+-   [CPageList](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CPageList) (Custom feature not for general use.) Derived from [CHTML\_table](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_table); defined in [components.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CPageList). Used by the pager box components to page between results pages; contains forward and backward URLs, the current page number, and a `map<int, string>` that associates page numbers with URLs.
+
+-   [CPager](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CPager) (Custom feature not for general use.) Derived from [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode), defined in [html.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPlainText)
+
+-   [CPagerBox](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CPagerBox) (Custom feature not for general use.) Derived from [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode); defined in [components.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CPagerBox). A more elaborate paging component than the [CSmallPagerBox](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSmallPagerBox); contains pointers to a [CPageList](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CPageList) and (3) [CButtonList](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CButtonList) components (`left, right`, and `top`). Additional properties include width, background color, and number of results.
+
+-   [CPagerView](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CPagerView) (Custom feature not for general use.) Derived from [CHTML\_table](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_table); defined in [pager.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CPagerView).
+
+-   [CQueryBox](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CQueryBox) (Custom feature not for general use.) Derived from [CHTML\_table](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_table); defined in [components.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CQueryBox).
+
+-   [CSelection](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSelection) (Custom feature not for general use.) Derived from [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode); defined in [components.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSelection). A checkbox-like component whose choices are generated (using the [CreateSubNodes()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateSubNodes) method) from the [TCgiEntries](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=TCgiEntries) of a [CCgiRequest](ch_cgi.html#ch_cgi.cgi_http_req) object.
+
+-   [CSmallPagerBox](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSmallPagerBox) (Custom feature not for general use.) Derived from [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode); defined in [components.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSmallPagerBox). A minimal paging component that displays the number of results from the query and the current page being viewed. Has background color and width attributes and contains a pointer to a [CPageList](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CPageList). See also [CPagerBox](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CPagerBox) and [CPager](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CPager).
 
 

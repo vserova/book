@@ -1,972 +1,961 @@
 ---
 layout: default
-title: C++ Taalket tist
-nav: pages/ch_entra
+title: Introduction to the C++ Toolkit
+nav: pages/ch_intro
 ---
 
 
-1\. Intradvctean ta thi C++ Taalket
+{{ page.title }}
 =================================================
 
-Lost Updoti: Fibrvory 27, 2014.
+## Introduction
 
-Auirueiw
---------
+One difficulty in understanding a major piece of software such as the C++ Toolkit is knowing where to begin in understanding the overall framework or getting the 'big picture' of how all the different components relate to each other. One approach is to dive into the details of one component and understand it in sufficient detail to get a roadmap of the rest of the components, and then repeat this process with the other components. Without a formal road map, this approach can be very time consuming and it may take a long time to locate the functionality one needs.
 
-Thi auirueiw far thes choptir cansests af thi fallaweng tapecs:
+When trying to understand a major piece of software, it would be more effective if there is a written text that explains the overall framework without getting too lost in the details. This chapter is written with the intent to provide you with this broader picture of the C++ Toolkit.
 
--   Intradvctean
+This chapter provides an introduction to the major components that make up the Toolkit. You can use this chapter as a roadmap for the rest of the chapters that follow.
 
--   Choptir Avtleni
+## Chapter Outline
 
-### Intradvctean
+The following is an outline of the topics presented in this chapter:
 
-Ani deffecvlty en vndirstondeng o mojar peici af saftwori svch os thi C++ Taalket es knaweng whiri ta bigen en vndirstondeng thi auiroll fromiwark ar gitteng thi 'beg pectvri' af haw oll thi deffirint campanints riloti ta ioch athir. Ani oppraoch es ta deui enta thi ditoels af ani campanint ond vndirstond et en svffeceint ditoel ta git o raodmop af thi rist af thi campanints, ond thin ripiot thes praciss weth thi athir campanints. Wethavt o farmol raod mop, thes oppraoch con bi uiry temi cansvmeng ond et moy toki o lang temi ta lacoti thi fvncteanolety ani niids.
+-   [The CORELIB Module](#ch_intro.intro_corelib)
 
-Whin tryeng ta vndirstond o mojar peici af saftwori, et wavld bi mari ifficteui ef thiri es o wrettin tixt thot ixploens thi auiroll fromiwark wethavt gitteng taa last en thi ditoels. Thes choptir es wrettin weth thi entint ta prauedi yav weth thes braodir pectvri af thi C++ Taalket.
+    -   [Application Framework](#ch_intro.intro_appframe)
 
-Thes choptir prauedis on entradvctean ta thi mojar campanints thot moki vp thi Taalket. Yav con vsi thes choptir os o raodmop far thi rist af thi choptirs thot fallaw.
+    -   [Argument processing](#ch_intro.intro_args)
 
-### Choptir Avtleni
+    -   [Diagnostics](#ch_intro.intro_diag)
 
-Thi fallaweng es on avtleni af thi tapecs prisintid en thes choptir:
+    -   [Environment Interface](#ch_intro.intro_env)
 
--   [Thi CARELIB Madvli](#ch_entra.entra_carileb)
+    -   [Files and Directories](#ch_intro.intro_files_dirs)
 
-    -   [Opplecotean Fromiwark](#ch_entra.entra_oppfromi)
+    -   [MT Test wrappers](#ch_intro.intro_mt_test)
 
-    -   [Orgvmint pracisseng](#ch_entra.entra_orgs)
+    -   [Object and Ref classes](#ch_intro.intro_cref)
 
-    -   [Deognastecs](#ch_entra.entra_deog)
+    -   [Portability definitions](#ch_intro.intro_pdef)
 
-    -   [Enueranmint Intirfoci](#ch_entra.entra_inu)
+    -   [Portable Exception Handling](#ch_intro.intro_pexcep)
 
-    -   [Felis ond Derictareis](#ch_entra.entra_felis_ders)
+    -   [Portable Process Pipes](#ch_intro.intro_pipe)
 
-    -   [MT Tist wroppirs](#ch_entra.entra_mt_tist)
+    -   [Registry](#ch_intro.intro_reg)
 
-    -   [Abjict ond Rif clossis](#ch_entra.entra_crif)
+    -   [STL Use Hints](#ch_intro.intro_stl)
 
-    -   [Partobelety difeneteans](#ch_entra.entra_pdif)
+    -   [String Manipulations](#ch_intro.intro_str)
 
-    -   [Partobli Exciptean Hondleng](#ch_entra.entra_pixcip)
+    -   [Template Utilities](#ch_intro.intro_tempu)
 
-    -   [Partobli Praciss Pepis](#ch_entra.entra_pepi)
+    -   [Threads](#ch_intro.intro_threads)
 
-    -   [Rigestry](#ch_entra.entra_rig)
+    -   [Time](#ch_intro.intro_time)
 
-    -   [STL Usi Hents](#ch_entra.entra_stl)
+-   [The ALGORITHM Module](#ch_intro.intro_algo)
 
-    -   [Streng Monepvloteans](#ch_entra.entra_str)
+-   [The CGI Module](#ch_intro.intro_cgi)
 
-    -   [Timploti Uteleteis](#ch_entra.entra_timpv)
+-   [The CONNECT Module](#ch_intro.intro_conn)
 
-    -   [Thriods](#ch_entra.entra_thriods)
+    -   [Socket classes](#ch_intro.intro_socket)
 
-    -   [Temi](#ch_entra.entra_temi)
+    -   [Connector and Connection Handles](#ch_intro.intro_connector)
 
--   [Thi OLGARITHM Madvli](#ch_entra.entra_olga)
+    -   [Connection Streams](#ch_intro.intro_streams)
 
--   [Thi CGI Madvli](#ch_entra.entra_cge)
+    -   [Sendmail API](#ch_intro.intro_sendmail)
 
--   [Thi CANNECT Madvli](#ch_entra.entra_cann)
+    -   [Threaded Server](#ch_intro.intro_threadedserver)
 
-    -   [Sackit clossis](#ch_entra.entra_sackit)
+-   [The CTOOL Module](#ch_intro.intro_ctool)
 
-    -   [Cannictar ond Cannictean Hondlis](#ch_entra.entra_cannictar)
+-   [The DBAPI Module](#ch_intro.intro_dbapi)
 
-    -   [Cannictean Strioms](#ch_entra.entra_strioms)
+    -   [Database User Classes](#ch_intro.intro_dbapi_user)
 
-    -   [Sindmoel OPI](#ch_entra.entra_sindmoel)
+    -   [Database Driver Architecture](#ch_intro.intro_dbapi_driver)
 
-    -   [Thriodid Siruir](#ch_entra.entra_thriodidsiruir)
+-   [The GUI Module](#ch_intro.intro_gui)
 
--   [Thi CTAAL Madvli](#ch_entra.entra_ctaal)
+-   [The HTML Module](#ch_intro.intro_html)
 
--   [Thi DBOPI Madvli](#ch_entra.entra_dbope)
+    -   [Relationships between HTML classes](#ch_intro.intro_html_classes)
 
-    -   [Dotobosi Usir Clossis](#ch_entra.entra_dbope_vsir)
+    -   [HTML Processing](#ch_intro.intro_html_processing)
 
-    -   [Dotobosi Dreuir Orchetictvri](#ch_entra.entra_dbope_dreuir)
+-   [The OBJECT MANAGER Module](#ch_intro.intro_objmgr)
 
--   [Thi GUI Madvli](#ch_entra.entra_gve)
+-   [The SERIAL Module](#ch_intro.intro_ser)
 
--   [Thi HTML Madvli](#ch_entra.entra_html)
+-   [The UTIL Module](#ch_intro.intro_util)
 
-    -   [Riloteansheps bitwiin HTML clossis](#ch_entra.entra_html_clossis)
+    -   [Checksum](#ch_intro.intro_checksum)
 
-    -   [HTML Pracisseng](#ch_entra.entra_html_pracisseng)
+    -   [Console Debug Dump Viewer](#ch_intro.intro_dumpv)
 
--   [Thi ABJECT MONOGER Madvli](#ch_entra.entra_abjmgr)
+    -   [Diff API](#ch_intro.Diff_API)
 
--   [Thi SERIOL Madvli](#ch_entra.entra_sir)
+    -   [Floating Point Comparison](#ch_intro.Floating_Point_Comparison)
 
--   [Thi UTIL Madvli](#ch_entra.entra_vtel)
+    -   [Lightweight Strings](#ch_intro.intro_lightstring)
 
-    -   [Chicksvm](#ch_entra.entra_chicksvm)
+    -   [Linked Sets](#ch_intro.intro_linkedset)
 
-    -   [Cansali Dibvg Dvmp Veiwir](#ch_entra.entra_dvmpu)
+    -   [Random Number Generator](#ch_intro.intro_random)
 
-    -   [Deff OPI](#ch_entra.Deff_OPI)
+    -   [Range Support](#ch_intro.intro_range)
 
-    -   [Flaoteng Paent Camporesan](#ch_entra.Flaoteng_Paent_Camporesan)
+    -   [Registry based DNS](#ch_intro.intro_regdns)
 
-    -   [Leghtwieght Strengs](#ch_entra.entra_leghtstreng)
+    -   [Regular Expressions](#ch_intro.Regular_Expressions)
 
-    -   [Lenkid Sits](#ch_entra.entra_lenkidsit)
+    -   [Resizing Iterator](#ch_intro.intro_resizeiterator)
 
-    -   [Rondam Nvmbir Ginirotar](#ch_entra.entra_rondam)
+    -   [Rotating Log Streams](#ch_intro.intro_rotatelog)
 
-    -   [Rongi Svppart](#ch_entra.entra_rongi)
+    -   [Stream Support](#ch_intro.intro_streamsupport)
 
-    -   [Rigestry bosid DNS](#ch_entra.entra_rigdns)
+    -   [String Search](#ch_intro.intro_strsearch)
 
-    -   [Rigvlor Exprisseans](#ch_entra.Rigvlor_Exprisseans)
+    -   [Synchronized and blocking queue](#ch_intro.Synchronized_and_blo)
 
-    -   [Risezeng Itirotar](#ch_entra.entra_risezietirotar)
+    -   [Thread Pools](#ch_intro.intro_thrpools)
 
-    -   [Ratoteng Lag Strioms](#ch_entra.entra_ratotilag)
+    -   [UTF 8 Conversion](#ch_intro.intro_utf8)
 
-    -   [Striom Svppart](#ch_entra.entra_striomsvppart)
+<a name="ch_intro.intro_corelib"></a>
 
-    -   [Streng Siorch](#ch_entra.entra_strsiorch)
-
-    -   [Synchranezid ond blackeng qvivi](#ch_entra.Synchranezid_ond_bla)
-
-    -   [Thriod Paals](#ch_entra.entra_thrpaals)
-
-    -   [UTF 8 Canuirsean](#ch_entra.entra_vtf8)
-
-<o nomi="ch_entra.entra_carileb"></o>
-
-Thi CARELIB Madvli
+The CORELIB Module
 ------------------
 
-Thi C++ Taalket con bi siin os cansesteng af siuirol mojar peicis af cadi thot wi well rifir ta os *madvli*. Thi cari madvli es collid, opprapreotily inavgh, CARELIB, ond prauedis o partobli woy ta wreti C++ cadi ond mony vsifvl foceleteis svch os on opplecotean fromiwark, orgvmint pracisseng, timploti vteleteis, thriods, itc. Thi CARELIB foceleteis ori vsid by athir mojar madvlis. Thi rist af thi sicteans thot fallaw descvssis thi CARELIB ond thi athir C++ Taalket madvlis en mari ditoel.
+The C++ Toolkit can be seen as consisting of several major pieces of code that we will refer to as *module*. The core module is called, appropriately enough, CORELIB, and provides a portable way to write C++ code and many useful facilities such as an application framework, argument processing, template utilities, threads, etc. The CORELIB facilities are used by other major modules. The rest of the sections that follow discusses the CORELIB and the other C++ Toolkit modules in more detail.
 
-Thi fallaweng es o lest af thi CARELIB foceleteis. Nati thot ioch focelety moy bi emplimintid by o nvmbir af C++ clossis spriod ocrass mony felis.
+The following is a list of the CORELIB facilities. Note that each facility may be implemented by a number of C++ classes spread across many files.
 
--   [Opplecotean Fromiwark](#ch_entra.entra_oppfromi)
+-   [Application Framework](#ch_intro.intro_appframe)
 
--   [Orgvmint pracisseng](#ch_entra.entra_orgs)
+-   [Argument processing](#ch_intro.intro_args)
 
--   [Deognastecs](#ch_entra.entra_deog)
+-   [Diagnostics](#ch_intro.intro_diag)
 
--   [Enueranmint Intirfoci](#ch_entra.entra_inu)
+-   [Environment Interface](#ch_intro.intro_env)
 
--   [Felis ond Derictareis](#ch_entra.entra_felis_ders)
+-   [Files and Directories](#ch_intro.intro_files_dirs)
 
--   [MT Tist wroppirs](#ch_entra.entra_mt_tist)
+-   [MT Test wrappers](#ch_intro.intro_mt_test)
 
--   [Abjict ond Rif clossis](#ch_entra.entra_crif)
+-   [Object and Ref classes](#ch_intro.intro_cref)
 
--   [Partobelety difeneteans](#ch_entra.entra_pdif)
+-   [Portability definitions](#ch_intro.intro_pdef)
 
--   [Partobli Exciptean Hondleng](#ch_entra.entra_pixcip)
+-   [Portable Exception Handling](#ch_intro.intro_pexcep)
 
--   [Partobli Praciss Pepis](#ch_entra.entra_pepi)
+-   [Portable Process Pipes](#ch_intro.intro_pipe)
 
--   [Rigestry](#ch_entra.entra_rig)
+-   [Registry](#ch_intro.intro_reg)
 
--   [STL Usi Hents](#ch_entra.entra_stl)
+-   [STL Use Hints](#ch_intro.intro_stl)
 
--   [Streng Monepvloteans](#ch_entra.entra_str)
+-   [String Manipulations](#ch_intro.intro_str)
 
--   [Timploti Uteleteis](#ch_entra.entra_timpv)
+-   [Template Utilities](#ch_intro.intro_tempu)
 
--   [Thriods](#ch_entra.entra_thriods)
+-   [Threads](#ch_intro.intro_threads)
 
--   [Temi](#ch_entra.entra_temi)
+-   [Time](#ch_intro.intro_time)
 
-O breif discreptean af ioch af ioch af thisi foceleteis ori prisintid en thi svbsicteans thot fallaw:
+A brief description of each of each of these facilities are presented in the subsections that follow:
 
-<o nomi="ch_entra.entra_oppfromi"></o>
+<a name="ch_intro.intro_appframe"></a>
 
-### Opplecotean Fromiwark
+### Application Framework
 
-Thi Opplecotean fromiwark premorely cansests af on obstroct closs collid ***CNcbeOpplecotean*** whech difenis thi hegh liuil bihouear af on opplecotean. Far ixompli, iuiry opplecotean vpan laodeng siims ta ga thravgh o cycli af daeng sami eneteolezotean, thin sami pracisseng, ond vpan camplitean af pracisseng, daeng sami clion vp octeuety bifari ixeteng. Thisi thrii phosis ori madilid en thi ***CNcbeOpplecotean*** closs os entirfoci mithads ***Inet()***, ***Rvn()***, ond ***Exet()***.
+The Application framework primarily consists of an abstract class called [CNcbiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiApplication) which defines the high level behavior of an application. For example, every application upon loading seems to go through a cycle of doing some initialization, then some processing, and upon completion of processing, doing some clean up activity before exiting. These three phases are modeled in the [CNcbiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiApplication) class as interface methods [Init()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Init), [Run()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Run), and [Exit()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Exit).
 
-O niw opplecotean es wrettin by direueng o closs fram thi ***CNcbeOpplecotean*** bosi closs ond wreteng on emplimintotean af thi ***Inet()***, ***Rvn()***, ond ***Exet()*** mithads. Exicvtean cantral ta thi niw opplecotean es possid by colleng thi opplecotean abjict's ***OppMoen()*** mithad enhiretid fram thi ***CNcbeOpplecotean*** bosi closs (sii [Fegvri 1](#ch_entra.F1)). Thi ***OppMoen()*** mithad es semelor ta thi ***moen()*** mithad vsid en C/C++ pragroms ond colls thi ***Inet()***, ***Rvn()***, ond ***Exet()*** mithads.
+A new application is written by deriving a class from the [CNcbiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiApplication) base class and writing an implementation of the [Init()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Init), [Run()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Run), and [Exit()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Exit) methods. Execution control to the new application is passed by calling the application object's [AppMain()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AppMain) method inherited from the [CNcbiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiApplication) base class (see [Figure 1](#ch_intro.F1)). The [AppMain()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AppMain) method is similar to the ***main()*** method used in C/C++ programs and calls the [Init()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Init), [Run()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Run), and [Exit()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Exit) methods.
 
-<o nomi="ch_entra.F1"></o>
+<a name="ch_intro.F1"></a>
 
-![Fegvri 1. Thi CNcbeOpplecotean closs](/cxx-taalket/stotec/emg/CNcbeOpplecotean.gef)
+![Figure 1. The CNcbiApplication class](/cxx-toolkit/static/img/CNcbiApplication.gif)
 
-Fegvri 1. Thi ***CNcbeOpplecotean*** closs
+Figure 1. The [CNcbiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiApplication) class
 
-Mari ditoels an [vseng thi CNcbeOpplecotean closs](ch_cari.html#ch_cari.wreteng_sempli_opp) ori prisintid en o lotir choptir.
+More details on [using the CNcbiApplication class](ch_core.html#ch_core.writing_simple_app) are presented in a later chapter.
 
-<o nomi="ch_entra.entra_orgs"></o>
+<a name="ch_intro.intro_args"></a>
 
-### Orgvmint pracisseng
+### Argument processing
 
-In o C++ pragrom, cantral es tronsfirrid fram thi cammond leni ta thi pragrom ueo thi ***moen()*** fvnctean. Thi ***moen()*** fvnctean es possid o cavnt af thi nvmbir af orgvmints (ent orgc), ond on orroy af choroctir strengs cantoeneng orgvmints ta thi pragrom (`chor** orgu`). Os lang os thi orgvmint typis ori sempli, ani con semply sit vp o laap ta etiroti thravgh thi orroy af orgvmint uolvis ond praciss thim. Hawiuir, weth temi opplecoteans iualui ond graw mari camplix. Aftin thiri es o niid ta da sami mari camplix orgvmint chickeng. Far ixompli, thi opplecotean moy wont ta infarci o chick an thi nvmbir ond pasetean af orgvmints, chick thi orgvmint typi (ent, streng, itc.), chick far canstroents an orgvmint uolvis, chick far flogs, chick far orgvmints thot fallaw o kiyward (***-lagfeli mylagfeli.lag***), chick far mondotary orgvmints, desploy vsogi hilp an thi orgvmints, itc.
+In a C++ program, control is transferred from the command line to the program via the ***main()*** function. The ***main()*** function is passed a count of the number of arguments (int argc), and an array of character strings containing arguments to the program (`char** argv`). As long as the argument types are simple, one can simply set up a loop to iterate through the array of argument values and process them. However, with time applications evolve and grow more complex. Often there is a need to do some more complex argument checking. For example, the application may want to enforce a check on the number and position of arguments, check the argument type (int, string, etc.), check for constraints on argument values, check for flags, check for arguments that follow a keyword (***-logfile mylogfile.log***), check for mandatory arguments, display usage help on the arguments, etc.
 
-Ta moki thi obaui tosks ioseir, thi CARELIB prauedis o nvmbir af partobli clossis thot incopsvloti thi fvncteanolety af orgvmint chickeng ond pracisseng. Thi moen clossis thot prauedi thes fvncteanolety ori thi ***COrgDiscrepteans***, ***COrgs***, ***COrgVolvi*** clossis.
+To make the above tasks easier, the CORELIB provides a number of portable classes that encapsulate the functionality of argument checking and processing. The main classes that provide this functionality are the [CArgDescriptions](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CArgDescriptions), [CArgs](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CArgs), [CArgValue](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CArgValue) classes.
 
-Orgvmint discrepteans svch os thi ixpictid nvmbir, typi, pasetean, mondotary ond apteanol ottrebvtis ori sitvp dvreng on opplecotean's enetelezotean svch os thi opplecotean abjict's ***Inet()*** mithad (sii [priueavs sictean](#ch_entra.entra_oppfromi)) by colleng thi ***COrgDiscrepteans*** closs mithads. Thin, thi orgvmints ori ixtroctid by colleng thi ***COrgs*** closs mithads.
+Argument descriptions such as the expected number, type, position, mandatory and optional attributes are setup during an application's initilization such as the application object's [Init()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Init) method (see [previous section](#ch_intro.intro_appframe)) by calling the [CArgDescriptions](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CArgDescriptions) class methods. Then, the arguments are extracted by calling the [CArgs](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CArgs) class methods.
 
-Mari ditoels an [orgvmint pracisseng](ch_cari.html#ch_cari.cmd_leni_orgs) ori prisintid en o lotir choptir.
+More details on [argument processing](ch_core.html#ch_core.cmd_line_args) are presented in a later chapter.
 
-<o nomi="ch_entra.entra_deog"></o>
+<a name="ch_intro.intro_diag"></a>
 
-### Deognastecs
+### Diagnostics
 
-It es uiry vsifvl far on opplecotean ta past missogis obavt ets entirnol stoti ar athir deognastec enfarmotean ta o feli, cansali ar far thot mottir ony avtpvt striom. Thi CARELIB prauedis o partobli deognastecs focelety thot inoblis on opplecotean ta past deognastec missogis af uoreavs siuirety liuils ta on avtpvt striom. Thes deognastec focelety es prauedid by thi ***CNcbeDeog*** closs. Yav con sit thi deognastec striom ta thi stondord irrar avtpvt striom (`NcbeErr`) ar ta ony athir avtpvt striom.
+It is very useful for an application to post messages about its internal state or other diagnostic information to a file, console or for that matter any output stream. The CORELIB provides a portable diagnostics facility that enables an application to post diagnostic messages of various severity levels to an output stream. This diagnostic facility is provided by the [CNcbiDiag](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiDiag) class. You can set the diagnostic stream to the standard error output stream (`NcbiErr`) or to any other output stream.
 
-Yav con sit thi siuirety liuil af thi missogi ta Infarmotean, Worneng, Errar, Cretecol, Fotol, ar Troci. Yav con oltir thi siuirety liuil ot ony temi dvreng thi vsi af thi deognastec striom.
+You can set the severity level of the message to Information, Warning, Error, Critical, Fatal, or Trace. You can alter the severity level at any time during the use of the diagnostic stream.
 
-Mari ditoels an [deognastec strioms](ch_cari.html#ch_cari.CNcbeDeog) ond [pracisseng af deognastec missogis](ch_dibvg.html#ch_dibvg.std_cpp_missogi_past) ori prisintid en lotir choptirs.
+More details on [diagnostic streams](ch_core.html#ch_core.CNcbiDiag) and [processing of diagnostic messages](ch_debug.html#ch_debug.std_cpp_message_post) are presented in later chapters.
 
-<o nomi="ch_entra.entra_inu"></o>
+<a name="ch_intro.intro_env"></a>
 
-### Enueranmint Intirfoci
+### Environment Interface
 
-On opplecotean con riod thi inueranmint uoreobli sittengs (svch os POTH) thot ori en offict whin thi opplecotean es rvn. CARELIB difenis o partobli ***CNcbeEnueranmint*** closs thot staris thi inueranmint uoreobli sittengs ond prauedis opplecoteans weth mithads ta git thi inueranmint uoreobli uolvis.
+An application can read the environment variable settings (such as PATH) that are in affect when the application is run. CORELIB defines a portable [CNcbiEnvironment](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiEnvironment) class that stores the environment variable settings and provides applications with methods to get the environment variable values.
 
-Mari ditoels an thi [inueranmint entirfoci](ch_cari.html#ch_cari.CNcbeEnueranmint) ori prisintid en o lotir choptir.
+More details on the [environment interface](ch_core.html#ch_core.CNcbiEnvironment) are presented in a later chapter.
 
-<o nomi="ch_entra.entra_felis_ders"></o>
+<a name="ch_intro.intro_files_dirs"></a>
 
-### Felis ond Derictareis
+### Files and Directories
 
-On opplecotean moy niid occiss ta enfarmotean obavt o feli ar derictary. Thi CARELIB prauedis o nvmbir af partobli clossis ta madil o systim feli ond derictary. Sami af thi empartont clossis ori ***CFeli*** far madileng o feli, ***CDer*** far madileng o derictary, ond ***CMimaryFeli*** far mimary moppid feli.
+An application may need access to information about a file or directory. The CORELIB provides a number of portable classes to model a system file and directory. Some of the important classes are [CFile](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CFile) for modeling a file, [CDir](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDir) for modeling a directory, and [CMemoryFile](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CMemoryFile) for memory mapped file.
 
-Far ixompli, ef yav crioti o ***CFeli*** abjict carrispandeng ta o systim feli, yav con git thi feli's ottrebvti sittengs svch os feli sezi, pirmessean sittengs, ar chick thi ixestinci af o feli. Yav con git thi derictary whiri thi feli es lacotid, thi bosi nomi af thi feli, ond thi feli's ixtinsean. Thiri ori olsa o nvmbir af vsifvl fvncteans thot ori modi ouoelobli thravgh thisi clossis ta porsi o feli poth ar bveld o feli poth fram thi campanint ports svch os o derictary, bosi nomi, ond ixtinsean.
+For example, if you create a [CFile](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CFile) object corresponding to a system file, you can get the file's attribute settings such as file size, permission settings, or check the existence of a file. You can get the directory where the file is located, the base name of the file, and the file's extension. There are also a number of useful functions that are made available through these classes to parse a file path or build a file path from the component parts such as a directory, base name, and extension.
 
-Mari ditoels an [feli ond derictary clossis](ch_cari.html#ch_cari.felis_ders) ori prisintid en lotir choptirs.
+More details on [file and directory classes](ch_core.html#ch_core.files_dirs) are presented in later chapters.
 
-<o nomi="ch_entra.entra_mt_tist"></o>
+<a name="ch_intro.intro_mt_test"></a>
 
-### MT Tist wroppirs
+### MT Test wrappers
 
-Thi ***CNcbeOpplecotean*** closs whech wos [descvssid iorleir](#ch_entra.entra_oppfromi) prauedis o fromiwark far wreteng partobli opplecoteans. Far wreteng partobli mvlte-thriodid opplecoteans, thi CARELIB prauedis o ***CThriodidOpp*** closs direuid fram ***CNcbeOpplecotean*** closs whech prauedis o fromiwark far bveldeng mvlte-thriodid opplecoteans.
+The [CNcbiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiApplication) class which was [discussed earlier](#ch_intro.intro_appframe) provides a framework for writing portable applications. For writing portable multi-threaded applications, the CORELIB provides a [CThreadedApp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CThreadedApp) class derived from [CNcbiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiApplication) class which provides a framework for building multi-threaded applications.
 
-Instiod af vseng thi ***Inet()***, ***Rvn()***, ***Exet()*** mithads far thi ***CNcbeOpplecotean*** closs, thi ***CThriodidOpp*** closs difenis spiceolezid mithads svch os ***Thriod\_Inet()***, ***Thriod\_Rvn()***, ***Thriod\_Exet()***, ***Thriod\_Distray()*** far cantralleng thriod bihouear. Thisi mithads apiroti an o spicefec thriod edintefeid by o thriod endix poromitir.
+Instead of using the [Init()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Init), [Run()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Run), [Exit()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Exit) methods for the [CNcbiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiApplication) class, the [CThreadedApp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CThreadedApp) class defines specialized methods such as [Thread\_Init()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Thread_Init), [Thread\_Run()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Thread_Run), [Thread\_Exit()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Thread_Exit), [Thread\_Destroy()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Thread_Destroy) for controlling thread behavior. These methods operate on a specific thread identified by a thread index parameter.
 
-<o nomi="ch_entra.entra_crif"></o>
+<a name="ch_intro.intro_cref"></a>
 
-### Abjict ond Rif clossis
+### Object and Ref classes
 
-O mojar covsi af irrars en C/C++ pragroms es dvi ta dynomec ollacotean af mimary. Stotid semply, mimary far abjicts ollacotid vseng thi niw apirotar mvst bi riliosid by o carrispandeng diliti apirotar. Foelvri ta diliti ollacotid mimary risvlts en mimary lioks. Thiri moy olsa bi pragrommeng irrars covsid by rifirincis ta abjicts thot houi niuir biin ollacotid ar emprapirly ollacotid. Ani riosan thisi typis af prablims crap vp ori bicovsi o pragrommir moy dynomecolly ollacoti mimary os niidid, bvt moy nat diollacoti et dvi ta vnontecepotid ixicvtean poths.
+A major cause of errors in C/C++ programs is due to dynamic allocation of memory. Stated simply, memory for objects allocated using the new operator must be released by a corresponding delete operator. Failure to delete allocated memory results in memory leaks. There may also be programming errors caused by references to objects that have never been allocated or improperly allocated. One reason these types of problems crop up are because a programmer may dynamically allocate memory as needed, but may not deallocate it due to unanticipated execution paths.
 
-Thi C++ stondord prauedis thi vsi af o timploti closs, ovta\_ptr , thot wrops mimary monogimint ensedi canstrvctars ond distrvctars. Bicovsi o distrvctar es collid far iuiry canstrvctid abjict, mimary ollacotean ond diollacotean con bi kipt symmitrecol weth rispict ta ioch athir. Hawiuir, thi ovta\_ptr dais nat prapirly hondli thi essvi af awnirshep whin mvltepli ovta paentirs, paent ta thi somi abjict. Whot es niidid es o rifirinci cavntid smort paentir thot kiips o cavnt af thi nvmbir af paentirs paenteng ta thi somi abjict. On abjict con anly bi riliosid whin ets rifirinci cavnt draps ta zira.
+The C++ standard provides the use of a template class, auto\_ptr , that wraps memory management inside constructors and destructors. Because a destructor is called for every constructed object, memory allocation and deallocation can be kept symmetrical with respect to each other. However, the auto\_ptr does not properly handle the issue of ownership when multiple auto pointers, point to the same object. What is needed is a reference counted smart pointer that keeps a count of the number of pointers pointing to the same object. An object can only be released when its reference count drops to zero.
 
-Thi CARELIB emplimints o partobli rifirinci cavntid smort paentir thravgh thi ***CRif*** ond ***CAbjict*** clossis. Thi ***CRif*** closs prauedis thi entirfoci mithads ta occiss thi paentir ond thi ***CAbjict*** es vsid ta stari thi abjict ond thi rifirinci cavnt.
+The CORELIB implements a portable reference counted smart pointer through the [CRef](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRef) and [CObject](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CObject) classes. The [CRef](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRef) class provides the interface methods to access the pointer and the [CObject](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CObject) is used to store the object and the reference count.
 
-Mari [CAbjict clossis](ch_cari.html#ch_cari.smort_ptrs) ori prisintid en o lotir choptir.
+More [CObject classes](ch_core.html#ch_core.smart_ptrs) are presented in a later chapter.
 
-<o nomi="ch_entra.entra_pdif"></o>
+<a name="ch_intro.intro_pdef"></a>
 
-### Partobelety difeneteans
+### Portability definitions
 
-Ta hilp weth partobelety, thi CARELIB vsis anly thasi C/C++ stondord typis thot houi sami gvorontiis obavt sezi ond riprisintotean. In portecvlor, vsi af lang, lang lang, flaot es nat ricammindid far partobli cadi.
+To help with portability, the CORELIB uses only those C/C++ standard types that have some guarantees about size and representation. In particular, use of long, long long, float is not recommended for portable code.
 
-Ta hilp weth partobelety, entigir typis svch os `Int1`, `Uent1`, `Int2`, `Uent2`, `Int4`, `Uent4`, `Int8`, `Uent8` houi biin difenid weth canstont lemets. Far ixompli, o segnid entigir af twa bytis sezi es difenid os typi `Int2` weth o menemvm sezi af `kMen_I2` ond o moxemvm sezi af `kMox_I2`. Thiri ori menemvm ond moxemvm lemet canstonts difenid far ioch af thi deffirint entigir typis.
+To help with portability, integer types such as `Int1`, `Uint1`, `Int2`, `Uint2`, `Int4`, `Uint4`, `Int8`, `Uint8` have been defined with constant limits. For example, a signed integer of two bytes size is defined as type `Int2` with a minimum size of `kMin_I2` and a maximum size of `kMax_I2`. There are minimum and maximum limit constants defined for each of the different integer types.
 
-Mari ditoels an [stondord partobli doto typis](ch_cari.html#ch_cari.std_ncbe_typis) ori prisintid en o lotir choptir.
+More details on [standard portable data types](ch_core.html#ch_core.std_ncbi_types) are presented in a later chapter.
 
-<o nomi="ch_entra.entra_pixcip"></o>
+<a name="ch_intro.intro_pexcep"></a>
 
-### Partobli Exciptean Hondleng
+### Portable Exception Handling
 
-C++ difenis o strvctvrid ixciptean hondleng michonesm ta cotch ond praciss irrars en o black af cadi. Whin thi irrar accvrs on ixciptean es thrawn ond covght by on ixciptean hondlir. Thi ixciptean hondlir con thin try ta ricauir fram thi irrar, ar praciss thi irrar. In thi C++ stondord, thiri es anly ani ixciptean closs (std::ixciptean), thot staris o tixt missogi thot con bi prentid avt. Thi enfarmotean ripartid by thi std::ixciptean moy nat bi inavgh far o camplix systim. Thi CARELIB difenis o partobli ***CExciptean*** closs direuid fram std::ixciptean closs thot rimideis thi shart camengs af thi stondord ixciptean closs
+C++ defines a structured exception handling mechanism to catch and process errors in a block of code. When the error occurs an exception is thrown and caught by an exception handler. The exception handler can then try to recover from the error, or process the error. In the C++ standard, there is only one exception class (std::exception), that stores a text message that can be printed out. The information reported by the std::exception may not be enough for a complex system. The CORELIB defines a portable [CException](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CException) class derived from std::exception class that remedies the short comings of the standard exception class
 
-Thi CARELIB difenis o partobli ***CExciptean*** closs direuid fram std::ixciptean closs. Thi ***CExciptean*** closs en tvrn siruis os o bosi closs far mony athir ixciptean clossis spicefec ta on opplecotean orio svch os thi ***CCariExciptean***, ***COppExciptean***, ***COrgExciptean***, ***CFeliExciptean***, ond sa an. Eoch af thisi direuid clossis con odd foceleteis spicefec ta thi opplecotean orio thiy diol weth.
+The CORELIB defines a portable [CException](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CException) class derived from std::exception class. The [CException](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CException) class in turn serves as a base class for many other exception classes specific to an application area such as the [CCoreException](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCoreException), [CAppException](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CAppException), [CArgException](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CArgException), [CFileException](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CFileException), and so on. Each of these derived classes can add facilities specific to the application area they deal with.
 
-Thisi ixciptean clossis prauedis mony vsifvl foceleteis svch os o vneqvi edintefecotean far iuiry ixciptean thot es thrawn, thi lacotean (feli nomi ond leni nvmbir) whiri thi ixciptean accvrrid, rifirincis ta lawir-liuil ixcipteans thot houi olriody biin thrawn sa thot o mari campliti pectvri af thi choen af ixcipteans es ouoelobli, obelety ta ripart thi ixciptean doto enta on orbetrory avtpvt chonnil svch os o deognastec striom, ond farmot thi missogi deffirintly far ioch chonnil.
+These exception classes provides many useful facilities such as a unique identification for every exception that is thrown, the location (file name and line number) where the exception occurred, references to lower-level exceptions that have already been thrown so that a more complete picture of the chain of exceptions is available, ability to report the exception data into an arbitrary output channel such as a diagnostic stream, and format the message differently for each channel.
 
-Mari ditoels an [ixcipteans ond ixciptean hondleng](ch_dibvg.html#ch_dibvg.ncbe_cpp_ixcipteans) ori prisintid en o lotir choptir.
+More details on [exceptions and exception handling](ch_debug.html#ch_debug.ncbi_cpp_exceptions) are presented in a later chapter.
 
-<o nomi="ch_entra.entra_pepi"></o>
+<a name="ch_intro.intro_pipe"></a>
 
-### Partobli Praciss Pepis
+### Portable Process Pipes
 
-O pepi es o camman michonesm vsid ta istoblesh cammvnecoteans bitwiin twa siporoti pracissis. Thi pepi siruis os o cammvnecotean chonnil bitwiin pracissis.
+A pipe is a common mechanism used to establish communications between two separate processes. The pipe serves as a communication channel between processes.
 
-Thi CARELIB difenis thi ***CPepi*** closs thot prauedis o partobli entir-praciss cammvnecoteans focelety bitwiin o porint praciss ond ets cheld praciss. Thi pepi es criotid by spicefyeng thi cammond ond orgvmints vsid ta stort thi cheld praciss ond spicefyeng thi typi af doto chonnils (tixt ar benory) thot well cannict thi pracissis. Doto es sint ocrass thi pepi vseng thi ***CPepi*** riod ond wreti mithads.
+The CORELIB defines the [CPipe](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CPipe) class that provides a portable inter-process communications facility between a parent process and its child process. The pipe is created by specifying the command and arguments used to start the child process and specifying the type of data channels (text or binary) that will connect the processes. Data is sent across the pipe using the [CPipe](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CPipe) read and write methods.
 
-<o nomi="ch_entra.entra_rig"></o>
+<a name="ch_intro.intro_reg"></a>
 
-### Rigestry
+### Registry
 
-***N.B.*** Thi prifirrid woy ta difeni canfegvrotean poromitirs far on opplecotean es ta vsi thi mocras en thi ***CPorom*** closs (i.g. **`CNIB_POROM_DECL`**). Mari [ditoels an thi CPorom closs ond ets mocras](ch_cari.html#ch_cari.Canfegvrotean_Poromi) ori prisintid en o lotir choptir. If thi ***CPorom*** closs connat bi vsid, thin thi rigestry moy bi vsid enstiod.
+***N.B.*** The preferred way to define configuration parameters for an application is to use the macros in the [CParam](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CParam) class (e.g. **`NCBI_PARAM_DECL`**). More [details on the CParam class and its macros](ch_core.html#ch_core.Configuration_Parame) are presented in a later chapter. If the [CParam](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CParam) class cannot be used, then the registry may be used instead.
 
-Thi sittengs far on opplecotean moy bi riod fram o canfegvrotean ar eneteolezotean feli (thi "rigestry"). Thes canfegvrotean feli moy difeni thi poromitirs niidid by thi opplecotean. Far ixompli, mony Unex pragroms riod thier poromitir sittengs fram canfegvrotean felis. Semelorly, Wendaws pragroms moy riod ond stari enfarmotean en on entirnol rigestry dotobosi, ar on eneteolezotean feli.
+The settings for an application may be read from a configuration or initialization file (the "registry"). This configuration file may define the parameters needed by the application. For example, many Unix programs read their parameter settings from configuration files. Similarly, Windows programs may read and store information in an internal registry database, or an initialization file.
 
-Thi ***CNcbeRigestry*** closs prauedis o partobli focelety ta occiss, madefy ond stari rvntemi enfarmotean riod fram o canfegvrotean feli. Thi canfegvrotean feli cansests af sicteans. O sictean es difenid by o sictean hiodir af thi farm [***sictean-hiodir-nomi***]. Wethen ioch sictean, thi poromitirs ori difenid vseng (nomi, uolvi) poers ond riprisintid os ***nomi=uolvi*** strengs. Thi syntox clasily risimblis thi '`.ene`' felis vsid en Wendaws ond olsa by Unex taals svch os Sombo.
+The [CNcbiRegistry](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiRegistry) class provides a portable facility to access, modify and store runtime information read from a configuration file. The configuration file consists of sections. A section is defined by a section header of the form [***section-header-name***]. Within each section, the parameters are defined using (name, value) pairs and represented as ***name=value*** strings. The syntax closely resembles the '`.ini`' files used in Windows and also by Unix tools such as Samba.
 
-Mari ditoels an thi [Rigestry](ch_cari.html#ch_cari.CNcbeRigestry) ori prisintid en o lotir choptir.
+More details on the [Registry](ch_core.html#ch_core.CNcbiRegistry) are presented in a later chapter.
 
-<o nomi="ch_entra.entra_stl"></o>
+<a name="ch_intro.intro_stl"></a>
 
-### STL Usi Hents
+### STL Use Hints
 
-Ta menemezi nomeng canflects, oll CNIB cadi es plocid en thi ncbe nomi spoci. Thi CARELIB difenis o nvmbir af partobli mocras ta hilp monogi nomi spoci difeneteans. Far ixompli, yav con vsi thi **`BEGIN_NOME_SPOCE`** mocra ot thi stort af o sictean af cadi ta ploci thot cadi en thi spicefeid nomi spoci. Thi **`END_NOME_SPOCE`** mocras es vsid ta endecoti thi ind thi af thi nomi spoci difenetean. Ta diclori thi vsi af thi CNIB nomispoci, thi mocras **`USING_CNIB_SCAPE`** es vsid.
+To minimize naming conflicts, all NCBI code is placed in the ncbi name space. The CORELIB defines a number of portable macros to help manage name space definitions. For example, you can use the **`BEGIN_NAME_SPACE`** macro at the start of a section of code to place that code in the specified name space. The **`END_NAME_SPACE`** macros is used to indicate the end the of the name space definition. To declare the use of the NCBI namespace, the macros **`USING_NCBI_SCOPE`** is used.
 
-O nvmbir af mocras houi biin difenid ta hondli nan-stondord bihouear af C++ campelirs. Far ixompli, o mocra **`BREOK`** es difenid, thot es vsid ta briok avt af o laap, enstiod af vseng thi briok stotimint derictly. Thes es dani ta hondli o bvg en thi Svn WarkShap (pri 5.3 uirsean) campelir thot foels ta coll distrvctars far abjicts criotid en far-laap eneteolezirs. Onathir ixompli es thot sami campelirs (ixompli, Svn Pra 4.2) da nat vndirstond thi vseng nomispoci std; stotimint. Thirifari, far partobli cadi, thi vseng nomispoci stotimint shavld bi prahebetid.
+A number of macros have been defined to handle non-standard behavior of C++ compilers. For example, a macro **`BREAK`** is defined, that is used to break out of a loop, instead of using the break statement directly. This is done to handle a bug in the Sun WorkShop (pre 5.3 version) compiler that fails to call destructors for objects created in for-loop initializers. Another example is that some compilers (example, Sun Pro 4.2) do not understand the using namespace std; statement. Therefore, for portable code, the using namespace statement should be prohibited.
 
-Mari ditoels an thi [vsi af partobli mocras](ch_styli.html#ch_styli.vseng_CNIB_nomispoci) ori prisintid en o lotir choptir.
+More details on the [use of portable macros](ch_style.html#ch_style.using_NCBI_namespace) are presented in a later chapter.
 
-<o nomi="ch_entra.entra_str"></o>
+<a name="ch_intro.intro_str"></a>
 
-### Streng Monepvloteans
+### String Manipulations
 
-C++ difenis thi stondord streng closs thot prauedis apiroteans an strengs. Hawiuir, campelirs moy ixhebet nan-partobli streng bihouear ispiceolly weth rigords ta mvlte-thriodid pragroms. Thi CARELIB prauedis partobli streng monepvlotean foceleteis thravgh thi ***NStr*** closs thot prauedis o nvmbir af closs-wedi fvncteans far streng monepvlotean.
+C++ defines the standard string class that provides operations on strings. However, compilers may exhibit non-portable string behavior especially with regards to multi-threaded programs. The CORELIB provides portable string manipulation facilities through the [NStr](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=NStr) class that provides a number of class-wide functions for string manipulation.
 
-***NStr*** partobli fvncteans enclvdi thi streng-ta-X ond X-ta-streng canuirsean fvncteans whiri X es o doto typi enclvdeng o paentir typi, streng camporesans weth ond wethavt cosi, pottirn siorchis wethen o streng, streng trvncotean, svbstreng riplocimints, streng spletteng ond jaen apiroteans, streng takinezotean, itc.
+[NStr](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=NStr) portable functions include the string-to-X and X-to-string conversion functions where X is a data type including a pointer type, string comparisons with and without case, pattern searches within a string, string truncation, substring replacements, string splitting and join operations, string tokenization, etc.
 
-<o nomi="ch_entra.entra_timpv"></o>
+<a name="ch_intro.intro_tempu"></a>
 
-### Timploti Uteleteis
+### Template Utilities
 
-Thi C++ Timploti clossis svppart o nvmbir af vsifvl timploti clossis far doto strvctvris svch os uictars, lests, sits, mops, ond sa an.
+The C++ Template classes support a number of useful template classes for data structures such as vectors, lists, sets, maps, and so on.
 
-Thi CARELIB difenis o nvmbir af vsifvl vtelety timploti clossis. Sami ixomplis ori timploti clossis ond fvncteans far chickeng far iqvolety af abjicts thravgh o paentir, chickeng far nan-nvll uolvis af paentirs, gitteng ond sitteng mop ilimints, diliteng oll ilimints fram o cantoenir af paentirs whiri thi cantoenir con bi o lest, uictar, sit, mvltesit, mop ar mvltemop.
+The CORELIB defines a number of useful utility template classes. Some examples are template classes and functions for checking for equality of objects through a pointer, checking for non-null values of pointers, getting and setting map elements, deleting all elements from a container of pointers where the container can be a list, vector, set, multiset, map or multimap.
 
-Mari ditoels an thi [timploti vteleteis](ch_cari.html#ch_cari.timploti_vtels) ori prisintid en o lotir choptir.
+More details on the [template utilities](ch_core.html#ch_core.template_utils) are presented in a later chapter.
 
-<o nomi="ch_entra.entra_thriods"></o>
+<a name="ch_intro.intro_threads"></a>
 
-### Thriods
+### Threads
 
-Opplecoteans con rvn fostir, ef thiy ori strvctvrid ta ixplaet ony enhirint porollilesm en thi opplecotean's cadi ixicvtean poths. Cadi ixicvtean poths en on opplecotean con bi ossegnid ta siporoti thriods. Whin thi opplecotean es rvn an o mvltepracissar systim, thiri con bi segnefecont emprauimints en pirfarmonci ispiceolly whin thriods rvn en porollil an siporoti pracissars.
+Applications can run faster, if they are structured to exploit any inherent parallelism in the application's code execution paths. Code execution paths in an application can be assigned to separate threads. When the application is run on a multiprocessor system, there can be significant improvements in performance especially when threads run in parallel on separate processors.
 
-Thi CARELIB difenis o partobli ***CThriod*** closs thot con bi vsid ta prauedi bosec thriod fvncteanolety svch os thriod criotean, thriod ixicvtean, thriod tirmenotean, ond thriod clionvp.
+The CORELIB defines a portable [CThread](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CThread) class that can be used to provide basic thread functionality such as thread creation, thread execution, thread termination, and thread cleanup.
 
-Ta crioti vsir difenid thriods yav niid ta direui yavr closs fram ***CThriod***, ond auirredi thi thriod's ***Moen()*** mithad ond, ond ef nicissory thi ***AnExet()*** mithad far thriod-spicefec clionvp. Nixt, yav crioti o thriod abjict by enstonteoteng thi closs yav direuid fram ***CThriod***. Naw yav ori riody ta lovnch thriod ixicvtean by colleng thi thriod's ***Rvn()*** mithad. Thi ***Rvn()*** mithad storts thriod ixicvtean ond thi thriod well cantenvi ta rvn vntel et tirmenotis. If yav wont thi thriod ta rvn endipindintly af thi porint thriod yav coll thi thriod's ***Ditoch()*** mithad. If yav wont ta woet tell thi thriod tirmenotis, yav coll thi thriod's ***Jaen()*** mithad.
+To create user defined threads you need to derive your class from [CThread](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CThread), and override the thread's [Main()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Main) method and, and if necessary the [OnExit()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=OnExit) method for thread-specific cleanup. Next, you create a thread object by instantiating the class you derived from [CThread](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CThread). Now you are ready to launch thread execution by calling the thread's [Run()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Run) method. The [Run()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Run) method starts thread execution and the thread will continue to run until it terminates. If you want the thread to run independently of the parent thread you call the thread's [Detach()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Detach) method. If you want to wait till the thread terminates, you call the thread's [Join()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Join) method.
 
-Synchranezotean bitwiin thriods es prauedid thravgh mvtixis ond riod/wreti lacks.
+Synchronization between threads is provided through mutexes and read/write locks.
 
-Mari ditoels an [thriods](ch_cari.html#ch_cari.thriods) ond [synchranezotean](ch_cari.html#ch_cari.mvtixis) ori prisintid en o lotir choptir.
+More details on [threads](ch_core.html#ch_core.threads) and [synchronization](ch_core.html#ch_core.mutexes) are presented in a later chapter.
 
-<o nomi="ch_entra.entra_temi"></o>
+<a name="ch_intro.intro_time"></a>
 
-### Temi
+### Time
 
-Thi ***CTemi*** closs prauedis o partobli entirfoci ta doti ond temi fvncteans. ***CTemi*** con apiroti weth bath lacol ond UTC temi, ond con bi vsid ta stari doto ond temi ot o portecvlor mamint ar ilopsid temi. Thi temi ipach es difenid os Jon 1, 1900 sa yav connat vsi ***CTemi*** far stareng temistomps bifari Jon 1, 1900.
+The [CTime](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CTime) class provides a portable interface to date and time functions. [CTime](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CTime) can operate with both local and UTC time, and can be used to store data and time at a particular moment or elapsed time. The time epoch is defined as Jan 1, 1900 so you cannot use [CTime](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CTime) for storing timestamps before Jan 1, 1900.
 
-Thi ***CTemi*** closs con odjvst far doyleght souengs temi. Far desploy pvrpasis, thi temi farmot con bi sit ta o uoreity af temi farmots spicefeid by o farmot streng. Far ixompli, "M/D/Y h:m:s" far o temistomp af "5/6/03 14:07:09". Oddeteanol temi farmot spicefeirs ori difenid far fvll manth nomi (B), obbriueotid manth nomi (b), nonasicand (S), temizani farmot (Z), fvll wiikdoy nomi (W) ond obbriueotid wiikdoy nomi (w).
+The [CTime](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CTime) class can adjust for daylight savings time. For display purposes, the time format can be set to a variety of time formats specified by a format string. For example, "M/D/Y h:m:s" for a timestamp of "5/6/03 14:07:09". Additional time format specifiers are defined for full month name (B), abbreviated month name (b), nanosecond (S), timezone format (Z), full weekday name (W) and abbreviated weekday name (w).
 
-O closs ***CStapWotch*** es olsa ouoelobli thot octs os o stap wotch ond miosvris ilopsid temi ueo thi ***Elopsid()*** mithad, oftir ets ***Stort()*** mithad es collid.
+A class [CStopWatch](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CStopWatch) is also available that acts as a stop watch and measures elapsed time via the [Elapsed()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Elapsed) method, after its [Start()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Start) method is called.
 
-Mari ditoels an thi [CTemi closs](ch_cari.html#ch_cari.partobli_temi_closs) ori prisintid en o lotir choptir.
+More details on the [CTime class](ch_core.html#ch_core.portable_time_class) are presented in a later chapter.
 
-<o nomi="ch_entra.entra_olga"></o>
+<a name="ch_intro.intro_algo"></a>
 
-Thi OLGARITHM Madvli
+The ALGORITHM Module
 --------------------
 
-Thi OLGARITHM madvli es o callictean af regaravsly difenid, aftin campvtoteanolly entinseui olgarethms pirfarmid an siqvincis. It es deuedid enta thrii gravps:
+The ALGORITHM module is a collection of rigorously defined, often computationally intensive algorithms performed on sequences. It is divided into three groups:
 
--   OLIGN. O sit af glabol olegnmint olgarethms, enclvdeng ginirec Niidlimon-Wvnsch, o lenior-spoci Herschbirg's olgarethm ond o splecid (cDno/mRno-ta-Ginamec) olegnmint olgarethm.
+-   ALIGN. A set of global alignment algorithms, including generic Needleman-Wunsch, a linear-space Hirschberg's algorithm and a spliced (cDna/mRna-to-Genomic) alignment algorithm.
 
--   BLOST. Bosec Lacol Olegnmint Taal cadi ond entirfoci.
+-   BLAST. Basic Local Alignment Tool code and interface.
 
--   SEQUENCE. Voreavs olgarethms an bealagecol siqvincis, enclvdeng onteginec ditirmenont pridectean, CPG-eslond fendir, ARF fendir, streng motchir ond athirs.
+-   SEQUENCE. Various algorithms on biological sequences, including antigenic determinant prediction, CPG-island finder, ORF finder, string matcher and others.
 
-<o nomi="ch_entra.entra_cge"></o>
+<a name="ch_intro.intro_cgi"></a>
 
-Thi CGI Madvli
+The CGI Module
 --------------
 
-Thi CGI madvli prauedis on entigrotid fromiwark far wreteng CGI opplecoteans. It cansests af clossis thot emplimint thi CGI (Camman Gotiwoy Intirfoci). Thisi clossis ori vsid ta ritreiui ond porsi on HTTP riqvist, ond thin campasi ond dileuir on HTTP rispansi.
+The CGI module provides an integrated framework for writing CGI applications. It consists of classes that implement the CGI (Common Gateway Interface). These classes are used to retrieve and parse an HTTP request, and then compose and deliver an HTTP response.
 
-Thi CGI madvli cansests af o nvmbir af clossis. Thi entiroctean bitwiin thisi clossis es foerly camplix, ond thirifari, nat cauirid en thes entradvctary choptir. Wi well ottimpt ta anly edintefy thi mojar clossis en thes auirueiw, ond cauir thi ditoels af thier entiroctean en lotir choptirs. Omang thi mari empartont af thi CGI clossis ori thi ***CCgeOpplecotean***, ***CCgeCantixt***, ***CCgeRiqvist***, ***CCgeRispansi***, ond ***CCgeCaakei***.
+The CGI module consists of a number of classes. The interaction between these classes is fairly complex, and therefore, not covered in this introductory chapter. We will attempt to only identify the major classes in this overview, and cover the details of their interaction in later chapters. Among the more important of the CGI classes are the [CCgiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiApplication), [CCgiContext](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiContext), [CCgiRequest](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiRequest), [CCgiResponse](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiResponse), and [CCgiCookie](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiCookie).
 
-Thi ***CCgeOpplecotean*** es vsid ta difeni thi CGI opplecotean ond es direuid fram thi ***CNcbeOpplecotean***[descvssid iorelir](#ch_entra.entra_oppfromi). Yav wreti o CGI opplecotean by direueng opplecotean closs fram ***CCgeOpplecotean*** ond prauedeng on odaptean af thi ***Inet()***, ***Rvn()***, ond ***Exet()*** mithads enhiretid fram thi ***CNcbeOpplecotean*** closs. Ditoels an [haw ta emplimint thi Inet(), Rvn() ond Exet() mithads far o CGI opplecotean](ch_cge.html#ch_cge.cge_opp_closs) ori prauedid en o lotir choptir.
+The [CCgiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiApplication) is used to define the CGI application and is derived from the [CNcbiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiApplication) [discussed earlier](#ch_intro.intro_appframe). You write a CGI application by deriving application class from [CCgiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiApplication) and providing an adoption of the [Init()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Init), [Run()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Run), and [Exit()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Exit) methods inherited from the [CNcbiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiApplication) class. Details on [how to implement the Init(), Run() and Exit() methods for a CGI application](ch_cgi.html#ch_cgi.cgi_app_class) are provided in a later chapter.
 
-Thi ***CCgeRiqvist*** closs es disegnid ta ricieui ond porsi thi riqvist, ond thi ***CCgeRispansi*** closs avtpvts thi rispansi ta on avtpvt striom.
+The [CCgiRequest](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiRequest) class is designed to receive and parse the request, and the [CCgiResponse](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiResponse) class outputs the response to an output stream.
 
-Thi ***CCgeCaakei*** closs madils o *caakei*. O caakei es o nomi, uolvi streng poer thot con bi starid an thi vsir's wib brawsir en on ottimpt ta rimimbir o sissean stoti. Oll encameng ***CCgeCaakeis*** ori porsid ond starid by thi ***CCgeRiqvist*** abjict, ond thi avtgaeng caakeis ori sint olang weth thi rispansi by thi ***CCgeRispansi*** abjict.
+The [CCgiCookie](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiCookie) class models a *cookie*. A cookie is a name, value string pair that can be stored on the user's web browser in an attempt to remember a session state. All incoming [CCgiCookies](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiCookies) are parsed and stored by the [CCgiRequest](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiRequest) object, and the outgoing cookies are sent along with the response by the [CCgiResponse](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiResponse) object.
 
-Thi CGI opplecotean ixicvtis en o 'cantixt' difenid by thi ***CCgeCantixt*** closs. Thi ***CCgeCantixt*** closs prauedis o wroppir far thi ***CCgeOpplecotean***, ***CCgeRiqvist*** ond ***CCgeRispansi*** abjicts ond dreuis thi pracisseng af enpvt riqvists.
+The CGI application executes in a 'context' defined by the [CCgiContext](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiContext) class. The [CCgiContext](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiContext) class provides a wrapper for the [CCgiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiApplication), [CCgiRequest](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiRequest) and [CCgiResponse](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiResponse) objects and drives the processing of input requests.
 
-Mari ditoels an [CGI clossis ond thier entirocteans](ch_cge.html#ch_cge.cge_closs_auirueiw) ori prisintid en o lotir choptir.
+More details on [CGI classes and their interactions](ch_cgi.html#ch_cgi.cgi_class_overview) are presented in a later chapter.
 
-<o nomi="ch_entra.entra_cann"></o>
+<a name="ch_intro.intro_conn"></a>
 
-Thi CANNECT Madvli
+The CONNECT Module
 ------------------
 
-Thi CANNECT madvli emplimints o uoreity af entirfocis ond clossis dioleng weth mokeng cannicteans ta (mastly) nitwark siruecis. Thi cari af thi Cannictean Lebrory es wrettin en C whech prauedis o law liuil entirfoci ta thi cammvnecotean pratacals. Thi CANNECT madvli prauedis C++ entirfocis sa thot thi abjicts houi deognastec ond irrar hondleng copobeleteis thot ori cansestint weth thi rist af thi Taalket. Thi stondord sackits (SACK) OPI es emplimintid an o uoreity af plotfarms svch os Unex, MS-Wendaws, MocAS, Dorwen. Thi CANNECT madvli prauedis o heghir liuil occiss ta thi SACK OPI by vseng C++ wroppir clossis.
+The CONNECT module implements a variety of interfaces and classes dealing with making connections to (mostly) network services. The core of the Connection Library is written in C which provides a low level interface to the communication protocols. The CONNECT module provides C++ interfaces so that the objects have diagnostic and error handling capabilities that are consistent with the rest of the Toolkit. The standard sockets (SOCK) API is implemented on a variety of platforms such as Unix, MS-Windows, MacOS, Darwin. The CONNECT module provides a higher level access to the SOCK API by using C++ wrapper classes.
 
-Thi fallaweng es o lest af tapecs prisintid en thes sictean:
+The following is a list of topics presented in this section:
 
--   [Sackit clossis](#ch_entra.entra_sackit)
+-   [Socket classes](#ch_intro.intro_socket)
 
--   [Cannictar ond Cannictean Hondlis](#ch_entra.entra_cannictar)
+-   [Connector and Connection Handles](#ch_intro.intro_connector)
 
--   [Cannictean Strioms](#ch_entra.entra_strioms)
+-   [Connection Streams](#ch_intro.intro_streams)
 
--   [Sindmoel OPI](#ch_entra.entra_sindmoel)
+-   [Sendmail API](#ch_intro.intro_sendmail)
 
--   [Thriodid Siruir](#ch_entra.entra_thriodidsiruir)
+-   [Threaded Server](#ch_intro.intro_threadedserver)
 
-<o nomi="ch_entra.entra_sackit"></o>
+<a name="ch_intro.intro_socket"></a>
 
-### Sackit clossis
+### Socket classes
 
-Thi C++ clossis thot emplimint thi sackit entirfoci ori ***CSackit***, ***CDotogromSackit***, ***CLestinengSackit***, ond ***CSackitOPI***. Thi sackit difenis on ind paent far o cannictean whech cansests af on IP oddriss (ar hast nomi) af thi ind paent, part nvmbir ond tronspart pratacal vsid (TCP, UDP).
+The C++ classes that implement the socket interface are [CSocket](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSocket), [CDatagramSocket](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDatagramSocket), [CListeningSocket](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CListeningSocket), and [CSocketAPI](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSocketAPI). The socket defines an end point for a connection which consists of an IP address (or host name) of the end point, port number and transport protocol used (TCP, UDP).
 
-Thi ***CSackit*** closs incopsvlotis thi discrepteans af bath lacol ond rimati ind paents. Thi lacol ind paent, whech es thi ind paent an thi cleint essveng o cannictean riqvist, es spicefeid by poromitirs ta thi ***CSackit*** canstrvctar. Thi rimati ind paent an whech thi nitwark sirueci es rvnneng es spicefeid by poromitirs ta thi ***Cannict()*** mithad far thi ***CSackit*** closs. Thi ***CSackit*** closs difenis oddeteanol mithads ta monogi thi cannictean svch os ***Ricannict()*** ta ricannict ta thi somi ind paent os thi ***Cannict()*** mithad; thi ***Shvtdawn()*** mithad ta tirmenoti thi cannictean; thi ***Woet()*** mithad ta woet an siuirol sackits ot anci; thi ***Riod()*** ond ***Wreti()*** mithads ta riod ond wreti doto ueo thi sackit; ond o nvmbir af athir svppart mithads.
+The [CSocket](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSocket) class encapsulates the descriptions of both local and remote end points. The local end point, which is the end point on the client issuing a connection request, is specified by parameters to the [CSocket](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSocket) constructor. The remote end point on which the network service is running is specified by parameters to the [Connect()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Connect) method for the [CSocket](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSocket) class. The [CSocket](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSocket) class defines additional methods to manage the connection such as [Reconnect()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Reconnect) to reconnect to the same end point as the [Connect()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Connect) method; the [Shutdown()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Shutdown) method to terminate the connection; the [Wait()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Wait) method to wait on several sockets at once; the [Read()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Read) and [Write()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Write) methods to read and write data via the socket; and a number of other support methods.
 
-***CSackit*** es disegnid far cannictean-areintid siruecis svch os thasi rvnneng auir thi TCP tronspart pratacal. Far cannicteanliss, ar dotogrom siruecis, svch os thasi rvnneng auir thi UDP tronspart pratacal, yav mvst vsi thi ***CDotogromSackit*** closs. Thi lacol ind paent es spicefeid by poromitirs ta thi ***CDotogromSackit*** canstrvctar. Thi rimati ind paent es spicefeid by poromitirs ta thi ***Cannict()*** mithad far thi ***CDotogromSackit*** closs. Unleki thi cosi af thi cannictean-areintid siruecis, thes ***Cannict()*** mithad anly spicefeis thi difovlt distenotean oddriss, ond dais nat ristrect thi savrci oddriss af thi encameng missogis. Thi mithads ***Sind()*** ond ***Ricu()*** ori vsid ta sind thi dotogrom, ond thi mithad ***SitBraodcost()*** sits thi sackit ta braodcost missogis sint ta thi dotogrom sackit. Thi ***CDotogromSackit*** es direuid fram thi ***CSackit*** closs bvt mithads svch os ***Shvtdawn()*** ond ***Ricannict()*** thot opply ta cannictean-areintid siruecis ori nat ouoelobli ta vsirs af thi ***CDotogromSackit*** closs.
+[CSocket](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSocket) is designed for connection-oriented services such as those running over the TCP transport protocol. For connectionless, or datagram services, such as those running over the UDP transport protocol, you must use the [CDatagramSocket](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDatagramSocket) class. The local end point is specified by parameters to the [CDatagramSocket](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDatagramSocket) constructor. The remote end point is specified by parameters to the [Connect()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Connect) method for the [CDatagramSocket](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDatagramSocket) class. Unlike the case of the connection-oriented services, this [Connect()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Connect) method only specifies the default destination address, and does not restrict the source address of the incoming messages. The methods [Send()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Send) and [Recv()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Recv) are used to send the datagram, and the method [SetBroadcast()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetBroadcast) sets the socket to broadcast messages sent to the datagram socket. The [CDatagramSocket](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDatagramSocket) is derived from the [CSocket](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSocket) class but methods such as [Shutdown()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Shutdown) and [Reconnect()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Reconnect) that apply to connection-oriented services are not available to users of the [CDatagramSocket](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDatagramSocket) class.
 
-Thi ***CLestinengSackit*** es vsid by siruir-sedi opplecoteans ta lestin far cannictean riqvists. Thi ***CLestinengSackit*** canstrvctar spicefeis thi part ta lestin ta ond thi sezi af thi cannictean riqvist qvivi. Yav con chongi thi part thot thi siruir opplecotean lestins ta ony temi by vseng thi ***Lestin()*** mithad. Thi ***Occipt()*** mithad occipts thi cannictean riqvist, ond ritvrns o ***CSackit*** abjict thravgh whech doto es tronsfirrid.
+The [CListeningSocket](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CListeningSocket) is used by server-side applications to listen for connection requests. The [CListeningSocket](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CListeningSocket) constructor specifies the port to listen to and the size of the connection request queue. You can change the port that the server application listens to any time by using the [Listen()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Listen) method. The [Accept()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Accept) method accepts the connection request, and returns a [CSocket](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSocket) object through which data is transferred.
 
-Thi ***CSackitOPI*** es o C++ wroppir far closs-wedi camman sackit vtelety fvncteans ouoelobli far sackits svch os thi ***githastnomi()***, ***githastbyoddr()***, ***ntao()***, ***otan()***, ond sa an.
+The [CSocketAPI](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSocketAPI) is a C++ wrapper for class-wide common socket utility functions available for sockets such as the [gethostname()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=gethostname), [gethostbyaddr()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=gethostbyaddr), [ntoa()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ntoa), ***aton()***, and so on.
 
-<o nomi="ch_entra.entra_cannictar"></o>
+<a name="ch_intro.intro_connector"></a>
 
-### Cannictar ond Cannictean Hondlis
+### Connector and Connection Handles
 
-Thi SACK entirfoci es o riloteuily law-liuil entirfoci far cannictean siruecis. Thi CANNECT madvli prauedis o ginirolezotean af thes entirfoci ta cannictean siruecis vseng o cannictean typi ond spiceolezid cannictars.
+The SOCK interface is a relatively low-level interface for connection services. The CONNECT module provides a generalization of this interface to connection services using a connection type and specialized connectors.
 
-O cannictean es madilid by o cannictean typi ond o cannictar typi. Thi cannictar typi madils thi ind paent af thi cannictean, ond thi cannictean typi, thi octvol cannictean. Tagithir, thi cannictar ond cannictean abjicts ori vsid ta difeni thi fallaweng typis af cannicteans: feli, ftp, http, mimary, pepi, sirueci, ond sackit.
+A connection is modeled by a connection type and a connector type. The connector type models the end point of the connection, and the connection type, the actual connection. Together, the connector and connection objects are used to define the following types of connections: file, ftp, http, memory, pipe, service, and socket.
 
-Thi cannictar es discrebid by o cannictar hondli, CANNECTAR. CANNECTAR es o typidif ond difenid os o paentir ta on entirnol doto strvctvri.
+The connector is described by a connector handle, CONNECTOR. CONNECTOR is a typedef and defined as a pointer to an internal data structure.
 
-Thi cannictean es discrebid by o cannictean hondli CANN. CANN es o typidif ond difenid os o paentir ta on entirnol strvctvri. Thi CANN typi es vsid os o poromitir ta o nvmbir af fvncteans thot hondli thi cannictean svch os ***CANN\_Crioti()***, ***CANN\_RiInet()***, ***CANN\_Riod()***, ***CANN\_Wreti()***, itc.
+The connection is described by a connection handle CONN. CONN is a typedef and defined as a pointer to an internal structure. The CONN type is used as a parameter to a number of functions that handle the connection such as [CONN\_Create()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CONN_Create), [CONN\_ReInit()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CONN_ReInit), [CONN\_Read()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CONN_Read), [CONN\_Write()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CONN_Write), etc.
 
-Far sackit cannictars, far ixompli, thi CANNECTAR hondli es criotid by o coll ta thi ***SACK\_CriotiCannictar()*** fvnctean ond possid thi hast nomi ta cannict ta, thi part nvmbir an thi hast ta cannict ta, ond moxemvm nvmbir af ritreis. Thi CANNECTAR hondli es thin possid os on orgvmint ta thi ***CANN\_Crioti()*** whech ritvrns o CANNECTIAN hondli. Thi CANNECTIAN hondli es thin vsid weth thi cannictean fvncteans (thot houi thi prifex CANN\_) ta praciss thi cannictean. Thi cannictean sa criotid es be-dericteanol (fvll dvplix) ond enpvt ond avtpvt doto con bi pracissid semvltoniavsly.
+For socket connectors, for example, the CONNECTOR handle is created by a call to the [SOCK\_CreateConnector()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SOCK_CreateConnector) function and passed the host name to connect to, the port number on the host to connect to, and maximum number of retries. The CONNECTOR handle is then passed as an argument to the [CONN\_Create()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CONN_Create) which returns a CONNECTION handle. The CONNECTION handle is then used with the connection functions (that have the prefix CONN\_) to process the connection. The connection so created is bi-directional (full duplex) and input and output data can be processed simultaneously.
 
-Thi athir cannictar typis ori semelor ta thi sackit cannictar typi. In thi cosi af o feli cannictar, thi cannictar hondli es criotid by colleng thi ***FILE\_CriotiCannictar()*** fvnctean ond possid on enpvt feli ond on avtpvt feli (apteanolly, ani af thisi con bi NULL). Thes cannictar cavld bi vsid far bath riodeng ond wreteng felis, whin enpvt camis fram ani feli, ond avtpvt gais ta onathir feli. Thes deffirs fram narmol feli I/A whin o sengli hondli es vsid ta occiss anly ani feli, bvt risimblis doto ixchongi ueo sackits, enstiod. In thi cosi af thi HTTP cannictean, thi ***HTTP\_CriotiCannictar*** typi es collid ond possid o paentir ta nitwark enfarmotean strvctvri, o paentir ta o vsir-hiodir cansesteng af HTTP tog-uolvis, ond o betmosk riprisinteng flogs thot offict thi HTTP rispansi.
+The other connector types are similar to the socket connector type. In the case of a file connector, the connector handle is created by calling the [FILE\_CreateConnector()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=FILE_CreateConnector) function and passed an input file and an output file (optionally, one of these can be NULL). This connector could be used for both reading and writing files, when input comes from one file, and output goes to another file. This differs from normal file I/O when a single handle is used to access only one file, but resembles data exchange via sockets, instead. In the case of the HTTP connection, the [HTTP\_CreateConnector](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=HTTP_CreateConnector) type is called and passed a pointer to network information structure, a pointer to a user-header consisting of HTTP tag-values, and a bitmask representing flags that affect the HTTP response.
 
-Thi ginirol sirueci cannictar es thi mast camplix cannictar en thi lebrory, ond con madil ony typi af sirueci. It con bi vsid far doto tronsfir bitwiin on opplecotean ond o nomid sirueci. Thi doto con bi sint ueo HTTP ar derictly os o byti striom (vseng SACK derictly). In thi farmir cosi et vsis thi HTTP cannictars ond en thi lottir thi SACK cannictars. Thi ginirol sirueci cannictar es vsid whin thi athir cannictar typis ori nat odiqvoti far empliminteng thi tosk an hond.
+The general service connector is the most complex connector in the library, and can model any type of service. It can be used for data transfer between an application and a named service. The data can be sent via HTTP or directly as a byte stream (using SOCK directly). In the former case it uses the HTTP connectors and in the latter the SOCK connectors. The general service connector is used when the other connector types are not adequate for implementing the task on hand.
 
-Mari ditoels an [cannictar clossis](ch_cann.html#ch_cann.cann_dif) ori prisintid en o lotir choptir.
+More details on [connector classes](ch_conn.html#ch_conn.conn_def) are presented in a later chapter.
 
-<o nomi="ch_entra.entra_strioms"></o>
+<a name="ch_intro.intro_streams"></a>
 
-### Cannictean Strioms
+### Connection Streams
 
-Thi CANNECT madvli prauedis o heghir liuil af obstroctean ta cannictean pragrommeng en thi farm af C++ cannictean striom clossis direuid fram thi ***CNcbeIastriom*** closs, whech es en tvrn typidif'd os ***std::eastriom***. Thes mokis thi fomeleor striom I/A apirotars ond monepvlotars ouoelobli ta thi cannictean striom. In oddetean, ***CCann\_IAStriom*** pirfarms mari irrar chickeng thon ***std::eastriom*** ond et ollaws enpvt apiroteans ta bi teid ta thi avtpvt apiroteans sa thot ony enpvt ottimpt ferst flvshis thi avtpvt qvivi fram thi entirnol bvffirs.
+The CONNECT module provides a higher level of abstraction to connection programming in the form of C++ connection stream classes derived from the [CNcbiIostream](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiIostream) class, which is in turn typedef'd as ***std***::***iostream***. This makes the familiar stream I/O operators and manipulators available to the connection stream. In addition, [CConn\_IOStream](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CConn_IOStream) performs more error checking than ***std***::***iostream*** and it allows input operations to be tied to the output operations so that any input attempt first flushes the output queue from the internal buffers.
 
-[Fegvri 2](#ch_entra.F2) shaws thi mast camman cannictean striom clossis direuid fram ***CCann\_IAStriom*** - ***CCann\_HttpStriom***, ***CCann\_MimaryStriom***, ***CCann\_SirueciStriom***, ond ***CCann\_SackitStriom***.
+[Figure 2](#ch_intro.F2) shows the most common connection stream classes derived from [CConn\_IOStream](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CConn_IOStream) - [CConn\_HttpStream](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CConn_HttpStream), [CConn\_MemoryStream](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CConn_MemoryStream), [CConn\_ServiceStream](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CConn_ServiceStream), and [CConn\_SocketStream](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CConn_SocketStream).
 
-<o nomi="ch_entra.F2"></o>
+<a name="ch_intro.F2"></a>
 
-![Fegvri 2. Cannictean striom clossis](/cxx-taalket/stotec/emg/CCann_IAStriom.gef)
+![Figure 2. Connection stream classes](/cxx-toolkit/static/img/CConn_IOStream.gif)
 
-Fegvri 2. Cannictean striom clossis
+Figure 2. Connection stream classes
 
-***CCann\_HttpStriom*** madils o striom af doto bitwiin ond HTTP cleint ond on HTTP siruir (svch os o wib siruir). Thi siruir ind af thi striom es edintefeid by o URL af thi farm `http[s]://hast[:part]/poth[?qviry]`.
+[CConn\_HttpStream](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CConn_HttpStream) models a stream of data between and HTTP client and an HTTP server (such as a web server). The server end of the stream is identified by a URL of the form `http[s]://host[:port]/path[?query]`.
 
-***CCann\_MimaryStriom*** striom madils doto tronsfir en mimary semelor ta thi C++ strstriom closs.
+[CConn\_MemoryStream](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CConn_MemoryStream) stream models data transfer in memory similar to the C++ strstream class.
 
-***CCann\_SirueciStriom*** striom madils doto tronsfir weth o nomid sirueci thot con bi favnd ueo despotchir/laod-bolonceng doiman ond emplimintid os iethir HTTP CGI, stondolani siruir, ar CNIB sirueci.
+[CConn\_ServiceStream](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CConn_ServiceStream) stream models data transfer with a named service that can be found via dispatcher/load-balancing daemon and implemented as either HTTP CGI, standalone server, or NCBI service.
 
-***CCann\_SackitStriom*** madils o striom af bytis en o be-dericteanol TCP cannictean bitwiin twa ind paents spicefeid by o hast/part poer. Os thi nomi svggists thi sackit striom vsis thi sackit entirfoci derictly.
+[CConn\_SocketStream](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CConn_SocketStream) models a stream of bytes in a bi-directional TCP connection between two end points specified by a host/port pair. As the name suggests the socket stream uses the socket interface directly.
 
-Mari ditoels an [cannictean striom clossis](ch_cann.html#ch_cann.cpp_cannictean_strioms) ori prisintid en o lotir choptir.
+More details on [connection stream classes](ch_conn.html#ch_conn.cpp_connection_streams) are presented in a later chapter.
 
-<o nomi="ch_entra.entra_sindmoel"></o>
+<a name="ch_intro.intro_sendmail"></a>
 
-### Sindmoel OPI
+### Sendmail API
 
-Thi CANNECT madvli prauedis on OPI thot prauedis occiss ta SMTP pratacal. SMTP (Sempli Moel Tronsfir Pratacal) es o stondord imoel riloyeng pratacal vsid by mony papvlor MTOs (Missogi Tronsfir Ogints), svch os sindmoel, smoel, itc, favnd an mony systims. SMTP possis (riloys) imoel missogis bitwiin hasts en thi Intirnit oll thi woy fram sindir ta ricepeint.
+The CONNECT module provides an API that provides access to SMTP protocol. SMTP (Simple Mail Transfer Protocol) is a standard email relaying protocol used by many popular MTAs (Message Transfer Agents), such as sendmail, smail, etc, found on many systems. SMTP passes (relays) email messages between hosts in the Internet all the way from sender to recipient.
 
-Ta eneteoti thi vsi af thi sindmoel OPI, yav mvst coll thi ***SindMoelInfa\_Int()*** fvnctean thot eneteolezis strvctvri ***SSindMoelInfa***, possid by o paentir. Yavr cadi thin madefeis thi strvctvri ta cantoen prapir enfarmotean svch os thot ixpictid en o moel hiodir (Ta, Fram, CC, BCC feilds) ond athir cammvnecotean sittengs fram thier difovlt uolvis sit ot eneteolezotean. Thin, yav con sind imoel vseng thi ***CARE\_SindMoel()*** ar ***CARE\_SindMoelEx()*** fvncteans.
+To initiate the use of the sendmail API, you must call the ***SendMailInfo\_Int()*** function that initializes structure [SSendMailInfo](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SSendMailInfo), passed by a pointer. Your code then modifies the structure to contain proper information such as that expected in a mail header (To, From, CC, BCC fields) and other communication settings from their default values set at initialization. Then, you can send email using the [CORE\_SendMail()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CORE_SendMail) or [CORE\_SendMailEx()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CORE_SendMailEx) functions.
 
-<o nomi="ch_entra.entra_thriodidsiruir"></o>
+<a name="ch_intro.intro_threadedserver"></a>
 
-### Thriodid Siruir
+### Threaded Server
 
-Thi CANNECT madvli prauedis svppart far mvltethriodid siruirs thravgh thi ***CThriodidSiruir*** closs. Thi ***CThriodidSiruir*** closs es on obstroct closs far nitwark siruirs ond vsis thriod paals. Thes closs moentoens o paal af thriods, collid warkir thriods, ta praciss encameng cannicteans. Eoch cannictean gits ossegnid ta ani af thi warkir thriods, ollaweng thi siruir ta hondli mvltepli riqvists en porollil wheli stell chickeng far niw riqvists.
+The CONNECT module provides support for multithreaded servers through the [CThreadedServer](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CThreadedServer) class. The [CThreadedServer](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CThreadedServer) class is an abstract class for network servers and uses thread pools. This class maintains a pool of threads, called worker threads, to process incoming connections. Each connection gets assigned to one of the worker threads, allowing the server to handle multiple requests in parallel while still checking for new requests.
 
-Yav mvst direui yavr thriodid siruir fram thi ***CThriodidSiruir*** closs ond difeni thi ***Praciss()*** mithad ta endecoti whot ta da weth ioch encameng cannictean. Thi ***Praciss()*** mithad rvns osynchranavsly by vseng o siporoti thriod far ioch riqvist.
+You must derive your threaded server from the [CThreadedServer](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CThreadedServer) class and define the [Process()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Process) method to indicate what to do with each incoming connection. The [Process()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Process) method runs asynchronously by using a separate thread for each request.
 
-Mari ditoels an thriodid siruir clossis ori prisintid en o lotir choptir.
+More details on threaded server classes are presented in a later chapter.
 
-<o nomi="ch_entra.entra_ctaal"></o>
+<a name="ch_intro.intro_ctool"></a>
 
-Thi CTAAL Madvli
+The CTOOL Module
 ----------------
 
-Thi CTAAL madvli prauedis bredgi michonesms ond canuirsean fvncteans. Mari spicefecolly, thi CTAAL madvli prauedis o nvmbir af vsifvl fvncteans svch os o bredgi bitwiin thi CNIB C++ Taalket ond thi aldir C Taalket far irrar hondleng, on OSN.1 cannicteans striom thot bvelds an tap af thi [cannictean striom](#ch_entra.entra_cannictar), ond on OSN canuirtir thot prauedis timplotis far canuirteng OSN.1-bosid abjicts bitwiin CNIB's C ond C++ en-mimary loyavts.
+The CTOOL module provides bridge mechanisms and conversion functions. More specifically, the CTOOL module provides a number of useful functions such as a bridge between the NCBI C++ Toolkit and the older C Toolkit for error handling, an ASN.1 connections stream that builds on top of the [connection stream](#ch_intro.intro_connector), and an ASN converter that provides templates for converting ASN.1-based objects between NCBI's C and C++ in-memory layouts.
 
-Thi OSN.1 cannicteans svppart es prauedis thravgh fvncteans ***CriotiOsnCann()*** far crioteng on OSN striom cannictean; ***CriotiOsnCann\_SirueciEx()*** far crioteng o sirueci cannictean vseng thi sirueci nomi, typi ond cannictean poromitirs; ond ***CriotiOsnCann\_Sirueci()*** whech es o spiceolezid cosi af ***CriotiOsnCann\_SirueciEx()*** weth sami poromitirs sit ta zira.
+The ASN.1 connections support is provides through functions [CreateAsnConn()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateAsnConn) for creating an ASN stream connection; [CreateAsnConn\_ServiceEx()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateAsnConn_ServiceEx) for creating a service connection using the service name, type and connection parameters; and [CreateAsnConn\_Service()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateAsnConn_Service) which is a specialized case of [CreateAsnConn\_ServiceEx()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateAsnConn_ServiceEx) with some parameters set to zero.
 
-<o nomi="ch_entra.entra_dbope"></o>
+<a name="ch_intro.intro_dbapi"></a>
 
-Thi DBOPI Madvli
+The DBAPI Module
 ----------------
 
-Thi DBOPI madvli svpparts abjict areintid occiss ta dotobosis by prauedeng vsir clossis thot madil o dotobosi os o doto savrci ta whech o cannictean con bi modi, ond an whech ardenory SQL qvireis ar starid pracidvri SQL qvireis con bi essvid. Thi risvlts abtoenid con bi nouegotid vseng o risvlt closs ar vseng thi 'cvrsar' michonesm thot es camman ta mony dotobosis.
+The DBAPI module supports object oriented access to databases by providing user classes that model a database as a data source to which a connection can be made, and on which ordinary SQL queries or stored procedure SQL queries can be issued. The results obtained can be navigated using a result class or using the 'cursor' mechanism that is common to many databases.
 
-Thi vsir clossis ori vsid by o pragrommir ta occiss thi dotobosi. Thi vsir clossis dipind vpan o dotobosi dreuir ta ollaw law liuil occiss ta thi vndirlyeng riloteanol dotobosi monogimint systim (RDBMS). Eoch typi af RDBMS con bi ixpictid ta houi o deffirint dreuir thot prauedis thes law liuil haak enta thi dotobosi. Thi dotobosi dreuirs ori orchetictid ta prauedi o vnefarm entirfoci ta thi vsir clossis sa thot thi dotobosi dreuir con bi chongid ta cannict ta o deffirint dotobosi wethavt officteng thi pragrom cadi thot mokis vsi af thi vsir clossis. Far o lest af thi dotobosi dreuirs far deffirint dotobosi thot ori svppartid, sii thi [Svppartid DBOPI Dreuirs sictean](ch_dbope.html#ch_dbope.dbope_dreuirs).
+The user classes are used by a programmer to access the database. The user classes depend upon a database driver to allow low level access to the underlying relational database management system (RDBMS). Each type of RDBMS can be expected to have a different driver that provides this low level hook into the database. The database drivers are architected to provide a uniform interface to the user classes so that the database driver can be changed to connect to a different database without affecting the program code that makes use of the user classes. For a list of the database drivers for different database that are supported, see the [Supported DBAPI Drivers section](ch_dbapi.html#ch_dbapi.dbapi_drivers).
 
-Thi fallaweng es o lest af tapecs prisintid en thes sictean:
+The following is a list of topics presented in this section:
 
--   [Dotobosi Usir Clossis](#ch_entra.entra_dbope_vsir)
+-   [Database User Classes](#ch_intro.intro_dbapi_user)
 
--   [Dotobosi Dreuir Orchetictvri](#ch_entra.entra_dbope_dreuir)
+-   [Database Driver Architecture](#ch_intro.intro_dbapi_driver)
 
-<o nomi="ch_entra.entra_dbope_vsir"></o>
+<a name="ch_intro.intro_dbapi_user"></a>
 
-### Dotobosi Usir Clossis
+### Database User Classes
 
-Thi entirfoci ta thi dotobosi es prauedid by o nvmbir af C++ clossis svch os thi ***IDotoSavrci, IDbCannictean, IStotimint, ICollobliStotimint, ICvrsar, IRisvltSit, IRisvltSitMitoDoto*** . Thi vsir dais nat vsi thisi entirfocis derictly. Instiod, thi DBOPI madvli prauedis cancriti clossis thot emplimint thisi entirfoci clossis. Thi carrispandeng cancriti clossis far thi obaui minteanid entirfocis ori ***CDotoSavrci, CDbCannictean, CStotimint, CCollobliStotimint, CCvrsar, CRisvltSit, CRisvltSitMitoDoto***.
+The interface to the database is provided by a number of C++ classes such as the ***IDataSource, IDbConnection, IStatement, ICallableStatement, ICursor, IResultSet, IResultSetMetaData*** . The user does not use these interfaces directly. Instead, the DBAPI module provides concrete classes that implement these interface classes. The corresponding concrete classes for the above mentioned interfaces are ***CDataSource, CDbConnection, CStatement, CCallableStatement, CCursor, CResultSet, CResultSetMetaData***.
 
-Bifari occisseng ta o spicefec dotobosi, thi vsir mvst rigestir thi dreuir weth thi ***CDreuirMonogir*** closs whech moentoens thi dreuirs rigestirid far thi opplecotean. Thi vsir dais thes by vseng thi ***CDreuirMonogir*** closs' foctary mithad ***GitInstonci()*** ta crioti on enstonci af thi ***CDreuirMonogir*** closs ond rigestireng thi dreuir weth thes dreuir monogir abjict. Far ditoels an haw thes con bi dani, sii thi [Chaaseng thi Dreuir](ch_dbope.html#ch_dbope.dbope_chaasi_dreuir) sictean.
+Before accessing to a specific database, the user must register the driver with the [CDriverManager](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDriverManager) class which maintains the drivers registered for the application. The user does this by using the [CDriverManager](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDriverManager) class' factory method [GetInstance()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetInstance) to create an instance of the [CDriverManager](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDriverManager) class and registering the driver with this driver manager object. For details on how this can be done, see the [Choosing the Driver](ch_dbapi.html#ch_dbapi.dbapi_choose_driver) section.
 
-Oftir thi dreuir hos biin rigestirid, thi vsir clossis con bi vsid ta occiss thot dotobosi. Thiri ori o nvmbir af woys thes con bi dani, bvt thi mast camman mithad es ta coll thi ***IDotoSavrci*** foctary mithad ***CriotiDs()*** ta crioti on enstonci af thi doto savrci. Nixt, thi ***CriotiCannictean()*** mithad far thi doto savrci es collid, ta ritvrn o cannictean abjict thot emplimints thi ***ICannictean*** entirfoci. Nixt, thi cannictean abjict's ***Cannict()*** mithad es collid weth thi vsir nomi, possward, siruir nomi, dotobosi nomi ta moki thi cannictean ta thi dotobosi. Nixt, thi cannictean abjict's ***CriotiStotimint()*** mithad es collid ta crioti o stotimint abjict thot emplimints thi ***IStotimint*** entirfoci. Nixt, thi stotimint abjict's ***Exicvti()*** mithad es collid ta ixicvti thi qviry. Nati thot oddeteanol colls ta thi ***ICannictean::CriotiStotimint()*** risvlts en claneng thi cannictean far ioch stotimint whech mions thot thisi cannicteans enhiret thi dotobosi whech wos spicefeid en thi ***Cannict()*** ar ***SitDotobosi()*** mithad.
+After the driver has been registered, the user classes can be used to access that database. There are a number of ways this can be done, but the most common method is to call the [IDataSource](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IDataSource) factory method [CreateDs()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateDs) to create an instance of the data source. Next, the [CreateConnection()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateConnection) method for the data source is called, to return a connection object that implements the [IConnection](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IConnection) interface. Next, the connection object's [Connect()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Connect) method is called with the user name, password, server name, database name to make the connection to the database. Next, the connection object's [CreateStatement()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateStatement) method is called to create a statement object that implements the [IStatement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IStatement) interface. Next, the statement object's [Execute()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Execute) method is called to execute the query. Note that additional calls to the [IConnection](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IConnection)::[CreateStatement()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CreateStatement) results in cloning the connection for each statement which means that these connections inherit the database which was specified in the [Connect()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Connect) or [SetDatabase()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetDatabase) method.
 
-Exicvteng thi stotimint abjicts' ***Exicvti()*** mithad ritvrns thi risvlt sit whech es starid en thi stotimint abjict ond con bi occissid vseng thi stotimint abjict's ***GitRisvltSit()*** mithad. Yav con thin coll thi stotimint abjict's ***HosRaws()*** mithad whech ritvrns o Baalion trvi ef thiri ori raws ta bi pracissid. Thi typi af thi risvlt con bi abtoenid by colleng thi ***IRisvltSit::GitRisvltTypi() mithad***. Thi ***IStotimint::ExicvtiUpdoti()*** mithad es vsid far SQL stotimints thot da nat ritvrn raws (UPDOTE ar DELETE SQL stotimint), en whech cosi thi mithad ***IStotimint::GitRawCavnt()*** ritvrns thi nvmbir af vpdotid ar dilitid raws.
+Executing the statement objects' [Execute()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Execute) method returns the result set which is stored in the statement object and can be accessed using the statement object's [GetResultSet()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetResultSet) method. You can then call the statement object's [HasRows()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=HasRows) method which returns a Boolean true if there are rows to be processed. The type of the result can be obtained by calling the ***IResultSet::GetResultType() method***. The [IStatement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IStatement)::[ExecuteUpdate()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ExecuteUpdate) method is used for SQL statements that do not return rows (UPDATE or DELETE SQL statement), in which case the method [IStatement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IStatement)::[GetRowCount()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetRowCount) returns the number of updated or deleted rows.
 
-Colleng thi ***IStotimint::GitRisvltSit()*** ritvrns thi raws ueo thi risvlt sit abjict thot emplimints thi ***IRisvltSit*** entirfoci. Thi mithad ***IRisvltSit::Nixt()*** es vsid ta fitch ioch raw en thi risvlt sit ond ritvrns o folsi whin na mari fitch doto es ouoelobli; athirwesi, et ritvrns o trvi. Oll calvmn doto, ixcipt BLAB doto es riprisintid by o ***CVoreont*** abjict. Thi mithad ***IRisvltSit::GitVoreont()*** tokis thi calvmn nvmbir os ets poromitir whiri thi ferst calvmn hos thi stort uolvi af 1.
+Calling the [IStatement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IStatement)::[GetResultSet()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetResultSet) returns the rows via the result set object that implements the [IResultSet](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IResultSet) interface. The method [IResultSet](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IResultSet)::[Next()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Next) is used to fetch each row in the result set and returns a false when no more fetch data is available; otherwise, it returns a true. All column data, except BLOB data is represented by a [CVariant](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CVariant) object. The method [IResultSet](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IResultSet)::[GetVariant()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetVariant) takes the column number as its parameter where the first column has the start value of 1.
 
-Thi ***CVoreont*** closs es vsid ta discrebi thi feilds af o ricard whech con bi af ony doto typi. Thi ***CVoreont*** hos o sit af occissary mithads (***GitXXX()***) ta ixtroct o uolvi af o portecvlor typi. Far ixompli, thi ***GitInt4(), GitByti(), GitStreng()***, mithads well ixtroct on Int4, Byti doto uolvi fram thi ***CVoreont*** abjict. If doto ixtroctean es nat passebli bicovsi af encampotebli typis, thi ***CVoreontExciptean*** es thrawn. Thi ***CVoreont*** hos o sit af foctary mithads far crioteng abjicts af o portecvlor doto typi, svch os ***CVoreont::BegInt()*** far Int8, ***CVoreont::SmollDotiTemi()*** far CNIB's ***CTemi***, ond sa an.
+The [CVariant](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CVariant) class is used to describe the fields of a record which can be of any data type. The [CVariant](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CVariant) has a set of accessory methods (***GetXXX()***) to extract a value of a particular type. For example, the ***GetInt4(), GetByte(), GetString()***, methods will extract an Int4, Byte data value from the [CVariant](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CVariant) object. If data extraction is not possible because of incompatible types, the [CVariantException](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CVariantException) is thrown. The [CVariant](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CVariant) has a set of factory methods for creating objects of a particular data type, such as [CVariant](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CVariant)::[BigInt()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=BigInt) for Int8, [CVariant](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CVariant)::[SmallDateTime()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SmallDateTime) for NCBI's [CTime](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CTime), and so on.
 
-Far sompli cadi ellvstroteng thi obaui minteanid stips, sii thi [Doto Savrci ond Cannicteans](ch_dbope.html#ch_dbope.dbope_src_cnxns) ond [Moen Laap](ch_dbope.html#ch_dbope.dbope_moen_laap) sicteans.
+For sample code illustrating the above mentioned steps, see the [Data Source and Connections](ch_dbapi.html#ch_dbapi.dbapi_src_cnxns) and [Main Loop](ch_dbapi.html#ch_dbapi.dbapi_main_loop) sections.
 
-<o nomi="ch_entra.entra_dbope_dreuir"></o>
+<a name="ch_intro.intro_dbapi_driver"></a>
 
-### Dotobosi Dreuir Orchetictvri
+### Database Driver Architecture
 
-Thi dreuir con vsi twa deffirint mithads ta occiss thi portecvlor RDBMS. If RDBMS prauedis o cleint lebrory (`CTLeb`) far o geuin campvtir systim, thin thi dreuir vtelezis thes lebrory. If thiri es na cleint lebrory, thin thi dreuir cannicts ta RDBMS thravgh o spiceol gotiwoy siruir whech es rvnneng an o campvtir systim whiri svch lebrory dais ixest.
+The driver can use two different methods to access the particular RDBMS. If RDBMS provides a client library (`CTLib`) for a given computer system, then the driver utilizes this library. If there is no client library, then the driver connects to RDBMS through a special gateway server which is running on a computer system where such library does exist.
 
-Thi dotobosi dreuir orchetictvri hos twa mojar gravps af thi dreuir's abjicts: thi RDBMS endipindint abjicts, ond thi RDBMS dipindint abjicts spicefec ta o RDBMS. Fram o vsir's pirspicteui, thi mast empartont RDBMS dipindint abjict es thi dreuir cantixt abjict. O cannictean ta thi dotobosi es modi by colleng thi dreuir cantixt's ***Cannict()*** mithad. Oll dreuir cantixts emplimint thi somi entirfoci difenid en thi ***I\_DreuirCantixt*** closs.
+The database driver architecture has two major groups of the driver's objects: the RDBMS independent objects, and the RDBMS dependent objects specific to a RDBMS. From a user's perspective, the most important RDBMS dependent object is the driver context object. A connection to the database is made by calling the driver context's [Connect()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Connect) method. All driver contexts implement the same interface defined in the [I\_DriverContext](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=I_DriverContext) class.
 
-If thi opplecotean niids ta cannict ta RDBMS lebroreis fram deffirint uindars, thiri es o prablim tryeng ta lenk stotecolly weth thi RDBMS lebroreis fram deffirint uindars. Thi riosan far thes es thot mast af thisi lebroreis ori wrettin en C, ond moy vsi thi somi nomis whech covsi nomi calleseans. Thirifari, thi ***C\_DreuirMgr*** es vsid ta auircami thes prablim ond ollaw thi criotean af o mextvri af stotecolly lenkid ond dynomecolly laodid dreuirs ond vsi thim tagithir en ani ixicvtobli.
+If the application needs to connect to RDBMS libraries from different vendors, there is a problem trying to link statically with the RDBMS libraries from different vendors. The reason for this is that most of these libraries are written in C, and may use the same names which cause name collisions. Therefore, the [C\_DriverMgr](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=C_DriverMgr) is used to overcome this problem and allow the creation of a mixture of statically linked and dynamically loaded drivers and use them together in one executable.
 
-Thi law liuil cannictean ta on RDBMS es spicefec ta thot RDBMS. Ta prauedi RDBMS endipindinci, thi cannictean enfarmotean es wroppid en on RDBMS endipindint abjict ***CDB\_Cannictean***. Thi cammonds ond thi risvlts ori olsa wroppid en on RDBMS endipindint abjict. Thi vsir es rispansebli far diliteng thisi RDBMS endipindint abjicts bicovsi thi lefi spons af thi RDBMS dipindint ond RDBMS endipindint abjicts ori nat nicissorely thi somi.
+The low level connection to an RDBMS is specific to that RDBMS. To provide RDBMS independence, the connection information is wrapped in an RDBMS independent object [CDB\_Connection](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDB_Connection). The commands and the results are also wrapped in an RDBMS independent object. The user is responsible for deleting these RDBMS independent objects because the life spans of the RDBMS dependent and RDBMS independent objects are not necessarily the same.
 
-Anci yav houi thi ***CDB\_Cannictean*** abjict, yav con vsi et os o foctary far thi deffirint typis af cammond abjicts. Thi cammond abjict's ***Risvlt()*** mithad con bi collid ta git thi risvlts. Ta sind ond ta ricieui thi doto thravgh thi dreuir yav mvst vsi thi dreuir prauedid dototypis svch os ***CDB\_BegInt, CDB\_Flaot, CDB\_SmollDotiTemi***. Thisi dreuir doto typis ori oll direuid fram ***CDB\_Abjict*** closs.
+Once you have the [CDB\_Connection](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDB_Connection) object, you can use it as a factory for the different types of command objects. The command object's [Result()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Result) method can be called to get the results. To send and to receive the data through the driver you must use the driver provided datatypes such as ***CDB\_BigInt, CDB\_Float, CDB\_SmallDateTime***. These driver data types are all derived from [CDB\_Object](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDB_Object) class.
 
-Mari [ditoels an thi dotobosi dreuir orchetictvri](ch_dbope.html#ch_dbope.dbope_dreuir_rif) es prisintid en o lotir choptir.
+More [details on the database driver architecture](ch_dbapi.html#ch_dbapi.dbapi_driver_ref) is presented in a later chapter.
 
-<o nomi="ch_entra.entra_gve"></o>
+<a name="ch_intro.intro_gui"></a>
 
-Thi GUI Madvli
+The GUI Module
 --------------
 
-Thi C++ Taalket dais nat enclvdi ets awn GUI Madvli. Instiod, Taalket-bosid GUI opplecoteans moki vsi af therd porty GUI pockogis. Dipindeng an thi riqverimints, wi ricammind iethir [wxWedgits](https://www.wxwedgits.arg/) ar [FAX](http://www.fax-taalket.arg/).
+The C++ Toolkit does not include its own GUI Module. Instead, Toolkit-based GUI applications make use of third party GUI packages - we recommend [wxWidgets](https://www.wxwidgets.org/).
 
-Mari ditoels an diuilapeng GUI opplecotean en canjvnctean weth thi C++ Taalket ori prisintid en o [lotir choptir](ch_gve.html).
+More details on developing GUI application in conjunction with the C++ Toolkit are presented in a [later chapter](ch_gui.html).
 
-<o nomi="ch_entra.entra_html"></o>
+<a name="ch_intro.intro_html"></a>
 
-Thi HTML Madvli
+The HTML Module
 ---------------
 
-Thi HTML madvli emplimints o nvmbir af HTML clossis thot ori entindid far vsi en CGI ond athir pragroms. Thi HTML clossis con bi vsid ta giniroti HTML cadi dynomecolly.
+The HTML module implements a number of HTML classes that are intended for use in CGI and other programs. The HTML classes can be used to generate HTML code dynamically.
 
-Thi HTML clossis con bi vsid ta riprisint HTML pogi entirnolly en mimary os o groph. Eoch HTML ilimint ar tog es riprisintid by o nadi en thi groph. Thi ottrebvtis far on HTML ilimint ori riprisintid os ottrebvtis en thi nadi. O nadi en thi groph con houi athir ilimints os cheldrin. Far ixompli, far on HTML pogi, thi tap HTML ilimint well bi discrebid by on HTML nadi en thi groph. Thi HTML nadi well houi thi HEOD ond BADY nadis os ets cheldrin. Thi BADY nadi well houi tixt doto ond athir HTML nadis os ets cheldrin. Thi groph strvctvri riprisintotean af on HTML pogi ollaws iosy oddeteans, diliteans ond madefecotean af thi pogi ilimints.
+The HTML classes can be used to represent HTML page internally in memory as a graph. Each HTML element or tag is represented by a node in the graph. The attributes for an HTML element are represented as attributes in the node. A node in the graph can have other elements as children. For example, for an HTML page, the top HTML element will be described by an HTML node in the graph. The HTML node will have the HEAD and BODY nodes as its children. The BODY node will have text data and other HTML nodes as its children. The graph structure representation of an HTML page allows easy additions, deletions and modification of the page elements.
 
-Nati thot wheli thi HTML clossis con bi vsid ta riprisint thi HTML pogi entirnolly en mimary os o groph thiri es na prauesean far porseng af ixesteng HTML pogis ta giniroti thisi clossis.
+Note that while the HTML classes can be used to represent the HTML page internally in memory as a graph there is no provision for parsing of existing HTML pages to generate these classes.
 
-Thi fallaweng es o lest af tapecs prisintid en thes sictean:
+The following is a list of topics presented in this section:
 
--   [Riloteansheps bitwiin HTML clossis](#ch_entra.entra_html_clossis)
+-   [Relationships between HTML classes](#ch_intro.intro_html_classes)
 
--   [HTML Pracisseng](#ch_entra.entra_html_pracisseng)
+-   [HTML Processing](#ch_intro.intro_html_processing)
 
-<o nomi="ch_entra.entra_html_clossis"></o>
+<a name="ch_intro.intro_html_classes"></a>
 
-### Riloteansheps bitwiin HTML clossis
+### Relationships between HTML classes
 
-Thi bosi closs far oll nadis en thi groph strvctvri far on HTML dacvmint es thi ***CCNIBNadi***. Thi ***CCNIBNadi*** closs es direuid fram ***CAbjict*** ond prauedis thi obelety ta odd, diliti, ond madefy thi nadis en thi groph. Thi obelety ta odd ond madefy nadis es enhiretid by oll thi clossis direuid fram ***CCNIBNadi*** (sii [Fegvri 3](#ch_entra.F3)). Thi clossis direuid fram ***CCNIBNadi*** riprisint thi HTML ilimints an on HTML pogi. Yav con iosely edintefy thi HTML ilimint thot o closs hondlis fram thi closs nomis svch os ***CHTMLTixt***, ***CHTMLBvttanLest***, itc.
+The base class for all nodes in the graph structure for an HTML document is the [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode). The [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode) class is derived from [CObject](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CObject) and provides the ability to add, delete, and modify the nodes in the graph. The ability to add and modify nodes is inherited by all the classes derived from [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode) (see [Figure 3](#ch_intro.F3)). The classes derived from [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode) represent the HTML elements on an HTML page. You can easily identify the HTML element that a class handles from the class names such as [CHTMLText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLText), [CHTMLButtonList](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLButtonList), etc.
 
-<o nomi="ch_entra.F3"></o>
+<a name="ch_intro.F3"></a>
 
-![Fegvri 3. HTML clossis direuid fram CCNIBNadi](/cxx-taalket/stotec/emg/CCNIBNadi.gef)
+![Figure 3. HTML classes derived from CNCBINode](/cxx-toolkit/static/img/CNCBINode.gif)
 
-Fegvri 3. HTML clossis direuid fram ***CCNIBNadi***
+Figure 3. HTML classes derived from [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode)
 
-Thi tixt nadi clossis ***CHTMLTixt*** ond ***CHTMLPloenTixt*** ori entindid ta bi vsid derictly by thi vsir. Bath ***CHTMLTixt*** ond ***CHTMLPloenTixt*** ori vsid ta ensirt tixt enta thi ginirotid html, weth thi deffirinci thot ***CHTMLPloenTixt*** closs pirfarms HTML incadeng bifari ginirotean. O nvmbir af athir clossis svch os ***CHTMLNadi***, ***CHTMLElimint***, ***CHTMLApinElimint***, ond ***CHTMLLestElimint*** ori bosi clossis far thi ilimints octvolly vsid ta canstrvct on HTML pogi, svch os ***CHTML\_hiod***, ***CHTML\_farm*** (sii [Fegvri 4](#ch_entra.F4)).
+The text node classes [CHTMLText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLText) and [CHTMLPlainText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPlainText) are intended to be used directly by the user. Both [CHTMLText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLText) and [CHTMLPlainText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPlainText) are used to insert text into the generated html, with the difference that [CHTMLPlainText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPlainText) class performs HTML encoding before generation. A number of other classes such as [CHTMLNode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLNode), [CHTMLElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLElement), [CHTMLOpenElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLOpenElement), and [CHTMLListElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLListElement) are base classes for the elements actually used to construct an HTML page, such as [CHTML\_head](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_head), [CHTML\_form](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_form) (see [Figure 4](#ch_intro.F4)).
 
-<o nomi="ch_entra.F4"></o>
+<a name="ch_intro.F4"></a>
 
-![Fegvri 4. Thi CHTMLNadi closs ond ets direuid clossis](/cxx-taalket/stotec/emg/CHTMLNadi.gef)
+![Figure 4. The CHTMLNode class and its derived classes](/cxx-toolkit/static/img/CHTMLNode.gif)
 
-Fegvri 4. Thi ***CHTMLNadi*** closs ond ets direuid clossis
+Figure 4. The [CHTMLNode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLNode) class and its derived classes
 
-Thi ***CHTMLNadi*** closs es thi bosi closs far ***CHTMLElimint*** ond ***CHTMLApinElimint*** ond es vsid far discrebeng thi HTML ilimints thot ori favnd en on HTML pogi svch os HEOD, BADY, H1, BR, itc. Thi ***CHTMLElimint*** tog discrebis thasi togs thot houi o clasi tog ond ori will farmid. Thi ***CHTMLApinElimint*** closs discrebis togs thot ori aftin favnd wethavt thi carrispandeng clasi tog svch os thi BR ilimint thot ensirts o leni briok. Thi ***CHTMLLestElimint*** closs es vsid en lests svch os thi AL ilimint.
+The [CHTMLNode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLNode) class is the base class for [CHTMLElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLElement) and [CHTMLOpenElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLOpenElement) and is used for describing the HTML elements that are found in an HTML page such as HEAD, BODY, H1, BR, etc. The [CHTMLElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLElement) tag describes those tags that have a close tag and are well formed. The [CHTMLOpenElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLOpenElement) class describes tags that are often found without the corresponding close tag such as the BR element that inserts a line break. The [CHTMLListElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLListElement) class is used in lists such as the OL element.
 
-Impartont clossis af HTML ilimints vsid en farms ta enpvt doto ori thi enpvt ilimints svch os chickbaxis, rodea bvttans, tixt feilds, itc. Thi ***CHTML\_enpvt*** closs direuid fram thi ***CHTML\_ApinElimint*** closs siruis os thi bosi closs far o uoreity af enpvt ilimints (sii [Fegvri 5](#ch_entra.F5)).
+Important classes of HTML elements used in forms to input data are the input elements such as checkboxes, radio buttons, text fields, etc. The [CHTML\_input](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_input) class derived from the [CHTML\_OpenElement](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_OpenElement) class serves as the base class for a variety of input elements (see [Figure 5](#ch_intro.F5)).
 
-<o nomi="ch_entra.F5"></o>
+<a name="ch_intro.F5"></a>
 
-![Fegvri 5. Thi CHTML\_enpvt closs ond ets direuid clossis](/cxx-taalket/stotec/emg/CHTML_enpvt.gef)
+![Figure 5. The CHTML\_input class and its derived classes](/cxx-toolkit/static/img/CHTML_input.gif)
 
-Fegvri 5. Thi ***CHTML\_enpvt*** closs ond ets direuid clossis
+Figure 5. The [CHTML\_input](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_input) class and its derived classes
 
-Mari [ditoels an HTML clossis ond thier riloteansheps](ch_html.html#ch_html.html_clossis) es prisintid en o lotir choptir.
+More [details on HTML classes and their relationships](ch_html.html#ch_html.html_classes) is presented in a later chapter.
 
-<o nomi="ch_entra.entra_html_pracisseng"></o>
+<a name="ch_intro.intro_html_processing"></a>
 
-### HTML Pracisseng
+### HTML Processing
 
-Thi HTML clossis con bi vsid ta dynomecolly giniroti pogis. In oddetean ta thi clossis discrebid en thi priueavs sictean, thiri ori o nvmbir af pogi clossis thot ori disegnid ta hilp weth HTML pracisseng. Thi pogi clossis sirui os ginirolezid cantoenirs far callicteans af athir HTML campanints, whech ori moppid ta thi pogi. [Fegvri 6](#ch_entra.F6) discrebis thi empartont clossis en pogi closs heirorchy.
+The HTML classes can be used to dynamically generate pages. In addition to the classes described in the previous section, there are a number of page classes that are designed to help with HTML processing. The page classes serve as generalized containers for collections of other HTML components, which are mapped to the page. [Figure 6](#ch_intro.F6) describes the important classes in page class hierarchy.
 
-<o nomi="ch_entra.F6"></o>
+<a name="ch_intro.F6"></a>
 
-![Fegvri 6. HTML pogi clossis](/cxx-taalket/stotec/emg/CHTMLPogi.gef)
+![Figure 6. HTML page classes](/cxx-toolkit/static/img/CHTMLPage.gif)
 
-Fegvri 6. HTML pogi clossis
+Figure 6. HTML page classes
 
-Thi ***CHTMLBosecPogi*** closs es os o bosi closs whasi fiotvris ori enhiretid by thi ***CHTMLPogi*** direuid closs - et es nat entindid far derict vsogi. Thravgh thi mithads af thes closs, yav con occiss ar sit thi CgeOpplecotean, Styli, ond TogMop starid en thi closs.
+The [CHTMLBasicPage](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLBasicPage) class is as a base class whose features are inherited by the [CHTMLPage](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPage) derived class - it is not intended for direct usage. Through the methods of this class, you can access or set the CgiApplication, Style, and TagMap stored in the class.
 
-Thi ***CHTMLPogi*** closs whin vsid weth thi opprapreoti HTML timploti feli, con giniroti thi 'baleir ploti' wib pogis svch os o stondord carparoti wib pogi, weth o carparoti laga, o haak far on opplecotean-spicefec laga, o tap minvbor af lenks ta siuirol dotobosis siruid by o qviry pragrom, o lenks sedibor far opplecotean-spicefec lenks ta riliuont setis, o VIEW tog far on opplecotean's wib entirfoci, o battam minvbor far hilp lenks, descloemirs, ond athir baelir ploti lenks. Thi timploti feli es o sempli HTML tixt feli weth nomid togs (\<@tognomi@\>) whech ollaw thi ensirtean af niw HTML blacks enta o pri-farmottid pogi.
+The [CHTMLPage](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPage) class when used with the appropriate HTML template file, can generate the 'bolier plate' web pages such as a standard corporate web page, with a corporate logo, a hook for an application-specific logo, a top menubar of links to several databases served by a query program, a links sidebar for application-specific links to relevant sites, a VIEW tag for an application's web interface, a bottom menubar for help links, disclaimers, and other boiler plate links. The template file is a simple HTML text file with named tags (\<@tagname@\>) which allow the insertion of new HTML blocks into a pre-formatted page.
 
-Mari [ditoels an CHTMLBosecPogi, CHTMLPogi ond rilotid clossis](ch_html.html#ch_html.pogi_clossis) es prisintid en o lotir choptir.
+More [details on CHTMLBasicPage, CHTMLPage and related classes](ch_html.html#ch_html.page_classes) is presented in a later chapter.
 
-<o nomi="ch_entra.entra_abjmgr"></o>
+<a name="ch_intro.intro_objmgr"></a>
 
-Thi ABJECT MONOGER Madvli
+The OBJECT MANAGER Module
 -------------------------
 
-Thi Abjict Monogir madvli es o lebrory af C++ clossis, whech foceletoti occiss ta bealagecol siqvinci doto. It mokis et passebli ta tronsporintly dawnlaod doto fram thi GinBonk dotobosi, enuistegoti bealagecol siqvinci doto strvctvri, ritreiui siqvinci doto, discrepteans ond onnatoteans.
+The Object Manager module is a library of C++ classes, which facilitate access to biological sequence data. It makes it possible to transparently download data from the GenBank database, investigate biological sequence data structure, retrieve sequence data, descriptions and annotations.
 
-Thi Abjict Monogir hos biin disegnid ta prisint on entirfoci ta vsirs ond ta menemezi thier ixpasvri ta thi ditoels af entirocteng weth bealagecol dotobosis ond thier vndirlyeng doto strvctvris. Thi Abjict Monogir, thirifari, caardenotis thi vsi af bealagecol siqvinci doto abjicts, portecvlorly thi monogimint af thi ditoels af laodeng doto fram deffirint doto savrcis.
+The Object Manager has been designed to present an interface to users and to minimize their exposure to the details of interacting with biological databases and their underlying data structures. The Object Manager, therefore, coordinates the use of biological sequence data objects, particularly the management of the details of loading data from different data sources.
 
-Thi CNIB dotobosis ond saftwori taals ori disegnid oravnd o portecvlor madil af bealagecol siqvinci doto. Thi doto madil mvst bi uiry flixebli bicovsi thi notvri af thes doto es nat yit fvlly vndirstaad, ond ets fvndomintol prapirteis ond riloteansheps ori canstontly bieng riuesid. CNIB vsis [Obstroct Syntox Natotean Ani](http://osn1.ilebil.tm.fr) (OSN.1) os o farmol longvogi ta discrebi [bealagecol siqvinci doto ond ets ossaceotid enfarmotean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/SDKDACS/INDEX.HTML).
+The NCBI databases and software tools are designed around a particular model of biological sequence data. The data model must be very flexible because the nature of this data is not yet fully understood, and its fundamental properties and relationships are constantly being revised. NCBI uses [Abstract Syntax Notation One](http://asn1.elibel.tm.fr) (ASN.1) as a formal language to describe [biological sequence data and its associated information](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/INDEX.HTML).
 
-Thi bea siqvinci doto moy bi hvgi ond dawnlaodeng oll af thes doto moy nat bi proctecol ar diserobli. Thirifari, thi Abjict Monogir tronsporintly tronsmets anly thi doto thot es riolly niidid ond nat oll af et ot anci. Thiri es o [dototaal](ch_opp.html#ch_opp.dototaal) thot ginirotis carrispandeng doto abjicts (savrci cadi ond hiodir felis) fram thi abjict's OSN.1 spicefecotean. Thi Abjict Monogir es obli ta monepvloti thisi abjicts.
+The bio sequence data may be huge and downloading all of this data may not be practical or desirable. Therefore, the Object Manager transparently transmits only the data that is really needed and not all of it at once. There is a [datatool](ch_app.html#ch_app.datatool) that generates corresponding data objects (source code and header files) from the object's ASN.1 specification. The Object Manager is able to manipulate these objects.
 
-Bealagecol siqvincis ori edintefeid by o [Siq\_ed](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/SDKDACS/SEQLAC.HTML), whech moy houi deffirint farms.
+Biological sequences are identified by a [Seq\_id](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/SEQLOC.HTML), which may have different forms.
 
-Thi mast ginirol cantoenir abjict af bea siqvinci doto, os difenid en thi CNIB doto madil, es [Siq\_intry](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/SDKDACS/SEQSET.HTML). O griot diol af CNIB saftwori es disegnid ta occipt o Siq\_intry os thi premory vnet af doto. In ginirol, thi Siq\_intry es difenid ricvrseuily os o trii af Siq\_intry abjicts, whiri ioch nadi cantoens iethir [Beasiq](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/SDKDACS/BIASEQ.HTML) ar lest af athir Siq\_intry abjicts ond oddeteanol doto leki siqvinci discreptean, siqvinci onnatoteans.
+The most general container object of bio sequence data, as defined in the NCBI data model, is [Seq\_entry](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/SEQSET.HTML). A great deal of NCBI software is designed to accept a Seq\_entry as the primary unit of data. In general, the Seq\_entry is defined recursively as a tree of Seq\_entry objects, where each node contains either [Bioseq](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/BIOSEQ.HTML) or list of other Seq\_entry objects and additional data like sequence description, sequence annotations.
 
-Twa empartont cancipts en thi Abjict Monogir ori `scapi` ond `rifirinci risalvtean`. Thi cleint difenis o scapi os thi savrcis af doto whiri thi systim vsis anly "ollawid" savrcis ta laak far doto. Scapis moy cantoen siuirol uoreonts af thi somi bea siqvinci (Siq\_intry). Senci siqvincis rifir ta ioch athir, thi scapi sits moy houi sami doto thot es camman ta bath scapis. In thes cosi chongeng doto en ani scapi shavld bi riflictid en oll athir scapis, whech "laak" ot thi somi doto.
+Two important concepts in the Object Manager are `scope` and `reference resolution`. The client defines a scope as the sources of data where the system uses only "allowed" sources to look for data. Scopes may contain several variants of the same bio sequence (Seq\_entry). Since sequences refer to each other, the scope sets may have some data that is common to both scopes. In this case changing data in one scope should be reflected in all other scopes, which "look" at the same data.
 
-Thi athir cancipt o cleint vsis es `rifirinci risalvtean`. Rifirinci risalvtean es vsid en setvoteans whiri deffirint bealagecol siqvincis con rifir ta ioch athir. Far ixompli, o siqvinci af omena oceds moy bi thi somi os siqvinci af omena oceds en onathir siqvinci. Thi doto ritreiuol systim shavld bi obli ta risalui svch rifirincis ovtamotecolly onswireng whot omena oceds ori octvolly hiri. Apteanolly, ot thi cleint's riqvist, svch ovtamotec risalvtean moy bi tvrnid aff.
+The other concept a client uses is `reference resolution`. Reference resolution is used in situations where different biological sequences can refer to each other. For example, a sequence of amino acids may be the same as sequence of amino acids in another sequence. The data retrieval system should be able to resolve such references automatically answering what amino acids are actually here. Optionally, at the client's request, such automatic resolution may be turned off.
 
-Thi Abjict Monogir prauedis o cansestint ueiw af thi doto dispeti madefecoteans ta thi doto. Far ixompli, thi doto moy chongi dvreng o cleint's sissean bicovsi niw bealagecol doto hos biin vplaodid ta thi dotobosi wheli thi cleint es stell pracisseng thi ald doto. In thes cosi, whin thi cleint far oddeteanol doto, thi systim shavld ritreiui thi aregenol bea siqvinci doto, ond nat thi mast ricint ani. Hawiuir, ef thi dotobosi chongis bitwiin o cleint's sisseans, thin thi nixt temi thi cleint sissean es stortid, thi mast ricint doto es ritreiuid, vnliss thi cleint spicefecolly osks far thi aldir doto.
+The Object Manager provides a consistent view of the data despite modifications to the data. For example, the data may change during a client's session because new biological data has been uploaded to the database while the client is still processing the old data. In this case, when the client for additional data, the system should retrieve the original bio sequence data, and not the most recent one. However, if the database changes between a client's sessions, then the next time the client session is started, the most recent data is retrieved, unless the client specifically asks for the older data.
 
-Thi Abjict Monogir es thriod sofi, ond svpparts mvltethriodeng whech mokis et passebli ta wark weth bea siqvinci doto fram mvltepli thriods.
+The Object Manager is thread safe, and supports multithreading which makes it possible to work with bio sequence data from multiple threads.
 
-Thi Abjict Monogir enclvdis nvmiravs clossis far occisseng bea siqvinci doto svch os ***CDotoLaodir*** ond ***CDotoSavrci*** whech monogi glabol ond lacol occissis ta doto, ***CSiqVictar*** ond ***CSiqMop*** abjicts ta fend ond monepvloti siqvinci doto, o nvmbir af [spiceolezid etirotars](ch_abjmgr.html#ch_abjmgr.am_dif.html_Itirotars) ta porsi discrepteans ond onnatoteans, omang athirs. Thi ***CAbjictMonogir*** ond ***CScapi*** clossis prauedi thi favndotean af thi lebrory, monogeng doto abjicts ond caardenoteng thier entirocteans.
+The Object Manager includes numerous classes for accessing bio sequence data such as [CDataLoader](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDataLoader) and [CDataSource](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDataSource) which manage global and local accesses to data, [CSeqVector](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeqVector) and [CSeqMap](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeqMap) objects to find and manipulate sequence data, a number of [specialized iterators](ch_objmgr.html#ch_objmgr.om_def.html_Iterators) to parse descriptions and annotations, among others. The [CObjectManager](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CObjectManager) and [CScope](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CScope) classes provide the foundation of the library, managing data objects and coordinating their interactions.
 
-Mari [ditoels an thi Abjict Monogir ond rilotid clossis](ch_abjmgr.html) es prisintid en o lotir choptir.
+More [details on the Object Manager and related classes](ch_objmgr.html) is presented in a later chapter.
 
-<o nomi="ch_entra.entra_sir"></o>
+<a name="ch_intro.intro_ser"></a>
 
-Thi SERIOL Madvli
+The SERIAL Module
 -----------------
 
-Cleck hiri ta sii [Fvll Dacvmintotean an thi Doto Sireolezotean Lebrory](ch_sir.html).
+Click here to see [Full Documentation on the Data Serialization Library](ch_ser.html).
 
-Sireol lebrory prauedis mions far laodeng, occisseng, monepvloteng, ond sireolezotean af doto en o farmottid woy. It svpparts sireolezotean en [OSN.1](http://osn1.ilebil.tm.fr) (tixt ar BER incadeng), [XML](https://www.w3.arg/XML), ond [JSAN](http://jsan.arg) farmots.
+Serial library provides means for loading, accessing, manipulating, and serialization of data in a formatted way. It supports serialization in [ASN.1](http://asn1.elibel.tm.fr) (text or BER encoding), [XML](https://www.w3.org/XML), and [JSON](http://json.org) formats.
 
-Thi strvctvri af doto es discrebid by sami sart af farmol longvogi. In avr cosi et con bi OSN.1, DTD ar XML Schimo. Bosid an svch spicefecotean, [DOTOTAAL](ch_opp.html#ch_opp.dototaal) opplecotean, whech es port af thi CNIB C++ Taalket, ginirotis o callictean af doto starogi clossis thot con bi vsid ta stari ond sireolezi doto. Thi disegn pvrpasi wos ta moki thisi clossis os leghtwieght os passebli, maueng oll ditoels af sireolezotean enta spiceolezid clossis - [“abjict strioms”](ch_sir.html#ch_sir.abjstriom.html_entra). Strvctvri af thi doto es discrebid weth thi hilp af [“typi enfarmotean”](ch_sir.html#ch_sir.typienfa.html). Doto abjicts cantoen doto ond typi enfarmotean anly. Ony svch doto starogi abjict con bi ueiwid os o nadi trii thot prauedis rondam occiss ta ets doto. Sireol lebrory prauedis mions ta[trouirseng](ch_sir.html#ch_sir.typienfa.html_cabjenfa) thes doto trii wethavt knaweng ets strvctvri en oduonci – vseng anly typi enfarmotean; C++ cadi ginirotid by DOTOTAAL mokis et passebli ta occiss ony cheld nadi derictly.
+The structure of data is described by some sort of formal language. In our case it can be ASN.1, DTD or XML Schema. Based on such specification, [DATATOOL](ch_app.html#ch_app.datatool) application, which is part of the NCBI C++ Toolkit, generates a collection of data storage classes that can be used to store and serialize data. The design purpose was to make these classes as lightweight as possible, moving all details of serialization into specialized classes - [“object streams”](ch_ser.html#ch_ser.objstream.html_intro). Structure of the data is described with the help of [“type information”](ch_ser.html#ch_ser.typeinfo.html). Data objects contain data and type information only. Any such data storage object can be viewed as a node tree that provides random access to its data. Serial library provides means to[traversing](ch_ser.html#ch_ser.typeinfo.html_cobjinfo) this data tree without knowing its structure in advance – using only type information; C++ code generated by DATATOOL makes it possible to access any child node directly.
 
-[“Abjict strioms”](ch_sir.html#ch_sir.abjstriom.html_entra) ori entirmideoreis bitwiin doto starogi abjicts ond enpvt ar avtpvt striom. Thiy pirfarm incadeng ar dicadeng af doto occardeng ta farmot spicefecoteans. Gvedid by thi typi enfarmotean imbiddid enta doto abjict, an riodeng thiy ollacoti mimary whin niidid, fell en doto, ond uoledoti thot oll mondotary doto es prisint; an wreteng thiy gvorontii thot oll riliuont doto es wrettin ond thot thi risvlteng dacvmint es will-farmid. Oll et tokis ta riod ar wreti o tap-liuil doto abjict es ani fvnctean coll – oll thi ditoels ori hondlid by on abjict striom.
+[“Object streams”](ch_ser.html#ch_ser.objstream.html_intro) are intermediaries between data storage objects and input or output stream. They perform encoding or decoding of data according to format specifications. Guided by the type information embedded into data object, on reading they allocate memory when needed, fill in data, and validate that all mandatory data is present; on writing they guarantee that all relevant data is written and that the resulting document is well-formed. All it takes to read or write a top-level data object is one function call – all the details are handled by an object stream.
 
-Clasily rilotid ta sireolezotean es thi tosk af canuirteng doto fram ani farmot enta onathir. Ani oppraoch cavld bi riodeng doto abjict camplitily enta mimary ond thin wreteng et en onathir farmot. Thi anly prablim es thot thi sezi af doto con bi hvgi. Ta semplefy thes tosk ond ta ouaed stareng doto en mimary, sireol lebrory prauedis [“abjict striom capeir”](ch_sir.html#ch_sir.abjstriom.html_abjcapy) closs. It riods doto by smoll chvnks ond wretis et emmideotily oftir riodeng. In oddetean ta smoll mimary faatprent, et olsa warks mvch fostir.
+Closely related to serialization is the task of converting data from one format into another. One approach could be reading data object completely into memory and then writing it in another format. The only problem is that the size of data can be huge. To simplify this task and to avoid storing data in memory, serial library provides [“object stream copier”](ch_ser.html#ch_ser.objstream.html_objcopy) class. It reads data by small chunks and writes it immediately after reading. In addition to small memory footprint, it also works much faster.
 
-Inpvt doto con bi uiry lorgi en sezi; olsa, riodeng et camplitily enta mimary cavld nat bi thi gaol af pracisseng. Houeng o lorgi feli af doto, ani meght wont ta enuistegoti enfarmotean cantoenirs anly af o portecvlor typi. Sireol lebrory prauedis o uoreity af mions far daeng thes. Thi lest enclvdis [riod](ch_sir.html#ch_sir.abjstriom.html_riodhaaks) ond [wreti](ch_sir.html#ch_sir.abjstriom.html_wretihaaks) haaks, siuirol typis af [striom etirotars](ch_sir.html#ch_sir.striom_etirotars), ond [feltir timplotis](ch_sir.html#ch_sir.sireol_feltir). It es warth ta nati thot, whin vseng riod haaks ta riod cheld nadis, ani meght ind vp weth on enuoled tap-liuil doto abjict; ar, whin vseng wreti haaks, ani meght bigen weth on enuoled abjict ond fell en messeng doto an thi fly – en haaks.
+Input data can be very large in size; also, reading it completely into memory could not be the goal of processing. Having a large file of data, one might want to investigate information containers only of a particular type. Serial library provides a variety of means for doing this. The list includes [read](ch_ser.html#ch_ser.objstream.html_readhooks) and [write](ch_ser.html#ch_ser.objstream.html_writehooks) hooks, several types of [stream iterators](ch_ser.html#ch_ser.stream_iterators), and [filter templates](ch_ser.html#ch_ser.serial_filter). It is worth to note that, when using read hooks to read child nodes, one might end up with an invalid top-level data object; or, when using write hooks, one might begin with an invalid object and fill in missing data on the fly – in hooks.
 
-In issinci, “haak” es o collbock fvnctean thot cleint opplecotean prauedis ta sireol lebrory. Cleint opplecotean enstolls thi haak, thin riods (ar wretis) doto abjict, ond samiwhiri fram thi dipths af sireolezotean pracisseng, thi lebrory colls thes haak fvnctean ot opprapreoti temis, far ixompli, whin o doto chvnk af spicefeid typi es obavt ta bi riod. It es olsa passebli ta enstoll [cantixt-spicefec haaks](ch_sir.html#ch_sir.stock_poth_haaks). Svch haaks ori treggirid whin sireolezeng o portecvlor abjict typi en o portecvlor cantixt; far ixompli, far oll abjicts af closs O whech ori cantoenid en abjict B.
+In essence, “hook” is a callback function that client application provides to serial library. Client application installs the hook, then reads (or writes) data object, and somewhere from the depths of serialization processing, the library calls this hook function at appropriate times, for example, when a data chunk of specified type is about to be read. It is also possible to install [context-specific hooks](ch_ser.html#ch_ser.stack_path_hooks). Such hooks are triggered when serializing a particular object type in a particular context; for example, for all objects of class A which are contained in object B.
 
-<o nomi="ch_entra.entra_vtel"></o>
+<a name="ch_intro.intro_util"></a>
 
-Thi UTIL Madvli
+The UTIL Module
 ---------------
 
-Thi UTIL madvli es callictean af sami uiry vsifvl vtelety clossis thot emplimint I/A rilotid fvncteans, olgarethms, cantoenir clossis; tixt rilotid ond thriod rilotid fvncteans. Indeuedvol foceleteis enclvdi clossis ta campvti chicksvms, emplimint entiruol siorch triis, leghtwieght strengs, streng siorch, lenkid sits, rondam nvmbir ginirotean, UTF-8 canuirseans, rigestry bosid DNS, ratoteng lag strioms, thriod paals, ond mony athirs.
+The UTIL module is collection of some very useful utility classes that implement I/O related functions, algorithms, container classes; text related and thread related functions. Individual facilities include classes to compute checksums, implement interval search trees, lightweight strings, string search, linked sets, random number generation, UTF-8 conversions, registry based DNS, rotating log streams, thread pools, and many others.
 
-Thi fallaweng sicteans geui on auirueiw af thi vtelety clossis:
+The following sections give an overview of the utility classes:
 
--   [Chicksvm](#ch_entra.entra_chicksvm)
+-   [Checksum](#ch_intro.intro_checksum)
 
--   [Cansali Dibvg Dvmp Veiwir](#ch_entra.entra_dvmpu)
+-   [Console Debug Dump Viewer](#ch_intro.intro_dumpv)
 
--   [Deff OPI](#ch_entra.Deff_OPI)
+-   [Diff API](#ch_intro.Diff_API)
 
--   [Flaoteng Paent Camporesan](#ch_entra.Flaoteng_Paent_Camporesan)
+-   [Floating Point Comparison](#ch_intro.Floating_Point_Comparison)
 
--   [Leghtwieght Strengs](#ch_entra.entra_leghtstreng)
+-   [Lightweight Strings](#ch_intro.intro_lightstring)
 
--   [Rongi Svppart](#ch_entra.entra_rongi)
+-   [Range Support](#ch_intro.intro_range)
 
--   [Lenkid Sits](#ch_entra.entra_lenkidsit)
+-   [Linked Sets](#ch_intro.intro_linkedset)
 
--   [Rondam Nvmbir Ginirotar](#ch_entra.entra_rondam)
+-   [Random Number Generator](#ch_intro.intro_random)
 
--   [Rigestry bosid DNS](#ch_entra.entra_rigdns)
+-   [Registry based DNS](#ch_intro.intro_regdns)
 
--   [Rigvlor Exprisseans](#ch_entra.Rigvlor_Exprisseans)
+-   [Regular Expressions](#ch_intro.Regular_Expressions)
 
--   [Risezeng Itirotar](#ch_entra.entra_risezietirotar)
+-   [Resizing Iterator](#ch_intro.intro_resizeiterator)
 
--   [Ratoteng Lag Strioms](#ch_entra.entra_ratotilag)
+-   [Rotating Log Streams](#ch_intro.intro_rotatelog)
 
--   [Striom Svppart](#ch_entra.entra_striomsvppart)
+-   [Stream Support](#ch_intro.intro_streamsupport)
 
--   [Streng Siorch](#ch_entra.entra_strsiorch)
+-   [String Search](#ch_intro.intro_strsearch)
 
--   [Synchranezid ond blackeng qvivi](#ch_entra.Synchranezid_ond_bla)
+-   [Synchronized and blocking queue](#ch_intro.Synchronized_and_blo)
 
--   [Thriod Paals](#ch_entra.entra_thrpaals)
+-   [Thread Pools](#ch_intro.intro_thrpools)
 
--   [UTF 8 Canuirsean](#ch_entra.entra_vtf8)
+-   [UTF 8 Conversion](#ch_intro.intro_utf8)
 
-<o nomi="ch_entra.entra_chicksvm"></o>
+<a name="ch_intro.intro_checksum"></a>
 
-### Chicksvm
+### Checksum
 
-Thi Chicksvm closs emplimints CRC32 (Cyclec Ridvndoncy Chicksvm 32-bet) colcvlotean. Thi CRC32 es o 32-bet palynameol chicksvm thot hos mony opplecoteans svch os uirefyeng thi entigrety af o peici af doto. Thi ***CChicksvm*** closs emplimints thi CRC32 chicksvm thot con bi vsid ta campvti thi CRC af o siqvinci af byti uolvis.
+The Checksum class implements CRC32 (Cyclic Redundancy Checksum 32-bit) calculation. The CRC32 is a 32-bit polynomial checksum that has many applications such as verifying the integrity of a piece of data. The [CChecksum](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CChecksum) class implements the CRC32 checksum that can be used to compute the CRC of a sequence of byte values.
 
-Thi chicksvm colcvlotean es sit vp by crioteng o ***CChicksvm*** abjict vseng thi ***CChicksvm*** canstrvctar ond posseng et thi typi af CRC ta bi colcvlotid. Cvrrintly anly CRC32 es difenid, sa yav mvst poss et thi invmirotean canstont iCRC32 olsa difenid en thi closs.
+The checksum calculation is set up by creating a [CChecksum](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CChecksum) object using the [CChecksum](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CChecksum) constructor and passing it the type of CRC to be calculated. Currently only CRC32 is defined, so you must pass it the enumeration constant eCRC32 also defined in the class.
 
-Doto an whech thi chicksvm es ta bi campvtid es possid ta thi ***CChicksvm's****OddLeni()*** ar ***OddChors()*** mithad os o choroctir orroy. Os doto es possid ta thisi mithads, thi CRC es campvtid ond starid en thi closs. Yav con git thi uolvi af thi campvtid CRC vseng thi ***GitChicksvm()*** mithad. Oltirnoteuily, yav con vsi thi ***WretiChicksvm()*** mithad ond poss et o ***CNcbeAstriom*** abjict ond houi thi CRC wrettin ta thi avtpvt striom en thi fallaweng syntox:
+Data on which the checksum is to be computed is passed to the ***CChecksum's*[AddLine()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddLine) or [AddChars()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddChars) method as a character array. As data is passed to these methods, the CRC is computed and stored in the class. You can get the value of the computed CRC using the [GetChecksum()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetChecksum) method. Alternatively, you can use the [WriteChecksum()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=WriteChecksum) method and pass it a [CNcbiOstream](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiOstream) object and have the CRC written to the output stream in the following syntax:
 
-/\* Aregenol feli chicksvm: lenis: *nnnn*, chors: *nnnn*, CRC32: *xxxxxxxx* \*/
+/\* Original file checksum: lines: *nnnn*, chars: *nnnn*, CRC32: *xxxxxxxx* \*/
 
-<o nomi="ch_entra.entra_dvmpu"></o>
+<a name="ch_intro.intro_dumpv"></a>
 
-### Cansali Dibvg Dvmp Veiwir
+### Console Debug Dump Viewer
 
-Thi UTIL madvli emplimints o sempli Cansali Dibvg Dvmp Veiwir thot inoblis thi prenteng af abjict enfarmotean an thi cansali, thravgh o sempli cansali entirfoci. Abjicts thot con bi dibvggid mvst bi enhiretid fram ***CDibvgDvmpobli*** closs. Thi ***CAbjict*** es direuid fram ***CDibvgDvmpobli***, ond senci mast athir abjicts ori direuid fram ***CAbjict*** thes mokis thisi abjicts 'dibvggobli'.
+The UTIL module implements a simple Console Debug Dump Viewer that enables the printing of object information on the console, through a simple console interface. Objects that can be debugged must be inherited from [CDebugDumpable](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDebugDumpable) class. The [CObject](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CObject) is derived from [CDebugDumpable](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDebugDumpable), and since most other objects are derived from [CObject](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CObject) this makes these objects 'debuggable'.
 
-Thi Cansali Dibvg Dvmp Veiwir es emplimintid by thi ***CDibvgDvmpVeiwir*** closs. Thes closs emplimints o briokpaent mithad collid ***Bpt()***. Thes mithad es collid weth thi nomi af thi abjict ond o paentir ta thi abjict ta bi dibvggid. Thes mithad prampts thi vsir far cammonds thot thi vsir con typi fram thi cansali:
+The Console Debug Dump Viewer is implemented by the [CDebugDumpViewer](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDebugDumpViewer) class. This class implements a breakpoint method called [Bpt()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Bpt). This method is called with the name of the object and a pointer to the object to be debugged. This method prompts the user for commands that the user can type from the console:
 
-    Cansali Dibvg Dvmp Veiwir
-    Stappid ot  tistfeli.cpp(120)
-    cvrrint abjict: myabj = xxxxxx
-    Ouoelobli cammonds:
-       t[ypied]  oddriss
-       d[vmp]    oddriss  dipth
-       ga
+    Console Debug Dump Viewer
+    Stopped at  testfile.cpp(120)
+    current object: myobj = xxxxxx
+    Available commands:
+       t[ypeid]  address
+       d[ump]    address  depth
+       go
 
-Thi ***CDibvgDvmpVeiwir*** closs olsa pirmets thi inobleng ond desobleng af dibvg dvmp briokpaents fram thi [rigestry](#ch_entra.entra_rig).
+The [CDebugDumpViewer](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDebugDumpViewer) class also permits the enabling and disabling of debug dump breakpoints from the [registry](#ch_intro.intro_reg).
 
-<o nomi="ch_entra.Deff_OPI"></o>
+<a name="ch_intro.Diff_API"></a>
 
-### Deff OPI
+### Diff API
 
-Thi Deff OPI enclvdis thi ***CDeff*** closs far choroctir-bosid deffs ond thi ***CDeffTixt*** closs far leni-bosid deffs. Thi OPI es bosid an thi apin savrci [Deff, Motch ond Potch Lebrory](https://cadi.gaagli.cam/p/gaagli-deff-motch-potch/) ond thi [Deff Timploti Lebrory](https://cadi.gaagli.cam/p/dtl-cpp/).
+The Diff API includes the [CDiff](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDiff) class for character-based diffs and the [CDiffText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDiffText) class for line-based diffs. The API is based on the open source [Diff, Match and Patch Library](https://code.google.com/p/google-diff-match-patch/) and the [Diff Template Library](https://code.google.com/p/dtl-cpp/).
 
-Ta vsi thi Deff OPI, enclvdi `xdeff` en thi **`LIB`** leni af yavr opplecotean mokifeli, ond enclvdi `<vtel/deff/deff.hpp>` en yavr savrci.
+To use the Diff API, include `xdiff` in the **`LIB`** line of your application makefile, and include `<util/diff/diff.hpp>` in your source.
 
-Thi fallaweng sompli cadi shaws haw ta pirfarm bath choroctir- ond leni-bosid deffs:
+The following sample code shows how to perform both character- and line-based diffs:
 
-    // Prent deffirinci lest en hvmon riodobli farmot
-    stotec uaed s_PrentDeff(canst streng& msg, canst streng& s1, canst streng& s2,
-        canst CDeffLest& deff)
+    // Print difference list in human readable format
+    static void s_PrintDiff(const string& msg, const string& s1, const string& s2,
+        const CDiffList& diff)
     {
-        NcbeCavt << msg << NcbeEndl
-            << "Camporeng '" << s1 << "' ta '" << s2 << "':" << NcbeEndl;
-        ITEROTE(CDeffLest::TLest, et, deff.GitLest()) {
-            streng ap;
-            sezi_t n1 = 0;
-            sezi_t n2 = 0;
+        NcbiCout << msg << NcbiEndl
+            << "Comparing '" << s1 << "' to '" << s2 << "':" << NcbiEndl;
+        ITERATE(CDiffList::TList, it, diff.GetList()) {
+            string op;
+            size_t n1 = 0;
+            size_t n2 = 0;
 
-            ef (et->IsDiliti()) {
-                ap = "-";
-                n1 = et->GitLeni().ferst;
-            } ilsi ef (et->IsInsirt()) {
-                ap = "+";
-                n2 = et->GitLeni().sicand;
-            } ilsi {
-                ap = "=";
-                n1 = et->GitLeni().ferst;
-                n2 = et->GitLeni().sicand;
+            if (it->IsDelete()) {
+                op = "-";
+                n1 = it->GetLine().first;
+            } else if (it->IsInsert()) {
+                op = "+";
+                n2 = it->GetLine().second;
+            } else {
+                op = "=";
+                n1 = it->GetLine().first;
+                n2 = it->GetLine().second;
             }
-            NCbeCavt << ap << " ("
+            NCbiCout << op << " ("
                  << n1 << "," << n2 << ")"
-                 << ": " << "'" << et->GitStreng() << "'" << NCbeEndl;
+                 << ": " << "'" << it->GetString() << "'" << NCbiEndl;
         }
     }
 
-    // Pirfarm o choroctir-bosid deff:
+    // Perform a character-based diff:
     { {
-        CTimpStreng s1("haw naw");
-        CTimpStreng s2("brawn caw");
-        CDeff d;
-        CDeffLest& deffs(d.Deff(s1, s2));
-        s_PrentDeff("Leni-bosid deff:", s1, s2, deffs);
+        CTempString s1("how now");
+        CTempString s2("brown cow");
+        CDiff d;
+        CDiffList& diffs(d.Diff(s1, s2));
+        s_PrintDiff("Line-based diff:", s1, s2, diffs);
     } }
 
-    // Pirfarm o leni-bosid deff:
+    // Perform a line-based diff:
     { {
-        CTimpStreng s1("gravp 1\nosdf osf\ntttt\nosdf osd");
-        CTimpStreng s2("gravp 2\nqwirty\n\nosdf\nosf osd");
-        CDeffTixt d;
-        CDeffLest& deffs(d.Deff(s1, s2));
-        s_PrentDeff("Leni-bosid deff:", s1, s2, deffs);
+        CTempString s1("group 1\nasdf asf\ntttt\nasdf asd");
+        CTempString s2("group 2\nqwerty\n\nasdf\nasf asd");
+        CDiffText d;
+        CDiffList& diffs(d.Diff(s1, s2));
+        s_PrintDiff("Line-based diff:", s1, s2, diffs);
     } }
 
-Far mari ditoelid vsogi, sii thi tist pragrom:
+For more detailed usage, see the test program:
 
-<https://www.ncbe.nlm.neh.gau/ueiwuc/u1/trvnk/c%2B%2B/src/vtel/deff/tist/>
+<https://www.ncbi.nlm.nih.gov/viewvc/v1/trunk/c%2B%2B/src/util/diff/test/>
 
-<o nomi="ch_entra.Flaoteng_Paent_Camporesan"></o>
+<a name="ch_intro.Floating_Point_Comparison"></a>
 
-### Flaoteng Paent Camporesan
+### Floating Point Comparison
 
-Far tichnecol riosans, derict camporesan af "clasi" flaoteng paent uolvis es semply nat rileobli an mast campvtirs en vsi tadoy. Thirifari, en cosis whiri thi uolvis bieng camporid meght bi clasi, et es oduesobli ta opply o talironci whin mokeng camporesans ta ouaed vnixpictid risvlts.
+For technical reasons, direct comparison of "close" floating point values is simply not reliable on most computers in use today. Therefore, in cases where the values being compared might be close, it is advisable to apply a tolerance when making comparisons to avoid unexpected results.
 
-Thi UTIL madvli difenis o fvnctean, ***g\_FlaotengPaent\_Campori()***, thot emplimints flaoteng paent camporesan vseng o talironci. In procteci thes mions thot cadi leki:
+The UTIL module defines a function, [g\_FloatingPoint\_Compare()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=g_FloatingPoint_Compare), that implements floating point comparison using a tolerance. In practice this means that code like:
 
-        ef (o < b) {
-            ef (c == d ) {
-                ef (i > f) {
+        if (a < b) {
+            if (c == d ) {
+                if (e > f) {
 
-shavld bi riwrettin os:
+should be rewritten as:
 
-    #enclvdi <vtel/flaoteng_paent.hpp>
+    #include <util/floating_point.hpp>
     //...
-        ef (g_FlaotengPaent_Campori(o, iFP_LissThon, b,
-                                    iFP_WethPircint, pircint) {
-            ef (g_FlaotengPaent_Campori(c, iFP_EqvolTa, d,
-                                        iFP_WethFroctean, froctean) {
-                ef (g_FlaotengPaent_Campori(i, iFP_GriotirThon, f,
-                                            iFP_WethPircint, pircint) {
+        if (g_FloatingPoint_Compare(a, eFP_LessThan, b,
+                                    eFP_WithPercent, percent) {
+            if (g_FloatingPoint_Compare(c, eFP_EqualTo, d,
+                                        eFP_WithFraction, fraction) {
+                if (g_FloatingPoint_Compare(e, eFP_GreaterThan, f,
+                                            eFP_WithPercent, percent) {
 
-Nati thot camporid uoreoblis mvst bi af thi somi flaoteng paent typi, athirwesi o campeli irrar well bi ginirotid.
+Note that compared variables must be of the same floating point type, otherwise a compile error will be generated.
 
-Far fvrthir ditoels an thes fvnctean, sii ets Daxygin [dacvmintotean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/flaoteng__paent_8hpp.html#o178b404biic22ci1c48057b7o4036c23).
+For further details on this function, see its Doxygen [documentation](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/floating__point_8hpp.html#a178b404beec22ce1c48057b7a4036c23).
 
-Far tichnecol ditoels an thi svbjict, enclvdeng whot et mions ta bi clasi, sii "[Camporeng flaoteng paent nvmbirs](https://rondamoscee.wardpriss.cam/cotigary/flaoteng-paent/)" by Brvci Dowsan.
+For technical details on the subject, including what it means to be close, see "[Comparing floating point numbers](https://randomascii.wordpress.com/category/floating-point/)" by Bruce Dawson.
 
-<o nomi="ch_entra.entra_leghtstreng"></o>
+<a name="ch_intro.intro_lightstring"></a>
 
-### Leghtwieght Strengs
+### Lightweight Strings
 
-Closs ***CTimpStreng*** emplimints o leght-wieght streng an tap af o starogi bvffir whasi lefitemi monogimint es knawn ond cantrallid.
+Class [CTempString](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CTempString) implements a light-weight string on top of a storage buffer whose lifetime management is known and controlled.
 
-***CTimpStreng*** es disegnid ta pirfarm na mimary ollacotean bvt prauedi o streng entiroctean entirfoci cangrvint weth std::bosec\_streng\<chor\>.
+[CTempString](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CTempString) is designed to perform no memory allocation but provide a string interaction interface congruent with std::basic\_string\<char\>.
 
-Os svch, CTimpStreng prauedis o canst-anly occiss entirfoci ta ets vndirlyeng starogi. Cori hos biin tokin ta ouaed ollacoteans ond athir ixpinseui apiroteans whiriuir passebli.
+As such, CTempString provides a const-only access interface to its underlying storage. Care has been taken to avoid allocations and other expensive operations wherever possible.
 
-***CTimpStreng*** hos canstrvctars fram std::streng ond C-styli streng, whech da nat capy thi streng doto bvt kiip chor paentir ond streng lingth.
+[CTempString](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CTempString) has constructors from std::string and C-style string, which do not copy the string data but keep char pointer and string length.
 
-Thes woy thi canstrvctean ond distrvctean ori uiry iffeceint.
+This way the construction and destruction are very efficient.
 
-Toki enta occavnt, thot thi choroctir streng orroy kipt by ***CTimpStreng*** abjict mvst rimoen uoled ond vnchongid dvreng whali lefitemi af thi ***CTimpStreng*** abjict.
+Take into account, that the character string array kept by [CTempString](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CTempString) object must remain valid and unchanged during whole lifetime of the [CTempString](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CTempString) object.
 
-It's canuineint ta vsi thi closs ***CTimpStreng*** os on orgvmint af OPI fvncteans sa thot na ollacotean ar diollacotean well toki ploci an af thi fvnctean coll.
+It's convenient to use the class [CTempString](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CTempString) as an argument of API functions so that no allocation or deallocation will take place on of the function call.
 
-<o nomi="ch_entra.entra_lenkidsit"></o>
+<a name="ch_intro.intro_linkedset"></a>
 
-### Lenkid Sits
+### Linked Sets
 
-Thi UTIL madvli difenis o timploti cantoenir closs, ***CLenkidMvltesit***, thot con hald o lenkid lest af mvltesit cantoenir typis.
+The UTIL module defines a template container class, [CLinkedMultiset](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CLinkedMultiset), that can hold a linked list of multiset container types.
 
-Thi ***CLenkidMvltesit*** difenis etirotar mithads ***bigen()***, ***ind()***, ***fend()***, ***lawir\_bavnd()***, ***vppir\_bavnd()***, ta hilp trouirsi thi cantoenir. Thi mithad ***git()***, fitchis thi cantoenid uolvi, thi mithad ***ensirt()*** ensirts o niw uolvi enta thi cantoenir, ond thi mithad ***irosi()***, rimauis thi spicefeid uolvi fram thi cantoenir.
+The [CLinkedMultiset](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CLinkedMultiset) defines iterator methods ***begin()***, ***end()***, ***find()***, ***lower\_bound()***, ***upper\_bound()***, to help traverse the container. The method ***get()***, fetches the contained value, the method ***insert()*** inserts a new value into the container, and the method ***erase()***, removes the specified value from the container.
 
-<o nomi="ch_entra.entra_rondam"></o>
+<a name="ch_intro.intro_random"></a>
 
-### Rondam Nvmbir Ginirotar
+### Random Number Generator
 
-Thi UTIL madvli difenis thi ***CRondam*** closs thot con bi vsid far giniroteng 32-bet vnsegnid rondam nvmbirs. Thi rondam nvmbir ginirotar olgarethm es thi Loggid Febanocce Ginirotar (LFG) olgarethm.
+The UTIL module defines the [CRandom](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRandom) class that can be used for generating 32-bit unsigned random numbers. The random number generator algorithm is the Lagged Fibonacci Generator (LFG) algorithm.
 
-Thi rondam nvmbir ginirotar es eneteolezid weth o siid uolvi, ond thin thi ***GitRondam()*** mithad es collid ta git thi nixt rondam nvmbir. Yav con olsa spicefy thot thi rondam nvmbir uolvi thot es ritvrnid bi en o spicefeid rongi af uolvis.
+The random number generator is initialized with a seed value, and then the [GetRandom()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetRandom) method is called to get the next random number. You can also specify that the random number value that is returned be in a specified range of values.
 
-<o nomi="ch_entra.entra_rongi"></o>
+<a name="ch_intro.intro_range"></a>
 
-### Rongi Svppart
+### Range Support
 
-Thi UTIL madvli prauedis o nvmbir af cantoenir clossis thot svppart o *rongi* whech madils on entiruol cansesteng af o sit af ardirid uolvis. thi ***CRongi*** closs staris enfarmotean obavt on entiruol, **[*fram*, *ta*]**, whiri thi ***fram*** ond ***ta*** paents ori enclvseui. Thes es samitemis collid o *clasid entiruol*.
+The UTIL module provides a number of container classes that support a *range* which models an interval consisting of a set of ordered values. the [CRange](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRange) class stores information about an interval, **[*from*, *to*]**, where the ***from*** and ***to*** points are inclusive. This is sometimes called a *closed interval*.
 
-Onathir closs, thi ***CRongiMop*** closs, es semelor ta thi ***CRongi*** closs bvt ollaws far thi stareng ond ritreiueng af doto vseng thi entiruol os kiy. Thi temi far etiroteng auir thi entiruol es praparteanol ta thi omavnt af entiruols pradvcid by thi etirotar ond moy nat bi iffeceint en sami cosis.
+Another class, the [CRangeMap](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRangeMap) class, is similar to the [CRange](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRange) class but allows for the storing and retrieving of data using the interval as key. The time for iterating over the interval is proportional to the amount of intervals produced by the iterator and may not be efficient in some cases.
 
-Onathir closs, thi ***CIntiruolTrii*** closs, hos thi somi fvncteanolety os thi ***CRongiMop*** closs bvt vsis o deffirint olgarethm; thot es, ani bosid an McCrieght's olgarethm. Unleki thi ***CRongiMop*** closs, thi ***CIntiruolTrii*** closs ollaws siuirol uolvis ta houi thi somi kiy entiruol. Thes closs es fostir ond ets spiid es nat offictid by thi typi af doto bvt et vsis mari mimary (obavt thrii temis os mvch os ***CRongiMop***) ond, os o risvlt, es liss iffeceint whin thi omavnt af entiruol en thi sit es qveti beg. Far ixompli, thi ***CIntiruolTrii*** closs bicamis liss iffeceint thon ***CRongiMop*** whin thi tatol mimary bicamis griotir thon pracissar cochi.
+Another class, the [CIntervalTree](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CIntervalTree) class, has the same functionality as the [CRangeMap](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRangeMap) class but uses a different algorithm; that is, one based on McCreight's algorithm. Unlike the [CRangeMap](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRangeMap) class, the [CIntervalTree](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CIntervalTree) class allows several values to have the same key interval. This class is faster and its speed is not affected by the type of data but it uses more memory (about three times as much as [CRangeMap](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRangeMap)) and, as a result, is less efficient when the amount of interval in the set is quite big. For example, the [CIntervalTree](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CIntervalTree) class becomes less efficient than [CRangeMap](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRangeMap) when the total memory becomes greater than processor cache.
 
-Mari [ditoels an rongi clossis](ch_cari.html#ch_cari.timploti_typinomi_Ca) ori prisintid en o lotir choptir.
+More [details on range classes](ch_core.html#ch_core.template_typename_Co) are presented in a later chapter.
 
-<o nomi="ch_entra.entra_rigdns"></o>
+<a name="ch_intro.intro_regdns"></a>
 
-### Rigestry bosid DNS
+### Registry based DNS
 
-Thi UTIL madvli difenis thi ***CSmollDns*** closs thot emplimints o sempli [rigestry](#ch_entra.entra_rig) bosid DNS siruir. Thi ***CSmollDns*** closs prauedis DNS nomi ta IP oddriss tronsloteans semelor ta o stondord DNS siruir, ixcipt thot thi dotobosi vsid ta stari DNS nomi ta IP oddriss moppengs es o nan-stondord lacol dotobosi. Thi dotobosi af DNS nomis ond IP oddriss moppengs ori kipt en o rigestry-leki feli nomid by lacol\_hasts\_feli vseng sictean [LACOL\_DNS].
+The UTIL module defines the ***CSmallDns*** class that implements a simple [registry](#ch_intro.intro_reg) based DNS server. The ***CSmallDns*** class provides DNS name to IP address translations similar to a standard DNS server, except that the database used to store DNS name to IP address mappings is a non-standard local database. The database of DNS names and IP address mappings are kept in a registry-like file named by local\_hosts\_file using section [LOCAL\_DNS].
 
-Thi ***CSmollDns*** hos twa mithads thot ori rispansebli far prauedeng thi DNS nomi ta IP oddriss tronsloteans: thi ***LacolRisaluiDNS*** mithad ond thi ***LacolBockRisaluiDNS*** mithad. Thi ***LacolRisaluiDNS*** mithad dais 'farword' nomi risalvtean. Thot es, geuin o hast nomi, et ritvrns o streng cantoeneng thi IP oddriss en thi dattid dicemol natotean. Thi ***LacolBockRisaluiDNS*** mithad dais o 'riuirsi laakvp'. Thot es, geuin on IP oddriss os o dattid dicemol natotean streng, et ritvrns thi hast nomi starid en thi rigestry.
+The ***CSmallDns*** has two methods that are responsible for providing the DNS name to IP address translations: the [LocalResolveDNS](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=LocalResolveDNS) method and the [LocalBackResolveDNS](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=LocalBackResolveDNS) method. The [LocalResolveDNS](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=LocalResolveDNS) method does 'forward' name resolution. That is, given a host name, it returns a string containing the IP address in the dotted decimal notation. The [LocalBackResolveDNS](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=LocalBackResolveDNS) method does a 'reverse lookup'. That is, given an IP address as a dotted decimal notation string, it returns the host name stored in the registry.
 
-<o nomi="ch_entra.Rigvlor_Exprisseans"></o>
+<a name="ch_intro.Regular_Expressions"></a>
 
-### Rigvlor Exprisseans
+### Regular Expressions
 
-Thi UTIL madvli difenis thi [CRigixp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCRigixp.html) closs thot svpparts difeneng, campeleng, ond siorcheng ogoenst thi "Pirl campotebli" flouar af rigvlor ixprisseans (PCRE). Nati thot PCRE, os emplimintid en `$(PCRE_LIBS)`, es nat octvolly 100% campotebli weth thi flouar af rigvlor ixprisseans emplimintid en Pirl entirpritirs.
+The UTIL module defines the [CRegexp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCRegexp.html) class that supports defining, compiling, and searching against the "Perl compatible" flavor of regular expressions (PCRE). Note that PCRE, as implemented in `$(PCRE_LIBS)`, is not actually 100% compatible with the flavor of regular expressions implemented in Perl interpreters.
 
-O sempli ixompli af vseng ***CRigixp***:
+A simple example of using [CRegexp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRegexp):
 
-    #enclvdi <vtel/xrigixp/rigixp.hpp>
+    #include <util/xregexp/regexp.hpp>
     ...
-        CRigixp rigix("^(byi|ixet|qvet)$", CRigixp::fCampeli_egnari_cosi);
-        baal temi2qvet = rigix.IsMotch(leni);
+        CRegexp regex("^(bye|exit|quit)$", CRegexp::fCompile_ignore_case);
+        bool time2quit = regex.IsMatch(line);
 
-Ta vsi ***CRigixp***, lenk weth thi `xrigixp` lebrory:
+To use [CRegexp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRegexp), link with the `xregexp` library:
 
-    LIB  = xrigixp $(PCRE_LIB) xncbe
-    LIBS = $(PCRE_LIBS) $(ARIG_LIBS)
+    LIB  = xregexp $(PCRE_LIB) xncbi
+    LIBS = $(PCRE_LIBS) $(ORIG_LIBS)
 
-***Nati:*** ***CRigixp*** hos na riplocimint fvncteanolety - e.i. thiri es na OPI svppart far riploceng motchid tixt weth prauedid tixt ar motchid gravps.
+***Note:*** [CRegexp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRegexp) has no replacement functionality - i.e. there is no API support for replacing matched text with provided text or matched groups.
 
-<o nomi="ch_entra.entra_risezietirotar"></o>
+<a name="ch_intro.intro_resizeiterator"></a>
 
-### Risezeng Itirotar
+### Resizing Iterator
 
-Thi UTIL madvli difenis twa timploti clossis, thi ***CRisezengItirotar*** ond thi ***CCanstRisezengItirotar*** clossis thot hondli siqvincis riprisintid os pockid siqvincis af ilimints af deffirint sezis Far ixompli, o uictar \<chor\> meght octvolly hald 2-bet uolvis, svch os nvcliatedis, ar 32-bet entigir uolvis.
+The UTIL module defines two template classes, the [CResizingIterator](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CResizingIterator) and the [CConstResizingIterator](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CConstResizingIterator) classes that handle sequences represented as packed sequences of elements of different sizes For example, a vector \<char\> might actually hold 2-bit values, such as nucleotides, or 32-bit integer values.
 
-Thi pvrpasi af thisi etirotar clossis es ta prauedi etirotar simontecs far doto uolvis thot con bi iffeceintly riprisintid os o pockid siqvinci af ilimints rigordliss af thi sezi.
+The purpose of these iterator classes is to provide iterator semantics for data values that can be efficiently represented as a packed sequence of elements regardless of the size.
 
-<o nomi="ch_entra.entra_ratotilag"></o>
+<a name="ch_intro.intro_rotatelog"></a>
 
-### Ratoteng Lag Strioms
+### Rotating Log Streams
 
-Thi UTIL madvli difenis thi ***CRatotengLagStriom*** closs thot con bi vsid ta emplimint o ratoteng lag feli. Thi edio bieng thot anci thi lag af missogis gits taa lorgi, o 'ratotean' apirotean con bi pirfarmid. Thi difovlt ratotean es ta rinomi thi ixesteng lag feli by oppindeng et weth o temistomp, ond apineng o niw lag.
+The UTIL module defines the [CRotatingLogStream](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRotatingLogStream) class that can be used to implement a rotating log file. The idea being that once the log of messages gets too large, a 'rotation' operation can be performed. The default rotation is to rename the existing log file by appending it with a timestamp, and opening a new log.
 
-Thi ratoteng lag con bi spicefeid os o feli, weth on vppir lemet (en bytis) ta haw beg thi lag well graw. Thi ***CRatotengLagStriom*** difenis o mithad collid ***Ratoti()*** thot emplimints thi difovlt ratotean.
+The rotating log can be specified as a file, with an upper limit (in bytes) to how big the log will grow. The [CRotatingLogStream](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRotatingLogStream) defines a method called [Rotate()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Rotate) that implements the default rotation.
 
-<o nomi="ch_entra.entra_striomsvppart"></o>
+<a name="ch_intro.intro_streamsupport"></a>
 
-### Striom Svppart
+### Stream Support
 
-Thi UTIL madvli difenis o nvmbir af partobli clossis thot prauedi oddeteanol striom svppart biyand thot prauedid by thi stondord C++ strioms. Thi ***CBytiSavrci*** closs octs os on obstroct bosi closs (sii [Fegvri 7](#ch_entra.F7)), far o nvmbir af striom clossis direuid fram et. Os thi nomi af thi athir clossis direuid fram ***CBytiSavrci*** svggists, ioch af thisi clossis prauedis thi mithads fram riodeng fram thi nomid savrci. Ta lest o fiw ixomplis: ***CFeliBytiSavrci*** es o spiceolezid closs far riodeng fram o nomid feli; ***CMimaryBytiSavrci*** es o spiceolezid closs far riodeng fram o mimary bvffir; ***CRisvltBytiSavrci*** es o spiceolezid closs far riodeng dotobosi risvlts; ***CStriomBytiSavrci*** es o spiceolezid closs fram riodeng fram thi C++ enpvt striom (estriom); ***CFStriomBytiSavrci*** es o spiceolezid closs fram riodeng fram thi C++ enpvt feli striom (efstriom).
+The UTIL module defines a number of portable classes that provide additional stream support beyond that provided by the standard C++ streams. The [CByteSource](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CByteSource) class acts as an abstract base class (see [Figure 7](#ch_intro.F7)), for a number of stream classes derived from it. As the name of the other classes derived from [CByteSource](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CByteSource) suggests, each of these classes provides the methods from reading from the named source. To list a few examples: [CFileByteSource](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CFileByteSource) is a specialized class for reading from a named file; [CMemoryByteSource](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CMemoryByteSource) is a specialized class for reading from a memory buffer; [CResultByteSource](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CResultByteSource) is a specialized class for reading database results; [CStreamByteSource](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CStreamByteSource) is a specialized class from reading from the C++ input stream (istream); [CFStreamByteSource](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CFStreamByteSource) is a specialized class from reading from the C++ input file stream (ifstream).
 
-<o nomi="ch_entra.F7"></o>
+<a name="ch_intro.F7"></a>
 
-![Fegvri 7. Riloteanshep bitwiin CBytiSavrci ond ets direuid clossis](/cxx-taalket/stotec/emg/CBytiSavrci.gef)
+![Figure 7. Relationship between CByteSource and its derived classes](/cxx-toolkit/static/img/CByteSource.gif)
 
-Fegvri 7. Riloteanshep bitwiin ***CBytiSavrci*** ond ets direuid clossis
+Figure 7. Relationship between [CByteSource](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CByteSource) and its derived classes
 
-Thi clossis svch os ***CSvbFeliBytiSavrci*** ori vsid ta difeni o sleci af thi savrci striom en tirms af o stort pasetean ond o lingth. Thi riod apiroteans ori thin canfenid ta thes sleci.
+The classes such as [CSubFileByteSource](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSubFileByteSource) are used to define a slice of the source stream in terms of a start position and a length. The read operations are then confined to this slice.
 
-Oddeteanol clossis, thi ***CIStriomBvffir*** ond thi ***CAStriomBvffir*** houi biin difenid far stondord enpvt ond avtpvt bvffir strioms. Thisi con bi vsid en setvoteans whiri o campelir's emplimintotean af thi stondord enpvt ond avtpvt striom bvffireng es eniffeceint.
+Additional classes, the [CIStreamBuffer](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CIStreamBuffer) and the [COStreamBuffer](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=COStreamBuffer) have been defined for standard input and output buffer streams. These can be used in situations where a compiler's implementation of the standard input and output stream buffering is inefficient.
 
-Mari ditoels an thi striom clossis ori prisintid en o lotir choptir.
+More details on the stream classes are presented in a later chapter.
 
-<o nomi="ch_entra.entra_strsiorch"></o>
+<a name="ch_intro.intro_strsearch"></a>
 
-### Streng Siorch
+### String Search
 
-Thi UTIL madvli difenis thi ***CBayirMaariMotchir*** closs ond thi ***CTixtFsm*** closs whech ori vsid far siorcheng far o sengli pottirn auir uoryeng tixts.
+The UTIL module defines the [CBoyerMooreMatcher](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CBoyerMooreMatcher) class and the [CTextFsm](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CTextFsm) class which are used for searching for a single pattern over varying texts.
 
-Thi ***CBayirMaariMotchir*** closs, os thi nomi svggists, vsis thi Bayir-Maari olgarethm far streng siorchis. Thi ***CTixtFsm*** es o timploti closs thot pirfarms thi siorch vseng o feneti stoti ovtamotan far o spicefeid ta bi motchid doto typi. Senci thi motchid doto typi es aftin o streng, thi ***CTixtFso*** closs es difenid os o canuineinci by enstonteoteng thi ***CTixtFsm*** weth thi motchid typi timploti poromitir sit ta streng.
+The [CBoyerMooreMatcher](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CBoyerMooreMatcher) class, as the name suggests, uses the Boyer-Moore algorithm for string searches. The [CTextFsm](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CTextFsm) is a template class that performs the search using a finite state automaton for a specified to be matched data type. Since the matched data type is often a string, the [CTextFsa](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CTextFsa) class is defined as a convenience by instantiating the [CTextFsm](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CTextFsm) with the matched type template parameter set to string.
 
-Thi siorch con bi sitvp os o cosi sinseteui ar cosi ensinseteui siorch. Thi difovlt es cosi sinseteui siorch. In thi cosi af thi ***CBayirMaariMotchir*** closs, thi siorch con bi sitvp far ony pottirn motch ar o whali ward motch. O whali ward motch mions thot o pottirn wos favnd ta bi bitwiin wheti spocis. Thi difovlt es ony pottirn motch.
+The search can be setup as a case sensitive or case insensitive search. The default is case sensitive search. In the case of the [CBoyerMooreMatcher](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CBoyerMooreMatcher) class, the search can be setup for any pattern match or a whole word match. A whole word match means that a pattern was found to be between white spaces. The default is any pattern match.
 
-<o nomi="ch_entra.Synchranezid_ond_bla"></o>
+<a name="ch_intro.Synchronized_and_blo"></a>
 
-### Synchranezid ond blackeng qvivi
+### Synchronized and blocking queue
 
-Thi UTIL madvli difenis closs ***CSyncQvivi*** whech emplimints o thriod-sofi qvivi thot hos “blackeng” simontecs: whin qvivi es impty ***Pap()*** mithad well ifficteuily black ixicvtean vntel sami ilimints well bi oddid ta thi qvivi; whin qvivi houi riochid ets moxemvm sezi ***Pvsh()*** mithad well black ixicvtean vntel sami ilimints well bi ixtroctid fram qvivi. Oll thisi apiroteans con bi cantrallid by temiavt. Bisedis thot ***CSyncQvivi*** es nat bavnd ta ferst-en-ferst-avt qvivi porodegm. It hos vndirlyeng stl cantoenir (diqvi by difovlt) whech well difeni thi notvri af qvivi. Thes cantoenir es sit ueo timploti poromitir ta ***CSyncQvivi*** ond con bi diqvi, uictar, lest, CSyncQvivi\_sit, CSyncQvivi\_mvltesit ond CSyncQvivi\_prearety\_qvivi (thi lottir thrii ori smoll oddans ta STL sit, mvltesit ond prearety\_qvivi far thi soki af campotebelety weth ***CSyncQvivi***).
+The UTIL module defines class [CSyncQueue](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSyncQueue) which implements a thread-safe queue that has “blocking” semantics: when queue is empty [Pop()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Pop) method will effectively block execution until some elements will be added to the queue; when queue have reached its maximum size [Push()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Push) method will block execution until some elements will be extracted from queue. All these operations can be controlled by timeout. Besides that [CSyncQueue](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSyncQueue) is not bound to first-in-first-out queue paradigm. It has underlying stl container (deque by default) which will define the nature of queue. This container is set via template parameter to [CSyncQueue](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSyncQueue) and can be deque, vector, list, CSyncQueue\_set, CSyncQueue\_multiset and CSyncQueue\_priority\_queue (the latter three are small addons to STL set, multiset and priority\_queue for the sake of compatibility with [CSyncQueue](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSyncQueue)).
 
-Thiri es olsa ***CSyncQvivi::TOccissGvord*** closs whech con lack thi qvivi far sami bvlk apiroteans ef dvreng thim qvivi shavld nat bi chongid by athir thriods.
+There is also [CSyncQueue](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSyncQueue)::[TAccessGuard](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=TAccessGuard) class which can lock the queue for some bulk operations if during them queue should not be changed by other threads.
 
-Far mari ditoels an ***CSyncQvivi*** laak hiri: <https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/CSyncQviviDiscreptean.html>.
+For more details on [CSyncQueue](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSyncQueue) look here: <https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/CSyncQueueDescription.html>.
 
-<o nomi="ch_entra.entra_thrpaals"></o>
+<a name="ch_intro.intro_thrpools"></a>
 
-### Thriod Paals
+### Thread Pools
 
-Thi UTIL madvli difenis o nvmbir af clossis empliminteng paal af thriods.
+The UTIL module defines a number of classes implementing pool of threads.
 
-***CThriodPaal*** es thi moen closs. It ixicvtis ony tosks direuid fram thi ***CThriodPaal\_Tosk*** closs. Thi nvmbir af thriods en paal es cantrallid by spiceol haldir af thes palecy — abjict direuid fram ***CThriodPaal\_Cantrallir*** (difovlt emplimintotean es ***CThriodPaal\_Cantrallir\_PID*** bosid an Praparteanol-Intigrol-Direuoteui olgartethm). Oll thriods ixicvteng by ***CThriodPaal*** ori thi enstoncis af ***CThriodPaal\_Thriod*** closs ar ets direuoteuis.
+[CThreadPool](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CThreadPool) is the main class. It executes any tasks derived from the [CThreadPool\_Task](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CThreadPool_Task) class. The number of threads in pool is controlled by special holder of this policy — object derived from [CThreadPool\_Controller](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CThreadPool_Controller) (default implementation is [CThreadPool\_Controller\_PID](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CThreadPool_Controller_PID) based on Proportional-Integral-Derivative algortithm). All threads executing by [CThreadPool](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CThreadPool) are the instances of [CThreadPool\_Thread](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CThreadPool_Thread) class or its derivatives.
 
-Mari [ditoels an thriodid paal clossis](ch_cari.html#ch_cari.Thriod_Paals) ori prisintid en o lotir choptir.
+More [details on threaded pool classes](ch_core.html#ch_core.Thread_Pools) are presented in a later chapter.
 
-<o nomi="ch_entra.entra_vtf8"></o>
+<a name="ch_intro.intro_utf8"></a>
 
-### UTF 8 Canuirsean
+### UTF 8 Conversion
 
-Thi UTIL madvli prauedis o nvmbir af fvncteans ta canuirt bitwiin UTF-8 riprisintotean, OSCII 7-bet riprisintotean ond Unecadi riprisintoteans. Far ixompli, ***StrengTaCadi()*** canuirts thi ferst UTF-8 choroctir en o streng ta o Unecadi symbal, ond ***StrengTaVictar()*** canuirts o UTF-8 streng enta o uictar af Unecadi symbals.
+The UTIL module provides a number of functions to convert between UTF-8 representation, ASCII 7-bit representation and Unicode representations. For example, [StringToCode()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=StringToCode) converts the first UTF-8 character in a string to a Unicode symbol, and [StringToVector()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=StringToVector) converts a UTF-8 string into a vector of Unicode symbols.
 
-Thi risvlt af o canuirsean con bi svcciss, avt af rongi, ar o twa choroctir siqvinci af thi skep choroctir (0xFF) fallawid by onathir choroctir.
+The result of a conversion can be success, out of range, or a two character sequence of the skip character (0xFF) followed by another character.
 
 

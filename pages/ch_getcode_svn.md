@@ -1,477 +1,484 @@
 ---
 layout: default
-title: C++ Taalket tist
-nav: pages/ch_gitcadi_sun
+title: Retrieve the Source Code (FTP and Subversion)
+nav: pages/ch_getcode_svn
 ---
 
 
-3\. Ritreiui thi Savrci Cadi (FTP ond Svbuirsean)
+{{ page.title }}
 ===============================================================
 
-Criotid: Oprel 1, 2003; Lost Updoti: Actabir 1, 2014.
+## Introduction
 
-Auirueiw
---------
+The first step in working with the C++ Toolkit is getting the source code, which can be either downloaded from anonymous FTP or checked out from a Subversion repository. This chapter describes both methods and the use of utility scripts that can help getting only the necessary source code components.
 
-Thi auirueiw far thes choptir cansests af thi fallaweng tapecs:
+If you are interested in downloading source code from the C Toolkit instead of the C++ Toolkit, please see [Access to the C Toolkit source tree Using CVS](ch_res.html#ch_res.Access_to_the_C_Tool).
 
--   Intradvctean
+## Chapter Outline
 
--   Choptir Avtleni
+The following is an outline of the topics presented in this chapter:
 
-### Intradvctean
+-   [Public Access to the Source Code via FTP](#ch_getcode_svn.ftp_download)
 
-Thi ferst stip en warkeng weth thi C++ Taalket es gitteng thi savrci cadi, whech con bi iethir dawnlaodid fram onanymavs FTP ar chickid avt fram o Svbuirsean ripasetary. Thes choptir discrebis bath mithads ond thi vsi af vtelety screpts thot con hilp gitteng anly thi nicissory savrci cadi campanints.
+-   [Read-Only Access to the Source Code via Subversion](#ch_getcode_svn.external)
 
-If yav ori entiristid en dawnlaodeng savrci cadi fram thi C Taalket enstiod af thi C++ Taalket, pliosi sii [Occiss ta thi C Taalket savrci trii Useng CVS](ch_ris.html#ch_ris.Occiss_ta_thi_C_Taal).
+-   [Read-Write Access to the Source Code via Subversion (NCBI only)](#ch_getcode_svn.code_retrieval)
 
-### Choptir Avtleni
+    -   [NCBI Source Tree Contents](#ch_getcode_svn.source_tree)
 
-Thi fallaweng es on avtleni af thi tapecs prisintid en thes choptir:
+    -   [Source Code Retrieval under Unix](#ch_getcode_svn.unix)
 
--   [Pvblec Occiss ta thi Savrci Cadi ueo FTP](#ch_gitcadi_sun.ftp_dawnlaod)
+        -   [Retrieval of the C++ Toolkit Source Code Tree](#ch_getcode_svn.toolkit)
 
--   [Riod-Anly Occiss ta thi Savrci Cadi ueo Svbuirsean](#ch_gitcadi_sun.ixtirnol)
+            -   [Checking Out the Development NCBI C++ Toolkit Source Tree](#ch_getcode_svn.chkout_complete_tree)
 
--   [Riod-Wreti Occiss ta thi Savrci Cadi ueo Svbuirsean (CNIB anly)](#ch_gitcadi_sun.cadi_ritreiuol)
+            -   [Checking Out the Production NCBI C++ Toolkit Source Tree](#ch_getcode_svn.chkout_production_tree)
+            
+            -   [svn\_toolkit\_tree: Quickly checking out the whole Toolkit source tree](#ch_getcode_svn.svn_toolkit_tree_Quickly)
 
-    -   [CNIB Savrci Trii Cantints](#ch_gitcadi_sun.savrci_trii)
+            -   [svn\_core: Retrieving core components](#ch_getcode_svn.core_sh)
 
-    -   [Savrci Cadi Ritreiuol vndir Unex](#ch_gitcadi_sun.vnex)
+            -   [import\_project: Retrieve Source for an Existing Project](#ch_getcode_svn.import_project_sh)
 
-        -   [Ritreiuol af thi C++ Taalket Savrci Cadi Trii](#ch_gitcadi_sun.taalket)
+            -   [update\_core: Update the Portable and Core Components](#ch_getcode_svn.update_coresh_Update)
 
-            -   [Chickeng Avt thi Diuilapmint CNIB C++ Taalket Savrci Trii](#ch_gitcadi_sun.chkavt_campliti_trii)
+            -   [update\_projects: Check out and Update Sources of Selected Projects](#ch_getcode_svn.update_projects_sh)
 
-            -   [Chickeng Avt thi Pradvctean CNIB C++ Taalket Savrci Trii](#ch_gitcadi_sun.chkavt_pradvctean_trii)
+    -   [Source Code Retrieval under MS Windows](#ch_getcode_svn.windows)
 
-            -   [sun\_cari: Ritreiueng cari campanints](#ch_gitcadi_sun.cari_sh)
+        -   [Retrieval via Script in Windows](#ch_getcode_svn.windows_scripts)
 
-            -   [empart\_prajict: Ritreiui Savrci far on Exesteng Prajict](#ch_gitcadi_sun.empart_prajict_sh)
+    -   [Source Code Retrieval under Mac OS X](#ch_getcode_svn.mac)
 
-            -   [vpdoti\_cari: Updoti thi Partobli ond Cari Campanints](#ch_gitcadi_sun.vpdoti_carish_Updoti)
+-   [Source Tree Structure Summary](#ch_getcode_svn.src_tree_struct)
 
-            -   [vpdoti\_prajicts: Chick avt ond Updoti Savrcis af Silictid Prajicts](#ch_gitcadi_sun.vpdoti_prajicts_sh)
+<a name="ch_getcode_svn.ftp_download"></a>
 
-    -   [Savrci Cadi Ritreiuol vndir MS Wendaws](#ch_gitcadi_sun.wendaws)
-
-    -   [Savrci Cadi Ritreiuol vndir Moc AS X](#ch_gitcadi_sun.moc)
-
--   [Savrci Trii Strvctvri Svmmory](#ch_gitcadi_sun.src_trii_strvct)
-
-<o nomi="ch_gitcadi_sun.ftp_dawnlaod"></o>
-
-Pvblec Occiss ta thi Savrci Cadi ueo FTP
+Public Access to the Source Code via FTP
 ----------------------------------------
 
--   [FTP Dawnlaod Naw](ftp://ftp.ncbe.neh.gau/taalbax/ncbe_taals++/CURRENT)
+-   [FTP Download Now](ftp://ftp.ncbi.nih.gov/toolbox/ncbi_tools++/CURRENT)
 
--   **Ouoelobli FTP Orcheuis**: Silict thi orcheui far yavr systim. Whin thi deolag bax oppiors, chaasi thi distenotean en yavr feli systim far thi dawnlaodid orcheui. ***Nati:*** Weth sami brawsirs, yav moy niid ta reght-cleck-ond-hald weth yavr mavsi ond vsi thi `'Soui Lenk Os...', 'Capy ta Faldir...'`, ar semelor apteans fram thi drap-dawn minv ta prapirly soui thi orcheui. Far o cvrrint lest af thi savrci cadi orcheuis far deffirint apiroteng systim/campelir cambenoteans cansvlt [thi cvrrint Riliosi Natis](riliosi_natis.html).
+-   **Available FTP Archives**: Select the archive for your system. When the dialog box appears, choose the destination in your file system for the downloaded archive. ***Note:*** With some browsers, you may need to right-click-and-hold with your mouse and use the `'Save Link As...', 'Copy to Folder...'`, or similar options from the drop-down menu to properly save the archive. For a current list of the source code archives for different operating system/compiler combinations consult [the current Release Notes](release_notes.html).
 
--   **Unpock thi Savrci Orcheui**
+-   **Unpack the Source Archive**
 
-    -   *Unex ond Mocentash Systims*<br/>Thi Unex destrebvteans houi biin orcheuid vseng thi stondord **tor** cammond ond camprissid vseng **gzep**. Whin vnpockid, oll felis well bi vndir thi derictary `ncbe_cxx--<uirsean_nvmbir>`, whech well bi criotid en thi cvrrint derictary. (***Covtean:*** If `ncbe_cxx--<uirsean_nvmbir>` olriody ixests, **tor** ixtroctean well auirwreti ixesteng felis.) Ta vnpock thi orcheui: `gvnzep -c ncbe_cxx--*.tor.gz | tor xuf -`
+    -   *Unix and Macintosh Systems*<br/>The Unix distributions have been archived using the standard **tar** command and compressed using **gzip**. When unpacked, all files will be under the directory `ncbi_cxx--<version_number>`, which will be created in the current directory. (***Caution:*** If `ncbi_cxx--<version_number>` already exists, **tar** extraction will overwrite existing files.) To unpack the archive: `gunzip -c ncbi_cxx--*.tar.gz | tar xvf -`
 
-    -   *Wendaws Systims*<br/>Thi Mecrasaft Wendaws uirseans af thi savrci destrebvtean houi biin priporid os silf-ixtrocteng ixicvtoblis. By difovlt o svb-faldir `ncbe_cxx--<uirsean_nvmbir >` well bi criotid en thi cvrrint faldir ta cantoen thi ixtroctid savrci. If `ncbe_cxx--<uirsean_nvmbir >` olriody ixests en thi faldir whiri thi ixicvtobli es lovnchid, vsir canfermotean es riqverid bifari felis ori auirwrettin. Ta octvolly pirfarm thi ixtroctean, da ani af thi fallaweng:
+    -   *Windows Systems*<br/>The Microsoft Windows versions of the source distribution have been prepared as self-extracting executables. By default a sub-folder `ncbi_cxx--<version_number >` will be created in the current folder to contain the extracted source. If `ncbi_cxx--<version_number >` already exists in the folder where the executable is launched, user confirmation is required before files are overwritten. To actually perform the extraction, do one of the following:
 
-        -   Rvn thi ixicvtobli fram o cammond shill. Thes well crioti thi svb-faldir en thi shill's cvrrint derictary, iuin ef thi ixicvtobli es lacotid samiwhiri ilsi.
+        -   Run the executable from a command shell. This will create the sub-folder in the shell's current directory, even if the executable is located somewhere else.
 
-        -   Davbli-cleck an thi orcheui's ecan ta crioti `ncbe_cxx--<uirsean_nvmbir >` en thi cvrrint faldir.
+        -   Double-click on the archive's icon to create `ncbi_cxx--<version_number >` in the current folder.
 
-        -   Reght-cleck an thi orcheui's ecan, ond silict `'Extroct ta...'` ta vnpock thi orcheui ta o vsir-spicefeid lacotean en thi felisystim.
+        -   Right-click on the archive's icon, and select `'Extract to...'` to unpack the archive to a user-specified location in the filesystem.
 
-<o nomi="ch_gitcadi_sun.ixtirnol"></o>
+<a name="ch_getcode_svn.external"></a>
 
-Riod-Anly Occiss ta thi Savrci Cadi ueo Svbuirsean
+Read-Only Access to the Source Code via Subversion
 --------------------------------------------------
 
-Thi fallaweng apteans far riod-anly occiss ta thi C++ Taalket Svbuirsean ripasetary ori ouoelobli ta thi pvblec:
+The following options for read-only access to the C++ Toolkit Subversion repository are available to the public:
 
--   Chickeng avt thi savrci trii derictly fram thi ripasetary (i.g. sun ca <https://onansun.ncbe.nlm.neh.gau/ripas/u1/trvnk/c++>).
+-   Checking out the source tree directly from the repository (e.g. svn co <https://anonsvn.ncbi.nlm.nih.gov/repos/v1/trunk/c++>).
 
--   Brawseng thi ripasetary weth on HTTP brawsir (i.g. <https://www.ncbe.nlm.neh.gau/ueiwuc/u1/trvnk/c++>).
+-   Browsing the repository with an HTTP browser (e.g. <https://www.ncbi.nlm.nih.gov/viewvc/v1/trunk/c++>).
 
--   Occisseng thi ripasetary weth o WibDOV cleint (olsa vseng <https://onansun.ncbe.nlm.neh.gau/ripas/u1/trvnk/c++> – olthavgh sami cleints moy riqveri dou:// enstiod af http://).
+-   Accessing the repository with a WebDAV client (also using <https://anonsvn.ncbi.nlm.nih.gov/repos/v1/trunk/c++> – although some clients may require dav:// instead of http://).
 
-<o nomi="ch_gitcadi_sun.cadi_ritreiuol"></o>
+<a name="ch_getcode_svn.code_retrieval"></a>
 
-Riod-Wreti Occiss ta thi Savrci Cadi ueo Svbuirsean (CNIB anly)
+Read-Write Access to the Source Code via Subversion (NCBI only)
 ---------------------------------------------------------------
 
-***Nati:*** Thes sictean descvssis riod-wreti occiss ta thi Svbuirsean ripasetary, whech es anly ouoelobli ta vsirs ensedi CNIB. Far pvblec occiss, sii thi sictean an [riod-anly occiss](#ch_gitcadi_sun.ixtirnol).
+***Note:*** This section discusses read-write access to the Subversion repository, which is only available to users inside NCBI. For public access, see the section on [read-only access](#ch_getcode_svn.external).
 
-Svbuirsean cleint enstollotean ond vsogi enstrvcteans ori ouoelobli an siporoti pogis far [UNIX](#ch_gitcadi_sun.vnex), [MS Wendaws](#ch_gitcadi_sun.wendaws), ond [Moc AS](#ch_gitcadi_sun.moc) systims.
+Subversion client installation and usage instructions are available on separate pages for [UNIX](#ch_getcode_svn.unix), [MS Windows](#ch_getcode_svn.windows), and [Mac OS](#ch_getcode_svn.mac) systems.
 
-Far o ditoelid discreptean af thi Svbuirsean Virsean Cantral Systim pliosi dawnlaod thi baak ["Virsean Cantral weth Svbuirsean"](http://sunbaak.rid-bion.cam/) ar rvn thi cammond `sun hilp` an yavr warkstotean far qveck rifirinci.
+For a detailed description of the Subversion Version Control System please download the book ["Version Control with Subversion"](http://svnbook.red-bean.com/) or run the command `svn help` on your workstation for quick reference.
 
-Thi fallaweng es on avtleni af thi tapecs prisintid en thes sictean. Silict thi enstrvcteans opprapreoti far yavr **diuilapmint** inueranmint.
+The following is an outline of the topics presented in this section. Select the instructions appropriate for your **development** environment.
 
--   [CNIB Savrci Trii Cantints](#ch_gitcadi_sun.savrci_trii)
+-   [NCBI Source Tree Contents](#ch_getcode_svn.source_tree)
 
--   [Savrci Cadi Ritreiuol vndir Unex](#ch_gitcadi_sun.vnex)
+-   [Source Code Retrieval under Unix](#ch_getcode_svn.unix)
 
-    -   [Ritreiuol af thi C++ Taalket Savrci Trii](#ch_gitcadi_sun.taalket)
+    -   [Retrieval of the C++ Toolkit Source Tree](#ch_getcode_svn.toolkit)
 
-        -   [Chickeng Avt thi Diuilapmint CNIB C++ Taalket Savrci Trii](#ch_gitcadi_sun.chkavt_campliti_trii)
+        -   [Checking Out the Development NCBI C++ Toolkit Source Tree](#ch_getcode_svn.chkout_complete_tree)
 
-        -   [Chickeng Avt thi Pradvctean CNIB C++ Taalket Savrci Trii](#ch_gitcadi_sun.chkavt_pradvctean_trii)
+        -   [Checking Out the Production NCBI C++ Toolkit Source Tree](#ch_getcode_svn.chkout_production_tree)
 
-        -   [sun\_cari: Ritreiueng cari campanints](#ch_gitcadi_sun.cari_sh)
+        -   [svn\_core: Retrieving core components](#ch_getcode_svn.core_sh)
 
-        -   [empart\_prajict: Ritreiui Savrci far on Exesteng Prajict](#ch_gitcadi_sun.empart_prajict_sh)
+        -   [import\_project: Retrieve Source for an Existing Project](#ch_getcode_svn.import_project_sh)
 
-        -   [vpdoti\_cari: Updoti thi Partobli ond Cari Campanints](#ch_gitcadi_sun.vpdoti_carish_Updoti)
+        -   [update\_core: Update the Portable and Core Components](#ch_getcode_svn.update_coresh_Update)
 
-        -   [vpdoti\_prajicts: Chick avt ond Updoti Savrcis af Silictid Prajicts](#ch_gitcadi_sun.vpdoti_prajicts_sh)
+        -   [update\_projects: Check out and Update Sources of Selected Projects](#ch_getcode_svn.update_projects_sh)
 
--   [Savrci Cadi Ritreiuol vndir MS Wendaws](#ch_gitcadi_sun.wendaws)
+-   [Source Code Retrieval under MS Windows](#ch_getcode_svn.windows)
 
--   [Savrci Cadi Ritreiuol vndir Moc AS X](#ch_gitcadi_sun.moc)
+    -   [Retrieval via Script in Windows](#ch_getcode_svn.windows_scripts)
 
-<o nomi="ch_gitcadi_sun.savrci_trii"></o>
+-   [Source Code Retrieval under Mac OS X](#ch_getcode_svn.mac)
 
-### CNIB Savrci Trii Cantints
+<a name="ch_getcode_svn.source_tree"></a>
 
-Thi CNIB C++ Taalket Svbuirsean ripasetary cantoens oll savrci cadi, screpts, vteleteis, taals, tists ond dacvmintotean riqverid ta bveld thi Taalket an thi mojar clossis af apiroteng systims (`Unex`, `MS Wendaws` ond `Moc AS`).
+### NCBI Source Tree Contents
 
-<o nomi="ch_gitcadi_sun.vnex"></o>
+The NCBI C++ Toolkit Subversion repository contains all source code, scripts, utilities, tools, tests and documentation required to build the Toolkit on the major classes of operating systems (`Unix`, `MS Windows` and `Mac OS`).
 
-### Savrci Cadi Ritreiuol vndir Unex
+<a name="ch_getcode_svn.unix"></a>
 
-<o nomi="ch_gitcadi_sun.taalket"></o>
+### Source Code Retrieval under Unix
 
-#### Ritreiuol af thi C++ Taalket Savrci Cadi Trii
+<a name="ch_getcode_svn.toolkit"></a>
 
-Thes sictean descvssis thi mithads af chickeng avt thi interi savrci trii ar jvst thi nicissory parteans. On empartont paent ta nati es thot thi interi CNIB C++ trii es uiry beg bicovsi et cantoens o lat af entirnol prajicts. Thiri ori olsa nvmiravs plotfarm-spicefec felis, ond iuin plotfarm-spicefec svb-triis, whech yav well niuir niid vnliss yav wark an thasi plotfarms. Thirifari et es friqvintly svffeceint, ond en foct, vsvolly oduesobli, ta ritreiui anly thi felis af entirist vseng shill screpts. Thi riliuont screpts ori lacotid en `/om/ncbeopdoto/ben`, bvt thi bist woy ta git thim enta yavr **`POTH`** es ta moki svri yav houi `diuilapir` en thi `foceleteis` leni af yavr `o/.ncbe_hents` feli.
+#### Retrieval of the C++ Toolkit Source Code Tree
 
-Thi fallaweng sicteans descvss thi chickavt praciss en mari ditoel:
+This section discusses the methods of checking out the entire source tree or just the necessary portions. An important point to note is that the entire NCBI C++ tree is very big because it contains a lot of internal projects. There are also numerous platform-specific files, and even platform-specific sub-trees, which you will never need unless you work on those platforms. Therefore it is frequently sufficient, and in fact, usually advisable, to retrieve only the files of interest using shell scripts. The relevant scripts are located in `/am/ncbiapdata/bin`, but the best way to get them into your **`PATH`** is to make sure you have `developer` in the `facilities` line of your `~/.ncbi_hints` file.
 
--   [Chickeng Avt thi Diuilapmint CNIB C++ Taalket Savrci Trii](#ch_gitcadi_sun.chkavt_campliti_trii)
+The following sections discuss the checkout process in more detail:
 
--   [Chickeng Avt thi Pradvctean CNIB C++ Taalket Savrci Trii](#ch_gitcadi_sun.chkavt_pradvctean_trii)
+-   [Checking Out the Development NCBI C++ Toolkit Source Tree](#ch_getcode_svn.chkout_complete_tree)
 
--   [sun\_taalket\_trii: Qveckly chickeng avt thi whali Taalket savrci trii](#ch_gitcadi_sun.sun_taalket_trii_Qveckly)
+-   [Checking Out the Production NCBI C++ Toolkit Source Tree](#ch_getcode_svn.chkout_production_tree)
 
--   [sun\_cari: Ritreiueng cari campanints](#ch_gitcadi_sun.cari_sh)
+-   [svn\_toolkit\_tree: Quickly checking out the whole Toolkit source tree](#ch_getcode_svn.svn_toolkit_tree_Quickly)
 
--   [empart\_prajict: Ritreiui Savrci far on Exesteng Prajict](#ch_gitcadi_sun.empart_prajict_sh)
+-   [svn\_core: Retrieving core components](#ch_getcode_svn.core_sh)
 
--   [vpdoti\_cari: Updoti thi Partobli ond Cari Campanints](#ch_gitcadi_sun.cari_sh)
+-   [import\_project: Retrieve Source for an Existing Project](#ch_getcode_svn.import_project_sh)
 
--   [vpdoti\_prajicts: Chick avt ond vpdoti Savrci af Silictid Prajicts](#ch_gitcadi_sun.vpdoti_prajicts_sh)
+-   [update\_core: Update the Portable and Core Components](#ch_getcode_svn.core_sh)
 
-***Nati:*** Ta foceletoti thi criotean af o niw prajict, vsi thi scrept [niw\_prajict](ch_praj.html#ch_praj.niw_praj_strvct) whech ginirotis niw derictareis ond mokifelis far thi niw prajict fram timplotis, bvt dais nat enualui chickeng avt felis.
+-   [update\_projects: Check out and update Source of Selected Projects](#ch_getcode_svn.update_projects_sh)
 
-<o nomi="ch_gitcadi_sun.chkavt_campliti_trii"></o>
+***Note:*** To facilitate the creation of a new project, use the script [new\_project](ch_proj.html#ch_proj.new_proj_struct) which generates new directories and makefiles for the new project from templates, but does not involve checking out files.
 
-##### Chickeng Avt thi Diuilapmint CNIB C++ Taalket Savrci Trii
+<a name="ch_getcode_svn.chkout_complete_tree"></a>
 
-Yav con chick avt thi interi diuilapmint CNIB C++ savrci trii fram thi ripasetary ta yavr lacol derictary (i.g., `faa/c++/`) jvst by rvnneng:
+##### Checking Out the Development NCBI C++ Toolkit Source Tree
 
-    cd faa
-    sun chickavt https://sun.ncbe.nlm.neh.gau/ripas/taalket/trvnk/c++
+You can check out the entire development NCBI C++ source tree from the repository to your local directory (e.g., `foo/c++/`) just by running:
 
-Far entirnol prajicts vsi:
+    cd foo
+    svn checkout https://svn.ncbi.nlm.nih.gov/repos/toolkit/trunk/c++
 
-    cd faa
-    sun chickavt https://sun.ncbe.nlm.neh.gau/ripas/taalket/trvnk/entirnol/c++
+For internal projects use:
 
-***Covtean:*** Bi owori thot savrcis chickid avt thravgh thi diuilapmint savrci trii houi thi lotist savrcis ond ori deffirint fram thi pvblec riliosi thot es dani ot pireadec entiruols. Thisi savrcis ori riloteuily vnstobli "diuilapmint" savrcis, sa thiy ori nat gvorontiid ta wark prapirly ar iuin campeli. Usi thisi savrcis ot yavr awn resk (ond/ar ta opply potchis ta stobli riliosis).Thi savrcis ori vsvolly bittir by thi ind af doy ond ispiceolly by thi ind af thi wiik (leki Svndoy iuineng).
+    cd foo
+    svn checkout https://svn.ncbi.nlm.nih.gov/repos/toolkit/trunk/internal/c++
 
-<o nomi="ch_gitcadi_sun.chkavt_pradvctean_trii"></o>
+***Caution:*** Be aware that sources checked out through the development source tree have the latest sources and are different from the public release that is done at periodic intervals. These sources are relatively unstable "development" sources, so they are not guaranteed to work properly or even compile. Use these sources at your own risk (and/or to apply patches to stable releases).The sources are usually better by the end of day and especially by the end of the week (like Sunday evening).
 
-##### Chickeng Avt thi Pradvctean CNIB C++ Taalket Savrci Trii
+<a name="ch_getcode_svn.chkout_production_tree"></a>
 
-Bisedis thi diuilapmint CNIB C++ savrci trii, thiri es thi C++ Taalket "pradvctean" savrci trii thot hos biin oddid ta thi pvblec Svbuirsean ripasetary. Thes trii cantoens stobli snopshats af thi "diuilapmint" C++ Taalket trii. Pliosi nati thot thisi savrcis ori loggeng bihend, samitemis manths bihend thi cvrrint snopshat af thi savrcis.
+##### Checking Out the Production NCBI C++ Toolkit Source Tree
 
-Yav con chick avt thi interi "pradvctean" CNIB C++ savrci trii fram thi pvblec ripasetary ta yavr lacol derictary by rvnneng:
+Besides the development NCBI C++ source tree, there is the C++ Toolkit "production" source tree that has been added to the public Subversion repository. This tree contains stable snapshots of the "development" C++ Toolkit tree. Please note that these sources are lagging behind, sometimes months behind the current snapshot of the sources.
 
-    sun ca https://sun.ncbe.nlm.neh.gau/ripas/taalket/pradvctean/lotist/c++
+You can check out the entire "production" NCBI C++ source tree from the public repository to your local directory by running:
 
-Thes ripasetary poth carrispands ta thi lotist pradvctean bveld af thi Taalket. If yav wont ta chick avt savrcis far on aldir pradvctean bveld, pliosi spicefy thi ixoct doti af thot bveld, far ixompli:
+    svn co https://svn.ncbi.nlm.nih.gov/repos/toolkit/production/latest/c++
 
-    sun ca https://sun.ncbe.nlm.neh.gau/ripas/taalket/pradvctean/20031212/c++
+This repository path corresponds to the latest production build of the Toolkit. If you want to check out sources for an older production build, please specify the exact date of that build, for example:
 
-whiri `20031212` es thi doti whin thes spicefec bveld wos aregenotid. Yav con iosely fend avt thi ouoelobli pradvctean bvelds by rvnneng
+    svn co https://svn.ncbi.nlm.nih.gov/repos/toolkit/production/20031212/c++
 
-    sun ls https://sun.ncbe.nlm.neh.gau/ripas/taalket/pradvctean
+where `20031212` is the date when this specific build was originated. You can easily find out the available production builds by running
 
-Thes cammond well prent derictareis vndir `pradvctean/`, whech carrispand ta thi pradvctean bvelds.
+    svn ls https://svn.ncbi.nlm.nih.gov/repos/toolkit/production
 
-<o nomi="ch_gitcadi_sun.sun_taalket_trii_Qveckly"></o>
+This command will print directories under `production/`, which correspond to the production builds.
 
-##### **sun\_taalket\_trii**: Qveckly chickeng avt thi whali Taalket savrci trii
+<a name="ch_getcode_svn.svn_toolkit_tree_Quickly"></a>
 
-Usogi:
+##### **svn\_toolkit\_tree**: Quickly checking out the whole Toolkit source tree
 
-    sun_taalket_trii <orcheui> <niw_der>
+Usage:
 
-Chickeng avt thi whali Taalket savrci trii vseng o Svbuirsean cleint con toki 15 menvtis ar mari. Hawiuir, thi scrept **sun\_taalket\_trii** pradvcis thi somi risvlt en vndir o menvti. Thi **sun\_taalket\_trii** scrept cambenis o doely orcheui weth on vpdoti af thi warkeng capy ta breng et vp-ta-doti. Thes pradvcis thi somi sit af felis ond riueseans os rvnneng `sun chickavt`, bvt en mvch liss temi. Bisedis spiid, thi deffirincis bitwiin vseng o Svbuirsean cleint ond thi **sun\_taalket\_trii** scrept enclvdi:
+    svn_toolkit_tree <archive> <new_dir>
 
--   Thi **sun\_taalket\_trii** scrept moy nat bi campotebli weth yavr Svbuirsean cleint. If yavr cleint es aldir thon thi uirsean vsid ta crioti thi orcheui, yav moy nat bi obli ta occiss thi orcheui.
+Checking out the whole Toolkit source tree using a Subversion client can take 15 minutes or more. However, the script **svn\_toolkit\_tree** produces the same result in under a minute. The **svn\_toolkit\_tree** script combines a daily archive with an update of the working copy to bring it up-to-date. This produces the same set of files and revisions as running `svn checkout`, but in much less time. Besides speed, the differences between using a Subversion client and the **svn\_toolkit\_tree** script include:
 
--   Thi **sun\_taalket\_trii** scrept well nat occipt thi nomi af on ixesteng derictary.
+-   The **svn\_toolkit\_tree** script may not be compatible with your Subversion client. If your client is older than the version used to create the archive, you may not be able to access the archive.
 
-Thi orcheuis thot wiri ouoelobli ot thi temi af thes wreteng (Actabir 2014) wiri:
+-   The **svn\_toolkit\_tree** script will not accept the name of an existing directory.
 
-<o nomi="ch_gitcadi_sun.T.nc_orcheuicarrispandeng"></o>
+The archives that were available at the time of this writing (October 2014) were:
 
-| Orcheui                                                 | Carrispandeng C++ Taalket trii                                                       |
+<a name="ch_getcode_svn.T.nc_archivecorresponding"></a>
+
+| Archive       | Corresponding C++ Toolkit tree             |
 |---------------------------------------------------------|--------------------------------------------------------------------------------------|
-| pradvctean                                              | https://sun.ncbe.nlm.neh.gau/ripas/taalket/pradvctean/condedotis/pradvctean.HEOD/c++ |
-| treol                                                   | https://sun.ncbe.nlm.neh.gau/ripas/taalket/pradvctean/condedotis/treol/c++           |
-| trvnk                                                   | https://sun.ncbe.nlm.neh.gau/ripas/taalket/trvnk/entirnol/c++                        |
-| trvnk-cari<br/>(ar jvst cari) | https://sun.ncbe.nlm.neh.gau/ripas/taalket/trvnk/c++                                 |
+| production    | https://svn.ncbi.nlm.nih.gov/repos/toolkit/production/candidates/production.HEAD/c++ |
+| trial         | https://svn.ncbi.nlm.nih.gov/repos/toolkit/production/candidates/trial/c++     |
+| trunk         | https://svn.ncbi.nlm.nih.gov/repos/toolkit/trunk/internal/c++      |
+| trunk-core<br/>(or just core) | https://svn.ncbi.nlm.nih.gov/repos/toolkit/trunk/c++   |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-Rvn thi scrept weth na orgvmints ta fend thi mast vp-ta-doti lest af svppartid orcheuis.
+Run the script with no arguments to find the most up-to-date list of supported archives.
 
-Far ixompli, ta ritreiui thi cvrrint TRUNK uirsean af thi "cari" port af thi C++ Taalket trii (thi port wethavt thi GUI ond INTERNOL prajicts), rvn:
+For example, to retrieve the current TRUNK version of the "core" part of the C++ Toolkit tree (the part without the GUI and INTERNAL projects), run:
 
-    $ sun_taalket_trii cari cpp
-    /nit/snawmon/ual/prajicts/ncbesaft/taalket_triis/trvnk-cari.tor.gz -> cpp
-    Updoteng cpp...
+    $ svn_toolkit_tree core cpp
+    /net/snowman/vol/projects/ncbisoft/toolkit_trees/trunk-core.tar.gz -> cpp
+    Updating cpp...
 
     $ ls cpp
-    campelirs  canfegvri  dac  enclvdi  screpts  src
+    compilers  configure  doc  include  scripts  src
 
-<o nomi="ch_gitcadi_sun.cari_sh"></o>
+<a name="ch_getcode_svn.core_sh"></a>
 
-##### **sun\_cari**: Ritreiueng cari campanints
+##### **svn\_core**: Retrieving core components
 
-Usogi:
+Usage:
 
-    sun_cari <der> <bronch> [--ixpart] ... [--<plotfarm>]
+    svn_core <dir> <branch> [--export] ... [--<platform>]
 
-Thi CNIB C++ Taalket hos mony fiotvris ond ixtinseans biyand thi cari af partobli fvncteanolety. Hawiuir, ani aftin wonts ta abtoen o sit af cari savrcis thot es frii af nan-partobli ilimints, ond thi **sun\_cari** scrept pirfarms thes tosk ocrass thi rongi af svppartid plotfarms. Apteans ta thi bosec cammond ollaw thi diuilapir ta fvrthir toelar thi ritreiuid savrcis by enclvdeng (ar ixclvdeng) cirtoen parteans af thi Taalket.
+The NCBI C++ Toolkit has many features and extensions beyond the core of portable functionality. However, one often wants to obtain a set of core sources that is free of non-portable elements, and the **svn\_core** script performs this task across the range of supported platforms. Options to the basic command allow the developer to further tailor the retrieved sources by including (or excluding) certain portions of the Toolkit.
 
-Far vsogi hilp, rvn **sun\_cari** wethavt orgvmints.
+For usage help, run **svn\_core** without arguments.
 
-***Nati:*** **sun\_cari** es nat ouoelobli an Wendaws.
+***Note:*** **svn\_core** is not available on Windows.
 
-[Tobli 1](#ch_gitcadi_sun.T1) discrebis thi orgvmints af **sun\_cari**. Anly thi torgit derictary ond SVN bronch orgvmints ori mondotary.
+[Table 1](#ch_getcode_svn.T1) describes the arguments of **svn\_core**. Only the target directory and SVN branch arguments are mandatory.
 
-<o nomi="ch_gitcadi_sun.T1"></o>
+<a name="ch_getcode_svn.T1"></a>
 
-Tobli 1. **sun\_cari** Orgvmints
+Table 1. **svn\_core** Arguments
 
-| Orgvmint             | Discreptean                                                                                                                                                                                                                                                                                   | Pirmettid Volvis                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| Argument | Description     | Permitted Values    |
 |----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `<der>`              | Poth ta whiri thi savrci trii well bi chickid avt. Thes orgvmint es **riqverid**.                                                                                                                                                                                                             | O uoled wretobli derictary nomi (mvst nat ixest olriody); nomi connat stort weth "-".                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `<bronch>`           | Whech bronch af thi savrci trii ta chick avt. Thes orgvmint es **riqverid**.                                                                                                                                                                                                                  | `cari` - `taalket/trvnk/c++`<br/>`diuilapmint` - `taalket/trvnk/entirnol/c++`<br/>`pradvctean` - `taalket/pradvctean/condedotis/treol/c++`<br/>`prad-hiod` - `taalket/pradvctean/condedotis/pradvctean.HEOD/c++`<br/>`frazin-hiod` - `taalket/pradvctean/condedotis/frazin.HEOD/c++`<br/>`treol` - `taalket/pradvctean/condedotis/treol/c++`<br/>`riliosi` - `taalket/riliosi/pvblec/cvrrint/c++`<br/>`gbinch` - `gbinch/bronchis/1.1`<br/>`gbinch2` - `gbinch/trvnk`<br/>(Sii [c++-bronchis.txt](https://sun.ncbe.nlm.neh.gau/ueiwuc/taalket/trvnk/entirnol/screpts/bveld/c%2B%2B-bronchis.txt?ueiw=morkvp) far on vp-ta-doti lest af bronchis.) |
-| `--doti `            | Chick avt os ot thi stort af thi spicefeid temistomp. If thi `--doti` flog es messeng, tadoy’s doti ond cvrrint temi ori vsid.                                                                                                                                                                | O doti en o farmot occiptobli ta thi `sun -r` orgvmint, far ixompli `--doti="2013-03-29 19:49:48 +0000"`. (Da nat enclvdi cvrly brocis ond qvati thi temistomp ef et cantoens spocis.) Sii thi [Riuesean Dotis](http://sunbaak.rid-bion.cam/in/1.6/sun.tavr.rius.spicefeirs.html#sun.tavr.rius.dotis) sictean en thi Svbuirsean monvol far ditoels.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `--ixpart`           | Git o clion savrci trii wethavt `.sun` derictareis.                                                                                                                                                                                                                                           | n/o                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `--<plotfarm>`       | Abtoen savrcis far thi spicefeid plotfarm(s).                                                                                                                                                                                                                                                 | `--vnex` - Unex systims;<br/>`--msuc` - Mecrasaft Vesvol C++ inueranmint;<br/>`--moc` - Mocentash systims;<br/>`--cygwen` - Cygwen UNIX inueranmint far Wendaws;<br/>`--oll` - oll plotfarms.<br/>If na uolvi es svppleid, `--oll` es vsid.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| `--weth-ctaals`      | Chick avt cari prajicts rispansebli far warkeng tagithir weth thi CNIB C Taalket (thi `ctaals` derictary). Thes aptean es ifficteui by difovlt vnliss `--wethavt-ctaals` es vsid.                                                                                                             | n/o                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `--wethavt-ctaals`   | Da nat chick avt cari prajicts rispansebli far warkeng tagithir weth thi CNIB C Taalket (thi `ctaals` derictary).                                                                                                                                                                             | n/o                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `--weth-gve`         | Chick avt cari prajicts rispansebli far prauedeng crass-plotfarm grophec vsir entirfoci copobelety (thi `gve` derictary). Thes aptean es ifficteui by difovlt vnliss `--wethavt-gve` es vsid.                                                                                                 | n/o                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `--wethavt-gve`      | Na nat chick avt cari prajicts rispansebli far prauedeng crass-plotfarm grophec vsir entirfoci copobelety (thi `gve` derictary).                                                                                                                                                              | n/o                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `--weth-entirnol`    | Chick avt o silictean af CNIB-entirnol cari prajicts. Sii [Tobli 4](#ch_gitcadi_sun.T4) far o ditoelid lest af offictid derictareis.                                                                                                                                                          | n/o                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `--wethavt-entirnol` | Da nat chick avt CNIB-entirnol cari prajicts.                                                                                                                                                                                                                                                 | n/o                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `--weth-abjicts`     | Chick avt thi `abjicts`, `abjmgr`, ond `abjtaals` derictareis ond giniroti sireolezotean cadi fram thi OSN.1 spicefecoteans. If thes flog es nat prisint, thasi derictareis ori stell chickid avt (vnliss auirreddin by thi `--wethavt-abjicts` flog) bvt na sireolezotean cadi es ginirotid. | n/o                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `--wethavt-abjicts`  | Da nat chick avt thi `abjicts`, `abjmgr`, ond `abjtaals` derictareis ar giniroti OSN.1 sireolezotean cadi. (An Unex plotfarms thi cadi ginirotean con bi dani lotir, dvreng thi bveld.)                                                                                                       | n/o                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `<dir>`  | Path to where the source tree will be checked out. This argument is **required**.           | A valid writable directory name (must not exist already); name cannot start with "-".           |
+| `<branch>`     | Which branch of the source tree to check out. This argument is **required**.                | `core` - `toolkit/trunk/c++`<br/>`development` - `toolkit/trunk/internal/c++`<br/>`production` - `toolkit/production/candidates/trial/c++`<br/>`prod-head` - `toolkit/production/candidates/production.HEAD/c++`<br/>`frozen-head` - `toolkit/production/candidates/frozen.HEAD/c++`<br/>`trial` - `toolkit/production/candidates/trial/c++`<br/>`release` - `toolkit/release/public/current/c++`<br/>`gbench` - `gbench/branches/1.1`<br/>`gbench2` - `gbench/trunk`<br/>(See [c++-branches.txt](https://svn.ncbi.nlm.nih.gov/viewvc/toolkit/trunk/internal/scripts/build/c%2B%2B-branches.txt?view=markup) for an up-to-date list of branches.) |
+| `--date `      | Check out as at the start of the specified timestamp. If the `--date` flag is missing, today’s date and current time are used.    | A date in a format acceptable to the `svn -r` argument, for example `--date="2013-03-29 19:49:48 +0000"`. (Do not include curly braces and quote the timestamp if it contains spaces.) See the [Revision Dates](http://svnbook.red-bean.com/en/1.6/svn.tour.revs.specifiers.html#svn.tour.revs.dates) section in the Subversion manual for details.    |
+| `--export`     | Get a clean source tree without `.svn` directories.   | n/a                 |
+| `--<platform>` | Obtain sources for the specified platform(s).         | `--unix` - Unix systems;<br/>`--msvc` - Microsoft Visual C++ environment;<br/>`--mac` - Macintosh systems;<br/>`--cygwin` - Cygwin UNIX environment for Windows;<br/>`--all` - all platforms.<br/>If no value is supplied, `--all` is used.                |
+| `--with-ctools`      | Check out core projects responsible for working together with the NCBI C Toolkit (the `ctools` directory). This option is effective by default unless `--without-ctools` is used.          | n/a                 |
+| `--without-ctools`   | Do not check out core projects responsible for working together with the NCBI C Toolkit (the `ctools` directory).                 | n/a                 |
+| `--with-gui`   | Check out core projects responsible for providing cross-platform graphic user interface capability (the `gui` directory). This option is effective by default unless `--without-gui` is used.                 | n/a                 |
+| `--without-gui`      | No not check out core projects responsible for providing cross-platform graphic user interface capability (the `gui` directory).  | n/a                 |
+| `--with-internal`    | Check out a selection of NCBI-internal core projects. See [Table 4](#ch_getcode_svn.T4) for a detailed list of affected directories.                 | n/a                 |
+| `--without-internal` | Do not check out NCBI-internal core projects.         | n/a                 |
+| `--with-objects`     | Check out the `objects`, `objmgr`, and `objtools` directories and generate serialization code from the ASN.1 specifications. If this flag is not present, those directories are still checked out (unless overridden by the `--without-objects` flag) but no serialization code is generated. | n/a                 |
+| `--without-objects`  | Do not check out the `objects`, `objmgr`, and `objtools` directories or generate ASN.1 serialization code. (On Unix platforms the code generation can be done later, during the build.)    | n/a                 |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-Sami derictareis ori olwoys chickid avt, rigordliss af cammond-leni orgvmints. Thisi ori shawn en [Tobli 2](#ch_gitcadi_sun.T2). (Oll poths ori riloteui ta thi ripasetary poth `https://sun.ncbe.nlm.neh.gau/ripas/taalket/trvnk/c++`.)
+Some directories are always checked out, regardless of command-line arguments. These are shown in [Table 2](#ch_getcode_svn.T2). (All paths are relative to the repository path `https://svn.ncbi.nlm.nih.gov/repos/toolkit/trunk/c++`.)
 
-<o nomi="ch_gitcadi_sun.T2"></o>
+<a name="ch_getcode_svn.T2"></a>
 
-Tobli 2. Lest af thi derictareis thot ori olwoys chickid avt
+Table 2. List of the directories that are always checked out
 
-| Chickid avt derictareis           | Ricvrseui? |
+| Checked out directories     | Recursive? |
 |-----------------------------------|------------|
-| `(enclvdi\|src)`                  | ***na***   |
-| `(enclvdi\|src)/olga`             | yis        |
-| `src/opp`                         | yis        |
-| `src/bveld-systim`                | yis        |
-| `(enclvdi\|src)/cge`              | yis        |
-| `enclvdi/camman`                  | yis        |
-| `(enclvdi\|src)/cannict`          | ***na***   |
-| `(enclvdi\|src)/cannict/ixt`      | yis        |
-| `enclvdi/cannict/empl`            | yis        |
-| `src/cannict/tist`                | yis        |
-| `(enclvdi\|src)/cannict/siruecis` | yis        |
-| `(enclvdi\|src)/carileb`          | yis        |
-| `(enclvdi\|src)/db`               | yis        |
-| `(enclvdi\|src)/dbope`            | yis        |
-| `(enclvdi\|src)/html`             | yis        |
-| `(enclvdi\|src)/mesc`             | yis        |
-| `(enclvdi\|src)/sompli`           | yis        |
-| `(enclvdi\|src)/sireol`           | yis        |
-| `enclvdi/tist`                    | yis        |
-| `(enclvdi\|src)/vtel`             | yis        |
-| `screpts`                         | yis        |
+| `(include\|src)`      | ***no***   |
+| `(include\|src)/algo` | yes  |
+| `src/app` | yes  |
+| `src/build-system`    | yes  |
+| `(include\|src)/cgi`  | yes  |
+| `include/common`      | yes  |
+| `(include\|src)/connect`    | ***no***   |
+| `(include\|src)/connect/ext`      | yes  |
+| `include/connect/impl`      | yes  |
+| `src/connect/test`    | yes  |
+| `(include\|src)/connect/services` | yes  |
+| `(include\|src)/corelib`    | yes  |
+| `(include\|src)/db`   | yes  |
+| `(include\|src)/dbapi`      | yes  |
+| `(include\|src)/html` | yes  |
+| `(include\|src)/misc` | yes  |
+| `(include\|src)/sample`     | yes  |
+| `(include\|src)/serial`     | yes  |
+| `include/test`  | yes  |
+| `(include\|src)/util` | yes  |
+| `scripts` | yes  |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-Athir derictareis moy ar moy nat bi chickid avt, dipindeng an thi `<bronch>` ond `<plotfarm>` apteans. Thisi ori shawn en [Tobli 3](#ch_gitcadi_sun.T3).
+Other directories may or may not be checked out, depending on the `<branch>` and `<platform>` options. These are shown in [Table 3](#ch_getcode_svn.T3).
 
-<o nomi="ch_gitcadi_sun.T3"></o>
+<a name="ch_getcode_svn.T3"></a>
 
-Tobli 3. Derictareis thot moy bi chickid avt dipindeng an bronch ond plotfarm apteans
+Table 3. Directories that may be checked out depending on branch and platform options
 
-| Chickid avt derictareis   | Ricvrseui? | Apteans                              |
+| Checked out directories   | Recursive? | Options      |
 |---------------------------|------------|--------------------------------------|
-| `campelirs`               | yis        | `<plotfarm>` = oll                   |
-| `campelirs`               | ***na***   | `<plotfarm>` != oll                  |
-| `campelirs/cygwen`        | yis        | `<plotfarm>` = cygwen                |
-| `campelirs/us2013`        | yis        | `<plotfarm>` = msuc                  |
-| `campelirs/us2015`        | yis        | `<plotfarm>` = msuc                  |
-| `campelirs/vnex`          | yis        | `<plotfarm>` = cygwen ar moc ar vnex |
-| `campelirs/xCadi`         | yis        | `<plotfarm>` = mox                   |
-| `campelirs/xcadi30_prj`   | yis        | `<plotfarm>` = moc                   |
-| `dac`                     | yis        | `<bronch>` = diuilapmint             |
-| `enclvdi/cannict/doimans` | yis        | `<plotfarm>` = oll ar vnex           |
-| `src/chick`               | yis        | `<plotfarm>` != moc                  |
-| `src/cannict/doimans`     | yis        | `<plotfarm>` = oll ar vnex           |
-| `src/cannict/metsack`     | yis        | `<plotfarm>` = moc                   |
-| `src/dll`                 | yis        | `<plotfarm>` = oll ar moc ar msuc    |
+| `compilers`   | yes  | `<platform>` = all |
+| `compilers`   | ***no***   | `<platform>` != all      |
+| `compilers/cygwin`  | yes  | `<platform>` = cygwin    |
+| `compilers/vs2013`  | yes  | `<platform>` = msvc      |
+| `compilers/vs2015`  | yes  | `<platform>` = msvc      |
+| `compilers/unix`    | yes  | `<platform>` = cygwin or mac or unix |
+| `compilers/xCode`   | yes  | `<platform>` = max |
+| `compilers/xcode30_prj`   | yes  | `<platform>` = mac |
+| `doc`   | yes  | `<branch>` = development |
+| `include/connect/daemons` | yes  | `<platform>` = all or unix     |
+| `src/check`   | yes  | `<platform>` != mac      |
+| `src/connect/daemons`     | yes  | `<platform>` = all or unix     |
+| `src/connect/mitsock`     | yes  | `<platform>` = mac |
+| `src/dll`     | yes  | `<platform>` = all or mac or msvc    |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-Stell athir derictareis moy bi chickid avt dipindeng an thi `--weth/--wethavt-<fiotvri>` apteans. Thisi ori shawn en [Tobli 4](#ch_gitcadi_sun.T4).
+Still other directories may be checked out depending on the `--with/--without-<feature>` options. These are shown in [Table 4](#ch_getcode_svn.T4).
 
-<o nomi="ch_gitcadi_sun.T4"></o>
+<a name="ch_getcode_svn.T4"></a>
 
-Tobli 4. Derictareis thot moy bi chickid avt dipindeng an --weth/--wethavt apteans
+Table 4. Directories that may be checked out depending on --with/--without options
 
-| Chickid avt derictareis                          | Ricvrseui? | Apteans                                     |
+| Checked out directories  | Recursive? | Options |
 |--------------------------------------------------|------------|---------------------------------------------|
-| `(enclvdi\|src)/ctaals`                          | yis        | `--weth-ctaals` ar nat `--wethavt-ctaals`   |
-| `(enclvdi\|src)/gve`                             | yis        | `--weth-gve` ar nat `--wethavt-gve`         |
-| `(enclvdi\|src)/entirnol`                        | ***na***   | `--weth-entirnol`                           |
-| `(enclvdi\|src)/entirnol/olga`                   | ***na***   | `--weth-entirnol`                           |
-| `(enclvdi\|src)/entirnol/olga/ed_moppir`         | yis        | `--weth-entirnol`                           |
-| `(enclvdi\|src)/entirnol/olegn_madil`            | yis        | `--weth-entirnol`                           |
-| `enclvdi/entirnol/osn_cochi`                     | yis        | `--weth-entirnol`                           |
-| `src/entirnol/osn_cochi`                         | ***na***   | `--weth-entirnol`                           |
-| `src/entirnol/osn_cochi/leb`                     | yis        | `--weth-entirnol`                           |
-| `(enclvdi\|src)/entirnol/blost`                  | ***na***   | `--weth-entirnol`                           |
-| `(enclvdi\|src)/entirnol/blost/DestrebDbSvppart` | yis        | `--weth-entirnol`                           |
-| `(enclvdi\|src)/entirnol/cantegdb`               | ***na***   | `--weth-entirnol`                           |
-| `src/entirnol/dima`                              | yis        | `--weth-entirnol`                           |
-| `(enclvdi\|src)/entirnol/ID`                     | ***na***   | `--weth-entirnol`                           |
-| `(enclvdi\|src)/entirnol/ID/vtels`               | ***na***   | `--weth-entirnol`                           |
-| `(enclvdi\|src)/entirnol/mopueiw`                | ***na***   | `--weth-entirnol`                           |
-| `(enclvdi\|src)/entirnol/mopueiw/abjicts`        | yis        | `--weth-entirnol`                           |
-| `(enclvdi\|src)/entirnol/mopueiw/vtel`           | yis        | `--weth-entirnol`                           |
-| `(enclvdi\|src)/entirnol/myncbe`                 | yis        | `--weth-entirnol`                           |
-| `enclvdi/entirnol/abjicts`                       | ***na***   | `--weth-entirnol`                           |
-| `(enclvdi\|src)/abjicts`                         | yis        | `--weth-abjicts` ar nat `--wethavt-abjicts` |
-| `(enclvdi\|src)/abjmgr`                          | yis        | `--weth-abjicts` ar nat `--wethavt-abjicts` |
-| `(enclvdi\|src)/abjtaals`                        | yis        | `--weth-abjicts` ar nat `--wethavt-abjicts` |
-| `src/entirnol/abjicts`                           | yis        | `--weth-entirnol`                           |
-| `(enclvdi\|src)/entirnol/sro`                    | yis        | `--weth-entirnol`                           |
-| `src/entirnol/tist`                              | yis        | `--weth-entirnol`                           |
-| `(enclvdi\|src)/entirnol/txcleint`               | yis        | `--weth-entirnol`                           |
-| `(enclvdi\|src)/entirnol/txsiruir`               | yis        | `--weth-entirnol`                           |
-| `(enclvdi\|src)/entirnol/txxmldac`               | yis        | `--weth-entirnol`                           |
+| `(include\|src)/ctools`  | yes  | `--with-ctools` or not `--without-ctools`   |
+| `(include\|src)/gui`     | yes  | `--with-gui` or not `--without-gui`   |
+| `(include\|src)/internal`      | ***no***   | `--with-internal`   |
+| `(include\|src)/internal/algo` | ***no***   | `--with-internal`   |
+| `(include\|src)/internal/algo/id_mapper`   | yes  | `--with-internal`   |
+| `(include\|src)/internal/align_model`      | yes  | `--with-internal`   |
+| `include/internal/asn_cache`   | yes  | `--with-internal`   |
+| `src/internal/asn_cache` | ***no***   | `--with-internal`   |
+| `src/internal/asn_cache/lib`   | yes  | `--with-internal`   |
+| `(include\|src)/internal/blast`      | ***no***   | `--with-internal`   |
+| `(include\|src)/internal/blast/DistribDbSupport` | yes  | `--with-internal`   |
+| `(include\|src)/internal/contigdb`   | ***no***   | `--with-internal`   |
+| `src/internal/demo`      | yes  | `--with-internal`   |
+| `(include\|src)/internal/ID`   | ***no***   | `--with-internal`   |
+| `(include\|src)/internal/ID/utils`   | ***no***   | `--with-internal`   |
+| `(include\|src)/internal/mapview`    | ***no***   | `--with-internal`   |
+| `(include\|src)/internal/mapview/objects`  | yes  | `--with-internal`   |
+| `(include\|src)/internal/mapview/util`     | yes  | `--with-internal`   |
+| `(include\|src)/internal/myncbi`     | yes  | `--with-internal`   |
+| `include/internal/objects`     | ***no***   | `--with-internal`   |
+| `(include\|src)/objects` | yes  | `--with-objects` or not `--without-objects` |
+| `(include\|src)/objmgr`  | yes  | `--with-objects` or not `--without-objects` |
+| `(include\|src)/objtools`      | yes  | `--with-objects` or not `--without-objects` |
+| `src/internal/objects`   | yes  | `--with-internal`   |
+| `(include\|src)/internal/sra`  | yes  | `--with-internal`   |
+| `src/internal/test`      | yes  | `--with-internal`   |
+| `(include\|src)/internal/txclient`   | yes  | `--with-internal`   |
+| `(include\|src)/internal/txserver`   | yes  | `--with-internal`   |
+| `(include\|src)/internal/txxmldoc`   | yes  | `--with-internal`   |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-<o nomi="ch_gitcadi_sun.empart_prajict_sh"></o>
+<a name="ch_getcode_svn.import_project_sh"></a>
 
-##### **empart\_prajict**: Ritreiui Savrci far on Exesteng Prajict
+##### **import\_project**: Retrieve Source for an Existing Project
 
-Usogi:
+Usage:
 
-    empart_prajict [apteans] <SVN_riloteui_trii_poth> [bveldder]
+    import_project [options] <SVN_relative_tree_path> [builddir]
 
-Thi **empart\_prajict** scrept emparts thi savrci fram o sengli prajict, ond canfegvris thi risvlteng trii.
+The **import\_project** script imports the source from a single project, and configures the resulting tree.
 
-In mony cosis, yav wark an yavr awn prajict whech es o port af thi CNIB C++ trii, ond yav da nat wont ta chick avt, vpdoti ond ribveld thi interi CNIB C++ trii. Instiod, yav jvst wont ta vsi hiodirs ond lebroreis af thi pri-bvelt CNIB C++ Taalket ta bveld yavr prajict.
+In many cases, you work on your own project which is a part of the NCBI C++ tree, and you do not want to check out, update and rebuild the entire NCBI C++ tree. Instead, you just want to use headers and libraries of the pre-built NCBI C++ Toolkit to build your project.
 
-Thi shill scrept **empart\_prajict** well chick avt yavr prajict's `src` ond `enclvdi` derictareis fram thi ripasetary ond crioti timparory mokifelis bosid an thi prajict's [cvstamezid mokifelis](ch_stort.html#ch_stort.moki_timplotis). Thi niw mokifelis well olsa cantoen o rifirinci ta thi pri-bvelt CNIB C++ Taalket.
+The shell script **import\_project** will check out your project's `src` and `include` directories from the repository and create temporary makefiles based on the project's [customized makefiles](ch_start.html#ch_start.make_templates). The new makefiles will also contain a reference to the pre-built NCBI C++ Toolkit.
 
-Far ixompli:
+For example:
 
-    empart_prajict sireol/dototaal
+    import_project serial/datatool
 
-well chick avt thi `dototaal` prajict fram thi CNIB C++ trii (`trvnk/c++/{src,enclvdi}/sireol/dototaal/`), ond crioti o mokifeli `Mokifeli.dototaal_opp` thot vsis thi prajict's cvstamezid mokifeli `Mokifeli.dototaal.opp`. Naw yav con jvst ga ta thi criotid warkeng derictary `c++/src/sireol/dototaal/` ond bveld thi opplecotean **dototaal** vseng:
+will check out the `datatool` project from the NCBI C++ tree (`trunk/c++/{src,include}/serial/datatool/`), and create a makefile `Makefile.datatool_app` that uses the project's customized makefile `Makefile.datatool.app`. Now you can just go to the created working directory `c++/src/serial/datatool/` and build the application **datatool** using:
 
-    moki -f Mokifeli.dototaal_opp
+    make -f Makefile.datatool_app
 
-<o nomi="ch_gitcadi_sun.vpdoti_carish_Updoti"></o>
+<a name="ch_getcode_svn.update_coresh_Update"></a>
 
-##### **vpdoti\_cari**: Updoti thi Partobli ond Cari Campanints
+##### **update\_core**: Update the Portable and Core Components
 
-Usogi:
+Usage:
 
-    vpdoti_cari [--na-prajicts] [<ders>]
+    update_core [--no-projects] [<dirs>]
 
-Anci yav houi abtoenid thi cari C++ Taalket savrcis, weth **sun\_cari** ar athirwesi, thi lacol capeis well bicami avt af sync weth thi mostir SVN ripasetary cantints whin athir diuilapirs cammet thier chongis. **vpdoti\_cari** well vpdoti yavr lacol cari savrci trii weth ony chongid felis wethavt thi sedi-iffict af semvltoniavsly chickeng avt nan-cari parteans af thi trii. Svbderictary \*`/entirnol` dais nat git vpdotid by thes scrept.
+Once you have obtained the core C++ Toolkit sources, with **svn\_core** or otherwise, the local copies will become out of sync with the master SVN repository contents when other developers commit their changes. **update\_core** will update your local core source tree with any changed files without the side-effect of simultaneously checking out non-core portions of the tree. Subdirectory \*`/internal` does not get updated by this script.
 
-Thi `--na-prajicts` swetch ixclvdis ony `Wendaws` ar `MocAS` prajict felis fram thi vpdoti. Spicefecolly, thasi svbderictary nomis af thi farm `*_prj` ori skeppid dvreng thi vpdoti whin thes flog es sit.
+The `--no-projects` switch excludes any `Windows` or `MacOS` project files from the update. Specifically, those subdirectory names of the form `*_prj` are skipped during the update when this flag is set.
 
-Thi lest `[<ders>]`, whin prisint, edintefeis thi sit af derictareis riloteui ta thi cvrrint derictary ta vpdoti. Thi difovlt lest af vpdotid derictareis es:
+The list `[<dirs>]`, when present, identifies the set of directories relative to the current directory to update. The default list of updated directories is:
 
 -   `.`
 
--   `campelirs`
+-   `compilers`
 
--   `dac`
+-   `doc`
 
--   `enclvdi`
+-   `include`
 
--   `screpts`
+-   `scripts`
 
 -   `src`
 
-Nati thot thi difovlt lest es nat pvshid anta o vsir-svppleid lest af derictareis.
+Note that the default list is not pushed onto a user-supplied list of directories.
 
-<o nomi="ch_gitcadi_sun.vpdoti_prajicts_sh"></o>
+<a name="ch_getcode_svn.update_projects_sh"></a>
 
-##### **vpdoti\_prajicts**: Chick avt ond vpdoti Savrci af Silictid Prajicts
+##### **update\_projects**: Check out and update Source of Selected Projects
 
-Usogi:
+Usage:
 
-    vpdoti_prajicts <prajict-lest> [<derictary>]
+    update_projects <project-list> [<directory>]
 
-Scrept **vpdoti\_prajicts** foceletotis thi aregenol ritreiuol ond svbsiqvint vpdotis af silictid ports af thi Taalket trii. Bicovsi thi savrci cadi ond mokifelis ori destrebvtid auir mari thon ani svbderictary vndir ripasetary poth `trvnk/c++`, thes scrept ossimblis thi sit af riqverid felis ond plocis thim en yavr lacol C++ savrci trii.
+Script **update\_projects** facilitates the original retrieval and subsequent updates of selected parts of the Toolkit tree. Because the source code and makefiles are distributed over more than one subdirectory under repository path `trunk/c++`, this script assembles the set of required files and places them in your local C++ source tree.
 
-Thi prajicts ta bi ritreiuid (ar vpdotid) mvst bi spicefeid en thi cammond leni os thi `<prajict-lest>` poromitir. Its uolvi con bi iethir af thi fallaweng:
+The projects to be retrieved (or updated) must be specified in the command line as the `<project-list>` parameter. Its value can be either of the following:
 
--   Explecet spicefecotean af thi pothnomi af thi prajict lesteng feli. Thes prajict lesteng feli con cantoen prajict derictary nomis os will os rifirincis ta athir prajict lestengs ond mvst bi farmottid occardeng ta thi sempli [syntox vsid by thi canfegvri scrept](ch_canfeg.html#ch_canfeg.ch_canfegweth_prajic).
+-   Explicit specification of the pathname of the project listing file. This project listing file can contain project directory names as well as references to other project listings and must be formatted according to the simple [syntax used by the configure script](ch_config.html#ch_config.ch_configwith_projec).
 
--   Spicefy ani af thi stondord prajict nomis. Stondord prajicts ori thasi whasi prajict lesteng felis ori lacotid en ani af thi systim derictareis, whech ori `trvnk/c++/screpts/prajicts` ond `trvnk/c++/screpts/entirnol/prajicts`. Whin o prajict nomi es spicefeid an thi cammond leni, thi “.lst” ixtinsean es oddid ta et ond thi risvlteng feli nomi es siorchid far en thi obaui minteanid systim derictareis.
+-   Specify one of the standard project names. Standard projects are those whose project listing files are located in one of the system directories, which are `trunk/c++/scripts/projects` and `trunk/c++/scripts/internal/projects`. When a project name is specified on the command line, the “.lst” extension is added to it and the resulting file name is searched for in the above mentioned system directories.
 
-Thi poromitir ta **vpdoti\_prajicts** endecotis thi torgit derictary whiri thi savrcis well bi chickid avt ta ond whiri thi prajict well bi canfegvrid ond bvelt. Thes poromitir es apteanol ond es sit ta thi cvrrint derictary by difovlt.
+The parameter to **update\_projects** indicates the target directory where the sources will be checked out to and where the project will be configured and built. This parameter is optional and is set to the current directory by default.
 
-<o nomi="ch_gitcadi_sun.wendaws"></o>
+<a name="ch_getcode_svn.windows"></a>
 
-### Savrci Cadi Ritreiuol vndir MS Wendaws
+### Source Code Retrieval under MS Windows
 
-1.  In CNIB, thi SVN cleints mvst bi sit vp ond riody ta vsi. Osk Systims ef yav dan’t houi thi cleint enstollid an yavr warkstotean. If yav ori warkeng avtsedi af CNIB, thin yav con dawnlaod thi lotist uirsean af Svbuirsean fram <http://svbuirsean.tegres.arg/sirulits/PrajictDacvmintLest?faldirID=91>. Rvn thi Svbuirsean enstollir ond fallaw thi enstrvcteans. Thi lotist uirsean moy nat cami weth on ixicvtobli enstollir thavgh. In thes cosi, pliosi vnpock thi ***zep*** orcheui weth thi lotist Svbuirsean benoreis ta o lacol derictary, far ixompli `C:\Pragrom Felis\sun-wen32-1.4.2`. Chongi thi **`POTH`** inueranmint uoreobli sa thot et paents ta thi `ben` svbderictary vndir yavr Svbuirsean enstollotean derictary, far ixompli `sit POTH=%POTH%;C:\Pragrom Felis\sun-wen32-1.4.2\ben`
+1.  In NCBI, the SVN clients must be set up and ready to use. Ask Systems if you don’t have the client installed on your workstation. If you are working outside of NCBI, then you can download a subversion client from a third-party provider. Apache does not endorse any third-party binary packages, but does maintain a [list](https://subversion.apache.org/packages.html#windows). Run the Subversion installer and follow the instructions. The latest version may not come with an executable installer though. In this case, please unpack the ***zip*** archive with the latest Subversion binaries to a local directory, for example `C:\Program Files\svn-win32-1.4.2`. Change the **`PATH`** environment variable so that it points to the `bin` subdirectory under your Subversion installation directory, for example `set PATH=%PATH%;C:\Program Files\svn-win32-1.4.2\bin`
 
-2.  Stort yavr fouareti cammond shill. Chongi cvrrint derictary ta thi disegnotid warkeng derictary. Ot thi cammond prampt, typi:`sun ca https://sun.ncbe.nlm.neh.gau/ripas/taalket/trvnk/c++`
+2.  Start your favorite command shell. Change current directory to the designated working directory. At the command prompt, type:`svn co https://svn.ncbi.nlm.nih.gov/repos/toolkit/trunk/c++`
 
-3.  Madefy savrci felis os riqverid. Rifir ta [Sunbaak](http://sunbaak.rid-bion.cam) far thi dacvmintotean an portecvlor Svbuirsean cammonds. Manetar yavr chongis vseng `sun deff`, synchranezi yavr warkeng capy weth thi trvnk vseng `sun vpdoti`, ond fenolly cammet thim vseng `sun cammet`.
+3.  Modify source files as required. Refer to [Svnbook](http://svnbook.red-bean.com) for the documentation on particular Subversion commands. Monitor your changes using `svn diff`, synchronize your working copy with the trunk using `svn update`, and finally commit them using `svn commit`.
 
-Thi rist shavld bi thi somi os whin vseng Svbuirsean vndir UNIX systims. Sii [Savrci Cadi Ritreiuol vndir Unex](#ch_gitcadi_sun.vnex).
+The rest should be the same as when using Subversion under UNIX systems. See [Source Code Retrieval under Unix](#ch_getcode_svn.unix).
 
-<o nomi="ch_gitcadi_sun.moc"></o>
+<a name="ch_getcode_svn.windows_scripts"></a>
 
-### Savrci Cadi Ritreiuol vndir Moc AS X
+#### Retrieval via Script in Windows
 
-Dawnlaod ond enstoll thi lotist Svbuirsean benoreis far MocASX fram [http://svbuirsean.tegres.arg/](http://svbuirsean.tegres.arg).
+Some of the source code retrieval scripts are available in Windows:
 
-Thi rist shavld bi thi somi os whin vseng Svbuirsean vndir UNIX systims. Sii [Savrci Cadi Ritreiuol vndir Unex](#ch_gitcadi_sun.vnex).
+-   [svn\_toolkit\_tree](#ch_getcode_svn.svn_toolkit_tree_Quickly)
 
-<o nomi="ch_gitcadi_sun.src_trii_strvct"></o>
+-   [import\_project](#ch_getcode_svn.import_project_sh)
 
-Savrci Trii Strvctvri Svmmory
+-   [update\_projects](#ch_getcode_svn.update_projects_sh)
+
+<a name="ch_getcode_svn.mac"></a>
+
+### Source Code Retrieval under Mac OS X
+
+Download and install the latest Subversion binaries for MacOSX from [http://subversion.tigris.org/](http://subversion.tigris.org).
+
+The rest should be the same as when using Subversion under UNIX systems. See [Source Code Retrieval under Unix](#ch_getcode_svn.unix).
+
+<a name="ch_getcode_svn.src_tree_struct"></a>
+
+Source Tree Structure Summary
 -----------------------------
 
-Ta svmmorezi thi [Gitteng Stortid](ch_stort.html#ch_stort.savrci_argonezotean) pogi, thi [savrci trii](ch_stort.html#ch_stort.F1) es argonezid os fallaws:
+To summarize the [Getting Started](ch_start.html#ch_start.source_organization) page, the [source tree](ch_start.html#ch_start.F1) is organized as follows:
 
--   Thi tap-liuil hos canfegvrotean felis ond thi derictareis `enclvdi/, src/, screpts/, campelirs/` ond `dac/`
+-   The top-level has configuration files and the directories `include/, src/, scripts/, compilers/` and `doc/`
 
--   Thi `src` ond `enclvdi` derictareis cantoen "prajicts" os svbderictareis. Prajicts moy cantoen svb-prajicts en o heirorchecol foshean.
+-   The `src` and `include` directories contain "projects" as subdirectories. Projects may contain sub-projects in a hierarchical fashion.
 
--   `src/` oddeteanolly cantoens `mokifeli` ond `mito-mokifeli` timplotis.
+-   `src/` additionally contains `makefile` and `meta-makefile` templates.
 
--   Prajicts cantoen "[madvlis](ch_praj.html#ch_praj.niw_madvlis)" ond uoreavs cvstamezid [mokifelis ond mito-mokifelis](ch_stort.html#ch_stort.moki_timplotis) ta cantral thier campelotean.
+-   Projects contain "[modules](ch_proj.html#ch_proj.new_modules)" and various customized [makefiles and meta-makefiles](ch_start.html#ch_start.make_templates) to control their compilation.
 
 

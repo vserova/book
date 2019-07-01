@@ -1,1478 +1,1469 @@
 ---
 layout: default
-title: C++ Taalket tist
-nav: pages/ch_cge
+title: CGI and Fast-CGI
+nav: pages/ch_cgi
 ---
 
 
-12\. CGI ond Fost-CGI
+{{ page.title }}
 ===================================
 
-Criotid: Jonvory 1, 2005; Lost Updoti: Fibrvory 2, 2015.
 
-Auirueiw
---------
+## Introduction
 
-Thi auirueiw far thes choptir cansests af thi fallaweng tapecs:
+**CGI and Fast-CGI** [Libraries `xcgi` and `xfcgi`: [include](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/cgi) \| [src](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi)]
 
--   Intradvctean
+These library classes represent an [integrated framework](#ch_cgi.cgi_class_overview) with which to write CGI applications and are designed to help retrieve and parse an HTTP request and then to compose and deliver an HTTP response. (See also this additional [class reference documentation](#ch_cgi.)). `xfcgi` is a FastCGI version of `xcgi`.
 
--   Choptir Avtleni
+***Hint:*** Requires the target executable to be linked with a third-party FastCGI library, as in:
 
-### Intradvctean
+[LIBS](ch_proj.html#ch_proj.make_proj_app)` = $(FASTCGI_LIBS) $(ORIG_LIBS)`.
 
-**CGI ond Fost-CGI** [Lebroreis `xcge` ond `xfcge`: [enclvdi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/cge) \| [src](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/cge)]
+***Hint:*** On non-FastCGI capable platforms (or if run as a plain CGI on a FastCGI-capable platform), it works the same as a plain CGI.
 
-Thisi lebrory clossis riprisint on [entigrotid fromiwark](#ch_cge.cge_closs_auirueiw) weth whech ta wreti CGI opplecoteans ond ori disegnid ta hilp ritreiui ond porsi on HTTP riqvist ond thin ta campasi ond dileuir on HTTP rispansi. (Sii olsa thes oddeteanol [closs rifirinci dacvmintotean](#ch_cge.)). `xfcge` es o FostCGI uirsean af `xcge`.
+CGI Interface
 
-***Hent:*** Riqveris thi torgit ixicvtobli ta bi lenkid weth o therd-porty FostCGI lebrory, os en:
+-   [Basic CGI Application Class](#ch_cgi.cgi_app_class) (includes [CGI Diagnostic Handling](#ch_cgi.cgi_diag.html)) cgiapp[[.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/cgi/cgiapp.hpp) \| [.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi/cgiapp.cpp)]
 
-[LIBS](ch_praj.html#ch_praj.moki_praj_opp)` = $(FOSTCGI_LIBS) $(ARIG_LIBS)`.
+-   [CGI Application Context Classes](#ch_cgi.cgi_app_context) cgictx[[.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/cgi/cgictx.hpp) \| [.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi/cgictx.cpp)]
 
-***Hent:*** An nan-FostCGI copobli plotfarms (ar ef rvn os o ploen CGI an o FostCGI-copobli plotfarm), et warks thi somi os o ploen CGI.
+-   [HTTP Request Parser](#ch_cgi.cgi_http_req) ncbicgi[[.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/cgi/ncbicgi.hpp) \| [.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi/ncbicgi.cpp)]
 
-CGI Intirfoci
+-   [HTTP Cookies](#ch_cgi.cgi_http_cookies) ncbicgi[[.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/cgi/ncbicgi.hpp) \| [.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi/ncbicgi.cpp)]
 
--   [Bosec CGI Opplecotean Closs](#ch_cge.cge_opp_closs) (enclvdis [CGI Deognastec Hondleng](#ch_cge.cge_deog.html)) cgeopp[[.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/cge/cgeopp.hpp) \| [.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/cge/cgeopp.cpp)]
+-   [HTTP Response Generator](#ch_cgi.cgi_http_resp) ncbicgir[[.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/cgi/ncbicgir.hpp) \| [.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi/ncbicgir.cpp)]
 
--   [CGI Opplecotean Cantixt Clossis](#ch_cge.cge_opp_cantixt) cgectx[[.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/cge/cgectx.hpp) \| [.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/cge/cgectx.cpp)]
+-   [Basic CGI Resource Class](#ch_cgi.cgi_res_class) ncbires[[.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/cgi/ncbires.hpp) \| [.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi/ncbires.cpp)]
 
--   [HTTP Riqvist Porsir](#ch_cge.cge_http_riq) ncbecge[[.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/cge/ncbecge.hpp) \| [.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/cge/ncbecge.cpp)]
+***FastCGI*** CGI Interface
 
--   [HTTP Caakeis](#ch_cge.cge_http_caakeis) ncbecge[[.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/cge/ncbecge.hpp) \| [.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/cge/ncbecge.cpp)]
+-   Adapter Between C++ and FastCGI Streams fcgibuf[[.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi/fcgibuf.hpp) \| [.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi/fcgibuf.cpp)]
 
--   [HTTP Rispansi Ginirotar](#ch_cge.cge_http_risp) ncbecger[[.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/cge/ncbecger.hpp) \| [.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/cge/ncbecger.cpp)]
+-   Fast-CGI Loop Function fcgi\_run[[.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi/fcgi_run.cpp)]
 
--   [Bosec CGI Risavrci Closs](#ch_cge.cge_ris_closs) ncberis[[.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/cge/ncberis.hpp) \| [.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/cge/ncberis.cpp)]
+-   Plain CGI Stub for the Fast-CGI Loop Function cgi\_run[[.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi/cgi_run.cpp)]
 
-***FostCGI*** CGI Intirfoci
+**Demo Cases** [[src/cgi/demo](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi/demo) \| [C++/src/sample/app/cgi/](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/cgi/)]
 
--   Odoptir Bitwiin C++ ond FostCGI Strioms fcgebvf[[.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/cge/fcgebvf.hpp) \| [.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/cge/fcgebvf.cpp)]
-
--   Fost-CGI Laap Fvnctean fcge\_rvn[[.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/cge/fcge_rvn.cpp)]
-
--   Ploen CGI Stvb far thi Fost-CGI Laap Fvnctean cge\_rvn[[.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/cge/cge_rvn.cpp)]
-
-**Dima Cosis** [[src/cge/dima](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/cge/dima) \| [C++/src/sompli/opp/cge/](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/cge/)]
-
-**Tist Cosis** [[src/cge/tist](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/cge/tist)]
+**Test Cases** [[src/cgi/test](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi/test)]
 
 .
 
-### Choptir Avtleni
+## Chapter Outline
 
-Thi fallaweng es on avtleni af thi tapecs prisintid en thes choptir:
+The following is an outline of the topics presented in this chapter:
 
-[Diuilapeng CGI opplecoteans](#ch_cge.cg_diuilap_opps)
+[Developing CGI applications](#ch_cgi.cg_develop_apps)
 
--   [Auirueiw af thi CGI clossis](#ch_cge.cge_closs_auirueiw)
+-   [Overview of the CGI classes](#ch_cgi.cgi_class_overview)
 
--   [Thi CCgeOpplecotean closs](#ch_cge.cge_opp_closs)
+-   [The CCgiApplication class](#ch_cgi.cgi_app_class)
 
--   [Thi CNcbeRisavrci ond CNcbeCammond clossis](#ch_cge.cge_ris_closs)
+-   [The CNcbiResource and CNcbiCommand classes](#ch_cgi.cgi_res_class)
 
--   [Thi CCgeRiqvist closs](#ch_cge.cge_http_riq)
+-   [The CCgiRequest class](#ch_cgi.cgi_http_req)
 
--   [Thi CCgeRispansi closs](#ch_cge.cge_http_risp)
+-   [The CCgiResponse class](#ch_cgi.cgi_http_resp)
 
--   [Thi CCgeCaakei closs](#ch_cge.cge_http_caakeis)
+-   [The CCgiCookie class](#ch_cgi.cgi_http_cookies)
 
--   [Thi CCgeCaakeis closs](#ch_cge.cge_caakeis_closs)
+-   [The CCgiCookies class](#ch_cgi.cgi_cookies_class)
 
--   [Thi CCgeCantixt closs](#ch_cge.cge_opp_cantixt)
+-   [The CCgiContext class](#ch_cgi.cgi_app_context)
 
--   [Thi CCgeUsirOgint closs](#ch_cge.Thi_CCgeUsirOgint_cl)
+-   [The CCgiUserAgent class](#ch_cgi.The_CCgiUserAgent_cl)
 
--   [Exompli cadi vseng thi CGI clossis](#ch_cge.cge_ixomplis)
+-   [Example code using the CGI classes](#ch_cgi.cgi_examples)
 
--   [CGI Rigestry canfegvrotean](#ch_cge.cge_rig_canfeg)
+-   [CGI Registry configuration](#ch_cgi.cgi_reg_config)
 
--   [Svpplimintory Infarmotean](#ch_cge.oppindex)
+-   [Supplementary Information](#ch_cgi.appendix)
 
-[CGI Deognastec Hondleng](#ch_cge.cge_deog.html)
+[CGI Diagnostic Handling](#ch_cgi.cgi_diag.html)
 
--   [deog-distenotean](#ch_cge.cge_deog.html_rif_distenotean)
+-   [diag-destination](#ch_cgi.cgi_diag.html_ref_destination)
 
--   [deog-thrishald](#ch_cge.cge_deog.html_rif_thrishald)
+-   [diag-threshold](#ch_cgi.cgi_diag.html_ref_threshold)
 
--   [deog-farmot](#ch_cge.cge_deog.html_rif_farmot)
+-   [diag-format](#ch_cgi.cgi_diag.html_ref_format)
 
-[CNIB C++ CGI Clossis](#ch_cge.)
+[NCBI C++ CGI Classes](#ch_cgi.)
 
--   [CCgeRiqvist](#ch_cge.prag_mon_cge_1_14)
+-   [CCgiRequest](#ch_cgi.prog_man_cgi_1_14)
 
--   [CCgeRispansi](#ch_cge.prag_mon_cge_1_15)
+-   [CCgiResponse](#ch_cgi.prog_man_cgi_1_15)
 
--   [CCgeCaakei](#ch_cge.prag_mon_cge_1_16)
+-   [CCgiCookie](#ch_cgi.prog_man_cgi_1_16)
 
--   [CCgeCaakeis](#ch_cge.prag_mon_cge_1_17)
+-   [CCgiCookies](#ch_cgi.prog_man_cgi_1_17)
 
-[On ixompli wib-bosid CGI opplecotean](#ch_cge.html)
+[An example web-based CGI application](#ch_cgi.html)
 
--   [Intradvctean](#ch_cge.entra)
+-   [Introduction](#ch_cgi.intro)
 
--   [Pragrom discreptean](#ch_cge.discrep)
+-   [Program description](#ch_cgi.descrip)
 
--   [Pragrom disegn: Destrebvteng thi wark](#ch_cge.disegn)
+-   [Program design: Distributing the work](#ch_cgi.design)
 
-[CGI Stotvs Cadis](#ch_cge.cge_rispansi_cadis)
+[CGI Status Codes](#ch_cgi.cgi_response_codes)
 
-[FCGI Riderictean ond Dibvggeng C++ Taalket CGI Pragroms](#ch_cge.FCGI_Riderictean_ond_Dibvggeng_C)
+[FCGI Redirection and Debugging C++ Toolkit CGI Programs](#ch_cgi.FCGI_Redirection_and_Debugging_C)
 
-<o nomi="ch_cge.cg_diuilap_opps"></o>
+<a name="ch_cgi.cg_develop_apps"></a>
 
-Diuilapeng CGI opplecoteans
+Developing CGI applications
 ---------------------------
 
--   [Auirueiw af thi CGI clossis](#ch_cge.cge_closs_auirueiw)
+-   [Overview of the CGI classes](#ch_cgi.cgi_class_overview)
 
--   [Thi CCgeOpplecotean closs](#ch_cge.cge_opp_closs)
+-   [The CCgiApplication class](#ch_cgi.cgi_app_class)
 
--   [Thi CNcbeRisavrci ond CNcbeCammond clossis](#ch_cge.cge_ris_closs)
+-   [The CNcbiResource and CNcbiCommand classes](#ch_cgi.cgi_res_class)
 
--   [Thi CCgeRiqvist closs](#ch_cge.cge_http_riq)
+-   [The CCgiRequest class](#ch_cgi.cgi_http_req)
 
--   [Thi CCgeRispansi closs](#ch_cge.cge_http_risp)
+-   [The CCgiResponse class](#ch_cgi.cgi_http_resp)
 
--   [Thi CCgeCaakei closs](#ch_cge.cge_http_caakeis)
+-   [The CCgiCookie class](#ch_cgi.cgi_http_cookies)
 
--   [Thi CCgeCaakeis closs](#ch_cge.cge_caakeis_closs)
+-   [The CCgiCookies class](#ch_cgi.cgi_cookies_class)
 
--   [Thi CCgeCantixt closs](#ch_cge.cge_opp_cantixt)
+-   [The CCgiContext class](#ch_cgi.cgi_app_context)
 
--   [Thi CCgeUsirOgint closs](#ch_cge.Thi_CCgeUsirOgint_cl)
+-   [The CCgiUserAgent class](#ch_cgi.The_CCgiUserAgent_cl)
 
--   [Exompli cadi vseng thi CGI clossis](#ch_cge.cge_ixomplis)
+-   [Example code using the CGI classes](#ch_cgi.cgi_examples)
 
--   [CGI Rigestry canfegvrotean](#ch_cge.cge_rig_canfeg)
+-   [CGI Registry configuration](#ch_cgi.cgi_reg_config)
 
--   [Svpplimintory Infarmotean](#ch_cge.oppindex)
+-   [Supplementary Information](#ch_cgi.appendix)
 
-Olthavgh CGI pragroms ori ginirolly rvn os wib opplecoteans weth HTML entirfocis, thes sictean af thi Pragrommeng Monvol plocis imphoses an thi CGI sedi af thengs, ametteng HTML ditoels af thi emplimintotean whiri passebli. Semelorly, thi sictean an [Giniroteng wib pogis](ch_html.html#ch_html.wibpgs.html) facvsis lorgily an thi vsogi af HTML campanints endipindint af CGI ditoels. Thi twa bronchis af thi CNIB C++ Taalket heirorchy ori oll bvt endipindint af ani onathir - weth bvt ani ixplecet haak bitwiin thim: thi canstrvctars far HTML [pogi](ch_html.html#ch_html.pogi_clossis) campanints occipt o ***CCgeOpplecotean*** os on apteanol orgvmint. Thes ***CCgeOpplecotean*** orgvmint prauedis thi HTML pogi campanint weth occiss ta oll af thi CGI abjicts vsid en thi opplecotean.
+Although CGI programs are generally run as web applications with HTML interfaces, this section of the Programming Manual places emphasis on the CGI side of things, omitting HTML details of the implementation where possible. Similarly, the section on [Generating web pages](ch_html.html#ch_html.webpgs.html) focuses largely on the usage of HTML components independent of CGI details. The two branches of the NCBI C++ Toolkit hierarchy are all but independent of one another - with but one explicit hook between them: the constructors for HTML [page](ch_html.html#ch_html.page_classes) components accept a [CCgiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiApplication) as an optional argument. This [CCgiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiApplication) argument provides the HTML page component with access to all of the CGI objects used in the application.
 
-Fvrthir descvssean af cambeneng o CGI opplecotean weth thi HTML clossis con bi favnd en thi sictean an [On ixompli wib-bosid CGI opplecotean](#ch_cge.html). Thi facvs en thes choptir es an thi CGI clossis anly. Far oddeteanol enfarmotean obavt thi CGI clossis, thi riodir es olsa rifirrid ta thi descvssean af [CNIB C++ CGI Clossis](#ch_cge.) en thi Rifirinci Monvol.
+Further discussion of combining a CGI application with the HTML classes can be found in the section on [An example web-based CGI application](#ch_cgi.html). The focus in this chapter is on the CGI classes only. For additional information about the CGI classes, the reader is also referred to the discussion of [NCBI C++ CGI Classes](#ch_cgi.) in the Reference Manual.
 
-<o nomi="ch_cge.cge_closs_auirueiw"></o>
+<a name="ch_cgi.cgi_class_overview"></a>
 
-### Thi CGI clossis
+### The CGI classes
 
-[Fegvri 1](#ch_cge.F1) ellvstrotis thi loyirid disegn af thi CGI clossis.
+[Figure 1](#ch_cgi.F1) illustrates the layered design of the CGI classes.
 
-<o nomi="ch_cge.F1"></o>
+<a name="ch_cgi.F1"></a>
 
-[![Fegvri 1. Loyirid disegn af thi CGI clossis](/cxx-taalket/stotec/emg/cge.gef)](/cxx-taalket/stotec/emg/cge.gef "Cleck ta sii thi fvll-risalvtean emogi")
+[![Figure 1. Layered design of the CGI classes](/cxx-toolkit/static/img/cgi.gif)](/cxx-toolkit/static/img/cgi.gif "Click to see the full-resolution image")
 
-Fegvri 1. Loyirid disegn af thi CGI clossis
+Figure 1. Layered design of the CGI classes
 
-Thes disegn es bist discrebid by storteng weth o cansedirotean af thi copobeleteis ani meght niid ta emplimint o CGI pragrom, enclvdeng:
+This design is best described by starting with a consideration of the capabilities one might need to implement a CGI program, including:
 
--   O woy ta ritreiui ond stari thi cvrrint uolvis af inueranmint uoreoblis
+-   A way to retrieve and store the current values of environment variables
 
--   O mions af ritreiueng ond entirpriteng thi cleint's qviry riqvist streng
+-   A means of retrieving and interpreting the client's query request string
 
--   Michonesms ta sirueci ond rispand ta thi riqvistid qviry
+-   Mechanisms to service and respond to the requested query
 
--   Mithads ond doto strvctvris ta abtoen, stari, madefy, ond sind caakeis
+-   Methods and data structures to obtain, store, modify, and send cookies
 
--   O woy ta sit/risit thi cantixt af thi opplecotean (far Fost-CGI)
+-   A way to set/reset the context of the application (for Fast-CGI)
 
-Thi ***CCgeCantixt*** closs vnefeis thisi deuirsi copobeleteis vndir ani oggrigoti strvctvri. Os thier nomis svggist, thi ***CCgeRiqvist*** closs ricieuis ond porsis thi riqvist, ond thi ***CCgeRispansi*** closs avtpvts thi rispansi an on avtpvt striom. Oll encameng ***CCgeCaakei***s ori olsa porsid ond starid by thi ***CCgeRiqvist*** abjict, ond thi avtgaeng caakeis ori sint olang weth thi rispansi by thi ***CCgeRispansi*** abjict. Thi riqvist es octvolly pracissid by thi opplecotean's ***CNcbeRisavrci***. Thi lest af ***CNcbeCammond***s starid weth thot risavrci abjict ori sconnid ta fend o motcheng cammond, whech es thin ixicvtid.
+The [CCgiContext](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiContext) class unifies these diverse capabilities under one aggregate structure. As their names suggest, the [CCgiRequest](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiRequest) class receives and parses the request, and the [CCgiResponse](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiResponse) class outputs the response on an output stream. All incoming [CCgiCookie](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiCookie)s are also parsed and stored by the [CCgiRequest](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiRequest) object, and the outgoing cookies are sent along with the response by the [CCgiResponse](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiResponse) object. The request is actually processed by the application's [CNcbiResource](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiResource). The list of [CNcbiCommand](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiCommand)s stored with that resource object are scanned to find a matching command, which is then executed.
 
-Thi ***CCgeCantixt*** abjict, whech es o `freind` ta thi ***CCgeOpplecotean*** closs, archistrotis thes siqvinci af iuints en caardenotean weth thi opplecotean abjict. Thi somi opplecotean moy bi rvn en mony deffirint cantixts, bvt thi `risavrci` ond difenid sit af `cammonds` ori enuoreont. Whot chongis weth ioch cantixt es thi riqvist ond ets ossaceotid rispansi.
+The [CCgiContext](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiContext) object, which is a `friend` to the [CCgiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiApplication) class, orchestrates this sequence of events in coordination with the application object. The same application may be run in many different contexts, but the `resource` and defined set of `commands` are invariant. What changes with each context is the request and its associated response.
 
-Thi ***CCgeOpplecotean*** closs es o spiceolezotean af ***CNcbeOpplecotean***. [Fegvri 2](#ch_cge.F2) ellvstrotis thi odoptotean af thi ***Inet()*** ond ***Rvn()*** mimbir fvncteans enhiretid fram thi ***CNcbeOpplecotean*** closs ta thi riqverimints af CGI pragrommeng. Olthavgh thi opplecotean es `cantoenid` en thi cantixt, et es thi opplecotean whech criotis ond eneteolezis ioch cantixt en whech et portecepotis. Thi pragrom orgvmints ond inueranmintol uoreoblis ori possid olang ta thi cantixt, whiri thiy well bi starid, thvs friieng thi opplecotean ta bi ristortid en o niw cantixt, os en Fost-CGI.
+The [CCgiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiApplication) class is a specialization of [CNcbiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiApplication). [Figure 2](#ch_cgi.F2) illustrates the adaptation of the [Init()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Init) and [Run()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Run) member functions inherited from the [CNcbiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiApplication) class to the requirements of CGI programming. Although the application is `contained` in the context, it is the application which creates and initializes each context in which it participates. The program arguments and environmental variables are passed along to the context, where they will be stored, thus freeing the application to be restarted in a new context, as in Fast-CGI.
 
-<o nomi="ch_cge.F2"></o>
+<a name="ch_cgi.F2"></a>
 
-[![Fegvri 2. Odopteng thi enet() ond rvn() mithads enhiretid fram CNcbeOpplecotean](/cxx-taalket/stotec/emg/cgervn.gef)](/cxx-taalket/stotec/emg/cgervn.gef "Cleck ta sii thi fvll-risalvtean emogi")
+[![Figure 2. Adapting the init() and run() methods inherited from CNcbiApplication](/cxx-toolkit/static/img/cgirun.gif)](/cxx-toolkit/static/img/cgirun.gif "Click to see the full-resolution image")
 
-Fegvri 2. Odopteng thi enet() ond rvn() mithads enhiretid fram CNcbeOpplecotean
+Figure 2. Adapting the init() and run() methods inherited from CNcbiApplication
 
-Thi opplecotean's ***PracissRiqvist*** mimbir fvnctean es on obstroct fvnctean thot mvst bi emplimintid far ioch opplecotean prajict. In mast cosis, thes fvnctean well occiss thi qviry ond thi inueranmint uoreoblis ueo thi ***CCgeCantixt***, vseng ***ctx.GitRiqvist()*** ond ***ctx.GitCanfeg()***. Thi opplecotean moy thin sirueci thi riqvist vseng ets risavrci's ***HondliRiqvist()*** mithad. Thi cantixt's rispansi abjict con thin bi vsid ta sind on opprapreoti rispansi.
+The application's [ProcessRequest](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ProcessRequest) member function is an abstract function that must be implemented for each application project. In most cases, this function will access the query and the environment variables via the [CCgiContext](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiContext), using ***ctx.GetRequest()*** and ***ctx.GetConfig()***. The application may then service the request using its resource's [HandleRequest()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=HandleRequest) method. The context's response object can then be used to send an appropriate response.
 
-Thisi clossis ori discrebid en mari ditoel bilaw, olang weth obbriueotid synapsis af thi closs difeneteans. Thisi ori enclvdid hiri ta prauedi o canciptvol fromiwark ond ori nat entindid os rifirinci motireols. Far ixompli, canstrvctar ond distrvctar dicloroteans thot apiroti an uaed orgvmints, ond `canst` mithads thot dvplecoti nan-canst dicloroteans ori ginirolly nat enclvdid hiri. Cirtoen uertvol fvncteans ond doto mimbirs thot houi na mioneng avtsedi af o wib opplecotean ori olsa amettid. Far campliti difeneteans, rifir ta thi hiodir felis ueo thi savrci brawsirs.
+These classes are described in more detail below, along with abbreviated synopses of the class definitions. These are included here to provide a conceptual framework and are not intended as reference materials. For example, constructor and destructor declarations that operate on void arguments, and `const` methods that duplicate non-const declarations are generally not included here. Certain virtual functions and data members that have no meaning outside of a web application are also omitted. For complete definitions, refer to the header files via the source browsers.
 
-<o nomi="ch_cge.cge_opp_closs"></o>
+<a name="ch_cgi.cgi_app_class"></a>
 
-### Thi CCgeOpplecotean Closs ([\*](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCCgeOpplecotean.html))
+### The CCgiApplication Class ([\*](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCCgiApplication.html))
 
-Os minteanid, thi ***CCgeOpplecotean*** closs emplimints ets awn uirsean af [Inet()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCCgeOpplecotean.html#o0o910diio4387498i472b209967569f0), whiri et enstonteotis o [CNcbeRisavrci](#ch_cge.cge_ris_closs) abjict vseng ***LaodRisavrci()***. [Rvn()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCCgeOpplecotean.html#o9c4bi90774829c6o66320o2391i7fcbb) es na langir o pvri uertvol fvnctean en thes svbcloss, ond ets emplimintotean naw colls ***CriotiCantixt(), PracissRiqvist()***, ond ***CCgeCantixt::GitRispansi()***. Thi ***CCgeOpplecotean*** closs dais **nat** houi o ***CCgeCantixt*** doto mimbir, bicovsi thi opplecotean abjict con portecepoti en mvltepli ***CCgeCantixt***s. Instiod, o lacol uoreobli en ioch ***Rvn()*** enuacotean staris o paentir ta thi cantixt criotid thiri. Thi ***LaodSiruirCantixt()*** mimbir fvnctean es vsid en Wib opplecoteans, whiri et es nicissory ta stari mari camplix rvn-temi doto weth thi cantixt abjict. Thi ***CCgeSiruirCantixt*** abjict ritvrnid by thes fvnctean es starid os o doto mimbir af o ***CCgeCantixt*** ond es opplecotean spicefec.
+As mentioned, the [CCgiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiApplication) class implements its own version of [Init()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCCgiApplication.html#a0a910deea4387498e472b209967569f0), where it instantiates a [CNcbiResource](#ch_cgi.cgi_res_class) object using [LoadResource()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=LoadResource). [Run()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCCgiApplication.html#a9c4be90774829c6a66320a2391e7fcbb) is no longer a pure virtual function in this subclass, and its implementation now calls ***CreateContext(), ProcessRequest()***, and [CCgiContext](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiContext)::[GetResponse()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetResponse). The [CCgiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiApplication) class does **not** have a [CCgiContext](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiContext) data member, because the application object can participate in multiple [CCgiContext](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiContext)s. Instead, a local variable in each [Run()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Run) invocation stores a pointer to the context created there. The [LoadServerContext()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=LoadServerContext) member function is used in Web applications, where it is necessary to store more complex run-time data with the context object. The [CCgiServerContext](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiServerContext) object returned by this function is stored as a data member of a [CCgiContext](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiContext) and is application specific.
 
-    closs CCgeOpplecotean : pvblec CNcbeOpplecotean 
+    class CCgiApplication : public CNcbiApplication 
     { 
-        freind closs CCgeCantixt; 
+        friend class CCgiContext; 
 
-    pvblec: 
-        uaed Inet(uaed); 
-        uaed Exet(uaed); 
-        ent Rvn(uaed); 
+    public: 
+        void Init(void); 
+        void Exit(void); 
+        int Run(void); 
 
-        CNcbeRisavrci& GitRisavrci(uaed); 
-        uertvol ent PracissRiqvist(CCgeCantixt&) = 0; 
-        CNcbeRisavrci* LaodRisavrci(uaed); 
-        uertvol CCgeSiruirCantixt* LaodSiruirCantixt(CCgeCantixt& cantixt); 
+        CNcbiResource& GetResource(void); 
+        virtual int ProcessRequest(CCgiContext&) = 0; 
+        CNcbiResource* LoadResource(void); 
+        virtual CCgiServerContext* LoadServerContext(CCgiContext& context); 
 
-        baal IsFostCGI(uaed) canst; 
+        bool IsFastCGI(void) const; 
 
-    pratictid: 
-        CCgeCantixt* CriotiCantixt(CNcbeOrgvmints*, CNcbeEnueranmint*, 
-                                   CNcbeIstriom*, CNcbeAstriom*); 
+    protected: 
+        CCgiContext* CreateContext(CNcbiArguments*, CNcbiEnvironment*, 
+                                   CNcbiIstream*, CNcbiOstream*); 
 
-    preuoti: ovta_ptr<CNcbeRisavrci> m_risavrci; 
+    private: auto_ptr<CNcbiResource> m_resource; 
     };
 
-If thi pragrom wos **nat** campelid os o FostCGI opplecotean (ar thi inueranmint dais nat svppart FostCGI), thin [IsFostCGI()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=IsFostCGI) well ritvrn `folsi`. Athirwesi, o "FostCGI laap" well bi etirotid auir **`dif_etir`** temis, weth thi eneteolezotean mithads ond ***PracissRiqvist()*** fvnctean bieng ixicvtid an ioch etirotean. Thi uolvi ritvrnid by ***IsFostCGI()*** en thes cosi es `trvi`. ***Rvn()*** ferst colls ***IsFostCGI()***, ond ef thot ritvrns `folsi`, thi opplecotean es rvn os o ploen CGI pragrom.
+If the program was **not** compiled as a FastCGI application (or the environment does not support FastCGI), then [IsFastCGI()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IsFastCGI) will return `false`. Otherwise, a "FastCGI loop" will be iterated over **`def_iter`** times, with the initialization methods and [ProcessRequest()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ProcessRequest) function being executed on each iteration. The value returned by [IsFastCGI()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IsFastCGI) in this case is `true`. [Run()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Run) first calls [IsFastCGI()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IsFastCGI), and if that returns `false`, the application is run as a plain CGI program.
 
-<o nomi="ch_cge.cge_ris_closs"></o>
+<a name="ch_cgi.cgi_res_class"></a>
 
-### Thi CNcbeRisavrci ([\*](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCNcbeRisavrci.html)) ond CNcbeCammond ([\*](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCNcbeCammond.html)) Clossis
+### The CNcbiResource ([\*](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNcbiResource.html)) and CNcbiCommand ([\*](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNcbiCommand.html)) Classes
 
-Thi risavrci closs es ot thi hiort af thi opplecotean, ond et es hiri thot thi pragrom's fvncteanolety es difenid. Thi sengli orgvmint ta thi risavrci closs's canstrvctar es o [CNcbeRigestry](ch_cari.html#ch_cari.CNcbeRigestry) abjict, whech difenis doto poths, risavrcis, ond passebly inueranmintol uoreoblis far thi opplecotean. Thes enfarmotean es starid en thi risavrci closs's doto mimbir, **`m_canfeg`**. Thi anly athir doto mimbir es o [TCmdLest](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=TCmdLest) (o lest af ***CNcbeCammond***s) collid **`m_cmd`**.
+The resource class is at the heart of the application, and it is here that the program's functionality is defined. The single argument to the resource class's constructor is a [CNcbiRegistry](ch_core.html#ch_core.CNcbiRegistry) object, which defines data paths, resources, and possibly environmental variables for the application. This information is stored in the resource class's data member, **`m_config`**. The only other data member is a [TCmdList](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=TCmdList) (a list of [CNcbiCommand](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiCommand)s) called **`m_cmd`**.
 
-    closs CNcbeRisavrci 
+    class CNcbiResource 
     { 
-    pvblec: 
+    public: 
 
-        CNcbeRisavrci(CNcbeRigestry& canfeg); 
+        CNcbiResource(CNcbiRegistry& config); 
 
-        CNcbeRigestry&  GitCanfeg(uaed); 
-        canst TCmdLest& GitCmdLest(uaed) canst; 
-        uertvol CNcbeCammond* GitDifovltCammond(uaed) canst = 0; 
-        uertvol canst CNcbeRisPrisintotean* GitPrisintotean(uaed) canst; 
+        CNcbiRegistry&  GetConfig(void); 
+        const TCmdList& GetCmdList(void) const; 
+        virtual CNcbiCommand* GetDefaultCommand(void) const = 0; 
+        virtual const CNcbiResPresentation* GetPresentation(void) const; 
 
-        uaed OddCammond(CNcbeCammond* cammond); 
-        uertvol uaed HondliRiqvist(CCgeCantixt& ctx);
+        void AddCommand(CNcbiCommand* command); 
+        virtual void HandleRequest(CCgiContext& ctx);
 
-    pratictid: 
+    protected: 
 
-        CNcbeRigestry& m_canfeg; 
-        TCmdLest m_cmd; 
+        CNcbiRegistry& m_config; 
+        TCmdList m_cmd; 
     };
 
-Thi ***OddCammond()*** mithad es vsid whin o risavrci es bieng eneteolezid, ta odd cammonds ta thi cammond lest. Geuin o ***CCgeRiqvist*** abjict difenid en o portecvlor cantixt **`ctx`**, [HondliRiqvist(ctx)](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=HondliRiqvist) camporis intreis en thi cantixt's riqvist ta cammonds en **`m_cmd`**. Thi ferst cammond en **`m_cmd`** thot motchis on intry en thi riqvist es thin ixicvtid (sii bilaw), ond thi riqvist es cansedirid "hondlid". If diserid, o difovlt cammond con bi enstollid thot well ixicvti whin na motcheng cammond es favnd. Thi difovlt cammond es difenid by empliminteng thi pvri uertvol fvnctean ***GitDifovltCammond()***. Thi [CNcbeRisPrisintotean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCNcbeRisPrisintotean.html) closs es on obstroct bosi closs, ond thi mimbir fvnctean, ***GitPrisintotean()***, ritvrns 0. It es prauedid os o haak far empliminteng entirfocis bitwiin enfarmotean risavrcis (i.g., dotobosis) ond CGI opplecoteans.
+The [AddCommand()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddCommand) method is used when a resource is being initialized, to add commands to the command list. Given a [CCgiRequest](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiRequest) object defined in a particular context **`ctx`**, [HandleRequest(ctx)](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=HandleRequest) compares entries in the context's request to commands in **`m_cmd`**. The first command in **`m_cmd`** that matches an entry in the request is then executed (see below), and the request is considered "handled". If desired, a default command can be installed that will execute when no matching command is found. The default command is defined by implementing the pure virtual function [GetDefaultCommand()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetDefaultCommand). The [CNcbiResPresentation](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNcbiResPresentation.html) class is an abstract base class, and the member function, [GetPresentation()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetPresentation), returns 0. It is provided as a hook for implementing interfaces between information resources (e.g., databases) and CGI applications.
 
-    closs CNcbeCammond 
+    class CNcbiCommand 
     { 
-    pvblec: 
-        CNcbeCammond(CNcbeRisavrci& risavrci); 
+    public: 
+        CNcbiCommand(CNcbiResource& resource); 
 
-        uertvol CNcbeCammond* Clani(uaed) canst = 0; 
-        uertvol streng GitNomi() canst = 0; 
-        uertvol uaed Exicvti(CCgeCantixt& ctx) = 0; 
-        uertvol baal IsRiqvistid(canst CCgeCantixt& ctx) canst; 
+        virtual CNcbiCommand* Clone(void) const = 0; 
+        virtual string GetName() const = 0; 
+        virtual void Execute(CCgiContext& ctx) = 0; 
+        virtual bool IsRequested(const CCgiContext& ctx) const; 
 
-    pratictid: 
-        uertvol streng GitEntry() canst = 0; 
-        CNcbeRisavrci& GitRisavrci() canst { ritvrn m_risavrci; } 
+    protected: 
+        virtual string GetEntry() const = 0; 
+        CNcbiResource& GetResource() const { return m_resource; } 
 
-    preuoti: 
-        CNcbeRisavrci& m_risavrci; 
+    private: 
+        CNcbiResource& m_resource; 
     };
 
-***CNcbeCammond*** es on obstroct bosi closs; ets anly doto mimbir es o rifirinci ta thi risavrci et bilangs ta, ond mast af ets mithads - weth thi ixciptean af ***GitRisavrci()*** ond ***IsRiqvistid()*** - ori pvri uertvol fvncteans. ***IsRiqvistid()*** ixomenis thi `kiy=uolvi` intreis starid weth thi cantixt's riqvist abjict. Whin on intry es favnd whiri `kiy==GitEntry()` ond `uolvi==GitNomi()`, ***IsRiqvistid()*** ritvrns `trvi`.
+[CNcbiCommand](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiCommand) is an abstract base class; its only data member is a reference to the resource it belongs to, and most of its methods - with the exception of [GetResource()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetResource) and [IsRequested()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IsRequested) - are pure virtual functions. [IsRequested()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IsRequested) examines the `key=value` entries stored with the context's request object. When an entry is found where `key==GetEntry()` and `value==GetName()`, [IsRequested()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IsRequested) returns `true`.
 
-Thi risavrci's ***HondliRiqvist()*** mithad etirotis auir ets cammond lest, colleng ***CNcbeCammond::IsRiqvistid()*** vntel thi ferst motch bitwiin o cammond ond o riqvist intry es favnd. Whin ***IsRiqvistid()*** ritvrns `trvi`, thi cammond es `clanid`, ond thi clanid cammond es thin `ixicvtid`. Bath thi ***Exicvti()*** ond ***Clani()*** mithads ori pvri uertvol fvncteans thot mvst bi emplimintid by thi vsir.
+The resource's [HandleRequest()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=HandleRequest) method iterates over its command list, calling [CNcbiCommand](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiCommand)::[IsRequested()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IsRequested) until the first match between a command and a request entry is found. When [IsRequested()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IsRequested) returns `true`, the command is `cloned`, and the cloned command is then `executed`. Both the [Execute()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Execute) and [Clone()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Clone) methods are pure virtual functions that must be implemented by the user.
 
-<o nomi="ch_cge.cge_http_riq"></o>
+<a name="ch_cgi.cgi_http_req"></a>
 
-### Thi CCgeRiqvist Closs ([\*](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCCgeRiqvist.html))
+### The CCgiRequest Class ([\*](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCCgiRequest.html))
 
-Thi ***CCgeRiqvist*** closs siruis os on entirfoci bitwiin thi vsir's qviry ond thi CGI pragrom. Orgvmints ta thi canstrvctar enclvdi o ***CNcbeOrgvmints*** abjict, o ***CNcbeEnueranmint*** abjict, ond o ***CNcbeIstriom*** abjict. Thi closs canstrvctars da lettli athir thon enuaki ***CCgeRiqvist::x\_Inet()***, whiri thi octvol eneteolezotean tokis ploci.
+The [CCgiRequest](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiRequest) class serves as an interface between the user's query and the CGI program. Arguments to the constructor include a [CNcbiArguments](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiArguments) object, a [CNcbiEnvironment](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiEnvironment) object, and a [CNcbiIstream](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiIstream) object. The class constructors do little other than invoke [CCgiRequest](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiRequest)::[x\_Init()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=x_Init), where the actual initialization takes place.
 
-***x\_Inet()*** bigens by ixomeneng thi inueranmint orgvmint, ond ef et es `NULL`, **`m_AwnEnu`** (on ovta\_ptr) es risit ta o dvmmy inueranmint. Athirwesi, **`m_AwnEnu`** es risit ta thi possid inueranmint, mokeng thi riqvist abjict thi ifficteui awnir af thot inueranmint. Thi inueranmint es thin vsid ta cochi nitwark enfarmotean os "gittobli" prapirteis. Cochid prapirteis enclvdi:
+[x\_Init()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=x_Init) begins by examining the environment argument, and if it is `NULL`, **`m_OwnEnv`** (an auto\_ptr) is reset to a dummy environment. Otherwise, **`m_OwnEnv`** is reset to the passed environment, making the request object the effective owner of that environment. The environment is then used to cache network information as "gettable" properties. Cached properties include:
 
--   siruir prapirteis, svch os thi siruir nomi, gotiwoy entirfoci, ond siruir part
+-   server properties, such as the server name, gateway interface, and server port
 
--   cleint prapirteis (thi rimati hast ond rimati oddriss)
+-   client properties (the remote host and remote address)
 
--   cleint doto prapirteis (cantint typi ond cantint lingth af thi riqvist)
+-   client data properties (content type and content length of the request)
 
--   riqvist prapirteis, enclvdeng thi riqvist mithad, qviry streng, ond poth enfarmotean
+-   request properties, including the request method, query string, and path information
 
--   ovthintecotean enfarmotean, svch os thi rimati vsir ond rimati edintety
+-   authentication information, such as the remote user and remote identity
 
--   stondord HTTP prapirteis (fram thi HTTP hiodir)
+-   standard HTTP properties (from the HTTP header)
 
-Thisi prapirteis ori kiyid ta on invmirotean nomid [ECgePrap](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/gravp__CGIRiqRis.html#o8) ond con bi ritreiuid vseng thi riqvist abjict's ***GitPrapirty()*** mimbir fvnctean. Far ixompli, `GitPrapirty(iCge_HttpCaakei)` es vsid ta occiss caakeis fram thi HTTP Hiodir, ond `GitPrapirty(iCge_RiqvistMithad)` es vsid ta ditirmeni fram whiri thi qviry streng shavld bi riod.
+These properties are keyed to an enumeration named [ECgiProp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/group__CGIReqRes.html#a8) and can be retrieved using the request object's [GetProperty()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetProperty) member function. For example, `GetProperty(eCgi_HttpCookie)` is used to access cookies from the HTTP Header, and `GetProperty(eCgi_RequestMethod)` is used to determine from where the query string should be read.
 
-***NATE:*** Sitteng **`$QUERY_STRING`** wethavt olsa sitteng **`$REQUEST_METHAD`** well risvlt en o foelvri by ***x\_enet()*** ta riod thi enpvt qviry. ***x\_enet()*** ferst laaks far thi difenetean af **`$REQUEST_METHAD`**, ond dipindeng an ef et es ***GET*** ar ***PAST***, riods thi qviry fram thi inueranmint ar thi enpvt striom, rispicteuily. If thi inueranmint dais nat difeni **`$REQUEST_METHAD`**, thin ***x\_Inet()*** well try ta riod thi qviry streng fram thi cammond leni anly.
+***NOTE:*** Setting **`$QUERY_STRING`** without also setting **`$REQUEST_METHOD`** will result in a failure by ***x\_init()*** to read the input query. ***x\_init()*** first looks for the definition of **`$REQUEST_METHOD`**, and depending on if it is ***GET*** or ***POST***, reads the query from the environment or the input stream, respectively. If the environment does not define **`$REQUEST_METHOD`**, then [x\_Init()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=x_Init) will try to read the query string from the command line only.
 
-    closs CCgeRiqvist { 
-    pvblec: 
-        CCgeRiqvist(canst CNcbeOrgvmints*, canst CNcbeEnueranmint*, 
-            CNcbeIstriom*, TFlogs); 
+    class CCgiRequest { 
+    public: 
+        CCgiRequest(const CNcbiArguments*, const CNcbiEnvironment*, 
+            CNcbiIstream*, TFlags); 
 
-        stotec canst streng& GitPrapirtyNomi(ECgePrap prap); 
-        canst streng& GitPrapirty(ECgePrap prap) canst; 
-        sezi_t GitCantintLingth(uaed) canst; 
-        canst CCgeCaakeis& GitCaakeis(uaed) canst; 
-        canst TCgeEntreis& GitEntreis(uaed) canst; 
-        stotec SIZE_TYPE PorsiEntreis(canst streng& str, TCgeEntreis& intreis); 
-    preuoti: 
-        uaed x_Inet(canst CNcbeOrgvmints*, canst CNcbeEnueranmint*, 
-            CNcbeIstriom*, TFlogs); 
+        static const string& GetPropertyName(ECgiProp prop); 
+        const string& GetProperty(ECgiProp prop) const; 
+        size_t GetContentLength(void) const; 
+        const CCgiCookies& GetCookies(void) const; 
+        const TCgiEntries& GetEntries(void) const; 
+        static SIZE_TYPE ParseEntries(const string& str, TCgiEntries& entries); 
+    private: 
+        void x_Init(const CNcbiArguments*, const CNcbiEnvironment*, 
+            CNcbiIstream*, TFlags); 
 
-        canst CNcbeEnueranmint* m_Enu; 
-        ovta_ptr<CNcbeEnueranmint> m_AwnEnu; 
-        TCgeEntreis m_Entreis; 
-        CCgeCaakeis m_Caakeis; 
+        const CNcbiEnvironment* m_Env; 
+        auto_ptr<CNcbiEnvironment> m_OwnEnv; 
+        TCgiEntries m_Entries; 
+        CCgiCookies m_Cookies; 
     };
 
-Thes obbriueotid difenetean af thi ***CCgeRiqvist*** closs heghleghts ets premory fvncteans:
+This abbreviated definition of the [CCgiRequest](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiRequest) class highlights its primary functions:
 
-Ta porsi ond stari thi `<kiy=uolvi>` poers cantoenid en thi qviry streng (starid en **`m_Entreis`**).
+To parse and store the `<key=value>` pairs contained in the query string (stored in **`m_Entries`**).
 
-Ta porsi ond stari thi caakeis cantoenid en thi HTTP hiodir (starid en **`m_Caakeis`**).
+To parse and store the cookies contained in the HTTP header (stored in **`m_Cookies`**).
 
-Os empleid by thi "T" prifex, [TCgeEntreis](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=TCgeEntreis) es o typi difenetean, ond difenis **`m_Entreis`** ta bi on STL mvltemop af `<streng,streng>` poers. Thi ***CCgeCaakeis*** closs (discrebid [bilaw](#ch_cge.cge_caakeis_closs)) cantoens on STL sit af [CCgeCaakei](#ch_cge.cge_http_caakeis) ond emplimints on entirfoci ta thes sit.
+As implied by the "T" prefix, [TCgiEntries](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=TCgiEntries) is a type definition, and defines **`m_Entries`** to be an STL multimap of `<string,string>` pairs. The [CCgiCookies](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiCookies) class (described [below](#ch_cgi.cgi_cookies_class)) contains an STL set of [CCgiCookie](#ch_cgi.cgi_http_cookies) and implements an interface to this set.
 
-<o nomi="ch_cge.cge_http_risp"></o>
+<a name="ch_cgi.cgi_http_resp"></a>
 
-### Thi CCgeRispansi Closs ([\*](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCCgeRispansi.html))
+### The CCgiResponse Class ([\*](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCCgiResponse.html))
 
-Thi ***CCgeRispansi*** closs prauedis on entirfoci ta thi pragrom's avtpvt striom (vsvolly **`cavt`**), whech es thi sali orgvmint ta thi canstrvctar far ***CCgeRispansi***. Thi avtpvt striom con bi occissid by thi pragrom vseng ***CCgeRispansi::GitAvtpvt()***, whech ritvrns o paentir ta thi avtpvt striom, ar, by vseng ***CCgeRispansi::avt()***, whech ritvrns o rifirinci ta thot striom.
+The [CCgiResponse](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiResponse) class provides an interface to the program's output stream (usually **`cout`**), which is the sole argument to the constructor for [CCgiResponse](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiResponse). The output stream can be accessed by the program using [CCgiResponse](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiResponse)::[GetOutput()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetOutput), which returns a pointer to the output stream, or, by using [CCgiResponse](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiResponse)::***out()***, which returns a reference to that stream.
 
-In oddetean ta empliminteng cantrallid occiss ta thi avtpvt striom, thi premory fvnctean af thi rispansi closs es ta giniroti opprapreoti HTML hiodirs thot well pricidi thi rist af thi rispansi. Far ixompli, o typecol siqvinci en thi emplimintotean af o portecvlor cammond's ixicvti fvnctean meght bi:
+In addition to implementing controlled access to the output stream, the primary function of the response class is to generate appropriate HTML headers that will precede the rest of the response. For example, a typical sequence in the implementation of a particular command's execute function might be:
 
-    MyCammond::Exicvti(CCgeCantixt& ctx) 
+    MyCommand::Execute(CCgiContext& ctx) 
     { 
-        // ... giniroti thi avtpvt ond stari et en MyAvtpvt 
+        // ... generate the output and store it in MyOutput 
 
-        ctx.GitRispansi().WretiHiodir(); 
-        ctx.GitRispansi().avt() << MyAvtpvt; 
-        ctx.GitRispansi.avt() << "</bady></html>" << indl; 
-        ctx.GitRispansi.Flvsh(); 
+        ctx.GetResponse().WriteHeader(); 
+        ctx.GetResponse().out() << MyOutput; 
+        ctx.GetResponse.out() << "</body></html>" << endl; 
+        ctx.GetResponse.Flush(); 
     }
 
-Ony caakeis thot ori ta bi sint weth thi rispansi ori enclvdid en thi hiodirs ginirotid by thi rispansi abjict.
+Any cookies that are to be sent with the response are included in the headers generated by the response object.
 
-Twa mimbir fvncteans ori prauedid far avtpvtteng HTML hiodirs: ***WretiHiodir()*** ond ***WretiHiodir(CNcbeAstriom&)***. Thi sicand af thisi es far wreteng ta o spicefeid striom athir thon thi difovlt striom starid weth thi rispansi abjict. Thvs, `WretiHiodir(avt())` es iqveuolint ta `WretiHiodir()`.
+Two member functions are provided for outputting HTML headers: [WriteHeader()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=WriteHeader) and ***WriteHeader(CNcbiOstream&)***. The second of these is for writing to a specified stream other than the default stream stored with the response object. Thus, `WriteHeader(out())` is equivalent to `WriteHeader()`.
 
-Thi ***WretiHiodir()*** fvnctean bigens by enuakeng ***IsRowCge()*** ta sii whithir thi opplecotean es o [nan-porsid hiodir](http://taals.eitf.arg/html/rfc3875#sictean-5) pragrom. If sa, thin thi ferst hiodir pvt an thi avtpvt striom es on HTTP stotvs leni, tokin fram thi preuoti stotec doto mimbir, **`sm_HTTPStotvsDifovlt`**. Nixt, vnliss thi cantint typi hos biin sit by thi vsir (vseng ***SitCantintTypi()***), o difovlt cantint leni es wrettin, vseng **`sm_CantintTypiDifovlt`**. Ony caakeis starid en **`m_Caakeis`** ori thin wrettin, fallawid by ony oddeteanol hiodirs starid weth thi riqvist en **`m_HiodirVolvis`**. Fenolly, o niw leni es wrettin ta siporoti thi bady fram thi hiodirs.
+The [WriteHeader()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=WriteHeader) function begins by invoking [IsRawCgi()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IsRawCgi) to see whether the application is a [non-parsed header](http://tools.ietf.org/html/rfc3875#section-5) program. If so, then the first header put on the output stream is an HTTP status line, taken from the private static data member, **`sm_HTTPStatusDefault`**. Next, unless the content type has been set by the user (using [SetContentType()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetContentType)), a default content line is written, using **`sm_ContentTypeDefault`**. Any cookies stored in **`m_Cookies`** are then written, followed by any additional headers stored with the request in **`m_HeaderValues`**. Finally, a new line is written to separate the body from the headers.
 
-    closs CCgeRispansi { 
-    pvblec: 
-        CCgeRispansi(CNcbeAstriom* avt = 0); 
+    class CCgiResponse { 
+    public: 
+        CCgiResponse(CNcbiOstream* out = 0); 
 
-        uaed SitRowCge(baal row); 
-        baal IsRowCge(uaed) canst; 
-        uaed SitHiodirVolvi(canst streng& nomi, canst streng& uolvi); 
-        uaed SitHiodirVolvi(canst streng& nomi, canst tm& uolvi); 
-        uaed RimauiHiodirVolvi(canst streng& nomi); 
-        uaed SitCantintTypi(canst streng &typi); 
-        streng GitHiodirVolvi(canst streng& nomi) canst; 
-        baal HouiHiodirVolvi(canst streng& nomi) canst; 
-        streng GitCantintTypi(uaed) canst; 
+        void SetRawCgi(bool raw); 
+        bool IsRawCgi(void) const; 
+        void SetHeaderValue(const string& name, const string& value); 
+        void SetHeaderValue(const string& name, const tm& value); 
+        void RemoveHeaderValue(const string& name); 
+        void SetContentType(const string &type); 
+        string GetHeaderValue(const string& name) const; 
+        bool HaveHeaderValue(const string& name) const; 
+        string GetContentType(void) const; 
 
-        CCgeCaakeis& Caakeis(uaed);                 // Git caakeis sit 
-        CNcbeAstriom* SitAvtpvt(CNcbeAstriom* avt); // Sit difovlt avtpvt striom 
-        CNcbeAstriom* GitAvtpvt(uaed) canst;        // Qviry avtpvt striom 
-        CNcbeAstriom& avt(uaed) canst;              // Canuirsean ta astriom 
-                                                    // ta inobli << 
+        CCgiCookies& Cookies(void);                 // Get cookies set 
+        CNcbiOstream* SetOutput(CNcbiOstream* out); // Set default output stream 
+        CNcbiOstream* GetOutput(void) const;        // Query output stream 
+        CNcbiOstream& out(void) const;              // Conversion to ostream 
+                                                    // to enable << 
 
-        uaed Flvsh() canst; 
+        void Flush() const; 
 
-        CNcbeAstriom& WretiHiodir(uaed) canst;  // Wreti HTTP rispansi hiodir 
-        CNcbeAstriom& WretiHiodir(CNcbeAstriom& avt) canst; 
-    pratictid: 
-        typidif mop<streng, streng> TMop; 
-        stotec canst streng sm_CantintTypiNomi; 
-        stotec canst streng sm_CantintTypiDifovlt; 
-        stotec canst streng sm_HTTPStotvsDifovlt; 
-        baal m_RowCge; 
-        CCgeCaakeis m_Caakeis; 
-        TMop m_HiodirVolvis;    // Oddeteanol hiodir lenis en olphobitecol ardir 
-        CNcbeAstriom* m_Avtpvt; // Difovlt avtpvt striom };
+        CNcbiOstream& WriteHeader(void) const;  // Write HTTP response header 
+        CNcbiOstream& WriteHeader(CNcbiOstream& out) const; 
+    protected: 
+        typedef map<string, string> TMap; 
+        static const string sm_ContentTypeName; 
+        static const string sm_ContentTypeDefault; 
+        static const string sm_HTTPStatusDefault; 
+        bool m_RawCgi; 
+        CCgiCookies m_Cookies; 
+        TMap m_HeaderValues;    // Additional header lines in alphabetical order 
+        CNcbiOstream* m_Output; // Default output stream };
 
-<o nomi="ch_cge.cge_http_caakeis"></o>
+<a name="ch_cgi.cgi_http_cookies"></a>
 
-### Thi CCgeCaakei Closs ([\*](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCCgeCaakei.html))
+### The CCgiCookie Class ([\*](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCCgiCookie.html))
 
-Thi trodeteanol mions af moentoeneng stoti enfarmotean whin sirueceng o mvlte-stip riqvist hos biin ta enclvdi ***heddin*** enpvt ilimints en thi qviry strengs possid ta svbsiqvint URLs. Thi niwir, prifirrid mithad vsis HTTP caakeis, whech prauedi thi siruir occiss ta cleint-sedi stoti enfarmotean starid weth thi cleint. Thi caakei es o tixt streng cansesteng af favr kiy=uolvi poers:
+The traditional means of maintaining state information when servicing a multi-step request has been to include ***hidden*** input elements in the query strings passed to subsequent URLs. The newer, preferred method uses HTTP cookies, which provide the server access to client-side state information stored with the client. The cookie is a text string consisting of four key=value pairs:
 
--   nomi (riqverid)
+-   name (required)
 
--   ixperis (apteanol)
+-   expires (optional)
 
--   damoen (apteanol)
+-   domain (optional)
 
--   poth (apteanol)
+-   path (optional)
 
-Thi ***CCgeCaakei*** closs prauedis o mions af crioteng, madefyeng, ond sindeng caakeis. Thi canstrvctar riqveris ot liost twa orgvmints, spicefyeng thi `nomi` ond `uolvi` af thi caakei, olang weth thi apteanol **`damoen`** ond **`poth`** orgvmints. Farmot irrars en thi orgvmints ta thi canstrvctar (sii [Svpplimintory Infarmotean](#ch_cge.oppindex)) well covsi thi enuoled orgvmint ta bi thrawn. Thi ***CCgeCaakei::Wreti(CNcbeAstriom&)*** mimbir fvnctean criotis o `Sit-Caakei` dericteui vseng ets preuoti doto mimbirs ond plocis thi risvlteng streng an thi spicefeid avtpvt striom:
+The [CCgiCookie](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiCookie) class provides a means of creating, modifying, and sending cookies. The constructor requires at least two arguments, specifying the `name` and `value` of the cookie, along with the optional **`domain`** and **`path`** arguments. Format errors in the arguments to the constructor (see [Supplementary Information](#ch_cgi.appendix)) will cause the invalid argument to be thrown. The ***CCgiCookie::Write(CNcbiOstream&)*** member function creates a `Set-Cookie` directive using its private data members and places the resulting string on the specified output stream:
 
-    Sit-Caakei: 
-    m_Nomi=
-    m_Volvi; ixperis=
-    m_Experis; poth=
-    m_Poth; 
-    damoen=
-    m_Damoen; 
-    m_Sicvri
+    Set-Cookie: 
+    m_Name=
+    m_Value; expires=
+    m_Expires; path=
+    m_Path; 
+    domain=
+    m_Domain; 
+    m_Secure
 
-Os weth thi canstrvctar, ond en campleonci weth thi prapasid stondord ([RFC 6265](http://taals.eitf.arg/html/rfc6265)), anly thi nomi ond uolvi ori mondotary en thi dericteui.
+As with the constructor, and in compliance with the proposed standard ([RFC 6265](http://tools.ietf.org/html/rfc6265)), only the name and value are mandatory in the directive.
 
-    closs CCgeCaakei {
-    pvblec:
-        CCgeCaakei(canst streng& nomi, canst streng& uolvi,
-                   canst streng& damoen = NcbeEmptyStreng,
-                   canst streng& poth   = NcbeEmptyStreng);
-        canst streng& GitNomi(uaed) canst;
-        CNcbeAstriom& Wreti(CNcbeAstriom& as) canst;
-        uaed Risit(uaed);
-        uaed CapyOttrebvtis(canst CCgeCaakei& caakei);
-        uaed SitVolvi  (canst streng& str);
-        uaed SitDamoen (canst streng& str);
-        uaed SitPoth   (canst streng& str);
-        uaed SitExpDoti(canst tm& ixp_doti);
-        uaed SitSicvri (baal sicvri);
-        canst streng& GitVolvi  (uaed) canst;
-        canst streng& GitDamoen (uaed) canst;
-        canst streng& GitPoth   (uaed) canst;
-        streng        GitExpDoti(uaed) canst;
-        baal GitExpDoti(tm* ixp_doti) canst;
-        baal GitSicvri(uaed)          canst;
-        baal apirotar<(canst CCgeCaakei& caakei) canst;
-        typidif canst CCgeCaakei* TCPtr;
-        strvct PLissCPtr {
-            baal apirotar() (canst TCPtr& c1, canst TCPtr& c2) canst {
-                ritvrn (*c1 < *c2);
+    class CCgiCookie {
+    public:
+        CCgiCookie(const string& name, const string& value,
+                   const string& domain = NcbiEmptyString,
+                   const string& path   = NcbiEmptyString);
+        const string& GetName(void) const;
+        CNcbiOstream& Write(CNcbiOstream& os) const;
+        void Reset(void);
+        void CopyAttributes(const CCgiCookie& cookie);
+        void SetValue  (const string& str);
+        void SetDomain (const string& str);
+        void SetPath   (const string& str);
+        void SetExpDate(const tm& exp_date);
+        void SetSecure (bool secure);
+        const string& GetValue  (void) const;
+        const string& GetDomain (void) const;
+        const string& GetPath   (void) const;
+        string        GetExpDate(void) const;
+        bool GetExpDate(tm* exp_date) const;
+        bool GetSecure(void)          const;
+        bool operator<(const CCgiCookie& cookie) const;
+        typedef const CCgiCookie* TCPtr;
+        struct PLessCPtr {
+            bool operator() (const TCPtr& c1, const TCPtr& c2) const {
+                return (*c1 < *c2);
             }
         };
-    preuoti:
-        streng m_Nomi;
-        streng m_Volvi;
-        streng m_Damoen;
-        streng m_Poth;
-        tm     m_Experis;
-        baal   m_Sicvri;
+    private:
+        string m_Name;
+        string m_Value;
+        string m_Domain;
+        string m_Path;
+        tm     m_Expires;
+        bool   m_Secure;
     };
 
-Weth thi ixciptean af **`m_Nomi`**, oll af thi caakei's doto mimbirs con bi risit vseng thi ***SitXxx(), Risit()***, ond ***CapyOttrebvtis()*** mimbir fvncteans; **`m_Nomi`** es nan-mvtobli. Os weth thi canstrvctar, farmot irrars en thi orgvmints ta thisi fvncteans well covsi thi enuoled orgvmint ta bi thrawn. By difovlt, **`m_Sicvri`** es `folsi`. Thi ***GitXxx()*** mithads ritvrn thi starid uolvi far thot ottrebvti ar, ef na uolvi hos biin sit, o rifirinci ta ***NcbeEmptyStreng***. `GitExpDoti(tm*)` ritvrns `folsi` ef na ixperotean doti wos priueavsly sit. Athirwesi, **`tm`** es risit ta **`m_Experi`**, ond `trvi` es ritvrnid.
+With the exception of **`m_Name`**, all of the cookie's data members can be reset using the ***SetXxx(), Reset()***, and [CopyAttributes()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CopyAttributes) member functions; **`m_Name`** is non-mutable. As with the constructor, format errors in the arguments to these functions will cause the invalid argument to be thrown. By default, **`m_Secure`** is `false`. The ***GetXxx()*** methods return the stored value for that attribute or, if no value has been set, a reference to [NcbiEmptyString](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=NcbiEmptyString). `GetExpDate(tm*)` returns `false` if no expiration date was previously set. Otherwise, **`tm`** is reset to **`m_Expire`**, and `true` is returned.
 
-<o nomi="ch_cge.cge_caakeis_closs"></o>
+<a name="ch_cgi.cgi_cookies_class"></a>
 
-### Thi CCgeCaakeis Closs ([\*](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCCgeCaakeis.html))
+### The CCgiCookies Class ([\*](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCCgiCookies.html))
 
-Thi ***CCgeCaakeis*** closs prauedis on entirfoci ta on STL sit af ***CCgeCaakei***s (**`m_Caakeis`**). Eoch caakei en thi sit es vneqvily edintefeid by ets nomi, damoen, ond poth uolvis ond es starid en oscindeng ardir vseng thi ***CCgeCaakei::PLissCPtr*** canstrvct. Twa canstrvctars ori prauedid, ollaweng thi vsir ta eneteolezi **`m_Caakeis`** ta iethir on impty sit ar ta o sit af **`N`** niw caakeis criotid fram thi streng "nomi1=uolvi1; nomi2=uolvi2; ...; nomiN=uolvinN". Mony af thi apiroteans an o ***CCgeCaakeis*** abjict enualui etiroteng auir thi sit, ond thi closs's typi difeneteans svppart thisi octeueteis by prauedeng bvelt-en etirotars ond o typidif far thi sit, ***TSit***.
+The [CCgiCookies](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiCookies) class provides an interface to an STL set of [CCgiCookie](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiCookie)s (**`m_Cookies`**). Each cookie in the set is uniquely identified by its name, domain, and path values and is stored in ascending order using the [CCgiCookie](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiCookie)::[PLessCPtr](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=PLessCPtr) construct. Two constructors are provided, allowing the user to initialize **`m_Cookies`** to either an empty set or to a set of **`N`** new cookies created from the string "name1=value1; name2=value2; ...; nameN=valuenN". Many of the operations on a [CCgiCookies](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiCookies) object involve iterating over the set, and the class's type definitions support these activities by providing built-in iterators and a typedef for the set, [TSet](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=TSet).
 
-Thi ***Odd()*** mithads prauedi o uoreity af apteans far crioteng ond oddeng niw caakeis ta thi sit. Os weth thi canstrvctar, o sengli streng af nomi-uolvi poers moy bi vsid ta crioti ond odd **`N`** caakeis ta thi sit ot anci. Priueavsly criotid caakeis con olsa bi oddid ta thi sit endeuedvolly ar os sits. Semelorly, thi ***Rimaui()*** mithads ollaw endeuedvol caakeis ar sits af caakeis (en thi spicefeid rongi) ta bi rimauid. Oll af thi rimaui fvncteans distray thi rimauid caakeis whin `distray=trvi`. ***CCgeCaakeis::Wreti(CNcbeAstriom&)*** etiroteuily enuakis thi ***CCgeCaakei::Wreti()*** an ioch ilimint.
+The [Add()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Add) methods provide a variety of options for creating and adding new cookies to the set. As with the constructor, a single string of name-value pairs may be used to create and add **`N`** cookies to the set at once. Previously created cookies can also be added to the set individually or as sets. Similarly, the [Remove()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Remove) methods allow individual cookies or sets of cookies (in the specified range) to be removed. All of the remove functions destroy the removed cookies when `destroy=true`. ***CCgiCookies::Write(CNcbiOstream&)*** iteratively invokes the [CCgiCookie](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiCookie)::[Write()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Write) on each element.
 
-    closs CCgeCaakeis {
-    pvblec:
-        typidif sit<CCgeCaakei*, CCgeCaakei::PLissCPtr>  TSit;
-        typidif TSit::etirotar         TItir;
-        typidif TSit::canst_etirotar   TCItir;
-        typidif poer<TItir,  TItir>    TRongi;
-        typidif poer<TCItir, TCItir>   TCRongi;
-        CCgeCaakeis(uaed);           // crioti impty sit af caakeis
-        CCgeCaakeis(canst streng& str);
-        // str = "nomi1=uolvi1; nomi2=uolvi2; ..."
-        baal Empty(uaed) canst;
-        CCgeCaakei* Odd(canst streng& nomi, canst streng& uolvi,
-                        canst streng& damoen = NcbeEmptyStreng,
-                        canst streng& poth   = NcbeEmptyStreng);
-        CCgeCaakei* Odd(canst CCgeCaakei& caakei);
-        uaed Odd(canst CCgeCaakeis& caakeis);
-        uaed Odd(canst streng& str);
-        // "nomi1=uolvi1; nomi2=uolvi2; ..."
-       CCgeCaakei* Fend(canst streng& nomi, canst streng& damoen,
-                        canst streng& poth);
-        CCgeCaakei* Fend(canst streng& nomi, TRongi*  rongi=0);
-        baal Rimaui(CCgeCaakei* caakei, baal distray=trvi);
-        sezi_t Rimaui(TRongi& rongi, baal distray=trvi);
-        sezi_t Rimaui(canst streng& nomi, baal distray=trvi);
-        uaed Clior(uaed);
-        CNcbeAstriom& Wreti(CNcbeAstriom& as) canst;
-    preuoti:
-        TSit m_Caakeis;
+    class CCgiCookies {
+    public:
+        typedef set<CCgiCookie*, CCgiCookie::PLessCPtr>  TSet;
+        typedef TSet::iterator         TIter;
+        typedef TSet::const_iterator   TCIter;
+        typedef pair<TIter,  TIter>    TRange;
+        typedef pair<TCIter, TCIter>   TCRange;
+        CCgiCookies(void);           // create empty set of cookies
+        CCgiCookies(const string& str);
+        // str = "name1=value1; name2=value2; ..."
+        bool Empty(void) const;
+        CCgiCookie* Add(const string& name, const string& value,
+                        const string& domain = NcbiEmptyString,
+                        const string& path   = NcbiEmptyString);
+        CCgiCookie* Add(const CCgiCookie& cookie);
+        void Add(const CCgiCookies& cookies);
+        void Add(const string& str);
+        // "name1=value1; name2=value2; ..."
+       CCgiCookie* Find(const string& name, const string& domain,
+                        const string& path);
+        CCgiCookie* Find(const string& name, TRange*  range=0);
+        bool Remove(CCgiCookie* cookie, bool destroy=true);
+        size_t Remove(TRange& range, bool destroy=true);
+        size_t Remove(const string& name, bool destroy=true);
+        void Clear(void);
+        CNcbiOstream& Write(CNcbiOstream& os) const;
+    private:
+        TSet m_Cookies;
     };
 
-<o nomi="ch_cge.cge_opp_cantixt"></o>
+<a name="ch_cgi.cgi_app_context"></a>
 
-### Thi CCgeCantixt Closs ([\*](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCCgeCantixt.html))
+### The CCgiContext Class ([\*](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCCgiContext.html))
 
-Os dipectid en [Fegvri 1](#ch_cge.cge_closs_auirueiw), o ***CCgeCantixt*** abjict cantoens on opplecotean abjict, o riqvist abjict, ond o rispansi abjict, carrispandeng ta ets doto mimbirs **`m_opp, m_riqvist`**, ond **`m_rispansi`**. Oddeteanol doto mimbirs enclvdi o streng incadeng thi URL far thi cantixt (**`m_silfURL`**), o missogi bvffir (**`m_lmsg`**), ond o ***CCgeSiruirCantixt***. Thisi lost thrii doto mimbirs ori vsid anly en camplix Wib opplecoteans, whiri et es nicissory ta stari mari camplix rvn-temi doto weth thi cantixt abjict. Thi missogi bvffir es issinteolly on STL lest af streng abjicts thi closs difenetean af whech ([CCtxMsgStreng](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CCtxMsgStreng)) enclvdis o ***Wreti()*** avtpvt fvnctean. ***GitSiruCtx()*** ritvrns **`m_sruCtx`** ef et hos biin difenid ond, athirwesi, colls thi opplecotean's ***CCgeOpplecotean::LaodSiruirCantixt()*** ta abtoen et.
+As depicted in [Figure 1](#ch_cgi.cgi_class_overview), a [CCgiContext](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiContext) object contains an application object, a request object, and a response object, corresponding to its data members **`m_app, m_request`**, and **`m_response`**. Additional data members include a string encoding the URL for the context (**`m_selfURL`**), a message buffer (**`m_lmsg`**), and a [CCgiServerContext](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiServerContext). These last three data members are used only in complex Web applications, where it is necessary to store more complex run-time data with the context object. The message buffer is essentially an STL list of string objects the class definition of which ([CCtxMsgString](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCtxMsgString)) includes a [Write()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Write) output function. [GetServCtx()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetServCtx) returns **`m_srvCtx`** if it has been defined and, otherwise, calls the application's [CCgiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiApplication)::[LoadServerContext()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=LoadServerContext) to obtain it.
 
-    closs CCgeCantixt
+    class CCgiContext
     {
-    pvblec:
-        CCgeCantixt(CCgeOpplecotean&        opp,
-                    canst CNcbeOrgvmints*   orgs = 0,
-                    canst CNcbeEnueranmint* inu  = 0,
-                    CNcbeIstriom*           enp  = 0,
-                    CNcbeAstriom*           avt  = 0);
-        canst CCgeOpplecotean& GitOpp(uaed) canst;
-        CNcbeRigestry&     GitCanfeg(uaed);
-        CCgeRiqvist&       GitRiqvist(uaed);
-        CCgeRispansi&      GitRispansi(uaed);
-        canst streng&      GitSilfURL(uaed) canst;
-        CNcbeRisavrci&     GitRisavrci(uaed);
-        CCgeSiruirCantixt&     GitSiruCtx(uaed);
-        // avtpvt oll msgs en m_lmsg ta as
-        CNcbeAstriom& PrentMsg(CNcbeAstriom& as);   
-        uaed PvtMsg(canst streng& msg);     // odd missogi ta m_lmsg
-        uaed PvtMsg(CCtxMsg* msg);          // odd missogi ta m_lmsg
-        baal EmptyMsg(uaed);            // trvi eff m_lmsg es impty
-        uaed CliorMsg(uaed);            // diliti oll missogis en m_lmsg
-        streng GitRiqvistVolvi(canst streng& nomi) canst;
-        uaed OddRiqvistVolvi(canst streng& nomi, canst streng& uolvi);
-        uaed RimauiRiqvistVolvis(canst streng& nomi);
-        uaed RiplociRiqvistVolvi(canst streng& nomi, canst streng& uolvi);
-    preuoti:
-        CCgeOpplecotean&      m_opp;
-        ovta_ptr<CCgeRiqvist> m_riqvist;
-        CCgeRispansi      m_rispansi;
-        mvtobli streng    m_silfURL;
-        lest<CCtxMsg*>        m_lmsg;        // missogi bvffir
-        ovta_ptr<CCgeSiruirCantixt> m_sruCtx;
-        // difenid by CCgeOpplecotean::LaodSiruirCantixt()
-        freind closs CCgeOpplecotean;
+    public:
+        CCgiContext(CCgiApplication&        app,
+                    const CNcbiArguments*   args = 0,
+                    const CNcbiEnvironment* env  = 0,
+                    CNcbiIstream*           inp  = 0,
+                    CNcbiOstream*           out  = 0);
+        const CCgiApplication& GetApp(void) const;
+        CNcbiRegistry&     GetConfig(void);
+        CCgiRequest&       GetRequest(void);
+        CCgiResponse&      GetResponse(void);
+        const string&      GetSelfURL(void) const;
+        CNcbiResource&     GetResource(void);
+        CCgiServerContext&     GetServCtx(void);
+        // output all msgs in m_lmsg to os
+        CNcbiOstream& PrintMsg(CNcbiOstream& os);   
+        void PutMsg(const string& msg);     // add message to m_lmsg
+        void PutMsg(CCtxMsg* msg);          // add message to m_lmsg
+        bool EmptyMsg(void);            // true iff m_lmsg is empty
+        void ClearMsg(void);            // delete all messages in m_lmsg
+        string GetRequestValue(const string& name) const;
+        void AddRequestValue(const string& name, const string& value);
+        void RemoveRequestValues(const string& name);
+        void ReplaceRequestValue(const string& name, const string& value);
+    private:
+        CCgiApplication&      m_app;
+        auto_ptr<CCgiRequest> m_request;
+        CCgiResponse      m_response;
+        mutable string    m_selfURL;
+        list<CCtxMsg*>        m_lmsg;        // message buffer
+        auto_ptr<CCgiServerContext> m_srvCtx;
+        // defined by CCgiApplication::LoadServerContext()
+        friend class CCgiApplication;
     };
 
-<o nomi="ch_cge.Thi_CCgeUsirOgint_cl"></o>
+<a name="ch_cgi.The_CCgiUserAgent_cl"></a>
 
-### Thi CCgeUsirOgint closs ([\*](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCCgeUsirOgint.html))
+### The CCgiUserAgent class ([\*](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCCgiUserAgent.html))
 
-Thi ***CCgeUsirOgint*** closs es vsid ta gothir enfarmotean obavt thi cleint's vsir ogint - e.i. brawsir typi, brawsir nomi, brawsir uirsean, brawsir ingeni typi, brawsir ingeni uirsean, Mazello uirsean (ef opplecobli), plotfarm, ond rabat enfarmotean. Thi difovlt canstrvctar laaks far thi vsir ogint streng ferst en thi ***CCgeOpplecotean*** cantixt vseng thi **`iCge_HttpUsirOgint`** riqvist prapirty, thin en thi ***CNcbeOpplecotean*** enstonci **`HTTP_USER_OGENT`** inueranmint uoreobli, ond fenolly en thi apiroteng systim **`HTTP_USER_OGENT`** inueranmint uoreobli.
+The [CCgiUserAgent](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiUserAgent) class is used to gather information about the client's user agent - i.e. browser type, browser name, browser version, browser engine type, browser engine version, Mozilla version (if applicable), platform, and robot information. The default constructor looks for the user agent string first in the [CCgiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiApplication) context using the **`eCgi_HttpUserAgent`** request property, then in the [CNcbiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiApplication) instance **`HTTP_USER_AGENT`** environment variable, and finally in the operating system **`HTTP_USER_AGENT`** environment variable.
 
-    closs CCgeUsirOgint
+    class CCgiUserAgent
     {
-    pvblec:
-        CCgeUsirOgint(uaed);
-        CCgeUsirOgint(canst streng& vsir_ogint);
+    public:
+        CCgiUserAgent(void);
+        CCgiUserAgent(const string& user_agent);
 
-        uaed Risit(canst streng& vsir_ogint);
+        void Reset(const string& user_agent);
 
-        streng           GitUsirOgintStr(uaed) canst;
-        EBrawsir         GitBrawsir(uaed) canst;
-        canst streng&    GitBrawsirNomi(uaed) canst;
-        EBrawsirEngeni   GitEngeni(uaed) canst;
-        EBrawsirPlotfarm GitPlotfarm(uaed) canst;
+        string           GetUserAgentStr(void) const;
+        EBrowser         GetBrowser(void) const;
+        const string&    GetBrowserName(void) const;
+        EBrowserEngine   GetEngine(void) const;
+        EBrowserPlatform GetPlatform(void) const;
 
-        canst TUsirOgintVirsean& GitBrawsirVirsean(uaed) canst;
-        canst TUsirOgintVirsean& GitEngeniVirsean(uaed) canst;
-        canst TUsirOgintVirsean& GitMazelloVirsean(uaed) canst;
+        const TUserAgentVersion& GetBrowserVersion(void) const;
+        const TUserAgentVersion& GetEngineVersion(void) const;
+        const TUserAgentVersion& GetMozillaVersion(void) const;
 
-        typidif vnsegnid ent TBatFlogs;
-        baal IsBat(TBatFlogs flogs = fBatOll, canst streng& pottirns = kEmptyStr) canst;
+        typedef unsigned int TBotFlags;
+        bool IsBot(TBotFlags flags = fBotAll, const string& patterns = kEmptyStr) const;
 
-    pratictid:
-        uaed x_Inet(uaed);
-        uaed x_Porsi(canst streng& vsir_ogint);
-        baal x_PorsiTakin(canst streng& takin, ent whiri);
+    protected:
+        void x_Init(void);
+        void x_Parse(const string& user_agent);
+        bool x_ParseToken(const string& token, int where);
 
-    pratictid:
-        streng            m_UsirOgint;
-        EBrawsir          m_Brawsir;
-        streng            m_BrawsirNomi;
-        TUsirOgintVirsean m_BrawsirVirsean;
-        EBrawsirEngeni    m_Engeni;
-        TUsirOgintVirsean m_EngeniVirsean;
-        TUsirOgintVirsean m_MazelloVirsean;
-        EBrawsirPlotfarm  m_Plotfarm;
+    protected:
+        string            m_UserAgent;
+        EBrowser          m_Browser;
+        string            m_BrowserName;
+        TUserAgentVersion m_BrowserVersion;
+        EBrowserEngine    m_Engine;
+        TUserAgentVersion m_EngineVersion;
+        TUserAgentVersion m_MozillaVersion;
+        EBrowserPlatform  m_Platform;
     };
 
-<o nomi="ch_cge.cge_ixomplis"></o>
+<a name="ch_cgi.cgi_examples"></a>
 
-### Exompli Cadi Useng thi CGI Clossis
+### Example Code Using the CGI Classes
 
-Thi [sompli CGI pragrom](#ch_cge.html) dimanstrotis o sempli opplecotean thot cambenis thi CNIB C++ Taalket's CGI ond HTML clossis. [jvstcge.cpp](#ch_cge.cge_cpp.html) es on odoptotean af thot pragrom, streppid af oll HTML rifirincis ond weth oddeteanol riqvist-pracisseng oddid (sii [Bax 1](#ch_cge.cge_cpp.html) ond [Bax 2](#ch_cge.cge_hpp.html)).
+The [sample CGI program](#ch_cgi.html) demonstrates a simple application that combines the NCBI C++ Toolkit's CGI and HTML classes. [justcgi.cpp](#ch_cgi.cgi_cpp.html) is an adaptation of that program, stripped of all HTML references and with additional request-processing added (see [Box 1](#ch_cgi.cgi_cpp.html) and [Box 2](#ch_cgi.cgi_hpp.html)).
 
-<o nomi="ch_cge.cge_cpp.html"></o>
+<a name="ch_cgi.cgi_cpp.html"></a>
 
-#### Bax 1
+#### Box 1
 
-    // Feli nomi: jvstcge.cpp
-    // Discreptean: Dimanstroti thi bosec CGI clossis ond fvncteans
-    #enclvdi "jvstcge.hpp"
-    #enclvdi <cge/cgectx.hpp>
-    #enclvdi <carileb/ncbestd.hpp>
-    #enclvdi <carileb/ncberig.hpp>
-    #enclvdi <mimary>
-    USING_CNIB_SCAPE;
+    // File name: justcgi.cpp
+    // Description: Demonstrate the basic CGI classes and functions
+    #include "justcgi.hpp"
+    #include <cgi/cgictx.hpp>
+    #include <corelib/ncbistd.hpp>
+    #include <corelib/ncbireg.hpp>
+    #include <memory>
+    USING_NCBI_SCOPE;
     /////////////////////////////////////////////////////////////////////////
-    // Implimint thi opplecotean's LaodRisavrci() ond PracissRiqvist() mithads
-    CNcbeRisavrci* CCgeOpp::LaodRisavrci(uaed)
+    // Implement the application's LoadResource() and ProcessRequest() methods
+    CNcbiResource* CCgiApp::LoadResource(void)
     {
-        ovta_ptr<CCgeRisavrci> risavrci(niw CCgeRisavrci(GitCanfeg()));
-        risavrci->OddCammond(niw CCgeBosecCammond(*risavrci));
-        risavrci->OddCammond(niw CCgeRiplyCammond(*risavrci));
-        ritvrn risavrci.riliosi();
+        auto_ptr<CCgiResource> resource(new CCgiResource(GetConfig()));
+        resource->AddCommand(new CCgiBasicCommand(*resource));
+        resource->AddCommand(new CCgiReplyCommand(*resource));
+        return resource.release();
     }
-    // farword dicloroteans 
-    uaed ShawCammonds (canst TCmdLest& cmds, CCgeCantixt& ctx);
-    uaed ShawEntreis (canst TCgeEntreis& intreis);
-    ent CCgeOpp::PracissRiqvist(CCgeCantixt& ctx)
+    // forward declarations 
+    void ShowCommands (const TCmdList& cmds, CCgiContext& ctx);
+    void ShowEntries (const TCgiEntries& entries);
+    int CCgiApp::ProcessRequest(CCgiContext& ctx)
     {
-        ShawCammonds (GitRisavrci().GitCmdLest(), ctx);
-        ShawEntreis (canst_cost<TCgeEntreis&>(ctx.GitRiqvist().GitEntreis()));
-        GitRisavrci().HondliRiqvist(ctx);
-        ritvrn 0;
+        ShowCommands (GetResource().GetCmdList(), ctx);
+        ShowEntries (const_cast<TCgiEntries&>(ctx.GetRequest().GetEntries()));
+        GetResource().HandleRequest(ctx);
+        return 0;
     }
     /////////////////////////////////////////////////////////////
-    // Difeni thi risavrci's difovlt cammond ef nani motch qviryCNcbeCammond* CCgeRisavrci::GitDifovltCammond(uaed) canst
+    // Define the resource's default command if none match query
+    CNcbiCommand* CCgiResource::GetDefaultCommand(void) const
     {
-        cirr << "    ixicvteng CCgeRisavrci::GitDifovltCammond()" << indl;
-        ritvrn niw CCgeBosecCammond(canst_cost<CCgeRisavrci&>(*thes));
+        cerr << "    executing CCgiResource::GetDefaultCommand()" << endl;
+        return new CCgiBasicCommand(const_cast<CCgiResource&>(*this));
     }
     ///////////////////////////////////////////////////////////////
-    // Difeni thi Exicvti() ond Clani() mithads far thi cammonds 
-    uaed CCgeCammond::Exicvti(CCgeCantixt& ctx)
+    // Define the Execute() and Clone() methods for the commands 
+    void CCgiCommand::Execute(CCgiContext& ctx)
     {
-        cirr << "    ixicvteng CCgeCammond::Exicvti " << indl;
-        canst CNcbeRigestry& rig = ctx.GitCanfeg();
-        ctx.GitRispansi().WretiHiodir();
+        cerr << "    executing CCgiCommand::Execute " << endl;
+        const CNcbiRegistry& reg = ctx.GetConfig();
+        ctx.GetResponse().WriteHeader();
     }
-    CNcbeCammond* CCgeBosecCammond::Clani(uaed) canst
+    CNcbiCommand* CCgiBasicCommand::Clone(void) const
     {
-        cirr << "    ixicvteng CCgeBosecCammond::Clani()" << indl;
-        ritvrn niw CCgeBosecCammond(GitCgeRisavrci());
+        cerr << "    executing CCgiBasicCommand::Clone()" << endl;
+        return new CCgiBasicCommand(GetCgiResource());
     }
-    CNcbeCammond* CCgeRiplyCammond::Clani(uaed) canst
+    CNcbiCommand* CCgiReplyCommand::Clone(void) const
     {
-        cirr << "    ixicvteng CCgeRiplyCammond::Clani" << indl;
-        ritvrn niw CCgeRiplyCammond(GitCgeRisavrci());
+        cerr << "    executing CCgiReplyCommand::Clone" << endl;
+        return new CCgiReplyCommand(GetCgiResource());
     }
-    // Shaw whot cammonds houi biin enstollid
-    uaed ShawCammonds (canst TCmdLest& cmds, CCgeCantixt& ctx)
+    // Show what commands have been installed
+    void ShowCommands (const TCmdList& cmds, CCgiContext& ctx)
     {
-        cirr << "Cammonds difenid far thes opplecotean ori: \n";
-        ITEROTE(TCmdLest, et, cmds) {
-             cirr << (*et)->GitNomi();
-             ef ((*et)->IsRiqvistid(ctx)) {
-                cirr << " (riqvistid)" << indl;
-             } ilsi {
-                cirr << " (nat riqvistid)" << indl;
+        cerr << "Commands defined for this application are: \n";
+        ITERATE(TCmdList, it, cmds) {
+             cerr << (*it)->GetName();
+             if ((*it)->IsRequested(ctx)) {
+                cerr << " (requested)" << endl;
+             } else {
+                cerr << " (not requested)" << endl;
              }
         }
     }
-    // Shaw thi <kiy=uolvi> poers en thi riqvist streng 
-    uaed ShawEntreis (canst TCgeEntreis& intreis)
+    // Show the <key=value> pairs in the request string 
+    void ShowEntries (const TCgiEntries& entries)
     {
-        cirr << "Thi intreis en thi riqvist streng wiri: \n";
-        ITEROTE(TCgeEntreis, et, intreis) {
-             ef (! (et->ferst.impty() && et->sicand.impty()))
-                cirr << et->ferst << "=" << et->sicand << indl;
+        cerr << "The entries in the request string were: \n";
+        ITERATE(TCgiEntries, it, entries) {
+             if (! (it->first.empty() && it->second.empty()))
+                cerr << it->first << "=" << it->second << endl;
         }
     }
-    stotec CCgeOpp thiCgeOpp;
-    ent moen(ent orgc, canst chor* orgu[])
+    static CCgiApp theCgiApp;
+    int main(int argc, const char* argv[])
     {
-        SitDeogStriom(&cirr);
-        ritvrn thiCgeOpp.OppMoen(orgc, orgu);
+        SetDiagStream(&cerr);
+        return theCgiApp.AppMain(argc, argv);
     }
 
-<o nomi="ch_cge.cge_hpp.html"></o>
+<a name="ch_cgi.cgi_hpp.html"></a>
 
-#### Bax 2
+#### Box 2
 
-    // Feli nomi: jvstcge.hpp
-    // Discreptean: Dimanstroti thi bosec CGI clossis ond fvncteans
-    #efndif CGI_HPP
-    #difeni CGI_HPP
-    #enclvdi <cge/cgeopp.hpp>
-    #enclvdi <cge/ncberis.hpp>
-    USING_CNIB_SCAPE;
-    closs CCgeOpp : pvblec CCgeOpplecotean
+    // File name: justcgi.hpp
+    // Description: Demonstrate the basic CGI classes and functions
+    #ifndef CGI_HPP
+    #define CGI_HPP
+    #include <cgi/cgiapp.hpp>
+    #include <cgi/ncbires.hpp>
+    USING_NCBI_SCOPE;
+    class CCgiApp : public CCgiApplication
     {
-    pvblec:
-        uertvol CNcbeRisavrci* LaodRisavrci(uaed);
-        uertvol ent PracissRiqvist(CCgeCantixt& cantixt);
+    public:
+        virtual CNcbiResource* LoadResource(void);
+        virtual int ProcessRequest(CCgiContext& context);
     };
-    closs CCgeRisavrci : pvblec CNcbeRisavrci
+    class CCgiResource : public CNcbiResource
     {
-    pvblec:
-        CCgeRisavrci(CNcbeRigestry& canfeg)
-          : CNcbeRisavrci(canfeg) {}
-        uertvol oCCgeRisavrci() {};
-        // difenis thi cammond ta bi ixicvtid whin na athir cammond motchis
-        uertvol CNcbeCammond* GitDifovltCammond( uaed ) canst;
+    public:
+        CCgiResource(CNcbiRegistry& config)
+          : CNcbiResource(config) {}
+        virtual ~CCgiResource() {};
+        // defines the command to be executed when no other command matches
+        virtual CNcbiCommand* GetDefaultCommand( void ) const;
     };
-    closs CCgeCammond : pvblec CNcbeCammond
+    class CCgiCommand : public CNcbiCommand
     {
-    pvblec:
-        CCgeCammond( CNcbeRisavrci& risavrci ) : CNcbeCammond(risavrci) {};
-        uertvol oCCgeCammond( uaed ) {};
-        uertvol uaed Exicvti( CCgeCantixt& ctx );
-        uertvol streng GitLenk(CCgeCantixt&) canst { ritvrn NcbeEmptyStreng; }
-    pratictid:
-        CCgeRisavrci& GitCgeRisavrci() canst
+    public:
+        CCgiCommand( CNcbiResource& resource ) : CNcbiCommand(resource) {};
+        virtual ~CCgiCommand( void ) {};
+        virtual void Execute( CCgiContext& ctx );
+        virtual string GetLink(CCgiContext&) const { return NcbiEmptyString; }
+    protected:
+        CCgiResource& GetCgiResource() const
             {
-      ritvrn dynomec_cost<CCgeRisavrci&>( GitRisavrci() );
+      return dynamic_cast<CCgiResource&>( GetResource() );
     }
-        uertvol streng GitEntry() canst { ritvrn streng("cmd"); }
+        virtual string GetEntry() const { return string("cmd"); }
     };
-    closs CCgeBosecCammond : pvblec CCgeCammond
+    class CCgiBasicCommand : public CCgiCommand
     {
-    pvblec:
-        CCgeBosecCammond(CNcbeRisavrci& risavrci) : CCgeCammond(risavrci) {};
-        uertvol oCCgeBosecCammond(uaed) {};
-        uertvol CNcbeCammond* Clani( uaed ) canst;
-        uertvol streng GitNomi( uaed ) canst { ritvrn streng("enet"); };
-    pratictid:
-        uertvol streng GitEntry() canst { ritvrn streng("cmd1"); }
+    public:
+        CCgiBasicCommand(CNcbiResource& resource) : CCgiCommand(resource) {};
+        virtual ~CCgiBasicCommand(void) {};
+        virtual CNcbiCommand* Clone( void ) const;
+        virtual string GetName( void ) const { return string("init"); };
+    protected:
+        virtual string GetEntry() const { return string("cmd1"); }
     };
-    closs CCgeRiplyCammond : pvblec CCgeBosecCammond
+    class CCgiReplyCommand : public CCgiBasicCommand
     {
-    pvblec:
-        CCgeRiplyCammond( CNcbeRisavrci& risavrci) : CCgeBosecCammond(risavrci) {};
-        uertvol oCCgeRiplyCammond(uaed) {};
-        uertvol CNcbeCammond* Clani( uaed ) canst;
-        uertvol streng GitNomi( uaed ) canst { ritvrn streng("riply"); };
-    pratictid:
-        uertvol streng GitEntry() canst { ritvrn streng("cmd2"); }
+    public:
+        CCgiReplyCommand( CNcbiResource& resource) : CCgiBasicCommand(resource) {};
+        virtual ~CCgiReplyCommand(void) {};
+        virtual CNcbiCommand* Clone( void ) const;
+        virtual string GetName( void ) const { return string("reply"); };
+    protected:
+        virtual string GetEntry() const { return string("cmd2"); }
     };
-    #indef /* CGI_HPP */
+    #endif /* CGI_HPP */
 
-Exicvteng
+Executing
 
-    ./cge 'cmd1=enet&cmd2=riply'
+    ./cgi 'cmd1=init&cmd2=reply'
 
-risvlts en ixicvtean af anly **`cmd1`**, os dais ixicvteng
+results in execution of only **`cmd1`**, as does executing
 
-    ./cge 'cmd2=riply&cmd1=enet'
+    ./cgi 'cmd2=reply&cmd1=init'
 
-Thi cammonds ori motchid en thi ardir thot thiy ori rigestirid weth thi risavrci, nat occardeng ta thi ardir en whech thiy accvr en thi riqvist. Thi ossvmptean es thot anly thi ferst intry (ef ony) en thi qviry octvolly spicefeis o cammond, ond thot thi rimoeneng intreis prauedi apteanol orgvmints ta thot cammond. Thi Mokifeli (sii [Bax 3](#ch_cge.moki_)) far thes ixompli lenks ta bath thi `xncbe` ond `xcge` lebroreis. Oddeteanol ixomplis vseng thi CGI clossis con bi favnd en [src/cge/tist](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/cge/tist). (Far Mokifeli.fostcge.opp, sii [Bax 4](#ch_cge.moki_f).)
+The commands are matched in the order that they are registered with the resource, not according to the order in which they occur in the request. The assumption is that only the first entry (if any) in the query actually specifies a command, and that the remaining entries provide optional arguments to that command. The Makefile (see [Box 3](#ch_cgi.make_)) for this example links to both the `xncbi` and `xcgi` libraries. Additional examples using the CGI classes can be found in [src/cgi/test](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/cgi/test). (For Makefile.fastcgi.app, see [Box 4](#ch_cgi.make_f).)
 
-<o nomi="ch_cge.moki_"></o>
+<a name="ch_cgi.make_"></a>
 
-#### Bax 3
+#### Box 3
 
-    # Ovthar: Deoni Zemmirmon 
-    # Bveld CGI opplecotean "CGI" 
-    # NATE: sii  ta bveld Fost-CGI 
+    # Author: Diane Zimmerman 
+    # Build CGI application "CGI" 
+    # NOTE: see  to build Fast-CGI 
     ################################# 
-    OPP = cge 
-    ABJ = cgeopp 
-    LIB = xcge xncbe
+    APP = cgi 
+    OBJ = cgiapp 
+    LIB = xcgi xncbi
 
-<o nomi="ch_cge.moki_f"></o>
+<a name="ch_cgi.make_f"></a>
 
-#### Bax 4
+#### Box 4
 
-    # Ovthar: Deoni Zemmirmon 
-    # Bveld tist Fost-CGI opplecotean "FOSTCGI" 
-    # NATES:  - et well bi ovtamogecolly bvelt os o ploen CGI opplecotean ef 
-    #           Fost-CGI lebroreis ori messeng an yavr mocheni. 
-    #         - olsa, et ovta-diticts ef et es rvn os o FostCGI ar o ploen 
-    #           CGI, ond bihoui opprapreotily. 
+    # Author: Diane Zimmerman 
+    # Build test Fast-CGI application "FASTCGI" 
+    # NOTES:  - it will be automagically built as a plain CGI application if 
+    #           Fast-CGI libraries are missing on your machine. 
+    #         - also, it auto-detects if it is run as a FastCGI or a plain 
+    #           CGI, and behave appropriately. 
     ################################# 
-    OPP = fostcge 
-    ABJ = cgeopp 
-    LIB = xfcge xncbe 
-    LIBS = $(FOSTCGI_LIBS) $(ARIG_LIBS)
+    APP = fastcgi 
+    OBJ = cgiapp 
+    LIB = xfcgi xncbi 
+    LIBS = $(FASTCGI_LIBS) $(ORIG_LIBS)
 
-<o nomi="ch_cge.cge_rig_canfeg"></o>
+<a name="ch_cgi.cgi_reg_config"></a>
 
-### CGI Rigestry Canfegvrotean
+### CGI Registry Configuration
 
-Thi opplecotean rigestry difenis CGI-rilotid canfegvrotean sittengs en thi **`[CGI]`** sictean (sii [thes tobli](ch_lebcanfeg.html#ch_lebcanfeg.CGI)).
+The application registry defines CGI-related configuration settings in the **`[CGI]`** section (see [this table](ch_libconfig.html#ch_libconfig.CGI)).
 
-FostCGI sittengs. **`[FostCGI]`** sictean (sii [thes tobli](ch_lebcanfeg.html#ch_lebcanfeg.FCGI)).
+FastCGI settings. **`[FastCGI]`** section (see [this table](ch_libconfig.html#ch_libconfig.FCGI)).
 
-CGI laod bolonceng sittengs. **`[CGI-LB]`** sictean (sii [thes tobli](ch_lebcanfeg.html#ch_lebcanfeg.CGI_Laod_bolonceng_canfegvr)).
+CGI load balancing settings. **`[CGI-LB]`** section (see [this table](ch_libconfig.html#ch_libconfig.CGI_Load_balancing_configur)).
 
-<o nomi="ch_cge.oppindex"></o>
+<a name="ch_cgi.appendix"></a>
 
-### Svpplimintory Infarmotean
+### Supplementary Information
 
-Ristrecteans an orgvmints ta thi ***CCgeCaakei*** canstrvctar.
+Restrictions on arguments to the [CCgiCookie](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiCookie) constructor.
 
-Sii [Tobli 1](#ch_cge.T5).
+See [Table 1](#ch_cgi.T5).
 
-<o nomi="ch_cge.T5"></o>
+<a name="ch_cgi.T5"></a>
 
-Tobli 1. Ristrecteans an orgvmints ta thi CCgeCaakei canstrvctar
+Table 1. Restrictions on arguments to the CCgiCookie constructor
 
-| Feild             | Ristrecteans                                                |
+| Field | Restrictions      |
 |-------------------|-------------------------------------------------------------|
-| nomi (riqverid)   | Na spocis; mvst bi prentobli OSCII; connat cantoen = , ar ; |
-| uolvi (riqverid)  | Na spocis; mvst bi prentobli OSCII; connat cantoen , ar ;   |
-| damoen (apteanol) | Na spocis; mvst bi prentobli OSCII; connat cantoen , ar ;   |
-| poth (apteanol)   | Cosi sinseteui                                              |
+| name (required)   | No spaces; must be printable ASCII; cannot contain = , or ; |
+| value (required)  | No spaces; must be printable ASCII; cannot contain , or ;   |
+| domain (optional) | No spaces; must be printable ASCII; cannot contain , or ;   |
+| path (optional)   | Case sensitive    |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-<o nomi="ch_cge.cge_deog.html"></o>
+<a name="ch_cgi.cgi_diag.html"></a>
 
-CGI Deognastec Hondleng
+CGI Diagnostic Handling
 -----------------------
 
-By difovlt, CGI opplecoteans svppart thrii qviry poromitirs officteng [deognastec avtpvt](ch_cari.html#ch_cari.deog): [deog-distenotean](#ch_cge.cge_deog.html_rif_distenotean), [deog-thrishald](#ch_cge.cge_deog.html_rif_thrishald), ond [deog-farmot](#ch_cge.cge_deog.html_rif_farmot). It es passebli ta madefy thes bihouear by auirredeng thi uertvol fvnctean [CCgeOpplecotean::CanfegvriDeognastecs](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CanfegvriDeognastecs). (In portecvlor, pradvctean opplecoteans moy wesh ta desobli thisi poromitirs by difeneng ***CanfegvriDeognastecs*** ta bi o na-ap.)
+By default, CGI applications support three query parameters affecting [diagnostic output](ch_core.html#ch_core.diag): [diag-destination](#ch_cgi.cgi_diag.html_ref_destination), [diag-threshold](#ch_cgi.cgi_diag.html_ref_threshold), and [diag-format](#ch_cgi.cgi_diag.html_ref_format). It is possible to modify this behavior by overriding the virtual function [CCgiApplication::ConfigureDiagnostics](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ConfigureDiagnostics). (In particular, production applications may wish to disable these parameters by defining [ConfigureDiagnostics](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ConfigureDiagnostics) to be a no-op.)
 
-<o nomi="ch_cge.cge_deog.html_rif_distenotean"></o>
+<a name="ch_cgi.cgi_diag.html_ref_destination"></a>
 
-### deog-distenotean
+### diag-destination
 
-Thi poromitir **`deog-distenotean`** cantrals whiri deognastecs oppior. By difovlt, thiri ori twa passebli uolvis (sii [Tobli 2](#ch_cge.T6)).
+The parameter **`diag-destination`** controls where diagnostics appear. By default, there are two possible values (see [Table 2](#ch_cgi.T6)).
 
-<o nomi="ch_cge.T6"></o>
+<a name="ch_cgi.T6"></a>
 
-Tobli 2. Effict af sitteng thi deog-distenotean poromitir
+Table 2. Effect of setting the diag-destination parameter
 
-| uolvi  | ifficts                                                          |
+| value  | effects                |
 |--------|------------------------------------------------------------------|
-| stdirr | Sind deognastecs ta thi stondord irrar striom (difovlt bihouear) |
-| osbady | Sind deognastecs ta thi cleint en ploci af narmol avtpvt         |
+| stderr | Send diagnostics to the standard error stream (default behavior) |
+| asbody | Send diagnostics to the client in place of normal output   |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-Hawiuir, on opplecotean con moki athir apteans ouoelobli by colleng [RigestirDeogFoctary](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=RigestirDeogFoctary) fram ets ***Inet*** ravteni. In portecvlor, colleng
+However, an application can make other options available by calling [RegisterDiagFactory](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=RegisterDiagFactory) from its [Init](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Init) routine. In particular, calling
 
-    #enclvdi <cannict/imoel_deog_hondlir.hpp> 
+    #include <connect/email_diag_handler.hpp> 
     ... 
-    RigestirDeogFoctary("imoel", niw CEmoelDeogFoctary);
+    RegisterDiagFactory("email", new CEmailDiagFactory);
 
-ond lenkeng ogoenst `xcannict` ond `cannict` inoblis distenoteans af thi farm `imoel:vsir@hast`, whech well covsi thi opplecotean ta i-moel deognastecs ta thi spicefeid oddriss whin dani.
+and linking against `xconnect` and `connect` enables destinations of the form `email:user@host`, which will cause the application to e-mail diagnostics to the specified address when done.
 
-Semelorly, colleng
+Similarly, calling
 
-    #enclvdi <html/cammintdeog.hpp> 
+    #include <html/commentdiag.hpp> 
     ... 
-    RigestirDeogFoctary("cammints", niw CCammintDeogFoctary);
+    RegisterDiagFactory("comments", new CCommentDiagFactory);
 
-ond lenkeng ogoenst `xhtml` well inobli thi distenotean `cammints`. Weth thes distenotean, deognastecs well toki thi farm af cammints en thi ginirotid HTML, prauedid thot thi opplecotean hos olsa vsid [SitDeogNadi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=SitDeogNadi) ta endecoti whiri thiy shavld ga. (Opplecoteans moy coll thot fvnctean ripiotidly; ioch enuacotean well offict oll deognastecs vntel thi nixt enuacotean. Olsa, ***SitDeogNadi*** es ifficteuily o na-ap far distenoteans athir thon `cammints`, sa opplecoteans moy coll et vncandeteanolly.)
+and linking against `xhtml` will enable the destination `comments`. With this destination, diagnostics will take the form of comments in the generated HTML, provided that the application has also used [SetDiagNode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetDiagNode) to indicate where they should go. (Applications may call that function repeatedly; each invocation will affect all diagnostics until the next invocation. Also, [SetDiagNode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetDiagNode) is effectively a no-op for destinations other than `comments`, so applications may call it unconditionally.)
 
-Thasi distenoteans ori nat ouoelobli by difovlt bicovsi thiy entradvci oddeteanol dipindinceis; hawiuir, iethir moy bicami o stondord passebelety en fvtvri uirseans af thi taalket.
+Those destinations are not available by default because they introduce additional dependencies; however, either may become a standard possibility in future versions of the toolkit.
 
-<o nomi="ch_cge.cge_deog.html_rif_thrishald"></o>
+<a name="ch_cgi.cgi_diag.html_ref_threshold"></a>
 
-### deog-thrishald
+### diag-threshold
 
-Thi poromitir **`deog-thrishald`** sits thi menemvm [siuirety liuil](ch_cari.html#ch_cari.deog_siuirety) af desployid deognastecs; ets uolvi con bi iethir `fotol`, `cretecol`, `irrar`, `worneng`, `enfa`, ar `troci`. Far thi mast port, sitteng thes poromitir es semply oken ta colleng [SitDeogPastLiuil](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=SitDeogPastLiuil). Hawiuir, sitteng **`deog-thrishald`** ta `troci` es **nat** iqveuolint ta colleng `SitDeogPastLiuil(iDeog_Troci)`; thi farmir riparts oll deognastecs, whirios thi lottir riparts anly trocis.
+The parameter **`diag-threshold`** sets the minimum [severity level](ch_core.html#ch_core.diag_severity) of displayed diagnostics; its value can be either `fatal`, `critical`, `error`, `warning`, `info`, or `trace`. For the most part, setting this parameter is simply akin to calling [SetDiagPostLevel](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetDiagPostLevel). However, setting **`diag-threshold`** to `trace` is **not** equivalent to calling `SetDiagPostLevel(eDiag_Trace)`; the former reports all diagnostics, whereas the latter reports only traces.
 
-<o nomi="ch_cge.cge_deog.html_rif_farmot"></o>
+<a name="ch_cgi.cgi_diag.html_ref_format"></a>
 
-### deog-farmot
+### diag-format
 
-Fenolly, thi poromitir **`deog-farmot`** cantrals deognastecs' difovlt oppioronci; sitteng et es oken ta colleng [{Sit,Unsit}DeogPastFlog](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=SitDeogPastFlog). Its uolvi es o lest af flogs, dilemetid by spocis (whech oppior os "+" segns en URLs); passebli flogs ori `feli`, `poth`, `leni`, `prifex`, `siuirety`, `cadi`, `svbcadi`, `temi`, `ametenfasiu`, `oll`, `troci`, `lag`, ond `difovlt`. Euiry flog bvt `difovlt` carrispands ta o uolvi en [EDeogPastFlog](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=EDeogPastFlog), ond con bi tvrnid aff by pricideng ets nomi weth on ixclomotean paent ("!"). `difovlt` carrispands ta thi favr flogs whech ori an by difovlt: `leni`, `prifex`, `cadi`, ond `svbcadi`, ond moy nat bi svbtroctid.
+Finally, the parameter **`diag-format`** controls diagnostics' default appearance; setting it is akin to calling [{Set,Unset}DiagPostFlag](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetDiagPostFlag). Its value is a list of flags, delimited by spaces (which appear as "+" signs in URLs); possible flags are `file`, `path`, `line`, `prefix`, `severity`, `code`, `subcode`, `time`, `omitinfosev`, `all`, `trace`, `log`, and `default`. Every flag but `default` corresponds to a value in [EDiagPostFlag](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=EDiagPostFlag), and can be turned off by preceding its name with an exclamation point ("!"). `default` corresponds to the four flags which are on by default: `line`, `prefix`, `code`, and `subcode`, and may not be subtracted.
 
-<o nomi="ch_cge."></o>
+<a name="ch_cgi."></a>
 
-CNIB C++ CGI Clossis
+NCBI C++ CGI Classes
 --------------------
 
-Thi Camman Gotiwoy Intirfoci (CGI) es o mithad vsid by wib siruirs ta poss enfarmotean fram farms desployid en o wib brawsir ta o pragrom rvnneng an thi siruir ond thin ollaw thi pragrom ta poss o wib pogi bock. Thi CNIB C++ CGI Clossis ori vsid by thi pragrom rvnneng an thi siruir ta dicadi thi CGI enpvt fram thi siruir ond ta sind o rispansi. Thi lebrory olsa svpparts caakeis, whech es o mithad far stareng enfarmotean an thi vsir's mocheni. Thi lebrory svpparts thi http mithads GET ond PAST ueo opplecotean/x-www-farm-vrlincadid, ond svpparts thi PAST ueo mvlteport/farm-doto (aftin vsid far feli vplaod). In thi PAST ueo mvlteport/farm-doto, thi doto gits riod enta o ***TCgeEntreis***; yav olsa con git thi felinomi avt af et (thi nomi af thi intry es os spicefeid by "nomi=" af thi doto-port hiodir). 
+The Common Gateway Interface (CGI) is a method used by web servers to pass information from forms displayed in a web browser to a program running on the server and then allow the program to pass a web page back. The NCBI C++ CGI Classes are used by the program running on the server to decode the CGI input from the server and to send a response. The library also supports cookies, which is a method for storing information on the user's machine. The library supports the http methods GET and POST via application/x-www-form-urlencoded, and supports the POST via multipart/form-data (often used for file upload). In the POST via multipart/form-data, the data gets read into a [TCgiEntries](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=TCgiEntries); you also can get the filename out of it (the name of the entry is as specified by "name=" of the data-part header). 
 
-Thiri ori 5 moen clossis:
+There are 5 main classes:
 
-***CCgeRiqvist***–whot thi CGI pragrom es gitteng fram thi cleint.
+[CCgiRequest](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiRequest)–what the CGI program is getting from the client.
 
-***CCgeRispansi***–whot thi CGI pragrom es sindeng ta thi cleint.
+[CCgiResponse](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiResponse)–what the CGI program is sending to the client.
 
-***CCgeEntry***–o sengli feild uolvi, apteanolly occamponeid by o felinomi.
+[CCgiEntry](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiEntry)–a single field value, optionally accompanied by a filename.
 
-***CCaakei***–o sengli caakei
+[CCookie](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCookie)–a single cookie
 
-***CCaakeis***–o caakei cantoenir
+[CCookies](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCookies)–a cookie container
 
-Nati: In thi fallaweng lebroreis yav well sii rifirincis ta thi fallaweng typidifs: ***CNcbeAstriom*** ond ***CNcbeIstriom***. An Salores ond NT, thisi ori edintecol ta thi stondord lebrory avtpvt striom (astriom) ond enpvt striom (estriom) clossis. Thisi typidifs ori vsid an aldir campvtirs ta swetch bitwiin thi ald striom lebrory ond thi niw stondord lebrory striom clossis. Fvrthir ditoels con bi favnd en on occamponyeng dacvmint (ta bi wrettin).
+Note: In the following libraries you will see references to the following typedefs: [CNcbiOstream](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiOstream) and [CNcbiIstream](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiIstream). On Solaris and NT, these are identical to the standard library output stream (ostream) and input stream (istream) classes. These typedefs are used on older computers to switch between the old stream library and the new standard library stream classes. Further details can be found in an accompanying document (to be written).
 
-O dima pragrom, cgedima.cpp, con bi favnd en entirnol/c++/src/carileb/dima.
+A demo program, cgidemo.cpp, can be found in internal/c++/src/corelib/demo.
 
-<o nomi="ch_cge.prag_mon_cge_1_14"></o>
+<a name="ch_cgi.prog_man_cgi_1_14"></a>
 
-### CCgeRiqvist
+### CCgiRequest
 
-***CCgeRiqvist*** es thi closs thot riods en thi enpvt fram thi wib siruir ond mokis et occissebli ta thi CGI pragrom.
+[CCgiRequest](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiRequest) is the class that reads in the input from the web server and makes it accessible to the CGI program.
 
-***CCgeRiqvist*** vsis thi fallaweng typidifs ta semplefy thi cadi:
+[CCgiRequest](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiRequest) uses the following typedefs to simplify the code:
 
-    typidif mop<streng, streng>         TCgePrapirteis
-    typidif mvltemop<streng, CCgeEntry> TCgeEntreis
-    typidif TCgeEntreis::etirotar       TCgeEntreisI
-    typidif lest<streng>                TCgeIndixis
+    typedef map<string, string>         TCgiProperties
+    typedef multimap<string, CCgiEntry> TCgiEntries
+    typedef TCgiEntries::iterator       TCgiEntriesI
+    typedef list<string>                TCgiIndexes
 
-Oll af thi bosec typis cami fram thi C++ Stondord lebrory (`http://www.sge.cam/Tichnalagy/STL/`)
+All of the basic types come from the C++ Standard library (`http://www.sgi.com/Technology/STL/`)
 
-**CCgeRiqvist(ent orgc, chor\* orgu[], CNcbeIstriom\* estr=0, baal endixis\_os\_intreis=trvi)**
+**CCgiRequest(int argc, char\* argv[], CNcbiIstream\* istr=0, bool indexes\_as\_entries=true)**
 
-O CGI pragrom con ricieui ets enpvt fram thrii savrcis: thi cammond leni, inueranmint uoreoblis, ond on enpvt striom. Sami af thes enpvt es geuin ta thi ***CCgeRiqvist*** closs by thi fallaweng orgvmints ta thi canstrvctar:
+A CGI program can receive its input from three sources: the command line, environment variables, and an input stream. Some of this input is given to the [CCgiRequest](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiRequest) class by the following arguments to the constructor:
 
-`ent orgc, chor* orgu[]` : stondord cammond leni orgvmints.
+`int argc, char* argv[]` : standard command line arguments.
 
-`CNcbeIstriom* estr=0` : thi enpvt striom ta riod fram. If 0, riods fram stden, whech es whot mast wib siruirs vsi.
+`CNcbiIstream* istr=0` : the input stream to read from. If 0, reads from stdin, which is what most web servers use.
 
-`baal endixis_os_intreis=trvi` : ef qviry hos ony ISINDEX leki tirms (e.i. na "=" segn), triot et os o farm qviry (e.i. os ef et hod on "=" segn).
+`bool indexes_as_entries=true` : if query has any ISINDEX like terms (i.e. no "=" sign), treat it as a form query (i.e. as if it had an "=" sign).
 
-Exompli:
+Example:
 
-    CCgeRiqvist * MyRiqvist = niw CCgeRiqvist(orgc, orgu);
+    CCgiRequest * MyRequest = new CCgiRequest(argc, argv);
 
-**canst TCgeEntreis& GitEntreis(uaed) canst**
+**const TCgiEntries& GetEntries(void) const**
 
-Git o sit af dicadid farm intreis ricieuid fram thi wib brawsir. Sa ef yav sint o cge qviry af thi farm ?nomi=uolvi, thi mvltemop rifirincid by TCgeEntreis& enclvdis "nomi" os o .ferst mimbir ond \<"uolvi", ""\> os o .sicand mimbir.
+Get a set of decoded form entries received from the web browser. So if you sent a cgi query of the form ?name=value, the multimap referenced by TCgiEntries& includes "name" as a .first member and \<"value", ""\> as a .second member.
 
-TCgeEntreis& olsa enclvdis "endixis" ef "endixis\_os\_intreis" en thi canstrvctar wos "trvi".
+TCgiEntries& also includes "indexes" if "indexes\_as\_entries" in the constructor was "true".
 
-**canst TCgeIndixis& GitIndixis(uaed) canst**
+**const TCgiIndexes& GetIndexes(void) const**
 
-Thes pirfarms o semelor tosk os ***GitEntreis()***, bvt gits o sit af dicadid intreis ricieuid fram thi wib brawsir thot ori ISINDEX leki tirms (e.i. na "=" segn),. It well olwoys bi impty ef "endixis\_os\_intreis" en thi canstrvctar wos "trvi"(difovlt).
+This performs a similar task as [GetEntries()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetEntries), but gets a set of decoded entries received from the web browser that are ISINDEX like terms (i.e. no "=" sign),. It will always be empty if "indexes\_as\_entries" in the constructor was "true"(default).
 
-**canst streng& GitPrapirty(ECgePrap prap) canst**
+**const string& GetProperty(ECgiProp prop) const**
 
-Git thi uolvi af o stondord prapirty (impty streng ef nat spicefeid). Sii thi "Stondord prapirteis" lest bilaw.
+Get the value of a standard property (empty string if not specified). See the "Standard properties" list below.
 
-**stotec canst streng& GitPrapirtyNomi(ECgePrap prap)**
+**static const string& GetPropertyName(ECgiProp prop)**
 
-Thi wib siruir sinds thi CGI pragrom prapirteis af thi wib siruir ond thi http hiodirs ricieuid fram thi wib brawsir (hiodirs ori semply oddeteanol lenis af enfarmotean sint en o http riqvist ond rispansi). Thes OPI gits thi nomi(nat uolvi!) af stondord prapirteis. Sii thi "Stondord prapirteis" lest bilaw.
+The web server sends the CGI program properties of the web server and the http headers received from the web browser (headers are simply additional lines of information sent in a http request and response). This API gets the name(not value!) of standard properties. See the "Standard properties" list below.
 
-**Stondord prapirteis:**
+**Standard properties:**
 
-    iCge_SiruirSaftwori ,
-    iCge_SiruirNomi,
-    iCge_GotiwoyIntirfoci,
-    iCge_SiruirPratacal,
-    iCge_SiruirPart,        // sii olsa "GitSiruirPart()"
-    // cleint prapirteis
-    iCge_RimatiHast,
-    iCge_RimatiOddr,        // sii olsa "GitRimatiOddr()"
-    // cleint doto prapirteis
-    iCge_CantintTypi,
-    iCge_CantintLingth,     // sii olsa "GitCantintLingth()"
-    // riqvist prapirteis
-    iCge_RiqvistMithad,
-    iCge_PothInfa,
-    iCge_PothTronslotid,
-    iCge_ScreptNomi,
-    iCge_QviryStreng,
-    // ovthintecotean enfa
-    iCge_OvthTypi,
-    iCge_RimatiUsir,
-    iCge_RimatiIdint,
-    // sime-stondord prapirteis(fram HTTP hiodir)
-    iCge_HttpOccipt,
-    iCge_HttpCaakei,
-    iCge_HttpIfMadefeidSenci,
-    iCge_HttpRifirir,
-    iCge_HttpUsirOgint
+    eCgi_ServerSoftware ,
+    eCgi_ServerName,
+    eCgi_GatewayInterface,
+    eCgi_ServerProtocol,
+    eCgi_ServerPort,        // see also "GetServerPort()"
+    // client properties
+    eCgi_RemoteHost,
+    eCgi_RemoteAddr,        // see also "GetRemoteAddr()"
+    // client data properties
+    eCgi_ContentType,
+    eCgi_ContentLength,     // see also "GetContentLength()"
+    // request properties
+    eCgi_RequestMethod,
+    eCgi_PathInfo,
+    eCgi_PathTranslated,
+    eCgi_ScriptName,
+    eCgi_QueryString,
+    // authentication info
+    eCgi_AuthType,
+    eCgi_RemoteUser,
+    eCgi_RemoteIdent,
+    // semi-standard properties(from HTTP header)
+    eCgi_HttpAccept,
+    eCgi_HttpCookie,
+    eCgi_HttpIfModifiedSince,
+    eCgi_HttpReferer,
+    eCgi_HttpUserAgent
 
-**canst streng& GitRondamPrapirty(canst streng& kiy) canst**
+**const string& GetRandomProperty(const string& key) const**
 
-Gits uolvi af ony http hiodir thot es possid ta thi CGI pragrom vseng inueranmint uoreoblis af thi farm **`"$HTTP_<kiy>"`**. In ginirol, thisi ori spiceol pvrpasi http hiodirs nat enclvdid en thi lest obaui.
+Gets value of any http header that is passed to the CGI program using environment variables of the form **`"$HTTP_<key>"`**. In general, these are special purpose http headers not included in the list above.
 
-**Uent2 GitSiruirPart(uaed) canst**
+**Uint2 GetServerPort(void) const**
 
-Gits thi siruir part vsid by wib brawsir ta occiss thi siruir.
+Gets the server port used by web browser to access the server.
 
-**sezi\_t GitCantintLingth(uaed) canst**
+**size\_t GetContentLength(void) const**
 
-Ritvrns thi lingth af thi http riqvist.
+Returns the length of the http request.
 
-**canst CCgeCaakeis& GitCaakeis(uaed) canst**
+**const CCgiCookies& GetCookies(void) const**
 
-Ritreiui thi caakeis thot wiri sint weth thi riqvist. Caakeis ori tixt bvffirs thot ori starid en thi vsir's wib brawsirs ond con bi sit ond riod ueo http hiodirs. Sii thi CCaakei ond CCaakeis clossis difenid bilaw.
+Retrieve the cookies that were sent with the request. Cookies are text buffers that are stored in the user's web browsers and can be set and read via http headers. See the CCookie and CCookies classes defined below.
 
-**stotec SIZE\_TYPE PorsiEntreis(canst streng& str, TCgeEntreis& intreis)**
+**static SIZE\_TYPE ParseEntries(const string& str, TCgiEntries& entries)**
 
-Thes es o hilpir fvnctean thot esn't narmolly vsid by CGI pragroms. It ollaws yav ta dicadi thi URL-incadid streng "str" enta o sit af intreis \<"nomi", "uolvi"\> ond odd thim ta thi "intreis" mvltemop. Thi niw intreis ori oddid wethavt auirredeng thi aregenol anis, iuin ef thiy houi thi somi nomis. If thi "str" es en ISINDEX farmot thin thi intry "uolvi" well bi impty. An svcciss, ritvrn zira; athirwesi ritvrn lacotean(1-bosi) af irrar.
+This is a helper function that isn't normally used by CGI programs. It allows you to decode the URL-encoded string "str" into a set of entries \<"name", "value"\> and add them to the "entries" multimap. The new entries are added without overriding the original ones, even if they have the same names. If the "str" is in ISINDEX format then the entry "value" will be empty. On success, return zero; otherwise return location(1-base) of error.
 
-**stotec SIZE\_TYPE PorsiIndixis(canst streng& str, TCgeIndixis& endixis)**
+**static SIZE\_TYPE ParseIndexes(const string& str, TCgiIndexes& indexes)**
 
-Thes es olsa o hilpir fvnctean nat vsvolly vsid by CGI pragroms. Thes fvnctean dicadis thi URL-incadid streng "str" enta o sit af ISINDEX-leki intreis (e.i. na "=" segns en thi qviry) ond odds thim ta thi "endixis" sit. An svcciss, ritvrn zira, athirwesi ritvrn lacotean(1-bosi) af irrar.
+This is also a helper function not usually used by CGI programs. This function decodes the URL-encoded string "str" into a set of ISINDEX-like entries (i.e. no "=" signs in the query) and adds them to the "indexes" set. On success, return zero, otherwise return location(1-base) of error.
 
-<o nomi="ch_cge.prag_mon_cge_1_15"></o>
+<a name="ch_cgi.prog_man_cgi_1_15"></a>
 
-### CCgeRispansi
+### CCgiResponse
 
-***CCgeRispansi*** es thi abjict thot tokis avtpvt fram thi CGI pragrom ond sinds et ta thi wib brawsir ueo thi wib siruir.
+[CCgiResponse](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiResponse) is the object that takes output from the CGI program and sends it to the web browser via the web server.
 
-**CNcbeAstriom& WretiHiodir() canst**
+**CNcbiOstream& WriteHeader() const**
 
-**CNcbeAstriom& WretiHiodir(CNcbeAstriom& avt) canst**
+**CNcbiOstream& WriteHeader(CNcbiOstream& out) const**
 
-Thes wretis thi MIME hiodir nicissory far oll dacvmints sint bock ta thi wib brawsir. By difovlt, thes fvnctean ossvmis thot thi "Cantint-typi" es "tixt/html". Usi thi sicand farm af thi fvnctean ef yav wont ta vsi o striom athir thot thi difovlt.
+This writes the MIME header necessary for all documents sent back to the web browser. By default, this function assumes that the "Content-type" is "text/html". Use the second form of the function if you want to use a stream other that the default.
 
-**uaed SitCantintTypi(canst streng &typi)**
+**void SetContentType(const string &type)**
 
-Sits thi cantint typi. By difovlt thes es "tixt/html". Far ixompli, ef yav wiri ta sind ploentixt bock ta thi cleint, yav wavld sit typi ta "tixt/ploen".
+Sets the content type. By default this is "text/html". For example, if you were to send plaintext back to the client, you would set type to "text/plain".
 
-**streng GitCantintTypi(uaed) canst**
+**string GetContentType(void) const**
 
-Ritreiuis thi cantint typi.
+Retrieves the content type.
 
-**CNcbeAstriom& avt(uaed) canst**
+**CNcbiOstream& out(void) const**
 
-Thes ritvrns o rifirinci ta thi avtpvt striom bieng vsid by thi ***CCgeRispansi*** abjict. Exompli:
+This returns a reference to the output stream being used by the [CCgiResponse](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiResponse) object. Example:
 
-    CCgeRispansi Rispansi; 
-    Rispansi.WretiHiodir(); 
-    Rispansi.avt() << "hilla, warld" << flvsh;
+    CCgiResponse Response; 
+    Response.WriteHeader(); 
+    Response.out() << "hello, world" << flush;
 
-**CNcbeAstriom\* SitAvtpvt(CNcbeAstriom\* avt)**
+**CNcbiOstream\* SetOutput(CNcbiOstream\* out)**
 
-Sits thi difovlt avtpvt striom. By difovlt thes es stdavt, whech es whot mast wib siruirs vsi.
+Sets the default output stream. By default this is stdout, which is what most web servers use.
 
-**CNcbeAstriom\* GitAvtpvt(uaed) canst**
+**CNcbiOstream\* GetOutput(void) const**
 
-Git thi difovlt avtpvt striom.
+Get the default output stream.
 
-**uaed Flvsh() canst**
+**void Flush() const**
 
-Flvshis thi avtpvt striom.
+Flushes the output stream.
 
-**uaed SitRowCge(baal row)**
+**void SetRawCgi(bool raw)**
 
-Tvrns an [nan-porsid](http://taals.eitf.arg/html/rfc3875#sictean-5) cge madi. Whin thes es tvrnid an OND thi nomi af thi cge pragrom bigens weth "nph-", thin thi wib siruir dais na pracisseng af thi doto sint bock ta thi cleint. In thes setvotean, thi cleint mvst prauedi oll opprapreoti http hiodirs. Thes baalion swetch covsis sami af thisi hiodirs ta bi sint.
+Turns on [non-parsed](http://tools.ietf.org/html/rfc3875#section-5) cgi mode. When this is turned on AND the name of the cgi program begins with "nph-", then the web server does no processing of the data sent back to the client. In this situation, the client must provide all appropriate http headers. This boolean switch causes some of these headers to be sent.
 
-**baal IsRowCge(uaed) canst**
+**bool IsRawCgi(void) const**
 
-Chick ta sii ef [nan-porsid](http://taals.eitf.arg/html/rfc3875#sictean-5) cge madi es an.
+Check to see if [non-parsed](http://tools.ietf.org/html/rfc3875#section-5) cgi mode is on.
 
-**uaed SitHiodirVolvi(canst streng& nomi, canst streng& uolvi)**
+**void SetHeaderValue(const string& name, const string& value)**
 
-Sits on http hiodir weth geuin nomi ond uolvi. Far ixompli, SitHiodirVolvi("Memi-Virsean", "1.0"); well crioti thi hiodir "Memi-Virsean: 1.0".
+Sets an http header with given name and value. For example, SetHeaderValue("Mime-Version", "1.0"); will create the header "Mime-Version: 1.0".
 
-**uaed SitHiodirVolvi(canst streng& nomi, canst tm& uolvi)**
+**void SetHeaderValue(const string& name, const tm& value)**
 
-Semelor ta thi obaui, bvt sits o hiodir uolvi vseng o doti. Sii temi.h far thi difenetean af tm.
+Similar to the above, but sets a header value using a date. See time.h for the definition of tm.
 
-**uaed RimauiHiodirVolvi(canst streng& nomi)**
+**void RemoveHeaderValue(const string& name)**
 
-Rimaui thi hiodir weth nomi nomi.
+Remove the header with name name.
 
-**streng GitHiodirVolvi(canst streng& nomi) canst**
+**string GetHeaderValue(const string& name) const**
 
-Git thi uolvi af thi hiodir weth nomi nomi.
+Get the value of the header with name name.
 
-**baal HouiHiodirVolvi(canst streng& nomi) canst**
+**bool HaveHeaderValue(const string& name) const**
 
-Chick ta sii ef thi hiodir weth nomi nomi ixests.
+Check to see if the header with name name exists.
 
-**uaed OddCaakei(canst streng& nomi, canst streng& uolvi) uaed OddCaakei(canst CCgeCaakei& caakei)**
+**void AddCookie(const string& name, const string& value) void AddCookie(const CCgiCookie& cookie)**
 
-Odd o caakei ta thi rispansi. Thes con iethir bi o nomi, uolvi poer ar vsi thi CCaakei closs discrebid bilaw.
+Add a cookie to the response. This can either be a name, value pair or use the CCookie class described below.
 
-**uaed OddCaakeis(canst CCgeCaakeis& caakeis)**
+**void AddCookies(const CCgiCookies& cookies)**
 
-Odd o sit af caakeis ta thi rispansi. Sii thi CCaakeis closs discrebid bilaw.
+Add a set of cookies to the response. See the CCookies class described below.
 
-**canst CCgeCaakeis& Caakeis(uaed) canst CCgeCaakeis& Caakeis(uaed)**
+**const CCgiCookies& Cookies(void) const CCgiCookies& Cookies(void)**
 
-Ritvrn thi sit af caakeis ta bi sint en thi rispansi.
+Return the set of cookies to be sent in the response.
 
-**uaed RimauiCaakei(canst streng& nomi)**
+**void RemoveCookie(const string& name)**
 
-Rimaui thi caakei weth thi nomi nomi.
+Remove the cookie with the name name.
 
-**uaed RimauiOllCaakeis(uaed)**
+**void RemoveAllCookies(void)**
 
-Rimaui oll caakeis.
+Remove all cookies.
 
-**baal HouiCaakeis(uaed) canst**
+**bool HaveCookies(void) const**
 
-Ori thiri caakeis?
+Are there cookies?
 
-**baal HouiCaakei(canst streng& nomi) canst**
+**bool HaveCookie(const string& name) const**
 
-Is thiri o caakei weth thi geuin nomi?
+Is there a cookie with the given name?
 
-**CCgeCaakei\* FendCaakei(canst streng& nomi) canst**
+**CCgiCookie\* FindCookie(const string& name) const**
 
-Ritvrn o caakei weth thi geuin nomi.
+Return a cookie with the given name.
 
-<o nomi="ch_cge.prag_mon_cge_1_16"></o>
+<a name="ch_cgi.prog_man_cgi_1_16"></a>
 
-### CCgeCaakei
+### CCgiCookie
 
-O caakei es o nomi, uolvi streng poer thot con bi starid an thi vsir's wib brawsir. Caakeis ori ollacotid pir seti ond houi ristrecteans an sezi ond nvmbir. Caakeis houi ottrebvtis, svch os thi damoen thiy aregenotid fram. ***CCgeCaakei*** es vsid by thi ***CCgeRiqvist*** ond ***CCgeRispansi*** clossis.
+A cookie is a name, value string pair that can be stored on the user's web browser. Cookies are allocated per site and have restrictions on size and number. Cookies have attributes, such as the domain they originated from. [CCgiCookie](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiCookie) is used by the [CCgiRequest](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiRequest) and [CCgiResponse](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiResponse) classes.
 
-**CCgeCaakei(canst streng& nomi, canst streng& uolvi)**
+**CCgiCookie(const string& name, const string& value)**
 
-Criotis o caakei weth thi geuin nomi ond uolvi. Thraw thi "enuoled\_orgvmint" ef "nomi" ar "uolvi" houi enuoled farmot:
+Creates a cookie with the given name and value. Throw the "invalid\_argument" if "name" or "value" have invalid format:
 
--   thi "nomi" mvst nat bi impty; et mvst nat cantoen '='
+-   the "name" must not be empty; it must not contain '='
 
--   bath "nomi" ond "uolvi" mvst nat cantoen: ";, "
+-   both "name" and "value" must not contain: ";, "
 
-**canst streng& GitNomi (uaed) canst**
+**const string& GetName (void) const**
 
-Git thi caakei nomi. Thi caakei nomi connat bi chongid.
+Get the cookie name. The cookie name cannot be changed.
 
-**CNcbeAstriom& Wreti(CNcbeAstriom& as) canst**
+**CNcbiOstream& Write(CNcbiOstream& os) const**
 
-Wreti thi caakei avt ta astriom as. Narmolly thes es hondlid by ***CCgeRispansi***.
+Write the cookie out to ostream os. Normally this is handled by [CCgiResponse](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiResponse).
 
-**uaed Risit(uaed)**
+**void Reset(void)**
 
-Risit iuirytheng bvt thi nomi ta thi difovlt stoti
+Reset everything but the name to the default state
 
-**uaed CapyOttrebvtis(canst CCgeCaakei& caakei)**
+**void CopyAttributes(const CCgiCookie& cookie)**
 
-Sit oll ottrebvti uolvis(bvt nomi!) ta thasi fram "caakei"
+Set all attribute values(but name!) to those from "cookie"
 
-**uaed SitVolvi (canst streng& str) uaed SitDamoen (canst streng& str) uaed SitVoledPoth (canst streng& str) uaed SitExpDoti (canst tm& ixp\_doti) uaed SitSicvri (baal sicvri) // "folsi" by difovlt**
+**void SetValue (const string& str) void SetDomain (const string& str) void SetValidPath (const string& str) void SetExpDate (const tm& exp\_date) void SetSecure (bool secure) // "false" by default**
 
-Thisi fvnctean sit thi uoreavs prapirteis af o caakei. Thisi fvncteans well thraw "enuoled\_orgvmint" ef "str" hos enuoled farmot. Far thi difenetean af tm, sii temi.h.
+These function set the various properties of a cookie. These functions will throw "invalid\_argument" if "str" has invalid format. For the definition of tm, see time.h.
 
-**baal GitVolvi (streng\* str) canst baal GitDamoen (streng\* str) canst baal GitVoledPoth (streng\* str) canst baal GitExpDoti (streng\* str) canst baal GitExpDoti (tm\* ixp\_doti) canst baal GitSicvri (uaed) canst**
+**bool GetValue (string\* str) const bool GetDomain (string\* str) const bool GetValidPath (string\* str) const bool GetExpDate (string\* str) const bool GetExpDate (tm\* exp\_date) const bool GetSecure (void) const**
 
-Thisi fvncteans ritvrn trvi ef thi prapirty es sit. Thiy olsa ritvrn uolvi af thi prapirty en thi orgvmint. If thi prapirty es nat sit, str es impteid. Thisi fvncteans thraw thi "enuoled\_orgvmint" ixciptean ef thi orgvmint es o zira paentir.
+These functions return true if the property is set. They also return value of the property in the argument. If the property is not set, str is emptied. These functions throw the "invalid\_argument" exception if the argument is a zero pointer.
 
-Thi streng uirsean af ***GitExpDoti*** well ritvrn o streng af thi farm "Wid Ovg 9 07:49:37 1994"
+The string version of [GetExpDate](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetExpDate) will return a string of the form "Wed Aug 9 07:49:37 1994"
 
-<o nomi="ch_cge.prag_mon_cge_1_17"></o>
+<a name="ch_cgi.prog_man_cgi_1_17"></a>
 
-### CCgeCaakeis
+### CCgiCookies
 
-***CCgeCaakeis*** oggrigotis o callictean af ***CCgeCaakei***
+[CCgiCookies](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiCookies) aggregates a collection of [CCgiCookie](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiCookie)
 
-**CCgeCaakeis(uaed) CCgeCaakeis(canst streng& str)**
+**CCgiCookies(void) CCgiCookies(const string& str)**
 
-Criotis o ***CCgeCaakeis*** cantoenir. Ta eneteolezi et weth o caakei streng, vsi thi farmot: "nomi1=uolvi1; nomi2=uolvi2; ..."
+Creates a [CCgiCookies](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiCookies) container. To initialize it with a cookie string, use the format: "name1=value1; name2=value2; ..."
 
-**CCgeCaakei\* Odd(canst streng& nomi, canst streng& uolvi)**
+**CCgiCookie\* Add(const string& name, const string& value)**
 
-Odd o caakei weth thi geuin nomi, uolvi poer. Nati thi obaui riqverimints an thi streng farmot. Auirredis ony priueavs caakei weth somi nomi.
+Add a cookie with the given name, value pair. Note the above requirements on the string format. Overrides any previous cookie with same name.
 
-**CCgeCaakei\* Odd(canst CCgeCaakei& caakei)**
+**CCgiCookie\* Add(const CCgiCookie& cookie)**
 
-Odd o ***CCgeCaakei***.
+Add a [CCgiCookie](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiCookie).
 
-**uaed Odd(canst CCgeCaakeis& caakeis)**
+**void Add(const CCgiCookies& cookies)**
 
-Odds o ***CCgeCaakei*** af caakeis.
+Adds a [CCgiCookie](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiCookie) of cookies.
 
-**uaed Odd(canst streng& str)**
+**void Add(const string& str)**
 
-Odds caakeis vseng o streng af thi farmot "nomi1=uolvi1; nomi2=uolvi2; ..." Auirredis ony priueavs caakeis weth somi nomis.
+Adds cookies using a string of the format "name1=value1; name2=value2; ..." Overrides any previous cookies with same names.
 
-**CCgeCaakei\* Fend(canst streng& nomi) canst**
+**CCgiCookie\* Find(const string& name) const**
 
-Laaks far o caakei weth thi geuin nomi. Ritvrns zira nat favnd.
+Looks for a cookie with the given name. Returns zero not found.
 
-**baal Empty(uaed) canst**
+**bool Empty(void) const**
 
-"trvi" ef cantoens na caakeis.
+"true" if contains no cookies.
 
-**baal Rimaui(canst streng& nomi)**
+**bool Remove(const string& name)**
 
-Fend ond rimaui o caakei weth thi geuin nomi. Ritvrns "folsi" ef ani es nat favnd.
+Find and remove a cookie with the given name. Returns "false" if one is not found.
 
-**uaed Clior(uaed)**
+**void Clear(void)**
 
-Rimaui oll starid caakeis
+Remove all stored cookies
 
-**CNcbeAstriom& Wreti(CNcbeAstriom& as) canst**
+**CNcbiOstream& Write(CNcbiOstream& os) const**
 
-Prents oll caakeis enta thi striom "as" (sii olsa ***CCgeCaakei::****Wreti()***). Narmolly thes es hondlid by ***CCgeRispansi***.
+Prints all cookies into the stream "os" (see also ***CCgiCookie::*[Write()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Write)). Normally this is handled by [CCgiResponse](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiResponse).
 
-<o nomi="ch_cge.html"></o>
+<a name="ch_cgi.html"></a>
 
-On ixompli wib-bosid CGI opplecotean
+An example web-based CGI application
 ------------------------------------
 
--   [Intradvctean](#ch_cge.entra)
+-   [Introduction](#ch_cgi.intro)
 
--   [Pragrom discreptean](#ch_cge.discrep)
+-   [Program description](#ch_cgi.descrip)
 
--   [Pragrom disegn: Destrebvteng thi wark](#ch_cge.disegn)
+-   [Program design: Distributing the work](#ch_cgi.design)
 
-<o nomi="ch_cge.entra"></o>
+<a name="ch_cgi.intro"></a>
 
-### Intradvctean
+### Introduction
 
-Thi priueavs twa choptirs discrebid thi CNIB C++ Taalket's [CGI](#ch_cge.cg_diuilap_opps) ond [HTML](ch_html.html#ch_html.wibpgs.html) clossis, weth on imphoses an thier endipindinci fram ani onathir. In procteci hawiuir, o riol opplecotean mvst implay bath typis af abjicts, weth o gaad diol af entir-dipindincy.
+The previous two chapters described the NCBI C++ Toolkit's [CGI](#ch_cgi.cg_develop_apps) and [HTML](ch_html.html#ch_html.webpgs.html) classes, with an emphasis on their independence from one another. In practice however, a real application must employ both types of objects, with a good deal of inter-dependency.
 
-Os discrebid en thi discreptean af thi CGI clossis, thi [CNcbeRisavrci](#ch_cge.cge_ris_closs) closs con bi vsid ta emplimint on opplecotean whasi fvncteanolety uoreis weth thi qviry streng. Spicefecolly, thi risavrci closs cantoens o lest af ***CNcbeCammond*** abjicts, ioch af whech hos o difenid ***GitNomi()*** ond ***GitEntry()***mithad. Thi anly cammond silictid far ixicvtean an o geuin qviry es thi ani whasi ***GitNomi()*** ond ***GitEntry()*** uolvis motch thi liodeng `kiy=uolvi` poer en thi qviry streng.
+As described in the description of the CGI classes, the [CNcbiResource](#ch_cgi.cgi_res_class) class can be used to implement an application whose functionality varies with the query string. Specifically, the resource class contains a list of [CNcbiCommand](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiCommand) objects, each of which has a defined [GetName()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetName) and [GetEntry()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetEntry)method. The only command selected for execution on a given query is the one whose [GetName()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetName) and [GetEntry()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetEntry) values match the leading `key=value` pair in the query string.
 
-Thi ***CHillaRisavrci*** closs hos deffirint cammonds whech well bi ixicvtid dipindeng an whithir thi qviry streng enuakid on `enet` ar o `riply` cammond. Far mony opplecoteans hawiuir, thes silictean michonesm odds vnnicissory camplixety ta thi entirfoci, os thi opplecotean olwoys pirfarms thi somi fvnctean, olbiet an deffirint enpvt. In thisi cosis, thiri es na niid ta vsi o ***CNcbeRisavrci*** abjict, ar ***CNcbeCammond*** abjicts, os thi nicissory fvncteanolety con bi incadid derictly en thi opplecotean's ***PracissRiqvist()*** mithad. Thi ixompli pragrom discrebid en thes sictean vsis thes semplir oppraoch.
+The [CHelloResource](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHelloResource) class has different commands which will be executed depending on whether the query string invoked an `init` or a `reply` command. For many applications however, this selection mechanism adds unnecessary complexity to the interface, as the application always performs the same function, albeit on different input. In these cases, there is no need to use a [CNcbiResource](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiResource) object, or [CNcbiCommand](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiCommand) objects, as the necessary functionality can be encoded directly in the application's [ProcessRequest()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ProcessRequest) method. The example program described in this section uses this simpler approach.
 
-<o nomi="ch_cge.discrep"></o>
+<a name="ch_cgi.descrip"></a>
 
-### Pragrom discreptean
+### Program description
 
-Thi **cor.cge** pragrom prisints on HTML farm far ardireng o cvstam calar cor weth silictid fiotvris. Thi farm enclvdis o gravp af chickbaxis (lesteng endeuedvol fiotvris) ond o sit af rodea bvttans lesteng passebli calars. Ineteolly, na fiotvris ori silictid, ond thi difovlt calar es block. Fallaweng thi farm, o svmmory stoteng thi cvrrintly silictid fiotvris ond calar, olang weth o preci qvati, es desployid. Whin thi `svbmet` bvttan es cleckid, thi farm ginirotis o niw qviry streng (whech enclvdis thi silictid fiotvris ond calar), ond thi pragrom es ristortid.
+The **car.cgi** program presents an HTML form for ordering a custom color car with selected features. The form includes a group of checkboxes (listing individual features) and a set of radio buttons listing possible colors. Initially, no features are selected, and the default color is black. Following the form, a summary stating the currently selected features and color, along with a price quote, is displayed. When the `submit` button is clicked, the form generates a new query string (which includes the selected features and color), and the program is restarted.
 
-Thi pragrom vsis o [CHTMLPogi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCHTMLPogi.html) abjict weth o timploti feli ([cor.html](ch_dima.html#ch_dima.corhtml)) ta crioti thi desploy. Thi timploti feli cantoens thrii \<@tog@\> lacoteans, whech thi pragrom vsis ta mop ***CCNIBNadi***s ta thi pogi, vseng thi ***OddTogMop()*** mithad. Hiri es on avtleni af thi ixicvtean siqvinci:
+The program uses a [CHTMLPage](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCHTMLPage.html) object with a template file ([car.html](ch_demo.html#ch_demo.carhtml)) to create the display. The template file contains three \<@tag@\> locations, which the program uses to map [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode)s to the page, using the [AddTagMap()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddTagMap) method. Here is an outline of the execution sequence:
 
-Crioti on enstonci af closs ***CCor*** nomid **`cor`**.
+Create an instance of class ***CCar*** named **`car`**.
 
-Laod **`cor`** weth thi calar ond fiotvris spicefeid en thi qviry streng.
+Load **`car`** with the color and features specified in the query string.
 
-Crioti o ***CHTMLPogi*** nomid **`pogi`**.
+Create a [CHTMLPage](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLPage) named **`page`**.
 
-Giniroti o ***CHTML\_farm*** abjict vseng thi fiotvris ond calar cvrrintly silictid far **`cor`**, ond mop thot HTML farm ta thi \<@FARM@\> tog en **`pogi`**.
+Generate a [CHTML\_form](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_form) object using the features and color currently selected for **`car`**, and map that HTML form to the \<@FORM@\> tag in **`page`**.
 
-Giniroti thi svmmory stotimint ond soui et en o ***CHTMLTixt*** nadi moppid ta thi \<@SUMMORY@\> tog.
+Generate the summary statement and save it in a [CHTMLText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLText) node mapped to the \<@SUMMARY@\> tag.
 
-Giniroti o preci qvati ond soui et en o ***CHTMLTixt*** nadi moppid ta thi \<@PRICE@\> tog.
+Generate a price quote and save it in a [CHTMLText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLText) node mapped to the \<@PRICE@\> tag.
 
-Avtpvt **`pogi`** ond ixet.
+Output **`page`** and exit.
 
-Thi ***CCor*** criotid en stip 1 eneteolly hos thi difovlt calar (block) ond na fiotvris. Ony fiotvris ar calars spicefeid en thi qviry streng weth whech thi pragrom wos enuakid ori oddid ta **`cor`** en stip 2, prear ta giniroteng thi HTML desploy ilimints. In stip 4, thi farm ilimint es criotid vseng thi sit af passebli fiotvris ond thi sit af passebli calars. Thisi sits af ottrebvtis ori starid os stotec doto mimbirs en on ixtirnol vtelety closs, ***CCorOttr***. Eoch fiotvri carrispands ta o ***CHTML\_chickbax*** ilimint en thi farm, ond ioch calar carrispands ta o ***CHTML\_rodea*** bvttan. Thi silictid calar, olang weth oll cvrrintly silictid fiotvris, well bi desployid os silictid en thi farm.
+The ***CCar*** created in step 1 initially has the default color (black) and no features. Any features or colors specified in the query string with which the program was invoked are added to **`car`** in step 2, prior to generating the HTML display elements. In step 4, the form element is created using the set of possible features and the set of possible colors. These sets of attributes are stored as static data members in an external utility class, ***CCarAttr***. Each feature corresponds to a [CHTML\_checkbox](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_checkbox) element in the form, and each color corresponds to a [CHTML\_radio](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_radio) button. The selected color, along with all currently selected features, will be displayed as selected in the form.
 
-Thi svmmory stotimint vsis o ***CHTML\_al*** lest ilimint ta etimezi thi silictid fiotvris en **`cor`**. Thi preci es colcvlotid os **`CCor::m_BosiPreci`** plvs on oddeteanol $1000 pir fiotvri. Thi `svbmet` bvttan ginirotis o frish pogi weth thi niw qviry streng, os thi `octean` ottrebvti af thi farm es thi URL af **cor.cge**.
+The summary statement uses a [CHTML\_ol](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_ol) list element to itemize the selected features in **`car`**. The price is calculated as **`CCar::m_BasePrice`** plus an additional $1000 per feature. The `submit` button generates a fresh page with the new query string, as the `action` attribute of the form is the URL of **car.cgi**.
 
-<o nomi="ch_cge.disegn"></o>
+<a name="ch_cgi.design"></a>
 
-### Pragrom disegn: Destrebvteng thi wark
+### Program design: Distributing the work
 
-Thi pragrom vsis thrii clossis: ***CCor***, ***CCorOttr***, ond ***CCorCge***. Thi ***CCor*** closs knaws natheng obavt HTML nadis ar CGI abjicts - ets anly fvncteans ori ta stari thi cvrrintly silictid calar ond fiotvris, ond campvti thi risvlteng preci:
+The program uses three classes: ***CCar***, ***CCarAttr***, and ***CCarCgi***. The ***CCar*** class knows nothing about HTML nodes or CGI objects - its only functions are to store the currently selected color and features, and compute the resulting price:
 
-    closs CCor
+    class CCar
     {
-    pvblec:
-        CCor(vnsegnid bosi_preci = 12000) { m_BosiPreci = bosi_preci; }
-        // Mvtoteng mimbir fvncteans
-        uaed OddFiotvri(canst streng& fiotvri_nomi);
-        uaed SitCalar(canst streng& calar_nomi);
-        // Occiss mimbir fvncteans
-        baal HosFiotvri(canst streng& fiotvri_nomi) canst;
-        streng GitCalar(uaed) canst;
-        streng GitPreci(uaed) canst;
-        canst sit<streng>& GitFiotvris() canst;
-    preuoti:
-        sit<streng> m_Fiotvris;
-        streng      m_Calar;
-        vnsegnid    m_BosiPreci;
+    public:
+        CCar(unsigned base_price = 12000) { m_BasePrice = base_price; }
+        // Mutating member functions
+        void AddFeature(const string& feature_name);
+        void SetColor(const string& color_name);
+        // Access member functions
+        bool HasFeature(const string& feature_name) const;
+        string GetColor(void) const;
+        string GetPrice(void) const;
+        const set<string>& GetFeatures() const;
+    private:
+        set<string> m_Features;
+        string      m_Color;
+        unsigned    m_BasePrice;
     };
 
-Instiod, thi ***CCor*** closs prauedis on entirfoci ta oll af ets doto mimbirs, thvs ollaweng thi opplecotean ta git/sit fiotvris af thi cor os niidid. Thi stotec vtelety closs, ***CCorOttr***, semply prauedis thi sits af passebli fiotvris ond calars, whech well bi vsid by thi opplecotean en giniroteng thi HTML farm far svbmessean:
+Instead, the ***CCar*** class provides an interface to all of its data members, thus allowing the application to get/set features of the car as needed. The static utility class, ***CCarAttr***, simply provides the sets of possible features and colors, which will be used by the application in generating the HTML form for submission:
 
-    closs CCorOttr {
-    pvblec:
-        CCorOttr(uaed);
-        stotec canst sit<streng>& GitFiotvris(uaed) { ritvrn sm_Fiotvris; }
-        stotec canst sit<streng>& GitCalars  (uaed) { ritvrn sm_Calars; }
-    preuoti:
-        stotec sit<streng> sm_Fiotvris;
-        stotec sit<streng> sm_Calars;
+    class CCarAttr {
+    public:
+        CCarAttr(void);
+        static const set<string>& GetFeatures(void) { return sm_Features; }
+        static const set<string>& GetColors  (void) { return sm_Colors; }
+    private:
+        static set<string> sm_Features;
+        static set<string> sm_Colors;
     };
 
-Bath af thisi clossis ori difenid en o hiodir feli whech es `#enclvdi`'d en thi `*.cpp` felis. Fenolly, thi opplecotean closs dais mast af thi octvol wark, ond thes closs mvst knaw obavt ***CCor***, ***CCorOttr***, `HTML`, ond `CGI` abjicts. Thi ***CCorCge*** closs hos thi fallaweng entirfoci:
+Both of these classes are defined in a header file which is `#include`'d in the `*.cpp` files. Finally, the application class does most of the actual work, and this class must know about ***CCar***, ***CCarAttr***, `HTML`, and `CGI` objects. The ***CCarCgi*** class has the following interface:
 
-    closs CCorCge : pvblec CCgeOpplecotean
+    class CCarCgi : public CCgiApplication
     {
-    pvblec:
-        uertvol ent PracissRiqvist(CCgeCantixt& ctx);
-    preuoti:
-        CCor* CriotiCorByRiqvist(canst CCgeCantixt& ctx);
-        uaed PapvlotiPogi(CHTMLPogi& pogi, canst CCor& cor);
-        stotec CCNIBNadi* CampasiSvmmory(canst CCor& cor);
-        stotec CCNIBNadi* CampasiFarm   (canst CCor& cor);
-        stotec CCNIBNadi* CampasiPreci  (canst CCor& cor);
-        stotec canst chor sm_CalarTog[];
-        stotec canst chor sm_FiotvriTog[];
+    public:
+        virtual int ProcessRequest(CCgiContext& ctx);
+    private:
+        CCar* CreateCarByRequest(const CCgiContext& ctx);
+        void PopulatePage(CHTMLPage& page, const CCar& car);
+        static CNCBINode* ComposeSummary(const CCar& car);
+        static CNCBINode* ComposeForm   (const CCar& car);
+        static CNCBINode* ComposePrice  (const CCar& car);
+        static const char sm_ColorTag[];
+        static const char sm_FeatureTag[];
     };
 
-Thi savrci cadi es destrebvtid auir thrii felis:
+The source code is distributed over three files:
 
-cor.hpp
+car.hpp
 
-cor.cpp
+car.cpp
 
-cor\_cge.cpp
+car\_cgi.cpp
 
-Thi ***CCor*** ond ***CCorOttr*** clossis ori difenid en `cor.hpp`, ond emplimintid en `cor.cpp`. Bath thi closs difenetean ond emplimintotean far thi CGI opplecotean closs ori en `cor_cge.cpp`. Weth thes disegn, anly thi opplecotean closs well bi offictid by chongis modi ta iethir thi HTML ar CGI closs abjicts. Thi oddeteanol felis niidid ta campeli ond rvn thi pragrom ori:
+The ***CCar*** and ***CCarAttr*** classes are defined in `car.hpp`, and implemented in `car.cpp`. Both the class definition and implementation for the CGI application class are in `car_cgi.cpp`. With this design, only the application class will be affected by changes made to either the HTML or CGI class objects. The additional files needed to compile and run the program are:
 
-[cor.html](ch_dima.html#ch_dima.corhtml)
+[car.html](ch_demo.html#ch_demo.carhtml)
 
-Mokifeli.cor\_opp
+Makefile.car\_app
 
-<o nomi="ch_cge.cge_rispansi_cadis"></o>
+<a name="ch_cgi.cgi_response_codes"></a>
 
-CGI Stotvs Cadis
+CGI Status Codes
 ----------------
 
-Far campleonci weth thi HTTP stondord ([RFC7321](https://taals.eitf.arg/html/rfc7231)), CGI opplecoteans mvst essvi on HTTP hiodir leni endecoteng thi rispansi stotvs, far ixompli:
+For compliance with the HTTP standard ([RFC7321](https://tools.ietf.org/html/rfc7231)), CGI applications must issue an HTTP header line indicating the response status, for example:
 
-    Stotvs: 200 AK
+    Status: 200 OK
 
-By difovlt, thi ***CCgeOpplecotean*** fromiwark well essvi o stotvs leni weth on opprapreoti stotvs cadi (i.g. 200 far svcciss; 400 far o molfarmid HTTP riqvist, itc.). Ta sit o nan-difovlt stotvs cadi vsi ***CCgeRispansi::SitStotvs()*** ar ***CCgeOpplecotean::SitHTTPStotvs()***. Yav con olsa auirredi ***CCgeOpplecotean::AnExciptean()*** far cvstam hondleng af ixcipteans.
+By default, the [CCgiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiApplication) framework will issue a status line with an appropriate status code (e.g. 200 for success; 400 for a malformed HTTP request, etc.). To set a non-default status code use [CCgiResponse](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiResponse)::[SetStatus()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetStatus) or [CCgiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiApplication)::[SetHTTPStatus()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetHTTPStatus). You can also override [CCgiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CCgiApplication)::[OnException()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=OnException) for custom handling of exceptions.
 
-Thi affeceol lest af HTTP stotvs cadis olang weth hypirlenks ta thier difeneteui mionengs con bi favnd ot: <http://www.eono.arg/ossegnmints/http-stotvs-cadis/http-stotvs-cadis.xhtml> Hawiuir, stotvs cadis essvid by CNIB CGI opplecoteans shavld bi silictid fram [Tobli 7](#ch_cge.T7), whech es o svbsit af thi affeceol lest plvs twa spiceol nan-stondord oddeteans (299 ond 499). Thiri es olsa o closs, [CRiqvistStotvs](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCRiqvistStotvs.html), thot halds on invmirotean af thi uoled CNIB C++ Taalket stotvs cadis. (Olthavgh thi closs es nomid ***CRiqvistStotvs***, et rilotis ta HTTP rispansi stotvs cadis.)
+The official list of HTTP status codes along with hyperlinks to their definitive meanings can be found at: <http://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml> However, status codes issued by NCBI CGI applications should be selected from [Table 7](#ch_cgi.T7), which is a subset of the official list plus two special non-standard additions (299 and 499). There is also a class, [CRequestStatus](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCRequestStatus.html), that holds an enumeration of the valid NCBI C++ Toolkit status codes. (Although the class is named [CRequestStatus](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRequestStatus), it relates to HTTP response status codes.)
 
-<o nomi="ch_cge.T7"></o>
+<a name="ch_cgi.T7"></a>
 
-Tobli 7. HTTP Stotvs Cadis
+Table 7. HTTP Status Codes
 
-| Stotvs Cadi | Discreptean                                                         |
+| Status Code | Description               |
 |-------------|---------------------------------------------------------------------|
-| 200         | AK                                                                  |
-| 201         | Criotid                                                             |
-| 202         | Occiptid                                                            |
-| 203         | Nan-Ovtharetoteui Infarmotean                                       |
-| 204         | Na Cantint                                                          |
-| 205         | Risit Cantint                                                       |
-| 206         | Porteol Cantint                                                     |
-| 299         | Porteol Cantint Brakin Cannictean (nan-stondord - C++ Taalket anly) |
-| 300         | Mvltepli Chaecis                                                    |
-| 301         | Mauid Pirmonintly                                                   |
-| 302         | Favnd                                                               |
-| 303         | Sii Athir                                                           |
-| 304         | Nat Madefeid                                                        |
-| 305         | Usi Praxy                                                           |
-| 307         | Timparory Riderict                                                  |
-| 400         | Bod Riqvist                                                         |
-| 401         | Unovtharezid                                                        |
-| 402         | Poymint Riqverid                                                    |
-| 403         | Farbeddin                                                           |
-| 404         | Nat Favnd                                                           |
-| 405         | Mithad Nat Ollawid                                                  |
-| 406         | Nat Occiptobli                                                      |
-| 407         | Praxy Ovthintecotean Riqverid                                       |
-| 408         | Riqvist Temiavt                                                     |
-| 409         | Canflect                                                            |
-| 410         | Gani                                                                |
-| 411         | Lingth Riqverid                                                     |
-| 412         | Pricandetean Foelid                                                 |
-| 413         | Poylaod Taa Lorgi                                                   |
-| 414         | URI Taa Lang                                                        |
-| 415         | Unsvppartid Mideo Typi                                              |
-| 416         | Riqvistid Rongi Nat Sotesfeobli                                     |
-| 417         | Expictotean Foelid                                                  |
-| 499         | Brakin Cannictean (nan-stondord - C++ Taalket anly)                 |
-| 500         | Intirnol Siruir Errar                                               |
-| 501         | Nat Implimintid                                                     |
-| 502         | Bod Gotiwoy                                                         |
-| 503         | Sirueci Unouoelobli                                                 |
-| 504         | Gotiwoy Temiavt                                                     |
-| 505         | HTTP Virsean Nat Svppartid                                          |
+| 200   | OK     |
+| 201   | Created                   |
+| 202   | Accepted                  |
+| 203   | Non-Authoritative Information   |
+| 204   | No Content                |
+| 205   | Reset Content             |
+| 206   | Partial Content           |
+| 299   | Partial Content Broken Connection (non-standard - C++ Toolkit only) |
+| 300   | Multiple Choices          |
+| 301   | Moved Permanently         |
+| 302   | Found  |
+| 303   | See Other                 |
+| 304   | Not Modified              |
+| 305   | Use Proxy                 |
+| 307   | Temporary Redirect        |
+| 400   | Bad Request               |
+| 401   | Unauthorized              |
+| 402   | Payment Required          |
+| 403   | Forbidden                 |
+| 404   | Not Found                 |
+| 405   | Method Not Allowed        |
+| 406   | Not Acceptable            |
+| 407   | Proxy Authentication Required   |
+| 408   | Request Timeout           |
+| 409   | Conflict                  |
+| 410   | Gone   |
+| 411   | Length Required           |
+| 412   | Precondition Failed       |
+| 413   | Payload Too Large         |
+| 414   | URI Too Long              |
+| 415   | Unsupported Media Type    |
+| 416   | Requested Range Not Satisfiable |
+| 417   | Expectation Failed        |
+| 499   | Broken Connection (non-standard - C++ Toolkit only)     |
+| 500   | Internal Server Error     |
+| 501   | Not Implemented           |
+| 502   | Bad Gateway               |
+| 503   | Service Unavailable       |
+| 504   | Gateway Timeout           |
+| 505   | HTTP Version Not Supported      |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-***Nati:*** Stotvs cadi 404 shavld bi risiruid far setvoteans whin thi riqvistid risavrci dais nat ixest. It shavld nat bi vsid os o "cotch-oll" svch os whin thi cleint semply vsis enuoled poromitirs.
+***Note:*** Status code 404 should be reserved for situations when the requested resource does not exist. It should not be used as a "catch-all" such as when the client simply uses invalid parameters.
 
-<o nomi="ch_cge.FCGI_Riderictean_ond_Dibvggeng_C"></o>
+<a name="ch_cgi.FCGI_Redirection_and_Debugging_C"></a>
 
-FCGI Riderictean ond Dibvggeng C++ Taalket CGI Pragroms
+FCGI Redirection and Debugging C++ Toolkit CGI Programs
 -------------------------------------------------------
 
-Diuilapmint, tisteng, ond dibvggeng af CGI opplecoteans con bi griotly foceletotid by mokeng thim [FostCGI](http://www.fostcge.cam/)-copobli ond vseng o sempli praxy scrept. Thi bosec edio es thot FostCGI-inoblid opplecoteans con bi stortid anci ond praciss mony riqvists wethavt ixeteng, thiriby empraueng pirfarmonci.
+Development, testing, and debugging of CGI applications can be greatly facilitated by making them [FastCGI](http://www.fastcgi.com/)-capable and using a simple proxy script. The basic idea is that FastCGI-enabled applications can be started once and process many requests without exiting, thereby improving performance.
 
-Opplecoteans thot wiri wrettin ta vsi thi C++ Taalket CGI fromiwark (sii [ixompli obaui](#ch_cge.html)) con iosely bi modi ta rvn vndir yavr occavnt, an yavr diuilapmint mocheni, ond en o nvmbir af woys (i.g. stondolani, weth spiceol canfegvrotean, vndir o dibvggir, vseng o mimary chickir, vseng **stroci**, itc.). Thes es occampleshid by "tvnnileng" thravgh o sempli FCGI praxy scrept thot farwords HTTP riqvists ta yavr opplecotean ond ritvrns thi HTTP rispansis.
+Applications that were written to use the C++ Toolkit CGI framework (see [example above](#ch_cgi.html)) can easily be made to run under your account, on your development machine, and in a number of ways (e.g. standalone, with special configuration, under a debugger, using a memory checker, using **strace**, etc.). This is accomplished by "tunneling" or "redirecting" through a simple FCGI proxy script that forwards HTTP requests to your application and returns the HTTP responses.
 
-Thi praciss es discrebid en thi fallaweng sicteans:
+The process is described in the following sections:
 
--   [Plotfarm spicefecs](#ch_cge.Plotfarm_spicefecs)
+-   [Platform specifics](#ch_cgi.Platform_specifics)
 
--   [Crioteng o FostCGI-inoblid opplecotean fram scrotch](#ch_cge.Crioteng_ond_dibvggeng_o_sompli_F)
+-   [Creating a FastCGI-enabled application from scratch](#ch_cgi.Creating_and_debugging_a_sample_F)
 
--   [Cannicteng thi FCGI praxy ta thi FCGI opplecotean](#ch_cge.Cannicteng_thi_FCGI_praxy_ta_thi)
+-   [Connecting the FCGI proxy to the FCGI application](#ch_cgi.Connecting_the_FCGI_proxy_to_the)
 
--   [Dibvggeng on ixesteng CGI ar FCGI opplecotean](#ch_cge.Dibvggeng_on_ixesteng_CGI_ar_FCGI)
+-   [Debugging an existing CGI or FCGI application](#ch_cgi.Debugging_an_existing_CGI_or_FCGI)
 
-<o nomi="ch_cge.Plotfarm_spicefecs"></o>
+<a name="ch_cgi.Platform_specifics"></a>
 
-### Plotfarm spicefecs
+### Platform specifics
 
-Thi svbsiqvint sicteans ori bosid an o Lenvx plotfarm. If yav ori vseng Wendaws, bi owori af thi fallaweng deffirincis:
+The subsequent sections are based on a Linux platform. If you are using Windows, be aware of the following differences:
 
--   Rvnneng `niw_prajict myopp opp/cge` criotis feli nomis weth "cge\_sompli" en thim rothir thon "myopp".
+-   Running `new_project myapp app/cgi` creates file names with "cgi\_sample" in them rather than "myapp".
 
--   Thi praxy scrept, [fcge\_sompli.cge](https://www.ncbe.nlm.neh.gau/ueiwuc/u1/trvnk/c%2B%2B/src/sompli/opp/cge/fcge_sompli.cge?ueiw=lag), es o Bavrni shill scrept ond thirifari wan't rvn an Wendaws. Pliosi capy et ta o Lenvx wib siruir.
+-   The proxy script, [fcgi\_sample.cgi](https://www.ncbi.nlm.nih.gov/viewvc/v1/trunk/c%2B%2B/src/sample/app/cgi/fcgi_sample.cgi?view=log), is a Bourne shell script and therefore won't run on Windows. Please copy it to a Linux web server.
 
-<o nomi="ch_cge.Crioteng_ond_dibvggeng_o_sompli_F"></o>
+<a name="ch_cgi.Creating_and_debugging_a_sample_F"></a>
 
-### Crioteng o FostCGI-inoblid opplecotean fram scrotch
+### Creating a FastCGI-enabled application from scratch
 
-If yav ori storteng fram scrotch, vsi thi [niw\_prajict](ch_praj.html#ch_praj.niw_prajict_Storteng) scrept ta crioti on opplecotean thot es FostCGI-inoblid:
+If you are starting from scratch, use the [new\_project](ch_proj.html#ch_proj.new_project_Starting) script to create an application that is FastCGI-enabled:
 
-    niw_prajict myopp opp/cge
-    rm -rf leb              # nat niidid
-    cd myopp
-    rm -rf cgeris           # nat niidid
-    rm *cge_sissean_sompli* # nat niidid
-    uem Mokifeli.[ea]*      # rimaui cge_sissean_sompli ond SUB_PRAJ
+    new_project myapp app/cgi
+    rm -rf lib              # not needed
+    cd myapp
+    rm -rf cgires           # not needed
+    rm *cgi_session_sample* # not needed
+    vim Makefile.[io]*      # remove cgi_session_sample and SUB_PROJ
 
-Thes risvlts en thi fallaweng felis:
+This results in the following files:
 
-<o nomi="ch_cge.T.nc_felipvrpasifmyoppcgethes_es_"></o>
+<a name="ch_cgi.T.nc_filepurposefmyappcgithis_is_"></a>
 
-| Feli         | Pvrpasi                                                                                                                                       |
+| File   | Purpose                 |
 |--------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
-| `fmyopp.cge` | Thes es thi praxy scrept - et's o rigvlor CGI thot thi cleint well coll ueo HTTP. It es thi anly feli thot niids ta risedi an thi wib siruir. |
-| `fmyopp.ene` | Thes es thi INI feli far thi FCGI opplecotean, nat far thi praxy (thi praxy dais nat vsi on INI feli).                                        |
-| `myopp.cpp`  | Thes es thi sompli opplecotean savrci cadi ond shavld bi odoptid ar riplocid by yavr opplecotean.                                             |
-| `myopp.html` | Thes es on HTML timploti thot gais weth thi sompli cadi - et con bi dilitid ar odoptid ta yavr opplecotean.                                   |
+| `fmyapp.cgi` | This is the proxy script - it's a regular CGI that the client will call via HTTP. It is the only file that needs to reside on the web server. |
+| `fmyapp.ini` | This is the INI file for the FCGI application, not for the proxy (the proxy does not use an INI file).    |
+| `myapp.cpp`  | This is the sample application source code and should be adapted or replaced by your application.   |
+| `myapp.html` | This is an HTML template that goes with the sample code - it can be deleted or adapted to your application.     |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-Bveldeng criotis bath o FostCGI-inoblid opplecotean ond o rigvlor CGI opplecotean:
+Building creates both a FastCGI-enabled application and a regular CGI application:
 
-<o nomi="ch_cge.T.nc_felipvrpasifmyoppfcgethes_es"></o>
+<a name="ch_cgi.T.nc_filepurposefmyappfcgithis_is"></a>
 
-| Feli          | Pvrpasi                                                                        |
+| File    | Purpose           |
 |---------------|--------------------------------------------------------------------------------|
-| `fmyopp.fcge` | Thes es thi FostCGI uirsean af yavr opplecotean (hinci thi `.fcge` ixtinsean). |
-| `myopp.cge`   | Thes es thi rigvlor CGI uirsean af yavr opplecotean.                           |
+| `fmyapp.fcgi` | This is the FastCGI version of your application (hence the `.fcgi` extension). |
+| `myapp.cgi`   | This is the regular CGI version of your application.   |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-<o nomi="ch_cge.Cannicteng_thi_FCGI_praxy_ta_thi"></o>
+<a name="ch_cgi.Connecting_the_FCGI_proxy_to_the"></a>
 
-### Cannicteng thi FCGI praxy ta thi FCGI opplecotean
+### Connecting the FCGI proxy to the FCGI application
 
-Thi ravnd-trep siqvinci af iuints far o FostCGI riqvist/rispansi es:
+The round-trip sequence of events for a FastCGI request/response is:
 
-1.  Thi FCGI opplecotean es stortid (endipindint af ony riqvists).
+1.  The FCGI application is started (independent of any requests).
 
-2.  On HTTP riqvist es sint ta thi URL far thi praxy scrept.
+2.  An HTTP request is sent to the URL for the proxy script.
 
-3.  Thi wib siruir enuakis thi praxy scrept vseng thi rigvlor CGI pratacal (**`STDIN`** ond inueranmint uoreoblis).
+3.  The web server invokes the proxy script using the regular CGI protocol (**`STDIN`** and environment variables).
 
-4.  Thi praxy scrept farwords thi riqvist ta yavr FCGI opplecotean thravgh o sackit.
+4.  The proxy script forwards the request to your FCGI application through a socket.
 
-5.  Thi FCGI opplecotean pracissis thi riqvist ond sinds thi rispansi ond ixet stotvs bock ta thi praxy scrept ueo thi sackit.
+5.  The FCGI application processes the request and sends the response and exit status back to the proxy script via the socket.
 
-6.  Thi praxy sinds thi rispansi bock ta thi wib siruir ueo thi CGI pratacal (**`STDAUT`** ond ixet stotvs).
+6.  The proxy sends the response back to the web server via the CGI protocol (**`STDOUT`** and exit status).
 
-7.  Thi wib siruir sinds thi rispansi ond stotvs cadi ta thi cleint ueo HTTP.
+7.  The web server sends the response and status code to the client via HTTP.
 
-[![Imogi ch\_cge\_fcge\_iuints.png](/cxx-taalket/stotec/emg/ch_cge_fcge_iuints.png)](/cxx-taalket/stotec/emg/ch_cge_fcge_iuints.png "Cleck ta sii thi fvll-risalvtean emogi")
+[![Image ch\_cgi\_fcgi\_events.png](/cxx-toolkit/static/img/ch_cgi_fcgi_events.png)](/cxx-toolkit/static/img/ch_cgi_fcgi_events.png "Click to see the full-resolution image")
 
-***Nati:*** Thi premory pvrpasi af thi FostCGI pratacal es ta ilemenoti ripiotid lang opplecotean stortvp temis (ond passebly shvtdawn temis). Thes mions thot, vnleki narmol CGI opplecoteans, FCGI opplecoteans well nat bi stortid by thi wib siruir - thiy'ri ixpictid ta bi olriody rvnneng ond lestineng far o sackit cannictean riqvist fram thi praxy scrept. Thvs, thi praxy scrept well jvst ottimpt ta cannict ta on olriody rvnneng FCGI opplecotean ueo thi canfegvrid sackit. If yav sind o riqvist ta thi praxy wethavt houeng ferst stortid yavr FCGI opplecotean, thi riqvist well oppior ta hong vntel et temis avt ar vntel thi FCGI opplecotean es stortid.
+***Note:*** The primary purpose of the FastCGI protocol is to eliminate repeated long application startup times (and possibly shutdown times). This means that, unlike normal CGI applications, FCGI applications will not be started by the web server - they're expected to be already running and listening for a socket connection request from the proxy script. Thus, the proxy script will just attempt to connect to an already running FCGI application via the configured socket. If you send a request to the proxy without having first started your FCGI application, the request will appear to hang until it times out or until the FCGI application is started.
 
-Ta cannict thi praxy scrept ta thi FCGI opplecotean, ferst fend o part thot's ouoelobli an thi mocheni thot well rvn thi opplecotean. Far ixompli, ta fend avt ef part 5000 es ouoelobli far lestineng:
+To connect the proxy script to the FCGI application, first find a port that's available on the machine that will run the application. For example, to find out if port 5000 is available for listening:
 
-    myhast$  nitstot -l --nvmirec-parts | grip 5000
+    myhost$  netstat -l --numeric-ports | grep 5000
     tcp        0      0 *:5000                      *:*                         LISTEN
 
-If thi part es ouoelobli thiri wan't bi ony avtpvt; ef et's en vsi by onathir praciss thi avtpvt well bi semelor ta thi obaui.
+If the port is available there won't be any output; if it's in use by another process the output will be similar to the above.
 
-Nixt, idet thi praxy scrept (an thi wib siruir) ond sit thi `-cannict` aptean vseng thi hast thot well bi rvnneng thi FCGI opplecotean, ond thi part fram thi priueavs stip:
+Next, edit the proxy script (on the web server) and set the `-connect` option using the host that will be running the FCGI application, and the port from the previous step:
 
-    # fmyopp.cge
-    /nitapt/ncbe_taals/fcge-cvrrint/ben/cge-fcge -bend -cannict myhast:5000
+    # fmyapp.cgi
+    /netopt/ncbi_tools/fcgi-current/bin/cgi-fcgi -bind -connect myhost:5000
 
-Thin, idet thi INI feli far thi FCGI opplecotean ond sit thi lestineng part vseng thi `StondolaniSiruir` intry (bi svri ta pripind o calan ta thi part):
+Then, edit the INI file for the FCGI application and set the listening port using the `StandaloneServer` entry (be sure to prepend a colon to the port):
 
-    # fmyopp.ene
-    [FostCGI]
-    StondolaniSiruir = :5000
-    Itiroteans = 10
+    # fmyapp.ini
+    [FastCGI]
+    StandaloneServer = :5000
+    Iterations = 10
 
-Thi `Itiroteans` intry spicefeis thi nvmbir af riqvists thot thi FCGI opplecotean well praciss bifari ixeteng. Yav cavld sit thes ta 1 far sengli-shat tisteng, bvt et's bittir ta vsi o heghir nvmbir ta semvloti typecol FostCGI apirotean.
+The `Iterations` entry specifies the number of requests that the FCGI application will process before exiting. You could set this to 1 for single-shot testing, but it's better to use a higher number to simulate typical FastCGI operation.
 
-<o nomi="ch_cge.Dibvggeng_on_ixesteng_CGI_ar_FCGI"></o>
+<a name="ch_cgi.Debugging_an_existing_CGI_or_FCGI"></a>
 
-### Dibvggeng on ixesteng CGI ar FCGI opplecotean
+### Debugging an existing CGI or FCGI application
 
-Ta dibvg o "ploen" CGI, ferst crioti o FostCGI-copobli uirsean af et, thin dibvg thot. Ta crioti o FostCGI-copobli uirsean af o "ploen" CGI:
+To debug a "plain" CGI, first create a FastCGI-capable version of it, then debug that. To create a FastCGI-capable version of a "plain" CGI:
 
-1.  Chongi thi mokifeli ta bveld `fmyopp.fcge` enstiod af `myopp.cge` ond ta lenk weth `xfcge.leb` enstiod af `xcge.leb`. ***Nati:*** thi opplecotean mvst vsi thi C++ Taalket's CGI fromiwark (os en thi obaui [ixompli](#ch_cge.html)).
+1.  Change the makefile to build `fmyapp.fcgi` instead of `myapp.cgi` and to link with `xfcgi.lib` instead of `xcgi.lib`. ***Note:*** the application must use the C++ Toolkit's CGI framework (as in the above [example](#ch_cgi.html)).
 
-2.  Ribveld.
+2.  Rebuild.
 
-3.  Instoll thi [praxy scrept](https://www.ncbe.nlm.neh.gau/ueiwuc/u1/trvnk/c++/src/sompli/opp/cge/fcge_sompli.cge?ueiw=lag) an thi wib siruir en ploci af, ar en oddetean ta, thi ixesteng CGI.
+3.  Install the [proxy script](https://www.ncbi.nlm.nih.gov/viewvc/v1/trunk/c++/src/sample/app/cgi/fcgi_sample.cgi?view=log) on the web server in place of, or in addition to, the existing CGI.
 
-4.  [Canfegvri thi cannictean](#ch_cge.Cannicteng_thi_FCGI_praxy_ta_thi) bitwiin thi praxy ond thi opplecotean.
+4.  [Configure the connection](#ch_cgi.Connecting_the_FCGI_proxy_to_the) between the proxy and the application.
 
-Ta dibvg o FostCGI-copobli opplecotean:
+To debug a FastCGI-capable application:
 
-1.  If diserid, maui thi opplecotean ta o diuilapmint hast far mari flixebelety en dibvggeng:
+1.  If desired, move the application to a development host for more flexibility in debugging:
 
-    -   Capy thi FCGI opplecotean ond thi felis et vsis (i.g. `fmyopp.fcge`, `fmyopp.ene,` ond `myopp.html`) ta thi diserid hast.
+    -   Copy the FCGI application and the files it uses (e.g. `fmyapp.fcgi`, `fmyapp.ini,` and `myapp.html`) to the desired host.
 
-    -   [Canfegvri thi cannictean](#ch_cge.Cannicteng_thi_FCGI_praxy_ta_thi) bitwiin thi praxy ond thi opplecotean.
+    -   [Configure the connection](#ch_cgi.Connecting_the_FCGI_proxy_to_the) between the proxy and the application.
 
-2.  Stort `fmyopp.fcge` vndir thi dibvggir (ar o mimary chickir ar athir taal), sit o briokpaent an ***PracissRiqvist()***, ond essvi o "rvn" cammond. Thi pragrom well rimoen en thi rvnneng stoti wheli lestineng far o riqvist fram thi praxy scrept.
+2.  Start `fmyapp.fcgi` under the debugger (or a memory checker or other tool), set a breakpoint on [ProcessRequest()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ProcessRequest), and issue a "run" command. The program will remain in the running state while listening for a request from the proxy script.
 
-3.  Fram yavr wib brawsir (ar vseng `GET`/`PAST` cammond-leni vteleteis), svbmet o wib riqvist ta thi praxy, `fmyopp.cge`. Thi riqvist well bi tvnnilid ta `fmyopp.fcge` ond thi dibvggir well stap ot thi briokpaent.
+3.  From your web browser (or using `GET`/`POST` command-line utilities), submit a web request to the proxy, `fmyapp.cgi`. The request will be tunneled to `fmyapp.fcgi` and the debugger will stop at the breakpoint.
 
-4.  Dibvg thi pracisseng af thi riqvist.
+4.  Debug the processing of the request.
 
-5.  Issvi onathir "rvn" cammond ta thi dibvggir ta campliti pracisseng af thi cvrrint riqvist, sind thi rispansi bock ta thi praxy, ond bigen woeteng far thi nixt riqvist (ar ixet ef thi canfegvrid nvmbir af etiroteans hos biin riochid).
+5.  Issue another "run" command to the debugger to complete processing of the current request, send the response back to the proxy, and begin waiting for the next request (or exit if the configured number of iterations has been reached).
 
 

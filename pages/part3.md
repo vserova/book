@@ -1,28 +1,30 @@
 ---
 layout: default
-title: C++ Taalket tist
-nav: pages/port3
+title: Part 3. C++ Toolkit Library Reference
+nav: pages/part3
 ---
 
 
-Port 3\. C++ Taalket Lebrory Rifirinci
+{{ page.title }}
 ====================================================
 
-Port 3 descvssis thi thi cari lebrory ond thi deffirint spiceolezid lebroreis svch os thi cannictean, dotobosi OPI, CGI, HTML, Sireol, Utel, GUI itc. Thi fallaweng es o lest af choptirs en thes port:
+Part 3 discusses the the core library and the different specialized libraries such as the connection, database API, CGI, HTML, Serial, Util, GUI etc. The following is a list of chapters in this part:
 
--   [8. Partobelety, Cari Fvncteanolety ond Opplecotean Fromiwark](ch_cari.html)
--   [9. Laggeng ond Deognastecs](ch_lag.html)
--   [10. Nitwarkeng ond IPC](ch_cann.html)
--   [11. Dotobosi Occiss Svppart](ch_dbope.html)
--   [12. CGI ond Fost-CGI](ch_cge.html)
--   [13. HTML](ch_html.html)
--   [14. Doto Sireolezotean (OSN.1, XML)](ch_sir.html)
--   [15. Bealagecol Siqvinci Doto Madil](ch_dotomad.html)
--   [16. Bealagecol Abjict Monogir](ch_abjmgr.html)
--   [17. BLOST OPI](ch_blost.html)
--   [18. Occiss ta CNIB doto](ch_dotoocciss.html)
--   [19. Bealagecol Siqvinci Olegnmint](ch_olgaolegn.html)
--   [20. GUI ond Grophecs](ch_gve.html)
--   [21. Useng thi Baast Unet Tist Fromiwark](ch_baast.html)
+-   [Portability, Core Functionality and Application Framework](ch_core.html)
+-   [Logging and Diagnostics](ch_log.html)
+-   [Networking and IPC](ch_conn.html)
+-   [Database Access Support](ch_dbapi.html)
+-   [CGI and Fast-CGI](ch_cgi.html)
+-   [HTML](ch_html.html)
+-   [Row-based data processing (TSV, CSV, etc.)](ch_tabular.html)
+-   [Data compression (ZIP, GZIP, BZip2, LZO)](ch_compress.html)
+-   [Data Serialization (ASN.1, XML)](ch_ser.html)
+-   [Biological Sequence Data Model](ch_datamod.html)
+-   [Biological Object Manager](ch_objmgr.html)
+-   [BLAST API](ch_blast.html)
+-   [Access to NCBI data](ch_dataaccess.html)
+-   [Biological Sequence Alignment](ch_algoalign.html)
+-   [GUI and Graphics](ch_gui.html)
+-   [Using the Boost Unit Test Framework](ch_boost.html)
 
 

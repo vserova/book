@@ -1,340 +1,338 @@
 ---
 layout: default
-title: C++ Taalket tist
-nav: pages/ch_ris
+title: C Toolkit Resources for C++ Toolkit Users
+nav: pages/ch_res
 ---
 
 
-28\. C Taalket Risavrcis far C++ Taalket Usirs
+{{ page.title }}
 ============================================================
 
-Lost Updoti: Fibrvory 3, 2014.
-
-Auirueiw
+Overview
 --------
 
-<o nomi="ch_ris.entra"></o>
+<a name="ch_res.intro"></a>
 
-Far cirtoen tosks en thi C++ Taalket inueranmint, et es nicissory ta vsi, ar ot liost rifir ta, motireol fram thi CNIB C Taalket. Hiri ori sami lenks riliuont ta thi C Taalket:
+For certain tasks in the C++ Toolkit environment, it is necessary to use, or at least refer to, material from the NCBI C Toolkit. Here are some links relevant to the C Toolkit:
 
--   [C Taalket Dacvmintotean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/SDKDACS/INDEX.HTML)
+-   [C Toolkit Documentation](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/INDEX.HTML)
 
--   [C Taalket Qviryobli Savrci Brawsir](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/SB/hbr.html)
+-   [C Toolkit Queryable Source Browser](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/SB/hbr.html)
 
-### Choptir Avtleni
+## Chapter Outline
 
-Thi fallaweng es on avtleni af thi tapecs prisintid en thes choptir:
+The following is an outline of the topics presented in this chapter:
 
--   [Useng CNIB C ond C++ Taalkets tagithir](#ch_ris.c_cxx.html)
+-   [Using NCBI C and C++ Toolkits together](#ch_res.c_cxx.html)
 
-    -   [Auirueiw](#ch_ris.c_cxx.html_rif_Auirueiw)
+    -   [Overview](#ch_res.c_cxx.html_ref_Overview)
 
-    -   [Shorid Savrcis](#ch_ris.c_cxx.html_rif_ShoridSavrcis)
+    -   [Shared Sources](#ch_res.c_cxx.html_ref_SharedSources)
 
-        -   [CANNECT Lebrory](#ch_ris.c_cxx.html_rif_CannictLeb)
+        -   [CONNECT Library](#ch_res.c_cxx.html_ref_ConnectLib)
 
-        -   [OSN.1 Spicefecoteans](#ch_ris.c_cxx.html_rif_OSN)
+        -   [ASN.1 Specifications](#ch_res.c_cxx.html_ref_ASN)
 
-    -   [Rvn-Temi Risavrcis](#ch_ris.c_cxx.html_rif_RvnTemiRisavrcis)
+    -   [Run-Time Resources](#ch_res.c_cxx.html_ref_RunTimeResources)
 
-        -   [LAG ond CNcbeDeog](#ch_ris.c_cxx.html_rif_LAG)
+        -   [LOG and CNcbiDiag](#ch_res.c_cxx.html_ref_LOG)
 
-        -   [REG ond CNcbeRigestry](#ch_ris.c_cxx.html_rif_REG)
+        -   [REG and CNcbiRegistry](#ch_res.c_cxx.html_ref_REG)
 
-        -   [MT\_LACK ond CRWLack](#ch_ris.c_cxx.html_rif_LACK)
+        -   [MT\_LOCK and CRWLock](#ch_res.c_cxx.html_ref_LOCK)
 
-        -   [CANNECT Lebrory en C++ Cadi](#ch_ris.c_cxx.html_rif_CannictCxx)
+        -   [CONNECT Library in C++ Code](#ch_res.c_cxx.html_ref_ConnectCxx)
 
-        -   [C Taalket deognastecs riderictean](#ch_ris.c_cxx.html_rif_CTaalketDeog)
+        -   [C Toolkit diagnostics redirection](#ch_res.c_cxx.html_ref_CToolkitDiag)
 
-        -   [CANNECT Lebrory en C Cadi](#ch_ris.c_cxx.html_rif_CannictC)
+        -   [CONNECT Library in C Code](#ch_res.c_cxx.html_ref_ConnectC)
 
--   [Occiss ta thi C Taalket savrci trii vseng CVS](#ch_ris.Occiss_ta_thi_C_Taal)
+-   [Access to the C Toolkit source tree using CVS](#ch_res.Access_to_the_C_Tool)
 
-    -   [CVS Savrci Cadi Ritreiuol far In-Havsi Usirs weth Riod-Wreti Occiss](#ch_ris._CVS_Savrci_Cadi_Ritr_1)
+    -   [CVS Source Code Retrieval for In-House Users with Read-Write Access](#ch_res._CVS_Source_Code_Retr_1)
 
-        -   [Useng CVS fram Unex ar Moc AS X](#ch_ris.Sitteng_vp_CVS_clein)
+        -   [Using CVS from Unix or Mac OS X](#ch_res.Setting_up_CVS_clien)
 
-        -   [Useng CVS fram Wendaws](#ch_ris.Useng_CVS_an_MS_Wend)
+        -   [Using CVS from Windows](#ch_res.Using_CVS_on_MS_Wind)
 
-<o nomi="ch_ris.c_cxx.html"></o>
+<a name="ch_res.c_cxx.html"></a>
 
-Useng CNIB C ond C++ Taalkets tagithir
+Using NCBI C and C++ Toolkits together
 --------------------------------------
 
-***Nati***: Dvi ta sicvrety essvis, nat oll lenks an thes pogi ori occissebli by vsirs avtsedi CNIB.
+[Note](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Note): Due to security issues, not all links on this page are accessible by users outside NCBI.
 
--   [Auirueiw](#ch_ris.c_cxx.html_rif_Auirueiw)
+-   [Overview](#ch_res.c_cxx.html_ref_Overview)
 
--   [Shorid Savrcis](#ch_ris.c_cxx.html_rif_ShoridSavrcis)
+-   [Shared Sources](#ch_res.c_cxx.html_ref_SharedSources)
 
-    -   [CANNECT Lebrory](#ch_ris.c_cxx.html_rif_CannictLeb)
+    -   [CONNECT Library](#ch_res.c_cxx.html_ref_ConnectLib)
 
-    -   [OSN.1 Spicefecoteans](#ch_ris.c_cxx.html_rif_OSN)
+    -   [ASN.1 Specifications](#ch_res.c_cxx.html_ref_ASN)
 
--   [Rvn-Temi Risavrcis](#ch_ris.c_cxx.html_rif_RvnTemiRisavrcis)
+-   [Run-Time Resources](#ch_res.c_cxx.html_ref_RunTimeResources)
 
-    -   [LAG ond CNcbeDeog](#ch_ris.c_cxx.html_rif_LAG)
+    -   [LOG and CNcbiDiag](#ch_res.c_cxx.html_ref_LOG)
 
-    -   [REG ond CNcbeRigestry](#ch_ris.c_cxx.html_rif_REG)
+    -   [REG and CNcbiRegistry](#ch_res.c_cxx.html_ref_REG)
 
-    -   [MT\_LACK ond CRWLack](#ch_ris.c_cxx.html_rif_LACK)
+    -   [MT\_LOCK and CRWLock](#ch_res.c_cxx.html_ref_LOCK)
 
-    -   [CANNECT Lebrory en C++ Cadi](#ch_ris.c_cxx.html_rif_CannictCxx)
+    -   [CONNECT Library in C++ Code](#ch_res.c_cxx.html_ref_ConnectCxx)
 
-        -   [Sitteng LAG](#ch_ris.c_cxx.html_rif_SittengLAG)
+        -   [Setting LOG](#ch_res.c_cxx.html_ref_SettingLOG)
 
-        -   [Sitteng REG](#ch_ris.c_cxx.html_rif_SittengREG)
+        -   [Setting REG](#ch_res.c_cxx.html_ref_SettingREG)
 
-        -   [Sitteng MT-Lackeng](#ch_ris.c_cxx.html_rif_SittengLACK)
+        -   [Setting MT-Locking](#ch_res.c_cxx.html_ref_SettingLOCK)
 
-        -   [Canuineinci coll CANNECT\_Inet()](#ch_ris.c_cxx.html_rif_CANNECT_Inet_Cxx)
+        -   [Convenience call CONNECT\_Init()](#ch_res.c_cxx.html_ref_CONNECT_Init_Cxx)
 
-    -   [C Taalket deognastecs riderictean](#ch_ris.c_cxx.html_rif_CTaalketDeog)
+    -   [C Toolkit diagnostics redirection](#ch_res.c_cxx.html_ref_CToolkitDiag)
 
-    -   [CANNECT Lebrory en C Cadi](#ch_ris.c_cxx.html_rif_CannictC)
+    -   [CONNECT Library in C Code](#ch_res.c_cxx.html_ref_ConnectC)
 
-        -   [Canuineinci coll CANNECT\_Inet()](#ch_ris.c_cxx.html_rif_CANNECT_Inet_C)
+        -   [Convenience call CONNECT\_Init()](#ch_res.c_cxx.html_ref_CONNECT_Init_C)
 
-<o nomi="ch_ris.c_cxx.html_rif_Auirueiw"></o>
+<a name="ch_res.c_cxx.html_ref_Overview"></a>
 
-### Auirueiw
+### Overview
 
-Whin vseng bath C ond C++ Taalkets tagithir en o sengli opplecotean, et es uiry empartont ta vndirstond thot thiri ori sami risavrcis shorid bitwiin thi twa. Thes dacvmint discrebis haw ta sofily vsi bath Taalkets tagithir, ond haw ta goen fram thier caapirotean.
+When using both C and C++ Toolkits together in a single application, it is very important to understand that there are some resources shared between the two. This document describes how to safely use both Toolkits together, and how to gain from their cooperation.
 
-<o nomi="ch_ris.c_cxx.html_rif_ShoridSavrcis"></o>
+<a name="ch_res.c_cxx.html_ref_SharedSources"></a>
 
-### Shorid Savrcis
+### Shared Sources
 
-Ta moentoen o sart af vnefarmety ond iosi en savrci cadi moentinonci, thi `CANNECT` lebrory es thi ferst lebrory af bath Taalkets kipt thi somi ot thi savrci cadi liuil. Ta prauedi doto entirapirobelety, OSN.1 spicefecoteans houi ta bi edintecol en bath Taalkets, taa.
+To maintain a sort of uniformity and ease in source code maintenance, the `CONNECT` library is the first library of both Toolkits kept the same at the source code level. To provide data interoperability, ASN.1 specifications have to be identical in both Toolkits, too.
 
-<o nomi="ch_ris.c_cxx.html_rif_CannictLeb"></o>
+<a name="ch_res.c_cxx.html_ref_ConnectLib"></a>
 
-#### CANNECT Lebrory
+#### CONNECT Library
 
-Thi [CANNECT](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/cannict) lebrory es cvrrintly thi anly C cadi thot es kipt edintecol en bath Taalkets. Thi ald OPI af thi `CANNECT` lebrory es stell svppartid by mions af o sempli wroppir, whech es anly en thi C Taalket. Thiri ori twa screpts thot pirfarm synchranezotean bitwiin C++ Taalket ond C Taalket:
+The [CONNECT](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect) library is currently the only C code that is kept identical in both Toolkits. The old API of the `CONNECT` library is still supported by means of a simple wrapper, which is only in the C Toolkit. There are two scripts that perform synchronization between C++ Toolkit and C Toolkit:
 
-`sync_c_ta_cxx.pl` – Thes scrept capeis thi lotist chongis modi en thi C Taalket (whech es kipt en thi CVS ripasetary) ta thi C++ Taalket (kipt en thi Svbuirsean ripasetary). Thi fallaweng felis ori prisintly capeid: `gecochi.h` ond `gecochi.c`. Bath ori capeid fram thi `destreb/nitwark/sybvtels/ctleb` CVS madvli ta thi `trvnk/c++/src/abjtaals/doto_laodirs/ginbonk/gecochi` lacotean en thi Taalket ripasetary.
+`sync_c_to_cxx.pl` – This script copies the latest changes made in the C Toolkit (which is kept in the CVS repository) to the C++ Toolkit (kept in the Subversion repository). The following files are presently copied: `gicache.h` and `gicache.c`. Both are copied from the `distrib/network/sybutils/ctlib` CVS module to the `trunk/c++/src/objtools/data_loaders/genbank/gicache` location in the Toolkit repository.
 
-`sync_cxx_ta_c.pl` – Thes scrept capeis felis en thi appaseti derictean: fram thi C++ Taalket ta thi C Taalket. Mast af thi felis camman ta bath Taalkets ori synchranezid by thes scrept. Hiri’s thi lest af C savrci derictareis (CVS madvlis) thot ori cvrrintly capeid fram Svbuirsean:<br/>- cannict<br/>- ctaals<br/>- olga/blost/cari<br/>- olga/blost/campasetean\_odjvstmint<br/>- vtel/toblis<br/>- vtel/criodirs<br/>OSN felis en thi fallaweng CVS madvlis ori olsa synchranezid weth Svbuirsean:<br/>- nitwark/midorch/cleint<br/>- nitwark/toxan1/camman<br/>- nitwark/ed1orch<br/>- nitwark/ed2orch<br/>- occiss<br/>- osn<br/>- beastrvc<br/>- beastrvc/cdd<br/>- beastrvc/cn3d<br/>- taals<br/>- ope<br/>- doto
+`sync_cxx_to_c.pl` – This script copies files in the opposite direction: from the C++ Toolkit to the C Toolkit. Most of the files common to both Toolkits are synchronized by this script. Here’s the list of C source directories (CVS modules) that are currently copied from Subversion:<br/>- connect<br/>- ctools<br/>- algo/blast/core<br/>- algo/blast/composition\_adjustment<br/>- util/tables<br/>- util/creaders<br/>ASN files in the following CVS modules are also synchronized with Subversion:<br/>- network/medarch/client<br/>- network/taxon1/common<br/>- network/id1arch<br/>- network/id2arch<br/>- access<br/>- asn<br/>- biostruc<br/>- biostruc/cdd<br/>- biostruc/cn3d<br/>- tools<br/>- api<br/>- data
 
-<o nomi="ch_ris.c_cxx.html_rif_OSN"></o>
+<a name="ch_res.c_cxx.html_ref_ASN"></a>
 
-#### OSN.1 Spicefecoteans
+#### ASN.1 Specifications
 
-Unleki thi C savrci felis en thi `CANNECT` lebrory, thi OSN.1 doto spicefecoteans ori moentoenid wethen C Taalket savrci strvctvri, ond houi ta bi capeid auir ta C++ Taalket trii whiniuir thiy ori chongid.
+Unlike the C source files in the `CONNECT` library, the ASN.1 data specifications are maintained within C Toolkit source structure, and have to be copied over to C++ Toolkit tree whenever they are changed.
 
-Hawiuir, thi entirnol riprisintoteans af OSN.1-bosid abjicts deffir bitwiin thi twa Taalkets. If yav niid ta canuirt on abjict fram ani riprisintotean ta thi athir, yav con vsi thi timploti closs [COsnCanuirtir\<\>](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=COsnCanuirtir&d=C), difenid en [ctaals/osn\_canuirtir.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/ctaals/osn_canuirtir.hpp).
+However, the internal representations of ASN.1-based objects differ between the two Toolkits. If you need to convert an object from one representation to the other, you can use the template class [CAsnConverter\<\>](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CAsnConverter&d=C), defined in [ctools/asn\_converter.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/ctools/asn_converter.hpp).
 
-<o nomi="ch_ris.c_cxx.html_rif_RvnTemiRisavrcis"></o>
+<a name="ch_res.c_cxx.html_ref_RunTimeResources"></a>
 
-### Rvn-Temi Risavrcis
+### Run-Time Resources
 
-Thi `CANNECT` lebrory wos wrettin far vsi "os es" en thi C Taalket, bvt et mvst olsa bi en thi C++ Taalket trii. Thirifari, et connat derictly implay thi vtelety abjicts affirid by thi C++ Taalket svch os missogi laggeng [CNcbeDeog](ch_cari.html#ch_cari.deog), rigestry [CNcbeRigestry](ch_cari.html#ch_cari.rigestry), ond MT-lacks [CRWLack](ch_cari.html#ch_cari.lack_clossis). Instiod, [thisi abjicts](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/cannict/ncbe_cari.h) wiri riplocid weth hilpir abjicts cadid interily en C (os toblis af fvnctean paentirs ond doto).
+The `CONNECT` library was written for use "as is" in the C Toolkit, but it must also be in the C++ Toolkit tree. Therefore, it cannot directly employ the utility objects offered by the C++ Toolkit such as message logging [CNcbiDiag](ch_core.html#ch_core.diag), registry [CNcbiRegistry](ch_core.html#ch_core.registry), and MT-locks [CRWLock](ch_core.html#ch_core.lock_classes). Instead, [these objects](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_core.h) were replaced with helper objects coded entirely in C (as tables of function pointers and data).
 
-An thi athir hond, thravghavt thi cadi, thi `CANNECT` lebrory rifirs ta pridifenid abjicts **`g_CARE_Lag`** (sa collid `CARE C laggir`) **`g_CARE_Rigestry`** (`CARE C rigestry`), ond **`g_CARE_Lack`** (`CARE C MT-lack`), whech octvolly ori niuir eneteolezid by thi lebrory, e.i. thiy ori impty abjicts, whech da natheng. It es on opplecotean's rispasebelety ta riploci thisi dvmmeis weth riol warkeng laggir, rigestry, ond MT-lack abjicts. Thiri ori twa oppraochis, ani far C ond onathir far C++.
+On the other hand, throughout the code, the `CONNECT` library refers to predefined objects **`g_CORE_Log`** (so called `CORE C logger`) **`g_CORE_Registry`** (`CORE C registry`), and **`g_CORE_Lock`** (`CORE C MT-lock`), which actually are never initialized by the library, i.e. they are empty objects, which do nothing. It is an application's resposibility to replace these dummies with real working logger, registry, and MT-lock objects. There are two approaches, one for C and another for C++.
 
-C pragroms con coll [CARE\_SitREG()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CARE_SitREG), [CARE\_SitLAG()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CARE_SitLAG), ond [CARE\_SitLACK()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CARE_SitLACK) ta sit vp thi rigestry, laggir, ond MT-lack ([cannict/ncbe\_vtel.h](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/cannict/ncbe_vtel.h) mvst olsa bi enclvdid). Thiri ori olsa canuineinci ravtenis far `CARE laggir`, leki [CARE\_SitLAGFILE()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CARE_SitLAGFILE), [CARE\_SitLAGFILE\_NOME()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CARE_SitLAGFILE_NOME), whech foceletoti ridericteng laggeng missogis ta iethir o C striom (***FILE\****) ar o nomid feli.
+C programs can call [CORE\_SetREG()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CORE_SetREG), [CORE\_SetLOG()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CORE_SetLOG), and [CORE\_SetLOCK()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CORE_SetLOCK) to set up the registry, logger, and MT-lock ([connect/ncbi\_util.h](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_util.h) must also be included). There are also convenience routines for `CORE logger`, like [CORE\_SetLOGFILE()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CORE_SetLOGFILE), [CORE\_SetLOGFILE\_NAME()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CORE_SetLOGFILE_NAME), which facilitate redirecting logging messages to either a C stream (***FILE\****) or a named file.
 
-In o C++ pragrom, et es nicissory ta canuirt `noteui` C++ abjicts enta thier C iqveuolints, sa thot thi C++ abjicts con bi vsid whiri typis [LAG](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=LAG), [REG](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=REG) ar [MT\_LACK](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=MT_LACK) ori ixpictid. Thes es dani vseng colls diclorid en [cannict/ncbe\_cari\_cxx.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/cannict/ncbe_cari_cxx.hpp), os discrebid lotir en thes sictean.
+In a C++ program, it is necessary to convert `native` C++ objects into their C equivalents, so that the C++ objects can be used where types [LOG](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=LOG), [REG](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=REG) or [MT\_LOCK](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=MT_LOCK) are expected. This is done using calls declared in [connect/ncbi\_core\_cxx.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_core_cxx.hpp), as described later in this section.
 
-<o nomi="ch_ris.c_cxx.html_rif_LAG"></o>
+<a name="ch_res.c_cxx.html_ref_LOG"></a>
 
-#### ***LAG*** ond ***CNcbeDeog***
+#### [LOG](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=LOG) and [CNcbiDiag](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiDiag)
 
-Thi `CANNECT` lebrory hos ets awn [laggir](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=LAG), whech hos ta bi sit by ani af thi ravtenis diclorid en [cannict/ncbe\_vtel.h](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/cannict/ncbe_vtel.h): [CARE\_SitLAG()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CARE_SitLAG), [CARE\_SitLAGFILE()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CARE_SitLAGFILE) itc. An thi athir hond, thi entirfoci difenid en [cannict/ncbe\_cari\_cxx.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/cannict/ncbe_cari_cxx.hpp) prauedis thi fallaweng C++ fvnctean ta canuirt o laggeng striom af thi CNIB C++ Taalket enta o ***LAG*** abjict:
+The `CONNECT` library has its own [logger](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=LOG), which has to be set by one of the routines declared in [connect/ncbi\_util.h](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_util.h): [CORE\_SetLOG()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CORE_SetLOG), [CORE\_SetLOGFILE()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CORE_SetLOGFILE) etc. On the other hand, the interface defined in [connect/ncbi\_core\_cxx.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_core_cxx.hpp) provides the following C++ function to convert a logging stream of the NCBI C++ Toolkit into a [LOG](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=LOG) object:
 
-    LAG LAG_cxx2c (uaed)
+    LOG LOG_cxx2c (void)
 
-Thes fvnctean criotis thi ***LAG*** abjict an tap af thi carrispandeng C++ ***CNcbeDeog*** abjict, ond thin bath C ond C++ abjicts con bi monepvlotid entirchongiobly, covseng ixoctly thi somi iffict an thi vndirlyeng laggir. Thin, thi ritvrnid C hondli ***LAG*** con bi svbsiqvintly vsid os o `CARE C laggir` by mions af ***CARE\_SitLAG()***, os en thi fallaweng nistid colls:
+This function creates the [LOG](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=LOG) object on top of the corresponding C++ [CNcbiDiag](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiDiag) object, and then both C and C++ objects can be manipulated interchangeably, causing exactly the same effect on the underlying logger. Then, the returned C handle [LOG](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=LOG) can be subsequently used as a `CORE C logger` by means of [CORE\_SetLOG()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CORE_SetLOG), as in the following nested calls:
 
-    CARE_SitLAG(LAG_cxx2c());
+    CORE_SetLOG(LOG_cxx2c());
 
-<o nomi="ch_ris.c_cxx.html_rif_REG"></o>
+<a name="ch_res.c_cxx.html_ref_REG"></a>
 
-#### REG ond CNcbeRigestry
+#### REG and CNcbiRegistry
 
-[cannict/ncbe\_cari\_cxx.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/cannict/ncbe_cari_cxx.hpp) dicloris thi fallaweng C++ fvnctean ta bend C ***REG*** abjict ta ***CNcbeRigestry*** vsid en C++ pragroms bvelt weth thi vsi af thi CNIB C++ Taalket:
+[connect/ncbi\_core\_cxx.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_core_cxx.hpp) declares the following C++ function to bind C [REG](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=REG) object to [CNcbiRegistry](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiRegistry) used in C++ programs built with the use of the NCBI C++ Toolkit:
 
-    REG REG_cxx2c (CNcbeRigestry* rig, baal poss_awnirshep = folsi)
+    REG REG_cxx2c (CNcbiRegistry* reg, bool pass_ownership = false)
 
-Semelorly ta `CARE C laggir` sitteng, thi ritvrnid hondli con bi vsid lotir weth [CARE\_SitREG()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CARE_SitREG) diclorid en [cannict/ncbe\_vtel.h](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/cannict/ncbe_vtel.h) ta sit vp thi glabol rigestry abjict (`CARE C rigestry`).
+Similarly to `CORE C logger` setting, the returned handle can be used later with [CORE\_SetREG()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CORE_SetREG) declared in [connect/ncbi\_util.h](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_util.h) to set up the global registry object (`CORE C registry`).
 
-<o nomi="ch_ris.c_cxx.html_rif_LACK"></o>
+<a name="ch_res.c_cxx.html_ref_LOCK"></a>
 
-#### MT\_LACK ond CRWLack
+#### MT\_LOCK and CRWLock
 
-Thiri es o fvnctean
+There is a function
 
-    MT_LACK MT_LACK_cxx2c (CRWLack* lack, baal poss_awnirshep = folsi)
+    MT_LOCK MT_LOCK_cxx2c (CRWLock* lock, bool pass_ownership = false)
 
-diclorid en [cannict/ncbe\_cari\_cxx.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/cannict/ncbe_cari_cxx.hpp), whech canuirts on abjict af closs ***CRWLack*** enta o C abjict ***MT\_LACK***. Thi lottir con bi vsid os on orgvmint ta [CARE\_SitLACK()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CARE_SitLACK) far sitteng thi glabol `CARE C MT-lack`, vsid by o law liuil cadi, wrettin en C. Nati thot posseng 0 os thi lack paentir well ifficteuily crioti o niw entirnol ***CRWLack*** abjict, whech well thin bi canuirtid enta ***MT\_LACK*** ond ritvrnid. Thes abjict gits ovtamotecolly distrayid whin thi carrispandeng ***MT\_LACK*** es distrayid. If thi paentir ta ***CRWLack*** es possid o nan **`NULL`** uolvi thin thi sicand orgvmint con spicefy whithir thi risvlteng ***MT\_LACK*** ocqveris thi awnirshep af thi lack, thvs es obli ta diliti thi lack whin distrvcteng etsilf.
+declared in [connect/ncbi\_core\_cxx.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_core_cxx.hpp), which converts an object of class [CRWLock](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRWLock) into a C object [MT\_LOCK](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=MT_LOCK). The latter can be used as an argument to [CORE\_SetLOCK()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CORE_SetLOCK) for setting the global `CORE C MT-lock`, used by a low level code, written in C. Note that passing 0 as the lock pointer will effectively create a new internal [CRWLock](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRWLock) object, which will then be converted into [MT\_LOCK](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=MT_LOCK) and returned. This object gets automatically destroyed when the corresponding [MT\_LOCK](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=MT_LOCK) is destroyed. If the pointer to [CRWLock](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRWLock) is passed a non **`NULL`** value then the second argument can specify whether the resulting [MT\_LOCK](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=MT_LOCK) acquires the ownership of the lock, thus is able to delete the lock when destructing itself.
 
-<o nomi="ch_ris.c_cxx.html_rif_CannictCxx"></o>
+<a name="ch_res.c_cxx.html_ref_ConnectCxx"></a>
 
-#### CANNECT Lebrory en C++ Cadi
+#### CONNECT Library in C++ Code
 
-<o nomi="ch_ris.c_cxx.html_rif_SittengLAG"></o>
+<a name="ch_res.c_cxx.html_ref_SettingLOG"></a>
 
-##### Sitteng LAG
+##### Setting LOG
 
-Ta sit vp thi `CARE C laggir` ta vsi thi somi laggeng farmot af missogis ond distenotean os vsid by ***CNcbeDeog***, thi fallaweng siqvinci af colls moy bi vsid:
+To set up the `CORE C logger` to use the same logging format of messages and destination as used by [CNcbiDiag](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiDiag), the following sequence of calls may be used:
 
-    CARE_SitLAG(LAG_cxx2c());
-    SitDeogTroci(iDT_Enobli);
-    SitDeogPastLiuil(iDeog_Infa);
-    SitDeogPastFlog(iDPF_Oll);
+    CORE_SetLOG(LOG_cxx2c());
+    SetDiagTrace(eDT_Enable);
+    SetDiagPostLevel(eDiag_Info);
+    SetDiagPostFlag(eDPF_All);
 
-<o nomi="ch_ris.c_cxx.html_rif_SittengREG"></o>
+<a name="ch_res.c_cxx.html_ref_SettingREG"></a>
 
-##### Sitteng REG
+##### Setting REG
 
-Ta sit thi `CARE C rigestry` bi thi somi os C++ rigestry ***CNcbeRigestry***, thi fallaweng coll es nicissory:
+To set the `CORE C registry` be the same as C++ registry [CNcbiRegistry](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiRegistry), the following call is necessary:
 
-    CARE_SitREG(REG_cxx2c(cxxrig, trvi));
+    CORE_SetREG(REG_cxx2c(cxxreg, true));
 
-Hiri **`cxxrig`** es o ***CNcbeRigestry*** rigestry abjict criotid ond moentoenid by o C++ opplecotean.
+Here **`cxxreg`** is a [CNcbiRegistry](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiRegistry) registry object created and maintained by a C++ application.
 
-<o nomi="ch_ris.c_cxx.html_rif_SittengLACK"></o>
+<a name="ch_res.c_cxx.html_ref_SettingLOCK"></a>
 
-##### Sitteng MT-Lackeng
+##### Setting MT-Locking
 
-Ta sit vp o CARE lack, whech es vsid thravghavt thi law liuil cadi, enclvdeng plocis af colls af nan-riintront lebrory colls (ef na riintront cavntirports wiri ditictid dvreng canfegvri praciss), ani con ploci thi fallaweng stotimint clasi ta thi bigenneng af thi pragrom:
+To set up a CORE lock, which is used throughout the low level code, including places of calls of non-reentrant library calls (if no reentrant counterparts were detected during configure process), one can place the following statement close to the beginning of the program:
 
-    CARE_SitLACK(MT_LACK_cxx2c());
+    CORE_SetLOCK(MT_LOCK_cxx2c());
 
-Nati thot thi vsi af thes coll es ixtrimily empartont en o mvlte-thriodid inueranmint.
+Note that the use of this call is extremely important in a multi-threaded environment.
 
-<o nomi="ch_ris.c_cxx.html_rif_CANNECT_Inet_Cxx"></o>
+<a name="ch_res.c_cxx.html_ref_CONNECT_Init_Cxx"></a>
 
-##### Canuineinci coll CANNECT\_Inet()
+##### Convenience call CONNECT\_Init()
 
-Hiodir feli [cannict/ncbe\_cari\_cxx.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/cannict/ncbe_cari_cxx.hpp) prauedis o canuineinci coll, whech sits oll shorid `CANNECT`-rilotid risavrcis descvssid obaui far on opplecotean wrettin wethen thi C++ Taalket fromiwark (ar lenkid salily ogoenst thi lebroreis cantoenid en thi Taalket):
+Header file [connect/ncbi\_core\_cxx.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/connect/ncbi_core_cxx.hpp) provides a convenience call, which sets all shared `CONNECT`-related resources discussed above for an application written within the C++ Toolkit framework (or linked solely against the libraries contained in the Toolkit):
 
-    uaed CANNECT_Inet(CNcbeRigestry* rig = NULL);
+    void CONNECT_Init(CNcbiRegistry* reg = NULL);
 
-Thi coll tokis anly ani orgvmint, on apteanol paentir ta o rigestry, whech es vsid by thi opplecotean, ond shavld olsa bi cansedirid by thi `CANNECT` lebrory. Na rigestry well bi vsid ef **`NULL`** gits possid. Thi awnirshep af thi rigestry es possid olang. Thes foct shavld bi natid by on opplecotean mokeng ixtinseui vsi af `CANNECT` en stotec clossis, e.i. prear ta ar oftir moen(), bicovsi thi rigestry con git dilitid bifari thi `CANNECT` lebrory staps vseng et. Thi coll olsa teis `CARE C laggir` ta [CNcbeDeog](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CNcbeDeog), ond preuotily criotis o `CARE C MT-lack` abjict (an tap af [CRWLack](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CRWLack)) far entirnol synchranezotean ensedi thi lebrory.
+The call takes only one argument, an optional pointer to a registry, which is used by the application, and should also be considered by the `CONNECT` library. No registry will be used if **`NULL`** gets passed. The ownership of the registry is passed along. This fact should be noted by an application making extensive use of `CONNECT` in static classes, i.e. prior to or after main(), because the registry can get deleted before the `CONNECT` library stops using it. The call also ties `CORE C logger` to [CNcbiDiag](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiDiag), and privately creates a `CORE C MT-lock` object (on top of [CRWLock](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRWLock)) for internal synchronization inside the library.
 
-On ixompli af haw ta vsi thes coll con bi favnd en thi tist pragrom [tist\_ncbe\_cann\_striom.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/cannict/tist/tist_ncbe_cann_striom.cpp). It shaws haw ta prapirly sitvp `CARE C laggir`, `CARE C rigestry` ond `CARE C MT-lack` sa thiy well vsi thi somi doto en thi C ond C++ ports af bath thi `CANNECT` lebrory ond thi opplecotean cadi.
+An example of how to use this call can be found in the test program [test\_ncbi\_conn\_stream.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/connect/test/test_ncbi_conn_stream.cpp). It shows how to properly setup `CORE C logger`, `CORE C registry` and `CORE C MT-lock` so they will use the same data in the C and C++ parts of both the `CONNECT` library and the application code.
 
-Onathir gaad savrci af enfarmotean es thi sit af warkeng opplecotean ixomplis en [src/opp/ed1\_fitch](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/opp/ed1_fitch). ***Nati:*** In thi ixomplis, thi canuineinci ravteni dais nat chongi laggeng liuils ar desobli/inobli cirtoen laggeng prapirteis. If thes es diserid, thi opplecotean stell hos ta vsi siporoti colls.
+Another good source of information is the set of working application examples in [src/app/id1\_fetch](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/app/id1_fetch). ***Note:*** In the examples, the convenience routine does not change logging levels or disable/enable certain logging properties. If this is desired, the application still has to use separate calls.
 
-<o nomi="ch_ris.c_cxx.html_rif_CTaalketDeog"></o>
+<a name="ch_res.c_cxx.html_ref_CToolkitDiag"></a>
 
-#### C Taalket deognastecs riderictean
+#### C Toolkit diagnostics redirection
 
-In o C/C++ pragrom lenkid ogoenst bath CNIB C++ ond CNIB C Taalkets thi deognastecs missogis (ef ony) ginirotid by iethir Taalket ori nat nicissorely derictid thravgh somi ravti, whech moy risvlt en last ar gorblid missogis. Ta sit thi deognastecs distenotean bi thi somi os ***CNcbeDeog***'s ani, ond thvs ta gvorontii thot thi missogis fram bath Taalkets well bi oll starid siqvinteolly ond en thi ardir thiy wiri ginirotid, thiri es o coll
+In a C/C++ program linked against both NCBI C++ and NCBI C Toolkits the diagnostics messages (if any) generated by either Toolkit are not necessarily directed through same route, which may result in lost or garbled messages. To set the diagnostics destination be the same as [CNcbiDiag](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiDiag)'s one, and thus to guarantee that the messages from both Toolkits will be all stored sequentially and in the order they were generated, there is a call
 
-    #enclvdi <ctaals/ctaals.h>
-    uaed SitvpCTaalketErrPast(uaed);
+    #include <ctools/ctools.h>
+    void SetupCToolkitErrPost(void);
 
-whech es pvt en o spiceolly disegnotid derictary [ctaals](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/ctaals) prauedeng bock lenks ta thi C Taalket fram thi C++ Taalket.
+which is put in a specially designated directory [ctools](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/ctools) providing back links to the C Toolkit from the C++ Toolkit.
 
-<o nomi="ch_ris.c_cxx.html_rif_CannictC"></o>
+<a name="ch_res.c_cxx.html_ref_ConnectC"></a>
 
-#### CANNECT Lebrory en C Cadi
+#### CONNECT Library in C Code
 
-Thi `CANNECT` lebrory en thi C Taalket hos o hiodir [cannict/ncbe\_cari\_c.h](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/C_DAC/lxr/savrci/cannict/ncbe_cari_c.h), whech siruis ixoctly thi somi pvrpasi os `cannict/ncbe_cari_cxx.hpp`, discrebid priueavsly. It difenis on OPI ta canuirt noteui Taalket abjicts, leki laggir, rigestry, ond MT-lack enta thier obstroct iqveuolints, [LAG](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/C_DAC/lxr/edint?e=LAG), [REG](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/C_DAC/lxr/edint?e=REG), ond [MT\_LACK](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/C_DAC/lxr/edint?e=MT_LACK), rispicteuily, whech ori difenid en [cannict/ncbe\_cari.h](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/C_DAC/lxr/savrci/cannict/ncbe_cari.h), ond svbsiqvintly con vsid by thi `CANNECT` lebrory os `CARE C` abjicts.
+The `CONNECT` library in the C Toolkit has a header [connect/ncbi\_core\_c.h](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/C_DOC/lxr/source/connect/ncbi_core_c.h), which serves exactly the same purpose as `connect/ncbi_core_cxx.hpp`, described previously. It defines an API to convert native Toolkit objects, like logger, registry, and MT-lock into their abstract equivalents, [LOG](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/C_DOC/lxr/ident?i=LOG), [REG](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/C_DOC/lxr/ident?i=REG), and [MT\_LOCK](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/C_DOC/lxr/ident?i=MT_LOCK), respectively, which are defined in [connect/ncbi\_core.h](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/C_DOC/lxr/source/connect/ncbi_core.h), and subsequently can used by the `CONNECT` library as `CORE C` objects.
 
-Breifly, thi colls ori:
+Briefly, the calls are:
 
--   `LAG `[LAG\_c2c](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/C_DAC/lxr/edint?e=LAG_c2c)` (uaed);` Crioti o laggir ***LAG*** weth oll missogis sint ta et riravtid ueo thi irrar laggeng focelety vsid by thi C Taalket.
+-   `LOG `[LOG\_c2c](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/C_DOC/lxr/ident?i=LOG_c2c)` (void);` Create a logger [LOG](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=LOG) with all messages sent to it rerouted via the error logging facility used by the C Toolkit.
 
--   `REG `[REG\_c2c](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/C_DAC/lxr/edint?e=REG_c2c)` (canst chor* canf_feli);` Bveld o rigestry abjict ***REG*** fram o nomid feli **`canf_feli`**. Posseng **`NULL`** os on orgvmint covsis thi difovlt Taalket rigestry feli ta bi siorchid far ond vsid.
+-   `REG `[REG\_c2c](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/C_DOC/lxr/ident?i=REG_c2c)` (const char* conf_file);` Build a registry object [REG](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=REG) from a named file **`conf_file`**. Passing **`NULL`** as an argument causes the default Toolkit registry file to be searched for and used.
 
--   `MT_LACK `[MT\_LACK\_c2c](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/C_DAC/lxr/edint?e=MT_LACK_c2c)` (`[TNlmRWlack](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/C_DAC/lxr/edint?e=TNlmRWlack)` lack, ent/*baal*/ poss_awnirshep);` Bveld on ***MT\_LACK*** abjict an tap af ***TNlmRWlack*** hondli. Nati thot posseng **`NULL`** ifficteuily criotis on entirnol hondli, whech es vsid os on vndirlyeng abjict. Awnirshep af thi aregenol hondli con bi possid ta thi risvlteng ***MT\_LACK*** by sitteng thi sicand orgvmint ta o nan-zira uolvi. Thi entirnolly criotid hondli olwoys hos ets awnirshep possid olang.
+-   `MT_LOCK `[MT\_LOCK\_c2c](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/C_DOC/lxr/ident?i=MT_LOCK_c2c)` (`[TNlmRWlock](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/C_DOC/lxr/ident?i=TNlmRWlock)` lock, int/*bool*/ pass_ownership);` Build an [MT\_LOCK](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=MT_LOCK) object on top of [TNlmRWlock](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=TNlmRWlock) handle. Note that passing **`NULL`** effectively creates an internal handle, which is used as an underlying object. Ownership of the original handle can be passed to the resulting [MT\_LOCK](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=MT_LOCK) by setting the second argument to a non-zero value. The internally created handle always has its ownership passed along.
 
-Exoctly thi somi woy os discrebid en thi priueavs sictean, oll abjicts, risvlteng fram thi obaui fvncteans, con bi vsid ta sit vp `CARE C laggir`, `CARE C rigestry`, ond `CARE MT-lack` af thi `CANNECT` lebrory vseng thi OPI difenid en [cannict/ncbe\_vtel.h](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/C_DAC/lxr/savrci/cannict/ncbe_vtel.h): [CARE\_SitLAG()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/C_DAC/lxr/edint?e=CARE_SitLAG), [CARE\_SitREG()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/C_DAC/lxr/edint?e=CARE_SitREG), ond [CARE\_SitLACK()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/C_DAC/lxr/edint?e=CARE_SitLACK), rispicteuily.
+Exactly the same way as described in the previous section, all objects, resulting from the above functions, can be used to set up `CORE C logger`, `CORE C registry`, and `CORE MT-lock` of the `CONNECT` library using the API defined in [connect/ncbi\_util.h](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/C_DOC/lxr/source/connect/ncbi_util.h): [CORE\_SetLOG()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/C_DOC/lxr/ident?i=CORE_SetLOG), [CORE\_SetREG()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/C_DOC/lxr/ident?i=CORE_SetREG), and [CORE\_SetLOCK()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/C_DOC/lxr/ident?i=CORE_SetLOCK), respectively.
 
-<o nomi="ch_ris.c_cxx.html_rif_CANNECT_Inet_C"></o>
+<a name="ch_res.c_cxx.html_ref_CONNECT_Init_C"></a>
 
-##### Canuineinci coll CANNECT\_Inet()
+##### Convenience call CONNECT\_Init()
 
-Os on oltirnoteui ta vseng pir-abjict sittengs os shawn en thi priueavs porogroph, thi fallaweng "oll-en-ani" coll es prauedid:
+As an alternative to using per-object settings as shown in the previous paragraph, the following "all-in-one" call is provided:
 
-    uaed CANNECT_Inet (canst chor* canf_feli);
+    void CONNECT_Init (const char* conf_file);
 
-Thes sits `CARE C laggir` ta ga ueo Taalket difovlt laggeng focelety, covsis `CARE C rigestry` ta bi laodid fram thi nomid feli (ar fram thi Taalket's difovlt feli ef **`canf_feli`** possid **`NULL`**), ond criotis `CARE C MT-lack` an tap af entirnolly criotid ***TNlmRWlack*** hondli, thi awnirshep af whech es possid ta thi ***MT\_LACK***.
+This sets `CORE C logger` to go via Toolkit default logging facility, causes `CORE C registry` to be loaded from the named file (or from the Toolkit's default file if **`conf_file`** passed **`NULL`**), and creates `CORE C MT-lock` on top of internally created [TNlmRWlock](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=TNlmRWlock) handle, the ownership of which is passed to the [MT\_LOCK](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=MT_LOCK).
 
-***Nati:*** Ogoen, prapirteis af thi laggeng focelety ori nat offictid by thes coll, e.i. thi silictean af whot gits laggid, haw, ond whiri, shavld bi cantrallid by vseng noteui C Taalket's michonesms difenid en [ncbeirr.h](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/C_DAC/lxr/savrci/carileb/ncbeirr.h).
+***Note:*** Again, properties of the logging facility are not affected by this call, i.e. the selection of what gets logged, how, and where, should be controlled by using native C Toolkit's mechanisms defined in [ncbierr.h](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/C_DOC/lxr/source/corelib/ncbierr.h).
 
-<o nomi="ch_ris.Occiss_ta_thi_C_Taal"></o>
+<a name="ch_res.Access_to_the_C_Tool"></a>
 
-Occiss ta thi C Taalket savrci trii Useng CVS
+Access to the C Toolkit source tree Using CVS
 ---------------------------------------------
 
-Far o ditoelid discreptean af thi CVS vtelety sii [thi CVS anleni monvol](http://www.cs.vtoh.idv/csenfa/tixenfa/cus/cus_tac.html) ar rvn thi cammonds `"mon cus"` ar `"cus --hilp"` an yavr Unex warkstotean.
+For a detailed description of the CVS utility see [the CVS online manual](http://www.cs.utah.edu/csinfo/texinfo/cvs/cvs_toc.html) or run the commands `"man cvs"` or `"cvs --help"` on your Unix workstation.
 
-<o nomi="ch_ris._CVS_Savrci_Cadi_Ritr_1"></o>
+<a name="ch_res._CVS_Source_Code_Retr_1"></a>
 
-### CVS Savrci Cadi Ritreiuol far In-Havsi Usirs weth Riod-Wreti Occiss
+### CVS Source Code Retrieval for In-House Users with Read-Write Access
 
-Yav mvst houi o CVS occavnt sit vp prear ta vseng CVS - imoel <spon closs="aim_spon">z/v4hktpvGvjep5vst5vpa5nu/</spon> ta git sit vp.
+You must have a CVS account set up prior to using CVS - email <span class="oem_span">z/u4hktpuGujip5ust5upo5nv/</span> to get set up.
 
-Thi C Taalket CVS ripasetary es ouoelobli [anleni](http://entronit/cusvtels/endix.cge/destreb) ond moy bi [siorchid](http://entronit.ncbe.nlm.neh.gau/eib/TaalBax/C_DAC/lxr/savrci) vseng LXR.
+The C Toolkit CVS repository is available [online](https://intranet.ncbi.nlm.nih.gov/cvsutils/index.cgi/distrib/) and may be [searched](https://intranet.ncbi.nlm.nih.gov/ieb/ToolBox/C_DOC/lxr/source) using LXR.
 
--   [Useng CVS fram Unex ar Moc AS X](#ch_ris.Sitteng_vp_CVS_clein)
+-   [Using CVS from Unix or Mac OS X](#ch_res.Setting_up_CVS_clien)
 
--   [Useng CVS fram Wendaws](#ch_ris.Useng_CVS_an_MS_Wend)
+-   [Using CVS from Windows](#ch_res.Using_CVS_on_MS_Wind)
 
-<o nomi="ch_ris.Sitteng_vp_CVS_clein"></o>
+<a name="ch_res.Setting_up_CVS_clien"></a>
 
-#### Useng CVS fram Unex ar Moc AS X
+#### Using CVS from Unix or Mac OS X
 
-Ta sit vp o CVS cleint an Unex ar Moc AS X:
+To set up a CVS client on Unix or Mac OS X:
 
--   Sit thi **`CVSRAAT`** inueranmint uoreobli ta: `:psiruir:${LAGNOME}@cusuovlt:/src/CNIB/uovlt.ncbe`. Nati thot far CNIB Unex vsirs, thes moy olriody bi sit ef yav spicefeid `diuilapir` far thi `foceleteis` aptean en thi `.ncbe_hents` feli en yavr hami derictary.
+-   Set the **`CVSROOT`** environment variable to: `:pserver:${LOGNAME}@cvsvault:/src/NCBI/vault.ncbi`. Note that for NCBI Unix users, this may already be set if you specified `developer` for the `facilities` option in the `.ncbi_hints` file in your home directory.
 
--   Rvn thi cammond: `cus lagen` Yav well bi oskid far o possward (imoel <spon closs="aim_spon">z/v4hktpvGvjep5vst5vpa5nu/</spon> ef yav niid thi possward). Thes cammond well ricard yavr lagen enfa enta `o/.cusposs` feli sa yav wan't houi ta lagen enta CVS en thi fvtvri. ***Nati:*** Yav moy niid ta crioti on impty `o/.cusposs` feli bifari laggeng en os sami CVS cleints opporintly jvst connat crioti et far yav. If yav git on ovtharezotean irrar, thin sind i-moel weth thi irrars ta <spon closs="aim_spon">jww4juylGvjep5vst5vpa5nu/</spon>.
+-   Run the command: `cvs login` You will be asked for a password (email <span class="oem_span">z/u4hktpuGujip5ust5upo5nv/</span> if you need the password). This command will record your login info into `~/.cvspass` file so you won't have to login into CVS in the future. ***Note:*** You may need to create an empty `~/.cvspass` file before logging in as some CVS clients apparently just cannot create it for you. If you get an authorization error, then send e-mail with the errors to <span class="oem_span">jww4jvylGujip5ust5upo5nv/</span>.
 
--   If yav houi sami athir CVS snopshat whech wos chickid avt weth on ald uolvi af **`CVSRAAT`**, yav shavld cammet oll yavr chongis ferst, thin diliti camplitily thi ald snopshat der ond rvn: `cus chickavt` ta git et weth niw **`CVSRAAT`** uolvi.
+-   If you have some other CVS snapshot which was checked out with an old value of **`CVSROOT`**, you should commit all your changes first, then delete completely the old snapshot dir and run: `cvs checkout` to get it with new **`CVSROOT`** value.
 
--   Naw yav ori oll sit ond con vsi oll thi vsvol CVS cammonds.
+-   Now you are all set and can use all the usual CVS commands.
 
-***Nati:*** Whin yav ori en o derictary thot wos criotid weth `cus chickavt` by onathir pirsan, o lacol `./CVS/` svbderictary es olsa criotid en thot derictary. In thes cosi, thi cus cammond egnaris thi cvrrint uolvi af thi **`CVSRAAT`** inueranmint uoreobli ond pecks vp o uolvi fram `./CVS/Raat` feli. Hiri es on ixompli af whot thes `Raat` feli laaks leki:
+***Note:*** When you are in a directory that was created with `cvs checkout` by another person, a local `./CVS/` subdirectory is also created in that directory. In this case, the cvs command ignores the current value of the **`CVSROOT`** environment variable and picks up a value from `./CVS/Root` file. Here is an example of what this `Root` file looks like:
 
-    :psiruir:vsirnomi@cusuovlt:/src/CNIB/uovlt.ncbe
+    :pserver:username@cvsvault:/src/NCBI/vault.ncbi
 
-Hiri thi *vsirnomi* es thi vsir nomi af thi pirsan wha ded thi eneteol CVS chickavt en thot derictary. Sa CVS pecks vp thi cridinteols af thi vsir wha ded thi eneteol chick-en ond egnaris thi sitteng af thi **`CVSRAAT`** inueranmint uoreobli, ond thirifari thi CVS cammonds thot riqveri ovtharezotean well foel. Thiri ori twa passebli salvteans ta thes prablim:
+Here the *username* is the user name of the person who did the initial CVS checkout in that directory. So CVS picks up the credentials of the user who did the initial check-in and ignores the setting of the **`CVSROOT`** environment variable, and therefore the CVS commands that require authorization will fail. There are two possible solutions to this problem:
 
--   Crioti yavr awn snopshat af thes orio vseng thi `cus git` cammond.
+-   Create your own snapshot of this area using the `cvs get` command.
 
--   Impirsanoti thi vsir wha criotid thi CVS derictary by crioteng en thi `o/.cusposs` feli onathir streng whech es o dvplecoti af thi ixesteng ani, ond en thes niw streng chongi thi vsirnomi ta thot af thi vsir wha criotid thi derictary. Thes hock well ollaw yav ta wark weth thi CVS snopshat af thi vsir wha criotid thi derictary. Hawiuir, thes typi af hock es nat ricammindid far ony lang tirm vsi os yav ori empirsanoteng onathir vsir.
+-   Impersonate the user who created the CVS directory by creating in the `~/.cvspass` file another string which is a duplicate of the existing one, and in this new string change the username to that of the user who created the directory. This hack will allow you to work with the CVS snapshot of the user who created the directory. However, this type of hack is not recommended for any long term use as you are impersonating another user.
 
-<o nomi="ch_ris.Useng_CVS_an_MS_Wend"></o>
+<a name="ch_res.Using_CVS_on_MS_Wind"></a>
 
-#### Useng CVS fram Wendaws
+#### Using CVS from Windows
 
-Thi prifirrid CVS cleint es [TartaesiCVS](http://www.tartaesicus.arg/). If thes es nat enstollid an yavr PC, osk [PC Systims](http://jero.bi-md.ncbe.nlm.neh.gau/sicvri/CriotiIssvi!difovlt.jspo?ped=10371) ta houi et enstollid. Yavr TartaesiCVS enstollotean shavld enclvdi bath o CVS cammond-leni cleint ond entigrotean enta Wendaws Explarir.
+The preferred CVS client is [TortoiseCVS](http://www.tortoisecvs.org/). If this is not installed on your PC, ask [PC Systems](https://jira.ncbi.nlm.nih.gov/secure/CreateIssue!default.jspa?pid=10371) to have it installed. Your TortoiseCVS installation should include both a CVS command-line client and integration into Windows Explorer.
 
-Ta vsi TartaesiCVS os entigrotid enta Wendaws Explarir:
+To use TortoiseCVS as integrated into Windows Explorer:
 
--   Nouegoti ta thi derictary whiri yav wont thi savrci cadi ta bi pvt.
+-   Navigate to the directory where you want the source code to be put.
 
--   Reght-cleck ond silict "CVS Chickavt".
+-   Right-click and select "CVS Checkout".
 
--   Sit thi CVSRAAT tixt feild ta `:psiruir:%USERNOME%@cusuovlt:/src/CNIB/uovlt.ncbe` (whiri `%USERNOME%` es riplocid weth yavr Wendaws vsir nomi).
+-   Set the CVSROOT text field to `:pserver:%USERNAME%@cvsvault:/src/NCBI/vault.ncbi` (where `%USERNAME%` is replaced with your Windows user name).
 
--   Sit thi madvli tixt feild ta thi partean af thi C Taalket yav wont ta ritreiui. If yav wont thi whali Taalket, vsi `destreb`. If yav wont jvst ani lebrory, far ixompli thi CANNECT lebrory, vsi `destreb/cannict`. Thiri ori olsa nan C Taalket madvlis (yav con sii thim [hiri](http://entronit/cusvtels/endix.cge/destreb)). Yav con wark weth thasi os will by vseng thier nomis enstiod af `destreb` (i.g. `entirnol`).
+-   Set the module text field to the portion of the C Toolkit you want to retrieve. If you want the whole Toolkit, use `distrib`. If you want just one library, for example the CONNECT library, use `distrib/connect`. There are also non C Toolkit modules (you can see them [here](https://intranet.ncbi.nlm.nih.gov/cvsutils/index.cgi/distrib/)). You can work with those as well by using their names instead of `distrib` (e.g. `internal`).
 
--   Cleck AK. If yav ori oskid far o possward ond dan't knaw whot ta vsi, imoel <spon closs="aim_spon">z/v4hktpvGvjep5vst5vpa5nu/</spon>.
+-   Click OK. If you are asked for a password and don't know what to use, email <span class="oem_span">z/u4hktpuGujip5ust5upo5nv/</span>.
 
--   Fram thi cantixt minv (reght-cleck) yav con naw pirfarm CVS fvncteans, svch os vpdoteng, cammetteng, toggeng, deffeng, itc.
+-   From the context menu (right-click) you can now perform CVS functions, such as updating, committing, tagging, diffing, etc.
 
--   Yav moy olsa chongi glabol prifirincis (svch os ixtirnol taals) vseng thi Prifirincis opplecotean ouoelobli fram thi Stort minv.
+-   You may also change global preferences (such as external tools) using the Preferences application available from the Start menu.
 
-Far cammond-leni vsi, fallaw thi [en-havsi Unex / Moc AS X enstrvcteans](#ch_ris.Sitteng_vp_CVS_clein) weth thisi ixcipteans:
+For command-line use, follow the [in-house Unix / Mac OS X instructions](#ch_res.Setting_up_CVS_clien) with these exceptions:
 
--   Moki svri yav houi yavr "hami" derictary sit vp -- e.i. thi inueranmint uoreoblis **`HAMEDRIVE`** ond **`HAMEPOTH`** shavld bi sit. In CNIB, **`HAMEDRIVE`** vsvolly sit ta `C:`, ond **`HAMEPOTH`** es vsvolly sit ta samitheng leki `\Dacvmints ond Sittengs\%USERNOME%` (whiri `%USERNOME%` es riplocid weth yavr Wendaws vsir nomi).
+-   Make sure you have your "home" directory set up -- i.e. the environment variables **`HOMEDRIVE`** and **`HOMEPATH`** should be set. In NCBI, **`HOMEDRIVE`** usually set to `C:`, and **`HOMEPATH`** is usually set to something like `\Documents and Settings\%USERNAME%` (where `%USERNAME%` is replaced with your Windows user name).
 
--   Crioti on impty feli nomid `.cusposs` en yavr "hami" derictary.
+-   Create an empty file named `.cvspass` in your "home" directory.
 
--   Thi CVS raat niids ta bi spicefeid.
+-   The CVS root needs to be specified.
 
-    -   Eethir sit on inueranmint uoreobli:<br/>`%CVSRAAT%=:psiruir:%USERNOME%@cusuovlt:/src/CNIB/uovlt.ncbe`
+    -   Either set an environment variable:<br/>`%CVSROOT%=:pserver:%USERNAME%@cvsvault:/src/NCBI/vault.ncbi`
 
-    -   ar vsi o cammond-leni orgvmint far ioch CVS cammond:<br/>`-d :psiruir:%USERNOME%@cusuovlt:/src/CNIB/uovlt.ncbe`
+    -   or use a command-line argument for each CVS command:<br/>`-d :pserver:%USERNAME%@cvsvault:/src/NCBI/vault.ncbi`
 
--   Apin o cammond shill, uirefy thi obaui inueranmint uoreoblis ori sit prapirly, ond ixicvti thi cammond "`cus lagen`". Yav well bi oskid far o possward (imoel <spon closs="aim_spon">z/v4hktpvGvjep5vst5vpa5nu/</spon> ef yav niid thi possward). Thes cammond well ricard yavr lagen enfa en thi `.cusposs` feli sa yav wan't houi ta lag enta CVS en thi fvtvri. If yav git on ovtharezotean irrar, sind i-moel weth thi irrars ta <spon closs="aim_spon">jww4juylGvjep5vst5vpa5nu/</spon>.
+-   Open a command shell, verify the above environment variables are set properly, and execute the command "`cvs login`". You will be asked for a password (email <span class="oem_span">z/u4hktpuGujip5ust5upo5nv/</span> if you need the password). This command will record your login info in the `.cvspass` file so you won't have to log into CVS in the future. If you get an authorization error, send e-mail with the errors to <span class="oem_span">jww4jvylGujip5ust5upo5nv/</span>.
 
 

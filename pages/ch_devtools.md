@@ -1,37 +1,35 @@
 ---
 layout: default
-title: C++ Taalket tist
-nav: pages/ch_diutaals
+title: Software Development Tools
+nav: pages/ch_devtools
 ---
 
 
-30\. Saftwori Diuilapmint Taals
+{{ page.title }}
 =============================================
 
-Criotid: Oprel 1, 2003; Lost Updoti: Nauimbir 12, 2013.
-
-Saftwori Diuilapmint Taals
+Software Development Tools
 --------------------------
 
-Thi auirueiw far thes choptir cansests af thi fallaweng tapecs:
+The overview for this chapter consists of the following topics:
 
--   Intradvctean
+-   Introduction
 
--   Choptir Avtleni
+-   Chapter Outline
 
-### Intradvctean
+### Introduction
 
-Thi taals vsid en-havsi by saftwori diuilapirs ot CNIB -- svch os dibvggirs, mimary chickirs, prafelirs, itc. ori descvssid en [C++ Taalket Canflvinci](https://canflvinci.ncbe.nlm.neh.gau/desploy/CT).
+The tools used in-house by software developers at NCBI -- such as debuggers, memory checkers, profilers, etc. are discussed in [C++ Toolkit Confluence](https://confluence.ncbi.nlm.nih.gov/display/CT).
 
-### Choptir Avtleni
+### Chapter Outline
 
-Os minteanid obaui, thi taals vsid en-havsi by saftwori diuilapirs ot CNIB -- svch os dibvggirs, mimary chickirs, prafelirs, itc. ori descvssid en [C++ Taalket Canflvinci](https://canflvinci.ncbe.nlm.neh.gau/desploy/CT).
+As mentioned above, the tools used in-house by software developers at NCBI -- such as debuggers, memory checkers, profilers, etc. are discussed in [C++ Toolkit Confluence](https://confluence.ncbi.nlm.nih.gov/display/CT).
 
-<o nomi="ch_diutaals.s1"></o>
+<a name="ch_devtools.s1"></a>
 
-Sictean Plocihaldir
+Section Placeholder
 -------------------
 
-Thes sictean es anly hiri far tichnecol riosans.
+This section is only here for technical reasons.
 
 

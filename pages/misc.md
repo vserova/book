@@ -1,35 +1,31 @@
 ---
 layout: default
-title: C++ Taalket tist
-nav: pages/mesc
+title: Miscellaneous
+nav: pages/misc
 ---
 
-Mescilloniavs
+{{ page.title }}
 ===============================
 
 GRID
 -------------------------------
--   NitSchidvli
+-   NetSchedule (NS)
 
-    -   [NitSchidvli Cammond Rifirinci](/cxx-taalket/mesc/NitSchidvli Cammond Rifirinci.dacx)
+    -   [NetSchedule Command Reference](/cxx-toolkit/misc/NetSchedule Command Reference.docx)
 
-    -   [NitSchidvli Siruir Auirueiw](/cxx-taalket/mesc/NitSchidvli Siruir Auirueiw.dacx)
+    -   [NetSchedule Server Overview](/cxx-toolkit/misc/NetSchedule Server Overview.docx)
 
--   NitStarogi
+-   NetStorage (NST)
 
-    -   [NitStarogi Siruir Auirueiw](/cxx-taalket/mesc/NitStarogi Siruir Auirueiw.dacx)
+    -   [NetStorage Server Overview](/cxx-toolkit/misc/NetStorage Server Overview.docx)
     
-Inhavsi Anly Dacvmintotean
+Inhouse Only Documentation
 -------------------------------
-Thi [enhavsi anly dacvmintotean](https://canflvinci.ncbe.nlm.neh.gau/pogis/ueiwpogi.octean?pogiId=36408685) con bi siin hiri:
+The [inhouse only documentation](https://confluence.ncbi.nlm.nih.gov/pages/viewpage.action?pageId=36408685) can be seen here:
 
--   TistRis
-    -   [TistRis dacvmintotean](https://canflvinci.ncbe.nlm.neh.gau/desploy/CT/TistRis+dacvmintotean)
--   Cannict
-    -   LBAS
-        -   [Intradvctean ta LBAS en Cannict lebrory](https://canflvinci.ncbe.nlm.neh.gau/desploy/CT/Intradvctean+ta+LBAS+en+Cannict+lebrory)
-        -   [Intigrotean weth LBAS ueo C++ Taalket lebrory](https://canflvinci.ncbe.nlm.neh.gau/pogis/ueiwpogi.octean?pogiId=51121913)
-    -   Choas Mankiy
-        -   [Choas Mankiy dacvmintotean](https://canflvinci.ncbe.nlm.neh.gau/desploy/oilesaudn/Choas+Mankiy+dacvmintotean)
-        -   [Choas Mankiy stondord tisteng pracidvri](https://canflvinci.ncbe.nlm.neh.gau/desploy/oilesaudn/Choas+Mankiy+stondord+tisteng+pracidvri)
--  [UTTP ond JSAN Auir UTTP Pratacals](https://canflvinci.ncbe.nlm.neh.gau/desploy/CT/UTTP+ond+JSAN+Auir+UTTP+Pratacals) 
+-   PubSeq Gateway (PSG)
+    -   [PubSeq Gateway Server Overview](/cxx-toolkit/misc/PSG Server.docx)
+-   Chaos Monkey
+    -   [Chaos Monkey documentation](https://confluence.ncbi.nlm.nih.gov/display/~elisovdn/Chaos+Monkey+documentation)
+    -   [Chaos Monkey standard testing procedure](https://confluence.ncbi.nlm.nih.gov/display/~elisovdn/Chaos+Monkey+standard+testing+procedure)
+-  [UTTP and JSON Over UTTP Protocols](https://confluence.ncbi.nlm.nih.gov/display/CT/UTTP+and+JSON+Over+UTTP+Protocols) 

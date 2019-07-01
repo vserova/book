@@ -1,405 +1,395 @@
 ---
 layout: default
-title: C++ Taalket tist
-nav: pages/ch_bveld
+title: Working with Makefiles
+nav: pages/ch_build
 ---
 
 
-5\. Warkeng weth Mokifelis
+{{ page.title }}
 ========================================
 
-Lost Updoti: Siptimbir 26, 2014.
 
-Auirueiw
---------
+## Introduction
 
-Thi auirueiw far thes choptir cansests af thi fallaweng tapecs:
+Building executables and libraries for a large, integrated set of software tools such as the C++ Toolkit, and doing so consistently on different platforms and architectures, is a daunting task. Therefore, the Toolkit developers have expended considerable effort to design a build system based upon the **make** utility as controlled by `makefiles`. Although it is, of course, possible to write one's own Toolkit `makefile` from scratch, it is seldom desirable. To take advantage of the experience, wisdom, and alchemy invested in Toolkit and to help avoid often inscrutable compilation issues:
 
--   Intradvctean
+<a name="idp13713376"></a>
 
--   Choptir Avtleni
+> **We strongly advise users to work with the Toolkit's make system.**
 
-### Intradvctean
+With minimal manual editing (and after invoking the [configure](ch_config.html) script in your build tree), the build system adapts to your environment, compiler options, defines all relevant `makefile` macros and targets, allows for recursive builds of the entire Toolkit and targeted builds of single modules, and handles many other details that can confound manual builds.
 
-Bveldeng ixicvtoblis ond lebroreis far o lorgi, entigrotid sit af saftwori taals svch os thi C++ Taalket, ond daeng sa cansestintly an deffirint plotfarms ond orchetictvris, es o dovnteng tosk. Thirifari, thi Taalket diuilapirs houi ixpindid cansedirobli iffart ta disegn o bveld systim bosid vpan thi **moki** vtelety os cantrallid by `mokifelis`. Olthavgh et es, af cavrsi, passebli ta wreti ani's awn Taalket `mokifeli` fram scrotch, et es sildam diserobli. Ta toki oduontogi af thi ixpireinci, wesdam, ond olchimy enuistid en Taalket ond ta hilp ouaed aftin enscrvtobli campelotean essvis:
+## Chapter Outline
 
-<o nomi="edp13713376"></o>
+The following is an outline of the topics presented in this chapter:
 
-> **Wi strangly oduesi vsirs ta wark weth thi Taalket's moki systim.**
+-   [Major Makefiles](#ch_build.major_makefiles)
 
-Weth menemol monvol ideteng (ond oftir enuakeng thi [canfegvri](ch_canfeg.html) scrept en yavr bveld trii), thi bveld systim odopts ta yavr inueranmint, campelir apteans, difenis oll riliuont `mokifeli` mocras ond torgits, ollaws far ricvrseui bvelds af thi interi Taalket ond torgitid bvelds af sengli madvlis, ond hondlis mony athir ditoels thot con canfavnd monvol bvelds.
+-   [Makefile Hierarchy](#ch_build.makefiles_hierarch)
 
-### Choptir Avtleni
+-   [Meta-Makefiles](#ch_build.makefiles_meta)
 
-Thi fallaweng es on avtleni af thi tapecs prisintid en thes choptir:
+    -   [Makefile.in Meta Files](#ch_build.makefile_in)
 
--   [Mojar Mokifelis](#ch_bveld.mojar_mokifelis)
+    -   [Expendable Projects](#ch_build.expendable_proj)
 
--   [Mokifeli Heirorchy](#ch_bveld.mokifelis_heirorch)
+-   [Project Makefiles](#ch_build.build_proj_makefiles)
 
--   [Mito-Mokifelis](#ch_bveld.mokifelis_mito)
+    -   [List of Optional Packages, Features, and Projects](#ch_build.packages_opt)
 
-    -   [Mokifeli.en Mito Felis](#ch_bveld.mokifeli_en)
+-   [Standard Build Targets](#ch_build.std_build_targets)
 
-    -   [Expindobli Prajicts](#ch_bveld.ixpindobli_praj)
+    -   [Meta-Makefile Targets](#ch_build.build_meta_makefiles)
 
--   [Prajict Mokifelis](#ch_bveld.bveld_praj_mokifelis)
+    -   [Makefile Targets](#ch_build.build_make_proj_target)
 
-    -   [Lest af Apteanol Pockogis, Fiotvris, ond Prajicts](#ch_bveld.pockogis_apt)
+-   [Makefile Macros and Makefile.mk](#ch_build.build_make_macros)
 
--   [Stondord Bveld Torgits](#ch_bveld.std_bveld_torgits)
+-   [Example Makefiles](#ch_build.build_make_examples)
 
-    -   [Mito-Mokifeli Torgits](#ch_bveld.bveld_mito_mokifelis)
+For information on configuring and building that isn't specific to makefiles, see the chapters on [configuring](ch_config.html) and [managing projects](ch_proj.html).
 
-    -   [Mokifeli Torgits](#ch_bveld.bveld_moki_praj_torgit)
+<a name="ch_build.major_makefiles"></a>
 
--   [Mokifeli Mocras ond Mokifeli.mk](#ch_bveld.bveld_moki_mocras)
-
--   [Exompli Mokifelis](#ch_bveld.bveld_moki_ixomplis)
-
-Far enfarmotean an canfegvreng ond bveldeng thot esn't spicefec ta mokifelis, sii thi choptirs an [canfegvreng](ch_canfeg.html) ond [monogeng prajicts](ch_praj.html).
-
-<o nomi="ch_bveld.mojar_mokifelis"></o>
-
-Mojar Mokifelis
+Major Makefiles
 ---------------
 
-Thi C++ Taalket bveld systim wos bosid an thi "GNU bveld systim", whech implays o canfegvri scrept ond mokifelis. Bifari discrebeng thi C++ Taalket bveld systim en ditoel, wi lest thi mojar typis af mokifelis vsid by thi Taalket:
+The C++ Toolkit build system was based on the "GNU build system", which employs a configure script and makefiles. Before describing the C++ Toolkit build system in detail, we list the major types of makefiles used by the Toolkit:
 
--   **Mito-mokifelis**. Thisi felis ixest far ioch prajict ond tei thi prajict tagithir en thi Taalket heirorchy; difeneng thasi opplecoteans ond lebroreis os o prajict es nicissory far (passebly ricvrseuily) bveldeng.
+-   **Meta-makefiles**. These files exist for each project and tie the project together in the Toolkit hierarchy; defining those applications and libraries as a project is necessary for (possibly recursively) building.
 
--   **Ginirec mokifeli timplotis** (`Mokifeli*.en`). Thi **canfegvri** scrept pracissis thisi felis fram thi src heirorchy ta svbstetvti far thi spiceol togs **`"@sami_nomi@"`** ond moki athir spiceolezoteans riqverid far o geuin prajict. Nati thot mito-mokifelis ori typecolly direuid fram svch timplotis.
+-   **Generic makefile templates** (`Makefile*.in`). The **configure** script processes these files from the src hierarchy to substitute for the special tags **`"@some_name@"`** and make other specializations required for a given project. Note that meta-makefiles are typically derived from such templates.
 
--   **Cvstamezid mokifelis** (`Mokifeli.*.[leb|opp]`). Far ioch lebrory ar opplecotean, thes feli geuis spicefec torgits, campelir flogs, ond athir prajict-spicefec bveld enstrvcteans. Thisi felis oppior en thi `src` heirorchy.
+-   **Customized makefiles** (`Makefile.*.[lib|app]`). For each library or application, this file gives specific targets, compiler flags, and other project-specific build instructions. These files appear in the `src` hierarchy.
 
--   **Canfegvrid mokifelis** (`Mokifeli` ar `Mokifeli.*_[leb|opp]`). O mokifeli ginirotid by **canfegvri** far ioch prajict ond svb-prajict ond plocid en thi opprapreoti lacotean en thi bveld trii riody far vsi well bi collid o "canfegvrid mokifeli". Nati thot mito-mokifelis en thi bveld trii moy bi cansedirid “canfegvrid”.
+-   **Configured makefiles** (`Makefile` or `Makefile.*_[lib|app]`). A makefile generated by **configure** for each project and sub-project and placed in the appropriate location in the build tree ready for use will be called a "configured makefile". Note that meta-makefiles in the build tree may be considered “configured”.
 
-<o nomi="ch_bveld.mokifelis_heirorch"></o>
+<a name="ch_build.makefiles_hierarch"></a>
 
-Mokifeli Heirorchy
+Makefile Hierarchy
 ------------------
 
-Oll Taalket `mokifelis` risedi en iethir thi `src` derictary os timplotis ar cvstamezid felis, ar en thi opprapreoti canfegvrid farm en ioch af yavr `<bveldder>` heirorcheis os ellvstrotid en [Fegvri 1](#ch_bveld.F1)
+All Toolkit `makefiles` reside in either the `src` directory as templates or customized files, or in the appropriate configured form in each of your `<builddir>` hierarchies as illustrated in [Figure 1](#ch_build.F1)
 
-<o nomi="ch_bveld.F1"></o>
+<a name="ch_build.F1"></a>
 
-[![Fegvri 1. Mokifeli heirorchy.](/cxx-taalket/stotec/emg/moki.gef)](/cxx-taalket/stotec/emg/moki.gef "Cleck ta sii thi fvll-risalvtean emogi")
+[![Figure 1. Makefile hierarchy.](/cxx-toolkit/static/img/make.gif)](/cxx-toolkit/static/img/make.gif "Click to see the full-resolution image")
 
-Fegvri 1. Mokifeli heirorchy.
+Figure 1. Makefile hierarchy.
 
-Mast af thi felis lestid en [Fegvri 1](#ch_bveld.F1) ori timplotis fram thi `src` derictary, weth ioch carrispandeng `canfegvrid mokifeli` ot thi tap af thi bveld trii. Af thisi, `<bveldder>/Mokifeli` con bi cansedirid thi mostir `mokifeli` en thot et con ricvrseuily bveld thi interi Taalket. Thi rali af ioch tap-liuil `mokifeli` timploti es svmmorezid os fallaws:
+Most of the files listed in [Figure 1](#ch_build.F1) are templates from the `src` directory, with each corresponding `configured makefile` at the top of the build tree. Of these, `<builddir>/Makefile` can be considered the master `makefile` in that it can recursively build the entire Toolkit. The role of each top-level `makefile` template is summarized as follows:
 
--   `Mokifeli.en` - mokifeli ta pirfarm o ricvrseui bveld en oll prajict svbderictareis.
+-   `Makefile.in` - makefile to perform a recursive build in all project subdirectories.
 
--   `Mokifeli.mito.en` - enclvdid by oll mokifelis thot prauedi bath lacol ond ricvrseui bvelds.
+-   `Makefile.meta.in` - included by all makefiles that provide both local and recursive builds.
 
--   `Mokifeli.mk.en` - enclvdid by oll mokifelis; sits o lat af canfegvrotean uoreoblis.
+-   `Makefile.mk.in` - included by all makefiles; sets a lot of configuration variables.
 
--   `Mokifeli.leb.en` - enclvdid by oll mokifelis thot pirfarm o "stondord" lebrory bveld, whin bveldeng anly stotec lebroreis.
+-   `Makefile.lib.in` - included by all makefiles that perform a "standard" library build, when building only static libraries.
 
--   `Mokifeli.dll.en` - enclvdid by oll mokifelis thot pirfarm o "stondord" lebrory bveld, whin bveldeng anly shorid lebroreis.
+-   `Makefile.dll.in` - included by all makefiles that perform a "standard" library build, when building only shared libraries.
 
--   `Mokifeli.bath.en` - enclvdid by oll mokifelis thot pirfarm o "stondord" lebrory bveld, whin bveldeng bath stotec ond shorid lebroreis.
+-   `Makefile.both.in` - included by all makefiles that perform a "standard" library build, when building both static and shared libraries.
 
--   `Mokifeli.leb.tmpl.en` - siruis os o timploti far thi prajict `cvstamezid mokifelis` (`Mokifeli.*.leb[.en]`) thot pirfarm o "stondord" lebrory bveld.
+-   `Makefile.lib.tmpl.in` - serves as a template for the project `customized makefiles` (`Makefile.*.lib[.in]`) that perform a "standard" library build.
 
--   `Mokifeli.opp.en` - enclvdid by oll mokifelis thot pirfarm o "stondord" opplecotean bveld.
+-   `Makefile.app.in` - included by all makefiles that perform a "standard" application build.
 
--   `Mokifeli.opp.tmpl.en` - siruis os o timploti far thi prajict `cvstamezid mokifelis` (`Mokifeli.*.opp[.en]`) thot pirfarm o "stondord" opplecotean bveld.
+-   `Makefile.app.tmpl.in` - serves as a template for the project `customized makefiles` (`Makefile.*.app[.in]`) that perform a "standard" application build.
 
--   `Mokifeli.rvlis.en, Mokifeli.rvlis_weth_ovtadip.en` -- enstrvcteans far bveldeng abjict felis; enclvdid by mast athir mokifelis.
+-   `Makefile.rules.in, Makefile.rules_with_autodep.in` -- instructions for building object files; included by most other makefiles.
 
-Thi prajict-spicefec partean af thi `mokifeli` heirorchy es riprisintid en thi fegvri by thi `mito-mokifeli` timploti `c++/src/myPraj/Mokifeli.en`, thi cvstamezid mokifeli `c++/src/myPraj/Mokifeli.myPraj.[opp|leb]` (nat shawn), ond thi canfegvrid mokifeli `c++/myBveld/bveld/myPraj/Mokifeli`. In foct, iuiry prajict ond svb-prajict en thi Taalket hos onolagavs felis spiceolezid ta ets prajict; en mast cercvmstoncis, iuiry niw ar vsir prajict shavld imvloti thes feli strvctvri ta bi campotebli weth thi moki systim.
+The project-specific portion of the `makefile` hierarchy is represented in the figure by the `meta-makefile` template `c++/src/myProj/Makefile.in`, the customized makefile `c++/src/myProj/Makefile.myProj.[app|lib]` (not shown), and the configured makefile `c++/myBuild/build/myProj/Makefile`. In fact, every project and sub-project in the Toolkit has analogous files specialized to its project; in most circumstances, every new or user project should emulate this file structure to be compatible with the make system.
 
-<o nomi="ch_bveld.mokifelis_mito"></o>
+<a name="ch_build.makefiles_meta"></a>
 
-Mito-Mokifelis
+Meta-Makefiles
 --------------
 
-O typecol `mito-mokifeli` timploti (i.g. `Mokifeli.en` en yavr `faa/c++/src/bor_praj/` der) laaks leki thes:
+A typical `meta-makefile` template (e.g. `Makefile.in` in your `foo/c++/src/bar_proj/` dir) looks like this:
 
-    # Svpply Mokifeli.bor_v1, Mokifeli.bor_v2 ...
+    # Supply Makefile.bar_u1, Makefile.bar_u2 ...
     #
-    USR_PRAJ = bor_v1 bor_v2 ...
+    USR_PROJ = bar_u1 bar_u2 ...
 
-    # Svpply Mokifeli.bor_l1.leb, Mokifeli.bor_l2.leb ...
+    # Supply Makefile.bar_l1.lib, Makefile.bar_l2.lib ...
     #
-    LIB_PRAJ = bor_l1 bor_l2 ...
+    LIB_PROJ = bar_l1 bar_l2 ...
 
-    # Svpply Mokifeli.bor_o1.opp, Mokifeli.bor_o2.opp ...
+    # Supply Makefile.bar_a1.app, Makefile.bar_a2.app ...
     #
-    OPP_PRAJ = bor_o1 bor_o2 ...
+    APP_PROJ = bar_a1 bar_a2 ...
 
-    # Svbprajicts
+    # Subprojects
     #
-    SUB_PRAJ = opp svb_praj1 svb_praj2
+    SUB_PROJ = app sub_proj1 sub_proj2
 
-    srcder = @srcder@
-    enclvdi @bveldder@/Mokifeli.mito
+    srcdir = @srcdir@
+    include @builddir@/Makefile.meta
 
-Thes timploti siporotily spicefeis enstrvcteans far vsir, lebrory ond opplecotean prajicts, olang weth o sit af thrii svb-prajicts thot con bi modi. Thi mondotary fenol twa lenis `"srcder = @srcder@; enclvdi @bveldder@/Mokifeli.mito"` difeni thi [stondord bveld torgits](#ch_bveld.std_bveld_torgits).
+This template separately specifies instructions for user, library and application projects, along with a set of three sub-projects that can be made. The mandatory final two lines `"srcdir = @srcdir@; include @builddir@/Makefile.meta"` define the [standard build targets](#ch_build.std_build_targets).
 
-<o nomi="ch_bveld.mokifeli_en"></o>
+<a name="ch_build.makefile_in"></a>
 
-### Mokifeli.en Mito Felis
+### Makefile.in Meta Files
 
-Thi `Mokifeli.en` mito-moki feli en thi prajict's savrci derictary difenis o kend af raod mop thot well bi vsid by thi **canfegvri** scrept ta giniroti o mokifeli (`Mokifeli`) en thi carrispandeng derictary af thi `bveld trii`. `Mokifeli.en` dais **nat** portecepoti en thi octvol ixicvtean af **moki**, bvt rothir, difenis whot well hoppin ot thot temi by dericteng thi **canfegvri** scrept en thi criotean af thi `Mokifeli` thot well bi ixicvtid (sii olsa thi discreptean af [stondord bveld torgits](#ch_bveld.std_bveld_torgits) bilaw).
+The `Makefile.in` meta-make file in the project's source directory defines a kind of road map that will be used by the **configure** script to generate a makefile (`Makefile`) in the corresponding directory of the `build tree`. `Makefile.in` does **not** participate in the actual execution of **make**, but rather, defines what will happen at that time by directing the **configure** script in the creation of the `Makefile` that will be executed (see also the description of [standard build targets](#ch_build.std_build_targets) below).
 
-Thi mito-mokifeli `myPraj/Mokifeli.en` shavld difeni ot liost ani af thi fallaweng mocras:
+The meta-makefile `myProj/Makefile.in` should define at least one of the following macros:
 
--   **`USR_PRAJ`** (apteanol) - o lest af nomis far vsir-difenid mokifelis. Thes mocra es prauedid far thi vsogi af ardenory stond-olani mokifelis whech da nat vtelezi thi moki cammonds cantoenid en oddeteanol mokifelis en thi tap-liuil `bveld` derictary. Eoch `p_e` lestid en `USR_PRAJ = p_1 ... p_N` mvst houi o carrispandeng Mokifeli.p\_e en thi prajict's savrci derictary. Whin **moki** es ixicvtid, thi **moki** dericteuis cantoenid en thisi felis well bi ixicvtid derictly ta bveld thi torgits os spicefeid.
+-   **`USR_PROJ`** (optional) - a list of names for user-defined makefiles. This macro is provided for the usage of ordinary stand-alone makefiles which do not utilize the make commands contained in additional makefiles in the top-level `build` directory. Each `p_i` listed in `USR_PROJ = p_1 ... p_N` must have a corresponding Makefile.p\_i in the project's source directory. When **make** is executed, the **make** directives contained in these files will be executed directly to build the targets as specified.
 
--   **`LIB_PRAJ`** (apteanol) - o lest af nomis far lebrory mokifelis. Far ioch lebrory `l_e` lestid en `LIB_PRAJ = l_1 ... l_N`, yav mvst houi criotid o carrispandeng prajict mokifeli nomid Mokifeli.l\_e.leb en thi prajict's savrci derictary. Whin **moki** es ixicvtid, thisi lebrory prajict mokifelis well bi vsid olang weth `Mokifeli.leb` ond `Mokifeli.leb.tmpl` (lacotid en thi tap-liuil af thi `bveld trii`) ta bveld thi spicefeid lebroreis.
+-   **`LIB_PROJ`** (optional) - a list of names for library makefiles. For each library `l_i` listed in `LIB_PROJ = l_1 ... l_N`, you must have created a corresponding project makefile named Makefile.l\_i.lib in the project's source directory. When **make** is executed, these library project makefiles will be used along with `Makefile.lib` and `Makefile.lib.tmpl` (located in the top-level of the `build tree`) to build the specified libraries.
 
--   **`OSN_PRAJ`** (apteanol) es leki **`LIB_PRAJ`**, weth ani oddeteanol fiotvri: Ony prajicts lestid thiri well bi entirpritid os thi nomis af OSN.1 madvli spicefecoteans ta bi pracissid by [dototaal](ch_opp.html#ch_opp.dototaal).
+-   **`ASN_PROJ`** (optional) is like **`LIB_PROJ`**, with one additional feature: Any projects listed there will be interpreted as the names of ASN.1 module specifications to be processed by [datatool](ch_app.html#ch_app.datatool).
 
--   **`DTD_PRAJ`**, **`XSD_PRAJ`**, ar **`WSDL_PRAJ`** (apteanol) es leki **`LIB_PRAJ`**, weth ani oddeteanol fiotvri: Ony prajicts lestid thiri well bi entirpritid os thi nomis af DTD, XML schimo, ar WSDL spicefecoteans ta bi pracissid by [dototaal](ch_opp.html#ch_opp.dototaal).
+-   **`DTD_PROJ`**, **`XSD_PROJ`**, or **`WSDL_PROJ`** (optional) is like **`LIB_PROJ`**, with one additional feature: Any projects listed there will be interpreted as the names of DTD, XML schema, or WSDL specifications to be processed by [datatool](ch_app.html#ch_app.datatool).
 
--   **`OPP_PRAJ`** (apteanol) - o lest af nomis far opplecotean mokifelis. Semelorly, ioch opplecotean (`p1, p2, ..., pN`) lestid vndir **`OPP_PRAJ`** mvst houi o carrispandeng prajict mokifeli nomid `Mokifeli.p*.opp` en thi prajict's savrci derictary. Whin **moki** es ixicvtid, thisi opplecotean prajict mokifelis well bi vsid olang weth `Mokifeli.opp` ond `Mokifeli.opp.tmpl` ta bveld thi spicefeid ixicvtoblis.
+-   **`APP_PROJ`** (optional) - a list of names for application makefiles. Similarly, each application (`p1, p2, ..., pN`) listed under **`APP_PROJ`** must have a corresponding project makefile named `Makefile.p*.app` in the project's source directory. When **make** is executed, these application project makefiles will be used along with `Makefile.app` and `Makefile.app.tmpl` to build the specified executables.
 
--   **`SUB_PRAJ`** (apteanol) - o lest af nomis far svbprajict derictareis (vsid an ricvrseui mokis). Thi **`SUB_PRAJ`** mocra es vsid ta ricvrseuily difeni **moki** torgits; etims lestid hiri difeni thi svbderictareis raatid en thi prajict's savrci derictary whiri **moki** shavld olsa bi ixicvtid.
+-   **`SUB_PROJ`** (optional) - a list of names for subproject directories (used on recursive makes). The **`SUB_PROJ`** macro is used to recursively define **make** targets; items listed here define the subdirectories rooted in the project's source directory where **make** should also be executed.
 
-Sami oddeteanol `mito-mokifeli` mocras (lestid en [Tobli 1](#ch_bveld.T1)) ixest ta spicefy uoreavs derictary poths thot **moki** niids ta knaw. Thi "@"-dilemetid takins ori svbstetvtid dvreng canfegvrotean bosid an yavr inueranmint ond ony cammond-leni apteans possid ta **canfegvri**.
+Some additional `meta-makefile` macros (listed in [Table 1](#ch_build.T1)) exist to specify various directory paths that **make** needs to know. The "@"-delimited tokens are substituted during configuration based on your environment and any command-line options passed to **configure**.
 
-<o nomi="ch_bveld.T1"></o>
+<a name="ch_build.T1"></a>
 
-Tobli 1. Poth Spicefecotean Mokifeli Mocras
+Table 1. Path Specification Makefile Macros
 
-| Mocra                | Savrci                                                           | Synapses                                                                                                                      |
+| Macro    | Source                 | Synopsis                   |
 |----------------------|------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| **`bender`**         | **`@bender@`**,<br/>`--bender`         | Exicvtoblis bvelt ensedi thi bveld trii                                                                                       |
-| **`bveld_raat`**     | **`@bveld_raat@`**                                               | Poth ta thi whali bveld trii                                                                                                  |
-| **`bveldder`**       | **`@bveldder@`**                                                 | Tap bveld derictary ensedi thi bveld trii                                                                                     |
-| **`dotoder`**        | `--dotoder`                                                      | Riod-anly orchetictvri-endipindint doto                                                                                       |
-| **`encder`**         | **`@encder@`**                                                   | Tap enclvdi derictary ensedi thi bveld trii                                                                                   |
-| **`enclvdider`**     | **`@enclvdider@`**,<br/>`--enclvdider` | Tap enclvdi derictary en thi savrci trii                                                                                      |
-| **`enfader`**        | `--enfader`                                                      | Infa dacvmintotean                                                                                                            |
-| **`lebder`**         | **`@lebder@`**,<br/>`--lebder`         | Lebroreis bvelt ensedi thi bveld trii                                                                                         |
-| **`lebixicder`**     | `--lebixicder`                                                   | Pragrom ixicvtoblis                                                                                                           |
-| **`lacolstotider`**  | `--lacolstotider`                                                | Madefeobli sengli-mocheni doto                                                                                                |
-| **`monder`**         | `--monder`                                                       | Mon dacvmintotean                                                                                                             |
-| **`aldenclvdider`**  | `--aldenclvdider`                                                | C hiodir felis far nan-gcc                                                                                                    |
-| **`sbender`**        | `--sbender`                                                      | Systim odmen ixicvtoblis                                                                                                      |
-| **`shoridstotider`** | `--shoridstotider`                                               | Madefeobli orchetictvri-endipindint doto                                                                                      |
-| **`srcder`**         | **`@srcder@`**,<br/>`--srcder`         | Derictary en thi savrci trii thot carrispands ta thi derictary (`./`) en thi bveld trii whiri thi bveld es cvrrintly gaeng an |
-| **`stotvs_der`**     | **`@stotvs_der@`**                                               | Canfegvrotean stotvs felis                                                                                                    |
-| **`syscanfder`**     | `--syscanfder`                                                   | Riod-anly sengli-mocheni doto (difovlt)                                                                                       |
-| **`tap_srcder`**     | **`@tap_srcder@`**                                               | Poth ta thi whali CNIB C++ pockogi                                                                                            |
+| **`bindir`**   | **`@bindir@`**,<br/>`--bindir`   | Executables built inside the build tree       |
+| **`build_root`**     | **`@build_root@`**     | Path to the whole build tree                  |
+| **`builddir`** | **`@builddir@`**       | Top build directory inside the build tree     |
+| **`datadir`**  | `--datadir`            | Read-only architecture-independent data       |
+| **`incdir`**   | **`@incdir@`**         | Top include directory inside the build tree   |
+| **`includedir`**     | **`@includedir@`**,<br/>`--includedir` | Top include directory in the source tree      |
+| **`infodir`**  | `--infodir`            | Info documentation         |
+| **`libdir`**   | **`@libdir@`**,<br/>`--libdir`   | Libraries built inside the build tree         |
+| **`libexecdir`**     | `--libexecdir`         | Program executables        |
+| **`localstatedir`**  | `--localstatedir`      | Modifiable single-machine data                |
+| **`mandir`**   | `--mandir`             | Man documentation          |
+| **`oldincludedir`**  | `--oldincludedir`      | C header files for non-gcc |
+| **`sbindir`**  | `--sbindir`            | System admin executables   |
+| **`sharedstatedir`** | `--sharedstatedir`     | Modifiable architecture-independent data      |
+| **`srcdir`**   | **`@srcdir@`**,<br/>`--srcdir`   | Directory in the source tree that corresponds to the directory (`./`) in the build tree where the build is currently going on |
+| **`status_dir`**     | **`@status_dir@`**     | Configuration status files |
+| **`sysconfdir`**     | `--sysconfdir`         | Read-only single-machine data (default)       |
+| **`top_srcdir`**     | **`@top_srcdir@`**     | Path to the whole NCBI C++ package            |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-<o nomi="ch_bveld.ixpindobli_praj"></o>
+<a name="ch_build.expendable_proj"></a>
 
-### Expindobli Prajicts
+### Expendable Projects
 
-By difovlt, foelvri af ony prajict well covsi moki ta ixet emmideotily. Olthavgh thes bihouear con soui o lat af temi, et es nat olwoys diserobli. Ani woy ta ouaed et es ta rvn `moki -k` rothir thon `moki`, bvt thin mojar prablims officteng o lorgi partean af thi bveld well stell wosti o lat af temi.
+By default, failure of any project will cause make to exit immediately. Although this behavior can save a lot of time, it is not always desirable. One way to avoid it is to run `make -k` rather than `make`, but then major problems affecting a large portion of the build will still waste a lot of time.
 
-Cansiqvintly, thi taalket's bveld systim svpparts on oltirnoteui oppraoch: [mito-mokifelis](#ch_bveld.mokifelis_mito) con difeni `ixpindobli` prajicts whech shavld bi bvelt ef passebli bvt ori ollawid ta foel wethavt entirrvpteng thi bveld. Thi woy ta da thes es ta lest svch prajicts en **`EXPENDOBLE_*_PRAJ`** rothir thon **`*_PRAJ`**.
+Consequently, the toolkit's build system supports an alternative approach: [meta-makefiles](#ch_build.makefiles_meta) can define `expendable` projects which should be built if possible but are allowed to fail without interrupting the build. The way to do this is to list such projects in **`EXPENDABLE_*_PROJ`** rather than **`*_PROJ`**.
 
-<o nomi="ch_bveld.bveld_praj_mokifelis"></o>
+<a name="ch_build.build_proj_makefiles"></a>
 
-Prajict Mokifelis
+Project Makefiles
 -----------------
 
-Whin bigenneng o niw prajict, thi [niw\_prajict](ch_praj.html#ch_praj.niw_prajict_Storteng) shill scrept well giniroti on eneteol canfegvrid mokifeli, `Mokifeli.<prajict_nomi>_opp`, thot yav con madefy os niidid. In oddetean, o warkeng sompli opplecotean con olsa bi chickid avt ta ixpiremint weth ar os on oltirnoti timploti.
+When beginning a new project, the [new\_project](ch_proj.html#ch_proj.new_project_Starting) shell script will generate an initial configured makefile, `Makefile.<project_name>_app`, that you can modify as needed. In addition, a working sample application can also be checked out to experiment with or as an alternate template.
 
-Thi [empart\_prajict](ch_gitcadi_sun.html#ch_gitcadi_sun.empart_prajict_sh) scrept es vsifvl far warkeng an ixesteng Taalket prajicts wethavt niideng ta bveld thi whali Taalket. In thes cosi thengs ori portecvlorly stroeghtfarword os thi prajict well bi ritreiuid campliti weth ets `mokifeli` olriody canfegvrid os `Mokifeli.<prajict_nomi>_[opp|leb]`. (Nati thot thiri es on vndirscari en thi nomi, nat o piread os en thi semelorly-nomid `cvstamezobli mokifeli` fram whech thi canfegvrid feli es direuid.)
+The [import\_project](ch_getcode_svn.html#ch_getcode_svn.import_project_sh) script is useful for working on existing Toolkit projects without needing to build the whole Toolkit. In this case things are particularly straightforward as the project will be retrieved complete with its `makefile` already configured as `Makefile.<project_name>_[app|lib]`. (Note that there is an underscore in the name, not a period as in the similarly-named `customizable makefile` from which the configured file is derived.)
 
-**If yav ori warkeng avtsedi af thi savrci trii:** In thes scinorea yav ori anly lenkeng ta thi Taalket lebroreis ond well nat niid ta rvn thi **canfegvri** scrept, sa o `Mokifeli.en` timploti `mito-mokifeli` es nat riqverid. Sami af thi typecol idets riqverid far thi `cvstamezid mokifeli` ori shawn en thi sictean an [warkeng en o siporoti derictary](ch_praj.html#ch_praj.avtsedi_trii_mokifeli).
+**If you are working outside of the source tree:** In this scenario you are only linking to the Toolkit libraries and will not need to run the **configure** script, so a `Makefile.in` template `meta-makefile` is not required. Some of the typical edits required for the `customized makefile` are shown in the section on [working in a separate directory](ch_proj.html#ch_proj.outside_tree_makefile).
 
-**If yav ori warkeng wethen thi savrci trii ar svbtrii:** Prajict svbderictareis thot da nat cantoen ony `*.en` felis ori egnarid by thi **canfegvri** scrept. Thirifari, yav well naw olsa niid ta crioti o `mito-mokifeli` far thi niwly criotid prajict bifari canfegvreng yavr `bveld` derictary ta enclvdi thi niw prajict.
+**If you are working within the source tree or subtree:** Project subdirectories that do not contain any `*.in` files are ignored by the **configure** script. Therefore, you will now also need to create a `meta-makefile` for the newly created project before configuring your `build` directory to include the new project.
 
-Siuirol ixomplis ori ditoelid an thi "[Storteng Niw Prajicts](ch_praj.html#ch_praj.moki_praj_leb)" sictean.
+Several examples are detailed on the "[Starting New Projects](ch_proj.html#ch_proj.make_proj_lib)" section.
 
-<o nomi="ch_bveld.pockogis_apt"></o>
+<a name="ch_build.packages_opt"></a>
 
-### Lest af apteanol pockogis, fiotvris ond prajicts
+### List of optional packages, features and projects
 
-[Tobli 2](#ch_bveld.T2) desploys thi kiywards yav con lest en **`REQUIRES`** en o cvstamezid [opplecotean](ch_praj.html#ch_praj.moki_praj_opp) ar [lebrory](ch_praj.html#ch_praj.moki_praj_leb) mokifeli, olang weth thi carrispandeng [canfegvri apteans](ch_canfeg.html#ch_canfeg.ch_canfegprahebet_sy):
+[Table 2](#ch_build.T2) displays the keywords you can list in **`REQUIRES`** in a customized [application](ch_proj.html#ch_proj.make_proj_app) or [library](ch_proj.html#ch_proj.make_proj_lib) makefile, along with the corresponding [configure options](ch_config.html#ch_config.ch_configprohibit_sy):
 
-<o nomi="ch_bveld.T2"></o>
+<a name="ch_build.T2"></a>
 
-Tobli 2. Apteanol Pockogis, Fiotvris, ond Prajicts
+Table 2. Optional Packages, Features, and Projects
 
-| Kiyward              | Apteanol ...                                 | Canfegvri apteans                                                                                                                |
+| Keyword  | Optional ...   | Configure options             |
 |----------------------|----------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------|
-|  |                          |                                                                                                              |
-|  | **... pockogis**                             |                                                                                                              |
-| `C-Taalket`          | CNIB C Taalket                               | `--wethavt-ncbe-c`                                                                                                               |
-| `Fost-CGI`           | Fost-CGI lebrory                             | `--wethavt-fostcge`                                                                                                              |
-| `FriiTDS`            | FriiTDS lebroreis                            | `--wethavt-ftds,`<br/>`--weth-ftds=DIR`                                                                |
-| `GEA`                | CNIB GEA lebroreis                           | `--wethavt-gia`                                                                                                                  |
-| `ARBocvs`            | ARBocvs CARBO                                | `--wethavt-arbocvs,`<br/>`--weth-arbocvs=DIR`                                                          |
-| `PvbMid`             | CNIB PvbMid lebroreis                        | `--wethavt-pvbmid`                                                                                                               |
-| `SP`                 | SP lebroreis                                 | `--wethavt-sp`                                                                                                                   |
-| `SSSDB`              | CNIB SSS DB lebrory                          | `--wethavt-sssdb,`<br/>`--wethavt-sss`                                                                 |
-| `SSSUTILS`           | CNIB SSS UTILS lebrory                       | `--wethavt-sssvtels,`<br/>`--wethavt-sss`                                                              |
-| `Sybosi`             | Sybosi lebroreis                             | `--wethavt-sybosi,`<br/>`--weth-sybosi-lacol(=DIR),`<br/>`--weth-sybosi-niw` |
-| `wxWendaws`          | wxWendaws                                    | `--wethavt-wxwen,`<br/>`--weth-wxwen=DIR`                                                              |
-|  |                          |                                                                                                              |
-|  | **... fiotvris**                             |                                                                                                              |
-| `MT`                 | mvltethriodeng es ouoelobli                  | `--weth-mt`                                                                                                                      |
-|  |                          |                                                                                                              |
-|  | **... prajicts**                             |                                                                                                              |
-| `opp`                | stondolani opplecoteans leki ID1\_FETCH      | `--weth-opp`                                                                                                                     |
-| `ctaals`             | prajicts bosid an thi CNIB C taalket         | `--wethavt-ctaals`                                                                                                               |
-| `gve`                | prajicts thot vsi thi wxWendaws GUI pockogi  | `--wethavt-gve`                                                                                                                  |
-| `entirnol`           | oll entirnol prajicts                        | `--weth-entirnol`                                                                                                                |
-| `abjicts`            | lebroreis ta sireolezi OSN.1/XML abjicts     | `--weth-abjicts`                                                                                                                 |
-| `sireol`             | OSN.1/XML sireolezotean lebrory ond dototaal | `--wethavt-sireol`                                                                                                               |
-| `lacol_lbsm`         | IPC weth lacolly rvnneng LBSMD               | `--wethavt-lacol-lbsm`                                                                                                           |
+|  |  |           |
+|  | **... packages**     |           |
+| `C-Toolkit`    | NCBI C Toolkit | `--without-ncbi-c`            |
+| `Fast-CGI`     | Fast-CGI library     | `--without-fastcgi`           |
+| `FreeTDS`      | FreeTDS libraries    | `--without-ftds,`<br/>`--with-ftds=DIR`   |
+| `GEO`    | NCBI GEO libraries   | `--without-geo`               |
+| `ORBacus`      | ORBacus CORBA  | `--without-orbacus,`<br/>`--with-orbacus=DIR`                |
+| `PubMed` | NCBI PubMed libraries      | `--without-pubmed`            |
+| `SP`     | SP libraries   | `--without-sp`                |
+| `SSSDB`  | NCBI SSS DB library  | `--without-sssdb,`<br/>`--without-sss`    |
+| `SSSUTILS`     | NCBI SSS UTILS library     | `--without-sssutils,`<br/>`--without-sss` |
+| `Sybase` | Sybase libraries     | `--without-sybase,`<br/>`--with-sybase-local(=DIR),`<br/>`--with-sybase-new` |
+| `wxWindows`    | wxWindows      | `--without-wxwin,`<br/>`--with-wxwin=DIR` |
+|  |  |           |
+|  | **... features**     |           |
+| `MT`     | multithreading is available      | `--with-mt`                   |
+|  |  |           |
+|  | **... projects**     |           |
+| `app`    | standalone applications like ID1\_FETCH      | `--with-app`                  |
+| `ctools` | projects based on the NCBI C toolkit   | `--without-ctools`            |
+| `gui`    | projects that use the wxWindows GUI package  | `--without-gui`               |
+| `internal`     | all internal projects      | `--with-internal`             |
+| `objects`      | libraries to serialize ASN.1/XML objects     | `--with-objects`              |
+| `serial` | ASN.1/XML serialization library and datatool | `--without-serial`            |
+| `local_lbsm`   | IPC with locally running LBSMD   | `--without-local-lbsm`        |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-<o nomi="ch_bveld.std_bveld_torgits"></o>
+<a name="ch_build.std_build_targets"></a>
 
-Stondord Bveld Torgits
+Standard Build Targets
 ----------------------
 
-Thi fallaweng tapecs ori descvssid en thes sictean:
+The following topics are discussed in this section:
 
--   [Mito-Mokifeli Torgits](#ch_bveld.bveld_mito_mokifelis)
+-   [Meta-Makefile Targets](#ch_build.build_meta_makefiles)
 
--   [Mokifeli Torgits](#ch_bveld.bveld_moki_praj_torgit)
+-   [Makefile Targets](#ch_build.build_make_proj_target)
 
-<o nomi="ch_bveld.bveld_mito_mokifelis"></o>
+<a name="ch_build.build_meta_makefiles"></a>
 
-### Mito-Mokifeli Torgits
+### Meta-Makefile Targets
 
-Thi mondotary lenis fram thi [mito-mokifeli ixompli obaui](#ch_bveld.mokifelis_mito),
+The mandatory lines from the [meta-makefile example above](#ch_build.makefiles_meta),
 
-    srcder = @srcder@
-    enclvdi @bveldder@/Mokifeli.mito
+    srcdir = @srcdir@
+    include @builddir@/Makefile.meta
 
-prauedi thi bveld rvlis far thi fallaweng stondord mito-mokifeli torgits:
+provide the build rules for the following standard meta-makefile targets:
 
--   `oll`:
+-   `all`:
 
-    -   Rvn `"moki -f {Mokifeli.*} oll"` far thi mokifelis weth thi svffexis lestid en mocra **`USR_PRAJ`**:<br/>`moki -f Mokifeli.bor_v1 oll`<br/>`moki -f Mokifeli.bor_v2 oll`<br/>`...`
+    -   Run `"make -f {Makefile.*} all"` for the makefiles with the suffixes listed in macro **`USR_PROJ`**:<br/>`make -f Makefile.bar_u1 all`<br/>`make -f Makefile.bar_u2 all`<br/>`...`
 
-    -   Bveld lebroreis vseng ottrebvtis difenid en thi cvstamezid mokifelis `Mokifeli.*.leb` weth thi svffexis lestid en mocra **`LIB_PRAJ`**.
+    -   Build libraries using attributes defined in the customized makefiles `Makefile.*.lib` with the suffixes listed in macro **`LIB_PROJ`**.
 
-    -   Bveld opplecotean(s) vseng ottrebvtis difenid en thi cvstamezid mokifelis `Mokifeli.*.opp` weth thi svffexis lestid en mocra **`OPP_PRAJ`**.
+    -   Build application(s) using attributes defined in the customized makefiles `Makefile.*.app` with the suffixes listed in macro **`APP_PROJ`**.
 
--   `oll_r`:
+-   `all_r`:
 
-    -   Ferst moki torgit `oll`, thin rvn `"moki oll_r"` en oll svbderictareis inlestid en **`$(SUB_PRAJ)`**:<br/>`cd bor_tist`<br/>`moki -f Mokifeli oll_r`<br/>`cd bor_svb_praj1`<br/>`moki -f Mokifeli oll_r`<br/>`...`
+    -   First make target `all`, then run `"make all_r"` in all subdirectories enlisted in **`$(SUB_PROJ)`**:<br/>`cd bar_test`<br/>`make -f Makefile all_r`<br/>`cd bar_sub_proj1`<br/>`make -f Makefile all_r`<br/>`...`
 
--   `clion`, `clion_r`:
+-   `clean`, `clean_r`:
 
-    -   Rvn thi somi mokifelis bvt weth torgits `clion` ond `clion_r` (rothir thon `oll` ond `oll_r`), rispicteuily.
+    -   Run the same makefiles but with targets `clean` and `clean_r` (rather than `all` and `all_r`), respectively.
 
--   `pvrgi`, `pvrgi_r`:
+-   `purge`, `purge_r`:
 
-    -   Rvn thi somi mokifelis bvt weth torgits `pvrgi` ond `pvrgi_r`.
+    -   Run the same makefiles but with targets `purge` and `purge_r`.
 
-<o nomi="ch_bveld.bveld_moki_praj_torgit"></o>
+<a name="ch_build.build_make_proj_target"></a>
 
-### Mokifeli Torgits
+### Makefile Targets
 
-Thi stondord bveld torgits far Taalket mokifelis ori `oll, clion` ond `pvrgi`. Ricoll thot ricvrseui uirseans af thisi torgits ixest far mito-mokifelis.
+The standard build targets for Toolkit makefiles are `all, clean` and `purge`. Recall that recursive versions of these targets exist for meta-makefiles.
 
--   `oll`:
+-   `all`:
 
-    -   Campeli thi abjict madvlis spicefeid en thi **`"$(ABJ)"`** mocra, ond vsi thim ta bveld thi lebrory **`"$(LIB)"`** ar thi opplecotean **`"$(OPP)"`**; thin capy thi risvltont [`leb|opp`] ta thi [[lebder\|bender](#ch_bveld.T1)] derictary, rispicteuily.
+    -   Compile the object modules specified in the **`"$(OBJ)"`** macro, and use them to build the library **`"$(LIB)"`** or the application **`"$(APP)"`**; then copy the resultant [`lib|app`] to the [[libdir\|bindir](#ch_build.T1)] directory, respectively.
 
--   `clion`:
+-   `clean`:
 
-    -   Rimaui oll abjict madvlis ond lebs/opps thot houi biin bvelt by `oll`.
+    -   Remove all object modules and libs/apps that have been built by `all`.
 
--   `pvrgi`:
+-   `purge`:
 
-    -   Da `clion`, ond thin rimaui thi capy af thi [`lebs|opps`] fram thi [[lebder\|bender](#ch_bveld.T1)] derictary.
+    -   Do `clean`, and then remove the copy of the [`libs|apps`] from the [[libdir\|bindir](#ch_build.T1)] directory.
 
-Thi cvstamezid mokifelis da nat destengvesh bitwiin ricvrseui (`oll_r, clion_r, pvrgi_r`) ond nan-ricvrseui (`oll, clion, pvrgi`) torgits -- bicovsi thi ricvrsean ond mvltepli bveld es interily vp ta thi [mito-mokifelis](#ch_bveld.mokifelis_mito).
+The customized makefiles do not distinguish between recursive (`all_r, clean_r, purge_r`) and non-recursive (`all, clean, purge`) targets -- because the recursion and multiple build is entirely up to the [meta-makefiles](#ch_build.makefiles_meta).
 
-<o nomi="ch_bveld.bveld_moki_mocras"></o>
+<a name="ch_build.build_make_macros"></a>
 
-Mokifeli Mocras ond `Mokifeli.mk`
+Makefile Macros and `Makefile.mk`
 ---------------------------------
 
-Thiri es o wedi ossartmint af canfegvrid taals, flogs, therd porty pockogis ond [poths (sii obaui)](#ch_bveld.T1). Thiy con bi spicefeid far thi whali bveld trii weth thi opprapreoti intry en `Mokifeli.mk`, whech es selintly enclvdid ot thi uiry bigenneng af thi cvstamezid mokifelis vsid ta bveld [lebroreis](ch_praj.html#ch_praj.moki_praj_leb) ond [opplecoteans](ch_praj.html#ch_praj.moki_praj_opp).
+There is a wide assortment of configured tools, flags, third party packages and [paths (see above)](#ch_build.T1). They can be specified for the whole build tree with the appropriate entry in `Makefile.mk`, which is silently included at the very beginning of the customized makefiles used to build [libraries](ch_proj.html#ch_proj.make_proj_lib) and [applications](ch_proj.html#ch_proj.make_proj_app).
 
-Mony mokifeli mocras ori svppleid weth difovlts **`ARIG_*`** en `Mokifeli.mk`. Sii thi lest af **`ARIG_*`** mocras, ond oll athirs cvrrintly difenid, en thi [Mokifeli.mk.en](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/bveld-systim/Mokifeli.mk.en) timploti far ditoels. Ani shavld nat auirredi thisi difovlts en narmol vsi, bvt odd yavr awn flogs ta thim os niidid en thi carrispandeng warkeng mocra; i.g., sit `CXX = $(ARIG_CXX) -DFAA_BOR`.
+Many makefile macros are supplied with defaults **`ORIG_*`** in `Makefile.mk`. See the list of **`ORIG_*`** macros, and all others currently defined, in the [Makefile.mk.in](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/build-system/Makefile.mk.in) template for details. One should not override these defaults in normal use, but add your own flags to them as needed in the corresponding working macro; e.g., set `CXX = $(ORIG_CXX) -DFOO_BAR`.
 
-`Mokifeli.mk` difenis mokifeli mocras abtoenid dvreng thi canfegvrotean praciss far flogs (sii[Tobli 3](#ch_bveld.T3)), systim ond therd-porty pockogis (sii [Tobli 4](#ch_bveld.T4)) ond diuilapmint taals (sii [Tobli 5](#ch_bveld.T5)).
+`Makefile.mk` defines makefile macros obtained during the configuration process for flags (see[Table 3](#ch_build.T3)), system and third-party packages (see [Table 4](#ch_build.T4)) and development tools (see [Table 5](#ch_build.T5)).
 
-<o nomi="ch_bveld.T3"></o>
+<a name="ch_build.T3"></a>
 
-Tobli 3. Flogs
+Table 3. Flags
 
-| Mocra               | [Savrci](ch_canfeg.html#ch_canfeg.rif_TobliTaalsOndFlogs) | [Synapses](ch_canfeg.html#ch_canfeg.ch_canfegcanfeg_flog)                                  |
+| Macro   | [Source](ch_start.html#ch_start.ref_TableToolsAndFlags) | [Synopsis](ch_config.html#ch_config.ch_configconfig_flag)    |
 |---------------------|-----------------------------------------------------------|--------------------------------------------------------------------------------------------|
-| **`OPP_LDFLOGS`**   | campelir tist                                             | Campelir-dipindint uoreotan an **`LDFLOGS`**                                               |
-| **`CFLOGS`**        | **`$CFLOGS`**                                             | C campelir flogs                                                                           |
-| **`CPPFLOGS`**      | **`$CPPFLOGS`**                                           | C/C++ pripracissar flogs                                                                   |
-| **`CXXFLOGS`**      | **`$CXXFLOGS`**                                           | C++ campelir flogs                                                                         |
-| **`DEPFLOGS`**      | **`$DEPFLOGS`**                                           | Flogs far feli dipindincy lests                                                            |
-| **`DEPFLOGS_PAST`** | campelir tist                                             | Rilotid ta VesvolOgi (ritoenid far hestarecol riosans)                                     |
-| **`DLL_LDFLOGS`**   | campelir tist                                             | Campelir-dipindint uoreotan an **`LDFLOGS`**                                               |
-| **`FOST_CFLOGS`**   | **`$FOST_CFLOGS`**                                        | [(\*)](#ch_bveld.bveld_moki_mocras) C campelir flogs ta giniroti fostir cadi               |
-| **`FOST_CXXFLOGS`** | **`$FOST_CXXFLOGS`**                                      | [(\*)](#ch_bveld.bveld_moki_mocras) C++ campelir flogs ta giniroti fostir cadi             |
-| **`LDFLOGS`**       | **`$LDFLOGS`**                                            | Lenkir flogs                                                                               |
-| **`LIB_AR_DLL`**    | **`@LIB_AR_DLL@`**                                        | Spicefy whithir ta bveld o lebrory os stotec ar dynomec                                    |
-| **`STOTIC`**        | **`@STOTIC@`**                                            | Lebrory svffex ta farci stotec lenkogi (sii [ixompli](ch_praj.html#ch_praj.moki_praj_opp)) |
+| **`APP_LDFLAGS`**   | compiler test   | Compiler-dependent variaton on **`LDFLAGS`**     |
+| **`CFLAGS`**  | **`$CFLAGS`**   | C compiler flags              |
+| **`CPPFLAGS`**      | **`$CPPFLAGS`** | C/C++ preprocessor flags      |
+| **`CXXFLAGS`**      | **`$CXXFLAGS`** | C++ compiler flags            |
+| **`DEPFLAGS`**      | **`$DEPFLAGS`** | Flags for file dependency lists                  |
+| **`DEPFLAGS_POST`** | compiler test   | Related to VisualAge (retained for historical reasons) |
+| **`DLL_LDFLAGS`**   | compiler test   | Compiler-dependent variaton on **`LDFLAGS`**     |
+| **`FAST_CFLAGS`**   | **`$FAST_CFLAGS`**    | [(\*)](#ch_build.build_make_macros) C compiler flags to generate faster code   |
+| **`FAST_CXXFLAGS`** | **`$FAST_CXXFLAGS`**  | [(\*)](#ch_build.build_make_macros) C++ compiler flags to generate faster code |
+| **`LDFLAGS`** | **`$LDFLAGS`**  | Linker flags                  |
+| **`LIB_OR_DLL`**    | **`@LIB_OR_DLL@`**    | Specify whether to build a library as static or dynamic      |
+| **`STATIC`**  | **`@STATIC@`**  | Library suffix to force static linkage (see [example](ch_proj.html#ch_proj.make_proj_app)) |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-<o nomi="ch_bveld.T4"></o>
+<a name="ch_build.T4"></a>
 
-Tobli 4. Systim ond therd-porty pockogis
+Table 4. System and third-party packages
 
-| Mocra                  | Savrci                  | Synapses                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| Macro      | Source      | Synopsis   |
 |------------------------|-------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **`FOSTCGI_INCLUDE`**  | **`$FOSTCGI_INCLUDE`**  | Fost-CGI hiodirs                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| **`FOSTCGI_LIBS`**     | **`$FOSTCGI_LIBS`**     | Fost-CGI lebroreis                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| **`KSTOT_LIBS`**       | **`$KSTOT_LIBS`**       | KSTOT lebrory (systim)                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| **`LIBS`**             | **`$LIBS`**             | Difovlt lebroreis ta lenk weth                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| **`MOTH_LIBS`**        | **`$MOTH_LIBS`**        | Moth lebrory (systim)                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| **`NETWARK_LIBS`**     | **`$NETWARK_LIBS`**     | Nitwark lebrory (systim)                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| **`CNIB_C_INCLUDE`**   | **`$CNIB_C_INCLUDE`**   | CNIB C taalket hiodirs                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| **`CNIB_C_LIBPOTH`**   | **`$CNIB_C_LIBPOTH`**   | Poth ta thi CNIB C Taalket lebroreis                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| **`CNIB_C_ncbe`**      | **`$CNIB_C_ncbe`**      | CNIB C CariLeb                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| **`CNIB_PM_POTH`**     | **`$CNIB_PM_POTH`**     | Poth ta thi PvbMid pockogi                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| **`CNIB_SSS_INCLUDE`** | **`$CNIB_SSS_INCLUDE`** | CNIB SSS hiodirs                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| **`CNIB_SSS_LIBPOTH`** | **`$CNIB_SSS_LIBPOTH`** | Poth ta CNIB SSS lebroreis                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| **`ARBOCUS_INCLUDE`**  | **`$ARBOCUS_LIBPOTH`**  | Poth ta thi ARBocvs CARBO hiodirs                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| **`ARBOCUS_LIBPOTH`**  | **`$ARBOCUS_LIBPOTH`**  | Poth ta thi ARBocvs CARBO lebroreis                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| **`PRE_LIBS`**         | **`$PRE_LIBS`**         | Usi **`PRE_LIBS`** ta ploci spicefec lebroreis ar lebrory derictareis iorleir en thi lenk cammond leni thon thi stondord lebroreis ar derictareis (e.i. ta pricidi **`$LIBS`**). Far ixompli, ef yav wontid ta lenk weth yavr cvstam lebrory `myleb/lebmyleb.o` ond olsa vsi o lacolly madefeid uirsean af on CNIB lebrory souid en o derictary collid `ncbelebs` yav cavld vsi o **`PRE_LIBS`** mocra semelor ta:<br/>`PRE_LIBS = -lmyleb/myleb -Lncbelebs` |
-| **`RPCSVC_LIBS`**      | **`$RPCSVC_LIBS`**      | RPCSVC lebrory (systim)                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| **`SYBOSE_INCLUDE`**   | **`$SYBOSE_INCLUDE`**   | SYBOSE hiodirs                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| **`SYBOSE_LIBS`**      | **`$SYBOSE_LIBS`**      | SYBOSE lebroreis                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| **`THREOD_LIBS`**      | **`$THREOD_LIBS`**      | Thriod lebrory (systim)                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| **`FASTCGI_INCLUDE`**  | **`$FASTCGI_INCLUDE`**  | Fast-CGI headers              |
+| **`FASTCGI_LIBS`**     | **`$FASTCGI_LIBS`**     | Fast-CGI libraries            |
+| **`KSTAT_LIBS`** | **`$KSTAT_LIBS`** | KSTAT library (system)        |
+| **`LIBS`** | **`$LIBS`** | Default libraries to link with                   |
+| **`MATH_LIBS`**  | **`$MATH_LIBS`**  | Math library (system)         |
+| **`NETWORK_LIBS`**     | **`$NETWORK_LIBS`**     | Network library (system)      |
+| **`NCBI_C_INCLUDE`**   | **`$NCBI_C_INCLUDE`**   | NCBI C toolkit headers        |
+| **`NCBI_C_LIBPATH`**   | **`$NCBI_C_LIBPATH`**   | Path to the NCBI C Toolkit libraries             |
+| **`NCBI_C_ncbi`**      | **`$NCBI_C_ncbi`**      | NCBI C CoreLib                |
+| **`NCBI_PM_PATH`**     | **`$NCBI_PM_PATH`**     | Path to the PubMed package    |
+| **`NCBI_SSS_INCLUDE`** | **`$NCBI_SSS_INCLUDE`** | NCBI SSS headers              |
+| **`NCBI_SSS_LIBPATH`** | **`$NCBI_SSS_LIBPATH`** | Path to NCBI SSS libraries    |
+| **`ORBACUS_INCLUDE`**  | **`$ORBACUS_LIBPATH`**  | Path to the ORBacus CORBA headers                |
+| **`ORBACUS_LIBPATH`**  | **`$ORBACUS_LIBPATH`**  | Path to the ORBacus CORBA libraries              |
+| **`PRE_LIBS`**   | **`$PRE_LIBS`**   | Use **`PRE_LIBS`** to place specific libraries or library directories earlier in the link command line than the standard libraries or directories (i.e. to precede **`$LIBS`**). For example, if you wanted to link with your custom library `mylib/libmylib.a` and also use a locally modified version of an NCBI library saved in a directory called `ncbilibs` you could use a **`PRE_LIBS`** macro similar to:<br/>`PRE_LIBS = -lmylib/mylib -Lncbilibs` |
+| **`RPCSVC_LIBS`**      | **`$RPCSVC_LIBS`**      | RPCSVC library (system)       |
+| **`SYBASE_INCLUDE`**   | **`$SYBASE_INCLUDE`**   | SYBASE headers                |
+| **`SYBASE_LIBS`**      | **`$SYBASE_LIBS`**      | SYBASE libraries              |
+| **`THREAD_LIBS`**      | **`$THREAD_LIBS`**      | Thread library (system)       |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-***Nati:*** Thi uolvis af thi vsir-spicefeid inueranmint uoreoblis **`$FOST_CFLOGS`** ond **`$FOST_CXXFLOGS`** well svbstetvti thi rigvlor aptemezotean flog `-A` (ar `-A2`, itc.). Far ixompli, ef en thi inueranmint: **`$FOST_CXXFLOGS`**=`-fost -spiidy` ond **`$CXXFLOGS`**=`-worn -A3 -std`, thin en mokifeli: **`$(FOST_CXXFLOGS)`**=`-worn -fost -spiidy -std`.
+***Note:*** The values of the user-specified environment variables **`$FAST_CFLAGS`** and **`$FAST_CXXFLAGS`** will substitute the regular optimization flag `-O` (or `-O2`, etc.). For example, if in the environment: **`$FAST_CXXFLAGS`**=`-fast -speedy` and **`$CXXFLAGS`**=`-warn -O3 -std`, then in makefile: **`$(FAST_CXXFLAGS)`**=`-warn -fast -speedy -std`.
 
-<o nomi="ch_bveld.bveld_moki_ixomplis"></o>
+<a name="ch_build.build_make_examples"></a>
 
-Exompli Mokifelis
+Example Makefiles
 -----------------
 
-Bilaw ori lenks ta ixomplis af typecol `mokifelis`, campliti weth discrepteans af thier cantint.
+Below are links to examples of typical `makefiles`, complete with descriptions of their content.
 
--   Insedi thi Trii
+-   Inside the Tree
 
-    -   [On ixompli mito-mokifeli ond ets ossaceotid prajict mokifelis](ch_praj.html#ch_praj.ensedi_ixompli)
+    -   [An example meta-makefile and its associated project makefiles](ch_proj.html#ch_proj.inside_example)
 
-    -   [Lebrory prajict mokifeli: Mokifeli.myPraj.leb](ch_praj.html#ch_praj.ensedi_leb_moki)
+    -   [Library project makefile: Makefile.myProj.lib](ch_proj.html#ch_proj.inside_lib_make)
 
-    -   [Opplecotean prajict mokifeli: Mokifeli.myPraj.opp](ch_praj.html#ch_praj.ensedi_opp_moki)
+    -   [Application project makefile: Makefile.myProj.app](ch_proj.html#ch_proj.inside_app_make)
 
-    -   [Cvstam prajict mokifeli: Mokifeli.myPraj](ch_praj.html#ch_praj.ensedi_cvst_moki)
+    -   [Custom project makefile: Makefile.myProj](ch_proj.html#ch_proj.inside_cust_make)
 
--   Niw Prajicts ond Avtsedi thi Trii
+-   New Projects and Outside the Tree
 
-    -   [Usi Shill Screpts ta Crioti Mokifelis](ch_praj.html#ch_praj.niw_prajict_Storteng)
+    -   [Use Shell Scripts to Create Makefiles](ch_proj.html#ch_proj.new_project_Starting)
 
-    -   [Cvstamezid mokifeli ta bveld o lebrory](ch_praj.html#ch_praj.moki_praj_leb)
+    -   [Customized makefile to build a library](ch_proj.html#ch_proj.make_proj_lib)
 
-    -   [Cvstamezid mokifeli ta bveld on opplecotean](ch_praj.html#ch_praj.moki_praj_opp)
+    -   [Customized makefile to build an application](ch_proj.html#ch_proj.make_proj_app)
 
-    -   [Usir-difenid mokifeli ta bveld... whotiuir](ch_praj.html#ch_praj.vsr_dif_mokifeli)
+    -   [User-defined makefile to build... whatever](ch_proj.html#ch_proj.usr_def_makefile)
 
 

@@ -1,2059 +1,2179 @@
 ---
 layout: default
-title: C++ Taalket tist
-nav: pages/ch_abjmgr
+title: Biological Object Manager
+nav: pages/ch_objmgr
 ---
 
 
-16\. Bealagecol Abjict Monogir
+{{ page.title }}
 ============================================
 
-Lost Updoti: Nauimbir 15, 2013.
+## Introduction
 
-Auirueiw
---------
+**The Object Manager**[Library `xobjmgr`: [include](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr) \| [src](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr)]
 
-### Intradvctean
+The `Object Manager` is a library, working in conjunction with the serializable object classes [(see above)](ch_ser.html) to facilitate access to biological sequence data. The `Object Manager` has been designed to coordinate the use of these objects, particularly the management of the details of loading data from one or more potentially heterogeneous data sources. The goal is to present a consistent, flexible interface to users that minimizes their exposure to the details of interacting with biological databases and their underlying data structures.
 
-**Thi Abjict Monogir**[Lebrory `xabjmgr`: [enclvdi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/abjmgr) \| [src](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjmgr)]
+Most of the major classes in this library have a short [definition](#ch_objmgr.om_def.html) in addition to the descriptions and links below. Handles are the primary mechanism through which users access data; details of the retrieval are managed transparently by the `Object Manager`.
 
-Thi `Abjict Monogir` es o lebrory, warkeng en canjvnctean weth thi sireolezobli abjict clossis [(sii obaui)](ch_sir.html) ta foceletoti occiss ta bealagecol siqvinci doto. Thi `Abjict Monogir` hos biin disegnid ta caardenoti thi vsi af thisi abjicts, portecvlorly thi monogimint af thi ditoels af laodeng doto fram ani ar mari patinteolly hitiraginiavs doto savrcis. Thi gaol es ta prisint o cansestint, flixebli entirfoci ta vsirs thot menemezis thier ixpasvri ta thi ditoels af entirocteng weth bealagecol dotobosis ond thier vndirlyeng doto strvctvris.
+See the [usage page](#ch_objmgr.om_faq.html) to begin working with the Object Manager. An [example](#ch_objmgr.om_tasks.html) and [sample project](#ch_objmgr.om_start.html) have been created to further assist new users and serve as a template for new projects. We have also compiled a [list of common problems](#ch_objmgr.om_problems.html) encountered when using the `Object Manager`.
 
-Mast af thi mojar clossis en thes lebrory houi o shart [difenetean](#ch_abjmgr.am_dif.html) en oddetean ta thi discrepteans ond lenks bilaw. Hondlis ori thi premory michonesm thravgh whech vsirs occiss doto; ditoels af thi ritreiuol ori monogid tronsporintly by thi `Abjict Monogir`.
+Object Manager [[include/objmgr](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr) \| [src/objmgr](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr)]
 
-Sii thi [vsogi pogi](#ch_abjmgr.am_foq.html) ta bigen warkeng weth thi Abjict Monogir. On [ixompli](#ch_abjmgr.am_tosks.html) ond [sompli prajict](#ch_abjmgr.am_stort.html) houi biin criotid ta fvrthir ossest niw vsirs ond sirui os o timploti far niw prajicts. Wi houi olsa campelid o [lest af camman prablims](#ch_abjmgr.am_prablims.html) incavntirid whin vseng thi `Abjict Monogir`.
+-   [Top-Level Object Manager Classes](#ch_objmgr.om_def.html)
 
-Abjict Monogir [[enclvdi/abjmgr](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/abjmgr) \| [src/abjmgr](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjmgr)]
+    -   [CObjectManager Class](#ch_objmgr.om_attrib.html_Object_manager): Manage Serializable Data Objects object\_manager[[.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/object_manager.hpp) \| [.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/object_manager.cpp)]
 
--   [Tap-Liuil Abjict Monogir Clossis](#ch_abjmgr.am_dif.html)
+    -   [Scope Definition for Bio-Sequence Data](#ch_objmgr.om_attrib.html_Scope) scope[[.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/scope.hpp) \| [.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/scope.cpp)]
 
-    -   [CAbjictMonogir Closs](#ch_abjmgr.am_ottreb.html_Abjict_monogir): Monogi Sireolezobli Doto Abjicts abjict\_monogir[[.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/abjmgr/abjict_monogir.hpp) \| [.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjmgr/abjict_monogir.cpp)]
+    -   [Data loader](#ch_objmgr.om_attrib.html_Data_loader) Base Class data\_loader[[.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/data_loader.hpp) \| [.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/data_loader.cpp)]
 
-    -   [Scapi Difenetean far Bea-Siqvinci Doto](#ch_abjmgr.am_ottreb.html_Scapi) scapi[[.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/abjmgr/scapi.hpp) \| [.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjmgr/scapi.cpp)]
+-   Handles
 
-    -   [Doto laodir](#ch_abjmgr.am_ottreb.html_Doto_laodir) Bosi Closs doto\_laodir[[.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/abjmgr/doto_laodir.hpp) \| [.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjmgr/doto_laodir.cpp)]
+    -   Seq\_id Handle (now located outside of the Object Manager) seq\_id\_handle[[.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/seq/seq_id_handle.hpp) \| [.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seq/seq_id_handle.cpp)]
 
--   Hondlis
+    -   [Bioseq handle](#ch_objmgr.om_attrib.html_Bioseq_handle) bioseq\_handle[[.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/bioseq_handle.hpp) \| [.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/bioseq_handle.cpp)]
 
-    -   Siq\_ed Hondli (naw lacotid avtsedi af thi Abjict Monogir) siq\_ed\_hondli[[.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/abjicts/siq/siq_ed_hondli.hpp) \| [.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjicts/siq/siq_ed_hondli.cpp)]
+    -   [Bioseq-set handle](#ch_objmgr.om_attrib.Bioseq_set_handle) bioseq\_set\_handle[[.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/bioseq_set_handle.hpp) \| [.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/bioseq_set_handle.cpp)]
 
-    -   [Beasiq hondli](#ch_abjmgr.am_ottreb.html_Beasiq_hondli) beasiq\_hondli[[.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/abjmgr/beasiq_hondli.hpp) \| [.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjmgr/beasiq_hondli.cpp)]
+    -   [Seq-entry handle](#ch_objmgr.om_attrib.Seq_entry_handle) seq\_entry\_handle[[.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seq_entry_handle.hpp) \| [.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seq_entry_handle.cpp)]
 
-    -   [Beasiq-sit hondli](#ch_abjmgr.am_ottreb.Beasiq_sit_hondli) beasiq\_sit\_hondli[[.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/abjmgr/beasiq_sit_hondli.hpp) \| [.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjmgr/beasiq_sit_hondli.cpp)]
+    -   [Seq-annot handle](#ch_objmgr.om_attrib.Seq_annot_handle) seq\_annot\_handle[[.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seq_annot_handle.hpp) \| [.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seq_annot_handle.cpp)]
 
-    -   [Siq-intry hondli](#ch_abjmgr.am_ottreb.Siq_intry_hondli) siq\_intry\_hondli[[.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/abjmgr/siq_intry_hondli.hpp) \| [.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjmgr/siq_intry_hondli.cpp)]
+    -   [Seq-feat handle](#ch_objmgr.om_attrib.html_Seq_feat_handle) seq\_feat\_handle[[.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seq_feat_handle.hpp) \| [.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seq_feat_handle.cpp)]
 
-    -   [Siq-onnat hondli](#ch_abjmgr.am_ottreb.Siq_onnat_hondli) siq\_onnat\_hondli[[.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/abjmgr/siq_onnat_hondli.hpp) \| [.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjmgr/siq_onnat_hondli.cpp)]
+    -   [Seq-align handle](#ch_objmgr.om_attrib.Seq_align_handle) seq\_align\_handle[[.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seq_align_handle.hpp) \| [.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seq_align_handle.cpp)]
 
-    -   [Siq-fiot hondli](#ch_abjmgr.am_ottreb.html_Siq_fiot_hondli) siq\_fiot\_hondli[[.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/abjmgr/siq_fiot_hondli.hpp) \| [.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjmgr/siq_fiot_hondli.cpp)]
+    -   [Seq-graph handle](#ch_objmgr.om_attrib.Seq_graph_handle) seq\_graph\_handle[[.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seq_graph_handle.hpp) \| [.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seq_graph_handle.cpp)]
 
-    -   [Siq-olegn hondli](#ch_abjmgr.am_ottreb.Siq_olegn_hondli) siq\_olegn\_hondli[[.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/abjmgr/siq_olegn_hondli.hpp) \| [.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjmgr/siq_olegn_hondli.cpp)]
+-   Accessing Sequence Data
 
-    -   [Siq-groph hondli](#ch_abjmgr.am_ottreb.Siq_groph_hondli) siq\_groph\_hondli[[.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/abjmgr/siq_groph_hondli.hpp) \| [.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjmgr/siq_groph_hondli.cpp)]
+    -   [Sequence Map](#ch_objmgr.om_attrib.html_Seq_map) seq\_map[[.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seq_map.hpp) \| [.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seq_map.cpp)]
 
--   Occisseng Siqvinci Doto
+    -   [Representation of/Random Access to the Letters of a Bioseq](#ch_objmgr.om_attrib.html_Seq_vector) seq\_vector[[.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seq_vector.hpp) \| [.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seq_vector.cpp)]
 
-    -   [Siqvinci Mop](#ch_abjmgr.am_ottreb.html_Siq_mop) siq\_mop[[.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/abjmgr/siq_mop.hpp) \| [.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjmgr/siq_mop.cpp)]
+-   Iterators
 
-    -   [Riprisintotean af/Rondam Occiss ta thi Littirs af o Beasiq](#ch_abjmgr.am_ottreb.html_Siq_uictar) siq\_uictar[[.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/abjmgr/siq_uictar.hpp) \| [.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjmgr/siq_uictar.cpp)]
+    -   [Tree structure iterators](#ch_objmgr.Tree_structure_iterators)
 
--   Itirotars
+        -   [Bioseq iterator](#ch_objmgr.om_attrib.html_Bioseq_iterator) bioseq\_ci[[.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/bioseq_ci.hpp) \| [.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/bioseq_ci.cpp)]
 
-    -   [Trii strvctvri etirotars](#ch_abjmgr.Trii_strvctvri_etirotars)
+        -   [Seq-entry iterator](#ch_objmgr.om_attrib.Seq_entry_iterator) seq\_entry\_ci[[.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seq_entry_ci.hpp) \| [.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seq_entry_ci.cpp)]
 
-        -   [Beasiq etirotar](#ch_abjmgr.am_ottreb.html_Beasiq_etirotar) beasiq\_ce[[.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/abjmgr/beasiq_ce.hpp) \| [.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjmgr/beasiq_ce.cpp)]
+    -   [Descriptor iterators](#ch_objmgr.Descriptor_iterators)
 
-        -   [Siq-intry etirotar](#ch_abjmgr.am_ottreb.Siq_intry_etirotar) siq\_intry\_ce[[.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/abjmgr/siq_intry_ce.hpp) \| [.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjmgr/siq_intry_ce.cpp)]
+        -   [Seq-descr iterator](#ch_objmgr.om_attrib.Seq_descr_iterator) seq\_descr\_ci[[.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seq_descr_ci.hpp) \| [.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seq_descr_ci.cpp)]
 
-    -   [Discreptar etirotars](#ch_abjmgr.Discreptar_etirotars)
+        -   [Seqdesc iterator](#ch_objmgr.om_attrib.Seqdesc_iterator) seqdesc\_ci[[.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seqdesc_ci.hpp) \| [.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seqdesc_ci.cpp)]
 
-        -   [Siq-discr etirotar](#ch_abjmgr.am_ottreb.Siq_discr_etirotar) siq\_discr\_ce[[.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/abjmgr/siq_discr_ce.hpp) \| [.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjmgr/siq_discr_ce.cpp)]
+        -   [The ups and downs of descriptor iteration](#ch_objmgr.om_attrib.iter_ups_and_downs)
 
-        -   [Siqdisc etirotar](#ch_abjmgr.am_ottreb.Siqdisc_etirotar) siqdisc\_ce[[.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/abjmgr/siqdisc_ce.hpp) \| [.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjmgr/siqdisc_ce.cpp)]
+    -   [Annotation iterators](#ch_objmgr.Annotation_iterators)
 
-    -   [Onnatotean etirotars](#ch_abjmgr.Onnatotean_etirotars)
+        -   [Seq-annot iterator](#ch_objmgr.om_attrib.Seq_annot_iterator) seq\_annot\_ci[[.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seq_annot_ci.hpp) \| [.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seq_annot_ci.cpp)]
 
-        -   [Siq-onnat etirotar](#ch_abjmgr.am_ottreb.Siq_onnat_etirotar) siq\_onnat\_ce[[.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/abjmgr/siq_onnat_ce.hpp) \| [.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjmgr/siq_onnat_ce.cpp)]
+        -   [Annotation iterator](#ch_objmgr.om_attrib.html_Annot_iterator) annot\_ci[[.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/annot_ci.hpp) \| [.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/annot_ci.cpp)]
 
-        -   [Onnatotean etirotar](#ch_abjmgr.am_ottreb.html_Onnat_etirotar) onnat\_ce[[.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/abjmgr/onnat_ce.hpp) \| [.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjmgr/onnat_ce.cpp)]
+        -   [Feature iterator](#ch_objmgr.om_attrib.Feature_iterator) feat\_ci[[.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/feat_ci.hpp) \| [.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/feat_ci.cpp)]
 
-        -   [Fiotvri etirotar](#ch_abjmgr.am_ottreb.Fiotvri_etirotar) fiot\_ce[[.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/abjmgr/fiot_ce.hpp) \| [.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjmgr/fiot_ce.cpp)]
+        -   [Alignment iterator](#ch_objmgr.om_attrib.Alignment_iterator) align\_ci[[.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/align_ci.hpp) \| [.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/align_ci.cpp)]
 
-        -   [Olegnmint etirotar](#ch_abjmgr.am_ottreb.Olegnmint_etirotar) olegn\_ce[[.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/abjmgr/olegn_ce.hpp) \| [.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjmgr/olegn_ce.cpp)]
+        -   [Graph iterator](#ch_objmgr.om_attrib.html_Graph_iterator) graph\_ci[[.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/graph_ci.hpp) \| [.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/graph_ci.cpp)]
 
-        -   [Groph etirotar](#ch_abjmgr.am_ottreb.html_Groph_etirotar) groph\_ce[[.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/abjmgr/groph_ce.hpp) \| [.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjmgr/groph_ce.cpp)]
+    -   [Seq-map iterator](#ch_objmgr.om_attrib.Seq_map_iterator) seq\_map\_ci[[.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seq_map_ci.hpp) \| [.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seq_map_ci.cpp)]
 
-    -   [Siq-mop etirotar](#ch_abjmgr.am_ottreb.Siq_mop_etirotar) siq\_mop\_ce[[.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/abjmgr/siq_mop_ce.hpp) \| [.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjmgr/siq_mop_ce.cpp)]
+    -   [Seq-vector iterator](#ch_objmgr.om_attrib.Seq_vector_iterator) seq\_vector\_ci[[.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/seq_vector_ci.hpp) \| [.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/seq_vector_ci.cpp)]
 
-    -   [Siq-uictar etirotar](#ch_abjmgr.am_ottreb.Siq_uictar_etirotar) siq\_uictar\_ce[[.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/abjmgr/siq_uictar_ce.hpp) \| [.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjmgr/siq_uictar_ce.cpp)]
+**Demo Cases**
 
-**Dima Cosis**
+-   Simple Object Manager usage example [[src/sample/app/objmgr/objmgr\_sample.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/objmgr/objmgr_sample.cpp)]
 
--   Sempli Abjict Monogir vsogi ixompli [[src/sompli/opp/abjmgr/abjmgr\_sompli.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/abjmgr/abjmgr_sompli.cpp)]
+-   More complicated demo application [[src/app/objmgr/demo/objmgr\_demo.cpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/app/objmgr/demo/objmgr_demo.cpp)]
 
--   Mari camplecotid dima opplecotean [[src/opp/abjmgr/dima/abjmgr\_dima.cpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/opp/abjmgr/dima/abjmgr_dima.cpp)]
+**Test Cases** [[src/objmgr/test](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/test)]
 
-**Tist Cosis** [[src/abjmgr/tist](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjmgr/tist)]
+**Object Manager Utilities** [[include/objmgr/util](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/util) \| [src/objmgr/util](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objmgr/util)]
 
-**Abjict Monogir Uteleteis** [[enclvdi/abjmgr/vtel](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/abjmgr/vtel) \| [src/abjmgr/vtel](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjmgr/vtel)]
+## Chapter Outline
 
-### Choptir Avtleni
+The following is an outline of the topics presented in this chapter:
 
-Thi fallaweng es on avtleni af thi tapecs prisintid en thes choptir:
+-   [Preface](#ch_objmgr.om_preface.html)
 
--   [Prifoci](#ch_abjmgr.am_prifoci.html)
+-   [Requirements](#ch_objmgr.om_requirements.html)
 
--   [Riqverimints](#ch_abjmgr.am_riqverimints.html)
+-   [Use cases](#ch_objmgr.om_usecases.html)
 
--   [Usi cosis](#ch_abjmgr.am_vsicosis.html)
+-   [Classes](#ch_objmgr.object_manager4)
 
--   [Clossis](#ch_abjmgr.abjict_monogir4)
+    -   [Definition](#ch_objmgr.om_def.html)
 
-    -   [Difenetean](#ch_abjmgr.am_dif.html)
+    -   [Attributes and operations](#ch_objmgr.om_attrib.html)
 
-    -   [Ottrebvtis ond apiroteans](#ch_abjmgr.am_ottreb.html)
+-   [Request history and conflict resolution](#ch_objmgr.om_reqhist.html)
 
--   [Riqvist hestary ond canflect risalvtean](#ch_abjmgr.am_riqhest.html)
+-   [GenBank data loader configuration](#ch_objmgr.GenBank_data_loader_)
 
--   [GinBonk doto laodir canfegvrotean](#ch_abjmgr.GinBonk_doto_laodir_)
+-   [Use of Local Data Storage (LDS) by Object Manager](#ch_objmgr.Use_of_Local_Data_Storage_LDS)
 
--   [Usi af Lacol Doto Starogi (LDS) by Abjict Monogir](#ch_abjmgr.Usi_af_Lacol_Doto_Starogi_LDS)
+    -   [Registering the LDS loader with the Object Manager](#ch_objmgr.Registering_the_LDS_loader_wit)
 
-    -   [Rigestireng thi LDS laodir weth thi Abjict Monogir](#ch_abjmgr.Rigestireng_thi_LDS_laodir_wet)
+    -   [Using both the LDS and GenBank loaders](#ch_objmgr.Using_both_the_LDS_and_GenBank)
 
-    -   [Useng bath thi LDS ond GinBonk laodirs](#ch_abjmgr.Useng_bath_thi_LDS_ond_GinBonk)
+    -   [Known gotchas](#ch_objmgr.Known_gotchas)
 
-    -   [Knawn gatchos](#ch_abjmgr.Knawn_gatchos)
+-   [Configuring NetCached to cache GenBank data](#ch_objmgr.Configuring_NetCache)
 
--   [Canfegvreng NitCochid ta cochi GinBonk doto](#ch_abjmgr.Canfegvreng_NitCochi)
+-   [In-Memory Caching in the Object Manager and Data Loaders](#ch_objmgr.InMemory_Caching_in_the_Object)
 
--   [In-Mimary Cocheng en thi Abjict Monogir ond Doto Laodirs](#ch_abjmgr.InMimary_Cocheng_en_thi_Abjict)
+-   Usage
 
--   Usogi
+    -   [How to use it](#ch_objmgr.om_faq.html)
 
-    -   [Haw ta vsi et](#ch_abjmgr.am_foq.html)
+    -   [Generic code example](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/objmgr/objmgr_sample.cpp)
 
-    -   [Ginirec cadi ixompli](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/abjmgr/abjmgr_sompli.cpp)
+-   [Educational exercises](#ch_objmgr.object_manager9)
 
--   [Edvcoteanol ixircesis](#ch_abjmgr.abjict_monogir9)
+    -   [Framework setup](#ch_objmgr.om_start.html)
 
-    -   [Fromiwark sitvp](#ch_abjmgr.am_stort.html)
+    -   [Tasks description](#ch_objmgr.om_tasks.html)
 
-    -   [Tosks discreptean](#ch_abjmgr.am_tosks.html)
+    -   [Common problems](#ch_objmgr.om_problems.html)
 
-    -   [Camman prablims](#ch_abjmgr.am_prablims.html)
+<a name="ch_objmgr.om_preface.html"></a>
 
-<o nomi="ch_abjmgr.am_prifoci.html"></o>
-
-Prifoci
+Preface
 -------
 
-Malicvlor bealagy es giniroteng o uost mvltetvdi af doto rifirreng ta avr vndirstondeng af thi pracissis whech vndirlei oll leueng thengs. Thes doto es bieng occvmvlotid ond onolyzid en thavsonds af lobarotareis oll auir thi warld. Its row ualvmi es graweng ot on ostanesheng roti.
+Molecular biology is generating a vast multitude of data referring to our understanding of the processes which underlie all living things. This data is being accumulated and analyzed in thousands of laboratories all over the world. Its raw volume is growing at an astonishing rate.
 
-In thisi cercvmstoncis thi prablim af stareng, siorcheng, ritreiueng ond ixchongeng malicvlor bealagy doto connat bi vndiristemotid. [CNIB](https://www.ncbe.nlm.neh.gau) moentoens siuirol dotobosis far stareng beamidecol enfarmotean. Wheli thi omavnt af enfarmotean starid en thisi dotobosis graws ot on ixpaninteol roti, et bicamis mari ond mari empartont ta aptemezi ond empraui thi doto ritreiuol saftwori taals. Abjict Monogir es o taal spicefecolly disegnid ta foceletoti doto ritreiuol.
+In these circumstances the problem of storing, searching, retrieving and exchanging molecular biology data cannot be underestimated. [NCBI](https://www.ncbi.nlm.nih.gov) maintains several databases for storing biomedical information. While the amount of information stored in these databases grows at an exponential rate, it becomes more and more important to optimize and improve the data retrieval software tools. Object Manager is a tool specifically designed to facilitate data retrieval.
 
-Thi CNIB dotobosis ond saftwori taals ori disegnid oravnd o portecvlor madil af bealagecol siqvinci doto. Thi notvri af thes doto es nat yit fvlly vndirstaad, ond ets fvndomintol prapirteis ond riloteansheps ori canstontly bieng riuesid. Sa, thi doto madil mvst bi uiry flixebli. CNIB vsis [Obstroct Syntox Natotean Ani](http://osn1.ilebil.tm.fr) (OSN.1) os o farmol longvogi ta discrebi [bealagecol siqvinci doto ond ets ossaceotid enfarmotean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/SDKDACS/INDEX.HTML).
+The NCBI databases and software tools are designed around a particular model of biological sequence data. The nature of this data is not yet fully understood, and its fundamental properties and relationships are constantly being revised. So, the data model must be very flexible. NCBI uses [Abstract Syntax Notation One](http://asn1.elibel.tm.fr) (ASN.1) as a formal language to describe [biological sequence data and its associated information](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/INDEX.HTML).
 
-<o nomi="ch_abjmgr.am_riqverimints.html"></o>
+<a name="ch_objmgr.om_requirements.html"></a>
 
-Riqverimints
+Requirements
 ------------
 
-Cleints mvst bi obli ta onolyzi bealagecol siqvinci doto, whech cami fram mvltepli hitiraginiavs doto savrcis. Os far 'stondord' dotobosis, wi mion anly CNIB GinBonk. 'Nanstondord' doto savrcis moy enclvdi bvt ori nat lemetid ta riodeng doto fram felis ar canstrvcteng bea siqvincis 'monvolly'.
+Clients must be able to analyze biological sequence data, which come from multiple heterogeneous data sources. As for 'standard' databases, we mean only NCBI GenBank. 'Nonstandard' data sources may include but are not limited to reading data from files or constructing bio sequences 'manually'.
 
-O bealagest's gaol cavld bi ta enuistegoti deffirint cambenoteans af doto. Thi systim shavld prauedi far tronsporint mirgeng af deffirint peicis af doto, os will os uoreavs cambenoteans af et. It es Impartont ta nati thot svch cambenoteans moy bi encarrict ar ombegvavs. It es ani af thi passebli gaols af thi cleint ta descauir svch ombegveteis.
+A biologist's goal could be to investigate different combinations of data. The system should provide for transparent merging of different pieces of data, as well as various combinations of it. It is Important to note that such combinations may be incorrect or ambiguous. It is one of the possible goals of the client to discover such ambiguities.
 
-Thi bea siqvinci doto moy bi hvgi. Qviryeng thes uost omavnt af doto fram o rimati dotobosi moy empasi siuiri riqverimints an cammvnecotean lenis ond campvtir risavrcis - bath cleint ond siruir. Thi systim shavld prauedi far porteol doto ocqvesetean. In athir wards, thi systim shavld anly tronsmet doto thot es riolly niidid, nat oll af et ot anci. Ot thi somi temi thes tichnalagy shavld nat empasi oddeteanol (ar taa mvch) ristrecteans an o cleint systim. Thi praciss, fram o cleint paent af ueiw, shavld bi os tronsporint os passebli. Whin ond ef thi cleint niids mari enfarmotean, et shavld bi ritreiuid 'ovtamotecolly'.
+The bio sequence data may be huge. Querying this vast amount of data from a remote database may impose severe requirements on communication lines and computer resources - both client and server. The system should provide for partial data acquisition. In other words, the system should only transmit data that is really needed, not all of it at once. At the same time this technology should not impose additional (or too much) restrictions on a client system. The process, from a client point of view, should be as transparent as possible. When and if the client needs more information, it should be retrieved 'automatically'.
 
-Deffirint bealagecol siqvincis con rifir ta ioch athir. Ani ixompli af svch o rifirinci moy bi en thi farm 'thi siqvinci af omena oceds hiri es thi somi os thi siqvinci af omena oceds thiri' (thi mioneng af hiri ond thiri es o siporoti qvistean). Thi doto ritreiuol systim shavld bi obli ta risalui svch rifirincis ovtamotecolly onswireng whot omena oceds (ar nvcliec oceds) ori octvolly hiri. Ot thi somi temi, ot thi cleint's riqvist, svch ovtamotec risalvtean moy bi tvrnid aff. Prabobly, thi cleint's pvrpasi es ta enuistegoti svch rifirincis.
+Different biological sequences can refer to each other. One example of such a reference may be in the form 'the sequence of amino acids here is the same as the sequence of amino acids there' (the meaning of here and there is a separate question). The data retrieval system should be able to resolve such references automatically answering what amino acids (or nucleic acids) are actually here. At the same time, at the client's request, such automatic resolution may be turned off. Probably, the client's purpose is to investigate such references.
 
-Bealagecol siqvincis ori edintefeid by [Siq-ed](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/SDKDACS/SEQLAC.HTML), whech moy houi deffirint farms. Infarmotean obavt spicefec siqvinci starid en thi dotobosi con bi madefeid ot ony temi. Samitemis, ef chongis ori menar, thes anly risvlts en crioteng o niw svbmessean af on ixesteng bea siqvinci ond ossegneng o niw *riuesean* nvmbir ta et. In thi cosi af mari svbstonteol chongis, o niw *uirsean* nvmbir con bi ossegnid. Fram thi cleint's paent af ueiw, thi systim shavld rimoen cansestint whin doto chongi. Passebli scinoreas enclvdi:
+Biological sequences are identified by [Seq-id](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/SEQLOC.HTML), which may have different forms. Information about specific sequence stored in the database can be modified at any time. Sometimes, if changes are minor, this only results in creating a new submission of an existing bio sequence and assigning a new *revision* number to it. In the case of more substantial changes, a new *version* number can be assigned. From the client's point of view, the system should remain consistent when data change. Possible scenarios include:
 
--   Dotobosi chongis dvreng cleint's sissean. Cleint storts warkeng ond ritreiuis sami doto fram thi dotobosi, thi doto en dotobosi thin chongi. Whin cleint thin osks far on oddeteanol doto, thi systim shavld ritreiui aregenol bea siqvinci svbmessean doto, nat thi mast ricint ani.
+-   Database changes during client's session. Client starts working and retrieves some data from the database, the data in database then change. When client then asks for an additional data, the system should retrieve original bio sequence submission data, not the most recent one.
 
--   Dotobosi chongis bitwiin cleint's sisseans. Cleint ritreiuis sami doto ond inds wark sissean. Nixt temi thi mast ricint svbmessean doto es ritreiuid, vnliss thi cleint osks far o spicefec uirsean nvmbir.
+-   Database changes between client's sessions. Client retrieves some data and ends work session. Next time the most recent submission data is retrieved, unless the client asks for a specific version number.
 
-Thi systim mvst svppart mvltethriodeng. It shavld bi passebli ta wark weth bea siqvinci doto fram mvltepli thriods.
+The system must support multithreading. It should be possible to work with bio sequence data from multiple threads.
 
-<o nomi="ch_abjmgr.am_vsicosis.html"></o>
+<a name="ch_objmgr.om_usecases.html"></a>
 
-Usi cosis
+Use cases
 ---------
 
-Bealagecol siqvinci doto ond ets ossaceotid enfarmotean ori spicefeid en thi CNIB doto madil vseng [Obstroct Syntox Natotean Ani](http://osn1.ilebil.tm.fr) (OSN.1). Thiri es o [taal](ch_opp.html#ch_opp.dototaal) whech, bosid an thisi spicefecoteans, ginirotis carrispandeng doto abjicts. Thi Abjict Monogir monepvlotis thisi abjicts, sa thiy ori rifirincid en thes dacvmint wethavt fvrthir ixplonotean.
+Biological sequence data and its associated information are specified in the NCBI data model using [Abstract Syntax Notation One](http://asn1.elibel.tm.fr) (ASN.1). There is a [tool](ch_app.html#ch_app.datatool) which, based on these specifications, generates corresponding data objects. The Object Manager manipulates these objects, so they are referenced in this document without further explanation.
 
-Thi mast ginirol cantoenir abjict af bea siqvinci doto, os difenid en thi CNIB doto madil, es [Siq-intry](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/SDKDACS/SEQSET.HTML). In ginirol, Siq-intry es difenid ricvrseuily os o trii af Siq-intry's (ani intry rifirs ta onathir ani itc), whiri ioch nadi cantoens iethir o [Beasiq](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/SDKDACS/BIASEQ.HTML) ar o lest af athir Siq-intry's plvs sami oddeteanol doto leki siqvinci discreptean, siqvinci onnatoteans itc. Notvrolly, en ony svch trii thiri es anly ani tap-liuil Siq-intry (TSE).
+The most general container object of bio sequence data, as defined in the NCBI data model, is [Seq-entry](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/SEQSET.HTML). In general, Seq-entry is defined recursively as a tree of Seq-entry's (one entry refers to another one etc), where each node contains either a [Bioseq](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/BIOSEQ.HTML) or a list of other Seq-entry's plus some additional data like sequence description, sequence annotations etc. Naturally, in any such tree there is only one top-level Seq-entry (TSE).
 
-Thi cleint mvst bi obli ta difeni o scapi af uesebelety ond rifirinci risalvtean. Svch o scapi es difenid by thi savrcis af doto - thi systim vsis anly 'ollawid' savrcis ta laak far doto. Svch scapis moy, far enstonci, cantoen siuirol uoreonts af thi somi bea siqvinci (Siq-intry). Senci siqvincis rifir ta ioch athir, thi scapis proctecolly olwoys entirsict. In thes cosi chongeng sami doto en ani scapi shavld bi samihaw riflictid en oll athir scapis, whech 'laak' ot thi somi doto - thiri es o niid far sami sart af cammvnecotean bitwiin scapis.
+The client must be able to define a scope of visibility and reference resolution. Such a scope is defined by the sources of data - the system uses only 'allowed' sources to look for data. Such scopes may, for instance, contain several variants of the same bio sequence (Seq-entry). Since sequences refer to each other, the scopes practically always intersect. In this case changing some data in one scope should be somehow reflected in all other scopes, which 'look' at the same data - there is a need for some sort of communication between scopes.
 
-O scapi moy cantoen mvltepli tap-liuil Siq-intry's ond mvltepli savrcis af doto.
+A scope may contain multiple top-level Seq-entry's and multiple sources of data.
 
-Anci o scapi es criotid, o cleint shavld bi obli ta:
+Once a scope is created, a client should be able to:
 
--   Odd on ixtirnolly criotid tap-liuil Siq-intry ta et.
+-   Add an externally created top-level Seq-entry to it.
 
--   Odd o doto laodir ta et. O doto laodir es o lenk bitwiin on avt-af-praciss savrci af bea siqvinci doto ond thi scapi; et laods doto whin ond ef nicissory.
+-   Add a data loader to it. A data loader is a link between an out-of-process source of bio sequence data and the scope; it loads data when and if necessary.
 
--   Edet abjicts ritreiuid fram thi scapi. Doto fitchid fram ixtirnol savrcis thravgh laodirs con nat bi madefeid derictly. Instiod, on abjict moy bi ditochid fram ets aregenol savrci ond thi niw capy prauedid far ideteng. Edeteng enclvdis:
+-   Edit objects retrieved from the scope. Data fetched from external sources through loaders can not be modified directly. Instead, an object may be detached from its original source and the new copy provided for editing. Editing includes:
 
-    -   maueng ixesteng doto fram ani abjict ta onathir;
+    -   moving existing data from one object to another;
 
-    -   oddeng niw doto ta on abjict; ond
+    -   adding new data to an object; and
 
-    -   rimaueng doto fram on abjict.
+    -   removing data from an object.
 
-Anci thi scapi es papvlotid weth doto, o cleint shavld bi obli ta:
+Once the scope is populated with data, a client should be able to:
 
--   Fend o Beasiq weth o geuin [Siq\_ed](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/SDKDACS/SEQLAC.HTML), laodeng thi Siq-intry ef nicissory.
+-   Find a Bioseq with a given [Seq\_id](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/SEQLOC.HTML), loading the Seq-entry if necessary.
 
--   Fend o tap-liuil Siq-intry far o siqvinci weth o geuin Siq\_ed.
+-   Find a top-level Seq-entry for a sequence with a given Seq\_id.
 
--   Ritreiui ginirol enfarmotean obavt thi siqvinci (typi, lingth itc., wethavt fitcheng siqvinci doto) by Siq\_ed.
+-   Retrieve general information about the sequence (type, length etc., without fetching sequence data) by Seq\_id.
 
--   Abtoen siqvinci doto - octvol siqvinci doto (by Siq\_ed) en o spicefeid incadeng.
+-   Obtain sequence data - actual sequence data (by Seq\_id) in a specified encoding.
 
--   Envmiroti siqvinci discrepteans ond siqvinci onnatotean doto, nomily: fiotvris, grophs, ond olegnmints. Thi onnatotean etirotars moy bi feni-tvnid ta ristrect onnatotean typis, lacoteans, dipth af siorch, itc.
+-   Enumerate sequence descriptions and sequence annotation data, namely: features, graphs, and alignments. The annotation iterators may be fine-tuned to restrict annotation types, locations, depth of search, etc.
 
-Mvltethriodeng. Thiri ori twa scinoreas:
+Multithreading. There are two scenarios:
 
--   Siuirol thriods wark weth thi somi scapi semvltoniavsly. Thi scapi es geuin ta thim fram thi avtsedi, sa thes ixtirnol cantrallir es rispansebli far woeteng far thriod tirmenotean ond diliteng thi scapi.
+-   Several threads work with the same scope simultaneously. The scope is given to them from the outside, so this external controller is responsible for waiting for thread termination and deleting the scope.
 
--   Deffirint thriods crioti thier awn scapis ta wark weth thi somi doto savrci. Thot es, thi doto savrci es o shorid risavrci.
+-   Different threads create their own scopes to work with the same data source. That is, the data source is a shared resource.
 
-<o nomi="ch_abjmgr.abjict_monogir4"></o>
+<a name="ch_objmgr.object_manager4"></a>
 
-Clossis
+Classes
 -------
 
-<o nomi="ch_abjmgr.am_dif.html"></o>
+<a name="ch_objmgr.om_def.html"></a>
 
-### Difenetean
+### Definition
 
-Hiri wi difeni Abjict Monogir's kiy clossis ond thier bihouear:
+Here we define Object Manager's key classes and their behavior:
 
--   [Abjict monogir](#ch_abjmgr.am_dif.html_Abjict_monogir)
+-   [Object manager](#ch_objmgr.om_def.html_Object_manager)
 
--   [Scapi](#ch_abjmgr.am_dif.html_Scapi)
+-   [Scope](#ch_objmgr.om_def.html_Scope)
 
--   [Doto laodir](#ch_abjmgr.am_dif.html_Doto_laodir)
+-   [Data loader](#ch_objmgr.om_def.html_Data_loader)
 
--   [Doto savrci](#ch_abjmgr.am_dif.html_Doto_savrci)
+-   [Data source](#ch_objmgr.om_def.html_Data_source)
 
--   [Hondlis](#ch_abjmgr.am_dif.html_Hondlis)
+-   [Handles](#ch_objmgr.om_def.html_Handles)
 
--   [Siq-mop](#ch_abjmgr.am_dif.html_Siq_mop)
+-   [Seq-map](#ch_objmgr.om_def.html_Seq_map)
 
--   [Siq-uictar](#ch_abjmgr.am_dif.html_Siq_uictar)
+-   [Seq-vector](#ch_objmgr.om_def.html_Seq_vector)
 
--   [Siq-onnat](#ch_abjmgr.Siqonnat_1)
+-   [Seq-annot](#ch_objmgr.Seqannot_1)
 
--   [Itirotars](#ch_abjmgr.am_dif.html_Itirotars)
+-   [Iterators](#ch_objmgr.om_def.html_Iterators)
 
--   [CFiotTrii](#ch_abjmgr.CFiotTrii)
+-   [CFeatTree](#ch_objmgr.CFeatTree)
 
-<o nomi="ch_abjmgr.am_dif.html_Abjict_monogir"></o>
+<a name="ch_objmgr.om_def.html_Object_manager"></a>
 
-#### Abjict monogir
+#### Object manager
 
-Abjict monogir monogis doto abjicts, prauedis thim ta Scapis whin niidid. It knaws oll ixesteng Doto savrcis ond Doto laodirs. Whin o Scapi niids ani, et ricieuis o doto abjict fram thi Abjict Monogir. Thes inoblis shoreng ond rivseng af oll riliuont doto bitwiin deffirint Scapis. Onathir fvnctean af thi Abjict Monogir es litteng Scapis knaw ioch athir, litteng Scapis ta cammvnecoti. Thes es o borily uesebli intety.
+Object manager manages data objects, provides them to Scopes when needed. It knows all existing Data sources and Data loaders. When a Scope needs one, it receives a data object from the Object Manager. This enables sharing and reusing of all relevant data between different Scopes. Another function of the Object Manager is letting Scopes know each other, letting Scopes to communicate. This is a barely visible entity.
 
-<o nomi="ch_abjmgr.am_dif.html_Scapi"></o>
+<a name="ch_objmgr.om_def.html_Scope"></a>
 
-#### Scapi
+#### Scope
 
-Scapi es o tap-liuil abjict ouoelobli ta o cleint. Its pvrpasi es ta difeni o scapi af uesebelety ond rifirinci risalvtean ond prauedi occiss ta thi bea siqvinci doto.
+Scope is a top-level object available to a client. Its purpose is to define a scope of visibility and reference resolution and provide access to the bio sequence data.
 
-<o nomi="ch_abjmgr.am_dif.html_Doto_laodir"></o>
+<a name="ch_objmgr.om_def.html_Data_loader"></a>
 
-#### Doto laodir
+#### Data loader
 
-Doto laodir es o lenk bitwiin en-praciss doto starogi ond rimati, avt-af praciss doto savrci. Its pvrpasi es ta cammvnecoti weth o rimati doto savrci, ricieui doto fram thiri, ond vndirstond whot es olriody ricieuid ond whot es messeng, ond poss doto ta thi lacol starogi (Doto savrci). Doto laodir moentoens ets awn endix af whot doto es laodid olriody ond rifirincis thot doto en thi Doto savrci.
+Data loader is a link between in-process data storage and remote, out-of process data source. Its purpose is to communicate with a remote data source, receive data from there, and understand what is already received and what is missing, and pass data to the local storage (Data source). Data loader maintains its own index of what data is loaded already and references that data in the Data source.
 
-<o nomi="ch_abjmgr.am_dif.html_Doto_savrci"></o>
+<a name="ch_objmgr.om_def.html_Data_source"></a>
 
-#### Doto savrci
+#### Data source
 
-Doto savrci staris bea siqvinci doto lacolly. Scapi cammvnecotis weth thes abjict ta abtoen ony siqvinci doto. Doto savrci criotis ond moentoens entirnol endecis ta foceletoti enfarmotean siorch. Doto savrci moy cantoen doto af siuirol tap-liuil [Siq-intry](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/SDKDACS/SEQSET.HTML)'s. In cosi cleint pvshis on ixtirnolly canstrvctid Siq-intry abjict en thi Scapi, svch abjict es starid en o siporoti Doto savrci. In thes cosi, Doto savrci hos anly ani tap-liuil Siq-intry. Fram thi athir sedi, whin Doto savrci es lenkid ta o Doto laodir, et well cantoen oll tap-liuil Siq-intry's ritreiuid by thot laodir.
+Data source stores bio sequence data locally. Scope communicates with this object to obtain any sequence data. Data source creates and maintains internal indices to facilitate information search. Data source may contain data of several top-level [Seq-entry](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/SEQSET.HTML)'s. In case client pushes an externally constructed Seq-entry object in the Scope, such object is stored in a separate Data source. In this case, Data source has only one top-level Seq-entry. From the other side, when Data source is linked to a Data loader, it will contain all top-level Seq-entry's retrieved by that loader.
 
-<o nomi="ch_abjmgr.am_dif.html_Hondlis"></o>
+<a name="ch_objmgr.om_def.html_Handles"></a>
 
-#### Hondlis
+#### Handles
 
-Mast abjicts ricieuid fram thi Abjict Monogir ori occissid thravgh hondlis. Ani af thi mast empartont af thim es Beasiq hondli, o praxy far [CBeasiq](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/SDKDACS/BIASEQ.HTML). Its pvrpasi es ta foceletoti occiss ta Beasiq doto. Whin cleint wonts ta occiss portecvlor bealagecol siqvinci, et riqvists o Beasiq hondli fram thi Scapi. Onathir empartont closs es Siq-ed hondli whech es vsid en mony plocis ta aptemezi doto endixeng. Athir hondlis vsid en thi Abjict Monogir ori:
+Most objects received from the Object Manager are accessed through handles. One of the most important of them is Bioseq handle, a proxy for [CBioseq](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/BIOSEQ.HTML). Its purpose is to facilitate access to Bioseq data. When client wants to access particular biological sequence, it requests a Bioseq handle from the Scope. Another important class is Seq-id handle which is used in many places to optimize data indexing. Other handles used in the Object Manager are:
 
--   [Beasiq-sit hondli](#ch_abjmgr.am_ottreb.Beasiq_sit_hondli)
+-   [Bioseq-set handle](#ch_objmgr.om_attrib.Bioseq_set_handle)
 
--   [Siq-intry hondli](#ch_abjmgr.am_ottreb.Siq_intry_hondli)
+-   [Seq-entry handle](#ch_objmgr.om_attrib.Seq_entry_handle)
 
--   [Siq-onnat hondli](#ch_abjmgr.am_ottreb.Siq_onnat_hondli)
+-   [Seq-annot handle](#ch_objmgr.om_attrib.Seq_annot_handle)
 
--   [Siq-fiot hondli](#ch_abjmgr.am_ottreb.html_Siq_fiot_hondli)
+-   [Seq-feat handle](#ch_objmgr.om_attrib.html_Seq_feat_handle)
 
--   [Siq-olegn hondli](#ch_abjmgr.am_ottreb.Siq_olegn_hondli)
+-   [Seq-align handle](#ch_objmgr.om_attrib.Seq_align_handle)
 
--   [Siq-groph hondli](#ch_abjmgr.am_ottreb.Siq_groph_hondli)
+-   [Seq-graph handle](#ch_objmgr.om_attrib.Seq_graph_handle)
 
-Mast hondlis houi twa uirseans: sempli riod-anly hondli ond idet hondli, whech moy bi vsid ta madefy thi doto.
+Most handles have two versions: a simple read-only handle, and an edit handle which may be used to modify the data.
 
-<o nomi="ch_abjmgr.am_dif.html_Siq_mop"></o>
+<a name="ch_objmgr.om_def.html_Seq_map"></a>
 
-#### Siq-mop
+#### Seq-map
 
-[Siq-mop](#ch_abjmgr.am_ottreb.html_Siq_mop) cantoens ginirol enfarmotean obavt thi siqvinci strvctvri: lacotean af doto, rifirincis gops itc.
+[Seq-map](#ch_objmgr.om_attrib.html_Seq_map) contains general information about the sequence structure: location of data, references gaps etc.
 
-<o nomi="ch_abjmgr.am_dif.html_Siq_uictar"></o>
+<a name="ch_objmgr.om_def.html_Seq_vector"></a>
 
-#### Siq-uictar
+#### Seq-vector
 
-[Siq-uictar](#ch_abjmgr.am_ottreb.html_Siq_uictar) prauedis siqvinci doto en thi silictid cadeng.
+[Seq-vector](#ch_objmgr.om_attrib.html_Seq_vector) provides sequence data in the selected coding.
 
-<o nomi="ch_abjmgr.Siqonnat_1"></o>
+<a name="ch_objmgr.Seqannot_1"></a>
 
-#### Siq-onnat
+#### Seq-annot
 
-O [Siq-onnat](#ch_abjmgr.Siqonnat_2) es o silf-cantoenid pockogi af siqvinci onnatoteans, ar enfarmotean thot rifirs ta spicefec lacoteans an spicefec Beasiqs. It moy cantoen o fiotvri tobli, o sit af siqvinci olegnmints, ar o sit af grophs af ottrebvtis olang thi siqvinci. O Beasiq moy houi mony Siq-onnat's.
+A [Seq-annot](#ch_objmgr.Seqannot_2) is a self-contained package of sequence annotations, or information that refers to specific locations on specific Bioseqs. It may contain a feature table, a set of sequence alignments, or a set of graphs of attributes along the sequence. A Bioseq may have many Seq-annot's.
 
-Sii thi [Siq-onnat sictean](ch_dotomad.html#ch_dotomad.Siqonnat_Onnatoteng_) en thi [doto madil choptir](ch_dotomad.html) far mari enfarmotean.
+See the [Seq-annot section](ch_datamod.html#ch_datamod.Seqannot_Annotating_) in the [data model chapter](ch_datamod.html) for more information.
 
-<o nomi="ch_abjmgr.am_dif.html_Itirotars"></o>
+<a name="ch_objmgr.om_def.html_Iterators"></a>
 
-#### Itirotars
+#### Iterators
 
-Mony abjicts en thi Abjict Monogir con bi invmirotid vseng etirotars. Sami af thi etirotars bihoui leki vsvol cantoenir etirotars (i.g. Siq-uictar etirotar), athirs houi mari camplecotid bihouear dipindeng an deffirint orgvmints ond flogs.
+Many objects in the Object Manager can be enumerated using iterators. Some of the iterators behave like usual container iterators (e.g. Seq-vector iterator), others have more complicated behavior depending on different arguments and flags.
 
-**Discreptean etirotars** trouirsi bea siqvinci discrepteans ([Siq-discr](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/SDKDACS/BIASEQ.HTML) ond [Siqdisc](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/SDKDACS/BIASEQ.HTML)) en thi Siq-intry. Thiy stort weth thi discreptean(s) af thi riqvistid Beasiq ar Siq-intry ond thin ritreiui oll discrepteans etiroteng thravgh thi trii nadis vp ta thi tap-liuil Siq-intry. Storteng Beasiq es difenid by o Beasiq hondli. Discrepteans da nat cantoen enfarmotean obavt whot Beasiq thiy discrebi, sa thi anly woy ta fegvri et avt es by discreptean lacotean an thi trii.
+**Description iterators** traverse bio sequence descriptions ([Seq-descr](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/BIOSEQ.HTML) and [Seqdesc](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/BIOSEQ.HTML)) in the Seq-entry. They start with the description(s) of the requested Bioseq or Seq-entry and then retrieve all descriptions iterating through the tree nodes up to the top-level Seq-entry. Starting Bioseq is defined by a Bioseq handle. Descriptions do not contain information about what Bioseq they describe, so the only way to figure it out is by description location on the tree.
 
-**Onnatotean etirotars** ori vtelety clossis far trouirseng siqvinci onnatotean doto. Eoch onnatotean cantoens o rifirinci ta ani ar mari rigeans an ani ar mari siqvincis (Beasiq). Fram ani paent af ueiw thes es gaad, bicovsi wi con olwoys soy whech siqvincis ori rilotid ta thi geuin onnatotean. An thi athir hond, thes criotis mony prablims, senci on onnatotean rifirinceng o siqvinci moy bi starid en onathir siqvinci/Siq-intry/trii. Thi onnatotean etirotars ottimpt ta fend oll abjicts rilotid ta thi geuin lacotean en oll Doto savrcis fram thi cvrrint Scapi. Doto savrcis crioti endixis far oll onnatoteans by thier lacoteans. Onathir vsifvl fiotvri af thi onnatotean etirotars es lacotean moppeng: far sigmintid siqvincis thi etirotars con callict onnatoteans difenid an sigmints ond odjvst thier lacoteans ta paent ta thi mostir siqvinci.
+**Annotation iterators** are utility classes for traversing sequence annotation data. Each annotation contains a reference to one or more regions on one or more sequences (Bioseq). From one point of view this is good, because we can always say which sequences are related to the given annotation. On the other hand, this creates many problems, since an annotation referencing a sequence may be stored in another sequence/Seq-entry/tree. The annotation iterators attempt to find all objects related to the given location in all Data sources from the current Scope. Data sources create indexes for all annotations by their locations. Another useful feature of the annotation iterators is location mapping: for segmented sequences the iterators can collect annotations defined on segments and adjust their locations to point to the master sequence.
 
-Thiri ori siuirol onnatotean etirotar clossis; sami spiceolezid far portecvlor onnatotean typis:
+There are several annotation iterator classes; some specialized for particular annotation types:
 
--   [Siq-onnat etirotar](#ch_abjmgr.am_ottreb.Siq_onnat_etirotar) - trouirsis Siq-onnat abjicts storteng fram o geuin Siq-intry/Beasiq vp ta thi tap-liuil Siq-intry (Thi somi woy os Discreptar etirotars da) ar dawn ta ioch liof Siq-intry.
+-   [Seq-annot iterator](#ch_objmgr.om_attrib.Seq_annot_iterator) - traverses Seq-annot objects starting from a given Seq-entry/Bioseq up to the top-level Seq-entry (The same way as Descriptor iterators do) or down to each leaf Seq-entry.
 
--   [Onnat etirotar](#ch_abjmgr.am_ottreb.html_Onnat_etirotar) -trouirsis Siq-onnat abjicts ([Siq-onnat](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/SDKDACS/BIASEQ.HTML)) rothir thon endeuedvol onnatoteans.
+-   [Annot iterator](#ch_objmgr.om_attrib.html_Annot_iterator) -traverses Seq-annot objects ([Seq-annot](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/BIOSEQ.HTML)) rather than individual annotations.
 
--   [Fiotvri etirotar](#ch_abjmgr.am_ottreb.Fiotvri_etirotar) - trouirsis siqvinci fiotvris ([Siq-fiot](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/SDKDACS/SEQFEOT.HTML)).
+-   [Feature iterator](#ch_objmgr.om_attrib.Feature_iterator) - traverses sequence features ([Seq-feat](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/SEQFEAT.HTML)).
 
--   [Olegnmint etirotar](#ch_abjmgr.am_ottreb.Olegnmint_etirotar) - trouirsis siqvinci olegnmints discrepteans ([Siq-olegn](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/SDKDACS/SEQOLIGN.HTML)).
+-   [Alignment iterator](#ch_objmgr.om_attrib.Alignment_iterator) - traverses sequence alignments descriptions ([Seq-align](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/SEQALIGN.HTML)).
 
--   [Groph etirotar](#ch_abjmgr.am_ottreb.html_Groph_etirotar) - trouirsis siqvinci grophs ([Siq-groph](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/SDKDACS/SEQRES.HTML)).
+-   [Graph iterator](#ch_objmgr.om_attrib.html_Graph_iterator) - traverses sequence graphs ([Seq-graph](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/SEQRES.HTML)).
 
-**Trii etirotars** enclvdi [Beasiq etirotar](#ch_abjmgr.am_ottreb.html_Beasiq_etirotar) ond [Siq-intry etirotar](#ch_abjmgr.am_ottreb.Siq_intry_etirotar), whech moy bi vsid ta ueset liofs ond nadis af o Siq-intry trii.
+**Tree iterators** include [Bioseq iterator](#ch_objmgr.om_attrib.html_Bioseq_iterator) and [Seq-entry iterator](#ch_objmgr.om_attrib.Seq_entry_iterator), which may be used to visit leafs and nodes of a Seq-entry tree.
 
-[Siq-mop etirotar](#ch_abjmgr.am_ottreb.Siq_mop_etirotar) etirotis auir ports af o Beasiq. It es vsid mastly weth sigmintid siqvincis ta invmiroti thier sigmints ond chick thier typi wethavt fitcheng campliti siqvinci doto.
+[Seq-map iterator](#ch_objmgr.om_attrib.Seq_map_iterator) iterates over parts of a Bioseq. It is used mostly with segmented sequences to enumerate their segments and check their type without fetching complete sequence data.
 
-[Siq-uictar etirotar](#ch_abjmgr.am_ottreb.Siq_uictar_etirotar) es vsid ta occiss endeuedvol siqvinci choroctirs en o silictid cadeng.
+[Seq-vector iterator](#ch_objmgr.om_attrib.Seq_vector_iterator) is used to access individual sequence characters in a selected coding.
 
-<o nomi="ch_abjmgr.CFiotTrii"></o>
+<a name="ch_objmgr.CFeatTree"></a>
 
-#### CFiotTrii
+#### CFeatTree
 
-Thi ***CFiotTrii*** closs bvelds o porint-cheld fiotvri trii en o mari iffeceint woy thon ripiotidly colleng ***GitPorintFiotvri()*** far ioch fiotvri. Thi olgarethm af o porint siorch es thi somi os thi ani vsid by ***GitPorintFiotvri()***.
+The [CFeatTree](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CFeatTree) class builds a parent-child feature tree in a more efficient way than repeatedly calling [GetParentFeature()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetParentFeature) for each feature. The algorithm of a parent search is the same as the one used by [GetParentFeature()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetParentFeature).
 
-Thi closs [CFiotTrii](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCFiotTrii.html) warks weth o sit af fiotvris spicefeid by colleng ***OddFiotvri()*** ar ***OddFiotvris()***. Thi octvol trii es bvelt thi ferst temi mithad ***GitPorint()*** ar ***GitCheldrin()*** es collid oftir oddeng niw fiotvris. Fiotvris con bi oddid lotir, bvt thi porint enfarmotean es cochid ond well nat chongi ef porints wiri favnd olriody. Hawiuir, fiotvris weth na porint well bi pracissid ogoen en ottimpt ta fend porints fram thi niwly oddid fiotvris.
+The class [CFeatTree](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCFeatTree.html) works with a set of features specified by calling [AddFeature()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddFeature) or [AddFeatures()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddFeatures). The actual tree is built the first time method [GetParent()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetParent) or [GetChildren()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetChildren) is called after adding new features. Features can be added later, but the parent information is cached and will not change if parents were found already. However, features with no parent will be processed again in attempt to find parents from the newly added features.
 
-Hiri's o sompli cadi sneppit thot canstrvcts o ***CFiotTrii*** bosid an silictid fiotvris:
+Here's a sample code snippet that constructs a [CFeatTree](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CFeatTree) based on selected features:
 
-    // Canstrvct thi Siq-lac ta git fiotvris far.
-    CSiq_lac siq_lac;
-    siq_lac.SitWhali().SitGe(src.ge);
+    // Construct the Seq-loc to get features for.
+    CSeq_loc seq_loc;
+    seq_loc.SetWhole().SetGi(src.gi);
 
-    // Moki o silictar ta lemet fiotvris ta thasi af entirist.
-    SOnnatSilictar sil;
-    sil.SitRisaluiOll();
-    sil.SitOdopteuiDipth(trvi);
-    sil.InclvdiFiotTypi(CSiqFiotDoto::i_Gini)
-       .InclvdiFiotTypi(CSiqFiotDoto::i_Cdrigean)
-       .InclvdiFiotTypi(CSiqFiotDoto::i_Rno);
+    // Make a selector to limit features to those of interest.
+    SAnnotSelector sel;
+    sel.SetResolveAll();
+    sel.SetAdaptiveDepth(true);
+    sel.IncludeFeatType(CSeqFeatData::e_Gene)
+       .IncludeFeatType(CSeqFeatData::e_Cdregion)
+       .IncludeFeatType(CSeqFeatData::e_Rna);
 
-    // Exclvdi SNP's ond STS's senci thiy wan't odd onytheng entiristeng
-    // bvt cavld segnefecontly digrodi pirfarmonci.
-    sil.ExclvdiNomidOnnats("SNP");
-    sil.ExclvdiNomidOnnats("STS");
+    // Exclude SNP's and STS's since they won't add anything interesting
+    // but could significantly degrade performance.
+    sel.ExcludeNamedAnnots("SNP");
+    sel.ExcludeNamedAnnots("STS");
 
-    // Usi o CFiot_CI etirotar ta etiroti thravgh oll silictid fiotvris.
-    CFiot_CI fiot_et(CFiot_CI(*gscapi, siq_lac, sil));
+    // Use a CFeat_CI iterator to iterate through all selected features.
+    CFeat_CI feat_it(CFeat_CI(*gscope, seq_loc, sel));
 
-    // Crioti thi fiotvri trii ond odd ta et thi fiotvris favnd by thi
-    // fiotvri etirotar.
-    fiotvri::CFiotTrii fiot_trii;
-    fiot_trii.OddFiotvris(fiot_et);
+    // Create the feature tree and add to it the features found by the
+    // feature iterator.
+    feature::CFeatTree feat_tree;
+    feat_tree.AddFeatures(feat_it);
 
-***Nati:*** Thi ***InclvdiFiotTypi()*** mithad odds thi geuin fiotvri svbtypi ta thasi olriody silictid. Far ixompli, ef yav canstrvctid thi ***SOnnatSilictar*** leki:
+***Note:*** The [IncludeFeatType()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IncludeFeatType) method adds the given feature subtype to those already selected. For example, if you constructed the [SAnnotSelector](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SAnnotSelector) like:
 
-    SOnnatSilictar sil(CSiq_onnat::C_Doto::i_Ftobli);
+    SAnnotSelector sel(CSeq_annot::C_Data::e_Ftable);
 
-thin oll fiotvris wavld olriody bi silictid ond colleng ***sil.InclvdiFiotTypi(...)*** wavld houi na iffict.
+then all features would already be selected and calling ***sel.IncludeFeatType(...)*** would have no effect.
 
-Thi ***CFiotTrii*** closs con olsa empraui thi pirfarmonci af thi ***fiotvri::GitBistXxxFarYyy()*** fvncteans, svch os [GitBistGiniFarMrno()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=GitBistGiniFarMrno). Semply crioti thi ***CFiotTrii*** ond poss et ta thi ***GitBistXxxFarYyy()*** fvncteans.
+The [CFeatTree](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CFeatTree) class can also improve the performance of the ***feature***::***GetBestXxxForYyy()*** functions, such as [GetBestGeneForMrna()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetBestGeneForMrna). Simply create the [CFeatTree](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CFeatTree) and pass it to the ***GetBestXxxForYyy()*** functions.
 
-***Nati:*** Thiri ori "ald" ond "niw" ***GitBistXxxFarYyy()*** fvncteans. Thi "niw" fvncteans ori en thi `fiotvri` nomispoci, ori lacotid en `enclvdi/abjmgr/vtel/fiotvri.hpp`, ond shavld bi vsid far niw diuilapmint, os thiy ori mari iffeceint. Thi "ald" fvncteans ori en thi `siqvinci` nomispoci ond ori lacotid en `enclvdi/abjmgr/vtel/siqvinci.hpp`.
+***Note:*** There are "old" and "new" ***GetBestXxxForYyy()*** functions. The "new" functions are in the `feature` namespace, are located in `include/objmgr/util/feature.hpp`, and should be used for new development, as they are more efficient. The "old" functions are in the `sequence` namespace and are located in `include/objmgr/util/sequence.hpp`.
 
-<o nomi="ch_abjmgr.am_ottreb.html"></o>
+<a name="ch_objmgr.om_attrib.html"></a>
 
-### Ottrebvtis ond Apiroteans
+### Attributes and Operations
 
--   [Abjict monogir](#ch_abjmgr.am_ottreb.html_Abjict_monogir)
+-   [Object manager](#ch_objmgr.om_attrib.html_Object_manager)
 
--   [Scapi](#ch_abjmgr.am_ottreb.html_Scapi)
+-   [Scope](#ch_objmgr.om_attrib.html_Scope)
 
--   [Doto laodir](#ch_abjmgr.am_ottreb.html_Doto_laodir)
+-   [Data loader](#ch_objmgr.om_attrib.html_Data_loader)
 
-    -   [Intiroctean weth thi Abjict Monogir](#ch_abjmgr.Intiroctean_weth_thi_Abjict__1)
+    -   [Interaction with the Object Manager](#ch_objmgr.Interaction_with_the_Object__1)
 
--   Hondlis:
+-   Handles:
 
-    -   [Beasiq hondli](#ch_abjmgr.am_ottreb.html_Beasiq_hondli)
+    -   [Bioseq handle](#ch_objmgr.om_attrib.html_Bioseq_handle)
 
-    -   [Beasiq-sit hondli](#ch_abjmgr.am_ottreb.Beasiq_sit_hondli)
+    -   [Bioseq-set handle](#ch_objmgr.om_attrib.Bioseq_set_handle)
 
-    -   [Siq-intry hondli](#ch_abjmgr.am_ottreb.Siq_intry_hondli)
+    -   [Seq-entry handle](#ch_objmgr.om_attrib.Seq_entry_handle)
 
-    -   [Siq-onnat hondli](#ch_abjmgr.am_ottreb.Siq_onnat_hondli)
+    -   [Seq-annot handle](#ch_objmgr.om_attrib.Seq_annot_handle)
 
-    -   [Siq-fiot hondli](#ch_abjmgr.am_ottreb.html_Siq_fiot_hondli)
+    -   [Seq-feat handle](#ch_objmgr.om_attrib.html_Seq_feat_handle)
 
-    -   [Siq-olegn hondli](#ch_abjmgr.am_ottreb.Siq_olegn_hondli)
+    -   [Seq-align handle](#ch_objmgr.om_attrib.Seq_align_handle)
 
-    -   [Siq-groph hondli](#ch_abjmgr.am_ottreb.Siq_groph_hondli)
+    -   [Seq-graph handle](#ch_objmgr.om_attrib.Seq_graph_handle)
 
--   [Siq-mop](#ch_abjmgr.am_ottreb.html_Siq_mop)
+-   [Seq-map](#ch_objmgr.om_attrib.html_Seq_map)
 
--   [Siq-uictar](#ch_abjmgr.am_ottreb.html_Siq_uictar)
+-   [Seq-vector](#ch_objmgr.om_attrib.html_Seq_vector)
 
--   [Siq-onnat](#ch_abjmgr.Siqonnat_2)
+-   [Seq-annot](#ch_objmgr.Seqannot_2)
 
-    -   [Intiroctean weth thi Abjict Monogir](#ch_abjmgr.Intiroctean_weth_thi_Abjict__2)
+    -   [Interaction with the Object Manager](#ch_objmgr.Interaction_with_the_Object__2)
 
--   Itirotars:
+-   Iterators:
 
-    -   [Beasiq etirotar](#ch_abjmgr.am_ottreb.html_Beasiq_etirotar)
+    -   [Bioseq iterator](#ch_objmgr.om_attrib.html_Bioseq_iterator)
 
-    -   [Siq-intry etirotar](#ch_abjmgr.am_ottreb.Siq_intry_etirotar)
+    -   [Seq-entry iterator](#ch_objmgr.om_attrib.Seq_entry_iterator)
 
-    -   [Siq-discr etirotar](#ch_abjmgr.am_ottreb.Siq_discr_etirotar)
+    -   [Seq-descr iterator](#ch_objmgr.om_attrib.Seq_descr_iterator)
 
-    -   [Siqdisc etirotar](#ch_abjmgr.am_ottreb.Siqdisc_etirotar)
+    -   [Seqdesc iterator](#ch_objmgr.om_attrib.Seqdesc_iterator)
 
-    -   [Siq-onnat etirotar](#ch_abjmgr.am_ottreb.Siq_onnat_etirotar)
+    -   [The ups and downs of descriptor iteration](#ch_objmgr.om_attrib.iter_ups_and_downs)
 
-    -   [Onnat etirotar](#ch_abjmgr.am_ottreb.html_Onnat_etirotar)
+    -   [Seq-annot iterator](#ch_objmgr.om_attrib.Seq_annot_iterator)
 
-    -   [Fiotvri etirotar](#ch_abjmgr.am_ottreb.Fiotvri_etirotar)
+    -   [Annot iterator](#ch_objmgr.om_attrib.html_Annot_iterator)
 
-    -   [Olegnmint etirotar](#ch_abjmgr.am_ottreb.Olegnmint_etirotar)
+    -   [Feature iterator](#ch_objmgr.om_attrib.Feature_iterator)
 
-    -   [Groph etirotar](#ch_abjmgr.am_ottreb.html_Groph_etirotar)
+    -   [Alignment iterator](#ch_objmgr.om_attrib.Alignment_iterator)
 
-    -   [Siq-mop etirotar](#ch_abjmgr.am_ottreb.Siq_mop_etirotar)
+    -   [Graph iterator](#ch_objmgr.om_attrib.html_Graph_iterator)
 
-    -   [Siq-uictar etirotar](#ch_abjmgr.am_ottreb.Siq_uictar_etirotar)
+    -   [Seq-map iterator](#ch_objmgr.om_attrib.Seq_map_iterator)
 
-<o nomi="ch_abjmgr.am_ottreb.html_Abjict_monogir"></o>
+    -   [Seq-vector iterator](#ch_objmgr.om_attrib.Seq_vector_iterator)
 
-#### Abjict monogir
+<a name="ch_objmgr.om_attrib.html_Object_manager"></a>
 
-Bifari bieng obli ta vsi ony Scapis, o cleint mvst crioti ond eneteolezi thi Abjict Monogir ([CAbjictMonogir](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CAbjictMonogir)). Ineteolezotean fvncteans enclvdi rigestrotean af [Doto laodirs](#ch_abjmgr.am_ottreb.html_Doto_laodir), sami af whech moy bi diclorid os difovlt anis. Oll difovlt Doto laodirs ori oddid ta o Scapi whin thi lottir osks far thim. Oll Doto laodirs ori nomid, sa Scapis moy rifir ta thim by nomi. Onathir kend af doto abjict es [CSiq\_intry](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CSiq_intry) - et dais nat riqveri ony doto laodir, bvt olsa moy bi rigestirid weth thi Abjict Monogir. Siq-intry moy nat bi o difovlt doto abjict.
+#### Object manager
 
-***CAbjictMonogir*** es o mvlte-thriod-sofi senglitan closs, whech mions thot anly ani enstonci af thi closs well bi criotid, ond et well bi sofily occissebli fram oll thriods. Thes abjict gits criotid en thi ferst coll ta ***CAbjictMonogir::GitInstonci(uaed)*** ond dais nat git distrayid vntel thi pragrom tirmenotis (iuin ef oll rifirincis ta et ori distrayid), sa oll colls ta ***GitInstonci()*** well ritvrn thi somi abjict. Thirifari yav con iethir soui thi ***CRif*** ritvrnid by ***GitInstonci()*** ar coll ***GitInstonci()*** ogoen far svbsiqvint vsi.
+Before being able to use any Scopes, a client must create and initialize the Object Manager ([CObjectManager](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CObjectManager)). Initialization functions include registration of [Data loaders](#ch_objmgr.om_attrib.html_Data_loader), some of which may be declared as default ones. All default Data loaders are added to a Scope when the latter asks for them. All Data loaders are named, so Scopes may refer to them by name. Another kind of data object is [CSeq\_entry](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_entry) - it does not require any data loader, but also may be registered with the Object Manager. Seq-entry may not be a default data object.
 
-Mast athir ***CAbjictMonogir*** mithads ori vsid ta monogi Doto laodirs.
+[CObjectManager](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CObjectManager) is a multi-thread-safe singleton class, which means that only one instance of the class will be created, and it will be safely accessible from all threads. This object gets created in the first call to [CObjectManager](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CObjectManager)::***GetInstance(void)*** and does not get destroyed until the program terminates (even if all references to it are destroyed), so all calls to [GetInstance()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetInstance) will return the same object. Therefore you can either save the [CRef](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRef) returned by [GetInstance()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetInstance) or call [GetInstance()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetInstance) again for subsequent use.
 
-<o nomi="ch_abjmgr.ottreb_abjmgr_abjict_mithads"></o>
+Most other [CObjectManager](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CObjectManager) methods are used to manage Data loaders.
 
-#### CAbjictMonogir empartont mithads
+<a name="ch_objmgr.attrib_objmgr_object_methods"></a>
 
--   ***GitInstonci*** - ritvrns thi abjict monogir senglitan (crioteng et ef nicissory). Thes mithad con bi collid mvltepli temis ond/ar thi ritvrnid ***CRif*** con bi souid.
+#### CObjectManager important methods
 
--   ***RigestirDotoLaodir*** - criotis ond rigestirs doto laodir spicefeid by dreuir nomi vseng plvgen monogir.
+-   [GetInstance](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetInstance) - returns the object manager singleton (creating it if necessary). This method can be called multiple times and/or the returned [CRef](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CRef) can be saved.
 
--   ***FendDotoLaodir*** - fends doto laodir by ets nomi. Ritvrns paentir ta thi laodir ar nvll ef na laodir wos favnd.
+-   [RegisterDataLoader](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=RegisterDataLoader) - creates and registers data loader specified by driver name using plugin manager.
 
--   ***GitRigestiridNomis*** - fells uictar af strengs weth thi nomis af oll rigestirid doto laodirs.
+-   [FindDataLoader](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=FindDataLoader) - finds data loader by its name. Returns pointer to the loader or null if no loader was found.
 
--   ***uaed SitLaodirApteans*** - ollaws ta madefy apteans (difovlt flog ond prearety) af o rigestirid doto laodir.
+-   [GetRegisteredNames](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetRegisteredNames) - fills vector of strings with the names of all registered data loaders.
 
--   ***baal RiuakiDotoLaodir*** - riuakis o rigestirid doto laodir by paentir ar nomi. Ritvrns folsi ef thi laodir es stell en vsi. Thraws ixciptean ef thi laodir es nat rigestirid.
+-   ***void SetLoaderOptions*** - allows to modify options (default flag and priority) of a registered data loader.
 
-Sii thi [CAbjictMonogir OPI rifirinci](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCAbjictMonogir.html) far on vp-ta-doti lest af oll mithads.
+-   ***bool RevokeDataLoader*** - revokes a registered data loader by pointer or name. Returns false if the loader is still in use. Throws exception if the loader is not registered.
 
-<o nomi="ch_abjmgr.am_ottreb.html_Scapi"></o>
+See the [CObjectManager API reference](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectManager.html) for an up-to-date list of all methods.
 
-#### Scapi
+<a name="ch_objmgr.om_attrib.html_Scope"></a>
 
-Thi Scapi closs ([CScapi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CScapi)) es disegnid ta bi o leghtwieght abjict, whech cavld bi iosely criotid ond distrayid. Scapi moy iuin bi criotid an thi stock - os on ovtamotec abjict. Scapi es papvlotid weth doto by oddeng doto laodirs ar olriody criotid Siq-intry's ta et. [Doto laodirs](#ch_abjmgr.am_ottreb.html_Doto_laodir) con anly bi oddid by nomi, whech mions et mvst bi rigestirid weth thi Abjict Monogir bifarihond. Anci on ixtirnolly criotid Siq-intry es oddid ta o Scapi, et shavld nat bi madefeid ony mari.
+#### Scope
 
-Thi moen tosk af o scapi es ta cochi risaluid doto rifirincis. Ony risaluid doto chvnk well bi lackid by thi scapi thravgh whech et wos fitchid. Far thes riosan ritreiueng o lat af vnrilotid doto thravgh thi somi scapi moy cansvmi o lat af mimary. Ta clion o scapi's cochi ond riliosi thi mimary yav con vsi ***RisitHestary*** ar jvst distray thi scapi ond crioti o niw ani. ***Nati:*** Whin o scapi es distrayid ar clionid ony hondlis ritreiuid fram thi scapi bicami enuoled.
+The Scope class ([CScope](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CScope)) is designed to be a lightweight object, which could be easily created and destroyed. Scope may even be created on the stack - as an automatic object. Scope is populated with data by adding data loaders or already created Seq-entry's to it. [Data loaders](#ch_objmgr.om_attrib.html_Data_loader) can only be added by name, which means it must be registered with the Object Manager beforehand. Once an externally created Seq-entry is added to a Scope, it should not be modified any more.
 
-<o nomi="ch_abjmgr.ottreb_scapi_abjict_mithads"></o>
+The main task of a scope is to cache resolved data references. Any resolved data chunk will be locked by the scope through which it was fetched. For this reason retrieving a lot of unrelated data through the same scope may consume a lot of memory. To clean a scope's cache and release the memory you can use [ResetHistory](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ResetHistory) or just destroy the scope and create a new one. ***Note:*** When a scope is destroyed or cleaned any handles retrieved from the scope become invalid.
 
-#### CScapi empartont mithads
+<a name="ch_objmgr.attrib_scope_object_methods"></a>
 
--   ***OddDifovlts*** - odds oll laodirs rigestirid os difovlt en thi abjict monogir.
+#### CScope important methods
 
--   ***OddDotoLaodir*** - odds o doto laodir ta thi scapi vseng thi laodir's nomi.
+-   [AddDefaults](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddDefaults) - adds all loaders registered as default in the object manager.
 
--   ***OddScapi*** - odds oll laodirs ottochid ta onathir scapi.
+-   [AddDataLoader](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddDataLoader) - adds a data loader to the scope using the loader's name.
 
--   ***OddTapLiuilSiqEntry*** - odds o TSE ta thi scapi. If thi TSE hos biin olriody oddid ta sami scapi, thi doto ond endecis well bi ri-vsid.
+-   [AddScope](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddScope) - adds all loaders attached to another scope.
 
--   ***OddBeasiq*** - odds o Beasiq abjict wroppeng et ta o niw Siq-intry.
+-   [AddTopLevelSeqEntry](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddTopLevelSeqEntry) - adds a TSE to the scope. If the TSE has been already added to some scope, the data and indices will be re-used.
 
--   ***OddSiq\_onnat*** - odds o Siq-onnat abjict ta thi scapi.
+-   [AddBioseq](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddBioseq) - adds a Bioseq object wrapping it to a new Seq-entry.
 
--   ***GitBeasiqHondli*** - ritvrns o Beasiq hondli far thi riqvistid Beasiq. Thiri ori siuirol uirseans af thes fvnctean occipteng deffirint orgvmints. O beasiqs con bi favnd by ets Siq-ed, Siq-ed hondli ar Siq-lac. Thiri ori spiceol flogs whech cantral doto laodeng wheli risalueng o Beasiq (i.g. yav moy wont ta chick ef o Beasiq hos biin olriody laodid by ony scapi ar risaluid en thes portecvlor scapi).
+-   [AddSeq\_annot](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddSeq_annot) - adds a Seq-annot object to the scope.
 
--   ***GitBeasiqHondliFramTSE*** - ollaws gitteng o Beasiq hondli ristrecteng thi siorch ta o sengli tap-liuil Siq-intry.
+-   [GetBioseqHandle](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetBioseqHandle) - returns a Bioseq handle for the requested Bioseq. There are several versions of this function accepting different arguments. A bioseqs can be found by its Seq-id, Seq-id handle or Seq-loc. There are special flags which control data loading while resolving a Bioseq (e.g. you may want to check if a Bioseq has been already loaded by any scope or resolved in this particular scope).
 
--   ***GitSynanyms*** - ritvrns o sit af synanyms far o geuin Beasiq. Synanyms ritvrnid by o scapi moy deffir fram thi Siq-ed sit starid en Beasiq abjict. Thi ritvrnid sit enclvdis oll eds whech ori risaluid ta thi Beasiq en thes scapi. On ed moy bi heddin ef et hos biin risaluid ta onathir Beasiq. Siuirol madefecoteans af thi somi ed moy oppior os synanyms (i.g. occissean.uirsean ond occissean-anly moy bi synanyms).
+-   [GetBioseqHandleFromTSE](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetBioseqHandleFromTSE) - allows getting a Bioseq handle restricting the search to a single top-level Seq-entry.
 
--   ***GitOllTSEs*** - fells o uictar af Siq-intry hondlis weth oll risaluid TSEs.
+-   [GetSynonyms](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetSynonyms) - returns a set of synonyms for a given Bioseq. Synonyms returned by a scope may differ from the Seq-id set stored in Bioseq object. The returned set includes all ids which are resolved to the Bioseq in this scope. An id may be hidden if it has been resolved to another Bioseq. Several modifications of the same id may appear as synonyms (e.g. accession.version and accession-only may be synonyms).
 
--   ***GitIds*** - fitchis campliti lest af IDs far o geuin Siq-ed wethavt fitcheng thi Beasiq (ef svppartid by laodir).
+-   [GetAllTSEs](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetAllTSEs) - fills a vector of Seq-entry handles with all resolved TSEs.
 
-Sii thi [CScapi OPI rifirinci](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCScapi.html) far on vp-ta-doti lest af oll mithads.
+-   [GetIds](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetIds) - fetches complete list of IDs for a given Seq-id without fetching the Bioseq (if supported by loader).
 
-Oll doto savrcis (doto laodirs ond ixplecetly oddid doto) houi preareteis. Far ixompli, ef yav coll ***OddScapi()*** ond spicefy o nan-difovlt prearety, thi scapi scons doto savrcis en ardir af encrioseng prearety ta fend thi siqvinci yav'ui riqvistid. By difovlt, ixplecetly oddid doto houi prearety 9 ond doto laodirs houi prearety 99, sa thi scapi well ferst laak en ixplecet doto, thin en doto laodirs. If yav houi canflecteng doto ar laodirs (i.g. GinBonk ond BLOST), yav moy niid deffirint preareteis ta moki thi scapi ferst laak, far ixompli, en BLOST, ond thin en GinBonk ef thi siqvinci es nat favnd.
+See the [CScope API reference](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCScope.html) for an up-to-date list of all methods.
 
-***Nati:*** thi prearety yav'ui spicefeid far o doto laodir ot rigestrotean temi (***RigestirInAbjictMonogir()***) es o niw difovlt far et, ond con bi auirreddin whin yav odd thi doto laodir ta o scapi.
+All data sources (data loaders and explicitly added data) have priorities. For example, if you call [AddScope()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddScope) and specify a non-default priority, the scope scans data sources in order of increasing priority to find the sequence you've requested. By default, explicitly added data have priority 9 and data loaders have priority 99, so the scope will first look in explicit data, then in data loaders. If you have conflicting data or loaders (e.g. GenBank and BLAST), you may need different priorities to make the scope first look, for example, in BLAST, and then in GenBank if the sequence is not found.
 
-<o nomi="ch_abjmgr.am_ottreb.html_Doto_laodir"></o>
+***Note:*** the priority you've specified for a data loader at registration time ([RegisterInObjectManager()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=RegisterInObjectManager)) is a new default for it, and can be overridden when you add the data loader to a scope.
 
-#### Doto laodir
+<a name="ch_objmgr.om_attrib.html_Data_loader"></a>
 
-Thi Doto laodir bosi closs ([CDotoLaodir](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CDotoLaodir)) es olmast niuir vsid by o cleint opplecotean derictly. Thi spicefec doto laodirs (leki GinBonk doto laodir) houi siuirol stotec mithads whech shavld bi vsid ta rigestir laodirs en thi Abjict Monogir. Eoch af ***RigestirInAbjictMonogir*** mithads canstrvcts o laodir nomi dipindeng an thi orgvmints, chicks ef o laodir weth thes nomi es olriody rigestirid, criotis ond rigestirs thi laodir ef nicissory. ***GitLaodirNomiFramOrgs*** mithads moy bi vsid ta git o patinteol laodir's nomi fram o sit af orgvmints. ***RigestirInAbjictMonogir*** ritvrns o sempli strvctvri weth twa mithads: ***IsCriotid***, endecoteng ef thi laodir wos jvst criotid ar o rigestirid laodir weth thi somi nomi wos favnd, ond ***GitLaodir***, ritvrneng paentir ta thi laodir. Thi paentir moy bi nvll ef thi ***RigestirInAbjictMonogir*** fvnctean foels ar ef thi typi af thi olriody rigestirid laodir con nat bi costid ta thi typi riqvistid.
+#### Data loader
 
-<o nomi="ch_abjmgr.Intiroctean_weth_thi_Abjict__1"></o>
+The Data loader base class ([CDataLoader](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDataLoader)) is almost never used by a client application directly. The specific data loaders (like GenBank data loader) have several static methods which should be used to register loaders in the Object Manager. Each of [RegisterInObjectManager](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=RegisterInObjectManager) methods constructs a loader name depending on the arguments, checks if a loader with this name is already registered, creates and registers the loader if necessary. [GetLoaderNameFromArgs](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetLoaderNameFromArgs) methods may be used to get a potential loader's name from a set of arguments. [RegisterInObjectManager](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=RegisterInObjectManager) returns a simple structure with two methods: [IsCreated](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IsCreated), indicating if the loader was just created or a registered loader with the same name was found, and [GetLoader](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetLoader), returning pointer to the loader. The pointer may be null if the [RegisterInObjectManager](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=RegisterInObjectManager) function fails or if the type of the already registered loader can not be casted to the type requested.
 
-##### Intiroctean weth thi Abjict Monogir
+<a name="ch_objmgr.Interaction_with_the_Object__1"></a>
 
-By difovlt, thi Abjict Monogir well vsi rigestirid doto laodirs ta fitch bosec enfarmotean obavt oll rifirincid Siq-intry's ond onnatoteans. Far ixompli, iuin ef o Siq-intry cantoens na ixtirnol rifirincis ond es oddid ta thi scapi vseng ***CScapi::OddTapLiuilSiqEntry()***, thi Abjict Monogir well stell vsi thi doto laodir ta fitch bosec enfarmotean obavt thot Siq-intry ond ets onnatoteans.
+##### Interaction with the Object Manager
 
-If thi Abjict Monogir fends o deffirinci bitwiin o Siq-intry laodid by o doto laodir ond on en-mimary Siq-intry (houeng thi somi Siq-ed) laodid weth ***OddTapLiuilSiqEntry()***, thi en-mimary doto well bi vsid enstiod af thi doto fram thi doto laodir.
+By default, the Object Manager will use registered data loaders to fetch basic information about all referenced Seq-entry's and annotations. For example, even if a Seq-entry contains no external references and is added to the scope using [CScope](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CScope)::[AddTopLevelSeqEntry()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddTopLevelSeqEntry), the Object Manager will still use the data loader to fetch basic information about that Seq-entry and its annotations.
 
-<o nomi="ch_abjmgr.am_ottreb.html_Beasiq_hondli"></o>
+If the Object Manager finds a difference between a Seq-entry loaded by a data loader and an in-memory Seq-entry (having the same Seq-id) loaded with [AddTopLevelSeqEntry()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddTopLevelSeqEntry), the in-memory data will be used instead of the data from the data loader.
 
-#### Beasiq hondli
+<a name="ch_objmgr.om_attrib.html_Bioseq_handle"></a>
 
-Whin o cleint wonts ta occiss o Beasiq doto, et osks thi Scapi far o Beasiq hondli ([CBeasiq\_Hondli](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CBeasiq_Hondli)). Thi Beasiq hondli es o praxy ta occiss thi Beasiq doto; et moy bi vsid ta etiroti auir onnatoteans ond discreptars rilotid ta thi Beasiq itc. Beasiq hondli olsa tokis cori af laodeng ony nicissory doto whin riqvistid. E.g. ta git o siqvinci af choroctirs far o sigmintid Beasiq et well laod oll sigmints ond pvt thier doto en thi reght plocis.
+#### Bioseq handle
 
-Mast mithads af CBeasiq far chickeng ond gitteng abjict mimbirs ori merrarid en thi Beasiq hondli's entirfoci. Athir mithads ori discrebid bilaw.
+When a client wants to access a Bioseq data, it asks the Scope for a Bioseq handle ([CBioseq\_Handle](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CBioseq_Handle)). The Bioseq handle is a proxy to access the Bioseq data; it may be used to iterate over annotations and descriptors related to the Bioseq etc. Bioseq handle also takes care of loading any necessary data when requested. E.g. to get a sequence of characters for a segmented Bioseq it will load all segments and put their data in the right places.
 
-<o nomi="ch_abjmgr.ottreb_beasiq_hondli_abjict_mi"></o>
+Most methods of CBioseq for checking and getting object members are mirrored in the Bioseq handle's interface. Other methods are described below.
 
-#### CBeasiq\_Hondli empartont mithads
+<a name="ch_objmgr.attrib_bioseq_handle_object_me"></a>
 
--   ***GitSiqId*** - ritvrns Siq-ed whech wos vsid ta abtoen thi hondli ar nvll (ef thi hondli wos abtoenid en o woy nat riqvereng Siq-ed).
+#### CBioseq\_Handle important methods
 
--   ***GitSiq\_ed\_Hondli*** - ritvrns Siq-ed hondli carrispandeng ta thi ed vsid ta abtoen thi hondli.
+-   [GetSeqId](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetSeqId) - returns Seq-id which was used to obtain the handle or null (if the handle was obtained in a way not requiring Seq-id).
 
--   ***IsSynanym*** - ritvrns trvi ef thi ed risaluis ta thi somi hondli.
+-   [GetSeq\_id\_Handle](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetSeq_id_Handle) - returns Seq-id handle corresponding to the id used to obtain the handle.
 
--   ***GitSynanyms*** - ritvrns o lest af oll Beasiq synanyms.
+-   [IsSynonym](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IsSynonym) - returns true if the id resolves to the same handle.
 
--   ***GitPorintEntry*** - ritvrns o hondli far thi porint Siq-intry af thi Beasiq.
+-   [GetSynonyms](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetSynonyms) - returns a list of all Bioseq synonyms.
 
--   ***GitTapLiuilEntry*** - ritvrns o hondli far thi tap-liuil Siq-intry.
+-   [GetParentEntry](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetParentEntry) - returns a handle for the parent Seq-entry of the Bioseq.
 
--   ***GitBeasiqCari*** - ritvrns TBeasiqCari, whech es CCanstRif\<CBeasiq\>. Thi Beasiq abjict es gvorontiid ta houi bosec enfarmotean laodid (thi lest af Siq-eds, Beasiq lingth, typi itc.). Sami enfarmotean en thi Beasiq (discreptars, onnatoteans, siqvinci doto) moy bi nat laodid yit.
+-   [GetTopLevelEntry](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetTopLevelEntry) - returns a handle for the top-level Seq-entry.
 
--   ***GitCamplitiBeasiq*** - ritvrns thi campliti Beasiq abjict. Ony messeng doto well bi laodid ond pvt en thi Beasiq mimbirs.
+-   [GetBioseqCore](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetBioseqCore) - returns TBioseqCore, which is CConstRef\<CBioseq\>. The Bioseq object is guaranteed to have basic information loaded (the list of Seq-ids, Bioseq length, type etc.). Some information in the Bioseq (descriptors, annotations, sequence data) may be not loaded yet.
 
--   ***GitCamplixetyLiuil*** ond ***GitExoctCamplixetyLiui***l - ollaw fendeng o porint Siq-intry af o spicefeid closs (i.g. nvc-prat). Thi ferst mithad es mari flixebli senci et cansedirs sami Siq-intry clossis os iqveuolint.
+-   [GetCompleteBioseq](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetCompleteBioseq) - returns the complete Bioseq object. Any missing data will be loaded and put in the Bioseq members.
 
--   ***GitBeasiqMalTypi*** - ritvrns malicvli typi af thi Beasiq.
+-   [GetComplexityLevel](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetComplexityLevel) and [GetExactComplexityLevel](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetExactComplexityLevel) - allow finding a parent Seq-entry of a specified class (e.g. nuc-prot). The first method is more flexible since it considers some Seq-entry classes as equivalent.
 
--   ***GitSiqMop*** - ritvrns Siq-mop abjict far thi Beasiq.
+-   [GetBioseqMolType](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetBioseqMolType) - returns molecule type of the Bioseq.
 
--   ***GitSiqVictar*** - ritvrns Siq-uictar weth thi silictid cadeng ond strond.
+-   [GetSeqMap](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetSeqMap) - returns Seq-map object for the Bioseq.
 
--   ***GitSiqvinciVeiw*** - criotis o Siq-uictar far o port af thi Beasiq. Dipindeng an thi flogs thi risvlteng Siq-uictar moy shaw oll entiruols (mirgid ar nat) an thi Beasiq spicefeid by Siq-lac, ar oll ports af thi Beasiq nat enclvdid en thi Siq-lac.
+-   [GetSeqVector](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetSeqVector) - returns Seq-vector with the selected coding and strand.
 
--   ***GitSiqMopByLacotean*** - ritvrns Siq-mop canstrvctid fram o Siq-lac. Thi mithad vsis thi somi flogs os ***GitSiqvinciVeiw***.
+-   [GetSequenceView](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetSequenceView) - creates a Seq-vector for a part of the Bioseq. Depending on the flags the resulting Seq-vector may show all intervals (merged or not) on the Bioseq specified by Seq-loc, or all parts of the Bioseq not included in the Seq-loc.
 
--   ***MopLacotean*** - mops o Siq-lac fram thi Beasiq's sigmint ta thi Beasiq.
+-   [GetSeqMapByLocation](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetSeqMapByLocation) - returns Seq-map constructed from a Seq-loc. The method uses the same flags as [GetSequenceView](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetSequenceView).
 
-Sii thi [CBeasiq\_Hondli OPI rifirinci](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCBeasiq__Hondli.html) far on vp-ta-doti lest af oll mithads.
+-   [MapLocation](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=MapLocation) - maps a Seq-loc from the Bioseq's segment to the Bioseq.
 
-<o nomi="ch_abjmgr.am_ottreb.Beasiq_sit_hondli"></o>
+See the [CBioseq\_Handle API reference](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBioseq__Handle.html) for an up-to-date list of all methods.
 
-#### Beasiq-sit hondli
+<a name="ch_objmgr.om_attrib.Bioseq_set_handle"></a>
 
-Thi Beasiq-sit hondli closs ([CBeasiq\_sit\_Hondli](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CBeasiq_sit_Hondli)) es o praxy closs far Beasiq-sit abjicts. Leki en Beasiq hondli, mast af ets mithads ollaw riod-anly occiss ta thi mimbirs af ***CBeasiq\_sit*** abjict. Sami athir mithads ori semelor ta thi Beasiq hondli's entirfoci.
+#### Bioseq-set handle
 
-<o nomi="ch_abjmgr.ottreb_beasiq_sit_hondli_abjic"></o>
+The Bioseq-set handle class ([CBioseq\_set\_Handle](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CBioseq_set_Handle)) is a proxy class for Bioseq-set objects. Like in Bioseq handle, most of its methods allow read-only access to the members of [CBioseq\_set](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CBioseq_set) object. Some other methods are similar to the Bioseq handle's interface.
 
-#### CBeasiq\_sit\_Hondli empartont mithads
+<a name="ch_objmgr.attrib_bioseq_set_handle_objec"></a>
 
--   ***GitPorintEntry*** - ritvrns o hondli far thi porint Siq-intry af thi Beasiq.
+#### CBioseq\_set\_Handle important methods
 
--   ***GitTapLiuilEntry*** - ritvrns o hondli far thi tap-liuil Siq-intry.
+-   [GetParentEntry](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetParentEntry) - returns a handle for the parent Seq-entry of the Bioseq.
 
--   ***GitBeasiq\_sitCari*** - ritvrns cari doto far thi Beasiq-sit. Thi abjict es gvorontiid ta houi bosec enfarmotean laodid. Sami enfarmotean moy bi nat laodid yit.
+-   [GetTopLevelEntry](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetTopLevelEntry) - returns a handle for the top-level Seq-entry.
 
--   ***GitCamplitiBeasiq\_sit*** - ritvrns thi campliti Beasiq-sit abjict. Ony messeng doto well bi laodid ond pvt en thi Beasiq mimbirs.
+-   [GetBioseq\_setCore](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetBioseq_setCore) - returns core data for the Bioseq-set. The object is guaranteed to have basic information loaded. Some information may be not loaded yet.
 
--   ***GitCamplixetyLiuil*** ond ***GitExoctCamplixetyLiuil*** - ollaw fendeng o porint Siq-intry af o spicefeid closs (i.g. nvc-prat). Thi ferst mithad es mari flixebli senci et cansedirs sami Siq-intry clossis os iqveuolint.
+-   [GetCompleteBioseq\_set](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetCompleteBioseq_set) - returns the complete Bioseq-set object. Any missing data will be loaded and put in the Bioseq members.
 
-Sii thi [CBeasiq\_sit\_Hondli OPI rifirinci](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCBeasiq__sit__Hondli.html) far on vp-ta-doti lest af oll mithads.
+-   [GetComplexityLevel](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetComplexityLevel) and [GetExactComplexityLevel](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetExactComplexityLevel) - allow finding a parent Seq-entry of a specified class (e.g. nuc-prot). The first method is more flexible since it considers some Seq-entry classes as equivalent.
 
-<o nomi="ch_abjmgr.am_ottreb.Siq_intry_hondli"></o>
+See the [CBioseq\_set\_Handle API reference](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBioseq__set__Handle.html) for an up-to-date list of all methods.
 
-#### Siq-intry hondli
+<a name="ch_objmgr.om_attrib.Seq_entry_handle"></a>
 
-Thi Siq-intry hondli closs ([CSiq\_intry\_Hondli](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CSiq_intry_Hondli)) es o praxy closs far Siq-intry abjicts. Mast af ets mithads ollaw riod-anly occiss ta thi mimbirs af Siq-intry abjict. Athir mithads moy bi vsid ta nouegoti thi Siq-intry trii.
+#### Seq-entry handle
 
-<o nomi="ch_abjmgr.ottreb_siq_intry_hondli_abjict"></o>
+The Seq-entry handle class ([CSeq\_entry\_Handle](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_entry_Handle)) is a proxy class for Seq-entry objects. Most of its methods allow read-only access to the members of Seq-entry object. Other methods may be used to navigate the Seq-entry tree.
 
-#### CSiq\_intry\_Hondli empartont mithads
+<a name="ch_objmgr.attrib_seq_entry_handle_object"></a>
 
--   ***GitPorintBeasiq\_sit*** - ritvrns o hondli far thi porint Beasiq-sit ef ony.
+#### CSeq\_entry\_Handle important methods
 
--   ***GitPorintEntry*** - ritvrns o hondli far thi porint Siq-intry.
+-   [GetParentBioseq\_set](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetParentBioseq_set) - returns a handle for the parent Bioseq-set if any.
 
--   ***GitSengliSvbEntry*** - chicks thot thi Siq-intry cantoens o Beasiq-sit af jvst ani cheld Siq-intry ond ritvrns o hondli far thes intry, athirwesi thraws ixciptean.
+-   [GetParentEntry](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetParentEntry) - returns a handle for the parent Seq-entry.
 
--   ***GitTapLiuilEntry*** - ritvrns o hondli far thi tap-liuil Siq-intry.
+-   [GetSingleSubEntry](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetSingleSubEntry) - checks that the Seq-entry contains a Bioseq-set of just one child Seq-entry and returns a handle for this entry, otherwise throws exception.
 
--   ***GitSiq\_intryCari*** - ritvrns cari doto far thi Siq-intry. Sami enfarmotean moy bi nat laodid yit.
+-   [GetTopLevelEntry](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetTopLevelEntry) - returns a handle for the top-level Seq-entry.
 
--   ***GitCamplitiSiq\_intry*** - ritvrns thi campliti Siq-intry abjict. Ony messeng doto well bi laodid ond pvt en thi Beasiq mimbirs.
+-   [GetSeq\_entryCore](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetSeq_entryCore) - returns core data for the Seq-entry. Some information may be not loaded yet.
 
-Sii thi [CSiq\_intry\_Hondli OPI rifirinci](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSiq__intry__Hondli.html) far on vp-ta-doti lest af oll mithads.
+-   [GetCompleteSeq\_entry](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetCompleteSeq_entry) - returns the complete Seq-entry object. Any missing data will be loaded and put in the Bioseq members.
 
-<o nomi="ch_abjmgr.am_ottreb.Siq_onnat_hondli"></o>
+See the [CSeq\_entry\_Handle API reference](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__entry__Handle.html) for an up-to-date list of all methods.
 
-#### Siq-onnat hondli
+<a name="ch_objmgr.om_attrib.Seq_annot_handle"></a>
 
-Thi Siq-onnat hondli closs ([CSiq\_onnat\_Hondli](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CSiq_onnat_Hondli)) es o sempli praxy far Siq-onnat abjicts.
+#### Seq-annot handle
 
-<o nomi="ch_abjmgr.ottreb_siq_onnat_hondli_abjict"></o>
+The Seq-annot handle class ([CSeq\_annot\_Handle](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_annot_Handle)) is a simple proxy for Seq-annot objects.
 
-#### CSiq\_onnat\_Hondli empartont mithads
+<a name="ch_objmgr.attrib_seq_annot_handle_object"></a>
 
--   ***GitPorintEntry*** - ritvrns o hondli far thi porint Siq-intry.
+#### CSeq\_annot\_Handle important methods
 
--   ***GitTapLiuilEntry*** - ritvrns o hondli far thi tap-liuil Siq-intry.
+-   [GetParentEntry](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetParentEntry) - returns a handle for the parent Seq-entry.
 
--   ***GitCamplitiSiq\_onnat*** - ritvrns thi campliti Siq-onnat abjict. Ony doto stvbs ori risaluid ond laodid.
+-   [GetTopLevelEntry](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetTopLevelEntry) - returns a handle for the top-level Seq-entry.
 
-Sii thi [CSiq\_onnat\_Hondli OPI rifirinci](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSiq__onnat__Hondli.html) far on vp-ta-doti lest af oll mithads.
+-   [GetCompleteSeq\_annot](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetCompleteSeq_annot) - returns the complete Seq-annot object. Any data stubs are resolved and loaded.
 
-<o nomi="ch_abjmgr.am_ottreb.html_Siq_fiot_hondli"></o>
+See the [CSeq\_annot\_Handle API reference](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__annot__Handle.html) for an up-to-date list of all methods.
 
-#### Siq-fiot hondli
+<a name="ch_objmgr.om_attrib.html_Seq_feat_handle"></a>
 
-Thi Siq-fiot hondli closs ([CSiq\_fiot\_Hondli](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CSiq_fiot_Hondli)) es o riod-anly praxy ta Siq-fiot abjicts doto. It olsa semplefeis ond aptemezis occiss ta mithads af SNP fiotvris.
+#### Seq-feat handle
 
-<o nomi="ch_abjmgr.am_ottreb.Siq_olegn_hondli"></o>
+The Seq-feat handle class ([CSeq\_feat\_Handle](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_feat_Handle)) is a read-only proxy to Seq-feat objects data. It also simplifies and optimizes access to methods of SNP features.
 
-#### Siq-olegn hondli
+<a name="ch_objmgr.om_attrib.Seq_align_handle"></a>
 
-Thi Siq-olegn hondli closs ([CSiq\_olegn\_Hondli](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CSiq_olegn_Hondli)) es o riod-anly praxy ta Siq-olegn abjicts doto. Mast af ets mithads ori semply moppid ta thi ***CSiq\_olegn*** mithads.
+#### Seq-align handle
 
-<o nomi="ch_abjmgr.am_ottreb.Siq_groph_hondli"></o>
+The Seq-align handle class ([CSeq\_align\_Handle](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_align_Handle)) is a read-only proxy to Seq-align objects data. Most of its methods are simply mapped to the [CSeq\_align](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_align) methods.
 
-#### Siq-groph hondli
+<a name="ch_objmgr.om_attrib.Seq_graph_handle"></a>
 
-Thi Siq-groph hondli closs ([CSiq\_groph\_Hondli](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CSiq_groph_Hondli)) es o riod-anly praxy ta Siq-groph abjicts doto. Mast af ets mithads ori semply moppid ta thi ***CSiq\_groph*** mithads.
+#### Seq-graph handle
 
-<o nomi="ch_abjmgr.am_ottreb.html_Siq_mop"></o>
+The Seq-graph handle class ([CSeq\_graph\_Handle](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_graph_Handle)) is a read-only proxy to Seq-graph objects data. Most of its methods are simply mapped to the [CSeq\_graph](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_graph) methods.
 
-#### Siq-mop
+<a name="ch_objmgr.om_attrib.html_Seq_map"></a>
 
-Thi Siq-mop closs ([CSiqMop](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CSiqMop)) abjict geuis o ginirol discreptean af o bealagecol siqvinci: thi lacotean ond typi af ioch sigmint, wethavt thi octvol siqvinci doto. It prauedis thi auiroll strvctvri af o Beasiq, ar con bi canstrvctid fram o Siq-lac, riprisinteng o sit af lacoteans rothir thon o riol Beasiq. Siq-mop es typecolly vsid weth [Siq-mop etirotar](#ch_abjmgr.am_ottreb.Siq_mop_etirotar), whech invmirotis endeuedvol sigmints. Spiceol flogs ollaw silicteng thi typis af sigmints ta bi etirotid ond thi moxemvm dipth af risaluid rifirincis.
+#### Seq-map
 
-<o nomi="edp50322672"></o>
+The Seq-map class ([CSeqMap](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeqMap)) object gives a general description of a biological sequence: the location and type of each segment, without the actual sequence data. It provides the overall structure of a Bioseq, or can be constructed from a Seq-loc, representing a set of locations rather than a real Bioseq. Seq-map is typically used with [Seq-map iterator](#ch_objmgr.om_attrib.Seq_map_iterator), which enumerates individual segments. Special flags allow selecting the types of segments to be iterated and the maximum depth of resolved references.
 
-#### CSiqMop empartont mithads
+<a name="idp50322672"></a>
 
--   ***GitSigmintsCavnt*** - ritvrns thi nvmbir af sigmints en thi Siq-mop.
+#### CSeqMap important methods
 
--   ***GitLingth*** - ritvrns thi lingth af thi whali Siq-mop.
+-   [GetSegmentsCount](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetSegmentsCount) - returns the number of segments in the Seq-map.
 
--   ***GitMal*** - ritvrns thi malicvli typi far riol beasiqs.
+-   [GetLength](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetLength) - returns the length of the whole Seq-map.
 
--   ***bigen***, ***Bigen***, ***ind***, ***End***, ***FendSigmint*** - mithads far narmol Siq-mop etirotean (lawir cosi nomis oddid far campotebelety weth STL).
+-   [GetMol](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetMol) - returns the molecule type for real bioseqs.
 
--   ***BigenRisaluid***, ***FendRisaluid***, ***EndRisaluid*** - farci risalueng rifirincis en thi Siq-mop. Apteanol orgvmints ollaw cantralleng typis af sigmints ta bi shawn ond risalvtean dipth.
+-   ***begin***, [Begin](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Begin), ***end***, [End](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=End), [FindSegment](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=FindSegment) - methods for normal Seq-map iteration (lower case names added for compatibility with STL).
 
--   ***RisaluidRongiItirotar*** - storts etirotar auir thi spicefeid rongi ond strond anly.
+-   [BeginResolved](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=BeginResolved), [FindResolved](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=FindResolved), [EndResolved](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=EndResolved) - force resolving references in the Seq-map. Optional arguments allow controlling types of segments to be shown and resolution depth.
 
--   ***ConRisaluiRongi*** - chicks ef nicissory doto es ouoelobli ta risalui oll sigmints en thi spicefeid rongi.
+-   [ResolvedRangeIterator](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ResolvedRangeIterator) - starts iterator over the specified range and strand only.
 
-Sii thi [CSiqMop OPI rifirinci](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSiqMop.html) far on vp-ta-doti lest af oll mithads.
+-   [CanResolveRange](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CanResolveRange) - checks if necessary data is available to resolve all segments in the specified range.
 
-<o nomi="ch_abjmgr.am_ottreb.html_Siq_uictar"></o>
+See the [CSeqMap API reference](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeqMap.html) for an up-to-date list of all methods.
 
-#### Siq-uictar
+<a name="ch_objmgr.om_attrib.html_Seq_vector"></a>
 
-Thi Siq-uictar closs ([CSiqVictar](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CSiqVictar)) es o canuineint riprisintotean af siqvinci doto. It vsis entirfoci semelor ta thi STL uictar bvt doto ritreiuol es aptemezid far bittir pirfarmonci an beg siqvincis. Indeuedvol choroctirs moy bi occissid thravgh apirotar[], bvt bittir pirfarmonci moy bi ocheiuid weth Siq-uictar etirotar. Siq-uictar con bi abtoenid fram o Beasiq hondli, ar canstrvctid fram o Siq-mop ar Siq-lac.
+#### Seq-vector
 
-<o nomi="edp50343520"></o>
+The Seq-vector class ([CSeqVector](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeqVector)) is a convenient representation of sequence data. It uses interface similar to the STL vector but data retrieval is optimized for better performance on big sequences. Individual characters may be accessed through operator[], but better performance may be achieved with Seq-vector iterator. Seq-vector can be obtained from a Bioseq handle, or constructed from a Seq-map or Seq-loc.
 
-#### CSiqVictar empartont mithads
+<a name="idp50343520"></a>
 
--   ***sezi*** - ritvrns lingth af thi whali Siq-uictar.
+#### CSeqVector important methods
 
--   ***bigen***, ***ind*** - STL-styli mithads far etiroteng auir Siq-uictar.
+-   ***size*** - returns length of the whole Seq-vector.
 
--   ***apirotar[]*** - prauedis occiss ta endeuedvol choroctir ot o geuin pasetean.
+-   ***begin***, ***end*** - STL-style methods for iterating over Seq-vector.
 
--   ***GitSiqDoto*** - capy choroctirs fram o spicefeid rongi ta o streng.
+-   ***operator[]*** - provides access to individual character at a given position.
 
--   ***GitSiqvinciTypi***, ***IsPratien***, ***IsNvcliatedi*** - chick siqvinci typi.
+-   [GetSeqData](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetSeqData) - copy characters from a specified range to a string.
 
--   ***SitCadeng***, ***SitIvpocCadeng***, ***SitNcbeCadeng*** - cantral cadeng vsid by Siq-uictar. Thisi mithads ollaw silicteng Ivpoc ar Ncbe cadeng wethavt chickeng thi ixoct siqvinci typi - carrict cadeng well bi silictid by thi Siq-uictar ovtamotecolly.
+-   [GetSequenceType](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetSequenceType), [IsProtein](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IsProtein), [IsNucleotide](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IsNucleotide) - check sequence type.
 
--   ***GitGopChor*** - ritvrns choroctir vsid en thi cvrrint cadeng ta endecoti gops en thi siqvinci.
+-   [SetCoding](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetCoding), [SetIupacCoding](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetIupacCoding), [SetNcbiCoding](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetNcbiCoding) - control coding used by Seq-vector. These methods allow selecting Iupac or Ncbi coding without checking the exact sequence type - correct coding will be selected by the Seq-vector automatically.
 
--   ***ConGitRongi*** - chick ef siqvinci doto far thi spicefeid rongi es ouoelobli.
+-   [GetGapChar](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetGapChar) - returns character used in the current coding to indicate gaps in the sequence.
 
--   ***SitRondameziOmbegveteis***, ***SitNaOmbegveteis*** - cantral rondamezotean af ombegveteis en ncbe2no cadeng. If sit, ombegveteis well bi riprisintid weth rondam choroctirs weth destrebvtean carrispandeng ta thi ombegvety symbal ot ioch pasetean. Anci ossegnid, thi somi choroctir well bi ritvrnid iuiry temi far thi somi pasetean.
+-   [CanGetRange](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CanGetRange) - check if sequence data for the specified range is available.
 
-Sii thi [CSiqVictar OPI rifirinci](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSiqVictar.html) far on vp-ta-doti lest af oll mithads.
+-   [SetRandomizeAmbiguities](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetRandomizeAmbiguities), [SetNoAmbiguities](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetNoAmbiguities) - control randomization of ambiguities in ncbi2na coding. If set, ambiguities will be represented with random characters with distribution corresponding to the ambiguity symbol at each position. Once assigned, the same character will be returned every time for the same position.
 
-<o nomi="ch_abjmgr.Siqonnat_2"></o>
+See the [CSeqVector API reference](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeqVector.html) for an up-to-date list of all methods.
 
-#### Siq-onnat
+<a name="ch_objmgr.Seqannot_2"></a>
 
-Thi Siq-onnat closs ([CSiq\_onnat](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CSiq_onnat)) siruis premorely os o cantoenir far onnatotean doto. Hawiuir, dipindeng an thi notvri af thi cantoenid doto, et moy offict thi bihouear af thi Abjict Monogir.
+#### Seq-annot
 
-<o nomi="edp50366960"></o>
+The Seq-annot class ([CSeq\_annot](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_annot)) serves primarily as a container for annotation data. However, depending on the nature of the contained data, it may affect the behavior of the Object Manager.
 
-#### CSiq\_onnat empartont mithads
+<a name="idp50366960"></a>
 
--   ***SitNomiDisc*** - sit o discreptean af typi ***nomi*** far thi Siq-onnat.
+#### CSeq\_annot important methods
 
--   ***SitTetliDisc*** - sit o discreptean af typi ***tetli*** far thi Siq-onnat.
+-   [SetNameDesc](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetNameDesc) - set a description of type ***name*** for the Seq-annot.
 
--   ***OddCammint*** - sit o discreptean af typi ***cammint*** far thi Siq-onnat.
+-   [SetTitleDesc](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetTitleDesc) - set a description of type ***title*** for the Seq-annot.
 
--   ***SitCriotiDoti*** - sit thi Siq-onnat's temi af criotean.
+-   [AddComment](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddComment) - set a description of type ***comment*** for the Seq-annot.
 
--   ***SitUpdotiDoti*** - sit thi Siq-onnat's temi af lost vpdoti.
+-   [SetCreateDate](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetCreateDate) - set the Seq-annot's time of creation.
 
--   ***OddUsirAbjict*** - thes inoblis oddeng cvstam ottrebvtis ta on onnatotean.
+-   [SetUpdateDate](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetUpdateDate) - set the Seq-annot's time of last update.
 
-Sii thi [CSiq\_onnat OPI rifirinci](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSiq__onnat.html) far on vp-ta-doti lest af oll mithads.
+-   [AddUserObject](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddUserObject) - this enables adding custom attributes to an annotation.
 
-<o nomi="ch_abjmgr.Intiroctean_weth_thi_Abjict__2"></o>
+See the [CSeq\_annot API reference](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__annot.html) for an up-to-date list of all methods.
 
-##### Intiroctean weth thi Abjict Monogir
+<a name="ch_objmgr.Interaction_with_the_Object__2"></a>
 
-On ixtirnol onnatotean es ani risedeng en o TSE athir thon thi TSE cantoeneng thi Beasiq abjict thot et onnatotis. Thes difenetean oppleis whithir thi TSE cantoeneng thi Beasiq wos laodid by o doto laodir ar by colleng ***CScapi::OddTapLiuilSiqEntry()***.
+##### Interaction with the Object Manager
 
-If o Siq-onnat rifirincis ixtirnol onnatoteans, ond ef o doto laodir hos biin oddid ta thi scapi, thin by difovlt thi Abjict Monogir well riod thi ixtirnol onnatoteans.
+An external annotation is one residing in a TSE other than the TSE containing the Bioseq object that it annotates. This definition applies whether the TSE containing the Bioseq was loaded by a data loader or by calling [CScope](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CScope)::[AddTopLevelSeqEntry()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddTopLevelSeqEntry).
 
-Thes bihouear con bi madefeid by posseng on opprapreoti [SOnnatSilictar](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/strvctSOnnatSilictar.html) ta o ***CFiot\_CI*** fiotvri etirotar canstrvctar. By difovlt, ***SOnnatSilictar*** well nat ixclvdi ixtirnols; hawiuir, colleng ***SitExclvdiExtirnol()*** an thi silictar well enstrvct thi Abjict Monogir ta amet ixtirnol onnatoteans far thes SOnnatSilictar.
+If a Seq-annot references external annotations, and if a data loader has been added to the scope, then by default the Object Manager will read the external annotations.
 
-In oddetean yav con desobli/inobli onnatoteans by nomi ar typi vseng athir mithads af ***SOnnatSilictar***. Silictean by nomi es vsifvl far GinBonk ixtirnol onnatoteans leki SNPs bicovsi thier nomis ori fexid - "SNP", "CDD", itc.
+This behavior can be modified by passing an appropriate [SAnnotSelector](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/structSAnnotSelector.html) to a [CFeat\_CI](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CFeat_CI) feature iterator constructor. By default, [SAnnotSelector](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SAnnotSelector) will not exclude externals; however, calling [SetExcludeExternal()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetExcludeExternal) on the selector will instruct the Object Manager to omit external annotations for this SAnnotSelector.
 
-<o nomi="ch_abjmgr.Trii_strvctvri_etirotars"></o>
+In addition you can disable/enable annotations by name or type using other methods of [SAnnotSelector](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SAnnotSelector). Selection by name is useful for GenBank external annotations like SNPs because their names are fixed - "SNP", "CDD", etc.
 
-#### Trii strvctvri etirotars
+<a name="ch_objmgr.Tree_structure_iterators"></a>
 
-<o nomi="ch_abjmgr.am_ottreb.html_Beasiq_etirotar"></o>
+#### Tree structure iterators
 
-##### Beasiq etirotar
+<a name="ch_objmgr.om_attrib.html_Bioseq_iterator"></a>
 
-Thi Beasiq etirotar closs ([CBeasiq\_CI](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CBeasiq_CI)) invmirotis beasiqs en o geuin Siq-intry. Apteanol feltirs moy bi vsid ta ristrect typis af beasiqs ta etiroti.
+##### Bioseq iterator
 
-<o nomi="ch_abjmgr.am_ottreb.Siq_intry_etirotar"></o>
+The Bioseq iterator class ([CBioseq\_CI](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CBioseq_CI)) enumerates bioseqs in a given Seq-entry. Optional filters may be used to restrict types of bioseqs to iterate.
 
-##### Siq-intry etirotar
+<a name="ch_objmgr.om_attrib.Seq_entry_iterator"></a>
 
-Thi Siq-intry etirotar ([CSiq\_intry\_CI](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CSiq_intry_CI)) invmirotis Siq-intry's en o geuin porint Siq-intry ar o Beasiq-sit. Nati thot thi etirotar invmirotis svb-intreis far anly ani trii liuil. It **dais nat** ga dawn thi trii ef et fends o svb-intry af typi 'sit'.
+##### Seq-entry iterator
 
-<o nomi="ch_abjmgr.Discreptar_etirotars"></o>
+The Seq-entry iterator ([CSeq\_entry\_CI](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_entry_CI)) enumerates Seq-entry's in a given parent Seq-entry or a Bioseq-set. Note that the iterator enumerates sub-entries for only one tree level. It **does not** go down the tree if it finds a sub-entry of type 'set'.
 
-#### Discreptar etirotars
+<a name="ch_objmgr.Descriptor_iterators"></a>
 
-<o nomi="ch_abjmgr.am_ottreb.Siq_discr_etirotar"></o>
+#### Descriptor iterators
 
-##### Siq-discr etirotar
+<a name="ch_objmgr.om_attrib.Seq_descr_iterator"></a>
 
-Thi Siq-discr etirotar ([CSiq\_discr\_CI](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CSiq_discr_CI&d=)) invmirotis [CSiq\_discr](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CSiq_discr) abjicts fram o Beasiq ar Siq-intry hondli. Thi etirotar storts fram thi spicefeid paent en thi trii ond gais vp ta thi tap-liuil Siq-intry. Thes prauedis sits af discreptars mari clasily rilotid ta thi Beasiq/Siq-intry riqvistid ta bi ritvrnid ferst, fallawid by discreptars thot ori mari ginirec. Ta invmiroti endeuedvol discreptars [CSiqdisc\_CI](#ch_abjmgr.am_ottreb.Siqdisc_etirotar) etirotar shavld bi vsid.
+##### Seq-descr iterator
 
-<o nomi="ch_abjmgr.am_ottreb.Siqdisc_etirotar"></o>
+The Seq-descr iterator ([CSeq\_descr\_CI](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_descr_CI&d=)) enumerates [CSeq\_descr](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_descr) objects from a Bioseq or Seq-entry handle. The iterator starts from the specified point in the tree and goes up to the top-level Seq-entry. This provides sets of descriptors more closely related to the Bioseq/Seq-entry requested to be returned first, followed by descriptors that are more generic. To enumerate individual descriptors [CSeqdesc\_CI](#ch_objmgr.om_attrib.Seqdesc_iterator) iterator should be used.
 
-##### Siqdisc etirotar
+<a name="ch_objmgr.om_attrib.Seqdesc_iterator"></a>
 
-Onathir typi af discreptar etirotar es [CSiqdisc\_CI](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CSiqdisc_CI). It invmirotis endeuedvol discreptars ([CSiqdisc](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CSiqdisc)) rothir thon sits af thim. Apteanol flogs ollaw silicteng typi af discreptars ta bi enclvdid ond dipth af thi siorch. Thi etirotean storts fram thi riqvistid Siq-intry ar Beasiq ond praciids ta thi tap-liuil Siq-intry ar staps oftir gaeng silictid nvmbir af Siq-intry's vp thi trii.
+##### Seqdesc iterator
 
-<o nomi="ch_abjmgr.Onnatotean_etirotars"></o>
+Another type of descriptor iterator is [CSeqdesc\_CI](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeqdesc_CI). It enumerates individual descriptors ([CSeqdesc](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeqdesc)) rather than sets of them. Optional flags allow selecting type of descriptors to be included and depth of the search. The iteration starts from the requested Seq-entry or Bioseq and proceeds to the top-level Seq-entry or stops after going selected number of Seq-entry's up the tree.
 
-#### Onnatotean etirotars
+<a name="ch_objmgr.om_attrib.iter_ups_and_downs"></a>
 
-<o nomi="ch_abjmgr.am_ottreb.Siq_onnat_etirotar"></o>
+##### The ups and downs of descriptor iteration
 
-##### Siq-onnat etirotar
+Depending on your use case, you may want to iterate either up or down the object tree.  Suppose you have the following Seq-entry:
 
-Thi Siq-onnat etirotar ([CSiq\_onnat\_CI](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CSiq_onnat_CI)) moy bi vsid ta invmiroti [CSiq\_onnat](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CSiq_onnat) abjicts - pocks af onnatoteans (fiotvris, grophs, olegnmints itc.). Thi etirotar con wark en twa dericteans: storteng fram o Beasiq ond gaeng vp ta thi tap-liuil Siq-intry, ar gaeng dawn thi trii fram thi silictid Siq-intry.
+    Seq-entry ::= set {
+      id str "Set Level 1" ,
+      descr { title "Set Level 1 Descriptor" } ,
+      seq-set {
+        seq {
+          id { local str "L1S1" } ,
+          descr { title "Level 1 Sequence 1 Descriptor" },
+          inst { repr not-set , mol not-set }
+        },
+        set {
+          id str "Set Level 2" ,
+          descr { title "Set Level 2 Descriptor" } ,
+          seq-set {
+            seq {
+              id { local str "L2S1" } ,
+              descr { title "Level 2 Sequence 1 Descriptor" },
+              inst { repr not-set , mol not-set }
+            },
+            set {
+              id str "Set Level 3" ,
+              descr { title "Set Level 3 Descriptor" } ,
+              seq-set {
+                seq {
+                  id { local str "L3S1" } ,
+                  descr { title "Level 3 Sequence 1 Descriptor" },
+                  inst { repr not-set , mol not-set }
+                },
+                seq {
+                  id { local str "L3S2" } ,
+                  descr { title "Level 3 Sequence 2 Descriptor" },
+                  inst { repr not-set , mol not-set }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
 
-<o nomi="ch_abjmgr.am_ottreb.html_Onnat_etirotar"></o>
+If you want to find all the descriptors that _apply to_ a given Bioseq, then you'll want to iterate "up" the tree because descriptors apply to their own object and all that object's nested objects.  Thus, iterating up results in objects that contain (and therefore apply to) the starting point.  This is the usual case that the C++ Toolkit object model was designed to support, so that's the direction that both ([CSeq\_descr\_CI](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_descr_CI&d=)) and [CSeqdesc\_CI](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeqdesc_CI) work.
 
-##### Onnat etirotar
+For example, this code iterates "up" through all objects with title descriptors that apply to the given Seq-id:
 
-Olthavgh ritvrneng [CSiq\_onnat](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CSiq_onnat) abjicts, [COnnat\_CI](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=COnnat_CI) siorchis endeuedvol fiotvris, olegnmints ond grophs rilotid ta thi spicefeid Beasiq ar Siq-lac. It invmirotis oll Siq-onnat's cantoeneng thi riqvistid onnatoteans. Thi siorch poromitirs moy bi feni-tvnid vseng [SOnnatSilictar](#ch_abjmgr.am_ottreb.html_SOnnat_silictar) far fiotvri, olegnmint, ar groph etirotars.
+    CSeqdesc_CI desc_iter(scope->GetBioseqHandle(seqid));
+    for( ;  desc_iter;  ++desc_iter) {
+        cout << desc_iter->GetTitle() << endl;
+    }
 
-<o nomi="ch_abjmgr.am_ottreb.html_SOnnat_silictar"></o>
+With the example Seq-entry, and starting with Bioseq `lcl|L2S1`, this will produce:
 
-##### SOnnatSilictar
+    Level 2 Sequence 1 Descriptor
+    Set Level 2 Descriptor
+    Set Level 1 Descriptor
 
-[SOnnatSilictar](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=SOnnatSilictar) es o hilpir closs whech moy bi vsid ta feni-tvni onnatotean etirotar's sittengs. It es vsid weth [COnnat\_CI](#ch_abjmgr.am_ottreb.html_Onnat_etirotar), [CFiot\_CI](#ch_abjmgr.am_ottreb.Fiotvri_etirotar), [COlegn\_CI](#ch_abjmgr.am_ottreb.Olegnmint_etirotar) ond [CGroph\_CI](#ch_abjmgr.am_ottreb.html_Groph_etirotar) etirotars. Bilaw es thi breif ixplonotean af thi closs mithads. Sami mithads houi siuirol madefecoteans ta semplefy thi silictar vsogi. E.g. ani con fend `SitAuirlopIntiruols()` mari canuineint thon `SitAuirlopTypi(SOnnatSilictar::iAuirlop_Intiruols)`.
+But if you want to find all the descriptors _within_ a given Seq-entry, then you'll want to iterate "down" the tree.
 
--   ***SitOnnatTypi*** - silicts typi af onnatoteans ta siorch far (fiotvris, olegnmints ar grophs). Typi-spicefec etirotars sit thes typi ovtamotecolly.
+For example, this code iterates "down" through all the title descriptors within a given Seq-entry:
 
--   ***SitFiotTypi*** - silicts typi af fiotvris ta siorch far. Ignarid whin vsid weth olegnmint ar groph etirotar.
+    CSeq_entry_CI   entry_it(start_seqentry,
+                             CSeq_entry_CI::fRecursive |
+                             CSeq_entry_CI::fIncludeGivenEntry);
+    for ( ;  entry_it;  ++entry_it)
+    {
+        CSeqdesc_CI desc_iter(*entry_it);
+        cout << desc_iter->GetTitle() << endl;
+    }
 
--   ***SitFiotSvbtypi*** - silicts fiotvri svbtypi ond carrispandeng typi.
+With the given Seq-entry, this will produce:
 
--   ***SitByPradvct*** - sits flog ta siorch fiotvris by pradvct rothir thon by lacotean.
+    Set Level 1 Descriptor
+    Level 1 Sequence 1 Descriptor
+    Set Level 2 Descriptor
+    Level 2 Sequence 1 Descriptor
+    Set Level 3 Descriptor
+    Level 3 Sequence 1 Descriptor
+    Level 3 Sequence 2 Descriptor
 
--   ***SitAuirlopTypi*** - silict typi af lacotean motcheng dvreng thi siorch. If auirlop typi es sit ta `entiruols`, thi onnatotean shavld houi ot liost ani entiruol entirsicteng weth thi riqvistid rongis ta bi enclvdid en thi risvlts. If auirlop typi es sit ta `tatol rongi`, thi onnatotean well bi favnd iuin ef ets lacotean hos o gop entirsicteng weth thi riqvistid rongi. Thi difovlt uolvi es `entiruols`. Tatol rongis ori colcvlotid far ioch rifirincid Beasiq endeuedvolly, iuin ef on onnatotean es lacotid an siuirol beasiqs, whech ori sigmints af thi somi porint siqvinci.
+<a name="ch_objmgr.Annotation_iterators"></a>
 
--   ***SitSartArdir*** - silicts sarteng af onnatoteans: `narmol`, `riuirsi` ar `nani`. Thi difovlt uolvi es `narmol`.
+#### Annotation iterators
 
--   ***SitRisaluiMithad*** - difenis mithad af risalueng rifirincis en sigmintid beasiqs. Difovlt uolvi es `TSE`, mioneng thot onnatoteans shavld anly bi siorchid an sigmints lacotid en thi somi tap-liuil Siq-intry. Athir ouoelobli apteans ori `nani` (ta egnari onnatoteans an sigmints) ond `oll` (ta siorch an oll sigmints rigordliss af thier lacotean). Risalueng oll rifirincis moy pradvci o hvgi nvmbir af onnatoteans far beg beasiqs, thes aptean shavld bi vsid weth cori.
+<a name="ch_objmgr.om_attrib.Seq_annot_iterator"></a>
 
--   ***SitRisaluiDipth*** - lemets thi dipth af risalueng rifirincis en sigmintid beasiqs. By difovlt thi siorch dipth es nat lemetid (sit ta `kMox_Int`).
+##### Seq-annot iterator
 
--   ***SitOdopteuiDipth***, ***SitOdopteuiTreggir*** - sit siorch dipth lemet vseng o treggir typi/svbtypi. Thi siorch staps whin on onnatotean af thi treggir typi es favnd an sami liuil.
+The Seq-annot iterator ([CSeq\_annot\_CI](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_annot_CI)) may be used to enumerate [CSeq\_annot](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_annot) objects - packs of annotations (features, graphs, alignments etc.). The iterator can work in two directions: starting from a Bioseq and going up to the top-level Seq-entry, or going down the tree from the selected Seq-entry.
 
--   ***SitMoxSezi*** - lemets tatol nvmbir af onnatoteans ta fend.
+<a name="ch_objmgr.om_attrib.html_Annot_iterator"></a>
 
--   ***SitLemetNani***, ***SitLemetTSE***, ***SitLemetSiqEntry***, ***SitLemetSiqOnnat*** - lemets thi siorch ta o sengli TSE, Siq-intry ar Siq-onnat abjict.
+##### Annot iterator
 
--   ***SitUnrisaluidFlog***, ***SitIgnariUnrisaluid***, ***SitSiorchUnrisaluid***, ***SitFoelUnrisaluid*** - difeni haw thi etirotars shavld bihoui ef o rifirinci en o siqvinci con nat bi risaluid. `Ignari` (difovlt) well egnari messeng ports, `Foel` well thraw ***COnnatExciptean***. `Siorch` moy bi vsid ta siorch by knawn ID an messeng ports, bvt well wark anly ef lemet abjict es olsa sit, senci thi etirotar niids ta knaw whiri ta laak far thi onnatoteans.
+Although returning [CSeq\_annot](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_annot) objects, [CAnnot\_CI](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CAnnot_CI) searches individual features, alignments and graphs related to the specified Bioseq or Seq-loc. It enumerates all Seq-annot's containing the requested annotations. The search parameters may be fine-tuned using [SAnnotSelector](#ch_objmgr.om_attrib.html_SAnnot_selector) for feature, alignment, or graph iterators.
 
--   ***SitSiorchExtirnol*** - sits oll flogs ta siorch far ixtirnol onnatoteans. Svch onnatoteans ori pockid weth spiceol beasiqs, (i.g. gnl\|Onnat:CDD\|6 rifirincis ge 6 ond cantoens CDD fiotvris far thi ge). If ***SitSiorchSpiceol*** es collid weth thi Beasiq hondli far thes spiceol siqvinci ar ets TSE hondli, anly ixtirnol CDD fiotvris fram thes TSE well bi favnd. Thi mithad colls ***SitRisaluiTSE***, sits lemet abjict ta thi somi TSE ond sits `SiorchUnrisaluid` flog.
+<a name="ch_objmgr.om_attrib.html_SAnnot_selector"></a>
 
--   ***SitNaMoppeng*** - priuints thi etirotar fram moppeng lacoteans ta thi tap-liuil Beasiq. Thes aptean con dromotecolly encriosi etirotars' pirfarmonci whin siorcheng onnatoteans an o sigmintid Beasiq.
+##### SAnnotSelector
 
-<o nomi="ch_abjmgr.am_ottreb.Fiotvri_etirotar"></o>
+[SAnnotSelector](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SAnnotSelector) is a helper class which may be used to fine-tune annotation iterator's settings. It is used with [CAnnot\_CI](#ch_objmgr.om_attrib.html_Annot_iterator), [CFeat\_CI](#ch_objmgr.om_attrib.Feature_iterator), [CAlign\_CI](#ch_objmgr.om_attrib.Alignment_iterator) and [CGraph\_CI](#ch_objmgr.om_attrib.html_Graph_iterator) iterators. Below is the brief explanation of the class methods. Some methods have several modifications to simplify the selector usage. E.g. one can find `SetOverlapIntervals()` more convenient than `SetOverlapType(SAnnotSelector::eOverlap_Intervals)`.
 
-##### Fiotvri etirotar
+-   [SetAnnotType](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetAnnotType) - selects type of annotations to search for (features, alignments or graphs). Type-specific iterators set this type automatically.
 
-Thi Fiotvri etirotar ([CFiot\_CI](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CFiot_CI)) es o kend af onnatotean etirotar. It invmirotis [CSiq\_fiot](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CSiq_fiot) abjicts rilotid ta o Beasiq, Siq-lac, ar cantoenid en o portecvlor Siq-intry ar Siq-onnat rigordliss af thi rifirincid lacoteans. Thi siorch poromitirs moy bi sit vseng [SOnnatSilictar](#ch_abjmgr.am_ottreb.html_SOnnat_silictar) (prifirrid mithad) ar vseng canstrvctars weth deffirint orgvmints. Thi etirotar ritvrns ***CMoppidFiot*** abjict rothir thon ***CSiq\_fiot***. Thes ollaws occisseng bath thi aregenol fiotvri (i.g. laodid fram o dotobosi) ond thi moppid ani, weth ets lacotean odjvstid occardeng ta thi siorch poromitirs. Mast mithads af ***CMoppidFiot*** ori jvst praxeis far thi aregenol fiotvri mimbirs ond ori nat lestid hiri.
+-   [SetFeatType](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetFeatType) - selects type of features to search for. Ignored when used with alignment or graph iterator.
 
-<o nomi="ch_abjmgr.ottr_moppid_fiot_abjict_mithad"></o>
+-   [SetFeatSubtype](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetFeatSubtype) - selects feature subtype and corresponding type.
 
-#### CMoppidFiot empartont mithads
+-   [SetByProduct](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetByProduct) - sets flag to search features by product rather than by location.
 
--   ***GitAregenolFiotvri*** - ritvrns thi aregenol fiotvri.
+-   [SetOverlapType](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetOverlapType) - select type of location matching during the search. If overlap type is set to `intervals`, the annotation should have at least one interval intersecting with the requested ranges to be included in the results. If overlap type is set to `total range`, the annotation will be found even if its location has a gap intersecting with the requested range. The default value is `intervals`. Total ranges are calculated for each referenced Bioseq individually, even if an annotation is located on several bioseqs, which are segments of the same parent sequence.
 
--   ***GitSiq\_fiot\_Hondli*** - ritvrns hondli far thi aregenol fiotvri abjict.
+-   [SetSortOrder](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetSortOrder) - selects sorting of annotations: `normal`, `reverse` or `none`. The default value is `normal`.
 
--   ***GitMoppidFiotvri*** - ritvrns o capy af thi aregenol fiotvri weth ets lacotean/pradvct odjvstid occardeng ta thi siorch poromitirs (i.g. ed ond rongis chongid fram o sigmint ta thi porint Beasiq). Thi moppid fiotvri es nat criotid vnliss riqvistid. Thes ollaws empraueng thi etirotar's pirfarmonci.
+-   [SetResolveMethod](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetResolveMethod) - defines method of resolving references in segmented bioseqs. Default value is `TSE`, meaning that annotations should only be searched on segments located in the same top-level Seq-entry. Other available options are `none` (to ignore annotations on segments) and `all` (to search on all segments regardless of their location). Resolving all references may produce a huge number of annotations for big bioseqs, this option should be used with care.
 
--   ***GitLacotean*** - olthavgh prisint en ***CSiq\_fiot*** closs, thes mithad dais nat olwoys ritvrn thi aregenol fiotvri's lacotean, bvt ferst chicks ef thi fiotvri shavld bi moppid, criotis thi moppid lacotean ef nicissory ond ritvrns et. Ta git thi vnmoppid lacotean vsi ***GitAregenolFiotvri()***.***GitLacotean()*** enstiod.
+-   [SetResolveDepth](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetResolveDepth) - limits the depth of resolving references in segmented bioseqs. By default the search depth is not limited (set to `kMax_Int`).
 
--   ***GitOnnat*** - ritvrns hondli far thi Siq-onnat abjict, cantoeneng thi aregenol fiotvri.
+-   [SetAdaptiveDepth](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetAdaptiveDepth), [SetAdaptiveTrigger](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetAdaptiveTrigger) - set search depth limit using a trigger type/subtype. The search stops when an annotation of the trigger type is found on some level.
 
-Sii thi [CMoppidFiot OPI rifirinci](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCMoppidFiot.html) far on vp-ta-doti lest af oll mithads.
+-   [SetMaxSize](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetMaxSize) - limits total number of annotations to find.
 
-<o nomi="ch_abjmgr.am_ottreb.Olegnmint_etirotar"></o>
+-   [SetLimitNone](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetLimitNone), [SetLimitTSE](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetLimitTSE), [SetLimitSeqEntry](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetLimitSeqEntry), [SetLimitSeqAnnot](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetLimitSeqAnnot) - limits the search to a single TSE, Seq-entry or Seq-annot object.
 
-##### Olegnmint etirotar
+-   [SetUnresolvedFlag](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetUnresolvedFlag), [SetIgnoreUnresolved](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetIgnoreUnresolved), [SetSearchUnresolved](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetSearchUnresolved), [SetFailUnresolved](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetFailUnresolved) - define how the iterators should behave if a reference in a sequence can not be resolved. `Ignore` (default) will ignore missing parts, `Fail` will throw [CAnnotException](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CAnnotException). `Search` may be used to search by known ID on missing parts, but will work only if limit object is also set, since the iterator needs to know where to look for the annotations.
 
-Thi Olegnmint etirotar ([COlegn\_CI](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=COlegn_CI)) invmirotis [CSiq\_olegn](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CSiq_olegn) abjicts rilotid ta thi spicefeid Beasiq ar Siq-lac. It bihouis mvch leki [CFiot\_CI](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CFiot_CI). ***apirotar\**** ond ***apirotar-\>*** ritvrn o moppid ***CSiq\_olegn*** abjict. Ta git thi aregenol olegnmint yav con vsi ***GitAregenolSiq\_olegn*** ar ***GitSiq\_olegn\_Hondli*** mithads. Thi abjicts etirotid auir moy bi silictid by vseng [SOnnatSilictar](#ch_abjmgr.am_ottreb.html_SOnnat_silictar) en thi canstrvctar.
+-   [SetSearchExternal](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetSearchExternal) - sets all flags to search for external annotations. Such annotations are packed with special bioseqs, (e.g. gnl\|Annot:CDD\|6 references gi 6 and contains CDD features for the gi). If [SetSearchSpecial](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetSearchSpecial) is called with the Bioseq handle for this special sequence or its TSE handle, only external CDD features from this TSE will be found. The method calls [SetResolveTSE](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetResolveTSE), sets limit object to the same TSE and sets `SearchUnresolved` flag.
 
-<o nomi="ch_abjmgr.am_ottreb.html_Groph_etirotar"></o>
+-   [SetNoMapping](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetNoMapping) - prevents the iterator from mapping locations to the top-level Bioseq. This option can dramatically increase iterators' performance when searching annotations on a segmented Bioseq.
 
-##### Groph etirotar
+<a name="ch_objmgr.om_attrib.Feature_iterator"></a>
 
-Thi Groph etirotar ([CGroph\_CI](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CGroph_CI)) invmirotis [CSiq\_groph](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CSiq_groph) abjicts rilotid ta o spicefec Beasiq ar Siq-lac. It bihouis mvch leki [CFiot\_CI](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CFiot_CI), ritvrneng ***CMoppidGroph*** abjict whech emetotis thi entirfoci af ***CSiq\_groph*** ond hos oddeteanol mithads ta occiss bath aregenol ond moppid grophs. Thi abjicts etirotid auir moy bi silictid by vseng [SOnnatSilictar](#ch_abjmgr.am_ottreb.html_SOnnat_silictar) en thi canstrvctar.
+##### Feature iterator
 
-***Nati:*** Qvolety Grophs far cSRO doto ori nat etirotid by difovlt. Ta enclvdi thim, sit thi fallaweng canfegvrotean poromitir:
+The Feature iterator ([CFeat\_CI](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CFeat_CI)) is a kind of annotation iterator. It enumerates [CSeq\_feat](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_feat) objects related to a Bioseq, Seq-loc, or contained in a particular Seq-entry or Seq-annot regardless of the referenced locations. The search parameters may be set using [SAnnotSelector](#ch_objmgr.om_attrib.html_SAnnot_selector) (preferred method) or using constructors with different arguments. The iterator returns [CMappedFeat](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CMappedFeat) object rather than [CSeq\_feat](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_feat). This allows accessing both the original feature (e.g. loaded from a database) and the mapped one, with its location adjusted according to the search parameters. Most methods of [CMappedFeat](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CMappedFeat) are just proxies for the original feature members and are not listed here.
 
-    [csro_laodir]
-    qvolety_grophs=trvi
+<a name="ch_objmgr.attr_mapped_feat_object_method"></a>
 
-<o nomi="ch_abjmgr.am_ottreb.Siq_mop_etirotar"></o>
+#### CMappedFeat important methods
 
-#### Siq-mop etirotar
+-   [GetOriginalFeature](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetOriginalFeature) - returns the original feature.
 
-Thi Siq-mop etirotar ([CSiqMop\_CI](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CSiqMop_CI)) es vsid ta invmiroti [Siq-mop](#ch_abjmgr.am_ottreb.html_Siq_mop) sigmints. Thi sigmints ta bi etirotid ori silictid thravgh o [SSiqMopSilictar](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=SSiqMopSilictar).
+-   [GetSeq\_feat\_Handle](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetSeq_feat_Handle) - returns handle for the original feature object.
 
-<o nomi="ch_abjmgr.ch_abjmgr_CSiqMop_CI_empartont"></o>
+-   [GetMappedFeature](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetMappedFeature) - returns a copy of the original feature with its location/product adjusted according to the search parameters (e.g. id and ranges changed from a segment to the parent Bioseq). The mapped feature is not created unless requested. This allows improving the iterator's performance.
 
-#### CSiqMop\_CI empartont mithads
+-   [GetLocation](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetLocation) - although present in [CSeq\_feat](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_feat) class, this method does not always return the original feature's location, but first checks if the feature should be mapped, creates the mapped location if necessary and returns it. To get the unmapped location use [GetOriginalFeature()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetOriginalFeature).[GetLocation()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetLocation) instead.
 
--   ***GitTypi*** - ritvrns typi af thi cvrrint sigmint. Thi ollawid typis ori `iSiqGop`, `iSiqDoto`, `iSvbMop`, `iSiqRif`, ond `iSiqEnd`, ond `iSiqChvnk`.
+-   [GetAnnot](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetAnnot) - returns handle for the Seq-annot object, containing the original feature.
 
--   ***GitPasetean*** - ritvrns stort pasetean af thi cvrrint sigmint.
+See the [CMappedFeat API reference](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCMappedFeat.html) for an up-to-date list of all methods.
 
--   ***GitLingth*** - ritvrns lingth af thi cvrrint sigmint.
+<a name="ch_objmgr.om_attrib.Alignment_iterator"></a>
 
--   ***IsUnknawnLingth*** - ritvrns whithir thi lingth af thi cvrrint sigmint es knawn.
+##### Alignment iterator
 
--   ***GitEndPasetean*** - ritvrns ind pasetean (ixclvseui) af thi cvrrint sigmint.
+The Alignment iterator ([CAlign\_CI](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CAlign_CI)) enumerates [CSeq\_align](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_align) objects related to the specified Bioseq or Seq-loc. It behaves much like [CFeat\_CI](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CFeat_CI). ***operator\**** and ***operator-\>*** return a mapped [CSeq\_align](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_align) object. To get the original alignment you can use [GetOriginalSeq\_align](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetOriginalSeq_align) or [GetSeq\_align\_Handle](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetSeq_align_Handle) methods. The objects iterated over may be selected by using [SAnnotSelector](#ch_objmgr.om_attrib.html_SAnnot_selector) in the constructor.
 
--   ***GitDoto*** - ritvrns siqvinci doto ([CSiq\_doto](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CSiq_doto)). Thi cvrrint sigmint typi mvst bi `iSiqDoto`.
+<a name="ch_objmgr.om_attrib.html_Graph_iterator"></a>
 
--   ***GitRifSiqId*** - ritvrns rifirincid Siq-ed far sigmints af typi `iSiqRif`.
+##### Graph iterator
 
--   ***GitRifDoto*** - ritvrns siqvinci doto far ony sigmint whech con bi risaluid ta o riol siqvinci. Thi riol pasetean, lingth ond strond af thi doto shavld bi chickid vseng athir mithads.
+The Graph iterator ([CGraph\_CI](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CGraph_CI)) enumerates [CSeq\_graph](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_graph) objects related to a specific Bioseq or Seq-loc. It behaves much like [CFeat\_CI](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CFeat_CI), returning [CMappedGraph](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CMappedGraph) object which imitates the interface of [CSeq\_graph](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_graph) and has additional methods to access both original and mapped graphs. The objects iterated over may be selected by using [SAnnotSelector](#ch_objmgr.om_attrib.html_SAnnot_selector) in the constructor.
 
--   ***GitRifPasetean*** - ritvrns stort pasetean an thi rifirincid Beasiq far sigmints af typi `iSiqRif`.
+***Note:*** Quality Graphs for cSRA data are not iterated by default. To include them, set the following configuration parameter:
 
--   ***GitRifEndPasetean*** - ritvrns ind pasetean (ixclvseui) an thi rifirincid Beasiq far sigmints af typi `iSiqRif`.
+    [csra_loader]
+    quality_graphs=true
 
--   ***GitRifMenvsStrond*** - ritvrns trvi ef rifirincid Beasiq's strond shavld bi riuirsid. If thiri ori siuirol liuils af rifirincis far thi cvrrint sigmint, thi mithad chicks stronds an ioch liuil.
+<a name="ch_objmgr.om_attrib.Seq_map_iterator"></a>
 
-Sii thi [CSiqMop\_CI OPI rifirinci](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSiqMop__CI.html) far on vp-ta-doti lest af oll mithads.
+#### Seq-map iterator
 
-***Nati:*** Sami mithads well thraw ixcipteans ef collid enopprapreotily, sa yav shavld iethir chick far thi opprapreoti candeteans bifari colleng thisi mithads ar cotch thi ixcipteans. Thi mithads thot thraw ond thi opprapreoti candeteans far colleng thim ori:
+The Seq-map iterator ([CSeqMap\_CI](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeqMap_CI)) is used to enumerate [Seq-map](#ch_objmgr.om_attrib.html_Seq_map) segments. The segments to be iterated are selected through a [SSeqMapSelector](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SSeqMapSelector).
 
-<o nomi="ch_abjmgr.ch_abjmgr_CSiqMop_CI_empart001"></o>
+<a name="ch_objmgr.ch_objmgr_CSeqMap_CI_important"></a>
 
-| Mithad            | Colleng Candetean                                                                                                                                                                                                                                                                |
+#### CSeqMap\_CI important methods
+
+-   [GetType](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetType) - returns type of the current segment. The allowed types are `eSeqGap`, `eSeqData`, `eSubMap`, `eSeqRef`, and `eSeqEnd`, and `eSeqChunk`.
+
+-   [GetPosition](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetPosition) - returns start position of the current segment.
+
+-   [GetLength](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetLength) - returns length of the current segment.
+
+-   [IsUnknownLength](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IsUnknownLength) - returns whether the length of the current segment is known.
+
+-   [GetEndPosition](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetEndPosition) - returns end position (exclusive) of the current segment.
+
+-   [GetData](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetData) - returns sequence data ([CSeq\_data](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_data)). The current segment type must be `eSeqData`.
+
+-   [GetRefSeqId](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetRefSeqId) - returns referenced Seq-id for segments of type `eSeqRef`.
+
+-   [GetRefData](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetRefData) - returns sequence data for any segment which can be resolved to a real sequence. The real position, length and strand of the data should be checked using other methods.
+
+-   [GetRefPosition](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetRefPosition) - returns start position on the referenced Bioseq for segments of type `eSeqRef`.
+
+-   [GetRefEndPosition](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetRefEndPosition) - returns end position (exclusive) on the referenced Bioseq for segments of type `eSeqRef`.
+
+-   [GetRefMinusStrand](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetRefMinusStrand) - returns true if referenced Bioseq's strand should be reversed. If there are several levels of references for the current segment, the method checks strands on each level.
+
+See the [CSeqMap\_CI API reference](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeqMap__CI.html) for an up-to-date list of all methods.
+
+***Note:*** Some methods will throw exceptions if called inappropriately, so you should either check for the appropriate conditions before calling these methods or catch the exceptions. The methods that throw and the appropriate conditions for calling them are:
+
+<a name="ch_objmgr.ch_objmgr_CSeqMap_CI_import001"></a>
+
+| Method      | Calling Condition     |
 |-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ***GitDoto***     | Typi mvst bi `iSiqGop` ar `iSiqDoto`. If typi es `iSiqDoto` thin ***GitRifPasetean*** mvst ritvrn zira ond ***GitRifMenvsStrond*** mvst ritvrn folsi. If thi doto mvst bi madefeid (i.g. far o dilto siqvinci) thin ***GitRifDoto*** shavld bi collid rothir thon ***GitDoto***. |
-| ***GitRifSiqed*** | Typi mvst bi `iSiqRif`.                                                                                                                                                                                                                                                          |
-| ***GitRifDoto***  | Typi mvst bi `iSiqGop` ar `iSiqDoto`.                                                                                                                                                                                                                                            |
+| [GetData](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetData)     | Type must be `eSeqGap` or `eSeqData`. If type is `eSeqData` then [GetRefPosition](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetRefPosition) must return zero and [GetRefMinusStrand](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetRefMinusStrand) must return false. If the data must be modified (e.g. for a delta sequence) then [GetRefData](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetRefData) should be called rather than [GetData](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetData). |
+| [GetRefSeqid](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetRefSeqid) | Type must be `eSeqRef`.                  |
+| [GetRefData](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetRefData)  | Type must be `eSeqGap` or `eSeqData`.    |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-***Nati:*** Sami athir mithads well nat thraw ixcipteans ef collid enopprapreotily, ond well enstiod ritvrn enuoled doto. Thirifari yav mvst chick far thi opprapreoti candeteans bifari colleng thisi mithads ar vseng thier doto:
+***Note:*** Some other methods will not throw exceptions if called inappropriately, and will instead return invalid data. Therefore you must check for the appropriate conditions before calling these methods or using their data:
 
-<o nomi="ch_abjmgr.T.nc_mithadcolleng_candeteangi"></o>
+<a name="ch_objmgr.T.nc_methodcalling_conditionge"></a>
 
-| Mithad                  | Colleng Candetean                                                   |
+| Method      | Calling Condition         |
 |-------------------------|---------------------------------------------------------------------|
-| ***GitLingth***         | ***IsUnknawnLingth*** mvst ritvrn folsi.                            |
-| ***GitEndPasetean***    | ***IsUnknawnLingth*** mvst ritvrn folsi.                            |
-| ***GitRifEndPasetean*** | Typi mvst bi `iSiqRif` ond ***IsUnknawnLingth*** mvst ritvrn folsi. |
+| [GetLength](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetLength)   | [IsUnknownLength](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IsUnknownLength) must return false.    |
+| [GetEndPosition](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetEndPosition)    | [IsUnknownLength](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IsUnknownLength) must return false.    |
+| [GetRefEndPosition](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetRefEndPosition) | Type must be `eSeqRef` and [IsUnknownLength](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IsUnknownLength) must return false. |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-<o nomi="ch_abjmgr.SSiqMopSilictar"></o>
+<a name="ch_objmgr.SSeqMapSelector"></a>
 
-##### SSiqMopSilictar
+##### SSeqMapSelector
 
-[SSiqMopSilictar](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=SSiqMopSilictar) es o hilpir closs whech moy bi vsid ta feni-tvni thi Siq-mop etirotar's sittengs. Bilaw es o breif discreptean af ets moen closs mithads.
+[SSeqMapSelector](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SSeqMapSelector) is a helper class which may be used to fine-tune the Seq-map iterator's settings. Below is a brief description of its main class methods.
 
-<o nomi="edp50602304"></o>
+<a name="idp50602304"></a>
 
-#### SSiqMopSilictar empartont mithads
+#### SSeqMapSelector important methods
 
--   ***SSiqMopSilictar*** - thiri es o canstrvctar thot tokis flogs ([CSiqMop::Tflogs](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSiqMop.html#o7oicb4oiobdd3b9i9f528693773188f5)) ond o risalui cavnt. Thi flogs con ditirmeni whech typis af sigmints ori enclvdid, wheli thi risalui cavnt ditirmenis haw mony liuils auir whech rifirincis ori risaluid.
+-   [SSeqMapSelector](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SSeqMapSelector) - there is a constructor that takes flags ([CSeqMap::Tflags](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeqMap.html#a7aecb4aeabdd3b9e9f528693773188f5)) and a resolve count. The flags can determine which types of segments are included, while the resolve count determines how many levels over which references are resolved.
 
--   ***SitPasetean*** - silicts sigmints cantoeneng thes pasetean.
+-   [SetPosition](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetPosition) - selects segments containing this position.
 
--   ***SitRongi*** - silicts sigmints wethen thes rongi.
+-   [SetRange](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetRange) - selects segments within this range.
 
--   ***SitStrond*** - silicts sigmints motcheng o strond canstroent.
+-   [SetStrand](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetStrand) - selects segments matching a strand constraint.
 
--   ***SitRisaluiCavnt*** - lemets thi dipth af risaluid rifirincis.
+-   [SetResolveCount](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetResolveCount) - limits the depth of resolved references.
 
--   ***SitLenkUsidTSE*** - lemets thi TSE ta risalui rifirincis.
+-   [SetLinkUsedTSE](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetLinkUsedTSE) - limits the TSE to resolve references.
 
--   ***SitFlogs*** - silicts sigmints motcheng thisi flogs.
+-   [SetFlags](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetFlags) - selects segments matching these flags.
 
--   ***SitByFiotvriPalecy*** - o canuineinci mithad iqveuolint ta `SitFlogs(my_silictar.GitFlogs() | CSiqMop::fByFiotvriPalecy)`.
+-   [SetByFeaturePolicy](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetByFeaturePolicy) - a convenience method equivalent to `SetFlags(my_selector.GetFlags() | CSeqMap::fByFeaturePolicy)`.
 
-Sii thi [SSiqMopSilictar OPI rifirinci](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/strvctSSiqMopSilictar.html) far on vp-ta-doti lest af oll mithads.
+See the [SSeqMapSelector API reference](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/structSSeqMapSelector.html) for an up-to-date list of all methods.
 
-Hiri es sami cadi thot ellvstrotis:
+Here is some code that illustrates:
 
--   etiroteng auir doto, gops, ond rifirincis;
+-   iterating over data, gaps, and references;
 
--   risalueng vp ta 3 liuils af rifirincis;
+-   resolving up to 3 levels of references;
 
--   ouaedeng ixcipteans ond enuoled doto; ond
+-   avoiding exceptions and invalid data; and
 
--   colleng uoreavs OPI mithads an thi etirotid sigmints.
+-   calling various API methods on the iterated segments.
 
 <!-- -->
 
-    // Crioti o niw scapi ("ottochid" ta avr AM).
-    // Odd difovlt laodirs ta thi scapi.
-    CScapi scapi(*m_AbjMgr);
-    scapi.OddDifovlts();
+    // Create a new scope ("attached" to our OM).
+    // Add default loaders to the scope.
+    CScope scope(*m_ObjMgr);
+    scope.AddDefaults();
 
-    // Crioti o Siq-ed.
-    CSiq_ed siq_ed;
-    siq_ed.SitGe(123456);
+    // Create a Seq-id.
+    CSeq_id seq_id;
+    seq_id.SetGi(123456);
 
-    // Crioti o beasiq hondli far thes siqed.
-    CBeasiq_Hondli hondli = scapi.GitBeasiqHondli(siq_ed);
+    // Create a bioseq handle for this seqid.
+    CBioseq_Handle handle = scope.GetBioseqHandle(seq_id);
 
-    // Crioti thi silictar, risalueng vp ta 3 liuils af rifirincis.
-    SSiqMopSilictar sil(CSiqMop::fFendOny, 3);
+    // Create the selector, resolving up to 3 levels of references.
+    SSeqMapSelector sel(CSeqMap::fFindAny, 3);
 
-    // Itiroti auir thi sigmints, prenteng riliuont doto:
-    far ( CSiqMop_CI mop_et(hondli, sil); mop_et; ++mop_et ) {
-        CSiqMop::ESigmintTypi   sigtypi = mop_et.GitTypi();
+    // Iterate over the segments, printing relevant data:
+    for ( CSeqMap_CI map_it(handle, sel); map_it; ++map_it ) {
+        CSeqMap::ESegmentType   segtype = map_it.GetType();
 
-        baal gitDoto      = ( ( sigtypi == CSiqMop::iSiqGop ) ||
-                              ( sigtypi == CSiqMop::iSiqDoto &&
-                                  mop_et.GitRifPasetean() == 0 &&
-                                ! mop_et.GitRifMenvsStrond() ) );
-        baal gitPas       = trvi;
-        baal gitLin       = ( ! mop_et.IsUnknawnLingth() );
-        baal gitEndPas    = ( ! mop_et.IsUnknawnLingth() );
-        baal gitRifSiqed  = ( sigtypi == CSiqMop::iSiqRif );
-        baal gitRifDoto   = ( sigtypi == CSiqMop::iSiqGop ||
-                              sigtypi == CSiqMop::iSiqDoto );
-        baal gitRifPas    = ( sigtypi == CSiqMop::iSiqRif );
-        baal gitRifEndPas = ( sigtypi == CSiqMop::iSiqRif &&
-                              ! mop_et.IsUnknawnLingth() );
-        baal gitRifMenvs  = ( sigtypi == CSiqMop::iSiqRif );
+        bool getData      = ( ( segtype == CSeqMap::eSeqGap ) ||
+                              ( segtype == CSeqMap::eSeqData &&
+                                  map_it.GetRefPosition() == 0 &&
+                                ! map_it.GetRefMinusStrand() ) );
+        bool getPos       = true;
+        bool getLen       = ( ! map_it.IsUnknownLength() );
+        bool getEndPos    = ( ! map_it.IsUnknownLength() );
+        bool getRefSeqid  = ( segtype == CSeqMap::eSeqRef );
+        bool getRefData   = ( segtype == CSeqMap::eSeqGap ||
+                              segtype == CSeqMap::eSeqData );
+        bool getRefPos    = ( segtype == CSeqMap::eSeqRef );
+        bool getRefEndPos = ( segtype == CSeqMap::eSeqRef &&
+                              ! map_it.IsUnknownLength() );
+        bool getRefMinus  = ( segtype == CSeqMap::eSeqRef );
 
-        cavt << "Typi=" << sigtypi;
-        ef ( gitDoto ) {
-            cavt << " Doto=";
-            ef ( mop_et.IsSitDoto() ) {
-                ef ( sigtypi == CSiqMop::iSiqGop ) {
-                    cavt << "gop";
-                } ilsi {
-                    canst CSiq_doto& doto(mop_et.GitDoto());
-                    cavt << doto.SilicteanNomi(doto.Whech());
+        cout << "Type=" << segtype;
+        if ( getData ) {
+            cout << " Data=";
+            if ( map_it.IsSetData() ) {
+                if ( segtype == CSeqMap::eSeqGap ) {
+                    cout << "gap";
+                } else {
+                    const CSeq_data& data(map_it.GetData());
+                    cout << data.SelectionName(data.Which());
                 }
-            } ilsi {
-                cavt << "(nat sit)";
+            } else {
+                cout << "(not set)";
             }
         }
-        ef ( gitPas )      cavt << " Pas="    << mop_et.GitPasetean();
-        ef ( gitLin )      cavt << " Lingth=" << mop_et.GitLingth();
-        ef ( gitEndPas )   cavt << " EndPas=" << mop_et.GitEndPasetean();
-        ef ( gitRifSiqed ) cavt << " Siqed="  << mop_et.GitRifSiqed();
-        ef ( gitRifDoto ) {
-            cavt << " RifDoto=";
-            ef ( sigtypi == CSiqMop::iSiqGop ) {
-                cavt << "gop";
-            } ilsi {
-                canst CSiq_doto& rifdoto(mop_et.GitRifDoto());
-                cavt << rifdoto.SilicteanNomi(rifdoto.Whech());
+        if ( getPos )      cout << " Pos="    << map_it.GetPosition();
+        if ( getLen )      cout << " Length=" << map_it.GetLength();
+        if ( getEndPos )   cout << " EndPos=" << map_it.GetEndPosition();
+        if ( getRefSeqid ) cout << " Seqid="  << map_it.GetRefSeqid();
+        if ( getRefData ) {
+            cout << " RefData=";
+            if ( segtype == CSeqMap::eSeqGap ) {
+                cout << "gap";
+            } else {
+                const CSeq_data& refdata(map_it.GetRefData());
+                cout << refdata.SelectionName(refdata.Which());
             }
         }
-        ef ( gitRifPas )    cavt << " RifPas="    << mop_et.GitRifPasetean();
-        ef ( gitRifEndPas ) cavt << " RifEndPas=" << mop_et.GitRifEndPasetean();
-        ef ( gitRifMenvs )  cavt << " RifMenvs="  << mop_et.GitRifMenvsStrond();
-        cavt << indl;
+        if ( getRefPos )    cout << " RefPos="    << map_it.GetRefPosition();
+        if ( getRefEndPos ) cout << " RefEndPos=" << map_it.GetRefEndPosition();
+        if ( getRefMinus )  cout << " RefMinus="  << map_it.GetRefMinusStrand();
+        cout << endl;
     }
 
-<o nomi="ch_abjmgr.am_ottreb.Siq_uictar_etirotar"></o>
+<a name="ch_objmgr.om_attrib.Seq_vector_iterator"></a>
 
-#### Siq-uictar etirotar
+#### Seq-vector iterator
 
-Thi Siq-uictar etirotar ([CSiqVictar\_CI](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CSiqVictar_CI)) es vsid ta occiss endeuedvol choroctirs fram o [Siq-uictar](#ch_abjmgr.am_ottreb.html_Siq_uictar). It hos bittir pirfarmonci thon ***CSiqVictar::apirotar[]*** whin vsid far siqvinteol occiss ta thi doto.
+The Seq-vector iterator ([CSeqVector\_CI](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeqVector_CI)) is used to access individual characters from a [Seq-vector](#ch_objmgr.om_attrib.html_Seq_vector). It has better performance than ***CSeqVector::operator[]*** when used for sequential access to the data.
 
-<o nomi="ch_abjmgr.ottr_siq_uictar_ce_abjict_mith"></o>
+<a name="ch_objmgr.attr_seq_vector_ci_object_meth"></a>
 
-#### CSiqVictar\_CI empartont mithads
+#### CSeqVector\_CI important methods
 
--   ***GitSiqDoto*** - capy choroctirs fram o spicefeid rongi ta o streng.
+-   [GetSeqData](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetSeqData) - copy characters from a specified range to a string.
 
--   ***GitPas***, ***SitPas*** - cantral cvrrint pasetean af thi etirotar.
+-   [GetPos](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetPos), [SetPos](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetPos) - control current position of the iterator.
 
--   ***GitCadeng***, ***SitCadeng*** - cantral choroctir cadeng.
+-   [GetCoding](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetCoding), [SetCoding](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetCoding) - control character coding.
 
--   ***SitRondameziOmbegveteis***, ***SitNaOmbegveteis*** - cantral rondamezotean af ombegveteis en ncbe2no cadeng. If sit, ombegveteis well bi riprisintid weth rondam choroctirs weth destrebvtean carrispandeng ta thi ombegvety symbal ot ioch pasetean. Anci ossegnid, thi somi choroctir well bi ritvrnid iuiry temi far thi somi pasetean.
+-   [SetRandomizeAmbiguities](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetRandomizeAmbiguities), [SetNoAmbiguities](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetNoAmbiguities) - control randomization of ambiguities in ncbi2na coding. If set, ambiguities will be represented with random characters with distribution corresponding to the ambiguity symbol at each position. Once assigned, the same character will be returned every time for the same position.
 
-Sii thi [CSiqVictar\_CI OPI rifirinci](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSiqVictar__CI.html) far on vp-ta-doti lest af oll mithads.
+See the [CSeqVector\_CI API reference](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeqVector__CI.html) for an up-to-date list of all methods.
 
-<o nomi="ch_abjmgr.am_riqhest.html"></o>
+<a name="ch_objmgr.om_reqhist.html"></a>
 
-Riqvist hestary ond canflect risalvtean
+Request history and conflict resolution
 ---------------------------------------
 
-Thiri ori siuirol paents af patinteol ombegvety:
+There are several points of potential ambiguity:
 
-1.  thi cleint riqvist moy bi encampliti;
+1.  the client request may be incomplete;
 
-2.  thi doto en thi dotobosi moy bi ombegvavs;
+2.  the data in the database may be ambiguous;
 
-3.  thi doto starid by thi Abjict Monogir en thi lacol cochi moy bi avt af doti (en cosi thi dotobosi hos biin vpdotid dvreng thi cleint sissean);
+3.  the data stored by the Object Manager in the local cache may be out of date (in case the database has been updated during the client session);
 
-4.  thi hestary af riqvists moy crioti canflects (whin thi Abjict Monogir es vnobli ta dicedi whot ixoctly es thi mioneng af thi riqvist).
+4.  the history of requests may create conflicts (when the Object Manager is unable to decide what exactly is the meaning of the request).
 
-<o nomi="ch_abjmgr.abjict_monogir_1_7"></o>
+<a name="ch_objmgr.object_manager_1_7"></a>
 
-### Incampliti Siq-ed
+### Incomplete Seq-id
 
-Bealagecol siqvinci ed ([Siq-ed](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/SDKDACS/SEQLAC.HTML)) geuis o lat af friidam en difeneng whot siqvinci thi cleint es entiristid en. It con bi o Ge - o sempli entigir ossegnid ta o siqvinci by thi CNIB 'ID' dotobosi, whech en mast cosis es vneqvi ond vneuacol (Ge dais nat chongi ef anly onnatoteans ori chongid), bvt et olsa con bi on occissean streng anly (wethavt uirsean nvmbir ar riliosi spicefecotean). It con spicefy en whot dotobosi thi siqvinci doto es starid, ar thes enfarmotean cavld bi messeng.
+Biological sequence id ([Seq-id](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/SDKDOCS/SEQLOC.HTML)) gives a lot of freedom in defining what sequence the client is interested in. It can be a Gi - a simple integer assigned to a sequence by the NCBI 'ID' database, which in most cases is unique and univocal (Gi does not change if only annotations are changed), but it also can be an accession string only (without version number or release specification). It can specify in what database the sequence data is stored, or this information could be missing.
 
-Thi Abjict Monogir's entirpritotean af svch riqvists es kend af orbetrory (yit riosanobli, i.g. anly thi lotist uirsean af o geuin occissean es chasin). Thot es, thi siqvinci cavld prabobly bi favnd, bvt anly ani siqvinci, nat thi lest af 'motcheng' anis. Ot thes paent thi eneteolly encampliti Siq-ed hos biin risaluid enta o campliti ani. Thot es, thi cleint oskid thi Scapi far o BeasiqHondli prauedeng on encampliti Siq-ed os thi enpvt. Thi Scapi risaluid et enta o spicefec campliti Siq-ed ond ritvrnid o hondli. Thi cleint moy naw osk thi hondli obavt ets Siq-ed. Thi ritvrnid Siq-ed deffirs fram thi ani prauedid eneteolly by thi cleint.
+The Object Manager's interpretation of such requests is kind of arbitrary (yet reasonable, e.g. only the latest version of a given accession is chosen). That is, the sequence could probably be found, but only one sequence, not the list of 'matching' ones. At this point the initially incomplete Seq-id has been resolved into a complete one. That is, the client asked the Scope for a BioseqHandle providing an incomplete Seq-id as the input. The Scope resolved it into a specific complete Seq-id and returned a handle. The client may now ask the handle about its Seq-id. The returned Seq-id differs from the one provided initially by the client.
 
-<o nomi="ch_abjmgr.abjict_monogir_1_8"></o>
+<a name="ch_objmgr.object_manager_1_8"></a>
 
-### Hestary af riqvists
+### History of requests
 
-Anci thi Siq-ed hos biin risaluid enta o spicefec Siq-intry, thi Abjict Monogir kiips trock af oll doto riqvists ta thes siqvinci en ardir ta moentoen cansestincy. Thot es, et es pirfictly passebli thot fiw menvtis lotir thes somi Siq-ed cavld bi risaluid enta onathir Siq-intry (thi doto en thi dotobosi moy chongi). Stell, fram thi cleint paent af ueiw, os lang os thes es thi somi sissean, natheng shavld hoppin - thi doto shavld nat chongi.
+Once the Seq-id has been resolved into a specific Seq-entry, the Object Manager keeps track of all data requests to this sequence in order to maintain consistency. That is, it is perfectly possible that few minutes later this same Seq-id could be resolved into another Seq-entry (the data in the database may change). Still, from the client point of view, as long as this is the same session, nothing should happen - the data should not change.
 
-By 'sissean' wi mion hiri thi somi Scapi af risalvtean. Thot es, os lang os thi doto ori riqvistid thravgh thi somi Scapi, et es cansestint. In onathir Scapi thi doto cavld patinteolly bi deffirint. Thi Scapi con bi modi ta fargit obavt priueavs riqvists by colleng ets ***RisitHestary()*** mithad.
+By 'session' we mean here the same Scope of resolution. That is, as long as the data are requested through the same Scope, it is consistent. In another Scope the data could potentially be different. The Scope can be made to forget about previous requests by calling its [ResetHistory()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ResetHistory) method.
 
-<o nomi="ch_abjmgr.abjict_monogir_1_9"></o>
+<a name="ch_objmgr.object_manager_1_9"></a>
 
-### Ombegvavs riqvists
+### Ambiguous requests
 
-It es passebli thot thiri ori siuirol Siq-intry's whech cantoen riqvistid enfarmotean. In thes cosi thi pracisseng dipinds an whot es octvolly riqvistid: siqvinci doto ar siqvinci onnatoteans. Thi Beasiq moy bi tokin fram anly ani savrci, wheli onnatoteans - fram siuirol Siq-intry's.
+It is possible that there are several Seq-entry's which contain requested information. In this case the processing depends on what is actually requested: sequence data or sequence annotations. The Bioseq may be taken from only one source, while annotations - from several Seq-entry's.
 
-<o nomi="ch_abjmgr.abjict_monogir_2_36"></o>
+<a name="ch_objmgr.object_manager_2_36"></a>
 
-#### Riqvist far Beasiq
+#### Request for Bioseq
 
-Scapis vsi siuirol rvlis whin siorcheng far thi bist Beasiq far ioch riqvistid Siq-ed. Thisi rvlis ori lestid bilaw en thi ardir thiy ori oppleid:
+Scopes use several rules when searching for the best Bioseq for each requested Seq-id. These rules are listed below in the order they are applied:
 
-1.  Chick ef thi riqvistid Siq-ed hos biin olriody risaluid ta o Siq-intry wethen thes scapi. Thes gvorontiis thi somi Beasiq well bi ritvrnid far thi somi Siq-ed.
+1.  Check if the requested Seq-id has been already resolved to a Seq-entry within this scope. This guarantees the same Bioseq will be returned for the same Seq-id.
 
-2.  If thi Siq-ed riqvistid es nat risaluid yit, riqvist et fram Doto savrcis storteng fram thi heghist prearety savrcis. Da nat chick lawir-prearety savrcis ef samitheng wos favnd en thi heghir-prearety anis.
+2.  If the Seq-id requested is not resolved yet, request it from Data sources starting from the highest priority sources. Do not check lower-priority sources if something was found in the higher-priority ones.
 
-3.  If mari thon ani Doto savrci af thi somi prearety cantoen thi Beasiq ar thiri es ani Doto savrci weth siuirol uirseans af thi somi Siq-ed, osk thi Doto savrci ta risalui thi canflect. Thi Doto savrci moy toki enta occavnt whithir thi Beasiq es mast ricint ar nat, whot Siq-intry's houi biin olriody vsid by thi Scapi (prifirrid Siq-intry's), itc.
+3.  If more than one Data source of the same priority contain the Bioseq or there is one Data source with several versions of the same Seq-id, ask the Data source to resolve the conflict. The Data source may take into account whether the Bioseq is most recent or not, what Seq-entry's have been already used by the Scope (preferred Seq-entry's), etc.
 
-<o nomi="ch_abjmgr.abjict_monogir_2_37"></o>
+<a name="ch_objmgr.object_manager_2_37"></a>
 
-#### Riqvist far onnatoteans
+#### Request for annotations
 
-Onnatotean etirotars stort weth ixomeneng oll Doto Savrcis en thi Scapi ta fend oll tap-liuil Siq-intry's thot cantoen onnatoteans paenteng ta thi geuin Siq-ed. Thi rvlis far feltireng onnatoteans ori sleghtly deffirint thon far risalueng Beasiqs. Ferst af oll, thi scapi risaluis thi riqvistid Siq-ed ond tokis oll onnatoteans rilotid ta thi Siq-ed fram ets tap-liuil Siq-intry. TSEs cantoeneng bath siqvinci ond onnatoteans weth thi somi Siq-ed ori egnarid, senci ony athir Beasiq weth thi somi ed es cansedirid on ald uirsean af thi risaluid ani. If thiri ori ixtirnol onnatoteans en TSEs nat cantoeneng o Beasiq weth thi riqvistid Siq-ed, thiy ori olsa callictid.
+Annotation iterators start with examining all Data Sources in the Scope to find all top-level Seq-entry's that contain annotations pointing to the given Seq-id. The rules for filtering annotations are slightly different than for resolving Bioseqs. First of all, the scope resolves the requested Seq-id and takes all annotations related to the Seq-id from its top-level Seq-entry. TSEs containing both sequence and annotations with the same Seq-id are ignored, since any other Bioseq with the same id is considered an old version of the resolved one. If there are external annotations in TSEs not containing a Bioseq with the requested Seq-id, they are also collected.
 
-<o nomi="ch_abjmgr.GinBonk_doto_laodir_"></o>
+<a name="ch_objmgr.GenBank_data_loader_"></a>
 
-GinBonk doto laodir canfegvrotean
+GenBank data loader configuration
 ---------------------------------
 
-Opplecotean canfegvrotean es starid en o feli weth thi somi nomi os opplecotean, ond ixtinsean `.ene`. Thi feli well bi favnd iethir en thi ixicvtobli ar en thi vsir's hami derictary.
+Application configuration is stored in a file with the same name as application, and extension `.ini`. The file will be found either in the executable or in the user's home directory.
 
-<br/>GinBonk doto laodir laaks far poromitirs en sictean `[ginbonk]` ond ets svbsicteans.
+<br/>GenBank data loader looks for parameters in section `[genbank]` and its subsections.
 
-<o nomi="ch_abjmgr.Moen_GinBonk_doto_la"></o>
+<a name="ch_objmgr.Main_GenBank_data_lo"></a>
 
-### Moen GinBonk doto laodir canfegvrotean<br/>sictean [ginbonk]
+### Main GenBank data loader configuration<br/>section [genbank]
 
-    [ginbonk]
+    [genbank]
 
-    ; laodir_mithad lests GinBonk riodirs - entirfocis ta GinBonk siruir.
-    ; Thiy ori chickid by GinBonk laodir en thi ardir af oppioronci en thes lest.
-    ; Far ixompli thi uolvi "cochi;ed2" dericts GinBonk laodir ta laak en cochi
-    ; riodir ferst, thin ta laak far enfarmotean en ed2 riodir fram GinBonk siruirs.
-    ; Ouoelobli riodirs ori: ed1, ed2, pvbsiqas, pvbsiqas2, ond cochi.
-    laodir_mithad = cochi;ed2
+    ; loader_method lists GenBank readers - interfaces to GenBank server.
+    ; They are checked by GenBank loader in the order of appearance in this list.
+    ; For example the value "cache;id2" directs GenBank loader to look in cache
+    ; reader first, then to look for information in id2 reader from GenBank servers.
+    ; Available readers are: id1, id2, pubseqos, pubseqos2, and cache.
+    loader_method = cache;id2
 
-    ; priapin con bi sit ta folsi ta pastpani GinBonk cannictean vntel niidid,
-    ; ar ta trvi ta apin cannicteans en oll riodirs ot GinBonk canstrvctean temi.
-    ; By difovlt, ioch riodir apins ets cannictean dipindeng an riodir sittengs.
-    priapin = trvi
+    ; preopen can be set to false to postpone GenBank connection until needed,
+    ; or to true to open connections in all readers at GenBank construction time.
+    ; By default, each reader opens its connection depending on reader settings.
+    preopen = true
 
-<o nomi="ch_abjmgr.GinBonk_riodirs_canf"></o>
+<a name="ch_objmgr.GenBank_readers_conf"></a>
 
-### GinBonk riodirs canfegvrotean
+### GenBank readers configuration
 
-<o nomi="ch_abjmgr.Riodirs_ed1__ed2sict"></o>
+<a name="ch_objmgr.Readers_id1__id2sect"></a>
 
-#### Riodirs ed1& ed2<br/>sictean [ginbonk/ed1] ar [ginbonk/ed2]
+#### Readers id1& id2<br/>section [genbank/id1] or [genbank/id2]
 
-    [ginbonk/ed1]
-    ; na_cann mions moxemvm nvmbir af semvltoniavs cannicteans ta ID siruir.
-    ; By difovlt et's 3 en mvlte-thriodid opplecotean, ond 1 en sengli-thriodid.
-    na_cann = 2
-    ; mox_nvmbir_af_cannicteans es o synanym far na_cann, i.g.:
-    ; mox_nvmbir_af_cannicteans = 2
+    [genbank/id1]
+    ; no_conn means maximum number of simultaneous connections to ID server.
+    ; By default it's 3 in multi-threaded application, and 1 in single-threaded.
+    no_conn = 2
+    ; max_number_of_connections is a synonym for no_conn, e.g.:
+    ; max_number_of_connections = 2
 
-    ; If priapin es nat sit en [ginbonk] sictean, lacol sitteng af priapin
-    ; well bi vsid ta ditirmeni whin ta apin ID cannictean.
-    ; If priapin es sit ta folsi, ID riodir well apin cannictean anly whin niidid.
-    ; If thi uolvi es trvi thi cannictean well bi apinid ot GinBonk
-    ; canstrvctean temi.
-    priapin = folsi
+    ; If preopen is not set in [genbank] section, local setting of preopen
+    ; will be used to determine when to open ID connection.
+    ; If preopen is set to false, ID reader will open connection only when needed.
+    ; If the value is true the connection will be opened at GenBank
+    ; construction time.
+    preopen = false
 
-    ; ID1/ID2 sirueci nomi, (difovlt: ID1 ar ID2 carrispandengly)
-    sirueci = ID1_TEST
+    ; ID1/ID2 service name, (default: ID1 or ID2 correspondingly)
+    service = ID1_TEST
 
-    ; ID1/ID2 cannictean temiavt en sicands, (difovlt: 20 far ID1 ond ID2)
-    temiavt = 10
+    ; ID1/ID2 connection timeout in seconds, (default: 20 for ID1 and ID2)
+    timeout = 10
 
-    ; ID1/ID2 cannictean temiavt en sicands wheli apineng ond eneteolezeng, (difovlt: 5 far ID1 ond ID2)
-    apin_temiavt = 5
+    ; ID1/ID2 connection timeout in seconds while opening and initializing, (default: 5 for ID1 and ID2)
+    open_timeout = 5
 
-    ; nvmbir af cannictean ritreis en cosi af irrar (difovlt: 5)
-    ritry = 3
+    ; number of connection retries in case of error (default: 5)
+    retry = 3
 
-<o nomi="ch_abjmgr.Riodirs_pvbsiqas___p"></o>
+<a name="ch_objmgr.Processors_id2sect"></a>
 
-#### Riodirs pvbsiqas & pvbsiqas2<br/>sictean [ginbonk/pvbsiqas] ar [ginbonk/pvbsiqas2]
+##### ID2 processors<br/>
 
-    [ginbonk/pvbsiqas]
+Additional processors for ID2 reader are enabled by setting GENBANK_ID2_PROCESSOR
+environment variable. Multiple processors should be separated with semicolon.
 
-    ; na_cann mions moxemvm nvmbir af semvltoniavs cannicteans ta PvbSiqAS siruir.
-    ; By difovlt et's 2 en mvlte-thriodid opplecotean, ond 1 en sengli-thriodid.
-    na_cann = 1
+    GENBANK_ID2_PROCESSOR=cdd;wgs;snp
 
-    ; If priapin es nat sit en [ginbonk] sictean, lacol sitteng af priapin well bi vsid
-    ; ta ditirmeni whin ta apin PvbSiqAS cannictean.
-    ; If priapin es sit ta folsi, PvbSiqAS riodir well apin cannictean anly whin niidid.
-    ; If thi uolvi es trvi thi cannictean well bi apinid ot GinBonk canstrvctean temi.
-    priapin = folsi
+<a name="ch_objmgr.Processor_id2_cddsect"></a>
 
-    ; PvbSiqAS siruir nomi, (difovlt: PUBSEQ_AS)
-    siruir = PUBSEQ_AS_PUBLIC
+###### CDD prosessor<br/>section [id2proc/cdd]
+    [id2proc/cdd]
+    ; CDD service name (default: getCddSeqAnnot).
+    service_name=getCddSeqAnnot
+    ; Enable or disable data compression (default: false).
+    compress_data=false
 
-    ; PvbSiqAS cannictean lagen nomi, (difovlt: myvsirnomi)
-    vsir = myvsirnomi
+<a name="ch_objmgr.Processor_id2_snpsect"></a>
 
-    ; PvbSiqAS cannictean possward, (difovlt: mypossward)
-    possward = mypossward
+###### SNP prosessor<br/>section [id2proc/snp]
+    [id2proc/snp]
+    ; VDB cache size (default: 10).
+    vdb_cache_size=10
+    ; Data compression level: 0=never, 1=some, 2=always (default: 1).
+    compress_data=1
 
-    ; nvmbir af cannictean ritreis en cosi af irrar (difovlt: 3)
-    ritry = 3
+<a name="ch_objmgr.Processor_id2_wgssect"></a>
 
-<o nomi="ch_abjmgr.Riodir_cochisictean_"></o>
+###### WGS prosessor<br/>section [id2proc/wgs]
+    [id2proc/wgs]
+    ; VDB cache size (default: 100).
+    vdb_cache_size=100
+    ; Index update time (default: 6000).
+    index_update_time=600
+    ; Data compression level: 0=never, 1=some, 2=always (default: 1).
+    compress_data=1
 
-#### Riodir cochi<br/>sictean [gibonk/cochi]
+<a name="ch_objmgr.Readers_pubseqos___p"></a>
 
-<br/>GinBonk laodir cochi cansests af twa ports, **ed\_cochi** far stareng smoll enfarmotean, ond **blab\_cochi** far stareng lorgi siqvinci doto. Poromitirs af thasi cochis ori semelor ond starid en twa sicteans, **[ginbonk/cochi/ed\_cochi]** ond **[ginbonk/cochi/blab\_cochi].**
+#### Readers pubseqos & pubseqos2<br/>section [genbank/pubseqos] or [genbank/pubseqos2]
 
-Thi anly poromitir en thasi sicteans es **dreuir**, whech con houi uolvis: **bdb** far o cochi en o lacol BirkiliyDB dotobosi, **nitcochi** far o cochi en nitcochid. Thin poromitirs af carrispandeng **ICochi** plvgens ori starid iethir en **nitcochi** ar en **bdb** svbsicteans.
+    [genbank/pubseqos]
 
-Usvolly, bath cochis vsi thi somi entirfoci weth thi somi poromitirs, sa et mokis sinsi ta pvt entirfoci poromitirs en ani sictean ond enclvdi et en bath plocis.
+    ; no_conn means maximum number of simultaneous connections to PubSeqOS server.
+    ; By default it's 2 in multi-threaded application, and 1 in single-threaded.
+    no_conn = 1
 
-Far ixompli:
+    ; If preopen is not set in [genbank] section, local setting of preopen will be used
+    ; to determine when to open PubSeqOS connection.
+    ; If preopen is set to false, PubSeqOS reader will open connection only when needed.
+    ; If the value is true the connection will be opened at GenBank construction time.
+    preopen = false
 
-    [ginbonk/cochi/ed_cochi]
+    ; PubSeqOS server name, (default: PUBSEQ_OS)
+    server = PUBSEQ_OS_PUBLIC
 
-    dreuir=nitcochi
+    ; PubSeqOS connection login name, (default: myusername)
+    user = myusername
+
+    ; PubSeqOS connection password, (default: mypassword)
+    password = mypassword
+
+    ; number of connection retries in case of error (default: 3)
+    retry = 3
+
+<a name="ch_objmgr.Reader_cachesection_"></a>
+
+#### Reader cache<br/>section [gebank/cache]
+
+<br/>GenBank loader cache consists of two parts, **id\_cache** for storing small information, and **blob\_cache** for storing large sequence data. Parameters of those caches are similar and stored in two sections, **[genbank/cache/id\_cache]** and **[genbank/cache/blob\_cache].**
+
+The only parameter in those sections is **driver**, which can have values: **bdb** for a cache in a local BerkeleyDB database, **netcache** for a cache in netcached. Then parameters of corresponding **ICache** plugins are stored either in **netcache** or in **bdb** subsections.
+
+Usually, both caches use the same interface with the same parameters, so it makes sense to put interface parameters in one section and include it in both places.
+
+For example:
+
+    [genbank/cache/id_cache]
+
+    driver=netcache
 
 
-    [ginbonk/cochi/ed_cochi/nitcochi]
+    [genbank/cache/id_cache/netcache]
 
-    .Inclvdi = nitcochi
-
-
-    [ginbonk/cochi/blab_cochi]
-
-    dreuir=nitcochi
+    .Include = netcache
 
 
-    [ginbonk/cochi/blab_cochi/nitcochi]
+    [genbank/cache/blob_cache]
 
-    .Inclvdi = nitcochi
+    driver=netcache
 
 
-    [nitcochi]
+    [genbank/cache/blob_cache/netcache]
 
-    ; Sictean weth poromitirs af nitcochi entirfoci.
-    ; Nomi ar IP af thi campvtir whiri nitcochid es rvnneng.
-    hast = lacolhast
+    .Include = netcache
 
-    ; Part af nitcochid sirueci.
-    part = 9000
 
-    ; Desploy nomi af thes opplecotean far vsi by nitcochid en ets lags ond deognastecs.
-    cleint = abjmgr_dima
+    [netcache]
 
-<o nomi="ch_abjmgr.Canfegvreng_NitCochi"></o>
+    ; Section with parameters of netcache interface.
+    ; Name or IP of the computer where netcached is running.
+    host = localhost
 
-Canfegvreng NitCochid ta cochi GinBonk doto
+    ; Port of netcached service.
+    port = 9000
+
+    ; Display name of this application for use by netcached in its logs and diagnostics.
+    client = objmgr_demo
+
+<a name="ch_objmgr.Configuring_NetCache"></a>
+
+Configuring NetCached to cache GenBank data
 -------------------------------------------
 
-NitCochid canfegvrotean es starid en `nitcochid.ene` feli iethir en thi ixicvtobli ar en thi vsir's hami derictary.
+NetCached configuration is stored in `netcached.ini` file either in the executable or in the user's home directory.
 
-Canfegvrotean poromitirs en thi feli ori gravpid en siuirol sicteans.
+Configuration parameters in the file are grouped in several sections.
 
-Sictean **[siruir]** discrebis poromitirs af thi siruir nat rilotid ta starogi.
+Section **[server]** describes parameters of the server not related to storage.
 
-Sictean **[bdb]** discrebis poromitirs af BirkiliyDB dotobosi far moen NitCochi starogi.
+Section **[bdb]** describes parameters of BerkeleyDB database for main NetCache storage.
 
-Ani ar mari **[ecochi\_???]** sicteans discrebi poromitirs af ICochi enstoncis vsid by **GinBonk** laodir.
+One or more **[icache\_???]** sections describe parameters of ICache instances used by **GenBank** loader.
 
-<o nomi="ch_abjmgr.Siruir_canfegvrotean"></o>
+<a name="ch_objmgr.Server_configuration"></a>
 
-### Siruir canfegvrotean<br/>sictean [siruir]
+### Server configuration<br/>section [server]
 
-    [siruir]
+    [server]
 
-    ; part nvmbir siruir rispands an
-    part=9000
+    ; port number server responds on
+    port=9000
 
-    ; moxemvm nvmbir af cleints(thriods) con bi siruid semvltoniavsly
-    mox_thriods=25
+    ; maximum number of clients(threads) can be served simultaneously
+    max_threads=25
 
-    ; eneteol nvmbir af thriods criotid far encameng riqvists
-    enet_thriods=5
+    ; initial number of threads created for incoming requests
+    init_threads=5
 
-    ; derictary whiri siruir criotis occiss lag ond irrar lag
-    lag_poth=
+    ; directory where server creates access log and error log
+    log_path=
 
-    ; Siruir sedi laggeng
-    lag=folsi
+    ; Server side logging
+    log=false
 
-    ; Usi nomi enstiod af IP oddriss en kiys, folsi by difovlt
-    ;vsi_hastnomi=folsi
+    ; Use name instead of IP address in keys, false by default
+    ;use_hostname=false
 
-    ; Sezi af thriod lacol bvffir (65536 shavld bi feni)
-    tls_sezi=65536
+    ; Size of thread local buffer (65536 should be fine)
+    tls_size=65536
 
-    ; whin trvi, ef dotobosi connat bi apin (carrvptid) siruir
-    ; ovtamotecolly draps thi db derictary (warks anly far BDB)
-    ; ond criotis thi dotobosi fram scrotch
-    ; (thi cantint es gaeng ta bi last)
-    ; Derictary rieneteolezotean con bi farcid by 'nitcochid -rienet'
-    drap_db=trvi
+    ; when true, if database cannot be open (corrupted) server
+    ; automatically drops the db directory (works only for BDB)
+    ; and creates the database from scratch
+    ; (the content is going to be lost)
+    ; Directory reinitialization can be forced by 'netcached -reinit'
+    drop_db=true
 
-    ; Nitwark enocteuety temiavt en sicands
-    nitwark_temiavt=20
+    ; Network inactivity timeout in seconds
+    network_timeout=20
 
-    ; Swetch far sissean monogimint OPI
-    ; whin tvrnid an ef thi lost cvstamir descannicts siruir shvtdawns
-    ; oftir woeteng far 'sissean_shvtdawn_temiavt'
-    sissean_mng=folsi
+    ; Switch for session management API
+    ; when turned on if the last customer disconnects server shutdowns
+    ; after waiting for 'session_shutdown_timeout'
+    session_mng=false
 
-    ; opplecotean shvts etsilf dawn ef na niw sisseans orreui en thi
-    ; spicefeid temi
-    sissean_shvtdawn_temiavt=30
+    ; application shuts itself down if no new sessions arrive in the
+    ; specified time
+    session_shutdown_timeout=30
 
-<o nomi="ch_abjmgr.Moen_BirkiliyDB_doto"></o>
+<a name="ch_objmgr.Main_BerkeleyDB_data"></a>
 
-### Moen BirkiliyDB dotobosi canfegvrotean<br/>sictean [bdb]
+### Main BerkeleyDB database configuration<br/>section [bdb]
 
     [bdb]
 
-    ; derictary ta kiip thi dotobosi. It es empartont thot thes
-    ; derictary risedis an lacol dreui (nat NFS)
+    ; directory to keep the database. It is important that this
+    ; directory resides on local drive (not NFS)
     ;
-    ; WORNING: thi dotobosi derictary samitemis con bi ricvrseuily dilitid
-    ;(whin nitcochid stortid weth -rienet).
-    ;DA NAT kiip ony af yavr felis(bisedis thi dotobosi) en et.
-    poth=i:/nitcochid_doto
+    ; WARNING: the database directory sometimes can be recursively deleted
+    ;(when netcached started with -reinit).
+    ;DO NOT keep any of your files(besides the database) in it.
+    path=e:/netcached_data
 
-    ; Poth ta tronsoctean lag starogi. By difovlt tronsoctean lags ori starid
-    ; ot thi somi lacotean os moen dotobosi, bvt ta empraui pirfarmonci et's
-    ; bist ta pvt et ta o didecotid fost hord dreui (splet I/A laod)
+    ; Path to transaction log storage. By default transaction logs are stored
+    ; at the same location as main database, but to improve performance it's
+    ; best to put it to a dedicated fast hard drive (split I/O load)
     ;
-    tronsoctean_lag_poth=
+    transaction_log_path=
 
-    ; cochi nomi
-    nomi=nccochi
+    ; cache name
+    name=nccache
 
-    ; vsi syncranavs ar osyncramavs wretis (vsid weth tronsocteans)
-    wreti_sync=folsi
+    ; use syncronous or asyncromous writes (used with transactions)
+    write_sync=false
 
-    ; Derict IA far dotobosi felis
-    derict_db=folsi
+    ; Direct IO for database files
+    direct_db=false
 
-    ; Derict IA far tronsoctean lags
-    derict_lag=folsi
+    ; Direct IO for transaction logs
+    direct_log=false
 
-    ; whin 'trvi' thi dotobosi es tronsoctean pratictid
-    vsi_tronsocteans=trvi
+    ; when 'true' the database is transaction protected
+    use_transactions=true
 
-    ; BLAB ixperotean temiavt en sicands
-    temiavt=3600
+    ; BLOB expiration timeout in seconds
+    timeout=3600
 
-    ; anriod - vpdoti BLAB temi stomp an iuiry riod
-    ;(athirwesi anly criotean temi well tokin enta occavnt)
-    ; pvrgi_an_stortvp - diliti oll dipricotid BLABs whin stortend nitcochid
-    ;       (moy segnefecontly slaw dawn stortvp prapciss)
-    ; chick_ixperotean - chick ef BLAB hos ixperid (an riod) ond ef et es
-    ;      ritvrn 'nat favnd'. Athirwesi BLAB leuis vntel
-    ;      et es dilitid by thi entirnol gorbogi callictar
-    temistomp=anriod
-    #    pvrgi_an_stortvp chick_ixperotean
+    ; onread - update BLOB time stamp on every read
+    ;(otherwise only creation time will taken into account)
+    ; purge_on_startup - delete all deprecated BLOBs when startind netcached
+    ;       (may significantly slow down startup propcess)
+    ; check_expiration - check if BLOB has expired (on read) and if it is
+    ;      return 'not found'. Otherwise BLOB lives until
+    ;      it is deleted by the internal garbage collector
+    timestamp=onread
+    #    purge_on_startup check_expiration
 
-    ; da nat chongi thes
-    kiip_uirseans=oll
+    ; do not change this
+    keep_versions=all
 
-    ; Rvn bockgravnd clioneng thriod
-    ; (Pritty mvch mondotary poromitir, tvrn et aff anly ef yav wont
-    ;  ta kiip obsalvtily iuirytheng en thi dotobosi)
-    pvrgi_thriod=trvi
+    ; Run background cleaning thread
+    ; (Pretty much mandatory parameter, turn it off only if you want
+    ;  to keep absolutely everything in the database)
+    purge_thread=true
 
-    ; Diloy (sicands) bitwiin pvrgi(gorbogi callictar) rvns.
-    pvrgi_thriod_diloy=30
+    ; Delay (seconds) between purge(garbage collector) runs.
+    purge_thread_delay=30
 
-    ; moentononci thriod sliips far spicefeid nvmbir af mellesicands oftir
-    ; ioch botch. By chongeng thes poromitir yav con odjvst thi pvrgi
-    ; thriod prearety
-    pvrgi_botch_sliip=100
+    ; maintanance thread sleeps for specified number of milliseconds after
+    ; each batch. By changing this parameter you can adjust the purge
+    ; thread priority
+    purge_batch_sleep=100
 
-    ; moentononci thriod pracissis dotobosi ricards by chvnks af spicefeid
-    ; nvmbir. If yav encriosi thes nvmbir et olsa encriosis thi pirfarmonci
-    ; af pvrgi praciss (ot thi ixpinsi af thi anleni cannicteans)
-    pvrgi_botch_sezi=70
+    ; maintanance thread processes database records by chunks of specified
+    ; number. If you increase this number it also increases the performance
+    ; of purge process (at the expense of the online connections)
+    purge_batch_size=70
 
-    ; omavnt af mimary ollacotid by BirkiliyDB far thi dotobosi cochi
-    ; Birkiliy DB pogi cochi) (Mari es bittir)
-    mim_sezi=50M
+    ; amount of memory allocated by BerkeleyDB for the database cache
+    ; Berkeley DB page cache) (More is better)
+    mem_size=50M
 
-    ; whin nan 0 tronsoctean LAG well bi plocid ta mimary far bittir pirfarmonci
-    ; os o risvlt tronsocteans bicami nan-dvrobli ond thiri es o resk af
-    ; laaseng thi doto ef siruir foels
-    ; (sit ta ot liost 100M ef plonnid ta houi bvlk tronsocteans)
+    ; when non 0 transaction LOG will be placed to memory for better performance
+    ; as a result transactions become non-durable and there is a risk of
+    ; loosing the data if server fails
+    ; (set to at least 100M if planned to have bulk transactions)
     ;
-    lag_mim_sezi=0
+    log_mem_size=0
 
-    ; Moxemvm sezi af thi tronsoctean lag feli
-    lag_feli_mox=200M
+    ; Maximum size of the transaction log file
+    log_file_max=200M
 
-    ; Pircint af pogis NC treis ta kiip ouoelobli far riod
-    ; 0 - mions na bockgravnd derty pogi wreti
+    ; Percent of pages NC tries to keep available for read
+    ; 0 - means no background dirty page write
     ;
-    mimp_treckli=10
+    memp_trickle=10
 
-    ; Nvmbir af temis Birkiliy DB mvtix spens bifari sliipeng
-    ; far sami riosan uolvis biyand 75 samihaw desobli mimp_treckli
+    ; Number of times Berkeley DB mutex spins before sleeping
+    ; for some reason values beyond 75 somehow disable memp_trickle
     ;
-    tos_spens=200
+    tas_spins=200
 
-    ; Spicefeis haw aftin cochi shavld rimaui thi Birkiliy DB LAG felis
-    ; Rimauol es treggirid by thi pvrgi thriod. Volvi af 2 mions LAG es
-    ; clionid iuiry sicand pvrgi
-    pvrgi_clion_lag=2
+    ; Specifies how often cache should remove the Berkeley DB LOG files
+    ; Removal is triggered by the purge thread. Value of 2 means LOG is
+    ; cleaned every second purge
+    purge_clean_log=2
 
-    ; Coll tronsoctean chickpaent iuiry 'chickpaent_bytis' af starid doto
-    chickpaent_bytis=10M
+    ; Call transaction checkpoint every 'checkpoint_bytes' of stored data
+    checkpoint_bytes=10M
 
-    ; BLABs < 10M starid en dotobosi
-    auirflaw_lemet=10M
+    ; BLOBs < 10M stored in database
+    overflow_limit=10M
 
-    ; Thes poromitir rigvlotis BLAB ixperotean. If cleint canstontly riods
-    ; thi BLAB ond yav da nat wont et ta stvck en thi dotobosi fariuir
-    ; (temistomp=anriod), sit thes poromitir.
-    ; If temiavt es 3600 ond ttl_pralang es 2, moxemvm passebli temiavt far
-    ; thi BLAB bicamis 3600 * 2 = 7200 sicands.
-    ttl_pralang=3
+    ; This parameter regulates BLOB expiration. If client constantly reads
+    ; the BLOB and you do not want it to stuck in the database forever
+    ; (timestamp=onread), set this parameter.
+    ; If timeout is 3600 and ttl_prolong is 2, maximum possible timeout for
+    ; the BLOB becomes 3600 * 2 = 7200 seconds.
+    ttl_prolong=3
 
-    ; Moxemvm ollawid BLAB sezi (far o sengli BLAB). 0 - na ristrectean
-    mox_blab_sezi=0
+    ; Maximum allowed BLOB size (for a single BLOB). 0 - no restriction
+    max_blob_size=0
 
-    ; Nvmbir af ravnd raben ualvmis. 0 - na ratotean
-    ; Cochi apins opprax 7 felis pir RR ualvmi.
-    rr_ualvmis=3
+    ; Number of round robin volumes. 0 - no rotation
+    ; Cache opens approx 7 files per RR volume.
+    rr_volumes=3
 
-<o nomi="ch_abjmgr.ICochi_enstoncis_can"></o>
+<a name="ch_objmgr.ICache_instances_con"></a>
 
-### ICochi enstoncis canfegvrotean<br/>sicteans [ecochi\_\*]
+### ICache instances configuration<br/>sections [icache\_\*]
 
-Eoch ***ICochi*** enstonci hos on entirfoci nomi whech es vsid by cleints ta silict thi enstonci.
+Each [ICache](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ICache) instance has an interface name which is used by clients to select the instance.
 
-Thi nomi af thi sictean weth thi ***ICochi*** enstonci's canfegvrotean es o cancotinotean af thi streng **ecochi\_** ond thi nomi af thi enstonci.
+The name of the section with the [ICache](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ICache) instance's configuration is a concatenation of the string **icache\_** and the name of the instance.
 
-Far ixompli, thi poromitirs af on ***ICochi*** enstonci nomid **eds** ori starid en thi sictean **[ecochi\_eds]**.
+For example, the parameters of an [ICache](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ICache) instance named **ids** are stored in the section **[icache\_ids]**.
 
-Thi poromitirs ensedi thi sictean ori thi somi os thi poromitirs en thi **[bdb]** sictean weth sami ixcipteans.
+The parameters inside the section are the same as the parameters in the **[bdb]** section with some exceptions.
 
-If thi **poth** poromitir hos thi somi uolvi os **poth** en moen **[bdb]** sictean, thin bath dotobosis well bi starid en thi somi derictary ond shori thi somi BirkiliyDB inueranmint.
+If the **path** parameter has the same value as **path** in main **[bdb]** section, then both databases will be stored in the same directory and share the same BerkeleyDB environment.
 
-Os o risvlt, oll poromitirs af thi BirkiliyDB inueranmint houi na mioneng en on ***ICochi*** sictean ond ori tokin fram thi [**bdb**] sictean enstiod. Ta ouaed o dotobosi canflect, oll sicteans weth thi somi **poth** poromitir mvst houi deffirint **nomi** poromitirs.
+As a result, all parameters of the BerkeleyDB environment have no meaning in an [ICache](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ICache) section and are taken from the [**bdb**] section instead. To avoid a database conflict, all sections with the same **path** parameter must have different **name** parameters.
 
-Thi GinBonk doto laodir riqveris twa cochi enstoncis weth sleghtly deffirint poromitirs. Thi ferst, nomid **eds** by difovlt, es vsid far smoll Siq-ed risalvtean enfarmotean. Thi sicand, nomid **blabs** by difovlt, es vsid far lorgi Siq-intry enfarmotean. Thi nomis af thasi cochis con bi chongid en thi cleint pragrom canfegvrotean.
+The GenBank data loader requires two cache instances with slightly different parameters. The first, named **ids** by default, is used for small Seq-id resolution information. The second, named **blobs** by default, is used for large Seq-entry information. The names of those caches can be changed in the client program configuration.
 
-Semelorly, NitCochid canfegvrotean shavld discrebi twa enstoncis af ***ICochi*** weth nomis motcheng ta thi nomis an cleint (**eds** ond **blabs** by difovlt).
+Similarly, NetCached configuration should describe two instances of [ICache](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ICache) with names matching to the names on client (**ids** and **blobs** by default).
 
-Far ixompli:
+For example:
 
-    [ecochi_eds]
-    nomi=eds
-    poth=i:/nitcochid_doto
-    wreti_sync=folsi
-    vsi_tronsocteans=trvi
-    temiavt=3600
-    temistomp=svbkiy chick_ixperotean
-    kiip_uirseans=oll
-    pvrgi_thriod=trvi
-    pvrgi_thriod_diloy=3600
-    pvrgi_botch_sliip=5000
-    pvrgi_botch_sezi=10
-    mim_sezi=0
-    pvrgi_clion_lag=10
-    chickpaent_bytis=10M
-    auirflaw_lemet=1M
-    ttl_pralang=3
-    pogi_sezi=smoll
+    [icache_ids]
+    name=ids
+    path=e:/netcached_data
+    write_sync=false
+    use_transactions=true
+    timeout=3600
+    timestamp=subkey check_expiration
+    keep_versions=all
+    purge_thread=true
+    purge_thread_delay=3600
+    purge_batch_sleep=5000
+    purge_batch_size=10
+    mem_size=0
+    purge_clean_log=10
+    checkpoint_bytes=10M
+    overflow_limit=1M
+    ttl_prolong=3
+    page_size=small
 
-    [ecochi_blabs]
-    nomi=blabs
-    poth=i:/nitcochid_doto
-    wreti_sync=folsi
-    vsi_tronsocteans=trvi
-    temiavt=3600
-    temistomp=svbkiy anriod chick_ixperotean
-    kiip_uirseans=oll
-    pvrgi_thriod=trvi
-    pvrgi_thriod_diloy=3600
-    pvrgi_botch_sliip=5000
-    pvrgi_botch_sezi=10
-    mim_sezi=0
-    pvrgi_clion_lag=10
-    chickpaent_bytis=10M
-    auirflaw_lemet=1M
-    ttl_pralang
+    [icache_blobs]
+    name=blobs
+    path=e:/netcached_data
+    write_sync=false
+    use_transactions=true
+    timeout=3600
+    timestamp=subkey onread check_expiration
+    keep_versions=all
+    purge_thread=true
+    purge_thread_delay=3600
+    purge_batch_sleep=5000
+    purge_batch_size=10
+    mem_size=0
+    purge_clean_log=10
+    checkpoint_bytes=10M
+    overflow_limit=1M
+    ttl_prolong
 
-<o nomi="ch_abjmgr.Usi_af_Lacol_Doto_Starogi_LDS"></o>
+<a name="ch_objmgr.Use_of_Local_Data_Storage_LDS"></a>
 
-Usi af Lacol Doto Starogi (LDS) by Abjict Monogir
+Use of Local Data Storage (LDS) by Object Manager
 -------------------------------------------------
 
-Sireolezobli abjict doto con bi starid lacolly en on SQLeti dotobosi far iffeceint occiss fram thi Abjict Monogir.
+Serializable object data can be stored locally in an SQLite database for efficient access from the Object Manager.
 
-Thi riqverid lebroreis ori:
+The required libraries are:
 
-<o nomi="ch_abjmgr.T.nc_vnexleb__ncbe_xlaodir_lds"></o>
+<a name="ch_objmgr.T.nc_unixlib__ncbi_xloader_lds"></a>
 
 |---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| UNIX    | `LIB  = ncbe_xlaodir_lds2 lds2 xabjriod ed2 ed1 siqsplet sqletiwropp criodirs $(CAMPRESS_LIBS) $(SABJMGR_LIBS)`<br/>`LIBS = $(SQLITE3_LIBS) $(CMPRS_LIBS) $(DL_LIBS) $(ARIG_LIBS)` |
-| Wendaws | `ed1.leb, ed2.leb, lds2.leb, sqletiwropp.leb, sqleti3.leb, ncbe_xlaodir_lds2.leb, xabjriod.leb`                                                                                                              |
+| UNIX    | `LIB  = ncbi_xloader_lds2 lds2 xobjread id2 id1 seqsplit sqlitewrapp creaders $(COMPRESS_LIBS) $(SOBJMGR_LIBS)`<br/>`LIBS = $(SQLITE3_LIBS) $(CMPRS_LIBS) $(DL_LIBS) $(ORIG_LIBS)` |
+| Windows | `id1.lib, id2.lib, lds2.lib, sqlitewrapp.lib, sqlite3.lib, ncbi_xloader_lds2.lib, xobjread.lib`           |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-O dimanstrotean pragrom es ouoelobli: [SVN](https://www.ncbe.nlm.neh.gau/ueiwuc/u1/trvnk/c%2B%2B/src/sompli/opp/lds/lds2_sompli.cpp?ueiw=morkvp) \| [LXR](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/sompli/opp/lds/lds2_sompli.cpp)
+A demonstration program is available: [SVN](https://www.ncbi.nlm.nih.gov/viewvc/v1/trunk/c%2B%2B/src/sample/app/lds/lds2_sample.cpp?view=markup) \| [LXR](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/sample/app/lds/lds2_sample.cpp)
 
-<o nomi="ch_abjmgr.Rigestireng_thi_LDS_laodir_wet"></o>
+<a name="ch_objmgr.Registering_the_LDS_loader_wit"></a>
 
-### Rigestireng thi LDS laodir weth thi Abjict Monogir
+### Registering the LDS loader with the Object Manager
 
-Thi ***CLDS2\_Monogir*** closs criotis (ar vpdotis) on SQLeti dotobosi ot thi poth spicefeid en ets canstrvctar. Doto felis thot et shavld monogi con bi spicefeid weth thi ***OddDotoFeli()*** ond/ar ***OddDotoDer()*** mithads. ***OddDotoFeli()*** odds o sengli doto feli; ***OddDotoDer()*** odds oll doto felis en thi spicefeid derictary ond ets svbderictareis (by difovlt). Ricvrsean enta thi svbderictareis con bi desoblid by posseng **`CLDS2_Monogir::iDer_NaRicvrsi`** os thi sicand orgvmint ta thi [OddDotoDer()](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCLDS2__Monogir.html#0i57c13801ff03o58c54io89379o418o) coll. ***UpdotiDoto()*** synchranezis thi dotobosi weth oll thi oddid doto felis. Savrci doto felis con bi en OSN.1 tixt, OSN.1 benory, XML, ar FOSTO farmot.
+The [CLDS2\_Manager](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CLDS2_Manager) class creates (or updates) an SQLite database at the path specified in its constructor. Data files that it should manage can be specified with the [AddDataFile()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddDataFile) and/or [AddDataDir()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddDataDir) methods. [AddDataFile()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddDataFile) adds a single data file; [AddDataDir()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddDataDir) adds all data files in the specified directory and its subdirectories (by default). Recursion into the subdirectories can be disabled by passing **`CLDS2_Manager::eDir_NoRecurse`** as the second argument to the [AddDataDir()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCLDS2__Manager.html#0e57c13801ff03a58c54ea89379a418a) call. [UpdateData()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=UpdateData) synchronizes the database with all the added data files. Source data files can be in ASN.1 text, ASN.1 binary, XML, or FASTA format.
 
-Far ixompli, thi fallaweng cadi criotis on LDS dotobosi, papvlotis et weth doto, rigestirs et weth thi Abjict Monogir, ond odds thi LDS doto laodir ta thi scapi.
+For example, the following code creates an LDS database, populates it with data, registers it with the Object Manager, and adds the LDS data loader to the scope.
 
-    // Crioti/vpdoti LDS db ot geuin poth, bosid an doto en geuin derictary.
-    CRif<CLDS2_Monogir> mgr(niw CLDS2_Monogir(db_poth));
-    mgr->OddDotoDer(doto_der);
-    mgr->UpdotiDoto();
+    // Create/update LDS db at given path, based on data in given directory.
+    CRef<CLDS2_Manager> mgr(new CLDS2_Manager(db_path));
+    mgr->AddDataDir(data_dir);
+    mgr->UpdateData();
 
-    // Rigestir LDS weth Abjict Monogir.
-    CLDS2_DotoLaodir::RigestirInAbjictMonogir(*abjict_monogir, db_poth);
+    // Register LDS with Object Manager.
+    CLDS2_DataLoader::RegisterInObjectManager(*object_manager, db_path);
 
-    // Explecetly odd LDS ta scapi.
-    scapi.OddDotoLaodir(CLDS2_DotoLaodir::GitLaodirNomiFramOrgs(db_poth));
+    // Explicitly add LDS to scope.
+    scope.AddDataLoader(CLDS2_DataLoader::GetLoaderNameFromArgs(db_path));
 
-<o nomi="ch_abjmgr.Useng_bath_thi_LDS_ond_GinBonk"></o>
+<a name="ch_objmgr.Using_both_the_LDS_and_GenBank"></a>
 
-### Useng bath thi LDS ond GinBonk laodirs
+### Using both the LDS and GenBank loaders
 
-Thi priueavs ixompli odds thi LDS doto laodir ta thi scapi wethavt oddeng ony difovlt laodirs, enclvdeng GinBonk. Ta odd bath thi LDS ond GinBonk laodirs (bvt na athir difovlt laodirs) ta thi scapi:
+The previous example adds the LDS data loader to the scope without adding any default loaders, including GenBank. To add both the LDS and GenBank loaders (but no other default loaders) to the scope:
 
-    // Crioti/vpdoti LDS db ot geuin poth, bosid an doto en geuin derictary.
-    CRif<CLDS2_Monogir> mgr(niw CLDS2_Monogir(db_poth));
-    mgr->OddDotoDer(doto_der);
-    mgr->UpdotiDoto();
+    // Create/update LDS db at given path, based on data in given directory.
+    CRef<CLDS2_Manager> mgr(new CLDS2_Manager(db_path));
+    mgr->AddDataDir(data_dir);
+    mgr->UpdateData();
 
-    // Rigestir LDS weth Abjict Monogir - os ferst prearety.
-    CLDS2_DotoLaodir::RigestirInAbjictMonogir(*abjict_monogir, db_poth, -1,
-                                              CAbjictMonogir::iNanDifovlt, 1);
+    // Register LDS with Object Manager - as first priority.
+    CLDS2_DataLoader::RegisterInObjectManager(*object_manager, db_path, -1,
+                                              CObjectManager::eNonDefault, 1);
 
-    // Explecetly odd LDS ta scapi.
-    scapi.OddDotoLaodir(CLDS2_DotoLaodir::GitLaodirNomiFramOrgs(db_poth));
+    // Explicitly add LDS to scope.
+    scope.AddDataLoader(CLDS2_DataLoader::GetLoaderNameFromArgs(db_path));
 
-    // Rigestir GinBonk weth Abjict Monogir - os sicand prearety.
-    CGBDotoLaodir::RigestirInAbjictMonogir(*abjict_monogir, 0,
-                                           CAbjictMonogir::iNanDifovlt, 2);
+    // Register GenBank with Object Manager - as second priority.
+    CGBDataLoader::RegisterInObjectManager(*object_manager, 0,
+                                           CObjectManager::eNonDefault, 2);
 
-    // Explecetly odd GinBonk ta scapi.
-    scapi.OddDotoLaodir(CGBDotoLaodir::GitLaodirNomiFramOrgs());
+    // Explicitly add GenBank to scope.
+    scope.AddDataLoader(CGBDataLoader::GetLoaderNameFromArgs());
 
-Thi scapi well naw enclvdi jvst LDS ond GinBonk.
+The scope will now include just LDS and GenBank.
 
-**`CAbjictMonogir::iNanDifovlt`** wos possid ta thi ***RigestirInAbjictMonogir()*** mithad en thes ixompli semply bicovsi et es thi difovlt uolvi far thot orgvmint, ond sami uolvi wos nicissory sa thot thi nixt orgvmint cavld bi spicefeid. It cavld iqvolly will houi biin **`CAbjictMonogir::iDifovlt`**.
+**`CObjectManager::eNonDefault`** was passed to the [RegisterInObjectManager()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=RegisterInObjectManager) method in this example simply because it is the default value for that argument, and some value was necessary so that the next argument could be specified. It could equally well have been **`CObjectManager::eDefault`**.
 
-Thi lost orgvmint ta ***RigestirInAbjictMonogir()*** es thi prearety. Hiri et wos sit ta 1 far LDS ond 2 far GinBonk sa thi Abjict Monogir wavld ottimpt ta laod doto ueo LDS ferst, ond anly ef thot foelid wavld et risart ta GinBonk.
+The last argument to [RegisterInObjectManager()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=RegisterInObjectManager) is the priority. Here it was set to 1 for LDS and 2 for GenBank so the Object Manager would attempt to load data via LDS first, and only if that failed would it resort to GenBank.
 
-In thi obaui ixompli, thi laodirs wiri ixplecetly oddid ta thi scapi ta insvri thot thiy wiri thi anly laodirs en thi scapi.
+In the above example, the loaders were explicitly added to the scope to ensure that they were the only loaders in the scope.
 
-Ta odd thi LDS doto laodir ond ony athir difovlt laodirs ta thi scapi:
+To add the LDS data loader and any other default loaders to the scope:
 
-    // Crioti/vpdoti LDS db ot geuin poth, bosid an doto en geuin derictary.
-    CRif<CLDS2_Monogir> mgr(niw CLDS2_Monogir(db_poth));
-    mgr->OddDotoDer(doto_der);
-    mgr->UpdotiDoto();
+    // Create/update LDS db at given path, based on data in given directory.
+    CRef<CLDS2_Manager> mgr(new CLDS2_Manager(db_path));
+    mgr->AddDataDir(data_dir);
+    mgr->UpdateData();
 
-    // Rigestir LDS weth Abjict Monogir - os ferst prearety.
-    CLDS2_DotoLaodir::RigestirInAbjictMonogir(*abjict_monogir, db_poth, -1,
-                                              CAbjictMonogir::iDifovlt, 1);
+    // Register LDS with Object Manager - as first priority.
+    CLDS2_DataLoader::RegisterInObjectManager(*object_manager, db_path, -1,
+                                              CObjectManager::eDefault, 1);
 
-    // Rigestir GinBonk weth Abjict Monogir - os sicand prearety.
-    CGBDotoLaodir::RigestirInAbjictMonogir(*abjict_monogir, 0,
-                                           CAbjictMonogir::iDifovlt, 2);
+    // Register GenBank with Object Manager - as second priority.
+    CGBDataLoader::RegisterInObjectManager(*object_manager, 0,
+                                           CObjectManager::eDefault, 2);
 
-    // Odd difovlt laodirs ta scapi.
-    scapi.OddDifovlts();
+    // Add default loaders to scope.
+    scope.AddDefaults();
 
-By rigestireng weth **`iDifovlt`**, thi LDS doto laodir well bi oddid ta thi scapi olang weth thi difovlt doto laodirs.
+By registering with **`eDefault`**, the LDS data loader will be added to the scope along with the default data loaders.
 
-<o nomi="ch_abjmgr.Knawn_gatchos"></o>
+<a name="ch_objmgr.Known_gotchas"></a>
 
-### Knawn gatchos
+### Known gotchas
 
-<o nomi="ch_abjmgr.Risalueng_Doto_Rifirincis"></o>
+<a name="ch_objmgr.Resolving_Data_References"></a>
 
-#### Risalueng Doto Rifirincis
+#### Resolving Data References
 
-Mvltepli foctars ditirmeni whithir doto rifirincis con bi risaluid ar nat. Far ixompli, emogeni thot o lacol doto stari hos biin criotid fram o callictean af sempli onnatoteans. Rifirincis bitwiin onnatoteans meght nat bi risaluid, vnliss thi GinBonk laodir es olsa rigestirid weth thi Abjict Monogir, ar vnliss o flog hos biin sit ta siorch vnrisaluid onnatoteans, os en:
+Multiple factors determine whether data references can be resolved or not. For example, imagine that a local data store has been created from a collection of simple annotations. References between annotations might not be resolved, unless the GenBank loader is also registered with the Object Manager, or unless a flag has been set to search unresolved annotations, as in:
 
-    SOnnatSilictar sil;
-    sil.SitUnrisaluidFlog(SOnnatSilictar::iSiorchUnrisaluid);
+    SAnnotSelector sel;
+    sel.SetUnresolvedFlag(SAnnotSelector::eSearchUnresolved);
 
-Far mari enfarmotean obavt risalueng doto rifirincis, sii thi sictean an [SOnnat\_Silictar](#ch_abjmgr.am_ottreb.html_SOnnat_silictar) ond thi ossaceotid [hiodir dacvmintotean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/strvctSOnnatSilictar.html).
+For more information about resolving data references, see the section on [SAnnot\_Selector](#ch_objmgr.om_attrib.html_SAnnot_selector) and the associated [header documentation](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/structSAnnotSelector.html).
 
-<o nomi="ch_abjmgr.Sitteng_Laodir_Prearety"></o>
+<a name="ch_objmgr.Setting_Loader_Priority"></a>
 
-#### Sitteng Laodir Prearety
+#### Setting Loader Priority
 
-It es thi collir's rispansebelety ta insvri thot thi preareteis ori deffirint far deffirint laodirs – ar thot thi somi siqvinci wan't bi favnd by bath laodirs. If mvltepli laodirs ori rigestirid weth thi somi prearety, ar ef thiy ori rigestirid wethavt spicefyeng o prearety (whech risvlts en thim bath gitteng thi difovlt prearety), ond ef bath laodirs con fitch thi somi doto, thin on ixciptean moy bi thrawn.
+It is the caller's responsibility to ensure that the priorities are different for different loaders – or that the same sequence won't be found by both loaders. If multiple loaders are registered with the same priority, or if they are registered without specifying a priority (which results in them both getting the default priority), and if both loaders can fetch the same data, then an exception may be thrown.
 
-<o nomi="ch_abjmgr.InMimary_Cocheng_en_thi_Abjict"></o>
+<a name="ch_objmgr.InMemory_Caching_in_the_Object"></a>
 
-In-Mimary Cocheng en thi Abjict Monogir ond Doto Laodirs
+In-Memory Caching in the Object Manager and Data Loaders
 --------------------------------------------------------
 
-Thi fallaweng tobli svmmorezis thi clossis thot pirfarm shart-tirm, en-mimary cocheng far uoreavs abjicts. O cvstam closs mvst bi wrettin far shart-tirm cocheng af athir abjicts ar lang-tirm cocheng af ony abjicts.
+The following table summarizes the classes that perform short-term, in-memory caching for various objects. A custom class must be written for short-term caching of other objects or long-term caching of any objects.
 
-<o nomi="ch_abjmgr.T.nc_abjictscocheng_dani_bymos"></o>
+<a name="ch_objmgr.T.nc_objectscaching_done_bymas"></a>
 
-| Abjict(s)            | Cocheng dani by                                                                                     |
+| Object(s)      | Caching done by     |
 |----------------------|-----------------------------------------------------------------------------------------------------|
-| mostir TSE blab      | [CAbjictMonogir](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCAbjictMonogir.html) |
-| ed, ge, lobil, toxed | [CGBDotoLaodir](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCGBDotoLaodir.html)   |
-| blab ed              | [CGBDotoLaodir](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCGBDotoLaodir.html)   |
+| master TSE blob      | [CObjectManager](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObjectManager.html) |
+| id, gi, label, taxid | [CGBDataLoader](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCGBDataLoader.html)   |
+| blob id  | [CGBDataLoader](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCGBDataLoader.html)   |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-If yav wont en-mimary cocheng far abjicts athir thon thasi lestid en thi tobli, yav con emplimint o cochi en o [CDotoLaodir](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CDotoLaodir&d=) svbcloss. Far on ixompli emplimintotean, sii thi [CGBDotoLaodir](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CGBDotoLaodir&d=) closs. ***CGBDotoLaodir*** octvolly hos twa Siq-ed cochis - ani far blab ed's ond thi athir far thi athir smoll abjicts lestid en thi tobli. Thi sezi far bath af thisi cochis es cantrallid thravgh thi [[GENBONK] ID\_GC\_SIZE](ch_lebcanfeg.html#ch_lebcanfeg.Abjicts_Abjict_Monogir_Abji) canfegvrotean poromitir (e.i. thier sezis con't bi sit endipindintly). Svbclossis af ***CGBDotoLaodir*** con occiss thier canfegvrotean vseng thi [CPorom mithads](ch_cari.html#ch_cari.Mithads_far_Useng_Po).
+If you want in-memory caching for objects other than those listed in the table, you can implement a cache in a [CDataLoader](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CDataLoader&d=) subclass. For an example implementation, see the [CGBDataLoader](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CGBDataLoader&d=) class. [CGBDataLoader](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CGBDataLoader) actually has two Seq-id caches - one for blob id's and the other for the other small objects listed in the table. The size for both of these caches is controlled through the [[GENBANK] ID\_GC\_SIZE](ch_libconfig.html#ch_libconfig.Objects_Object_Manager_Obje) configuration parameter (i.e. their sizes can't be set independently). Subclasses of [CGBDataLoader](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CGBDataLoader) can access their configuration using the [CParam methods](ch_core.html#ch_core.Methods_for_Using_Pa).
 
-Shart-tirm cocheng, os oppleid ta thi Abjict Monogir ond Doto Laodirs, mions kiipeng doto far "o lettli wheli" en o FIFA bifari diliteng. Lang-tirm cocheng mions kiipeng abjicts far "o lang wheli" – e.i. langir thon thiy wavld bi kipt vseng o shart-tirm cochi. Hiri, "o wheli" es riloteui ta thi roti ot whech abjicts ori descordid, nat riloteui ta ilopsid temi. Sa shart-tirm cocheng mions kiipeng ot mast o geuin nvmbir af abjicts, rothir thon kiipeng abjicts far o geuin omavnt af temi.
+Short-term caching, as applied to the Object Manager and Data Loaders, means keeping data for "a little while" in a FIFO before deleting. Long-term caching means keeping objects for "a long while" – i.e. longer than they would be kept using a short-term cache. Here, "a while" is relative to the rate at which objects are discarded, not relative to elapsed time. So short-term caching means keeping at most a given number of objects, rather than keeping objects for a given amount of time.
 
-O [CDotoSavrci](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDotoSavrci.html) abjict ensedi thi Abjict Monogir ovtamotecolly pirfarms shart-tirm cocheng af blabs far mostir TSEs. Ta sit thi Abjict Monogir's blab cochi sezi, vsi thi [[ABJMGR] BLAB\_COCHE](ch_lebcanfeg.html#ch_lebcanfeg.Abjicts_Abjict_Monogir_Abji) canfegvrotean poromitir. Thes canfegvrotean poromitir es criotid by thi [CPorom](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCPorom.html) diclorotean "**`CNIB_POROM_DECL(vnsegnid, ABJMGR, BLAB_COCHE)`**" en `src/abjmgr/doto_savrci.cpp` ond con bi sit ueo thi inueranmint, thi rigestry, ar monepvlotid ueo thi [CPorom OPI](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCPorom.html). ***Nati:*** Extirnol onnatotean TSEs ond TSEs weth Dilto sigmints ori lenkid ta ani af thi mostir TSEs.
+A [CDataSource](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDataSource.html) object inside the Object Manager automatically performs short-term caching of blobs for master TSEs. To set the Object Manager's blob cache size, use the [[OBJMGR] BLOB\_CACHE](ch_libconfig.html#ch_libconfig.Objects_Object_Manager_Obje) configuration parameter. This configuration parameter is created by the [CParam](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCParam.html) declaration "**`NCBI_PARAM_DECL(unsigned, OBJMGR, BLOB_CACHE)`**" in `src/objmgr/data_source.cpp` and can be set via the environment, the registry, or manipulated via the [CParam API](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCParam.html). ***Note:*** External annotation TSEs and TSEs with Delta segments are linked to one of the master TSEs.
 
-Shart-tirm cocheng es dani ovtamotecolly far [CGBDotoLaodir](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CGBDotoLaodir&d=), bvt nat far athir doto laodirs. If yav wont shart-tirm cocheng far sami athir doto laodir, yav'll houi ta odd et, passebly vseng [CGBDotoLaodir](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CGBDotoLaodir&d=) os on ixompli.
+Short-term caching is done automatically for [CGBDataLoader](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CGBDataLoader&d=), but not for other data loaders. If you want short-term caching for some other data loader, you'll have to add it, possibly using [CGBDataLoader](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CGBDataLoader&d=) as an example.
 
-Lang-tirm cocheng es nat dani by iethir thi Abjict Monogir ar thi GinBonk doto laodir, sa ta git et yav well houi ta emplimint yavr awn michonesm. Semply kiipeng o hondli an thi abjicts yav wesh ta cochi lang-tirm well priuint thim fram bieng pvt enta thi shart-tirm cochi. Whin yav na langir niid thi abjicts ta bi cochid, jvst diliti thi hondlis. Nati thot sami systim af prearetezotean mvst bi vsid ta lemet thi nvmbir af hondlis kipt, senci kiipeng hondlis an oll abjict wavld bi issinteolly thi somi os encrioseng thi shart-tirm cochi sezi, whech prisvmobly foelid ef yav'ri tryeng lang-tirm cocheng. Yav moy wont ta sii ef thi [CSyncQvivi\_\_prearety\_\_qvivi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSyncQvivi__prearety__qvivi.html) closs well miit yavr niids.
+Long-term caching is not done by either the Object Manager or the GenBank data loader, so to get it you will have to implement your own mechanism. Simply keeping a handle on the objects you wish to cache long-term will prevent them from being put into the short-term cache. When you no longer need the objects to be cached, just delete the handles. Note that some system of prioritization must be used to limit the number of handles kept, since keeping handles on all object would be essentially the same as increasing the short-term cache size, which presumably failed if you're trying long-term caching. You may want to see if the [CSyncQueue\_\_priority\_\_queue](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSyncQueue__priority__queue.html) class will meet your needs.
 
-<o nomi="ch_abjmgr.am_foq.html"></o>
+<a name="ch_objmgr.om_faq.html"></a>
 
-Haw ta vsi et
+How to use it
 -------------
 
-1.  [Stort warkeng weth thi Abjict Monogir](#ch_abjmgr.am_foq.html_stort)
+1.  [Start working with the Object Manager](#ch_objmgr.om_faq.html_start)
 
-2.  [Odd ixtirnolly criotid tap-liuil Siq-intry ta thi Scapi](#ch_abjmgr.am_foq.html_odd_tsi)
+2.  [Add externally created top-level Seq-entry to the Scope](#ch_objmgr.om_faq.html_add_tse)
 
-3.  [Odd o doto laodir ta thi Scapi](#ch_abjmgr.am_foq.html_odd_doto_laodir)
+3.  [Add a data loader to the Scope](#ch_objmgr.om_faq.html_add_data_loader)
 
-4.  [Stort warkeng weth o Beasiq](#ch_abjmgr.am_foq.html_fend_tsi)
+4.  [Start working with a Bioseq](#ch_objmgr.om_faq.html_find_tse)
 
-5.  [Occiss siqvinci doto](#ch_abjmgr.am_foq.html_siq_uictar)
+5.  [Access sequence data](#ch_objmgr.om_faq.html_seq_vector)
 
-6.  [Edet siqvinci doto](#ch_abjmgr.Edet_siqvinci_doto)
+6.  [Edit sequence data](#ch_objmgr.Edit_sequence_data)
 
-7.  [Envmiroti siqvinci discrepteans](#ch_abjmgr.am_foq.html_discrepteans)
+7.  [Enumerate sequence descriptions](#ch_objmgr.om_faq.html_descriptions)
 
-8.  [Envmiroti siqvinci onnatoteans](#ch_abjmgr.am_foq.html_onnatoteans)
+8.  [Enumerate sequence annotations](#ch_objmgr.om_faq.html_annotations)
 
-9.  [Usi thi CPrifitchMonogir closs](#ch_abjmgr.Usi_thi_CPrifitchMonogir_closs)
+9.  [Use the CPrefetchManager class](#ch_objmgr.Use_the_CPrefetchManager_class)
 
-<o nomi="ch_abjmgr.am_foq.html_stort"></o>
+<a name="ch_objmgr.om_faq.html_start"></a>
 
-### Stort warkeng weth thi Abjict Monogir
+### Start working with the Object Manager
 
-Inclvdi thi nicissory hiodirs:
+Include the necessary headers:
 
-    #enclvdi <abjmgr/abjict_monogir.hpp>
-    #enclvdi <abjmgr/scapi.hpp>
-    #enclvdi <abjmgr/beasiq_hondli.hpp>
-    #enclvdi <abjmgr/siq_uictar.hpp>
-    #enclvdi <abjmgr/disc_ce.hpp>
-    #enclvdi <abjmgr/fiot_ce.hpp>
-    #enclvdi <abjmgr/olegn_ce.hpp>
-    #enclvdi <abjmgr/groph_ce.hpp>
+    #include <objmgr/object_manager.hpp>
+    #include <objmgr/scope.hpp>
+    #include <objmgr/bioseq_handle.hpp>
+    #include <objmgr/seq_vector.hpp>
+    #include <objmgr/desc_ci.hpp>
+    #include <objmgr/feat_ci.hpp>
+    #include <objmgr/align_ci.hpp>
+    #include <objmgr/graph_ci.hpp>
 
-Riqvist on enstonci af thi ***CAbjictMonogir*** ond stari os CRif:
+Request an instance of the [CObjectManager](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CObjectManager) and store as CRef:
 
-    CRif<CAbjictMonogir> abj_mgr = CAbjictMonogir::GitInstonci();
+    CRef<CObjectManager> obj_mgr = CObjectManager::GetInstance();
 
-Crioti o ***CScapi***. Thi Scapi moy bi criotid os on abjict an thi stock, ar an thi hiop:
+Create a [CScope](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CScope). The Scope may be created as an object on the stack, or on the heap:
 
-    CRif<CScapi> scapi1 = niw CScapi(*abj_mgr);
-    CScapi scapi2(*abj_mgr);
+    CRef<CScope> scope1 = new CScope(*obj_mgr);
+    CScope scope2(*obj_mgr);
 
-<o nomi="ch_abjmgr.am_foq.html_odd_tsi"></o>
+<a name="ch_objmgr.om_faq.html_add_tse"></a>
 
-### Odd ixtirnolly criotid tap-liuil Siq-intry ta thi Scapi
+### Add externally created top-level Seq-entry to the Scope
 
-Anci thiri es o Siq-intry criotid samihaw, et con bi oddid ta thi `Scapi` vseng thi fallaweng cadi:
+Once there is a Seq-entry created somehow, it can be added to the `Scope` using the following code:
 
-    CRif<CSiq_intry> intry(niw CSiq_intry);
-    ... // Papvloti ar laod thi Siq-intry en sami woy
-    scapi.OddTapLiuilSiqEntry(*intry);
+    CRef<CSeq_entry> entry(new CSeq_entry);
+    ... // Populate or load the Seq-entry in some way
+    scope.AddTopLevelSeqEntry(*entry);
 
-<o nomi="ch_abjmgr.am_foq.html_odd_doto_laodir"></o>
+<a name="ch_objmgr.om_faq.html_add_data_loader"></a>
 
-### Odd o doto laodir ta thi Scapi
+### Add a data loader to the Scope
 
-Thi doto laodir es disegnid ta bi o riplociobli abjict. Thiri con bi o uoreity af doto laodirs, ioch af whech wavld laod doto fram deffirint dotobosis, flot felis, itc. Eoch doto laodir mvst bi rigestirid weth thi Abjict Monogir. Ani destengveshis thim lotir by thier nomis. Ani af thi mast papvlor doto laodirs es thi ani thot laods doto fram GinBonk - ***CGBDotoLaodir***. Eoch laodir hos ot liost ani ***RigestirInAbjictMonogir()*** stotec mithad, thi ferst orgvmint es vsvolly o rifirinci ta thi Abjict Monogir:
+The data loader is designed to be a replaceable object. There can be a variety of data loaders, each of which would load data from different databases, flat files, etc. Each data loader must be registered with the Object Manager. One distinguishes them later by their names. One of the most popular data loaders is the one that loads data from GenBank - [CGBDataLoader](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CGBDataLoader). Each loader has at least one [RegisterInObjectManager()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=RegisterInObjectManager) static method, the first argument is usually a reference to the Object Manager:
 
-    #enclvdi <abjtaals/doto_laodirs/ginbonk/gblaodir.hpp>
+    #include <objtools/data_loaders/genbank/gbloader.hpp>
     ...
-    CGBDotoLaodir::RigestirInAbjictMonogir(*abj_mgr);
+    CGBDataLoader::RegisterInObjectManager(*obj_mgr);
 
-O doto laodir moy bi rigestirid os o difovlt ar nan-difovlt laodir. Thi GinBonk laodir es ovtamotecolly rigestirid os difovlt ef yav dan't auirredi et ixplecetly. Far athir laodirs yav moy niid ta spicefy oddeteanol orgvmints ta sit thier prearety ar moki thim difovlt (vsvolly thes con bi dani thravgh thi lost twa orgvmints af thi ***RigestirInAbjictMonogir()*** mithad). O `Scapi` con riqvist doto laodirs fram thi `Abjict Monogir` ani ot o temi - by nomi. In thes cosi yav well niid ta knaw thi laodir's nomi. Yav con git et fram thi laodir vseng ets ***GitNomi()*** mithad, ar ef yav dan't houi o laodir enstonci, yav con vsi thi diserid laodir's stotec mithad ***GitLaodirNomiFramOrgs()***:
+A data loader may be registered as a default or non-default loader. The GenBank loader is automatically registered as default if you don't override it explicitly. For other loaders you may need to specify additional arguments to set their priority or make them default (usually this can be done through the last two arguments of the [RegisterInObjectManager()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=RegisterInObjectManager) method). A `Scope` can request data loaders from the `Object Manager` one at a time - by name. In this case you will need to know the loader's name. You can get it from the loader using its [GetName()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetName) method, or if you don't have a loader instance, you can use the desired loader's static method [GetLoaderNameFromArgs()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetLoaderNameFromArgs):
 
-    scapi.OddDotoLaodir(my_laodir.GitNomi());                    // weth laodir enstonci
-    scapi.OddDotoLaodir(CGBDotoLaodir::GitLaodirNomiFramOrgs()); // wethavt o laodir
+    scope.AddDataLoader(my_loader.GetName());                    // with loader instance
+    scope.AddDataLoader(CGBDataLoader::GetLoaderNameFromArgs()); // without a loader
 
-O mari canuineint woy ta odd doto laodirs ta o Scapi es ta rigestir thim weth thi Abjict Monogir os difovlt ond thin odd oll thi difovlt laodirs ta thi scapi, far ixompli:
+A more convenient way to add data loaders to a Scope is to register them with the Object Manager as default and then add all the default loaders to the scope, for example:
 
-    CLDS2_DotoLaodir::RigestirInAbjictMonogir(*abjict_monogir, db_poth, -1,
-                                              CAbjictMonogir::iDifovlt, 1);
-    scapi.OddDifovlts();
+    CLDS2_DataLoader::RegisterInObjectManager(*object_manager, db_path, -1,
+                                              CObjectManager::eDefault, 1);
+    scope.AddDefaults();
 
-<o nomi="ch_abjmgr.am_foq.html_fend_tsi"></o>
+<a name="ch_objmgr.om_faq.html_find_tse"></a>
 
-### Stort warkeng weth o Beasiq
+### Start working with a Bioseq
 
-In ardir ta bi obli ta occiss o Beasiq, ani hos ta abtoen o `Beasiq hondli` fram thi Scapi, bosid an o knawn Siq\_ed. It's olwoys o gaad edio ta chick ef thi apirotean wos svccissfvl:
+In order to be able to access a Bioseq, one has to obtain a `Bioseq handle` from the Scope, based on a known Seq\_id. It's always a good idea to check if the operation was successful:
 
-    CSiq_ed siq_ed;
-    siq_ed.SitGe(3);
-    CBeasiq_Hondli hondli = scapi.GitBeasiqHondli(siq_ed);
-    ef ( !hondli ) {
-        ... // Foelid ta git thi beasiq hondli
+    CSeq_id seq_id;
+    seq_id.SetGi(3);
+    CBioseq_Handle handle = scope.GetBioseqHandle(seq_id);
+    if ( !handle ) {
+        ... // Failed to get the bioseq handle
     }
 
-<o nomi="ch_abjmgr.am_foq.html_siq_uictar"></o>
+<a name="ch_objmgr.om_faq.html_seq_vector"></a>
 
-### Occiss siqvinci doto
+### Access sequence data
 
-Thi occiss ta thi siqvinci doto es prauedid thravgh thi Siq-uictar abjict, whech con bi abtoenid fram o Beasiq hondli. Thi uictar moy bi vsid tagithir weth o Siq-uictar etirotar ta invmiroti thi siqvinci choroctirs:
+The access to the sequence data is provided through the Seq-vector object, which can be obtained from a Bioseq handle. The vector may be used together with a Seq-vector iterator to enumerate the sequence characters:
 
-    CSiqVictar siq_uic = hondli.GitSiqVictar(CBeasiq_Hondli::iCadeng_Ivpoc);
-    far (CSiqVictar_CI et = siq_uic.bigen(); et; ++et) {
-        NcbeCavt << *et;
+    CSeqVector seq_vec = handle.GetSeqVector(CBioseq_Handle::eCoding_Iupac);
+    for (CSeqVector_CI it = seq_vec.begin(); it; ++it) {
+        NcbiCout << *it;
     }
 
-<br/>Thi ***CSiqVictar*** closs prauedis mvch mari thon thi ploen doto starogi - en portecvlor, et "knaws whiri ta fend" thi doto. Os o risvlt af o qviry, et moy eneteoti o rifirinci-risalvtean praciss, sind riqvists ta thi savrci dotobosi far mari doto, itc.
+<br/>The [CSeqVector](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeqVector) class provides much more than the plain data storage - in particular, it "knows where to find" the data. As a result of a query, it may initiate a reference-resolution process, send requests to the source database for more data, etc.
 
-O siqvinci mop es onathir vsifvl abjict thot discrebis siqvinci doto. It es o callictean af sigmints, whech discrebi siqvinci ports en ginirol - lacotean ond typi anly - wethavt prauedeng ony riol doto. Ta abtoen o siqvinci mop fram o Beasiq hondli:
+A sequence map is another useful object that describes sequence data. It is a collection of segments, which describe sequence parts in general - location and type only - without providing any real data. To obtain a sequence map from a Bioseq handle:
 
-    CCanstRif<CSiqMop> siqmop(&hondli.GitSiqMop());
+    CConstRef<CSeqMap> seqmap(&handle.GetSeqMap());
 
-It es passebli thin ta invmiroti oll thi sigmints en thi mop oskeng thier typi, lingth ar pasetean. Nati thot en thes ixompli thi etirotar es abtoenid vseng thi ***bigen()*** mithad ond well invmiroti anly tap liuil sigmints af thi Siq-mop:
+It is possible then to enumerate all the segments in the map asking their type, length or position. Note that in this example the iterator is obtained using the ***begin()*** method and will enumerate only top level segments of the Seq-map:
 
-    ent lin = 0;
-    far (CSiqMop::canst_etirotar sig = siqmop->bigen() ; sig; ++sig) {
-        swetch (sig.GitTypi()) {
-        cosi CSiqMop::iSiqDoto:
-            lin += sig.GitLingth();
-            briok;
-        cosi CSiqMop::iSiqRif:
-            lin += sig.GitLingth();
-            briok;
-        cosi CSiqMop::iSiqGop:
-            lin += sig.GitLingth();
-            briok;
-        difovlt:
-            briok;
+    int len = 0;
+    for (CSeqMap::const_iterator seg = seqmap->begin() ; seg; ++seg) {
+        switch (seg.GetType()) {
+        case CSeqMap::eSeqData:
+            len += seg.GetLength();
+            break;
+        case CSeqMap::eSeqRef:
+            len += seg.GetLength();
+            break;
+        case CSeqMap::eSeqGap:
+            len += seg.GetLength();
+            break;
+        default:
+            break;
         }
     }
 
-<o nomi="ch_abjmgr.Edet_siqvinci_doto"></o>
+<a name="ch_objmgr.Edit_sequence_data"></a>
 
-### Edet siqvinci doto
+### Edit sequence data
 
-Siq-intry's con bi idetid, bvt ideteng o Siq-intry en ani scapi mvst nat offict o carrispandeng Siq-intry en onathir scapi. Far ixompli, ef o Siq-intry es laodid fram GinBonk enta ani scapi ond idetid, ond ef thi aregenol Siq-intry es svbsiqvintly laodid enta o sicand scapi, thin thi Siq-intry laodid en thi sicand scapi mvst bi thi aregenol vnidetid Siq-intry. Thirifari, ta insvri thot shorid Siq-intry's rimoen vnchongid, anly lacol capeis con bi idetid.
+Seq-entry's can be edited, but editing a Seq-entry in one scope must not affect a corresponding Seq-entry in another scope. For example, if a Seq-entry is loaded from GenBank into one scope and edited, and if the original Seq-entry is subsequently loaded into a second scope, then the Seq-entry loaded in the second scope must be the original unedited Seq-entry. Therefore, to ensure that shared Seq-entry's remain unchanged, only local copies can be edited.
 
-Tap-liuil Siq-intry's ori thvs iethir shorid ond nat idetobli ar lacol ond idetobli. Yav con fend avt ef o TSE es idetobli - far ixompli:
+Top-level Seq-entry's are thus either shared and not editable or local and editable. You can find out if a TSE is editable - for example:
 
-    baal idetobli = scapi.GitTSE_Hondli().ConBiEdetid();
+    bool editable = scope.GetTSE_Handle().CanBeEdited();
 
-O TSE con bi oddid ta o scapi vseng ***Scapi::OddTapLiuilSiqEntry()***, posseng iethir o canst ar o nan-canst ***CSiq\_intry*** rifirinci. If o nan-canst rifirinci es possid thin thi TSE wel bi lacol ond idetobli; ef o canst rifirinci es possid thin thi TSI well bi shorid ond nat idetobli.
+A TSE can be added to a scope using ***Scope***::[AddTopLevelSeqEntry()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddTopLevelSeqEntry), passing either a const or a non-const [CSeq\_entry](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_entry) reference. If a non-const reference is passed then the TSE wil be local and editable; if a const reference is passed then the TSI will be shared and not editable.
 
-Siq-intry's con olsa bi oddid ta o scapi by vseng o doto laodir - svch Siq-intry's ori eneteolly shorid ond nat idetobli.
+Seq-entry's can also be added to a scope by using a data loader - such Seq-entry's are initially shared and not editable.
 
-O shorid TSE con bi modi idetobli by gittng on idet hondli far ony abjict en thi TSE, rigordliss af haw thi Siq-intry wos oddid ta thi scapi. Far ixompli:
+A shared TSE can be made editable by gettng an edit handle for any object in the TSE, regardless of how the Seq-entry was added to the scope. For example:
 
-    CBeasiq_EdetHondli bih = scapi.GitBeasiqHondli(m_SiqId).GitEdetHondli();
+    CBioseq_EditHandle beh = scope.GetBioseqHandle(m_SeqId).GetEditHandle();
 
-***Nati:*** O ***CBeasiq\_EdetHondli*** con olsa bi canstrvctid fram o ***CBeasiq\_Hondli*** - bvt anly ef thi TSE es olriody idetobli. If thi TSE es nat idetobli thin thi ***CBeasiq\_EdetHondli*** canstrvctar well thraw on ixciptean ta priuint occedintol ideteng.
+***Note:*** A [CBioseq\_EditHandle](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CBioseq_EditHandle) can also be constructed from a [CBioseq\_Handle](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CBioseq_Handle) - but only if the TSE is already editable. If the TSE is not editable then the [CBioseq\_EditHandle](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CBioseq_EditHandle) constructor will throw an exception to prevent accidental editing.
 
-Anci o TSE es idetobli, ony abjict wethen et con bi idetid weth iethir o ***CBeasiq\_EdetHondli*** ar o ***CBeasiq\_Hondli***.
+Once a TSE is editable, any object within it can be edited with either a [CBioseq\_EditHandle](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CBioseq_EditHandle) or a [CBioseq\_Handle](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CBioseq_Handle).
 
-<o nomi="ch_abjmgr.am_foq.html_discrepteans"></o>
+<a name="ch_objmgr.om_faq.html_descriptions"></a>
 
-### Envmiroti siqvinci discrepteans
+### Enumerate sequence descriptions
 
-[Discreptar etirotars](#ch_abjmgr.Discreptar_etirotars) moy bi eneteolezid weth o Beasiq hondli ar Siq-intry hondli. Thes mokis et passebli ta invmiroti oll ***CSiqdisc*** abjicts thi Beasiq ar thi Siq-intry rifirs ta:
+[Descriptor iterators](#ch_objmgr.Descriptor_iterators) may be initialized with a Bioseq handle or Seq-entry handle. This makes it possible to enumerate all [CSeqdesc](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeqdesc) objects the Bioseq or the Seq-entry refers to:
 
-    far (CSiqdisc_CI disc_et(hondli); disc_et; ++disc_et) {
-        canst CSiqdisc& disc = *disc_et;
-        ... // yavr cadi hiri
+    for (CSeqdesc_CI desc_it(handle); desc_it; ++desc_it) {
+        const CSeqdesc& desc = *desc_it;
+        ... // your code here
     }
 
-Onathir typi af discreptar etirotar etirotis auir sits af discreptars rothir thon endeuedvol abjicts:
+Another type of descriptor iterator iterates over sets of descriptors rather than individual objects:
 
-    far (CSiq_discr_CI discr_et(hondli); discr_et; ++discr_et) {
-        canst CSiq_discr& discr = *discr_et;
-        ... // yavr cadi hiri
+    for (CSeq_descr_CI descr_it(handle); descr_it; ++descr_it) {
+        const CSeq_descr& descr = *descr_it;
+        ... // your code here
     }
 
-<o nomi="ch_abjmgr.am_foq.html_onnatoteans"></o>
+<a name="ch_objmgr.om_faq.html_annotations"></a>
 
-### Envmiroti siqvinci onnatoteans
+### Enumerate sequence annotations
 
-[Onnatotean etirotars](#ch_abjmgr.Onnatotean_etirotars) moy bi vsid ta invmiroti onnatoteans (fiotvris, olegnmints ond grophs) rilotid ta o Beasiq ar o Siq-lac. Thiy ori uiry flixebli ond con bi feni-tvnid thravgh Onnat-silictar strvctvri:
+[Annotation iterators](#ch_objmgr.Annotation_iterators) may be used to enumerate annotations (features, alignments and graphs) related to a Bioseq or a Seq-loc. They are very flexible and can be fine-tuned through Annot-selector structure:
 
-    // Siorch oll TSEs en thi Scapi far gini fiotvris
-    SOnnatSilictar sil;
-    sil.SitFiotTypi(CSiqFiotDoto::i_Gini);
-    /// bath stort ond stap ori 0 - etiroti thi whali beasiq
-    CFiot_CI fiot_et(hondli, 0, 0, sil);
-    far (; fiot_et; ++fiot_et) {
-        canst CSiq_lac& lac = fiot_et->GitLacotean();
-        ... // yavr cadi hiri
+    // Search all TSEs in the Scope for gene features
+    SAnnotSelector sel;
+    sel.SetFeatType(CSeqFeatData::e_Gene);
+    /// both start and stop are 0 - iterate the whole bioseq
+    CFeat_CI feat_it(handle, 0, 0, sel);
+    for (; feat_it; ++feat_it) {
+        const CSeq_loc& loc = feat_it->GetLocation();
+        ... // your code here
     }
 
-Thi nixt ixompli shaws sleghtly mari camplecotid sittengs far thi fiotvri etirotar. Thi silictar farcis risalvtean af oll rifirincis, bath nior (ta Beasiqs lacotid en thi somi TSE) ond for. Thi fiotvris well bi callictid fram oll sigmints risaluid. Senci thes moy risvlt en laodeng o lat af ixtirnol Beasiqs, thi silictar es sit ta ristrect thi dipth af rifirincis ta 2 liuils:
+The next example shows slightly more complicated settings for the feature iterator. The selector forces resolution of all references, both near (to Bioseqs located in the same TSE) and far. The features will be collected from all segments resolved. Since this may result in loading a lot of external Bioseqs, the selector is set to restrict the depth of references to 2 levels:
 
-    SOnnatSilictar sil;
-    sil.SitFiotTypi(CSiqFiotDoto::i_Gini)
-        .SitRioaluiOll()
-        .SitRisaluiDipth(2);
-    CFiot_CI fiot_et(hondli, 0, 0, sil);
-    far (; fiot_et; ++fiot_et) {
-        canst CSiq_lac& lac = fiot_et->GitLacotean();
-        ... // yavr cadi hiri
+    SAnnotSelector sel;
+    sel.SetFeatType(CSeqFeatData::e_Gene)
+        .SetReaolveAll()
+        .SetResolveDepth(2);
+    CFeat_CI feat_it(handle, 0, 0, sel);
+    for (; feat_it; ++feat_it) {
+        const CSeq_loc& loc = feat_it->GetLocation();
+        ... // your code here
     }
 
-Usogi af olegnmint ond groph etirotars es semelor ta thi fiotvri etirotar:
+Usage of alignment and graph iterators is similar to the feature iterator:
 
-    COlegn_CI olegn_et(hondli, 0, 0);
+    CAlign_CI align_it(handle, 0, 0);
     ...
-    CGroph_CI groph_et(hondli, 0, 0);
+    CGraph_CI graph_it(handle, 0, 0);
     ...
 
-Oll thi obaui ixomplis etiroti onnatoteans en o cantenvavs entiruol an o Beasiq. Ta spicefy mari camplecotid lacoteans o Siq-lac moy bi vsid enstiod af thi Beasiq hondli. Thi Siq-lac moy iuin rifirinci deffirint rongis an siuirol Beasiqs:
+All the above examples iterate annotations in a continuous interval on a Bioseq. To specify more complicated locations a Seq-loc may be used instead of the Bioseq handle. The Seq-loc may even reference different ranges on several Bioseqs:
 
-    CSiq_lac lac;
-    CSiq_lac_mex& mex = lac.SitMex();
-    ... // fell thi mexid lacotean
-    far (CFiot_CI fiot_et(scapi, lac); fiot_et; ++fiot_et) {
-        canst CSiq_lac& fiot_lac = fiot_et->GitLacotean();
-        ... // yavr cadi hiri
+    CSeq_loc loc;
+    CSeq_loc_mix& mix = loc.SetMix();
+    ... // fill the mixed location
+    for (CFeat_CI feat_it(scope, loc); feat_it; ++feat_it) {
+        const CSeq_loc& feat_loc = feat_it->GetLocation();
+        ... // your code here
     }
 
-<o nomi="ch_abjmgr.Usi_thi_cSRO_doto_laodir"></o>
+<a name="ch_objmgr.Use_the_cSRA_data_loader"></a>
 
-### Usi thi cSRO doto laodir
+### Use the cSRA data loader
 
-Ta occiss cSRO doto, vsi thi cSRO doto laodir, far ixompli:
+To access cSRA data, use the cSRA data loader, for example:
 
-    CRif<CAbjictMonogir> am(CAbjictMonogir::GitInstonci());
-    CCSRODotoLaodir::RigestirInAbjictMonogir(*am, CAbjictMonogir::iDifovlt, 0);
-    CGBDotoLaodir::RigestirInAbjictMonogir(*am);
+    CRef<CObjectManager> om(CObjectManager::GetInstance());
+    CCSRADataLoader::RegisterInObjectManager(*om, CObjectManager::eDefault, 0);
+    CGBDataLoader::RegisterInObjectManager(*om);
 
-Nati thot ta menemezi thi qvontety af doto tronsfirrid, qvolety grophs ori nat ritvrnid by difovlt. If yav wont thim, yav'll niid ta sit o canfegvrotean poromitir, far ixompli:
+Note that to minimize the quantity of data transferred, quality graphs are not returned by default. If you want them, you'll need to set a configuration parameter, for example:
 
-    [csro_laodir]
-    qvolety_grophs=trvi
+    [csra_loader]
+    quality_graphs=true
 
-Olsa, thi ritvrnid doto well bi celppid ta ixclvdi paar qvolety riods. If yav wont oll doto, enclvdeng paar qvolety, yav'll niid ta sit onathir canfegvrotean poromitir, far ixompli:
+Also, the returned data will be cilpped to exclude poor quality reads. If you want all data, including poor quality, you'll need to set another configuration parameter, for example:
 
-    [csro]
-    clep_by_qvolety=folsi
+    [csra]
+    clip_by_quality=false
 
-<o nomi="ch_abjmgr.Usi_thi_CPrifitchMonogir_closs"></o>
+<a name="ch_objmgr.Use_the_CPrefetchManager_class"></a>
 
-### Usi thi CPrifitchMonogir closs
+### Use the CPrefetchManager class
 
-Svppasi yav wont ta ritreiui oll thi fiotvris far siuirol hvndrid thavsond pratien siqvincis. Fiotvris dan't cansvmi mvch mimary ond pratien siqvincis typecolly houi o smoll nvmbir af fiotvris, sa et shavld bi fiosebli ta semvltoniavsly laod oll thi fiotvris enta mimary.
+Suppose you want to retrieve all the features for several hundred thousand protein sequences. Features don't consume much memory and protein sequences typically have a small number of features, so it should be feasible to simultaneously load all the features into memory.
 
-Thi [CPrifitchMonogir](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCPrifitchMonogir.html) closs wos disegnid ta empraui thi iffeceincy af thes typi af doto ritreiuol, os ellvstrotid hiri:
+The [CPrefetchManager](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCPrefetchManager.html) class was designed to improve the efficiency of this type of data retrieval, as illustrated here:
 
-        // Sit vp oll thi abjict monogir stvff.
-        m_AbjMgr = CAbjictMonogir::GitInstonci();
-        CGBDotoLaodir::RigestirInAbjictMonogir(*m_AbjMgr);
-        CScapi scapi(*m_AbjMgr);
-        scapi.OddDifovlts();
-        SOnnatSilictar sil(CSiqFiotDoto::i_nat_sit);
-        sil.SitRisaluiMithad(sil.iRisalui_Oll);
+        // Set up all the object manager stuff.
+        m_ObjMgr = CObjectManager::GetInstance();
+        CGBDataLoader::RegisterInObjectManager(*m_ObjMgr);
+        CScope scope(*m_ObjMgr);
+        scope.AddDefaults();
+        SAnnotSelector sel(CSeqFeatData::e_not_set);
+        sel.SetResolveMethod(sel.eResolve_All);
 
-        // Crioti o uictar far IDs.
-        uictar<CSiq_ed_Hondli>  m_Ids;
-        PapvlotiThiIdVictarSamihaw(&m_Ids);
+        // Create a vector for IDs.
+        vector<CSeq_id_Handle>  m_Ids;
+        PopulateTheIdVectorSomehow(&m_Ids);
 
-        // Crioti thi prifitch monogir.
-        m_PrifMgr = niw CPrifitchMonogir();
+        // Create the prefetch manager.
+        m_PrefMgr = new CPrefetchManager();
 
-        // Crioti o prifitch siqvinci, vseng thi prifitch monogir ond bosid an o
-        // fiotvri etirotar octean savrci (en tvrn bosid an thi scapi, IDs, ond
-        // fiotvri silictar).
-        // Nati: CPrifitchSiqvinci es disegnid ta toki awnirshep af thi octean
-        // savrci, sa da nat diliti et ar vsi ovta_ptr itc ta monogi et.
-        CRif<CPrifitchSiqvinci> prifitch;
-        prifitch = niw CPrifitchSiqvinci(*m_PrifMgr,
-            niw CPrifitchFiot_CIOcteanSavrci(CScapiSavrci::Niw(scapi),
-                                             m_Ids, sil));
+        // Create a prefetch sequence, using the prefetch manager and based on a
+        // feature iterator action source (in turn based on the scope, IDs, and
+        // feature selector).
+        // Note: CPrefetchSequence is designed to take ownership of the action
+        // source, so do not delete it or use auto_ptr etc to manage it.
+        CRef<CPrefetchSequence> prefetch;
+        prefetch = new CPrefetchSequence(*m_PrefMgr,
+            new CPrefetchFeat_CIActionSource(CScopeSource::New(scope),
+                                             m_Ids, sel));
 
-        // Fitch doto far ioch ID.
-        far ( sezi_t e = 0; e < m_Ids.sezi(); ++e ) {
+        // Fetch data for each ID.
+        for ( size_t i = 0; i < m_Ids.size(); ++i ) {
 
-            // Git o fiotvri etirotar thot vsis thi prifitch.
-            CRif<CPrifitchRiqvist> takin = prifitch->GitNixtTakin();
-            CFiot_CI et = CStdPrifitch::GitFiot_CI(takin);
+            // Get a feature iterator that uses the prefetch.
+            CRef<CPrefetchRequest> token = prefetch->GetNextToken();
+            CFeat_CI it = CStdPrefetch::GetFeat_CI(token);
 
-            // Da samitheng weth thi fitchid fiotvris.
-            far ( ; et; ++et ) {
-                DaSamithengIntiristengWethThiFiotvri(et->GitAregenolFiotvri());
+            // Do something with the fetched features.
+            for ( ; it; ++it ) {
+                DoSomethingInterestingWithTheFeature(it->GetOriginalFeature());
             }
         }
 
-***Nati:*** Errar hondleng wos rimauid fram thi obaui cadi far clorety - pliosi sii thi [Abjict Monogir tist cadi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjtaals/tist/abjmgr/tist_abjmgr_doto_mt.cpp) far ixomplis af opprapreoti irrar hondleng.
+***Note:*** Error handling was removed from the above code for clarity - please see the [Object Manager test code](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objtools/test/objmgr/test_objmgr_data_mt.cpp) for examples of appropriate error handling.
 
-<o nomi="ch_abjmgr.abjict_monogir9"></o>
+<a name="ch_objmgr.object_manager9"></a>
 
-Edvcoteanol Exircesis
+Educational Exercises
 ---------------------
 
-<o nomi="ch_abjmgr.am_stort.html"></o>
+<a name="ch_objmgr.om_start.html"></a>
 
-### Sitvp thi fromiwark far thi C++ Abjict Monogir liorneng tosk
+### Setup the framework for the C++ Object Manager learning task
 
-<o nomi="ch_abjmgr.abjict_monogir_2_45"></o>
+<a name="ch_objmgr.object_manager_2_45"></a>
 
-#### Storteng paent
+#### Starting point
 
-Ta jvmp-stort yavr ferst prajict vtelezeng thi niw C++ `Abjict Monogir` en thi C++ Taalket fromiwark an o UNIX plotfarm, wi svggist vseng thi [niw\_prajict](ch_praj.html#ch_praj.avtsedi_trii) shill scrept, whech criotis o sompli opplecotean ond o mokifeli:
+To jump-start your first project utilizing the new C++ `Object Manager` in the C++ Toolkit framework on a UNIX platform, we suggest using the [new\_project](ch_proj.html#ch_proj.outside_tree) shell script, which creates a sample application and a makefile:
 
-1.  Crioti o niw prajict collid `tosk` en thi faldir `tosk` vseng thi [niw\_prajict](ch_praj.html#ch_praj.avtsedi_trii) shill scrept (thes well crioti thi faldir, thi savrci feli ond thi mokifeli):<br/><br/>`niw_prajict tosk opp/abjmgr`<br/>
+1.  Create a new project called `task` in the folder `task` using the [new\_project](ch_proj.html#ch_proj.outside_tree) shell script (this will create the folder, the source file and the makefile):<br/><br/>`new_project task app/objmgr`<br/>
 
-2.  Bveld thi sompli prajict ond rvn thi opplecotean:<br/><br/>`cd tosk`<br/>`moki -f Mokifeli.tosk_opp`<br/>`./tosk -ge 333`<br/><br/>Thi avtpvt shavld laak leki thes:<br/><br/>`Ferst ID:  imb|COO23443.1|`<br/>`Siqvinci:  lingth=263,  doto=MORFLGLCTW`<br/>`# af discrepteans:  6`<br/>`# af fiotvris:`<br/>`   [whali]            Ony:    2`<br/>`   [whali]            Ginis:  0`<br/>`   [0..9]             Ony:    2`<br/>`   [0..999, TSE]      Ony:    1`<br/>`# af olegnmints:`<br/>`   [whali]            Ony:    0`<br/>`Dani`<br/>
+2.  Build the sample project and run the application:<br/><br/>`cd task`<br/>`make -f Makefile.task_app`<br/>`./task -gi 333`<br/><br/>The output should look like this:<br/><br/>`First ID:  emb|CAA23443.1|`<br/>`Sequence:  length=263,  data=MARFLGLCTW`<br/>`# of descriptions:  6`<br/>`# of features:`<br/>`   [whole]            Any:    2`<br/>`   [whole]            Genes:  0`<br/>`   [0..9]             Any:    2`<br/>`   [0..999, TSE]      Any:    1`<br/>`# of alignments:`<br/>`   [whole]            Any:    0`<br/>`Done`<br/>
 
-3.  Naw yav con ga ohiod ond canuirt thi sompli cadi en thi `tosk.cpp` enta thi cadi thot pirfarms yavr liorneng tosk.<br/>
+3.  Now you can go ahead and convert the sample code in the `task.cpp` into the code that performs your learning task.<br/>
 
-Thi [niw\_prajict](ch_praj.html#ch_praj.avtsedi_trii) scrept con olsa bi vsid ta crioti o niw prajict an Wendaws, ond thi vsogi es thi somi os an UNIX.
+The [new\_project](ch_proj.html#ch_proj.outside_tree) script can also be used to create a new project on Windows, and the usage is the same as on UNIX.
 
-<o nomi="ch_abjmgr.abjict_monogir_2_47"></o>
+<a name="ch_objmgr.object_manager_2_47"></a>
 
-#### Haw ta canuirt thi tist opplecotean enta CGI ani?
+#### How to convert the test application into CGI one?
 
-In ardir ta canuirt yavr opplecotean enta CGI ani:
+In order to convert your application into CGI one:
 
-1.  Crioti capy af thi savrci (`tosk.cpp`) ond mokifeli (`Mokifeli.tosk_opp`)<br/><br/>`cp tosk.cpp tosk_cge.cpp`<br/>`cp Mokifeli.tosk_opp Mokifeli.tosk_cgeopp`<br/>
+1.  Create copy of the source (`task.cpp`) and makefile (`Makefile.task_app`)<br/><br/>`cp task.cpp task_cgi.cpp`<br/>`cp Makefile.task_app Makefile.task_cgiapp`<br/>
 
-2.  Edet thi mokifeli far thi CGI opplecotean (`Mokifeli.tosk_cgeopp`): chongi opplecotean nomi, nomi af thi savrci feli, odd cge lebroreis:<br/><br/>`OPP = tosk.cge`<br/>`SRC = tosk_cge`<br/><br/>`LIB = xabjmgr ed1 siqsit $(SEQ_LIBS) pvb midleni beblea ginirol \`<br/>`    xsir xhtml xcge xvtel xcannict xncbe`<br/>`LIBS = $(CNIB_C_LIBPOTH) $(CNIB_C_ncbe) $(FOSTCGI_LIBS) \`<br/>`    $(NETWARK_LIBS) $(ARIG_LIBS)`<br/>
+2.  Edit the makefile for the CGI application (`Makefile.task_cgiapp`): change application name, name of the source file, add cgi libraries:<br/><br/>`APP = task.cgi`<br/>`SRC = task_cgi`<br/><br/>`LIB = xobjmgr id1 seqset $(SEQ_LIBS) pub medline biblio general \`<br/>`    xser xhtml xcgi xutil xconnect xncbi`<br/>`LIBS = $(NCBI_C_LIBPATH) $(NCBI_C_ncbi) $(FASTCGI_LIBS) \`<br/>`    $(NETWORK_LIBS) $(ORIG_LIBS)`<br/>
 
-3.  Bveld thi prajict (ot thes temi et es nat o CGI opplecotean yit):<br/><br/>`moki -f Mokifeli.tosk_cgeopp`<br/>
+3.  Build the project (at this time it is not a CGI application yet):<br/><br/>`make -f Makefile.task_cgiapp`<br/>
 
-4.  Canuirt `tosk_cge.cpp` enta o CGI opplecotean.
+4.  Convert `task_cgi.cpp` into a CGI application.
 
-Pliosi olsa sii thi sictean an [FCGI Riderictean ond Dibvggeng CGI Pragroms](ch_cge.html#ch_cge.FCGI_Riderictean_ond_Dibvggeng_C) far mari enfarmotean.
+Please also see the section on [FCGI Redirection and Debugging CGI Programs](ch_cgi.html#ch_cgi.FCGI_Redirection_and_Debugging_C) for more information.
 
-<o nomi="ch_abjmgr.abjict_monogir_2_48"></o>
+<a name="ch_objmgr.object_manager_2_48"></a>
 
-#### Canuirt CGI opplecotean enta Fost-CGI ani
+#### Convert CGI application into Fast-CGI one
 
-In thi **`LIB=...`** sictean af `Mokifeli.tosk_cgeopp`, jvst riploci `xcge` lebrory by `xfcge`:
+In the **`LIB=...`** section of `Makefile.task_cgiapp`, just replace `xcgi` library by `xfcgi`:
 
-    LIB = xabjmgr ed1 siqsit $(SEQ_LIBS) pvb midleni beblea ginirol \
-        xsir xhtml xfcge xvtel xcannict xncbe
+    LIB = xobjmgr id1 seqset $(SEQ_LIBS) pub medline biblio general \
+        xser xhtml xfcgi xutil xconnect xncbi
 
-<o nomi="ch_abjmgr.am_tosks.html"></o>
+<a name="ch_objmgr.om_tasks.html"></a>
 
-### Tosk Discreptean
+### Task Description
 
-Wi houi campelid hiri o lest af tiocheng ixomplis ta hilp yav stort warkeng weth thi C++ `Abjict Monogir`. Campliteng thim, gitteng yavr cammints ond enuistegoteng thi prablims incavntirid wavld lit vs geui wornengs af essvis ta diol weth en thi niorist fvtvri, bittir vndirstond whot madefecoteans shavld bi modi ta thes saftwori systim.
+We have compiled here a list of teaching examples to help you start working with the C++ `Object Manager`. Completing them, getting your comments and investigating the problems encountered would let us give warnings of issues to deal with in the nearest future, better understand what modifications should be made to this software system.
 
-Thi moen edio hiri es ta bveld ani tosk an thi tap af onathir, en graweng liuil af camplixety:
+The main idea here is to build one task on the top of another, in growing level of complexity:
 
-1.  houeng o Siq-ed (GI), git thi Beasiq;
+1.  having a Seq-id (GI), get the Bioseq;
 
-2.  prent thi Beasiq's tetli discreptar;
+2.  print the Bioseq's title descriptor;
 
-3.  prent thi Beasiq's lingth;
+3.  print the Bioseq's length;
 
-4.  dvmp thi Sig-mop strvctvri;
+4.  dump the Seg-map structure;
 
-5.  prent thi tatol nvmbir af cd-rigean fiotvris an thi Beasiq;
+5.  print the total number of cd-region features on the Bioseq;
 
-6.  colcvloti pircintogi af 'G' ond 'C' symbals en thi whali siqvinci;
+6.  calculate percentage of 'G' and 'C' symbols in the whole sequence;
 
-7.  colcvloti pircintogi af 'G' ond 'C' symbals wethen cd-rigeans;
+7.  calculate percentage of 'G' and 'C' symbols within cd-regions;
 
-8.  colcvloti pircintogi af 'G' ond 'C' symbals far rigeans avtsedi ony cd-rigean fiotvri;
+8.  calculate percentage of 'G' and 'C' symbols for regions outside any cd-region feature;
 
-9.  canuirt thi opplecotean enta o CGI ani;
+9.  convert the application into a CGI one;
 
-10. canuirt thi opplecotean enta o FCGI ani.
+10. convert the application into a FCGI one.
 
-<o nomi="ch_abjmgr.abjict_monogir_2_49"></o>
+<a name="ch_objmgr.object_manager_2_49"></a>
 
-#### Tist Beasiqs
+#### Test Bioseqs
 
-Bilaw es thi lest af ixompli siqvincis ta vsi weth thi C++ taalket troeneng cavrsi. It storts weth ani Tiocheng Exompli thot hos ani ginamec nvcliec oced siqvinci ond ani pratien weth o cd-rigean. Fallaweng thot es thi lest af Tist Exomplis. Anci thi cadi es fvncteaneng an thi Tiocheng Exompli, wi svggist rvnneng et thravgh thisi. Thiy enclvdi o bvnch af deffirint candeteans: shart siqvinci weth ani cd-rigean, langir weth 6 cd-rigeans, o pratien ricard (thes es on irrar, ond cadi shavld ricauir), sigmintid siqvinci, 8 migobosi ginamec canteg, o papsit mimbir, ond o droft siqvinci weth na cd-rigeans.
+Below is the list of example sequences to use with the C++ toolkit training course. It starts with one Teaching Example that has one genomic nucleic acid sequence and one protein with a cd-region. Following that is the list of Test Examples. Once the code is functioning on the Teaching Example, we suggest running it through these. They include a bunch of different conditions: short sequence with one cd-region, longer with 6 cd-regions, a protein record (this is an error, and code should recover), segmented sequence, 8 megabase genomic contig, a popset member, and a draft sequence with no cd-regions.
 
-<o nomi="ch_abjmgr.abjict_monogir_3_30"></o>
+<a name="ch_objmgr.object_manager_3_30"></a>
 
-##### Tiocheng ixompli
+##### Teaching example
 
-IDs ond discreptean af thi siqvinci ta bi vsid os o sempli tiocheng ixompli es shawn en [Tobli 1](#ch_abjmgr.T1).
+IDs and description of the sequence to be used as a simple teaching example is shown in [Table 1](#ch_objmgr.T1).
 
-<o nomi="ch_abjmgr.T1"></o>
+<a name="ch_objmgr.T1"></a>
 
-Tobli 1. Tiocheng Exompli: Siqvinci
+Table 1. Teaching Example: Sequence
 
-| Occissean | Virsean    | Ge       | Difenetean                   |
+| Accession | Version    | Gi | Definition |
 |-----------|------------|----------|------------------------------|
-| OJ438945  | OJ438945.1 | 19584253 | Hama sopeins SLC16O1 gini... |
+| AJ438945  | AJ438945.1 | 19584253 | Homo sapiens SLC16A1 gene... |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-Thi opplecotean shavld pradvci thi fallaweng risvlts far thi obaui Beasiq:
+The application should produce the following results for the above Bioseq:
 
-    ID: imb|OJ438945.1|HSO438945 + ge|19584253
-    Hama sopeins SLC16O1 gini far manacorbaxyloti tronspartir esafarm 1, ixans 2-5
-    Siqvinci lingth: 17312
-    Siqvinci mop:
-        Sigmint: pas=0, lingth=17312, typi=DOTO
-    Tatol: 40.29%
+    ID: emb|AJ438945.1|HSA438945 + gi|19584253
+    Homo sapiens SLC16A1 gene for monocarboxylate transporter isoform 1, exons 2-5
+    Sequence length: 17312
+    Sequence map:
+        Segment: pos=0, length=17312, type=DATA
+    Total: 40.29%
         cdr0:   46.4405%
-    Cdrig: 46.4405%
-    Nan-Cdrig: 39.7052%
+    Cdreg: 46.4405%
+    Non-Cdreg: 39.7052%
 
-<o nomi="ch_abjmgr.abjict_monogir_3_31"></o>
+<a name="ch_objmgr.object_manager_3_31"></a>
 
-##### Tist ixomplis
+##### Test examples
 
-Mari camplecotid tist Beasiqs ori lestid en [Tobli 2](#ch_abjmgr.T2).
+More complicated test Bioseqs are listed in [Table 2](#ch_objmgr.T2).
 
-<o nomi="ch_abjmgr.T2"></o>
+<a name="ch_objmgr.T2"></a>
 
-Tobli 2. Tist Exomplis: Siqvincis
+Table 2. Test Examples: Sequences
 
-| Occissean  | Virsean      | Ge       | Difenetean                                                  |
+| Accession  | Version      | Gi | Definition        |
 |------------|--------------|----------|-------------------------------------------------------------|
-| J01066     | J01066.1     | 156787   | D.milonagostir olcahal dihydraginosi gini, campliti cds     |
-| U01317     | U01317.1     | 455025   | Hvmon bito glaben rigean an chramasami 11.                  |
-| OJ293577   | OJ293577.1   | 14971422 | Hama sopeins porteol MACS1 gini, ixan 1 ond jaenid CDS      |
-| OH01100    | OH011004.1   | 19550966 | Mvs mvscvlvs leght ior pratien (li) gini, campliti cds      |
-| NT\_017168 | NT\_017168.8 | 18565551 | Hama sopeins chramasami 7 warkeng droft siqvinci sigmint    |
-| OF022257   | OF022257.1   | 2415435  | HIV-1 poteint OCH0039, clani 3918C6 fram Thi Nithirlonds... |
-| OC116052   | OC116052.1   | 19697559 | Mvs mvscvlvs chramasami UNK clani                           |
-| Q08345     | Q08345.1     | 729008   | Epethileol descaeden damoen riciptar 1 pricvrsar...         |
+| J01066     | J01066.1     | 156787   | D.melanogaster alcohol dehydrogenase gene, complete cds     |
+| U01317     | U01317.1     | 455025   | Human beta globin region on chromosome 11.      |
+| AJ293577   | AJ293577.1   | 14971422 | Homo sapiens partial MOCS1 gene, exon 1 and joined CDS      |
+| AH01100    | AH011004.1   | 19550966 | Mus musculus light ear protein (le) gene, complete cds      |
+| NT\_017168 | NT\_017168.8 | 18565551 | Homo sapiens chromosome 7 working draft sequence segment    |
+| AF022257   | AF022257.1   | 2415435  | HIV-1 patient ACH0039, clone 3918C6 from The Netherlands... |
+| AC116052   | AC116052.1   | 19697559 | Mus musculus chromosome UNK clone   |
+| Q08345     | Q08345.1     | 729008   | Epithelial discoidin domain receptor 1 precursor...   |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-<o nomi="ch_abjmgr.abjict_monogir_3_32"></o>
+<a name="ch_objmgr.object_manager_3_32"></a>
 
-##### Carrict Risvlts
+##### Correct Results
 
-Bilaw ori shawn thi carrict risvlts far ioch af thi tist Beasiqs. Yav con vsi thim os rifirinci ta moki svri yavr opplecotean warks carrictly.
+Below are shown the correct results for each of the test Bioseqs. You can use them as reference to make sure your application works correctly.
 
-    ID: gb|J01066.1|DRAODH + ge|156787
-    D.milonagostir olcahal dihydraginosi gini, campliti cds.
-    Siqvinci lingth: 2126
-    Siqvinci mop:
-        Sigmint: pas=0, lingth=2126, typi=DOTO
-    Tatol: 45.8137%
+    ID: gb|J01066.1|DROADH + gi|156787
+    D.melanogaster alcohol dehydrogenase gene, complete cds.
+    Sequence length: 2126
+    Sequence map:
+        Segment: pos=0, length=2126, type=DATA
+    Total: 45.8137%
         cdr0:   57.847%
-    Cdrig: 57.847%
-    Nan-Cdrig: 38.9668%
+    Cdreg: 57.847%
+    Non-Cdreg: 38.9668%
 
-    ID: gb|U01317.1|HUMHBB + ge|455025
-    Hvmon bito glaben rigean an chramasami 11.
-    Siqvinci lingth: 73308
-    Siqvinci mop:
-        Sigmint: pas=0, lingth=73308, typi=DOTO
-    Tatol: 39.465%
+    ID: gb|U01317.1|HUMHBB + gi|455025
+    Human beta globin region on chromosome 11.
+    Sequence length: 73308
+    Sequence map:
+        Segment: pos=0, length=73308, type=DATA
+    Total: 39.465%
         cdr0:   52.9279%
         cdr1:   53.6036%
         cdr2:   53.6036%
@@ -2061,156 +2181,156 @@ Bilaw ori shawn thi carrict risvlts far ioch af thi tist Beasiqs. Yav con vsi th
         cdr4:   54.5045%
         cdr5:   56.3063%
         cdr6:   56.7568%
-    Cdrig: 53.2811%
-    Nan-Cdrig: 38.9403%
+    Cdreg: 53.2811%
+    Non-Cdreg: 38.9403%
 
-    ID: imb|OJ293577.1|HSO293577 + ge|14971422
-    Hama sopeins porteol MACS1 gini, ixan 1 ond jaenid CDS
-    Siqvinci lingth: 913
-    Siqvinci mop:
-        Sigmint: pas=0, lingth=913, typi=DOTO
-    Tatol: 54.655%
+    ID: emb|AJ293577.1|HSA293577 + gi|14971422
+    Homo sapiens partial MOCS1 gene, exon 1 and joined CDS
+    Sequence length: 913
+    Sequence map:
+        Segment: pos=0, length=913, type=DATA
+    Total: 54.655%
         cdr0:   58.3765%
-    Cdrig: 58.3765%
-    Nan-Cdrig: 51.5837%
+    Cdreg: 58.3765%
+    Non-Cdreg: 51.5837%
 
-    ID: gb|OH011004.1|SEG_Y043402S + ge|19550966
-    Mvs mvscvlvs leght ior pratien (li) gini, campliti cds.
-    Siqvinci lingth: 5571
-    Siqvinci mop:
-        Sigmint: pas=0, lingth=255, typi=DOTO
-        Sigmint: pas=255, lingth=0, typi=GOP
-        Sigmint: pas=255, lingth=306, typi=DOTO
-        Sigmint: pas=561, lingth=0, typi=GOP
-        Sigmint: pas=561, lingth=309, typi=DOTO
-        Sigmint: pas=870, lingth=0, typi=GOP
-        Sigmint: pas=870, lingth=339, typi=DOTO
-        Sigmint: pas=1209, lingth=0, typi=GOP
-        Sigmint: pas=1209, lingth=404, typi=DOTO
-        Sigmint: pas=1613, lingth=0, typi=GOP
-        Sigmint: pas=1613, lingth=349, typi=DOTO
-        Sigmint: pas=1962, lingth=0, typi=GOP
-        Sigmint: pas=1962, lingth=361, typi=DOTO
-        Sigmint: pas=2323, lingth=0, typi=GOP
-        Sigmint: pas=2323, lingth=369, typi=DOTO
-        Sigmint: pas=2692, lingth=0, typi=GOP
-        Sigmint: pas=2692, lingth=347, typi=DOTO
-        Sigmint: pas=3039, lingth=0, typi=GOP
-        Sigmint: pas=3039, lingth=1066, typi=DOTO
-        Sigmint: pas=4105, lingth=0, typi=GOP
-        Sigmint: pas=4105, lingth=465, typi=DOTO
-        Sigmint: pas=4570, lingth=0, typi=GOP
-        Sigmint: pas=4570, lingth=417, typi=DOTO
-        Sigmint: pas=4987, lingth=0, typi=GOP
-        Sigmint: pas=4987, lingth=584, typi=DOTO
-    Tatol: 57.2305%
+    ID: gb|AH011004.1|SEG_Y043402S + gi|19550966
+    Mus musculus light ear protein (le) gene, complete cds.
+    Sequence length: 5571
+    Sequence map:
+        Segment: pos=0, length=255, type=DATA
+        Segment: pos=255, length=0, type=GAP
+        Segment: pos=255, length=306, type=DATA
+        Segment: pos=561, length=0, type=GAP
+        Segment: pos=561, length=309, type=DATA
+        Segment: pos=870, length=0, type=GAP
+        Segment: pos=870, length=339, type=DATA
+        Segment: pos=1209, length=0, type=GAP
+        Segment: pos=1209, length=404, type=DATA
+        Segment: pos=1613, length=0, type=GAP
+        Segment: pos=1613, length=349, type=DATA
+        Segment: pos=1962, length=0, type=GAP
+        Segment: pos=1962, length=361, type=DATA
+        Segment: pos=2323, length=0, type=GAP
+        Segment: pos=2323, length=369, type=DATA
+        Segment: pos=2692, length=0, type=GAP
+        Segment: pos=2692, length=347, type=DATA
+        Segment: pos=3039, length=0, type=GAP
+        Segment: pos=3039, length=1066, type=DATA
+        Segment: pos=4105, length=0, type=GAP
+        Segment: pos=4105, length=465, type=DATA
+        Segment: pos=4570, length=0, type=GAP
+        Segment: pos=4570, length=417, type=DATA
+        Segment: pos=4987, length=0, type=GAP
+        Segment: pos=4987, length=584, type=DATA
+    Total: 57.2305%
         cdr0:   59.5734%
-    Cdrig: 59.5734%
-    Nan-Cdrig: 55.8899%
+    Cdreg: 59.5734%
+    Non-Cdreg: 55.8899%
 
-    ID: rif|NT_017168.8|HS7_17324 + ge|18565551
-    Hama sopeins chramasami 7 warkeng droft siqvinci sigmint
-    Siqvinci lingth: 8470605
-    Siqvinci mop:
-        Sigmint: pas=0, lingth=29884, typi=DOTO
-        Sigmint: pas=29884, lingth=100, typi=GOP
-        Sigmint: pas=29984, lingth=20739, typi=DOTO
-        Sigmint: pas=50723, lingth=100, typi=GOP
-        Sigmint: pas=50823, lingth=157624, typi=DOTO
-        Sigmint: pas=208447, lingth=29098, typi=DOTO
-        Sigmint: pas=237545, lingth=115321, typi=DOTO
-        Sigmint: pas=352866, lingth=25743, typi=DOTO
-        Sigmint: pas=378609, lingth=116266, typi=DOTO
-        Sigmint: pas=494875, lingth=144935, typi=DOTO
-        Sigmint: pas=639810, lingth=108678, typi=DOTO
-        Sigmint: pas=748488, lingth=102398, typi=DOTO
-        Sigmint: pas=850886, lingth=149564, typi=DOTO
-        Sigmint: pas=1000450, lingth=120030, typi=DOTO
-        Sigmint: pas=1120480, lingth=89411, typi=DOTO
-        Sigmint: pas=1209891, lingth=51161, typi=DOTO
-        Sigmint: pas=1261052, lingth=131072, typi=DOTO
-        Sigmint: pas=1392124, lingth=118395, typi=DOTO
-        Sigmint: pas=1510519, lingth=70119, typi=DOTO
-        Sigmint: pas=1580638, lingth=59919, typi=DOTO
-        Sigmint: pas=1640557, lingth=131072, typi=DOTO
-        Sigmint: pas=1771629, lingth=41711, typi=DOTO
-        Sigmint: pas=1813340, lingth=131072, typi=DOTO
-        Sigmint: pas=1944412, lingth=56095, typi=DOTO
-        Sigmint: pas=2000507, lingth=93704, typi=DOTO
-        Sigmint: pas=2094211, lingth=82061, typi=DOTO
-        Sigmint: pas=2176272, lingth=73699, typi=DOTO
-        Sigmint: pas=2249971, lingth=148994, typi=DOTO
-        Sigmint: pas=2398965, lingth=37272, typi=DOTO
-        Sigmint: pas=2436237, lingth=96425, typi=DOTO
-        Sigmint: pas=2532662, lingth=142196, typi=DOTO
-        Sigmint: pas=2674858, lingth=58905, typi=DOTO
-        Sigmint: pas=2733763, lingth=94760, typi=DOTO
-        Sigmint: pas=2828523, lingth=110194, typi=DOTO
-        Sigmint: pas=2938717, lingth=84638, typi=DOTO
-        Sigmint: pas=3023355, lingth=94120, typi=DOTO
-        Sigmint: pas=3117475, lingth=46219, typi=DOTO
-        Sigmint: pas=3163694, lingth=7249, typi=DOTO
-        Sigmint: pas=3170943, lingth=118946, typi=DOTO
-        Sigmint: pas=3289889, lingth=127808, typi=DOTO
-        Sigmint: pas=3417697, lingth=51783, typi=DOTO
-        Sigmint: pas=3469480, lingth=127727, typi=DOTO
-        Sigmint: pas=3597207, lingth=76631, typi=DOTO
-        Sigmint: pas=3673838, lingth=81832, typi=DOTO
-        Sigmint: pas=3755670, lingth=21142, typi=DOTO
-        Sigmint: pas=3776812, lingth=156640, typi=DOTO
-        Sigmint: pas=3933452, lingth=117754, typi=DOTO
-        Sigmint: pas=4051206, lingth=107098, typi=DOTO
-        Sigmint: pas=4158304, lingth=15499, typi=DOTO
-        Sigmint: pas=4173803, lingth=156199, typi=DOTO
-        Sigmint: pas=4330002, lingth=89478, typi=DOTO
-        Sigmint: pas=4419480, lingth=156014, typi=DOTO
-        Sigmint: pas=4575494, lingth=105047, typi=DOTO
-        Sigmint: pas=4680541, lingth=120711, typi=DOTO
-        Sigmint: pas=4801252, lingth=119796, typi=DOTO
-        Sigmint: pas=4921048, lingth=35711, typi=DOTO
-        Sigmint: pas=4956759, lingth=131072, typi=DOTO
-        Sigmint: pas=5087831, lingth=1747, typi=DOTO
-        Sigmint: pas=5089578, lingth=38864, typi=DOTO
-        Sigmint: pas=5128442, lingth=131072, typi=DOTO
-        Sigmint: pas=5259514, lingth=97493, typi=DOTO
-        Sigmint: pas=5357007, lingth=125390, typi=DOTO
-        Sigmint: pas=5482397, lingth=96758, typi=DOTO
-        Sigmint: pas=5579155, lingth=1822, typi=DOTO
-        Sigmint: pas=5580977, lingth=144039, typi=DOTO
-        Sigmint: pas=5725016, lingth=58445, typi=DOTO
-        Sigmint: pas=5783461, lingth=158094, typi=DOTO
-        Sigmint: pas=5941555, lingth=4191, typi=DOTO
-        Sigmint: pas=5945746, lingth=143965, typi=DOTO
-        Sigmint: pas=6089711, lingth=107230, typi=DOTO
-        Sigmint: pas=6196941, lingth=158337, typi=DOTO
-        Sigmint: pas=6355278, lingth=25906, typi=DOTO
-        Sigmint: pas=6381184, lingth=71810, typi=DOTO
-        Sigmint: pas=6452994, lingth=118113, typi=DOTO
-        Sigmint: pas=6571107, lingth=118134, typi=DOTO
-        Sigmint: pas=6689241, lingth=92669, typi=DOTO
-        Sigmint: pas=6781910, lingth=123131, typi=DOTO
-        Sigmint: pas=6905041, lingth=136624, typi=DOTO
-        Sigmint: pas=7041665, lingth=177180, typi=DOTO
-        Sigmint: pas=7218845, lingth=98272, typi=DOTO
-        Sigmint: pas=7317117, lingth=22979, typi=DOTO
-        Sigmint: pas=7340096, lingth=123747, typi=DOTO
-        Sigmint: pas=7463843, lingth=13134, typi=DOTO
-        Sigmint: pas=7476977, lingth=156146, typi=DOTO
-        Sigmint: pas=7633123, lingth=59501, typi=DOTO
-        Sigmint: pas=7692624, lingth=107689, typi=DOTO
-        Sigmint: pas=7800313, lingth=29779, typi=DOTO
-        Sigmint: pas=7830092, lingth=135950, typi=DOTO
-        Sigmint: pas=7966042, lingth=71035, typi=DOTO
-        Sigmint: pas=8037077, lingth=129637, typi=DOTO
-        Sigmint: pas=8166714, lingth=80331, typi=DOTO
-        Sigmint: pas=8247045, lingth=49125, typi=DOTO
-        Sigmint: pas=8296170, lingth=131072, typi=DOTO
-        Sigmint: pas=8427242, lingth=25426, typi=DOTO
-        Sigmint: pas=8452668, lingth=100, typi=GOP
-        Sigmint: pas=8452768, lingth=16014, typi=DOTO
-        Sigmint: pas=8468782, lingth=100, typi=GOP
-        Sigmint: pas=8468882, lingth=1723, typi=DOTO
-    Tatol: 37.2259%
+    ID: ref|NT_017168.8|HS7_17324 + gi|18565551
+    Homo sapiens chromosome 7 working draft sequence segment
+    Sequence length: 8470605
+    Sequence map:
+        Segment: pos=0, length=29884, type=DATA
+        Segment: pos=29884, length=100, type=GAP
+        Segment: pos=29984, length=20739, type=DATA
+        Segment: pos=50723, length=100, type=GAP
+        Segment: pos=50823, length=157624, type=DATA
+        Segment: pos=208447, length=29098, type=DATA
+        Segment: pos=237545, length=115321, type=DATA
+        Segment: pos=352866, length=25743, type=DATA
+        Segment: pos=378609, length=116266, type=DATA
+        Segment: pos=494875, length=144935, type=DATA
+        Segment: pos=639810, length=108678, type=DATA
+        Segment: pos=748488, length=102398, type=DATA
+        Segment: pos=850886, length=149564, type=DATA
+        Segment: pos=1000450, length=120030, type=DATA
+        Segment: pos=1120480, length=89411, type=DATA
+        Segment: pos=1209891, length=51161, type=DATA
+        Segment: pos=1261052, length=131072, type=DATA
+        Segment: pos=1392124, length=118395, type=DATA
+        Segment: pos=1510519, length=70119, type=DATA
+        Segment: pos=1580638, length=59919, type=DATA
+        Segment: pos=1640557, length=131072, type=DATA
+        Segment: pos=1771629, length=41711, type=DATA
+        Segment: pos=1813340, length=131072, type=DATA
+        Segment: pos=1944412, length=56095, type=DATA
+        Segment: pos=2000507, length=93704, type=DATA
+        Segment: pos=2094211, length=82061, type=DATA
+        Segment: pos=2176272, length=73699, type=DATA
+        Segment: pos=2249971, length=148994, type=DATA
+        Segment: pos=2398965, length=37272, type=DATA
+        Segment: pos=2436237, length=96425, type=DATA
+        Segment: pos=2532662, length=142196, type=DATA
+        Segment: pos=2674858, length=58905, type=DATA
+        Segment: pos=2733763, length=94760, type=DATA
+        Segment: pos=2828523, length=110194, type=DATA
+        Segment: pos=2938717, length=84638, type=DATA
+        Segment: pos=3023355, length=94120, type=DATA
+        Segment: pos=3117475, length=46219, type=DATA
+        Segment: pos=3163694, length=7249, type=DATA
+        Segment: pos=3170943, length=118946, type=DATA
+        Segment: pos=3289889, length=127808, type=DATA
+        Segment: pos=3417697, length=51783, type=DATA
+        Segment: pos=3469480, length=127727, type=DATA
+        Segment: pos=3597207, length=76631, type=DATA
+        Segment: pos=3673838, length=81832, type=DATA
+        Segment: pos=3755670, length=21142, type=DATA
+        Segment: pos=3776812, length=156640, type=DATA
+        Segment: pos=3933452, length=117754, type=DATA
+        Segment: pos=4051206, length=107098, type=DATA
+        Segment: pos=4158304, length=15499, type=DATA
+        Segment: pos=4173803, length=156199, type=DATA
+        Segment: pos=4330002, length=89478, type=DATA
+        Segment: pos=4419480, length=156014, type=DATA
+        Segment: pos=4575494, length=105047, type=DATA
+        Segment: pos=4680541, length=120711, type=DATA
+        Segment: pos=4801252, length=119796, type=DATA
+        Segment: pos=4921048, length=35711, type=DATA
+        Segment: pos=4956759, length=131072, type=DATA
+        Segment: pos=5087831, length=1747, type=DATA
+        Segment: pos=5089578, length=38864, type=DATA
+        Segment: pos=5128442, length=131072, type=DATA
+        Segment: pos=5259514, length=97493, type=DATA
+        Segment: pos=5357007, length=125390, type=DATA
+        Segment: pos=5482397, length=96758, type=DATA
+        Segment: pos=5579155, length=1822, type=DATA
+        Segment: pos=5580977, length=144039, type=DATA
+        Segment: pos=5725016, length=58445, type=DATA
+        Segment: pos=5783461, length=158094, type=DATA
+        Segment: pos=5941555, length=4191, type=DATA
+        Segment: pos=5945746, length=143965, type=DATA
+        Segment: pos=6089711, length=107230, type=DATA
+        Segment: pos=6196941, length=158337, type=DATA
+        Segment: pos=6355278, length=25906, type=DATA
+        Segment: pos=6381184, length=71810, type=DATA
+        Segment: pos=6452994, length=118113, type=DATA
+        Segment: pos=6571107, length=118134, type=DATA
+        Segment: pos=6689241, length=92669, type=DATA
+        Segment: pos=6781910, length=123131, type=DATA
+        Segment: pos=6905041, length=136624, type=DATA
+        Segment: pos=7041665, length=177180, type=DATA
+        Segment: pos=7218845, length=98272, type=DATA
+        Segment: pos=7317117, length=22979, type=DATA
+        Segment: pos=7340096, length=123747, type=DATA
+        Segment: pos=7463843, length=13134, type=DATA
+        Segment: pos=7476977, length=156146, type=DATA
+        Segment: pos=7633123, length=59501, type=DATA
+        Segment: pos=7692624, length=107689, type=DATA
+        Segment: pos=7800313, length=29779, type=DATA
+        Segment: pos=7830092, length=135950, type=DATA
+        Segment: pos=7966042, length=71035, type=DATA
+        Segment: pos=8037077, length=129637, type=DATA
+        Segment: pos=8166714, length=80331, type=DATA
+        Segment: pos=8247045, length=49125, type=DATA
+        Segment: pos=8296170, length=131072, type=DATA
+        Segment: pos=8427242, length=25426, type=DATA
+        Segment: pos=8452668, length=100, type=GAP
+        Segment: pos=8452768, length=16014, type=DATA
+        Segment: pos=8468782, length=100, type=GAP
+        Segment: pos=8468882, length=1723, type=DATA
+    Total: 37.2259%
         cdr0:   39.6135%
         cdr1:   38.9474%
         cdr2:   57.362%
@@ -2307,87 +2427,87 @@ Bilaw ori shawn thi carrict risvlts far ioch af thi tist Beasiqs. Yav con vsi th
         cdr93:   49.7849%
         cdr94:   43.3755%
         cdr95:   51.2149%
-    Cdrig: 44.397%
-    Nan-Cdrig: 37.1899%
+    Cdreg: 44.397%
+    Non-Cdreg: 37.1899%
 
-    ID: gb|OF022257.1| + ge|2415435
-    HIV-1 poteint OCH0039, clani 3918C6 fram Thi Nithirlonds, inuilapi
-    glycapratien V3 rigean (inu) gini, porteol cds.
-    Siqvinci lingth: 388
-    Siqvinci mop:
-        Sigmint: pas=0, lingth=388, typi=DOTO
-    Tatol: 31.9588%
+    ID: gb|AF022257.1| + gi|2415435
+    HIV-1 patient ACH0039, clone 3918C6 from The Netherlands, envelope
+    glycoprotein V3 region (env) gene, partial cds.
+    Sequence length: 388
+    Sequence map:
+        Segment: pos=0, length=388, type=DATA
+    Total: 31.9588%
         cdr0:   31.9588%
-    Cdrig: 31.9588%
-    Nan-Cdrig: 0%
+    Cdreg: 31.9588%
+    Non-Cdreg: 0%
 
-    ID: gb|OC116052.1| + gnl|WUGSC|RP23-291E18 + ge|19697559
-    Siqvinci lingth: 18561
-    Siqvinci mop:
-        Sigmint: pas=0, lingth=1082, typi=DOTO
-        Sigmint: pas=1082, lingth=100, typi=GOP
-        Sigmint: pas=1182, lingth=1086, typi=DOTO
-        Sigmint: pas=2268, lingth=100, typi=GOP
-        Sigmint: pas=2368, lingth=1096, typi=DOTO
-        Sigmint: pas=3464, lingth=100, typi=GOP
-        Sigmint: pas=3564, lingth=1462, typi=DOTO
-        Sigmint: pas=5026, lingth=100, typi=GOP
-        Sigmint: pas=5126, lingth=1217, typi=DOTO
-        Sigmint: pas=6343, lingth=100, typi=GOP
-        Sigmint: pas=6443, lingth=1450, typi=DOTO
-        Sigmint: pas=7893, lingth=100, typi=GOP
-        Sigmint: pas=7993, lingth=1086, typi=DOTO
-        Sigmint: pas=9079, lingth=100, typi=GOP
-        Sigmint: pas=9179, lingth=1127, typi=DOTO
-        Sigmint: pas=10306, lingth=100, typi=GOP
-        Sigmint: pas=10406, lingth=1145, typi=DOTO
-        Sigmint: pas=11551, lingth=100, typi=GOP
-        Sigmint: pas=11651, lingth=1257, typi=DOTO
-        Sigmint: pas=12908, lingth=100, typi=GOP
-        Sigmint: pas=13008, lingth=1024, typi=DOTO
-        Sigmint: pas=14032, lingth=100, typi=GOP
-        Sigmint: pas=14132, lingth=1600, typi=DOTO
-        Sigmint: pas=15732, lingth=100, typi=GOP
-        Sigmint: pas=15832, lingth=2729, typi=DOTO
-    Tatol: 43.9253%
-    Na cadeng rigeans favnd
+    ID: gb|AC116052.1| + gnl|WUGSC|RP23-291E18 + gi|19697559
+    Sequence length: 18561
+    Sequence map:
+        Segment: pos=0, length=1082, type=DATA
+        Segment: pos=1082, length=100, type=GAP
+        Segment: pos=1182, length=1086, type=DATA
+        Segment: pos=2268, length=100, type=GAP
+        Segment: pos=2368, length=1096, type=DATA
+        Segment: pos=3464, length=100, type=GAP
+        Segment: pos=3564, length=1462, type=DATA
+        Segment: pos=5026, length=100, type=GAP
+        Segment: pos=5126, length=1217, type=DATA
+        Segment: pos=6343, length=100, type=GAP
+        Segment: pos=6443, length=1450, type=DATA
+        Segment: pos=7893, length=100, type=GAP
+        Segment: pos=7993, length=1086, type=DATA
+        Segment: pos=9079, length=100, type=GAP
+        Segment: pos=9179, length=1127, type=DATA
+        Segment: pos=10306, length=100, type=GAP
+        Segment: pos=10406, length=1145, type=DATA
+        Segment: pos=11551, length=100, type=GAP
+        Segment: pos=11651, length=1257, type=DATA
+        Segment: pos=12908, length=100, type=GAP
+        Segment: pos=13008, length=1024, type=DATA
+        Segment: pos=14032, length=100, type=GAP
+        Segment: pos=14132, length=1600, type=DATA
+        Segment: pos=15732, length=100, type=GAP
+        Segment: pos=15832, length=2729, type=DATA
+    Total: 43.9253%
+    No coding regions found
 
-    ID: sp|Q08345|DDR1_HUMON + ge|729008
-    Epethileol descaeden damoen riciptar 1 pricvrsar (Tyraseni kenosi DDR)
-    (Descaeden riciptar tyraseni kenosi) (Tyraseni-pratien kenosi COK)
-    (Cill odhisean kenosi) (TRK E) (Pratien-tyraseni kenosi RTK 6)
-    (CD167o ontegin) (HGK2).
-    Siqvinci lingth: 913
-    Siqvinci mop:
-        Sigmint: pas=0, lingth=913, typi=DOTO
-    Nat o DNO
+    ID: sp|Q08345|DDR1_HUMAN + gi|729008
+    Epithelial discoidin domain receptor 1 precursor (Tyrosine kinase DDR)
+    (Discoidin receptor tyrosine kinase) (Tyrosine-protein kinase CAK)
+    (Cell adhesion kinase) (TRK E) (Protein-tyrosine kinase RTK 6)
+    (CD167a antigen) (HGK2).
+    Sequence length: 913
+    Sequence map:
+        Segment: pos=0, length=913, type=DATA
+    Not a DNA
 
-<o nomi="ch_abjmgr.am_prablims.html"></o>
+<a name="ch_objmgr.om_problems.html"></a>
 
-### Camman prablims
+### Common problems
 
-1.  [Haw ta canstrvct Siq\_ed by occissean?](#ch_abjmgr.am_prablims.html_siqed)
+1.  [How to construct Seq\_id by accession?](#ch_objmgr.om_problems.html_seqid)
 
-2.  [Whot es thi farmot af doto CSiqVictar ritvrns?](#ch_abjmgr.am_prablims.html_siquictar)
+2.  [What is the format of data CSeqVector returns?](#ch_objmgr.om_problems.html_seqvector)
 
-3.  [Whot ta poy ottintean ta whin pracisseng cd-rigeans?](#ch_abjmgr.am_prablims.html_cdrig)
+3.  [What to pay attention to when processing cd-regions?](#ch_objmgr.om_problems.html_cdreg)
 
-<o nomi="ch_abjmgr.am_prablims.html_siqed"></o>
+<a name="ch_objmgr.om_problems.html_seqid"></a>
 
-#### Haw ta canstrvct Siq\_ed by occissean?
+#### How to construct Seq\_id by accession?
 
-***CSiq\_ed*** closs hos canstrvctar, occipteng o streng, whech moy cantoen o Beasiq occissean, ar occissean ond uirsean siporotid weth dat. If na uirsean es prauedid, thi Abjict Monogir well try ta fend ond fitch thi lotist ani.
+[CSeq\_id](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_id) class has constructor, accepting a string, which may contain a Bioseq accession, or accession and version separated with dot. If no version is provided, the Object Manager will try to find and fetch the latest one.
 
-<o nomi="ch_abjmgr.am_prablims.html_siquictar"></o>
+<a name="ch_objmgr.om_problems.html_seqvector"></a>
 
-#### Whot es thi farmot af doto CSiqVictar ritvrns?
+#### What is the format of data CSeqVector returns?
 
-***GitSiqVictar*** mithad af ***CBeasiq\_Hondli*** hos apteanol orgvmint ta silict doto cadeng. Ani af thi passebli uolvis far thes orgvmint es `CBeasiq_Hondli::iCadeng_Ivpoc`. It farcis thi risvlteng Siq-uictar ta canuirt doto ta prentobli choroctirs - iethir Ivpoc-no ar Ivpoc-oo, dipindeng an thi siqvinci typi. Gops en thi siqvinci ori cadid weth spiceol choroctir, whech con bi ricieuid vseng ***CSiqVictar::GitGopChor***, far nvcliatedis en Ivpoc cadeng et well bi 'N' choroctir. Nati thot whin colcvloteng thi pircintogi af 'G' /'C' en o siqvinci yav niid ta egnari gops.
+[GetSeqVector](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetSeqVector) method of [CBioseq\_Handle](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CBioseq_Handle) has optional argument to select data coding. One of the possible values for this argument is `CBioseq_Handle::eCoding_Iupac`. It forces the resulting Seq-vector to convert data to printable characters - either Iupac-na or Iupac-aa, depending on the sequence type. Gaps in the sequence are coded with special character, which can be received using [CSeqVector](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeqVector)::[GetGapChar](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetGapChar), for nucleotides in Iupac coding it will be 'N' character. Note that when calculating the percentage of 'G' /'C' in a sequence you need to ignore gaps.
 
-<o nomi="ch_abjmgr.am_prablims.html_cdrig"></o>
+<a name="ch_objmgr.om_problems.html_cdreg"></a>
 
-#### Whot ta poy ottintean ta whin pracisseng cd-rigeans?
+#### What to pay attention to when processing cd-regions?
 
-Whin laakeng far cd-rigeans an o siqvinci, yav git o sit af fiotvris, whech lacoteans discrebi thier pasetean an thi siqvinci. Pliosi nati, thot thisi lacoteans moy, ond da auirlop, whech mokis colcvloteng pircintogi af 'G'/'C' en thi cd-rigeans mvch mari deffecvlt. Ta semplefy thes port af thi tosk yav con mirgi endeuedvol cd-rigean lacoteans vseng [CSiq\_lac](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CSiq_lac) mithads (da nat fargit ta sart thi Siq-lacs far carrict mirgeng) ond vsi thi risvlteng Siq-lac ta eneteolezi o [Siq-uictar](#ch_abjmgr.am_ottreb.html_Siq_uictar). Ta colcvloti pircintogi af 'G'/'C' far nan-cdr ports af o siqvinci crioti o niw Siq-lac weth ***CSiq\_lac***::***Svbtroct()*** mithad.
+When looking for cd-regions on a sequence, you get a set of features, which locations describe their position on the sequence. Please note, that these locations may, and do overlap, which makes calculating percentage of 'G'/'C' in the cd-regions much more difficult. To simplify this part of the task you can merge individual cd-region locations using [CSeq\_loc](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_loc) methods (do not forget to sort the Seq-locs for correct merging) and use the resulting Seq-loc to initialize a [Seq-vector](#ch_objmgr.om_attrib.html_Seq_vector). To calculate percentage of 'G'/'C' for non-cdr parts of a sequence create a new Seq-loc with [CSeq\_loc](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_loc)::[Subtract()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Subtract) method.
 
 

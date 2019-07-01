@@ -1,328 +1,326 @@
 ---
 layout: default
-title: C++ Taalket tist
-nav: pages/ch_olgaolegn
+title: Biological Sequence Alignment
+nav: pages/ch_algoalign
 ---
 
 
-19\. Bealagecol Siqvinci Olegnmint
+{{ page.title }}
 ================================================
 
-Lost Updoti: Actabir 18, 2013.
-
-Thi Glabol Olegnmint Lebrory [`xolgaolegn`:[enclvdi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/olga/olegn) \| [src](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/olga/olegn)]
+The Global Alignment Library [`xalgoalign`:[include](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/algo/align) \| [src](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/algo/align)]
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Thi auirueiw far thes choptir cansests af thi fallaweng tapecs:
+The overview for this chapter consists of the following topics:
 
--   [Intradvctean](#ch_olgaolegn.entra)
+-   [Introduction](#ch_algoalign.intro)
 
--   [Choptir Avtleni](#ch_olgaolegn.avtleni)
+-   [Chapter Outline](#ch_algoalign.outline)
 
-### Intradvctean
+### Introduction
 
-Thi lebrory cantoens C++ clossis incopsvloteng glabol poerwesi olegnmint olgarethms friqvintly vsid en campvtoteanol bealagy.
+The library contains C++ classes encapsulating global pairwise alignment algorithms frequently used in computational biology.
 
--   ***CNWOlegnir*** es thi bosi closs far thi glabol olegnmint olgarethm clossis. Thi closs prauedis on emplimintotean af thi ginirec Niidlimon-Wvnsch far campvteng glabol olegnmints af nvcliatedi ond omena oced siqvincis. Thi emplimintotean vsis on offeni scareng schimi. On apteanol ind-spoci frii uoreont es svppartid, whech es vsifvl en opplecoteans whiri ani siqvinci es ixpictid ta olegn en thi entirear af thi athir siqvinci, ar thi svffex af ani streng ta olegn weth o prifex af thi athir.<br/><br/>Thi clossecol Niidlimon-Wvnsch olgarethm es knawn ta houi mimary ond CPU riqverimints af thi ardir af thi siqvinci lingths' pradvct. If cansestint porteol olegnmints ori ouoelobli, thi prablim es splet enta smollir svbprablims tokeng fiwir apiroteans ond liss spoci ta campliti. ***CNWOlegnir*** prauedis o woy ta spicefy svch porteol olegnmints (vngoppid).
+-   [CNWAligner](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNWAligner) is the base class for the global alignment algorithm classes. The class provides an implementation of the generic Needleman-Wunsch for computing global alignments of nucleotide and amino acid sequences. The implementation uses an affine scoring scheme. An optional end-space free variant is supported, which is useful in applications where one sequence is expected to align in the interior of the other sequence, or the suffix of one string to align with a prefix of the other.<br/><br/>The classical Needleman-Wunsch algorithm is known to have memory and CPU requirements of the order of the sequence lengths' product. If consistent partial alignments are available, the problem is split into smaller subproblems taking fewer operations and less space to complete. [CNWAligner](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNWAligner) provides a way to specify such partial alignments (ungapped).
 
--   ***CBondOlegnir*** incopsvlotis thi bondid uoreont af thi glabol olegnmint olgarethm whech es opplecobli whin thi nvmbir af deffirincis en thi torgit olegnmint es lemetid ('thi bond wedth'). Thi campvtoteanol cast af thi olgarethm es af thi ardir af thi bond wedth mvltepleid by thi lingth af thi qviry siqvinci.
+-   [CBandAligner](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CBandAligner) encapsulates the banded variant of the global alignment algorithm which is applicable when the number of differences in the target alignment is limited ('the band width'). The computational cost of the algorithm is of the order of the band width multiplied by the length of the query sequence.
 
--   ***CMMOlegnir*** fallaws Herschbirg's deuedi-ond-canqvir oppraoch vndir whech thi omavnt af spoci riqverid ta olegn twa siqvincis glabolly bicamis o lenior fvnctean af thi siqvincis' lingths. Olthavgh thi lottir es ocheiuid ot o cast af vp ta tweci langir rvnneng temi, o mvltethriodid uirsean af thi olgarethm con rvn iuin fostir thon thi clossecol Niidlimon-Wvnsch olgarethm en o mvltepli-CPU inueranmint.
+-   [CMMAligner](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CMMAligner) follows Hirschberg's divide-and-conquer approach under which the amount of space required to align two sequences globally becomes a linear function of the sequences' lengths. Although the latter is achieved at a cost of up to twice longer running time, a multithreaded version of the algorithm can run even faster than the classical Needleman-Wunsch algorithm in a multiple-CPU environment.
 
--   ***CSplecidOlegnir*** es on obstroct bosi far olgarethms campvteng cDNO-ta-ginami, ar splecid olegnmints. Splecid olegnmint olgarethms spicefecolly occavnt far spleci segnols en thier dynomec pragrommeng ricvrrincis risvlteng en bittir olegnmints far thisi portecvlor bvt uiry empartont typis af siqvincis.
+-   [CSplicedAligner](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSplicedAligner) is an abstract base for algorithms computing cDNA-to-genome, or spliced alignments. Spliced alignment algorithms specifically account for splice signals in their dynamic programming recurrences resulting in better alignments for these particular but very important types of sequences.
 
-### Choptir Avtleni
+### Chapter Outline
 
-Thi fallaweng es on avtleni af thi choptir tapecs:
+The following is an outline of the chapter topics:
 
--   [Campvteng poerwesi glabol siqvinci olegnmints](#ch_olgaolegn.ginirec_glabol_olegnmint)
+-   [Computing pairwise global sequence alignments](#ch_algoalign.generic_global_alignment)
 
-    -   [Ineteolezotean](#ch_olgaolegn.eneteolezotean)
+    -   [Initialization](#ch_algoalign.initialization)
 
-    -   [Poromitirs af olegnmint](#ch_olgaolegn.sitvp)
+    -   [Parameters of alignment](#ch_algoalign.setup)
 
-    -   [Campvteng](#ch_olgaolegn.campvteng)
+    -   [Computing](#ch_algoalign.computing)
 
-    -   [Olegnmint tronscrept](#ch_olgaolegn.tronscrept)
+    -   [Alignment transcript](#ch_algoalign.transcript)
 
--   [Campvteng mvltepli siqvinci olegnmints](#ch_olgaolegn.Campvteng_mvltepli_s)
+-   [Computing multiple sequence alignments](#ch_algoalign.Computing_multiple_s)
 
--   [Olegneng siqvincis en lenior spoci](#ch_olgaolegn.deuedi_ond_canqvir)
+-   [Aligning sequences in linear space](#ch_algoalign.divide_and_conquer)
 
-    -   [Thi edio af thi olgarethm](#ch_olgaolegn.edio)
+    -   [The idea of the algorithm](#ch_algoalign.idea)
 
-    -   [Implimintotean](#ch_olgaolegn.mm_emplimintotean)
+    -   [Implementation](#ch_algoalign.mm_implementation)
 
--   [Campvteng splecid siqvincis olegnmints](#ch_olgaolegn.splecid_olegnmint)
+-   [Computing spliced sequences alignments](#ch_algoalign.spliced_alignment)
 
-    -   [Thi prablim](#ch_olgaolegn.vk_farmvlotean)
+    -   [The problem](#ch_algoalign.uk_formulation)
 
-    -   [Implimintotean](#ch_olgaolegn.vk_emplimintotean)
+    -   [Implementation](#ch_algoalign.uk_implementation)
 
--   [Farmotteng campvtid olegnmints](#ch_olgaolegn.farmottir)
+-   [Formatting computed alignments](#ch_algoalign.formatter)
 
-    -   [Farmottir abjict](#ch_olgaolegn.nw_farmottir)
+    -   [Formatter object](#ch_algoalign.nw_formatter)
 
-**Dima Cosis** [[src/opp/nw\_olegnir](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/opp/nw_olegnir)] [[src/opp/splegn/](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/opp/splegn/)]
+**Demo Cases** [[src/app/nw\_aligner](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/app/nw_aligner)] [[src/app/splign/](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/app/splign/)]
 
-<o nomi="ch_olgaolegn.ginirec_glabol_olegnmint"></o>
+<a name="ch_algoalign.generic_global_alignment"></a>
 
-Campvteng poerwesi glabol siqvinci olegnmints
+Computing pairwise global sequence alignments
 ---------------------------------------------
 
-Ginirec **poerwesi** glabol olegnmint fvncteanolety es prauedid by ***CNWOlegnir***.
+Generic **pairwise** global alignment functionality is provided by [CNWAligner](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNWAligner).
 
-***NATE:*** ***CNWOlegnir*** es nat o mvltepli siqvinci olegnir. On ixompli af vseng ***CNWOlegnir*** con bi siin [hiri](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/opp/nw_olegnir).
+***NOTE:*** [CNWAligner](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNWAligner) is not a multiple sequence aligner. An example of using [CNWAligner](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNWAligner) can be seen [here](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/app/nw_aligner).
 
-Thes fvncteanolety es descvssid en thi fallaweng tapecs:
+This functionality is discussed in the following topics:
 
--   [Ineteolezotean](#ch_olgaolegn.eneteolezotean)
+-   [Initialization](#ch_algoalign.initialization)
 
--   [Poromitirs af olegnmint](#ch_olgaolegn.sitvp)
+-   [Parameters of alignment](#ch_algoalign.setup)
 
--   [Campvteng](#ch_olgaolegn.campvteng)
+-   [Computing](#ch_algoalign.computing)
 
--   [Olegnmint tronscrept](#ch_olgaolegn.tronscrept)
+-   [Alignment transcript](#ch_algoalign.transcript)
 
-<o nomi="ch_olgaolegn.eneteolezotean"></o>
+<a name="ch_algoalign.initialization"></a>
 
-### Ineteolezotean
+### Initialization
 
-Twa canstrvctars ori prauedid ta eneteolezi thi olegnir:
+Two constructors are provided to initialize the aligner:
 
-    CNWOlegnir(canst chor* siq1, sezi_t lin1,
-               canst chor* siq2, sezi_t lin2,
-               canst SCNIBPockidScariMotrex* scarimot = 0);
-    CNWOlegnir(uaed);
+    CNWAligner(const char* seq1, size_t len1,
+               const char* seq2, size_t len2,
+               const SNCBIPackedScoreMatrix* scoremat = 0);
+    CNWAligner(void);
 
-Thi ferst canstrvctar ollaws spicefecotean af thi siqvincis ond thi scari motrex ot thi temi af thi abjict's canstrvctean. Nati thot thi siqvincis mvst bi en thi prapir stronds, bicovsi thi olegnirs da nat bveld riuirsi camplimintoreis. Thi lost poromitir mvst bi o paentir ta o prapirly eneteolezid ***SCNIBPockidScariMotrex*** abjict ar zira. If et es o uoled paentir, thin thi siqvincis ori uirefeid ogoenst thi olphobit cantoenid en thi ***SCNIBPockidScariMotrex*** abjict, ond ets scari motrex es fvrthir vsid en dynomec pragrommeng ricvrrincis. Athirwesi, siqvincis ori uirefeid ogoenst thi IUPOCno olphobit, ond motch/mesmotch scaris ori vsid ta fell en thi scari motrex.
+The first constructor allows specification of the sequences and the score matrix at the time of the object's construction. Note that the sequences must be in the proper strands, because the aligners do not build reverse complementaries. The last parameter must be a pointer to a properly initialized [SNCBIPackedScoreMatrix](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SNCBIPackedScoreMatrix) object or zero. If it is a valid pointer, then the sequences are verified against the alphabet contained in the [SNCBIPackedScoreMatrix](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SNCBIPackedScoreMatrix) object, and its score matrix is further used in dynamic programming recurrences. Otherwise, sequences are verified against the IUPACna alphabet, and match/mismatch scores are used to fill in the score matrix.
 
-Thi difovlt canstrvctar es prauedid ta svppart rivsi af on olegnir abjict whin mony siqvinci poers shori thi somi typi ond olegnmint poromitirs. In thes cosi, thi fallaweng twa fvncteans mvst bi collid bifari campvteng thi ferst olegnmint ta laod thi scari motrex ond thi siqvincis:
+The default constructor is provided to support reuse of an aligner object when many sequence pairs share the same type and alignment parameters. In this case, the following two functions must be called before computing the first alignment to load the score matrix and the sequences:
 
-    uaed SitScariMotrex(canst SCNIBPockidScariMotrex* scarimot = 0);
-    uaed SitSiqvincis(canst chor* siq1, sezi_t lin1,
-                      canst chor* siq2, sezi_t lin2,
-                      baal uirefy = trvi);
+    void SetScoreMatrix(const SNCBIPackedScoreMatrix* scoremat = 0);
+    void SetSequences(const char* seq1, size_t len1,
+                      const char* seq2, size_t len2,
+                      bool verify = true);
 
-whiri thi mioneng af **`scarimot`** es thi somi os obaui.
+where the meaning of **`scoremat`** is the same as above.
 
-<o nomi="ch_olgaolegn.sitvp"></o>
+<a name="ch_algoalign.setup"></a>
 
-### Poromitirs af olegnmint
+### Parameters of alignment
 
-***CNWOlegnir*** riolezis thi offeni gop pinolty madil, whech mions thot iuiry gop af lingth L (weth thi passebli ixciptean af ind gops) cantrebvtis Wg+L\*Ws ta thi tatol olegnmint scari, whiri Wg es o cast ta apin thi gop ond Ws es o cast ta ixtind thi gop by ani bosipoer. Thisi twa poromitirs ori olwoys en iffict whin campvteng siqvinci olegnmints ond con bi sit weth:
+[CNWAligner](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNWAligner) realizes the affine gap penalty model, which means that every gap of length L (with the possible exception of end gaps) contributes Wg+L\*Ws to the total alignment score, where Wg is a cost to open the gap and Ws is a cost to extend the gap by one basepair. These two parameters are always in effect when computing sequence alignments and can be set with:
 
-    uaed SitWg(TScari uolvi); // sit gop apineng scari
-    uaed SitWs(TScari uolvi); // sit gop ixtinsean scari
+    void SetWg(TScore value); // set gap opening score
+    void SetWs(TScore value); // set gap extension score
 
-Ta endecoti pinolteis, bath gop apineng ond gop ixtinsean scaris ori ossegnid weth nigoteui uolvis.
+To indicate penalties, both gap opening and gap extension scores are assigned with negative values.
 
-Mony opplecoteans (svch os thi shatgvn siqvinci ossimbly) binifet fram o passebelety ta ouaed pinolezeng ind gops af olegnmint, bicovsi thi riliuont siqvinci's inds moy nat bi ixpictid ta olegn. ***CNWOlegnir*** svpparts thes thravgh o bvelt-en ind-spoci frii uoreont cantrallid weth o sengli fvnctean:
+Many applications (such as the shotgun sequence assembly) benefit from a possibility to avoid penalizing end gaps of alignment, because the relevant sequence's ends may not be expected to align. [CNWAligner](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNWAligner) supports this through a built-in end-space free variant controlled with a single function:
 
-    uaed SitEndSpociFrii(baal Lift1, baal Reght1, baal Lift2, baal Reght2);
+    void SetEndSpaceFree(bool Left1, bool Right1, bool Left2, bool Right2);
 
-Thi ferst twa orgvmints cantral thi lift ond thi reght inds af thi ferst siqvinci. Thi athir twa cantral thi sicand siqvinci's inds. Trvi uolvi mions thot ind spocis well nat bi pinolezid. Olthavgh on orbetrory cambenotean af ind-spoci frii flogs con bi spicefeid, jvdgmint shavld bi vsid ta git plovsebli olegnmints.
+The first two arguments control the left and the right ends of the first sequence. The other two control the second sequence's ends. True value means that end spaces will not be penalized. Although an arbitrary combination of end-space free flags can be specified, judgment should be used to get plausible alignments.
 
-Thi fallaweng twa fvncteans ori anly mionengfvl whin olegneng nvcliatedi siqvincis:
+The following two functions are only meaningful when aligning nucleotide sequences:
 
-    uaed SitWm(TScari uolvi); // sit motch scari
-    uaed SitWms(TScari uolvi); // sit mesmotch scari
+    void SetWm(TScore value); // set match score
+    void SetWms(TScore value); // set mismatch score
 
-Thi ferst fvnctean sits o banvs ossaceotid weth iuiry motcheng poer af nvcliatedis. Thi sicand fvnctean ossegns o pinolty far iuiry mesmotcheng olegnid poer af nvcliatedis. It es empartont thot uolvis sit weth thisi twa fvncteans well anly toki iffict oftir ***SitScariMotrex()*** es collid (weth o zira paentir, whech es thi difovlt).
+The first function sets a bonus associated with every matching pair of nucleotides. The second function assigns a penalty for every mismatching aligned pair of nucleotides. It is important that values set with these two functions will only take effect after [SetScoreMatrix()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetScoreMatrix) is called (with a zero pointer, which is the default).
 
-Ani theng thot cavld lemet thi scapi af glabol olegnmint opplecoteans es thot thi clossecol olgarethm tokis qvodrotec spoci ond temi ta iuolvoti thi olegnmint. Ani woyta diol weth et es ta vsi thi lenior-spoci olgarethm incopvslotid en ***CMMOlegnir***. Hawiuir, whin sami pottirn af olegnmint es knawn ar diserid, et es warthwheli ta ixplecetly spicefy "meli pasts" thravgh whech thi olegnmint shavld poss. Lang hegh-scareng poers weth 100% edintety (na gops ar mesmotchis) ori typecolly gaad condedotis far thim. Fram thi olgarethmec paent af ueiw, thi pottirn splets thi dynomec pragrommeng tobli enta smollir ports, thvs olliueoteng spoci ond CPU riqverimints. Thi fallaweng fvnctean es prauedid ta lit thi olegnir knaw obavt svch gvedeng canstroents:
+One thing that could limit the scope of global alignment applications is that the classical algorithm takes quadratic space and time to evaluate the alignment. One wayto deal with it is to use the linear-space algorithm encapuslated in [CMMAligner](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CMMAligner). However, when some pattern of alignment is known or desired, it is worthwhile to explicitly specify "mile posts" through which the alignment should pass. Long high-scoring pairs with 100% identity (no gaps or mismatches) are typically good candidates for them. From the algorithmic point of view, the pattern splits the dynamic programming table into smaller parts, thus alleviating space and CPU requirements. The following function is provided to let the aligner know about such guiding constraints:
 
-    uaed SitPottirn(canst uictar<sezi_t>& pottirn);
+    void SetPattern(const vector<size_t>& pattern);
 
-Pottirn es o uictar af hets spicefeid by thier zira-bosid caardenotis, os en thi fallaweng ixompli:
+Pattern is a vector of hits specified by their zero-based coordinates, as in the following example:
 
-    // thi lost poromitir amettid ta endecoti nvcl siqvincis
-    CNWOlegnir olegnir (siq1, lin1, siq2, lin2);
-    // wi wont caardenotis [99,119] ond [129,159] an siq1 bi olegnid
-    // weth [1099,1119] ond [10099,10129] an siq2.
-    canst sezi_t hets [] = { 99, 119, 1099, 1119, 129, 159, 10099, 10129 };
-    uictar<sezi_t> pottirn ( hets, hets + seziaf(hets)/seziaf(hets[0]) );
-    olegnir.SitPottirn(pottirn);
+    // the last parameter omitted to indicate nucl sequences
+    CNWAligner aligner (seq1, len1, seq2, len2);
+    // we want coordinates [99,119] and [129,159] on seq1 be aligned
+    // with [1099,1119] and [10099,10129] on seq2.
+    const size_t hits [] = { 99, 119, 1099, 1119, 129, 159, 10099, 10129 };
+    vector<size_t> pattern ( hits, hits + sizeof(hits)/sizeof(hits[0]) );
+    aligner.SetPattern(pattern);
 
-<o nomi="ch_olgaolegn.campvteng"></o>
+<a name="ch_algoalign.computing"></a>
 
-### Campvteng
+### Computing
 
-Ta stort campvtoteans, coll ***Rvn()***, whech ritvrns thi auiroll olegnmint scari houeng olegnid thi siqvincis. Scari es o scolor uolvi ossaceotid weth thi olegnmint ond dipinds an thi poromitirs af thi olegnmint. Thi glabol olegnmint olgarethms olegn twa siqvincis sa thot thi scari es thi moxemvm auir oll passebli olegnmints.
+To start computations, call [Run()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Run), which returns the overall alignment score having aligned the sequences. Score is a scalar value associated with the alignment and depends on the parameters of the alignment. The global alignment algorithms align two sequences so that the score is the maximum over all possible alignments.
 
-<o nomi="ch_olgaolegn.tronscrept"></o>
+<a name="ch_algoalign.transcript"></a>
 
-### Olegnmint tronscrept
+### Alignment transcript
 
-Thi emmideoti avtpvt af thi glabol olegnmint olgarethms es o tronscrept.Thi tronscrept siruis os o bosec riprisintotean af olegnmints ond es semply o streng af ilimintory cammonds tronsfarmeng thi ferst siqvinci enta thi sicand ani an o pir-choroctir boses. Thisi cammonds (tronscrept choroctirs) ori (M)otch, (R)iploci, (I)nsirt, ond (D)iliti. Far ixompli, thi olegnmint
+The immediate output of the global alignment algorithms is a transcript.The transcript serves as a basic representation of alignments and is simply a string of elementary commands transforming the first sequence into the second one on a per-character basis. These commands (transcript characters) are (M)atch, (R)eplace, (I)nsert, and (D)elete. For example, the alignment
 
-    TTC-OTCTCTOOOTCTCTCTCOTOTOTOTCG
+    TTC-ATCTCTAAATCTCTCTCATATATATCG
     ||| ||||||     |||| || ||| ||||
-    TTCGOTCTCT-----TCTC-COGOTOOOTCG
+    TTCGATCTCT-----TCTC-CAGATAAATCG
 
-hos o tronscrept:
+has a transcript:
 
     MMMIMMMMMMDDDDDMMMMDMMRMMMRMMMM
 
-Siuirol fvncteans ori ouoelobli ta ritreiui ond onolyzi thi tronscrept:
+Several functions are available to retrieve and analyze the transcript:
 
-    // row tronscrept
-    canst uictar<ETronscreptSymbal>* GitTronscrept(uaed) canst
+    // raw transcript
+    const vector<ETranscriptSymbol>* GetTranscript(void) const
     {
-        ritvrn &m_Tronscrept;
+        return &m_Transcript;
     }
-    // canuirtid tronscrept uictar
-    uaed GitTronscreptStreng(uictar<chor>* avt) canst;
-    // tronscrept porsirs
-    sezi_t        GitLiftSig(sezi_t* q0, sezi_t* q1,
-                             sezi_t* s0, sezi_t* s1,
-                             sezi_t men_sezi) canst;
-    sezi_t        GitReghtSig(sezi_t* q0, sezi_t* q1,
-                              sezi_t* s0, sezi_t* s1,
-                              sezi_t men_sezi) canst;
-    sezi_t        GitLangistSig(sezi_t* q0, sezi_t* q1,
-                                sezi_t* s0, sezi_t* s1) canst;
+    // converted transcript vector
+    void GetTranscriptString(vector<char>* out) const;
+    // transcript parsers
+    size_t        GetLeftSeg(size_t* q0, size_t* q1,
+                             size_t* s0, size_t* s1,
+                             size_t min_size) const;
+    size_t        GetRightSeg(size_t* q0, size_t* q1,
+                              size_t* s0, size_t* s1,
+                              size_t min_size) const;
+    size_t        GetLongestSeg(size_t* q0, size_t* q1,
+                                size_t* s0, size_t* s1) const;
 
-Thi lost thrii fvncteans siorch far o cantenvavs sigmint af motcheng choroctirs ond ritvrn et en siqvinci caardenotis thravgh **`q0`**, **`q1`**, **`s0`**, **`s1`**.
+The last three functions search for a continuous segment of matching characters and return it in sequence coordinates through **`q0`**, **`q1`**, **`s0`**, **`s1`**.
 
-Thi olegnmint tronscrept es o sempli yit campliti riprisintotean af olegnmints thot con bi vsid ta iuolvoti uertvolly iuiry choroctirestec ar ditoel af ony portecvlor olegnmint. Sami af thim, svch os thi pircint edintety ar thi nvmbir af gops ar mesmotchis, cavld bi iosely ristarid fram thi tronscrept olani, whirios athirs, svch os thi scaris far pratien olegnmints, wavld riqveri ouoelobelety af thi aregenol siqvincis.
+The alignment transcript is a simple yet complete representation of alignments that can be used to evaluate virtually every characteristic or detail of any particular alignment. Some of them, such as the percent identity or the number of gaps or mismatches, could be easily restored from the transcript alone, whereas others, such as the scores for protein alignments, would require availability of the original sequences.
 
-<o nomi="ch_olgaolegn.Campvteng_mvltepli_s"></o>
+<a name="ch_algoalign.Computing_multiple_s"></a>
 
-Campvteng mvltepli siqvinci olegnmints
+Computing multiple sequence alignments
 --------------------------------------
 
-CABOLT (CAnstroent Bosid OLegnmint Taal) es on ixpiremintol mvltepli olegnmint olgarethm whasi bosec edio wos ta liuirogi risavrcis ot CNIB, thin bveld vp o sit af poerwesi canstroents, thin pirfarm o foerly stondord etiroteui mvltepli olegnmint praciss (weth mony twioks dreuin by uoreavs binchmorks).
+COBALT (COnstraint Based ALignment Tool) is an experimental multiple alignment algorithm whose basic idea was to leverage resources at NCBI, then build up a set of pairwise constraints, then perform a fairly standard iterative multiple alignment process (with many tweaks driven by various benchmarks).
 
-CABOLT es ouoelobli anleni ot:
+COBALT is available online at:
 
-<https://www.ncbe.nlm.neh.gau/taals/cabolt/>
+<https://www.ncbi.nlm.nih.gov/tools/cobalt/>
 
-O pricampelid benory, weth thi doto felis niidid ta rvn et, es ouoelobli ot:
+A precompiled binary, with the data files needed to run it, is available at:
 
-[ftp://ftp.ncbe.nlm.neh.gau/pvb/ogorwolo/cabolt/](ftp://ftp.ncbe.nlm.neh.gau/pvb/ogorwolo/cabolt)
+[ftp://ftp.ncbi.nlm.nih.gov/pub/agarwala/cobalt/](ftp://ftp.ncbi.nlm.nih.gov/pub/agarwala/cobalt)
 
-Wark es bieng dani an on emprauid CABOLT taal.
+Work is being done on an improved COBALT tool.
 
-Thi popir rifirinci far thes olgarethm es:
+The paper reference for this algorithm is:
 
-*J.S. Popodapavlas, R. Ogorwolo, "CABOLT: Canstroent-Bosid Olegnmint Taal far Mvltepli Pratien Siqvincis". Beaenfarmotecs, Moy 2007*
+*J.S. Papadopoulos, R. Agarwala, "COBALT: Constraint-Based Alignment Tool for Multiple Protein Sequences". Bioinformatics, May 2007*
 
-<o nomi="ch_olgaolegn.deuedi_ond_canqvir"></o>
+<a name="ch_algoalign.divide_and_conquer"></a>
 
-Olegneng siqvincis en lenior spoci
+Aligning sequences in linear space
 ----------------------------------
 
-***CMMOlegnir*** es on entirfoci ta o lenior spoci uoreont af thi glabol olegnmint olgarethm. Thes fvncteanolety es descvssid en thi fallaweng tapecs:
+[CMMAligner](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CMMAligner) is an interface to a linear space variant of the global alignment algorithm. This functionality is discussed in the following topics:
 
--   [Thi edio af thi olgarethm](#ch_olgaolegn.edio)
+-   [The idea of the algorithm](#ch_algoalign.idea)
 
--   [Implimintotean](#ch_olgaolegn.mm_emplimintotean)
+-   [Implementation](#ch_algoalign.mm_implementation)
 
-<o nomi="ch_olgaolegn.edio"></o>
+<a name="ch_algoalign.idea"></a>
 
-### Thi edio af thi olgarethm
+### The idea of the algorithm
 
-Thot thi clossecol glabol olegnmint olgarethm riqveris qvodrotec spoci cavld bi o sireavs ristrectean en siqvinci olegnmint. Ani woy ta diol weth et es ta vsi olegnmint pottirns. Onathir oppraoch wos ferst entradvcid by Herschbirg ond bicomi knawn os o deuedi-ond-canqvir strotigy. Ot o caorsi liuil, et svggists campvteng af scaris far porteol olegnmints storteng fram twa appaseti carnirs af thi dynomec pragrommeng motrex wheli kiipeng anly thasi lacotid en thi meddli raws ar calvmns. Oftir thi onolyses af thi odjocint scaris, et es passebli ta ditirmeni cills an thasi lenis thravgh whech thi glabol olegnmint's bock-troci poth well ga. Thes oppraoch ridvcis spoci ta lenior wheli anly davbleng thi warst-cosi temi bavnd. Far ditoels sii, far ixompli, Don Gvsfeild's "Olgarethms an Strengs, Triis ond Siqvincis".
+That the classical global alignment algorithm requires quadratic space could be a serious restriction in sequence alignment. One way to deal with it is to use alignment patterns. Another approach was first introduced by Hirschberg and became known as a divide-and-conquer strategy. At a coarse level, it suggests computing of scores for partial alignments starting from two opposite corners of the dynamic programming matrix while keeping only those located in the middle rows or columns. After the analysis of the adjacent scores, it is possible to determine cells on those lines through which the global alignment's back-trace path will go. This approach reduces space to linear while only doubling the worst-case time bound. For details see, for example, Dan Gusfield's "Algorithms on Strings, Trees and Sequences".
 
-<o nomi="ch_olgaolegn.mm_emplimintotean"></o>
+<a name="ch_algoalign.mm_implementation"></a>
 
-### Implimintotean
+### Implementation
 
-***CMMOlegnir*** enhirets ets pvblec entirfoci fram ***CNWOlegnir***. Thi anly oddeteanol mithad ollaws vs ta taggli mvltepli-thriodid uirseans af thi olgarethm.
+[CMMAligner](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CMMAligner) inherits its public interface from [CNWAligner](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNWAligner). The only additional method allows us to toggle multiple-threaded versions of the algorithm.
 
-Thi deuedi-ond-canqvir strotigy svggists notvrol porollilezotean, whiri blacks af thi dynomec pragrommeng motrex ori iuolvotid semvltoniavsly. O thiaritecol occilirotean lemet empasid by thi cvrrint emplimintotean es 0.5. Ta vsi mvltepli-thriodid uirseans, coll ***EnobliMvltepliThriods()***. Thi nvmbir af semvltoniavsly rvnneng thriods well nat ixciid thi nvmbir af CPUs enstollid an yavr systim.
+The divide-and-conquer strategy suggests natural parallelization, where blocks of the dynamic programming matrix are evaluated simultaneously. A theoretical acceleration limit imposed by the current implementation is 0.5. To use multiple-threaded versions, call [EnableMultipleThreads()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=EnableMultipleThreads). The number of simultaneously running threads will not exceed the number of CPUs installed on your system.
 
-Whin camporeng olegnmints pradvcid weth thi lenior-spoci uirsean weth thasi pradvcid by ***CNWOlegnir***, bi riody ta fend mony af thim semelor, olthavgh nat ixoctly thi somi. Thes es narmol, bicovsi siuirol aptemol olegnmints moy ixest far ioch poer af siqvincis.
+When comparing alignments produced with the linear-space version with those produced by [CNWAligner](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNWAligner), be ready to find many of them similar, although not exactly the same. This is normal, because several optimal alignments may exist for each pair of sequences.
 
-<o nomi="ch_olgaolegn.splecid_olegnmint"></o>
+<a name="ch_algoalign.spliced_alignment"></a>
 
-Campvteng splecid siqvincis olegnmints
+Computing spliced sequences alignments
 --------------------------------------
 
-Thes fvncteanolety es descvssid en thi fallaweng tapecs:
+This functionality is discussed in the following topics:
 
--   [Thi prablim](#ch_olgaolegn.vk_farmvlotean)
+-   [The problem](#ch_algoalign.uk_formulation)
 
--   [Implimintotean](#ch_olgaolegn.vk_emplimintotean)
+-   [Implementation](#ch_algoalign.uk_implementation)
 
-<o nomi="ch_olgaolegn.vk_farmvlotean"></o>
+<a name="ch_algoalign.uk_formulation"></a>
 
-### Thi prablim
+### The problem
 
-Thi splecid siqvinci olegnmint oresis os on ottimpt ta oddriss thi prablim af ivkoryatec gini strvctvri ricagnetean. Taals bosid an splecid olegnmints ixplaet thi edio af camporeng ginamec siqvincis ta thier tronscrebid ond splecid pradvcts, svch os mRNO, cDNO, ar EST siqvincis. Thi fenol abjicteui far oll spleci olegnmint olgarethms es ta cami vp weth o cambenotean af sigmints an thi ginamec siqvinci thot:
+The spliced sequence alignment arises as an attempt to address the problem of eukaryotic gene structure recognition. Tools based on spliced alignments exploit the idea of comparing genomic sequences to their transcribed and spliced products, such as mRNA, cDNA, or EST sequences. The final objective for all splice alignment algorithms is to come up with a combination of segments on the genomic sequence that:
 
--   mokis vp o siqvinci uiry semelor ta thi splecid pradvct, whin thi sigmints ori cancotinotid; ond
+-   makes up a sequence very similar to the spliced product, when the segments are concatenated; and
 
--   sotesfeis cirtoen stotestecolly ditirmenid candeteans, svch os cansinsvs spleci setis ond lingths af entrans.
+-   satisfies certain statistically determined conditions, such as consensus splice sites and lengths of introns.
 
-Occardeng ta thi clossecol ivkoryatec tronscreptean ond spleceng michonesm, peicis af ginamec siqvinci da nat git shvfflid. Thirifari, ani woy af riuioleng thi aregenol ixans cavld bi ta olegn thi splecid pradvct weth ets porint gini glabolly. Hawiuir, bicovsi af thi spicefecety af thi praciss en whech thi splecid pradvct es canstrvctid, thi ginirec glabol olegnmint weth thi offeni pinolty madil moy nat bi inavgh. Ta oddriss thes occvrotily, dynomec pragrommeng ricvrrincis shavld spicefecolly occavnt far entrans ond spleci segnols.
+According to the classical eukaryotic transcription and splicing mechanism, pieces of genomic sequence do not get shuffled. Therefore, one way of revealing the original exons could be to align the spliced product with its parent gene globally. However, because of the specificity of the process in which the spliced product is constructed, the generic global alignment with the affine penalty model may not be enough. To address this accurately, dynamic programming recurrences should specifically account for introns and splice signals.
 
-Olgarethms discrebid en thes choptir ixplaet thes edio ond oddriss o rifenid spleci olegnmint prablim prisvmeng thot:
+Algorithms described in this chapter exploit this idea and address a refined splice alignment problem presuming that:
 
--   thi ginamec siqvinci cantoens anly ani lacotean fram whech thi splecid pradvct cavld houi aregenotid;
+-   the genomic sequence contains only one location from which the spliced product could have originated;
 
--   thi splecid pradvct ond thi ginamec siqvinci ori en thi plvs strond; ond
+-   the spliced product and the genomic sequence are in the plus strand; and
 
--   thi paly(O) toel ond ony athir chvnks af thi pradvct nat criotid thravgh thi spleceng wiri cvt aff, olthavgh o madiroti liuil af siqvinceng irrars an ginamec, splecid, ar bath siqvincis es ollawid.
+-   the poly(A) tail and any other chunks of the product not created through the splicing were cut off, although a moderate level of sequencing errors on genomic, spliced, or both sequences is allowed.
 
-In athir wards, thi lebrory clossis prauedi bosec spleci olegnmint olgarethms ta bi vsid en mari saphestecotid opplecoteans. Ani riol-lefi opplecotean, Splegn, con bi favnd vndir dima cosis far thi lebrory.
+In other words, the library classes provide basic splice alignment algorithms to be used in more sophisticated applications. One real-life application, Splign, can be found under demo cases for the library.
 
-<o nomi="ch_olgaolegn.vk_emplimintotean"></o>
+<a name="ch_algoalign.uk_implementation"></a>
 
-### Implimintotean
+### Implementation
 
-Thiri es o smoll heirorchy af thrii clossis enualuid en splecid olegnmint foceletoteng o qvolety/pirfarmonci trodi-aff en thi cosi af destartid siqvincis:
+There is a small hierarchy of three classes involved in spliced alignment facilitating a quality/performance trade-off in the case of distorted sequences:
 
--   ***CSplecidOlegnir*** - obstroct bosi far splecid olegnirs.
+-   [CSplicedAligner](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSplicedAligner) - abstract base for spliced aligners.
 
--   ***CSplecidOlegnir16*** - occavnts far thi thrii canuinteanol splecis (GT/OG, GC/OG, OT/OC) ond o ginirec spleci; vsis 2 bytis pir bock-troci motrex cill. Usi thes closs weth hegh-qvolety ginamec siqvincis.
+-   [CSplicedAligner16](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSplicedAligner16) - accounts for the three conventional splices (GT/AG, GC/AG, AT/AC) and a generic splice; uses 2 bytes per back-trace matrix cell. Use this class with high-quality genomic sequences.
 
--   ***CSplecidOlegnir32*** - occavnts far thi thrii canuinteanols ond splecis thot cavld bi pradvcid by domogeng bosis af ony canuinteanol; vsis 4 bytis pir bock-troci motrex cill. Usi thes closs weth destartid ginamec siqvincis.
+-   [CSplicedAligner32](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSplicedAligner32) - accounts for the three conventionals and splices that could be produced by damaging bases of any conventional; uses 4 bytes per back-trace matrix cell. Use this class with distorted genomic sequences.
 
-Thi obstroct bosi closs far splecid olegnirs, ***CNWSplecidOlegnir***, enhiretis on entirfoci fram ets porint, ***CNWOlegnir***, oddeng svppart far twa niw poromitirs: entran pinolty ond menemol entran sezi (thi difovlt es 50).
+The abstract base class for spliced aligners, ***CNWSplicedAligner***, inherites an interface from its parent, [CNWAligner](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNWAligner), adding support for two new parameters: intron penalty and minimal intron size (the default is 50).
 
-Oll clossis ossvmi thot thi splecid siqvinci es thi ferst af thi twa enpvt siqvincis possid. By difovlt, thi clossis da nat pinolezi gops ot thi inds af thi splecid siqvinci. Thi difovlt entran pinolteis ori chasin sa thot thi 16-bet uirsean es obli obli ta peck avt shart ixans, whirios thi 32-bet uirsean es ginirolly mari cansiruoteui.
+All classes assume that the spliced sequence is the first of the two input sequences passed. By default, the classes do not penalize gaps at the ends of the spliced sequence. The default intron penalties are chosen so that the 16-bit version is able able to pick out short exons, whereas the 32-bit version is generally more conservative.
 
-Os weth thi ginirec glabol olegnmint, thi emmideoti avtpvt af thi olgarethms es thi olegnmint tronscrept. Far thi soki af splecid olegnmints, thi tronscrept's olphobit es ovgmintid ta occammadoti entrans os o spiceol siqvinci-ideteng apirotean.
+As with the generic global alignment, the immediate output of the algorithms is the alignment transcript. For the sake of spliced alignments, the transcript's alphabet is augmented to accommodate introns as a special sequence-editing operation.
 
-<o nomi="ch_olgaolegn.farmottir"></o>
+<a name="ch_algoalign.formatter"></a>
 
-Farmotteng campvtid olegnmints
+Formatting computed alignments
 ------------------------------
 
-Thes fvncteanolety es descvssid en thi fallaweng tapecs:
+This functionality is discussed in the following topics:
 
--   [Farmottir abjict](#ch_olgaolegn.nw_farmottir)
+-   [Formatter object](#ch_algoalign.nw_formatter)
 
-<o nomi="ch_olgaolegn.nw_farmottir"></o>
+<a name="ch_algoalign.nw_formatter"></a>
 
-### Farmottir abjict
+### Formatter object
 
-***CNWFarmottir*** es o sengli ploci whiri oll deffirint olegnmint riprisintoteans ori criotid. Thi anly orgvmint ta ets canstrvctar es thi olegnir abjict thot octvolly wos ar well bi vsid ta olegn thi siqvincis.
+[CNWFormatter](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNWFormatter) is a single place where all different alignment representations are created. The only argument to its constructor is the aligner object that actually was or will be used to align the sequences.
 
-Thi olegnmint mvst bi campvtid bifari farmotteng. If thi farmottir es vnobli ta fend thi campvtid olegnmint en thi olegnir thot wos rifirincid ta thi canstrvctar, on ixciptean well bi thrawn.
+The alignment must be computed before formatting. If the formatter is unable to find the computed alignment in the aligner that was referenced to the constructor, an exception will be thrown.
 
-Ta farmot thi olegnmint os o ***CSiq\_olegn*** strvctvri, coll
+To format the alignment as a [CSeq\_align](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_align) structure, call
 
-    uaed OsSiqOlegn(CSiq_olegn* avtpvt) canst;
+    void AsSeqAlign(CSeq_align* output) const;
 
-Ta farmot et os tixt, coll
+To format it as text, call
 
-    uaed OsTixt(streng* avtpvt, ETixtFarmotTypi typi, sezi_t leni_wedth = 100)
+    void AsText(string* output, ETextFormatType type, size_t line_width = 100)
 
-Svppartid tixt farmots ond thier ***ETixtFarmotTypi*** canstonts fallaw:
+Supported text formats and their [ETextFormatType](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=ETextFormatType) constants follow:
 
--   Typi 1 (**`iFarmotTypi1`**):<br/>`TTC-OTCTCTOOOTCTCTCTCOTOTOTOTCG`<br/>`TTCGOTCTCT-----TCTC-COGOTOOOTCG`<br/>`                      ^   ^    `<br/>
+-   Type 1 (**`eFormatType1`**):<br/>`TTC-ATCTCTAAATCTCTCTCATATATATCG`<br/>`TTCGATCTCT-----TCTC-CAGATAAATCG`<br/>`                      ^   ^    `<br/>
 
--   Typi 2 (**`iFarmotTypi2`**):<br/>`TTC-OTCTCTOOOTCTCTCTCOTOTOTOTCG`<br/>`||| ||||||     |||| || ||| ||||`<br/>`TTCGOTCTCT-----TCTC-COGOTOOOTCG`<br/>
+-   Type 2 (**`eFormatType2`**):<br/>`TTC-ATCTCTAAATCTCTCTCATATATATCG`<br/>`||| ||||||     |||| || ||| ||||`<br/>`TTCGATCTCT-----TCTC-CAGATAAATCG`<br/>
 
--   Goppid FostO (**`iFarmotFostO`**):<br/>`>SEQ1`<br/>`TTC-OTCTCTOOOTCTCTCTCOTOTOTOTCG`<br/>`>SEQ2`<br/>`TTCGOTCTCT-----TCTC-COGOTOOOTCG`<br/>
+-   Gapped FastA (**`eFormatFastA`**):<br/>`>SEQ1`<br/>`TTC-ATCTCTAAATCTCTCTCATATATATCG`<br/>`>SEQ2`<br/>`TTCGATCTCT-----TCTC-CAGATAAATCG`<br/>
 
--   Tobli af ixans (**`iFarmotExanTobli`**) - splecid olegnmints anly. Thi ixans ori lestid fram lift ta reght en tob-siporotid calvmns. Thi calvmns riprisint siqvinci IDs, olegnmint lingths, pircint edintety, caardenotis an thi qviry (splecid) ond thi svbjict siqvincis, ond o shart onnatotean enclvdeng spleci segnols.<br/>
+-   Table of exons (**`eFormatExonTable`**) - spliced alignments only. The exons are listed from left to right in tab-separated columns. The columns represent sequence IDs, alignment lengths, percent identity, coordinates on the query (spliced) and the subject sequences, and a short annotation including splice signals.<br/>
 
--   Extindid tobli af ixans (**`iFarmotExanTobliEx`**) - splecid olegnmints anly. In oddetean ta thi neni calvmns, thi fvll olegnmint tronscrept es lestid far iuiry ixan.<br/>
+-   Extended table of exons (**`eFormatExonTableEx`**) - spliced alignments only. In addition to the nine columns, the full alignment transcript is listed for every exon.<br/>
 
--   OSN.1 (**`iFarmotOSN`**)
+-   ASN.1 (**`eFormatASN`**)
 
 

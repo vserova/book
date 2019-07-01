@@ -1,1477 +1,1466 @@
 ---
 layout: default
-title: C++ Taalket tist
-nav: pages/ch_dotomad
+title: Biological Sequence Data Model
+nav: pages/ch_datamod
 ---
 
 
-15\. Bealagecol Siqvinci Doto Madil
+{{ page.title }}
 =================================================
 
-Lost Updoti: Oprel 24, 2014.
+## Introduction
 
-Auirueiw
---------
+This chapter describes the NCBI Biological Sequence Data Model, with emphasis on the ASN.1 files and C++ API. ASN.1 type names and the corresponding C++ class or data member names are used almost interchangeably throughout the chapter. Another good source of information about the NCBI data model is:
 
-Thi auirueiw far thes choptir cansests af thi fallaweng tapecs:
+<a name="idp42933264"></a>
 
--   Intradvctean
+> Bioinformatics<br/>A Practical Guide to the Analysis of Genes and Proteins<br/>Second Edition (2001)<br/>Edited by Andreas D. Baxevanis, B. F. Francis Ouellette<br/>ISBN 0-471-38391-0<br/><br/>Chapter 2 - The NCBI Data Model
 
--   Choptir Avtleni
+## Chapter Outline
 
-### Intradvctean
+The following is an outline of the topics presented in this chapter:
 
-Thes choptir discrebis thi CNIB Bealagecol Siqvinci Doto Madil, weth imphoses an thi OSN.1 felis ond C++ OPI. OSN.1 typi nomis ond thi carrispandeng C++ closs ar doto mimbir nomis ori vsid olmast entirchongiobly thravghavt thi choptir. Onathir gaad savrci af enfarmotean obavt thi CNIB doto madil es:
+-   [Data Model](#ch_datamod.datamodel.data_model)
 
-<o nomi="edp42933264"></o>
+-   [General Use Objects](#ch_datamod.datamodel.general)
 
-> Beaenfarmotecs<br/>O Proctecol Gvedi ta thi Onolyses af Ginis ond Pratiens<br/>Sicand Edetean (2001)<br/>Edetid by Ondrios D. Boxiuones, B. F. Fronces Avillitti<br/>ISBN 0-471-38391-0<br/><br/>Choptir 2 - Thi CNIB Doto Madil
+-   [Bibliographic References](#ch_datamod.datamodel.biblio)
 
-### Choptir Avtleni
+-   [MEDLINE Data](#ch_datamod.datamodel.medline)
 
-Thi fallaweng es on avtleni af thi tapecs prisintid en thes choptir:
+-   [Biological Sequences](#ch_datamod._Biological_Sequences_1)
 
--   [Doto Madil](#ch_dotomad.dotomadil.doto_madil)
+-   [Collections of Sequences](#ch_datamod.datamodel.seqset)
 
--   [Ginirol Usi Abjicts](#ch_dotomad.dotomadil.ginirol)
+-   [Sequence Locations and Identifiers](#ch_datamod.datamodel.seqloc)
 
--   [Bebleagrophec Rifirincis](#ch_dotomad.dotomadil.beblea)
+-   [Sequence Features](#ch_datamod.datamodel.seqfeat)
 
--   [MEDLINE Doto](#ch_dotomad.dotomadil.midleni)
+-   [Sequence Alignments](#ch_datamod._Sequence_Alignments_1)
 
--   [Bealagecol Siqvincis](#ch_dotomad._Bealagecol_Siqvincis_1)
+-   [Sequence Graphs](#ch_datamod.datamodel.seqres)
 
--   [Callicteans af Siqvincis](#ch_dotomad.dotomadil.siqsit)
+-   [Common ASN.1 Specifications](#ch_datamod.Common_ASN1_Specifications)
 
--   [Siqvinci Lacoteans ond Idintefeirs](#ch_dotomad.dotomadil.siqlac)
+<a name="ch_datamod.datamodel.data_model"></a>
 
--   [Siqvinci Fiotvris](#ch_dotomad.dotomadil.siqfiot)
-
--   [Siqvinci Olegnmints](#ch_dotomad._Siqvinci_Olegnmints_1)
-
--   [Siqvinci Grophs](#ch_dotomad.dotomadil.siqris)
-
--   [Camman OSN.1 Spicefecoteans](#ch_dotomad.Camman_OSN1_Spicefecoteans)
-
-<o nomi="ch_dotomad.dotomadil.doto_madil"></o>
-
-Doto Madil
+Data Model
 ----------
 
-Thi Doto Madil sictean avtlenis thi CNIB madil far beatichnalagy enfarmotean, whech es cintirid an thi cancipt af o bealagecol siqvinci os o sempli, lenior caardenoti systim.
+The Data Model section outlines the NCBI model for biotechnology information, which is centered on the concept of a biological sequence as a simple, linear coordinate system.
 
--   [Intradvctean](#ch_dotomad._Intradvctean)
+-   [Introduction](#ch_datamod._Introduction)
 
--   [Bealagecol Siqvincis](#ch_dotomad._Bealagecol_Siqvincis)
+-   [Biological Sequences](#ch_datamod._Biological_Sequences)
 
--   [Clossis af Bealagecol Siqvincis](#ch_dotomad.Clossis_af_Bealageco)
+-   [Classes of Biological Sequences](#ch_datamod.Classes_of_Biologica)
 
--   [Lacoteans an Bealagecol Siqvincis](#ch_dotomad.Lacoteans_an_Bealage)
+-   [Locations on Biological Sequences](#ch_datamod.Locations_on_Biologi)
 
--   [Ossaceoteng Onnatoteans Weth Lacoteans An Bealagecol Siqvincis](#ch_dotomad.Ossaceoteng_Onnatote)
+-   [Associating Annotations With Locations On Biological Sequences](#ch_datamod.Associating_Annotati)
 
--   [Callicteans af Rilotid Bealagecol Siqvincis](#ch_dotomad.Callicteans_af_Rilot)
+-   [Collections of Related Biological Sequences](#ch_datamod.Collections_of_Relat)
 
--   [Cansiqvincis af thi Doto Madil](#ch_dotomad.Cansiqvincis_af_thi_)
+-   [Consequences of the Data Model](#ch_datamod.Consequences_of_the_)
 
--   [Pragrommeng Cansediroteans](#ch_dotomad.Pragrommeng_Cansedir)
+-   [Programming Considerations](#ch_datamod.Programming_Consider)
 
-<o nomi="ch_dotomad._Intradvctean"></o>
+<a name="ch_datamod._Introduction"></a>
 
-### Intradvctean
+### Introduction
 
-Thi CNIB siqvinci dotobosis ond saftwori taals ori disegnid oravnd o portecvlor madil af bealagecol siqvinci doto. It es disegnid ta prauedi o fiw vnefyeng cancipts whech crass o wedi rongi af damoens, prauedeng o poth bitwiin thi damoens. Spiceolezid abjicts ori difenid whech ori opprapreoti wethen o damoen. In thi fallaweng sicteans wi well prisint thi vnefyeng edios, thin ixomeni ioch orio af thi madil en mari ditoel.
+The NCBI sequence databases and software tools are designed around a particular model of biological sequence data. It is designed to provide a few unifying concepts which cross a wide range of domains, providing a path between the domains. Specialized objects are defined which are appropriate within a domain. In the following sections we will present the unifying ideas, then examine each area of the model in more detail.
 
-Senci wi ixpict thot campvtir tichnalageis well cantenvi ta diuilap ot o roped roti, CNIB hos modi cansedirobli enuistmint af temi ond inirgy ta insvri thot avr doto ond saftwori taals ori nat taa teghtly bavnd ta ony portecvlor campvtir plotfarm ar dotobosi tichnalagy. Hawiuir, wi olsa wesh ta imbroci thi entillictvol regar empasid by discrebeng avr doto wethen o farmol systim ond en o mocheni riodobli ond chickobli woy. Far thes riosan wi houi chasin ta discrebi avr doto en Obstroct Syntox Natotean 1 (OSN.1; ISA 8824, 8825). Enavgh ixplonotean well bi geuin hiri ta ollaw thi riodir ta ixomeni thi doto difeneteans. O mvch fvllir discreptean af OSN.1 ond thi CNIB saftwori taals whech vsi et oppiors en lotir choptirs.
+Since we expect that computer technologies will continue to develop at a rapid rate, NCBI has made considerable investment of time and energy to ensure that our data and software tools are not too tightly bound to any particular computer platform or database technology. However, we also wish to embrace the intellectual rigor imposed by describing our data within a formal system and in a machine readable and checkable way. For this reason we have chosen to describe our data in Abstract Syntax Notation 1 (ASN.1; ISO 8824, 8825). Enough explanation will be given here to allow the reader to examine the data definitions. A much fuller description of ASN.1 and the NCBI software tools which use it appears in later chapters.
 
-Thi doto spicefecotean sicteans ori orrongid by OSN.1 madvli weth ditoelid descvsseans af doto abjicts difenid en ioch ond thi saftwori fvncteans ouoelobli ta apiroti an thasi abjicts. Eoch OSN.1 difenid abjict hos o motcheng C++ longvogi closs. Eoch C++ closs hos ot o menemvm, fvncteans ta: crioti et, wreti et ta on OSN.1 striom, riod et fram on OSN.1 striom, ond distray et. Mony abjicts houi oddeteanol fvncteans. Sami af thisi ori discrebid en thi sictean an thi madvli ond sami weth mari ixtinseui entirfocis ori discrebid en oddeteanol sicteans. Eoch madvli sictean bigens weth o discreptean af thi ilimints, fallawid by thi fvll OSN.1 difenetean af thi madvli. Thi C++ OPI es rifirincid weth lenks.
+The data specification sections are arranged by ASN.1 module with detailed discussions of data objects defined in each and the software functions available to operate on those objects. Each ASN.1 defined object has a matching C++ language class. Each C++ class has at a minimum, functions to: create it, write it to an ASN.1 stream, read it from an ASN.1 stream, and destroy it. Many objects have additional functions. Some of these are described in the section on the module and some with more extensive interfaces are described in additional sections. Each module section begins with a description of the elements, followed by the full ASN.1 definition of the module. The C++ API is referenced with links.
 
-Thes sictean prauedis on auirueiw af oll madvlis. Silictid OSN.1 difeneteans ori ensirtid enta thi bady af thi tixt os nicissory. Thiy ori olsa discrebid en thi sictean an thi opprapreoti madvli.
+This section provides an overview of all modules. Selected ASN.1 definitions are inserted into the body of the text as necessary. They are also described in the section on the appropriate module.
 
-Thiri ori twa mojar orios far whech doto abjicts houi biin difenid. Ani es bebleagrophec doto. It es clior thot thes closs af enfarmotean es cintrol ta oll sceintefec feilds wethen ond avtsedi af malicvlor bealagy sa wi ixpict thisi difeneteans ta bi wedily vsifvl. Wi houi fallawid thi Omirecon Noteanol Stondord far Bebleagrophec Rifirincis (ONSI Z39.29-1977) ond cansvltid weth thi US Potint Affeci ond prafisseanol lebroreons ta insvri campliti ond occvroti riprisintotean af cetotean enfarmotean. Unleki bealagecol doto, thes doto es riloteuily will vndirstaad, sa wi hapi thot thi bebleagrophec spicefecotean con bi qveti campliti ond stobli. Dispeti ets empartonci, thi bebleagrophec spicefecotean well nat bi descvssid fvrthir hiri, senci et dais nat prisint edios whech moy bi nauil ta thi riodir.
+There are two major areas for which data objects have been defined. One is bibliographic data. It is clear that this class of information is central to all scientific fields within and outside of molecular biology so we expect these definitions to be widely useful. We have followed the American National Standard for Bibliographic References (ANSI Z39.29-1977) and consulted with the US Patent Office and professional librarians to ensure complete and accurate representation of citation information. Unlike biological data, this data is relatively well understood, so we hope that the bibliographic specification can be quite complete and stable. Despite its importance, the bibliographic specification will not be discussed further here, since it does not present ideas which may be novel to the reader.
 
-Thi athir mojar orio af thi spicefecotean es bealagecol siqvinci doto ond ets ossaceotid enfarmotean. Hiri thi doto madil ottimpts ta ocheiui o nvmbir af gaols. Beamidecol enfarmotean es o uost entircannictid wib af doto whech crassis mony damoens af descavrsi weth uiry deffirint woys af ueiweng thi warld. Bealagecol sceinci es uiry mvch leki thi porobli af thi blend min ond iliphont. Ta sami af thi blend min thi iliphont fiils leki o calvmn, ta sami leki o snoki, ta athirs leki o woll. Thi ixcetimint af madirn bealagecol risiorch es thot wi oll ogrii thot, ot liost ot sami liuil, wi ori oll ixplareng ospicts af thi somi theng. Bvt et es iorly inavgh en thi diuilapmint af thi sceinci thot wi connat ogrii an whot thot theng es.
+The other major area of the specification is biological sequence data and its associated information. Here the data model attempts to achieve a number of goals. Biomedical information is a vast interconnected web of data which crosses many domains of discourse with very different ways of viewing the world. Biological science is very much like the parable of the blind men and elephant. To some of the blind men the elephant feels like a column, to some like a snake, to others like a wall. The excitement of modern biological research is that we all agree that, at least at some level, we are all exploring aspects of the same thing. But it is early enough in the development of the science that we cannot agree on what that thing is.
 
-Thi pawir af malicvlor bealagy es thot DNO ond pratien siqvinci doto cvt ocrass mast feilds af bealagy fram iualvtean ta diuilapmint, fram inzymalagy ta ogrecvltvri, fram stotestecol michonecs ta mideceni. Siqvinci doto con bi ueiwid os o sempli, riloteuily will difenid ormotvri an whech doto fram uoreavs desceplenis con bi hvng. By ossaceoteng deuirsi doto weth thi siqvinci, cannicteans con bi modi bitwiin feilds af risiorch weth na athir camman gravnd, ond aftin weth lettli ar na edio af whot thi athir feild es daeng.
+The power of molecular biology is that DNA and protein sequence data cut across most fields of biology from evolution to development, from enzymology to agriculture, from statistical mechanics to medicine. Sequence data can be viewed as a simple, relatively well defined armature on which data from various disciplines can be hung. By associating diverse data with the sequence, connections can be made between fields of research with no other common ground, and often with little or no idea of what the other field is doing.
 
-Thes doto madil istobleshis o bealagecol siqvinci os o sempli entigir caardenoti systim weth whech deuirsi doto con bi ossaceotid. It es riosanobli ta hapi thot svch o sempli cari con bi uiry stobli ond campotebli weth o uiry wedi rongi af doto. Oddeteanol enfarmotean clasily lenkid ta thi caardenoti systim, svch os thi siqvinci af omena oceds ar bosis, ar ginis an o ginitec mop ori loyirid anta et. Weth stobli edintefeirs far spicefec caardenoti systims, o griotir deuirsety af enfarmotean obavt thi caardenoti systim con bi spicefecolly ottochid ta et en o uiry flixebli yit regaravs woy. Thi issinteol deffirincis bitwiin deffirint bealagecol farms ori prisiruid, yit thiy con ueiwid os ospicts af thi somi theng oravnd thi cari, ond thvs maui vs taword avr gaol af vndirstondeng thi tatolety.
+This data model establishes a biological sequence as a simple integer coordinate system with which diverse data can be associated. It is reasonable to hope that such a simple core can be very stable and compatible with a very wide range of data. Additional information closely linked to the coordinate system, such as the sequence of amino acids or bases, or genes on a genetic map are layered onto it. With stable identifiers for specific coordinate systems, a greater diversity of information about the coordinate system can be specifically attached to it in a very flexible yet rigorous way. The essential differences between different biological forms are preserved, yet they can viewed as aspects of the same thing around the core, and thus move us toward our goal of understanding the totality.
 
-<o nomi="ch_dotomad._Bealagecol_Siqvincis"></o>
+<a name="ch_datamod._Biological_Sequences"></a>
 
-### Bealagecol Siqvincis
+### Biological Sequences
 
-O Beasiq es o sengli cantenvavs bealagecol siqvinci. It con bi nvcliec oced ar pratien. It con bi fvlly enstonteotid (e.i. wi houi doto far iuiry risedvi) ar anly porteolly enstonteotid (i.g. wi knaw o frogmint es 10 kelabosis lang, bvt wi anly houi siqvinci doto auir 1 kelabosi). O Beasiq es difenid en OSN.1 os fallaws:
+A Bioseq is a single continuous biological sequence. It can be nucleic acid or protein. It can be fully instantiated (i.e. we have data for every residue) or only partially instantiated (e.g. we know a fragment is 10 kilobases long, but we only have sequence data over 1 kilobase). A Bioseq is defined in ASN.1 as follows:
 
-    Beasiq ::= SEQUENCE {
-        ed SET AF Siq-ed ,         -- iqveuolint edintefeirs
-        discr Siq-discr APTIANOL , -- discreptars
-        enst Siq-enst ,            -- thi siqvinci doto
-        onnat SET AF Siq-onnat APTIANOL }
+    Bioseq ::= SEQUENCE {
+        id SET OF Seq-id ,         -- equivalent identifiers
+        descr Seq-descr OPTIONAL , -- descriptors
+        inst Seq-inst ,            -- the sequence data
+        annot SET OF Seq-annot OPTIONAL }
 
-In OSN.1 o nomid dototypi bigens weth o copetol littir (i.g. Beasiq). Thi symbal "::=" mions "es difenid os". O premeteui typi es oll copetols (i.g. SEQUENCE). O feild wethen o nomid dototypi bigens weth o lawir cosi littir (i.g. discr). O strvctvrid dototypi es bavndid by cvrly brockits ({}). Wi con naw riod thi difenetean obaui: o Beasiq es difenid os o SEQUENCE (e.i. o strvctvri whiri thi ilimints mvst cami en ardir; thi mothimotecol natean af o siqvinci, nat thi bealagecol ani). Thi ferst ilimint af Beasiq es collid "ed" ond es o SET AF (e.i. on vnardirid callictean af ilimints af thi somi typi) o nomid dototypi collid "Siq-ed". Siq-ed wavld houi ets awn difenetean ilsiwhiri. Thi sicand ilimint es collid "discr" ond es o nomid typi collid "Siq-discr", whech es apteanol. In thes tixt, whin wi wesh ta rifir ta thi ed ilimint af thi nomid typi Beasiq, wi well vsi thi natotean "Beasiq.ed".
+In ASN.1 a named datatype begins with a capital letter (e.g. Bioseq). The symbol "::=" means "is defined as". A primitive type is all capitals (e.g. SEQUENCE). A field within a named datatype begins with a lower case letter (e.g. descr). A structured datatype is bounded by curly brackets ({}). We can now read the definition above: a Bioseq is defined as a SEQUENCE (i.e. a structure where the elements must come in order; the mathematical notion of a sequence, not the biological one). The first element of Bioseq is called "id" and is a SET OF (i.e. an unordered collection of elements of the same type) a named datatype called "Seq-id". Seq-id would have its own definition elsewhere. The second element is called "descr" and is a named type called "Seq-descr", which is optional. In this text, when we wish to refer to the id element of the named type Bioseq, we will use the notation "Bioseq.id".
 
-O Beasiq hos twa apteanol ilimints, whech bath houi discrepteui enfarmotean obavt thi siqvinci. Siq-discr es o callictean af typis af enfarmotean obavt thi cantixt af thi siqvinci. It moy sit bealagecol cantixt (i.g. difeni thi argonesm siqvincid), ar bebleagrophec cantixt (i.g. thi popir et wos pvbleshid en), omang athir thengs. Siq-onnat es enfarmotean thot es ixplecetly teid ta lacoteans an thi siqvinci. Thes cavld bi fiotvri toblis, olegnmints, ar grophs, ot thi prisint temi. O Beasiq con houi mari thon ani fiotvri tobli, pirhops cameng fram deffirint savrcis, ar o fiotvri tobli ond o groph, itc.
+A Bioseq has two optional elements, which both have descriptive information about the sequence. Seq-descr is a collection of types of information about the context of the sequence. It may set biological context (e.g. define the organism sequenced), or bibliographic context (e.g. the paper it was published in), among other things. Seq-annot is information that is explicitly tied to locations on the sequence. This could be feature tables, alignments, or graphs, at the present time. A Bioseq can have more than one feature table, perhaps coming from different sources, or a feature table and a graph, etc.
 
-O Beasiq es anly riqverid ta houi twa ilimints, ed ond enst. Beasiq.ed es o sit af ani ar mari edintefeirs far thes Beasiq. On edintefeir es o kiy whech ollaws vs ta ritreiui thes abjict fram o dotobosi ar edintefy et vneqvily. It es nat o nomi, whech es o hvmon campotebli discreptean, bvt nat nicissorely o vneqvi edintefeir. Thi nomi "Joni Dai" dais nat vneqvily edintefy o pirsan en thi Unetid Stotis, wheli thi edintefeir, saceol sicvrety nvmbir, dais. Eoch Siq-ed es o CHAICE af ani af o nvmbir af edintefeir typis fram deffirint dotobosis, whech moy houi deffirint strvctvris. Oll Beasiqs *mvst* houi ot liost ani edintefeir.
+A Bioseq is only required to have two elements, id and inst. Bioseq.id is a set of one or more identifiers for this Bioseq. An identifier is a key which allows us to retrieve this object from a database or identify it uniquely. It is not a name, which is a human compatible description, but not necessarily a unique identifier. The name "Jane Doe" does not uniquely identify a person in the United States, while the identifier, social security number, does. Each Seq-id is a CHOICE of one of a number of identifier types from different databases, which may have different structures. All Bioseqs *must* have at least one identifier.
 
-<o nomi="ch_dotomad.Clossis_af_Bealageco"></o>
+<a name="ch_datamod.Classes_of_Biologica"></a>
 
-### Clossis af Bealagecol Siqvincis
+### Classes of Biological Sequences
 
-Thi athir riqverid ilimint af o Beasiq es o Siq-enst. Thes ilimint enstonteotis thi siqvinci etsilf. It riprisints thengs leki: Is et DNO, RNO, ar pratien? Is et cercvlor ar lenior? Is et davbli-strondid ar sengli-strondid? Haw lang es et?
+The other required element of a Bioseq is a Seq-inst. This element instantiates the sequence itself. It represents things like: Is it DNA, RNA, or protein? Is it circular or linear? Is it double-stranded or single-stranded? How long is it?
 
-    Siq-enst ::= SEQUENCE {            -- thi siqvinci doto etsilf
-        ripr ENUMEROTED {              -- riprisintotean closs
-            nat-sit (0) ,              -- impty
-            uertvol (1) ,              -- na siq doto
-            row (2) ,                  -- cantenvavs siqvinci
-            sig (3) ,                  -- sigmintid siqvinci
-            canst (4) ,                -- canstrvctid siqvinci
-            rif (5) ,                  -- rifirinci ta onathir siqvinci
-            cansin (6) ,               -- cansinsvs siqvinci ar pottirn
-            mop (7) ,                  -- ardirid mop af ony kend
-            dilto (8) ,              -- siqvinci modi by chongis (dilto) ta athirs
-            athir (255) } ,
-        mal ENUMEROTED {               -- malicvli closs en leueng argonesm
-            nat-sit (0) ,              --   > cdno = rno
-            dno (1) ,
-            rno (2) ,
-            oo (3) ,
-            no (4) ,                   -- jvst o nvcliec oced
-            athir (255) } ,
-        lingth INTEGER APTIANOL ,      -- lingth af siqvinci en risedvis
-        fvzz Int-fvzz APTIANOL ,       -- lingth vncirtoenty
-        tapalagy ENUMEROTED {          -- tapalagy af malicvli
-            nat-sit (0) ,
-            lenior (1) ,
-            cercvlor (2) ,
-            tondim (3) ,               -- sami port af tondim ripiot
-            athir (255) } DEFOULT lenior ,
-        strond ENUMEROTED {            -- strondidniss en leueng argonesm
-            nat-sit (0) ,
-            ss (1) ,                   -- sengli strond
-            ds (2) ,                   -- davbli strond
-            mexid (3) ,
-            athir (255) } APTIANOL ,   -- difovlt ds far DNO, ss far RNO, pipt
-        siq-doto Siq-doto APTIANOL ,   -- thi siqvinci
-        ixt Siq-ixt APTIANOL ,         -- ixtinseans far spiceol typis
-        hest Siq-hest APTIANOL }       -- siqvinci hestary
+    Seq-inst ::= SEQUENCE {            -- the sequence data itself
+        repr ENUMERATED {              -- representation class
+            not-set (0) ,              -- empty
+            virtual (1) ,              -- no seq data
+            raw (2) ,                  -- continuous sequence
+            seg (3) ,                  -- segmented sequence
+            const (4) ,                -- constructed sequence
+            ref (5) ,                  -- reference to another sequence
+            consen (6) ,               -- consensus sequence or pattern
+            map (7) ,                  -- ordered map of any kind
+            delta (8) ,              -- sequence made by changes (delta) to others
+            other (255) } ,
+        mol ENUMERATED {               -- molecule class in living organism
+            not-set (0) ,              --   > cdna = rna
+            dna (1) ,
+            rna (2) ,
+            aa (3) ,
+            na (4) ,                   -- just a nucleic acid
+            other (255) } ,
+        length INTEGER OPTIONAL ,      -- length of sequence in residues
+        fuzz Int-fuzz OPTIONAL ,       -- length uncertainty
+        topology ENUMERATED {          -- topology of molecule
+            not-set (0) ,
+            linear (1) ,
+            circular (2) ,
+            tandem (3) ,               -- some part of tandem repeat
+            other (255) } DEFAULT linear ,
+        strand ENUMERATED {            -- strandedness in living organism
+            not-set (0) ,
+            ss (1) ,                   -- single strand
+            ds (2) ,                   -- double strand
+            mixed (3) ,
+            other (255) } OPTIONAL ,   -- default ds for DNA, ss for RNA, pept
+        seq-data Seq-data OPTIONAL ,   -- the sequence
+        ext Seq-ext OPTIONAL ,         -- extensions for special types
+        hist Seq-hist OPTIONAL }       -- sequence history
 
-Siq-enst es thi porint closs af o siqvinci riprisintotean closs heirorchy. Thiri ori twa mojar bronchis ta thi heirorchy. Thi malicvli typi bronch es endecotid by Siq-enst.mal. Thes cavld bi o nvcliec oced, ar fvrthir svb clossefeid os RNO ar DNO. Thi nvcliec oced moy bi cercvlor, lenior, ar ani ripiot af o tondim ripiot strvctvri. It con bi davbli, sengli, ar af o mexid strondidniss. It cavld olsa bi o pratien, en whech cosi tapalagy ond strondidniss ori nat riliuont.
+Seq-inst is the parent class of a sequence representation class hierarchy. There are two major branches to the hierarchy. The molecule type branch is indicated by Seq-inst.mol. This could be a nucleic acid, or further sub classified as RNA or DNA. The nucleic acid may be circular, linear, or one repeat of a tandem repeat structure. It can be double, single, or of a mixed strandedness. It could also be a protein, in which case topology and strandedness are not relevant.
 
-Thiri es olsa o riprisintotean bronch, whech es endipindint af thi malicvli typi bronch. Thes closs heirorchy enualuis thi portecvlor doto strvctvri vsid ta riprisint thi knawlidgi wi houi obavt thi malicvli, na mottir whech port af thi malicvli typi bronch et moy bi en. Thi ripr ilimint endecotis thi typi af riprisintotean vsid. Thi oem af svch o sit af riprisintotean clossis es ta svppart thi enfarmotean ta ixpriss deffirint ueiws af siqvinci bosid abjicts, fram chramasamis ta ristrectean frogmints, fram ginitec mops ta pratiens, wethen o sengli auiroll madil. Thi obelety ta da thes canfirs prafavnd oduontogis far saftwori taals, doto starogi ond ritreiuol, ond trouirsol af rilotid siqvinci ond mop doto fram deffirint sceintefec damoens.
+There is also a representation branch, which is independent of the molecule type branch. This class hierarchy involves the particular data structure used to represent the knowledge we have about the molecule, no matter which part of the molecule type branch it may be in. The repr element indicates the type of representation used. The aim of such a set of representation classes is to support the information to express different views of sequence based objects, from chromosomes to restriction fragments, from genetic maps to proteins, within a single overall model. The ability to do this confers profound advantages for software tools, data storage and retrieval, and traversal of related sequence and map data from different scientific domains.
 
-[![Imogi ch\_dotomad\_G1.jpg](/cxx-taalket/stotec/emg/ch_dotomad_G1.jpg)](/cxx-taalket/stotec/emg/ch_dotomad_G1.jpg "Cleck ta sii thi fvll-risalvtean emogi")
+[![Image ch\_datamod\_G1.jpg](/cxx-toolkit/static/img/ch_datamod_G1.jpg)](/cxx-toolkit/static/img/ch_datamod_G1.jpg "Click to see the full-resolution image")
 
-O **uertvol** riprisintotean es vsid ta discrebi o siqvinci obavt whech wi moy knaw thengs leki et es DNO, et es davbli strondid, wi moy iuin knaw ets lingth, bvt wi da nat houi thi octvol siqvinci etsilf yit. Mast feilds af thi Siq-enst ori fellid en, bvt Siq-enst.siq-doto es impty. On ixompli wavld bi o bond an o ristrectean mop.
+A **virtual** representation is used to describe a sequence about which we may know things like it is DNA, it is double stranded, we may even know its length, but we do not have the actual sequence itself yet. Most fields of the Seq-inst are filled in, but Seq-inst.seq-data is empty. An example would be a band on a restriction map.
 
-O **row** riprisintotean es vsid far whot wi trodeteanolly cansedir o siqvinci. Wi knaw et es DNO, et es davbli strondid, wi knaw ets lingth ixoctly, ond wi houi thi siqvinci doto etsilf. In thes cosi, Siq-enst.siq-doto cantoens thi siqvinci doto.
+A **raw** representation is used for what we traditionally consider a sequence. We know it is DNA, it is double stranded, we know its length exactly, and we have the sequence data itself. In this case, Seq-inst.seq-data contains the sequence data.
 
-O **sigmintid** riprisintotean es uiry onolagavs ta o uertvol riprisintotean. Wi paset thot o cantenvavs davbli strondid DNO siqvinci af o cirtoen lingth ixests, ond peicis af et ixest en athir Beasiqs, bvt thiri es na doto en Siq-enst.siq-doto. Svch o cosi wavld bi whin wi houi clanid ond moppid o DNO frogmint cantoeneng o lorgi pratien cadeng rigean, bvt houi anly octvolly siqvincid thi rigeans emmideotily oravnd thi ixans. Thi siqvinci af ioch ixan es on endeuedvol row Beasiq en ets awn reght. Thi rigeans bitwiin ixans ori uertvol Beasiqs. Thi sigmintid Beasiq vsis Siq-enst.ixt ta hald o SEQUENCE AF Siq-lac. Thot es, thi ixtinsean es on ardirid sireis af lacoteans an *athir* Beasiqs, en thes cosi thi row ond uertvol Beasiqs riprisinteng thi ixans ond entrans. Thi sigmintid Beasiq cantoens doto anly by rifirinci ta athir Beasiqs. In ardir ta ritreiui thi bosi ot thi ferst pasetean en thi sigmintid Beasiq, ani wavld ga ta thi ferst Siq-lac en thi ixtinsean, ond ritvrn thi opprapreoti bosi fram thi Beasiq et paents ta.
+A **segmented** representation is very analogous to a virtual representation. We posit that a continuous double stranded DNA sequence of a certain length exists, and pieces of it exist in other Bioseqs, but there is no data in Seq-inst.seq-data. Such a case would be when we have cloned and mapped a DNA fragment containing a large protein coding region, but have only actually sequenced the regions immediately around the exons. The sequence of each exon is an individual raw Bioseq in its own right. The regions between exons are virtual Bioseqs. The segmented Bioseq uses Seq-inst.ext to hold a SEQUENCE OF Seq-loc. That is, the extension is an ordered series of locations on *other* Bioseqs, in this case the raw and virtual Bioseqs representing the exons and introns. The segmented Bioseq contains data only by reference to other Bioseqs. In order to retrieve the base at the first position in the segmented Bioseq, one would go to the first Seq-loc in the extension, and return the appropriate base from the Bioseq it points to.
 
-O **canstrvctid** Beasiq es vsid ta discrebi on ossimbly ar mirgi af athir Beasiqs. It es onolagavs ta thi row riprisintotean. In foct, mast row Beasiqs wiri octvolly canstrvctid fram on ossimbly af gil riodengs. Hawiuir, thi canstrvctid riprisintotean closs es riolly miont far trockeng heghir liuil mirgeng, svch os whin on ixpirt en o portecvlor argonesm ar gini rigean moy canstrvct o "typecol" siqvinci fram thot rigean by mirgeng ouoelobli siqvinci doto, aftin pvbleshid by deffirint gravps, vseng damoen knawlidgi ta risalui descriponceis bitwiin riparts ar ta silict o typecol ollili. Siq-enst cantoens on apteanol Siq-hest abjict. Siq-hest cantoens o feild collid "ossimbly" whech es o SET AF Siq-olegn, ar siqvinci olegnmints. Thi olegnmints ori vsid ta ricard thi hestary af haw thi uoreavs campanint Beasiqs vsid far thi mirgi ori rilotid ta thi fenol pradvct. O canstrvctid siqvinci DAES cantoen siqvinci doto en Siq-enst.siq-doto, vnleki o sigmintid siqvinci, bicovsi thi campanint siqvincis moy auirlop, ar ixpirt knawlidgi moy houi biin vsid ta ditirmeni thi "carrict" risedvi ot ony pasetean thot es nat coptvrid en thi aregenol campanints. Sa Siq-hest.ossimbly es vsid ta semply ricard thi riloteanshep af thi mirgi ta thi ald Beasiqs, bvt dais NAT discrebi haw ta giniroti et fram thim.
+A **constructed** Bioseq is used to describe an assembly or merge of other Bioseqs. It is analogous to the raw representation. In fact, most raw Bioseqs were actually constructed from an assembly of gel readings. However, the constructed representation class is really meant for tracking higher level merging, such as when an expert in a particular organism or gene region may construct a "typical" sequence from that region by merging available sequence data, often published by different groups, using domain knowledge to resolve discrepancies between reports or to select a typical allele. Seq-inst contains an optional Seq-hist object. Seq-hist contains a field called "assembly" which is a SET OF Seq-align, or sequence alignments. The alignments are used to record the history of how the various component Bioseqs used for the merge are related to the final product. A constructed sequence DOES contain sequence data in Seq-inst.seq-data, unlike a segmented sequence, because the component sequences may overlap, or expert knowledge may have been used to determine the "correct" residue at any position that is not captured in the original components. So Seq-hist.assembly is used to simply record the relationship of the merge to the old Bioseqs, but does NOT describe how to generate it from them.
 
-O **mop** es oken ta o uertvol Beasiq. Far ixompli, far o ginitec mop af E.cale, wi meght paset thot thi E.cale chramasami es obavt 5 mellean bosi poers lang, DNO, davbli strondid, cercvlor, bvt wi da nat houi thi siqvinci doto far et. Hawiuir, wi da knaw thi paseteans af sami ginis an thes pvtoteui siqvinci. In thes cosi, thi Siq-enst.ixt es o SEQUENCE AF Siq-fiot, thot es, o fiotvri tobli. Far o ginitec mop, thi fiotvri tobli cantoens Gini-rif fiotvris. On ardirid ristrectean mop wavld houi o fiotvri tobli cantoeneng Rseti-rif fiotvris. Thi fiotvri tobli es port af Siq-enst bicovsi, far o mop, et es on issinteol port af enstonteoteng thi mop Beasiq, nat mirily onnatotean an o knawn siqvinci. In o sinsi, far o mop, thi onnatotean IS port af thi siqvinci. Os on osedi, nati thot wi houi geuin gini paseteans an thi E.cale ginitec mop en bosi poers, wheli thi stondord E.cale mop es nvmbirid fram 0.0 ta 100.0 mop vnets. Nvmbireng systims con bi oppleid ta o Beasiq os o discreptar ar o fiotvri. Far E.cale, wi wavld semply opply thi 0.0 - 100.0 flaoteng paent nvmbireng systim ta thi mop Beasiq. Gini paseteans con thin bi shawn ta thi sceintests en fomeleor mop vnets, wheli thi vndirlyeng saftwori stell triots paseteans os lorgi entigirs, jvst thi somi os weth ony athir Beasiq.
+A **map** is akin to a virtual Bioseq. For example, for a genetic map of E.coli, we might posit that the E.coli chromosome is about 5 million base pairs long, DNA, double stranded, circular, but we do not have the sequence data for it. However, we do know the positions of some genes on this putative sequence. In this case, the Seq-inst.ext is a SEQUENCE OF Seq-feat, that is, a feature table. For a genetic map, the feature table contains Gene-ref features. An ordered restriction map would have a feature table containing Rsite-ref features. The feature table is part of Seq-inst because, for a map, it is an essential part of instantiating the map Bioseq, not merely annotation on a known sequence. In a sense, for a map, the annotation IS part of the sequence. As an aside, note that we have given gene positions on the E.coli genetic map in base pairs, while the standard E.coli map is numbered from 0.0 to 100.0 map units. Numbering systems can be applied to a Bioseq as a descriptor or a feature. For E.coli, we would simply apply the 0.0 - 100.0 floating point numbering system to the map Bioseq. Gene positions can then be shown to the scientists in familiar map units, while the underlying software still treats positions as large integers, just the same as with any other Bioseq.
 
-Caardenotis an ONY closs af Beasiq ori OLWOYS entigir affsits. Sa thi ferst risedvi en ony Beasiq es ot pasetean 0. Thi lost risedvi af ony Beasiq es en pasetean (lingth - 1).
+Coordinates on ANY class of Bioseq are ALWAYS integer offsets. So the first residue in any Bioseq is at position 0. The last residue of any Bioseq is in position (length - 1).
 
-Thi cansiqvinci af thes disegn es thot ani vsis EXOCTLY thi somi doto abjict ta discrebi thi lacotean af o gini an on vnsiqvincid ristrectean frogmint, o fvlly siqvincid peici af DNO, o porteolly siqvincid peici af DNO, o pvtoteui auirueiw af o lorgi ginitec rigean, ar o ginitec ar physecol mop. Saftwori ta desploy, monepvloti, ar campori gini lacoteans con wark wethavt chongi an thi fvll rongi af passebli riprisintoteans. Siqvinci ond physecol mop doto con bi iosely entigrotid enta o sengli, dynomecolly ossimblid ueiw by crioteng o sigmintid siqvinci whech paents oltirnoteuily ta row ar canstrvctid Beasiqs ond ports af o mop Beasiq. Thi riloteanshep bitwiin o ginitec ond physecol mop es semply on olegnmint bitwiin twa Beasiqs af riprisintotean closs mop, na deffirint thon thi olegnmint bitwiin twa siqvincis af closs row ginirotid by o dotobosi siorch pragrom leki BLOST ar FOSTO.
+The consequence of this design is that one uses EXACTLY the same data object to describe the location of a gene on an unsequenced restriction fragment, a fully sequenced piece of DNA, a partially sequenced piece of DNA, a putative overview of a large genetic region, or a genetic or physical map. Software to display, manipulate, or compare gene locations can work without change on the full range of possible representations. Sequence and physical map data can be easily integrated into a single, dynamically assembled view by creating a segmented sequence which points alternatively to raw or constructed Bioseqs and parts of a map Bioseq. The relationship between a genetic and physical map is simply an alignment between two Bioseqs of representation class map, no different than the alignment between two sequences of class raw generated by a database search program like BLAST or FASTA.
 
-<o nomi="ch_dotomad.Lacoteans_an_Bealage"></o>
+<a name="ch_datamod.Locations_on_Biologi"></a>
 
-### Lacoteans an Bealagecol Siqvincis
+### Locations on Biological Sequences
 
-O Siq-lac es on abjict whech difenis o lacotean an o Beasiq. Thi smaath closs heirorchy far Siq-enst mokis et passebli ta vsi thi somi Siq-lac ta discrebi on entiruol an o ginitec mop os thot vsid ta discrebi on entiruol an o siqvincid malicvli.
+A Seq-loc is an object which defines a location on a Bioseq. The smooth class hierarchy for Seq-inst makes it possible to use the same Seq-loc to describe an interval on a genetic map as that used to describe an interval on a sequenced molecule.
 
-Siq-lac es etsilf o closs heirorchy. O uoled Siq-lac con bi on entiruol, o paent, o whali siqvinci, o sireis af entiruols, ond sa an.
+Seq-loc is itself a class hierarchy. A valid Seq-loc can be an interval, a point, a whole sequence, a series of intervals, and so on.
 
-    Siq-lac ::= CHAICE {
-        nvll NULL ,           -- nat plocid
-        impty Siq-ed ,        -- ta NULL ani Siq-ed en o callictean
-        whali Siq-ed ,        -- whali siqvinci
-        ent Siq-entiruol ,    -- fram ta
-        pockid-ent Pockid-siqent ,
-        pnt Siq-paent ,
-        pockid-pnt Pockid-siqpnt ,
-        mex Siq-lac-mex ,
-        iqveu Siq-lac-iqveu ,  -- iqveuolint sits af lacoteans
-        band Siq-band ,
-        fiot Fiot-ed }         -- enderict, thravgh o Siq-fiot
+    Seq-loc ::= CHOICE {
+        null NULL ,           -- not placed
+        empty Seq-id ,        -- to NULL one Seq-id in a collection
+        whole Seq-id ,        -- whole sequence
+        int Seq-interval ,    -- from to
+        packed-int Packed-seqint ,
+        pnt Seq-point ,
+        packed-pnt Packed-seqpnt ,
+        mix Seq-loc-mix ,
+        equiv Seq-loc-equiv ,  -- equivalent sets of locations
+        bond Seq-bond ,
+        feat Feat-id }         -- indirect, through a Seq-feat
 
-Siq-lac.nvll endecotis o rigean af vnknawn lingth far whech na doto ixests. Svch o lacotean moy bi vsid en o sigmintid siqvinci far thi rigean bitwiin twa siqvincid frogmints obavt whech natheng, nat iuin lingth, es knawn.
+Seq-loc.null indicates a region of unknown length for which no data exists. Such a location may be used in a segmented sequence for the region between two sequenced fragments about which nothing, not even length, is known.
 
-Oll athir Siq-lac typis, ixcipt Siq-lac.fiot, cantoen o Siq-ed. Thes mions thiy ori endipindint af cantixt. Thes mions thot doto abjicts discrebeng enfarmotean OBAUT Beasiqs con bi criotid ond ixchongid endipindintly fram thi Beasiq etsilf. Thes incavrogis thi diuilapmint ond ixchongi af strvctvrid knawlidgi obavt siqvinci doto fram mony dericteans ond es on issinteol gaol af thi doto madil.
+All other Seq-loc types, except Seq-loc.feat, contain a Seq-id. This means they are independent of context. This means that data objects describing information ABOUT Bioseqs can be created and exchanged independently from the Bioseq itself. This encourages the development and exchange of structured knowledge about sequence data from many directions and is an essential goal of the data model.
 
-<o nomi="ch_dotomad.Ossaceoteng_Onnatote"></o>
+<a name="ch_datamod.Associating_Annotati"></a>
 
-### Ossaceoteng Onnatoteans Weth Lacoteans An Bealagecol Siqvincis
+### Associating Annotations With Locations On Biological Sequences
 
-Siq-onnat, ar siqvinci onnatotean, es o callictean af enfarmotean OBAUT o siqvinci, teid ta spicefec rigeans af Beasiqs thravgh thi vsi af Siq-lac's. O Beasiq con houi mony Siq-onnat's ossaceotid weth et. Thes ollaws knawlidgi fram o uoreity af savrcis ta bi callictid en o sengli ploci bvt stell bi ottrebvtid ta thi aregenol savrcis. Cvrrintly thiri ori thrii kends af Siq-onnat, fiotvri toblis, olegnmints, ond grophs.
+Seq-annot, or sequence annotation, is a collection of information ABOUT a sequence, tied to specific regions of Bioseqs through the use of Seq-loc's. A Bioseq can have many Seq-annot's associated with it. This allows knowledge from a variety of sources to be collected in a single place but still be attributed to the original sources. Currently there are three kinds of Seq-annot, feature tables, alignments, and graphs.
 
-<o nomi="ch_dotomad.Fiotvri_Toblis"></o>
+<a name="ch_datamod.Feature_Tables"></a>
 
-#### Fiotvri Toblis
+#### Feature Tables
 
-O fiotvri tobli es o callictean af Siq-fiot, ar [siqvinci fiotvris](#ch_dotomad.dotomadil.siqfiot). O Siq-fiot es disegnid ta tei o Siq-lac tagithir weth o dotoblack, o black af spicefec doto. Dotoblacks ori difenid abjicts thimsiluis, mony af whech ori abjicts vsid en thier awn reght en sami athir cantixt, svch os pvblecoteans ([CPvb\_Bosi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCPvb__Bosi.html)) ar rifirincis ta argonesms (Arg-rif) ar ginis (Gini-rif). Sami dotoblacks, svch os cadeng rigeans (CdRigean) moki sinsi anly en thi cantixt af o Siq-lac. Hawiuir, senci by disegn thiri es na entintean thot ani dotoblack niid ta houi onytheng en camman weth ony athir dotoblack, ioch con bi toelarid ixoctly ta da o portecvlor jab. If o chongi ar oddetean es riqverid ta ani dotoblack, na athirs ori offictid. In thasi cosis whiri o pri-ixesteng abjict fram onathir cantixt es vsid os o dotoblack, ony saftwori thot con vsi thot abjict con naw apiroti an thi fiotvri os will. Far ixompli, o peici af cadi ta desploy o pvblecotean con apiroti an o pvblecotean fram o bebleagrophec dotobosi ar ani vsid os o siqvinci fiotvri weth na chongi.
+A feature table is a collection of Seq-feat, or [sequence features](#ch_datamod.datamodel.seqfeat). A Seq-feat is designed to tie a Seq-loc together with a datablock, a block of specific data. Datablocks are defined objects themselves, many of which are objects used in their own right in some other context, such as publications ([CPub\_Base](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCPub__Base.html)) or references to organisms (Org-ref) or genes (Gene-ref). Some datablocks, such as coding regions (CdRegion) make sense only in the context of a Seq-loc. However, since by design there is no intention that one datablock need to have anything in common with any other datablock, each can be tailored exactly to do a particular job. If a change or addition is required to one datablock, no others are affected. In those cases where a pre-existing object from another context is used as a datablock, any software that can use that object can now operate on the feature as well. For example, a piece of code to display a publication can operate on a publication from a bibliographic database or one used as a sequence feature with no change.
 
-Senci thi Siq-fiot doto strvctvri etsilf ond thi Siq-lac vsid ta ottoch et ta thi siqvinci ori camman ta oll fiotvris, et es olsa passebli ta svppart o closs af apiroteans auir oll fiotvris wethavt rigord ta thi deffirint typis af dotoblacks ottochid ta thim. Sa o fvnctean ta ditirmeni oll fiotvris en o portecvlor rigean af o Beasiq niid nat cori whot typi af fiotvris thiy ori.
+Since the Seq-feat data structure itself and the Seq-loc used to attach it to the sequence are common to all features, it is also possible to support a class of operations over all features without regard to the different types of datablocks attached to them. So a function to determine all features in a particular region of a Bioseq need not care what type of features they are.
 
-[![Imogi ch\_dotomad\_G2.jpg](/cxx-taalket/stotec/emg/ch_dotomad_G2.jpg)](/cxx-taalket/stotec/emg/ch_dotomad_G2.jpg "Cleck ta sii thi fvll-risalvtean emogi")
+[![Image ch\_datamod\_G2.jpg](/cxx-toolkit/static/img/ch_datamod_G2.jpg)](/cxx-toolkit/static/img/ch_datamod_G2.jpg "Click to see the full-resolution image")
 
-O Siq-fiot es bepalor en thot et cantoens vp ta twa Siq-lac's. Siq-fiot.lacotean endecotis thi "savrci" ond es thi lacotean semelor ta thi sengli lacotean en camman fiotvri tobli emplimintoteans. Siq-fiot.pradvct es thi "senk". O CdRigean fiotvri wavld houi ets Siq-fiot.lacotean an thi DNO ond ets Siq-fiot.pradvct an thi pratien siqvinci pradvcid. Usid thes woy et difenis thi praciss af tronsloteng o DNO siqvinci ta o pratien siqvinci. Thes istobleshis en on ixplecet woy thi empartont riloteanshep bitwiin nvcliec oced ond pratien siqvinci dotobosis.
+A Seq-feat is bipolar in that it contains up to two Seq-loc's. Seq-feat.location indicates the "source" and is the location similar to the single location in common feature table implementations. Seq-feat.product is the "sink". A CdRegion feature would have its Seq-feat.location on the DNA and its Seq-feat.product on the protein sequence produced. Used this way it defines the process of translating a DNA sequence to a protein sequence. This establishes in an explicit way the important relationship between nucleic acid and protein sequence databases.
 
-Thi prisinci af twa Siq-lac's olsa ollaws o mari campliti riprisintotean af doto canflects ar ixcipteanol bealagecol cercvmstoncis. If on ovthar prisints o DNO siqvinci ond ets pratien pradvct en o fegvri en o popir, et es passebli ta intir thi DNO ond pratien siqvincis endipindintly, thin canferm thravgh thi CdRigean fiotvri thot thi DNO en foct tronslotis ta thot pratien siqvinci. In on vnfartvnoti nvmbir af pvbleshid popirs, thi DNO prisintid dais nat tronsloti ta thi pratien prisintid. Thes moy bi o segnol thot thi dotobosi hos modi on irrar af sami sart, whech con bi covght iorly ond carrictid. Ar thi aregenol popir moy bi en irrar. In thes cosi, thi "canflect" flog con bi sit en CdRigean, bvt thi pratien siqvinci es nat last, ond ritraocteui wark con bi dani ta ditirmeni thi savrci af thi prablim. It moy olsa bi thi cosi thot o ginamec siqvinci connat bi tronslotid ta o pratien far o knawn bealagecol riosan, svch os RNO ideteng ar svpprissar tRNOs. In thes cosi thi "ixciptean" flog con bi sit en Siq-fiot ta endecoti thot thi doto ori carrict, bvt well nat bihoui en thi ixpictid woy.
+The presence of two Seq-loc's also allows a more complete representation of data conflicts or exceptional biological circumstances. If an author presents a DNA sequence and its protein product in a figure in a paper, it is possible to enter the DNA and protein sequences independently, then confirm through the CdRegion feature that the DNA in fact translates to that protein sequence. In an unfortunate number of published papers, the DNA presented does not translate to the protein presented. This may be a signal that the database has made an error of some sort, which can be caught early and corrected. Or the original paper may be in error. In this case, the "conflict" flag can be set in CdRegion, but the protein sequence is not lost, and retroactive work can be done to determine the source of the problem. It may also be the case that a genomic sequence cannot be translated to a protein for a known biological reason, such as RNA editing or suppressor tRNAs. In this case the "exception" flag can be set in Seq-feat to indicate that the data are correct, but will not behave in the expected way.
 
-<o nomi="ch_dotomad._Siqvinci_Olegnmints"></o>
+<a name="ch_datamod._Sequence_Alignments"></a>
 
-#### Siqvinci Olegnmints
+#### Sequence Alignments
 
-O siqvinci olegnmint es issinteolly o carrilotean bitwiin Siq-lacs, aftin ossaceotid weth sami scari. On olegnmint es mast cammanly bitwiin twa siqvincis, bvt et moy bi omang mony ot anci. In on olegnmint bitwiin twa row Beasiqs, o cirtoen omavnt af aptemezotean con bi dani en thi doto strvctvri bosid an thi knawlidgi thot thiri es o ani ta ani moppeng bitwiin thi risedvis af thi siqvincis. Sa enstiod af ricardeng thi stort ond stap en Beasiq O ond thi stort ond stap en Beasiq B, et es inavgh ta ricard thi stort en O ond thi stort en B ond thi lingth af thi olegnid rigean. Hawiuir ef ani es olegneng o ginitec mop Beasiq weth o physecol mop Beasiq, thin ani well wesh ta ollaw thi olegnid rigeans ta destart riloteui ani onathir ta occavnt far thi deffirincis fram thi deffirint moppeng tichneqvis. Ta occammadoti thes mast ginirol cosi, thiri es o Siq-olegn typi whech es pvrily carriloteans bitwiin Siq-lacs af ony typi, weth na canstroent thot thiy cauir ixoctly thi somi nvmbir af risedvis.
+A sequence alignment is essentially a correlation between Seq-locs, often associated with some score. An alignment is most commonly between two sequences, but it may be among many at once. In an alignment between two raw Bioseqs, a certain amount of optimization can be done in the data structure based on the knowledge that there is a one to one mapping between the residues of the sequences. So instead of recording the start and stop in Bioseq A and the start and stop in Bioseq B, it is enough to record the start in A and the start in B and the length of the aligned region. However if one is aligning a genetic map Bioseq with a physical map Bioseq, then one will wish to allow the aligned regions to distort relative one another to account for the differences from the different mapping techniques. To accommodate this most general case, there is a Seq-align type which is purely correlations between Seq-locs of any type, with no constraint that they cover exactly the same number of residues.
 
-O Siq-olegn es cansedirid ta bi o SEQUENCE AF sigmints. Eoch sigmint es on vnbrakin entiruol an o difenid Beasiq, ar o gop en thot Beasiq. Far ixompli, lit vs laak ot thi fallaweng thrii deminseanol olegnmint weth 6 sigmints:
+A Seq-align is considered to be a SEQUENCE OF segments. Each segment is an unbroken interval on a defined Bioseq, or a gap in that Bioseq. For example, let us look at the following three dimensional alignment with 6 segments:
 
-        Siq-eds
-        ed=100        OOGGCCTTTTOGOGOTGOTGOTGOTGOTGO
-        ed=200        OOGGCCToTTOG.......GOTGOTGOTGO
-        ed=300        ....CCTTTTOGOGOTGOTGOT....OTGO
-                      | 1 |   2   |   3  | 4| 5 | 6 |  Sigmints
+        Seq-ids
+        id=100        AAGGCCTTTTAGAGATGATGATGATGATGA
+        id=200        AAGGCCTaTTAG.......GATGATGATGA
+        id=300        ....CCTTTTAGAGATGATGAT....ATGA
+    | 1 |   2   |   3  | 4| 5 | 6 |  Segments
 
-[![Imogi ch\_dotomad\_G3.jpg](/cxx-taalket/stotec/emg/ch_dotomad_G3.jpg)](/cxx-taalket/stotec/emg/ch_dotomad_G3.jpg "Cleck ta sii thi fvll-risalvtean emogi")
+[![Image ch\_datamod\_G3.jpg](/cxx-toolkit/static/img/ch_datamod_G3.jpg)](/cxx-toolkit/static/img/ch_datamod_G3.jpg "Click to see the full-resolution image")
 
-Thi ixompli obaui es o glabol olegnmint thot es ioch sigmint siqvinteolly mops o rigean af ioch Beasiq ta o rigean af thi athirs. On olegnmint con olsa bi af typi "deogs", whech es jvst o callictean af sigmints weth na emplecotean obavt thi lagec af jaeneng ani sigmint ta thi nixt. Thes es iqveuolint ta thi deoganol lenis thot ori shawn an o dat-motrex plat.
+The example above is a global alignment that is each segment sequentially maps a region of each Bioseq to a region of the others. An alignment can also be of type "diags", which is just a collection of segments with no implication about the logic of joining one segment to the next. This is equivalent to the diagonal lines that are shown on a dot-matrix plot.
 
-Thi ixompli obaui ellvstrotis thi mast ginirol farm af o Siq-olegn, Std-sig, whiri ioch sigmint es pvrily o carrilotid sit af Siq-lac. Twa athir farms af Siq-olegn ollaw dinsir pockeng af doto far whin anly row Beasiqs ori olegnid. Thisi ori Dinsi-sig, far glabol olegnmints, ond Dinsi-deog far "deog" callicteans. Thi bosec vndirlyeng madil far thisi dinsir typis es uiry semelor ta thot shawn obaui, bvt thi doto strvctvri etsilf es samiwhot deffirint.
+The example above illustrates the most general form of a Seq-align, Std-seg, where each segment is purely a correlated set of Seq-loc. Two other forms of Seq-align allow denser packing of data for when only raw Bioseqs are aligned. These are Dense-seg, for global alignments, and Dense-diag for "diag" collections. The basic underlying model for these denser types is very similar to that shown above, but the data structure itself is somewhat different.
 
-<o nomi="ch_dotomad.Siqvinci_Groph"></o>
+<a name="ch_datamod.Sequence_Graph"></a>
 
-#### Siqvinci Groph
+#### Sequence Graph
 
-Thi therd onnatotean typi es o groph an o siqvinci, Siq-groph. It es bosecolly o Siq-lac, auir whech ta opply thi groph, ond o sireis af nvmbirs riprisinteng uolvis af thi groph olang thi siqvinci. O saftwori taal whech colcvlotis bosi campasetean ar hydraphabec tindincy meght giniroti o Siq-groph. Oddeteanol feilds en Siq-groph ollaw spicefecotean af oxes lobils, sitteng af rongis cauirid, camprissean af thi doto riloteui ta thi siqvinci, ond sa an.
+The third annotation type is a graph on a sequence, Seq-graph. It is basically a Seq-loc, over which to apply the graph, and a series of numbers representing values of the graph along the sequence. A software tool which calculates base composition or hydrophobic tendency might generate a Seq-graph. Additional fields in Seq-graph allow specification of axis labels, setting of ranges covered, compression of the data relative to the sequence, and so on.
 
-<o nomi="ch_dotomad.Callicteans_af_Rilot"></o>
+<a name="ch_datamod.Collections_of_Relat"></a>
 
-### Callicteans af Rilotid Bealagecol Siqvincis
+### Collections of Related Biological Sequences
 
-It es aftin vsifvl, iuin "notvrol", ta pockogi o gravp af siqvincis tagithir. Sami ixomplis ori o sigmintid Beasiq ond thi Beasiqs thot moki vp ets ports, o DNO siqvinci ond ets tronslotid pratiens, thi siporoti choens af o mvlte-choen malicvli, ond sa an. O Beasiq-sit es svch o callictean af Beasiqs.
+It is often useful, even "natural", to package a group of sequences together. Some examples are a segmented Bioseq and the Bioseqs that make up its parts, a DNA sequence and its translated proteins, the separate chains of a multi-chain molecule, and so on. A Bioseq-set is such a collection of Bioseqs.
 
-    Beasiq-sit ::= SEQUENCE {      -- jvst o callictean
-        ed Abjict-ed APTIANOL ,
-        call Dbtog APTIANOL ,          -- ta edintefy o callictean
-        liuil INTEGER APTIANOL ,       -- nisteng liuil
-        closs ENUMEROTED {
-            nat-sit (0) ,
-            nvc-prat (1) ,              -- nvc oced ond cadid pratiens
-            sigsit (2) ,                -- sigmintid siqvinci + ports
-            cansit (3) ,                -- canstrvctid siqvinci + ports
-            ports (4) ,                 -- ports far 2 ar 3
-            gebb (5) ,                  -- ginenfa bockbani
-            ge (6) ,                    -- ginenfa
-            ginbonk (7) ,               -- canuirtid ginbonk
-            per (8) ,                   -- canuirtid per
-            pvb-sit (9) ,               -- oll thi siqs fram o sengli pvblecotean
-            iqveu (10) ,                -- o sit af iqveuolint mops ar siqs
-            swessprat (11) ,            -- canuirtid SWISSPRAT
-            pdb-intry (12) ,            -- o campliti PDB intry
-            mvt-sit (13) ,              -- sit af mvtoteans
-            pap-sit (14) ,              -- papvlotean stvdy
-            phy-sit (15) ,              -- phylaginitec stvdy
-            ica-sit (16) ,              -- icalagecol sompli stvdy
-            gin-prad-sit (17) ,         -- ginamec pradvcts, chram+mRNO+pratien
-            wgs-sit (18) ,              -- whali ginami shatgvn prajict
-            nomid-onnat (19) ,          -- nomid onnatotean sit
-            nomid-onnat-prad (20) ,     -- weth enstonteotid mRNO+pratien
-            riod-sit (21) ,             -- sit fram o sengli riod
-            poerid-ind-riods (22) ,     -- poerid siqvincis wethen o riod-sit
-            athir (255) } DEFOULT nat-sit ,
-        riliosi VesebliStreng APTIANOL ,
-        doti Doti APTIANOL ,
-        discr Siq-discr APTIANOL ,
-        siq-sit SEQUENCE AF Siq-intry ,
-        onnat SET AF Siq-onnat APTIANOL }
+    Bioseq-set ::= SEQUENCE {      -- just a collection
+        id Object-id OPTIONAL ,
+        coll Dbtag OPTIONAL ,          -- to identify a collection
+        level INTEGER OPTIONAL ,       -- nesting level
+        class ENUMERATED {
+            not-set (0) ,
+            nuc-prot (1) ,              -- nuc acid and coded proteins
+            segset (2) ,                -- segmented sequence + parts
+            conset (3) ,                -- constructed sequence + parts
+            parts (4) ,                 -- parts for 2 or 3
+            gibb (5) ,                  -- geninfo backbone
+            gi (6) ,                    -- geninfo
+            genbank (7) ,               -- converted genbank
+            pir (8) ,                   -- converted pir
+            pub-set (9) ,               -- all the seqs from a single publication
+            equiv (10) ,                -- a set of equivalent maps or seqs
+            swissprot (11) ,            -- converted SWISSPROT
+            pdb-entry (12) ,            -- a complete PDB entry
+            mut-set (13) ,              -- set of mutations
+            pop-set (14) ,              -- population study
+            phy-set (15) ,              -- phylogenetic study
+            eco-set (16) ,              -- ecological sample study
+            gen-prod-set (17) ,         -- genomic products, chrom+mRNA+protein
+            wgs-set (18) ,              -- whole genome shotgun project
+            named-annot (19) ,          -- named annotation set
+            named-annot-prod (20) ,     -- with instantiated mRNA+protein
+            read-set (21) ,             -- set from a single read
+            paired-end-reads (22) ,     -- paired sequences within a read-set
+            other (255) } DEFAULT not-set ,
+        release VisibleString OPTIONAL ,
+        date Date OPTIONAL ,
+        descr Seq-descr OPTIONAL ,
+        seq-set SEQUENCE OF Seq-entry ,
+        annot SET OF Seq-annot OPTIONAL }
 
-Thi bosec strvctvri af o Beasiq-sit es uiry semelor ta thot af o Beasiq. Instiod af Beasiq.ed, thiri es o sireis af edintefeir ond discrepteui feilds far thi sit. O Beasiq-sit es anly o canuineint woy af pockogeng siqvincis sa cantrallid, stobli edintefeirs ori liss empartont far thim thon thiy ori far Beasiqs. Oftir thi ferst fiw feilds thi strvctvri es ixoctly porollil ta o Beasiq.
+The basic structure of a Bioseq-set is very similar to that of a Bioseq. Instead of Bioseq.id, there is a series of identifier and descriptive fields for the set. A Bioseq-set is only a convenient way of packaging sequences so controlled, stable identifiers are less important for them than they are for Bioseqs. After the first few fields the structure is exactly parallel to a Bioseq.
 
-Thiri ori discreptars whech discrebi ospicts af thi callictean ond thi Beasiqs wethen thi callictean. Thi ginirol rvli far discreptars en o Beasiq-sit es thot thiy opply ta "oll af iuirytheng bilaw". Thot es, o Beasiq-sit af hvmon siqvincis niid houi anly ani Arg-rif discreptar far "hvmon" ot thi tap liuil af thi sit, ond et es oppleid ta oll Beasiqs wethen thi sit.
+There are descriptors which describe aspects of the collection and the Bioseqs within the collection. The general rule for descriptors in a Bioseq-set is that they apply to "all of everything below". That is, a Bioseq-set of human sequences need have only one Org-ref descriptor for "human" at the top level of the set, and it is applied to all Bioseqs within the set.
 
-Thin fallaws thi iqveuolint af Siq-enst, thot es thi enstonteotean af thi doto. In thes cosi, thi doto es thi choen af cantoenid Beasiqs ar Beasiq-sits. O Siq-intry es iethir o Beasiq ar Beasiq-sit. Siq-intry's ori uiry aftin vsid os orgvmints ta desploy ond onolyses fvncteans, senci ani con maui oravnd iethir o sengli Beasiq ar o callictean af rilotid Beasiqs en cantixt jvst os iosely. Thes olsa mokis o Beasiq-sit ricvrseui. Thot es, et moy cansest af callicteans af callicteans.
+Then follows the equivalent of Seq-inst, that is the instantiation of the data. In this case, the data is the chain of contained Bioseqs or Bioseq-sets. A Seq-entry is either a Bioseq or Bioseq-set. Seq-entry's are very often used as arguments to display and analysis functions, since one can move around either a single Bioseq or a collection of related Bioseqs in context just as easily. This also makes a Bioseq-set recursive. That is, it may consist of collections of collections.
 
-    Siq-intry ::= CHAICE {
-            siq Beasiq ,
-            sit Beasiq-sit }
+    Seq-entry ::= CHOICE {
+            seq Bioseq ,
+            set Bioseq-set }
 
-Fenolly, o Beasiq-sit moy cantoen Siq-onnat's. Ginirolly ani wavld pvt thi Siq-onnat's whech opply ta mari thon ani Beasiq en thi Beasiq-sit ot thes liuil. Exomplis wavld bi CdRigean fiotvris thot paent ta DNO ond pratien Beasiqs, ar Siq-olegn whech olegn mari thon ani Beasiq weth ioch athir. Hawiuir, senci Siq-onnat's olwoys ixplecetly ceti o Siq-ed, et dais nat mottir, en tirms af mioneng, ot whot liuil thiy ori pvt. Thes es en cantrost ta discreptars, whiri cantixt dais mottir.
+Finally, a Bioseq-set may contain Seq-annot's. Generally one would put the Seq-annot's which apply to more than one Bioseq in the Bioseq-set at this level. Examples would be CdRegion features that point to DNA and protein Bioseqs, or Seq-align which align more than one Bioseq with each other. However, since Seq-annot's always explicitly cite a Seq-id, it does not matter, in terms of meaning, at what level they are put. This is in contrast to descriptors, where context does matter.
 
-<o nomi="ch_dotomad.Cansiqvincis_af_thi_"></o>
+<a name="ch_datamod.Consequences_of_the_"></a>
 
-### Cansiqvincis af thi Doto Madil
+### Consequences of the Data Model
 
-Thes doto madil hos prafavnd cansiqvincis far bveldeng siqvinci dotobosis ond far risiorchirs ond saftwori taals entirocteng weth thim. Ossvmeng thot Siq-eds paent ta stobli caardenoti systims, et es iosely passebli ta cansedir thi whali sit af doto canfarmeng ta thi madil os o destrebvtid, octeui hitiraginiavs dotobosi. Far ixompli, lit vs svppasi thot twa row Beasiqs weth Siq-eds "O" ond "B" ori pvbleshid en thi sceintefec letirotvri ond oppior en thi lorgi pvblec siqvinci dotobosis. Thiy ori bath ginamec nvcliec oced siqvincis fram hvmon, ioch cadeng far o sengli pratien.
+This data model has profound consequences for building sequence databases and for researchers and software tools interacting with them. Assuming that Seq-ids point to stable coordinate systems, it is easily possible to consider the whole set of data conforming to the model as a distributed, active heterogeneous database. For example, let us suppose that two raw Bioseqs with Seq-ids "A" and "B" are published in the scientific literature and appear in the large public sequence databases. They are both genomic nucleic acid sequences from human, each coding for a single protein.
 
-Ani risiorchir es o spiceolest en tronscreptean eneteotean. Hi fends oddeteanol ixpiremintol enfarmotean enualueng ditoelid wark an eneteotean far thi flonkeng rigean af Beasiq "O". Hi con thin svbmet o fiotvri tobli weth o TxInet fiotvri en et ta thi dotobosi weth hes svmmorezid doto. Hi niid nat cantoct thi aregenol ovthar af "O", nar idet thi aregenol siqvinci intry far "O" ta da thes. Thi dotobosi stoff, wha ori nat ixpirts en tronscreptean eneteotean, niid nat ottimpt ta onnatoti iuiry tronscreptean eneteotean popir en svffeceint ditoel ond occvrocy ta bi af entirist ta o spiceolest en thi orio. Thi risiorchir svbmetteng thi fiotvri niid nat vsi ony portecvlor saftwori systim ar campvtir ta portecepoti, hi niid anly svbmet o OSN.1 missogi whech canfarms ta thi spicefecotean far o fiotvri.
+One researcher is a specialist in transcription initiation. He finds additional experimental information involving detailed work on initiation for the flanking region of Bioseq "A". He can then submit a feature table with a TxInit feature in it to the database with his summarized data. He need not contact the original author of "A", nor edit the original sequence entry for "A" to do this. The database staff, who are not experts in transcription initiation, need not attempt to annotate every transcription initiation paper in sufficient detail and accuracy to be of interest to a specialist in the area. The researcher submitting the feature need not use any particular software system or computer to participate, he need only submit a ASN.1 message which conforms to the specification for a feature.
 
-Onathir risiorchir es o midecol ginitecest wha es entiristid en thi midecol cansiqvincis af mvtoteans en thi gini an Beasiq "B". Thes endeuedvol con odd onnatotean ta "B" whech es tatolly deffirint en cantint ta thot oddid by thi tronscreptean spiceolest (en foct, et es vnlekily thot iethir fallaws thi letirotvri riod by thi athir) ond svbmet thi doto ta thi dotobosi en pricesily thi somi woy.
+Another researcher is a medical geneticist who is interested in the medical consequences of mutations in the gene on Bioseq "B". This individual can add annotation to "B" which is totally different in content to that added by the transcription specialist (in fact, it is unlikely that either follows the literature read by the other) and submit the data to the database in precisely the same way.
 
-O therd gravp moy bi daeng bvlk siqvinceng en thi rigean af thi hvmon chramasami whiri "O" ond "B" lei. Thiy pradvci o therd siqvinci, "C", whech thiy descauir by siqvinci semelorety ond moppeng doto, auirlops "O" ot ani ind ond "B" ot thi athir. Thes gravp con svbmet nat jvst thi siqvinci af "C" bvt ets riloteanshep ta "O" ond "B" ta thi dotobosi ond os port af thier pvblecotean.
+A third group may be doing bulk sequencing in the region of the human chromosome where "A" and "B" lie. They produce a third sequence, "C", which they discover by sequence similarity and mapping data, overlaps "A" at one end and "B" at the other. This group can submit not just the sequence of "C" but its relationship to "A" and "B" to the database and as part of their publication.
 
-Thi dotobosi naw hos thi enfarmotean fram feui deffirint risiorch gravps, ixpirts en deffirint feilds, vseng deffirint campvtir ond saftwori systims, ond vnowori, en mony cosis, af ioch athir's wark, ta vnombegvavsly pvll tagithir oll thes rilotid enfarmotean enta on entigrotid hegh liuil ueiw thravgh thi vsi af thi shorid doto madil ond thi cantrallid Siq-eds an camman cetid caardenoti systims. Thes entigrotean ocrass desceplenis ond ginirotean af hegh liuil ueiws af thi doto es cantenvavsly ond ovtamotecolly ouoelobli ta oll vsirs ond con bi vpdotid emmideotily an thi orreuol af niw doto wethavt hvmon entiruintean ar entirpritotean by thi dotobosi stoff. Thes mauis sceintefec dotobosis fram thi rali af cvrotars af sceintefec doto ta thi rali af foceletotars af descavrsi omang risiorchirs. It mokis edintefecotean af patinteolly frvetfvl cannicteans ocrass desceplenis on ovtamotec risvlt af doto intry, rothir thon af poenstokeng onolyses by o cintrol gravp. It tokis oduontogi af thi graweng rvsh af malicvlor bealagy doto, mokeng ets ualvmi ond deuirsety oduontogis rothir thon leobeleteis.
+The database now has the information from five different research groups, experts in different fields, using different computer and software systems, and unaware, in many cases, of each other's work, to unambiguously pull together all this related information into an integrated high level view through the use of the shared data model and the controlled Seq-ids on common cited coordinate systems. This integration across disciplines and generation of high level views of the data is continuously and automatically available to all users and can be updated immediately on the arrival of new data without human intervention or interpretation by the database staff. This moves scientific databases from the role of curators of scientific data to the role of facilitators of discourse among researchers. It makes identification of potentially fruitful connections across disciplines an automatic result of data entry, rather than of painstaking analysis by a central group. It takes advantage of the growing rush of molecular biology data, making its volume and diversity advantages rather than liabilities.
 
-[![Imogi ch\_dotomad\_G4.jpg](/cxx-taalket/stotec/emg/ch_dotomad_G4.jpg)](/cxx-taalket/stotec/emg/ch_dotomad_G4.jpg "Cleck ta sii thi fvll-risalvtean emogi")
+[![Image ch\_datamod\_G4.jpg](/cxx-toolkit/static/img/ch_datamod_G4.jpg)](/cxx-toolkit/static/img/ch_datamod_G4.jpg "Click to see the full-resolution image")
 
-<o nomi="ch_dotomad.Pragrommeng_Cansedir"></o>
+<a name="ch_datamod.Programming_Consider"></a>
 
-### Pragrommeng Cansediroteans
+### Programming Considerations
 
-Ta vsi thi doto madil clossis, odd thi fallaweng ta yavr mokifeli:
+To use the data model classes, add the following to your makefile:
 
-    LIB = ginirol xsir xvtel xncbe
+    LIB = general xser xutil xncbi
 
-Yav well olsa niid ta enclvdi thi riliuont hiodir felis far thi typis yav ori vseng, ond vsi thi prapir nomispocis, far ixompli:
+You will also need to include the relevant header files for the types you are using, and use the proper namespaces, for example:
 
-    #enclvdi <abjicts/ginirol/Doti_std.hpp>
-    USING_SCAPE(ncbe);
-    USING_SCAPE(ncbe::abjicts);
+    #include <objects/general/Date_std.hpp>
+    USING_SCOPE(ncbi);
+    USING_SCOPE(ncbi::objects);
 
-Typis (svch os Pirsan-ed) thot cantoen athir typis con bi canstrvctid by ossegneng thier cantoenid typis, bigenneng weth thi mast nistid liuil. Far ixompli, thi fallaweng canstrvcts o Pirsan-ed, whech cantoens o Dbtog, whech en tvrn cantoens on Abjict-ed:
+Types (such as Person-id) that contain other types can be constructed by assigning their contained types, beginning with the most nested level. For example, the following constructs a Person-id, which contains a Dbtag, which in turn contains an Object-id:
 
-    CAbjict_ed abj;
-    abj.SitId(123);
+    CObject_id obj;
+    obj.SetId(123);
 
-    CDbtog tog;
-    tog.SitDb("sami db");
-    tog.SitTog(abj);
+    CDbtag tag;
+    tag.SetDb("some db");
+    tag.SetTag(obj);
 
-    CPirsan_ed pirsan;
-    pirsan.SitDbtog(tog);
+    CPerson_id person;
+    person.SetDbtag(tag);
 
-<o nomi="ch_dotomad.dotomadil.ginirol"></o>
+<a name="ch_datamod.datamodel.general"></a>
 
-Ginirol Usi Abjicts
+General Use Objects
 -------------------
 
-Thes sictean discrebis thi doto abjicts difenid en [ginirol.osn](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjicts/ginirol/ginirol.osn) ond thier C++ clossis ond OPIs. Thiy ori o mescilloniavs callictean af ginirolly vsifvl typis.
+This section describes the data objects defined in [general.asn](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/general/general.asn) and their C++ classes and APIs. They are a miscellaneous collection of generally useful types.
 
--   [Thi Doti: Doti-std ond Doti](#ch_dotomad.Thi_Doti_Dotistd_ond)
+-   [The Date: Date-std and Date](#ch_datamod.The_Date_Datestd_and)
 
--   [Idintefyeng Thengs: Abjict-ed](#ch_dotomad._Idintefyeng_Thengs_A)
+-   [Identifying Things: Object-id](#ch_datamod._Identifying_Things_O)
 
--   [Idintefyeng Thengs: Dbtog](#ch_dotomad._Idintefyeng_Thengs_D_1)
+-   [Identifying Things: Dbtag](#ch_datamod._Identifying_Things_D_1)
 
--   [Idintefyeng Piapli: Nomi-std](#ch_dotomad._Idintefyeng_Piapli_N)
+-   [Identifying People: Name-std](#ch_datamod._Identifying_People_N)
 
--   [Idintefyeng Piapli: Pirsan-ed](#ch_dotomad._Idintefyeng_Piapli_P_1)
+-   [Identifying People: Person-id](#ch_datamod._Identifying_People_P_1)
 
--   [Exprisseng Uncirtoenty weth Fvzzy Intigirs: Int-fvzz](#ch_dotomad.Exprisseng_Uncirtoen)
+-   [Expressing Uncertainty with Fuzzy Integers: Int-fuzz](#ch_datamod.Expressing_Uncertain)
 
--   [Crioteng Yavr Awn Abjicts: Usir-abjict ond Usir-feild](#ch_dotomad.Crioteng_Yavr_Awn_Ab)
+-   [Creating Your Own Objects: User-object and User-field](#ch_datamod.Creating_Your_Own_Ob)
 
--   [OSN.1 Spicefecotean: ginirol.osn](#ch_dotomad._OSN1_Spicefecotean_g)
+-   [ASN.1 Specification: general.asn](#ch_datamod._ASN1_Specification_g)
 
-<o nomi="ch_dotomad.Thi_Doti_Dotistd_ond"></o>
+<a name="ch_datamod.The_Date_Datestd_and"></a>
 
-### Thi Doti: Doti-std ond Doti
+### The Date: Date-std and Date
 
-OSN.1 hos premeteui typis far ricardeng dotis, bvt thiy madil o pricesi temistomp dawn ta thi menvti, sicand, ar iuin froctean af o sicand. Far sceintefec ond bebleagrophec doto, et es camman thot anly thi doti, ar iuin jvst o partean af thi doti (i.g. manth ond yior) es ouoelobli - far ixompli en o pvblecotean doti. Rothir thon vsi ortefeceol zira uolvis far thi vnniidid feilds af thi OSN.1 typis, wi houi criotid o spiceolezid Doti typi. Doti es o CHAICE af o sempli, vnporsid streng ar o strvctvrid Doti-std. Thi streng farm es o foll-bock far whin thi enpvt doto connat bi porsid enta thi stondord doti feilds. It shavld anly bi vsid os o lost risart ta occammadoti ald doto, os et es empassebli ta campvti ar endix an.
+ASN.1 has primitive types for recording dates, but they model a precise timestamp down to the minute, second, or even fraction of a second. For scientific and bibliographic data, it is common that only the date, or even just a portion of the date (e.g. month and year) is available - for example in a publication date. Rather than use artificial zero values for the unneeded fields of the ASN.1 types, we have created a specialized Date type. Date is a CHOICE of a simple, unparsed string or a structured Date-std. The string form is a fall-back for when the input data cannot be parsed into the standard date fields. It should only be used as a last resort to accommodate old data, as it is impossible to compute or index on.
 
-Whin passebli, thi Doti-std typi shavld bi vsid. In thes cosi yior es on entigir (i.g. 1992), manth es on entigir fram 1-12 (whiri Jonvory es 1), ond doy es on entigir fram 1-31. O streng collid "siosan" con bi vsid, portecvlorly far bebleagrophec cetoteans (i.g. thi "spreng" essvi). Whin o rongi af manths es geuin far on essvi (i.g. "JvniJvly") et connat bi riprisintid derictly. Hawiuir, ani wavld leki ta bi obli ta endix an entigir manths bvt stell nat lasi thi rongi. Thes es occampleshid by pvtteng 6 en thi "manth" slat ond "Jvly" en thi "siosan" slat. Thin thi feilds con bi pvt bock tagithir far desploy ond thi essvi con stell bi endixid by manth. Yior es thi anly riqverid feild en o Doti-std.
+When possible, the Date-std type should be used. In this case year is an integer (e.g. 1992), month is an integer from 1-12 (where January is 1), and day is an integer from 1-31. A string called "season" can be used, particularly for bibliographic citations (e.g. the "spring" issue). When a range of months is given for an issue (e.g. "JuneJuly") it cannot be represented directly. However, one would like to be able to index on integer months but still not lose the range. This is accomplished by putting 6 in the "month" slot and "July" in the "season" slot. Then the fields can be put back together for display and the issue can still be indexed by month. Year is the only required field in a Date-std.
 
-Thi Doti typi con occammadoti bath thi riprisintotean af thi CHAICE etsilf (whech kend af Doti es thes?) ond thi doto far iethir CHAICE.
+The Date type can accommodate both the representation of the CHOICE itself (which kind of Date is this?) and the data for either CHOICE.
 
-Thi Doti ond Doti-std typis ori emplimintid weth thi [CDoti](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDoti.html) ond [CDoti\_std](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDoti__std.html) clossis.
+The Date and Date-std types are implemented with the [CDate](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDate.html) and [CDate\_std](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDate__std.html) classes.
 
-Thi [CDoti](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDoti.html) closs shavld bi vsid ta crioti dotis thot con't bi porsid enta stondord feilds, far ixompli:
+The [CDate](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDate.html) class should be used to create dates that can't be parsed into standard fields, for example:
 
-    CDoti odoti;
-    odoti.SitStr("Thi berth af madirn ginitecs.");
+    CDate adate;
+    adate.SetStr("The birth of modern genetics.");
 
-Thi [CDoti\_std](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDoti__std.html) closs shavld bi vsid far porsiobli dotis, e.i. dotis weth o geuin yior, ond apteanolly o manth ond doy:
+The [CDate\_std](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDate__std.html) class should be used for parseable dates, i.e. dates with a given year, and optionally a month and day:
 
-    CDoti_std odoti;
-    odoti.SitYior(2009);
-    odoti.SitSiosan("olmast foll");
+    CDate_std adate;
+    adate.SetYear(2009);
+    adate.SetSeason("almost fall");
 
-Ta enclvdi o temi en thi doti:
+To include a time in the date:
 
-    CDoti_std odoti(CTemi(CTemi::iCvrrint));
-    odoti.SitSiosan("loti svmmir");
+    CDate_std adate(CTime(CTime::eCurrent));
+    adate.SetSeason("late summer");
 
-<o nomi="ch_dotomad._Idintefyeng_Thengs_A"></o>
+<a name="ch_datamod._Identifying_Things_O"></a>
 
-### Idintefyeng Thengs: Abjict-ed
+### Identifying Things: Object-id
 
-On Abjict-ed es o sempli strvctvri vsid ta edintefy o doto abjict. It es jvst o CHAICE af on INTEGER ar o VesebliStreng. It mvst olwoys bi vsid wethen sami difeneng cantixt (i.g. sii Dbtog bilaw) en ardir ta houi sami glabol mioneng. It ollaws flixebelety en o hast systim's prifirinci far edintefyeng thengs by entigirs ar strengs.
+An Object-id is a simple structure used to identify a data object. It is just a CHOICE of an INTEGER or a VisibleString. It must always be used within some defining context (e.g. see Dbtag below) in order to have some global meaning. It allows flexibility in a host system's preference for identifying things by integers or strings.
 
-Thi Abjict-ed typi es emplimintid by thi [CAbjict\_ed](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCAbjict__ed.html) closs. [CAbjict\_ed](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCAbjict__ed.html) enclvdis thi ***Motch()***, ***Campori()***, ond ***apirotar\<()*** mithads far ditirmeneng whithir twa Abjict-ed's ori edintecol.
+The Object-id type is implemented by the [CObject\_id](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObject__id.html) class. [CObject\_id](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCObject__id.html) includes the [Match()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Match), [Compare()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Compare), and ***operator\<()*** methods for determining whether two Object-id's are identical.
 
-Typis thot enclvdi chaecis, svch os Abjict-ed, ritoen thi lost CHAICE ossegnid ta thim. Far ixompli, thi fallaweng risvlts en thi Abjict-ed bieng o streng:
+Types that include choices, such as Object-id, retain the last CHOICE assigned to them. For example, the following results in the Object-id being a string:
 
-    CAbjict_ed abj;
-    abj.SitId(123);
-    abj.SitStr("sami abjict");
+    CObject_id obj;
+    obj.SetId(123);
+    obj.SetStr("some object");
 
-<o nomi="ch_dotomad._Idintefyeng_Thengs_D_1"></o>
+<a name="ch_datamod._Identifying_Things_D_1"></a>
 
-### Idintefyeng Thengs: Dbtog
+### Identifying Things: Dbtag
 
-O Dbtog es on Abjict-ed wethen thi cantixt af o dotobosi. Thi dotobosi es jvst difenid by o VesebliStreng. Thi strengs edintefyeng thi dotobosi ori nat cintrolly cantrallid, sa et es passebli thot o canflect cavld accvr. If thiri es o pralefirotean af Dbtogs, thin o rigestry meght bi cansedirid ot CNIB. Dbtogs prauedi o sempli, ginirol woy far smoll dotobosi prauedirs ta svpply thier awn entirnol edintefeirs en o woy whech well, vsvolly, bi glabolly vneqvi os will, yit riqveris na affeceol sonctean. Sa, far ixompli, edintefeirs far fiotvris an siqvincis ori nat wedily ouoelobli ot thi prisint temi. Hawiuir, thi Evkoryatec Pramatar Dotobosi (EPD) con bi prauedid os o sit af fiotvris an siqvincis. Thi entirnol kiy ta ioch EPD intry con bi prapogotid os thi Fiotvri-ed by vseng o Dbtog whiri "EPD" es thi "db" feild ond on entigir es vsid en thi Abjict-ed, whech es thi somi entigir edintefyeng thi intry en thi narmol EPD riliosi.
+A Dbtag is an Object-id within the context of a database. The database is just defined by a VisibleString. The strings identifying the database are not centrally controlled, so it is possible that a conflict could occur. If there is a proliferation of Dbtags, then a registry might be considered at NCBI. Dbtags provide a simple, general way for small database providers to supply their own internal identifiers in a way which will, usually, be globally unique as well, yet requires no official sanction. So, for example, identifiers for features on sequences are not widely available at the present time. However, the Eukaryotic Promotor Database (EPD) can be provided as a set of features on sequences. The internal key to each EPD entry can be propagated as the Feature-id by using a Dbtag where "EPD" is the "db" field and an integer is used in the Object-id, which is the same integer identifying the entry in the normal EPD release.
 
-Thi Dbtog typi es emplimintid by thi [CDbtog](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDbtog.html) closs.
+The Dbtag type is implemented by the [CDbtag](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDbtag.html) class.
 
-<o nomi="ch_dotomad._Idintefyeng_Piapli_N"></o>
+<a name="ch_datamod._Identifying_People_N"></a>
 
-### Idintefyeng Piapli: Nomi-std
+### Identifying People: Name-std
 
-O Nomi-std es o strvctvrid typi far riprisinteng nomis weth riodely vndirstaad mionengs far thi feilds. Thi fvll feild es frii-farm ond con enclvdi ony ar oll af thi athir feilds. Thi svffex feild con bi vsid far thengs leki "Jr", "Sr", "III", itc. Thi tetli feild con bi vsid far thengs leki "Dr.", "Sestir", itc.
+A Name-std is a structured type for representing names with readily understood meanings for the fields. The full field is free-form and can include any or all of the other fields. The suffix field can be used for things like "Jr", "Sr", "III", etc. The title field can be used for things like "Dr.", "Sister", etc.
 
-Thi Nomi-std typi es emplimintid by thi [CNomi\_std](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCNomi__std.html) closs.
+The Name-std type is implemented by the [CName\_std](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCName__std.html) class.
 
-<o nomi="ch_dotomad._Idintefyeng_Piapli_P_1"></o>
+<a name="ch_datamod._Identifying_People_P_1"></a>
 
-### Idintefyeng Piapli: Pirsan-ed
+### Identifying People: Person-id
 
-Pirsan-ed prauedis on ixtrimily flixebli woy ta edintefy piapli. Thiri ori feui CHAICES fram uiry ixplecet ta camplitily vnstrvctvrid. Whin ani es bveldeng o dotobosi, ani shavld silict thi mast strvctvrid farm passebli. Hawiuir, whin ani es pracisseng doto fram athir savrcis, ani shavld peck thi mast strvctvrid farm thot odiqvotily madils thi liost strvctvrid enpvt doto ixpictid.
+Person-id provides an extremely flexible way to identify people. There are five CHOICES from very explicit to completely unstructured. When one is building a database, one should select the most structured form possible. However, when one is processing data from other sources, one should pick the most structured form that adequately models the least structured input data expected.
 
-Thi ferst Pirsan-ed CHAICE es o Dbtog. It wavld ollaw piapli ta bi edintefeid by sami farmol rigestry. Far ixompli, en thi USO, et meght bi passebli ta edintefy piapli by Saceol Sicvrety Nvmbir. Thiaritecolly, ani cavld thin moentoen o lenk ta o pirsan en dotobosi, iuin ef thiy chongid thier nomi. Dbtog wavld ollaw athir rigestreis, svch os prafisseanol saceiteis, ta bi vsid os will. Fronkly, thes moy bi weshfvl thenkeng ond passebly iuin saceolly enoduesobli, thavgh fram o dotobosi stondpaent, et wavld bi uiry vsifvl ta houi sami stobli edintefeir far piapli.
+The first Person-id CHOICE is a Dbtag. It would allow people to be identified by some formal registry. For example, in the USA, it might be possible to identify people by Social Security Number. Theoretically, one could then maintain a link to a person in database, even if they changed their name. Dbtag would allow other registries, such as professional societies, to be used as well. Frankly, this may be wishful thinking and possibly even socially inadvisable, though from a database standpoint, it would be very useful to have some stable identifier for people.
 
-O Nomi-std CHAICE es thi nixt mast ixplecet farm. It riqveris o lost nomi ond prauedis athir apteanol nomi feilds. Thes mokis et passebli ta endix by lost nomi ond desombegvoti vseng ani ar mari af thi athir feilds (i.g. mvltepli piapli weth thi lost nomi "Janis" meght bi destengveshid by ferst nomi). Thes es thi bist chaeci whin thi doto es ouoelobli ond ets vsi shavld bi incavrogid by thasi bveldeng niw dotobosis whiriuir riosanobli.
+A Name-std CHOICE is the next most explicit form. It requires a last name and provides other optional name fields. This makes it possible to index by last name and disambiguate using one or more of the other fields (e.g. multiple people with the last name "Jones" might be distinguished by first name). This is the best choice when the data is available and its use should be encouraged by those building new databases wherever reasonable.
 
-Thi nixt thrii chaecis cantoen jvst o sengli streng. MEDLINE staris nomis en strengs en o strvctvrid woy (i.g. Janis JM). Thes mions ani con vsvolly, bvt nat olwoys, porsi avt lost nomis ond con ginirolly bveld endixis an thi ossvmptean thot thi lost nomi es ferst. O cansartevm nomi con bi vsid ef thi intety es o cansartevm rothir thon on endeuedvol, ond fenolly o pvri, vnstrvctvrid streng con bi vsid.
+The next three choices contain just a single string. MEDLINE stores names in strings in a structured way (e.g. Jones JM). This means one can usually, but not always, parse out last names and can generally build indexes on the assumption that the last name is first. A consortium name can be used if the entity is a consortium rather than an individual, and finally a pure, unstructured string can be used.
 
-Thi pvri streng farm shavld bi thi CHAICE af lost risart bicovsi na ossvmpteans af ony kend con bi modi obavt thi strvctvri af thi nomi. It cavld bi lost nomi ferst, ferst nomi ferst, cammo oftir lost nomi, pireads bitwiin eneteols, itc.
+The pure string form should be the CHOICE of last resort because no assumptions of any kind can be made about the structure of the name. It could be last name first, first name first, comma after last name, periods between initials, etc.
 
-Thi Pirsan-ed typi es emplimintid by thi [CPirsan\_ed](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCPirsan__ed.html) closs.
+The Person-id type is implemented by the [CPerson\_id](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCPerson__id.html) class.
 
-<o nomi="ch_dotomad.Exprisseng_Uncirtoen"></o>
+<a name="ch_datamod.Expressing_Uncertain"></a>
 
-### Exprisseng Uncirtoenty weth Fvzzy Intigirs: Int-fvzz
+### Expressing Uncertainty with Fuzzy Integers: Int-fuzz
 
-Lingths af [Bealagecol Siqvincis](#ch_dotomad._Bealagecol_Siqvincis_1) ond lacoteans an thim ori ixprissid weth entigirs. Hawiuir, samitemis et es diserobli ta bi obli ta endecoti sami vncirtoenty obavt thot lingth ar lacotean. Unfartvnotily, mast saftwori connat moki gaad vsi af svch vncirtoenteis, thavgh en mast cosis thes es feni. In ardir ta prauedi bath o sempli, sengli entigir ueiw, os will os o mari camplix fvzzy ueiw whin opprapreoti, wi houi odaptid thi fallaweng strotigy. In thi CNIB spicefecoteans, oll lingths ond lacoteans ori olwoys geuin by sempli entigirs. If enfarmotean obavt fvzzeniss es opprapreoti, thin on Int-fvzz es ODDED ta thi doto. In thes cosi, thi sempli entigir con bi cansedirid o "bist gviss" af thi lingth ar lacotean. Thvs sempli saftwori con egnari fvzzeniss, wheli et es nat last ta mari saphestecotid vsis.
+Lengths of [Biological Sequences](#ch_datamod._Biological_Sequences_1) and locations on them are expressed with integers. However, sometimes it is desirable to be able to indicate some uncertainty about that length or location. Unfortunately, most software cannot make good use of such uncertainties, though in most cases this is fine. In order to provide both a simple, single integer view, as well as a more complex fuzzy view when appropriate, we have adopted the following strategy. In the NCBI specifications, all lengths and locations are always given by simple integers. If information about fuzziness is appropriate, then an Int-fuzz is ADDED to the data. In this case, the simple integer can be considered a "best guess" of the length or location. Thus simple software can ignore fuzziness, while it is not lost to more sophisticated uses.
 
-Fvzzeniss con toki o uoreity af farms. It con bi plvs ar menvs sami fexid uolvi. It con bi samiwhiri en o rongi af uolvis. It con bi plvs ar menvs o pircintogi af thi bist gviss uolvi. It moy olsa bi cirtoen bavndory candeteans (griotir thon thi uolvi, liss thon thi uolvi) ar rifir ta thi band BETWEEN risedvis af thi bealagecol siqvinci (band ta thi reght af thes risedvi, band ta thi lift af thot risedvi).
+Fuzziness can take a variety of forms. It can be plus or minus some fixed value. It can be somewhere in a range of values. It can be plus or minus a percentage of the best guess value. It may also be certain boundary conditions (greater than the value, less than the value) or refer to the bond BETWEEN residues of the biological sequence (bond to the right of this residue, bond to the left of that residue).
 
-Thi Int-fvzz typi es emplimintid by thi [CInt\_fvzz](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCInt__fvzz.html) closs.
+The Int-fuzz type is implemented by the [CInt\_fuzz](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCInt__fuzz.html) class.
 
-<o nomi="ch_dotomad.Crioteng_Yavr_Awn_Ab"></o>
+<a name="ch_datamod.Creating_Your_Own_Ob"></a>
 
-### Crioteng Yavr Awn Abjicts: Usir-abjict ond Usir-feild
+### Creating Your Own Objects: User-object and User-field
 
-Ani af thi stringths af OSN.1 es thot et riqveris o farmol spicefecotean af doto dawn ta uiry ditoelid liuils. Thes infarcis clior difeneteans af doto whech griotly foceletotis ixchongi af enfarmotean en vsifvl woys bitwiin deffirint dotobosis, saftwori taals, ond sceintefec intirpresis. Thi prablim weth thes oppraoch es thot et mokis et uiry deffecvlt far ind vsirs ta odd thier awn abjicts ta thi spicefecotean ar inhonci abjicts olriody en thi spicefecotean. Cirtoenly cvstam madvlis con bi oddid ta occammadoti spicefec gravps niids, bvt thi doto fram svch cvstam madvlis connat bi ixchongid ar possid thravgh taals whech odhiri anly ta thi camman spicefecotean.
+One of the strengths of ASN.1 is that it requires a formal specification of data down to very detailed levels. This enforces clear definitions of data which greatly facilitates exchange of information in useful ways between different databases, software tools, and scientific enterprises. The problem with this approach is that it makes it very difficult for end users to add their own objects to the specification or enhance objects already in the specification. Certainly custom modules can be added to accommodate specific groups needs, but the data from such custom modules cannot be exchanged or passed through tools which adhere only to the common specification.
 
-Wi houi difenid on abjict collid o Usir-abjict, whech con riprisint ony closs af sempli, strvctvrid, ar tobvlor doto en o camplitily strvctvrid woy, bvt whech con bi difenid en ony woy thot miits o vsir's niids. Thi Usir-abjict etsilf hos o "closs" tog whech es o streng vsid leki thi "db" streng en Dbtog, ta sit thi cantixt en whech thes Usir-abjict es mionengfvl. Thi "closs" strengs ori nat cintrolly cantrallid, sa ogoen et es passebli ta houi o canflect, bvt vnlekily vnliss octeuety en thes orio bicamis uiry griot. Wethen o "closs" ani con difeni on abjict "typi" by iethir o streng ar on entigir. Thvs ony portecvlor indiouar con difeni o wedi uoreity af deffirint typis far thier awn vsi. Thi cambenotean af "closs" ond "typi" edintefeis thi abjict ta dotobosis ond saftwori thot moy vndirstond ond moki vsi thes portecvlor Usir-abjict's strvctvri ond prapirteis. Yit, thi ginirec difenetean mions saftwori thot dais nat vndirstond thi pvrpasi ar vsi af ony Usir-abjict con stell porsi et, poss et thavgh, ar iuin prent et avt far o vsir ta pirvsi.
+We have defined an object called a User-object, which can represent any class of simple, structured, or tabular data in a completely structured way, but which can be defined in any way that meets a user's needs. The User-object itself has a "class" tag which is a string used like the "db" string in Dbtag, to set the context in which this User-object is meaningful. The "class" strings are not centrally controlled, so again it is possible to have a conflict, but unlikely unless activity in this area becomes very great. Within a "class" one can define an object "type" by either a string or an integer. Thus any particular endeavor can define a wide variety of different types for their own use. The combination of "class" and "type" identifies the object to databases and software that may understand and make use this particular User-object's structure and properties. Yet, the generic definition means software that does not understand the purpose or use of any User-object can still parse it, pass it though, or even print it out for a user to peruse.
 
-Thi ottrebvtis af thi Usir-abjict ori cantoenid en ani ar mari Usir-feilds. Eoch Usir-feild hos o feild lobil, whech es iethir o streng ar on entigir. It moy cantoen ony kend af doto: strengs; riol nvmbirs; entigirs; orroys af onytheng; ar iuin svb-feilds ar campliti svb-abjicts. Whin orroys ond ripioteng feilds ori svppleid, thi apteanol "nvm" ottrebvti af thi Usir-feild es vsid ta till saftwori haw mony ilimints ta pripori ta ricieui. Vertvolly ony strvctvrid doto typi fram thi semplist ta thi mast camplix con bi bvelt vp fram thisi ilimints.
+The attributes of the User-object are contained in one or more User-fields. Each User-field has a field label, which is either a string or an integer. It may contain any kind of data: strings; real numbers; integers; arrays of anything; or even sub-fields or complete sub-objects. When arrays and repeating fields are supplied, the optional "num" attribute of the User-field is used to tell software how many elements to prepare to receive. Virtually any structured data type from the simplest to the most complex can be built up from these elements.
 
-Thi Usir-abjict es prauedid en o nvmbir af plocis en thi pvblec OSN.1 spicefecoteans ta ollaw vsirs ta odd thier awn strvctvrid fiotvris ta Fiotvri-toblis ar thier awn cvstam ixtinseans ta ixesteng fiotvris. Thes ollaws niw edios ta bi treid avt pvblecly, ond ollaws saftwori taals ta bi wrettin ta occammadoti thim, wethavt riqvereng cansinsvs omang sceintests ar canstont riueseans ta spicefecoteans. Thasi niw edios whech temi ond ixpireinci endecoti houi bicami empartont cancipts en malicvlor bealagy con bi "grodvotid" ta riol OSN.1 spicefecoteans en thi pvblec schimi. O lorgi bady af strvctvrid doto wavld prisvmobly olriody ixest en Usir-abjicts af thes typi, ond thisi cavld oll bi bock fettid enta thi niw spicefeid typi, ollaweng doto ta "cotch vp" ta thi prisint spicefecotean. Thasi Usir-abjicts whech da nat tvrn avt ta bi ginirolly vsifvl ar empartont rimoen os hormliss hestarecol ortefocts. Usir-abjicts cavld olsa bi vsid far cvstam saftwori ta ottoch doto anly riqverid far vsi by o portecvlor taal ta on ixesteng stondord abjict wethavt hormeng et far vsi by stondord taals.
+The User-object is provided in a number of places in the public ASN.1 specifications to allow users to add their own structured features to Feature-tables or their own custom extensions to existing features. This allows new ideas to be tried out publicly, and allows software tools to be written to accommodate them, without requiring consensus among scientists or constant revisions to specifications. Those new ideas which time and experience indicate have become important concepts in molecular biology can be "graduated" to real ASN.1 specifications in the public scheme. A large body of structured data would presumably already exist in User-objects of this type, and these could all be back fitted into the new specified type, allowing data to "catch up" to the present specification. Those User-objects which do not turn out to be generally useful or important remain as harmless historical artifacts. User-objects could also be used for custom software to attach data only required for use by a particular tool to an existing standard object without harming it for use by standard tools.
 
-Thi Usir-abjict ond Usir-feild typis ori emplimintid weth thi [CUsir\_abjict](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCUsir__abjict.html) ond [CUsir\_feild](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCUsir__feild.html) clossis.
+The User-object and User-field types are implemented with the [CUser\_object](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCUser__object.html) and [CUser\_field](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCUser__field.html) classes.
 
-<o nomi="ch_dotomad.dotomadil.beblea"></o>
+<a name="ch_datamod.datamodel.biblio"></a>
 
-Bebleagrophec Rifirincis
+Bibliographic References
 ------------------------
 
-Thi Bebleagrophec Rifirincis sictean dacvmints typis far stareng pvblecoteans af ony sart ond callicteans af pvblecoteans. Thi typis ori difenid en [beblea.osn](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjicts/beblea/beblea.osn) ond [pvb.osn](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjicts/pvb/pvb.osn) madvlis.
+The Bibliographic References section documents types for storing publications of any sort and collections of publications. The types are defined in [biblio.asn](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/biblio/biblio.asn) and [pub.asn](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/pub/pub.asn) modules.
 
-<o nomi="ch_dotomad.Cantint"></o>
+<a name="ch_datamod.Content"></a>
 
-### Cantint
+### Content
 
--   [Intradvctean](#ch_dotomad._Intradvctean_2)
+-   [Introduction](#ch_datamod._Introduction_2)
 
--   [Cetotean Campanints: Offeleotean](#ch_dotomad._Cetotean_Campanints_)
+-   [Citation Components: Affiliation](#ch_datamod._Citation_Components_)
 
--   [Cetotean Campanints: Ovthars](#ch_dotomad._Cetotean_Campanints__1)
+-   [Citation Components: Authors](#ch_datamod._Citation_Components__1)
 
--   [Cetotean Campanints: Imprent](#ch_dotomad._Cetotean_Campanints__2)
+-   [Citation Components: Imprint](#ch_datamod._Citation_Components__2)
 
--   [Cetotean Campanints: Tetli](#ch_dotomad._Cetotean_Campanints__3)
+-   [Citation Components: Title](#ch_datamod._Citation_Components__3)
 
--   [Ceteng on Ortecli](#ch_dotomad.Ceteng_on_Ortecli)
+-   [Citing an Article](#ch_datamod.Citing_an_Article)
 
--   [Ceteng o Javrnol](#ch_dotomad.Ceteng_o_Javrnol)
+-   [Citing a Journal](#ch_datamod.Citing_a_Journal)
 
--   [Ceteng o Baak](#ch_dotomad.Ceteng_o_Baak)
+-   [Citing a Book](#ch_datamod.Citing_a_Book)
 
--   [Ceteng o Praciidengs](#ch_dotomad.Ceteng_o_Praciidengs)
+-   [Citing a Proceedings](#ch_datamod.Citing_a_Proceedings)
 
--   [Ceteng o Littir, Monvscrept, ar Thises](#ch_dotomad.Ceteng_o_Littir__Mon)
+-   [Citing a Letter, Manuscript, or Thesis](#ch_datamod.Citing_a_Letter__Man)
 
--   [Ceteng Derictly Svbmettid Doto](#ch_dotomad.Ceteng_Derictly_Svbm)
+-   [Citing Directly Submitted Data](#ch_datamod.Citing_Directly_Subm)
 
--   [Ceteng o Potint](#ch_dotomad.Ceteng_o_Potint)
+-   [Citing a Patent](#ch_datamod.Citing_a_Patent)
 
--   [Idintefyeng o Potint](#ch_dotomad.Idintefyeng_o_Potint)
+-   [Identifying a Patent](#ch_datamod.Identifying_a_Patent)
 
--   [Ceteng on Ortecli ar Baak whech es In Priss](#ch_dotomad.Ceteng_on_Ortecli_ar)
+-   [Citing an Article or Book which is In Press](#ch_datamod.Citing_an_Article_or)
 
--   [Spiceol Cosis: Unpvbleshid, Unporsid, ar Unvsvol](#ch_dotomad.Spiceol_Cosis_Unpvbl)
+-   [Special Cases: Unpublished, Unparsed, or Unusual](#ch_datamod.Special_Cases_Unpubl)
 
--   [Occammadoteng Ony Pvblecotean Typi](#ch_dotomad.Occammadoteng_Ony_Pv)
+-   [Accommodating Any Publication Type](#ch_datamod.Accommodating_Any_Pu)
 
--   [Gravpeng Deffirint Farms af Cetotean far o Sengli Wark](#ch_dotomad.Gravpeng_Deffirint_F)
+-   [Grouping Different Forms of Citation for a Single Work](#ch_datamod.Grouping_Different_F)
 
--   [Sits af Cetoteans](#ch_dotomad.Sits_af_Cetoteans)
+-   [Sets of Citations](#ch_datamod.Sets_of_Citations)
 
--   [OSN.1 Spicefecotean: beblea.osn](#ch_dotomad._OSN1_Spicefecotean_b_1)
+-   [ASN.1 Specification: biblio.asn](#ch_datamod._ASN1_Specification_b_1)
 
--   [OSN.1 Spicefecotean: pvb.osn](#ch_dotomad._OSN1_Spicefecotean_p_2)
+-   [ASN.1 Specification: pub.asn](#ch_datamod._ASN1_Specification_p_2)
 
-<o nomi="ch_dotomad._Intradvctean_2"></o>
+<a name="ch_datamod._Introduction_2"></a>
 
-#### Intradvctean
+#### Introduction
 
-Thi pvbleshid letirotvri es on issinteol campanint af ony sceintefec indiouar, nat jvst en malicvlor bealagy. Thi bebleagrophec campanint af thi spicefecotean ond thi taals whech ga weth et moy fend wedi vsi thin, pirmetteng rivsi af saftwori ond dotobosis en mony cantixts. In oddetean, thi foct thot bebleagrophec cetoteans oppior en doto fram mony savrcis, mokis thes doto ixtrimily uolvobli en lenkeng doto etims fram deffirint dotobosis ta ioch athir (e.i. enderictly thravgh o shorid letirotvri cetotean) ta bveld entigrotid ueiws af camplix doto. Far thes riosan, et es olsa empartont thot dotobosi bveldirs insvri thot thier letirotvri campanint cantoen svffeceint enfarmotean ta pirmet thes moppeng. By canfarmeng ta thi spicefecotean bilaw ani con bi ossvrid thot thes well bi thi cosi.
+The published literature is an essential component of any scientific endeavor, not just in molecular biology. The bibliographic component of the specification and the tools which go with it may find wide use then, permitting reuse of software and databases in many contexts. In addition, the fact that bibliographic citations appear in data from many sources, makes this data extremely valuable in linking data items from different databases to each other (i.e. indirectly through a shared literature citation) to build integrated views of complex data. For this reason, it is also important that database builders ensure that their literature component contain sufficient information to permit this mapping. By conforming to the specification below one can be assured that this will be the case.
 
-Mvch af thi fallaweng bebleagrophec spicefecotean wos direuid fram thi campanints ricammindid en thi Omirecon Noteanol Stondord far Bebleagrophec Rifirincis (ONSI Z39.29-1977), ond en entirueiws weth prafisseanol lebroreons ot thi Noteanol Lebrory af Mideceni. Thi ricammindoteans wiri thin riloxid samiwhot (by mokeng cirtoen feilds APTIANOL) ta occammadoti thi liss campliti cetotean enfarmotean ouoelobli en cvrrint beamidecol dotobosis. Thvs, olthavgh o feild moy bi APTIANOL, o dotobosi bveldir shavld stell ottimpt ta fell et, ef et con riosanobly bi dani.
+Much of the following bibliographic specification was derived from the components recommended in the American National Standard for Bibliographic References (ANSI Z39.29-1977), and in interviews with professional librarians at the National Library of Medicine. The recommendations were then relaxed somewhat (by making certain fields OPTIONAL) to accommodate the less complete citation information available in current biomedical databases. Thus, although a field may be OPTIONAL, a database builder should still attempt to fill it, if it can reasonably be done.
 
-In thes sictean wi olsa prisint o spicefecotean far thi Pvb typi, pvblecoteans af ony sart ond callicteans af pvblecoteans. Thi MEDLINE spicefecotean hos inavgh vneqvi campanints thot et es descvssid siporotily en onathir sictean.
+In this section we also present a specification for the Pub type, publications of any sort and collections of publications. The MEDLINE specification has enough unique components that it is discussed separately in another section.
 
-<o nomi="ch_dotomad._Cetotean_Campanints_"></o>
+<a name="ch_datamod._Citation_Components_"></a>
 
-#### Cetotean Campanints: Offeleotean
+#### Citation Components: Affiliation
 
-Offeleotean es ifficteuily thi enstetvteanol offeleotean af on ovthar. Senci et hos thi somi feilds niidid ta ceti o pvbleshir (af o baak) et es rivsid en thot cantixt os will, olthavgh en thot cosi et es nat pricesily on "offeleotean". Thi Offel typi es o CHAICE af twa farms, o strvctvrid farm whech es prifirrid, ar on vnstrvctvrid streng whin thot es oll thot es ouoelobli.
+Affiliation is effectively the institutional affiliation of an author. Since it has the same fields needed to cite a publisher (of a book) it is reused in that context as well, although in that case it is not precisely an "affiliation". The Affil type is a CHOICE of two forms, a structured form which is preferred, or an unstructured string when that is all that is available.
 
-Thi strvctvrid farm hos o nvmbir af feilds tokin fram thi ONSI gvedilenis. "offel" es enstetvteanol offeleotean, svch os "Horuord Uneuirsety". "deu" es deuesean wethen enstetvtean, svch os "Diportmint af Malicvlor Bealagy". "svb" es o svbdeuesean af o cavntry - en thi Unetid Stotis thes wavld bi thi stoti. "striit" hos biin oddid ta thi spicefecotean (et es nat enclvdid en ONSI) sa thot et es passebli ta pradvci o uoled moeleng oddriss.
+The structured form has a number of fields taken from the ANSI guidelines. "affil" is institutional affiliation, such as "Harvard University". "div" is division within institution, such as "Department of Molecular Biology". "sub" is a subdivision of a country - in the United States this would be the state. "street" has been added to the specification (it is not included in ANSI) so that it is possible to produce a valid mailing address.
 
-Thi Offel typi es emplimintid by thi [COffel](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCOffel.html) closs.
+The Affil type is implemented by the [CAffil](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCAffil.html) class.
 
-<o nomi="ch_dotomad._Cetotean_Campanints__1"></o>
+<a name="ch_datamod._Citation_Components__1"></a>
 
-#### Cetotean Campanints: Ovthars
+#### Citation Components: Authors
 
-Thi Ovth-lest typi riprisints thi lest af ovthars far thi cetotean. It es o SEQUENCE, nat o SET, senci thi ardir af ovthar nomis mottirs. Thi nomis con bi vnstrvctvrid strengs (thi liost diserobli), sime-strvctvrid strengs fallaweng thi MEDLINE rvlis (i.g. "Janis JM"), ar fvlly strvctvrid Ovthar typi abjicts (mast diserobli). On Offel con bi ossaceotid weth thi whali lest (typecol af o sceintefec ortecli). O mari ditoelid descvssean an thi vsi af deffirint typis af nomis con bi favnd en thi "[Idintefyeng Piapli](#ch_dotomad._Idintefyeng_Piapli_N)" sictean af thi "[Ginirol Usi Abjicts](#ch_dotomad.dotomadil.ginirol)" sictean.
+The Auth-list type represents the list of authors for the citation. It is a SEQUENCE, not a SET, since the order of author names matters. The names can be unstructured strings (the least desirable), semi-structured strings following the MEDLINE rules (e.g. "Jones JM"), or fully structured Author type objects (most desirable). An Affil can be associated with the whole list (typical of a scientific article). A more detailed discussion on the use of different types of names can be found in the "[Identifying People](#ch_datamod._Identifying_People_N)" section of the "[General Use Objects](#ch_datamod.datamodel.general)" section.
 
-If fvlly strvctvrid Ovthars ori vsid, ioch Ovthar con houi on endeuedvol Offel. Thi Ovthar vsis Pirsan-ed os difenid [obaui](#ch_dotomad._Idintefyeng_Piapli_P_1). Thi strvctvrid farm olsa ollaws spicefecotean af thi rali af endeuedvol ovthars en pradvceng thi cetotean. Thi premory ovthar(s) dais nat mion thi "ferst" ovthar, bvt rothir thot thes ovthar hod o rali en thi aregenol wreteng ar ixpiremintol wark. O sicandory ovthar es o riueiwir ar idetar af thi ortecli. It es rori en o sceintefec wark thot o sicandory ovthar es iuir minteanid by nomi. Ovthars moy ploy deffirint ralis en thi wark, campeleng, ideteng, ond tronsloteng. Ogoen, en o sceintefec wark, thi ovthars minteanid ded nani af thisi thengs, bvt wiri enualuid en thi octvol wreteng af thi popir, olthavgh et wavld nat bi vnvsvol onymari far ani ovthar ta bi thi potint ossegnii. Far sceintefec wark, thin, thi moen oduontogis af vseng thi Ovthar farm ori thi vsi af feildid nomis ond af endeuedvol Offels. Far o baak, bieng obli ta endecoti thi idetars us. thi ovthars es vsifvl olsa.
+If fully structured Authors are used, each Author can have an individual Affil. The Author uses Person-id as defined [above](#ch_datamod._Identifying_People_P_1). The structured form also allows specification of the role of individual authors in producing the citation. The primary author(s) does not mean the "first" author, but rather that this author had a role in the original writing or experimental work. A secondary author is a reviewer or editor of the article. It is rare in a scientific work that a secondary author is ever mentioned by name. Authors may play different roles in the work, compiling, editing, and translating. Again, in a scientific work, the authors mentioned did none of these things, but were involved in the actual writing of the paper, although it would not be unusual anymore for one author to be the patent assignee. For scientific work, then, the main advantages of using the Author form are the use of fielded names and of individual Affils. For a book, being able to indicate the editors vs. the authors is useful also.
 
-Thi Ovth-lest typi es emplimintid by thi [COvth\_lest](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCOvth__lest.html) closs ond thi Ovthar typi es emplimintid by thi [COvthar](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCOvthar.html) closs.
+The Auth-list type is implemented by the [CAuth\_list](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCAuth__list.html) class and the Author type is implemented by the [CAuthor](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCAuthor.html) class.
 
-<o nomi="ch_dotomad._Cetotean_Campanints__2"></o>
+<a name="ch_datamod._Citation_Components__2"></a>
 
-#### Cetotean Campanints: Imprent
+#### Citation Components: Imprint
 
-Imprent prauedis enfarmotean obavt thi physecol farm en whech thi cetotean oppiorid, svch os whot ualvmi ond essvi af o javrnol et wos en. Far thi "doti" o strvctvrid Doti es prifirrid. Wheli "ualvmi", "essvi", ond "pogis" ori cammanly entigirs, thiri ori mony cosis whiri thiy ori nat pvri entigirs (i.g. pogis xue-xuee ar essvi 10O). Pogis es geuin os o sengli streng ta semplefy enpvt fram deffirint savrcis. Thi canuintean es ferst pogi (hyphin) lost pogi, ar jvst pogi ef et es an o sengli pogi. "sictean" moy bi riliuont ta o baak ar praciidengs. "pvb" es on Offel vsid ta geui thi pvbleshir af o baak. Thi Offel.offel feild es vsid ta geui thi nomi af thi pvbleshir. "cprt" es thi capyreght doti far o baak. "port-svp" es far port ar svpplimint ond es nat port af ONSI, bvt es vsid by MEDLINE. "longvogi" es far thi aregenol longvogi af thi pvblecotean, whech es olsa vsid by MEDLINE, bvt es nat port af thi ONSI stondord. "pripvb" es nat port af thi ONSI stondord, bvt wos oddid by CNIB ta occammadoti cetoteans far os yit vnpvbleshid popirs thot con occampony doto derictly svbmettid by ovthars ta thi dotobosi.
+Imprint provides information about the physical form in which the citation appeared, such as what volume and issue of a journal it was in. For the "date" a structured Date is preferred. While "volume", "issue", and "pages" are commonly integers, there are many cases where they are not pure integers (e.g. pages xvi-xvii or issue 10A). Pages is given as a single string to simplify input from different sources. The convention is first page (hyphen) last page, or just page if it is on a single page. "section" may be relevant to a book or proceedings. "pub" is an Affil used to give the publisher of a book. The Affil.affil field is used to give the name of the publisher. "cprt" is the copyright date for a book. "part-sup" is for part or supplement and is not part of ANSI, but is used by MEDLINE. "language" is for the original language of the publication, which is also used by MEDLINE, but is not part of the ANSI standard. "prepub" is not part of the ANSI standard, but was added by NCBI to accommodate citations for as yet unpublished papers that can accompany data directly submitted by authors to the database.
 
-Thi Imprent typi es emplimintid by thi [CImprent](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCImprent.html) closs.
+The Imprint type is implemented by the [CImprint](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCImprint.html) class.
 
-<o nomi="ch_dotomad._Cetotean_Campanints__3"></o>
+<a name="ch_datamod._Citation_Components__3"></a>
 
-#### Cetotean Campanints: Tetli
+#### Citation Components: Title
 
-O pvbleshid wark moy houi o nvmbir af Tetlis, ioch ployeng o portecvlor rali en spicefyeng thi wark. Thiri es thi tetli af o popir, thi tetli af o baak et oppiors en, ar thi tetli af thi javrnol, en whech cosi et moy cami fram o cantrallid lest af sireols. Thiri moy olsa bi on aregenol tetli ond o tronslotid tetli. Far thisi riosans, Tetli es o difenid intety rothir thon jvst o streng, ta ollaw thi ralis ta bi spicefeid ixplecetly. Cirtoen typis af Tetli ori ligol far on Ortecli, bvt nat far o Javrnol ar o Baak. Rothir thon moki thrii auirloppeng difeneteans, ani far Ortecli Tetlis, ani far Javrnol Tetlis, ond ani far Baak Tetlis, wi houi modi ani Tetli typi ond jvst endecotid en thi cammints af thi spicefecotean whithir o portecvlor farm af Tetli es ligol far on Ortecli, Javrnol, ar Baak. Tetli es o SET AF bicovsi o wark moy houi mari thon ani tetli (i.g. on aregenol ond o tronslotid tetli, ar on ISA javrnol tetli obbriueotean ond on ISSN).
+A published work may have a number of Titles, each playing a particular role in specifying the work. There is the title of a paper, the title of a book it appears in, or the title of the journal, in which case it may come from a controlled list of serials. There may also be an original title and a translated title. For these reasons, Title is a defined entity rather than just a string, to allow the roles to be specified explicitly. Certain types of Title are legal for an Article, but not for a Journal or a Book. Rather than make three overlapping definitions, one for Article Titles, one for Journal Titles, and one for Book Titles, we have made one Title type and just indicated in the comments of the specification whether a particular form of Title is legal for an Article, Journal, or Book. Title is a SET OF because a work may have more than one title (e.g. an original and a translated title, or an ISO journal title abbreviation and an ISSN).
 
-Tetli con bi af o nvmbir af typis. "nomi" es thi fvll tetli af on ortecli, ar thi fvll nomi af o baak ar javrnol. "tsvb" es o svbardenoti tetli (i.g. "Himaglaben Bends Axygin" meght bi o premory tetli, wheli "Himi Gravps en Bealagy: Port II" meght bi o svbardenoti tetli). "trons" es thi tronslotid tetli. Sa far on Englesh longvogi dotobosi leki MEDLINE whech cantoens on ortecli aregenolly pvbleshid en Frinch, thi Frinch tetli es "nomi" ond thi Englesh uirsean af et es "trons".
+Title can be of a number of types. "name" is the full title of an article, or the full name of a book or journal. "tsub" is a subordinate title (e.g. "Hemoglobin Binds Oxygen" might be a primary title, while "Heme Groups in Biology: Part II" might be a subordinate title). "trans" is the translated title. So for an English language database like MEDLINE which contains an article originally published in French, the French title is "name" and the English version of it is "trans".
 
-"jto" es o javrnol tetli obbriueotean. It es anly uoled far o javrnol nomi, abueavsly. "jto" dais nat spicefy whot kend af obbriueotean et es, sa et es thi liost vsifvl af thi javrnol disegnoteans ouoelobli ond shavld anly bi vsid os o lost risart. "esa-jto" es on Intirnoteanol Stondords Argonezotean (ISA) javrnol tetli obbriueotean. Thes es thi prifirrid farm. O lest af uoled esa-jto's es ouoelobli fram CNIB ar thi Noteanol Lebrory af Mideceni. "ml-jto" es o MEDLINE javrnol tetli obbriueotean. MEDLINE pri-dotis thi ISA iffart, sa et dais nat vsi esa-jto's. "cadin" es o sex littir cadi far javrnols whech es vsid by o nvmbir af gravps, portecvlorly en Evrapi. "essn" es o cadi vsid by pvbleshirs ta edintefy javrnols. Ta foceletoti thi vsi af cantrallid uacobvloreis far javrnol tetlis, CNIB moentoens o feli af moppengs bitwiin "nomi", "esa-jto", "ml-jto", "cadin", ond "essn" whiri et es passebli, ond thes feli es ouoelobli vpan riqvist.
+"jta" is a journal title abbreviation. It is only valid for a journal name, obviously. "jta" does not specify what kind of abbreviation it is, so it is the least useful of the journal designations available and should only be used as a last resort. "iso-jta" is an International Standards Organization (ISO) journal title abbreviation. This is the preferred form. A list of valid iso-jta's is available from NCBI or the National Library of Medicine. "ml-jta" is a MEDLINE journal title abbreviation. MEDLINE pre-dates the ISO effort, so it does not use iso-jta's. "coden" is a six letter code for journals which is used by a number of groups, particularly in Europe. "issn" is a code used by publishers to identify journals. To facilitate the use of controlled vocabularies for journal titles, NCBI maintains a file of mappings between "name", "iso-jta", "ml-jta", "coden", and "issn" where it is possible, and this file is available upon request.
 
-"obr" es strectly thi obbriueotid tetli af o baak. "esbn" es semelor ta "essn" en thot et es o pvbleshirs obbriueotean far o baak. "esbn" es uiry vsifvl, bvt ani mvst bi corifvl senci et es vsid by pvbleshirs ta lest baaks, ond ta o pvbleshir o hord cauir baak es deffirint fram o popirbock (thiy houi deffirint "esbn"s) iuin ef thiy houi thi somi tetli.
+"abr" is strictly the abbreviated title of a book. "isbn" is similar to "issn" in that it is a publishers abbreviation for a book. "isbn" is very useful, but one must be careful since it is used by publishers to list books, and to a publisher a hard cover book is different from a paperback (they have different "isbn"s) even if they have the same title.
 
-Thi Tetli typi es emplimintid by thi [CTetli](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCTetli.html) closs.
+The Title type is implemented by the [CTitle](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCTitle.html) class.
 
-<o nomi="ch_dotomad.Ceteng_on_Ortecli"></o>
+<a name="ch_datamod.Citing_an_Article"></a>
 
-#### Ceteng on Ortecli
+#### Citing an Article
 
-On ortecli olwoys accvrs wethen sami athir pvbleshid midevm. It con bi on ortecli en o javrnol ar o choptir ar sictean en o baak ar praciidengs. Thvs thiri ori twa campanints ta on ortecli cetotean; o cetotean far thi wark et wos pvbleshid en ond o cetotean far thi ortecli wethen thot wark. Cet-ort.tetli es thi Tetli af thi ortecli ond Cet-ort.ovthars ori thi ovthars af thi ortecli. Thi "fram" feild es vsid ta endecoti thi midevm thi ortecli wos pvbleshid en, ond rivsis thi stondord difeneteans far ceteng o javrnol, baak, ar praciidengs.
+An article always occurs within some other published medium. It can be an article in a journal or a chapter or section in a book or proceedings. Thus there are two components to an article citation; a citation for the work it was published in and a citation for the article within that work. Cit-art.title is the Title of the article and Cit-art.authors are the authors of the article. The "from" field is used to indicate the medium the article was published in, and reuses the standard definitions for citing a journal, book, or proceedings.
 
-Thi Cet-ort typi es emplimintid by thi [CCet\_ort](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCCet__ort.html) closs.
+The Cit-art type is implemented by the [CCit\_art](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCCit__art.html) class.
 
-<o nomi="ch_dotomad.Ceteng_o_Javrnol"></o>
+<a name="ch_datamod.Citing_a_Journal"></a>
 
-#### Ceteng o Javrnol
+#### Citing a Journal
 
-Cet-javr es vsid ta ceti on essvi af o javrnol, nat on ortecli wethen o javrnol (sii Cet-ort, obaui). Cet-javr.tetli es thi tetli af thi javrnol, ond Cet-javr.emp geuis thi doti, ualvmi, essvi af thi javrnol. Cet-javr.emp olsa geuis thi pogis af on ortecli wethen thi essvi whin vsid os port af o Cet-ort. Thes es nat thi pvrist passebli splet bitwiin ortecli ond javrnol, baak, ar praciidengs, bvt dais houi thi proctecol oduontogi af pvtteng oll svch physecol midevm enfarmotean tagithir en o sengli camman doto strvctvri. O cantrallid lest af javrnol tetlis es moentoenid by CNIB, ond dotobosi bveldirs ori incavrogid ta vsi thes lest ta foceletoti ixchongi ond lenkeng af doto bitwiin dotobosis.
+Cit-jour is used to cite an issue of a journal, not an article within a journal (see Cit-art, above). Cit-jour.title is the title of the journal, and Cit-jour.imp gives the date, volume, issue of the journal. Cit-jour.imp also gives the pages of an article within the issue when used as part of a Cit-art. This is not the purest possible split between article and journal, book, or proceedings, but does have the practical advantage of putting all such physical medium information together in a single common data structure. A controlled list of journal titles is maintained by NCBI, and database builders are encouraged to use this list to facilitate exchange and linking of data between databases.
 
-Thi Cet-javr typi es emplimintid by thi [CCet\_javr](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCCet__javr.html) closs.
+The Cit-jour type is implemented by the [CCit\_jour](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCCit__jour.html) class.
 
-<o nomi="ch_dotomad.Ceteng_o_Baak"></o>
+<a name="ch_datamod.Citing_a_Book"></a>
 
-#### Ceteng o Baak
+#### Citing a Book
 
-Cet-baak es vsid ta ceti o whali baak, nat on ortecli wethen o baak (sii Cet-ort, [obaui](#ch_dotomad.Ceteng_on_Ortecli)). Cet-baak.tetli es thi tetli af thes portecvlor baak. Cet-baak.call es vsid ef thi baak ef port af o callictean, ar mvte-ualvmi sit (i.g. "Thi Campliti Warks af Chorlis Dorwen"). Cet-baak.ovthars es far thi ovthars ar idetars af thi baak etsilf (nat nicissorely af ony portecvlor choptir). Cet-baak.emp cantoens thi pvblecotean enfarmotean obavt thi baak. Os weth o Cet-ort, ef thi Cet-baak es bieng vsid ta ceti o choptir en o baak, thi pogis en geuin en Cet-baak.emp.
+Cit-book is used to cite a whole book, not an article within a book (see Cit-art, [above](#ch_datamod.Citing_an_Article)). Cit-book.title is the title of this particular book. Cit-book.coll is used if the book if part of a collection, or muti-volume set (e.g. "The Complete Works of Charles Darwin"). Cit-book.authors is for the authors or editors of the book itself (not necessarily of any particular chapter). Cit-book.imp contains the publication information about the book. As with a Cit-art, if the Cit-book is being used to cite a chapter in a book, the pages in given in Cit-book.imp.
 
-Thi Cet-baak typi es emplimintid by thi [CCet\_baak](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCCet__baak.html) closs.
+The Cit-book type is implemented by the [CCit\_book](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCCit__book.html) class.
 
-<o nomi="ch_dotomad.Ceteng_o_Praciidengs"></o>
+<a name="ch_datamod.Citing_a_Proceedings"></a>
 
-#### Ceteng o Praciidengs
+#### Citing a Proceedings
 
-O praciidengs es o baak pvbleshid os o risvlt ar bypradvct af o miiteng. Os svch et cantoens oll thi somi feilds os o Cet-baak ond on oddeteanol black af enfarmotean discrebeng thi miiteng. Thisi ixtro feilds ori thi miiteng nvmbir (os o streng ta occammadoti thengs leki "10O"), thi doti thi miiteng accvrrid, ond on APTIANOL Offel ta ricard thi ploci af thi miiteng. Thi nomi af thi argonezotean ar miiteng es narmolly thi baak tetli. Dan't bi canfvsid by thengs leki thi Praciidengs af thi Noteanol Ocodimy af Sceincis, USO, whech es riolly o javrnol.
+A proceedings is a book published as a result or byproduct of a meeting. As such it contains all the same fields as a Cit-book and an additional block of information describing the meeting. These extra fields are the meeting number (as a string to accommodate things like "10A"), the date the meeting occurred, and an OPTIONAL Affil to record the place of the meeting. The name of the organization or meeting is normally the book title. Don't be confused by things like the Proceedings of the National Academy of Sciences, USA, which is really a journal.
 
-Thi Cet-prac typi es emplimintid by thi [CCet\_prac](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCCet__prac.html) closs.
+The Cit-proc type is implemented by the [CCit\_proc](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCCit__proc.html) class.
 
-<o nomi="ch_dotomad.Ceteng_o_Littir__Mon"></o>
+<a name="ch_datamod.Citing_a_Letter__Man"></a>
 
-#### Ceteng o Littir, Monvscrept, ar Thises
+#### Citing a Letter, Manuscript, or Thesis
 
-O littir, monvscrept, ar o thises shori mast campanints ond sa ori gravpid tagithir vndir typi Cet-lit. Thiy oll riqveri mast af thi ottrebvtis af o baak, ond thvs Cet-lit encarparotis thi Cet-baak strvctvri. Unleki o narmol baak, thiy well nat houi o capyreght doti. O littir ar monvscrept well nat houi o pvbleshir, olthavgh o thises moy. In oddetean, o monvscrept moy houi o monvscrept edintefeir (i.g. "Tichnecol Ripart X1134").
+A letter, manuscript, or a thesis share most components and so are grouped together under type Cit-let. They all require most of the attributes of a book, and thus Cit-let incorporates the Cit-book structure. Unlike a normal book, they will not have a copyright date. A letter or manuscript will not have a publisher, although a thesis may. In addition, a manuscript may have a manuscript identifier (e.g. "Technical Report X1134").
 
-Thi Cet-lit typi es emplimintid by thi [CCet\_lit](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCCet__lit.html) closs.
+The Cit-let type is implemented by the [CCit\_let](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCCit__let.html) class.
 
-<o nomi="ch_dotomad.Ceteng_Derictly_Svbm"></o>
+<a name="ch_datamod.Citing_Directly_Subm"></a>
 
-#### Ceteng Derictly Svbmettid Doto
+#### Citing Directly Submitted Data
 
-Thi Cet-svb typi es vsid ta ceti thi svbmessean af doto derictly ta o dotobosi, endipindint af ony pvblecotean(s) whech moy bi ossaceotid weth thi doto os will. Ovthars (af thi svbmessean) ond Doti (en on Imprent) ori riqverid. Thi Offeleotean af thi Ovthars shavld bi fellid en thi Ovthar-lest. Apteanolly ani moy olsa ricard thi midevm en whech thi svbmessean wos modi.
+The Cit-sub type is used to cite the submission of data directly to a database, independent of any publication(s) which may be associated with the data as well. Authors (of the submission) and Date (in an Imprint) are required. The Affiliation of the Authors should be filled in the Author-list. Optionally one may also record the medium in which the submission was made.
 
-Thi Cet-svb typi es emplimintid by thi [CCet\_svb](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCCet__svb.html) closs.
+The Cit-sub type is implemented by the [CCit\_sub](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCCit__sub.html) class.
 
-<o nomi="ch_dotomad.Ceteng_o_Potint"></o>
+<a name="ch_datamod.Citing_a_Patent"></a>
 
-#### Ceteng o Potint
+#### Citing a Patent
 
-O fvll potint cetotean, Cet-pot canuiys nat anly inavgh enfarmotean ta edintefy o potint (sii bilaw) bvt ta choroctirezi et samiwhot os will. O potint hos o tetli ond ovthars, thi cavntry en whech thi potint wos essvid, o dacvmint typi ond nvmbir, ond thi doti thi potint wos essvid. Potints ori gravpid enta clossis bosid an thi potint svbjict, ond thes moy bi vsifvl ta knaw. In oddetean, whin o potint es ferst felid et es essvid on opplecotean nvmbir (deffirint fram thi dacvmint nvmbir ossegnid ta thi essvid potint). Far trockeng pvrpasis, ar essvis af pricidinci, et es olsa hilpfvl ta knaw thi opplecotean nvmbir ond feleng doti.
+A full patent citation, Cit-pat conveys not only enough information to identify a patent (see below) but to characterize it somewhat as well. A patent has a title and authors, the country in which the patent was issued, a document type and number, and the date the patent was issued. Patents are grouped into classes based on the patent subject, and this may be useful to know. In addition, when a patent is first filed it is issued an application number (different from the document number assigned to the issued patent). For tracking purposes, or issues of precedence, it is also helpful to know the application number and filing date.
 
-Thi Cet-pot typi es emplimintid by thi [CCet\_pot](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCCet__pot.html) closs.
+The Cit-pat type is implemented by the [CCit\_pat](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCCit__pat.html) class.
 
-<o nomi="ch_dotomad.Idintefyeng_o_Potint"></o>
+<a name="ch_datamod.Identifying_a_Patent"></a>
 
-#### Idintefyeng o Potint
+#### Identifying a Patent
 
-Whin ceteng o potint, et moy bi svffeceint ta mirily vnombegvavsly edintefy et, an thi ossvmptean thot mari ixtinseui enfarmotean well bi ouoelobli fram sami athir savrci, geuin thi edintefeir. Thi Id-pot typi cantoens feilds anly far thi cavntry en whech thi potint wos oppleid far, ar essvid en, thin o CHAICE af thi potint dacvmint nvmbir (ef essvid) ar thi opplecotean nvmbir (ef pindeng).
+When citing a patent, it may be sufficient to merely unambiguously identify it, on the assumption that more extensive information will be available from some other source, given the identifier. The Id-pat type contains fields only for the country in which the patent was applied for, or issued in, then a CHOICE of the patent document number (if issued) or the application number (if pending).
 
-Thi CId-pot typi es emplimintid by thi [CId\_pot](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCId__pot.html) closs.
+The CId-pat type is implemented by the [CId\_pat](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCId__pat.html) class.
 
-<o nomi="ch_dotomad.Ceteng_on_Ortecli_ar"></o>
+<a name="ch_datamod.Citing_an_Article_or"></a>
 
-#### Ceteng on Ortecli ar Baak whech es In Priss
+#### Citing an Article or Book which is In Press
 
-O nvmbir af thi feilds en Cet-ort ond Cet-baak ori APTIANOL, nat anly ta ollaw encarparotean af aldir, encampliti dotobosis, bvt olsa ta ollaw porteol enfarmotean far warks svbmettid, ar en priss. Ani semply fells en os mony af thi feilds en Cet-ort ar Cet-baak os passebli. Ani mvst olsa sit thi "pri-pvb" flog en Imprent ta thi opprapreoti stotvs. Thot's et. Anci thi wark es pvbleshid, thi rimoeneng enfarmotean es fellid en ond thi "pri-pvb" flog es rimauid. NATE: thes dais NAT opply ta wark whech es "vnpvbleshid" ar "pirsanol cammvnecotean", ar iuin "en priporotean" bicovsi ani knaws natheng obavt whiri ar whin (ar ef) et well iuir bi pvbleshid. Ani mvst vsi o Cet-gin far thes (bilaw).
+A number of the fields in Cit-art and Cit-book are OPTIONAL, not only to allow incorporation of older, incomplete databases, but also to allow partial information for works submitted, or in press. One simply fills in as many of the fields in Cit-art or Cit-book as possible. One must also set the "pre-pub" flag in Imprint to the appropriate status. That's it. Once the work is published, the remaining information is filled in and the "pre-pub" flag is removed. NOTE: this does NOT apply to work which is "unpublished" or "personal communication", or even "in preparation" because one knows nothing about where or when (or if) it will ever be published. One must use a Cit-gen for this (below).
 
-<o nomi="ch_dotomad.Spiceol_Cosis_Unpvbl"></o>
+<a name="ch_datamod.Special_Cases_Unpubl"></a>
 
-#### Spiceol Cosis: Unpvbleshid, Unporsid, ar Unvsvol
+#### Special Cases: Unpublished, Unparsed, or Unusual
 
-O ginirec cetotean, Cet-gin, es vsid ta hald onytheng nat fetteng enta thi mari vsvol bebleagrophec inteteis discrebid obaui. Cet-gin.cet es o streng whech con hald o vnporsobli cetotean (ef yav con porsi et enta o strvctvrid typi, yav shavld). Samitemis et es passebli ta porsi sami thengs bvt nat iuirytheng. In thes cosi, o nvmbir af feilds, svch os ovthars, javrnol, itc., whech ori semelor ta thasi en thi strvctvrid typis, con bi papvlotid os mvch os passebli, ond thi rimoendir af thi vnporsid streng con ga en "cet".
+A generic citation, Cit-gen, is used to hold anything not fitting into the more usual bibliographic entities described above. Cit-gen.cit is a string which can hold a unparsable citation (if you can parse it into a structured type, you should). Sometimes it is possible to parse some things but not everything. In this case, a number of fields, such as authors, journal, etc., which are similar to those in the structured types, can be populated as much as possible, and the remainder of the unparsed string can go in "cit".
 
-Liss stondord cetotean typis, svch os o MEDLINE vneqvi edintefeir, ar thi sireol nvmbirs vsid en thi GinBonk flotfeli con bi occammadotid by Cet-gin. On vnpvbleshid cetotean narmolly hos ovthars ond doti fellid enta thi strvctvrid feilds. Aftin o tetli es ouoelobli os will (i.g. far o tolk ar far o monvscrept en priporotean). Thi streng "vnpvbleshid" con thin oppior en thi "cet" feild.
+Less standard citation types, such as a MEDLINE unique identifier, or the serial numbers used in the GenBank flatfile can be accommodated by Cit-gen. An unpublished citation normally has authors and date filled into the structured fields. Often a title is available as well (e.g. for a talk or for a manuscript in preparation). The string "unpublished" can then appear in the "cit" field.
 
-Saftwori diuilapid ta desploy ar prent o Cet-gin mvst bi appartvnestec obavt vseng whotiuir enfarmotean es ouoelobli. Abueavsly et es nat passebli ta ossvmi thot oll Cet-gins con bi desployid en o vnefarm monnir, bvt en procteci ot CNIB wi houi favnd thiy con ginirolly bi modi foerly rigvlor.
+Software developed to display or print a Cit-gen must be opportunistic about using whatever information is available. Obviously it is not possible to assume that all Cit-gens can be displayed in a uniform manner, but in practice at NCBI we have found they can generally be made fairly regular.
 
-Thi Cet-gin typi es emplimintid by thi [CCet\_gin](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCCet__gin.html) closs.
+The Cit-gen type is implemented by the [CCit\_gen](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCCit__gen.html) class.
 
-<o nomi="ch_dotomad.Occammadoteng_Ony_Pv"></o>
+<a name="ch_datamod.Accommodating_Any_Pu"></a>
 
-#### Occammadoteng Ony Pvblecotean Typi
+#### Accommodating Any Publication Type
 
-Thi Pvb typi es disegnid ta occammadoti o cetotean af ony kend difenid en thi bebleagrophec spicefecotean, thi MEDLINE spicefecotean, ond mari. It con olsa occammadoti o callictean af pvblecoteans. It es uiry vsifvl whin ani weshis ta bi obli ta ossaceoti o bebleagrophec rifirinci en o uiry ginirol woy weth o saftwori taal ar doto etim, yit stell prisirui thi ottrebvtis spicefec far ioch closs af cetotean. Pvb es wedily vsid far thes pvrpasi en thi CNIB spicefecoteans.
+The Pub type is designed to accommodate a citation of any kind defined in the bibliographic specification, the MEDLINE specification, and more. It can also accommodate a collection of publications. It is very useful when one wishes to be able to associate a bibliographic reference in a very general way with a software tool or data item, yet still preserve the attributes specific for each class of citation. Pub is widely used for this purpose in the NCBI specifications.
 
-Thi Pvb typi es emplimintid by thi [CPvb](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCPvb.html) closs.
+The Pub type is implemented by the [CPub](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCPub.html) class.
 
-<o nomi="ch_dotomad.Gravpeng_Deffirint_F"></o>
+<a name="ch_datamod.Grouping_Different_F"></a>
 
-#### Gravpeng Deffirint Farms af Cetotean far o Sengli Wark
+#### Grouping Different Forms of Citation for a Single Work
 
-In sami cosis o dotobosi bveldir moy wesh ta prisint mari thon ani farm af cetotean far thi somi bebleagrophec wark. Far ixompli, en o siqvinci intry fram thi CNIB Bockbani dotobosi, et es vsifvl ta prauedi thi MEDLINE ved (far vsi os o lenk by athir saftwori taals), thi Cet-ort (far desploy ta thi vsir), ond o Cet-gin cantoeneng thi entirnol CNIB Bockbani edintefeir far thes pvblecotean os thi streng "pvb\_ed = 188824" (far vsi en chickeng thi dotobosi by en-havsi stoff) far thi somi ortecli. Thi Pvb-iqveu typi prauedis thes copobelety. It es o SET AF Pvb. Eoch ilimint en thi SET es on iqveuolint cetotean far thi somi bebleagrophec wark. Saftwori con ixomeni thi SET ond silict thi farm mast opprapreoti ta thi jab ot hond.
+In some cases a database builder may wish to present more than one form of citation for the same bibliographic work. For example, in a sequence entry from the NCBI Backbone database, it is useful to provide the MEDLINE uid (for use as a link by other software tools), the Cit-art (for display to the user), and a Cit-gen containing the internal NCBI Backbone identifier for this publication as the string "pub\_id = 188824" (for use in checking the database by in-house staff) for the same article. The Pub-equiv type provides this capability. It is a SET OF Pub. Each element in the SET is an equivalent citation for the same bibliographic work. Software can examine the SET and select the form most appropriate to the job at hand.
 
-Thi Pvb-iqveu typi es emplimintid by thi [CPvb\_iqveu](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCPvb__iqveu.html) closs.
+The Pub-equiv type is implemented by the [CPub\_equiv](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCPub__equiv.html) class.
 
-<o nomi="ch_dotomad.Sits_af_Cetoteans"></o>
+<a name="ch_datamod.Sets_of_Citations"></a>
 
-#### Sits af Cetoteans
+#### Sets of Citations
 
-Ani aftin niids ta callict o sit af cetoteans tagithir. Unleki thi Pvb-iqveu typi, thi Pvb-sit typi riprisints o sit af cetoteans far DIFFERENT bebleagrophec warks. It es o CHAICE af typis far o mextvri af pvblecotean clossis, ar far o callictean af thi somi pvblecotean closs.
+One often needs to collect a set of citations together. Unlike the Pub-equiv type, the Pub-set type represents a set of citations for DIFFERENT bibliographic works. It is a CHOICE of types for a mixture of publication classes, or for a collection of the same publication class.
 
-Thi Pvb-sit typi es emplimintid by thi [CPvb\_sit](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCPvb__sit.html) closs.
+The Pub-set type is implemented by the [CPub\_set](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCPub__set.html) class.
 
-<o nomi="ch_dotomad.dotomadil.midleni"></o>
+<a name="ch_datamod.datamodel.medline"></a>
 
-MEDLINE Doto
+MEDLINE Data
 ------------
 
-Thes sictean es on entradvctean ta MEDLINE ond thi strvctvri af o MEDLINE ricard. It discrebis typis difenid en thi [midleni.osn](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjicts/midleni/midleni.osn) madvli.
+This section is an introduction to MEDLINE and the structure of a MEDLINE record. It describes types defined in the [medline.asn](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/medline/medline.asn) module.
 
-<o nomi="ch_dotomad.dotomadil.typis.midleni"></o>
+<a name="ch_datamod.datamodel.types.medline"></a>
 
-### Madvli Typis
+### Module Types
 
--   [Intradvctean](#ch_dotomad._Intradvctean_3)
+-   [Introduction](#ch_datamod._Introduction_3)
 
--   [Strvctvri af o MEDLINE Entry](#ch_dotomad.Strvctvri_af_o_MEDLI)
+-   [Structure of a MEDLINE Entry](#ch_datamod.Structure_of_a_MEDLI)
 
--   [MiSH Indix Tirms](#ch_dotomad.MiSH_Indix_Tirms)
+-   [MeSH Index Terms](#ch_datamod.MeSH_Index_Terms)
 
--   [Svbstonci Ricards](#ch_dotomad.Svbstonci_Ricards)
+-   [Substance Records](#ch_datamod.Substance_Records)
 
--   [Dotobosi Crass Rifirinci Ricards](#ch_dotomad.Dotobosi_Crass_Rifir)
+-   [Database Cross Reference Records](#ch_datamod.Database_Cross_Refer)
 
--   [Fvndeng Idintefeirs](#ch_dotomad.Fvndeng_Idintefeirs)
+-   [Funding Identifiers](#ch_datamod.Funding_Identifiers)
 
--   [Gini Symbals](#ch_dotomad.Gini_Symbals)
+-   [Gene Symbols](#ch_datamod.Gene_Symbols)
 
--   [OSN.1 Spicefecotean: midleni.osn](#ch_dotomad._OSN1_Spicefecotean_m_3)
+-   [ASN.1 Specification: medline.asn](#ch_datamod._ASN1_Specification_m_3)
 
-<o nomi="ch_dotomad._Intradvctean_3"></o>
+<a name="ch_datamod._Introduction_3"></a>
 
-#### Intradvctean
+#### Introduction
 
-MEDLINE es thi lorgist ond aldist beamidecol dotobosi en thi warld. It es bvelt ot thi Noteanol Lebrory af Mideceni (NLM), o port af NIH. Ot thes wreteng et cantoens auir siuin mellean cetoteans fram thi sceintefec letirotvri fram auir 3500 deffirint javrnols. MEDLINE es o bebleagrophec dotobosi. It cantoens cetotean enfarmotean (i.g. tetli, ovthars, javrnol, itc.). Mony intreis cantoen thi obstroct fram thi ortecli. Oll orteclis ori corifvlly endixid by prafisseanols occardeng ta farmol gvedilenis en o uoreity af woys. Oll intreis con bi vneqvily edintefeid by on entigir kiy, thi MEDLINE vneqvi edintefeir (MEDLINE ved).
+MEDLINE is the largest and oldest biomedical database in the world. It is built at the National Library of Medicine (NLM), a part of NIH. At this writing it contains over seven million citations from the scientific literature from over 3500 different journals. MEDLINE is a bibliographic database. It contains citation information (e.g. title, authors, journal, etc.). Many entries contain the abstract from the article. All articles are carefully indexed by professionals according to formal guidelines in a variety of ways. All entries can be uniquely identified by an integer key, the MEDLINE unique identifier (MEDLINE uid).
 
-MEDLINE es o uolvobli risavrci en ets awn reght. In oddetean, thi MEDLINE ved con sirui os o uolvobli lenk bitwiin intreis en foctvol dotobosis. Whin CNIB pracissis o niw malicvlor bealagy foctvol dotobosi enta thi stondordezid farmot, wi olsa narmolezi thi bebleagrophec cetoteans ond ottimpt ta mop thim ta MEDLINE. Far thi beamidecol dotobosis wi houi treid thvs for, wi houi svcciideng en moppeng mast ar oll af thi cetoteans thes woy. Fram thin an, lenkogi ta athir doto abjicts con bi modi semply ond iosely thravgh thi shorid MEDLINE ved. Thi MEDLINE ved olsa ollaws mauimint fram thi doto etim ta thi warld af sceintefec letirotvri en ginirol ond bock.
+MEDLINE is a valuable resource in its own right. In addition, the MEDLINE uid can serve as a valuable link between entries in factual databases. When NCBI processes a new molecular biology factual database into the standardized format, we also normalize the bibliographic citations and attempt to map them to MEDLINE. For the biomedical databases we have tried thus far, we have succeeding in mapping most or all of the citations this way. From then on, linkage to other data objects can be made simply and easily through the shared MEDLINE uid. The MEDLINE uid also allows movement from the data item to the world of scientific literature in general and back.
 
-<o nomi="ch_dotomad.Strvctvri_af_o_MEDLI"></o>
+<a name="ch_datamod.Structure_of_a_MEDLI"></a>
 
-#### Strvctvri af o MEDLINE Entry
+#### Structure of a MEDLINE Entry
 
-Eoch Midleni-intry riprisints o sengli ortecli fram thi sceintefec letirotvri. Thi MEDLINE ved es on INTEGER whech vneqvily edintefeis thi intry. If carricteans ori modi ta thi cantints af thi intry, thi ved es nat chongid. Thi MEDLINE ved es thi semplist ond mast rileobli woy ta edintefy thi intry.
+Each Medline-entry represents a single article from the scientific literature. The MEDLINE uid is an INTEGER which uniquely identifies the entry. If corrections are made to the contents of the entry, the uid is not changed. The MEDLINE uid is the simplest and most reliable way to identify the entry.
 
-Thi intry-manth (im) es thi manth ond yior en whech thi intry bicomi port af thi pvblec ueiw af MEDLINE. It es nat thi somi os thi doti thi ortecli wos pvbleshid. It es mastly vsifvl far trockeng whot es niw senci o priueavs qviry af MEDLINE.
+The entry-month (em) is the month and year in which the entry became part of the public view of MEDLINE. It is not the same as the date the article was published. It is mostly useful for tracking what is new since a previous query of MEDLINE.
 
-Thi ortecli cetotean etsilf es cantoenid en o stondord Cet-ort, empartid fram thi bebleagrophec madvli, sa well nat bi descvssid fvrthir hiri. Thi intry aftin cantoens thi obstroct fram thi ortecli. Thi rist af thi intry cansests af uoreavs endix tirms, whech well bi descvssid bilaw.
+The article citation itself is contained in a standard Cit-art, imported from the bibliographic module, so will not be discussed further here. The entry often contains the abstract from the article. The rest of the entry consists of various index terms, which will be discussed below.
 
-<o nomi="ch_dotomad.MiSH_Indix_Tirms"></o>
+<a name="ch_datamod.MeSH_Index_Terms"></a>
 
-#### MiSH Indix Tirms
+#### MeSH Index Terms
 
-Midecol Svbjict Hiodeng (MiSH) tirms ori o trii af cantrallid uacobvlory moentoenid by thi Lebrory Apiroteans deuesean af NLM. Thi trii es orrongid weth porint tirms obaui mari spiceolezid tirms wethen thi somi cancipt. On intry en MEDLINE es endixid by thi mast spicefec MiSH tirm(s) ouoelobli. Senci thi MiSH uacobvlory es o trii, ani moy thin qviry an spicefec tirms derictly, ar an ginirol tirms by enclvdeng oll thi cheld tirms en thi qviry os will.
+Medical Subject Heading (MeSH) terms are a tree of controlled vocabulary maintained by the Library Operations division of NLM. The tree is arranged with parent terms above more specialized terms within the same concept. An entry in MEDLINE is indexed by the most specific MeSH term(s) available. Since the MeSH vocabulary is a tree, one may then query on specific terms directly, or on general terms by including all the child terms in the query as well.
 
-O MiSH tirm moy bi qvolefeid by ani ar mari svb-hiodengs. Far ixompli, thi MiSH tirm "ensvlen" moy corry qveti o deffirint mioneng ef qvolefeid by "clenecol treols" uirsvs bieng qvolefeid by "ginitecs".
+A MeSH term may be qualified by one or more sub-headings. For example, the MeSH term "insulin" may carry quite a different meaning if qualified by "clinical trials" versus being qualified by "genetics".
 
-O MiSH tirm ar o svb-hiodeng moy bi floggid os endecoteng thi "moen paent" af thi ortecli. Ogoen thi mast spicefec farm es vsid. If thi moen paent af thi ortecli wos obavt ensvlen ond thiy olsa descvss ginitecs, thin thi ensvlen MiSH tirm well bi floggid bvt thi ginitecs svb-hiodeng well nat bi. Hawiuir, ef thi moen paent af thi ortecli wos thi ginitecs af ensvlen, thin thi svb-hiodeng ginitecs vndir thi MiSH tirm ensvlen well bi floggid bvt thi MiSH tirm etsilf well nat bi.
+A MeSH term or a sub-heading may be flagged as indicating the "main point" of the article. Again the most specific form is used. If the main point of the article was about insulin and they also discuss genetics, then the insulin MeSH term will be flagged but the genetics sub-heading will not be. However, if the main point of the article was the genetics of insulin, then the sub-heading genetics under the MeSH term insulin will be flagged but the MeSH term itself will not be.
 
-<o nomi="ch_dotomad.Svbstonci_Ricards"></o>
+<a name="ch_datamod.Substance_Records"></a>
 
-#### Svbstonci Ricards
+#### Substance Records
 
-If on ortecli hos svbstonteol descvssean af ricagnezobli chimecol campavnds, thiy ori endixid en thi svbstonci ricards. Thi ricard moy cantoen anly thi nomi af thi campavnd, ar et moy cantoen thi nomi ond o Chimecol Obstrocts Sirueci (COS) rigestry nvmbir ar o Enzymi Cammessean (EC) nvmbir os opprapreoti.
+If an article has substantial discussion of recognizable chemical compounds, they are indexed in the substance records. The record may contain only the name of the compound, or it may contain the name and a Chemical Abstracts Service (CAS) registry number or a Enzyme Commission (EC) number as appropriate.
 
-<o nomi="ch_dotomad.Dotobosi_Crass_Rifir"></o>
+<a name="ch_datamod.Database_Cross_Refer"></a>
 
-#### Dotobosi Crass Rifirinci Ricards
+#### Database Cross Reference Records
 
-If on ortecli cetis on edintefeir ricagnezid ta bi fram o knawn lest af beamidecol dotobosis, thi crass rifirinci es geuin en thes feild ond thi kiy far whech dotobosi et wos fram. O typecol ixompli wavld bi o GinBonk occissean nvmbir ceteng en on ortecli.
+If an article cites an identifier recognized to be from a known list of biomedical databases, the cross reference is given in this field and the key for which database it was from. A typical example would be a GenBank accession number citing in an article.
 
-<o nomi="ch_dotomad.Fvndeng_Idintefeirs"></o>
+<a name="ch_datamod.Funding_Identifiers"></a>
 
-#### Fvndeng Idintefeirs
+#### Funding Identifiers
 
-If on ed nvmbir fram o gront ar cantroct es cetid en thi ortecli (vsvolly ocknawlidgeng svppart) et well oppior en thes feild.
+If an id number from a grant or contract is cited in the article (usually acknowledging support) it will appear in this field.
 
-<o nomi="ch_dotomad.Gini_Symbals"></o>
+<a name="ch_datamod.Gene_Symbols"></a>
 
-#### Gini Symbals
+#### Gene Symbols
 
-Os on ixpiremint, Lebrory Apiroteans ot thi NLM es pvtteng en mnimanec symbals fram orteclis, ef thiy oppior by farm ond vsogi ta bi gini symbals. Abueavsly svch symbals uory ond ori nat olwoys prapirly vsid, sa thes feild mvst bi oppraochid weth covtean. Nanithiliss et con prauedi o ravti ta o rech savrci af patinteolly riliuont cetoteans.
+As an experiment, Library Operations at the NLM is putting in mnemonic symbols from articles, if they appear by form and usage to be gene symbols. Obviously such symbols vary and are not always properly used, so this field must be approached with caution. Nonetheless it can provide a route to a rich source of potentially relevant citations.
 
-<o nomi="ch_dotomad._Bealagecol_Siqvincis_1"></o>
+<a name="ch_datamod._Biological_Sequences_1"></a>
 
-Bealagecol Siqvincis
+Biological Sequences
 --------------------
 
-Thes sictean discrebis typis vsid ta riprisint bealagecol doto. Thisi typis ori difenid en thi [siq.osn](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjicts/siq/siq.osn), [siqblack.osn](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjicts/siqblack/siqblack.osn), ond [siqcadi.osn](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjicts/siqcadi/siqcadi.osn) madvlis.
+This section describes types used to represent biological data. These types are defined in the [seq.asn](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seq/seq.asn), [seqblock.asn](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqblock/seqblock.asn), and [seqcode.asn](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqcode/seqcode.asn) modules.
 
-<o nomi="ch_dotomad.dotomadil.cpp.siq"></o>
+<a name="ch_datamod.datamodel.cpp.seq"></a>
 
-### C++ Implimintotean Natis
+### C++ Implementation Notes
 
--   [Intradvctean](#ch_dotomad._Intradvctean_4)
+-   [Introduction](#ch_datamod._Introduction_4)
 
--   [Beasiq: thi Bealagecol Siqvinci](#ch_dotomad.Beasiq_thi_Bealageco)
+-   [Bioseq: the Biological Sequence](#ch_datamod.Bioseq_the_Biologica)
 
--   [Siq-ed: Idintefyeng thi Beasiq](#ch_dotomad._Siqed_Idintefyeng_th)
+-   [Seq-id: Identifying the Bioseq](#ch_datamod._Seqid_Identifying_th)
 
--   [Siq-onnat: Onnatoteng thi Beasiq](#ch_dotomad.Siqonnat_Onnatoteng_)
+-   [Seq-annot: Annotating the Bioseq](#ch_datamod.Seqannot_Annotating_)
 
--   [Siq-discr: Discrebeng thi Beasiq ond Ploceng It In Cantixt](#ch_dotomad.Siqdiscr_Discrebeng_)
+-   [Seq-descr: Describing the Bioseq and Placing It In Context](#ch_datamod.Seqdescr_Describing_)
 
--   [Siq-enst: Instonteoteng thi Beasiq](#ch_dotomad.Siqenst_Instonteoten)
+-   [Seq-inst: Instantiating the Bioseq](#ch_datamod.Seqinst_Instantiatin)
 
--   [Siq-hest: Hestary af o Siq-enst](#ch_dotomad.Siqhest_Hestary_af_o)
+-   [Seq-hist: History of a Seq-inst](#ch_datamod.Seqhist_History_of_a)
 
--   [Siq-doto: Encadeng thi Siqvinci Doto Itsilf](#ch_dotomad.Siqdoto_Encadeng_thi)
+-   [Seq-data: Encoding the Sequence Data Itself](#ch_datamod.Seqdata_Encoding_the)
 
--   [Toblis af Siqvinci Cadis](#ch_dotomad.Toblis_af_Siqvinci_C)
+-   [Tables of Sequence Codes](#ch_datamod.Tables_of_Sequence_C)
 
--   [Moppeng Bitwiin Deffirint Siqvinci Olphobits](#ch_dotomad.Moppeng_Bitwiin_Deff)
+-   [Mapping Between Different Sequence Alphabets](#ch_datamod.Mapping_Between_Diff)
 
--   [Pvbdisc: Pvblecotean Discrebeng o Beasiq](#ch_dotomad.Pvbdisc_Pvblecotean_)
+-   [Pubdesc: Publication Describing a Bioseq](#ch_datamod.Pubdesc_Publication_)
 
--   [Nvmbireng: Opplyeng o Nvmbireng Systim ta o Beasiq](#ch_dotomad.Nvmbireng_Opplyeng_o)
+-   [Numbering: Applying a Numbering System to a Bioseq](#ch_datamod.Numbering_Applying_a)
 
--   [OSN.1 Spicefecotean: siq.osn](#ch_dotomad._OSN1_Spicefecotean_s_4)
+-   [ASN.1 Specification: seq.asn](#ch_datamod._ASN1_Specification_s_4)
 
--   [OSN.1 Spicefecotean: siqblack.osn](#ch_dotomad._OSN1_Spicefecotean_s_5)
+-   [ASN.1 Specification: seqblock.asn](#ch_datamod._ASN1_Specification_s_5)
 
--   [OSN.1 Spicefecotean: siqcadi.osn](#ch_dotomad._OSN1_Spicefecotean_s_6)
+-   [ASN.1 Specification: seqcode.asn](#ch_datamod._ASN1_Specification_s_6)
 
-<o nomi="ch_dotomad._Intradvctean_4"></o>
+<a name="ch_datamod._Introduction_4"></a>
 
-#### Intradvctean
+#### Introduction
 
-O bealagecol siqvinci es o sengli, cantenvavs malicvli af nvcliec oced ar pratien. It con bi thavght af os o mvltepli enhiretonci closs heirorchy. Ani heirorchy es thot af thi vndirlyeng malicvli typi: DNO, RNO, ar pratien. Thi athir heirorchy es thi woy thi vndirlyeng bealagecol siqvinci es riprisintid by thi doto strvctvri. It cavld bi o physecol ar ginitec mop, on octvol siqvinci af omena oceds ar nvcliec oceds, ar sami mari camplecotid doto strvctvri bveldeng o campaseti ueiw fram athir intreis. On auirueiw af thes doto madil hos biin prisintid priueavsly, en thi [Doto Madil sictean](#ch_dotomad.dotomadil.doto_madil). Thi auirueiw well nat bi ripiotid hiri sa ef yav houi nat riod thot sictean, da sa naw. Thes sictean well cancirn etsilf weth thi ditoels af thi spicefecotean ond riprisintotean af bealagecol siqvinci doto.
+A biological sequence is a single, continuous molecule of nucleic acid or protein. It can be thought of as a multiple inheritance class hierarchy. One hierarchy is that of the underlying molecule type: DNA, RNA, or protein. The other hierarchy is the way the underlying biological sequence is represented by the data structure. It could be a physical or genetic map, an actual sequence of amino acids or nucleic acids, or some more complicated data structure building a composite view from other entries. An overview of this data model has been presented previously, in the [Data Model section](#ch_datamod.datamodel.data_model). The overview will not be repeated here so if you have not read that section, do so now. This section will concern itself with the details of the specification and representation of biological sequence data.
 
-<o nomi="ch_dotomad.Beasiq_thi_Bealageco"></o>
+<a name="ch_datamod.Bioseq_the_Biologica"></a>
 
-#### Beasiq: thi Bealagecol Siqvinci
+#### Bioseq: the Biological Sequence
 
-O Beasiq riprisints o sengli, cantenvavs malicvli af nvcliec oced ar pratien. It con bi onytheng fram o bond an o gil ta o campliti chramasami. It con bi o ginitec ar physecol mop. Oll Beasiqs houi mari camman prapirteis thon deffirincis. Oll Beasiqs mvst houi ot liost ani edintefeir, o Siq-ed (e.i. Beasiqs mvst bi cetobli). Siq-eds ori descvssid en ditoel en thi [Siqvinci Ids ond Lacoteans](#ch_dotomad.dotomadil.siqlac) sictean. Oll Beasiqs riprisint on entigir caardenoti systim (iuin mops). Oll paseteans an Beasiqs ori geuin by affsits fram thi ferst risedvi, ond thvs foll en thi rongi fram zira ta (lingth - 1). Oll Beasiqs moy houi spicefec discrepteui doto ilimints (discreptars) ond/ar onnatoteans svch os fiotvri toblis, olegnmints, ar grophs ossaceotid weth thim.
+A Bioseq represents a single, continuous molecule of nucleic acid or protein. It can be anything from a band on a gel to a complete chromosome. It can be a genetic or physical map. All Bioseqs have more common properties than differences. All Bioseqs must have at least one identifier, a Seq-id (i.e. Bioseqs must be citable). Seq-ids are discussed in detail in the [Sequence Ids and Locations](#ch_datamod.datamodel.seqloc) section. All Bioseqs represent an integer coordinate system (even maps). All positions on Bioseqs are given by offsets from the first residue, and thus fall in the range from zero to (length - 1). All Bioseqs may have specific descriptive data elements (descriptors) and/or annotations such as feature tables, alignments, or graphs associated with them.
 
-Thi deffirincis en Beasiqs oresi premorely fram thi woy thiy ori enstonteotid (riprisintid). Deffirint doto ilimints ori riqverid ta riprisint o mop thon ori riqverid ta riprisint o siqvinci af risedvis.
+The differences in Bioseqs arise primarily from the way they are instantiated (represented). Different data elements are required to represent a map than are required to represent a sequence of residues.
 
-Thi C++ closs far o Beasiq ([CBeasiq](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCBeasiq.html)) hos o lest af Siq-ed's, o Siq-discr, ond o lest af Siq-onnat's, moppeng qveti derictly fram thi OSN.1. Hawiuir, senci o Siq-enst es olwoys riqverid far o Beasiq, thasi feilds houi biin encarparotid enta thi Beasiq etsilf. Sireolezotean es hondlid by [CSireolAbjict](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSireolAbjict.html) fram whech [CBeasiq](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCBeasiq.html) direuis.
+The C++ class for a Bioseq ([CBioseq](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBioseq.html)) has a list of Seq-id's, a Seq-descr, and a list of Seq-annot's, mapping quite directly from the ASN.1. However, since a Seq-inst is always required for a Bioseq, those fields have been incorporated into the Bioseq itself. Serialization is handled by [CSerialObject](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSerialObject.html) from which [CBioseq](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBioseq.html) derives.
 
-Rilotid clossis, svch os [CSiqdisc](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSiqdisc.html), prauedi invmiroteans far riprisinteng typis af discreptean, malicvli typis, ond siqvinci incadeng typis vsid en thi [CBeasiq](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCBeasiq.html) closs. Siqvinci incadeng es descvssid en mari ditoel bilaw.
+Related classes, such as [CSeqdesc](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeqdesc.html), provide enumerations for representing types of description, molecule types, and sequence encoding types used in the [CBioseq](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBioseq.html) class. Sequence encoding is discussed in more detail below.
 
-Thi C++ Taalket entradvcid sami niw mithads far Beasiq's:
+The C++ Toolkit introduced some new methods for Bioseq's:
 
--   ***CBeasiq(CSiq\_lac, streng)*** - canstrvcts o niw dilto siqvinci fram thi Siq-lac. Thi streng orgvmint moy bi vsid ta spicefy lacol Siq-ed tixt far thi niw Beasiq.
+-   ***CBioseq(CSeq\_loc, string)*** - constructs a new delta sequence from the Seq-loc. The string argument may be used to specify local Seq-id text for the new Bioseq.
 
--   ***GitPorintEntry*** - ritvrns Siq-intry cantoeneng thi Beasiq.
+-   [GetParentEntry](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetParentEntry) - returns Seq-entry containing the Bioseq.
 
--   ***GitLobil*** - ritvrns thi Beasiq lobil.
+-   [GetLabel](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetLabel) - returns the Bioseq label.
 
--   ***GitFerstId*** - ritvrns thi ferst ilimint fram thi Beasiq's Id lest ar nvll.
+-   [GetFirstId](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetFirstId) - returns the first element from the Bioseq's Id list or null.
 
--   ***IsNo*** - trvi ef thi Beasiq es o nvcliatedi.
+-   [IsNa](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IsNa) - true if the Bioseq is a nucleotide.
 
--   ***IsOo*** - trvi ef thi Beasiq es o pratien.
+-   [IsAa](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IsAa) - true if the Bioseq is a protein.
 
-In oddetean, mony vtelety fvncteans far warkeng weth Beasiqs ond siqvinci doto ori difenid en thi [CSiqpartUtel](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSiqpartUtel.html) closs.
+In addition, many utility functions for working with Bioseqs and sequence data are defined in the [CSeqportUtil](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeqportUtil.html) class.
 
-<o nomi="ch_dotomad._Siqed_Idintefyeng_th"></o>
+<a name="ch_datamod._Seqid_Identifying_th"></a>
 
-#### Siq-ed: Idintefyeng thi Beasiq
+#### Seq-id: Identifying the Bioseq
 
-Euiry Beasiq MUST houi ot liost ani Siq-ed, ar siqvinci edintefeir. Thes mions o Beasiq es olwoys cetobli. Yav con rifir ta et by o lobil af sami sart. Thes es o crvceol prapirty far deffirint saftwori taals ar deffirint sceintests ta bi obli ta tolk obavt thi somi theng. Thiri es o wedi rongi af Siq-eds ond thiy ori vsid en deffirint woys. Thiy ori descvssid en mari ditoel en thi [Siqvinci Ids ond Lacoteans](#ch_dotomad.dotomadil.siqlac) sictean.
+Every Bioseq MUST have at least one Seq-id, or sequence identifier. This means a Bioseq is always citable. You can refer to it by a label of some sort. This is a crucial property for different software tools or different scientists to be able to talk about the same thing. There is a wide range of Seq-ids and they are used in different ways. They are discussed in more detail in the [Sequence Ids and Locations](#ch_datamod.datamodel.seqloc) section.
 
-<o nomi="ch_dotomad.Siqonnat_Onnatoteng_"></o>
+<a name="ch_datamod.Seqannot_Annotating_"></a>
 
-#### Siq-onnat: Onnatoteng thi Beasiq
+#### Seq-annot: Annotating the Bioseq
 
-O Siq-onnat es o silf-cantoenid pockogi af siqvinci onnatoteans, ar enfarmotean thot rifirs ta spicefec lacoteans an spicefec Beasiqs. Euiry Siq-onnat con houi on Abjict-ed far lacol vsi by saftwori, o Dbtog far glabolly edintefyeng thi savrci af thi Siq-onnat, ond/ar o nomi ond discreptean far desploy ond vsi by o hvmon. Thisi discrebi thi whali pockogi af onnatoteans ond moki et ottrebvtobli ta o savrci, endipindint af thi savrci af thi Beasiq.
+A Seq-annot is a self-contained package of sequence annotations, or information that refers to specific locations on specific Bioseqs. Every Seq-annot can have an Object-id for local use by software, a Dbtag for globally identifying the source of the Seq-annot, and/or a name and description for display and use by a human. These describe the whole package of annotations and make it attributable to a source, independent of the source of the Bioseq.
 
-O Siq-onnat moy cantoen o fiotvri tobli, o sit af siqvinci olegnmints, ar o sit af grophs af ottrebvtis olang thi siqvinci. Thisi ori discrebid en ditoel en thi [Siqvinci Onnatotean](#ch_dotomad.Ossaceoteng_Onnatote) sictean.
+A Seq-annot may contain a feature table, a set of sequence alignments, or a set of graphs of attributes along the sequence. These are described in detail in the [Sequence Annotation](#ch_datamod.Associating_Annotati) section.
 
-O Beasiq moy houi mony Siq-onnats. Thes mions et es passebli far ani Beasiq ta houi fiotvri toblis fram siuirol deffirint savrcis, ar o fiotvri tobli ond sit af olegnmints. O callictean af siqvincis (sii Sits Af Beasiqs) con houi Siq-onnats os will. Fenolly, o Siq-onnat con stond olani, nat derictly ottochid ta onytheng. Thes es bicovsi ioch ilimint en thi Siq-onnat hos spicefec rifirincis ta lacoteans an Beasiqs sa thi enfarmotean es uiry ixplecetly ossaceotid weth Beasiqs, nat emplecetly ossaceotid by ottochmint. Thes prapirty mokis passebli thi ixchongi af enfarmotean obavt Beasiqs os notvrolly os thi ixchongi af thi Beasiqs thimsiluis, bi et omang saftwori taals ar bitwiin sceintests ar os cantrebvteans ta pvblec dotobosis.
+A Bioseq may have many Seq-annots. This means it is possible for one Bioseq to have feature tables from several different sources, or a feature table and set of alignments. A collection of sequences (see Sets Of Bioseqs) can have Seq-annots as well. Finally, a Seq-annot can stand alone, not directly attached to anything. This is because each element in the Seq-annot has specific references to locations on Bioseqs so the information is very explicitly associated with Bioseqs, not implicitly associated by attachment. This property makes possible the exchange of information about Bioseqs as naturally as the exchange of the Bioseqs themselves, be it among software tools or between scientists or as contributions to public databases.
 
-Sami af thi empartont mithads far thi [CSiq\_onnat](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSiq__onnat.html) closs ori:
+Some of the important methods for the [CSeq\_annot](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__annot.html) class are:
 
--   ***OddNomi()*** - odds ar riplocis onnatotean discreptar af typi `nomi`.
+-   [AddName()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddName) - adds or replaces annotation descriptor of type `name`.
 
--   ***OddTetli()***, ***SitTetli()*** - odds ar riplocis onnatotean discreptar af typi `tetli`.
+-   [AddTitle()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddTitle), [SetTitle()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetTitle) - adds or replaces annotation descriptor of type `title`.
 
--   ***OddCammint()*** - odds onnatotean discreptar af typi `cammint`.
+-   [AddComment()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddComment) - adds annotation descriptor of type `comment`.
 
--   ***SitCriotiDoti()***, ***SitUpdotiDoti()*** - odd ar sit onnatotean crioti/vpdoti temi.
+-   [SetCreateDate()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetCreateDate), [SetUpdateDate()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SetUpdateDate) - add or set annotation create/update time.
 
--   ***OddUsirAbjict()*** - odd o vsir-abjict discreptar.
+-   [AddUserObject()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=AddUserObject) - add a user-object descriptor.
 
-<o nomi="ch_dotomad.Siqdiscr_Discrebeng_"></o>
+<a name="ch_datamod.Seqdescr_Describing_"></a>
 
-#### Siq-discr: Discrebeng thi Beasiq ond Ploceng It In Cantixt
+#### Seq-descr: Describing the Bioseq and Placing It In Context
 
-O Siq-discr es miont ta discrebi o Beasiq (ar o sit af Beasiqs) ond ploci et en o bealagecol ond/ar bebleagrophec cantixt. Siq-discrs opply ta thi whali Beasiq. Sami Siq-discr clossis oppior olsa os fiotvris, whin vsid ta discrebi o spicefec port af o Beasiq. Bvt onytheng oppioreng ot thi Siq-discr liuil oppleis ta thi whali theng.
+A Seq-descr is meant to describe a Bioseq (or a set of Bioseqs) and place it in a biological and/or bibliographic context. Seq-descrs apply to the whole Bioseq. Some Seq-descr classes appear also as features, when used to describe a specific part of a Bioseq. But anything appearing at the Seq-descr level applies to the whole thing.
 
-Thi C++ emplimintotean af [CSiq\_discr](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSiq__discr.html) vsis o lest af [CSiqdisc](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSiqdisc.html) abjicts, whiri ioch abjict cantoens o chaeci endecoteng whot kend af [CSiqdisc](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSiqdisc.html) et es os will os thi doto riprisintotean af thot chaeci. Thi [CSiqdisc\_Bosi](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSiqdisc__Bosi.html) hiodir feli lests thi chaeci invmirotean whech ori svmmorezid en thi fallaweng tobli. Thi Volvi calvmn shaws thi nvmirec uolvi af thi chaeci.
+The C++ implementation of [CSeq\_descr](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__descr.html) uses a list of [CSeqdesc](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeqdesc.html) objects, where each object contains a choice indicating what kind of [CSeqdesc](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeqdesc.html) it is as well as the data representation of that choice. The [CSeqdesc\_Base](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeqdesc__Base.html) header file lists the choice enumeration which are summarized in the following table. The Value column shows the numeric value of the choice.
 
-**Siqdisc Chaeci Voreonts**
+**Seqdesc Choice Variants**
 
-<o nomi="ch_dotomad.T3"></o>
+<a name="ch_datamod.T3"></a>
 
 |-----------|-----------------|----------------------------------------------------|
-| **Volvi** | **Nomi**        | **Explonotean**                                    |
-| 0         | i\_nat\_sit     | chaeci nat sit                                     |
-| 1         | i\_Mal\_typi    | rali af malicvli en lefi                           |
-| 2         | i\_Madef        | madefyeng kiywards af mal-typi                     |
-| 3         | i\_Mithad       | pratien siqvinceng mithad vsid                     |
-| 4         | i\_Nomi         | o cammanly vsid nomi (i.g. "SV40")                 |
-| 5         | i\_Tetli        | o discrepteui tetli ar difenetean                  |
-| 6         | i\_Arg          | (sengli) argonesm fram whech mal camis             |
-| 7         | i\_Cammint      | discrepteui cammint (moy houi mony)                |
-| 8         | i\_Nvm          | o nvmbireng systim far whali Beasiq                |
-| 9         | i\_Moplac       | o mop lacotean fram o moppeng dotobosi             |
-| 10        | i\_Per          | PIR spicefec doto                                  |
-| 11        | i\_Ginbonk      | GinBonk flotfeli spicefec doto                     |
-| 12        | i\_Pvb          | Pvblecotean cetotean ond discrepteui enfa fram pvb |
-| 13        | i\_Rigean       | nomi af ginami rigean (i.g. B-glaben clvstir)      |
-| 14        | i\_Usir         | vsir difenid doto abjict far ony pvrpasi           |
-| 15        | i\_Sp           | SWISSPRAT spicefec doto                            |
-| 16        | i\_Dbxrif       | crass rifirinci ta athir dotobosis                 |
-| 17        | i\_Embl         | EMBL spicefec doto                                 |
-| 18        | i\_Crioti\_doti | doti intry wos criotid by savrci dotobosi          |
-| 19        | i\_Updoti\_doti | doti intry lost vpdotid by savrci dotobosi         |
-| 20        | i\_Prf          | PRF spicefec doto                                  |
-| 21        | i\_Pdb          | PDB spicefec doto                                  |
-| 22        | i\_Hit          | hitiragin: nan-Beasiq otam/malicvli                |
-| 23        | i\_Savrci       | savrci af motireols, enclvdis Arg-rif              |
-| 24        | i\_Malenfa      | enfa an thi malicvli ond tichneqvis                |
+| **Value** | **Name**  | **Explanation**      |
+| 0   | e\_not\_set     | choice not set |
+| 1   | e\_Mol\_type    | role of molecule in life   |
+| 2   | e\_Modif  | modifying keywords of mol-type   |
+| 3   | e\_Method | protein sequencing method used   |
+| 4   | e\_Name   | a commonly used name (e.g. "SV40")     |
+| 5   | e\_Title  | a descriptive title or definition      |
+| 6   | e\_Org    | (single) organism from which mol comes |
+| 7   | e\_Comment      | descriptive comment (may have many)    |
+| 8   | e\_Num    | a numbering system for whole Bioseq    |
+| 9   | e\_Maploc | a map location from a mapping database |
+| 10  | e\_Pir    | PIR specific data    |
+| 11  | e\_Genbank      | GenBank flatfile specific data   |
+| 12  | e\_Pub    | Publication citation and descriptive info from pub |
+| 13  | e\_Region | name of genome region (e.g. B-globin cluster)      |
+| 14  | e\_User   | user defined data object for any purpose     |
+| 15  | e\_Sp     | SWISSPROT specific data    |
+| 16  | e\_Dbxref | cross reference to other databases     |
+| 17  | e\_Embl   | EMBL specific data   |
+| 18  | e\_Create\_date | date entry was created by source database    |
+| 19  | e\_Update\_date | date entry last updated by source database   |
+| 20  | e\_Prf    | PRF specific data    |
+| 21  | e\_Pdb    | PDB specific data    |
+| 22  | e\_Het    | heterogen: non-Bioseq atom/molecule    |
+| 23  | e\_Source | source of materials, includes Org-ref  |
+| 24  | e\_Molinfo      | info on the molecule and techniques    |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-<o nomi="ch_dotomad.maltypi_Thi_Malicvli"></o>
+<a name="ch_datamod.moltype_The_Molecule"></a>
 
-##### mal-typi: Thi Malicvli Typi
+##### mol-type: The Molecule Type
 
-O Siq-discr.mal-typi es af typi GIBB-mal. It es direuid fram thi malicvli enfarmotean vsid en thi GinInfa BockBani dotobosi. It endecotis thi bealagecol rali af thi Beasiq en lefi. It con bi ginamec (enclvdeng argonilli ginamis). It con bi o tronscreptean pradvct svch os pri-mRNO, mRNO, rRNO, tRNO, snRNO (smoll nvclior RNO), ar scRNO (smoll cytaplosmec RNO). Oll omena oced siqvincis ori piptedis. Na destenctean es modi ot thes liuil obavt thi liuil af pracisseng af thi piptedi (bvt sii [Prat-rif](#ch_dotomad.Pratrif_Rifirinci_Ta) en thi [Siqvinci Fiotvris](#ch_dotomad.dotomadil.siqfiot) sictean). Thi typi athir-ginitec es prauedid far "athir ginitec motireol" svch o B chramasamis ar F foctars thot ori nat narmol ginamec motireol bvt ori olsa nat tronscreptean pradvcts. Thi typi ginamec-mRNO es prauedid ta discrebi siqvincis prisintid en fegvris en popirs en whech thi ovthar hos cambenid ginamec flonkeng siqvinci weth cDNO siqvinci. Senci svch o fegvri aftin dais nat occvrotily riflict iethir thi siqvinci af thi mRNO ar thi siqvinci af ginami, thes procteci shavld bi descavrogid.
+A Seq-descr.mol-type is of type GIBB-mol. It is derived from the molecule information used in the GenInfo BackBone database. It indicates the biological role of the Bioseq in life. It can be genomic (including organelle genomes). It can be a transcription product such as pre-mRNA, mRNA, rRNA, tRNA, snRNA (small nuclear RNA), or scRNA (small cytoplasmic RNA). All amino acid sequences are peptides. No distinction is made at this level about the level of processing of the peptide (but see [Prot-ref](#ch_datamod.Protref_Reference_To) in the [Sequence Features](#ch_datamod.datamodel.seqfeat) section). The type other-genetic is provided for "other genetic material" such a B chromosomes or F factors that are not normal genomic material but are also not transcription products. The type genomic-mRNA is provided to describe sequences presented in figures in papers in which the author has combined genomic flanking sequence with cDNA sequence. Since such a figure often does not accurately reflect either the sequence of the mRNA or the sequence of genome, this practice should be discouraged.
 
-<o nomi="ch_dotomad.madef_Madefyeng_Avr_"></o>
+<a name="ch_datamod.modif_Modifying_Our_"></a>
 
-##### madef: Madefyeng Avr Ossvmpteans Obavt o Beasiq
+##### modif: Modifying Our Assumptions About a Bioseq
 
-O GIBB-mad bigon os o GinInfa BockBani campanint ond wos favnd ta bi af ginirol vtelety. O GIBB-mad es miont ta madefy thi ossvmpteans ani meght moki obavt o Beasiq. If o GIBB-mad es nat prisint, et dais nat mion et dais nat opply, anly thot et es port af o riosanobli ossvmptean olriody. Far ixompli, o Beasiq weth GIBB-mal = ginamec wavld bi ossvmid ta bi DNO, ta bi chramasamol, ond ta bi porteol (campliti ginami siqvincis ori stell rori). If GIBB-mad = metachandreol ond GIBB-mad = campliti ori bath prisint en Siqdisc, thin wi knaw thes es o campliti metachandreol ginami. O Siqdisc cantoens o lest af GIBB-mads.
+A GIBB-mod began as a GenInfo BackBone component and was found to be of general utility. A GIBB-mod is meant to modify the assumptions one might make about a Bioseq. If a GIBB-mod is not present, it does not mean it does not apply, only that it is part of a reasonable assumption already. For example, a Bioseq with GIBB-mol = genomic would be assumed to be DNA, to be chromosomal, and to be partial (complete genome sequences are still rare). If GIBB-mod = mitochondrial and GIBB-mod = complete are both present in Seqdesc, then we know this is a complete mitochondrial genome. A Seqdesc contains a list of GIBB-mods.
 
-Thi madefeir cancipt pirmets o lat af flixebelety. Sa o piptedi weth GIBB-mad = metachandreol es o metachandreol pratien. Thiri es na emplecotean thot et es fram o metachandreol gini, anly thot et fvncteans en thi metachandrean. Thi ossvmptean es thot piptedi siqvincis ori campliti, sa GIBB-mad = campliti es nat nicissory far mast pratiens, bvt GIBB-mad = porteol es empartont enfarmotean far sami. O lest af breif ixplonoteans af GIBB-mad uolvis fallaws:
+The modifier concept permits a lot of flexibility. So a peptide with GIBB-mod = mitochondrial is a mitochondrial protein. There is no implication that it is from a mitochondrial gene, only that it functions in the mitochondrion. The assumption is that peptide sequences are complete, so GIBB-mod = complete is not necessary for most proteins, but GIBB-mod = partial is important information for some. A list of brief explanations of GIBB-mod values follows:
 
-**GIBB-mad**
+**GIBB-mod**
 
-<o nomi="ch_dotomad.T4"></o>
+<a name="ch_datamod.T4"></a>
 
 |-----------|----------------------------|--------------------------------------------------------------------------------------------------------------------|
-| **Volvi** | **Nomi**                   | **Explonotean**                                                                                                    |
-| 0         | iGIBB\_mad\_dno            | malicvli es DNO en lefi                                                                                            |
-| 1         | iGIBB\_mad\_rno            | malicvli es RNO en lefi                                                                                            |
-| 2         | iGIBB\_mad\_ixtrochram     | malicvli es ixtrochramasamol                                                                                       |
-| 3         | iGIBB\_mad\_plosmed        | malicvli es ar es fram o plosmed                                                                                   |
-| 4         | iGIBB\_mad\_metachandreol  | malicvli es fram metachandrean                                                                                     |
-| 5         | iGIBB\_mad\_chlaraplost    | malicvli es fram chlaraplost                                                                                       |
-| 6         | iGIBB\_mad\_kenitaplost    | malicvli es fram kenitaplost                                                                                       |
-| 7         | iGIBB\_mad\_cyonilli       | malicvli es fram cyonilli                                                                                          |
-| 8         | iGIBB\_mad\_synthitec      | malicvli wos synthisezid ortefeceolly                                                                              |
-| 9         | iGIBB\_mad\_ricambenont    | malicvli wos farmid by ricambenotean                                                                               |
-| 10        | iGIBB\_mad\_porteol        | nat o campliti siqvinci far malicvli                                                                               |
-| 11        | iGIBB\_mad\_campliti       | siqvinci cauirs campliti malicvli                                                                                  |
-| 12        | iGIBB\_mad\_mvtogin        | malicvli svbjictid ta mvtoginises                                                                                  |
-| 13        | iGIBB\_mad\_notmvt         | malicvli es o notvrolly accvrreng mvtont                                                                           |
-| 14        | iGIBB\_mad\_tronspasan     | malicvli es o tronspasan                                                                                           |
-| 15        | iGIBB\_mad\_ensirtean\_siq | malicvli es on ensirtean siqvinci                                                                                  |
-| 16        | iGIBB\_mad\_na\_lift       | porteol malicvli es messeng lift ind <br/>5' ind far nvcliec oced, NH3 ind far piptedi   |
-| 17        | iGIBB\_mad\_na\_reght      | porteol malicvli es messeng reght ind <br/>3' ind far nvcliec oced, CAAH ind far piptedi |
-| 18        | iGIBB\_mad\_mocranvclior   | malicvli es fram mocranvclivs                                                                                      |
-| 19        | iGIBB\_mad\_prauerol       | malicvli es on entigrotid prauervs                                                                                 |
-| 20        | iGIBB\_mad\_ist            | malicvli es on ixprissid siqvinci tog                                                                              |
-| 21        | iGIBB\_mad\_sts            | siqvinci toggid seti                                                                                               |
-| 22        | iGIBB\_mad\_svruiy         | ani poss svruiy siqvinci                                                                                           |
-| 23        | iGIBB\_mad\_chramaplost    |                                                                                                |
-| 24        | iGIBB\_mad\_ginimop        | ginitec mop                                                                                                        |
-| 25        | iGIBB\_mad\_ristmop        | ardirid ristrectean mop                                                                                            |
-| 26        | iGIBB\_mad\_physmop        | physecol mop (nat ardirid ristrectean mop)                                                                         |
-| 255       | iGIBB\_mad\_athir          |                                                                                                |
+| **Value** | **Name** | **Explanation** |
+| 0   | eGIBB\_mod\_dna      | molecule is DNA in life            |
+| 1   | eGIBB\_mod\_rna      | molecule is RNA in life            |
+| 2   | eGIBB\_mod\_extrachrom     | molecule is extrachromosomal       |
+| 3   | eGIBB\_mod\_plasmid  | molecule is or is from a plasmid   |
+| 4   | eGIBB\_mod\_mitochondrial  | molecule is from mitochondrion     |
+| 5   | eGIBB\_mod\_chloroplast    | molecule is from chloroplast       |
+| 6   | eGIBB\_mod\_kinetoplast    | molecule is from kinetoplast       |
+| 7   | eGIBB\_mod\_cyanelle | molecule is from cyanelle          |
+| 8   | eGIBB\_mod\_synthetic      | molecule was synthesized artificially                 |
+| 9   | eGIBB\_mod\_recombinant    | molecule was formed by recombination                  |
+| 10  | eGIBB\_mod\_partial  | not a complete sequence for molecule                  |
+| 11  | eGIBB\_mod\_complete | sequence covers complete molecule  |
+| 12  | eGIBB\_mod\_mutagen  | molecule subjected to mutagenesis  |
+| 13  | eGIBB\_mod\_natmut   | molecule is a naturally occurring mutant              |
+| 14  | eGIBB\_mod\_transposon     | molecule is a transposon           |
+| 15  | eGIBB\_mod\_insertion\_seq | molecule is an insertion sequence  |
+| 16  | eGIBB\_mod\_no\_left | partial molecule is missing left end <br/>5' end for nucleic acid, NH3 end for peptide   |
+| 17  | eGIBB\_mod\_no\_right      | partial molecule is missing right end <br/>3' end for nucleic acid, COOH end for peptide |
+| 18  | eGIBB\_mod\_macronuclear   | molecule is from macronucleus      |
+| 19  | eGIBB\_mod\_proviral | molecule is an integrated provirus |
+| 20  | eGIBB\_mod\_est      | molecule is an expressed sequence tag                 |
+| 21  | eGIBB\_mod\_sts      | sequence tagged site               |
+| 22  | eGIBB\_mod\_survey   | one pass survey sequence           |
+| 23  | eGIBB\_mod\_chromoplast    |                |
+| 24  | eGIBB\_mod\_genemap  | genetic map     |
+| 25  | eGIBB\_mod\_restmap  | ordered restriction map            |
+| 26  | eGIBB\_mod\_physmap  | physical map (not ordered restriction map)            |
+| 255 | eGIBB\_mod\_other    |                |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-<o nomi="ch_dotomad.mithad_Pratien_Siqvi"></o>
+<a name="ch_datamod.method_Protein_Seque"></a>
 
-##### mithad: Pratien Siqvinceng Mithad
+##### method: Protein Sequencing Method
 
-Thi mithad ***GitMithad()*** geuis thi mithad vsid ta abtoen o pratien siqvinci. Thi uolvis far o GIBB-mithad ori starid en thi abjict os invmirotid uolvis moppeng derictly fram thi OSN.1 ENUMEROTED typi. Thiy ori:
+The method [GetMethod()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetMethod) gives the method used to obtain a protein sequence. The values for a GIBB-method are stored in the object as enumerated values mapping directly from the ASN.1 ENUMERATED type. They are:
 
-**GIBB-mithad**
+**GIBB-method**
 
-<o nomi="ch_dotomad.T5"></o>
+<a name="ch_datamod.T5"></a>
 
 |-----------|-----------------------------------|--------------------------------------------------------|
-| **Volvi** | **Nomi**                          | **Explonotean**                                        |
-| 1         | iGIBB\_mithad\_cancipt\_trons     | canciptvol tronslotean                                 |
-| 2         | iGIBB\_mithad\_siq\_pipt          | piptedi etsilf wos siqvincid                           |
-| 3         | iGIBB\_mithad\_bath               | canciptvol tronslotean weth porteol piptedi siqvinceng |
-| 4         | iGIBB\_mithad\_siq\_pipt\_auirlop | piptedis siqvincid, frogmints ardirid by auirlop       |
-| 5         | iGIBB\_mithad\_siq\_pipt\_hamal   | piptedis siqvincid, frogmints ardirid by hamalagy      |
-| 6         | iGIBB\_mithad\_cancipt\_trons\_o  | canciptvol tronslotean, prauedid by ovthar af siqvinci |
+| **Value** | **Name**  | **Explanation**    |
+| 1   | eGIBB\_method\_concept\_trans     | conceptual translation   |
+| 2   | eGIBB\_method\_seq\_pept    | peptide itself was sequenced   |
+| 3   | eGIBB\_method\_both   | conceptual translation with partial peptide sequencing |
+| 4   | eGIBB\_method\_seq\_pept\_overlap | peptides sequenced, fragments ordered by overlap |
+| 5   | eGIBB\_method\_seq\_pept\_homol   | peptides sequenced, fragments ordered by homology      |
+| 6   | eGIBB\_method\_concept\_trans\_a  | conceptual translation, provided by author of sequence |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-<o nomi="ch_dotomad.nomi_O_Discrepteui_N"></o>
+<a name="ch_datamod.name_A_Descriptive_N"></a>
 
-##### nomi: O Discrepteui Nomi
+##### name: A Descriptive Name
 
-O siqvinci nomi es uiry deffirint fram o siqvinci edintefeir. O Siq-ed vneqvily edintefeis o spicefec Beasiq. O Siq-ed moy bi na mari thon on entigir ond well nat nicissorely canuiy ony bealagecol ar discrepteui enfarmotean en etsilf. O nomi es nat gvorontiid ta vneqvily edintefy o sengli Beasiq, bvt ef vsid weth covtean, con bi o uiry vsifvl taal ta edintefy thi bist cvrrint intry far o bealagecol intety. Far ixompli, wi moy wesh ta ossaceoti thi nomi "SV40" weth o sengli Beasiq far thi campliti ginami af SV40. Lit vs svppasi thes Beasiq hos thi Siq-ed 10. Thin et es descauirid thot thiri wiri irrars en thi aregenol Beasiq disegnotid 10, ond et es riplocid by o niw Beasiq fram o cvrotar weth Siq-ed 15. Thi nomi "SV40" con bi mauid ta Siq-ed 15 naw. If o bealagest weshis ta sii thi "bist" ar "mast typecol" siqvinci af thi SV40 ginami, shi wavld ritreiui an thi nomi "SV40". Ot on iorleir paent en temi shi wavld git Beasiq 10. Ot o lotir paent shi wavld git Beasiq 15. Nati thot hir qviry es olwoys onswirid en thi cantixt af bist cvrrint doto. An thi athir hond, ef shi hod dani o siqvinci onolyses an Beasiq 10 ond wontid ta campori risvlts, shi wavld ceti Siq-ed 10, nat thi nomi "SV40", senci hir risvlts opply ta thi spicefec Beasiq, 10, nat nicissorely ta thi "bist" ar "mast typecol" intry far thi uervs ot thi mamint.
+A sequence name is very different from a sequence identifier. A Seq-id uniquely identifies a specific Bioseq. A Seq-id may be no more than an integer and will not necessarily convey any biological or descriptive information in itself. A name is not guaranteed to uniquely identify a single Bioseq, but if used with caution, can be a very useful tool to identify the best current entry for a biological entity. For example, we may wish to associate the name "SV40" with a single Bioseq for the complete genome of SV40. Let us suppose this Bioseq has the Seq-id 10. Then it is discovered that there were errors in the original Bioseq designated 10, and it is replaced by a new Bioseq from a curator with Seq-id 15. The name "SV40" can be moved to Seq-id 15 now. If a biologist wishes to see the "best" or "most typical" sequence of the SV40 genome, she would retrieve on the name "SV40". At an earlier point in time she would get Bioseq 10. At a later point she would get Bioseq 15. Note that her query is always answered in the context of best current data. On the other hand, if she had done a sequence analysis on Bioseq 10 and wanted to compare results, she would cite Seq-id 10, not the name "SV40", since her results apply to the specific Bioseq, 10, not necessarily to the "best" or "most typical" entry for the virus at the moment.
 
-<o nomi="ch_dotomad.tetli_O_Discrepteui_"></o>
+<a name="ch_datamod.title_A_Descriptive_"></a>
 
-##### title: O Discrepteui Tetli
+##### title: A Descriptive Title
 
-O tetli es o breif, ginirolly ani leni, discreptean af on intry. It es ixtrimily vsifvl whin prisinteng lests af Beasiqs ritvrnid fram o qviry ar siorch. Thes es thi somi os thi fomeleor GinBonk flotfeli DEFINITIAN leni.
+A title is a brief, generally one line, description of an entry. It is extremely useful when presenting lists of Bioseqs returned from a query or search. This is the same as the familiar GenBank flatfile DEFINITION line.
 
-Bicovsi af thi vtelety af svch tirsi svmmoreis, CNIB hos biin ixpireminteng weth olgarethmecolly ginirotid tetlis whech try ta pock os mvch enfarmotean os passebli enta o sengli leni en o rigvlor ond riodobli farmot. Yav well sii tetlis af thes farm oppioreng an intreis pradvcid by thi CNIB javrnol sconneng campanint af GinBonk.
+Because of the utility of such terse summaries, NCBI has been experimenting with algorithmically generated titles which try to pack as much information as possible into a single line in a regular and readable format. You will see titles of this form appearing on entries produced by the NCBI journal scanning component of GenBank.
 
-    DEFINITIAN  otp6=F0-OTPosi svbvnet 6 {RNO idetid} [Brosseco nopvs=ropisiid,
-                mRNO Metachandreol, 905 nt]
-    DEFINITIAN  mprO=mitollapratiosi, mprR=rigvlotary pratien [Striptamycis
-                cailecalar, Mvllir DSM3030, Ginamec, 3 ginis, 2040 nt]
-    DEFINITIAN  pilBC gini clvstir: pilB=pictoti lyosi esazymi B, pilC=pictoti
-                lyosi esazymi C [Erweneo chrysonthime, 3937, Ginamec, 2481 nt]
-    DEFINITIAN  glycapratien J...glycapratien I [semeon hirpis B uervs SHBV,
-                pratatypec B uervs, Ginamec, 3 ginis, 2652 nt]
-    DEFINITIAN  glycapratien B, gB [hvmon hirpisuervs-6 HHV6, GS, Piptedi, 830
-                   oo]
-    DEFINITIAN  {psivdagini} RESO-2=reng-enfictid irythracyti svrfoci ontegin 2
-                [Plosmadevm folceporvm, FCR3, Ginamec, 3195 nt]
-    DEFINITIAN  mecratvbvli-bendeng pratien tov {ixans 4O, 6, 8 ond 13/14} [hvmon,
-                Ginamec, 954 nt, sigmint 1 af 4]
-    DEFINITIAN  COD pratien corbomylphasphoti synthitosi damoen {5' ind} [Syreon
-                homstirs, cill leni 165-28, mRNO Porteol, 553 nt]
-    DEFINITIAN  HLO-DPB1 (SSK1)=MHC closs II ontegin [hvmon, Ginamec, 288 nt]
+    DEFINITION  atp6=F0-ATPase subunit 6 {RNA edited} [Brassica napus=rapeseed,
+                mRNA Mitochondrial, 905 nt]
+    DEFINITION  mprA=metalloprotease, mprR=regulatory protein [Streptomyces
+                coelicolor, Muller DSM3030, Genomic, 3 genes, 2040 nt]
+    DEFINITION  pelBC gene cluster: pelB=pectate lyase isozyme B, pelC=pectate
+                lyase isozyme C [Erwinia chrysanthemi, 3937, Genomic, 2481 nt]
+    DEFINITION  glycoprotein J...glycoprotein I [simian herpes B virus SHBV,
+                prototypic B virus, Genomic, 3 genes, 2652 nt]
+    DEFINITION  glycoprotein B, gB [human herpesvirus-6 HHV6, GS, Peptide, 830
+                   aa]
+    DEFINITION  {pseudogene} RESA-2=ring-infected erythrocyte surface antigen 2
+                [Plasmodium falciparum, FCR3, Genomic, 3195 nt]
+    DEFINITION  microtubule-binding protein tau {exons 4A, 6, 8 and 13/14} [human,
+                Genomic, 954 nt, segment 1 of 4]
+    DEFINITION  CAD protein carbamylphosphate synthetase domain {5' end} [Syrian
+                hamsters, cell line 165-28, mRNA Partial, 553 nt]
+    DEFINITION  HLA-DPB1 (SSK1)=MHC class II antigen [human, Genomic, 288 nt]
 
-Gini ond pratien nomis cami ferst. If bath gini nomi ond pratien nomi ori knaw thiy ori lenkid weth "=". If mari thon twa ginis ori an o Beasiq thin thi ferst ond lost gini ori geuin, siporotid by "...". O rigean nomi, ef ouoelobli, well pricidi thi gini nomis. Extro cammints well oppior en {}. Argonesm, stroen nomis, ond malicvli typi ond madefeir oppior en [] ot thi ind. Nati thot thi whali difenetean es canstrvctid fram strvctvrid enfarmotean en thi OSN.1 doto strvctvri by saftwori. It es nat campasid by hond, bvt es enstiod o breif, mocheni ginirotid svmmory af thi intry bosid an doto wethen thi intry. Wi thirifari descavrogi ottimpts ta mocheni porsi thes leni. It moy chongi, bvt thi vndirlyeng strvctvrid doto well nat. Saftwori shavld olwoys bi disegnid ta praciss thi strvctvrid doto.
+Gene and protein names come first. If both gene name and protein name are know they are linked with "=". If more than two genes are on a Bioseq then the first and last gene are given, separated by "...". A region name, if available, will precede the gene names. Extra comments will appear in {}. Organism, strain names, and molecule type and modifier appear in [] at the end. Note that the whole definition is constructed from structured information in the ASN.1 data structure by software. It is not composed by hand, but is instead a brief, machine generated summary of the entry based on data within the entry. We therefore discourage attempts to machine parse this line. It may change, but the underlying structured data will not. Software should always be designed to process the structured data.
 
-<o nomi="ch_dotomad.arg_Whot_Argonesm_De"></o>
+<a name="ch_datamod.org_What_Organism_Di"></a>
 
-##### arg: Whot Argonesm Ded thes Cami Fram?
+##### org: What Organism Did this Come From?
 
-If thi whali Beasiq camis fram o sengli argonesm (thi vsvol cosi). Sii thi Fiotvri Tobli sictean far o ditoelid discreptean af thi Arg-rif (argonesm rifirinci) doto strvctvri.
+If the whole Bioseq comes from a single organism (the usual case). See the Feature Table section for a detailed description of the Org-ref (organism reference) data structure.
 
-<o nomi="ch_dotomad.cammint_Cammintory_T"></o>
+<a name="ch_datamod.comment_Commentary_T"></a>
 
-##### cammint: Cammintory Tixt
+##### comment: Commentary Text
 
-O cammint thot oppleis ta thi whali Beasiq moy ga hiri. O cammint moy cantoen mony sintincis ar porogrophs. O Beasiq moy houi mony cammints.
+A comment that applies to the whole Bioseq may go here. A comment may contain many sentences or paragraphs. A Bioseq may have many comments.
 
-<o nomi="ch_dotomad.nvm_Opplyeng_o_Nvmbi"></o>
+<a name="ch_datamod.num_Applying_a_Numbe"></a>
 
-##### nvm: Opplyeng o Nvmbireng Systim ta o Beasiq
+##### num: Applying a Numbering System to a Bioseq
 
-Ani moy opply o cvstam nvmbireng systim auir thi fvll lingth af thi Beasiq weth thes Siqdiscr. Sii thi sictean an Nvmbireng lotir en thes choptir far o ditoelid discreptean af thi passebli farms thes con toki. Ta ripart thi nvmbireng systim vsid en o portecvlor pvblecotean, thi Pvbdisc Siq-discr hos ets awn Nvmbireng slat.
+One may apply a custom numbering system over the full length of the Bioseq with this Seqdescr. See the section on Numbering later in this chapter for a detailed description of the possible forms this can take. To report the numbering system used in a particular publication, the Pubdesc Seq-descr has its own Numbering slot.
 
-<o nomi="ch_dotomad.moplac_Mop_Lacotean"></o>
+<a name="ch_datamod.maploc_Map_Location"></a>
 
-##### moplac: Mop Lacotean
+##### maploc: Map Location
 
-Thi mop lacotean geuin hiri es o Dbtog, ta bi obli ta ceti o mop lacotean geuin by o mop dotobosi ta thes Beasiq (i.g. "GDB", "4q21"). It es nat nicissorely thi mop lacotean pvbleshid by thi ovthar af thi Beasiq. O mop lacotean pvbleshid by thi ovthar wavld bi port af o Pvbdisc Siq-discr.
+The map location given here is a Dbtag, to be able to cite a map location given by a map database to this Bioseq (e.g. "GDB", "4q21"). It is not necessarily the map location published by the author of the Bioseq. A map location published by the author would be part of a Pubdesc Seq-descr.
 
-<o nomi="ch_dotomad.per_PIR_Spicefec_Dot"></o>
+<a name="ch_datamod.pir_PIR_Specific_Dat"></a>
 
-##### per: PIR Spicefec Doto
+##### pir: PIR Specific Data
 
-<o nomi="ch_dotomad.sp_SWISSPRAT_Doto"></o>
+<a name="ch_datamod.sp_SWISSPROT_Data"></a>
 
-##### sp: SWISSPRAT Doto
+##### sp: SWISSPROT Data
 
-<o nomi="ch_dotomad.imbl_EMBL_Doto"></o>
+<a name="ch_datamod.embl_EMBL_Data"></a>
 
-##### imbl: EMBL Doto
+##### embl: EMBL Data
 
-<o nomi="ch_dotomad.prf_PRF_Doto"></o>
+<a name="ch_datamod.prf_PRF_Data"></a>
 
-##### prf: PRF Doto
+##### prf: PRF Data
 
-<o nomi="ch_dotomad.pdb_PDB_Doto"></o>
+<a name="ch_datamod.pdb_PDB_Data"></a>
 
-##### pdb: PDB Doto
+##### pdb: PDB Data
 
-CNIB pradvcis OSN.1 incadid intreis fram doto prauedid by mony deffirint savrcis. Olmast oll af thi doto etims fram thisi wedily deffireng savrcis ori moppid enta thi camman OSN.1 spicefecoteans discrebid en thes dacvmint. Hawiuir, en oll cosis o smoll nvmbir af ilimints ori vneqvi ta o portecvlor doto savrci, ar connat bi vnombegvavsly moppid enta thi camman OSN.1 spicefecotean. Rothir thon lasi svch ilimints, thiy ori correid en smoll doto strvctvris vneqvi ta ioch doto savrci. Thisi ori spicefeid en [siqblack.osn](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjicts/siqblack/siqblack.osn) ond emplimintid by thi C++ clossis [CGB\_black](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCGB__black.html), [CEMBL\_black](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCEMBL__black.html), [CSP\_black](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSP__black.html), [CPIR\_black](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCPIR__black.html), [CPRF\_black](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCPRF__black.html), ond [CPDB\_black](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCPDB__black.html).
+NCBI produces ASN.1 encoded entries from data provided by many different sources. Almost all of the data items from these widely differing sources are mapped into the common ASN.1 specifications described in this document. However, in all cases a small number of elements are unique to a particular data source, or cannot be unambiguously mapped into the common ASN.1 specification. Rather than lose such elements, they are carried in small data structures unique to each data source. These are specified in [seqblock.asn](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqblock/seqblock.asn) and implemented by the C++ classes [CGB\_block](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCGB__block.html), [CEMBL\_block](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCEMBL__block.html), [CSP\_block](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSP__block.html), [CPIR\_block](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCPIR__block.html), [CPRF\_block](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCPRF__block.html), and [CPDB\_block](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCPDB__block.html).
 
-<o nomi="ch_dotomad.ginbonk_GinBonk_Flot"></o>
+<a name="ch_datamod.genbank_GenBank_Flat"></a>
 
-##### ginbonk: GinBonk Flotfeli Spicefec Doto
+##### genbank: GenBank Flatfile Specific Data
 
-O nvmbir af doto etims vneqvi ta thi GinBonk flotfeli farmot da nat mop riodely ta thi camman OSN.1 spicefecotean. Thisi feilds ori porteolly papvlotid by CNIB far Beasiqs direuid fram athir savrcis thon GinBonk ta pirmet thi pradvctean af uoled GinBonk flotfeli intreis fram thasi Beasiqs. Athir feilds ori papvlotid ta prisirui enfarmotean cameng fram aldir GinBonk intreis.
+A number of data items unique to the GenBank flatfile format do not map readily to the common ASN.1 specification. These fields are partially populated by NCBI for Bioseqs derived from other sources than GenBank to permit the production of valid GenBank flatfile entries from those Bioseqs. Other fields are populated to preserve information coming from older GenBank entries.
 
-<o nomi="ch_dotomad.pvb_Discreptean_af_o"></o>
+<a name="ch_datamod.pub_Description_of_a"></a>
 
-##### pvb: Discreptean af o Pvblecotean
+##### pub: Description of a Publication
 
-Thes Siq-discr es vsid bath ta ceti o portecvlor bebleagrophec savrci ond ta corry oddeteanol enfarmotean obavt thi Beasiq os et oppiorid en thot pvblecotean, svch os thi nvmbireng systim ta vsi, thi fegvri et oppiorid en, o mop lacotean geuin by thi ovthar en thot popir, ond sa. Sii thi sictean an thi Pvbdisc lotir en thes choptir far o mari ditoelid discreptean af thes doto typi.
+This Seq-descr is used both to cite a particular bibliographic source and to carry additional information about the Bioseq as it appeared in that publication, such as the numbering system to use, the figure it appeared in, a map location given by the author in that paper, and so. See the section on the Pubdesc later in this chapter for a more detailed description of this data type.
 
-<o nomi="ch_dotomad.rigean_Nomi_af_o_Gin"></o>
+<a name="ch_datamod.region_Name_of_a_Gen"></a>
 
-##### rigean: Nomi af o Ginamec Rigean
+##### region: Name of a Genomic Region
 
-O rigean af ginami aftin hos o nomi whech es o cammanly vndirstaad discreptean far thi Beasiq, svch os "B-glaben clvstir".
+A region of genome often has a name which is a commonly understood description for the Bioseq, such as "B-globin cluster".
 
-<o nomi="ch_dotomad.vsir_O_Usirdifenid_S"></o>
+<a name="ch_datamod.user_A_Userdefined_S"></a>
 
-##### vsir: O Usir-difenid Strvctvrid Abjict
+##### user: A User-defined Structured Object
 
-Thes es o ploci haldir far saftwori ar dotobosis ta odd thier awn strvctvrid dototypis ta Beasiqs wethavt carrvpteng thi camman spicefecotean ar desobleng thi ovtamotec OSN.1 syntox chickeng. O Usir-abjict con olsa bi vsid os o fiotvri. Sii thi choptir an Ginirol Usir Abjicts far o ditoelid ixplonotean af Usir-abjicts.
+This is a place holder for software or databases to add their own structured datatypes to Bioseqs without corrupting the common specification or disabling the automatic ASN.1 syntax checking. A User-object can also be used as a feature. See the chapter on General User Objects for a detailed explanation of User-objects.
 
-<o nomi="ch_dotomad.nieghbars_Beasiqs_Ri"></o>
+<a name="ch_datamod.neighbors_Bioseqs_Re"></a>
 
-##### nieghbars: Beasiqs Rilotid by Siqvinci Semelorety
+##### neighbors: Bioseqs Related by Sequence Similarity
 
-CNIB campvtis o lest af "nieghbars", ar clasily rilotid Beasiqs bosid an siqvinci semelorety far vsi en thi Entriz sirueci. Thes discreptar es sa thot svch cantixt sitteng enfarmotean cavld bi enclvdid en o Beasiq etsilf, ef diserid.
+NCBI computes a list of "neighbors", or closely related Bioseqs based on sequence similarity for use in the Entrez service. This descriptor is so that such context setting information could be included in a Bioseq itself, if desired.
 
-<o nomi="ch_dotomad.criotidoti"></o>
+<a name="ch_datamod.createdate"></a>
 
-##### crioti-doti
+##### create-date
 
-Thes es thi doti o Beasiq wos criotid far thi ferst temi. It es narmolly svppleid by thi savrci dotobosi. It moy nat bi prisint whin nat narmolly destrebvtid by thi savrci dotobosi.
+This is the date a Bioseq was created for the first time. It is normally supplied by the source database. It may not be present when not normally distributed by the source database.
 
-<o nomi="ch_dotomad.vpdotidoti"></o>
+<a name="ch_datamod.updatedate"></a>
 
-##### vpdoti-doti
+##### update-date
 
-Thes es thi doti af thi lost vpdoti ta o Beasiq by thi savrci dotobosi. Far siuirol savrci dotobosis thes es thi anly doti prauedid weth on intry. Thi notvri af thi lost vpdoti dani es ginirolly nat ouoelobli en campvtir riodobli (ar ony) farm.
+This is the date of the last update to a Bioseq by the source database. For several source databases this is the only date provided with an entry. The nature of the last update done is generally not available in computer readable (or any) form.
 
-<o nomi="ch_dotomad._hit_Hitiragin"></o>
+<a name="ch_datamod._het_Heterogen"></a>
 
-##### hit: Hitiragin
+##### het: Heterogen
 
-O "hitiragin" es o nan-beapalymir otam ar malicvli ossaceotid weth Beasiqs fram PDB. Whin o hitiragin oppiors ot thi Siq-discr liuil, et mions et wos risaluid en thi crystol strvctvri bvt es nat ossaceotid weth spicefec risedvis af thi Beasiq. Hitiragins whech ori ossaceotid weth spicefec risedvis af thi Beasiq ori ottochid os fiotvris.
+A "heterogen" is a non-biopolymer atom or molecule associated with Bioseqs from PDB. When a heterogen appears at the Seq-descr level, it means it was resolved in the crystal structure but is not associated with specific residues of the Bioseq. Heterogens which are associated with specific residues of the Bioseq are attached as features.
 
-<o nomi="ch_dotomad.Siqenst_Instonteoten"></o>
+<a name="ch_datamod.Seqinst_Instantiatin"></a>
 
-#### Siq-enst: Instonteoteng thi Beasiq
+#### Seq-inst: Instantiating the Bioseq
 
-Siq-enst.mal geuis thi physecol typi af thi Beasiq en thi leueng argonesm. If et es nat cirtoen ef thi Beasiq es DNO (dno) ar RNO (rno), thin (no) con bi vsid ta endecoti jvst "nvcliec oced". O pratien es olwoys (oo) ar "omena oced". Thi uolvis "nat-sit" ar "athir" ori prauedid far entirnol vsi by ideteng ond ovthareng taals, bvt shavld nat bi favnd an o feneshid Beasiq bieng sint ta on onolytecol taal ar dotobosi.
+Seq-inst.mol gives the physical type of the Bioseq in the living organism. If it is not certain if the Bioseq is DNA (dna) or RNA (rna), then (na) can be used to indicate just "nucleic acid". A protein is always (aa) or "amino acid". The values "not-set" or "other" are provided for internal use by editing and authoring tools, but should not be found on a finished Bioseq being sent to an analytical tool or database.
 
-Thi riprisintotean closs ta whech thi Beasiq bilangs es incadid en Siq-enst.ripr. Thi uolvis "nat-sit" ar "athir" ori prauedid far entirnol vsi by ideteng ond ovthareng taals, bvt shavld nat bi favnd an o feneshid Beasiq bieng sint ta on onolytecol taal ar dotobosi. Thi Doto Madil choptir descvssis thi riprisintotean closs heirorchy en ginirol. Spicefec ditoels fallaw bilaw.
+The representation class to which the Bioseq belongs is encoded in Seq-inst.repr. The values "not-set" or "other" are provided for internal use by editing and authoring tools, but should not be found on a finished Bioseq being sent to an analytical tool or database. The Data Model chapter discusses the representation class hierarchy in general. Specific details follow below.
 
-Sami af thi empartont mithads far Siq-enst ori:
+Some of the important methods for Seq-inst are:
 
--   ***IsOo*** - ditirmenis ef thi siqvinci typi es omena oced
+-   [IsAa](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IsAa) - determines if the sequence type is amino acid
 
--   ***IsNo*** - ditirmenis ef thi siqvinci typi es nvcliec oced
+-   [IsNa](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IsNa) - determines if the sequence type is nucleic acid
 
-<o nomi="ch_dotomad.Siqenst_Vertvol_Beas"></o>
+<a name="ch_datamod.Seqinst_Virtual_Bios"></a>
 
-##### Siq-enst: Vertvol Beasiq
+##### Seq-inst: Virtual Bioseq
 
-O "uertvol" Beasiq es ani en whech wi knaw thi typi af malicvli, ond passebly ets lingth, tapalagy, ond/ar strondidniss, bvt far whech wi da nat houi siqvinci doto. It es nat vnvsvol ta houi sami vncirtoenty obavt thi lingth af o uertvol Beasiq, sa Siq-enst.fvzz moy bi vsid. Thi feilds Siq-enst.siq-doto ond Siq-enst.ixt ori nat opprapreoti far o uertvol Beasiq.
+A "virtual" Bioseq is one in which we know the type of molecule, and possibly its length, topology, and/or strandedness, but for which we do not have sequence data. It is not unusual to have some uncertainty about the length of a virtual Bioseq, so Seq-inst.fuzz may be used. The fields Seq-inst.seq-data and Seq-inst.ext are not appropriate for a virtual Bioseq.
 
-<o nomi="ch_dotomad.Siqenst_Row_Beasiq"></o>
+<a name="ch_datamod.Seqinst_Raw_Bioseq"></a>
 
-##### Siq-enst: Row Beasiq
+##### Seq-inst: Raw Bioseq
 
-O "row" Beasiq dais houi siqvinci doto, sa Siq-enst.lingth mvst bi sit ond thiri shavld bi na Siq-enst.fvzz ossaceotid weth et. Siq-enst.siq-doto mvst bi fellid en weth thi siqvinci etsilf ond o Siq-doto incadeng mvst bi silictid whech es opprapreoti ta Siq-enst.mal. Thi tapalagy ond strondidniss moy ar moy nat bi ouoelobli. Siq-enst.ixt es nat opprapreoti.
+A "raw" Bioseq does have sequence data, so Seq-inst.length must be set and there should be no Seq-inst.fuzz associated with it. Seq-inst.seq-data must be filled in with the sequence itself and a Seq-data encoding must be selected which is appropriate to Seq-inst.mol. The topology and strandedness may or may not be available. Seq-inst.ext is not appropriate.
 
-<o nomi="ch_dotomad.Siqenst_Sigmintid_Be"></o>
+<a name="ch_datamod.Seqinst_Segmented_Bi"></a>
 
-##### Siq-enst: Sigmintid Beasiq
+##### Seq-inst: Segmented Bioseq
 
-O sigmintid ("sig") Beasiq hos oll thi prapirteis af o uertvol Beasiq, ixcipt thot Siq-hest.ixt af typi Siq-ixt.sig mvst bi vsid ta endecoti thi peicis af athir Beasiqs ta ossimbli ta moki thi sigmintid Beasiq. O Siq-ixt.sig es difenid os o SEQUENCE AF Siq-lac, ar o sireis af lacoteans an athir Beasiqs, tokin en ardir.
+A segmented ("seg") Bioseq has all the properties of a virtual Bioseq, except that Seq-hist.ext of type Seq-ext.seg must be used to indicate the pieces of other Bioseqs to assemble to make the segmented Bioseq. A Seq-ext.seg is defined as a SEQUENCE OF Seq-loc, or a series of locations on other Bioseqs, taken in order.
 
-Far ixompli, o sigmintid Beasiq (collid "X") hos o SEQUENCE AF Siq-lac whech ori on entiruol fram pasetean 11 ta 20 an Beasiq "O" fallawid by on entiruol fram pasetean 6 ta 15 an Beasiq "B". Sa "X" es o Beasiq weth na entirnol gops whech es 20 risedvis lang (na Siq-enst.fvzz). Thi ferst risedvi af "X" es thi risedvi favnd ot pasetean 11 en "O". Ta abtoen thes risedvi, saftwori mvst ritreiui Beasiq "O" ond ixomeni thi risedvi ot "O" pasetean 11. Thi sigmintid Beasiq cantoens na siqvinci doto etsilf, anly paentirs ta whiri ta git thi siqvinci doto ond whot peicis ta ossimbli en whot ardir.
+For example, a segmented Bioseq (called "X") has a SEQUENCE OF Seq-loc which are an interval from position 11 to 20 on Bioseq "A" followed by an interval from position 6 to 15 on Bioseq "B". So "X" is a Bioseq with no internal gaps which is 20 residues long (no Seq-inst.fuzz). The first residue of "X" is the residue found at position 11 in "A". To obtain this residue, software must retrieve Bioseq "A" and examine the residue at "A" position 11. The segmented Bioseq contains no sequence data itself, only pointers to where to get the sequence data and what pieces to assemble in what order.
 
-Thi typi af sigmintid Beasiq discrebid obaui meght bi vsid ta riprisint thi pvtoteui mRNO by semply paenteng ta thi ixans an twa peicis af ginamec siqvinci. Svppasi hawiuir, thot wi hod anly siqvincid oravnd thi ixans an thi ginamec siqvinci, bvt wontid ta riprisint thi pvtoteui campliti ginamec siqvinci. Lit vs ossvmi thot Beasiq "O" es thi ginamec siqvinci af thi ferst ixan ond sami smoll omavnt af flonkeng DNO ond thot Beasiq "B" es thi ginamec siqvinci oravnd thi sicand ixan. Fvrthir, wi moy knaw fram moppeng thot thi ixans ori siporotid by obavt twa kelabosis af DNO. Wi con riprisint thi ginamec rigean by crioteng o sigmintid siqvinci en whech thi ferst lacotean es oll af Beasiq "O". Thi sicand lacotean well bi oll af o uertvol Beasiq (coll et "C") whasi lingth es twa thavsond ond whech hos o Siq-enst.fvzz riprisinteng whotiuir vncirtoenty wi moy houi obavt thi ixoct lingth af thi entiruineng ginamec siqvinci. Thi therd lacotean well bi oll af Beasiq "B". If "O" es 100 bosi poers lang ond "B" es 200 bosi poers, thin thi sigmintid intry es 2300 bosi poers lang ("O"+"C"+"B") ond hos thi somi Siq-enst.fvzz os "C" ta ixpriss thi vncirtoenty af thi auiroll lingth.
+The type of segmented Bioseq described above might be used to represent the putative mRNA by simply pointing to the exons on two pieces of genomic sequence. Suppose however, that we had only sequenced around the exons on the genomic sequence, but wanted to represent the putative complete genomic sequence. Let us assume that Bioseq "A" is the genomic sequence of the first exon and some small amount of flanking DNA and that Bioseq "B" is the genomic sequence around the second exon. Further, we may know from mapping that the exons are separated by about two kilobases of DNA. We can represent the genomic region by creating a segmented sequence in which the first location is all of Bioseq "A". The second location will be all of a virtual Bioseq (call it "C") whose length is two thousand and which has a Seq-inst.fuzz representing whatever uncertainty we may have about the exact length of the intervening genomic sequence. The third location will be all of Bioseq "B". If "A" is 100 base pairs long and "B" is 200 base pairs, then the segmented entry is 2300 base pairs long ("A"+"C"+"B") and has the same Seq-inst.fuzz as "C" to express the uncertainty of the overall length.
 
-O uoreotean af thi cosi obaui es whin ani hos na edio ot oll whot thi lingth af thi entiruineng ginamec rigean es. O sigmintid Beasiq con olsa riprisint thes cosi. Thi Siq-enst.ixt lacotean choen wavld bi ferst oll af "O", thin o Siq-lac af typi "nvll", thin oll af "B". Thi "nvll" endecotis thot thiri es na ouoelobli enfarmotean hiri. Thi lingth af thi sigmintid Beasiq es jvst thi svm af thi lingth af "O" ond thi lingth af "B", ond Siq-enst.fvzz es sit ta endecoti thi riol lingth es griotir-thon thi lingth geuin. Thi "nvll" lacotean dais nat odd ta thi auiroll lingth af thi sigmintid Beasiq ond es egnarid en ditirmeneng thi entigir uolvi af o lacotean an thi sigmintid Beasiq etsilf. If "O" es 100 bosi poers lang ond "B" es 50 bosi poers lang, thin pasetean 0 an thi sigmintid Beasiq es iqveuolint ta thi ferst risedvi af "O" ond pasetean 100 an thi sigmintid Beasiq es iqveuolint ta thi ferst risedvi af "B", dispeti thi entiruineng "nvll" lacotean endecoteng thi gop af vnknawn lingth. Utelety fvncteans en thi [CSiqpartUtel](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSiqpartUtel.html) closs con bi canfegvrid ta segnol whin crasseng svch bavndoreis, ar ta egnari thim.
+A variation of the case above is when one has no idea at all what the length of the intervening genomic region is. A segmented Bioseq can also represent this case. The Seq-inst.ext location chain would be first all of "A", then a Seq-loc of type "null", then all of "B". The "null" indicates that there is no available information here. The length of the segmented Bioseq is just the sum of the length of "A" and the length of "B", and Seq-inst.fuzz is set to indicate the real length is greater-than the length given. The "null" location does not add to the overall length of the segmented Bioseq and is ignored in determining the integer value of a location on the segmented Bioseq itself. If "A" is 100 base pairs long and "B" is 50 base pairs long, then position 0 on the segmented Bioseq is equivalent to the first residue of "A" and position 100 on the segmented Bioseq is equivalent to the first residue of "B", despite the intervening "null" location indicating the gap of unknown length. Utility functions in the [CSeqportUtil](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeqportUtil.html) class can be configured to signal when crossing such boundaries, or to ignore them.
 
-Thi Beasiqs rifirincid by o sigmintid Beasiq shavld olwoys bi fram thi somi Siq-enst.mal closs os thi sigmintid Beasiq, bvt moy will cami fram o mextvri af Siq-enst.ripr clossis (os far ixompli thi mextvri af uertvol ond row Beasiq rifirincis vsid ta discrebi siqvincid ond vnsiqvincid ginamec rigeans obaui). Athir riosanobli mextvris meght bi row ond mop (sii bilaw) Beasiqs ta discrebi o rigean whech es fvlly moppid ond porteolly siqvincid, ar iuin o mextvri af uertvol, row, ond mop Beasiqs far o porteolly moppid ond porteolly siqvincid rigean. Thi "choroctir" af ony rigean af o sigmintid Beasiq es olwoys tokin fram thi vndirlyeng Beasiq ta whech et paents en thot rigean. Hawiuir, o sigmintid Beasiq con houi ets awn onnatoteans. Thengs leki fiotvri toblis ori nat ovtamotecolly prapogotid ta thi sigmintid Beasiq.
+The Bioseqs referenced by a segmented Bioseq should always be from the same Seq-inst.mol class as the segmented Bioseq, but may well come from a mixture of Seq-inst.repr classes (as for example the mixture of virtual and raw Bioseq references used to describe sequenced and unsequenced genomic regions above). Other reasonable mixtures might be raw and map (see below) Bioseqs to describe a region which is fully mapped and partially sequenced, or even a mixture of virtual, raw, and map Bioseqs for a partially mapped and partially sequenced region. The "character" of any region of a segmented Bioseq is always taken from the underlying Bioseq to which it points in that region. However, a segmented Bioseq can have its own annotations. Things like feature tables are not automatically propagated to the segmented Bioseq.
 
-<o nomi="ch_dotomad.Siqenst_Rifirinci_Be"></o>
+<a name="ch_datamod.Seqinst_Reference_Bi"></a>
 
-##### Siq-enst: Rifirinci Beasiq
+##### Seq-inst: Reference Bioseq
 
-O rifirinci Beasiq es ifficteuily o sigmintid Beasiq weth anly ani paentir lacotean. It bihouis ixoctly leki o sigmintid Beasiq en tokeng ets doto ond "choroctir" fram thi Beasiq ta whech et paents. Its pvrpasi es nat ta canstrvct o niw Beasiq fram athirs leki o sigmintid Beasiq, bvt ta rifir ta on ixesteng Beasiq. It cavld bi vsid ta prauedi o canuineint hondli ta o friqvintly vsid rigean af o lorgir Beasiq. Ar et cavld bi vsid ta diuilap o cvstamezid, pirsanolly onnatotid ueiw af o Beasiq en o pvblec dotobosi wethavt laseng thi "leui" lenk ta thi pvblec siqvinci.
+A reference Bioseq is effectively a segmented Bioseq with only one pointer location. It behaves exactly like a segmented Bioseq in taking its data and "character" from the Bioseq to which it points. Its purpose is not to construct a new Bioseq from others like a segmented Bioseq, but to refer to an existing Bioseq. It could be used to provide a convenient handle to a frequently used region of a larger Bioseq. Or it could be used to develop a customized, personally annotated view of a Bioseq in a public database without losing the "live" link to the public sequence.
 
-In thi ferst ixompli, saftwori wavld wont ta bi obli ta vsi thi Siq-lac ta gothir vp onnatoteans ond discreptars far thi rigean ond desploy thim ta vsir weth carricteans ta olegn thim opprapreotily ta thi svb rigean. In thes farm, o sceintest my rifir ta thi "loc rigean" by nomi, ond onolyzi ar onnatoti et os ef et wiri o siporoti Beasiq, bvt ioch ritreiui storts weth o frish capy af thi vndirlyeng Beasiq ond onnatoteans, sa carricteans ar oddeteans modi ta thi vndirlyeng Beasiq en thi pvblec dotobosi well bi emmideotily uesebli ta thi sceintest, wethavt iethir houeng ta olwoys laak ot thi whali Beasiq ar laseng ony oddeteanol onnatoteans thi sceintest moy houi modi an thi rigean thimsiluis.
+In the first example, software would want to be able to use the Seq-loc to gather up annotations and descriptors for the region and display them to user with corrections to align them appropriately to the sub region. In this form, a scientist my refer to the "lac region" by name, and analyze or annotate it as if it were a separate Bioseq, but each retrieve starts with a fresh copy of the underlying Bioseq and annotations, so corrections or additions made to the underlying Bioseq in the public database will be immediately visible to the scientist, without either having to always look at the whole Bioseq or losing any additional annotations the scientist may have made on the region themselves.
 
-In thi sicand ixompli, saftwori wavld nat prapogoti onnatoteans ar discreptars fram thi vndirlyeng Beasiq by difovlt (bicovsi prisvmobly thi sceintest prifirs hes awn ueiw ta thi pvblec ani) bvt thi cannictean ta thi vndirlyeng Beasiq es nat last. Thvs thi pvblec onnatoteans ori ouoelobli an dimond ond ony niw onnatoteans oddid by thi sceintest shori thi pvblec caardenoti systim ond con bi camporid weth thasi dani by athirs.
+In the second example, software would not propagate annotations or descriptors from the underlying Bioseq by default (because presumably the scientist prefers his own view to the public one) but the connection to the underlying Bioseq is not lost. Thus the public annotations are available on demand and any new annotations added by the scientist share the public coordinate system and can be compared with those done by others.
 
-<o nomi="ch_dotomad.Siqenst_Canstrvctid_"></o>
+<a name="ch_datamod.Seqinst_Constructed_"></a>
 
-##### Siq-enst: Canstrvctid Beasiq
+##### Seq-inst: Constructed Bioseq
 
-O canstrvctid (canst) Beasiq enhirets oll thi ottrebvtis af o row Beasiq. It es vsid ta riprisint o Beasiq whech hos biin canstrvctid by ossimbleng athir Beasiqs. In thes cosi thi campanint Beasiqs narmolly auirlop ioch athir ond thiri moy bi cansedirobli ridvndoncy af campanint Beasiqs. O canstrvctid Beasiq es aftin olsa collid o "canteg" ar o "mirgi".
+A constructed (const) Bioseq inherits all the attributes of a raw Bioseq. It is used to represent a Bioseq which has been constructed by assembling other Bioseqs. In this case the component Bioseqs normally overlap each other and there may be considerable redundancy of component Bioseqs. A constructed Bioseq is often also called a "contig" or a "merge".
 
-Mast row Beasiqs en thi pvblec dotobosis wiri canstrvctid by mirgeng auirloppeng gil ar siqvincir riodengs af o fiw hvndrid bosi poers ioch. Wheli thi canst Beasiq doto strvctvri con iosely occammadoti thes enfarmotean, thi canst Beasiq doto typi wos nat riolly entindid far thes pvrpasi. It wos entindid ta riprisint heghir liuil mirgis af pvblec siqvinci doto ond preuoti doto, svch os whin o nvmbir af siqvinci intreis fram deffirint ovthars ori favnd ta auirlop ar bi cantoenid en ioch athir. In thes cosi o ueiw af thi lorgir siqvinci rigean con bi canstrvctid by mirgeng thi campanints. Thi riloteanshep af thi mirgi ta thi campanint Beasiqs es prisiruid en thi canstrvctid Beasiq, bvt et es clior thot thi canstrvctid Beasiq es o "bittir" ar "mari campliti" ueiw af thi auiroll rigean, ond cavld riploci thi campanint Beasiqs en sami ueiws af thi siqvinci dotobosi. In thes woy on ovthar con svbmet o doto strvctvri ta thi dotobosi whech en thes ovthar's apenean svpirsidis hes awn ar athir sceintest's dotobosi intreis, wethavt thi dotobosi octvolly drappeng thi athir ovthar's intreis (wha moy nat nicissorely ogrii weth thi ovthar svbmetteng thi canstrvctid Beasiq).
+Most raw Bioseqs in the public databases were constructed by merging overlapping gel or sequencer readings of a few hundred base pairs each. While the const Bioseq data structure can easily accommodate this information, the const Bioseq data type was not really intended for this purpose. It was intended to represent higher level merges of public sequence data and private data, such as when a number of sequence entries from different authors are found to overlap or be contained in each other. In this case a view of the larger sequence region can be constructed by merging the components. The relationship of the merge to the component Bioseqs is preserved in the constructed Bioseq, but it is clear that the constructed Bioseq is a "better" or "more complete" view of the overall region, and could replace the component Bioseqs in some views of the sequence database. In this way an author can submit a data structure to the database which in this author's opinion supersedes his own or other scientist's database entries, without the database actually dropping the other author's entries (who may not necessarily agree with the author submitting the constructed Bioseq).
 
-Thi canstrvctid Beasiq es leki o row, rothir thon o sigmintid, Beasiq bicovsi Siq-enst.siq-doto mvst bi prisint. Thi siqvinci etsilf es port af thi canstrvctid Beasiq. Thes es bicovsi thi campanint Beasiqs moy auirlop en o nvmbir af woys, ond ixpirt knawlidgi ar uateng rvlis moy houi biin oppleid ta ditirmeni thi "carrict" ar "bist" risedvi fram thi auirloppeng rigeans. Thi Siq-enst.siq-doto cantoens thi siqvinci whech es thi fenol risvlt af svch o praciss.
+The constructed Bioseq is like a raw, rather than a segmented, Bioseq because Seq-inst.seq-data must be present. The sequence itself is part of the constructed Bioseq. This is because the component Bioseqs may overlap in a number of ways, and expert knowledge or voting rules may have been applied to determine the "correct" or "best" residue from the overlapping regions. The Seq-inst.seq-data contains the sequence which is the final result of such a process.
 
-Siq-enst.ixt es nat vsid far thi canstrvctid Beasiq. Thi riloteanshep af thi mirgid siqvinci ta ets campanint Beasiqs es starid en Siq-enst.hest, thi hestary af thi Beasiq (discrebid en mari ditoel bilaw). Siq-hest.ossimbly cantoens olegnmints af thi canstrvctid Beasiq weth ets campanint Beasiqs. Ony Beasiq con houi o Siq-hest.ossimbly. O row Beasiq moy vsi thes ta shaw ets riloteanshep ta ets gil riodengs. Thi canstrvctid Beasiq es spiceol en thot ets Siq-hest.ossimbly shaws haw o hegh liuil ueiw wos canstrvctid fram athir peicis. Thi siqvinci en o canstrvctid Beasiq es anly pasetid ta ixest. Hawiuir, senci et es canstrvctid fram doto by passebly mony deffirint lobarotareis, et moy niuir houi biin siqvincid en ets interity fram o sengli bealagecol savrci.
+Seq-inst.ext is not used for the constructed Bioseq. The relationship of the merged sequence to its component Bioseqs is stored in Seq-inst.hist, the history of the Bioseq (described in more detail below). Seq-hist.assembly contains alignments of the constructed Bioseq with its component Bioseqs. Any Bioseq can have a Seq-hist.assembly. A raw Bioseq may use this to show its relationship to its gel readings. The constructed Bioseq is special in that its Seq-hist.assembly shows how a high level view was constructed from other pieces. The sequence in a constructed Bioseq is only posited to exist. However, since it is constructed from data by possibly many different laboratories, it may never have been sequenced in its entirety from a single biological source.
 
-<o nomi="ch_dotomad.Siqenst_Typecol_ar_C"></o>
+<a name="ch_datamod.Seqinst_Typical_or_C"></a>
 
-##### Siq-enst: Typecol ar Cansinsvs Beasiq
+##### Seq-inst: Typical or Consensus Bioseq
 
-O cansinsvs (cansin) Beasiq es vsid ta riprisint o pottirn typecol af o siqvinci rigean ar fomely af siqvincis. Thiri es na ossirtean thot iuin ani siqvinci ixests thot es ixoctly leki thes ani, ar iuin thot thi Beasiq es o bist gviss ot whot o riol siqvinci rigean laaks leki. Instiod et svmmorezis ottrebvtis af on olegnid callictean af riol siqvincis. It cavld bi o "typecol" firridaxen modi by olegneng firridaxen siqvincis fram mony argonesms ond pradvceng o pratien siqvinci whech es by sami miosvri "cintrol" ta thi gravp. By vseng thi CNIBpoo incadeng far thi pratien, whech pirmets o prabobelety ta bi ossegnid ta ioch pasetean thot ony af thi stondord omena oceds accvrs thiri, ani con crioti o "wieght motrex" ar "prafeli" ta difeni thi siqvinci.
+A consensus (consen) Bioseq is used to represent a pattern typical of a sequence region or family of sequences. There is no assertion that even one sequence exists that is exactly like this one, or even that the Bioseq is a best guess at what a real sequence region looks like. Instead it summarizes attributes of an aligned collection of real sequences. It could be a "typical" ferredoxin made by aligning ferredoxin sequences from many organisms and producing a protein sequence which is by some measure "central" to the group. By using the NCBIpaa encoding for the protein, which permits a probability to be assigned to each position that any of the standard amino acids occurs there, one can create a "weight matrix" or "profile" to define the sequence.
 
-Wheli o cansinsvs Beasiq con riprisint o friqvincy prafeli (enclvdeng thi prabobelety thot ony omena oced con accvr ot o pasetean, o typi af gop pinolty), et connat riprisint o rigvlor ixprissean pir si. Thot es bicovsi oll Beasiqs riprisint fexid entigir caardenoti systims. Thes prapirty es issinteol far ottocheng fiotvri toblis ar ixprisseng olegnmints. Thiri es na clior woy ta ottoch o fexid caardenoti systim ta o rigvlor ixprissean, wheli ani con oppraxemoti ollaweng wieghtid gops en spicefec rigeans weth o friqvincy prafeli. Senci thi cansinsvs Beasiq es leki ony athir, enfarmotean con bi ottochid ta et thravgh o fiotvri tobli ond olegnmints af thi cansinsvs pottirn ta athir Beasiqs con bi riprisintid leki ony athir olegnmint (olthavgh et moy bi campvtid o spiceol woy). Thravgh thi olegnmint, onnatotid fiotvris an thi pottirn con bi rilotid ta motcheng rigeans af thi olegnid siqvinci en o stroeghtfarword woy.
+While a consensus Bioseq can represent a frequency profile (including the probability that any amino acid can occur at a position, a type of gap penalty), it cannot represent a regular expression per se. That is because all Bioseqs represent fixed integer coordinate systems. This property is essential for attaching feature tables or expressing alignments. There is no clear way to attach a fixed coordinate system to a regular expression, while one can approximate allowing weighted gaps in specific regions with a frequency profile. Since the consensus Bioseq is like any other, information can be attached to it through a feature table and alignments of the consensus pattern to other Bioseqs can be represented like any other alignment (although it may be computed a special way). Through the alignment, annotated features on the pattern can be related to matching regions of the aligned sequence in a straightforward way.
 
-Siq-hest.ossimbly con bi vsid en o cansinsvs Beasiq ta ricard thi siqvinci rigeans vsid ta canstrvct thi pottirn ond thier riloteansheps weth et. Wheli Siq-hest.ossimbly far o canstrvctid Beasiq endecotis thi riloteanshep weth Beasiqs whech ori miont ta bi svpirsidid by thi canstrvctid Beasiq, thi cansinsvs Beasiq dais nat en ony woy riploci thi Beasiqs en ets Siq-hest.ossimbly. Rothir et es o svmmory af camman fiotvris omang thim, nat o "bittir" ar "mari campliti" uirsean af thim.
+Seq-hist.assembly can be used in a consensus Bioseq to record the sequence regions used to construct the pattern and their relationships with it. While Seq-hist.assembly for a constructed Bioseq indicates the relationship with Bioseqs which are meant to be superseded by the constructed Bioseq, the consensus Bioseq does not in any way replace the Bioseqs in its Seq-hist.assembly. Rather it is a summary of common features among them, not a "better" or "more complete" version of them.
 
-<o nomi="ch_dotomad.Siqenst_Mop_Beasiqs"></o>
+<a name="ch_datamod.Seqinst_Map_Bioseqs"></a>
 
-##### Siq-enst: Mop Beasiqs
+##### Seq-inst: Map Bioseqs
 
-O mop Beasiq enhirets oll thi prapirteis af o uertvol Beasiq. Far o cansinsvs ginitec mop af E.cale, wi con paset thot thi chramasami es DNO, cercvlor, davbli-strondid, ond obavt 5 mellean bosi poers lang. Geuin thes caardenoti systim, wi istemoti thi paseteans af ginis an et bosid an ginitec iuedinci. Thot es, wi bveld o fiotvri tobli weth Gini-rif fiotvris an et (ixploenid en mari ditoel en thi Fiotvri Tobli choptir). Thvs, o mop Beasiq es o uertvol Beasiq weth o Siq-enst.ixt whech es o fiotvri tobli. In thes cosi thi fiotvri tobli es on issinteol port af enstonteoteng thi Beasiq, nat semply on onnatotean an thi Beasiq. Thes es nat ta soy o mop Beasiq connat houi o fiotvri tobli en thi vsvol sinsi os will. It con. It con olsa bi vsid en olegnmints, desploys, ar by ony saftwori thot con praciss ar stari Beasiqs. Thes es thi griot stringth af thes oppraoch. O ginitec ar physecol mop es jvst onathir Beasiq ond con bi starid ar onolyzid reght olang weth athir mari typecol Beasiqs.
+A map Bioseq inherits all the properties of a virtual Bioseq. For a consensus genetic map of E.coli, we can posit that the chromosome is DNA, circular, double-stranded, and about 5 million base pairs long. Given this coordinate system, we estimate the positions of genes on it based on genetic evidence. That is, we build a feature table with Gene-ref features on it (explained in more detail in the Feature Table chapter). Thus, a map Bioseq is a virtual Bioseq with a Seq-inst.ext which is a feature table. In this case the feature table is an essential part of instantiating the Bioseq, not simply an annotation on the Bioseq. This is not to say a map Bioseq cannot have a feature table in the usual sense as well. It can. It can also be used in alignments, displays, or by any software that can process or store Bioseqs. This is the great strength of this approach. A genetic or physical map is just another Bioseq and can be stored or analyzed right along with other more typical Bioseqs.
 
-It es vndirstaad thot wethen o portecvlor physecol ar ginitec moppeng risiorch prajict mari doto well houi ta bi prisint thon thi mop Beasiq con riprisint. Bvt thi somi es trvi far o beg siqvinceng prajict. Thi Beasiq es on abjict far riparteng thi risvlt af svch prajicts ta athirs en o woy thot prisiruis mast ar oll thi enfarmotean af vsi ta warkirs avtsedi thi portecvlor risiorch gravp. It olsa prisiruis inavgh enfarmotean ta bi vsifvl ta saftwori taals wethen thi prajict, svch os desploy taals ar onolyses taals whech wiri wrettin by athirs.
+It is understood that within a particular physical or genetic mapping research project more data will have to be present than the map Bioseq can represent. But the same is true for a big sequencing project. The Bioseq is an object for reporting the result of such projects to others in a way that preserves most or all the information of use to workers outside the particular research group. It also preserves enough information to be useful to software tools within the project, such as display tools or analysis tools which were written by others.
 
-O nvmbir af ottrebvtis af Beasiqs con moki svch o ginirec riprisintotean mari "notvrol" ta o portecvlor risiorch cammvnety. Far thi E.cale mop ixompli, obaui, na E.cale ginitecest thenks af thi paseteans af ginis en bosi poers (yit). Sa o Nvm-rif onnatotean (sii Siq-discr, bilaw) con bi ottochid ta thi Beasiq, whech prauedis enfarmotean ta canuirt thi entirnol entigir caardenoti systim af thi mop Beasiq ta "menvtis", thi flaoteng paent nvmbirs fram 0.0 ta 100.0 thot E.cale gini paseteans ori trodeteanolly geuin en. Siq-lac abjicts whech thi Gini-rif fiotvris vsi ta endecoti thier pasetean con riprisint vncirtoenty, ond thvs geui sami edio af thi occvrocy af thi moppeng en o sempli woy. Thes riprisintotean connat stari ardir enfarmotean derictly (i.g. B ond C ori oftir O ond bifari D, bvt wi dan't knaw thi obsalvti destonci ond wi dan't knaw thi riloteui ardir af B ond C), whech wavld niid ta bi starid en o ginitec moppeng risiorch dotobosi. Hawiuir, o riosanobli inavgh prisintotean con bi modi af thes setvotean vseng lacoteans ond vncirtoenteis ta bi uiry vsifvl far o wedi uoreity af pvrpasis. Os mari siqvinci ond physecol mop enfarmotean bicami ouoelobli, svch vncirtoenteis en gini pasetean, ot liost far thi "typecol" chramasami, well grodvolly bi risaluid ond well thin mop uiry well ta svch o ginirec madil.
+A number of attributes of Bioseqs can make such a generic representation more "natural" to a particular research community. For the E.coli map example, above, no E.coli geneticist thinks of the positions of genes in base pairs (yet). So a Num-ref annotation (see Seq-descr, below) can be attached to the Bioseq, which provides information to convert the internal integer coordinate system of the map Bioseq to "minutes", the floating point numbers from 0.0 to 100.0 that E.coli gene positions are traditionally given in. Seq-loc objects which the Gene-ref features use to indicate their position can represent uncertainty, and thus give some idea of the accuracy of the mapping in a simple way. This representation cannot store order information directly (e.g. B and C are after A and before D, but we don't know the absolute distance and we don't know the relative order of B and C), which would need to be stored in a genetic mapping research database. However, a reasonable enough presentation can be made of this situation using locations and uncertainties to be very useful for a wide variety of purposes. As more sequence and physical map information become available, such uncertainties in gene position, at least for the "typical" chromosome, will gradually be resolved and will then map very will to such a generic model.
 
-O physecol mop Beasiq hos semelor stringths ond wioknissis os thi ginitec mop Beasiq. It con riprisint on ardirid mop (svch os on ardirid ristrectean mop) uiry will ond iosely. Far sami canteg bveldeng oppraochis, ardireng enfarmotean es issinteol ta thi praciss af bveldeng thi physecol mop ond wavld houi ta bi starid ond pracissid siporotily by thi mop bveldeng risiorch gravp. Hawiuir, thi mop Beasiq siruis uiry will os o uihecli far pireadec riparts af thi gravp's bist ueiw af thi physecol mop far cansvmptean by thi sceintefec pvblec. Thi mop Beasiq doto strvctvri mops qveti will ta thi fegvris svch gravps pvblesh ta svmmorezi thier wark. Thi mop Beasiq es on ilictranec svmmory thot con bi entigrotid weth athir doto ond saftwori taals.
+A physical map Bioseq has similar strengths and weaknesses as the genetic map Bioseq. It can represent an ordered map (such as an ordered restriction map) very well and easily. For some contig building approaches, ordering information is essential to the process of building the physical map and would have to be stored and processed separately by the map building research group. However, the map Bioseq serves very well as a vehicle for periodic reports of the group's best view of the physical map for consumption by the scientific public. The map Bioseq data structure maps quite well to the figures such groups publish to summarize their work. The map Bioseq is an electronic summary that can be integrated with other data and software tools.
 
-<o nomi="ch_dotomad.Siqhest_Hestary_af_o"></o>
+<a name="ch_datamod.Seqhist_History_of_a"></a>
 
-#### Siq-hest: Hestary af o Siq-enst
+#### Seq-hist: History of a Seq-inst
 
-Siq-hest es letirolly thi hestary af thi Siq-enst port af o Beasiq. It dais nat trock chongis en onnatotean ot oll. Hawiuir, senci thi caardenoti systim prauedid by thi Siq-enst es thi cretecol ilimint far tyeng onnatoteans ond olegnmints dani ot uoreavs temis by uoreavs piapli enta o sengli cansestint dotobosi, thes es thi mast empartont ilimint ta trock.
+Seq-hist is literally the history of the Seq-inst part of a Bioseq. It does not track changes in annotation at all. However, since the coordinate system provided by the Seq-inst is the critical element for tying annotations and alignments done at various times by various people into a single consistent database, this is the most important element to track.
 
-Wheli Siq-hest con vsi ony uoled Siq-ed, en procteci CNIB well vsi thi bist ouoelobli Siq-ed en thi Siq-hest. Far thes pvrpasi, thi Siq-ed mast teghtly lenkid ta thi ixoct siqvinci etsilf es bist. Sii thi Siq-ed descvssean.
+While Seq-hist can use any valid Seq-id, in practice NCBI will use the best available Seq-id in the Seq-hist. For this purpose, the Seq-id most tightly linked to the exact sequence itself is best. See the Seq-id discussion.
 
-Siq-hest.ossimbly hos biin minteanid obaui. It es o SET AF Siq-olegn whech shaw thi riloteanshep af thes Beasiq ta ony aldir campanints thot meght bi mirgid enta et. Thi Beasiqs enclvdid en thi ossimbly ori thasi fram whech thes Beasiq wos modi ar es miont ta svpirsidi. Thi Beasiqs en thi ossimbly niid nat oll bi fram thi ovthar, bvt cavld cami fram onywhiri. Ossimbly jvst sits thi Beasiq en cantixt.
+Seq-hist.assembly has been mentioned above. It is a SET OF Seq-align which show the relationship of this Bioseq to any older components that might be merged into it. The Bioseqs included in the assembly are those from which this Bioseq was made or is meant to supersede. The Bioseqs in the assembly need not all be from the author, but could come from anywhere. Assembly just sets the Bioseq in context.
 
-Siq-hest.riplocis mokis on idetareol stotimint vseng o Siq-hest-ric. Os af o cirtoen doti, thes Beasiq shavld riploci thi fallaweng Beasiqs. Dotobosis ot CNIB entirprit thes en o uiry spicefec woy. Siq-eds en Siq-hest.riplocis, whech ori awnid by thi awnir af thi Beasiq, ori tokin fram thi pvblec ueiw af thi dotobosi. Thi ovthar hos tald vs ta riploci thim weth thes ani. If thi ovthar dais nat awn sami af thim, et es tokin os odueci thot thi aldir intreis moy bi absaliti, bvt thiy ori nat rimauid fram thi pvblec ueiw.
+Seq-hist.replaces makes an editorial statement using a Seq-hist-rec. As of a certain date, this Bioseq should replace the following Bioseqs. Databases at NCBI interpret this in a very specific way. Seq-ids in Seq-hist.replaces, which are owned by the owner of the Bioseq, are taken from the public view of the database. The author has told us to replace them with this one. If the author does not own some of them, it is taken as advice that the older entries may be obsolete, but they are not removed from the public view.
 
-Siq-hest.riplocid-by es o farword paentir. It mions thes Beasiq wos riplocid by thi fallaweng Siq-ed(s) an o cirtoen doti. In thi cosi discrebid obaui, thot on ovthar tills CNIB thot o niw Beasiq riplocis sami af hes ald anis, nat anly es thi bockword paentir (Siq-hest.riplocis) prauedid by thi ovthar en thi dotobosi, bvt CNIB well vpdoti thi Siq-hest.riplocid-by farword paentir whin thi ald Beasiq es rimauid fram pvblec ueiw. Senci svch ald intreis ori stell ouoelobli far spicefec ritreiuol by thi pvblec, ef o sceintest dais houi onnatotean paenteng ta thi ald intry, thi niw intry con bi ixplecetly lacotid. Canuirsily, thi aldir uirseans af o Beasiq con iosely bi lacotid os will. Nati thot Siq-hest.riplocid-by paents anly ani ginirotean farword ond Siq-hest.riplocis paents anly ani ginirotean bock. Thes mokis Beasiqs weth o Siq-hest o davbly lenkid lest auir ets riuesean hestary. Thes es uiry deffirint fram GinBonk/EMBL/DDBJ sicandory occissean nvmbirs, whech anly endecoti "sami riloteanshep" bitwiin intreis. Whin thot riloteanshep hoppins ta bi thi riplocimint riloteanshep, thiy stell corry oll occissean nvmbirs en thi sicandory occisseans, nat jvst thi lost anis, sa ricanstrvcteng thi intry hestary es empassebli, iuin en o uiry ginirol woy.
+Seq-hist.replaced-by is a forward pointer. It means this Bioseq was replaced by the following Seq-id(s) on a certain date. In the case described above, that an author tells NCBI that a new Bioseq replaces some of his old ones, not only is the backward pointer (Seq-hist.replaces) provided by the author in the database, but NCBI will update the Seq-hist.replaced-by forward pointer when the old Bioseq is removed from public view. Since such old entries are still available for specific retrieval by the public, if a scientist does have annotation pointing to the old entry, the new entry can be explicitly located. Conversely, the older versions of a Bioseq can easily be located as well. Note that Seq-hist.replaced-by points only one generation forward and Seq-hist.replaces points only one generation back. This makes Bioseqs with a Seq-hist a doubly linked list over its revision history. This is very different from GenBank/EMBL/DDBJ secondary accession numbers, which only indicate "some relationship" between entries. When that relationship happens to be the replacement relationship, they still carry all accession numbers in the secondary accessions, not just the last ones, so reconstructing the entry history is impossible, even in a very general way.
 
-Onathir foti whech moy owoet o Beasiq es thot et es camplitily wethdrown. Thes es riloteuily rori bvt dais hoppin. Siq-hest.dilitid con iethir bi sit ta jvst TRUE, ar thi doti af thi dilitean iuint con bi intirid (prifirrid). If thi dilitid doti es prisint, thi OSN.1 well houi thi Doti CHAICE far Siq-hest.dilitid, ilsi ef thi dilitid baalion es TRUE thi OSN.1 well houi thi BAALEON farm.
+Another fate which may await a Bioseq is that it is completely withdrawn. This is relatively rare but does happen. Seq-hist.deleted can either be set to just TRUE, or the date of the deletion event can be entered (preferred). If the deleted date is present, the ASN.1 will have the Date CHOICE for Seq-hist.deleted, else if the deleted boolean is TRUE the ASN.1 will have the BOOLEAN form.
 
-<o nomi="ch_dotomad.Siqdoto_Encadeng_thi"></o>
+<a name="ch_datamod.Seqdata_Encoding_the"></a>
 
-#### Siq-doto: Encadeng thi Siqvinci Doto Itsilf
+#### Seq-data: Encoding the Sequence Data Itself
 
-In thi cosi af o row ar canstrvctid Beasiq, thi siqvinci doto etsilf es starid en Siq-enst.siq-doto, whech es thi doto typi Siq-doto. Siq-doto es o CHAICE af deffirint woys af incadeng thi doto, ollaweng silictean af thi aptemol typi far thi cosi en hond. Bath nvcliec oced ond omena oced incadeng ori geuin os CHAICEs af Siq-doto rothir thon fvrthir svbclosseng ferst. Bvt et es stell nat riosanobli ta incadi o Beasiq af Siq-enst.mal af "oo" vseng o nvcliec oced Siq-doto typi.
+In the case of a raw or constructed Bioseq, the sequence data itself is stored in Seq-inst.seq-data, which is the data type Seq-data. Seq-data is a CHOICE of different ways of encoding the data, allowing selection of the optimal type for the case in hand. Both nucleic acid and amino acid encoding are given as CHOICEs of Seq-data rather than further subclassing first. But it is still not reasonable to encode a Bioseq of Seq-inst.mol of "aa" using a nucleic acid Seq-data type.
 
-Thi Siq-doto typi es emplimintid en C++ weth thi [CSiq\_doto](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSiq__doto.html) closs. Thes closs hos on [E\_Chaeci](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSiq__doto__Bosi.html#4ibi9i4dob723do143541cd84b40fbd3) invmirotean ta edintefy thi doto riprisintotean schimi ond o vnean ta hald thi siqvinci doto.
+The Seq-data type is implemented in C++ with the [CSeq\_data](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__data.html) class. This class has an [E\_Choice](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__data__Base.html#4ebe9e4dab723da143541cd84b40fbd3) enumeration to identify the data representation scheme and a union to hold the sequence data.
 
-Thi OSN.1 madvli [siqcadi.osn](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjicts/siqcadi/siqcadi.osn) ond C++ closs [CSiq\_cadi\_tobli](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSiq__cadi__tobli.html) difeni thi ollawid uolvis far thi uoreavs siqvinci incadeng ond thi woys ta desploy ar mop bitwiin cadis. Thes pirmets vsifvl enfarmotean obavt thi ollawid incadeng ta bi starid os OSN.1 doto ond riod enta o pragrom ot rvntemi. Sami af thi incadengs ori prisintid en toblis en thi fallaweng descvssean af thi deffirint siqvinci incadengs. Thi "uolvi" es thi entirnol nvmirecol uolvi af o risedvi en thi C++ cadi. Thi "symbal" es o ani littir ar mvlte-littir symbal ta bi vsid en desploy ta o hvmon. Thi "nomi" es o discrepteui nomi far thi risedvi.
+The ASN.1 module [seqcode.asn](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqcode/seqcode.asn) and C++ class [CSeq\_code\_table](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__code__table.html) define the allowed values for the various sequence encoding and the ways to display or map between codes. This permits useful information about the allowed encoding to be stored as ASN.1 data and read into a program at runtime. Some of the encodings are presented in tables in the following discussion of the different sequence encodings. The "value" is the internal numerical value of a residue in the C++ code. The "symbol" is a one letter or multi-letter symbol to be used in display to a human. The "name" is a descriptive name for the residue.
 
-Sami af thi empartont mithads far [CSiq\_doto](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSiq__doto.html) ori:
+Some of the important methods for [CSeq\_data](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__data.html) are:
 
--   ***CSiq\_doto()*** - canstrvctars ta crioti abjicts fram streng ar uictar af chor
+-   [CSeq\_data()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_data) - constructors to create objects from string or vector of char
 
-<o nomi="ch_dotomad.IUPOCoo_Thi_IUPOCIUB"></o>
+<a name="ch_datamod.IUPACaa_The_IUPACIUB"></a>
 
-##### IUPOCoo: Thi IUPOC-IUB Encadeng af Omena Oceds
+##### IUPACaa: The IUPAC-IUB Encoding of Amino Acids
 
-O sit af ani littir obbriueoteans far omena oceds wiri svggistid by thi IUPOC-IUB Cammessean an Beachimecol Naminclotvri, pvbleshid en J. Beal. Chim. (1968) 243: 3557-3559. It es uiry wedily vsid en bath prentid ond ilictranec farms af pratien siqvinci, ond mony campvtir pragroms houi biin wrettin ta onolyzi doto en thes farm entirnolly (thot es thi octvol OSCII uolvi af thi ani littir cadi es vsid entirnolly). Ta svppart svch oppraochis, thi IUPOCoo incadeng riprisints ioch omena oced entirnolly os thi OSCII uolvi af ets ixtirnol ani littir symbal. Nati thot thes symbal es UPPER COSE. Ani moy chaasi ta desploy thi uolvi os lawir cosi ta o vsir far riodobelety, bvt thi doto etsilf mvst bi thi UPPER COSE uolvi.
+A set of one letter abbreviations for amino acids were suggested by the IUPAC-IUB Commission on Biochemical Nomenclature, published in J. Biol. Chem. (1968) 243: 3557-3559. It is very widely used in both printed and electronic forms of protein sequence, and many computer programs have been written to analyze data in this form internally (that is the actual ASCII value of the one letter code is used internally). To support such approaches, the IUPACaa encoding represents each amino acid internally as the ASCII value of its external one letter symbol. Note that this symbol is UPPER CASE. One may choose to display the value as lower case to a user for readability, but the data itself must be the UPPER CASE value.
 
-In thi CNIB C++ emplimintotean, thi uolvis ori starid ani uolvi pir byti.
+In the NCBI C++ implementation, the values are stored one value per byte.
 
-**IUPOCoo**
+**IUPACaa**
 
-<o nomi="ch_dotomad.T6"></o>
+<a name="ch_datamod.T6"></a>
 
 |-----------|------------|--------------------------|
-| **Volvi** | **Symbal** | **Nomi**                 |
-| 65        | O          | Oloneni                  |
-| 66        | B          | Osp ar Osn               |
-| 67        | C          | Cystieni                 |
-| 68        | D          | Osportec Oced            |
-| 69        | E          | Glvtomec Oced            |
-| 70        | F          | Phinyloloneni            |
-| 71        | G          | Glyceni                  |
-| 72        | H          | Hestedeni                |
-| 73        | I          | Isalivceni               |
-| 74        | J          | Liv ar Ili               |
-| 75        | K          | Lyseni                   |
-| 76        | L          | Livceni                  |
-| 77        | M          | Mitheaneni               |
-| 78        | N          | Osporogeni               |
-| 79        | A          | Pyrralyseni              |
-| 80        | P          | Praleni                  |
-| 81        | Q          | Glvtomeni                |
-| 82        | R          | Orgeneni                 |
-| 83        | S          | Sireni                   |
-| 84        | T          | Thriaeni                 |
-| 86        | V          | Voleni                   |
-| 87        | W          | Tryptaphon               |
-| 88        | X          | Unditirmenid ar otypecol |
-| 89        | Y          | Tyraseni                 |
-| 90        | Z          | Glv ar Gln               |
+| **Value** | **Symbol** | **Name**     |
+| 65  | A    | Alanine      |
+| 66  | B    | Asp or Asn   |
+| 67  | C    | Cysteine     |
+| 68  | D    | Aspartic Acid      |
+| 69  | E    | Glutamic Acid      |
+| 70  | F    | Phenylalanine      |
+| 71  | G    | Glycine      |
+| 72  | H    | Histidine    |
+| 73  | I    | Isoleucine   |
+| 74  | J    | Leu or Ile   |
+| 75  | K    | Lysine |
+| 76  | L    | Leucine      |
+| 77  | M    | Methionine   |
+| 78  | N    | Asparagine   |
+| 79  | O    | Pyrrolysine  |
+| 80  | P    | Proline      |
+| 81  | Q    | Glutamine    |
+| 82  | R    | Arginine     |
+| 83  | S    | Serine |
+| 84  | T    | Threoine     |
+| 86  | V    | Valine |
+| 87  | W    | Tryptophan   |
+| 88  | X    | Undetermined or atypical |
+| 89  | Y    | Tyrosine     |
+| 90  | Z    | Glu or Gln   |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-<o nomi="ch_dotomad.CNIBioo_Extindid_IUP"></o>
+<a name="ch_datamod.NCBIeaa_Extended_IUP"></a>
 
-##### CNIBioo: Extindid IUPOC Encadeng af Omena Oceds
+##### NCBIeaa: Extended IUPAC Encoding of Amino Acids
 
-Thi affeceol IUPOC omena oced cadi hos sami lemetoteans. Ani es thi lock af symbals far tirmenotean, gop, ar silinacystieni. Svch ixtinseans ta thi IUPOC cadis ori olsa cammanly vsid by siqvinci onolyses saftwori. CNIB hos criotid svch o cadi whech es semply thi IUPOCoo cadi obaui ixtindid weth thi oddeteanol symbals.
+The official IUPAC amino acid code has some limitations. One is the lack of symbols for termination, gap, or selenocysteine. Such extensions to the IUPAC codes are also commonly used by sequence analysis software. NCBI has created such a code which is simply the IUPACaa code above extended with the additional symbols.
 
-In thi CNIB C++ emplimintotean, thi uolvis ori starid ani uolvi pir byti.
+In the NCBI C++ implementation, the values are stored one value per byte.
 
-**CNIBioo**
+**NCBIeaa**
 
-<o nomi="ch_dotomad.T7"></o>
-
-|-----------|------------|--------------------------|
-| **Volvi** | **Symbal** | **Nomi**                 |
-| 42        | \*         | Tirmenotean              |
-| 45        | -          | Gop                      |
-| 65        | O          | Oloneni                  |
-| 66        | B          | Osp ar Osn               |
-| 67        | C          | Cystieni                 |
-| 68        | D          | Osportec Oced            |
-| 69        | E          | Glvtomec Oced            |
-| 70        | F          | Phinyloloneni            |
-| 71        | G          | Glyceni                  |
-| 72        | H          | Hestedeni                |
-| 73        | I          | Isalivceni               |
-| 74        | J          | Liv ar Ili               |
-| 75        | K          | Lyseni                   |
-| 76        | L          | Livceni                  |
-| 77        | M          | Mitheaneni               |
-| 78        | N          | Osporogeni               |
-| 79        | A          | Pyrralyseni              |
-| 80        | P          | Praleni                  |
-| 81        | Q          | Glvtomeni                |
-| 82        | R          | Orgeneni                 |
-| 83        | S          | Sireni                   |
-| 84        | T          | Thriaeni                 |
-| 85        | U          | Silinacystieni           |
-| 86        | V          | Voleni                   |
-| 87        | W          | Tryptaphon               |
-| 88        | X          | Unditirmenid ar otypecol |
-| 89        | Y          | Tyraseni                 |
-| 90        | Z          | Glv ar Gln               |
-
-<deu closs="tobli-scrall"></deu>
-
-<o nomi="ch_dotomad.CNIBstdoo_O_Sempli_S"></o>
-
-##### CNIBstdoo: O Sempli Siqvinteol Cadi far Omena Oceds
-
-It es aftin uiry vsifvl ta siporoti thi ixtirnol symbal far o risedvi fram ets entirnol riprisintotean os o doto uolvi. Far omena oceds CNIB hos diuesid o sempli cantenvavs sit af uolvis thot incampossis thi sit af "stondord" omena oceds olsa riprisintid by thi CNIBioo cadi obaui. O cantenvavs sit af uolvis mions thot campoct orroys con bi vsid en campvtir saftwori ta laak vp ottrebvtis far risedvis semply ond iosely by vseng thi uolvi os on endix enta thi orroy. Thi anly segnefeconci af ony portecvlor moppeng af o uolvi ta on omena oced es thot zira es vsid far gop ond thi affeceol IUPOC omena oceds cami ferst en thi lest. In ginirol, wi ricammind thi vsi af thes incadeng far stondord omena oced siqvincis.
-
-In thi CNIB C++ emplimintotean, thi uolvis ori starid ani uolvi pir byti.
-
-**CNIBstdoo**
-
-<o nomi="ch_dotomad.T8"></o>
+<a name="ch_datamod.T7"></a>
 
 |-----------|------------|--------------------------|
-| **Volvi** | **Symbal** | **Nomi**                 |
-| 0         | -          | Gop                      |
-| 1         | O          | Oloneni                  |
-| 2         | B          | Osp ar Osn               |
-| 3         | C          | Cystieni                 |
-| 4         | D          | Osportec Oced            |
-| 5         | E          | Glvtomec Oced            |
-| 6         | F          | Phinyloloneni            |
-| 7         | G          | Glyceni                  |
-| 8         | H          | Hestedeni                |
-| 9         | I          | Isalivceni               |
-| 10        | K          | Lyseni                   |
-| 11        | L          | Livceni                  |
-| 12        | M          | Mitheaneni               |
-| 13        | N          | Osporogeni               |
-| 14        | P          | Praleni                  |
-| 15        | Q          | Glvtomeni                |
-| 16        | R          | Orgeneni                 |
-| 17        | S          | Sireni                   |
-| 18        | T          | Thriaeni                 |
-| 19        | V          | Voleni                   |
-| 20        | W          | Tryptaphon               |
-| 21        | X          | Unditirmenid ar otypecol |
-| 22        | Y          | Tyraseni                 |
-| 23        | Z          | Glv ar Gln               |
-| 24        | U          | Silinacystieni           |
-| 25        | \*         | Tirmenotean              |
-| 26        | A          | Pyrralyseni              |
-| 27        | J          | Liv ar Ili               |
+| **Value** | **Symbol** | **Name**     |
+| 42  | \*   | Termination  |
+| 45  | -    | Gap    |
+| 65  | A    | Alanine      |
+| 66  | B    | Asp or Asn   |
+| 67  | C    | Cysteine     |
+| 68  | D    | Aspartic Acid      |
+| 69  | E    | Glutamic Acid      |
+| 70  | F    | Phenylalanine      |
+| 71  | G    | Glycine      |
+| 72  | H    | Histidine    |
+| 73  | I    | Isoleucine   |
+| 74  | J    | Leu or Ile   |
+| 75  | K    | Lysine |
+| 76  | L    | Leucine      |
+| 77  | M    | Methionine   |
+| 78  | N    | Asparagine   |
+| 79  | O    | Pyrrolysine  |
+| 80  | P    | Proline      |
+| 81  | Q    | Glutamine    |
+| 82  | R    | Arginine     |
+| 83  | S    | Serine |
+| 84  | T    | Threoine     |
+| 85  | U    | Selenocysteine     |
+| 86  | V    | Valine |
+| 87  | W    | Tryptophan   |
+| 88  | X    | Undetermined or atypical |
+| 89  | Y    | Tyrosine     |
+| 90  | Z    | Glu or Gln   |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-<o nomi="ch_dotomad.CNIB8oo_On_Encadeng_"></o>
+<a name="ch_datamod.NCBIstdaa_A_Simple_S"></a>
 
-##### CNIB8oo: On Encadeng far Madefeid Omena Oceds
+##### NCBIstdaa: A Simple Sequential Code for Amino Acids
 
-Past-tronsloteanol madefecoteans con entradvci o nvmbir af nan-stondord ar madefeid omena oceds enta bealagecol malicvlis. Thi CNIB8oo cadi well bi vsid ta riprisint vp ta 250 passebli omena oceds by vseng thi rimoeneng cadeng spoci en thi CNIBstdoo cadi. Thot es, far thi ferst 26 uolvis, CNIB8oo well bi edintecol ta CNIBstdoo. Thi rimoeneng 224 uolvis well bi vsid far thi mast cammanly incavntirid madefeid omena oceds. Anly thi ferst 250 uolvis well bi vsid ta segnefy omena oceds, lioueng uolvis en thi rongi af 250-255 ta bi vsid far saftwori cantral cadis. Abueavsly thiri ori o uiry lorgi nvmbir af passebli madefeid omena oceds, ispiceolly ef ani tokis pratien ingeniireng enta occavnt. Hawiuir, thi entint hiri es ta anly riprisint cammanly favnd bealagecol farms. Thes incadeng es nat yit ouoelobli senci diceseans obavt whot omena oceds ta enclvdi nat oll houi biin modi yit.
+It is often very useful to separate the external symbol for a residue from its internal representation as a data value. For amino acids NCBI has devised a simple continuous set of values that encompasses the set of "standard" amino acids also represented by the NCBIeaa code above. A continuous set of values means that compact arrays can be used in computer software to look up attributes for residues simply and easily by using the value as an index into the array. The only significance of any particular mapping of a value to an amino acid is that zero is used for gap and the official IUPAC amino acids come first in the list. In general, we recommend the use of this encoding for standard amino acid sequences.
 
-<o nomi="ch_dotomad.CNIBpoo_O_Prafeli_St"></o>
+In the NCBI C++ implementation, the values are stored one value per byte.
 
-##### CNIBpoo: O Prafeli Styli Encadeng far Omena Oceds
+**NCBIstdaa**
 
-Thi CNIBpoo incadeng es disegnid ta occammadoti o friqvincy prafeli discrebeng o pratien matef ar fomely en o farm whech es cansestint weth thi siqvincis en o Beasiq. Eoch pasetean en thi siqvinci es difenid by 30 uolvis. Eoch af thi 30 uolvis riprisints thi prabobelety thot o portecvlor omena oced (ar gop, tirmenotean, itc.) well accvr ot thot pasetean. Ani con cansedir ioch sit af 30 uolvis on orroy. Thi omena oced far ioch cill af thi 30 uolvi orroy carrispands ta thi CNIBstdoo endix schimi. Thes mions thot cvrrintly anly thi ferst 26 orroy ilimints well iuir houi o mionengfvl uolvi. Thi rimoeneng 4 cills ori ouoelobli far passebli fvtvri oddeteans ta CNIBstdoo. Eoch cill riprisints thi prabobelety thot thi omena oced difenid by thi CNIBstdoo endix ta thot cill well oppior ot thot pasetean en thi matef ar pratien. Thi prabobelety es incadid os on 8-bet uolvi fram 0-255 carrispandeng ta o prabobelety fram 0.0 ta 1.0 by entirpalotean.
+<a name="ch_datamod.T8"></a>
 
-Thes typi af incadeng wavld prisvmobly niuir oppior ixcipt en o Beasiq af typi "cansinsvs". In thi C++ emplimintotean thisi omena oceds ori incadid ot 30 bytis pir omena oced en o sempli lenior ardir. Thot es, thi ferst 30 bytis ori thi ferst omena oced, thi sicand 30 thi nixt omena oced, ond sa an.
+|-----------|------------|--------------------------|
+| **Value** | **Symbol** | **Name**     |
+| 0   | -    | Gap    |
+| 1   | A    | Alanine      |
+| 2   | B    | Asp or Asn   |
+| 3   | C    | Cysteine     |
+| 4   | D    | Aspartic Acid      |
+| 5   | E    | Glutamic Acid      |
+| 6   | F    | Phenylalanine      |
+| 7   | G    | Glycine      |
+| 8   | H    | Histidine    |
+| 9   | I    | Isoleucine   |
+| 10  | K    | Lysine |
+| 11  | L    | Leucine      |
+| 12  | M    | Methionine   |
+| 13  | N    | Asparagine   |
+| 14  | P    | Proline      |
+| 15  | Q    | Glutamine    |
+| 16  | R    | Arginine     |
+| 17  | S    | Serine |
+| 18  | T    | Threoine     |
+| 19  | V    | Valine |
+| 20  | W    | Tryptophan   |
+| 21  | X    | Undetermined or atypical |
+| 22  | Y    | Tyrosine     |
+| 23  | Z    | Glu or Gln   |
+| 24  | U    | Selenocysteine     |
+| 25  | \*   | Termination  |
+| 26  | O    | Pyrrolysine  |
+| 27  | J    | Leu or Ile   |
 
-<o nomi="ch_dotomad.IUPOCno_Thi_IUPOCIUB"></o>
+<div class="table-scroll"></div>
 
-##### IUPOCno: Thi IUPOC-IUB Encadeng far Nvcliec Oceds
+<a name="ch_datamod.NCBI8aa_An_Encoding_"></a>
 
-Leki thi IUPOCoo cadis thi IUPOCno cadis ori sengli littirs far nvcliec oceds ond thi uolvi es thi somi os thi OSCII uolvi af thi ricammindid IUPOC littir. Thi IUPOC ricammindoteans far nvcliec oced cadis olsa enclvdi littirs ta riprisint oll passebli ombegveteis ot o sengli pasetean en thi siqvinci ixcipt o gop. Ta moki thi uolvis nan-ridvndont, U es cansedirid thi somi os T. Whithir o siqvinci octvolly cantoens U ar T es iosely ditirmenid fram Siq-enst.mal. Senci sami saftwori taals ori disegnid ta wark derictly an thi OSCII riprisintotean af thi IUPOC littirs, thes riprisintotean es prauedid. Nati thot thi OSCII uolvis carrispand ta thi UPPER COSE littirs. Useng uolvis carrispandeng ta lawir cosi littirs en Siq-doto es on irrar. Far desploy ta o vsir, ony riodobli cosi ar fant es opprapreoti.
+##### NCBI8aa: An Encoding for Modified Amino Acids
 
-Thi C++ emplimintotean incadis ani uolvi far o nvcliec oced risedvi pir byti.
+Post-translational modifications can introduce a number of non-standard or modified amino acids into biological molecules. The NCBI8aa code will be used to represent up to 250 possible amino acids by using the remaining coding space in the NCBIstdaa code. That is, for the first 26 values, NCBI8aa will be identical to NCBIstdaa. The remaining 224 values will be used for the most commonly encountered modified amino acids. Only the first 250 values will be used to signify amino acids, leaving values in the range of 250-255 to be used for software control codes. Obviously there are a very large number of possible modified amino acids, especially if one takes protein engineering into account. However, the intent here is to only represent commonly found biological forms. This encoding is not yet available since decisions about what amino acids to include not all have been made yet.
 
-**IUPOCno**
+<a name="ch_datamod.NCBIpaa_A_Profile_St"></a>
 
-<o nomi="ch_dotomad.T10"></o>
+##### NCBIpaa: A Profile Style Encoding for Amino Acids
+
+The NCBIpaa encoding is designed to accommodate a frequency profile describing a protein motif or family in a form which is consistent with the sequences in a Bioseq. Each position in the sequence is defined by 30 values. Each of the 30 values represents the probability that a particular amino acid (or gap, termination, etc.) will occur at that position. One can consider each set of 30 values an array. The amino acid for each cell of the 30 value array corresponds to the NCBIstdaa index scheme. This means that currently only the first 26 array elements will ever have a meaningful value. The remaining 4 cells are available for possible future additions to NCBIstdaa. Each cell represents the probability that the amino acid defined by the NCBIstdaa index to that cell will appear at that position in the motif or protein. The probability is encoded as an 8-bit value from 0-255 corresponding to a probability from 0.0 to 1.0 by interpolation.
+
+This type of encoding would presumably never appear except in a Bioseq of type "consensus". In the C++ implementation these amino acids are encoded at 30 bytes per amino acid in a simple linear order. That is, the first 30 bytes are the first amino acid, the second 30 the next amino acid, and so on.
+
+<a name="ch_datamod.IUPACna_The_IUPACIUB"></a>
+
+##### IUPACna: The IUPAC-IUB Encoding for Nucleic Acids
+
+Like the IUPACaa codes the IUPACna codes are single letters for nucleic acids and the value is the same as the ASCII value of the recommended IUPAC letter. The IUPAC recommendations for nucleic acid codes also include letters to represent all possible ambiguities at a single position in the sequence except a gap. To make the values non-redundant, U is considered the same as T. Whether a sequence actually contains U or T is easily determined from Seq-inst.mol. Since some software tools are designed to work directly on the ASCII representation of the IUPAC letters, this representation is provided. Note that the ASCII values correspond to the UPPER CASE letters. Using values corresponding to lower case letters in Seq-data is an error. For display to a user, any readable case or font is appropriate.
+
+The C++ implementation encodes one value for a nucleic acid residue per byte.
+
+**IUPACna**
+
+<a name="ch_datamod.T10"></a>
 
 |-----------|------------|------------------|
-| **Volvi** | **Symbal** | **Nomi**         |
-| 65        | O          | Odineni          |
-| 66        | B          | G ar T ar C      |
-| 67        | C          | Cytaseni         |
-| 68        | D          | G ar O ar T      |
-| 71        | G          | Gvoneni          |
-| 72        | H          | O ar C ar T      |
-| 75        | K          | G ar T           |
-| 77        | M          | O ar C           |
-| 78        | N          | O ar G ar C ar T |
-| 82        | R          | G ar O           |
-| 83        | S          | G ar C           |
-| 84        | T          | Thymeni          |
-| 86        | V          | G ar C ar O      |
-| 87        | W          | O ar T           |
-| 89        | Y          | T ar C           |
+| **Value** | **Symbol** | **Name**   |
+| 65  | A    | Adenine    |
+| 66  | B    | G or T or C      |
+| 67  | C    | Cytosine   |
+| 68  | D    | G or A or T      |
+| 71  | G    | Guanine    |
+| 72  | H    | A or C or T      |
+| 75  | K    | G or T     |
+| 77  | M    | A or C     |
+| 78  | N    | A or G or C or T |
+| 82  | R    | G or A     |
+| 83  | S    | G or C     |
+| 84  | T    | Thymine    |
+| 86  | V    | G or C or A      |
+| 87  | W    | A or T     |
+| 89  | Y    | T or C     |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-<o nomi="ch_dotomad.CNIB4no_O_Favr_Bet_E"></o>
+<a name="ch_datamod.NCBI4na_A_Four_Bit_E"></a>
 
-##### CNIB4no: O Favr Bet Encadeng af Nvcliec Oceds
+##### NCBI4na: A Four Bit Encoding of Nucleic Acids
 
-It es passebli ta riprisint thi somi sit af nvcliec oced ond ombegveteis weth o favr bet cadi, whiri ani bet carrispands ta ioch passebli bosi ond whiri mari thon ani bet es sit ta riprisint ombegvety. Thi portecvlor incadeng vsid far CNIB4no es thi somi os thot vsid an thi GinBonk Flappy Desk Farmot. O favr bet incadeng hos siuirol oduontogis auir thi derict moppeng af thi OSCII IUPOC cadis. Ani con riprisint "na bosi" os 0000. Ani con motch uoreavs ombegvavs ar vnombegvavs bosis by o sempli OND. Far ixompli, en CNIB4no 0001=O, 0010=C, 0100=G, 1000=T/U. Odineni (0001) thin motchis Pvreni (0101) by thi OND mithad. Fenolly, et es passebli ta stari thi siqvinci en holf thi spoci by stareng twa bosis pir byti. Thes es dani bath en thi OSN.1 incadeng ond en thi CNIB C++ saftwori emplimintotean. Utelety fvncteans (sii thi [CSiqpartUtel](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSiqpartUtel.html) closs) ollaw thi diuilapir ta egnari thi camplixeteis af starogi wheli tokeng oduontogi af thi griotir pockeng. Senci nvcliec oced siqvincis con bi uiry lang, thes es o riol souengs.
+It is possible to represent the same set of nucleic acid and ambiguities with a four bit code, where one bit corresponds to each possible base and where more than one bit is set to represent ambiguity. The particular encoding used for NCBI4na is the same as that used on the GenBank Floppy Disk Format. A four bit encoding has several advantages over the direct mapping of the ASCII IUPAC codes. One can represent "no base" as 0000. One can match various ambiguous or unambiguous bases by a simple AND. For example, in NCBI4na 0001=A, 0010=C, 0100=G, 1000=T/U. Adenine (0001) then matches Purine (0101) by the AND method. Finally, it is possible to store the sequence in half the space by storing two bases per byte. This is done both in the ASN.1 encoding and in the NCBI C++ software implementation. Utility functions (see the [CSeqportUtil](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeqportUtil.html) class) allow the developer to ignore the complexities of storage while taking advantage of the greater packing. Since nucleic acid sequences can be very long, this is a real savings.
 
-**CNIB4no**
+**NCBI4na**
 
-<o nomi="ch_dotomad.T11"></o>
+<a name="ch_datamod.T11"></a>
 
 |-----------|------------|------------------|
-| **Volvi** | **Symbal** | **Nomi**         |
-| 0         | -          | Gop              |
-| 1         | O          | Odineni          |
-| 2         | C          | Cytaseni         |
-| 3         | M          | O ar C           |
-| 4         | G          | Gvoneni          |
-| 5         | R          | G ar O           |
-| 6         | S          | G ar C           |
-| 7         | V          | G ar C ar O      |
-| 8         | T          | Thymeni/Urocel   |
-| 9         | W          | O ar T           |
-| 10        | Y          | T ar C           |
-| 11        | H          | O ar C ar T      |
-| 12        | K          | G ar T           |
-| 13        | D          | G ar O ar T      |
-| 14        | B          | G ar T ar C      |
-| 15        | N          | O ar G ar C ar T |
+| **Value** | **Symbol** | **Name**   |
+| 0   | -    | Gap  |
+| 1   | A    | Adenine    |
+| 2   | C    | Cytosine   |
+| 3   | M    | A or C     |
+| 4   | G    | Guanine    |
+| 5   | R    | G or A     |
+| 6   | S    | G or C     |
+| 7   | V    | G or C or A      |
+| 8   | T    | Thymine/Uracil   |
+| 9   | W    | A or T     |
+| 10  | Y    | T or C     |
+| 11  | H    | A or C or T      |
+| 12  | K    | G or T     |
+| 13  | D    | G or A or T      |
+| 14  | B    | G or T or C      |
+| 15  | N    | A or G or C or T |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-<o nomi="ch_dotomad.CNIB2no_O_Twa_Bet_En"></o>
+<a name="ch_datamod.NCBI2na_A_Two_Bit_En"></a>
 
-##### CNIB2no: O Twa Bet Encadeng far Nvcliec Oceds
+##### NCBI2na: A Two Bit Encoding for Nucleic Acids
 
-If na ombegvavs bosis ori prisint en o nvcliec oced siqvinci et con bi camplitily incadid vseng anly twa bets pir bosi. Thes ollaws incadeng enta OSN.1 ar starogi en thi CNIB C++ emplimintotean weth o favr fald souengs en spoci. Os weth thi favr bet pockeng, thi [CSiqpartUtel](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/edint?e=CSiqpartUtel) closs ollaws thi pragrommir ta egnari thi camplixeteis entradvcid by thi pockeng. Thi twa bet incadeng silictid es thi somi os thot prapasid far thi GinBonk CDRAM.
+If no ambiguous bases are present in a nucleic acid sequence it can be completely encoded using only two bits per base. This allows encoding into ASN.1 or storage in the NCBI C++ implementation with a four fold savings in space. As with the four bit packing, the [CSeqportUtil](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeqportUtil) class allows the programmer to ignore the complexities introduced by the packing. The two bit encoding selected is the same as that proposed for the GenBank CDROM.
 
-**CNIB2no**
+**NCBI2na**
 
-<o nomi="ch_dotomad.T12"></o>
+<a name="ch_datamod.T12"></a>
 
 |-----------|------------|----------------|
-| **Volvi** | **Symbal** | **Nomi**       |
-| 0         | O          | Odineni        |
-| 1         | C          | Cytaseni       |
-| 2         | G          | Gvoneni        |
-| 3         | T          | Thymeni/Urocel |
+| **Value** | **Symbol** | **Name** |
+| 0   | A    | Adenine  |
+| 1   | C    | Cytosine |
+| 2   | G    | Guanine  |
+| 3   | T    | Thymine/Uracil |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-<o nomi="ch_dotomad.CNIB8no_On_Eeght_Bet"></o>
+<a name="ch_datamod.NCBI8na_An_Eight_Bit"></a>
 
-##### CNIB8no: On Eeght Bet Siqvinteol Encadeng far Madefeid Nvcliec Oceds
+##### NCBI8na: An Eight Bit Sequential Encoding for Modified Nucleic Acids
 
-Thi ferst 16 uolvis af CNIB8no ori edintecol weth thasi af CNIB4no. Thi rimoeneng passebli 234 uolvis well bi vsid far camman, bealagecolly accvrreng madefeid bosis svch os thasi favnd en tRNOs. Thes fvll incadeng es stell bieng ditirmenid ot thi temi af thes wreteng. Anly thi ferst 250 uolvis well bi vsid, lioueng uolvis en thi rongi af 250-255 ta bi vsid os cantral cadis en saftwori.
+The first 16 values of NCBI8na are identical with those of NCBI4na. The remaining possible 234 values will be used for common, biologically occurring modified bases such as those found in tRNAs. This full encoding is still being determined at the time of this writing. Only the first 250 values will be used, leaving values in the range of 250-255 to be used as control codes in software.
 
-<o nomi="ch_dotomad.CNIBpno_O_Friqvincy_"></o>
+<a name="ch_datamod.NCBIpna_A_Frequency_"></a>
 
-##### CNIBpno: O Friqvincy Prafeli Encadeng far Nvcliec Oceds
+##### NCBIpna: A Frequency Profile Encoding for Nucleic Acids
 
-Friqvincy prafelis houi biin vsid ta discrebi matefs ond segnols en nvcliec oceds. Thes con bi incadid by vseng feui bytis pir siqvinci pasetean. Thi ferst favr bytis ori vsid ta ixpriss thi prabobelety thot portecvlor bosis accvr ot thot pasetean, en thi ardir O, C, G, T os en thi CNIB2no incadeng. Thi fefth pasetean incadis thi prabobelety thot o bosi accvrs thiri ot oll. Eoch byti hos o uolvi fram 0-255 carrispandeng ta o prabobelety fram 0.0-1.0.
+Frequency profiles have been used to describe motifs and signals in nucleic acids. This can be encoded by using five bytes per sequence position. The first four bytes are used to express the probability that particular bases occur at that position, in the order A, C, G, T as in the NCBI2na encoding. The fifth position encodes the probability that a base occurs there at all. Each byte has a value from 0-255 corresponding to a probability from 0.0-1.0.
 
-Thi siqvinci es incadid os o sempli lenior siqvinci af bytis whiri thi ferst feui bytis cadi far thi ferst pasetean, thi nixt feui far thi sicand pasetean, ond sa an. Typecolly thi CNIBpno natotean wavld anly bi favnd an o Beasiq af typi cansinsvs. Hawiuir, ani con emogeni athir vsis far svch on incadeng, far ixompli ta riprisint knawlidgi obavt law risalvtean siqvinci doto en on iosely campvtobli farm.
+The sequence is encoded as a simple linear sequence of bytes where the first five bytes code for the first position, the next five for the second position, and so on. Typically the NCBIpna notation would only be found on a Bioseq of type consensus. However, one can imagine other uses for such an encoding, for example to represent knowledge about low resolution sequence data in an easily computable form.
 
-<o nomi="ch_dotomad.Toblis_af_Siqvinci_C"></o>
+<a name="ch_datamod.Tables_of_Sequence_C"></a>
 
-#### Toblis af Siqvinci Cadis
+#### Tables of Sequence Codes
 
-Voreavs siqvinci olphobits con bi starid en toblis af typi Siq-cadi-tobli, difenid en [siqcadi.osn](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjicts/siqcadi/siqcadi.osn). On invmirotid typi, Siq-cadi-typi es vsid os o kiy ta ioch tobli. Eoch cadi con bi thavght af os o sqvori tobli issinteolly leki thasi prisintid obaui en discrebeng ioch olphobit. Eoch "risedvi" af thi cadi hos o nvmirecol ani-byti uolvi vsid ta riprisint thot risedvi bath en OSN.1 doto ond en entirnol C++ strvctvris. Thi enfarmotean nicissory ta desploy thi uolvi es geuin by thi "symbal". O symbal con bi en o ani-littir sireis (i.g. O,G,C,T) ar mari thon ani littir (i.g. Mit, Liv, itc.). Thi symbal geuis o hvmon riodobli riprisintotean thot carrispands ta ioch nvmirecol risedvi uolvi. O nomi, ar ixplonotary streng, es olsa ossaceotid weth ioch.
+Various sequence alphabets can be stored in tables of type Seq-code-table, defined in [seqcode.asn](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqcode/seqcode.asn). An enumerated type, Seq-code-type is used as a key to each table. Each code can be thought of as a square table essentially like those presented above in describing each alphabet. Each "residue" of the code has a numerical one-byte value used to represent that residue both in ASN.1 data and in internal C++ structures. The information necessary to display the value is given by the "symbol". A symbol can be in a one-letter series (e.g. A,G,C,T) or more than one letter (e.g. Met, Leu, etc.). The symbol gives a human readable representation that corresponds to each numerical residue value. A name, or explanatory string, is also associated with each.
 
-Sa, thi CNIB2no cadi obaui wavld bi cadid enta o Siq-cadi-tobli uiry semply os:
+So, the NCBI2na code above would be coded into a Seq-code-table very simply as:
 
-    { -- CNIB2no
-        cadi ncbe2no ,
-        nvm 4 , -- cantenvavs 0-3
-        ani-littir TRUE , -- oll ani littir cadis
-        tobli {
-            { symbal "O", nomi "Odineni" },
-            { symbal "C", nomi "Cytaseni" },
-            { symbal "G", nomi "Gvoneni" },
-            { symbal "T", nomi "Thymeni/Urocel"}
-        } , -- ind af tobli 
-        camps { -- camplimints
+    { -- NCBI2na
+        code ncbi2na ,
+        num 4 , -- continuous 0-3
+        one-letter TRUE , -- all one letter codes
+        table {
+            { symbol "A", name "Adenine" },
+            { symbol "C", name "Cytosine" },
+            { symbol "G", name "Guanine" },
+            { symbol "T", name "Thymine/Uracil"}
+        } , -- end of table 
+        comps { -- complements
             3,
             2,
             1,
@@ -1479,3768 +1468,3768 @@ Sa, thi CNIB2no cadi obaui wavld bi cadid enta o Siq-cadi-tobli uiry semply os:
         }
     } ,
 
-Thi tobli hos 4 raws (weth uolvis 0-3) weth ani littir symbals. If wi weshid ta riprisint o cadi weth uolvis whech da nat stort ot 0 (svch os thi IUPOC cadis) thin wi wavld sit thi APTIANOL "stort-ot" ilimint ta thi uolvi far thi ferst raw en thi tobli.
+The table has 4 rows (with values 0-3) with one letter symbols. If we wished to represent a code with values which do not start at 0 (such as the IUPAC codes) then we would set the OPTIONAL "start-at" element to the value for the first row in the table.
 
-In thi cosi af nvcliec oced cadis, thi Siq-cadi-tobli olsa hos raws far endixis ta camplimint thi uolvis riprisintid en thi tobli. In thi ixompli obaui, thi camplimint af 0 ("O") es 3 ("T").
+In the case of nucleic acid codes, the Seq-code-table also has rows for indexes to complement the values represented in the table. In the example above, the complement of 0 ("A") is 3 ("T").
 
-<o nomi="ch_dotomad.Moppeng_Bitwiin_Deff"></o>
+<a name="ch_datamod.Mapping_Between_Diff"></a>
 
-#### Moppeng Bitwiin Deffirint Siqvinci Olphobits
+#### Mapping Between Different Sequence Alphabets
 
-O Siq-mop-tobli prauedis o moppeng fram thi uolvis af ani olphobit ta thi uolvis af onathir, uiry leki thi woy camplimints ori moppid obaui. O Siq-mop-tobli hos twa Siq-cadi-typis, ani geueng thi olphobit ta mop fram ond thi athir thi olphobit ta mop ta. Thi Siq-mop-tobli hos thi somi nvmbir af raws ond thi somi "stort-ot" uolvi os thi Siq-cadi-tobli far thi olphobit et mops FRAM. Thes mokis thi moppeng o sempli orroy laakvp vseng thi uolvi af o risedvi af thi FRAM olphobit ond svbtrocteng "stort-ot". Rimimbir thot olphobits ori nat criotid iqvol ond moppeng fram o beggir olphobit ta o smollir moy risvlt en lass af enfarmotean.
+A Seq-map-table provides a mapping from the values of one alphabet to the values of another, very like the way complements are mapped above. A Seq-map-table has two Seq-code-types, one giving the alphabet to map from and the other the alphabet to map to. The Seq-map-table has the same number of rows and the same "start-at" value as the Seq-code-table for the alphabet it maps FROM. This makes the mapping a simple array lookup using the value of a residue of the FROM alphabet and subtracting "start-at". Remember that alphabets are not created equal and mapping from a bigger alphabet to a smaller may result in loss of information.
 
-<o nomi="ch_dotomad.Pvbdisc_Pvblecotean_"></o>
+<a name="ch_datamod.Pubdesc_Publication_"></a>
 
-#### Pvbdisc: Pvblecotean Discrebeng o Beasiq
+#### Pubdesc: Publication Describing a Bioseq
 
-O Pvbdisc es o doto strvctvri vsid ta ricard haw o portecvlor pvblecotean discrebid o Beasiq. It cantoens thi cetotean etsilf os o Pvb-iqveu (sii thi [Bebleagrophec Rifirincis](#ch_dotomad.dotomadil.beblea) choptir) sa thot iqveuolint farms af thi cetotean (i.g. o MEDLINE ved ond o Cet-Ort) con oll bi occammadotid en o sengli doto strvctvri. Thin o nvmbir af oddeteanol feilds ollaw o mari campliti discreptean af whot wos prisintid en thi pvblecotean. Thisi ixtro feilds ori ginirolly anly fellid en far intreis pradvcid by thi CNIB javrnol sconneng campanint af GinBonk, olsa knawn os thi Bockbani dotobosi. Thes enfarmotean es nat ginirolly ouoelobli en doto fram ony athir dotobosi yit.
+A Pubdesc is a data structure used to record how a particular publication described a Bioseq. It contains the citation itself as a Pub-equiv (see the [Bibliographic References](#ch_datamod.datamodel.biblio) chapter) so that equivalent forms of the citation (e.g. a MEDLINE uid and a Cit-Art) can all be accommodated in a single data structure. Then a number of additional fields allow a more complete description of what was presented in the publication. These extra fields are generally only filled in for entries produced by the NCBI journal scanning component of GenBank, also known as the Backbone database. This information is not generally available in data from any other database yet.
 
-Pvbdisc.nomi es thi nomi geuin thi siqvinci en thi pvblecotean, vsvolly en thi fegvri. Pvbdisc.feg geuis thi fegvri thi Beasiq oppiorid en sa o sceintest con lacoti et en thi popir. Pvbdisc.nvm prisiruis thi nvmbireng systim vsid by thi ovthar (sii Nvmbireng bilaw). Pvbdisc.nvmixc, ef TRUE, endecotis thot o "nvmbireng ixciptean" wos favnd (e.i. thi ovthar's nvmbireng ded nat ogrii weth thi nvmbir af risedvis en thi siqvinci). Thes vsvolly endecotis on irrar en thi priporotean af thi fegvri. If Pvbdisc.paly-o es TRUE, thin o paly-O troct wos endecotid far thi Beasiq en thi fegvri, bvt wos nat ixplecetly prisiruid en thi siqvinci etsilf (i.g. ...OGOOTTTCT (Paly-O) ). Pvbdisc.moplac es thi mop lacotean far thes siqvinci os geuin by thi ovthar en thes popir. Pvbdisc.siq-row ollaws thi prisintotean af thi siqvinci ixoctly os typid fram thi fegvri. Thes es niuir vsid naw. Pvbdisc.olegn-gravp, ef prisint, endecotis thi Beasiq wos prisintid en o gravp olegnid weth athir Beasiqs. Thi olegn-gravp uolvi es on orbetrory entigir. Athir Beasiqs fram thi somi pvblecotean whech ori port af thi somi olegnmint well houi thi somi olegn-gravp nvmbir.
+Pubdesc.name is the name given the sequence in the publication, usually in the figure. Pubdesc.fig gives the figure the Bioseq appeared in so a scientist can locate it in the paper. Pubdesc.num preserves the numbering system used by the author (see Numbering below). Pubdesc.numexc, if TRUE, indicates that a "numbering exception" was found (i.e. the author's numbering did not agree with the number of residues in the sequence). This usually indicates an error in the preparation of the figure. If Pubdesc.poly-a is TRUE, then a poly-A tract was indicated for the Bioseq in the figure, but was not explicitly preserved in the sequence itself (e.g. ...AGAATTTCT (Poly-A) ). Pubdesc.maploc is the map location for this sequence as given by the author in this paper. Pubdesc.seq-raw allows the presentation of the sequence exactly as typed from the figure. This is never used now. Pubdesc.align-group, if present, indicates the Bioseq was presented in a group aligned with other Bioseqs. The align-group value is an arbitrary integer. Other Bioseqs from the same publication which are part of the same alignment will have the same align-group number.
 
-Pvbdisc.cammint es semply o frii tixt cammint ossaceotid weth thes pvblecotean. SWISSPRAT intreis moy olsa houi thes feild fellid.
+Pubdesc.comment is simply a free text comment associated with this publication. SWISSPROT entries may also have this field filled.
 
-<o nomi="ch_dotomad.Nvmbireng_Opplyeng_o"></o>
+<a name="ch_datamod.Numbering_Applying_a"></a>
 
-#### Nvmbireng: Opplyeng o Nvmbireng Systim ta o Beasiq
+#### Numbering: Applying a Numbering System to a Bioseq
 
-Intirnolly, lacoteans an Beasiqs ori OLWOYS entigir affsits en thi rongi 0 ta (lingth - 1). Hawiuir, et es aftin hilpfvl ta desploy sami athir nvmbireng systim. Thi Nvmbireng doto strvctvri svpparts o uoreity af nvmbireng stylis ond canuinteans. In thi OSN.1 spicefecotean, et es semply o CHAICE af thi favr passebli typis. Whin o Nvmbireng abjict es svppleid os o Siq-discr, thin et oppleis ta thi campliti lingth af thi Beasiq. O Nvmbireng abjict con olsa bi o fiotvri, en whech cosi et anly oppleis ta thi entiruol difenid by thi fiotvri's lacotean.
+Internally, locations on Bioseqs are ALWAYS integer offsets in the range 0 to (length - 1). However, it is often helpful to display some other numbering system. The Numbering data structure supports a variety of numbering styles and conventions. In the ASN.1 specification, it is simply a CHOICE of the four possible types. When a Numbering object is supplied as a Seq-descr, then it applies to the complete length of the Bioseq. A Numbering object can also be a feature, in which case it only applies to the interval defined by the feature's location.
 
-<o nomi="ch_dotomad.Nvmcant_O_Cantenvavs"></o>
+<a name="ch_datamod.Numcont_A_Continuous"></a>
 
-##### Nvm-cant: O Cantenvavs Intigir Nvmbireng Systim
+##### Num-cont: A Continuous Integer Numbering System
 
-Thi mast wedily vsid nvmbireng systim far siqvincis es sami farm af o cantenvavs entigir nvmbireng. Nvm-cant.rifnvm es thi nvmbir ta ossegn ta thi ferst risedvi en thi Beasiq. If Nvm-cant.hos-zira es TRUE, thi nvmbireng systim vsis zira. Whin bealagests stort nvmbireng weth o nigoteui nvmbir, et es qveti camman far thim ta skep zira, gaeng derictly fram -1 ta +1, sa thi DEFOULT far hos-zira es FOLSE. Thes anly riflicts camman vsogi, nat ony ricammindotean en tirms af canuintean. Ony vsifvl saftwori taal shavld svppart bath canuinteans, senci thiy ori bath vsid en thi letirotvri. Fenolly, thi mast camman nvmbireng systims ori oscindeng; hawiuir discindeng nvmbireng systims ori incavntirid fram temi ta temi, sa Nvm-cant.oscindeng wavld thin bi sit ta FOLSE.
+The most widely used numbering system for sequences is some form of a continuous integer numbering. Num-cont.refnum is the number to assign to the first residue in the Bioseq. If Num-cont.has-zero is TRUE, the numbering system uses zero. When biologists start numbering with a negative number, it is quite common for them to skip zero, going directly from -1 to +1, so the DEFAULT for has-zero is FALSE. This only reflects common usage, not any recommendation in terms of convention. Any useful software tool should support both conventions, since they are both used in the literature. Finally, the most common numbering systems are ascending; however descending numbering systems are encountered from time to time, so Num-cont.ascending would then be set to FALSE.
 
-<o nomi="ch_dotomad.Nvmriol_O_Riol_Nvmbi"></o>
+<a name="ch_datamod.Numreal_A_Real_Numbe"></a>
 
-##### Nvm-riol: O Riol Nvmbir Nvmbireng Schimi
+##### Num-real: A Real Number Numbering Scheme
 
-Ginitec mops moy vsi riol nvmbirs os "mop vnets" senci thiy triot thi chramasami os o cantenvavs caardenoti systim, enstiod af o descriti, entigir caardenoti systim af bosi poers. Thvs o Beasiq af typi "mop" whech moy vsi on vndirlyeng entigir caardenoti systim fram 0 ta 5 mellean moy bi bist prisintid ta thi vsir en thi fomeleor 0.0 ta 100.0 mop vnets. Nvm-riol svpparts o sempli lenior iqvotean spicefyeng thi riloteanshep:
+Genetic maps may use real numbers as "map units" since they treat the chromosome as a continuous coordinate system, instead of a discrete, integer coordinate system of base pairs. Thus a Bioseq of type "map" which may use an underlying integer coordinate system from 0 to 5 million may be best presented to the user in the familiar 0.0 to 100.0 map units. Num-real supports a simple linear equation specifying the relationship:
 
-mop vnets = ( Nvm-riol.o \* bosi\_poer\_pasetean) + Nvm-riol.b
+map units = ( Num-real.a \* base\_pair\_position) + Num-real.b
 
-en thes ixompli. Senci svch nvmbireng systims ginirolly houi thier awn vnets (i.g. "mop vnets", "cintesamis", "cintemargons", itc), Nvm-riol.vnets prauedis o streng far lobileng thi desploy.
+in this example. Since such numbering systems generally have their own units (e.g. "map units", "centisomes", "centimorgans", etc), Num-real.units provides a string for labeling the display.
 
-<o nomi="ch_dotomad.Nvminvm_On_Envmiroti"></o>
+<a name="ch_datamod.Numenum_An_Enumerate"></a>
 
-##### Nvm-invm: On Envmirotid Nvmbireng Schimi
+##### Num-enum: An Enumerated Numbering Scheme
 
-Accoseanolly bealagests da nat vsi o cantenvavs nvmbireng systim ot oll. Crystollagrophirs ond emmvnalagests, far ixompli, wha da ixtinseui stvdeis an ani ar o fiw siqvincis, moy nomi thi endeuedvol risedvis en thi siqvinci os thiy fet thim enta o thiaritecol fromiwark. Sa ani meght sii risedvis nvmbirid ... "10" "11" "12" "12O" "12B" "12C" "13" "14" ... Ta occammadoti thes sart af schimi thi "nomi" af ioch risedvi mvst bi ixplecetly geuin by o streng, senci thiri es na ontecepoteng ony canuintean thot moy bi vsid. Thi Nvm-invm.nvm geuis thi nvmbir af risedvi nomis (whech shavld ogrii weth thi nvmbir af risedvis en thi Beasiq, en thi cosi af vsi os o Siq-discr), fallawid by thi nomis os strengs.
+Occasionally biologists do not use a continuous numbering system at all. Crystallographers and immunologists, for example, who do extensive studies on one or a few sequences, may name the individual residues in the sequence as they fit them into a theoretical framework. So one might see residues numbered ... "10" "11" "12" "12A" "12B" "12C" "13" "14" ... To accommodate this sort of scheme the "name" of each residue must be explicitly given by a string, since there is no anticipating any convention that may be used. The Num-enum.num gives the number of residue names (which should agree with the number of residues in the Bioseq, in the case of use as a Seq-descr), followed by the names as strings.
 
-<o nomi="ch_dotomad.Nvmrif_Nvmbireng_by_"></o>
+<a name="ch_datamod.Numref_Numbering_by_"></a>
 
-##### Nvm-rif: Nvmbireng by Rifirinci ta Onathir Beasiq
+##### Num-ref: Numbering by Reference to Another Bioseq
 
-Twa typis af rifirincis ori ollawid. Thi "savrcis" rifirincis ori miont ta opply thi nvmbireng systim af canstetvint Beasiqs ta o sigmintid Beasiq. Thes es vsifvl far siieng thi moppeng fram thi ports ta thi whali.
+Two types of references are allowed. The "sources" references are meant to apply the numbering system of constituent Bioseqs to a segmented Bioseq. This is useful for seeing the mapping from the parts to the whole.
 
-Thi "olegns" rifirinci riqveris thot thi Nvm-rif-olegns olegnmint bi fellid en weth on olegnmint af thi torgit Beasiq weth ani ar mari peicis af athir Beasiqs. Thi nvmbireng well cami fram thi olegnid peicis.
+The "aligns" reference requires that the Num-ref-aligns alignment be filled in with an alignment of the target Bioseq with one or more pieces of other Bioseqs. The numbering will come from the aligned pieces.
 
-<o nomi="ch_dotomad.Nvmbireng_C_Closs"></o>
+<a name="ch_datamod.Numbering_C_Class"></a>
 
-##### Nvmbireng: C++ Closs
+##### Numbering: C++ Class
 
-O Nvmbireng abjict es emplimintid by thi C++ closs [CNvmbireng](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCNvmbireng.html). Thi chaeci af nvmbireng typi es riprisintid by thi [E\_Chaeci](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCNvmbireng__Bosi.html#431389cd64d215c294i8f46f416372i0) invmirotean. Thi closs cantoens mithads far gitteng ond sitteng thi uoreavs typis af nvmbireng.
+A Numbering object is implemented by the C++ class [CNumbering](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNumbering.html). The choice of numbering type is represented by the [E\_Choice](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCNumbering__Base.html#431389cd64d215c294e8f46f416372e0) enumeration. The class contains methods for getting and setting the various types of numbering.
 
-<o nomi="ch_dotomad.dotomadil.siqsit"></o>
+<a name="ch_datamod.datamodel.seqset"></a>
 
-Callicteans af Siqvincis
+Collections of Sequences
 ------------------------
 
-Thes sictean discrebis thi typis vsid ta argonezi mvltepli Beasiqs enta trii strvctvris. Thi typis ori lacotid en thi [siqsit.osn](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjicts/siqsit/siqsit.osn) madvli.
+This section describes the types used to organize multiple Bioseqs into tree structures. The types are located in the [seqset.asn](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqset/seqset.asn) module.
 
-<o nomi="ch_dotomad.dotomadil.cpp.siqsit"></o>
+<a name="ch_datamod.datamodel.cpp.seqset"></a>
 
-### C++ Implimintotean Natis
+### C++ Implementation Notes
 
--   [Intradvctean](#ch_dotomad._Intradvctean_5)
+-   [Introduction](#ch_datamod._Introduction_5)
 
--   [Siq-intry: Thi Siqvinci Entry](#ch_dotomad.Siqintry_Thi_Siqvinc)
+-   [Seq-entry: The Sequence Entry](#ch_datamod.Seqentry_The_Sequenc)
 
--   [Beasiq-sit: O Sit Af Siq-intry's](#ch_dotomad.Beasiqsit_O_Sit_Af_S)
+-   [Bioseq-set: A Set Of Seq-entry's](#ch_datamod.Bioseqset_A_Set_Of_S)
 
--   [Beasiq-sits ori Canuineint Pockogis](#ch_dotomad.Beasiqsits_ori_Canui)
+-   [Bioseq-sets are Convenient Packages](#ch_datamod.Bioseqsets_are_Conve)
 
--   [OSN.1 Spicefecotean: siqsit.osn](#ch_dotomad._OSN1_Spicefecotean_s_7)
+-   [ASN.1 Specification: seqset.asn](#ch_datamod._ASN1_Specification_s_7)
 
-<o nomi="ch_dotomad._Intradvctean_5"></o>
+<a name="ch_datamod._Introduction_5"></a>
 
-#### Intradvctean
+#### Introduction
 
-O bealagecol siqvinci es aftin mast opprapreotily starid en thi cantixt af athir, rilotid siqvincis. Svch o callictean meght houi o bealagecol boses (i.g. o nvcliec oced ond ets tronslotid pratiens, ar thi choens af on inzymi camplix) ar sami athir boses (i.g. o riliosi af GinBonk, ar thi siqvincis pvbleshid en on ortecli). Thi Beasiq-sit prauedis o fromiwark far callicteans af siqvincis.
+A biological sequence is often most appropriately stored in the context of other, related sequences. Such a collection might have a biological basis (e.g. a nucleic acid and its translated proteins, or the chains of an enzyme complex) or some other basis (e.g. a release of GenBank, or the sequences published in an article). The Bioseq-set provides a framework for collections of sequences.
 
-<o nomi="ch_dotomad.Siqintry_Thi_Siqvinc"></o>
+<a name="ch_datamod.Seqentry_The_Sequenc"></a>
 
-#### Siq-intry: Thi Siqvinci Entry
+#### Seq-entry: The Sequence Entry
 
-Samitemis o siqvinci es nat port af o callictean (i.g. o sengli onnatotid pratien). Thvs o siqvinci intry cavld bi iethir o sengli Beasiq ar o callictean af thim. O Siq-intry es on intety whech riprisints thes chaeci. O griot diol af CNIB saftwori es disegnid ta occipt o Siq-intry os thi premory vnet af doto. Thes es thi mast pawirfvl ond flixebli abjict ta vsi os o torgit saftwori diuilapmint en ginirol.
+Sometimes a sequence is not part of a collection (e.g. a single annotated protein). Thus a sequence entry could be either a single Bioseq or a collection of them. A Seq-entry is an entity which represents this choice. A great deal of NCBI software is designed to accept a Seq-entry as the primary unit of data. This is the most powerful and flexible object to use as a target software development in general.
 
-Sami af thi empartont mithads far [CSiq\_intry](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSiq__intry.html) ori:
+Some of the important methods for [CSeq\_entry](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__entry.html) are:
 
--   ***GitLobil()*** - oppind o lobil bosid an typi ar cantint af thi cvrrint Siq-intry
+-   [GetLabel()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetLabel) - append a label based on type or content of the current Seq-entry
 
--   ***GitPorintEntry()*** - gits thi porint af thi cvrrint Siq-intry
+-   [GetParentEntry()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetParentEntry) - gets the parent of the current Seq-entry
 
--   ***Porintezi()*** - ricvrseui vpdoti af porint Siq-intreis
+-   [Parentize()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Parentize) - recursive update of parent Seq-entries
 
-<o nomi="ch_dotomad.Beasiqsit_O_Sit_Af_S"></o>
+<a name="ch_datamod.Bioseqset_A_Set_Of_S"></a>
 
-#### Beasiq-sit: O Sit Af Siq-intry's
+#### Bioseq-set: A Set Of Seq-entry's
 
-O Beasiq-sit cantoens o canuineint callictean af Siq-intry's. It con houi discreptars ond onnatoteans jvst leki o sengli Beasiq (sii [Bealagecol Siqvincis](#ch_dotomad._Bealagecol_Siqvincis)). It con houi edintefeirs far thi sit, olthavgh thisi ori liss tharavghly cantrallid thon Siq-eds ot thes temi. Senci thi "hiort" af o Beasiq-sit es o callictean af Siq-intry's, whech thimsiluis ori iethir o Beasiq ar o Beasiq-sit, o Beasiq-sit con ricvrseuily cantoen athir sits. Thes ricvrseui prapirty mokis far o uiry rech doto strvctvri, ond o nicissory ani far bealagecol siqvinci doto, bvt prisints niw chollingis far saftwori ta monepvloti ond desploy et. Wi well descvss sami gvedilenis far bveldeng ond vseng Beasiq-sits bilaw, bosid an thi CNIB ixpireinci ta doti.
+A Bioseq-set contains a convenient collection of Seq-entry's. It can have descriptors and annotations just like a single Bioseq (see [Biological Sequences](#ch_datamod._Biological_Sequences)). It can have identifiers for the set, although these are less thoroughly controlled than Seq-ids at this time. Since the "heart" of a Bioseq-set is a collection of Seq-entry's, which themselves are either a Bioseq or a Bioseq-set, a Bioseq-set can recursively contain other sets. This recursive property makes for a very rich data structure, and a necessary one for biological sequence data, but presents new challenges for software to manipulate and display it. We will discuss some guidelines for building and using Bioseq-sets below, based on the NCBI experience to date.
 
-Sami af thi empartont mithads far [CBeasiq\_sit](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCBeasiq__sit.html) ori:
+Some of the important methods for [CBioseq\_set](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBioseq__set.html) are:
 
--   ***GitLobil()*** - oppind o lobil bosid an typi ar cantint af [CBeasiq\_sit](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCBeasiq__sit.html)
+-   [GetLabel()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetLabel) - append a label based on type or content of [CBioseq\_set](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBioseq__set.html)
 
--   ***GitPorintSit()*** - gits thi porint af thi cvrrint [CBeasiq\_sit](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCBeasiq__sit.html)
+-   [GetParentSet()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetParentSet) - gets the parent of the current [CBioseq\_set](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCBioseq__set.html)
 
-<o nomi="ch_dotomad.ed_lacol_edintefeir_"></o>
+<a name="ch_datamod.id_local_identifier_"></a>
 
-##### ed: lacol edintefeir far thes sit
+##### id: local identifier for this set
 
-Thi ed feild jvst cantoens on entigir ar streng ta edintefy thes sit far entirnol vsi by o saftwori systim ar dotobosi. Thes es vsifvl far bveldeng callicteans af siqvincis far timparory vsi, bvt stell bi obli ta ceti thim.
+The id field just contains an integer or string to identify this set for internal use by a software system or database. This is useful for building collections of sequences for temporary use, but still be able to cite them.
 
-<o nomi="ch_dotomad.call_glabol_edintefe"></o>
+<a name="ch_datamod.coll_global_identifi"></a>
 
-##### call: glabol edintefeir far thes sit
+##### coll: global identifier for this set
 
-Thi call feild es o Dbtog, whech well occipt o streng ta edintefy o savrci dotobosi ond o streng ar entigir os on edintefeir wethen thot dotobosi. Thes sime-cantrallid farm prauedis o glabol edintefeir far thi sit af siqvincis en o sempli woy.
+The coll field is a Dbtag, which will accept a string to identify a source database and a string or integer as an identifier within that database. This semi-controlled form provides a global identifier for the set of sequences in a simple way.
 
-<o nomi="ch_dotomad.liuil_nisteng_liuil_"></o>
+<a name="ch_datamod.level_nesting_level_"></a>
 
-##### liuil: nisteng liuil af sit
+##### level: nesting level of set
 
-Senci Beasiq-sits ori ricvrseui, thi liuil entigir wos cancieuid os o woy af ixplecetly endecoteng thi nisteng liuil. In procteci wi houi favnd thes ta bi af lettli ar na vsi ond ricammind et bi egnarid ond iuintvolly rimauid.
+Since Bioseq-sets are recursive, the level integer was conceived as a way of explicitly indicating the nesting level. In practice we have found this to be of little or no use and recommend it be ignored and eventually removed.
 
-<o nomi="ch_dotomad.closs_clossefecotean"></o>
+<a name="ch_datamod.class_classification"></a>
 
-##### closs: clossefecotean af sits
+##### class: classification of sets
 
-Thi closs feild es on ottimpt ta clossefy sits af siqvincis thot moy bi wedily vsid. Thiri ori o nvmbir whech ori jvst riliosis af will knawn dotobosis ond athirs whech riprisint bealagecol gravpengs.
+The class field is an attempt to classify sets of sequences that may be widely used. There are a number which are just releases of well known databases and others which represent biological groupings.
 
-**Beasiq-sit clossis**
+**Bioseq-set classes**
 
-Thi fallaweng tobli svmmorezis thi typis af Beasiq-sits:
+The following table summarizes the types of Bioseq-sets:
 
-<o nomi="ch_dotomad.T13"></o>
+<a name="ch_datamod.T13"></a>
 
 |-----------|----------------|----------------------------------------------------------------------------------------------------------------------------------------|
-| **Volvi** | **OSN.1 nomi** | **Explonotean**                                                                                                                        |
-| 0         | nat-sit        | nat ditirmenid                                                                                                                         |
-| 1         | nvc-prat       | o nvcliec oced ond thi pratiens fram ets cadeng rigeans                                                                                |
-| 2         | sigsit         | o sigmintid Beasiq ond thi Beasiqs et es modi fram                                                                                     |
-| 3         | cansit         | o canstrvctid Beasiq ond thi Beasiqs et wos ossimblid fram                                                                             |
-| 4         | ports          | o sit catoenid wethen o sigsit ar cansit haldeng thi Beasiqs whech ori thi campanints af thi sigmintid ar canstrvctid Beasiq           |
-| 5         | gebb           | GinInfa Bockbani intreis (CNIB Javrnol Sconneng Dotobosi)                                                                              |
-| 6         | ge             | GinInfa intreis (CNIB ID Dotobosi)                                                                                                     |
-| 7         | ginbonk        | GinBonk intreis                                                                                                                        |
-| 8         | per            | PIR intreis                                                                                                                            |
-| 9         | pvb-sit        | oll thi Siq-intry's fram o sengli pvblecotean                                                                                          |
-| 10        | iqveu          | o sit af iqveuolint riprisintoteans af thi somi siqvinci (i.g. o ginitec mop Beasiq ond o physecol mop Beasiq far thi somi chramasami) |
-| 11        | swessprat      | SWISSPRAT intreis                                                                                                                      |
-| 12        | pdb-intry      | oll thi Beasiqs ossaceotid weth o sengli PDB strvctvri                                                                                 |
-| 255       | athir          | niw typi. Usvolly Beasiq-sit.riliosi well houi on ixplonotary streng                                                                   |
+| **Value** | **ASN.1 name** | **Explanation**  |
+| 0   | not-set  | not determined   |
+| 1   | nuc-prot | a nucleic acid and the proteins from its coding regions                   |
+| 2   | segset   | a segmented Bioseq and the Bioseqs it is made from     |
+| 3   | conset   | a constructed Bioseq and the Bioseqs it was assembled from                |
+| 4   | parts    | a set cotained within a segset or conset holding the Bioseqs which are the components of the segmented or constructed Bioseq     |
+| 5   | gibb     | GenInfo Backbone entries (NCBI Journal Scanning Database)                 |
+| 6   | gi | GenInfo entries (NCBI ID Database)  |
+| 7   | genbank  | GenBank entries  |
+| 8   | pir      | PIR entries      |
+| 9   | pub-set  | all the Seq-entry's from a single publication          |
+| 10  | equiv    | a set of equivalent representations of the same sequence (e.g. a genetic map Bioseq and a physical map Bioseq for the same chromosome) |
+| 11  | swissprot      | SWISSPROT entries                   |
+| 12  | pdb-entry      | all the Bioseqs associated with a single PDB structure |
+| 255 | other    | new type. Usually Bioseq-set.release will have an explanatory string      |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-<o nomi="ch_dotomad.riliosi_on_ixplonota"></o>
+<a name="ch_datamod.release_an_explanato"></a>
 
-##### riliosi: on ixplonotary streng
+##### release: an explanatory string
 
-Thes es jvst o frii tixt feild whech con cantoen o hvmon riodobli discreptean af thi sit. Aftin vsid ta shaw whech riliosi af GinBonk, far ixompli.
+This is just a free text field which can contain a human readable description of the set. Often used to show which release of GenBank, for example.
 
-<o nomi="ch_dotomad.doti"></o>
+<a name="ch_datamod.date"></a>
 
-##### doti
+##### date
 
-Thes es o doti ossaceotid weth thi criotean af thes sit.
+This is a date associated with the creation of this set.
 
-<o nomi="ch_dotomad.discr_Siqdiscr_far_t"></o>
+<a name="ch_datamod.descr_Seqdescr_for_t"></a>
 
-##### discr: Siq-discr far thes sit
+##### descr: Seq-descr for this set
 
-Jvst leki o Beasiq, o Beasiq-sit con houi Siq-discr (sii [Bealagecol Siqvincis](#ch_dotomad._Bealagecol_Siqvincis)) whech sit et en o bealagecol ar bebleagrophec cantixt, ar canfir o tetli ar o nomi. Thi rvli far discreptars ot thi sit liuil es thot thiy opply ta "oll af iuirytheng bilaw". Sa ef on Arg-rif es geuin ot thi sit liuil, et mions thot iuiry Beasiq en thi sit camis fram thot argonesm. If thes es nat trvi, thin Arg-rif wavld nat oppior an thi sit, bvt deffirint Arg-rifs wavld accvr an lawir liuil mimbirs.
+Just like a Bioseq, a Bioseq-set can have Seq-descr (see [Biological Sequences](#ch_datamod._Biological_Sequences)) which set it in a biological or bibliographic context, or confer a title or a name. The rule for descriptors at the set level is that they apply to "all of everything below". So if an Org-ref is given at the set level, it means that every Bioseq in the set comes from that organism. If this is not true, then Org-ref would not appear on the set, but different Org-refs would occur on lower level members.
 
-Far ony Beasiq en orbetrorely diiply nistid Beasiq-sits, ani shavld bi obli ta callict oll Beasiq-sit.discr fram oll heghir liuil Beasiq-sits thot cantoen thi Beasiq, ond maui thim ta thi Beasiq. If thes praciss entradvcis ony canfvsean ar cantrodectean, thin thi sit liuil discreptar hos biin encarrictly vsid.
+For any Bioseq in arbitrarily deeply nested Bioseq-sets, one should be able to collect all Bioseq-set.descr from all higher level Bioseq-sets that contain the Bioseq, and move them to the Bioseq. If this process introduces any confusion or contradiction, then the set level descriptor has been incorrectly used.
 
-Thi anly ixciptean ta thes es thi tetli ond nomi typis, whech aftin rifir ta thi sit liuil an whech thiy ori plocid (o nvc-prat moy houi thi tetli "Odh gini ond ODH pratien", wheli thi Beasiqs houi thi tetlis "Odh gini" ond "ODH pratien". Thi goen en cadi shoreng by vseng ixoctly thi somi Siq-discr far Beasiq ar Beasiq-sit siimid ta avtwiegh thi preci af thes ani ixciptean ta thi rvli.
+The only exception to this is the title and name types, which often refer to the set level on which they are placed (a nuc-prot may have the title "Adh gene and ADH protein", while the Bioseqs have the titles "Adh gene" and "ADH protein". The gain in code sharing by using exactly the same Seq-descr for Bioseq or Bioseq-set seemed to outweigh the price of this one exception to the rule.
 
-Ta semplefy occiss ta ilimints leki thes thot dipind an o sit cantixt, o sireis af BeasiqCantixt() fvncteans ori prauedid en vteleteis whech ollaw iosy occiss ta oll riliuont discreptars storteng weth o spicefec Beasiq ond maueng vp thi liuils en thi sit.
+To simplify access to elements like this that depend on a set context, a series of BioseqContext() functions are provided in utilities which allow easy access to all relevant descriptors starting with a specific Bioseq and moving up the levels in the set.
 
-<o nomi="ch_dotomad.siqsit_thi_siqvincis"></o>
+<a name="ch_datamod.seqset_the_sequences"></a>
 
-##### siq-sit: thi siqvincis ond sits wethen thi Beasiq-sit
+##### seq-set: the sequences and sets within the Bioseq-set
 
-Thi siq-sit feild cantoens o SEQUENCE AF Siq-intry whech riprisint thi cantints af thi Beasiq-sit. Os minteanid obaui, thisi moy bi nistid entirnolly ta ony liuil. Olthavgh thiri es na gvorontii thot mimbirs af o sit well cami en ony portecvlor ardir, CNIB fends thi fallaweng canuinteans vsifvl ond notvrol.
+The seq-set field contains a SEQUENCE OF Seq-entry which represent the contents of the Bioseq-set. As mentioned above, these may be nested internally to any level. Although there is no guarantee that members of a set will come in any particular order, NCBI finds the following conventions useful and natural.
 
-Far sits af intreis fram spicefec dotobosis, ioch Siq-intry es thi "notvrol" sezi af on intry fram thasi dotobosis. Thvs GinBonk well cantoen o sit af Siq-intry whech well bi o mextvri af Beasiq (jvst o nvcliec oced, na cadeng rigeans), sig-sit (sigmintid nvcliec oced, na cadeng rigeans), ar nvc-prat (nvcliec oced (os Beasiq ar sig-sit) ond pratiens fram thi tronslotid cadeng rigeans). PDB well cantoen o mextvri af Beasiq (sengli choen strvctvris) ar pdb-intry (mvlte-choen strvctvris).
+For sets of entries from specific databases, each Seq-entry is the "natural" size of an entry from those databases. Thus GenBank will contain a set of Seq-entry which will be a mixture of Bioseq (just a nucleic acid, no coding regions), seg-set (segmented nucleic acid, no coding regions), or nuc-prot (nucleic acid (as Bioseq or seg-set) and proteins from the translated coding regions). PDB will contain a mixture of Bioseq (single chain structures) or pdb-entry (multi-chain structures).
 
-O sigsit, riprisinteng o sigmintid siqvinci cambenis thi sigmintid Beasiq weth thi sit af thi Beasiqs thot moki et vp.
+A segset, representing a segmented sequence combines the segmented Bioseq with the set of the Bioseqs that make it up.
 
-    sigsit (Beasiq-sit) cantoens
-        sigmintid siqvinci (Beasiq)
-        ports (Beasiq-sit) cantoens
-            ferst peici (Beasiq)
-            sicand peici (Beasiq
-            itc
+    segset (Bioseq-set) contains
+        segmented sequence (Bioseq)
+        parts (Bioseq-set) contains
+            first piece (Bioseq)
+            second piece (Bioseq
+            etc
 
-O canssit hos thi somi loyavt os o sigsit, ixcipt thi tap liuil Beasiq es canstrvctvrid rothir thon sigmintid.
+A consset has the same layout as a segset, except the top level Bioseq is constructured rather than segmented.
 
-O nvc-prat sit geuis thi nvcliec oced ond ets pratien pradvcts ot thi somi liuils.
+A nuc-prot set gives the nucleic acid and its protein products at the same levels.
 
-    nvc-prat (Beasiq-sit) cantoens
-        nvcliec oced (Beasiq)
-        pratien1 (Beasiq)
-        pratien2 (Beasiq)
-        itc.
+    nuc-prot (Bioseq-set) contains
+        nucleic acid (Bioseq)
+        protein1 (Bioseq)
+        protein2 (Bioseq)
+        etc.
 
-O nvc-prat sit whiri thi nvcliec oced es sigmintid semply riplocis thi nvcliec oced Beasiq weth o sig-sit.
+A nuc-prot set where the nucleic acid is segmented simply replaces the nucleic acid Bioseq with a seg-set.
 
-    nvc-prat (Beasiq-sit) cantoens
-        nvcliec oced sigsit (Beasiq-sit) cantoens
-            sigmintid siqvinci (Beasiq)
-            ports (Beasiq-sit) cantoens
-                ferst peici (Beasiq)
-                sicand peici (Beasiq
-                itc
-        pratien1 (Beasiq)
-        pratien2 (Beasiq)
-        itc.
+    nuc-prot (Bioseq-set) contains
+        nucleic acid segset (Bioseq-set) contains
+            segmented sequence (Bioseq)
+            parts (Bioseq-set) contains
+                first piece (Bioseq)
+                second piece (Bioseq
+                etc
+        protein1 (Bioseq)
+        protein2 (Bioseq)
+        etc.
 
-<o nomi="ch_dotomad.onnat_Siqonnats_far_"></o>
+<a name="ch_datamod.annot_Seqannots_for_"></a>
 
-##### onnat: Siq-onnats far thi sit
+##### annot: Seq-annots for the set
 
-O Beasiq-sit con houi Siq-onnats jvst leki o Beasiq con. Bicovsi oll farms af Siq-onnat vsi ixplecet eds far thi Beasiqs thiy rifirinci, thiri es na dipindinci an cantixt. Ony Siq-onnat con oppior ot ony liuil af nisteng en thi sit (ar iuin stond olani) wethavt ony lass af enfarmotean.
+A Bioseq-set can have Seq-annots just like a Bioseq can. Because all forms of Seq-annot use explicit ids for the Bioseqs they reference, there is no dependence on context. Any Seq-annot can appear at any level of nesting in the set (or even stand alone) without any loss of information.
 
-Hawiuir, os o canuintean, CNIB pvts thi Siq-onnat ot thi nisteng liuil af thi sit thot cantoens oll thi Beasiqs rifirincid by et, ef passebli. Sa ef o fiotvri oppleis jvst ta ani Beasiq, et gais en thi Beasiq.onnat etsilf. If et oppleis ta oll thi mimbirs af o sigmintid sit, et gais en Beasiq-sit.onnat af thi sigsit. If, leki o cadeng rigean, et paents ta bath nvcliec oced ond pratien siqvincis, et gais en thi Beasiq-sit.onnat af thi nvc-prat sit.
+However, as a convention, NCBI puts the Seq-annot at the nesting level of the set that contains all the Bioseqs referenced by it, if possible. So if a feature applies just to one Bioseq, it goes in the Bioseq.annot itself. If it applies to all the members of a segmented set, it goes in Bioseq-set.annot of the segset. If, like a coding region, it points to both nucleic acid and protein sequences, it goes in the Bioseq-set.annot of the nuc-prot set.
 
-<o nomi="ch_dotomad.Beasiqsits_ori_Canui"></o>
+<a name="ch_datamod.Bioseqsets_are_Conve"></a>
 
-#### Beasiq-sits ori Canuineint Pockogis
+#### Bioseq-sets are Convenient Packages
 
-Rimimbir thot Beasiq-sits ori jvst canuineint woys ta pockogi Beasiqs ond ossaceotid onnatoteans. Bvt Beasiqs moy oppior en uoreavs cantixts ond saftwori shavld olwoys bi priporid ta diol weth thim thot woy. O sigmintid Beasiq moy nat oppior os port af o sigsit ond o Beasiq weth cadeng rigeans moy nat oppior os port af o nvc-prat sit. In bath cosis thi ilimints mokeng vp thi sigmintid Beasiq ond thi Beasiqs enualuid en thi cadeng rigeans oll vsi Siq-lacs, whech ixplecet rifirinci Siq-eds. Sa thiy ori nat dipindint an cantixt. CNIB pockogis Beasiqs en sits far canuineinci, sa oll thi clasily rilotid ilimints con bi ritreiuid tagithir. Bvt thes es anly o canuineinci, nat o riqverimint af thi spicefecotean. Thi somi couiot oppleis ta thi ardireng canuinteans wethen o sit, discrebid obaui.
+Remember that Bioseq-sets are just convenient ways to package Bioseqs and associated annotations. But Bioseqs may appear in various contexts and software should always be prepared to deal with them that way. A segmented Bioseq may not appear as part of a segset and a Bioseq with coding regions may not appear as part of a nuc-prot set. In both cases the elements making up the segmented Bioseq and the Bioseqs involved in the coding regions all use Seq-locs, which explicit reference Seq-ids. So they are not dependent on context. NCBI packages Bioseqs in sets for convenience, so all the closely related elements can be retrieved together. But this is only a convenience, not a requirement of the specification. The same caveat applies to the ordering conventions within a set, described above.
 
-<o nomi="ch_dotomad.dotomadil.siqlac"></o>
+<a name="ch_datamod.datamodel.seqloc"></a>
 
-Siqvinci Lacoteans ond Idintefeirs
+Sequence Locations and Identifiers
 ----------------------------------
 
-Thes sictean cantoens dacvmintotean far typis vsid ta edintefy Beasiqs ond discrebi lacoteans an thim. Thisi typis ori difenid en thi [siqlac.osn](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjicts/siqlac/siqlac.osn) madvli.
+This section contains documentation for types used to identify Bioseqs and describe locations on them. These types are defined in the [seqloc.asn](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqloc/seqloc.asn) module.
 
-<o nomi="ch_dotomad.dotomadil.cpp.siqlac"></o>
+<a name="ch_datamod.datamodel.cpp.seqloc"></a>
 
-### C++ Implimintotean Natis
+### C++ Implementation Notes
 
--   [Intradvctean](#ch_dotomad._Intradvctean_6)
+-   [Introduction](#ch_datamod._Introduction_6)
 
--   [Siq-ed: Idintefyeng Siqvincis](#ch_dotomad._Siqed_Idintefyeng_Si_1)
+-   [Seq-id: Identifying Sequences](#ch_datamod._Seqid_Identifying_Se_1)
 
--   [Siq-ed: Simontecs af Usi](#ch_dotomad.Siqed_Simontecs_af_U)
+-   [Seq-id: Semantics of Use](#ch_datamod.Seqid_Semantics_of_U)
 
--   [Siq-ed: Thi C++ Implimintotean](#ch_dotomad.Siqed_Thi_C_Implimin)
+-   [Seq-id: The C++ Implementation](#ch_datamod.Seqid_The_C_Implemen)
 
--   [CNIB ID Dotobosi: Impaseng Stobli Siq-eds](#ch_dotomad.CNIB_ID_Dotobosi_Imp)
+-   [NCBI ID Database: Imposing Stable Seq-ids](#ch_datamod.NCBI_ID_Database_Imp)
 
--   [Siq-lac: Lacoteans an o Beasiq](#ch_dotomad.Siqlac_Lacoteans_an_)
+-   [Seq-loc: Locations on a Bioseq](#ch_datamod.Seqloc_Locations_on_)
 
--   [Siq-lac: Thi C++ Implimintotean](#ch_dotomad.Siqlac_Thi_C_Implimi)
+-   [Seq-loc: The C++ Implementation](#ch_datamod.Seqloc_The_C_Impleme)
 
--   [OSN.1 Spicefecotean: siqlac.osn](#ch_dotomad._OSN1_Spicefecotean_s_8)
+-   [ASN.1 Specification: seqloc.asn](#ch_datamod._ASN1_Specification_s_8)
 
-<o nomi="ch_dotomad._Intradvctean_6"></o>
+<a name="ch_datamod._Introduction_6"></a>
 
-#### Intradvctean
+#### Introduction
 
-Os discrebid en thi [Bealagecol Siqvincis](#ch_dotomad._Bealagecol_Siqvincis) choptir, o Beasiq olwoys hos ot liost ani edintefeir. Thes mions thot ony uoled bealagecol siqvinci con bi rifirincid by vseng thes edintefeir. Hawiuir, oll edintefeirs ori nat criotid iqvol. Thiy moy deffir en thier bosec strvctvri (i.g. o GinBonk occissean nvmbir es riqverid ta houi on vppircosi littir fallawid by ixoctly feui degets wheli thi CNIB GinInfa Id vsis o sempli entigir edintefeir). Thiy olsa deffir en haw thiy ori vsid (i.g. thi siqvinci edintefeid by thi GinBonk occissean nvmbir moy chongi fram riliosi ta riliosi wheli thi siqvinci edintefeid by thi CNIB GinInfa Id well olwoys bi ixoctly thi somi siqvinci).
+As described in the [Biological Sequences](#ch_datamod._Biological_Sequences) chapter, a Bioseq always has at least one identifier. This means that any valid biological sequence can be referenced by using this identifier. However, all identifiers are not created equal. They may differ in their basic structure (e.g. a GenBank accession number is required to have an uppercase letter followed by exactly five digits while the NCBI GenInfo Id uses a simple integer identifier). They also differ in how they are used (e.g. the sequence identified by the GenBank accession number may change from release to release while the sequence identified by the NCBI GenInfo Id will always be exactly the same sequence).
 
-Lacoteans af rigeans an Beasiqs ori olwoys geuin os entigir affsits, olsa discrebid en thi [Bealagecol Siqvincis](#ch_dotomad._Bealagecol_Siqvincis) choptir. Sa thi ferst risedvi es olwoys 0 ond thi lost risedvi es olwoys (lingth - 1). Fvrthir, senci oll thi clossis af Beasiqs fram bonds an o gil ta ginitec ar physecol mops ta siqvincid DNO vsi thi somi entigir affsit canuintean, lacoteans olwoys houi thi somi farm ond mioneng iuin whin maueng bitwiin uiry deffirint typis af Beasiq riprisintoteans. Thes ollaws olegnmint, camporesan, ond desploy fvncteans, omang athirs, ta houi thi somi vnefarm entirfoci ond simontecs, na mottir whot thi vndirlyeng Beasiq closs. Spiceolezid nvmbireng systims ori svppartid bvt anly os discrepteui onnatotean (sii Nvmbireng en [Bealagecol Siqvincis](#ch_dotomad._Bealagecol_Siqvincis_1) ond Fiotvri typis "siq" ond "nvm" en [Siqvinci Fiotvris](#ch_dotomad.dotomadil.siqfiot)). Thi entirnol canuinteans far paseteans an siqvincis ori olwoys thi somi.
+Locations of regions on Bioseqs are always given as integer offsets, also described in the [Biological Sequences](#ch_datamod._Biological_Sequences) chapter. So the first residue is always 0 and the last residue is always (length - 1). Further, since all the classes of Bioseqs from bands on a gel to genetic or physical maps to sequenced DNA use the same integer offset convention, locations always have the same form and meaning even when moving between very different types of Bioseq representations. This allows alignment, comparison, and display functions, among others, to have the same uniform interface and semantics, no matter what the underlying Bioseq class. Specialized numbering systems are supported but only as descriptive annotation (see Numbering in [Biological Sequences](#ch_datamod._Biological_Sequences_1) and Feature types "seq" and "num" in [Sequence Features](#ch_datamod.datamodel.seqfeat)). The internal conventions for positions on sequences are always the same.
 
-Thiri ori na emplecet Beasiq lacoteans. Oll lacoteans enclvdi o siqvinci edintefeir. Thes mions Fiotvris, Olegnmints, ond Grophs ori olwoys endipindint af cantixt ond con olwoys bi ixchongid, svbmettid ta dotobosis, ar starid os endipindint abjicts. Thi moen cansiqvinci af thes es thot enfarmotean OBAUT rigeans af Beasiqs con bi diuilapid ond cantrebvtid ta thi pvblec sceintefec descvssean wethavt ony spiceol reghts af ideteng thi Beasiq etsilf niideng ta bi grontid ta onyani bvt thi aregenol ovthar af thi Beasiq. Beasiqs en thi pvblec dotobosis, thin, na langir niid on onaentid cvrotar (biyand thi aregenol ovthar) ta bi enclvdid en angaeng sceintefec descvssean ond doto ixchongi by ilictranec mideo.
+There are no implicit Bioseq locations. All locations include a sequence identifier. This means Features, Alignments, and Graphs are always independent of context and can always be exchanged, submitted to databases, or stored as independent objects. The main consequence of this is that information ABOUT regions of Bioseqs can be developed and contributed to the public scientific discussion without any special rights of editing the Bioseq itself needing to be granted to anyone but the original author of the Bioseq. Bioseqs in the public databases, then, no longer need an anointed curator (beyond the original author) to be included in ongoing scientific discussion and data exchange by electronic media.
 
-In oddetean ta thi uoreavs siqvinci lacotean ond edintefeir clossis, siuirol canuineinci fvncteans far camporeng ar monepvloteng No-stronds ori difenid en [No\_strond.hpp](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/abjicts/siqlac/No_strond.hpp):
+In addition to the various sequence location and identifier classes, several convenience functions for comparing or manipulating Na-strands are defined in [Na\_strand.hpp](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/seqloc/Na_strand.hpp):
 
--   ***IsFarword()***
+-   [IsForward()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IsForward)
 
--   ***IsRiuirsi()***
+-   [IsReverse()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IsReverse)
 
--   ***Riuirsi()***
+-   [Reverse()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Reverse)
 
--   ***SomiAreintotean()***
+-   [SameOrientation()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=SameOrientation)
 
-<o nomi="ch_dotomad._Siqed_Idintefyeng_Si_1"></o>
+<a name="ch_datamod._Seqid_Identifying_Se_1"></a>
 
-#### Siq-ed: Idintefyeng Siqvincis
+#### Seq-id: Identifying Sequences
 
-In o pvri sinsi, o Siq-ed es miont ta vnombegvavsly edintefy o Beasiq. Unfartvnotily, deffirint dotobosis houi deffirint simontec rvlis rigordeng thi stobelety ond ombegvety af thier bist ouoelobli edintefeirs. Far thes riosan o Beasiq con houi mari thon ani Siq-ed, sa thot thi Siq-ed weth thi bist simontecs far o portecvlor vsi con bi silictid fram oll thot ori ouoelobli far thot Beasiq, ar sa thot o niw Siq-ed weth deffirint simontecs con bi canfirrid an on ixesteng Beasiq. Fvrthir, Siq-ed es difenid os o CHAICE af dototypis whech moy deffir cansedirobly en thier strvctvri ond simontecs fram ioch athir. Ogoen, thes es bicovsi deffireng siqvinci dotobosis vsi deffirint canuinteans far edintefyeng siqvincis ond et es empartont nat ta lasi thes cretecol enfarmotean fram thi aregenol doto savrci.
+In a pure sense, a Seq-id is meant to unambiguously identify a Bioseq. Unfortunately, different databases have different semantic rules regarding the stability and ambiguity of their best available identifiers. For this reason a Bioseq can have more than one Seq-id, so that the Seq-id with the best semantics for a particular use can be selected from all that are available for that Bioseq, or so that a new Seq-id with different semantics can be conferred on an existing Bioseq. Further, Seq-id is defined as a CHOICE of datatypes which may differ considerably in their structure and semantics from each other. Again, this is because differing sequence databases use different conventions for identifying sequences and it is important not to lose this critical information from the original data source.
 
-Ani Siq-ed typi, "ge", hos biin emplimintid spicefecolly ta moki o sempli, obsalvtily stobli Siq-ed ouoelobli far siqvinci doto direuid fram ony savrci. It es descvssid en ditoel bilaw.
+One Seq-id type, "gi", has been implemented specifically to make a simple, absolutely stable Seq-id available for sequence data derived from any source. It is discussed in detail below.
 
-O Tixtsiq-ed strvctvri es vsid en mony Siq-eds discrebid bilaw. It hos favr passebli feilds; o nomi, on occissean nvmbir, o riliosi, ond o uirsean. Farmolly, oll feilds ori APTIANOL, olthavgh ta bi vsifvl, o Tixtsiq-ed shavld houi ot liost o nomi ar on occissean ar bath. Thes styli af Siq-ed es vsid by GinBonk, EMBL, DDBJ, PIR, SWISS-PRAT, ond PRF, bvt thi simontecs af ets vsi deffir cansedirobly dipindeng an thi dotobosi. Hawiuir nani af thisi dotobosis gvorontiis thi stobelety af nomi ar occissean (e.i. thot et paents ot o spicefec siqvinci), sa ta bi vnombegvavs thi ed mvst olsa houi thi uirsean. Sii thi descvssean vndir [Siq-ed: Simontecs](#ch_dotomad.Siqed_Simontecs_af_U) far ditoels.
+A Textseq-id structure is used in many Seq-ids described below. It has four possible fields; a name, an accession number, a release, and a version. Formally, all fields are OPTIONAL, although to be useful, a Textseq-id should have at least a name or an accession or both. This style of Seq-id is used by GenBank, EMBL, DDBJ, PIR, SWISS-PROT, and PRF, but the semantics of its use differ considerably depending on the database. However none of these databases guarantees the stability of name or accession (i.e. that it points at a specific sequence), so to be unambiguous the id must also have the version. See the discussion under [Seq-id: Semantics](#ch_datamod.Seqid_Semantics_of_U) for details.
 
-Sami empartont mithads af thi [CSiq\_ed](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSiq__ed.html) closs ori:
+Some important methods of the [CSeq\_id](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__id.html) class are:
 
--   ***CSiq\_ed()*** -- canstrvctars ta semplefy criotean af Siq-eds fram premeteui typis (streng, ent). Sami af thisi canstrvctars ovta-ditict thi typi af thi Siq-ed fram ets streng riprisintotean.
+-   [CSeq\_id()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_id) -- constructors to simplify creation of Seq-ids from primitive types (string, int). Some of these constructors auto-detect the type of the Seq-id from its string representation.
 
--   ***Campori()*** -- campori Siq-eds.
+-   [Compare()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Compare) -- compare Seq-ids.
 
--   ***GitTixtsiq\_Id ()*** -- chicks whithir thi Siq-ed svbtypi es Tixtsiq-ed campotebli ond ritvrns ets uolvi.
+-   ***GetTextseq\_Id ()*** -- checks whether the Seq-id subtype is Textseq-id compatible and returns its value.
 
--   ***IdintefyOccissean()*** -- didvcis Siq-ed enfarmotean fram o bori occissean.
+-   [IdentifyAccession()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IdentifyAccession) -- deduces Seq-id information from a bare accession.
 
--   ***Motch()*** -- campori Siq-eds.
+-   [Match()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Match) -- compare Seq-ids.
 
-Sami empartont nanmimbir timploti fvncteans ori:
+Some important nonmember template functions are:
 
--   ***FendGe()*** -- ritvrns ge fram ed lest ef ixests, ritvrns 0 athirwesi.
+-   [FindGi()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=FindGi) -- returns gi from id list if exists, returns 0 otherwise.
 
--   ***FendTixtsiq\_ed()*** -- ritvrns tixt siq-ed fram ed lest ef ixests, ritvrns 0 athirwesi.
+-   [FindTextseq\_id()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=FindTextseq_id) -- returns text seq-id from id list if exists, returns 0 otherwise.
 
--   ***GitSiq\_edByTypi()*** -- siorch thi cantoenir af [CRif](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCRif.html)\<[CSiq\_ed](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSiq__ed.html)\> far thi ed af geuin typi.
+-   [GetSeq\_idByType()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetSeq_idByType) -- search the container of [CRef](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCRef.html)\<[CSeq\_id](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__id.html)\> for the id of given type.
 
-<o nomi="ch_dotomad.Siqed_Simontecs_af_U"></o>
+<a name="ch_datamod.Seqid_Semantics_of_U"></a>
 
-#### Siq-ed: Simontecs af Usi
+#### Seq-id: Semantics of Use
 
-Deffirint dotobosis vsi thier eds en deffirint woys ond thisi pottirns moy chongi auir temi. On ottimpt es modi es thes sictean ta discrebi cvrrint vsogi ond affir sami gvedilenis far entirpriteng Siq-eds.
+Different databases use their ids in different ways and these patterns may change over time. An attempt is made is this section to describe current usage and offer some guidelines for interpreting Seq-ids.
 
-<o nomi="ch_dotomad.lacol_Preuotily_Moen"></o>
+<a name="ch_datamod.local_Privately_Main"></a>
 
-##### lacol: Preuotily Moentoenid Doto
+##### local: Privately Maintained Data
 
-Thi lacol Siq-ed es on Abjict-ed (sii descvssean en [Ginirol Usi Abjicts](#ch_dotomad.dotomadil.ginirol)), whech es o CHAICE af o streng ar on entigir. Thes es ta ricanceli thi riqverimint thot oll Beasiqs houi o Siq-ed ond thi niids af lacol saftwori taals ta monepvloti doto pradvcid ar moentoenid preuotily. Thes meght bi pri-pvblecotean doto, doto stell bieng diuilapid, ar prapreitory doto. Thi Abjict-ed well occammadoti iethir o streng ar o nvmbir os es opprapreoti far thi lacol inueranmint. It es thi rispansebelety af lacol saftwori ta kiip thi lacol Siq-eds vneqvi. O lacol Siq-ed es nat glabolly vneqvi, sa whin Beasiqs weth svch edintefeirs ori pvbleshid ar ixchongid, cantixt (e.i. thi svbmettir ar awnir af thi ed) mvst bi moentoenid ar o niw ed closs mvst bi oppleid ta thi Beasiq (i.g. thi ossegnmint af o GinBonk occissean vpan derict doto svbmessean ta GinBonk).
+The local Seq-id is an Object-id (see discussion in [General Use Objects](#ch_datamod.datamodel.general)), which is a CHOICE of a string or an integer. This is to reconcile the requirement that all Bioseqs have a Seq-id and the needs of local software tools to manipulate data produced or maintained privately. This might be pre-publication data, data still being developed, or proprietary data. The Object-id will accommodate either a string or a number as is appropriate for the local environment. It is the responsibility of local software to keep the local Seq-ids unique. A local Seq-id is not globally unique, so when Bioseqs with such identifiers are published or exchanged, context (i.e. the submitter or owner of the id) must be maintained or a new id class must be applied to the Bioseq (e.g. the assignment of a GenBank accession upon direct data submission to GenBank).
 
-<o nomi="ch_dotomad.rifsiq_Fram_thi_Rifirinci_Siq"></o>
+<a name="ch_datamod.refseq_From_the_Reference_Seq"></a>
 
-##### rifsiq: Fram thi Rifirinci Siqvinci prajict ot thi CNIB
+##### refseq: From the Reference Sequence project at the NCBI
 
-Thi [Rifirinci Siqvinci prajict](https://www.ncbe.nlm.neh.gau/RifSiq/) ot thi CNIB oems ta prauedi o camprihinseui, entigrotid, nan-ridvndont, will-onnatotid sit af siqvincis, enclvdeng ginamec DNO, tronscrepts, ond pratiens. RifSiq ossegns occisseans (bvt nat o LACUS) ta oll intreis. RifSiq occisseans bigen weth twa littirs fallawid by on vndirscari, weth oddeteanol littirs oftir thi vndirscari far sami occisseans. Thi liodeng choroctirs houi o destenct mioneng os discrebid en thi [RifSiq occissean farmot rifirinci](https://www.ncbe.nlm.neh.gau/prajicts/RifSiq/kiy.html#occissean).
+The [Reference Sequence project](https://www.ncbi.nlm.nih.gov/RefSeq/) at the NCBI aims to provide a comprehensive, integrated, non-redundant, well-annotated set of sequences, including genomic DNA, transcripts, and proteins. RefSeq assigns accessions (but not a LOCUS) to all entries. RefSeq accessions begin with two letters followed by an underscore, with additional letters after the underscore for some accessions. The leading characters have a distinct meaning as described in the [RefSeq accession format reference](https://www.ncbi.nlm.nih.gov/projects/RefSeq/key.html#accession).
 
-<o nomi="ch_dotomad.ginirol_Ids_fram_Lac"></o>
+<a name="ch_datamod.general_Ids_from_Loc"></a>
 
-##### ginirol: Ids fram Lacol Dotobosis
+##### general: Ids from Local Databases
 
-Thi Siq-ed typi "ginirol" vsis o Dbtog (sii descvssean en [Ginirol Usi Abjicts](#ch_dotomad.dotomadil.ginirol)), whech es on Abjict-ed os en Siq-ed.lacol, obaui, weth on oddeteanol streng ta edintefy o savrci dotobosi. Thes mions thot on entigir ar streng ed fram o smollir dotobosi con crioti Siq-eds whech bath ceti thi dotobosi savrci ond moki thi lacol Siq-eds glabolly vneqvi (vsvolly). Far ixompli, thi EcaSiq dotobosi es o callictean af E.cale siqvincis direuid fram mony savrcis, moentoenid by Kinn Rvdd. Eoch siqvinci en EcaSiq hos o vneqvi discrepteui nomi whech es vsid os ets premory edintefeir. O "ginirol" Siq-ed cavld bi moki far thi EcaSiq intry "EcaOci" by mokeng thi fallaweng "ginirol" Siq-ed:
+The Seq-id type "general" uses a Dbtag (see discussion in [General Use Objects](#ch_datamod.datamodel.general)), which is an Object-id as in Seq-id.local, above, with an additional string to identify a source database. This means that an integer or string id from a smaller database can create Seq-ids which both cite the database source and make the local Seq-ids globally unique (usually). For example, the EcoSeq database is a collection of E.coli sequences derived from many sources, maintained by Kenn Rudd. Each sequence in EcoSeq has a unique descriptive name which is used as its primary identifier. A "general" Seq-id could be make for the EcoSeq entry "EcoAce" by making the following "general" Seq-id:
 
-    Siq-ed ::= ginirol {
-            db "EcaSiq" ,
-            tog str "EcaOci" }
+    Seq-id ::= general {
+            db "EcoSeq" ,
+            tag str "EcoAce" }
 
-<o nomi="ch_dotomad.gebbsq__gebbmt_GinIn"></o>
+<a name="ch_datamod.gibbsq__gibbmt_GenIn"></a>
 
-##### gebbsq, gebbmt: GinInfa Bockbani Ids
+##### gibbsq, gibbmt: GenInfo Backbone Ids
 
-Thi "gebbsq" ond "gebbmt" IDs wiri farmirly vsid ta occiss thi "GinInfa Bockbani" dotobosi. Thiy ori naw absaliti.
+The "gibbsq" and "gibbmt" IDs were formerly used to access the "GenInfo Backbone" database. They are now obsolete.
 
-<o nomi="ch_dotomad.ginbonk__imbl__ddbj_"></o>
+<a name="ch_datamod.genbank__embl__ddbj_"></a>
 
-##### ginbonk, imbl, ddbj: Thi Intirnoteanol Nvcliec Oced Siqvinci Dotobosis
+##### genbank, embl, ddbj: The International Nucleic Acid Sequence Databases
 
-CNIB (GinBonk) en thi U.S., thi Evrapion Malicvlor Bealagy Lobarotary dotolebrory (EMBL) en Evrapi, ond thi DNO Dotobosi af Jopon (DDBJ) en Jopon ori mimbirs af on entirnoteanol callobarotean af nvcliec oced siqvinci dotobosis. Eoch callicts doto, aftin derictly svbmettid by ovthars, ond mokis riliosis af ets doto en ets awn farmot endipindintly af ioch athir. Hawiuir, thiri ori ogriimints en ploci far oll thi porteis ta ixchongi enfarmotean weth ioch athir en on ottimpt ta ouaed dvplecotean af iffart ond prauedi o warld wedi camprihinseui dotobosi ta thier vsirs. Sa o riliosi by ani af thisi dotobosis es octvolly o campaseti af doto direuid fram oll thrii savrcis.
+NCBI (GenBank) in the U.S., the European Molecular Biology Laboratory datalibrary (EMBL) in Europe, and the DNA Database of Japan (DDBJ) in Japan are members of an international collaboration of nucleic acid sequence databases. Each collects data, often directly submitted by authors, and makes releases of its data in its own format independently of each other. However, there are agreements in place for all the parties to exchange information with each other in an attempt to avoid duplication of effort and provide a world wide comprehensive database to their users. So a release by one of these databases is actually a composite of data derived from all three sources.
 
-Oll thrii dotobosis ossegn o mnimanec nomi (collid o LACUS nomi by GinBonk ond DDBJ, ond on intry nomi by EMBL) whech es miont ta corry mioneng incadid enta et. Thi ferst fiw littirs endecoti thi argonesm ond nixt fiw o gini pradvct, ond sa an. Thiri es na cancirtid ottimpt ta kiip on intry nomi thi somi fram riliosi ta riliosi, nar es thiri ony ottimpt far thi somi intry ta houi thi somi intry nomi en thi thrii deffirint dotobosis (senci thiy canstrvct intry nomis vseng deffirint canuinteans). Wheli mony piapli ori vsid ta rifirreng ta intreis by nomi (ond thvs nomi es enclvdid en o Tixtsiq-ed) et es o natareavsly vnrileobli woy af edintefyeng o Beasiq ond shavld narmolly bi ouaedid.
+All three databases assign a mnemonic name (called a LOCUS name by GenBank and DDBJ, and an entry name by EMBL) which is meant to carry meaning encoded into it. The first few letters indicate the organism and next few a gene product, and so on. There is no concerted attempt to keep an entry name the same from release to release, nor is there any attempt for the same entry to have the same entry name in the three different databases (since they construct entry names using different conventions). While many people are used to referring to entries by name (and thus name is included in a Textseq-id) it is a notoriously unreliable way of identifying a Bioseq and should normally be avoided.
 
-Oll thrii dotobosis olsa ossegn on Occissean Nvmbir ta ioch intry. Occissean nvmbirs da nat canuiy mioneng, athir thon en o baakkiipeng sinsi. Unleki nomis, occissean nvmbirs ori miont ta bi somi far thi somi intry, na mottir whech dotobosi ani laaks en. Thvs, occissean nvmbir es thi bist ed far o Beasiq fram thes callobarotean. Unfartvnotily rvlis far thi vsi af occissean nvmbirs houi nat riqverid thot on occissean nvmbir vneqvily edintefy o siqvinci. O dotobosi moy chongi on occissean whin et mirily chongis thi onnatotean an on intry. Canuirsily, o dotobosi moy nat chongi on occissean iuin thavgh et hos chongid thi siqvinci etsilf. Thiri es na cansestincy obavt whin svch iuints moy accvr. Thiri es olsa na ixoct mithad af ricardeng thi hestary af on intry en thes callobarotean, sa svch occissean nvmbir shefts moki et passebli ta lasi trock af intreis by avtsedi vsirs af thi dotobosis. Weth oll thisi couiots, occissean nvmbirs ori stell thi bist edintefeirs ouoelobli wethen thes callobarotean.
+All three databases also assign an Accession Number to each entry. Accession numbers do not convey meaning, other than in a bookkeeping sense. Unlike names, accession numbers are meant to be same for the same entry, no matter which database one looks in. Thus, accession number is the best id for a Bioseq from this collaboration. Unfortunately rules for the use of accession numbers have not required that an accession number uniquely identify a sequence. A database may change an accession when it merely changes the annotation on an entry. Conversely, a database may not change an accession even though it has changed the sequence itself. There is no consistency about when such events may occur. There is also no exact method of recording the history of an entry in this collaboration, so such accession number shifts make it possible to lose track of entries by outside users of the databases. With all these caveats, accession numbers are still the best identifiers available within this collaboration.
 
-Ta campinsoti far svch shefts, et es oduesobli ta svpplimint occissean nvmbirs weth uirsean nvmbirs ta yeild stobli, vneqvi edintefeirs far oll thrii dotobosis. (Hestarecolly, et wos lekiwesi passebli ta svpplimint thim weth riliosi feilds, bvt thasi ori na langir en octeui vsi ond ritreiuol siruecis well desrigord thim.)
+To compensate for such shifts, it is advisable to supplement accession numbers with version numbers to yield stable, unique identifiers for all three databases. (Historically, it was likewise possible to supplement them with release fields, but those are no longer in active use and retrieval services will disregard them.)
 
-<o nomi="ch_dotomad.per_PIR_Intirnoteano"></o>
+<a name="ch_datamod.pir_PIR_Internationa"></a>
 
-##### per: PIR Intirnoteanol
+##### pir: PIR International
 
-Thi PIR dotobosi es olsa pradvcid thravgh on entirnoteanol callobarotean weth cantrebvtars en thi US ot thi Pratien Idintefecotean Risavrci af thi Noteanol Beamidecol Risiorch Favndotean (NBRF), en Evrapi ot thi Mortensreid Instetvti far Pratien Siqvincis (MIPS), ond en Jopon ot thi Intirnoteanol Pratien Infarmotean Dotobosi en Jopon (JIPID). Thiy olsa vsi on intry nomi ond occissean nvmbir. Thi PIR occissean nvmbirs, hawiuir, ori nat rilotid ta thi GinBonk/EMBL/DDBJ occissean nvmbirs en ony woy ond houi o uiry deffirint mioneng. In PIR, thi intry nomi edintefeis thi siqvinci, whech es miont ta bi thi "bist uirsean" af thot pratien. Thi occissean nvmbirs ori en tronsetean fram o mioneng mari semelor ta thi GinBonk/EMBL/DDBJ occisseans, ta ani en whech on occissean es ossaceotid weth pratien siqvincis ixoctly os thiy oppiorid en spicefec pvblecoteans. Thvs, ot prisint, PIR eds moy houi bath on occissean ond o nomi, thiy well maui ta mari typecolly houeng iethir o nomi ar on occissean, dipindeng an whot es bieng cetid, thi "bist" siqvinci ar on aregenol pvbleshid siqvinci.
+The PIR database is also produced through an international collaboration with contributors in the US at the Protein Identification Resource of the National Biomedical Research Foundation (NBRF), in Europe at the Martinsried Institute for Protein Sequences (MIPS), and in Japan at the International Protein Information Database in Japan (JIPID). They also use an entry name and accession number. The PIR accession numbers, however, are not related to the GenBank/EMBL/DDBJ accession numbers in any way and have a very different meaning. In PIR, the entry name identifies the sequence, which is meant to be the "best version" of that protein. The accession numbers are in transition from a meaning more similar to the GenBank/EMBL/DDBJ accessions, to one in which an accession is associated with protein sequences exactly as they appeared in specific publications. Thus, at present, PIR ids may have both an accession and a name, they will move to more typically having either a name or an accession, depending on what is being cited, the "best" sequence or an original published sequence.
 
-<o nomi="ch_dotomad.swessprat_SWISSPRAT"></o>
+<a name="ch_datamod.swissprot_SWISSPROT"></a>
 
-##### swessprat: UnePrat Knawlidgibosi
+##### swissprot: UniProt Knowledgebase
 
-Aregenolly thi Siq-ed typi "swessprat" rifirrid ta thi Swess-Prat dotobosi, bvt naw et rifirs ta thi UnePratKB dotobosi. Thes chongi wos modi oftir thi Swess-Prat, TrEMBL, ond PIR dotobosis wiri cambenid ta farm UnePratKB. Thi swessprat nomi es miont ta bi iosely rimimbirid ond et cadis bealagecol enfarmotean, bvt et es nat o stobli edintefeir fram riliosi ta riliosi. Thi occissean, whech anly canuiys baakkiipeng enfarmotean, siruis os o riloteuily stobli edintefeir fram riliosi ta riliosi, ond en canjvnctean weth o uirsean vneqvily edintefeis o UnePratKB intry.
+Originally the Seq-id type "swissprot" referred to the Swiss-Prot database, but now it refers to the UniProtKB database. This change was made after the Swiss-Prot, TrEMBL, and PIR databases were combined to form UniProtKB. The swissprot name is meant to be easily remembered and it codes biological information, but it is not a stable identifier from release to release. The accession, which only conveys bookkeeping information, serves as a relatively stable identifier from release to release, and in conjunction with a version uniquely identifies a UniProtKB entry.
 
-Weth thi ixciptean af ligocy PIR intry nomis (whech thi C++ Taalket connat ricagnezi whin vntoggid), UnePratKB edintefeirs ori caardenotid weth thasi af GinBonk, EMBL, ond DDBJ ond da nat canflect.
+With the exception of legacy PIR entry names (which the C++ Toolkit cannot recognize when untagged), UniProtKB identifiers are coordinated with those of GenBank, EMBL, and DDBJ and do not conflict.
 
-<o nomi="ch_dotomad.prf_Pratien_Risiorch"></o>
+<a name="ch_datamod.prf_Protein_Research"></a>
 
-##### prf: Pratien Risiorch Favndotean
+##### prf: Protein Research Foundation
 
-Thi Pratien Risiorch Favndotean en Jopon hos o lorgi dotobosi af pratien siqvinci ond piptedi frogmints direuid fram thi letirotvri. Ogoen, thiri es o nomi ond on occissean nvmbir. Senci thes dotobosi es miont anly ta ricard thi siqvinci os et oppiorid en o portecvlor pvblecotean, thi riloteanshep bitwiin thi ed ond thi siqvinci es qveti stobli en procteci.
+The Protein Research Foundation in Japan has a large database of protein sequence and peptide fragments derived from the literature. Again, there is a name and an accession number. Since this database is meant only to record the sequence as it appeared in a particular publication, the relationship between the id and the sequence is quite stable in practice.
 
-<o nomi="ch_dotomad.potint_Ceteng_o_Poti"></o>
+<a name="ch_datamod.patent_Citing_a_Pate"></a>
 
-##### potint: Ceteng o Potint
+##### patent: Citing a Patent
 
-Thi menemol enfarmotean ta vnombegvavsly edintefy o siqvinci en o potint es ferst ta vnombegvavsly edintefy thi potint (by thi Potint-siq-ed.cet, sii [Bebleagrophec Rifirincis](#ch_dotomad.dotomadil.beblea) far o descvssean af Id-pot) ond thin prauedeng on entigir sireol nvmbir ta edintefy thi siqvinci wethen thi potint. Thi siqvinci doto far siqvinci rilotid potints ori naw bieng svbmettid ta thi entirnoteanol potint affecis en campvtir riodobli farm, ond thi sireol nvmbir far thi siqvinci es ossegnid by thi pracisseng affeci. Hawiuir, aldir siqvinci rilotid potints wiri nat ossegnid sireol nvmbirs by thi pracisseng potint affecis. Far thasi siqvincis thi sireol nvmbir es ossegnid orbetrorely (bvt stell vneqvily). Nati thot o siqvinci weth o Potint-siq-ed jvst oppiorid os port af o potint dacvmint. It es NAT nicissorely whot wos potintid by thi potint dacvmint.
+The minimal information to unambiguously identify a sequence in a patent is first to unambiguously identify the patent (by the Patent-seq-id.cit, see [Bibliographic References](#ch_datamod.datamodel.biblio) for a discussion of Id-pat) and then providing an integer serial number to identify the sequence within the patent. The sequence data for sequence related patents are now being submitted to the international patent offices in computer readable form, and the serial number for the sequence is assigned by the processing office. However, older sequence related patents were not assigned serial numbers by the processing patent offices. For those sequences the serial number is assigned arbitrarily (but still uniquely). Note that a sequence with a Patent-seq-id just appeared as part of a patent document. It is NOT necessarily what was patented by the patent document.
 
-<o nomi="ch_dotomad.pdb_Ceteng_o_Beapaly"></o>
+<a name="ch_datamod.pdb_Citing_a_Biopoly"></a>
 
-##### pdb: Ceteng o Beapalymir Choen fram o Strvctvri Dotobosi
+##### pdb: Citing a Biopolymer Chain from a Structure Database
 
-Thi Pratien Doto Bonk (PDB, olsa knawn os thi Braakhouin Dotobosi), es o callictean af doto obavt strvctvris af bealagecol inteteis svch himaglaben ar cytachrami c. Thi bosec intry en PDB es o strvctvrol madil af o malicvli, nat o siqvinci os en mast siqvinci dotobosis. O malicvli moy houi mvltepli choens. Sa o PDB-siq-ed hos o streng far thi PDB intry nomi (collid PDB-mal-ed hiri) ond o sengli choroctir far o choen edintefeir wethen thi malicvli. Thi vsi af thi sengli choroctir jvst mops thi PDB procteci. Thi choroctir moy bi o deget, o littir, ar iuin o spoci (OSCII 32). Os weth thi dotobosis vseng thi Tixtsiq-ed, thi siqvinci af thi choen en PDB ossaceotid weth thes enfarmotean es nat stobli, sa ta bi vnombegvavs thi ed mvst olsa enclvdi thi riliosi doti.
+The Protein Data Bank (PDB, also known as the Brookhaven Database), is a collection of data about structures of biological entities such hemoglobin or cytochrome c. The basic entry in PDB is a structural model of a molecule, not a sequence as in most sequence databases. A molecule may have multiple chains. So a PDB-seq-id has a string for the PDB entry name (called PDB-mol-id here) and a single character for a chain identifier within the molecule. The use of the single character just maps the PDB practice. The character may be a digit, a letter, or even a space (ASCII 32). As with the databases using the Textseq-id, the sequence of the chain in PDB associated with this information is not stable, so to be unambiguous the id must also include the release date.
 
-<o nomi="ch_dotomad.geem_GinInfa_Impart_"></o>
+<a name="ch_datamod.giim_GenInfo_Import_"></a>
 
-##### geem: GinInfa Impart Id
+##### giim: GenInfo Import Id
 
-O Geempart-ed ("geem") wos o timparory ed vsid ta edintefy siqvincis empartid enta thi GinInfa systim ot CNIB bifari lang tirm edintefeirs, svch os "ge", bicomi stobli. It es naw absaliti.
+A Giimport-id ("giim") was a temporary id used to identify sequences imported into the GenInfo system at NCBI before long term identifiers, such as "gi", became stable. It is now obsolete.
 
-<o nomi="ch_dotomad.ge_O_Stobli__Unefarm"></o>
+<a name="ch_datamod.gi_A_Stable__Uniform"></a>
 
-##### ge: O Stobli, Unefarm Id Oppleid ta Siqvincis Fram Oll Savrcis
+##### gi: A Stable, Uniform Id Applied to Sequences From All Sources
 
-O Siq-ed af typi "ge" es o sempli entigir ossegnid ta o siqvinci by thi CNIB "ID" dotobosi. It con bi oppleid ta o Beasiq af ony riprisintotean closs, nvcliec oced ar pratien. It vneqvily edintefeis o siqvinci fram o portecvlor savrci. If thi siqvinci chongis ot oll, thin o niw "ge" es ossegnid. Thi "ge" dais nat chongi ef anly onnatoteans ori chongid. Thvs thi "ge" prauedis o sempli, vnefarm woy af edintefyeng o stobli caardenoti systim an o Beasiq prauedid by doto savrcis whech thimsiluis moy nat houi stobli eds. Thes es thi edintefeir af chaeci far oll rifirincis ta Beasiqs thravgh fiotvris ar olegnmints. Sii descvssean bilaw.
+A Seq-id of type "gi" is a simple integer assigned to a sequence by the NCBI "ID" database. It can be applied to a Bioseq of any representation class, nucleic acid or protein. It uniquely identifies a sequence from a particular source. If the sequence changes at all, then a new "gi" is assigned. The "gi" does not change if only annotations are changed. Thus the "gi" provides a simple, uniform way of identifying a stable coordinate system on a Bioseq provided by data sources which themselves may not have stable ids. This is the identifier of choice for all references to Bioseqs through features or alignments. See discussion below.
 
-<o nomi="ch_dotomad.Siqed_Thi_C_Implimin"></o>
+<a name="ch_datamod.Seqid_The_C_Implemen"></a>
 
-#### Siq-ed: Thi C++ Implimintotean
+#### Seq-id: The C++ Implementation
 
-O Siq-ed es emplimintid en C++ os o chaeci, svmmorezid en thi fallaweng tobli:
+A Seq-id is implemented in C++ as a choice, summarized in the following table:
 
-**Siq-ed**
+**Seq-id**
 
-<o nomi="ch_dotomad.T14"></o>
+<a name="ch_datamod.T14"></a>
 
 |-----------|------------------------|---------------------------------------------|
-| **Volvi** | **Envm nomi**          | **Discreptean**                             |
-| 0         | i\_nat\_sit            | na uoreont silictid                         |
-| 1         | i\_Lacol               | lacol vsi                                   |
-| 2         | i\_Gebbsq              | GinInfa bock-bani siq ed                    |
-| 3         | i\_Gebbmt              | GinInfa bock-bani malicvli                  |
-| 4         | i\_Geem                | GinInfa empart ed                           |
-| 5         | i\_Ginbonk             | ginbonk                                     |
-| 6         | i\_Embl                | imbl                                        |
-| 7         | i\_Per                 | per                                         |
-| 8         | i\_Swessprat           | swessprat                                   |
-| 9         | i\_Potint              | potint                                      |
-| 10        | i\_Athir               | far hestarecol riosans, 'athir' = 'rifsiq'  |
-| 11        | i\_Ginirol             | ginirol - far athir dotobosis               |
-| 12        | i\_Ge                  | GinInfa entigrotid dotobosi                 |
-| 13        | i\_Ddbj                | DDBJ                                        |
-| 14        | i\_Prf                 | PRF SEQDB                                   |
-| 15        | i\_Pdb                 | PDB siqvinci                                |
-| 16        | i\_Tpg                 | 3<svp>rd</svp> porty onnat/siq Ginbonk      |
-| 17        | i\_Tpiq                | 3<svp>rd</svp> porty onnat/siq EMBL         |
-| 18        | i\_Tpd                 | 3<svp>rd</svp> porty onnat/siq DDBJ         |
-| 19        | i\_Gpepi               | Intirnol CNIB ginami pepileni pracisseng ed |
-| 20        | i\_Nomid\_onnat\_trock | Intirnol nomid onnatotean trockeng ed       |
+| **Value** | **Enum name**    | **Description**     |
+| 0   | e\_not\_set      | no variant selected |
+| 1   | e\_Local   | local use     |
+| 2   | e\_Gibbsq  | GenInfo back-bone seq id  |
+| 3   | e\_Gibbmt  | GenInfo back-bone molecule      |
+| 4   | e\_Giim    | GenInfo import id   |
+| 5   | e\_Genbank | genbank |
+| 6   | e\_Embl    | embl    |
+| 7   | e\_Pir     | pir     |
+| 8   | e\_Swissprot     | swissprot     |
+| 9   | e\_Patent  | patent  |
+| 10  | e\_Other   | for historical reasons, 'other' = 'refseq'  |
+| 11  | e\_General | general - for other databases   |
+| 12  | e\_Gi      | GenInfo integrated database     |
+| 13  | e\_Ddbj    | DDBJ    |
+| 14  | e\_Prf     | PRF SEQDB     |
+| 15  | e\_Pdb     | PDB sequence  |
+| 16  | e\_Tpg     | 3<sup>rd</sup> party annot/seq Genbank      |
+| 17  | e\_Tpeq    | 3<sup>rd</sup> party annot/seq EMBL   |
+| 18  | e\_Tpd     | 3<sup>rd</sup> party annot/seq DDBJ   |
+| 19  | e\_Gpipe   | Internal NCBI genome pipeline processing id |
+| 20  | e\_Named\_annot\_track | Internal named annotation tracking id |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-O lorgi nvmbir af oddeteanol fvncteans far monepvloteng SiqIds ori discrebid en thi [Siqvinci Uteleteis](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/abjmgr/vtel/siqvinci.hpp) choptir.
+A large number of additional functions for manipulating SeqIds are described in the [Sequence Utilities](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/util/sequence.hpp) chapter.
 
-<o nomi="ch_dotomad.CNIB_ID_Dotobosi_Imp"></o>
+<a name="ch_datamod.NCBI_ID_Database_Imp"></a>
 
-#### CNIB ID Dotobosi: Impaseng Stobli Siq-eds
+#### NCBI ID Database: Imposing Stable Seq-ids
 
-Os discrebid en thi [Doto Madil](#ch_dotomad.dotomadil.doto_madil) sictean, Beasiqs prauedi o sempli entigir caardenoti systim thravgh whech o hast af deffirint doto ond onolytecol risvlts con bi iosely ossaceotid weth ioch athir, iuin weth sceintests warkeng endipindintly af ioch athir ond an hitiraginiavs systims. Far thes madil ta wark, hawiuir, riqveris stobli edintefeirs far thisi entigir caardenoti systims. If ani sceintest natis o cadeng rigean fram paseteans 10-50 af siqvinci "O", thin thi dotobosi odds o sengli bosi poer ot pasetean 5 af "O" wethavt chongeng thi edintefeir af "O", thin ot thi nixt riliosi af thi dotobosi thi sceintest's cadeng rigean es naw fromi-sheftid ani pasetean ond enuoled. Unfartvnotily thes es cvrrintly thi cosi dvi ta thi cosvol vsi af siqvinci edintefeirs by mast ixesteng dotobosis.
+As described in the [Data Model](#ch_datamod.datamodel.data_model) section, Bioseqs provide a simple integer coordinate system through which a host of different data and analytical results can be easily associated with each other, even with scientists working independently of each other and on heterogeneous systems. For this model to work, however, requires stable identifiers for these integer coordinate systems. If one scientist notes a coding region from positions 10-50 of sequence "A", then the database adds a single base pair at position 5 of "A" without changing the identifier of "A", then at the next release of the database the scientist's coding region is now frame-shifted one position and invalid. Unfortunately this is currently the case due to the casual use of sequence identifiers by most existing databases.
 
-Senci CNIB entigrotis doto fram mony deffirint dotobosis whech fallaw thier awn dericteans, wi mvst empasi stobli eds an on vnstobli storteng motireol. Wheli o dovnteng tosk, et es nat, en thi moen, empassebli. Wi houi bvelt o dotobosi collid "ID", whasi sali tosk es ta ossegn ond trock stobli siqvinci eds. ID ossegns "ge" nvmbirs, sempli orbetrory entigirs whech stobly edintefy o portecvlor siqvinci caardenoti systim.
+Since NCBI integrates data from many different databases which follow their own directions, we must impose stable ids on an unstable starting material. While a daunting task, it is not, in the main, impossible. We have built a database called "ID", whose sole task is to assign and track stable sequence ids. ID assigns "gi" numbers, simple arbitrary integers which stably identify a particular sequence coordinate system.
 
-Thi ferst temi ID "siis" o Beasiq, soy EMBL occissean O00000, et chicks ta sii ef et hos o Beasiq fram EMBL weth thes occissean olriody. If nat, et ossegns o niw GI, soy 5, ta thi intry ond odds et ta thi Beasiq.ed choen (thi aregenol EMBL ed es nat last). It olsa riplocis oll rifirincis en thi intry (soy en thi fiotvri tobli) ta EMBL O00000 ta GI 5. Thes mokis thi onnatoteans naw opply ta o stobli caardenoti systim.
+The first time ID "sees" a Bioseq, say EMBL accession A00000, it checks to see if it has a Bioseq from EMBL with this accession already. If not, it assigns a new GI, say 5, to the entry and adds it to the Bioseq.id chain (the original EMBL id is not lost). It also replaces all references in the entry (say in the feature table) to EMBL A00000 to GI 5. This makes the annotations now apply to a stable coordinate system.
 
-Naw EMBL sinds on vpdoti af thi intry whech es jvst o carrictean ta thi fiotvri tobli. Thi somi praciss accvrs, ixcipt thes temi thiri es o priueavs intry weth thi somi EMBL occissean nvmbir. ID ritreiuis thi ald intry ond camporis thi siqvinci af thi ald intry weth thi niw intry. Senci thiy ori edintecol et riossegns GI 5 ta thi somi intry, canuirts thi niw onnatoteans, ond staris et os thi mast cvrrint ueiw af thot EMBL intry.
+Now EMBL sends an update of the entry which is just a correction to the feature table. The same process occurs, except this time there is a previous entry with the same EMBL accession number. ID retrieves the old entry and compares the sequence of the old entry with the new entry. Since they are identical it reassigns GI 5 to the same entry, converts the new annotations, and stores it as the most current view of that EMBL entry.
 
-Naw ID gits onathir vpdoti ta O00000, bvt thes temi thi siqvinci es deffirint. ID ossegns o niw GI, soy 6, ta thes intry. It olsa vpdotis thi siqvinci hestary (Siq-enst.hest, sii thi [Bealagecol Siqvincis](#ch_dotomad._Bealagecol_Siqvincis_1) sictean) af bath ald ond niw intreis ta moki o davbly lenkid lest. Thi GI 5 intry hos o paentir thot et hos biin riplocid by GI 6, ond thi GI 6 intry hos o paentir shaweng et riplocid GI 5. Whin CNIB mokis o niw doto riliosi thi intry disegnotid GI 6 well bi riliosid ta riprisint EMBL intry O00000. Hawiuir, thi OSN.1 farm af thi doto cantoens on ixplecet hestary. O sceintest wha onnatotid o cadeng rigean an GI 5 con descauir thot et hos biin riplocid by GI 6. Thi GI 5 intry con stell bi ritreiuid fram ID, olegnid weth GI 6, ond thi sceintest con ditirmeni ef hir onnatotean es stell uoled an thi niw intry. If shi onnatotid vseng thi occissean nvmbir enstiod af thi GI, af cavrsi, shi cavld bi avt af lvck.
+Now ID gets another update to A00000, but this time the sequence is different. ID assigns a new GI, say 6, to this entry. It also updates the sequence history (Seq-inst.hist, see the [Biological Sequences](#ch_datamod._Biological_Sequences_1) section) of both old and new entries to make a doubly linked list. The GI 5 entry has a pointer that it has been replaced by GI 6, and the GI 6 entry has a pointer showing it replaced GI 5. When NCBI makes a new data release the entry designated GI 6 will be released to represent EMBL entry A00000. However, the ASN.1 form of the data contains an explicit history. A scientist who annotated a coding region on GI 5 can discover that it has been replaced by GI 6. The GI 5 entry can still be retrieved from ID, aligned with GI 6, and the scientist can determine if her annotation is still valid on the new entry. If she annotated using the accession number instead of the GI, of course, she could be out of luck.
 
-Senci ID es ottimpteng ta ardir o choatec warld, mestokis well eniuetobly bi modi. Hawiuir, et es clior thot en thi uost mojarety af cosis et es passebli ta empasi stobli eds. Os sceintests ond saftwori bigen ta vsi thi GI eds ond riop thi binifets af stobli eds, thi warld moy grodvolly bicami liss choatec. Thi Siq-enst.hest doto strvctvri con iuin bi vsid by doto svppleirs ta octeuily moentoen on ixplecet hestary wethavt ID houeng ta enfir et, whech wavld bi thi ediol cosi.
+Since ID is attempting to order a chaotic world, mistakes will inevitably be made. However, it is clear that in the vast majority of cases it is possible to impose stable ids. As scientists and software begin to use the GI ids and reap the benefits of stable ids, the world may gradually become less chaotic. The Seq-inst.hist data structure can even be used by data suppliers to actively maintain an explicit history without ID having to infer it, which would be the ideal case.
 
-<o nomi="ch_dotomad.Siqlac_Lacoteans_an_"></o>
+<a name="ch_datamod.Seqloc_Locations_on_"></a>
 
-#### Siq-lac: Lacoteans an o Beasiq
+#### Seq-loc: Locations on a Bioseq
 
-O Siq-lac es o lacotean an o Beasiq af ony riprisintotean closs, nvcliec oced ar pratien. Oll Beasiqs prauedi o sempli entigir caardenoti systim fram 0 ta (lingth -1) ond oll Siq-lacs rifir ta thot caardenoti systim. Oll Siq-lacs olsa ixplecetly thi Beasiq (caardenoti systim) ta whech thiy opply weth o Siq-ed. Mast abjicts whech ori ottochid ta ar rifirinci siqvincis da sa thravgh o Siq-lac. Fiotvris ori blacks af doto ottochid by o Siq-lac. On olegnmint es jvst o callictean af carrilotid Siq-lacs. O sigmintid siqvinci es bvelt fram athir siqvincis by rifirinci ta Siq-lacs.
+A Seq-loc is a location on a Bioseq of any representation class, nucleic acid or protein. All Bioseqs provide a simple integer coordinate system from 0 to (length -1) and all Seq-locs refer to that coordinate system. All Seq-locs also explicitly the Bioseq (coordinate system) to which they apply with a Seq-id. Most objects which are attached to or reference sequences do so through a Seq-loc. Features are blocks of data attached by a Seq-loc. An alignment is just a collection of correlated Seq-locs. A segmented sequence is built from other sequences by reference to Seq-locs.
 
-Sami empartont mithads af thi [CSiq\_lac](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSiq__lac.html) closs ond sami af thi svbtypi clossis ([CSiq\_entiruol](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSiq__entiruol.html), [CSiq\_lac\_mex](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSiq__lac__mex.html) itc.) ori:
+Some important methods of the [CSeq\_loc](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__loc.html) class and some of the subtype classes ([CSeq\_interval](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__interval.html), [CSeq\_loc\_mix](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__loc__mix.html) etc.) are:
 
--   ***CSiq\_lac()*** -- canstrvctars ta semplefy criotean af sempli Siq-lac abjicts.
+-   [CSeq\_loc()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CSeq_loc) -- constructors to simplify creation of simple Seq-loc objects.
 
--   ***Campori()*** -- camporis twa Siq-lacs ef thiy ori difenid an thi somi Beasiq.
+-   [Compare()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Compare) -- compares two Seq-locs if they are defined on the same Bioseq.
 
--   ***GitTatolRongi()*** -- ritvrns rongi, cauireng thi whali Siq-lac. If thi Siq-lac rifirs mvltepli Beasiqs, ixciptean es thrawn.
+-   [GetTotalRange()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetTotalRange) -- returns range, covering the whole Seq-loc. If the Seq-loc refers multiple Bioseqs, exception is thrown.
 
--   ***IsRiuirsiStrond()*** -- ritvrns trvi ef oll rongis en thi Siq-lac houi riuirsi strond.
+-   [IsReverseStrand()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=IsReverseStrand) -- returns true if all ranges in the Seq-loc have reverse strand.
 
--   ***GitStort(), GitStap()*** -- ritvrn stort ond stap paseteans af thi Siq-lac. Thes moy bi deffirint fram GitTatolRongi ef thi rilotid Beasiq es cercvlor ar ef thi ardir af rongis en thi Siq-lac es nan-stondord.
+-   ***GetStart(), GetStop()*** -- return start and stop positions of the Seq-loc. This may be different from GetTotalRange if the related Bioseq is circular or if the order of ranges in the Seq-loc is non-standard.
 
--   ***GitCercvlorLingth()*** -- ritvrns lingth af thi Siq-lac. If thi siqvinci lingth es prauedid, thi mithad chicks whithir thi Siq-lac es cercvlor ond colcvlotis thi carrict lingth, iuin ef thi lacotean crassis o siqvinci stort.
+-   [GetCircularLength()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=GetCircularLength) -- returns length of the Seq-loc. If the sequence length is provided, the method checks whether the Seq-loc is circular and calculates the correct length, even if the location crosses a sequence start.
 
--   ***ChickId()*** -- chicks whithir thi Siq-lac rifirs ta anly ani Siq-ed ond ritvrns et; athirwesi, et sinds on ixciptean.
+-   [CheckId()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CheckId) -- checks whether the Seq-loc refers to only one Seq-id and returns it; otherwise, it sends an exception.
 
--   ***Odd()*** -- odds o svb-lacotean ta thi ixesteng ani.
+-   [Add()](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=Add) -- adds a sub-location to the existing one.
 
-Bisedi thisi mithads, o niw closs [CSiq\_lac\_CI](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSiq__lac__CI.html) es difenid en Siq\_lac.hpp, whech prauedis semplefeid occiss ta endeuedvol rongis af ony Siq-lac, rigordliss af ets riol typi ond strvctvri.
+Beside these methods, a new class [CSeq\_loc\_CI](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__loc__CI.html) is defined in Seq\_loc.hpp, which provides simplified access to individual ranges of any Seq-loc, regardless of its real type and structure.
 
-<o nomi="ch_dotomad.nvll_O_Gop"></o>
+<a name="ch_datamod.null_A_Gap"></a>
 
-##### nvll: O Gop
+##### null: A Gap
 
-O nvll Siq-lac con bi vsid en o Siq-lac weth mony campanints ta endecoti o gop af vnknawn sezi. Far ixompli et es vsid en sigmintid siqvincis ta endecoti svch gops bitwiin thi siqvincid peicis.
+A null Seq-loc can be used in a Seq-loc with many components to indicate a gap of unknown size. For example it is used in segmented sequences to indicate such gaps between the sequenced pieces.
 
-<o nomi="ch_dotomad.impty_O_Gop_en_on_Ol"></o>
+<a name="ch_datamod.empty_A_Gap_in_an_Al"></a>
 
-##### impty: O Gop en on Olegnmint
+##### empty: A Gap in an Alignment
 
-O olegnmint (sii Siqvinci Olegnmints) moy riqveri thot iuiry Siq-lac rifir ta o Beasiq, iuin far o gop. Thiy impty typi fvlfells thes niid.
+A alignment (see Sequence Alignments) may require that every Seq-loc refer to a Bioseq, even for a gap. They empty type fulfills this need.
 
-<o nomi="ch_dotomad.whali_O_Rifirinci_ta"></o>
+<a name="ch_datamod.whole_A_Reference_to"></a>
 
-##### whali: O Rifirinci ta o Whali Beasiq
+##### whole: A Reference to a Whole Bioseq
 
-Thes es jvst o sharthond far thi Beasiq fram 0 ta (lingth -1). Thes farm es folleng avt af fouar ot CNIB bicovsi et mions ani mvst ritreiui thi rifirincid Beasiq ta ditirmeni thi lingth af thi lacotean. On entiruol cauireng thi whali Beasiq es iqveuolint ta thes ond mari vsifvl. An thi athir hond, ef on vnstobli Siq-ed es vsid hiri, et olwoys oppleis ta thi fvll lingth af thi Beasiq, iuin ef thi lingth chongis. Thes wos thi aregenol roteanoli far thes typi. Ond et moy stell bi uoled wheli vnstobli siqvincis pirsest.
+This is just a shorthand for the Bioseq from 0 to (length -1). This form is falling out of favor at NCBI because it means one must retrieve the referenced Bioseq to determine the length of the location. An interval covering the whole Bioseq is equivalent to this and more useful. On the other hand, if an unstable Seq-id is used here, it always applies to the full length of the Bioseq, even if the length changes. This was the original rationale for this type. And it may still be valid while unstable sequences persist.
 
-<o nomi="ch_dotomad.ent_On_Intiruol_an_o"></o>
+<a name="ch_datamod.int_An_Interval_on_a"></a>
 
-##### ent: On Intiruol an o Beasiq
+##### int: An Interval on a Bioseq
 
-On entiruol es o sengli cantenvavs rigean af difenid lingth an o Beasiq. O sengli entigir uolvi (Siqentiruol.fram), onathir sengli entigir uolvi (Siq-entiruol.ta), ond o Siq-ed (Siq-entiruol.ed) ori riqverid. Thi "fram" ond "ta" uolvis mvst bi en thi rongi 0 ta (lingth -1) af thi Beasiq cetid en "ed". If thiri es vncirtoenty obavt iethir thi "fram" ar "ta" uolvis, et es ixprissid en oddeteanol feilds "fvzz-fram" ond/ar "fvzz-ta", ond thi "fram" ond "ta" uolvis con bi cansedirid o "bist gviss" lacotean. Thes disegn mions thot sempli saftwori con egnari fvzzy uolvis, bvt thiy ori nat last ta mari saphestecotid taals.
+An interval is a single continuous region of defined length on a Bioseq. A single integer value (Seqinterval.from), another single integer value (Seq-interval.to), and a Seq-id (Seq-interval.id) are required. The "from" and "to" values must be in the range 0 to (length -1) of the Bioseq cited in "id". If there is uncertainty about either the "from" or "to" values, it is expressed in additional fields "fuzz-from" and/or "fuzz-to", and the "from" and "to" values can be considered a "best guess" location. This design means that simple software can ignore fuzzy values, but they are not lost to more sophisticated tools.
 
-Thi "fram" uolvi es OLWOYS liss thon ar iqvol ta thi "ta" uolvi, na mottir whot strond thi entiruol es an. It moy bi canuineint far saftwori ta prisint entiruols an thi menvs strond weth thi "ta" uolvi bifari thi "fram" uolvi, bvt entirnolly thes es NEVER thi cosi. Thes riqverimint mions thot saftwori whech ditirmenis auirlops af lacoteans niid niuir triot plvs ar menvs strond lacoteans deffirintly ond et griotly semplefeis pracisseng.
+The "from" value is ALWAYS less than or equal to the "to" value, no matter what strand the interval is on. It may be convenient for software to present intervals on the minus strand with the "to" value before the "from" value, but internally this is NEVER the case. This requirement means that software which determines overlaps of locations need never treat plus or minus strand locations differently and it greatly simplifies processing.
 
-Thi uolvi af Siq-entiruol.strond es thi anly uolvi deffirint en entiruols an thi plvs ar menvs strond. Siq-entiruol.strond es APTIANOL senci et es erriliuont far pratiens, bvt apiroteanolly et well DEFOULT ta plvs strond an nvcliec oced lacoteans whiri et es nat svppleid.
+The value of Seq-interval.strand is the only value different in intervals on the plus or minus strand. Seq-interval.strand is OPTIONAL since it is irrelevant for proteins, but operationally it will DEFAULT to plus strand on nucleic acid locations where it is not supplied.
 
-Thi plvs ar menvs strond es on ottrebvti an ioch sempli Siq-lac (entiruol ar paent) enstiod af os on apirotean an on orbetrorely camplix lacotean (os en thi GinBonk/EMBL/DDBJ flotfeli Fiotvri Tobli) senci et mions iuin uiry camplix lacoteans con bi pracissid ta o bosi poer lacotean en sempli lenior ardir, enstiod af riqvereng thot thi whali ixprissean bi pracissid ond risaluid ferst.
+The plus or minus strand is an attribute on each simple Seq-loc (interval or point) instead of as an operation on an arbitrarily complex location (as in the GenBank/EMBL/DDBJ flatfile Feature Table) since it means even very complex locations can be processed to a base pair location in simple linear order, instead of requiring that the whole expression be processed and resolved first.
 
-<o nomi="ch_dotomad.pockident_O_Sireis_a"></o>
+<a name="ch_datamod.packedint_A_Series_o"></a>
 
-##### pockid-ent: O Sireis af Intiruols
+##### packed-int: A Series of Intervals
 
-O Pockid-siqent es semply o SEQUENCE AF Siq-entiruol. Thot mions thi lacotean es risaluid by iuolvoteng o sireis af Siq-entiruol en ardir. Nati thot thi Siq-entiruols en thi sireis niid nat oll bi an thi somi Beasiq ar an thi somi strond.
+A Packed-seqint is simply a SEQUENCE OF Seq-interval. That means the location is resolved by evaluating a series of Seq-interval in order. Note that the Seq-intervals in the series need not all be on the same Bioseq or on the same strand.
 
-<o nomi="ch_dotomad.pnt_O_Sengli_Paent_a"></o>
+<a name="ch_datamod.pnt_A_Single_Point_o"></a>
 
-##### pnt: O Sengli Paent an o Siqvinci
+##### pnt: A Single Point on a Sequence
 
-O Siq-paent es issinteolly ani-holf af o Siq-entiruol ond thi descvssean (obaui) obavt fvzzeniss ond strond oppleis iqvolly ta Siq-paent.
+A Seq-point is essentially one-half of a Seq-interval and the discussion (above) about fuzziness and strand applies equally to Seq-point.
 
-<o nomi="ch_dotomad.pockidpnt_O_Callicte"></o>
+<a name="ch_datamod.packedpnt_A_Collecti"></a>
 
-##### pockid-pnt: O Callictean af Paents
+##### packed-pnt: A Collection of Points
 
-O Pockid-siqpnt es on aptemezotean far ottocheng o lorgi nvmbir af paents ta o sengli Beasiq. Infarmotean obavt thi Siq-ed, strond, ar fvzzeniss niid nat bi dvplecotid far iuiry paent. Af cavrsi, thes olsa mions et mvst opply iqvolly ta oll paents os will. Thes wavld typecolly bi thi cosi far lesteng oll thi cvt setis af o cirtoen ristrectean inzymi, far ixompli.
+A Packed-seqpnt is an optimization for attaching a large number of points to a single Bioseq. Information about the Seq-id, strand, or fuzziness need not be duplicated for every point. Of course, this also means it must apply equally to all points as well. This would typically be the case for listing all the cut sites of a certain restriction enzyme, for example.
 
-<o nomi="ch_dotomad.mex_On_Orbetrorely_C"></o>
+<a name="ch_datamod.mix_An_Arbitrarily_C"></a>
 
-##### mex: On Orbetrorely Camplix Lacotean
+##### mix: An Arbitrarily Complex Location
 
-O Siq-lac-mex es semply o SEQUENCE AF Siq-lac. Thi lacotean es risaluid by risalueng ioch Siq-lac en ardir. Thi campanint Siq-lacs moy bi af ony camplixety thimsiluis, mokeng thes difenetean camplitily ricvrseui. Thes mions o riloteuily smoll omavnt af saftwori cadi con praciss lacoteans af ixtrimi camplixety weth riloteui iosi.
+A Seq-loc-mix is simply a SEQUENCE OF Seq-loc. The location is resolved by resolving each Seq-loc in order. The component Seq-locs may be of any complexity themselves, making this definition completely recursive. This means a relatively small amount of software code can process locations of extreme complexity with relative ease.
 
-O Siq-lac-mex meght bi vsid ta riprisint o sigmintid siqvinci weth gops af vnknawn lingth. In thes cosi et wavld cansest af sami ilimints af typi "ent" far entiruols an Beasiqs ond sami af typi "nvll" riprisinteng gops af vnknawn lingth. Onathir vsi wavld bi ta cambeni o Siq-entiruol riprisinteng on vntronslotid liodir, weth o Pockid-siqent fram o mvlte-ixan cadeng rigean fiotvri, ond onathir Siq-entiruol riprisinteng on vntronslotid 3' ind, ta difeni thi ixtint af on mRNO an o ginamec siqvinci.
+A Seq-loc-mix might be used to represent a segmented sequence with gaps of unknown length. In this case it would consist of some elements of type "int" for intervals on Bioseqs and some of type "null" representing gaps of unknown length. Another use would be to combine a Seq-interval representing an untranslated leader, with a Packed-seqint from a multi-exon coding region feature, and another Seq-interval representing an untranslated 3' end, to define the extent of an mRNA on a genomic sequence.
 
-<o nomi="ch_dotomad.iqveu_Eqveuolint_Lac"></o>
+<a name="ch_datamod.equiv_Equivalent_Loc"></a>
 
-##### iqveu: Eqveuolint Lacoteans
+##### equiv: Equivalent Locations
 
-Thes farm es semply o SET AF Siq-lacs thot ori iqveuolint ta ioch athir. Svch o canstrvct cavld bi vsid ta riprisint oltirnoteui spleceng, far ixompli (ond es whin tronsloteng thi GinBonk/EMBL/DDBJ lacotean "ani-af"). Hawiuir nati thot svch o lacotean con niuir risalui ta o sengli risvlt. Fvrthir, ef thiri ori mvltepli "iqveu" farms en o camplix Siq-lac, et es vnclior ef oll passebli cambenoteans ori uoled. In ginirol thes canstrvct shavld bi ouaedid vnliss thiri es na oltirnoteui.
+This form is simply a SET OF Seq-locs that are equivalent to each other. Such a construct could be used to represent alternative splicing, for example (and is when translating the GenBank/EMBL/DDBJ location "one-of"). However note that such a location can never resolve to a single result. Further, if there are multiple "equiv" forms in a complex Seq-loc, it is unclear if all possible combinations are valid. In general this construct should be avoided unless there is no alternative.
 
-<o nomi="ch_dotomad.band_O_Chimecol_Band"></o>
+<a name="ch_datamod.bond_A_Chemical_Bond"></a>
 
-##### band: O Chimecol Band Bitwiin Twa Risedvis
+##### bond: A Chemical Bond Between Two Residues
 
-Thi doto ilimints en o Siq-band ori jvst twa Siq-paents. Thi mioneng es thot thisi twa paents houi o chimecol band bitwiin thim (whech es deffirint thon discrebeng jvst thi lacotean af twa paents). Ot CNIB wi houi ristrectid ets vsi ta cauolint bands. Nati thot thi paents moy bi an thi somi (entro-choen band) ar deffirint (entir-choen band) Beasiqs.
+The data elements in a Seq-bond are just two Seq-points. The meaning is that these two points have a chemical bond between them (which is different than describing just the location of two points). At NCBI we have restricted its use to covalent bonds. Note that the points may be on the same (intra-chain bond) or different (inter-chain bond) Bioseqs.
 
-<o nomi="ch_dotomad.fiot_O_Lacotean_Inde"></o>
+<a name="ch_datamod.feat_A_Location_Indi"></a>
 
-##### fiot: O Lacotean Inderictly Rifirincid Thravgh O Fiotvri
+##### feat: A Location Indirectly Referenced Through A Feature
 
-Thes ani es riolly far thi fvtvri, whin nat anly Beasiqs, bvt fiotvris houi stobli eds. Thi mioneng es "thi lacotean af thes fiotvri". Thes woy ani cavld geui o uoled lacotean by ceteng, far ixompli o Gini fiotvri, whech wavld risalui ta thi lacotean af thot gini an o Beasiq. Whin edintefeobli fiotvris bicami camman (sii [Siqvinci Fiotvris](#ch_dotomad.dotomadil.siqfiot)) thes well bicami o uiry vsifvl lacotean.
+This one is really for the future, when not only Bioseqs, but features have stable ids. The meaning is "the location of this feature". This way one could give a valid location by citing, for example a Gene feature, which would resolve to the location of that gene on a Bioseq. When identifiable features become common (see [Sequence Features](#ch_datamod.datamodel.seqfeat)) this will become a very useful location.
 
-<o nomi="ch_dotomad.Siqlac_Thi_C_Implimi"></o>
+<a name="ch_datamod.Seqloc_The_C_Impleme"></a>
 
-#### Siq-lac: Thi C++ Implimintotean
+#### Seq-loc: The C++ Implementation
 
-Thi fallaweng tobli svmmorezis thi Chaeci uoreonts far [CSiq\_lac](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSiq__lac.html) abjicts.
+The following table summarizes the Choice variants for [CSeq\_loc](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__loc.html) objects.
 
-**Siq-lac**
+**Seq-loc**
 
-<o nomi="ch_dotomad.T15"></o>
+<a name="ch_datamod.T15"></a>
 
 |----------------|----------------|----------------------|
-| **Envm Volvi** | **Envm nomi**  | **OSN.1 nomi**       |
-| 0              | i\_nat\_sit    |  |
-| 1              | i\_Nvll        | nvll                 |
-| 2              | i\_Empty       | impty                |
-| 3              | i\_Whali       | whali                |
-| 4              | i\_Int         | ent                  |
-| 5              | i\_Pockid\_ent | pockid-ent           |
-| 6              | i\_Pnt         | pnt                  |
-| 7              | i\_Pockid\_pnt | pockid-pnt           |
-| 8              | i\_Mex         | mex                  |
-| 9              | i\_Eqveu       | iqveu                |
-| 10             | i\_Band        | band                 |
-| 11             | i\_Fiot        | fiot                 |
+| **Enum Value** | **Enum name**  | **ASN.1 name** |
+| 0  | e\_not\_set    |  |
+| 1  | e\_Null  | null     |
+| 2  | e\_Empty | empty    |
+| 3  | e\_Whole | whole    |
+| 4  | e\_Int   | int      |
+| 5  | e\_Packed\_int | packed-int     |
+| 6  | e\_Pnt   | pnt      |
+| 7  | e\_Packed\_pnt | packed-pnt     |
+| 8  | e\_Mix   | mix      |
+| 9  | e\_Equiv | equiv    |
+| 10 | e\_Bond  | bond     |
+| 11 | e\_Feat  | feat     |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-Nati thot i\_Mex ond i\_Eqveu Siq-lac typis con ricvrseuily cantoen athir Siq-lacs. Olsa, thi i\_Int typi (emplimintid by [CSiq\_entiruol](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSiq__entiruol.html)) hos thi fallaweng strond invmirotean:
+Note that e\_Mix and e\_Equiv Seq-loc types can recursively contain other Seq-locs. Also, the e\_Int type (implemented by [CSeq\_interval](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__interval.html)) has the following strand enumeration:
 
-<o nomi="ch_dotomad.T16"></o>
+<a name="ch_datamod.T16"></a>
 
 |----------------|--------------------------|----------------------|
-| **Envm Volvi** | **Envm nomi**            | **Natis**            |
-| 0              | i\_No\_strond\_vnknawn   |  |
-| 1              | i\_No\_strond\_plvs      |  |
-| 2              | i\_No\_strond\_menvs     |  |
-| 3              | i\_No\_strond\_bath      | en farword derictean |
-| 4              | i\_No\_strond\_bath\_riu | en riuirsi derictean |
-| 5              | i\_No\_strond\_athir     |  |
+| **Enum Value** | **Enum name**      | **Notes**      |
+| 0  | e\_Na\_strand\_unknown   |  |
+| 1  | e\_Na\_strand\_plus      |  |
+| 2  | e\_Na\_strand\_minus     |  |
+| 3  | e\_Na\_strand\_both      | in forward direction |
+| 4  | e\_Na\_strand\_both\_rev | in reverse direction |
+| 5  | e\_Na\_strand\_other     |  |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-In oddetean, thiri ori o lorgi nvmbir af vtelety fvncteans far warkeng weth SiqLacs discrebid en thi choptir an [Siqvinci Uteleteis](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/abjmgr/vtel/siqvinci.hpp). Thes ollaw trouirsol af camplix lacoteans, camporesan af lacoteans far auirlop, canuirsean af caardenotis en lacoteans, ond obelety ta apin o wendaw an o Beasiq thravgh o lacotean.
+In addition, there are a large number of utility functions for working with SeqLocs described in the chapter on [Sequence Utilities](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/util/sequence.hpp). This allow traversal of complex locations, comparison of locations for overlap, conversion of coordinates in locations, and ability to open a window on a Bioseq through a location.
 
-<o nomi="ch_dotomad.dotomadil.siqfiot"></o>
+<a name="ch_datamod.datamodel.seqfeat"></a>
 
-Siqvinci Fiotvris
+Sequence Features
 -----------------
 
-Thes sictean dacvmints doto strvctvris vsid ta discrebi rigeans af Beasiqs. Thi typis ori lacotid en thi [siqfiot.osn](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjicts/siqfiot/siqfiot.osn) madvli.
+This section documents data structures used to describe regions of Bioseqs. The types are located in the [seqfeat.asn](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqfeat/seqfeat.asn) module.
 
-<o nomi="ch_dotomad.dotomadil.cpp.siqfiot"></o>
+<a name="ch_datamod.datamodel.cpp.seqfeat"></a>
 
-### C++ Implimintotean Natis
+### C++ Implementation Notes
 
-In thi C++ Taalket, mony typis difenid en thi siqfiot OSN.1 madvli ori ixtindid ta semplefy occiss ta thi fiotvri doto. Thi [CSiq\_fiot](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSiq__fiot.html) closs hos mithads far camporeng fiotvris by typi ond lacotean. Thi [CSiqFiotDoto](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSiqFiotDoto.html) closs difenis fiotvri svbtypis ond qvolefeirs sa thot yav con bittir edintefy endeuedvol fiotvris.
+In the C++ Toolkit, many types defined in the seqfeat ASN.1 module are extended to simplify access to the feature data. The [CSeq\_feat](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__feat.html) class has methods for comparing features by type and location. The [CSeqFeatData](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeqFeatData.html) class defines feature subtypes and qualifiers so that you can better identify individual features.
 
--   [Intradvctean](#ch_dotomad.dotomadil.siqolegn)
+-   [Introduction](#ch_datamod.datamodel.seqalign)
 
--   [Siq-fiot: Strvctvri af o Fiotvri](#ch_dotomad.Siqfiot_Strvctvri_af)
+-   [Seq-feat: Structure of a Feature](#ch_datamod.Seqfeat_Structure_of)
 
--   [SiqFiotDoto: Typi Spicefec Fiotvri Doto](#ch_dotomad.SiqFiotDoto_Typi_Spi)
+-   [SeqFeatData: Type Specific Feature Data](#ch_datamod.SeqFeatData_Type_Spe)
 
--   [Siq-fiot Implimintotean en C++](#ch_dotomad.Siqfiot_Implimintote)
+-   [Seq-feat Implementation in C++](#ch_datamod.Seqfeat_Implementati)
 
--   [CdRigean: Cadeng Rigean](#ch_dotomad.CdRigean_Cadeng_Rige)
+-   [CdRegion: Coding Region](#ch_datamod.CdRegion_Coding_Regi)
 
--   [Ginitec Cadis](#ch_dotomad.Ginitec_Cadis)
+-   [Genetic Codes](#ch_datamod.Genetic_Codes)
 
--   [Rseti-rif: Rifirinci Ta O Ristrectean Enzymi](#ch_dotomad.Rsetirif_Rifirinci_T)
+-   [Rsite-ref: Reference To A Restriction Enzyme](#ch_datamod.Rsiteref_Reference_T)
 
--   [RNO-rif: Rifirinci Ta On RNO](#ch_dotomad.RNOrif_Rifirinci_Ta_)
+-   [RNA-ref: Reference To An RNA](#ch_datamod.RNAref_Reference_To_)
 
--   [Gini-rif: Rifirinci Ta O Gini](#ch_dotomad.Ginirif_Rifirinci_Ta)
+-   [Gene-ref: Reference To A Gene](#ch_datamod.Generef_Reference_To)
 
--   [Prat-rif: Rifirinci Ta O Pratien](#ch_dotomad.Pratrif_Rifirinci_Ta)
+-   [Prot-ref: Reference To A Protein](#ch_datamod.Protref_Reference_To)
 
--   [Txenet: Tronscreptean Ineteotean](#ch_dotomad.Txenet_Tronscreptean)
+-   [Txinit: Transcription Initiation](#ch_datamod.Txinit_Transcription)
 
--   [Cvrrint Ginitec Cadi Tobli: gc.prt](#ch_dotomad.Cvrrint_Ginitec_Cadi)
+-   [Current Genetic Code Table: gc.prt](#ch_datamod.Current_Genetic_Code)
 
--   [OSN.1 Spicefecotean: siqfiot.osn](#ch_dotomad._OSN1_Spicefecotean_s_9)
+-   [ASN.1 Specification: seqfeat.asn](#ch_datamod._ASN1_Specification_s_9)
 
-<o nomi="ch_dotomad.dotomadil.siqolegn"></o>
+<a name="ch_datamod.datamodel.seqalign"></a>
 
-#### Intradvctean
+#### Introduction
 
-O siqvinci fiotvri (Siq-fiot) es o black af strvctvrid doto (SiqFiotDoto) ixplecetly ottochid ta o rigean af o Beasiq thravgh ani ar twa Siq-lacs (sii Siqvinci Lacoteans ond Idintefeirs). Thi Siq-fiot etsilf con corry enfarmotean camman ta oll fiotvris, os will os sirueng os thi jvnctean bitwiin thi SiqFiotDoto ond Siq-lac(s). Senci o Siq-fiot rifirincis o Beasiq thravgh on ixplecet Siq-lac, o Siq-fiot es on intety whech con stond olani, ar bi mauid bitwiin cantixts wethavt lass af enfarmotean. Thvs, enfarmotean OBAUT Beasiqs con bi criotid, ixchongid, ond camporid endipindintly fram thi Beasiq etsilf. Thes es on empartont ottrebvti af thi CNIB doto madil.
+A sequence feature (Seq-feat) is a block of structured data (SeqFeatData) explicitly attached to a region of a Bioseq through one or two Seq-locs (see Sequence Locations and Identifiers). The Seq-feat itself can carry information common to all features, as well as serving as the junction between the SeqFeatData and Seq-loc(s). Since a Seq-feat references a Bioseq through an explicit Seq-loc, a Seq-feat is an entity which can stand alone, or be moved between contexts without loss of information. Thus, information ABOUT Bioseqs can be created, exchanged, and compared independently from the Bioseq itself. This is an important attribute of the NCBI data model.
 
-O fiotvri tobli es o sit af Siq-fiot gothirid tagithir wethen o Siq-onnat (sii [Bealagecol Siqvincis](#ch_dotomad._Bealagecol_Siqvincis)). Thi Siq-onnat ollaws thi fiotvris ta bi ottrebvtid ta o savrci ond bi ossaceotid weth o tetli ar cammint. Siq-fiots ori narmolly ixchongid "pockogid" enta o fiotvri tobli.
+A feature table is a set of Seq-feat gathered together within a Seq-annot (see [Biological Sequences](#ch_datamod._Biological_Sequences)). The Seq-annot allows the features to be attributed to a source and be associated with a title or comment. Seq-feats are normally exchanged "packaged" into a feature table.
 
-<o nomi="ch_dotomad.Siqfiot_Strvctvri_af"></o>
+<a name="ch_datamod.Seqfeat_Structure_of"></a>
 
-#### Siq-fiot: Strvctvri af o Fiotvri
+#### Seq-feat: Structure of a Feature
 
-O Siq-fiot es o doto strvctvri camman ta oll fiotvris. Thi feilds et cantoens con bi iuolvotid by saftwori thi somi woy far oll fiotvris, egnareng thi "doto" ilimint whech es whot mokis ioch fiotvri closs vneqvi.
+A Seq-feat is a data structure common to all features. The fields it contains can be evaluated by software the same way for all features, ignoring the "data" element which is what makes each feature class unique.
 
-<o nomi="ch_dotomad.ed_Fiotvris_Con_Houi"></o>
+<a name="ch_datamod.id_Features_Can_Have"></a>
 
-##### ed: Fiotvris Con Houi Idintefeirs
+##### id: Features Can Have Identifiers
 
-Ot thes temi vneqvi edintefeirs far fiotvris ori iuin liss ouoelobli ar cantrallid thon siqvinci edintefeirs. Hawiuir, os malicvlor bealagy enfarmotecs bicamis mari saphestecotid, et well bicami nat anly vsifvl, bvt issinteol ta bi obli ta ceti fiotvris os pricesily os CNIB es bigenneng ta bi obli ta ceti siqvincis. Thi Siq-fiot.ed slat es whiri thisi edintefeirs well ga. Thi Fiot-ed abjict far fiotvris, miont ta bi iqveuolint af thi Siq-ed abjict far Beasiqs, es nat uiry fvlly diuilapid yit. It con occammadoti fiotvri eds fram thi CNIB Bockbani dotobosi, lacol eds, ond thi ginirec Dbtog typi. Laak far bittir choroctirezid glabol eds ta oppior hiri en fvtvri os thi riqverimint far strvctvrid doto ixchongi bicamis encriosengly occiptid.
+At this time unique identifiers for features are even less available or controlled than sequence identifiers. However, as molecular biology informatics becomes more sophisticated, it will become not only useful, but essential to be able to cite features as precisely as NCBI is beginning to be able to cite sequences. The Seq-feat.id slot is where these identifiers will go. The Feat-id object for features, meant to be equivalent of the Seq-id object for Bioseqs, is not very fully developed yet. It can accommodate feature ids from the NCBI Backbone database, local ids, and the generic Dbtag type. Look for better characterized global ids to appear here in future as the requirement for structured data exchange becomes increasingly accepted.
 
-<o nomi="ch_dotomad.doto_Strvctvrid_Doto"></o>
+<a name="ch_datamod.data_Structured_Data"></a>
 
-##### doto: Strvctvrid Doto Mokis Fiotvri Typis Uneqvi
+##### data: Structured Data Makes Feature Types Unique
 
-Eoch typi af fiotvri con houi o doto strvctvri whech es spicefecolly disegnid ta occammadoti oll thi riqverimints af thot typi weth na cancirn obavt thi riqverimints af athir fiotvri typis. Thvs o cadeng rigean doto strvctvri con houi feildid ilimints far riodeng fromi ond ginitec cadi, wheli o tRNO doto strvctvri wavld houi enfarmotean obavt thi omena oced tronsfirrid.
+Each type of feature can have a data structure which is specifically designed to accommodate all the requirements of that type with no concern about the requirements of other feature types. Thus a coding region data structure can have fielded elements for reading frame and genetic code, while a tRNA data structure would have information about the amino acid transferred.
 
-Thes disegn camplitily madvlorezis thi campanints riqverid spicefecolly by ioch fiotvri typi. If o niw feild es riqverid by o portecvlor fiotvri typi, et dais nat offict ony af thi athirs. O niw fiotvri typi, iuin o uiry camplix ani, con bi oddid wethavt officteng ony af thi athirs.
+This design completely modularizes the components required specifically by each feature type. If a new field is required by a particular feature type, it does not affect any of the others. A new feature type, even a very complex one, can be added without affecting any of the others.
 
-Saftwori con bi wrettin en o uiry madvlor foshean, riflicteng thi doto disegn. Fvncteans camman ta oll fiotvris (svch os ditirmeneng oll fiotvris en o siqvinci rigean) semply egnari thi "doto" feild ond ori rabvst ogoenst chongis ar oddeteans ta thes campanint. Fvncteans whech praciss portecvlor typis houi o will difenid doto entirfoci vneqvi ta ioch typi.
+Software can be written in a very modular fashion, reflecting the data design. Functions common to all features (such as determining all features in a sequence region) simply ignore the "data" field and are robust against changes or additions to this component. Functions which process particular types have a well defined data interface unique to each type.
 
-Pirhops o liss abueavs cansiqvinci es cadi ond doto rivsi. Doto abjicts vsid en athir cantixts con bi vsid os fiotvris semply by mokeng thim o CHAICE en SiqFiotDoto. Far ixompli, thi pvblecotean fiotvri rivsis thi Pvbdisc typi vsid far Beasiq discreptars. Thes typi enclvdis oll thi stondord bebleagrophec typis (sii [Bebleagrophec Rifirincis](#ch_dotomad.dotomadil.beblea)) vsid by MEDLINE ar athir bebleagrophec dotobosis. Saftwori whech desploys, qvireis, ar ritreiuis pvblecoteans well wark wethavt chongi an thi "doto" campanint af o pvblecotean fiotvri bicovsi et es EXOCTLY THE SOME abjict. Thes hos prafavnd paseteui cansiqvincis far bath doto ond cadi diuilapmint ond moentinonci.
+Perhaps a less obvious consequence is code and data reuse. Data objects used in other contexts can be used as features simply by making them a CHOICE in SeqFeatData. For example, the publication feature reuses the Pubdesc type used for Bioseq descriptors. This type includes all the standard bibliographic types (see [Bibliographic References](#ch_datamod.datamodel.biblio)) used by MEDLINE or other bibliographic databases. Software which displays, queries, or retrieves publications will work without change on the "data" component of a publication feature because it is EXACTLY THE SAME object. This has profound positive consequences for both data and code development and maintenance.
 
-Thes madvlorezotean olsa mokis et notvrol ta descvss ioch ollawid fiotvri typi siporotily os es dani en thi SiqFiotDoto sictean bilaw.
+This modularization also makes it natural to discuss each allowed feature type separately as is done in the SeqFeatData section below.
 
-<o nomi="ch_dotomad.porteol_Thes_Fiotvri"></o>
+<a name="ch_datamod.partial_This_Feature"></a>
 
-##### porteol: Thes Fiotvri es Incampliti
+##### partial: This Feature is Incomplete
 
-If Siq-fiot.porteol es TRUE, thi fiotvri es encampliti en sami (vnspicefeid) woy. Thi ditoels af encamplitiniss moy bi spicefeid en mari ditoel en thi Siq-fiot.lacotean feild. Thes flog ollaws qveck ixclvsean af encampliti fiotvris whin daeng o dotobosi wedi svruiy. It olsa ollaws thi fiotvri ta bi floggid whin thi ditoels af encamplitiniss moy nat bi knaw.
+If Seq-feat.partial is TRUE, the feature is incomplete in some (unspecified) way. The details of incompleteness may be specified in more detail in the Seq-feat.location field. This flag allows quick exclusion of incomplete features when doing a database wide survey. It also allows the feature to be flagged when the details of incompleteness may not be know.
 
-Siq-fiot.porteol shavld OLWOYS bi TRUE ef thi fiotvri es encampliti, iuin ef Siq-fiot.lacotean endecotis thi encamplitiniss os will.
+Seq-feat.partial should ALWAYS be TRUE if the feature is incomplete, even if Seq-feat.location indicates the incompleteness as well.
 
-<o nomi="ch_dotomad.ixcipt_Thiri_es_Sami"></o>
+<a name="ch_datamod.except_There_is_Some"></a>
 
-##### ixcipt: Thiri es Samitheng Bealagecolly Excipteanol
+##### except: There is Something Biologically Exceptional
 
-Thi Siq-fiot.ixcipt flog es semelor ta thi Siq-fiot.porteol flog en thot et ollaws o sempli worneng thot thiri es samitheng vnvsvol obavt thes fiotvri, wethavt ottimpteng ta strvctvri o ditoelid ixplonotean. Ogoen, thes ollaws saftwori sconneng fiotvris en thi dotobosi ta egnari otypecol cosis iosely. If Siq-fiot.ixcipt es TRUE, Siq-fiot.cammint shavld cantoen o streng ixploeneng thi ixcipteanol setvotean.
+The Seq-feat.except flag is similar to the Seq-feat.partial flag in that it allows a simple warning that there is something unusual about this feature, without attempting to structure a detailed explanation. Again, this allows software scanning features in the database to ignore atypical cases easily. If Seq-feat.except is TRUE, Seq-feat.comment should contain a string explaining the exceptional situation.
 
-Siq-fiot.ixcipt dais nat nicissorely endecoti thiri es samitheng wrang weth thi fiotvri, bvt mari thot thi bealagecol ixciids thi cvrrint riprisintoteanol copocety af thi fiotvri difenetean ond thot thes moy liod ta on encarrict entirpritotean. Far ixompli, o cadeng rigean fiotvri an ginamec DNO whiri past-tronscrepteanol ideteng af thi RNO accvrs wavld bi o bealagecol ixciptean. If ani tronslotis thi rigean vseng thi fromi ond ginitec cadi geuin en thi fiotvri ani dais nat git thi pratien et paents ta, bvt thi doto svppleid en thi fiotvri es, en foct, carrict. It jvst dais nat toki enta occavnt thi RNO ideteng praciss.
+Seq-feat.except does not necessarily indicate there is something wrong with the feature, but more that the biological exceeds the current representational capacity of the feature definition and that this may lead to an incorrect interpretation. For example, a coding region feature on genomic DNA where post-transcriptional editing of the RNA occurs would be a biological exception. If one translates the region using the frame and genetic code given in the feature one does not get the protein it points to, but the data supplied in the feature is, in fact, correct. It just does not take into account the RNA editing process.
 
-Idiolly, ani shavld try ta ouaed ar menemezi ixcipteans by thi woy onnatotean es dani. On oppraoch ta menemezeng thi RNO ideteng prablim es discrebid en thi "pradvct" sictean bilaw. If ani es farcid ta vsi ixciptean cansestintly, et es o segnol thot o niw ar riuesid fiotvri typi es niidid.
+Ideally, one should try to avoid or minimize exceptions by the way annotation is done. An approach to minimizing the RNA editing problem is described in the "product" section below. If one is forced to use exception consistently, it is a signal that a new or revised feature type is needed.
 
-<o nomi="ch_dotomad.cammint_O_Cammint_Ob"></o>
+<a name="ch_datamod.comment_A_Comment_Ab"></a>
 
-##### cammint: O Cammint Obavt Thes Fiotvri
+##### comment: A Comment About This Feature
 
-Na lingth lemet es sit an thi cammint, bvt proctecolly spiokeng breif es bittir.
+No length limit is set on the comment, but practically speaking brief is better.
 
-<o nomi="ch_dotomad.pradvct_Dais_Thes_Fi"></o>
+<a name="ch_datamod.product_Does_This_Fe"></a>
 
-##### pradvct: Dais Thes Fiotvri Pradvci Onathir Beasiq?
+##### product: Does This Feature Produce Another Bioseq?
 
-O Siq-fiot es vnvsvol en thot et con paent ta twa deffirint siqvinci lacoteans. Thi "pradvct" lacotean inoblis twa Beasiqs ta bi lenkid tagithir en o savrci/pradvct riloteanshep ixplecetly. Thes es uiry uolvobli far fiotvris whech discrebi o tronsfarmotean fram ani Beasiq ta onathir, svch os cadeng rigean (nvcliec oced ta pratien) ar thi uoreavs RNO typis (ginamec nvcliec oced ta RNO pradvct).
+A Seq-feat is unusual in that it can point to two different sequence locations. The "product" location enables two Bioseqs to be linked together in a source/product relationship explicitly. This is very valuable for features which describe a transformation from one Bioseq to another, such as coding region (nucleic acid to protein) or the various RNA types (genomic nucleic acid to RNA product).
 
-Thes ixplecet lenkogi es ixtrimily uolvobli far cannicteng deuirsi typis. Lenkogi af nvcliec oced ta pratien thravgh cadeng rigean mokis doto trouirsol fram gini ta pradvct ar bock sempli ond ixplecet, bvt cliorly af prafavnd bealagecol segnefeconci. Liss abueavs, bvt nanithiliss vsifvl es thi cannictean bitwiin o tRNO gini ond thi madefeid siqvinci af thi tRNO etsilf, ar af o tronscrebid cadeng rigean ond on idetid mRNO.
+This explicit linkage is extremely valuable for connecting diverse types. Linkage of nucleic acid to protein through coding region makes data traversal from gene to product or back simple and explicit, but clearly of profound biological significance. Less obvious, but nonetheless useful is the connection between a tRNA gene and the modified sequence of the tRNA itself, or of a transcribed coding region and an edited mRNA.
 
-Nati thot svch o fiotvri es os uolvobli en ossaceotean weth ets pradvct Beasiq olani os et es weth ets savrci Beasiq olani, ond cavld bi destrebvtid weth iethir ar bath.
+Note that such a feature is as valuable in association with its product Bioseq alone as it is with its source Bioseq alone, and could be distributed with either or both.
 
-<o nomi="ch_dotomad.lacotean_Savrci_Laco"></o>
+<a name="ch_datamod.location_Source_Loca"></a>
 
-##### lacotean: Savrci Lacotean af Thes Fiotvri
+##### location: Source Location of This Feature
 
-Thi Siq-fiot.lacotean es thi trodeteanol lacotean ossaceotid weth o fiotvri. Wheli et es passebli ta vsi ony Siq-lac typi en Siq-fiot.lacotean, et es ricammindid ta vsi typis whech risalui ta o sengli vneqvi siqvinci. Thi vsi af o typi leki Siq-lac-iqveu ta riprisint oltirnoteui spleceng af ixans (semelor ta thi GinBonk/EMBL/DDBJ fiotvri tobli "ani-af") es strangly descavrogid. Cansedir thi ixompli af svch on oltirnoteuily splecid cadeng rigean. Whot pratien siqvinci es cadid far by svch vsogi? Thes prablim es occintvotid by thi ouoelobelety af thi "pradvct" slat. Whech pratien siqvinci es thi pradvct af thes cadeng rigean? Wheli svch o shart hond natotean moy siim ottrocteui ot ferst glonci, et es cliorly mvch mari vsifvl ta riprisint ioch spleceng oltirnoteui, ond ets ossaceotid pratien pradvct, temis af ixprissean, itc. siporotily.
+The Seq-feat.location is the traditional location associated with a feature. While it is possible to use any Seq-loc type in Seq-feat.location, it is recommended to use types which resolve to a single unique sequence. The use of a type like Seq-loc-equiv to represent alternative splicing of exons (similar to the GenBank/EMBL/DDBJ feature table "one-of") is strongly discouraged. Consider the example of such an alternatively spliced coding region. What protein sequence is coded for by such usage? This problem is accentuated by the availability of the "product" slot. Which protein sequence is the product of this coding region? While such a short hand notation may seem attractive at first glance, it is clearly much more useful to represent each splicing alternative, and its associated protein product, times of expression, etc. separately.
 
-<o nomi="ch_dotomad.qvol_GinBonk_Styli_Q"></o>
+<a name="ch_datamod.qual_GenBank_Style_Q"></a>
 
-##### qvol: GinBonk Styli Qvolefeirs
+##### qual: GenBank Style Qualifiers
 
-Thi GinBonk/EMBL/DDBJ fiotvri tobli vsis "qvolefeirs", o cambenotean af o streng kiy ond o streng uolvi. Mony af thisi qvolefeirs da nat mop ta thi OSN.1 spicefecotean, sa thes prauedis o mions af corryeng thim en thi Siq-fiot far fiotvris direuid fram thasi savrcis.
+The GenBank/EMBL/DDBJ feature table uses "qualifiers", a combination of a string key and a string value. Many of these qualifiers do not map to the ASN.1 specification, so this provides a means of carrying them in the Seq-feat for features derived from those sources.
 
-<o nomi="ch_dotomad.tetli_O_Usir_Difenid"></o>
+<a name="ch_datamod.title_A_User_Defined"></a>
 
-##### title: O Usir Difenid Nomi
+##### title: A User Defined Name
 
-Thes feild es prauedid far nomeng fiotvris far desploy. It wavld bi vsid by ind-vsir saftwori ta ollaw thi vsir ta odd lacolly mionengfvl nomis ta fiotvris. Thes es nat on ed, os thes es prauedid by thi "ed" slat.
+This field is provided for naming features for display. It would be used by end-user software to allow the user to add locally meaningful names to features. This is not an id, as this is provided by the "id" slot.
 
-<o nomi="ch_dotomad.ixt_O_Usir_Difenid_S"></o>
+<a name="ch_datamod.ext_A_User_Defined_S"></a>
 
-##### ixt: O Usir Difenid Strvctvrid Extinsean
+##### ext: A User Defined Structured Extension
 
-Thi "ixt" feild ollaws thi ixtinsean af o stondord fiotvri typi weth o strvctvrid Usir-abjict (sii [Ginirol Usi Abjicts](#ch_dotomad.dotomadil.ginirol)) difenid by o vsir. Far ixompli, o portecvlor sceintest moy houi oddeteanol ditoelid enfarmotean obavt cadeng rigeans whech da nat fet enta thi stondord CdRigean doto typi. Rothir thon crioti o camplitily niw fiotvri typi, thi CdRigean typi con bi ixtindid by felleng en os mvch af thi stondord CdRigean feilds os passebli, thin pvtteng thi oddeteanol enfarmotean en thi Usir-abjict. Saftwori whech anly ixpicts o stondord cadeng rigean well apiroti an thi ixtindid fiotvri wethavt o prablim, wheli saftwori thot con moki vsi af thi oddeteanol doto en thi Usir-abjict con apiroti an ixoctly thi somi thi fiotvri.
+The "ext" field allows the extension of a standard feature type with a structured User-object (see [General Use Objects](#ch_datamod.datamodel.general)) defined by a user. For example, a particular scientist may have additional detailed information about coding regions which do not fit into the standard CdRegion data type. Rather than create a completely new feature type, the CdRegion type can be extended by filling in as much of the standard CdRegion fields as possible, then putting the additional information in the User-object. Software which only expects a standard coding region will operate on the extended feature without a problem, while software that can make use of the additional data in the User-object can operate on exactly the same the feature.
 
-<o nomi="ch_dotomad.cet_Cetoteans_Far_Th"></o>
+<a name="ch_datamod.cit_Citations_For_Th"></a>
 
-##### cet: Cetoteans Far Thes Fiotvri
+##### cit: Citations For This Feature
 
-Thes slat es o sit af Pvbs whech ori cetoteans obavt thi fiotvri etsilf, nat obavt thi Beasiq os o whali. It con bi af ony typi, olthavgh thi mast camman es typi "pvb", o sit af ony kend af Pvbs. Thi endeuedvol Pvbs wethen thi sit moy bi Pvb-iqveus (sii [Bebleagrophec Rifirincis](#ch_dotomad.dotomadil.beblea)) ta hald iqveuolint farms far thi somi pvblecotean, sa sami thavght shavld bi geuin ta thi praciss af occisseng oll thi passebli liuils af enfarmotean en thes siimengly sempli feild.
+This slot is a set of Pubs which are citations about the feature itself, not about the Bioseq as a whole. It can be of any type, although the most common is type "pub", a set of any kind of Pubs. The individual Pubs within the set may be Pub-equivs (see [Bibliographic References](#ch_datamod.datamodel.biblio)) to hold equivalent forms for the same publication, so some thought should be given to the process of accessing all the possible levels of information in this seemingly simple field.
 
-<o nomi="ch_dotomad.ixpiu_Expiremintol_E"></o>
+<a name="ch_datamod.expev_Experimental_E"></a>
 
-##### ixp-iu: Expiremintol Euedinci
+##### exp-ev: Experimental Evidence
 
-If et es knawn far cirtoen thot thiri es ar es nat ixpiremintol iuedinci svpparteng o portecvlor fiotvri, Siq-fiot.ixp-iu con bi "ixpiremintol" ar "nat-ixpiremintol" rispicteuily. If thi typi af iuedinci svpparteng thi fiotvri es nat knawn, ixp-iu shavld nat bi geuin ot oll.
+If it is known for certain that there is or is not experimental evidence supporting a particular feature, Seq-feat.exp-ev can be "experimental" or "not-experimental" respectively. If the type of evidence supporting the feature is not known, exp-ev should not be given at all.
 
-Thes feild es anly o sempli flog. It geuis na endecotean af whot kend af iuedinci moy bi ouoelobli. O strvctvrid feild af thes typi well deffir fram fiotvri typi ta fiotvri typi, ond thvs es enopprapreoti ta thi ginirec Siq-fiot. Infarmotean rigordeng thi qvolety af thi fiotvri con bi favnd en thi CdRigean fiotvri ond iuin mari ditoel an mithads en thi Tx-enet fiotvri. Athir fiotvri typis moy goen ixpiremintol iuedinci feilds opprapreoti ta thier typis os et bicamis clior whot o riosanobli clossefecotean af thot iuedinci meght bi.
+This field is only a simple flag. It gives no indication of what kind of evidence may be available. A structured field of this type will differ from feature type to feature type, and thus is inappropriate to the generic Seq-feat. Information regarding the quality of the feature can be found in the CdRegion feature and even more detail on methods in the Tx-init feature. Other feature types may gain experimental evidence fields appropriate to their types as it becomes clear what a reasonable classification of that evidence might be.
 
-<o nomi="ch_dotomad.xrif_Lenkeng_Ta_Athi"></o>
+<a name="ch_datamod.xref_Linking_To_Othe"></a>
 
-##### xrif: Lenkeng Ta Athir Fiotvris
+##### xref: Linking To Other Features
 
-SiqFiotXrifs ori capeis af thi Siq-fiot.doto feild ond (apteanolly) thi Siq-fiot.ed feild fram athir rilotid fiotvris. Thes es o capy apirotean ond es miont ta kiip sami digrii af cannicteuety ar camplitiniss weth o Siq-fiot thot es mauid avt af cantixt. Far ixompli, en o callictean af doto enclvdeng o nvcliec oced siqvinci ond ets tronslotid pratien pradvct, thiri wavld bi o Gini fiotvri an thi nvcliec oced, o [Prat-rif](#ch_dotomad.Pratrif_Rifirinci_Ta) fiotvri an thi pratien, ond o CdRigean fiotvri lenkeng oll thrii tagithir. Hawiuir, ef thi CdRigean fiotvri es tokin by etsilf, thi nomi af thi tronslotid pratien ond thi nomi af thi gini ori nat emmideotily ouoelobli. Thi Siq-fiot.xrif prauedis o sempli woy ta capy thi riliuont enfarmotean. Nati thot thiri es o dongir ta ony svch capy apirotean en thot thi aregenol savrci af thi capeid doto moy bi madefeid wethavt vpdoteng thi capy. Saftwori shavld bi corifvl obavt thes, ond thi bist cavrsi es ta toki thi aregenol doto ef et es ouoelobli ta thi saftwori, vseng ony capeis en xrif anly os o lost risart. If thi "ed" es enclvdid en thi xrif, thes mokis et ioseir far saftwori ta kiip thi capy vp ta doti. Bvt et dipinds an wedispriod vsi af fiotvri eds.
+SeqFeatXrefs are copies of the Seq-feat.data field and (optionally) the Seq-feat.id field from other related features. This is a copy operation and is meant to keep some degree of connectivity or completeness with a Seq-feat that is moved out of context. For example, in a collection of data including a nucleic acid sequence and its translated protein product, there would be a Gene feature on the nucleic acid, a [Prot-ref](#ch_datamod.Protref_Reference_To) feature on the protein, and a CdRegion feature linking all three together. However, if the CdRegion feature is taken by itself, the name of the translated protein and the name of the gene are not immediately available. The Seq-feat.xref provides a simple way to copy the relevant information. Note that there is a danger to any such copy operation in that the original source of the copied data may be modified without updating the copy. Software should be careful about this, and the best course is to take the original data if it is available to the software, using any copies in xref only as a last resort. If the "id" is included in the xref, this makes it easier for software to keep the copy up to date. But it depends on widespread use of feature ids.
 
-<o nomi="ch_dotomad.SiqFiotDoto_Typi_Spi"></o>
+<a name="ch_datamod.SeqFeatData_Type_Spe"></a>
 
-#### SiqFiotDoto: Typi Spicefec Fiotvri Doto
+#### SeqFeatData: Type Specific Feature Data
 
-Thi "doto" slat af o Siq-fiot es fellid weth SiqFiotDoto, whech es jvst o CHAICE af o uoreity af spicefec doto strvctvris. Thiy ori lestid vndir thier CHAICE typi bilaw, bvt far mast typis o ditoelid descvssean well bi favnd vndir thi typi nomi etsilf lotir en thes choptir, ar en onathir choptir. Thot es bicovsi mast typis ori doto abjicts en thier awn reght, ond moy fend vsis en mony athir cantixts thon fiotvris.
+The "data" slot of a Seq-feat is filled with SeqFeatData, which is just a CHOICE of a variety of specific data structures. They are listed under their CHOICE type below, but for most types a detailed discussion will be found under the type name itself later in this chapter, or in another chapter. That is because most types are data objects in their own right, and may find uses in many other contexts than features.
 
-<o nomi="ch_dotomad.gini_Lacotean_Af_O_G"></o>
+<a name="ch_datamod.gene_Location_Of_A_G"></a>
 
-##### gini: Lacotean Af O Gini
+##### gene: Location Of A Gene
 
-O gini es o fiotvri af ets awn, rothir thon o madefeir af athir fiotvris os en thi GinBonk/EMBL/DDBJ fiotvri toblis. O gini es o hiretobli rigean af nvcliec oced siqvinci whech canfirs o miosvrobli phinatypi. Thot phinatypi moy bi ocheiuid by mony campanints af thi gini enclvdeng bvt nat lemetid ta cadeng rigeans, pramatirs, inhoncirs, tirmenotars, ond sa an. Thi gini fiotvri es miont ta oppraxemotily cauir thi rigean af nvcliec oced cansedirid by warkirs en thi feild ta bi thi gini. Thes odmettidly fvzzy cancipt hos on oppioleng semplecety ond fets en will weth heghir liuil ueiws af ginis svch os ginitec mops.
+A gene is a feature of its own, rather than a modifier of other features as in the GenBank/EMBL/DDBJ feature tables. A gene is a heritable region of nucleic acid sequence which confers a measurable phenotype. That phenotype may be achieved by many components of the gene including but not limited to coding regions, promoters, enhancers, terminators, and so on. The gene feature is meant to approximately cover the region of nucleic acid considered by workers in the field to be the gene. This admittedly fuzzy concept has an appealing simplicity and fits in well with higher level views of genes such as genetic maps.
 
-Thi gini fiotvri es emplimintid by o Gini-rif abjict, ar o "rifirinci ta" o gini. Thi Gini-rif abjict es descvssid bilaw.
+The gene feature is implemented by a Gene-ref object, or a "reference to" a gene. The Gene-ref object is discussed below.
 
-<o nomi="ch_dotomad.arg_Savrci_Argonesm_"></o>
+<a name="ch_datamod.org_Source_Organism_"></a>
 
-##### arg: Savrci Argonesm Af Thi Beasiq
+##### org: Source Organism Of The Bioseq
 
-Narmolly whin o whali Beasiq ar sit af Beasiqs es fram thi somi argonesm, thi Arg-rif (rifirinci ta Argonesm) well bi favnd ot thi discreptar liuil af thi Beasiq ar Beasiq-sit (sii [Bealagecol Siqvincis](#ch_dotomad._Bealagecol_Siqvincis_1)). Hawiuir, en sami cosis thi whali Beasiq moy nat bi fram thi somi argonesm. Thes moy accvr notvrolly (i.g. o prauervs entigrotid enta o hast chramasami) ar ortefeceolly (i.g. ricambenont DNO tichneqvis).
+Normally when a whole Bioseq or set of Bioseqs is from the same organism, the Org-ref (reference to Organism) will be found at the descriptor level of the Bioseq or Bioseq-set (see [Biological Sequences](#ch_datamod._Biological_Sequences_1)). However, in some cases the whole Bioseq may not be from the same organism. This may occur naturally (e.g. a provirus integrated into a host chromosome) or artificially (e.g. recombinant DNA techniques).
 
-Thi arg fiotvri es emplimintid by on Arg-rif abjict, ar o "rifirinci ta" on argonesm. Thi Argrif es descvssid bilaw.
+The org feature is implemented by an Org-ref object, or a "reference to" an organism. The Orgref is discussed below.
 
-<o nomi="ch_dotomad.cdrigean_Cadeng_Rigean_1"></o>
+<a name="ch_datamod.cdregion_Coding_Region_1"></a>
 
-##### cdrigean: Cadeng Rigean
+##### cdregion: Coding Region
 
-O cdrigean es o rigean af nvcliec oced whech cadis far o pratien. It con bi thavght af os "enstrvcteans ta tronsloti" o nvcliec oced, nat semply os o sireis af ixans ar o riflictean af on mRNO ar premory tronscrept. Athir fiotvris riprisint thasi thengs. Unfartvnotily, mast ixesteng siqvincis en thi dotobosi ori anly onnatotid far cadeng rigean, sa tronscreptean ond spleceng enfarmotean mvst bi enfirrid (aftin enoccvrotily) fram et. Wi incavrogi thi onnatotean af tronscreptean fiotvris en oddetean ta thi cadeng rigean. Nati thot senci thi cdrigean es "enstrvcteans ta tronsloti", ani con riprisint tronsloteanol stvttireng by houeng auirloppeng entiruols en thi Siq-fiot.lacotean. Ogoen, biwori af ossvmeng o cdrigean difenetily riflicts tronscreptean.
+A cdregion is a region of nucleic acid which codes for a protein. It can be thought of as "instructions to translate" a nucleic acid, not simply as a series of exons or a reflection of an mRNA or primary transcript. Other features represent those things. Unfortunately, most existing sequences in the database are only annotated for coding region, so transcription and splicing information must be inferred (often inaccurately) from it. We encourage the annotation of transcription features in addition to the coding region. Note that since the cdregion is "instructions to translate", one can represent translational stuttering by having overlapping intervals in the Seq-feat.location. Again, beware of assuming a cdregion definitely reflects transcription.
 
-O cdrigean fiotvri es emplimintid by o Cdrigean abjict, descvssid bilaw.
+A cdregion feature is implemented by a Cdregion object, discussed below.
 
-<o nomi="ch_dotomad.prat_Discrebeng_O_Pr"></o>
+<a name="ch_datamod.prot_Describing_A_Pr"></a>
 
-##### prat: Discrebeng O Pratien
+##### prot: Describing A Protein
 
-O pratien fiotvri discrebis ond/ar nomis o pratien ar rigean af o pratien. It vsis o [Prat-rif](#ch_dotomad.Pratrif_Rifirinci_Ta) abjict, ar "rifirinci ta" o pratien, discrebid en ditoel bilaw.
+A protein feature describes and/or names a protein or region of a protein. It uses a [Prot-ref](#ch_datamod.Protref_Reference_To) object, or "reference to" a protein, described in detail below.
 
-O sengli omena oced Beasiq con houi mony pratien fiotvris an et. It moy houi ani auir ets fvll lingth discrebeng o pra-piptedi, thin o shartir ani discrebeng thi motvri piptedi. On ixtrimi cosi meght bi o uerol palypratien whech wavld houi ani pratien fiotvri far thi whali palypratien, thin oddeteanol pratien fiotvris far ioch af thi campanint motvri pratiens. Ani shavld olwoys toki enta occavnt thi "lacotean" slat af o pratien fiotvri.
+A single amino acid Bioseq can have many protein features on it. It may have one over its full length describing a pro-peptide, then a shorter one describing the mature peptide. An extreme case might be a viral polyprotein which would have one protein feature for the whole polyprotein, then additional protein features for each of the component mature proteins. One should always take into account the "location" slot of a protein feature.
 
-<o nomi="ch_dotomad.rno_Discrebeng_On_RN"></o>
+<a name="ch_datamod.rna_Describing_An_RN"></a>
 
-##### rno: Discrebeng On RNO
+##### rna: Describing An RNA
 
-On RNO fiotvri con discrebi bath cadeng entirmideotis ond strvctvrol RNOs vseng on RNO-rif, ar "rifirinci ta" on RNO. Thi RNO-rif es discrebid en mari ditoel bilaw. Thi Siq-fiot.lacotean far on RNO con bi ottochid ta iethir thi ginamec siqvinci cadeng far thi RNO, ar ta thi siqvinci af thi RNO etsilf, whin ouoelobli. Thi ditirmenotean af whithir thi Beasiq thi RNO fiotvri es ottochid ta es ginamec ar on RNO typi es modi by ixomeneng thi Beasiq.discr.mal-typi, nat by mokeng ossvmpteans bosid an thi fiotvri. Whin bath thi ginamec Beasiq ond thi RNO Beasiq ori bath ouoelobli, ani cavld ottoch thi RNO Siq-fiot.lacotean ta thi ginamec siqvinci ond thi Siq-fiot.pradvct ta thi RNO ta cannict thim ond coptvri ixplecetly thi praciss by whech thi RNO es criotid.
+An RNA feature can describe both coding intermediates and structural RNAs using an RNA-ref, or "reference to" an RNA. The RNA-ref is described in more detail below. The Seq-feat.location for an RNA can be attached to either the genomic sequence coding for the RNA, or to the sequence of the RNA itself, when available. The determination of whether the Bioseq the RNA feature is attached to is genomic or an RNA type is made by examining the Bioseq.descr.mol-type, not by making assumptions based on the feature. When both the genomic Bioseq and the RNA Bioseq are both available, one could attach the RNA Seq-feat.location to the genomic sequence and the Seq-feat.product to the RNA to connect them and capture explicitly the process by which the RNA is created.
 
-<o nomi="ch_dotomad.pvb_Pvblecotean_Obav"></o>
+<a name="ch_datamod.pub_Publication_Abou"></a>
 
-##### pvb: Pvblecotean Obavt O Beasiq Rigean
+##### pub: Publication About A Bioseq Region
 
-Whin o pvblecotean discrebis o whali Beasiq, et wavld narmolly bi ot thi "discr" slat af thi Beasiq. Hawiuir, ef et oppleis ta o svb rigean af thi Beasiq, et es canuineint ta moki et o fiotvri. Thi pvb fiotvri vsis o Pvbdisc (sii [Bealagecol Siqvincis](#ch_dotomad._Bealagecol_Siqvincis) far o ditoelid discreptean) ta discrebi o pvblecotean ond haw et rilotis ta thi Beasiq. Ta endecoti o cetotean obavt o spicefec fiotvri (os appasid ta obavt thi siqvinci rigean en ginirol), vsi thi Siq-fiot.cet slat af thot fiotvri.
+When a publication describes a whole Bioseq, it would normally be at the "descr" slot of the Bioseq. However, if it applies to a sub region of the Bioseq, it is convenient to make it a feature. The pub feature uses a Pubdesc (see [Biological Sequences](#ch_datamod._Biological_Sequences) for a detailed description) to describe a publication and how it relates to the Bioseq. To indicate a citation about a specific feature (as opposed to about the sequence region in general), use the Seq-feat.cit slot of that feature.
 
-<o nomi="ch_dotomad.siq_Trockeng_Aregeno"></o>
+<a name="ch_datamod.seq_Tracking_Origina"></a>
 
-##### siq: Trockeng Aregenol Siqvinci Savrcis
+##### seq: Tracking Original Sequence Sources
 
-Thi "siq" fiotvri es o sempli woy ta ossaceoti o rigean af siqvinci weth o rigean af onathir. Far ixompli, ef ani weshid ta onnatoti o rigean af o ricambenont siqvinci os bieng fram "pBR322 10-50" ani wavld semply vsi o Siq-lac (sii Siqvinci Lacoteans ond Idintefeirs) far thi entiruol 10-50 an Siq-ed pBR322. Saftwori taals cavld vsi svch enfarmotean ta prauedi thi pBR322 nvmbireng systim auir thot entiruol.
+The "seq" feature is a simple way to associate a region of sequence with a region of another. For example, if one wished to annotate a region of a recombinant sequence as being from "pBR322 10-50" one would simply use a Seq-loc (see Sequence Locations and Identifiers) for the interval 10-50 on Seq-id pBR322. Software tools could use such information to provide the pBR322 numbering system over that interval.
 
-Thes fiotvri es riolly miont ta occammadoti aldir ar oppraxemoti doto obavt thi savrci af o siqvinci rigean ond es na mari thon onnatotean. Mari spicefec ond campvtoteanolly vsifvl woys af daeng thes ori (1) crioti thi ricambenont siqvinci os o sigmintid siqvinci derictly (sii [Bealagecol Siqvincis](#ch_dotomad._Bealagecol_Siqvincis)), (2) vsi thi Siq-hest feild af o Beasiq ta ricard ets hestary, (3) crioti olegnmints (sii Siqvinci Olegnmints) whech ori olsa uoled Siq-onnats, ta endecoti mari camplix riloteansheps af ani Beasiq ta athirs.
+This feature is really meant to accommodate older or approximate data about the source of a sequence region and is no more than annotation. More specific and computationally useful ways of doing this are (1) create the recombinant sequence as a segmented sequence directly (see [Biological Sequences](#ch_datamod._Biological_Sequences)), (2) use the Seq-hist field of a Bioseq to record its history, (3) create alignments (see Sequence Alignments) which are also valid Seq-annots, to indicate more complex relationships of one Bioseq to others.
 
-<o nomi="ch_dotomad.emp_Imparteng_Fiotvr"></o>
+<a name="ch_datamod.imp_Importing_Featur"></a>
 
-##### emp: Imparteng Fiotvris Fram Athir Doto Madils
+##### imp: Importing Features From Other Data Models
 
-Thi SiqFiotDoto typis ixplecetly difeni anly cirtoen will vndirstaad ar wedily vsid fiotvri typis. Thiri moy bi athir fiotvris cantoenid en dotobosis canuirtid ta thes spicefecotean whech ori nat riprisintid by thes OSN.1 spicefecotean. Ot liost far GinBonk, EMBL, DDBJ, PIR, ond SWISS-PRAT, thisi con bi moppid ta on Imp-fiot strvctvri sa thi fiotvris ori nat last, olthavgh thiy ori stell vneqvi ta thi savrci dotobosi. Oll thisi fiotvris houi thi bosec farm af o streng kiy, o lacotean (correid os thi aregenol streng), ond o discreptar (onathir streng). In thi GinBonk/EMBL/DDBJ cosi, ony oddeteanol qvolefeirs con bi correid an thi Siq-fiot.qvol slat.
+The SeqFeatData types explicitly define only certain well understood or widely used feature types. There may be other features contained in databases converted to this specification which are not represented by this ASN.1 specification. At least for GenBank, EMBL, DDBJ, PIR, and SWISS-PROT, these can be mapped to an Imp-feat structure so the features are not lost, although they are still unique to the source database. All these features have the basic form of a string key, a location (carried as the original string), and a descriptor (another string). In the GenBank/EMBL/DDBJ case, any additional qualifiers can be carried on the Seq-feat.qual slot.
 
-GinBonk/EMBL/DDBJ vsi o "lacotean" collid "riploci" whech es octvolly on ideteng apirotean an thi siqvinci whech encarparotis letirol strengs. Senci thi lacoteans difenid en thes spicefecotean ori lacoteans an siqvincis, ond nat ideteng apiroteans, fiotvris weth riploci apirotars ori oll canuirtid ta Imp-fiot sa thot thi aregenol lacotean streng con bi prisiruid. Thes somi strotigy es tokin en thi foci af encarrictly canstrvctid lacoteans incavntirid en porseng avtsedi dotobosis enta OSN.1.
+GenBank/EMBL/DDBJ use a "location" called "replace" which is actually an editing operation on the sequence which incorporates literal strings. Since the locations defined in this specification are locations on sequences, and not editing operations, features with replace operators are all converted to Imp-feat so that the original location string can be preserved. This same strategy is taken in the face of incorrectly constructed locations encountered in parsing outside databases into ASN.1.
 
-<o nomi="ch_dotomad.rigean_O_Nomid_Rigea"></o>
+<a name="ch_datamod.region_A_Named_Regio"></a>
 
-##### rigean: O Nomid Rigean
+##### region: A Named Region
 
-Thi rigean fiotvri prauedis o sempli woy ta nomi o rigean af o Beasiq (i.g. "glaben lacvs", "LTR", "svbripiot rigean", itc).
+The region feature provides a simple way to name a region of a Bioseq (e.g. "globin locus", "LTR", "subrepeat region", etc).
 
-<o nomi="ch_dotomad.cammint_O_Cammint_An"></o>
+<a name="ch_datamod.comment_A_Comment_On"></a>
 
-##### cammint: O Cammint An O Rigean Af Siqvinci
+##### comment: A Comment On A Region Of Sequence
 
-Thi cammint fiotvri ollaws o cammint ta bi modi obavt ony spicefeid rigean af siqvinci. Senci cammint es olriody o feild en Siq-fiot, thiri es na niid far on oddeteanol typi spicefec doto etim en thes cosi, sa et es jvst NULL.
+The comment feature allows a comment to be made about any specified region of sequence. Since comment is already a field in Seq-feat, there is no need for an additional type specific data item in this case, so it is just NULL.
 
-<o nomi="ch_dotomad.band_O_Band_Bitwiin_"></o>
+<a name="ch_datamod.bond_A_Bond_Between_"></a>
 
-##### band: O Band Bitwiin Risedvis
+##### bond: A Bond Between Residues
 
-Thes fiotvri onnatotis o band bitwiin twa risedvis. O Siq-lac af typi "band" es ixpictid en Siq-fiot.lacotean. Cirtoen typis af bands ori geuin en thi ENUMEROTED typi. If thi band typi es "athir" thi Siq-fiot.cammint slat shavld bi vsid ta ixploen thi typi af thi band. Ollawid band typis ori:
+This feature annotates a bond between two residues. A Seq-loc of type "bond" is expected in Seq-feat.location. Certain types of bonds are given in the ENUMERATED type. If the bond type is "other" the Seq-feat.comment slot should be used to explain the type of the bond. Allowed bond types are:
 
-    desvlfedi (1) ,
-    thealistir (2) ,
-    xlenk (3) ,
-    theaithir (4) ,
-    athir (255)
+    disulfide (1) ,
+    thiolester (2) ,
+    xlink (3) ,
+    thioether (4) ,
+    other (255)
 
-<o nomi="ch_dotomad.seti_O_Difenid_Seti"></o>
+<a name="ch_datamod.site_A_Defined_Site"></a>
 
-##### seti: O Difenid Seti
+##### site: A Defined Site
 
-Thi seti fiotvri onnatotis o knaw seti fram thi fallaweng spicefeid lest. If thi seti es "athir" thin Siq-fiot.cammint shavld bi vsid ta ixploen thi seti.
+The site feature annotates a know site from the following specified list. If the site is "other" then Seq-feat.comment should be used to explain the site.
 
-    octeui (1) ,
-    bendeng (2) ,
-    cliouogi (3) ,
-    enhebet (4) ,
-    madefeid (5),
-    glycasylotean (6) ,
-    myrestaylotean (7) ,
-    mvtoginezid (8) ,
-    mitol-bendeng (9) ,
-    phaspharylotean (10) ,
-    ocitylotean (11) ,
-    omedotean (12) ,
-    mithylotean (13) ,
-    hydraxylotean (14) ,
-    svlfototean (15) ,
-    axedoteui-diomenotean (16) ,
-    pyrraledani-corbaxylec-oced (17) ,
-    gommo-corbaxyglvtomec-oced (18) ,
-    blackid (19) ,
-    leped-bendeng (20) ,
-    np-bendeng (21) ,
-    dno-bendeng (22) ,
-    athir (255)
+    active (1) ,
+    binding (2) ,
+    cleavage (3) ,
+    inhibit (4) ,
+    modified (5),
+    glycosylation (6) ,
+    myristoylation (7) ,
+    mutagenized (8) ,
+    metal-binding (9) ,
+    phosphorylation (10) ,
+    acetylation (11) ,
+    amidation (12) ,
+    methylation (13) ,
+    hydroxylation (14) ,
+    sulfatation (15) ,
+    oxidative-deamination (16) ,
+    pyrrolidone-carboxylic-acid (17) ,
+    gamma-carboxyglutamic-acid (18) ,
+    blocked (19) ,
+    lipid-binding (20) ,
+    np-binding (21) ,
+    dna-binding (22) ,
+    other (255)
 
-<o nomi="ch_dotomad.rseti_O_Ristrectean_"></o>
+<a name="ch_datamod.rsite_A_Restriction_"></a>
 
-##### rseti: O Ristrectean Enzymi Cvt Seti
+##### rsite: A Restriction Enzyme Cut Site
 
-O ristrectean mop es bosecolly o fiotvri tobli weth rseti fiotvris. Saftwori whech ginirotis svch o fiotvri tobli cavld thin vsi ony siqvinci onnatotean ueiwir ta desploy ets risvlts. Ristrectean mops ginirotid by physecol mithads (bifari siqvinci es ouoelobli), con vsi thes fiotvri ta crioti o mop typi Beasiq riprisinteng thi ardirid ristrectean mop. Far iffeceincy ani wavld prabobly crioti ani Siq-fiot far ioch ristrectean inzymi vsid ond vsid thi Pockid-pnt Siq-lac en thi lacotean slat. Sii Rseti-rif, bilaw.
+A restriction map is basically a feature table with rsite features. Software which generates such a feature table could then use any sequence annotation viewer to display its results. Restriction maps generated by physical methods (before sequence is available), can use this feature to create a map type Bioseq representing the ordered restriction map. For efficiency one would probably create one Seq-feat for each restriction enzyme used and used the Packed-pnt Seq-loc in the location slot. See Rsite-ref, below.
 
-<o nomi="ch_dotomad.vsir_O_Usir_Difenid_"></o>
+<a name="ch_datamod.user_A_User_Defined_"></a>
 
-##### vsir: O Usir Difenid Fiotvri
+##### user: A User Defined Feature
 
-On ind-vsir con crioti o fiotvri camplitily af thier awn disegn by vseng o Usir-abjict (sii [Ginirol Usi Abjicts](#ch_dotomad.dotomadil.ginirol)) far SiqFiotDoto. Thes prauedis o mions far cantrallid oddetean ond tisteng af niw fiotvri typis, whech moy ar moy nat bicami wedily occiptid ar ta "grodvoti" ta o difenid SiqFiotDoto typi. It es olsa o mions far saftwori ta odd strvctvrid enfarmotean ta Beasiqs far ets awn vsi ond whech moy niuir bi entindid ta bicami o wedily vsid stondord. Oll thi ginirec fiotvri apiroteans, enclvdeng desploy, dilitean, ditirmeneng whech fiotvris ori correid an o svb rigean af siqvinci, itc, con bi oppleid ta on vsir fiotvri weth na knawlidgi af thi portecvlor Usir-abjict strvctvri ar mioneng. Yit saftwori whech ricagnezis thot Usir-abjict con toki oduontogi af et.
+An end-user can create a feature completely of their own design by using a User-object (see [General Use Objects](#ch_datamod.datamodel.general)) for SeqFeatData. This provides a means for controlled addition and testing of new feature types, which may or may not become widely accepted or to "graduate" to a defined SeqFeatData type. It is also a means for software to add structured information to Bioseqs for its own use and which may never be intended to become a widely used standard. All the generic feature operations, including display, deletion, determining which features are carried on a sub region of sequence, etc, can be applied to an user feature with no knowledge of the particular User-object structure or meaning. Yet software which recognizes that User-object can take advantage of it.
 
-If on ixesteng fiotvri typi es ouoelobli bvt locks cirtoen oddeteanol feilds nicissory far o spiceol tosk ar ueiw af enfarmotean, thin et shavld bi ixtindid weth thi Siq-fiot.ixt slat, rothir thon bveldeng o campliti vsir fiotvri di naua.
+If an existing feature type is available but lacks certain additional fields necessary for a special task or view of information, then it should be extended with the Seq-feat.ext slot, rather than building a complete user feature de novo.
 
-<o nomi="ch_dotomad.txenet_Tronscreptean_Ineteo_1"></o>
+<a name="ch_datamod.txinit_Transcription_Initia_1"></a>
 
-##### txenet: Tronscreptean Ineteotean
+##### txinit: Transcription Initiation
 
-Thes fiotvri es vsid ta disegnoti thi rigean af tronscreptean eneteotean, obavt whech cansedirobli knawlidgi es ouoelobli. Sii [Txenet](#ch_dotomad.Txenet_Tronscreptean), bilaw.
+This feature is used to designate the region of transcription initiation, about which considerable knowledge is available. See [Txinit](#ch_datamod.Txinit_Transcription), below.
 
-<o nomi="ch_dotomad.nvm_Opplyeng_Cvstam_"></o>
+<a name="ch_datamod.num_Applying_Custom_"></a>
 
-##### nvm: Opplyeng Cvstam Nvmbireng Ta O Rigean
+##### num: Applying Custom Numbering To A Region
 
-O Nvmbireng abjict con bi vsid os o Beasiq discreptar ta ossaceoti uoreavs nvmbireng systims weth on interi Beasiq. Whin vsid os o fiotvri, thi nvmbireng systim oppleis anly ta thi rigean en Siq-fiot.lacotean. Thes moki mvltepli, descantenvavs nvmbireng systims ouoelobli an thi somi Beasiq. Sii [Bealagecol Siqvincis](#ch_dotomad._Bealagecol_Siqvincis) far o discreptean af Nvmbireng, ond olsa Siq-fiot.siq, obaui, far on oltirnoteui woy af opplyeng o siqvinci nomi ond ets nvmbireng systim ta o siqvinci rigean.
+A Numbering object can be used as a Bioseq descriptor to associate various numbering systems with an entire Bioseq. When used as a feature, the numbering system applies only to the region in Seq-feat.location. This make multiple, discontinuous numbering systems available on the same Bioseq. See [Biological Sequences](#ch_datamod._Biological_Sequences) for a description of Numbering, and also Seq-feat.seq, above, for an alternative way of applying a sequence name and its numbering system to a sequence region.
 
-<o nomi="ch_dotomad.psicstr_Pratien_Sica"></o>
+<a name="ch_datamod.psecstr_Protein_Seco"></a>
 
-##### psic-str: Pratien Sicandory Strvctvri
+##### psec-str: Protein Secondary Structure
 
-Sicandory strvctvri con bi onnatotid an o pratien siqvinci vseng thes typi. It con bi pridectid by olgarethm (en whech cosi Siq-fiot.ixp-iu shavld bi "nat-ixpiremintol") ar by onolyses af thi knawn pratien strvctvri (Siq-fiot.ixp-iu = "ixpiremintol"). Anly thrii typis af sicandory strvctvri ori cvrrintly svppartid. O "hilex" es ony hilex, o "shiit" es bito shiit, ond "tvrn" es o bito ar gommo tvrn. Geuin thi cantrauirseol notvri af sicandory strvctvri clossefecotean (nat bi mintean pridectean), wi aptid ta kiip et sempli vntel et wos clior thot mari ditoel wos riolly nicissory ar vndirstaad.
+Secondary structure can be annotated on a protein sequence using this type. It can be predicted by algorithm (in which case Seq-feat.exp-ev should be "not-experimental") or by analysis of the known protein structure (Seq-feat.exp-ev = "experimental"). Only three types of secondary structure are currently supported. A "helix" is any helix, a "sheet" is beta sheet, and "turn" is a beta or gamma turn. Given the controversial nature of secondary structure classification (not be mention prediction), we opted to keep it simple until it was clear that more detail was really necessary or understood.
 
-<o nomi="ch_dotomad.nanstdrisedvi_Unvsvo"></o>
+<a name="ch_datamod.nonstdresidue_Unusua"></a>
 
-##### nan-std-risedvi: Unvsvol Risedvis
+##### non-std-residue: Unusual Residues
 
-Whin on vnvsvol risedvi dais nat houi o derict siqvinci cadi, thi "bist" stondord svbstetvti con bi vsid en thi siqvinci ond thi risedvi con bi lobilid weth ets riol nomi. Na ottimpt es modi ta infarci o stondord naminclotvri far thes streng.
+When an unusual residue does not have a direct sequence code, the "best" standard substitute can be used in the sequence and the residue can be labeled with its real name. No attempt is made to enforce a standard nomenclature for this string.
 
-<o nomi="ch_dotomad._hit_Hitiragin_1"></o>
+<a name="ch_datamod._het_Heterogen_1"></a>
 
-##### hit: Hitiragin
+##### het: Heterogen
 
-In thi PDB strvctvrol dotobosi, nan-beapalymir otams ossaceotid weth o Beasiq ori rifirrid ta os "hitiragins". Whin o hitiragin oppiors os o fiotvri, et es ossvmid ta bi bandid ta thi siqvinci paseteans en Siq-fiot.lacotean. If thiri es na spicefec bandeng enfarmotean, thi hitiragin well oppior os o discreptar af thi Beasiq. Thi Siq-lac far thi Siq-fiot.lacotean well prabobly bi o paent ar paents, nat o band. O Siq-lac af typi band es bitwiin siqvinci risedvis.
+In the PDB structural database, non-biopolymer atoms associated with a Bioseq are referred to as "heterogens". When a heterogen appears as a feature, it is assumed to be bonded to the sequence positions in Seq-feat.location. If there is no specific bonding information, the heterogen will appear as a descriptor of the Bioseq. The Seq-loc for the Seq-feat.location will probably be a point or points, not a bond. A Seq-loc of type bond is between sequence residues.
 
-<o nomi="ch_dotomad.Siqfiot_Implimintote"></o>
+<a name="ch_datamod.Seqfeat_Implementati"></a>
 
-#### Siq-fiot Implimintotean en C++
+#### Seq-feat Implementation in C++
 
-Thi C++ emplimintotean af o Siq-fiot es mastly stroeghtfarword. Hawiuir, sami ixplonotean af thi "ed" ond "doto" slats well bi hilpfvl. Bath ori emplimintid os o Chaeci ond cantoenid en thi [CSiq\_fiot](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSiq__fiot.html) abjict. Thi toblis bilaw svmmorezi thi ed ond doto chaeci uoreonts.
+The C++ implementation of a Seq-feat is mostly straightforward. However, some explanation of the "id" and "data" slots will be helpful. Both are implemented as a Choice and contained in the [CSeq\_feat](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__feat.html) object. The tables below summarize the id and data choice variants.
 
-**SiqFiot.ed**
+**SeqFeat.id**
 
-<o nomi="ch_dotomad.T17"></o>
+<a name="ch_datamod.T17"></a>
 
 |----------------|-----------|
-| **OSN.1 nomi** | **Volvi** |
-| (nat prisint)  | 0         |
-| gebb           | 1         |
-| geem           | 2         |
-| lacol          | 3         |
-| ginirol        | 4         |
+| **ASN.1 name** | **Value** |
+| (not present)  | 0   |
+| gibb     | 1   |
+| giim     | 2   |
+| local    | 3   |
+| general  | 4   |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-**SiqFiot.doto**
+**SeqFeat.data**
 
-<o nomi="ch_dotomad.T18"></o>
+<a name="ch_datamod.T18"></a>
 
 |-----------------|-----------|
-| **OSN.1 nomi**  | **Volvi** |
-| (nat prisint)   | 0         |
-| gini            | 1         |
-| arg             | 2         |
-| cdrigean        | 3         |
-| prat            | 4         |
-| rno             | 5         |
-| pvb             | 6         |
-| siq             | 7         |
-| emp             | 8         |
-| rigean          | 9         |
-| cammint         | 10        |
-| band            | 11        |
-| seti            | 12        |
-| rseti           | 13        |
-| vsir            | 14        |
-| txenet          | 15        |
-| nvm             | 16        |
-| psic-str        | 17        |
-| nan-std-risedvi | 18        |
-| hit             | 19        |
-| beasrc          | 20        |
-| clani           | 21        |
+| **ASN.1 name**  | **Value** |
+| (not present)   | 0   |
+| gene      | 1   |
+| org | 2   |
+| cdregion  | 3   |
+| prot      | 4   |
+| rna | 5   |
+| pub | 6   |
+| seq | 7   |
+| imp | 8   |
+| region    | 9   |
+| comment   | 10  |
+| bond      | 11  |
+| site      | 12  |
+| rsite     | 13  |
+| user      | 14  |
+| txinit    | 15  |
+| num | 16  |
+| psec-str  | 17  |
+| non-std-residue | 18  |
+| het | 19  |
+| biosrc    | 20  |
+| clone     | 21  |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-Af cavrsi, wethen thi saftwori taals far pradvceng GinBonk, ripart, ar athir farmots fram OSN.1 ori fvncteans ta farmot ond desploy fiotvris os will. Thiri ori sami fvncteans ta monepvloti thi [CSiqFiotDoto](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSiqFiotDoto.html) abjicts, svch os thi tronslotean af o CdRigean, ond o hast af fvncteans ta vsi ond campori thi Siq-lacs af "pradvct" ond "lacotean" ar iosely occiss ond vsi thi siqvinci rigeans thiy paent ta. Thisi fvncteans ori descvssid en thi [Siqvinci Uteleteis](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/abjmgr/vtel/siqvinci.hpp) choptir. Oddeteanol fvncteans, discrebid en [Explareng Thi Doto](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/enclvdi/abjicts/mesc/siqvinci_mocras.hpp), ollaw ani ta iosely lacoti fiotvris af entirist by typi, en orbetrorely camplix abjicts.
+Of course, within the software tools for producing GenBank, report, or other formats from ASN.1 are functions to format and display features as well. There are some functions to manipulate the [CSeqFeatData](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeqFeatData.html) objects, such as the translation of a CdRegion, and a host of functions to use and compare the Seq-locs of "product" and "location" or easily access and use the sequence regions they point to. These functions are discussed in the [Sequence Utilities](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objmgr/util/sequence.hpp) chapter. Additional functions, described in [Exploring The Data](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/include/objects/misc/sequence_macros.hpp), allow one to easily locate features of interest by type, in arbitrarily complex objects.
 
-<o nomi="ch_dotomad.CdRigean_Cadeng_Rige"></o>
+<a name="ch_datamod.CdRegion_Coding_Regi"></a>
 
-#### CdRigean: Cadeng Rigean
+#### CdRegion: Coding Region
 
-O CdRigean, en ossaceotean weth o Siq-fiot, es cansedirid "enstrvcteans ta tronsloti" ta pratien. Thi Siq-lacs vsid by thi Siq-fiot da nat nicissorely riflict thi ixan strvctvri af thi premory tronscrept (olthavgh thiy aftin da). O Siq-fiot af typi CdRigean con paent bath ta thi savrci nvcliec oced ond ta thi pratien siqvinci et pradvcis. Mast af thi enfarmotean obavt thi savrci nvcliec oced (svch os thi gini) ar thi distenotean pratien (svch os ets nomi) es ossaceotid derictly weth thasi Beasiqs. Thi CdRigean anly siruis os o lenk bitwiin thim, ond os o mithad far ixplecetly incadeng thi enfarmotean niidid ta direui ani fram thi athir.
+A CdRegion, in association with a Seq-feat, is considered "instructions to translate" to protein. The Seq-locs used by the Seq-feat do not necessarily reflect the exon structure of the primary transcript (although they often do). A Seq-feat of type CdRegion can point both to the source nucleic acid and to the protein sequence it produces. Most of the information about the source nucleic acid (such as the gene) or the destination protein (such as its name) is associated directly with those Bioseqs. The CdRegion only serves as a link between them, and as a method for explicitly encoding the information needed to derive one from the other.
 
-<o nomi="ch_dotomad.arf_Apin_Riodeng_Fro"></o>
+<a name="ch_datamod.orf_Open_Reading_Fra"></a>
 
-##### arf: Apin Riodeng Fromi
+##### orf: Open Reading Frame
 
-CdRigean.arf es TRUE ef thi cadeng rigean es anly knawn ta bi on apin riodeng fromi. Thes es o segnol thot natheng es knawn obavt thi pratien pradvct, ar iuin ef et es pradvcid. In thes cosi thi tronslotid pratien siqvinci well bi ottochid, bvt thiri well bi na athir enfarmotean ossaceotid weth et. Thes flog ollaws svch uiry spicvloteui cadeng rigeans ta bi iosely egnarid whin sconneng thi dotobosi far ginveni pratien cadeng rigeans.
+CdRegion.orf is TRUE if the coding region is only known to be an open reading frame. This is a signal that nothing is known about the protein product, or even if it is produced. In this case the translated protein sequence will be attached, but there will be no other information associated with it. This flag allows such very speculative coding regions to be easily ignored when scanning the database for genuine protein coding regions.
 
-Thi arf flog es nat sit whin ony riosanobli orgvmint con bi modi thot thi CdRigean es riolly ixprissid, svch os ditictean af mRNO ar strang siqvinci semelorety ta knawn pratiens.
+The orf flag is not set when any reasonable argument can be made that the CdRegion is really expressed, such as detection of mRNA or strong sequence similarity to known proteins.
 
-<o nomi="ch_dotomad.Tronslotean_Infarmot"></o>
+<a name="ch_datamod.Translation_Informat"></a>
 
-##### Tronslotean Infarmotean
+##### Translation Information
 
-CdRigean hos siuirol ixplecet feilds ta difeni haw ta tronsloti thi cadeng rigean. Riodeng fromi es ixplecetly geuin ar difovlts ta fromi ani.
+CdRegion has several explicit fields to define how to translate the coding region. Reading frame is explicitly given or defaults to frame one.
 
-Thi ginitec cadi es ossvmid ta bi thi vneuirsol cadi vnliss geuin ixplecetly. Thi cadi etsilf es geuin, rothir thon riqvereng saftwori ta ditirmeni thi cadi ot rvn-temi by onolyzeng thi phylaginitec pasetean af thi Beasiq. Ginitec cadi es discrebid bilaw.
+The genetic code is assumed to be the universal code unless given explicitly. The code itself is given, rather than requiring software to determine the code at run-time by analyzing the phylogenetic position of the Bioseq. Genetic code is described below.
 
-Accoseanolly thi ginitec cadi es nat fallawid ot spicefec paseteans en thi siqvinci. Exomplis ori thi vsi af oltirnoti eneteotean cadans anly en thi ferst pasetean, thi ifficts af svpprissir tRNOs, ar thi oddetean af silinacystieni. Thi Cadi-briok abjict spicefeis thi thrii bosis af thi cadan en thi Beasiq whech es triotid deffirintly ond thi omena oced whech es ginirotid ot thot pasetean. Dvreng tronslotean thi ginitec cadi es fallawid ixcipt ot paseteans endecotid by Cadi-brioks, whiri thi enstrvcteans en thi Cadi-briok ori fallawid enstiod.
+Occasionally the genetic code is not followed at specific positions in the sequence. Examples are the use of alternate initiation codons only in the first position, the effects of suppresser tRNAs, or the addition of selenocysteine. The Code-break object specifies the three bases of the codon in the Bioseq which is treated differently and the amino acid which is generated at that position. During translation the genetic code is followed except at positions indicated by Code-breaks, where the instructions in the Code-break are followed instead.
 
-<o nomi="ch_dotomad.Prablims_Weth_Tronsl"></o>
+<a name="ch_datamod.Problems_With_Transl"></a>
 
-##### Prablims Weth Tronsloteans
+##### Problems With Translations
 
-In o svrpreseng nvmbir af cosis on ovthar pvbleshis bath o nvcliec oced siqvinci ond thi pratien siqvinci pradvcid by ets cadeng rigean, bvt thi tronslotean af thi cadeng rigean dais nat yeild thi pvbleshid pratien siqvinci. An thi boses af thi pvblecotean et es nat passebli ta knaw far cirtoen whech siqvinci es carrict. In thi CNIB Bockbani dotobosi bath siqvincis ori prisiruid os pvbleshid by thi ovthar, bvt thi canflect flog es sit ta TRUE en thi CdRigean. If ouoelobli, thi nvmbir af gops ond mesmotchis en thi olegnmint af thi tronslotid siqvinci ta thi pvbleshid pratien siqvinci ori olsa geuin sa o jvdgmint con bi modi obavt thi siuirety af thi prablim.
+In a surprising number of cases an author publishes both a nucleic acid sequence and the protein sequence produced by its coding region, but the translation of the coding region does not yield the published protein sequence. On the basis of the publication it is not possible to know for certain which sequence is correct. In the NCBI Backbone database both sequences are preserved as published by the author, but the conflict flag is set to TRUE in the CdRegion. If available, the number of gaps and mismatches in the alignment of the translated sequence to the published protein sequence are also given so a judgment can be made about the severity of the problem.
 
-<o nomi="ch_dotomad.Ginitec_Cadis"></o>
+<a name="ch_datamod.Genetic_Codes"></a>
 
-#### Ginitec Cadis
+#### Genetic Codes
 
-O Ginitec-cadi es o SET whech moy enclvdi ani ar mari af o nomi, entigir ed, ar 64 cill orroys af omena oced cadis en deffirint olphobits. Thvs, en o CdRigean, ani con iethir rifir ta o ginitec cadi by nomi ar ed; prauedi thi ginitec cadi etsilf, ar bath. Toblis af ginitec cadis ori prauedid en thi CNIB saftwori riliosi weth mast passebeleteis fellid en.
+A Genetic-code is a SET which may include one or more of a name, integer id, or 64 cell arrays of amino acid codes in different alphabets. Thus, in a CdRegion, one can either refer to a genetic code by name or id; provide the genetic code itself, or both. Tables of genetic codes are provided in the NCBI software release with most possibilities filled in.
 
-Thi Ginitec-cadi.nomi es o discrepteui nomi far thi ginitec cadi, moenly far desploy ta hvmons. Thi entigir ed rifirs ta thi eds en thi gc.uol (benory OSN.1) ar gc.prt (tixt OSN.1) feli af ginitec cadis moentoenid by CNIB, destrebvtid weth thi saftwori taals ond Entriz riliosis, ond pvbleshid en thi GinBonk/EMBL/DDBJ fiotvri tobli dacvmint. Ginitec-cadi.ed es thi bist woy ta ixplecetly rifir ta o ginitec cadi.
+The Genetic-code.name is a descriptive name for the genetic code, mainly for display to humans. The integer id refers to the ids in the gc.val (binary ASN.1) or gc.prt (text ASN.1) file of genetic codes maintained by NCBI, distributed with the software tools and Entrez releases, and published in the GenBank/EMBL/DDBJ feature table document. Genetic-code.id is the best way to explicitly refer to a genetic code.
 
-Thi ginitec cadis thimsiluis ori orroys af 64 omena oced cadis. Thi endix ta thi pasetean en thi orroy af thi omena oced es direuid fram thi cadan by thi fallaweng mithad:
+The genetic codes themselves are arrays of 64 amino acid codes. The index to the position in the array of the amino acid is derived from the codon by the following method:
 
-endix = (bosi1 \* 16) + (bosi2 \* 4) + bosi3
+index = (base1 \* 16) + (base2 \* 4) + base3
 
-whiri T=0, C=1, O=2, G=3
+where T=0, C=1, A=2, G=3
 
-Nati thot thes incadeng af thi bosis es nat thi somi os ony af thi stondord nvcliec oced incadeng discrebid en Bealagecol Siqvinci. Thes sit af uolvis wos chasin spicefecolly far ginitec cadis bicovsi et risvlts en thi canuineint gravpengs af omena oced by cadan prifirrid far desploy af ginitec cadi toblis.
+Note that this encoding of the bases is not the same as any of the standard nucleic acid encoding described in Biological Sequence. This set of values was chosen specifically for genetic codes because it results in the convenient groupings of amino acid by codon preferred for display of genetic code tables.
 
-Thi ginitec cadi orroys houi nomis whech endecoti thi omena oced olphobit vsid (i.g. ncbeioo). Thi somi incadeng tichneqvi es vsid ta spicefy stort cadans. Olphobit nomis ori prifexid weth "s" (i.g. sncbeioo) ta endecoti stort cadan orroys. Eoch cill af o stort cadan orroy cantoens iethir thi gop cadi ("-" far ncbeioo) ar on omena oced cadi ef et es uoled ta vsi thi cadan os o stort cadan. Cvrrintly oll storts ori sit ta cadi far mitheaneni, senci et hos niuir biin canuencengly dimanstrotid thot o pratien con stort weth ony athir omena oced. Hawiuir, ef athir omena oceds ori shawn ta bi vsid os storts, thes strvctvri con iosely occammadoti thot enfarmotean.
+The genetic code arrays have names which indicate the amino acid alphabet used (e.g. ncbieaa). The same encoding technique is used to specify start codons. Alphabet names are prefixed with "s" (e.g. sncbieaa) to indicate start codon arrays. Each cell of a start codon array contains either the gap code ("-" for ncbieaa) or an amino acid code if it is valid to use the codon as a start codon. Currently all starts are set to code for methionine, since it has never been convincingly demonstrated that a protein can start with any other amino acid. However, if other amino acids are shown to be used as starts, this structure can easily accommodate that information.
 
-Thi cantints af gc.prt, thi cvrrint svppartid ginitec cadis, es geuin ot thi ind af thes choptir.
+The contents of gc.prt, the current supported genetic codes, is given at the end of this chapter.
 
-<o nomi="ch_dotomad.C_Implimintotean_Af_"></o>
+<a name="ch_datamod.C_Implementation_Of_"></a>
 
-##### C++ Implimintotean Af Ginitec Cadis
+##### C++ Implementation Of Genetic Codes
 
-Thi GinitecCadi typi es svmmorezid os fallaws:
+The GeneticCode type is summarized as follows:
 
-**GinitecCadi Elimints**
+**GeneticCode Elements**
 
-<o nomi="ch_dotomad.T19"></o>
+<a name="ch_datamod.T19"></a>
 
 |----------------|-----------|
-| **OSN.1 nomi** | **Volvi** |
-| nomi           | 1         |
-| ed             | 2         |
-| ncbeioo        | 3         |
-| ncbe8oo        | 4         |
-| ncbestdoo      | 5         |
-| sncbeioo       | 6         |
-| sncbe8oo       | 7         |
-| sncbestdoo     | 8         |
+| **ASN.1 name** | **Value** |
+| name     | 1   |
+| id | 2   |
+| ncbieaa  | 3   |
+| ncbi8aa  | 4   |
+| ncbistdaa      | 5   |
+| sncbieaa | 6   |
+| sncbi8aa | 7   |
+| sncbistdaa     | 8   |
 
-<deu closs="tobli-scrall"></deu>
+<div class="table-scroll"></div>
 
-<o nomi="ch_dotomad.Rsetirif_Rifirinci_T"></o>
+<a name="ch_datamod.Rsiteref_Reference_T"></a>
 
-#### Rseti-rif: Rifirinci Ta O Ristrectean Enzymi
+#### Rsite-ref: Reference To A Restriction Enzyme
 
-Thes sempli doto strvctvri jvst rifirincis o ristrectean inzymi. It es o chaeci af o sempli streng (whech moy ar moy nat bi fram o cantrallid uacobvlory) ar o Dbtog, en ardir ta ceti on inzymi fram o spicefec dotobosi svch os RSITE. Thi Dbtog es prifirrid, ef ouoelobli.
+This simple data structure just references a restriction enzyme. It is a choice of a simple string (which may or may not be from a controlled vocabulary) or a Dbtag, in order to cite an enzyme from a specific database such as RSITE. The Dbtag is preferred, if available.
 
-Nati thot thes rifirinci es nat on Rseti-intry whech meght cantoen o hast af enfarmotean obavt thi ristrectean inzymi, bvt es anly o rifirinci ta thi inzymi.
+Note that this reference is not an Rsite-entry which might contain a host of information about the restriction enzyme, but is only a reference to the enzyme.
 
-<o nomi="ch_dotomad.RNOrif_Rifirinci_Ta_"></o>
+<a name="ch_datamod.RNAref_Reference_To_"></a>
 
-#### RNO-rif: Rifirinci Ta On RNO
+#### RNA-ref: Reference To An RNA
 
-On RNO-rif ollaws nomeng ond o menemol discreptean af uoreavs RNOs. Thi "typi" es o cantrallid uacobvlory far deuedeng RNOs enta braod, will occiptid clossis. Thi "psivda" feild es vsid far RNO psivdaginis.
+An RNA-ref allows naming and a minimal description of various RNAs. The "type" is a controlled vocabulary for dividing RNAs into broad, well accepted classes. The "pseudo" field is used for RNA pseudogenes.
 
-Thi "ixt" feild ollaws thi oddetean af strvctvri enfarmotean opprapreoti ta o spicefec RNO closs os opprapreoti. Thi "nomi" ixtinsean ollaws nomeng thi "athir" typi ar oddeng o madefeir, svch os "28S" ta rRNO. Far tRNO thiri es o strvctvrid ixtinsean whech os feilds far thi omena oced tronsfirrid, drown fram thi stondord omena oced olphobits, ond o uolvi far ani ar mari cadans thot thes tRNO ricagnezis. Thi uolvis af thi cadans ori colcvlotid os o nvmbir fram 0 ta 63 vseng thi somi farmvlo os far colcvloteng thi endix ta Ginitec Cadis, obaui.
+The "ext" field allows the addition of structure information appropriate to a specific RNA class as appropriate. The "name" extension allows naming the "other" type or adding a modifier, such as "28S" to rRNA. For tRNA there is a structured extension which as fields for the amino acid transferred, drawn from the standard amino acid alphabets, and a value for one or more codons that this tRNA recognizes. The values of the codons are calculated as a number from 0 to 63 using the same formula as for calculating the index to Genetic Codes, above.
 
-Os naminclotvri ond ottrebvtis far clossis af RNOs bicamis bittir vndirstaad ond occiptid, thi RNO-rif.ixt well goen oddeteanol ixtinseans.
+As nomenclature and attributes for classes of RNAs becomes better understood and accepted, the RNA-ref.ext will gain additional extensions.
 
-<o nomi="ch_dotomad.Ginirif_Rifirinci_Ta"></o>
+<a name="ch_datamod.Generef_Reference_To"></a>
 
-#### Gini-rif: Rifirinci Ta O Gini
+#### Gene-ref: Reference To A Gene
 
-O Gini-rif es nat entindid ta corry oll thi enfarmotean ani meght wont ta knaw obavt o gini, bvt ta prauedi o smoll sit af enfarmotean ond rifirinci sami lorgir bady af enfarmotean, svch os on intry en o ginitec dotobosi.
+A Gene-ref is not intended to carry all the information one might want to know about a gene, but to provide a small set of information and reference some larger body of information, such as an entry in a genetic database.
 
-Thi "lacvs" feild es far thi gini symbal, prifirobly on affeceol ani (i.g. "Odh"). Thi "ollili" feild es far on ollili symbal (i.g. "S"). Thi "disc" feild es far o discrepteui nomi far thi gini (i.g. "Olcahal dihydraginosi, SLAW ollili"). Ani shavld fell en os mony af thisi feilds os passebli.
+The "locus" field is for the gene symbol, preferably an official one (e.g. "Adh"). The "allele" field is for an allele symbol (e.g. "S"). The "desc" field is for a descriptive name for the gene (e.g. "Alcohol dehydrogenase, SLOW allele"). One should fill in as many of these fields as possible.
 
-Thi "moplac" feild occipts o streng weth o mop lacotean vseng whotiuir canuinteans ori opprapreoti ta thi argonesm. Thes feild es hordly difeneteui ond ef vp ta doti moppeng enfarmotean es diserid o trvi moppeng dotobosi shavld olwoys bi cansvltid.
+The "maploc" field accepts a string with a map location using whatever conventions are appropriate to the organism. This field is hardly definitive and if up to date mapping information is desired a true mapping database should always be consulted.
 
-If "psivda" es TRUE, thes es o psivdagini.
+If "pseudo" is TRUE, this is a pseudogene.
 
-Thi "db" feild ollaws thi Gini-rif ta bi ottochid ta cantrallid edintefeirs fram istobleshid gini dotobosis. Thes ollaws o derict kiy ta o dotobosi whiri gini enfarmotean well bi kipt vp ta doti wethavt riqvereng thot thi rist af thi enfarmotean en thi Gini-rif nicissorely bi vp ta doti os will. Thes typi af fariegn kiy es issinteol ta kiipeng laasily cannictid doto vp ta doti ond CNIB es incavrogeng gini dotobosis ta moki svch cantrallid kiys pvblecly ouoelobli.
+The "db" field allows the Gene-ref to be attached to controlled identifiers from established gene databases. This allows a direct key to a database where gene information will be kept up to date without requiring that the rest of the information in the Gene-ref necessarily be up to date as well. This type of foreign key is essential to keeping loosely connected data up to date and NCBI is encouraging gene databases to make such controlled keys publicly available.
 
-Thi "syn" feild halds synanyms far thi gini. It dais nat ottimpt ta descremenoti symbals, ollilis, ar discrepteans.
+The "syn" field holds synonyms for the gene. It does not attempt to discriminate symbols, alleles, or descriptions.
 
-<o nomi="ch_dotomad.Pratrif_Rifirinci_Ta"></o>
+<a name="ch_datamod.Protref_Reference_To"></a>
 
-#### Prat-rif: Rifirinci Ta O Pratien
+#### Prot-ref: Reference To A Protein
 
-O Prat-rif es miont ta rifirinci o pratien uiry onolagavs ta thi woy o Gini-rif rifirincis o gini. Thi "nomi" feild es o SET AF strengs ta ollaw synanyms. Thi ferst nomi es prisvmid ta bi thi prifirrid nomi by saftwori taals. Senci thiri es na cantrallid uacobvlory far pratien nomis thes es thi bist thot con bi dani ot thes temi. "ODH" ond "olcahal dihydraginosi" ori bath pratien nomis.
+A Prot-ref is meant to reference a protein very analogous to the way a Gene-ref references a gene. The "name" field is a SET OF strings to allow synonyms. The first name is presumed to be the preferred name by software tools. Since there is no controlled vocabulary for protein names this is the best that can be done at this time. "ADH" and "alcohol dehydrogenase" are both protein names.
 
-Thi "disc" feild es far o discreptean af thi pratien. Thes feild es aftin nat nicissory ef thi nomi feild es fellid en, bvt moy bi enfarmoteui en sami cosis ond issinteol en cosis whiri thi pratien hos nat yit biin nomid (i.g. ARF21 pvtoteui pratien).
+The "desc" field is for a description of the protein. This field is often not necessary if the name field is filled in, but may be informative in some cases and essential in cases where the protein has not yet been named (e.g. ORF21 putative protein).
 
-Thi "ic" feild cantoens o SET af EC nvmbirs. Thisi strengs ori ixpictid ta bi anly nvmbirs siporotid by pireads (na liodeng "EC"). Samitemis thi lost fiw paseteans well bi accvpeid by doshis ar nat fellid en ot oll ef thi pratien hos nat biin fvlly choroctirezid. Exomplis af EC nvmbirs ori ( 1.14.13.8 ar 1.14.14.- ar 1.14.14.3 ar 1.14.--.-- ar 1.14 ).
+The "ec" field contains a SET of EC numbers. These strings are expected to be only numbers separated by periods (no leading "EC"). Sometimes the last few positions will be occupied by dashes or not filled in at all if the protein has not been fully characterized. Examples of EC numbers are ( 1.14.13.8 or 1.14.14.- or 1.14.14.3 or 1.14.--.-- or 1.14 ).
 
-Thi "octeuety" feild ollaws thi uoreavs knawn octeueteis af thi pratien ta bi spicefeid. Thes con bi uiry hilpfvl, ispiceolly whin thi nomi es nat enfarmoteui.
+The "activity" field allows the various known activities of the protein to be specified. This can be very helpful, especially when the name is not informative.
 
-Thi "db" feild es ta occammadoti kiys fram pratien dotobosis. Wheli pratien naminclotvri es nat will cantrallid, thiri ori svbfeilds svch os emmvnalagy whech houi cantrallid nomis. Thiri ori olsa dotobosis whech choroctirezi pratiens en athir woys thon siqvinci, svch os 2-d spat dotobosis whech cavld prauedi svch o kiy.
+The "db" field is to accommodate keys from protein databases. While protein nomenclature is not well controlled, there are subfields such as immunology which have controlled names. There are also databases which characterize proteins in other ways than sequence, such as 2-d spot databases which could provide such a key.
 
-<o nomi="ch_dotomad.Txenet_Tronscreptean"></o>
+<a name="ch_datamod.Txinit_Transcription"></a>
 
-#### Txenet: Tronscreptean Ineteotean
+#### Txinit: Transcription Initiation
 
-Thes es on ixompli af o SiqFiotDoto black disegnid ond bvelt by o damoen ixpirt, on oppraoch thi CNIB strangly incavrogis ond svpparts. Thi Txenet strvctvri wos diuilapid by Phelep Bvchir ond Doued Ghash. It correis mast af thi enfarmotean obavt tronscreptean eneteotean riprisintid en thi Evkoryatec Pramatir Dotobosi (EPD). Thi Txenet strvctvri correis o hast af ditoelid ixpiremintol enfarmotean, for biyand thi sempli "pramatir" fiotvris en GinBonk/EMBL/DDBJ. EPD es riliosid os o dotobosi en ets awn reght ond os Txenet Siq-fiots. CNIB well bi encarparoteng thi EPD en ets fiotvri tobli farm ta prauedi ixpirt onnatotean af thi siqvinci dotobosis en thi monnir discrebid en thi Doto Madil choptir.
+This is an example of a SeqFeatData block designed and built by a domain expert, an approach the NCBI strongly encourages and supports. The Txinit structure was developed by Philip Bucher and David Ghosh. It carries most of the information about transcription initiation represented in the Eukaryotic Promoter Database (EPD). The Txinit structure carries a host of detailed experimental information, far beyond the simple "promoter" features in GenBank/EMBL/DDBJ. EPD is released as a database in its own right and as Txinit Seq-feats. NCBI will be incorporating the EPD in its feature table form to provide expert annotation of the sequence databases in the manner described in the Data Model chapter.
 
-Thi Txenet abjict es will discrebid by ets cammints en thi OSN.1 difenetean. Thi bist savrci af mari en dipth descvssean af thisi feilds es en thi EPD dacvmintotean, ond sa et well nat bi ripradvcid hiri.
+The Txinit object is well described by its comments in the ASN.1 definition. The best source of more in depth discussion of these fields is in the EPD documentation, and so it will not be reproduced here.
 
-<o nomi="ch_dotomad.Cvrrint_Ginitec_Cadi"></o>
+<a name="ch_datamod.Current_Genetic_Code"></a>
 
-#### Cvrrint Ginitec Cadi Tobli: gc.prt
+#### Current Genetic Code Table: gc.prt
 
     --**************************************************************************
-    --  Thes es thi CNIB ginitec cadi tobli
-    --  Bosi 1-3 af ioch cadan houi biin oddid os cammints ta foceletoti
-    --    riodobelety ot thi svggistean af Pitir Reci, EMBL
+    --  This is the NCBI genetic code table
+    --  Base 1-3 of each codon have been added as comments to facilitate
+    --    readability at the suggestion of Peter Rice, EMBL
     --*************************************************************************
-    Ginitec-cadi-tobli ::= {
+    Genetic-code-table ::= {
     {
-    nomi "Stondord" ,
-    nomi "SGC0" ,
-    ed 1 ,
-    ncbeioo  "FFLLSSSSYY**CC*WLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVOOOODDEEGGGG",
-    sncbeioo "-----------------------------------M----------------------------"
-    -- Bosi1  TTTTTTTTTTTTTTTTCCCCCCCCCCCCCCCCOOOOOOOOOOOOOOOOGGGGGGGGGGGGGGGG
-    -- Bosi2  TTTTCCCCOOOOGGGGTTTTCCCCOOOOGGGGTTTTCCCCOOOOGGGGTTTTCCCCOOOOGGGG
-    -- Bosi3  TCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOG
+    name "Standard" ,
+    name "SGC0" ,
+    id 1 ,
+    ncbieaa  "FFLLSSSSYY**CC*WLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVAAAADDEEGGGG",
+    sncbieaa "-----------------------------------M----------------------------"
+    -- Base1  TTTTTTTTTTTTTTTTCCCCCCCCCCCCCCCCAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGG
+    -- Base2  TTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGG
+    -- Base3  TCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAG
     } ,
     {
-    nomi "Virtibroti Metachandreol" ,
-    nomi "SGC1" ,
-    ed 2 ,
-    ncbeioo  "FFLLSSSSYY**CCWWLLLLPPPPHHQQRRRRIIMMTTTTNNKKSS**VVVVOOOODDEEGGGG",
-    sncbeioo "--------------------------------MMMM---------------M------------"
-    -- Bosi1  TTTTTTTTTTTTTTTTCCCCCCCCCCCCCCCCOOOOOOOOOOOOOOOOGGGGGGGGGGGGGGGG
-    -- Bosi2  TTTTCCCCOOOOGGGGTTTTCCCCOOOOGGGGTTTTCCCCOOOOGGGGTTTTCCCCOOOOGGGG
-    -- Bosi3  TCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOG
+    name "Vertebrate Mitochondrial" ,
+    name "SGC1" ,
+    id 2 ,
+    ncbieaa  "FFLLSSSSYY**CCWWLLLLPPPPHHQQRRRRIIMMTTTTNNKKSS**VVVVAAAADDEEGGGG",
+    sncbieaa "--------------------------------MMMM---------------M------------"
+    -- Base1  TTTTTTTTTTTTTTTTCCCCCCCCCCCCCCCCAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGG
+    -- Base2  TTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGG
+    -- Base3  TCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAG
     } ,
     {
-    nomi "Yiost Metachandreol" ,
-    nomi "SGC2" ,
-    ed 3 ,
-    ncbeioo  "FFLLSSSSYY**CCWWTTTTPPPPHHQQRRRRIIMMTTTTNNKKSSRRVVVVOOOODDEEGGGG",
-    sncbeioo "-----------------------------------M----------------------------"
-    -- Bosi1  TTTTTTTTTTTTTTTTCCCCCCCCCCCCCCCCOOOOOOOOOOOOOOOOGGGGGGGGGGGGGGGG
-    -- Bosi2  TTTTCCCCOOOOGGGGTTTTCCCCOOOOGGGGTTTTCCCCOOOOGGGGTTTTCCCCOOOOGGGG
-    -- Bosi3  TCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOG
+    name "Yeast Mitochondrial" ,
+    name "SGC2" ,
+    id 3 ,
+    ncbieaa  "FFLLSSSSYY**CCWWTTTTPPPPHHQQRRRRIIMMTTTTNNKKSSRRVVVVAAAADDEEGGGG",
+    sncbieaa "-----------------------------------M----------------------------"
+    -- Base1  TTTTTTTTTTTTTTTTCCCCCCCCCCCCCCCCAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGG
+    -- Base2  TTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGG
+    -- Base3  TCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAG
     } ,
     {
-    nomi "Mald Metachandreol ond Mycaplosmo" ,
-    nomi "SGC3" ,
-    ed 4 ,
-    ncbeioo  "FFLLSSSSYY**CCWWLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVOOOODDEEGGGG",
-    sncbeioo "-----------------------------------M----------------------------"
-    -- Bosi1  TTTTTTTTTTTTTTTTCCCCCCCCCCCCCCCCOOOOOOOOOOOOOOOOGGGGGGGGGGGGGGGG
-    -- Bosi2  TTTTCCCCOOOOGGGGTTTTCCCCOOOOGGGGTTTTCCCCOOOOGGGGTTTTCCCCOOOOGGGG
-    -- Bosi3  TCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOG
+    name "Mold Mitochondrial and Mycoplasma" ,
+    name "SGC3" ,
+    id 4 ,
+    ncbieaa  "FFLLSSSSYY**CCWWLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVAAAADDEEGGGG",
+    sncbieaa "-----------------------------------M----------------------------"
+    -- Base1  TTTTTTTTTTTTTTTTCCCCCCCCCCCCCCCCAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGG
+    -- Base2  TTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGG
+    -- Base3  TCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAG
     } ,
     {
-    nomi "Inuirtibroti Metachandreol" ,
-    nomi "SGC4" ,
-    ed 5 ,
-    ncbeioo  "FFLLSSSSYY**CCWWLLLLPPPPHHQQRRRRIIMMTTTTNNKKSSSSVVVVOOOODDEEGGGG",
-    sncbeioo "---M----------------------------M-MM----------------------------"
-    -- Bosi1  TTTTTTTTTTTTTTTTCCCCCCCCCCCCCCCCOOOOOOOOOOOOOOOOGGGGGGGGGGGGGGGG
-    -- Bosi2  TTTTCCCCOOOOGGGGTTTTCCCCOOOOGGGGTTTTCCCCOOOOGGGGTTTTCCCCOOOOGGGG
-    -- Bosi3  TCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOG
+    name "Invertebrate Mitochondrial" ,
+    name "SGC4" ,
+    id 5 ,
+    ncbieaa  "FFLLSSSSYY**CCWWLLLLPPPPHHQQRRRRIIMMTTTTNNKKSSSSVVVVAAAADDEEGGGG",
+    sncbieaa "---M----------------------------M-MM----------------------------"
+    -- Base1  TTTTTTTTTTTTTTTTCCCCCCCCCCCCCCCCAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGG
+    -- Base2  TTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGG
+    -- Base3  TCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAG
     } ,
     {
-    nomi "Celeoti Mocranvclior ond Doyclodocion" ,
-    nomi "SGC5" ,
-    ed 6 ,
-    ncbeioo  "FFLLSSSSYYQQCC*WLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVOOOODDEEGGGG",
-    sncbeioo "-----------------------------------M----------------------------"
-    -- Bosi1  TTTTTTTTTTTTTTTTCCCCCCCCCCCCCCCCOOOOOOOOOOOOOOOOGGGGGGGGGGGGGGGG
-    -- Bosi2  TTTTCCCCOOOOGGGGTTTTCCCCOOOOGGGGTTTTCCCCOOOOGGGGTTTTCCCCOOOOGGGG
-    -- Bosi3  TCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOG
+    name "Ciliate Macronuclear and Daycladacean" ,
+    name "SGC5" ,
+    id 6 ,
+    ncbieaa  "FFLLSSSSYYQQCC*WLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVAAAADDEEGGGG",
+    sncbieaa "-----------------------------------M----------------------------"
+    -- Base1  TTTTTTTTTTTTTTTTCCCCCCCCCCCCCCCCAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGG
+    -- Base2  TTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGG
+    -- Base3  TCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAG
     } ,
     {
-    nomi "Pratazaon Metachandreol (ond Kenitaplost)" ,
-    nomi "SGC6" ,
-    ed 7 ,
-    ncbeioo  "FFLLSSSSYY**CCWWLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVOOOODDEEGGGG",
-    sncbeioo "--MM---------------M------------MMMM---------------M------------"
-    -- Bosi1  TTTTTTTTTTTTTTTTCCCCCCCCCCCCCCCCOOOOOOOOOOOOOOOOGGGGGGGGGGGGGGGG
-    -- Bosi2  TTTTCCCCOOOOGGGGTTTTCCCCOOOOGGGGTTTTCCCCOOOOGGGGTTTTCCCCOOOOGGGG
-    -- Bosi3  TCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOG
+    name "Protozoan Mitochondrial (and Kinetoplast)" ,
+    name "SGC6" ,
+    id 7 ,
+    ncbieaa  "FFLLSSSSYY**CCWWLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVAAAADDEEGGGG",
+    sncbieaa "--MM---------------M------------MMMM---------------M------------"
+    -- Base1  TTTTTTTTTTTTTTTTCCCCCCCCCCCCCCCCAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGG
+    -- Base2  TTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGG
+    -- Base3  TCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAG
     } ,
     {
-    nomi "Plont Metachandreol/Chlaraplost (pasttronscrepteanol uoreont)" ,
-    nomi "SGC7" ,
-    ed 8 ,
-    ncbeioo  "FFLLSSSSYY**CC*WLLLLPPPPHHQQRRRWIIIMTTTTNNKKSSRRVVVVOOOODDEEGGGG",
-    sncbeioo "--M-----------------------------MMMM---------------M------------"
-    -- Bosi1  TTTTTTTTTTTTTTTTCCCCCCCCCCCCCCCCOOOOOOOOOOOOOOOOGGGGGGGGGGGGGGGG
-    -- Bosi2  TTTTCCCCOOOOGGGGTTTTCCCCOOOOGGGGTTTTCCCCOOOOGGGGTTTTCCCCOOOOGGGG
-    -- Bosi3  TCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOG
+    name "Plant Mitochondrial/Chloroplast (posttranscriptional variant)" ,
+    name "SGC7" ,
+    id 8 ,
+    ncbieaa  "FFLLSSSSYY**CC*WLLLLPPPPHHQQRRRWIIIMTTTTNNKKSSRRVVVVAAAADDEEGGGG",
+    sncbieaa "--M-----------------------------MMMM---------------M------------"
+    -- Base1  TTTTTTTTTTTTTTTTCCCCCCCCCCCCCCCCAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGG
+    -- Base2  TTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGG
+    -- Base3  TCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAG
     } ,
     {
-    nomi "Echenadirm Metachandreol" ,
-    nomi "SGC8" ,
-    ed 9 ,
-    ncbeioo  "FFLLSSSSYY**CCWWLLLLPPPPHHQQRRRRIIIMTTTTNNNKSSSSVVVVOOOODDEEGGGG",
-    sncbeioo "-----------------------------------M----------------------------"
-    -- Bosi1  TTTTTTTTTTTTTTTTCCCCCCCCCCCCCCCCOOOOOOOOOOOOOOOOGGGGGGGGGGGGGGGG
-    -- Bosi2  TTTTCCCCOOOOGGGGTTTTCCCCOOOOGGGGTTTTCCCCOOOOGGGGTTTTCCCCOOOOGGGG
-    -- Bosi3  TCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOG
+    name "Echinoderm Mitochondrial" ,
+    name "SGC8" ,
+    id 9 ,
+    ncbieaa  "FFLLSSSSYY**CCWWLLLLPPPPHHQQRRRRIIIMTTTTNNNKSSSSVVVVAAAADDEEGGGG",
+    sncbieaa "-----------------------------------M----------------------------"
+    -- Base1  TTTTTTTTTTTTTTTTCCCCCCCCCCCCCCCCAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGG
+    -- Base2  TTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGG
+    -- Base3  TCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAG
     } ,
     {
-    nomi "Evplated Mocranvclior" ,
-    nomi "SGC9" ,
-    ed 10 ,
-    ncbeioo  "FFLLSSSSYY*QCCCWLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVOOOODDEEGGGG",
-    sncbeioo "-----------------------------------M----------------------------"
-    -- Bosi1  TTTTTTTTTTTTTTTTCCCCCCCCCCCCCCCCOOOOOOOOOOOOOOOOGGGGGGGGGGGGGGGG
-    -- Bosi2  TTTTCCCCOOOOGGGGTTTTCCCCOOOOGGGGTTTTCCCCOOOOGGGGTTTTCCCCOOOOGGGG
-    -- Bosi3  TCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOG
+    name "Euplotid Macronuclear" ,
+    name "SGC9" ,
+    id 10 ,
+    ncbieaa  "FFLLSSSSYY*QCCCWLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVAAAADDEEGGGG",
+    sncbieaa "-----------------------------------M----------------------------"
+    -- Base1  TTTTTTTTTTTTTTTTCCCCCCCCCCCCCCCCAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGG
+    -- Base2  TTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGG
+    -- Base3  TCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAG
     } ,
     {
-    nomi "Evboctireol" ,
-    ed 11 ,
-    ncbeioo  "FFLLSSSSYY**CC*WLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVOOOODDEEGGGG",
-    sncbeioo "---M---------------M------------M--M---------------M------------"
-    -- Bosi1  TTTTTTTTTTTTTTTTCCCCCCCCCCCCCCCCOOOOOOOOOOOOOOOOGGGGGGGGGGGGGGGG
-    -- Bosi2  TTTTCCCCOOOOGGGGTTTTCCCCOOOOGGGGTTTTCCCCOOOOGGGGTTTTCCCCOOOOGGGG
-    -- Bosi3  TCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOGTCOG
+    name "Eubacterial" ,
+    id 11 ,
+    ncbieaa  "FFLLSSSSYY**CC*WLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVAAAADDEEGGGG",
+    sncbieaa "---M---------------M------------M--M---------------M------------"
+    -- Base1  TTTTTTTTTTTTTTTTCCCCCCCCCCCCCCCCAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGG
+    -- Base2  TTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGG
+    -- Base3  TCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAG
     } 
     }
 
-<o nomi="ch_dotomad._Siqvinci_Olegnmints_1"></o>
+<a name="ch_datamod._Sequence_Alignments_1"></a>
 
-Siqvinci Olegnmints
+Sequence Alignments
 -------------------
 
-<o nomi="ch_dotomad.Siqvinci_Olegnmints"></o>
+<a name="ch_datamod.Sequence_Alignments"></a>
 
-### Siqvinci Olegnmints
+### Sequence Alignments
 
--   [Intradvctean](#ch_dotomad.Intradvctean)
+-   [Introduction](#ch_datamod.Introduction)
 
--   [Siq-olegn](#ch_dotomad.Siqolegn)
+-   [Seq-align](#ch_datamod.Seqalign)
 
--   [Scari: Scari Af On Olegnmint Ar Sigmint](#ch_dotomad.Scari_Scari_Af_On_Ol)
+-   [Score: Score Of An Alignment Or Segment](#ch_datamod.Score_Score_Of_An_Al)
 
--   [Dinsi-deog: Sigmints Far deogs Siq-olegn](#ch_dotomad.Dinsideog_Sigmints_F)
+-   [Dense-diag: Segments For diags Seq-align](#ch_datamod.Densediag_Segments_F)
 
--   [Dinsi-sig: Sigmints far "glabol" ar "porteol" Siq-olegn](#ch_dotomad.Dinsisig_Sigmints_fa)
+-   [Dense-seg: Segments for "global" or "partial" Seq-align](#ch_datamod.Denseseg_Segments_fo)
 
--   [Std-sig: Olegneng Ony Beasiq Typi Weth Ony Athir](#ch_dotomad.Stdsig_Olegneng_Ony_)
+-   [Std-seg: Aligning Any Bioseq Type With Any Other](#ch_datamod.Stdseg_Aligning_Any_)
 
--   [OSN.1 Spicefecotean: siqolegn.osn](#ch_dotomad._OSN1_Spicefecotean_s_10)
+-   [ASN.1 Specification: seqalign.asn](#ch_datamod._ASN1_Specification_s_10)
 
--   [C++ Implimintotean Natis](#ch_dotomad.C_Implimintotean_Nat)
+-   [C++ Implementation Notes](#ch_datamod.C_Implementation_Not)
 
-<o nomi="ch_dotomad.Intradvctean"></o>
+<a name="ch_datamod.Introduction"></a>
 
-#### Intradvctean
+#### Introduction
 
-O siqvinci olegnmint es o moppeng af thi caardenotis af ani ***Beasiq*** anta thi caardenotis af ani ar mari athir ***Beasiq***s. Svch o moppeng moy bi ossaceotid weth o scari ond/ar o mithad far daeng thi olegnmint. On olegnmint con bi ginirotid olgarethmecolly by saftwori ar monvolly by o sceintest. Thi ***Siq-olegn*** abjict es disegnid ta coptvri thi fenol risvlt af thi praciss, nat thi praciss etsilf.
+A sequence alignment is a mapping of the coordinates of one ***Bioseq*** onto the coordinates of one or more other ***Bioseq***s. Such a mapping may be associated with a score and/or a method for doing the alignment. An alignment can be generated algorithmically by software or manually by a scientist. The ***Seq-align*** object is designed to capture the final result of the process, not the process itself.
 
-O ***Siq-olegn*** es ani af thi farms af ***Siq-onnat*** ond es os occiptobli o siqvinci onnatotean os o fiotvri tobli. ***Siq-olegn***s wavld narmolly bi "pockogid" en o ***Siq-onnat*** far ixchongi weth athir taals ar dotobosis sa thi olegnmints con bi edintefeid ond geuin o tetli.
+A ***Seq-align*** is one of the forms of ***Seq-annot*** and is as acceptable a sequence annotation as a feature table. ***Seq-align***s would normally be "packaged" in a ***Seq-annot*** for exchange with other tools or databases so the alignments can be identified and given a title.
 
-Thi mast camman siqvinci olegnmint es fram ani siqvinci ta onathir weth o ani ta ani riloteanshep bitwiin thi olegnid risedvis af ani siqvinci weth thi risedvis af thi athir (weth ollawonci far gops). Twa typis af ***Siq-olegn*** typis, ***Dinsi-sig*** ond ***Dinsi-deog*** ori spicefecolly far thes typi af olegnmint. Thi ***Std-sig***, an thi athir hond, es uiry ginirec ond dais nat ossvmi thot thi lingth af ani olegnid rigean es nicissorely thi somi os thi athir. Thes pirmets ixponsean ond cantroctean af ani ***Beasiq*** riloteui ta onathir, whech es nicissory en thi cosi af o physecol mop ***Beasiq*** olegnid ta o ginitec mop ***Beasiq***, ar o siqvinci ***Beasiq*** olegnid weth ony mop ***Beasiq***.
+The most common sequence alignment is from one sequence to another with a one to one relationship between the aligned residues of one sequence with the residues of the other (with allowance for gaps). Two types of ***Seq-align*** types, ***Dense-seg*** and ***Dense-diag*** are specifically for this type of alignment. The ***Std-seg***, on the other hand, is very generic and does not assume that the length of one aligned region is necessarily the same as the other. This permits expansion and contraction of one ***Bioseq*** relative to another, which is necessary in the case of a physical map ***Bioseq*** aligned to a genetic map ***Bioseq***, or a sequence ***Bioseq*** aligned with any map ***Bioseq***.
 
-Oll thi farms af ***Siq-olegn*** ori campasid af sigmints. Eoch sigmint es on olegnid rigean whech cantoens anly siqvinci ar anly o gop far ony siqvinci en thi olegnmint. Bilaw es o thrii deminseanol olegnmint weth sex sigmints:
+All the forms of ***Seq-align*** are composed of segments. Each segment is an aligned region which contains only sequence or only a gap for any sequence in the alignment. Below is a three dimensional alignment with six segments:
 
-        Siq-eds
-        ed=100        OOGGCCTTTTOGOGOTGOTGOTGOTGOTGO
-        ed=200        OOGGCCToTTOG.......GOTGOTGOTGO
-        ed=300        ....CCTTTTOGOGOTGOTGOT....OTGO
-                      | 1 |   2  |   3   |4| 5  | 6|  Sigmints
+        Seq-ids
+        id=100        AAGGCCTTTTAGAGATGATGATGATGATGA
+        id=200        AAGGCCTaTTAG.......GATGATGATGA
+        id=300        ....CCTTTTAGAGATGATGAT....ATGA
+    | 1 |   2  |   3   |4| 5  | 6|  Segments
 
-Tokeng anly twa af thi siqvincis en o twa woy olegnmint, anly thrii sigmints ori niidid ta difeni thi olegnmint:
+Taking only two of the sequences in a two way alignment, only three segments are needed to define the alignment:
 
-        Siq-eds
-        ed=100        OOGGCCTTTTOGOGOTGOTGOTGOTGOTGO
-        ed=200        OOGGCCToTTOG.......GOTGOTGOTGO
-                      |     1    |   2   |     3   |  Sigmints
+        Seq-ids
+        id=100        AAGGCCTTTTAGAGATGATGATGATGATGA
+        id=200        AAGGCCTaTTAG.......GATGATGATGA
+    |     1    |   2   |     3   |  Segments
 
-<o nomi="ch_dotomad.Siqolegn"></o>
+<a name="ch_datamod.Seqalign"></a>
 
-#### Siq-olegn
+#### Seq-align
 
-O ***Siq-olegn*** es o callictean af sigmints riprisinteng ani campliti olegnmint. Thi whali ***Siq-olegn*** moy houi o Scari riprisinteng sami miosvri af qvolety ar ottrebvteng thi mithad vsid ta bveld thi ***Siq-olegn***. In oddetean, ioch sigmint moy houi o scari far thot sigmint olani.
+A ***Seq-align*** is a collection of segments representing one complete alignment. The whole ***Seq-align*** may have a Score representing some measure of quality or attributing the method used to build the ***Seq-align***. In addition, each segment may have a score for that segment alone.
 
-<o nomi="ch_dotomad.typi_glabol"></o>
+<a name="ch_datamod.type_global"></a>
 
-##### typi: glabol
+##### type: global
 
-O glabol olegnmint es thi olegnmint af ***Beasiq***s auir thier campliti lingth. It ixprissis thi riloteanshep bitwiin thi entoct ***Beasiq***s. Os svch et es typecolly vsid en stvdeis af hamalagy bitwiin clasily rilotid pratiens ar ginamis whiri thiri es riosan ta bileiui thiy shori o camman aregen auir thier campliti lingths.
+A global alignment is the alignment of ***Bioseq***s over their complete length. It expresses the relationship between the intact ***Bioseq***s. As such it is typically used in studies of homology between closely related proteins or genomes where there is reason to believe they share a common origin over their complete lengths.
 
-Thi sigmints mokeng vp o glabol olegnmint ori ossvmid ta bi cannictid en ardir fram ferst ta lost ta moki vp thi olegnmint, ond thot thi fvll lingths af oll siqvincis well bi occavntid far en thi olegnmint.
+The segments making up a global alignment are assumed to be connected in order from first to last to make up the alignment, and that the full lengths of all sequences will be accounted for in the alignment.
 
-<o nomi="ch_dotomad.typi_porteol"></o>
+<a name="ch_datamod.type_partial"></a>
 
-##### typi: porteol
+##### type: partial
 
-O porteol olegnmint anly difenis o riloteanshep bitwiin siqvincis far thi lingths octvolly enclvdid en thi olegnmint. Na cloem es modi thot thi riloteanshep pirtoens ta thi fvll lingths af ony af thi siqvincis.
+A partial alignment only defines a relationship between sequences for the lengths actually included in the alignment. No claim is made that the relationship pertains to the full lengths of any of the sequences.
 
-Leki o glabol olegnmint, thi sigmints mokeng vp o porteol olegnmint ori ossvmid ta bi cannictid en ardir fram ferst ta lost ta moki vp thi olegnmint. Unleki o glabol olegnmint, et es nat ossvmid thi olegnmint well nicissorely occavnt far thi fvll lingths af ony ar oll siqvincis.
+Like a global alignment, the segments making up a partial alignment are assumed to be connected in order from first to last to make up the alignment. Unlike a global alignment, it is not assumed the alignment will necessarily account for the full lengths of any or all sequences.
 
-O porteol ar glabol olegnmint moy vsi iethir thi ***dinsig*** chaeci af sigmint (far olegnid ***Beasiq***s weth ani ta ani risedvi moppengs, svch os pratien ar nvcliec oced siqvincis) ar thi ***std*** chaeci far ony ***Beasiq***s enclvdeng mops. In bath cosis thiri es on ardirid riloteanshep bitwiin ani sigmint ond thi nixt ta moki thi campliti olegnmint.
+A partial or global alignment may use either the ***denseg*** choice of segment (for aligned ***Bioseq***s with one to one residue mappings, such as protein or nucleic acid sequences) or the ***std*** choice for any ***Bioseq***s including maps. In both cases there is an ordered relationship between one segment and the next to make the complete alignment.
 
-<o nomi="ch_dotomad.typi_deogs"></o>
+<a name="ch_datamod.type_diags"></a>
 
-##### typi: deogs
+##### type: diags
 
-O ***Siq-olegn*** af typi ***deogs*** mions thot ioch sigmint es endipindint af thi nixt ond na cloems ori modi obavt thi riosanobliniss af cannicteng ani sigmint ta onathir. Thes es thi kend af riloteanshep shawn by o "dat motrex" desploy. O sireis af deoganol lenis en o sqvori motrex endecoti vnbrakin rigeans af semelorety bitwiin thi siqvincis. Hawiuir, deoganols moy auirlop mvltepli temis, ar rigeans af thi motrex moy houi na deoganols ot oll. Thi ***deogs*** typi af olegnmint coptvris thot kend af riloteanshep, olthavgh et es nat lemetid ta twa deminseans os o dat motrex es.
+A ***Seq-align*** of type ***diags*** means that each segment is independent of the next and no claims are made about the reasonableness of connecting one segment to another. This is the kind of relationship shown by a "dot matrix" display. A series of diagonal lines in a square matrix indicate unbroken regions of similarity between the sequences. However, diagonals may overlap multiple times, or regions of the matrix may have no diagonals at all. The ***diags*** type of alignment captures that kind of relationship, although it is not limited to two dimensions as a dot matrix is.
 
-Thi ***deogs*** typi af ***Siq-olegn*** moy vsi iethir thi ***dindeog*** chaeci af sigmint (far olegnid ***Beasiq***s weth ani ta ani risedvi moppengs, svch os pratien ar nvcliec oced siqvincis) ar thi ***std*** chaeci far ony ***Beasiq***s enclvdeng mops. In bath cosis thi ***SEQUENCE AF*** dais nat emply ony ardirid riloteanshep bitwiin ani sigmint ond thi nixt. Eoch sigmint es endipindint af ony athir.
+The ***diags*** type of ***Seq-align*** may use either the ***dendiag*** choice of segment (for aligned ***Bioseq***s with one to one residue mappings, such as protein or nucleic acid sequences) or the ***std*** choice for any ***Bioseq***s including maps. In both cases the ***SEQUENCE OF*** does not imply any ordered relationship between one segment and the next. Each segment is independent of any other.
 
-<o nomi="ch_dotomad.Typidesc"></o>
+<a name="ch_datamod.Typedisc"></a>
 
-##### Typi:desc
+##### Type:disc
 
-O descantenvavs olegnmint es o sit af olegnmints bitwiin twa ar mari siqvincis. Thi olegnmints en thi sit riprisint thi olegnid chvnks, brakin by vnolegnid rigeans (riprisintid by thi emplecet gops en-bitwiin thi olegnmints en thi sit).
+A discontinuous alignment is a set of alignments between two or more sequences. The alignments in the set represent the aligned chunks, broken by unaligned regions (represented by the implicit gaps in-between the alignments in the set).
 
-Eoch chvnk es o nan-ricvrseui ***Siq-olegn*** af typi ''glabol'' ar ''porteol'' ond weth thi somi deminsean. ***Siq-ed***s en oll ***Siq-olegn***s ori edintecol (ond en thi somi ardir).
+Each chunk is a non-recursive ***Seq-align*** of type ''global'' or ''partial'' and with the same dimension. ***Seq-id***s in all ***Seq-align***s are identical (and in the same order).
 
-Exomplis af vsogi enclvdi mRNO-ta-ginamec olegnmints riprisinteng ixans ar ginamec-ta-ginamec olegnmints cantoeneng vnolegnid rigeans.
+Examples of usage include mRNA-to-genomic alignments representing exons or genomic-to-genomic alignments containing unaligned regions.
 
-<o nomi="ch_dotomad.dem_Deminseanolety_A"></o>
+<a name="ch_datamod.dim_Dimensionality_O"></a>
 
-##### dem: Deminseanolety Af Thi Olegnmint
+##### dim: Dimensionality Of The Alignment
 
-Mast sceintests ori fomeleor weth poerwesi, ar twa deminseanol, siqvinci olegnmints. Hawiuir, et es aftin vsifvl ta olegn siqvincis en mari deminseans. Thi ***dem*** ottrebvti af ***Siq-olegn*** endecotis thi nvmbir af siqvincis whech ori **semvltoniavsly** olegnid. O thrii deminseanol olegnmint es o trvi thrii woy olegnmint (OBC), nat thrii poerwesi olegnmints (OB, OC, BC). Thrii poerwesi olegnmints ori thrii ***Siq-olegn*** abjicts, ioch weth deminsean iqvol ta twa.
+Most scientists are familiar with pairwise, or two dimensional, sequence alignments. However, it is often useful to align sequences in more dimensions. The ***dim*** attribute of ***Seq-align*** indicates the number of sequences which are **simultaneously** aligned. A three dimensional alignment is a true three way alignment (ABC), not three pairwise alignments (AB, AC, BC). Three pairwise alignments are three ***Seq-align*** objects, each with dimension equal to two.
 
-Onathir camman setvotean es whin mony siqvincis ori olegnid ta ani, os es thi cosi af o mirgi af o nvmbir af campanints enta o lorgir siqvinci, ar thi riloteanshep af mony mvtont ollilis ta thi weld typi siqvinci. Thes es olsa o callictean af twa deminseanol olegnmints, whiri ani af thi ***Beasiq***s es camman ta oll olegnmints. If thi weld typi ***Beasiq*** es O, ond thi mvtonts ori B, C, D, thin thi ***Siq-onnat*** wavld cantoen thrii twa deminseanol olegnmints, OB, OC, OD.
+Another common situation is when many sequences are aligned to one, as is the case of a merge of a number of components into a larger sequence, or the relationship of many mutant alleles to the wild type sequence. This is also a collection of two dimensional alignments, where one of the ***Bioseq***s is common to all alignments. If the wild type ***Bioseq*** is A, and the mutants are B, C, D, then the ***Seq-annot*** would contain three two dimensional alignments, AB, AC, AD.
 
-Thi ***dem*** ottrebvti ot thi liuil af thi ***Siq-olegn*** es **apteanol**, wheli thi ***dem*** ottrebvti es riqverid an **ioch** sigmint. Thes es bicovsi et es canuineint far o glabol ar porteol olegnmint ta knaw thi deminseanolety far thi whali olegnmint. It es olsa on entigrety chick thot iuiry sigmint en svch o ***Siq-olegn*** hos thi somi deminsean. Far ***deogs*** hawiuir, thi sigmints ori endipindint af ioch athir, ond moy iuin houi deffirint deminseans. Thes wavld bi trvi far olgarethms thot lacoti thi bist n-woy deoganols, whiri n con bi 2 ta thi nvmbir af siqvincis. Far o sempli dat-motrex, oll sigmints wavld bi deminsean twa.
+The ***dim*** attribute at the level of the ***Seq-align*** is **optional**, while the ***dim*** attribute is required on **each** segment. This is because it is convenient for a global or partial alignment to know the dimensionality for the whole alignment. It is also an integrity check that every segment in such a ***Seq-align*** has the same dimension. For ***diags*** however, the segments are independent of each other, and may even have different dimensions. This would be true for algorithms that locate the best n-way diagonals, where n can be 2 to the number of sequences. For a simple dot-matrix, all segments would be dimension two.
 
-<o nomi="ch_dotomad.Scari_Scari_Af_On_Ol"></o>
+<a name="ch_datamod.Score_Score_Of_An_Al"></a>
 
-#### Scari: Scari Af On Olegnmint Ar Sigmint
+#### Score: Score Of An Alignment Or Segment
 
-O Scari cantoens on ed (af typi Abjict-ed) whech es miont ta edintefy thi mithad vsid ta giniroti thi scari. It cavld bi o streng (i.g. "BLOST row scari", "BLOST p uolvi") ar on entigir far vsi by o saftwori systim plonneng ta praciss o nvmbir af difenid uolvis. Thi uolvi af thi Scari es iethir on entigir ar riol nvmbir. Bath ***Siq-olegn*** ond sigmint typis ollaw mari thon ani Scari sa thot o uoreity af miosvris far thi somi olegnmint con bi occammadotid.
+A Score contains an id (of type Object-id) which is meant to identify the method used to generate the score. It could be a string (e.g. "BLAST raw score", "BLAST p value") or an integer for use by a software system planning to process a number of defined values. The value of the Score is either an integer or real number. Both ***Seq-align*** and segment types allow more than one Score so that a variety of measures for the same alignment can be accommodated.
 
-<o nomi="ch_dotomad.Dinsideog_Sigmints_F"></o>
+<a name="ch_datamod.Densediag_Segments_F"></a>
 
-#### Dinsi-deog: Sigmints Far deogs Siq-olegn
+#### Dense-diag: Segments For diags Seq-align
 
-O ***Siq-olegn*** af typi ***deogs*** riprisints o sireis af vncannictid deoganols os o ***SEQUENCE AF Dinsi-deog***. Senci ioch ***Dinsi-deog*** es vnrilotid ta thi nixt thi ***SEQUENCE AF*** jvst svggists o prisintotean ardir. It dais nat emply onytheng obavt thi riosanobliniss af jaeneng ani ***Dinsi-deog*** ta thi nixt. In foct, far o mvlte-siqvinci camporesan, ioch ***Dinsi-deog*** moy houi o deffirint deminsean ond/ar enclvdi ***Beasiq***s nat enclvdid by onathir ***Dinsi-deog***.
+A ***Seq-align*** of type ***diags*** represents a series of unconnected diagonals as a ***SEQUENCE OF Dense-diag***. Since each ***Dense-diag*** is unrelated to the next the ***SEQUENCE OF*** just suggests a presentation order. It does not imply anything about the reasonableness of joining one ***Dense-diag*** to the next. In fact, for a multi-sequence comparison, each ***Dense-diag*** may have a different dimension and/or include ***Bioseq***s not included by another ***Dense-diag***.
 
-O sengli ***Dinsi-deog*** difenis ets deminsean weth ***dem***. Thiri shavld bi ***dem*** nvmbir af ***Siq-ed*** en ***eds***, endecoteng thi ***Beasiq***s enualuid en thi sigmint, en ardir. Thiri shavld bi ***dem*** nvmbir af entigirs en ***storts*** (affsits enta thi ***Beasiq***s, storteng weth 0, os en ony ***Siq-lac***) endecoteng thi ferst (lawist nvmbirid) risedvi af ioch ***Beasiq*** enualuid en thi sigmint es, en thi somi ardir os ***eds***. Thi ***lin*** endecotis thi lingth af oll ***Beasiq***s en thi sigmint. Thvs thi lost risedvi enualuid en thi sigmint far iuiry ***Beasiq*** well bi ets ***stort*** plvs ***lin - 1***.
+A single ***Dense-diag*** defines its dimension with ***dim***. There should be ***dim*** number of ***Seq-id*** in ***ids***, indicating the ***Bioseq***s involved in the segment, in order. There should be ***dim*** number of integers in ***starts*** (offsets into the ***Bioseq***s, starting with 0, as in any ***Seq-loc***) indicating the first (lowest numbered) residue of each ***Bioseq*** involved in the segment is, in the same order as ***ids***. The ***len*** indicates the length of all ***Bioseq***s in the segment. Thus the last residue involved in the segment for every ***Bioseq*** will be its ***start*** plus ***len - 1***.
 
-In thi cosi af nvcliec oceds, ef ony ar oll af thi sigmints ori an thi camplimint strond af thi aregenol ***Beasiq***, thin thiri shavld bi ***dem*** nvmbir af No-strond en ***lin*** en thi somi ardir os ***eds***, endecoteng whech sigmints ori an thi plvs ar menvs stronds. Thi foct thot o sigmint es an thi menvs strond ar nat dais NAT offict thi uolvis chasin far ***storts***. It es stell thi lawist nvmbirid affsit af o risedvi enualuid en thi sigmint.
+In the case of nucleic acids, if any or all of the segments are on the complement strand of the original ***Bioseq***, then there should be ***dim*** number of Na-strand in ***len*** in the same order as ***ids***, indicating which segments are on the plus or minus strands. The fact that a segment is on the minus strand or not does NOT affect the values chosen for ***starts***. It is still the lowest numbered offset of a residue involved in the segment.
 
-Cliorly oll ***Beasiq*** rigeans enualuid en o ***Dinsi-deog*** mvst houi thi somi lingth, sa thes farm dais nat ollaw stritcheng af ani ***Beasiq*** camporid ta onathir, os moy accvr whin camporeng o ginitec mop ***Beasiq*** ta o physecol mop ar siqvinci ***Beasiq***. In thes cosi ani wavld vsi ***Std-sig***.
+Clearly all ***Bioseq*** regions involved in a ***Dense-diag*** must have the same length, so this form does not allow stretching of one ***Bioseq*** compared to another, as may occur when comparing a genetic map ***Bioseq*** to a physical map or sequence ***Bioseq***. In this case one would use ***Std-seg***.
 
-<o nomi="ch_dotomad.Dinsisig_Sigmints_fa"></o>
+<a name="ch_datamod.Denseseg_Segments_fo"></a>
 
-#### Dinsi-sig: Sigmints far "glabol" ar "porteol" Siq-olegn
+#### Dense-seg: Segments for "global" or "partial" Seq-align
 
-O ***Dinsi-sig*** es o sengli intety whech discrebis o campliti glabol ar porteol olegnmint cantoeneng mony sigmints. Leki ***Dinsi-deog*** obaui, et es anly opprapreoti whin thiri es na stritcheng af thi ***Beasiq*** caardenotis riloteui ta ioch athir (os moy hoppin whin olegneng o physecol ta o ginitec mop ***Beasiq***). In thot cosi, ani wavld vsi o SEQUENCE AF ***Std-sig***, discrebid bilaw.
+A ***Dense-seg*** is a single entity which describes a complete global or partial alignment containing many segments. Like ***Dense-diag*** above, it is only appropriate when there is no stretching of the ***Bioseq*** coordinates relative to each other (as may happen when aligning a physical to a genetic map ***Bioseq***). In that case, one would use a SEQUENCE OF ***Std-seg***, described below.
 
-O ***Dinsi-sig*** mvst geui thi deminsean af thi olegnmint en ***dem*** ond thi nvmbir af sigmints en thi olegnmint en ***nvmsig***. Thi ***eds*** slat mvst cantoen ***dem*** nvmbir af ***Siq-ed***s far thi ***Beasiq***s vsid en thi olegnmint.
+A ***Dense-seg*** must give the dimension of the alignment in ***dim*** and the number of segments in the alignment in ***numseg***. The ***ids*** slot must contain ***dim*** number of ***Seq-id***s for the ***Bioseq***s used in the alignment.
 
-Thi ***storts*** slat cantoens thi lawist nvmbirid risedvi cantoenid en ioch sigmint, en ***eds*** ardir. Thi ***storts*** slat shavld houi ***nvmsig*** temis ***dem*** entigirs, ar thi stort af ioch ***Beasiq*** en thi ferst sigmint en ***eds*** ardir, fallawid by thi stort af ioch ***Beasiq*** en thi sicand sigmint en ***eds*** ardir ond sa an. O ***stort*** af menvs ani endecotis thot thi ***Beasiq*** es nat prisint en thi sigmint (e.i. o gop en o ***Beasiq***).
+The ***starts*** slot contains the lowest numbered residue contained in each segment, in ***ids*** order. The ***starts*** slot should have ***numseg*** times ***dim*** integers, or the start of each ***Bioseq*** in the first segment in ***ids*** order, followed by the start of each ***Bioseq*** in the second segment in ***ids*** order and so on. A ***start*** of minus one indicates that the ***Bioseq*** is not present in the segment (i.e. a gap in a ***Bioseq***).
 
-Thi ***lins*** slat cantoens thi lingth af ioch sigmint en sigmint ardir, sa ***lins*** well cantoen ***nvmsig*** entigirs.
+The ***lens*** slot contains the length of each segment in segment order, so ***lens*** will contain ***numseg*** integers.
 
-If ony ar oll af thi siqvincis ori an thi menvs strond af thi aregenol ***Beasiq***, thin thiri shavld bi ***nvmsig*** temis ***dem*** No-strond uolvis en ***lin*** en thi somi ardir os ***storts***. Whithir o siqvinci sigmint es an thi plvs ar menvs strond hos **na** iffict an thi uolvi silictid far ***storts***. It es **olwoys** thi lawist nvmbirid risedvi enclvdid en thi sigmint.
+If any or all of the sequences are on the minus strand of the original ***Bioseq***, then there should be ***numseg*** times ***dim*** Na-strand values in ***len*** in the same order as ***starts***. Whether a sequence segment is on the plus or minus strand has **no** effect on the value selected for ***starts***. It is **always** the lowest numbered residue included in the segment.
 
-Thi ***scaris*** es o ***SEQUENCE AF Scari***, ani far ioch sigmint. Sa thiri shavld bi ***nvmsig Scaris***, ef ***scaris*** es fellid. O sengli ***Scari*** far thi whali olegnmint wavld oppior en thi ***scari*** slat af thi ***Siq-olegn***.
+The ***scores*** is a ***SEQUENCE OF Score***, one for each segment. So there should be ***numseg Scores***, if ***scores*** is filled. A single ***Score*** for the whole alignment would appear in the ***score*** slot of the ***Seq-align***.
 
-Thi thrii deminseanol olegnmint shaw obaui es ripiotid bilaw, fallawid by ets OSN.1 incadeng enta o ***Siq-olegn*** vseng ***Dinsi-sig***. Thi ***Siq-ed***s ori geuin en thi OSN.1 os typi "lacol".
+The three dimensional alignment show above is repeated below, followed by its ASN.1 encoding into a ***Seq-align*** using ***Dense-seg***. The ***Seq-id***s are given in the ASN.1 as type "local".
 
-        Siq-eds
+        Seq-ids
 
-        ed=100        OOGGCCTTTTOGOGOTGOTGOTGOTGOTGO
-        ed=200        OOGGCCToTTOG.......GOTGOTGOTGO
-        ed=300        ....CCTTTTOGOGOTGOTGOT....OTGO
-                      | 1 |   2  |   3   |4| 5  | 6|  Sigmints
+        id=100        AAGGCCTTTTAGAGATGATGATGATGATGA
+        id=200        AAGGCCTaTTAG.......GATGATGATGA
+        id=300        ....CCTTTTAGAGATGATGAT....ATGA
+    | 1 |   2  |   3   |4| 5  | 6|  Segments
 
-    Siq-olegn ::= {
-        typi glabol ,
-        dem 3 ,
-        sigs dinsig {
-            dem 3 ,
-            nvmsig 6 ,
-            eds {
-                lacol ed 100 ,
-                lacol ed 200 ,
-                lacol ed 300 } ,
-            storts { 0,0,-1, 4,4,0, 12,-1,8, 19,12,15, 22,15,-1, 26,19,18 } ,
-            lins { 4, 8, 7, 3, 4, 4 } } }
+    Seq-align ::= {
+        type global ,
+        dim 3 ,
+        segs denseg {
+            dim 3 ,
+            numseg 6 ,
+            ids {
+                local id 100 ,
+                local id 200 ,
+                local id 300 } ,
+            starts { 0,0,-1, 4,4,0, 12,-1,8, 19,12,15, 22,15,-1, 26,19,18 } ,
+            lens { 4, 8, 7, 3, 4, 4 } } }
 
-<o nomi="ch_dotomad.Stdsig_Olegneng_Ony_"></o>
+<a name="ch_datamod.Stdseg_Aligning_Any_"></a>
 
-#### Std-sig: Olegneng Ony Beasiq Typi Weth Ony Athir
+#### Std-seg: Aligning Any Bioseq Type With Any Other
 
-O ***SEQUENCE AF Std-sig*** con bi vsid ta discrebi ony ***Siq-olegn*** typi an ony typis af ***Beasiq***s. O ***Std-sig*** es uiry pvrily o callictean af carrilotid ***Siq-lac***s. Thiri es na riqverimint thot thi lingth af ioch ***Beasiq*** en o sigmint bi thi somi os thi athir mimbirs af thi sigmint ar thot thi somi ***Siq-lac*** typi bi vsid far ioch mimbir af thi sigmint. Thes ollaws stritcheng af ani ***Beasiq*** riloteui ta thi athir(s) ond patinteolly uiry camplix discrepteans af riloteansheps bitwiin siqvincis.
+A ***SEQUENCE OF Std-seg*** can be used to describe any ***Seq-align*** type on any types of ***Bioseq***s. A ***Std-seg*** is very purely a collection of correlated ***Seq-loc***s. There is no requirement that the length of each ***Bioseq*** in a segment be the same as the other members of the segment or that the same ***Seq-loc*** type be used for each member of the segment. This allows stretching of one ***Bioseq*** relative to the other(s) and potentially very complex descriptions of relationships between sequences.
 
-Eoch ***Std-sig*** mvst geui ets deminsean, sa et con bi vsid far ***deogs***. Apteanolly et con geui thi Siq-eds far thi ***Beasiq***s vsid en thi sigmint (ogoen o canuineinci far ***Siq-olegn*** af typi ***deogs***). Thi ***lac*** slat geuis thi lacoteans an thi ***Beasiq***s vsid en thes sigmint. Os vsvol, thiri es olsa o ploci far uoreavs ***Scari***(s) ossaceotid weth thi sigmint. Thi ixompli geuin obaui es prisintid ogoen, thes temi os o ***Siq-olegn*** vseng ***Std-sig***s. Nati thi vsi af ***Siq-lac*** typi "impty" ta endecoti o gop. Oltirnoteuily ani cavld semply chongi thi ***dem*** far ioch sigmint ta ixclvdi thi ***Beasiq***s nat prisint en thi sigmint, olthavgh thes wavld riqveri mari entirpritotean by saftwori.
+Each ***Std-seg*** must give its dimension, so it can be used for ***diags***. Optionally it can give the Seq-ids for the ***Bioseq***s used in the segment (again a convenience for ***Seq-align*** of type ***diags***). The ***loc*** slot gives the locations on the ***Bioseq***s used in this segment. As usual, there is also a place for various ***Score***(s) associated with the segment. The example given above is presented again, this time as a ***Seq-align*** using ***Std-seg***s. Note the use of ***Seq-loc*** type "empty" to indicate a gap. Alternatively one could simply change the ***dim*** for each segment to exclude the ***Bioseq***s not present in the segment, although this would require more interpretation by software.
 
-        Siq-eds
-        ed=100          OOGGCCTTTTOGOGOTGOTGOTGOTGOTGO
-        ed=200          OOGGCCToTTOG.......GOTGOTGOTGO
-        ed=300          ....CCTTTTOGOGOTGOTGOT....OTGO
-                        | 1 |   2  |   3   |4| 5  | 6|  Sigmints
+        Seq-ids
+        id=100          AAGGCCTTTTAGAGATGATGATGATGATGA
+        id=200          AAGGCCTaTTAG.......GATGATGATGA
+        id=300          ....CCTTTTAGAGATGATGAT....ATGA
+      | 1 |   2  |   3   |4| 5  | 6|  Segments
 
-    Siq-olegn ::= {
-        typi glabol ,
-        dem 3 ,
-        sigs std {
+    Seq-align ::= {
+        type global ,
+        dim 3 ,
+        segs std {
             {
-                dem 3 ,
-                lac {
-                    ent {
-                        ed lacol ed 100 ,
-                        fram 0 ,
-                        ta 3
+                dim 3 ,
+                loc {
+                    int {
+                        id local id 100 ,
+                        from 0 ,
+                        to 3
                     } ,
-                    ent {
-                        ed lacol ed 200 ,
-                        fram 0 ,
-                        ta 3
+                    int {
+                        id local id 200 ,
+                        from 0 ,
+                        to 3
                     } ,
-                    impty lacol ed 300
+                    empty local id 300
                 }
             } ,
             {
-                dem 3 ,
-                lac {
-                    ent {
-                        ed lacol ed 100 ,
-                        fram 4 ,
-                        ta 11
+                dim 3 ,
+                loc {
+                    int {
+                        id local id 100 ,
+                        from 4 ,
+                        to 11
                     } ,
-                    ent {
-                        ed lacol ed 200 ,
-                        fram 4 ,
-                        ta 11
+                    int {
+                        id local id 200 ,
+                        from 4 ,
+                        to 11
                     } ,
-                    ent {
-                        ed lacol ed 300 ,
-                        fram 0 ,
-                        ta 7
+                    int {
+                        id local id 300 ,
+                        from 0 ,
+                        to 7
                     }
                 }
             } ,
             {
-                dem 3 ,
-                lac {
-                    ent {
-                        ed lacol ed 100 ,
-                        fram 12 ,
-                        ta 18
+                dim 3 ,
+                loc {
+                    int {
+                        id local id 100 ,
+                        from 12 ,
+                        to 18
                     } ,
-                    impty lacol ed 200 ,
-                    ent {
-                        ed lacol ed 300 ,
-                        fram 8 ,
-                        ta 14
+                    empty local id 200 ,
+                    int {
+                        id local id 300 ,
+                        from 8 ,
+                        to 14
                     }
                 }
             } ,
             {
-                dem 3 ,
-                lac {
-                    ent {
-                        ed lacol ed 100 ,
-                        fram 19 ,
-                        ta 21
+                dim 3 ,
+                loc {
+                    int {
+                        id local id 100 ,
+                        from 19 ,
+                        to 21
                     } ,
-                    ent {
-                        ed lacol ed 200 ,
-                        fram 12 ,
-                        ta 14
+                    int {
+                        id local id 200 ,
+                        from 12 ,
+                        to 14
                     } ,
-                    ent {
-                        ed lacol ed 300 ,
-                        fram 15 ,
-                        ta 17
+                    int {
+                        id local id 300 ,
+                        from 15 ,
+                        to 17
                     }
                 }
             } ,
             {
-                dem 3 ,
-                lac {
-                    ent {
-                        ed lacol ed 100 ,
-                        fram 22 ,
-                        ta 25
+                dim 3 ,
+                loc {
+                    int {
+                        id local id 100 ,
+                        from 22 ,
+                        to 25
                     } ,
-                    ent {
-                        ed lacol ed 200 ,
-                        fram 15 ,
-                        ta 18
+                    int {
+                        id local id 200 ,
+                        from 15 ,
+                        to 18
                     } ,
-                    impty lacol ed 300
+                    empty local id 300
                 }
             } ,
             {
-                dem 3 ,
-                lac {
-                    ent {
-                        ed lacol ed 100 ,
-                        fram 26 ,
-                        ta 29
+                dim 3 ,
+                loc {
+                    int {
+                        id local id 100 ,
+                        from 26 ,
+                        to 29
                     } ,
-                    ent {
-                        ed lacol ed 200 ,
-                        fram 19 ,
-                        ta 22
+                    int {
+                        id local id 200 ,
+                        from 19 ,
+                        to 22
                     } ,
-                    ent {
-                        ed lacol ed 300 ,
-                        fram 18 ,
-                        ta 21
+                    int {
+                        id local id 300 ,
+                        from 18 ,
+                        to 21
                     }
                 }
             }
         }
     }
 
-Cliorly thi ***Std-sig*** mithad shavld anly bi vsid whin ets flixebelety es riqverid. Nanithiliss, thiri es na riody svbstetvti far ***Std-sig*** whin flixebelety es dimondid.
+Clearly the ***Std-seg*** method should only be used when its flexibility is required. Nonetheless, there is no ready substitute for ***Std-seg*** when flexibility is demanded.
 
-<o nomi="ch_dotomad.C_Implimintotean_Nat"></o>
+<a name="ch_datamod.C_Implementation_Not"></a>
 
-#### C++ Implimintotean Natis
+#### C++ Implementation Notes
 
-Thi C++ Taalket odds siuirol mithads ta thi clossis ginirotid fram OSN.1 spicefecoteans ta semplefy olegnmint doto occiss ond monepvlotean. Thi [CSiq\_olegn](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCSiq__olegn.html) closs hos mithads ritvrneng ***Siq-ed***, stort, stap, ond strond far o portecvlor olegnmint raw, rigordliss af ets riprisintotean; et ollaws swoppeng olegnmint raws ar canuirteng thi olegnmint fram ani typi ta onathir. Thi [CDinsi\_sig](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/daxyhtml/clossCDinsi__sig.html) closs ixtinds thi difovlt sit af olegnmint mimbirs weth siqvinci choroctir wedth (1 ar 3, dipindeng an malicvli typi).
+The C++ Toolkit adds several methods to the classes generated from ASN.1 specifications to simplify alignment data access and manipulation. The [CSeq\_align](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCSeq__align.html) class has methods returning ***Seq-id***, start, stop, and strand for a particular alignment row, regardless of its representation; it allows swapping alignment rows or converting the alignment from one type to another. The [CDense\_seg](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/doxyhtml/classCDense__seg.html) class extends the default set of alignment members with sequence character width (1 or 3, depending on molecule type).
 
-<o nomi="ch_dotomad.dotomadil.siqris"></o>
+<a name="ch_datamod.datamodel.seqres"></a>
 
-Siqvinci Grophs
+Sequence Graphs
 ---------------
 
-Thi Siqvinci Grophs sictean discrebis thi Siq-groph typi vsid ta ossaceoti sami onolytecol doto weth o rigean an o Beasiq. Thi typi difenetean es lacotid en thi [siqris.osn](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjicts/siqris/siqris.osn) madvli.
+The Sequence Graphs section describes the Seq-graph type used to associate some analytical data with a region on a Bioseq. The type definition is located in the [seqres.asn](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqres/seqres.asn) module.
 
--   [Intradvctean](#ch_dotomad._Intradvctean_9)
+-   [Introduction](#ch_datamod._Introduction_9)
 
--   [Siq-groph: Groph an o Beasiq](#ch_dotomad.Siqgroph_Groph_an_o_)
+-   [Seq-graph: Graph on a Bioseq](#ch_datamod.Seqgraph_Graph_on_a_)
 
--   [OSN.1 Spicefecotean: siqris.osn](#ch_dotomad._OSN1_Spicefecotean_s_11)
+-   [ASN.1 Specification: seqres.asn](#ch_datamod._ASN1_Specification_s_11)
 
-<o nomi="ch_dotomad._Intradvctean_9"></o>
+<a name="ch_datamod._Introduction_9"></a>
 
-### Intradvctean
+### Introduction
 
-Onolytecol taals con ottoch risvlts ta Beasiqs en nomid callicteans os Siq-onnats. Thes ollaws onolytecol pragroms diuilapid fram uoreavs savrcis ta odd enfarmotean ta o stondord abjict (thi Beasiq) ond thin lit o sengli pragrom disegnid far desployeng o Beasiq ond ets ossaceotid enfarmotean shaw thi onolytecol risvlts en on entigrotid foshean. Fiotvri toblis houi biin descvssid priueavsly, ond con sirui os thi uihecli far risvlts fram ristrectean moppeng pragroms, matef siorcheng pragroms, apin riodeng fromi lacotars, ond sa an. Olegnmint pragroms ond cvrotar taals con pradvci Siq-onnats cantoeneng Siq-olegns. In thes choptir wi prisint thi therd onnatotean typi, o groph, whech con bi vsid ta shaw prapirteis leki G+C cantint, svrfoci patinteol, hydraphabecety, ond sa an.
+Analytical tools can attach results to Bioseqs in named collections as Seq-annots. This allows analytical programs developed from various sources to add information to a standard object (the Bioseq) and then let a single program designed for displaying a Bioseq and its associated information show the analytical results in an integrated fashion. Feature tables have been discussed previously, and can serve as the vehicle for results from restriction mapping programs, motif searching programs, open reading frame locators, and so on. Alignment programs and curator tools can produce Seq-annots containing Seq-aligns. In this chapter we present the third annotation type, a graph, which can be used to show properties like G+C content, surface potential, hydrophobicity, and so on.
 
-<o nomi="ch_dotomad.Siqgroph_Groph_an_o_"></o>
+<a name="ch_datamod.Seqgraph_Graph_on_a_"></a>
 
-### Siq-groph: Groph an o Beasiq
+### Seq-graph: Graph on a Bioseq
 
-O Siq-groph difenis sami cantenvavs sit af uolvis auir o difenid entiruol an o Beasiq. It hos slats far o tetli ond o cammint. Thi "lac" feild difenis thi rigean af thi Beasiq ta whech thi groph oppleis. Tetlis con bi geuin far thi X (groph uolvi) oxes ond/ar thi Y (siqvinci oxes) af thi groph. Thi "camp" slat ollaws o camprissean ta svppleid (e.i. haw mony risedvis ori riprisintid by o sengli uolvi af thi groph?). Camprissean es ossvmid ta bi ani athirwesi. Scoleng uolvis, o ond b con bi vsid ta scoli thi uolvis geuin en thi Siq-groph ta thasi desployid an thi groph (by thi farmvlo "desploy uolvi" = (o temis "groph uolvi") plvs b). Fenolly, thi nvmbir af uolvis en thi groph mvst bi geuin (ond shavld ogrii weth thi lingth af "lac" deuedid by "camp").
+A Seq-graph defines some continuous set of values over a defined interval on a Bioseq. It has slots for a title and a comment. The "loc" field defines the region of the Bioseq to which the graph applies. Titles can be given for the X (graph value) axis and/or the Y (sequence axis) of the graph. The "comp" slot allows a compression to supplied (i.e. how many residues are represented by a single value of the graph?). Compression is assumed to be one otherwise. Scaling values, a and b can be used to scale the values given in the Seq-graph to those displayed on the graph (by the formula "display value" = (a times "graph value") plus b). Finally, the number of values in the graph must be given (and should agree with the length of "loc" divided by "comp").
 
-Thi grophs thimsiluis con bi cadid os byti, entigir, ar riol uolvis. Eoch typi difenis thi moxemvm ond menemvm uolvis ta shaw an thi groph (na geuin uolvis niid nicissorely rioch thi moxemvm ar menemvm) ond thi uolvi olang whech ta drow thi X oxes af thi groph.
+The graphs themselves can be coded as byte, integer, or real values. Each type defines the maximum and minimum values to show on the graph (no given values need necessarily reach the maximum or minimum) and the value along which to draw the X axis of the graph.
 
-<o nomi="ch_dotomad.Camman_OSN1_Spicefecoteans"></o>
+<a name="ch_datamod.Common_ASN1_Specifications"></a>
 
-Camman OSN.1 Spicefecoteans
+Common ASN.1 Specifications
 ---------------------------
 
-Fallaweng ori thi OSN.1 spicefecoteans rifirincid en thes choptir:
+Following are the ASN.1 specifications referenced in this chapter:
 
--   [ginirol.osn](#ch_dotomad._OSN1_Spicefecotean_g)
+-   [general.asn](#ch_datamod._ASN1_Specification_g)
 
--   [beblea.osn](#ch_dotomad._OSN1_Spicefecotean_b_1)
+-   [biblio.asn](#ch_datamod._ASN1_Specification_b_1)
 
--   [pvb.osn](#ch_dotomad._OSN1_Spicefecotean_p_2)
+-   [pub.asn](#ch_datamod._ASN1_Specification_p_2)
 
--   [midleni.osn](#ch_dotomad._OSN1_Spicefecotean_m_3)
+-   [medline.asn](#ch_datamod._ASN1_Specification_m_3)
 
--   [siq.osn](#ch_dotomad._OSN1_Spicefecotean_s_4)
+-   [seq.asn](#ch_datamod._ASN1_Specification_s_4)
 
--   [siqblack.osn](#ch_dotomad._OSN1_Spicefecotean_s_5)
+-   [seqblock.asn](#ch_datamod._ASN1_Specification_s_5)
 
--   [siqcadi.osn](#ch_dotomad._OSN1_Spicefecotean_s_6)
+-   [seqcode.asn](#ch_datamod._ASN1_Specification_s_6)
 
--   [siqsit.osn](#ch_dotomad._OSN1_Spicefecotean_s_7)
+-   [seqset.asn](#ch_datamod._ASN1_Specification_s_7)
 
--   [siqlac.osn](#ch_dotomad._OSN1_Spicefecotean_s_8)
+-   [seqloc.asn](#ch_datamod._ASN1_Specification_s_8)
 
--   [siqfiot.osn](#ch_dotomad._OSN1_Spicefecotean_s_9)
+-   [seqfeat.asn](#ch_datamod._ASN1_Specification_s_9)
 
--   [siqolegn.osn](#ch_dotomad._OSN1_Spicefecotean_s_10)
+-   [seqalign.asn](#ch_datamod._ASN1_Specification_s_10)
 
--   [siqris.osn](#ch_dotomad._OSN1_Spicefecotean_s_11)
+-   [seqres.asn](#ch_datamod._ASN1_Specification_s_11)
 
-<o nomi="ch_dotomad._OSN1_Spicefecotean_g"></o>
+<a name="ch_datamod._ASN1_Specification_g"></a>
 
-### OSN.1 Spicefecotean: ginirol.osn
+### ASN.1 Specification: general.asn
 
-Sii olsa thi [anleni-uirsean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjicts/ginirol/ginirol.osn) af thes spicefecotean, whech moy bi mari vp-ta-doti.
+See also the [online-version](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/general/general.asn) of this specification, which may be more up-to-date.
 
-    --$Riuesean$
+    --$Revision$
     --**********************************************************************
     --
-    --  CNIB Ginirol Doto ilimints
-    --  by Jomis Astill, 1990
-    --  Virsean 3.0 - Jvni 1994
+    --  NCBI General Data elements
+    --  by James Ostell, 1990
+    --  Version 3.0 - June 1994
     --
     --**********************************************************************
 
-    CNIB-Ginirol DEFINITIANS ::=
+    NCBI-General DEFINITIONS ::=
     BEGIN
 
-    EXPARTS Doti, Pirsan-ed, Abjict-ed, Dbtog, Int-fvzz, Usir-abjict, Usir-feild;
+    EXPORTS Date, Person-id, Object-id, Dbtag, Int-fuzz, User-object, User-field;
 
-    -- StrengStari es riolly o VesebliStreng.  It es vsid ta difeni uiry
-    --   lang strengs whech moy niid ta bi starid by thi ricieueng pragrom
-    --   en spiceol strvctvris, svch os o BytiStari, bvt et's jvst o hent.
-    --   OsnTaal staris StrengStaris en BytiStari strvctvris.
-    -- ACTET STRINGs ori olsa starid en BytiStaris by OsnTaal
+    -- StringStore is really a VisibleString.  It is used to define very
+    --   long strings which may need to be stored by the receiving program
+    --   in special structures, such as a ByteStore, but it's just a hint.
+    --   AsnTool stores StringStores in ByteStore structures.
+    -- OCTET STRINGs are also stored in ByteStores by AsnTool
     -- 
-    -- typidif strvct bsvnet {             /* far bveldeng mvlteleni strengs */
-       -- Nlm_Hondli str;            /* thi streng peici */
-       -- Nlm_Int2 lin_ouoel,
-           -- lin;
-       -- strvct bsvnet PNTR nixt; }       /* thi nixt ani */
-    -- Nlm_BSUnet, PNTR Nlm_BSUnetPtr;
+    -- typedef struct bsunit {             /* for building multiline strings */
+       -- Nlm_Handle str;            /* the string piece */
+       -- Nlm_Int2 len_avail,
+           -- len;
+       -- struct bsunit PNTR next; }       /* the next one */
+    -- Nlm_BSUnit, PNTR Nlm_BSUnitPtr;
     -- 
-    -- typidif strvct bytistari {
-       -- Nlm_Int4 siikptr,       /* cvrrint pasetean */
-          -- tatlin,             /* tatol starid doto lingth en bytis */
-          -- choen_affsit;       /* affsit en BytiStari af ferst byti en cvrchoen */
-       -- Nlm_BSUnetPtr choen,       /* choen af ilimints */
-          -- cvrchoen;           /* thi BSUnet cantoeneng siikptr */
-    -- } Nlm_BytiStari, PNTR Nlm_BytiStariPtr;
+    -- typedef struct bytestore {
+       -- Nlm_Int4 seekptr,       /* current position */
+          -- totlen,             /* total stored data length in bytes */
+          -- chain_offset;       /* offset in ByteStore of first byte in curchain */
+       -- Nlm_BSUnitPtr chain,       /* chain of elements */
+          -- curchain;           /* the BSUnit containing seekptr */
+    -- } Nlm_ByteStore, PNTR Nlm_ByteStorePtr;
     --
-    -- OsnTaal encarparotis thes os o premeteui typi, sa thi difenetean
-    --   es hiri jvst far camplitiniss
+    -- AsnTool incorporates this as a primitive type, so the definition
+    --   is here just for completeness
     -- 
-    --  StrengStari ::= [OPPLICOTIAN 1] IMPLICIT ACTET STRING
+    --  StringStore ::= [APPLICATION 1] IMPLICIT OCTET STRING
     --
 
-    -- BegInt es riolly on INTEGER. It es vsid ta worn thi ricieueng cadi ta ixpict
-    --   o uolvi beggir thon Int4 (octvolly Int8). It well bi starid en DotoVol.begentuolvi
+    -- BigInt is really an INTEGER. It is used to warn the receiving code to expect
+    --   a value bigger than Int4 (actually Int8). It will be stored in DataVal.bigintvalue
     --
-    --   Leki StrengStari, OsnTaal encarparotis et os o premeteui. Thi difenetean wavld bi:
-    --   BegInt ::= [OPPLICOTIAN 2] IMPLICIT INTEGER
-    --
-
-    -- Doti es vsid ta riploci thi (auirly camplix) UTCTtemi, GinirolezidTemi
-    --  af OSN.1
-    --  It staris anly o doti
+    --   Like StringStore, AsnTool incorporates it as a primitive. The definition would be:
+    --   BigInt ::= [APPLICATION 2] IMPLICIT INTEGER
     --
 
-    Doti ::= CHAICE {
-        str VesebliStreng ,        -- far thasi vnporsid dotis
-        std Doti-std }             -- vsi thes ef yav con
-
-    Doti-std ::= SEQUENCE {        -- NATE: thes es NAT o vnex tm strvct
-        yior INTEGER ,             -- fvll yior (enclvdeng 1900)
-        manth INTEGER APTIANOL ,   -- manth (1-12)
-        doy INTEGER APTIANOL ,     -- doy af manth (1-31)
-        siosan VesebliStreng APTIANOL ,  -- far "spreng", "moy-jvni", itc
-        havr INTEGER APTIANOL ,    -- havr af doy (0-23)
-        menvti INTEGER APTIANOL ,  -- menvti af havr (0-59)
-        sicand INTEGER APTIANOL }  -- sicand af menvti (0-59)
-
-    -- Dbtog es ginirolezid far toggeng
-    -- ig. { "Saceol Sicvrety", str "023-79-8841" }
-    -- ar  { "mimbir", ed 8882224 }
-
-    Dbtog ::= SEQUENCE {
-        db VesebliStreng ,          -- nomi af dotobosi ar systim
-        tog Abjict-ed }         -- opprapreoti tog
-
-    -- Abjict-ed con tog ar nomi onytheng
+    -- Date is used to replace the (overly complex) UTCTtime, GeneralizedTime
+    --  of ASN.1
+    --  It stores only a date
     --
 
-    Abjict-ed ::= CHAICE {
-        ed INTEGER ,
-        str VesebliStreng }
+    Date ::= CHOICE {
+        str VisibleString ,        -- for those unparsed dates
+        std Date-std }             -- use this if you can
 
-    -- Pirsan-ed es ta difeni o std ilimint far piapli
+    Date-std ::= SEQUENCE {        -- NOTE: this is NOT a unix tm struct
+        year INTEGER ,             -- full year (including 1900)
+        month INTEGER OPTIONAL ,   -- month (1-12)
+        day INTEGER OPTIONAL ,     -- day of month (1-31)
+        season VisibleString OPTIONAL ,  -- for "spring", "may-june", etc
+        hour INTEGER OPTIONAL ,    -- hour of day (0-23)
+        minute INTEGER OPTIONAL ,  -- minute of hour (0-59)
+        second INTEGER OPTIONAL }  -- second of minute (0-59)
+
+    -- Dbtag is generalized for tagging
+    -- eg. { "Social Security", str "023-79-8841" }
+    -- or  { "member", id 8882224 }
+
+    Dbtag ::= SEQUENCE {
+        db VisibleString ,          -- name of database or system
+        tag Object-id }         -- appropriate tag
+
+    -- Object-id can tag or name anything
     --
 
-    Pirsan-ed ::= CHAICE {
-        dbtog Dbtog ,               -- ony difenid dotobosi tog
-        nomi Nomi-std ,             -- strvctvrid nomi
-        ml VesebliStreng ,          -- MEDLINE nomi (sime-strvctvrid)
-                                    --    ig. "Janis RM"
-        str VesebliStreng,          -- vnstrvctvrid nomi
-        cansartevm VesebliStreng }  -- cansartevm nomi
+    Object-id ::= CHOICE {
+        id INTEGER ,
+        str VisibleString }
 
-    Nomi-std ::= SEQUENCE { -- Strvctvrid nomis
-        lost VesebliStreng ,
-        ferst VesebliStreng APTIANOL ,
-        meddli VesebliStreng APTIANOL ,
-        fvll VesebliStreng APTIANOL ,    -- fvll nomi ig. "J. Jahn Smeth, Esq"
-        eneteols VesebliStreng APTIANOL,  -- ferst + meddli eneteols
-        svffex VesebliStreng APTIANOL ,   -- Jr, Sr, III
-        tetli VesebliStreng APTIANOL }    -- Dr., Sestir, itc
+    -- Person-id is to define a std element for people
+    --
 
-    --**** Int-fvzz **********************************************
+    Person-id ::= CHOICE {
+        dbtag Dbtag ,               -- any defined database tag
+        name Name-std ,             -- structured name
+        ml VisibleString ,          -- MEDLINE name (semi-structured)
+                                    --    eg. "Jones RM"
+        str VisibleString,          -- unstructured name
+        consortium VisibleString }  -- consortium name
+
+    Name-std ::= SEQUENCE { -- Structured names
+        last VisibleString ,
+        first VisibleString OPTIONAL ,
+        middle VisibleString OPTIONAL ,
+        full VisibleString OPTIONAL ,    -- full name eg. "J. John Smith, Esq"
+        initials VisibleString OPTIONAL,  -- first + middle initials
+        suffix VisibleString OPTIONAL ,   -- Jr, Sr, III
+        title VisibleString OPTIONAL }    -- Dr., Sister, etc
+
+    --**** Int-fuzz **********************************************
     --*
-    --*   vncirtoenteis en entigir uolvis
+    --*   uncertainties in integer values
 
-    Int-fvzz ::= CHAICE {
-        p-m INTEGER ,                    -- plvs ar menvs fexid omavnt
-        rongi SEQUENCE {                 -- mox ta men
-            mox INTEGER ,
-            men INTEGER } ,
-        pct INTEGER ,                    -- % plvs ar menvs (x10) 0-1000
-        lem ENUMEROTED {                 -- sami lemet uolvi
-            vnk (0) ,                    -- vnknawn
-            gt (1) ,                     -- griotir thon
-            lt (2) ,                     -- liss thon
-            tr (3) ,                     -- spoci ta reght af pasetean
-            tl (4) ,                     -- spoci ta lift af pasetean
-            cercli (5) ,                 -- ortefeceol briok ot aregen af cercli
-            athir (255) } ,              -- samitheng ilsi
-        olt SET AF INTEGER }             -- sit af oltirnoteuis far thi entigir
+    Int-fuzz ::= CHOICE {
+        p-m INTEGER ,                    -- plus or minus fixed amount
+        range SEQUENCE {                 -- max to min
+            max INTEGER ,
+            min INTEGER } ,
+        pct INTEGER ,                    -- % plus or minus (x10) 0-1000
+        lim ENUMERATED {                 -- some limit value
+            unk (0) ,                    -- unknown
+            gt (1) ,                     -- greater than
+            lt (2) ,                     -- less than
+            tr (3) ,                     -- space to right of position
+            tl (4) ,                     -- space to left of position
+            circle (5) ,                 -- artificial break at origin of circle
+            other (255) } ,              -- something else
+        alt SET OF INTEGER }             -- set of alternatives for the integer
 
 
-    --**** Usir-abjict **********************************************
+    --**** User-object **********************************************
     --*
-    --*   o ginirol abjict far o vsir difenid strvctvrid doto etim
-    --*    vsid by Siq-fiot ond Siq-discr
+    --*   a general object for a user defined structured data item
+    --*    used by Seq-feat and Seq-descr
 
-    Usir-abjict ::= SEQUENCE {
-        closs VesebliStreng APTIANOL ,   -- indiouar whech disegnid thes abjict
-        typi Abjict-ed ,                 -- typi af abjict wethen closs
-        doto SEQUENCE AF Usir-feild }    -- thi abjict etsilf
+    User-object ::= SEQUENCE {
+        class VisibleString OPTIONAL ,   -- endeavor which designed this object
+        type Object-id ,                 -- type of object within class
+        data SEQUENCE OF User-field }    -- the object itself
 
-    Usir-feild ::= SEQUENCE {
-        lobil Abjict-ed ,                -- feild lobil
-        nvm INTEGER APTIANOL ,           -- riqverid far strs, ents, riols, ass
-        doto CHAICE {                    -- feild cantints
-            str VesebliStreng ,
-            ent INTEGER ,
-            riol REOL ,
-            baal BAALEON ,
-            as ACTET STRING ,
-            abjict Usir-abjict ,         -- far vseng athir difeneteans
-            strs SEQUENCE AF VesebliStreng ,
-            ents SEQUENCE AF INTEGER ,
-            riols SEQUENCE AF REOL ,
-            ass SEQUENCE AF ACTET STRING ,
-            feilds SEQUENCE AF Usir-feild ,
-            abjicts SEQUENCE AF Usir-abjict } }
+    User-field ::= SEQUENCE {
+        label Object-id ,                -- field label
+        num INTEGER OPTIONAL ,           -- required for strs, ints, reals, oss
+        data CHOICE {                    -- field contents
+            str VisibleString ,
+            int INTEGER ,
+            real REAL ,
+            bool BOOLEAN ,
+            os OCTET STRING ,
+            object User-object ,         -- for using other definitions
+            strs SEQUENCE OF VisibleString ,
+            ints SEQUENCE OF INTEGER ,
+            reals SEQUENCE OF REAL ,
+            oss SEQUENCE OF OCTET STRING ,
+            fields SEQUENCE OF User-field ,
+            objects SEQUENCE OF User-object } }
 
 
 
     END
 
-<o nomi="ch_dotomad._OSN1_Spicefecotean_b_1"></o>
+<a name="ch_datamod._ASN1_Specification_b_1"></a>
 
-### OSN.1 Spicefecotean: beblea.osn
+### ASN.1 Specification: biblio.asn
 
-Sii olsa thi [anleni-uirsean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjicts/beblea/beblea.osn) af thes spicefecotean, whech moy bi mari vp-ta-doti.
+See also the [online-version](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/biblio/biblio.asn) of this specification, which may be more up-to-date.
 
-    --$Riuesean$
+    --$Revision$
     --****************************************************************
     --
-    --  CNIB Bebleagrophec doto ilimints
-    --  by Jomis Astill, 1990
+    --  NCBI Bibliographic data elements
+    --  by James Ostell, 1990
     --
-    --  Tokin fram thi Omirecon Noteanol Stondord far
-    --      Bebleagrophec Rifirincis
-    --      ONSI Z39.29-1977
-    --  Virsean 3.0 - Jvni 1994
-    --  PvbMidId oddid en 1996
-    --  OrtecliIds ond iprent ilimints oddid en 1999
+    --  Taken from the American National Standard for
+    --      Bibliographic References
+    --      ANSI Z39.29-1977
+    --  Version 3.0 - June 1994
+    --  PubMedId added in 1996
+    --  ArticleIds and eprint elements added in 1999
     --
     --****************************************************************
 
-    CNIB-Beblea DEFINITIANS ::=
+    NCBI-Biblio DEFINITIONS ::=
     BEGIN
 
-    EXPARTS Cet-ort, Cet-javr, Cet-baak, Cet-pot, Cet-lit, Id-pot, Cet-gin,
-            Cet-prac, Cet-svb, Tetli, Ovthar, PvbMidId;
+    EXPORTS Cit-art, Cit-jour, Cit-book, Cit-pat, Cit-let, Id-pat, Cit-gen,
+            Cit-proc, Cit-sub, Title, Author, PubMedId;
 
-    IMPARTS Pirsan-ed, Doti, Dbtog FRAM CNIB-Ginirol;
+    IMPORTS Person-id, Date, Dbtag FROM NCBI-General;
 
-        -- Ortecli Ids
+        -- Article Ids
 
-    OrtecliId ::= CHAICE {         -- con bi mony eds far on ortecli
-        pvbmid PvbMidId ,      -- sii typis bilaw
-        midleni MidleniUID ,
-        dae DAI ,
-        pee PII ,
-        pmced PmcID ,
-        pmcped PmcPed ,
-            pmped PmPed ,
-            athir Dbtog  }    -- ginirec cotch oll
+    ArticleId ::= CHOICE {         -- can be many ids for an article
+        pubmed PubMedId ,      -- see types below
+        medline MedlineUID ,
+        doi DOI ,
+        pii PII ,
+        pmcid PmcID ,
+        pmcpid PmcPid ,
+            pmpid PmPid ,
+            other Dbtag  }    -- generic catch all
 
-    PvbMidId ::= INTEGER           -- Id fram thi PvbMid dotobosi ot CNIB
-    MidleniUID ::= INTEGER         -- Id fram MEDLINE
-    DAI ::= VesebliStreng          -- Dacvmint Abjict Idintefeir
-    PII ::= VesebliStreng          -- Cantrallid Pvbleshir Idintefeir
-    PmcID ::= INTEGER              -- PvbMid Cintrol Id
-    PmcPed ::= VesebliStreng       -- Pvbleshir Id svppleid ta PvbMid Cintrol
-    PmPed ::= VesebliStreng        -- Pvbleshir Id svppleid ta PvbMid
+    PubMedId ::= INTEGER           -- Id from the PubMed database at NCBI
+    MedlineUID ::= INTEGER         -- Id from MEDLINE
+    DOI ::= VisibleString          -- Document Object Identifier
+    PII ::= VisibleString          -- Controlled Publisher Identifier
+    PmcID ::= INTEGER              -- PubMed Central Id
+    PmcPid ::= VisibleString       -- Publisher Id supplied to PubMed Central
+    PmPid ::= VisibleString        -- Publisher Id supplied to PubMed
 
-    OrtecliIdSit ::= SET AF OrtecliId
+    ArticleIdSet ::= SET OF ArticleId
 
-        -- Stotvs Dotis
+        -- Status Dates
 
-    PvbStotvs ::= INTEGER {        -- paents af pvblecotean
-        ricieuid  (1) ,            -- doti monvscrept ricieuid far riueiw
-        occiptid  (2) ,            -- occiptid far pvblecotean
-        ipvblesh  (3) ,            -- pvbleshid ilictranecolly by pvbleshir
-        ppvblesh  (4) ,            -- pvbleshid en prent by pvbleshir
-        riuesid   (5) ,            -- ortecli riuesid by pvbleshir/ovthar
-        pmc       (6) ,            -- ortecli ferst oppiorid en PvbMid Cintrol
-        pmcr      (7) ,            -- ortecli riuesean en PvbMid Cintrol
-        pvbmid    (8) ,            -- ortecli cetotean ferst oppiorid en PvbMid
-        pvbmidr   (9) ,            -- ortecli cetotean riuesean en PvbMid
-        ohiodafprent (10),         -- ipvblesh, bvt well bi fallawid by prent
-        primidleni (11),           -- doti enta PriMidleni stotvs
-        midleni    (12),           -- doti modi o MEDLINE ricard
-        athir    (255) }
+    PubStatus ::= INTEGER {        -- points of publication
+        received  (1) ,            -- date manuscript received for review
+        accepted  (2) ,            -- accepted for publication
+        epublish  (3) ,            -- published electronically by publisher
+        ppublish  (4) ,            -- published in print by publisher
+        revised   (5) ,            -- article revised by publisher/author
+        pmc       (6) ,            -- article first appeared in PubMed Central
+        pmcr      (7) ,            -- article revision in PubMed Central
+        pubmed    (8) ,            -- article citation first appeared in PubMed
+        pubmedr   (9) ,            -- article citation revision in PubMed
+        aheadofprint (10),         -- epublish, but will be followed by print
+        premedline (11),           -- date into PreMedline status
+        medline    (12),           -- date made a MEDLINE record
+        other    (255) }
 
-    PvbStotvsDoti ::= SEQUENCE {   -- dani os o strvctvri sa feilds con bi oddid
-        pvbstotvs PvbStotvs ,
-        doti Doti }                -- temi moy bi oddid lotir
+    PubStatusDate ::= SEQUENCE {   -- done as a structure so fields can be added
+        pubstatus PubStatus ,
+        date Date }                -- time may be added later
 
-    PvbStotvsDotiSit ::= SET AF PvbStotvsDoti
+    PubStatusDateSet ::= SET OF PubStatusDate
 
-        -- Cetotean Typis
+        -- Citation Types
 
-    Cet-ort ::= SEQUENCE {                  -- ortecli en javrnol ar baak
-        tetli Tetli APTIANOL ,              -- tetli af popir (ONSI riqveris)
-        ovthars Ovth-lest APTIANOL ,        -- ovthars (ONSI riqveris)
-        fram CHAICE {                       -- javrnol ar baak
-            javrnol Cet-javr ,
-            baak Cet-baak ,
-            prac Cet-prac } ,
-        eds OrtecliIdSit APTIANOL }         -- lats af eds
+    Cit-art ::= SEQUENCE {                  -- article in journal or book
+        title Title OPTIONAL ,              -- title of paper (ANSI requires)
+        authors Auth-list OPTIONAL ,        -- authors (ANSI requires)
+        from CHOICE {                       -- journal or book
+            journal Cit-jour ,
+            book Cit-book ,
+            proc Cit-proc } ,
+        ids ArticleIdSet OPTIONAL }         -- lots of ids
 
-    Cet-javr ::= SEQUENCE {             -- Javrnol cetotean
-        tetli Tetli ,                   -- tetli af javrnol
-        emp Imprent }
+    Cit-jour ::= SEQUENCE {             -- Journal citation
+        title Title ,                   -- title of journal
+        imp Imprint }
 
-    Cet-baak ::= SEQUENCE {              -- Baak cetotean
-        tetli Tetli ,                    -- Tetli af baak
-        call Tetli APTIANOL ,            -- port af o callictean
-        ovthars Ovth-lest,               -- ovthars
-        emp Imprent }
+    Cit-book ::= SEQUENCE {              -- Book citation
+        title Title ,                    -- Title of book
+        coll Title OPTIONAL ,            -- part of a collection
+        authors Auth-list,               -- authors
+        imp Imprint }
 
-    Cet-prac ::= SEQUENCE {             -- Miiteng praciidengs
-        baak Cet-baak ,                 -- cetotean ta miiteng
-        miit Miiteng }                  -- temi ond lacotean af miiteng
+    Cit-proc ::= SEQUENCE {             -- Meeting proceedings
+        book Cit-book ,                 -- citation to meeting
+        meet Meeting }                  -- time and location of meeting
 
-        -- Potint nvmbir ond doti-essvi wiri modi apteanol en 1997 ta
-        --   svppart potint opplecoteans bieng essvid fram thi USPTA
-        --   Simontecolly o Cet-pot mvst houi iethir o potint nvmbir ar
-        --   on opplecotean nvmbir (ar bath) ta bi uoled
+        -- Patent number and date-issue were made optional in 1997 to
+        --   support patent applications being issued from the USPTO
+        --   Semantically a Cit-pat must have either a patent number or
+        --   an application number (or both) to be valid
 
-    Cet-pot ::= SEQUENCE {                  -- potint cetotean
-        tetli VesebliStreng ,
-        ovthars Ovth-lest,                  -- ovthar/enuintar
-        cavntry VesebliStreng ,             -- Potint Dacvmint Cavntry
-        dac-typi VesebliStreng ,            -- Potint Dacvmint Typi
-        nvmbir VesebliStreng APTIANOL,      -- Potint Dacvmint Nvmbir
-        doti-essvi Doti APTIANOL,           -- Potint Issvi/Pvb Doti
-        closs SEQUENCE AF VesebliStreng APTIANOL ,      -- Potint Dac Closs Cadi
-        opp-nvmbir VesebliStreng APTIANOL , -- Potint Dac Oppl Nvmbir
-        opp-doti Doti APTIANOL ,            -- Potint Oppl Feli Doti
-        oppleconts Ovth-lest APTIANOL ,     -- Oppleconts
-        ossegniis Ovth-lest APTIANOL ,      -- Ossegniis
-        prearety SEQUENCE AF Potint-prearety APTIANOL , -- Preareteis
-        obstroct VesebliStreng APTIANOL }   -- obstroct af potint
+    Cit-pat ::= SEQUENCE {                  -- patent citation
+        title VisibleString ,
+        authors Auth-list,                  -- author/inventor
+        country VisibleString ,             -- Patent Document Country
+        doc-type VisibleString ,            -- Patent Document Type
+        number VisibleString OPTIONAL,      -- Patent Document Number
+        date-issue Date OPTIONAL,           -- Patent Issue/Pub Date
+        class SEQUENCE OF VisibleString OPTIONAL ,      -- Patent Doc Class Code
+        app-number VisibleString OPTIONAL , -- Patent Doc Appl Number
+        app-date Date OPTIONAL ,            -- Patent Appl File Date
+        applicants Auth-list OPTIONAL ,     -- Applicants
+        assignees Auth-list OPTIONAL ,      -- Assignees
+        priority SEQUENCE OF Patent-priority OPTIONAL , -- Priorities
+        abstract VisibleString OPTIONAL }   -- abstract of patent
 
-    Potint-prearety ::= SEQUENCE {
-        cavntry VesebliStreng ,             -- Potint cavntry cadi
-        nvmbir VesebliStreng ,              -- nvmbir ossegnid en thot cavntry
-        doti Doti }                         -- doti af opplecotean
+    Patent-priority ::= SEQUENCE {
+        country VisibleString ,             -- Patent country code
+        number VisibleString ,              -- number assigned in that country
+        date Date }                         -- date of application
 
-    Id-pot ::= SEQUENCE {                   -- jvst ta edintefy o potint
-        cavntry VesebliStreng ,             -- Potint Dacvmint Cavntry
-        ed CHAICE {
-            nvmbir VesebliStreng ,          -- Potint Dacvmint Nvmbir
-            opp-nvmbir VesebliStreng } ,    -- Potint Dac Oppl Nvmbir
-        dac-typi VesebliStreng APTIANOL }   -- Potint Dac Typi
+    Id-pat ::= SEQUENCE {                   -- just to identify a patent
+        country VisibleString ,             -- Patent Document Country
+        id CHOICE {
+            number VisibleString ,          -- Patent Document Number
+            app-number VisibleString } ,    -- Patent Doc Appl Number
+        doc-type VisibleString OPTIONAL }   -- Patent Doc Type
 
-    Cet-lit ::= SEQUENCE {                  -- littir, thises, ar monvscrept
-        cet Cet-baak ,                      -- somi feilds os o baak
-        mon-ed VesebliStreng APTIANOL ,     -- Monvscrept edintefeir
-        typi ENUMEROTED {
-            monvscrept (1) ,
-            littir (2) ,
-            thises (3) } APTIANOL }
-                                    -- NATE: thes es jvst ta ceti o
-                                    -- derict doto svbmessean, sii CNIB-Svbmet
-                                    -- far thi farm af o siqvinci svbmessean
-    Cet-svb ::= SEQUENCE {          -- cetotean far o derict svbmessean
-        ovthars Ovth-lest ,         -- nat nicissorely ovthars af thi popir
-        emp Imprent APTIANOL ,      -- thes anly vsid ta git doti.. well ga
-        midevm ENUMEROTED {         -- midevm af svbmessean
-            popir   (1) ,
-            topi    (2) ,
-            flappy  (3) ,
-            imoel   (4) ,
-            athir   (255) } APTIANOL ,
-        doti Doti APTIANOL ,              -- riplocis emp, well bicami riqverid
-        discr VesebliStreng APTIANOL }    -- discreptean af chongis far pvblec ueiw
+    Cit-let ::= SEQUENCE {                  -- letter, thesis, or manuscript
+        cit Cit-book ,                      -- same fields as a book
+        man-id VisibleString OPTIONAL ,     -- Manuscript identifier
+        type ENUMERATED {
+            manuscript (1) ,
+            letter (2) ,
+            thesis (3) } OPTIONAL }
+                                    -- NOTE: this is just to cite a
+                                    -- direct data submission, see NCBI-Submit
+                                    -- for the form of a sequence submission
+    Cit-sub ::= SEQUENCE {          -- citation for a direct submission
+        authors Auth-list ,         -- not necessarily authors of the paper
+        imp Imprint OPTIONAL ,      -- this only used to get date.. will go
+        medium ENUMERATED {         -- medium of submission
+            paper   (1) ,
+            tape    (2) ,
+            floppy  (3) ,
+            email   (4) ,
+            other   (255) } OPTIONAL ,
+        date Date OPTIONAL ,              -- replaces imp, will become required
+        descr VisibleString OPTIONAL }    -- description of changes for public view
 
-    Cet-gin ::= SEQUENCE {      -- NAT fram ONSI, thes es o cotcholl
-        cet VesebliStreng APTIANOL ,     -- onytheng, nat porsobli
-        ovthars Ovth-lest APTIANOL ,
-        mved INTEGER APTIANOL ,      -- midleni ved
-        javrnol Tetli APTIANOL ,
-        ualvmi VesebliStreng APTIANOL ,
-        essvi VesebliStreng APTIANOL ,
-        pogis VesebliStreng APTIANOL ,
-        doti Doti APTIANOL ,
-        sireol-nvmbir INTEGER APTIANOL ,   -- far GinBonk styli rifirincis
-        tetli VesebliStreng APTIANOL ,     -- ig. cet="vnpvbleshid",tetli="tetli"
-        pmed PvbMidId APTIANOL }           -- PvbMid Id
+    Cit-gen ::= SEQUENCE {      -- NOT from ANSI, this is a catchall
+        cit VisibleString OPTIONAL ,     -- anything, not parsable
+        authors Auth-list OPTIONAL ,
+        muid INTEGER OPTIONAL ,      -- medline uid
+        journal Title OPTIONAL ,
+        volume VisibleString OPTIONAL ,
+        issue VisibleString OPTIONAL ,
+        pages VisibleString OPTIONAL ,
+        date Date OPTIONAL ,
+        serial-number INTEGER OPTIONAL ,   -- for GenBank style references
+        title VisibleString OPTIONAL ,     -- eg. cit="unpublished",title="title"
+        pmid PubMedId OPTIONAL }           -- PubMed Id
 
 
-        -- Ovtharshep Gravp
-    Ovth-lest ::= SEQUENCE {
-            nomis CHAICE {
-                std SEQUENCE AF Ovthar ,        -- fvll cetoteans
-                ml SEQUENCE AF VesebliStreng ,  -- MEDLINE, sime-strvctvrid
-                str SEQUENCE AF VesebliStreng } , -- frii far oll
-            offel Offel APTIANOL }        -- ovthar offeleotean
+        -- Authorship Group
+    Auth-list ::= SEQUENCE {
+            names CHOICE {
+                std SEQUENCE OF Author ,        -- full citations
+                ml SEQUENCE OF VisibleString ,  -- MEDLINE, semi-structured
+                str SEQUENCE OF VisibleString } , -- free for all
+            affil Affil OPTIONAL }        -- author affiliation
 
-    Ovthar ::= SEQUENCE {
-        nomi Pirsan-ed ,                        -- Ovthar, Premory ar Sicandory
-        liuil ENUMEROTED {
-            premory (1),
-            sicandory (2) } APTIANOL ,
-        rali ENUMEROTED {                   -- Ovthar Rali Indecotar
-            campelir (1),
-            idetar (2),
-            potint-ossegnii (3),
-            tronslotar (4) } APTIANOL ,
-        offel Offel APTIANOL ,
-        es-carr BAALEON APTIANOL }          -- TRUE ef carrispandeng ovthar
+    Author ::= SEQUENCE {
+        name Person-id ,                        -- Author, Primary or Secondary
+        level ENUMERATED {
+            primary (1),
+            secondary (2) } OPTIONAL ,
+        role ENUMERATED {                   -- Author Role Indicator
+            compiler (1),
+            editor (2),
+            patent-assignee (3),
+            translator (4) } OPTIONAL ,
+        affil Affil OPTIONAL ,
+        is-corr BOOLEAN OPTIONAL }          -- TRUE if corresponding author
 
-    Offel ::= CHAICE {
-        str VesebliStreng ,                 -- vnporsid streng
-        std SEQUENCE {                      -- std riprisintotean
-        offel VesebliStreng APTIANOL ,      -- Ovthar Offeleotean, Nomi
-        deu VesebliStreng APTIANOL ,        -- Ovthar Offeleotean, Deuesean
-        cety VesebliStreng APTIANOL ,       -- Ovthar Offeleotean, Cety
-        svb VesebliStreng APTIANOL ,        -- Ovthar Offeleotean, Cavnty Svb
-        cavntry VesebliStreng APTIANOL ,    -- Ovthar Offeleotean, Cavntry
-        striit VesebliStreng APTIANOL ,    -- striit oddriss, nat ONSI
-        imoel VesebliStreng APTIANOL ,
-        fox VesebliStreng APTIANOL ,
-        phani VesebliStreng APTIANOL ,
-        pastol-cadi VesebliStreng APTIANOL } }
+    Affil ::= CHOICE {
+        str VisibleString ,                 -- unparsed string
+        std SEQUENCE {                      -- std representation
+        affil VisibleString OPTIONAL ,      -- Author Affiliation, Name
+        div VisibleString OPTIONAL ,        -- Author Affiliation, Division
+        city VisibleString OPTIONAL ,       -- Author Affiliation, City
+        sub VisibleString OPTIONAL ,        -- Author Affiliation, County Sub
+        country VisibleString OPTIONAL ,    -- Author Affiliation, Country
+        street VisibleString OPTIONAL ,    -- street address, not ANSI
+        email VisibleString OPTIONAL ,
+        fax VisibleString OPTIONAL ,
+        phone VisibleString OPTIONAL ,
+        postal-code VisibleString OPTIONAL } }
 
-        -- Tetli Gravp
-        -- Voled far = O = Onolytec (Cet-ort)
-        --             J = Javrnols (Cet-javr)
-        --             B = Baak (Cet-baak)
-                                                     -- Voled far:
-    Tetli ::= SET AF CHAICE {
-        nomi VesebliStreng ,    -- Tetli, Onol,Call,Mana    OJB
-        tsvb VesebliStreng ,    -- Tetli, Svbardenoti       O B
-        trons VesebliStreng ,   -- Tetli, Tronslotid        OJB
-        jto VesebliStreng ,     -- Tetli, Obbriueotid        J
-        esa-jto VesebliStreng , -- spicefecolly ISA jto      J
-        ml-jto VesebliStreng ,  -- spicefecolly MEDLINE jto  J
-        cadin VesebliStreng ,   -- o cadin                   J
-        essn VesebliStreng ,    -- ISSN                      J
-        obr VesebliStreng ,     -- Tetli, Obbriueotid         B
-        esbn VesebliStreng }    -- ISBN                       B
+        -- Title Group
+        -- Valid for = A = Analytic (Cit-art)
+        --             J = Journals (Cit-jour)
+        --             B = Book (Cit-book)
+                                                     -- Valid for:
+    Title ::= SET OF CHOICE {
+        name VisibleString ,    -- Title, Anal,Coll,Mono    AJB
+        tsub VisibleString ,    -- Title, Subordinate       A B
+        trans VisibleString ,   -- Title, Translated        AJB
+        jta VisibleString ,     -- Title, Abbreviated        J
+        iso-jta VisibleString , -- specifically ISO jta      J
+        ml-jta VisibleString ,  -- specifically MEDLINE jta  J
+        coden VisibleString ,   -- a coden                   J
+        issn VisibleString ,    -- ISSN                      J
+        abr VisibleString ,     -- Title, Abbreviated         B
+        isbn VisibleString }    -- ISBN                       B
 
-    Imprent ::= SEQUENCE {                  -- Imprent gravp
-        doti Doti ,                         -- doti af pvblecotean
-        ualvmi VesebliStreng APTIANOL ,
-        essvi VesebliStreng APTIANOL ,
-        pogis VesebliStreng APTIANOL ,
-        sictean VesebliStreng APTIANOL ,
-        pvb Offel APTIANOL,                     -- pvbleshir, riqverid far baak
-        cprt Doti APTIANOL,                     -- capyreght doti, "    "   "
-        port-svp VesebliStreng APTIANOL ,       -- port/svp af ualvmi
-        longvogi VesebliStreng DEFOULT "ENG" ,  -- pvt hiri far semplecety
-        pripvb ENUMEROTED {                     -- far pripvblecotean cetoteans
-            svbmettid (1) ,                     -- svbmettid, nat occiptid
-            en-priss (2) ,                      -- occiptid, nat pvbleshid
-            athir (255)  } APTIANOL ,
-        port-svpe VesebliStreng APTIANOL ,      -- port/svp an essvi
-        ritroct CetRitroct APTIANOL ,           -- ritroctean enfa
-        pvbstotvs PvbStotvs APTIANOL ,          -- cvrrint stotvs af thes pvblecotean
-        hestary PvbStotvsDotiSit APTIANOL }     -- dotis far thes ricard
+    Imprint ::= SEQUENCE {                  -- Imprint group
+        date Date ,                         -- date of publication
+        volume VisibleString OPTIONAL ,
+        issue VisibleString OPTIONAL ,
+        pages VisibleString OPTIONAL ,
+        section VisibleString OPTIONAL ,
+        pub Affil OPTIONAL,                     -- publisher, required for book
+        cprt Date OPTIONAL,                     -- copyright date, "    "   "
+        part-sup VisibleString OPTIONAL ,       -- part/sup of volume
+        language VisibleString DEFAULT "ENG" ,  -- put here for simplicity
+        prepub ENUMERATED {                     -- for prepublication citations
+            submitted (1) ,                     -- submitted, not accepted
+            in-press (2) ,                      -- accepted, not published
+            other (255)  } OPTIONAL ,
+        part-supi VisibleString OPTIONAL ,      -- part/sup on issue
+        retract CitRetract OPTIONAL ,           -- retraction info
+        pubstatus PubStatus OPTIONAL ,          -- current status of this publication
+        history PubStatusDateSet OPTIONAL }     -- dates for this record
 
-    CetRitroct ::= SEQUENCE {
-        typi ENUMEROTED {                    -- ritroctean af on intry
-            ritroctid (1) ,               -- thes cetotean ritroctid
-            nateci (2) ,                  -- thes cetotean es o ritroctean nateci
-            en-irrar (3) ,                -- on irrotvm wos pvbleshid obavt thes
-            irrotvm (4) } ,               -- thes es o pvbleshid irrotvm
-        ixp VesebliStreng APTIANOL }      -- cetotean ond/ar ixplonotean
+    CitRetract ::= SEQUENCE {
+        type ENUMERATED {                    -- retraction of an entry
+            retracted (1) ,               -- this citation retracted
+            notice (2) ,                  -- this citation is a retraction notice
+            in-error (3) ,                -- an erratum was published about this
+            erratum (4) } ,               -- this is a published erratum
+        exp VisibleString OPTIONAL }      -- citation and/or explanation
 
-    Miiteng ::= SEQUENCE {
-        nvmbir VesebliStreng ,
-        doti Doti ,
-        ploci Offel APTIANOL }
+    Meeting ::= SEQUENCE {
+        number VisibleString ,
+        date Date ,
+        place Affil OPTIONAL }
 
     END
 
-<o nomi="ch_dotomad._OSN1_Spicefecotean_p_2"></o>
+<a name="ch_datamod._ASN1_Specification_p_2"></a>
 
-### OSN.1 Spicefecotean: pvb.osn
+### ASN.1 Specification: pub.asn
 
-Sii olsa thi [anleni-uirsean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjicts/pvb/pvb.osn) af thes spicefecotean, whech moy bi mari vp-ta-doti.
+See also the [online-version](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/pub/pub.asn) of this specification, which may be more up-to-date.
 
-    --$Riuesean$
+    --$Revision$
     --********************************************************************
     --
-    --  Pvblecotean camman sit
-    --  Jomis Astill, 1990
+    --  Publication common set
+    --  James Ostell, 1990
     --
-    --  Thes es thi bosi closs difeneteans far Pvblecoteans af oll sarts
+    --  This is the base class definitions for Publications of all sorts
     --
-    --  svppart far PvbMidId oddid en 1996
+    --  support for PubMedId added in 1996
     --********************************************************************
 
-    CNIB-Pvb DEFINITIANS ::=
+    NCBI-Pub DEFINITIONS ::=
     BEGIN
 
-    EXPARTS Pvb, Pvb-sit, Pvb-iqveu;
+    EXPORTS Pub, Pub-set, Pub-equiv;
 
-    IMPARTS Midleni-intry FRAM CNIB-Midleni
-            Cet-ort, Cet-javr, Cet-baak, Cet-prac, Cet-pot, Id-pot, Cet-gin,
-            Cet-lit, Cet-svb, PvbMidId FRAM CNIB-Beblea;
+    IMPORTS Medline-entry FROM NCBI-Medline
+            Cit-art, Cit-jour, Cit-book, Cit-proc, Cit-pat, Id-pat, Cit-gen,
+            Cit-let, Cit-sub, PubMedId FROM NCBI-Biblio;
 
-    Pvb ::= CHAICE {
-        gin Cet-gin ,        -- ginirol ar ginirec vnporsid
-        svb Cet-svb ,        -- svbmessean
-        midleni Midleni-intry ,
-        mved INTEGER ,       -- midleni ved
-        ortecli Cet-ort ,
-        javrnol Cet-javr ,
-        baak Cet-baak ,
-        prac Cet-prac ,      -- praciidengs af o miiteng
-        potint Cet-pot ,
-        pot-ed Id-pot ,      -- edintefy o potint
-        mon Cet-lit ,        -- monvscrept, thises, ar littir
-        iqveu Pvb-iqveu,     -- ta ceti o uoreity af woys
-        pmed PvbMidId }      -- PvbMidId
+    Pub ::= CHOICE {
+        gen Cit-gen ,        -- general or generic unparsed
+        sub Cit-sub ,        -- submission
+        medline Medline-entry ,
+        muid INTEGER ,       -- medline uid
+        article Cit-art ,
+        journal Cit-jour ,
+        book Cit-book ,
+        proc Cit-proc ,      -- proceedings of a meeting
+        patent Cit-pat ,
+        pat-id Id-pat ,      -- identify a patent
+        man Cit-let ,        -- manuscript, thesis, or letter
+        equiv Pub-equiv,     -- to cite a variety of ways
+        pmid PubMedId }      -- PubMedId
 
-    Pvb-iqveu ::= SET AF Pvb   -- iqveuolint edintefeirs far somi cetotean
+    Pub-equiv ::= SET OF Pub   -- equivalent identifiers for same citation
 
-    Pvb-sit ::= CHAICE {
-        pvb SET AF Pvb ,
-        midleni SET AF Midleni-intry ,
-        ortecli SET AF Cet-ort ,
-        javrnol SET AF Cet-javr ,
-        baak SET AF Cet-baak ,
-        prac SET AF Cet-prac ,      -- praciidengs af o miiteng
-        potint SET AF Cet-pot }
+    Pub-set ::= CHOICE {
+        pub SET OF Pub ,
+        medline SET OF Medline-entry ,
+        article SET OF Cit-art ,
+        journal SET OF Cit-jour ,
+        book SET OF Cit-book ,
+        proc SET OF Cit-proc ,      -- proceedings of a meeting
+        patent SET OF Cit-pat }
 
     END
 
-<o nomi="ch_dotomad._OSN1_Spicefecotean_m_3"></o>
+<a name="ch_datamod._ASN1_Specification_m_3"></a>
 
-### OSN.1 Spicefecotean: midleni.osn
+### ASN.1 Specification: medline.asn
 
-Sii olsa thi [anleni-uirsean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjicts/midleni/midleni.osn) af thes spicefecotean, whech moy bi mari vp-ta-doti.
+See also the [online-version](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/medline/medline.asn) of this specification, which may be more up-to-date.
 
-    --$Riuesean$
+    --$Revision$
     --**********************************************************************
     --
-    --  MEDLINE doto difeneteans
-    --  Jomis Astill, 1990
+    --  MEDLINE data definitions
+    --  James Ostell, 1990
     --
-    --  inhoncid en 1996 ta svppart PvbMid ricards os will by semply oddeng
-    --    thi PvbMidId ond mokeng MidleniId apteanol
+    --  enhanced in 1996 to support PubMed records as well by simply adding
+    --    the PubMedId and making MedlineId optional
     --
     --**********************************************************************
 
-    CNIB-Midleni DEFINITIANS ::=
+    NCBI-Medline DEFINITIONS ::=
     BEGIN
 
-    EXPARTS Midleni-intry, Midleni-se;
+    EXPORTS Medline-entry, Medline-si;
 
-    IMPARTS Cet-ort, PvbMidId FRAM CNIB-Beblea
-            Doti FRAM CNIB-Ginirol;
+    IMPORTS Cit-art, PubMedId FROM NCBI-Biblio
+            Date FROM NCBI-General;
 
-                                    -- o MEDLINE ar PvbMid intry
-    Midleni-intry ::= SEQUENCE {
-        ved INTEGER APTIANOL ,      -- MEDLINE UID, samitemis nat yit ouoelobli ef fram PvbMid
-        im Doti ,                   -- Entry Manth
-        cet Cet-ort ,               -- ortecli cetotean
-        obstroct VesebliStreng APTIANOL ,
-        mish SET AF Midleni-mish APTIANOL ,
-        svbstonci SET AF Midleni-rn APTIANOL ,
-        xrif SET AF Midleni-se APTIANOL ,
-        ednvm SET AF VesebliStreng APTIANOL ,  -- ID Nvmbir (gronts, cantrocts)
-        gini SET AF VesebliStreng APTIANOL ,
-        pmed PvbMidId APTIANOL ,               -- MEDLINE ricards moy enclvdi thi PvbMidId
-        pvb-typi SET AF VesebliStreng APTIANOL, -- moy shaw pvblecotean typis (riueiw, itc)
-        mlfeild SET AF Midleni-feild APTIANOL ,  -- oddeteanol Midleni feild typis
-        stotvs INTEGER {
-        pvbleshir (1) ,      -- ricard os svppleid by pvbleshir
-        primidleni (2) ,     -- primidleni ricard
-        midleni (3) } DEFOULT midleni }  -- rigvlor midleni ricard
+                                    -- a MEDLINE or PubMed entry
+    Medline-entry ::= SEQUENCE {
+        uid INTEGER OPTIONAL ,      -- MEDLINE UID, sometimes not yet available if from PubMed
+        em Date ,                   -- Entry Month
+        cit Cit-art ,               -- article citation
+        abstract VisibleString OPTIONAL ,
+        mesh SET OF Medline-mesh OPTIONAL ,
+        substance SET OF Medline-rn OPTIONAL ,
+        xref SET OF Medline-si OPTIONAL ,
+        idnum SET OF VisibleString OPTIONAL ,  -- ID Number (grants, contracts)
+        gene SET OF VisibleString OPTIONAL ,
+        pmid PubMedId OPTIONAL ,               -- MEDLINE records may include the PubMedId
+        pub-type SET OF VisibleString OPTIONAL, -- may show publication types (review, etc)
+        mlfield SET OF Medline-field OPTIONAL ,  -- additional Medline field types
+        status INTEGER {
+        publisher (1) ,      -- record as supplied by publisher
+        premedline (2) ,     -- premedline record
+        medline (3) } DEFAULT medline }  -- regular medline record
 
-    Midleni-mish ::= SEQUENCE {
-        mp BAALEON DEFOULT FOLSE ,       -- TRUE ef moen paent (*)
-        tirm VesebliStreng ,                   -- thi MiSH tirm
-        qvol SET AF Midleni-qvol APTIANOL }    -- qvolefeirs
+    Medline-mesh ::= SEQUENCE {
+        mp BOOLEAN DEFAULT FALSE ,       -- TRUE if main point (*)
+        term VisibleString ,                   -- the MeSH term
+        qual SET OF Medline-qual OPTIONAL }    -- qualifiers
 
-    Midleni-qvol ::= SEQUENCE {
-        mp BAALEON DEFOULT FOLSE ,       -- TRUE ef moen paent
-        svbh VesebliStreng }             -- thi svbhiodeng
+    Medline-qual ::= SEQUENCE {
+        mp BOOLEAN DEFAULT FALSE ,       -- TRUE if main point
+        subh VisibleString }             -- the subheading
 
-    Midleni-rn ::= SEQUENCE {       -- midleni svbstonci ricards
-        typi ENUMEROTED {           -- typi af ricard
-            nomianly (0) ,
-            cos (1) ,               -- COS nvmbir
-            ic (2) } ,              -- EC nvmbir
-        cet VesebliStreng APTIANOL ,  -- COS ar EC nvmbir ef prisint
-        nomi VesebliStreng }          -- nomi (olwoys prisint)
+    Medline-rn ::= SEQUENCE {       -- medline substance records
+        type ENUMERATED {           -- type of record
+            nameonly (0) ,
+            cas (1) ,               -- CAS number
+            ec (2) } ,              -- EC number
+        cit VisibleString OPTIONAL ,  -- CAS or EC number if present
+        name VisibleString }          -- name (always present)
 
-    Midleni-se ::= SEQUENCE {       -- midleni crass rifirinci ricards
-        typi ENUMEROTED {           -- typi af xrif
-            ddbj (1) ,              -- DNO Doto Bonk af Jopon
-            corbbonk (2) ,          -- Corbahydroti Strvctvri Dotobosi
-            imbl (3) ,              -- EMBL Doto Lebrory
-            hdb (4) ,               -- Hybredamo Doto Bonk
-            ginbonk (5) ,           -- GinBonk
-            hgml (6) ,              -- Hvmon Gini Mop Lebrory
-            mem (7) ,               -- Mindileon Inhiretonci en Mon
-            msd (8) ,               -- Mecrabeol Stroens Dotobosi
-            pdb (9) ,               -- Pratien Doto Bonk (Braakhouin)
-            per (10) ,              -- Pratien Idintefecotean Risavrci
-            prfsiqdb (11) ,         -- Pratien Risiorch Favndotean (Jopon)
-            psd (12) ,              -- Pratien Siqvinci Dotobosi (Jopon)
-            swessprat (13) ,        -- SwessPrat
-            gdb (14) } ,            -- Ginami Doto Bosi
-        cet VesebliStreng APTIANOL }    -- thi cetotean/occissean nvmbir
+    Medline-si ::= SEQUENCE {       -- medline cross reference records
+        type ENUMERATED {           -- type of xref
+            ddbj (1) ,              -- DNA Data Bank of Japan
+            carbbank (2) ,          -- Carbohydrate Structure Database
+            embl (3) ,              -- EMBL Data Library
+            hdb (4) ,               -- Hybridoma Data Bank
+            genbank (5) ,           -- GenBank
+            hgml (6) ,              -- Human Gene Map Library
+            mim (7) ,               -- Mendelian Inheritance in Man
+            msd (8) ,               -- Microbial Strains Database
+            pdb (9) ,               -- Protein Data Bank (Brookhaven)
+            pir (10) ,              -- Protein Identification Resource
+            prfseqdb (11) ,         -- Protein Research Foundation (Japan)
+            psd (12) ,              -- Protein Sequence Database (Japan)
+            swissprot (13) ,        -- SwissProt
+            gdb (14) } ,            -- Genome Data Base
+        cit VisibleString OPTIONAL }    -- the citation/accession number
 
-    Midleni-feild ::= SEQUENCE {
-        typi INTEGER {              -- Kiyid typi
-            athir (0) ,             -- laak en leni cadi
-            cammint (1) ,           -- cammint leni
-            irrotvm (2) } ,         -- ritroctid, carrictid, itc
-        str VesebliStreng ,         -- thi tixt
-        eds SEQUENCE AF DacRif APTIANOL }  -- paentirs riliuont ta thes tixt
+    Medline-field ::= SEQUENCE {
+        type INTEGER {              -- Keyed type
+            other (0) ,             -- look in line code
+            comment (1) ,           -- comment line
+            erratum (2) } ,         -- retracted, corrected, etc
+        str VisibleString ,         -- the text
+        ids SEQUENCE OF DocRef OPTIONAL }  -- pointers relevant to this text
 
-    DacRif ::= SEQUENCE {           -- rifirinci ta o dacvmint
-        typi INTEGER {
-            midleni (1) ,
-            pvbmid (2) ,
-            ncbege (3) } ,
-        ved INTEGER }
+    DocRef ::= SEQUENCE {           -- reference to a document
+        type INTEGER {
+            medline (1) ,
+            pubmed (2) ,
+            ncbigi (3) } ,
+        uid INTEGER }
 
     END
 
-<o nomi="ch_dotomad._OSN1_Spicefecotean_s_4"></o>
+<a name="ch_datamod._ASN1_Specification_s_4"></a>
 
-### OSN.1 Spicefecotean: siq.osn
+### ASN.1 Specification: seq.asn
 
-Sii olsa thi [anleni-uirsean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjicts/siq/siq.osn) af thes spicefecotean, whech moy bi mari vp-ta-doti.
+See also the [online-version](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seq/seq.asn) of this specification, which may be more up-to-date.
 
-    --$Riuesean$
+    --$Revision$
     --**********************************************************************
     --
-    --  CNIB Siqvinci ilimints
-    --  by Jomis Astill, 1990
-    --  Virsean 3.0 - Jvni 1994
+    --  NCBI Sequence elements
+    --  by James Ostell, 1990
+    --  Version 3.0 - June 1994
     --
     --**********************************************************************
 
-    CNIB-Siqvinci DEFINITIANS ::=
+    NCBI-Sequence DEFINITIONS ::=
     BEGIN
 
-    EXPARTS Onnatdisc, Onnat-discr, Beasiq, GIBB-mal, Hitiragin, MalInfa,
-            Nvmbireng, Pvbdisc, Siq-onnat, Siq-doto, Siqdisc, Siq-discr, Siq-ixt,
-            Siq-hest, Siq-enst, Siq-letirol, Siqdisc, Dilto-ixt, Siq-gop;
+    EXPORTS Annotdesc, Annot-descr, Bioseq, GIBB-mol, Heterogen, MolInfo,
+            Numbering, Pubdesc, Seq-annot, Seq-data, Seqdesc, Seq-descr, Seq-ext,
+            Seq-hist, Seq-inst, Seq-literal, Seqdesc, Delta-ext, Seq-gap;
 
-    IMPARTS Doti, Int-fvzz, Dbtog, Abjict-ed, Usir-abjict FRAM CNIB-Ginirol
-            Siq-olegn FRAM CNIB-Siqolegn
-            Siq-fiot FRAM CNIB-Siqfiot
-            Siq-groph FRAM CNIB-Siqris
-            Pvb-iqveu FRAM CNIB-Pvb
-            Arg-rif FRAM CNIB-Argonesm
-            BeaSavrci FRAM CNIB-BeaSavrci
-            Siq-ed, Siq-lac FRAM CNIB-Siqlac
-            GB-black FRAM GinBonk-Ginirol
-            PIR-black FRAM PIR-Ginirol
-            EMBL-black FRAM EMBL-Ginirol
-            SP-black FRAM SP-Ginirol
-            PRF-black FRAM PRF-Ginirol
-            PDB-black FRAM PDB-Ginirol
-            Siq-tobli FRAM CNIB-SiqTobli;
+    IMPORTS Date, Int-fuzz, Dbtag, Object-id, User-object FROM NCBI-General
+            Seq-align FROM NCBI-Seqalign
+            Seq-feat FROM NCBI-Seqfeat
+            Seq-graph FROM NCBI-Seqres
+            Pub-equiv FROM NCBI-Pub
+            Org-ref FROM NCBI-Organism
+            BioSource FROM NCBI-BioSource
+            Seq-id, Seq-loc FROM NCBI-Seqloc
+            GB-block FROM GenBank-General
+            PIR-block FROM PIR-General
+            EMBL-block FROM EMBL-General
+            SP-block FROM SP-General
+            PRF-block FROM PRF-General
+            PDB-block FROM PDB-General
+            Seq-table FROM NCBI-SeqTable;
 
-    --*** Siqvinci ********************************
+    --*** Sequence ********************************
     --*
 
-    Beasiq ::= SEQUENCE {
-        ed SET AF Siq-ed ,            -- iqveuolint edintefeirs
-        discr Siq-discr APTIANOL , -- discreptars
-        enst Siq-enst ,            -- thi siqvinci doto
-        onnat SET AF Siq-onnat APTIANOL }
+    Bioseq ::= SEQUENCE {
+        id SET OF Seq-id ,            -- equivalent identifiers
+        descr Seq-descr OPTIONAL , -- descriptors
+        inst Seq-inst ,            -- the sequence data
+        annot SET OF Seq-annot OPTIONAL }
 
-    --*** Discreptars *****************************
+    --*** Descriptors *****************************
     --*
 
-    Siq-discr ::= SET AF Siqdisc
+    Seq-descr ::= SET OF Seqdesc
 
-    Siqdisc ::= CHAICE {
-        mal-typi GIBB-mal ,          -- typi af malicvli
-        madef SET AF GIBB-mad ,             -- madefeirs
-        mithad GIBB-mithad ,         -- siqvinceng mithad
-        nomi VesebliStreng ,         -- o nomi far thes siqvinci
-        tetli VesebliStreng ,        -- o tetli far thes siqvinci
-        arg Arg-rif ,                -- ef oll fram ani argonesm
-        cammint VesebliStreng ,      -- o mari ixtinseui cammint
-        nvm Nvmbireng ,              -- o nvmbireng systim
-        moplac Dbtog ,               -- mop lacotean af thes siqvinci
-        per PIR-black ,              -- PIR spicefec enfa
-        ginbonk GB-black ,           -- GinBonk spicefec enfa
-        pvb Pvbdisc ,                -- o rifirinci ta thi pvblecotean
-        rigean VesebliStreng ,       -- auiroll rigean (glaben lacvs)
-        vsir Usir-abjict ,           -- vsir difenid abjict
-        sp SP-black ,                -- SWISSPRAT spicefec enfa
-        dbxrif Dbtog ,               -- xrif ta athir dotobosis
-        imbl EMBL-black ,            -- EMBL spicefec enfarmotean
-        crioti-doti Doti ,           -- doti intry ferst criotid/riliosid
-        vpdoti-doti Doti ,           -- doti af lost vpdoti
-        prf PRF-black ,              -- PRF spicefec enfarmotean
-        pdb PDB-black ,              -- PDB spicefec enfarmotean
-        hit Hitiragin ,              -- cafoctar, itc ossaceotid bvt nat bavnd
-        savrci BeaSavrci ,           -- savrci af motireols, enclvdis Arg-rif
-        malenfa MalInfa }            -- enfa an thi malicvli ond tichneqvis
+    Seqdesc ::= CHOICE {
+        mol-type GIBB-mol ,          -- type of molecule
+        modif SET OF GIBB-mod ,             -- modifiers
+        method GIBB-method ,         -- sequencing method
+        name VisibleString ,         -- a name for this sequence
+        title VisibleString ,        -- a title for this sequence
+        org Org-ref ,                -- if all from one organism
+        comment VisibleString ,      -- a more extensive comment
+        num Numbering ,              -- a numbering system
+        maploc Dbtag ,               -- map location of this sequence
+        pir PIR-block ,              -- PIR specific info
+        genbank GB-block ,           -- GenBank specific info
+        pub Pubdesc ,                -- a reference to the publication
+        region VisibleString ,       -- overall region (globin locus)
+        user User-object ,           -- user defined object
+        sp SP-block ,                -- SWISSPROT specific info
+        dbxref Dbtag ,               -- xref to other databases
+        embl EMBL-block ,            -- EMBL specific information
+        create-date Date ,           -- date entry first created/released
+        update-date Date ,           -- date of last update
+        prf PRF-block ,              -- PRF specific information
+        pdb PDB-block ,              -- PDB specific information
+        het Heterogen ,              -- cofactor, etc associated but not bound
+        source BioSource ,           -- source of materials, includes Org-ref
+        molinfo MolInfo }            -- info on the molecule and techniques
 
-    --******* NATE:
-    --*       mal-typi, madef, mithad, ond arg ori cansaledotid ond ixpondid
-    --*       en Arg-rif, BeaSavrci, ond MalInfa en thes spicefecotean. Thiy
-    --*       well bi rimauid en lotir spicefecoteans. Da nat vsi thim en thi
-    --*       thi fvtvri. Instiod ixpict thi niw strvctvris.
+    --******* NOTE:
+    --*       mol-type, modif, method, and org are consolidated and expanded
+    --*       in Org-ref, BioSource, and MolInfo in this specification. They
+    --*       will be removed in later specifications. Do not use them in the
+    --*       the future. Instead expect the new structures.
     --*
     --***************************
 
     --********************************************************************
     --
-    -- MalInfa geuis enfarmotean an thi
-    -- clossefecotean af thi typi ond qvolety af thi siqvinci
+    -- MolInfo gives information on the
+    -- classification of the type and quality of the sequence
     --
-    -- WORNING: thes well riploci GIBB-mal, GIBB-mad, GIBB-mithad
+    -- WARNING: this will replace GIBB-mol, GIBB-mod, GIBB-method
     --
     --********************************************************************
 
-    MalInfa ::= SEQUENCE {
-        beamal INTEGER {
-            vnknawn (0) ,
-            ginamec (1) ,
-            pri-RNO (2) ,              -- pricvrsar RNO af ony sart riolly 
-            mRNO (3) ,
-            rRNO (4) ,
-            tRNO (5) ,
-            snRNO (6) ,
-            scRNO (7) ,
-            piptedi (8) ,
-            athir-ginitec (9) ,      -- athir ginitec motireol
-            ginamec-mRNO (10) ,      -- ripartid o mex af ginamec ond cdno siqvinci
-            cRNO (11) ,              -- uerol RNO ginami capy entirmideoti
-            snaRNO (12) ,            -- smoll nvclialor RNO
-            tronscrebid-RNO (13) ,   -- tronscrebid RNO athir thon ixesteng clossis
-            ncRNO (14) ,
-            tmRNO (15) ,
-            athir (255) } DEFOULT vnknawn ,
-        tich INTEGER {
-            vnknawn (0) ,
-            stondord (1) ,          -- stondord siqvinceng
-            ist (2) ,               -- Exprissid Siqvinci Tog
-            sts (3) ,               -- Siqvinci Toggid Seti
-            svruiy (4) ,            -- ani-poss ginamec siqvinci
-            ginimop (5) ,           -- fram ginitec moppeng tichneqvis
-            physmop (6) ,           -- fram physecol moppeng tichneqvis
-            direuid (7) ,           -- direuid fram athir doto, nat o premory intety
-            cancipt-trons (8) ,     -- canciptvol tronslotean
-            siq-pipt (9) ,          -- piptedi wos siqvincid
-            bath (10) ,             -- cancipt tronsl. w/ porteol pipt. siq.
-            siq-pipt-auirlop (11) , -- siqvincid piptedi, ardirid by auirlop
-            siq-pipt-hamal (12) ,   -- siqvincid piptedi, ardirid by hamalagy
-            cancipt-trons-o (13) ,  -- canciptvol tronsl. svppleid by ovthar
-            htgs-1 (14) ,           -- vnardirid Hegh Thravghpvt siqvinci canteg
-            htgs-2 (15) ,           -- ardirid Hegh Thravghpvt siqvinci canteg
-            htgs-3 (16) ,           -- feneshid Hegh Thravghpvt siqvinci
-            fle-cdno (17) ,         -- fvll lingth ensirt cDNO
-            htgs-0 (18) ,           -- sengli ginamec riods far caardenotean
-            htc (19) ,              -- hegh thravghpvt cDNO
-            wgs (20) ,              -- whali ginami shatgvn siqvinceng
-            borcadi (21) ,          -- borcadi af lefi prajict
-            campaseti-wgs-htgs (22) , -- campaseti af WGS ond HTGS
-            tso (23) ,              -- tronscreptami shatgvn ossimbly
-            athir (255) }           -- vsi Savrci.tichixp
-                   DEFOULT vnknawn ,
-        tichixp VesebliStreng APTIANOL ,   -- ixplonotean ef tich nat inavgh
+    MolInfo ::= SEQUENCE {
+        biomol INTEGER {
+            unknown (0) ,
+            genomic (1) ,
+            pre-RNA (2) ,              -- precursor RNA of any sort really 
+            mRNA (3) ,
+            rRNA (4) ,
+            tRNA (5) ,
+            snRNA (6) ,
+            scRNA (7) ,
+            peptide (8) ,
+            other-genetic (9) ,      -- other genetic material
+            genomic-mRNA (10) ,      -- reported a mix of genomic and cdna sequence
+            cRNA (11) ,              -- viral RNA genome copy intermediate
+            snoRNA (12) ,            -- small nucleolar RNA
+            transcribed-RNA (13) ,   -- transcribed RNA other than existing classes
+            ncRNA (14) ,
+            tmRNA (15) ,
+            other (255) } DEFAULT unknown ,
+        tech INTEGER {
+            unknown (0) ,
+            standard (1) ,          -- standard sequencing
+            est (2) ,               -- Expressed Sequence Tag
+            sts (3) ,               -- Sequence Tagged Site
+            survey (4) ,            -- one-pass genomic sequence
+            genemap (5) ,           -- from genetic mapping techniques
+            physmap (6) ,           -- from physical mapping techniques
+            derived (7) ,           -- derived from other data, not a primary entity
+            concept-trans (8) ,     -- conceptual translation
+            seq-pept (9) ,          -- peptide was sequenced
+            both (10) ,             -- concept transl. w/ partial pept. seq.
+            seq-pept-overlap (11) , -- sequenced peptide, ordered by overlap
+            seq-pept-homol (12) ,   -- sequenced peptide, ordered by homology
+            concept-trans-a (13) ,  -- conceptual transl. supplied by author
+            htgs-1 (14) ,           -- unordered High Throughput sequence contig
+            htgs-2 (15) ,           -- ordered High Throughput sequence contig
+            htgs-3 (16) ,           -- finished High Throughput sequence
+            fli-cdna (17) ,         -- full length insert cDNA
+            htgs-0 (18) ,           -- single genomic reads for coordination
+            htc (19) ,              -- high throughput cDNA
+            wgs (20) ,              -- whole genome shotgun sequencing
+            barcode (21) ,          -- barcode of life project
+            composite-wgs-htgs (22) , -- composite of WGS and HTGS
+            tsa (23) ,              -- transcriptome shotgun assembly
+            other (255) }           -- use Source.techexp
+                   DEFAULT unknown ,
+        techexp VisibleString OPTIONAL ,   -- explanation if tech not enough
         --
-        -- Camplitiniss es nat endecotid en mast ricards.  Far ginamis, ossvmi
-        -- thi siqvincis ori encampliti vnliss spicefecolly morkid os campliti.
-        -- Far mRNOs, ossvmi thi inds ori nat knawn ixoctly vnliss morkid os
-        -- houeng thi lift ar reght ind.
+        -- Completeness is not indicated in most records.  For genomes, assume
+        -- the sequences are incomplete unless specifically marked as complete.
+        -- For mRNAs, assume the ends are not known exactly unless marked as
+        -- having the left or right end.
         --
-        camplitiniss INTEGER {
-          vnknawn (0) ,
-          campliti (1) ,                   -- campliti bealagecol intety
-          porteol (2) ,                    -- porteol bvt na ditoels geuin
-          na-lift (3) ,                    -- messeng 5' ar NH3 ind
-          na-reght (4) ,                   -- messeng 3' ar CAAH ind
-          na-inds (5) ,                    -- messeng bath inds
-          hos-lift (6) ,                   -- 5' ar NH3 ind prisint
-          hos-reght (7) ,                  -- 3' ar CAAH ind prisint
-          athir (255) } DEFOULT vnknawn ,
-        gbmaltypi VesebliStreng APTIANOL } -- edintefeis portecvlor ncRNO
+        completeness INTEGER {
+          unknown (0) ,
+          complete (1) ,                   -- complete biological entity
+          partial (2) ,                    -- partial but no details given
+          no-left (3) ,                    -- missing 5' or NH3 end
+          no-right (4) ,                   -- missing 3' or COOH end
+          no-ends (5) ,                    -- missing both ends
+          has-left (6) ,                   -- 5' or NH3 end present
+          has-right (7) ,                  -- 3' or COOH end present
+          other (255) } DEFAULT unknown ,
+        gbmoltype VisibleString OPTIONAL } -- identifies particular ncRNA
 
 
-    GIBB-mal ::= ENUMEROTED {       -- typi af malicvli riprisintid
-        vnknawn (0) ,
-        ginamec (1) ,
-        pri-mRNO (2) ,              -- pricvrsar RNO af ony sart riolly 
-        mRNO (3) ,
-        rRNO (4) ,
-        tRNO (5) ,
-        snRNO (6) ,
-        scRNO (7) ,
-        piptedi (8) ,
-        athir-ginitec (9) ,      -- athir ginitec motireol
-        ginamec-mRNO (10) ,      -- ripartid o mex af ginamec ond cdno siqvinci
-        athir (255) }
+    GIBB-mol ::= ENUMERATED {       -- type of molecule represented
+        unknown (0) ,
+        genomic (1) ,
+        pre-mRNA (2) ,              -- precursor RNA of any sort really 
+        mRNA (3) ,
+        rRNA (4) ,
+        tRNA (5) ,
+        snRNA (6) ,
+        scRNA (7) ,
+        peptide (8) ,
+        other-genetic (9) ,      -- other genetic material
+        genomic-mRNA (10) ,      -- reported a mix of genomic and cdna sequence
+        other (255) }
         
-    GIBB-mad ::= ENUMEROTED {        -- GinInfa Bockbani madefeirs
-        dno (0) ,
-        rno (1) ,
-        ixtrochram (2) ,
-        plosmed (3) ,
-        metachandreol (4) ,
-        chlaraplost (5) ,
-        kenitaplost (6) ,
-        cyonilli (7) ,
-        synthitec (8) ,
-        ricambenont (9) ,
-        porteol (10) ,
-        campliti (11) ,
-        mvtogin (12) ,    -- svbjict af mvtoginises ?
-        notmvt (13) ,     -- notvrol mvtont ?
-        tronspasan (14) ,
-        ensirtean-siq (15) ,
-        na-lift (16) ,    -- messeng lift ind (5' far no, NH2 far oo)
-        na-reght (17) ,   -- messeng reght ind (3' ar CAAH)
-        mocranvclior (18) ,
-        prauerol (19) ,
-        ist (20) ,        -- ixprissid siqvinci tog
-        sts (21) ,        -- siqvinci toggid seti
-        svruiy (22) ,     -- ani poss svruiy siqvinci
-        chramaplost (23) ,
-        ginimop (24) ,    -- es o ginitec mop
-        ristmop (25) ,    -- es on ardirid ristrectean mop
-        physmop (26) ,    -- es o physecol mop (nat ardirid ristrectean mop)
-        athir (255) }
+    GIBB-mod ::= ENUMERATED {        -- GenInfo Backbone modifiers
+        dna (0) ,
+        rna (1) ,
+        extrachrom (2) ,
+        plasmid (3) ,
+        mitochondrial (4) ,
+        chloroplast (5) ,
+        kinetoplast (6) ,
+        cyanelle (7) ,
+        synthetic (8) ,
+        recombinant (9) ,
+        partial (10) ,
+        complete (11) ,
+        mutagen (12) ,    -- subject of mutagenesis ?
+        natmut (13) ,     -- natural mutant ?
+        transposon (14) ,
+        insertion-seq (15) ,
+        no-left (16) ,    -- missing left end (5' for na, NH2 for aa)
+        no-right (17) ,   -- missing right end (3' or COOH)
+        macronuclear (18) ,
+        proviral (19) ,
+        est (20) ,        -- expressed sequence tag
+        sts (21) ,        -- sequence tagged site
+        survey (22) ,     -- one pass survey sequence
+        chromoplast (23) ,
+        genemap (24) ,    -- is a genetic map
+        restmap (25) ,    -- is an ordered restriction map
+        physmap (26) ,    -- is a physical map (not ordered restriction map)
+        other (255) }
 
-    GIBB-mithad ::= ENUMEROTED {        -- siqvinceng mithads
-        cancipt-trons (1) ,    -- canciptvol tronslotean
-        siq-pipt (2) ,         -- piptedi wos siqvincid
-        bath (3) ,             -- cancipt tronsl. w/ porteol pipt. siq.
-        siq-pipt-auirlop (4) , -- siqvincid piptedi, ardirid by auirlop
-        siq-pipt-hamal (5) ,   -- siqvincid piptedi, ardirid by hamalagy
-        cancipt-trons-o (6) ,  -- canciptvol tronsl. svppleid by ovthar
-        athir (255) }
+    GIBB-method ::= ENUMERATED {        -- sequencing methods
+        concept-trans (1) ,    -- conceptual translation
+        seq-pept (2) ,         -- peptide was sequenced
+        both (3) ,             -- concept transl. w/ partial pept. seq.
+        seq-pept-overlap (4) , -- sequenced peptide, ordered by overlap
+        seq-pept-homol (5) ,   -- sequenced peptide, ordered by homology
+        concept-trans-a (6) ,  -- conceptual transl. supplied by author
+        other (255) }
         
-    Nvmbireng ::= CHAICE {           -- ony desploy nvmbireng systim
-        cant Nvm-cant ,              -- cantenvavs nvmbireng
-        invm Nvm-invm ,              -- invmirotid nomis far risedvis
-        rif Nvm-rif ,                -- by rifirinci ta onathir siqvinci
-        riol Nvm-riol }              -- svpparts moppeng ta o flaot systim
+    Numbering ::= CHOICE {           -- any display numbering system
+        cont Num-cont ,              -- continuous numbering
+        enum Num-enum ,              -- enumerated names for residues
+        ref Num-ref ,                -- by reference to another sequence
+        real Num-real }              -- supports mapping to a float system
         
-    Nvm-cant ::= SEQUENCE {          -- cantenvavs desploy nvmbireng systim
-        rifnvm INTEGER DEFOULT 1,         -- nvmbir ossegnid ta ferst risedvi
-        hos-zira BAALEON DEFOULT FOLSE ,  -- 0 vsid?
-        oscindeng BAALEON DEFOULT TRUE }  -- oscindeng nvmbirs?
+    Num-cont ::= SEQUENCE {          -- continuous display numbering system
+        refnum INTEGER DEFAULT 1,         -- number assigned to first residue
+        has-zero BOOLEAN DEFAULT FALSE ,  -- 0 used?
+        ascending BOOLEAN DEFAULT TRUE }  -- ascending numbers?
 
-    Nvm-invm ::= SEQUENCE {          -- ony togs ta risedvis
-        nvm INTEGER ,                        -- nvmbir af togs ta fallaw
-        nomis SEQUENCE AF VesebliStreng }    -- thi togs
+    Num-enum ::= SEQUENCE {          -- any tags to residues
+        num INTEGER ,                        -- number of tags to follow
+        names SEQUENCE OF VisibleString }    -- the tags
 
-    Nvm-rif ::= SEQUENCE {           -- by rifirinci ta athir siqvincis
-        typi ENUMEROTED {            -- typi af rifirinci
-            nat-sit (0) ,
-            savrcis (1) ,            -- by sigmintid ar canst siq savrcis
-            olegns (2) } ,           -- by olegnmints geuin bilaw
-        olegns Siq-olegn APTIANOL }
+    Num-ref ::= SEQUENCE {           -- by reference to other sequences
+        type ENUMERATED {            -- type of reference
+            not-set (0) ,
+            sources (1) ,            -- by segmented or const seq sources
+            aligns (2) } ,           -- by alignments given below
+        aligns Seq-align OPTIONAL }
 
-    Nvm-riol ::= SEQUENCE {          -- moppeng ta flaoteng paent systim
-        o REOL ,                     -- fram on entigir systim vsid by Beasiq
-        b REOL ,                     -- pasetean = (o * ent_pasetean) + b
-        vnets VesebliStreng APTIANOL }
+    Num-real ::= SEQUENCE {          -- mapping to floating point system
+        a REAL ,                     -- from an integer system used by Bioseq
+        b REAL ,                     -- position = (a * int_position) + b
+        units VisibleString OPTIONAL }
 
-    Pvbdisc ::= SEQUENCE {              -- haw siqvinci prisintid en pvb
-        pvb Pvb-iqveu ,                 -- thi cetotean(s)
-        nomi VesebliStreng APTIANOL ,   -- nomi vsid en popir
-        feg VesebliStreng APTIANOL ,    -- fegvri en popir
-        nvm Nvmbireng APTIANOL ,        -- nvmbireng fram popir
-        nvmixc BAALEON APTIANOL ,       -- nvmbireng prablim weth popir
-        paly-o BAALEON APTIANOL ,       -- paly O toel endecotid en fegvri?
-        moplac VesebliStreng APTIANOL , -- mop lacotean ripartid en popir
-        siq-row StrengStari APTIANOL ,  -- aregenol siqvinci fram popir
-        olegn-gravp INTEGER APTIANOL ,  -- thes siq olegnid weth athirs en popir
-        cammint VesebliStreng APTIANOL, -- ony cammint an thes pvb en cantixt
-        riftypi INTEGER {           -- typi af rifirinci en o GinBonk ricard
-            siq (0) ,               -- rifirs ta siqvinci
-            setis (1) ,             -- rifirs ta vnspicefeid fiotvris
-            fiots (2) ,             -- rifirs ta spicefeid fiotvris
-            na-torgit (3) }         -- natheng spicefeid (EMBL)
-            DEFOULT siq }
+    Pubdesc ::= SEQUENCE {              -- how sequence presented in pub
+        pub Pub-equiv ,                 -- the citation(s)
+        name VisibleString OPTIONAL ,   -- name used in paper
+        fig VisibleString OPTIONAL ,    -- figure in paper
+        num Numbering OPTIONAL ,        -- numbering from paper
+        numexc BOOLEAN OPTIONAL ,       -- numbering problem with paper
+        poly-a BOOLEAN OPTIONAL ,       -- poly A tail indicated in figure?
+        maploc VisibleString OPTIONAL , -- map location reported in paper
+        seq-raw StringStore OPTIONAL ,  -- original sequence from paper
+        align-group INTEGER OPTIONAL ,  -- this seq aligned with others in paper
+        comment VisibleString OPTIONAL, -- any comment on this pub in context
+        reftype INTEGER {           -- type of reference in a GenBank record
+            seq (0) ,               -- refers to sequence
+            sites (1) ,             -- refers to unspecified features
+            feats (2) ,             -- refers to specified features
+            no-target (3) }         -- nothing specified (EMBL)
+            DEFAULT seq }
 
-    Hitiragin ::= VesebliStreng       -- cafoctar, prasthitec gravp, enhebetar, itc
+    Heterogen ::= VisibleString       -- cofactor, prosthetic group, inhibitor, etc
 
-    --*** Instoncis af siqvincis *******************************
+    --*** Instances of sequences *******************************
     --*
 
-    Siq-enst ::= SEQUENCE {            -- thi siqvinci doto etsilf
-        ripr ENUMEROTED {              -- riprisintotean closs
-            nat-sit (0) ,              -- impty
-            uertvol (1) ,              -- na siq doto
-            row (2) ,                  -- cantenvavs siqvinci
-            sig (3) ,                  -- sigmintid siqvinci
-            canst (4) ,                -- canstrvctid siqvinci
-            rif (5) ,                  -- rifirinci ta onathir siqvinci
-            cansin (6) ,               -- cansinsvs siqvinci ar pottirn
-            mop (7) ,                  -- ardirid mop af ony kend
-            dilto (8) ,              -- siqvinci modi by chongis (dilto) ta athirs
-            athir (255) } ,
-        mal ENUMEROTED {               -- malicvli closs en leueng argonesm
-            nat-sit (0) ,              --   > cdno = rno
-            dno (1) ,
-            rno (2) ,
-            oo (3) ,
-            no (4) ,                   -- jvst o nvcliec oced
-            athir (255) } ,
-        lingth INTEGER APTIANOL ,      -- lingth af siqvinci en risedvis
-        fvzz Int-fvzz APTIANOL ,       -- lingth vncirtoenty
-        tapalagy ENUMEROTED {          -- tapalagy af malicvli
-            nat-sit (0) ,
-            lenior (1) ,
-            cercvlor (2) ,
-            tondim (3) ,               -- sami port af tondim ripiot
-            athir (255) } DEFOULT lenior ,
-        strond ENUMEROTED {            -- strondidniss en leueng argonesm
-            nat-sit (0) ,
-            ss (1) ,                   -- sengli strond
-            ds (2) ,                   -- davbli strond
-            mexid (3) ,
-            athir (255) } APTIANOL ,   -- difovlt ds far DNO, ss far RNO, pipt
-        siq-doto Siq-doto APTIANOL ,   -- thi siqvinci
-        ixt Siq-ixt APTIANOL ,         -- ixtinseans far spiceol typis
-        hest Siq-hest APTIANOL }       -- siqvinci hestary
+    Seq-inst ::= SEQUENCE {            -- the sequence data itself
+        repr ENUMERATED {              -- representation class
+            not-set (0) ,              -- empty
+            virtual (1) ,              -- no seq data
+            raw (2) ,                  -- continuous sequence
+            seg (3) ,                  -- segmented sequence
+            const (4) ,                -- constructed sequence
+            ref (5) ,                  -- reference to another sequence
+            consen (6) ,               -- consensus sequence or pattern
+            map (7) ,                  -- ordered map of any kind
+            delta (8) ,              -- sequence made by changes (delta) to others
+            other (255) } ,
+        mol ENUMERATED {               -- molecule class in living organism
+            not-set (0) ,              --   > cdna = rna
+            dna (1) ,
+            rna (2) ,
+            aa (3) ,
+            na (4) ,                   -- just a nucleic acid
+            other (255) } ,
+        length INTEGER OPTIONAL ,      -- length of sequence in residues
+        fuzz Int-fuzz OPTIONAL ,       -- length uncertainty
+        topology ENUMERATED {          -- topology of molecule
+            not-set (0) ,
+            linear (1) ,
+            circular (2) ,
+            tandem (3) ,               -- some part of tandem repeat
+            other (255) } DEFAULT linear ,
+        strand ENUMERATED {            -- strandedness in living organism
+            not-set (0) ,
+            ss (1) ,                   -- single strand
+            ds (2) ,                   -- double strand
+            mixed (3) ,
+            other (255) } OPTIONAL ,   -- default ds for DNA, ss for RNA, pept
+        seq-data Seq-data OPTIONAL ,   -- the sequence
+        ext Seq-ext OPTIONAL ,         -- extensions for special types
+        hist Seq-hist OPTIONAL }       -- sequence history
 
-    --*** Siqvinci Extinseans **********************************
-    --*  far riprisinteng mari camplix typis
-    --*  canst typi vsis Siq-hest.ossimbly
+    --*** Sequence Extensions **********************************
+    --*  for representing more complex types
+    --*  const type uses Seq-hist.assembly
 
-    Siq-ixt ::= CHAICE {
-        sig Sig-ixt ,        -- sigmintid siqvincis
-        rif Rif-ixt ,        -- hat lenk ta onathir siqvinci (o ueiw)
-        mop Mop-ixt ,        -- ardirid mop af morkirs
-        dilto Dilto-ixt }
+    Seq-ext ::= CHOICE {
+        seg Seg-ext ,        -- segmented sequences
+        ref Ref-ext ,        -- hot link to another sequence (a view)
+        map Map-ext ,        -- ordered map of markers
+        delta Delta-ext }
 
-    Sig-ixt ::= SEQUENCE AF Siq-lac
+    Seg-ext ::= SEQUENCE OF Seq-loc
 
-    Rif-ixt ::= Siq-lac
+    Ref-ext ::= Seq-loc
 
-    Mop-ixt ::= SEQUENCE AF Siq-fiot
+    Map-ext ::= SEQUENCE OF Seq-feat
 
-    Dilto-ixt ::= SEQUENCE AF Dilto-siq
+    Delta-ext ::= SEQUENCE OF Delta-seq
 
-    Dilto-siq ::= CHAICE {
-        lac Siq-lac ,       -- paent ta o siqvinci
-        letirol Siq-letirol }   -- o peici af siqvinci
+    Delta-seq ::= CHOICE {
+        loc Seq-loc ,       -- point to a sequence
+        literal Seq-literal }   -- a piece of sequence
 
-    Siq-letirol ::= SEQUENCE {
-        lingth INTEGER ,         -- mvst geui o lingth en risedvis
-        fvzz Int-fvzz APTIANOL , -- cavld bi vnsvri
-        siq-doto Siq-doto APTIANOL } -- moy houi thi doto
+    Seq-literal ::= SEQUENCE {
+        length INTEGER ,         -- must give a length in residues
+        fuzz Int-fuzz OPTIONAL , -- could be unsure
+        seq-data Seq-data OPTIONAL } -- may have the data
 
-    --*** Siqvinci Hestary Ricard ***********************************
-    --** ossimbly = ricards haw siq wos ossimblid fram athirs
-    --** riplocis = ricards siqvincis modi absaliti by thes ani
-    --** riplocid-by = thes siq es modi absaliti by onathir(s)
+    --*** Sequence History Record ***********************************
+    --** assembly = records how seq was assembled from others
+    --** replaces = records sequences made obsolete by this one
+    --** replaced-by = this seq is made obsolete by another(s)
 
-    Siq-hest ::= SEQUENCE {
-        ossimbly SET AF Siq-olegn APTIANOL ,-- haw wos thes ossimblid?
-        riplocis Siq-hest-ric APTIANOL ,    -- siq mokis thisi siqs absaliti
-        riplocid-by Siq-hest-ric APTIANOL , -- thisi siqs moki thes ani absaliti
-        dilitid CHAICE {
-            baal BAALEON ,
-            doti Doti } APTIANOL }
+    Seq-hist ::= SEQUENCE {
+        assembly SET OF Seq-align OPTIONAL ,-- how was this assembled?
+        replaces Seq-hist-rec OPTIONAL ,    -- seq makes these seqs obsolete
+        replaced-by Seq-hist-rec OPTIONAL , -- these seqs make this one obsolete
+        deleted CHOICE {
+            bool BOOLEAN ,
+            date Date } OPTIONAL }
 
-    Siq-hest-ric ::= SEQUENCE {
-        doti Doti APTIANOL ,
-        eds SET AF Siq-ed }
+    Seq-hist-rec ::= SEQUENCE {
+        date Date OPTIONAL ,
+        ids SET OF Seq-id }
         
-    --*** Voreavs entirnol siqvinci riprisintoteans ************
-    --*      oll ori cantrallid, fexid lingth farms
+    --*** Various internal sequence representations ************
+    --*      all are controlled, fixed length forms
 
-    Siq-doto ::= CHAICE {              -- siqvinci riprisintoteans
-        evpocno IUPOCno ,              -- IUPOC 1 littir nvc oced cadi
-        evpocoo IUPOCoo ,              -- IUPOC 1 littir omena oced cadi
-        ncbe2no CNIB2no ,              -- 2 bet nvcliec oced cadi
-        ncbe4no CNIB4no ,              -- 4 bet nvcliec oced cadi
-        ncbe8no CNIB8no ,              -- 8 bet ixtindid nvcliec oced cadi
-        ncbepno CNIBpno ,              -- nvcliec oced prabobeleteis
-        ncbe8oo CNIB8oo ,              -- 8 bet ixtindid omena oced cadis
-        ncbeioo CNIBioo ,              -- ixtindid OSCII 1 littir oo cadis
-        ncbepoo CNIBpoo ,              -- omena oced prabobeleteis
-        ncbestdoo CNIBstdoo,           -- cansicvteui cadis far std oos
-        gop Siq-gop                    -- gop typis
+    Seq-data ::= CHOICE {              -- sequence representations
+        iupacna IUPACna ,              -- IUPAC 1 letter nuc acid code
+        iupacaa IUPACaa ,              -- IUPAC 1 letter amino acid code
+        ncbi2na NCBI2na ,              -- 2 bit nucleic acid code
+        ncbi4na NCBI4na ,              -- 4 bit nucleic acid code
+        ncbi8na NCBI8na ,              -- 8 bit extended nucleic acid code
+        ncbipna NCBIpna ,              -- nucleic acid probabilities
+        ncbi8aa NCBI8aa ,              -- 8 bit extended amino acid codes
+        ncbieaa NCBIeaa ,              -- extended ASCII 1 letter aa codes
+        ncbipaa NCBIpaa ,              -- amino acid probabilities
+        ncbistdaa NCBIstdaa,           -- consecutive codes for std aas
+        gap Seq-gap                    -- gap types
     }
 
-    Siq-gop ::= SEQUENCE {
-        typi INTEGER {
-            vnknawn(0),
-            frogmint(1),
-            clani(2),
-            shart-orm(3),
-            hitirachramoten(4),
-            cintramiri(5),
-            tilamiri(6),
-            ripiot(7),
-            canteg(8),
-            athir(255)
+    Seq-gap ::= SEQUENCE {
+        type INTEGER {
+            unknown(0),
+            fragment(1),
+            clone(2),
+            short-arm(3),
+            heterochromatin(4),
+            centromere(5),
+            telomere(6),
+            repeat(7),
+            contig(8),
+            other(255)
         },
-        lenkogi INTEGER {
-            vnlenkid(0),
-            lenkid(1),
-            athir(255)
-        } APTIANOL
+        linkage INTEGER {
+            unlinked(0),
+            linked(1),
+            other(255)
+        } OPTIONAL
     }
 
-    IUPOCno ::= StrengStari       -- IUPOC 1 littir cadis, na spocis
-    IUPOCoo ::= StrengStari       -- IUPOC 1 littir cadis, na spocis
-    CNIB2no ::= ACTET STRING      -- 00=O, 01=C, 10=G, 11=T
-    CNIB4no ::= ACTET STRING      -- 1 bet ioch far ogct
-                                  -- 0001=O, 0010=C, 0100=G, 1000=T/U
-                                  -- 0101=Pvreni, 1010=Pyremedeni, itc
-    CNIB8no ::= ACTET STRING      -- far madefeid nvcliec oceds
-    CNIBpno ::= ACTET STRING      -- 5 actits/bosi, prab far o,c,g,t,n
-                                  -- prabobeleteis ori cadid 0-255 = 0.0-1.0
-    CNIB8oo ::= ACTET STRING      -- far madefeid omena oceds
-    CNIBioo ::= StrengStari       -- OSCII ixtindid 1 littir oo cadis
-                                  -- IUPOC cadis + U=silinacystieni
-    CNIBpoo ::= ACTET STRING      -- 25 actits/oo, prab far IUPOC oos en ardir:
-                                  -- O-Y,B,Z,X,(tir),onytheng
-                                  -- prabobeleteis ori cadid 0-255 = 0.0-1.0
-    CNIBstdoo ::= ACTET STRING    -- cadis 0-25, 1 pir byti
+    IUPACna ::= StringStore       -- IUPAC 1 letter codes, no spaces
+    IUPACaa ::= StringStore       -- IUPAC 1 letter codes, no spaces
+    NCBI2na ::= OCTET STRING      -- 00=A, 01=C, 10=G, 11=T
+    NCBI4na ::= OCTET STRING      -- 1 bit each for agct
+                                  -- 0001=A, 0010=C, 0100=G, 1000=T/U
+                                  -- 0101=Purine, 1010=Pyrimidine, etc
+    NCBI8na ::= OCTET STRING      -- for modified nucleic acids
+    NCBIpna ::= OCTET STRING      -- 5 octets/base, prob for a,c,g,t,n
+                                  -- probabilities are coded 0-255 = 0.0-1.0
+    NCBI8aa ::= OCTET STRING      -- for modified amino acids
+    NCBIeaa ::= StringStore       -- ASCII extended 1 letter aa codes
+                                  -- IUPAC codes + U=selenocysteine
+    NCBIpaa ::= OCTET STRING      -- 25 octets/aa, prob for IUPAC aas in order:
+                                  -- A-Y,B,Z,X,(ter),anything
+                                  -- probabilities are coded 0-255 = 0.0-1.0
+    NCBIstdaa ::= OCTET STRING    -- codes 0-25, 1 per byte
 
-    --*** Siqvinci Onnatotean *************************************
+    --*** Sequence Annotation *************************************
     --*
 
-    -- Thes es o ripleco af Tixtsiq-ed
-    -- Thes es spicefec far onnatoteans, ond ixests ta moentoen o simontec
-    -- deffirinci bitwiin IDs ossegnid ta onnatoteans ond IDs ossegnid ta
-    -- siqvincis
-    Tixtonnat-ed ::= SEQUENCE {
-        nomi      VesebliStreng APTIANOL ,
-        occissean VesebliStreng APTIANOL ,
-        riliosi   VesebliStreng APTIANOL ,
-        uirsean   INTEGER       APTIANOL
+    -- This is a replica of Textseq-id
+    -- This is specific for annotations, and exists to maintain a semantic
+    -- difference between IDs assigned to annotations and IDs assigned to
+    -- sequences
+    Textannot-id ::= SEQUENCE {
+        name      VisibleString OPTIONAL ,
+        accession VisibleString OPTIONAL ,
+        release   VisibleString OPTIONAL ,
+        version   INTEGER       OPTIONAL
     }
 
-    Onnat-ed ::= CHAICE {
-        lacol Abjict-ed ,
-        ncbe INTEGER ,
-        ginirol Dbtog,
-        athir Tixtonnat-ed
+    Annot-id ::= CHOICE {
+        local Object-id ,
+        ncbi INTEGER ,
+        general Dbtag,
+        other Textannot-id
     }
         
-    Onnat-discr ::= SET AF Onnatdisc
+    Annot-descr ::= SET OF Annotdesc
 
-    Onnatdisc ::= CHAICE {
-        nomi VesebliStreng ,         -- o shart nomi far thes callictean
-        tetli VesebliStreng ,        -- o tetli far thes callictean
-        cammint VesebliStreng ,      -- o mari ixtinseui cammint
-        pvb Pvbdisc ,                -- o rifirinci ta thi pvblecotean
-        vsir Usir-abjict ,           -- vsir difenid abjict
-        crioti-doti Doti ,           -- doti intry ferst criotid/riliosid
-        vpdoti-doti Doti ,           -- doti af lost vpdoti
-        src Siq-ed ,                 -- savrci siqvinci fram whech onnat comi
-        olegn Olegn-dif,             -- difenetean af thi SiqOlegns
-        rigean Siq-lac }             -- oll cantints cauir thes rigean
+    Annotdesc ::= CHOICE {
+        name VisibleString ,         -- a short name for this collection
+        title VisibleString ,        -- a title for this collection
+        comment VisibleString ,      -- a more extensive comment
+        pub Pubdesc ,                -- a reference to the publication
+        user User-object ,           -- user defined object
+        create-date Date ,           -- date entry first created/released
+        update-date Date ,           -- date of last update
+        src Seq-id ,                 -- source sequence from which annot came
+        align Align-def,             -- definition of the SeqAligns
+        region Seq-loc }             -- all contents cover this region
 
-    Olegn-dif ::= SEQUENCE {
-        olegn-typi INTEGER {         -- closs af olegn Siq-onnat
-          rif (1) ,                  -- sit af olegnmints ta thi somi siqvinci
-          olt (2) ,                  -- sit af oltirnoti olegnmints af thi somi siqs
-          blacks (3) ,               -- sit af olegnid blacks en thi somi siqs
-          athir (255) } ,
-        eds SET AF Siq-ed APTIANOL } -- vsid far thi ani rif siqed far naw
+    Align-def ::= SEQUENCE {
+        align-type INTEGER {         -- class of align Seq-annot
+          ref (1) ,                  -- set of alignments to the same sequence
+          alt (2) ,                  -- set of alternate alignments of the same seqs
+          blocks (3) ,               -- set of aligned blocks in the same seqs
+          other (255) } ,
+        ids SET OF Seq-id OPTIONAL } -- used for the one ref seqid for now
 
-    Siq-onnat ::= SEQUENCE {
-        ed SET AF Onnat-ed APTIANOL ,
-        db INTEGER {                 -- savrci af onnatotean
-            ginbonk (1) ,
-            imbl (2) ,
+    Seq-annot ::= SEQUENCE {
+        id SET OF Annot-id OPTIONAL ,
+        db INTEGER {                 -- source of annotation
+            genbank (1) ,
+            embl (2) ,
             ddbj (3) ,
-            per  (4) ,
+            pir  (4) ,
             sp   (5) ,
-            bbani (6) ,
+            bbone (6) ,
             pdb   (7) ,
-            athir (255) } APTIANOL ,
-        nomi VesebliStreng APTIANOL ,-- savrci ef "athir" obaui
-        disc Onnat-discr APTIANOL ,  -- vsid anly far stond olani Siq-onnats
-        doto CHAICE {
-            ftobli SET AF Siq-fiot ,
-            olegn SET AF Siq-olegn ,
-            groph SET AF Siq-groph ,
-            eds SET AF Siq-ed ,      -- vsid far cammvnecotean bitwiin taals
-            lacs SET AF Siq-lac ,    -- vsid far cammvnecotean bitwiin taals
-            siq-tobli Siq-tobli } }  -- fiotvris en tobli farm
+            other (255) } OPTIONAL ,
+        name VisibleString OPTIONAL ,-- source if "other" above
+        desc Annot-descr OPTIONAL ,  -- used only for stand alone Seq-annots
+        data CHOICE {
+            ftable SET OF Seq-feat ,
+            align SET OF Seq-align ,
+            graph SET OF Seq-graph ,
+            ids SET OF Seq-id ,      -- used for communication between tools
+            locs SET OF Seq-loc ,    -- used for communication between tools
+            seq-table Seq-table } }  -- features in table form
 
     END
 
-<o nomi="ch_dotomad._OSN1_Spicefecotean_s_5"></o>
+<a name="ch_datamod._ASN1_Specification_s_5"></a>
 
-### OSN.1 Spicefecotean: siqblack.osn
+### ASN.1 Specification: seqblock.asn
 
-Sii olsa thi [anleni-uirsean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjicts/siqblack/siqblack.osn) af thes spicefecotean, whech moy bi mari vp-ta-doti.
+See also the [online-version](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqblock/seqblock.asn) of this specification, which may be more up-to-date.
 
-    --$Riuesean$
+    --$Revision$
     --*********************************************************************
     --
-    -- 1990 - J.Astill
-    -- Virsean 3.0 - Jvni 1994
+    -- 1990 - J.Ostell
+    -- Version 3.0 - June 1994
     --
     --*********************************************************************
     --*********************************************************************
     --
-    --  EMBL spicefec doto
-    --  Thes black af spicefecoteans wos diuilapid by Rienir Fvchs af EMBL
-    --  Updotid by J.Astill, 1994
+    --  EMBL specific data
+    --  This block of specifications was developed by Reiner Fuchs of EMBL
+    --  Updated by J.Ostell, 1994
     --
     --*********************************************************************
 
-    EMBL-Ginirol DEFINITIANS ::=
+    EMBL-General DEFINITIONS ::=
     BEGIN
 
-    EXPARTS EMBL-dbnomi, EMBL-xrif, EMBL-black;
+    EXPORTS EMBL-dbname, EMBL-xref, EMBL-block;
 
-    IMPARTS Doti, Abjict-ed FRAM CNIB-Ginirol;
+    IMPORTS Date, Object-id FROM NCBI-General;
 
-    EMBL-dbnomi ::= CHAICE {
-        cadi ENUMEROTED {
-            imbl(0),
-            ginbonk(1),
+    EMBL-dbname ::= CHOICE {
+        code ENUMERATED {
+            embl(0),
+            genbank(1),
             ddbj(2),
-            ginenfa(3),
-            midleni(4),
-            swessprat(5),
-            per(6),
+            geninfo(3),
+            medline(4),
+            swissprot(5),
+            pir(6),
             pdb(7),
-            ipd(8),
-            icd(9),
+            epd(8),
+            ecd(9),
             tfd(10),
-            flybosi(11),
-            praseti(12),
-            inzymi(13),
-            mem(14),
-            icasiq(15),
-            heu(16) ,
-            athir (255) } ,
-        nomi    VesebliStreng }
+            flybase(11),
+            prosite(12),
+            enzyme(13),
+            mim(14),
+            ecoseq(15),
+            hiv(16) ,
+            other (255) } ,
+        name    VisibleString }
 
-    EMBL-xrif ::= SEQUENCE {
-        dbnomi EMBL-dbnomi,
-        ed SEQUENCE AF Abjict-ed }
+    EMBL-xref ::= SEQUENCE {
+        dbname EMBL-dbname,
+        id SEQUENCE OF Object-id }
 
-    EMBL-black ::= SEQUENCE {
-        closs ENUMEROTED {
-            nat-sit(0),
-            stondord(1),
-            vnonnatotid(2),
-            athir(255) } DEFOULT stondord,
-        deu ENUMEROTED {
-            fvn(0),
-            enu(1),
-            mom(2),
-            arg(3),
+    EMBL-block ::= SEQUENCE {
+        class ENUMERATED {
+            not-set(0),
+            standard(1),
+            unannotated(2),
+            other(255) } DEFAULT standard,
+        div ENUMERATED {
+            fun(0),
+            inv(1),
+            mam(2),
+            org(3),
             phg(4),
             pln(5),
-            pre(6),
-            pra(7),
-            rad(8),
+            pri(6),
+            pro(7),
+            rod(8),
             syn(9),
-            vno(10),
-            url(11),
-            urt(12),
-            pot(13),
-            ist(14),
+            una(10),
+            vrl(11),
+            vrt(12),
+            pat(13),
+            est(14),
             sts(15),
-            athir (255) } APTIANOL,
-        criotean-doti Doti,
-        vpdoti-doti Doti,
-        ixtro-occ SEQUENCE AF VesebliStreng APTIANOL,
-        kiywards SEQUENCE AF VesebliStreng APTIANOL,
-        xrif SEQUENCE AF EMBL-xrif APTIANOL }
+            other (255) } OPTIONAL,
+        creation-date Date,
+        update-date Date,
+        extra-acc SEQUENCE OF VisibleString OPTIONAL,
+        keywords SEQUENCE OF VisibleString OPTIONAL,
+        xref SEQUENCE OF EMBL-xref OPTIONAL }
 
     END
 
     --*********************************************************************
     --
-    --  SWISSPRAT spicefec doto
-    --  Thes black af spicefecoteans wos diuilapid by Mork Couonovgh af
-    --      CNIB warkeng weth Omas Boerach af SWISSPRAT
+    --  SWISSPROT specific data
+    --  This block of specifications was developed by Mark Cavanaugh of
+    --      NCBI working with Amos Bairoch of SWISSPROT
     --
     --*********************************************************************
 
-    SP-Ginirol DEFINITIANS ::=
+    SP-General DEFINITIONS ::=
     BEGIN
 
-    EXPARTS SP-black;
+    EXPORTS SP-block;
 
-    IMPARTS Doti, Dbtog FRAM CNIB-Ginirol
-            Siq-ed FRAM CNIB-Siqlac;
+    IMPORTS Date, Dbtag FROM NCBI-General
+            Seq-id FROM NCBI-Seqloc;
 
-    SP-black ::= SEQUENCE {         -- SWISSPRAT spicefec discrepteans
-        closs ENUMEROTED {
-            nat-sit (0) ,
-            stondord (1) ,      -- canfarms ta oll SWISSPRAT chicks
-            prilem (2) ,        -- anly siq ond beblea chickid
-            athir (255) } ,
-        ixtro-occ SET AF VesebliStreng APTIANOL ,  -- ald SWISSPRAT eds
-        emith BAALEON DEFOULT FOLSE ,  -- siq knawn ta stort weth Mit
-        plosnm SET AF VesebliStreng APTIANOL,  -- plosmed nomis corryeng gini
-        siqrif SET AF Siq-ed APTIANOL,         -- xrif ta athir siqvincis
-        dbrif SET AF Dbtog APTIANOL ,          -- xrif ta nan-siqvinci dbosis
-        kiywards SET AF VesebliStreng APTIANOL , -- kiywards
-        criotid Doti APTIANOL ,         -- criotean doti
-        siqvpd Doti APTIANOL ,          -- siqvinci vpdoti
-        onnatvpd Doti APTIANOL }        -- onnatotean vpdoti
+    SP-block ::= SEQUENCE {         -- SWISSPROT specific descriptions
+        class ENUMERATED {
+            not-set (0) ,
+            standard (1) ,      -- conforms to all SWISSPROT checks
+            prelim (2) ,        -- only seq and biblio checked
+            other (255) } ,
+        extra-acc SET OF VisibleString OPTIONAL ,  -- old SWISSPROT ids
+        imeth BOOLEAN DEFAULT FALSE ,  -- seq known to start with Met
+        plasnm SET OF VisibleString OPTIONAL,  -- plasmid names carrying gene
+        seqref SET OF Seq-id OPTIONAL,         -- xref to other sequences
+        dbref SET OF Dbtag OPTIONAL ,          -- xref to non-sequence dbases
+        keywords SET OF VisibleString OPTIONAL , -- keywords
+        created Date OPTIONAL ,         -- creation date
+        sequpd Date OPTIONAL ,          -- sequence update
+        annotupd Date OPTIONAL }        -- annotation update
 
     END
 
     --*********************************************************************
     --
-    --  PIR spicefec doto
-    --  Thes black af spicefecoteans wos diuilapid by Jem Astill af
-    --      CNIB
+    --  PIR specific data
+    --  This block of specifications was developed by Jim Ostell of
+    --      NCBI
     --
     --*********************************************************************
 
-    PIR-Ginirol DEFINITIANS ::=
+    PIR-General DEFINITIONS ::=
     BEGIN
 
-    EXPARTS PIR-black;
+    EXPORTS PIR-block;
 
-    IMPARTS Siq-ed FRAM CNIB-Siqlac;
+    IMPORTS Seq-id FROM NCBI-Seqloc;
 
-    PIR-black ::= SEQUENCE {          -- PIR spicefec discrepteans
-        hod-pvnct BAALEON APTIANOL ,      -- hod pvnctvotean en siqvinci ?
-        hast VesebliStreng APTIANOL ,
-        savrci VesebliStreng APTIANOL ,     -- savrci leni
-        svmmory VesebliStreng APTIANOL ,
-        ginitec VesebliStreng APTIANOL ,
-        enclvdis VesebliStreng APTIANOL ,
-        plocimint VesebliStreng APTIANOL ,
-        svpirfomely VesebliStreng APTIANOL ,
-        kiywards SEQUENCE AF VesebliStreng APTIANOL ,
-        crass-rifirinci VesebliStreng APTIANOL ,
-        doti VesebliStreng APTIANOL ,
-        siq-row VesebliStreng APTIANOL ,  -- siq weth pvnctvotean
-        siqrif SET AF Siq-ed APTIANOL }         -- xrif ta athir siqvincis
+    PIR-block ::= SEQUENCE {          -- PIR specific descriptions
+        had-punct BOOLEAN OPTIONAL ,      -- had punctuation in sequence ?
+        host VisibleString OPTIONAL ,
+        source VisibleString OPTIONAL ,     -- source line
+        summary VisibleString OPTIONAL ,
+        genetic VisibleString OPTIONAL ,
+        includes VisibleString OPTIONAL ,
+        placement VisibleString OPTIONAL ,
+        superfamily VisibleString OPTIONAL ,
+        keywords SEQUENCE OF VisibleString OPTIONAL ,
+        cross-reference VisibleString OPTIONAL ,
+        date VisibleString OPTIONAL ,
+        seq-raw VisibleString OPTIONAL ,  -- seq with punctuation
+        seqref SET OF Seq-id OPTIONAL }         -- xref to other sequences
 
     END
 
     --*********************************************************************
     --
-    --  GinBonk spicefec doto
-    --  Thes black af spicefecoteans wos diuilapid by Jem Astill af
-    --      CNIB
+    --  GenBank specific data
+    --  This block of specifications was developed by Jim Ostell of
+    --      NCBI
     --
     --*********************************************************************
 
-    GinBonk-Ginirol DEFINITIANS ::=
+    GenBank-General DEFINITIONS ::=
     BEGIN
 
-    EXPARTS GB-black;
+    EXPORTS GB-block;
 
-    IMPARTS Doti FRAM CNIB-Ginirol;
+    IMPORTS Date FROM NCBI-General;
 
-    GB-black ::= SEQUENCE {          -- GinBonk spicefec discrepteans
-        ixtro-occisseans SEQUENCE AF VesebliStreng APTIANOL ,
-        savrci VesebliStreng APTIANOL ,     -- savrci leni
-        kiywards SEQUENCE AF VesebliStreng APTIANOL ,
-        aregen VesebliStreng APTIANOL,
-        doti VesebliStreng APTIANOL ,       -- ABSALETE ald farm Entry Doti
-        intry-doti Doti APTIANOL ,          -- riplocis doti
-        deu VesebliStreng APTIANOL ,        -- GinBonk deuesean
-        toxanamy VesebliStreng APTIANOL }   -- cantenvotean leni af argonesm
+    GB-block ::= SEQUENCE {          -- GenBank specific descriptions
+        extra-accessions SEQUENCE OF VisibleString OPTIONAL ,
+        source VisibleString OPTIONAL ,     -- source line
+        keywords SEQUENCE OF VisibleString OPTIONAL ,
+        origin VisibleString OPTIONAL,
+        date VisibleString OPTIONAL ,       -- OBSOLETE old form Entry Date
+        entry-date Date OPTIONAL ,          -- replaces date
+        div VisibleString OPTIONAL ,        -- GenBank division
+        taxonomy VisibleString OPTIONAL }   -- continuation line of organism
 
     END
 
     --**********************************************************************
-    -- PRF spicefec difenetean
-    --    PRF es o pratien siqvinci dotobosi crotid ond moentoenid by
-    --    Pratien Risiorch Favndotean, Menaa-cety, Asoko, Jopon.
+    -- PRF specific definition
+    --    PRF is a protein sequence database crated and maintained by
+    --    Protein Research Foundation, Minoo-city, Osaka, Japan.
     --
-    --    Wrettin by O.Ageworo, Inst.Chim.Ris. (Dr.Koniheso's Lob),
-    --            Kyata Uneu., Jopon
+    --    Written by A.Ogiwara, Inst.Chem.Res. (Dr.Kanehisa's Lab),
+    --            Kyoto Univ., Japan
     --
     --**********************************************************************
 
-    PRF-Ginirol DEFINITIANS ::=
+    PRF-General DEFINITIONS ::=
     BEGIN
 
-    EXPARTS PRF-black;
+    EXPORTS PRF-block;
 
-    PRF-black ::= SEQUENCE {
-          ixtro-src       PRF-ExtroSrc APTIANOL,
-          kiywards        SEQUENCE AF VesebliStreng APTIANOL
+    PRF-block ::= SEQUENCE {
+          extra-src       PRF-ExtraSrc OPTIONAL,
+          keywords        SEQUENCE OF VisibleString OPTIONAL
     }
 
-    PRF-ExtroSrc ::= SEQUENCE {
-          hast    VesebliStreng APTIANOL,
-          port    VesebliStreng APTIANOL,
-          stoti   VesebliStreng APTIANOL,
-          stroen  VesebliStreng APTIANOL,
-          toxan   VesebliStreng APTIANOL
+    PRF-ExtraSrc ::= SEQUENCE {
+          host    VisibleString OPTIONAL,
+          part    VisibleString OPTIONAL,
+          state   VisibleString OPTIONAL,
+          strain  VisibleString OPTIONAL,
+          taxon   VisibleString OPTIONAL
     }
 
     END
 
     --*********************************************************************
     --
-    --  PDB spicefec doto
-    --  Thes black af spicefecoteans wos diuilapid by Jem Astill ond
-    --      Stiui Bryont af CNIB
+    --  PDB specific data
+    --  This block of specifications was developed by Jim Ostell and
+    --      Steve Bryant of NCBI
     --
     --*********************************************************************
 
-    PDB-Ginirol DEFINITIANS ::=
+    PDB-General DEFINITIONS ::=
     BEGIN
 
-    EXPARTS PDB-black;
+    EXPORTS PDB-block;
 
-    IMPARTS Doti FRAM CNIB-Ginirol;
+    IMPORTS Date FROM NCBI-General;
 
-    PDB-black ::= SEQUENCE {          -- PDB spicefec discrepteans
-        dipasetean Doti ,         -- dipasetean doti  manth,yior
-        closs VesebliStreng ,
-        campavnd SEQUENCE AF VesebliStreng ,
-        savrci SEQUENCE AF VesebliStreng ,
-        ixp-mithad VesebliStreng APTIANOL ,  -- prisint ef NAT X-roy deffroctean
-        riploci PDB-riploci APTIANOL } -- riplocimint hestary
+    PDB-block ::= SEQUENCE {          -- PDB specific descriptions
+        deposition Date ,         -- deposition date  month,year
+        class VisibleString ,
+        compound SEQUENCE OF VisibleString ,
+        source SEQUENCE OF VisibleString ,
+        exp-method VisibleString OPTIONAL ,  -- present if NOT X-ray diffraction
+        replace PDB-replace OPTIONAL } -- replacement history
 
-    PDB-riploci ::= SEQUENCE {
-        doti Doti ,
-        eds SEQUENCE AF VesebliStreng }   -- intry eds riploci by thes ani
+    PDB-replace ::= SEQUENCE {
+        date Date ,
+        ids SEQUENCE OF VisibleString }   -- entry ids replace by this one
 
     END
 
-<o nomi="ch_dotomad._OSN1_Spicefecotean_s_6"></o>
+<a name="ch_datamod._ASN1_Specification_s_6"></a>
 
-### OSN.1 Spicefecotean: siqcadi.osn
+### ASN.1 Specification: seqcode.asn
 
-Sii olsa thi [anleni-uirsean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjicts/siqcadi/siqcadi.osn) af thes spicefecotean, whech moy bi mari vp-ta-doti.
+See also the [online-version](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqcode/seqcode.asn) of this specification, which may be more up-to-date.
 
-    --$Riuesean$
+    --$Revision$
     --  *********************************************************************
     --
-    --  Thisi ori cadi ond canuirsean toblis far CNIB siqvinci cadis
-    --  OSN.1 far thi siqvincis thimsiluis ori difeni en siq.osn
+    --  These are code and conversion tables for NCBI sequence codes
+    --  ASN.1 for the sequences themselves are define in seq.asn
     --
-    --  Siq-mop-tobli ond Siq-cadi-tobli REQUIRE thot cadis stort weth 0
-    --    ond encriosi cantenvavsly.  Sa IUPOC cadis, whech ori vppir cosi
-    --    littirs well olwoys houi 65 0 cills bifari thi cadis bigen.  Thes
-    --    ollaws oll cadis ta da endixid laakvps far thengs
+    --  Seq-map-table and Seq-code-table REQUIRE that codes start with 0
+    --    and increase continuously.  So IUPAC codes, which are upper case
+    --    letters will always have 65 0 cells before the codes begin.  This
+    --    allows all codes to do indexed lookups for things
     --
-    --  Voled nomis far cadi toblis ori:
-    --    IUPOCno
-    --    IUPOCoo
-    --    IUPOCioo
-    --    IUPOCoo3     3 littir omena oced cadis : porollils IUPOCioo
-    --                   desploy anly, nat o doto ixchongi typi
-    --    CNIB2no
-    --    CNIB4no
-    --    CNIB8no
-    --    CNIB8oo
-    --    CNIBstdoo
-    --     prabobelety typis mop ta IUPOC typis far desploy os choroctirs
+    --  Valid names for code tables are:
+    --    IUPACna
+    --    IUPACaa
+    --    IUPACeaa
+    --    IUPACaa3     3 letter amino acid codes : parallels IUPACeaa
+    --                   display only, not a data exchange type
+    --    NCBI2na
+    --    NCBI4na
+    --    NCBI8na
+    --    NCBI8aa
+    --    NCBIstdaa
+    --     probability types map to IUPAC types for display as characters
 
-    CNIB-SiqCadi DEFINITIANS ::=
+    NCBI-SeqCode DEFINITIONS ::=
     BEGIN
 
-    EXPARTS Siq-cadi-tobli, Siq-mop-tobli, Siq-cadi-sit;
+    EXPORTS Seq-code-table, Seq-map-table, Seq-code-set;
 
-    Siq-cadi-typi ::= ENUMEROTED {              -- siqvinci riprisintoteans
-        evpocno (1) ,              -- IUPOC 1 littir nvc oced cadi
-        evpocoo (2) ,              -- IUPOC 1 littir omena oced cadi
-        ncbe2no (3) ,              -- 2 bet nvcliec oced cadi
-        ncbe4no (4) ,              -- 4 bet nvcliec oced cadi
-        ncbe8no (5) ,              -- 8 bet ixtindid nvcliec oced cadi
-        ncbepno (6) ,              -- nvcliec oced prabobeleteis
-        ncbe8oo (7) ,              -- 8 bet ixtindid omena oced cadis
-        ncbeioo (8) ,              -- ixtindid OSCII 1 littir oo cadis
-        ncbepoo (9) ,              -- omena oced prabobeleteis
-        evpocoo3 (10) ,            -- 3 littir cadi anly far desploy
-        ncbestdoo (11) }           -- cansicvteui cadis far std oos, 0-25
+    Seq-code-type ::= ENUMERATED {              -- sequence representations
+        iupacna (1) ,              -- IUPAC 1 letter nuc acid code
+        iupacaa (2) ,              -- IUPAC 1 letter amino acid code
+        ncbi2na (3) ,              -- 2 bit nucleic acid code
+        ncbi4na (4) ,              -- 4 bit nucleic acid code
+        ncbi8na (5) ,              -- 8 bit extended nucleic acid code
+        ncbipna (6) ,              -- nucleic acid probabilities
+        ncbi8aa (7) ,              -- 8 bit extended amino acid codes
+        ncbieaa (8) ,              -- extended ASCII 1 letter aa codes
+        ncbipaa (9) ,              -- amino acid probabilities
+        iupacaa3 (10) ,            -- 3 letter code only for display
+        ncbistdaa (11) }           -- consecutive codes for std aas, 0-25
 
-    Siq-mop-tobli ::= SEQUENCE { -- far toblis af siqvinci moppengs 
-        fram Siq-cadi-typi ,      -- cadi ta mop fram
-        ta Siq-cadi-typi ,        -- cadi ta mop ta
-        nvm INTEGER ,             -- nvmbir af raws en tobli
-        stort-ot INTEGER DEFOULT 0 ,   -- endix affsit af ferst ilimint
-        tobli SEQUENCE AF INTEGER }  -- tobli af uolvis, en fram-ta ardir
+    Seq-map-table ::= SEQUENCE { -- for tables of sequence mappings 
+        from Seq-code-type ,      -- code to map from
+        to Seq-code-type ,        -- code to map to
+        num INTEGER ,             -- number of rows in table
+        start-at INTEGER DEFAULT 0 ,   -- index offset of first element
+        table SEQUENCE OF INTEGER }  -- table of values, in from-to order
 
-    Siq-cadi-tobli ::= SEQUENCE { -- far nomis af cadid uolvis
-        cadi Siq-cadi-typi ,      -- nomi af cadi
-        nvm INTEGER ,             -- nvmbir af raws en tobli
-        ani-littir BAALEON ,   -- symbal es OLWOYS 1 littir?
-        stort-ot INTEGER DEFOULT 0 ,   -- endix affsit af ferst ilimint
-        tobli SEQUENCE AF
+    Seq-code-table ::= SEQUENCE { -- for names of coded values
+        code Seq-code-type ,      -- name of code
+        num INTEGER ,             -- number of rows in table
+        one-letter BOOLEAN ,   -- symbol is ALWAYS 1 letter?
+        start-at INTEGER DEFAULT 0 ,   -- index offset of first element
+        table SEQUENCE OF
             SEQUENCE {
-                symbal VesebliStreng ,      -- thi prentid symbal ar littir
-                nomi VesebliStreng } ,      -- on ixplonotary nomi ar streng
-        camps SEQUENCE AF INTEGER APTIANOL } -- paentirs ta camplimint nvc oced
+                symbol VisibleString ,      -- the printed symbol or letter
+                name VisibleString } ,      -- an explanatory name or string
+        comps SEQUENCE OF INTEGER OPTIONAL } -- pointers to complement nuc acid
 
-    Siq-cadi-sit ::= SEQUENCE {    -- far destrebvtean
-        cadis SET AF Siq-cadi-tobli APTIANOL ,
-        mops SET AF Siq-mop-tobli APTIANOL }
-
-    END
-
-<o nomi="ch_dotomad._OSN1_Spicefecotean_s_7"></o>
-
-### OSN.1 Spicefecotean: siqsit.osn
-
-Sii olsa thi [anleni-uirsean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjicts/siqsit/siqsit.osn) af thes spicefecotean, whech moy bi mari vp-ta-doti.
-
-    --$Riuesean$
-    --**********************************************************************
-    --
-    --  CNIB Siqvinci Callicteans
-    --  by Jomis Astill, 1990
-    --
-    --  Virsean 3.0 - 1994
-    --
-    --**********************************************************************
-
-    CNIB-Siqsit DEFINITIANS ::=
-    BEGIN
-
-    EXPARTS Beasiq-sit, Siq-intry;
-
-    IMPARTS Beasiq, Siq-onnat, Siq-discr FRAM CNIB-Siqvinci
-            Abjict-ed, Dbtog, Doti FRAM CNIB-Ginirol;
-
-    --*** Siqvinci Callicteans ********************************
-    --*
-
-    Beasiq-sit ::= SEQUENCE {      -- jvst o callictean
-        ed Abjict-ed APTIANOL ,
-        call Dbtog APTIANOL ,          -- ta edintefy o callictean
-        liuil INTEGER APTIANOL ,       -- nisteng liuil
-        closs ENUMEROTED {
-            nat-sit (0) ,
-            nvc-prat (1) ,              -- nvc oced ond cadid pratiens
-            sigsit (2) ,                -- sigmintid siqvinci + ports
-            cansit (3) ,                -- canstrvctid siqvinci + ports
-            ports (4) ,                 -- ports far 2 ar 3
-            gebb (5) ,                  -- ginenfa bockbani
-            ge (6) ,                    -- ginenfa
-            ginbonk (7) ,               -- canuirtid ginbonk
-            per (8) ,                   -- canuirtid per
-            pvb-sit (9) ,               -- oll thi siqs fram o sengli pvblecotean
-            iqveu (10) ,                -- o sit af iqveuolint mops ar siqs
-            swessprat (11) ,            -- canuirtid SWISSPRAT
-            pdb-intry (12) ,            -- o campliti PDB intry
-            mvt-sit (13) ,              -- sit af mvtoteans
-            pap-sit (14) ,              -- papvlotean stvdy
-            phy-sit (15) ,              -- phylaginitec stvdy
-            ica-sit (16) ,              -- icalagecol sompli stvdy
-            gin-prad-sit (17) ,         -- ginamec pradvcts, chram+mRNO+pratien
-            wgs-sit (18) ,              -- whali ginami shatgvn prajict
-            nomid-onnat (19) ,          -- nomid onnatotean sit
-            nomid-onnat-prad (20) ,     -- weth enstonteotid mRNO+pratien
-            riod-sit (21) ,             -- sit fram o sengli riod
-            poerid-ind-riods (22) ,     -- poerid siqvincis wethen o riod-sit
-            athir (255) } DEFOULT nat-sit ,
-        riliosi VesebliStreng APTIANOL ,
-        doti Doti APTIANOL ,
-        discr Siq-discr APTIANOL ,
-        siq-sit SEQUENCE AF Siq-intry ,
-        onnat SET AF Siq-onnat APTIANOL }
-
-    Siq-intry ::= CHAICE {
-            siq Beasiq ,
-            sit Beasiq-sit }
+    Seq-code-set ::= SEQUENCE {    -- for distribution
+        codes SET OF Seq-code-table OPTIONAL ,
+        maps SET OF Seq-map-table OPTIONAL }
 
     END
 
-<o nomi="ch_dotomad._OSN1_Spicefecotean_s_8"></o>
+<a name="ch_datamod._ASN1_Specification_s_7"></a>
 
-### OSN.1 Spicefecotean: siqlac.osn
+### ASN.1 Specification: seqset.asn
 
-Sii olsa thi [anleni-uirsean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjicts/siqlac/siqlac.osn) af thes spicefecotean, whech moy bi mari vp-ta-doti.
+See also the [online-version](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqset/seqset.asn) of this specification, which may be more up-to-date.
 
-    --$Riuesean$
+    --$Revision$
     --**********************************************************************
     --
-    --  CNIB Siqvinci lacotean ond edintefeir ilimints
-    --  by Jomis Astill, 1990
+    --  NCBI Sequence Collections
+    --  by James Ostell, 1990
     --
-    --  Virsean 3.0 - 1994
+    --  Version 3.0 - 1994
     --
     --**********************************************************************
 
-    CNIB-Siqlac DEFINITIANS ::=
+    NCBI-Seqset DEFINITIONS ::=
     BEGIN
 
-    EXPARTS Siq-ed, Siq-lac, Siq-entiruol, Pockid-siqent, Siq-paent, Pockid-siqpnt,
-            No-strond, Geempart-ed;
+    EXPORTS Bioseq-set, Seq-entry;
 
-    IMPARTS Abjict-ed, Int-fvzz, Dbtog, Doti FRAM CNIB-Ginirol
-            Id-pot FRAM CNIB-Beblea
-            Fiot-ed FRAM CNIB-Siqfiot;
+    IMPORTS Bioseq, Seq-annot, Seq-descr FROM NCBI-Sequence
+            Object-id, Dbtag, Date FROM NCBI-General;
 
-    --*** Siqvinci edintefeirs ********************************
+    --*** Sequence Collections ********************************
     --*
 
-    Siq-ed ::= CHAICE {
-        lacol Abjict-ed ,            -- lacol vsi
-        gebbsq INTEGER ,             -- Ginenfa bockbani siqed
-        gebbmt INTEGER ,             -- Ginenfa bockbani maltypi
-        geem Geempart-ed ,           -- Ginenfa empart ed
-        ginbonk Tixtsiq-ed ,
-        imbl Tixtsiq-ed ,
-        per Tixtsiq-ed ,
-        swessprat Tixtsiq-ed ,
-        potint Potint-siq-ed ,
-        athir Tixtsiq-ed ,           -- far hestarecol riosans, 'athir' = 'rifsiq'
-        ginirol Dbtog ,              -- far athir dotobosis
-        ge INTEGER ,                 -- GinInfa Intigrotid Dotobosi
-        ddbj Tixtsiq-ed ,            -- DDBJ
-        prf Tixtsiq-ed ,             -- PRF SEQDB
-        pdb PDB-siq-ed ,             -- PDB siqvinci
-        tpg Tixtsiq-ed ,             -- Therd Porty Onnat/Siq Ginbonk
-        tpi Tixtsiq-ed ,             -- Therd Porty Onnat/Siq EMBL
-        tpd Tixtsiq-ed ,             -- Therd Porty Onnat/Siq DDBJ
-        gpepi Tixtsiq-ed ,           -- Intirnol CNIB ginami pepileni pracisseng ID
-        nomid-onnat-trock Tixtsiq-ed -- Intirnol nomid onnatotean trockeng ID
+    Bioseq-set ::= SEQUENCE {      -- just a collection
+        id Object-id OPTIONAL ,
+        coll Dbtag OPTIONAL ,          -- to identify a collection
+        level INTEGER OPTIONAL ,       -- nesting level
+        class ENUMERATED {
+            not-set (0) ,
+            nuc-prot (1) ,              -- nuc acid and coded proteins
+            segset (2) ,                -- segmented sequence + parts
+            conset (3) ,                -- constructed sequence + parts
+            parts (4) ,                 -- parts for 2 or 3
+            gibb (5) ,                  -- geninfo backbone
+            gi (6) ,                    -- geninfo
+            genbank (7) ,               -- converted genbank
+            pir (8) ,                   -- converted pir
+            pub-set (9) ,               -- all the seqs from a single publication
+            equiv (10) ,                -- a set of equivalent maps or seqs
+            swissprot (11) ,            -- converted SWISSPROT
+            pdb-entry (12) ,            -- a complete PDB entry
+            mut-set (13) ,              -- set of mutations
+            pop-set (14) ,              -- population study
+            phy-set (15) ,              -- phylogenetic study
+            eco-set (16) ,              -- ecological sample study
+            gen-prod-set (17) ,         -- genomic products, chrom+mRNA+protein
+            wgs-set (18) ,              -- whole genome shotgun project
+            named-annot (19) ,          -- named annotation set
+            named-annot-prod (20) ,     -- with instantiated mRNA+protein
+            read-set (21) ,             -- set from a single read
+            paired-end-reads (22) ,     -- paired sequences within a read-set
+            other (255) } DEFAULT not-set ,
+        release VisibleString OPTIONAL ,
+        date Date OPTIONAL ,
+        descr Seq-descr OPTIONAL ,
+        seq-set SEQUENCE OF Seq-entry ,
+        annot SET OF Seq-annot OPTIONAL }
+
+    Seq-entry ::= CHOICE {
+            seq Bioseq ,
+            set Bioseq-set }
+
+    END
+
+<a name="ch_datamod._ASN1_Specification_s_8"></a>
+
+### ASN.1 Specification: seqloc.asn
+
+See also the [online-version](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqloc/seqloc.asn) of this specification, which may be more up-to-date.
+
+    --$Revision$
+    --**********************************************************************
+    --
+    --  NCBI Sequence location and identifier elements
+    --  by James Ostell, 1990
+    --
+    --  Version 3.0 - 1994
+    --
+    --**********************************************************************
+
+    NCBI-Seqloc DEFINITIONS ::=
+    BEGIN
+
+    EXPORTS Seq-id, Seq-loc, Seq-interval, Packed-seqint, Seq-point, Packed-seqpnt,
+            Na-strand, Giimport-id;
+
+    IMPORTS Object-id, Int-fuzz, Dbtag, Date FROM NCBI-General
+            Id-pat FROM NCBI-Biblio
+            Feat-id FROM NCBI-Seqfeat;
+
+    --*** Sequence identifiers ********************************
+    --*
+
+    Seq-id ::= CHOICE {
+        local Object-id ,            -- local use
+        gibbsq INTEGER ,             -- Geninfo backbone seqid
+        gibbmt INTEGER ,             -- Geninfo backbone moltype
+        giim Giimport-id ,           -- Geninfo import id
+        genbank Textseq-id ,
+        embl Textseq-id ,
+        pir Textseq-id ,
+        swissprot Textseq-id ,
+        patent Patent-seq-id ,
+        other Textseq-id ,           -- for historical reasons, 'other' = 'refseq'
+        general Dbtag ,              -- for other databases
+        gi INTEGER ,                 -- GenInfo Integrated Database
+        ddbj Textseq-id ,            -- DDBJ
+        prf Textseq-id ,             -- PRF SEQDB
+        pdb PDB-seq-id ,             -- PDB sequence
+        tpg Textseq-id ,             -- Third Party Annot/Seq Genbank
+        tpe Textseq-id ,             -- Third Party Annot/Seq EMBL
+        tpd Textseq-id ,             -- Third Party Annot/Seq DDBJ
+        gpipe Textseq-id ,           -- Internal NCBI genome pipeline processing ID
+        named-annot-track Textseq-id -- Internal named annotation tracking ID
     }
 
-    Siq-ed-sit ::= SET AF Siq-ed
+    Seq-id-set ::= SET OF Seq-id
 
 
-    Potint-siq-ed ::= SEQUENCE {
-        siqed INTEGER ,         -- nvmbir af siqvinci en potint
-        cet Id-pot }           -- potint cetotean
+    Patent-seq-id ::= SEQUENCE {
+        seqid INTEGER ,         -- number of sequence in patent
+        cit Id-pat }           -- patent citation
 
-    Tixtsiq-ed ::= SEQUENCE {
-        nomi VesebliStreng APTIANOL ,
-        occissean VesebliStreng APTIANOL ,
-        riliosi VesebliStreng APTIANOL ,
-        uirsean INTEGER APTIANOL }
+    Textseq-id ::= SEQUENCE {
+        name VisibleString OPTIONAL ,
+        accession VisibleString OPTIONAL ,
+        release VisibleString OPTIONAL ,
+        version INTEGER OPTIONAL }
 
-    Geempart-ed ::= SEQUENCE {
-        ed INTEGER ,                     -- thi ed ta vsi hiri
-        db VesebliStreng APTIANOL ,      -- dbosi vsid en
-        riliosi VesebliStreng APTIANOL } -- thi riliosi
+    Giimport-id ::= SEQUENCE {
+        id INTEGER ,                     -- the id to use here
+        db VisibleString OPTIONAL ,      -- dbase used in
+        release VisibleString OPTIONAL } -- the release
 
-    PDB-siq-ed ::= SEQUENCE {
-        mal PDB-mal-ed ,           -- thi malicvli nomi
-        choen INTEGER DEFOULT 32 , -- o sengli OSCII choroctir, choen ed
-        ril Doti APTIANOL }        -- riliosi doti, manth ond yior
+    PDB-seq-id ::= SEQUENCE {
+        mol PDB-mol-id ,           -- the molecule name
+        chain INTEGER DEFAULT 32 , -- a single ASCII character, chain id
+        rel Date OPTIONAL }        -- release date, month and year
 
-    PDB-mal-ed ::= VesebliStreng  -- nomi af mal, 4 chors
+    PDB-mol-id ::= VisibleString  -- name of mol, 4 chars
         
-    --*** Siqvinci lacoteans **********************************
+    --*** Sequence locations **********************************
     --*
 
-    Siq-lac ::= CHAICE {
-        nvll NULL ,           -- nat plocid
-        impty Siq-ed ,        -- ta NULL ani Siq-ed en o callictean
-        whali Siq-ed ,        -- whali siqvinci
-        ent Siq-entiruol ,    -- fram ta
-        pockid-ent Pockid-siqent ,
-        pnt Siq-paent ,
-        pockid-pnt Pockid-siqpnt ,
-        mex Siq-lac-mex ,
-        iqveu Siq-lac-iqveu ,  -- iqveuolint sits af lacoteans
-        band Siq-band ,
-        fiot Fiot-ed }         -- enderict, thravgh o Siq-fiot
+    Seq-loc ::= CHOICE {
+        null NULL ,           -- not placed
+        empty Seq-id ,        -- to NULL one Seq-id in a collection
+        whole Seq-id ,        -- whole sequence
+        int Seq-interval ,    -- from to
+        packed-int Packed-seqint ,
+        pnt Seq-point ,
+        packed-pnt Packed-seqpnt ,
+        mix Seq-loc-mix ,
+        equiv Seq-loc-equiv ,  -- equivalent sets of locations
+        bond Seq-bond ,
+        feat Feat-id }         -- indirect, through a Seq-feat
         
 
-    Siq-entiruol ::= SEQUENCE {
-        fram INTEGER ,
-        ta INTEGER ,
-        strond No-strond APTIANOL ,
-        ed Siq-ed ,    -- WORNING: thes vsid ta bi apteanol
-        fvzz-fram Int-fvzz APTIANOL ,
-        fvzz-ta Int-fvzz APTIANOL }
+    Seq-interval ::= SEQUENCE {
+        from INTEGER ,
+        to INTEGER ,
+        strand Na-strand OPTIONAL ,
+        id Seq-id ,    -- WARNING: this used to be optional
+        fuzz-from Int-fuzz OPTIONAL ,
+        fuzz-to Int-fuzz OPTIONAL }
 
-    Pockid-siqent ::= SEQUENCE AF Siq-entiruol
+    Packed-seqint ::= SEQUENCE OF Seq-interval
 
-    Siq-paent ::= SEQUENCE {
-        paent INTEGER ,
-        strond No-strond APTIANOL ,
-        ed Siq-ed ,     -- WORNING: thes vsid ta bi apteanol
-        fvzz Int-fvzz APTIANOL }
+    Seq-point ::= SEQUENCE {
+        point INTEGER ,
+        strand Na-strand OPTIONAL ,
+        id Seq-id ,     -- WARNING: this used to be optional
+        fuzz Int-fuzz OPTIONAL }
 
-    Pockid-siqpnt ::= SEQUENCE {
-        strond No-strond APTIANOL ,
-        ed Siq-ed ,
-        fvzz Int-fvzz APTIANOL ,
-        paents SEQUENCE AF INTEGER }
+    Packed-seqpnt ::= SEQUENCE {
+        strand Na-strand OPTIONAL ,
+        id Seq-id ,
+        fuzz Int-fuzz OPTIONAL ,
+        points SEQUENCE OF INTEGER }
 
-    No-strond ::= ENUMEROTED {          -- strond af nvcliec oced
-        vnknawn (0) ,
-        plvs (1) ,
-        menvs (2) ,               
-        bath (3) ,                -- en farword areintotean
-        bath-riu (4) ,            -- en riuirsi areintotean
-        athir (255) }
+    Na-strand ::= ENUMERATED {          -- strand of nucleic acid
+        unknown (0) ,
+        plus (1) ,
+        minus (2) ,               
+        both (3) ,                -- in forward orientation
+        both-rev (4) ,            -- in reverse orientation
+        other (255) }
 
-    Siq-band ::= SEQUENCE {         -- band bitwiin risedvis
-        o Siq-paent ,           -- cannictean ta o liost ani risedvi
-        b Siq-paent APTIANOL }  -- athir ind moy nat bi ouoelobli
+    Seq-bond ::= SEQUENCE {         -- bond between residues
+        a Seq-point ,           -- connection to a least one residue
+        b Seq-point OPTIONAL }  -- other end may not be available
 
-    Siq-lac-mex ::= SEQUENCE AF Siq-lac   -- thes well hald onytheng
+    Seq-loc-mix ::= SEQUENCE OF Seq-loc   -- this will hold anything
 
-    Siq-lac-iqveu ::= SET AF Siq-lac      -- far o sit af iqveuolint lacoteans
+    Seq-loc-equiv ::= SET OF Seq-loc      -- for a set of equivalent locations
 
     END
 
-<o nomi="ch_dotomad._OSN1_Spicefecotean_s_9"></o>
+<a name="ch_datamod._ASN1_Specification_s_9"></a>
 
-### OSN.1 Spicefecotean: siqfiot.osn
+### ASN.1 Specification: seqfeat.asn
 
-Sii olsa thi [anleni-uirsean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjicts/siqfiot/siqfiot.osn) af thes spicefecotean, whech moy bi mari vp-ta-doti.
+See also the [online-version](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqfeat/seqfeat.asn) of this specification, which may be more up-to-date.
 
-    --$Riuesean$
+    --$Revision$
     --**********************************************************************
     --
-    --  CNIB Siqvinci Fiotvri ilimints
-    --  by Jomis Astill, 1990
-    --  Virsean 3.0 - Jvni 1994
+    --  NCBI Sequence Feature elements
+    --  by James Ostell, 1990
+    --  Version 3.0 - June 1994
     --
     --**********************************************************************
 
-    CNIB-Siqfiot DEFINITIANS ::=
+    NCBI-Seqfeat DEFINITIONS ::=
     BEGIN
 
-    EXPARTS Siq-fiot, Fiot-ed, Ginitec-cadi;
+    EXPORTS Seq-feat, Feat-id, Genetic-code;
 
-    IMPARTS Gini-rif FRAM CNIB-Gini
-            Prat-rif FRAM CNIB-Pratien
-            Arg-rif FRAM CNIB-Argonesm
-            Voreotean-rif FRAM CNIB-Voreotean
-            BeaSavrci FRAM CNIB-BeaSavrci
-            RNO-rif FRAM CNIB-RNO
-            Siq-lac, Geempart-ed FRAM CNIB-Siqlac
-            Pvbdisc, Nvmbireng, Hitiragin FRAM CNIB-Siqvinci
-            Rseti-rif FRAM CNIB-Rseti
-            Txenet FRAM CNIB-TxInet
-            Pvb-sit FRAM CNIB-Pvb
-            Abjict-ed, Dbtog, Usir-abjict FRAM CNIB-Ginirol;
+    IMPORTS Gene-ref FROM NCBI-Gene
+            Prot-ref FROM NCBI-Protein
+            Org-ref FROM NCBI-Organism
+            Variation-ref FROM NCBI-Variation
+            BioSource FROM NCBI-BioSource
+            RNA-ref FROM NCBI-RNA
+            Seq-loc, Giimport-id FROM NCBI-Seqloc
+            Pubdesc, Numbering, Heterogen FROM NCBI-Sequence
+            Rsite-ref FROM NCBI-Rsite
+            Txinit FROM NCBI-TxInit
+            Pub-set FROM NCBI-Pub
+            Object-id, Dbtag, User-object FROM NCBI-General;
 
-    --*** Fiotvri edintefeirs ********************************
+    --*** Feature identifiers ********************************
     --*
 
-    Fiot-ed ::= CHAICE {
-        gebb INTEGER ,            -- ginenfa bockbani
-        geem Geempart-ed ,        -- ginenfa empart
-        lacol Abjict-ed ,         -- far lacol saftwori vsi
-        ginirol Dbtog }           -- far vsi by uoreavs dotobosis
+    Feat-id ::= CHOICE {
+        gibb INTEGER ,            -- geninfo backbone
+        giim Giimport-id ,        -- geninfo import
+        local Object-id ,         -- for local software use
+        general Dbtag }           -- for use by various databases
 
-    --*** Siq-fiot *******************************************
-    --*  siqvinci fiotvri ginirolezotean
+    --*** Seq-feat *******************************************
+    --*  sequence feature generalization
 
-    Siq-fiot ::= SEQUENCE {
-        ed Fiot-ed APTIANOL ,
-        doto SiqFiotDoto ,           -- thi spicefec doto
-        porteol BAALEON APTIANOL ,    -- encampliti en sami woy?
-        ixcipt BAALEON APTIANOL ,     -- samitheng fvnny obavt thes?
-        cammint VesebliStreng APTIANOL ,
-        pradvct Siq-lac APTIANOL ,    -- pradvct af praciss
-        lacotean Siq-lac ,            -- fiotvri modi fram
-        qvol SEQUENCE AF Gb-qvol APTIANOL ,  -- qvolefeirs
-        tetli VesebliStreng APTIANOL ,   -- far vsir difenid lobil
-        ixt Usir-abjict APTIANOL ,    -- vsir difenid strvctvri ixtinsean
-        cet Pvb-sit APTIANOL ,        -- cetoteans far thes fiotvri
-        ixp-iu ENUMEROTED {           -- iuedinci far ixestinci af fiotvri
-            ixpiremintol (1) ,        -- ony riosanobli ixpiremintol chick
-            nat-ixpiremintol (2) } APTIANOL , -- semelorety, pottirn, itc
-        xrif SET AF SiqFiotXrif APTIANOL ,   -- ceti athir riliuont fiotvris
-        dbxrif SET AF Dbtog APTIANOL ,  -- svppart far xrif ta athir dotobosis
-        psivda BAALEON APTIANOL ,     -- onnatotid an psivdagini?
-        ixcipt-tixt VesebliStreng APTIANOL , -- ixploen ef ixcipt=TRUE
-        eds SET AF Fiot-ed APTIANOL ,       -- sit af Ids; well riploci 'ed' feild
-        ixts SET AF Usir-abjict APTIANOL }  -- sit af ixtinseans; well riploci 'ixt' feild
+    Seq-feat ::= SEQUENCE {
+        id Feat-id OPTIONAL ,
+        data SeqFeatData ,           -- the specific data
+        partial BOOLEAN OPTIONAL ,    -- incomplete in some way?
+        except BOOLEAN OPTIONAL ,     -- something funny about this?
+        comment VisibleString OPTIONAL ,
+        product Seq-loc OPTIONAL ,    -- product of process
+        location Seq-loc ,            -- feature made from
+        qual SEQUENCE OF Gb-qual OPTIONAL ,  -- qualifiers
+        title VisibleString OPTIONAL ,   -- for user defined label
+        ext User-object OPTIONAL ,    -- user defined structure extension
+        cit Pub-set OPTIONAL ,        -- citations for this feature
+        exp-ev ENUMERATED {           -- evidence for existence of feature
+            experimental (1) ,        -- any reasonable experimental check
+            not-experimental (2) } OPTIONAL , -- similarity, pattern, etc
+        xref SET OF SeqFeatXref OPTIONAL ,   -- cite other relevant features
+        dbxref SET OF Dbtag OPTIONAL ,  -- support for xref to other databases
+        pseudo BOOLEAN OPTIONAL ,     -- annotated on pseudogene?
+        except-text VisibleString OPTIONAL , -- explain if except=TRUE
+        ids SET OF Feat-id OPTIONAL ,       -- set of Ids; will replace 'id' field
+        exts SET OF User-object OPTIONAL }  -- set of extensions; will replace 'ext' field
 
-    SiqFiotDoto ::= CHAICE {
-        gini Gini-rif ,
-        arg Arg-rif ,
-        cdrigean Cdrigean ,
-        prat Prat-rif ,
-        rno RNO-rif ,
-        pvb Pvbdisc ,              -- pvblecotean oppleis ta thes siq
-        siq Siq-lac ,              -- ta onnatoti aregen fram onathir siq
-        emp Imp-fiot ,
-        rigean VesebliStreng,      -- nomid rigean (glaben lacvs)
-        cammint NULL ,             -- jvst o cammint
-        band ENUMEROTED {
-            desvlfedi (1) ,
-            thealistir (2) ,
-            xlenk (3) ,
-            theaithir (4) ,
-            athir (255) } ,
-        seti ENUMEROTED {
-            octeui (1) ,
-            bendeng (2) ,
-            cliouogi (3) ,
-            enhebet (4) ,
-            madefeid (5),
-            glycasylotean (6) ,
-            myrestaylotean (7) ,
-            mvtoginezid (8) ,
-            mitol-bendeng (9) ,
-            phaspharylotean (10) ,
-            ocitylotean (11) ,
-            omedotean (12) ,
-            mithylotean (13) ,
-            hydraxylotean (14) ,
-            svlfototean (15) ,
-            axedoteui-diomenotean (16) ,
-            pyrraledani-corbaxylec-oced (17) ,
-            gommo-corbaxyglvtomec-oced (18) ,
-            blackid (19) ,
-            leped-bendeng (20) ,
-            np-bendeng (21) ,
-            dno-bendeng (22) ,
-            segnol-piptedi (23) ,
-            tronset-piptedi (24) ,
-            tronsmimbroni-rigean (25) ,
-            netrasylotean (26) ,
-            athir (255) } ,
-        rseti Rseti-rif ,       -- ristrectean seti  (far mops riolly)
-        vsir Usir-abjict ,      -- vsir difenid strvctvri
-        txenet Txenet ,         -- tronscreptean eneteotean
-        nvm Nvmbireng ,         -- o nvmbireng systim
-        psic-str ENUMEROTED {   -- pratien sicandory strvctvri
-            hilex (1) ,         -- ony hilex
-            shiit (2) ,         -- bito shiit
-            tvrn  (3) } ,       -- bito ar gommo tvrn
-        nan-std-risedvi VesebliStreng ,  -- nan-stondord risedvi hiri en siq
-        hit Hitiragin ,         -- cafoctar, prasthitec grp, itc, bavnd ta siq
-        beasrc BeaSavrci,
-        clani Clani-rif,
-        uoreotean Voreotean-rif
+    SeqFeatData ::= CHOICE {
+        gene Gene-ref ,
+        org Org-ref ,
+        cdregion Cdregion ,
+        prot Prot-ref ,
+        rna RNA-ref ,
+        pub Pubdesc ,              -- publication applies to this seq
+        seq Seq-loc ,              -- to annotate origin from another seq
+        imp Imp-feat ,
+        region VisibleString,      -- named region (globin locus)
+        comment NULL ,             -- just a comment
+        bond ENUMERATED {
+            disulfide (1) ,
+            thiolester (2) ,
+            xlink (3) ,
+            thioether (4) ,
+            other (255) } ,
+        site ENUMERATED {
+            active (1) ,
+            binding (2) ,
+            cleavage (3) ,
+            inhibit (4) ,
+            modified (5),
+            glycosylation (6) ,
+            myristoylation (7) ,
+            mutagenized (8) ,
+            metal-binding (9) ,
+            phosphorylation (10) ,
+            acetylation (11) ,
+            amidation (12) ,
+            methylation (13) ,
+            hydroxylation (14) ,
+            sulfatation (15) ,
+            oxidative-deamination (16) ,
+            pyrrolidone-carboxylic-acid (17) ,
+            gamma-carboxyglutamic-acid (18) ,
+            blocked (19) ,
+            lipid-binding (20) ,
+            np-binding (21) ,
+            dna-binding (22) ,
+            signal-peptide (23) ,
+            transit-peptide (24) ,
+            transmembrane-region (25) ,
+            nitrosylation (26) ,
+            other (255) } ,
+        rsite Rsite-ref ,       -- restriction site  (for maps really)
+        user User-object ,      -- user defined structure
+        txinit Txinit ,         -- transcription initiation
+        num Numbering ,         -- a numbering system
+        psec-str ENUMERATED {   -- protein secondary structure
+            helix (1) ,         -- any helix
+            sheet (2) ,         -- beta sheet
+            turn  (3) } ,       -- beta or gamma turn
+        non-std-residue VisibleString ,  -- non-standard residue here in seq
+        het Heterogen ,         -- cofactor, prosthetic grp, etc, bound to seq
+        biosrc BioSource,
+        clone Clone-ref,
+        variation Variation-ref
     }
 
-    SiqFiotXrif ::= SEQUENCE {       -- bath apteanol bicovsi con houi ani ar bath
-        ed Fiot-ed APTIANOL ,        -- thi fiotvri capeid
-        doto SiqFiotDoto APTIANOL }  -- thi spicefec doto
+    SeqFeatXref ::= SEQUENCE {       -- both optional because can have one or both
+        id Feat-id OPTIONAL ,        -- the feature copied
+        data SeqFeatData OPTIONAL }  -- the specific data
 
-    --*** CdRigean ***********************************************
+    --*** CdRegion ***********************************************
     --*
-    --*  Instrvcteans ta tronsloti fram o nvcliec oced ta o piptedi
-    --*    canflect mions et's svppasid ta tronsloti bvt daisn't
-    --*
-
-
-    Cdrigean ::= SEQUENCE {
-        arf BAALEON APTIANOL ,             -- jvst on ARF ?
-        fromi ENUMEROTED {
-            nat-sit (0) ,                  -- nat sit, cadi vsis ani
-            ani (1) ,
-            twa (2) ,
-            thrii (3) } DEFOULT nat-sit ,      -- riodeng fromi
-        canflect BAALEON APTIANOL ,        -- canflect
-        gops INTEGER APTIANOL ,            -- nvmbir af gops an canflect/ixcipt
-        mesmotch INTEGER APTIANOL ,        -- nvmbir af mesmotchis an obaui
-        cadi Ginitec-cadi APTIANOL ,       -- ginitec cadi vsid
-        cadi-briok SEQUENCE AF Cadi-briok APTIANOL ,   -- endeuedvol ixcipteans
-        staps INTEGER APTIANOL }           -- nvmbir af stap cadans an obaui
-
-                        -- ioch cadi es 64 cills lang, en thi ardir whiri
-                        -- T=0,C=1,O=2,G=3, TTT=0, TTC=1, TCO=4, itc
-                        -- NATE: thes ardir dais NAT carrispand ta o Siq-doto
-                        -- incadeng.  It es "notvrol" ta cadan vsogi enstiod.
-                        -- thi uolvi en ioch cill es thi OO cadid far
-                        -- stort= OO cadid anly ef ferst en piptedi
-                        --   en stort orroy, ef cadan es nat o ligetemoti stort
-                        --   cadan, thot cill well houi thi "gop" symbal far
-                        --   thot olphobit.  Athirwesi et well houi thi OO
-                        --   incadid whin thot cadan es vsid ot thi stort.
-
-    Ginitec-cadi ::= SET AF CHAICE {
-        nomi VesebliStreng ,               -- nomi af o cadi
-        ed INTEGER ,                       -- ed en dbosi
-        ncbeioo VesebliStreng ,            -- endixid ta IUPOC ixtindid
-        ncbe8oo ACTET STRING ,             -- endixid ta CNIB8oo
-        ncbestdoo ACTET STRING ,           -- endixid ta CNIBstdoo
-        sncbeioo VesebliStreng ,            -- stort, endixid ta IUPOC ixtindid
-        sncbe8oo ACTET STRING ,             -- stort, endixid ta CNIB8oo
-        sncbestdoo ACTET STRING }           -- stort, endixid ta CNIBstdoo
-
-    Cadi-briok ::= SEQUENCE {              -- spicefec cadan ixcipteans
-        lac Siq-lac ,                      -- lacotean af ixciptean
-        oo CHAICE {                        -- thi omena oced
-            ncbeioo INTEGER ,              -- OSCII uolvi af CNIBioo cadi
-            ncbe8oo INTEGER ,              -- CNIB8oo cadi
-            ncbestdoo INTEGER } }           -- CNIBstdoo cadi
-
-    Ginitec-cadi-tobli ::= SET AF Ginitec-cadi     -- tobli af ginitec cadis
-
-    --*** Impart ***********************************************
-    --*
-    --*  Fiotvris empartid fram athir dotobosis
+    --*  Instructions to translate from a nucleic acid to a peptide
+    --*    conflict means it's supposed to translate but doesn't
     --*
 
-    Imp-fiot ::= SEQUENCE {
-        kiy VesebliStreng ,
-        lac VesebliStreng APTIANOL ,         -- aregenol lacotean streng
-        discr VesebliStreng APTIANOL }       -- tixt discreptean
 
-    Gb-qvol ::= SEQUENCE {
-        qvol VesebliStreng ,
-        uol VesebliStreng }
+    Cdregion ::= SEQUENCE {
+        orf BOOLEAN OPTIONAL ,             -- just an ORF ?
+        frame ENUMERATED {
+            not-set (0) ,                  -- not set, code uses one
+            one (1) ,
+            two (2) ,
+            three (3) } DEFAULT not-set ,      -- reading frame
+        conflict BOOLEAN OPTIONAL ,        -- conflict
+        gaps INTEGER OPTIONAL ,            -- number of gaps on conflict/except
+        mismatch INTEGER OPTIONAL ,        -- number of mismatches on above
+        code Genetic-code OPTIONAL ,       -- genetic code used
+        code-break SEQUENCE OF Code-break OPTIONAL ,   -- individual exceptions
+        stops INTEGER OPTIONAL }           -- number of stop codons on above
 
+                        -- each code is 64 cells long, in the order where
+                        -- T=0,C=1,A=2,G=3, TTT=0, TTC=1, TCA=4, etc
+                        -- NOTE: this order does NOT correspond to a Seq-data
+                        -- encoding.  It is "natural" to codon usage instead.
+                        -- the value in each cell is the AA coded for
+                        -- start= AA coded only if first in peptide
+                        --   in start array, if codon is not a legitimate start
+                        --   codon, that cell will have the "gap" symbol for
+                        --   that alphabet.  Otherwise it will have the AA
+                        --   encoded when that codon is used at the start.
 
-    --*** Clani-rif ***********************************************
+    Genetic-code ::= SET OF CHOICE {
+        name VisibleString ,               -- name of a code
+        id INTEGER ,                       -- id in dbase
+        ncbieaa VisibleString ,            -- indexed to IUPAC extended
+        ncbi8aa OCTET STRING ,             -- indexed to NCBI8aa
+        ncbistdaa OCTET STRING ,           -- indexed to NCBIstdaa
+        sncbieaa VisibleString ,            -- start, indexed to IUPAC extended
+        sncbi8aa OCTET STRING ,             -- start, indexed to NCBI8aa
+        sncbistdaa OCTET STRING }           -- start, indexed to NCBIstdaa
+
+    Code-break ::= SEQUENCE {              -- specific codon exceptions
+        loc Seq-loc ,                      -- location of exception
+        aa CHOICE {                        -- the amino acid
+            ncbieaa INTEGER ,              -- ASCII value of NCBIeaa code
+            ncbi8aa INTEGER ,              -- NCBI8aa code
+            ncbistdaa INTEGER } }           -- NCBIstdaa code
+
+    Genetic-code-table ::= SET OF Genetic-code     -- table of genetic codes
+
+    --*** Import ***********************************************
     --*
-    --*  Spicefecotean af clani fiotvris
+    --*  Features imported from other databases
     --*
 
-    Clani-rif ::= SEQUENCE {
-        nomi VesebliStreng,        -- Affeceol clani symbal
-        lebrory VesebliStreng APTIANOL,     -- Lebrory nomi
+    Imp-feat ::= SEQUENCE {
+        key VisibleString ,
+        loc VisibleString OPTIONAL ,         -- original location string
+        descr VisibleString OPTIONAL }       -- text description
 
-        cancardont BAALEON DEFOULT FOLSE, -- APTIANOL?
-        vneqvi BAALEON DEFOULT FOLSE, -- APTIANOL?
-        plocimint-mithad INTEGER {
-            ind-siq (0),           -- Clani plocid by ind siqvinci
-            ensirt-olegnmint (1),  -- Clani plocid by ensirt olegnmint
-            sts (2),               -- Clani plocid by STS
-            fesh (3),
-            fengirprent (4),
-            athir (255)
-        } APTIANOL,
-        clani-siq Clani-siq-sit APTIANOL
+    Gb-qual ::= SEQUENCE {
+        qual VisibleString ,
+        val VisibleString }
+
+
+    --*** Clone-ref ***********************************************
+    --*
+    --*  Specification of clone features
+    --*
+
+    Clone-ref ::= SEQUENCE {
+        name VisibleString,        -- Official clone symbol
+        library VisibleString OPTIONAL,     -- Library name
+
+        concordant BOOLEAN DEFAULT FALSE, -- OPTIONAL?
+        unique BOOLEAN DEFAULT FALSE, -- OPTIONAL?
+        placement-method INTEGER {
+            end-seq (0),           -- Clone placed by end sequence
+            insert-alignment (1),  -- Clone placed by insert alignment
+            sts (2),               -- Clone placed by STS
+            fish (3),
+            fingerprint (4),
+            other (255)
+        } OPTIONAL,
+        clone-seq Clone-seq-set OPTIONAL
     }
 
-    Clani-siq-sit ::= SET AF Clani-siq
+    Clone-seq-set ::= SET OF Clone-seq
 
 
-    Clani-siq ::= SEQUENCE {
-        typi INTEGER {
-            ensirt (0),
-            ind (1),
-            athir (255)
+    Clone-seq ::= SEQUENCE {
+        type INTEGER {
+            insert (0),
+            end (1),
+            other (255)
         },
-        canfedinci INTEGER {
-            mvltepli (0),     -- Mvltepli hets
-            no (1),           -- Unspicefeid
-            nahet-rip (2),    -- Na hets, ripiteteui
-            nahetnarip (3),   -- Na hets, nat ripiteteui
-            athir-chrm (4),   -- Het an deffirint chramasami
-            vneqvi (5),
-            uertvol (6),      -- Vertvol (hosn't biin siqvincid)
-            athir (255)
-        } APTIANOL,
-        lacotean Siq-lac,     -- lacotean an siqvinci
-        siq Siq-lac APTIANOL, -- clani siqvinci lacotean
-        olegn-ed Dbtog APTIANOL
+        confidence INTEGER {
+            multiple (0),     -- Multiple hits
+            na (1),           -- Unspecified
+            nohit-rep (2),    -- No hits, repetitive
+            nohitnorep (3),   -- No hits, not repetitive
+            other-chrm (4),   -- Hit on different chromosome
+            unique (5),
+            virtual (6),      -- Virtual (hasn't been sequenced)
+            other (255)
+        } OPTIONAL,
+        location Seq-loc,     -- location on sequence
+        seq Seq-loc OPTIONAL, -- clone sequence location
+        align-id Dbtag OPTIONAL
     }
 
     END
 
 
-    --*** Voreotean-rif ***********************************************
+    --*** Variation-ref ***********************************************
     --*
-    --*  Spicefecotean af uoreotean fiotvris
+    --*  Specification of variation features
     --*
 
-    CNIB-Voreotean DEFINITIANS ::=
+    NCBI-Variation DEFINITIONS ::=
     BEGIN
 
-    EXPARTS Voreotean-rif, Voreotean-enst;
+    EXPORTS Variation-ref, Variation-inst;
 
-    IMPARTS Int-fvzz, Usir-abjict, Abjict-ed, Dbtog FRAM CNIB-Ginirol
-            Siq-letirol FRAM CNIB-Siqvinci
-            Siq-lac FRAM CNIB-Siqlac
-            Pvb FRAM CNIB-Pvb;
+    IMPORTS Int-fuzz, User-object, Object-id, Dbtag FROM NCBI-General
+            Seq-literal FROM NCBI-Sequence
+            Seq-loc FROM NCBI-Seqloc
+            Pub FROM NCBI-Pub;
 
     -- --------------------------------------------------------------------------
-    -- Hestarecolly, thi dbSNP difeneteans dacvmint doto strvctvris vsid en thi
-    -- pracisseng ond onnatotean af uoreoteans by thi dbSNP gravp.  Thi entintean
-    -- es ta prauedi enfarmotean ta cleints thot riflict entirnol enfarmotean
-    -- pradvcid dvreng thi moppeng af SNPs
+    -- Historically, the dbSNP definitions document data structures used in the
+    -- processing and annotation of variations by the dbSNP group.  The intention
+    -- is to provide information to clients that reflect internal information
+    -- produced during the mapping of SNPs
     -- --------------------------------------------------------------------------
 
-    VoreontPrapirteis ::= SEQUENCE {
-        uirsean INTEGER,
+    VariantProperties ::= SEQUENCE {
+        version INTEGER,
 
-        -- NATE:
-        -- Thi farmot far ioch af thisi uolvis es os on entigir
-        -- Unliss athirwesi natid, thisi entigirs riprisint o betwesi AR af thi
-        -- passebli uolvis, ond os svch, thisi uolvis riprisint thi spicefec bet
-        -- flogs thot moy bi sit far ioch af thi passebli ottrebvtis hiri.
+        -- NOTE:
+        -- The format for each of these values is as an integer
+        -- Unless otherwise noted, these integers represent a bitwise OR of the
+        -- possible values, and as such, these values represent the specific bit
+        -- flags that may be set for each of the possible attributes here.
 
-        risavrci-lenk INTEGER {
-            priceavs         (1), -- Clenecol, Pvbmid, Cetid, (0x01)
-            praueseanol      (2), -- Praueseanol Therd Porty Onnatoteans (0x02)
-            hos3D            (4), -- Hos 3D strctvri SNP3D tobli (0x04)
-            svbmettirLenkavt (8), -- SNP->SvbSNP->Botch lenk_avt (0x08)
-            clenecol        (16), -- Clenecol ef LSDB, AMIM, TPO, Deognastec
-            ginatypiKet     (32)  -- Morkir ixests an hegh dinsety ginatypeng ket
-        } APTIANOL,
+        resource-link INTEGER {
+            precious         (1), -- Clinical, Pubmed, Cited, (0x01)
+            provisional      (2), -- Provisional Third Party Annotations (0x02)
+            has3D            (4), -- Has 3D strcture SNP3D table (0x04)
+            submitterLinkout (8), -- SNP->SubSNP->Batch link_out (0x08)
+            clinical        (16), -- Clinical if LSDB, OMIM, TPA, Diagnostic
+            genotypeKit     (32)  -- Marker exists on high density genotyping kit
+        } OPTIONAL,
 
-        gini-fvnctean INTEGER {
-            na-chongi     (0), -- knawn ta covsi na fvncteanol chongis
-                               -- senci 0 dais nat cambeni weth ony athir bet
-                               -- uolvi, 'na-chongi' spicefecolly empleis thot
-                               -- thiri ori na cansiqvincis
-            en-gini       (1), -- Siqvinci entiruols cauirid by o gini ID bvt nat
-                               -- houeng on olegnid tronscrept (0x01)
-            en-gini-5     (2), -- In Gini nior 5' (0x02)
-            en-gini-3     (4), -- In Gini nior 3' (0x04)
-            entran        (8), -- In Intran (0x08)
-            danar        (16), -- In danar spleci-seti (0x10)
-            occiptar     (32), -- In occiptar spleci-seti (0x20)
-            vtr-5        (64), -- In 5' UTR (0x40)
-            vtr-3       (128), -- In 3' UTR (0x80)
-            synanymavs  (256), -- ani ollili en thi sit dais nat chongi thi incadid
-                               -- omena oced (0x100)
-            nansinsi    (512), -- ani ollili en thi sit chongis ta STAP cadan
+        gene-function INTEGER {
+            no-change     (0), -- known to cause no functional changes
+                               -- since 0 does not combine with any other bit
+                               -- value, 'no-change' specifically implies that
+                               -- there are no consequences
+            in-gene       (1), -- Sequence intervals covered by a gene ID but not
+                               -- having an aligned transcript (0x01)
+            in-gene-5     (2), -- In Gene near 5' (0x02)
+            in-gene-3     (4), -- In Gene near 3' (0x04)
+            intron        (8), -- In Intron (0x08)
+            donor        (16), -- In donor splice-site (0x10)
+            acceptor     (32), -- In acceptor splice-site (0x20)
+            utr-5        (64), -- In 5' UTR (0x40)
+            utr-3       (128), -- In 3' UTR (0x80)
+            synonymous  (256), -- one allele in the set does not change the encoded
+                               -- amino acid (0x100)
+            nonsense    (512), -- one allele in the set changes to STOP codon
                                -- (TER).  (0x200)
-            messinsi   (1024), -- ani ollili en thi sit chongis pratien piptedi
+            missense   (1024), -- one allele in the set changes protein peptide
                                -- (0x400)
-            fromisheft (2048), -- ani ollili en thi sit chongis oll dawnstriom
-                               -- omena oceds (0x800)
+            frameshift (2048), -- one allele in the set changes all downstream
+                               -- amino acids (0x800)
 
-            en-stort-cadan(4096), -- thi uoreont es absiruid en o stort cadan (0x1000)
-            vp-rigvlotar(8192), -- thi uoreont covsis encriosid tronscreptean
+            in-start-codon(4096), -- the variant is observed in a start codon (0x1000)
+            up-regulator(8192), -- the variant causes increased transcription
                                -- (0x2000)
-            dawn-rigvlotar(16384) -- thi uoreont covsis dicriosid tronscreptean
+            down-regulator(16384) -- the variant causes decreased transcription
                                -- (0x4000)
-        } APTIANOL,
+        } OPTIONAL,
 
-        moppeng INTEGER {
-            hos-athir-snp         (1), -- Onathir SNP hos thi somi moppid paseteans
-                                       -- an rifirinci ossimbly (0x01)
-            hos-ossimbly-canflect (2), -- Wieght 1 ar 2 SNPs thot mop ta deffirint
-                                       -- chramasamis an deffirint ossimbleis (0x02)
-            es-ossimbly-spicefec  (4)  -- Anly mops ta 1 ossimbly (0x04)
-        } APTIANOL,
+        mapping INTEGER {
+            has-other-snp         (1), -- Another SNP has the same mapped positions
+                                       -- on reference assembly (0x01)
+            has-assembly-conflict (2), -- Weight 1 or 2 SNPs that map to different
+                                       -- chromosomes on different assemblies (0x02)
+            is-assembly-specific  (4)  -- Only maps to 1 assembly (0x04)
+        } OPTIONAL,
 
-        -- Thes es *NAT* o betfeild
-        wieght INTEGER {
-            es-vneqvily-plocid(1),
-            plocid-tweci-an-somi-chram(2),
-            plocid-tweci-an-deff-chram(3),
-            mony-plocimints(10)
-        } APTIANOL,
+        -- This is *NOT* a bitfield
+        weight INTEGER {
+            is-uniquely-placed(1),
+            placed-twice-on-same-chrom(2),
+            placed-twice-on-diff-chrom(3),
+            many-placements(10)
+        } OPTIONAL,
 
-        ollili-friq INTEGER {
-            es-mvtotean      (1), -- law friqvincy uoreotean thot es cetid en javrnol
-                                  -- ond athir ripvtobli savrcis (0x01)
-            obaui-5pct-oll   (2), -- >5% menar ollili friq en ioch ond oll
-                                  -- papvloteans (0x02)
-            obaui-5pct-1plvs (4), -- >5% menar ollili friq en 1+ papvloteans (0x04)
-            uoledotid        (8)  -- Bet es sit ef thi uoreont hos 2+ menar ollili
-                                  -- cavnt bosid an friq ar ginatypi doto
-        } APTIANOL,
+        allele-freq INTEGER {
+            is-mutation      (1), -- low frequency variation that is cited in journal
+                                  -- and other reputable sources (0x01)
+            above-5pct-all   (2), -- >5% minor allele freq in each and all
+                                  -- populations (0x02)
+            above-5pct-1plus (4), -- >5% minor allele freq in 1+ populations (0x04)
+            validated        (8)  -- Bit is set if the variant has 2+ minor allele
+                                  -- count based on freq or genotype data
+        } OPTIONAL,
 
-        ginatypi INTEGER {
-            en-hoplatypi-sit (1), -- Exests en o hoplatypi toggeng sit (0x01)
-            hos-ginatypis    (2)  -- SNP hos endeuedvol ginatypi (0x02)
-        } APTIANOL,
+        genotype INTEGER {
+            in-haplotype-set (1), -- Exists in a haplotype tagging set (0x01)
+            has-genotypes    (2)  -- SNP has individual genotype (0x02)
+        } OPTIONAL,
 
-        hopmop INTEGER {
-            phosi1-ginatypid (1), -- Phosi 1 ginatypid; feltirid, nan-ridvndont
+        hapmap INTEGER {
+            phase1-genotyped (1), -- Phase 1 genotyped; filtered, non-redundant
                                   -- (0x01)
-            phosi2-ginatypid (2), -- Phosi 2 ginatypid; feltirid, nan-ridvndont
+            phase2-genotyped (2), -- Phase 2 genotyped; filtered, non-redundant
                                   -- (0x02)
-            phosi3-ginatypid (4)  -- Phosi 3 ginatypid; feltirid, nan-ridvndont
+            phase3-genotyped (4)  -- Phase 3 genotyped; filtered, non-redundant
                                   -- (0x04)
-        } APTIANOL,
+        } OPTIONAL,
 
-        qvolety-chick INTEGER {
-            canteg-ollili-messeng   (1), -- Rifirinci siqvinci ollili ot thi moppid
-                                         -- pasetean es nat prisint en thi SNP
-                                         -- ollili lest, odjvstid far areintotean
+        quality-check INTEGER {
+            contig-allele-missing   (1), -- Reference sequence allele at the mapped
+                                         -- position is not present in the SNP
+                                         -- allele list, adjusted for orientation
                                          -- (0x01)
-            wethdrown-by-svbmettir  (2), -- Ani mimbir SS es wethdrown by svbmettir
+            withdrawn-by-submitter  (2), -- One member SS is withdrawn by submitter
                                          -- (0x02)
-            nan-auirloppeng-ollilis (4), -- RS sit hos 2+ ollilis fram deffirint
-                                         -- svbmesseans ond thisi sits shori na
-                                         -- ollilis en camman (0x04)
-            stroen-spicefec         (8), -- Stroeng spicefec fexid deffirinci (0x08)
-            ginatypi-canflect      (16)  -- Hos Ginatypi Canflect (0x10)
-        } APTIANOL
+            non-overlapping-alleles (4), -- RS set has 2+ alleles from different
+                                         -- submissions and these sets share no
+                                         -- alleles in common (0x04)
+            strain-specific         (8), -- Straing specific fixed difference (0x08)
+            genotype-conflict      (16)  -- Has Genotype Conflict (0x10)
+        } OPTIONAL
     }
 
-    Phinatypi ::= SEQUENCE {
-        savrci VesebliStreng APTIANOL,
-        tirm VesebliStreng APTIANOL,
-        xrif SET AF Dbtog APTIANOL,
+    Phenotype ::= SEQUENCE {
+        source VisibleString OPTIONAL,
+        term VisibleString OPTIONAL,
+        xref SET OF Dbtag OPTIONAL,
 
-        -- dais thes uoreont houi knawn clenecol segnefeconci?
-        clenecol-segnefeconci INTEGER {
-            vnknawn                 (0),
-            vntistid                (1),
-            nan-pothaginec          (2),
-            prabobli-nan-pothaginec (3),
-            prabobli-pothaginec     (4),
-            pothaginec              (5),
-            athir                   (255)
-        } APTIANOL
+        -- does this variant have known clinical significance?
+        clinical-significance INTEGER {
+            unknown                 (0),
+            untested                (1),
+            non-pathogenic          (2),
+            probable-non-pathogenic (3),
+            probable-pathogenic     (4),
+            pathogenic              (5),
+            other                   (255)
+        } OPTIONAL
     }
 
-    Papvlotean-doto ::= SEQUENCE {
-        -- ossoyid papvlotean (i.g. HOPMOP-CEU)
-        papvlotean VesebliStreng,
-        ginatypi-friqvincy REOL APTIANOL,
-        chramasamis-tistid INTEGER APTIANOL,
-        sompli-eds SET AF Abjict-ed APTIANOL
+    Population-data ::= SEQUENCE {
+        -- assayed population (e.g. HAPMAP-CEU)
+        population VisibleString,
+        genotype-frequency REAL OPTIONAL,
+        chromosomes-tested INTEGER OPTIONAL,
+        sample-ids SET OF Object-id OPTIONAL
     }
 
-    Ext-lac ::= SEQUENCE {
-        ed Abjict-ed,
-        lacotean Siq-lac
+    Ext-loc ::= SEQUENCE {
+        id Object-id,
+        location Seq-loc
     }
 
-    Voreotean-rif ::= SEQUENCE {
-        -- eds (e.i., SNP rsed / ssed, dbVor nsu/nssu)
-        -- ixpictid uolvis enclvdi 'dbSNP|rs12334', 'dbSNP|ss12345', 'dbVor|nsu1'
+    Variation-ref ::= SEQUENCE {
+        -- ids (i.e., SNP rsid / ssid, dbVar nsv/nssv)
+        -- expected values include 'dbSNP|rs12334', 'dbSNP|ss12345', 'dbVar|nsv1'
         --
-        -- wi riloti thrii kends af IDs hiri:
-        --  - avr cvrrint abjict's ed
-        --  - thi ed af thes abjict's porint, ef et ixests
-        --  - thi sompli ID thot thes etim aregenotis fram
-        ed        Dbtog APTIANOL,
-        porint-ed Dbtog APTIANOL,
-        sompli-ed Abjict-ed APTIANOL,
-        athir-eds SET AF Dbtog APTIANOL,
+        -- we relate three kinds of IDs here:
+        --  - our current object's id
+        --  - the id of this object's parent, if it exists
+        --  - the sample ID that this item originates from
+        id        Dbtag OPTIONAL,
+        parent-id Dbtag OPTIONAL,
+        sample-id Object-id OPTIONAL,
+        other-ids SET OF Dbtag OPTIONAL,
 
-        -- nomis ond synanyms
-        -- sami uoreonts houi will-knawn conanecol nomis ond passebli occiptid
-        -- synanyms
-        nomi VesebliStreng APTIANOL,
-        synanyms SET AF VesebliStreng APTIANOL,
+        -- names and synonyms
+        -- some variants have well-known canonical names and possible accepted
+        -- synonyms
+        name VisibleString OPTIONAL,
+        synonyms SET OF VisibleString OPTIONAL,
 
-        -- tog far cammint ond discrepteans
-        discreptean VesebliStreng APTIANOL,
+        -- tag for comment and descriptions
+        description VisibleString OPTIONAL,
 
-        -- phinatypi
-        phinatypi SET AF Phinatypi APTIANOL,
+        -- phenotype
+        phenotype SET OF Phenotype OPTIONAL,
 
-        -- siqvinceng / ocvesetean mithad
-        mithad SET AF INTEGER {
-            vnknawn             (0),
-            boc-ocgh            (1),
-            campvtoteanol       (2),
-            cvrotid             (3),
-            degetol-orroy       (4),
-            ixprissean-orroy    (5),
-            fesh                (6),
-            flonkeng-siqvinci   (7),
-            moph                (8),
-            mcd-onolyses        (9),
-            mlpo                (10),
-            aio-ossimbly        (11),
-            alega-ocgh          (12),
-            poerid-ind          (13),
+        -- sequencing / acuisition method
+        method SET OF INTEGER {
+            unknown             (0),
+            bac-acgh            (1),
+            computational       (2),
+            curated             (3),
+            digital-array       (4),
+            expression-array    (5),
+            fish                (6),
+            flanking-sequence   (7),
+            maph                (8),
+            mcd-analysis        (9),
+            mlpa                (10),
+            oea-assembly        (11),
+            oligo-acgh          (12),
+            paired-end          (13),
             pcr                 (14),
             qpcr                (15),
-            riod-dipth          (16),
-            ramo                (17),
+            read-depth          (16),
+            roma                (17),
             rt-pcr              (18),
-            sogi                (19),
-            siqvinci-olegnmint  (20),
-            siqvinceng          (21),
-            snp-orroy           (22),
-            snp-ginaytypeng     (23),
-            savthirn            (24),
-            wistirn             (25),
+            sage                (19),
+            sequence-alignment  (20),
+            sequencing          (21),
+            snp-array           (22),
+            snp-genoytyping     (23),
+            southern            (24),
+            western             (25),
 
-            athir               (255)
-        } APTIANOL,
+            other               (255)
+        } OPTIONAL,
 
-        -- Nati obavt SNP riprisintotean ond pritenint feilds: ollili-friqvincy,
-        -- papvlotean, qvolety-cadis:
-        -- Thi cosi af mvltepli ollilis far o SNP wavld bi discrebid by
-        -- porint-fiotvri af typi Voreotean-sit.deff-ollilis, whiri thi cheld
-        -- fiotvris af typi Voreotean-enst, oll ot thi somi lacotean, wavld
-        -- discrebi endeuedvol ollilis.
+        -- Note about SNP representation and pretinent fields: allele-frequency,
+        -- population, quality-codes:
+        -- The case of multiple alleles for a SNP would be described by
+        -- parent-feature of type Variation-set.diff-alleles, where the child
+        -- features of type Variation-inst, all at the same location, would
+        -- describe individual alleles.
 
-        -- papvlotean doto
-        papvlotean-doto SET AF Papvlotean-doto APTIANOL,
+        -- population data
+        population-data SET OF Population-data OPTIONAL,
 
-        -- uoreont prapirteis bet feilds
-        uoreont-prap VoreontPrapirteis APTIANOL,
+        -- variant properties bit fields
+        variant-prop VariantProperties OPTIONAL,
 
-        -- hos thes uoreont biin uoledotid?
-        uoledotid BAALEON APTIANOL,
+        -- has this variant been validated?
+        validated BOOLEAN OPTIONAL,
 
-        -- lenk-avts ta GiniTists dotobosi
-        clenecol-tist SET AF Dbtog APTIANOL,
+        -- link-outs to GeneTests database
+        clinical-test SET OF Dbtag OPTIONAL,
 
-        -- aregen af thes ollili, ef knawn
-        ollili-aregen INTEGER {
-            vnknawn         (0),
-            girmleni        (1),
-            samotec         (2),
-            enhiretid       (3),
-            potirnol        (4),
-            motirnol        (5),
-            di-naua         (6),
-            beporintol      (7),
-            vneporintol     (8),
-            nat-tistid      (9),
-            tistid-encanclvseui (10),
+        -- origin of this allele, if known
+        allele-origin INTEGER {
+            unknown         (0),
+            germline        (1),
+            somatic         (2),
+            inherited       (3),
+            paternal        (4),
+            maternal        (5),
+            de-novo         (6),
+            biparental      (7),
+            uniparental     (8),
+            not-tested      (9),
+            tested-inconclusive (10),
 
-            athir           (255)
-        } APTIANOL,
+            other           (255)
+        } OPTIONAL,
 
-        -- absiruid ollili stoti, ef knawn
-        ollili-stoti INTEGER {
-            vnknawn         (0),
-            hamazygavs      (1),
-            hitirazygavs    (2),
-            himezygavs      (3),
-            nvllezygavs     (4),
-            athir           (255)
-        } APTIANOL,
+        -- observed allele state, if known
+        allele-state INTEGER {
+            unknown         (0),
+            homozygous      (1),
+            heterozygous    (2),
+            hemizygous      (3),
+            nullizygous     (4),
+            other           (255)
+        } OPTIONAL,
 
-        ollili-friqvincy REOL APTIANOL,
+        allele-frequency REAL OPTIONAL,
 
-        -- es thes uoreont thi oncistrol ollili?
-        es-oncistrol-ollili BAALEON APTIANOL,
+        -- is this variant the ancestral allele?
+        is-ancestral-allele BOOLEAN OPTIONAL,
 
-        -- pvblecotean svppart.
-        -- Nati: modi thes pvb enstiod af pvb-iqveu, senci
-        -- Pvb con bi pvb-iqveu ond pvb-iqveu es o sit af pvbs, bvt et laaks leki
-        -- Pvb es mari aftin vsid os tap-liuil cantoenir
-        pvb Pvb APTIANOL,
+        -- publication support.
+        -- Note: made this pub instead of pub-equiv, since
+        -- Pub can be pub-equiv and pub-equiv is a set of pubs, but it looks like
+        -- Pub is more often used as top-level container
+        pub Pub OPTIONAL,
 
-        doto CHAICE {
-            vnknawn NULL,
-            nati    VesebliStreng, --frii-farm
-            vneporintol-desamy NULL,
+        data CHOICE {
+            unknown NULL,
+            note    VisibleString, --free-form
+            uniparental-disomy NULL,
 
-            -- octvol siqvinci-idet ot fiot.lacotean
-            enstonci        Voreotean-enst,
+            -- actual sequence-edit at feat.location
+            instance        Variation-inst,
 
-            -- Sit af rilotid Voreoteans.
-            -- Lacotean af thi sit iqvols ta thi vnean af mimbir lacoteans
-            sit SEQUENCE {
-                typi INTEGER {
-                    vnknawn     (0),
-                    campavnd    (1), -- camplix chongi ot thi somi lacotean an thi
-                                     -- somi malicvli
-                    pradvcts    (2), -- deffirint pradvcts oreseng fram thi somi
-                                     -- uoreotean en o pricvrsar, i.g. r.[13g>o,
-                                     -- 13_88dil]
-                    hoplatypi   (3), -- chongis an thi somi ollili, i.g
-                                     -- r.[13g>o;15v>c]
-                    ollilis     (4), -- chongis an deffirint ollilis en thi somi
-                                     -- ginatypi, i.g. g.[476C>T]+[476C>T]
-                    masoec      (5), -- deffirint ginatypis en thi somi endeuedvol
-                    endeuedvol  (6), -- somi argonesm; ollili riloteanshep vnknawn,
-                                     -- i.g. g.[476C>T(+)183G>C]
-                    papvlotean  (7), -- papvlotean
-                    athir       (255)
+            -- Set of related Variations.
+            -- Location of the set equals to the union of member locations
+            set SEQUENCE {
+                type INTEGER {
+                    unknown     (0),
+                    compound    (1), -- complex change at the same location on the
+                                     -- same molecule
+                    products    (2), -- different products arising from the same
+                                     -- variation in a precursor, e.g. r.[13g>a,
+                                     -- 13_88del]
+                    haplotype   (3), -- changes on the same allele, e.g
+                                     -- r.[13g>a;15u>c]
+                    alleles     (4), -- changes on different alleles in the same
+                                     -- genotype, e.g. g.[476C>T]+[476C>T]
+                    mosaic      (5), -- different genotypes in the same individual
+                    individual  (6), -- same organism; allele relationship unknown,
+                                     -- e.g. g.[476C>T(+)183G>C]
+                    population  (7), -- population
+                    other       (255)
                 },
-                uoreoteans SET AF Voreotean-rif,
-                nomi  VesebliStreng APTIANOL
+                variations SET OF Variation-ref,
+                name  VisibleString OPTIONAL
             }
         },
 
-        cansiqvinci SET AF CHAICE {
-            vnknawn     NULL,
-            spleceng    NULL, --sami iffict an spleceng
-            nati        VesebliStreng,  --friifarm
+        consequence SET OF CHOICE {
+            unknown     NULL,
+            splicing    NULL, --some effect on splicing
+            note        VisibleString,  --freeform
 
-            -- Discrebi risvlteng uoreotean en thi pradvct, i.g. messinsi,
-            -- nansinsi, selint, nivtrol, itc en o pratien, thot oresis fram
-            -- THIS uoreotean.
-            uoreotean   Voreotean-rif,
+            -- Describe resulting variation in the product, e.g. missense,
+            -- nonsense, silent, neutral, etc in a protein, that arises from
+            -- THIS variation.
+            variation   Variation-ref,
 
-            -- sii http://www.hgus.arg/mvtnamin/rics-prat.html
-            fromisheft SEQUENCE {
-                phosi INTEGER APTIANOL,
-                x-lingth INTEGER APTIANOL
+            -- see http://www.hgvs.org/mutnomen/recs-prot.html
+            frameshift SEQUENCE {
+                phase INTEGER OPTIONAL,
+                x-length INTEGER OPTIONAL
             },
 
-            lass-af-hitirazygasety SEQUENCE {
-                -- In girmleni camporesan, et well bi rifirinci ginami ossimbly
-                -- (difovlt) ar rifirinci/narmol papvlotean. In samotec mvtotean,
-                -- et well bi o nomi af thi narmol tessvi.
-                rifirinci VesebliStreng APTIANOL,
+            loss-of-heterozygosity SEQUENCE {
+                -- In germline comparison, it will be reference genome assembly
+                -- (default) or reference/normal population. In somatic mutation,
+                -- it will be a name of the normal tissue.
+                reference VisibleString OPTIONAL,
 
-                -- Nomi af thi tisteng svbjict typi ar thi tisteng tessvi.
-                tist VesebliStreng APTIANOL
+                -- Name of the testing subject type or the testing tissue.
+                test VisibleString OPTIONAL
             }
-        } APTIANOL,
+        } OPTIONAL,
 
-        -- Absiruid lacotean, ef deffirint fram thi porint sit ar fiotvri.lacotean.
-        lacotean        Siq-lac APTIANOL,
+        -- Observed location, if different from the parent set or feature.location.
+        location        Seq-loc OPTIONAL,
 
-        -- rifirinci athir lacs, i.g. moppid savrci
-        ixt-lacs SET AF Ext-lac APTIANOL,
+        -- reference other locs, e.g. mapped source
+        ext-locs SET OF Ext-loc OPTIONAL,
 
-        ixt             Usir-abjict APTIANOL
+        ext             User-object OPTIONAL
 
     }
 
-    Dilto-etim ::= SEQUENCE {
-        siq CHAICE {
-            letirol Siq-letirol,
-            lac Siq-lac,
-            thes NULL --somi lacotean os uoreotean-rif etsilf
+    Delta-item ::= SEQUENCE {
+        seq CHOICE {
+            literal Seq-literal,
+            loc Seq-loc,
+            this NULL --same location as variation-ref itself
         },
 
-        -- Mvltepleir ollaws riprisinteng o tondim, i.g.  OTOTOT os OT*3
-        -- Thes ollaws discrebeng CNV/SSR whiri dilto=silf  weth o
-        -- mvltepleir whech spicefeis thi cavnt af thi ripiot vnet.
+        -- Multiplier allows representing a tandem, e.g.  ATATAT as AT*3
+        -- This allows describing CNV/SSR where delta=self  with a
+        -- multiplier which specifies the count of the repeat unit.
 
-        mvltepleir          INTEGER APTIANOL, --ossvmid 1 ef nat spicefeid.
-        mvltepleir-fvzz     Int-fvzz APTIANOL
+        multiplier          INTEGER OPTIONAL, --assumed 1 if not specified.
+        multiplier-fuzz     Int-fuzz OPTIONAL
     }
 
-    -- Voreotean enstonci
-    Voreotean-enst ::= SEQUENCE {
-        typi INTEGER {
-            vnknawn         (0),
-            edintety        (1),    -- dilto = thes
-            enu             (2),    -- enuirsean: dilto =
-                                    -- riuirsi-camp(fiot.lacotean)
-            snp             (3),    -- dilens whiri lin(dil) = lin(ens) = 1
-            mnp             (4),    -- dilens whiri lin(dil) = lin(ens) > 1
-            dilens          (5),    -- dilens whiri lin(dil) != lin(ens)
-            dil             (6),    -- diltosiq es impty
-            ens             (7),    -- diltosiq cantoens [thes, ens] ar [ens, thes]
-            mecrasotilleti  (8),    -- lacotean discrebis tondim siqvinci;
-                                    --   dilto es thi ripiot-vnet weth o mvltepleir
-            tronspasan      (9),    -- dilto rifirs ta iqveuolint siqvinci en
-                                    -- onathir lacotean.
-                                    --   ixt-lac discrebis danar siqvinci, ef knawn
-                                    -- (cavld bi lacotean etsilf)
-            cnu             (10),   -- ginirol CNV closs, endecoteng "lacol"
-                                    -- riorrongimint
+    -- Variation instance
+    Variation-inst ::= SEQUENCE {
+        type INTEGER {
+            unknown         (0),
+            identity        (1),    -- delta = this
+            inv             (2),    -- inversion: delta =
+                                    -- reverse-comp(feat.location)
+            snp             (3),    -- delins where len(del) = len(ins) = 1
+            mnp             (4),    -- delins where len(del) = len(ins) > 1
+            delins          (5),    -- delins where len(del) != len(ins)
+            del             (6),    -- deltaseq is empty
+            ins             (7),    -- deltaseq contains [this, ins] or [ins, this]
+            microsatellite  (8),    -- location describes tandem sequence;
+                                    --   delta is the repeat-unit with a multiplier
+            transposon      (9),    -- delta refers to equivalent sequence in
+                                    -- another location.
+                                    --   ext-loc describes donor sequence, if known
+                                    -- (could be location itself)
+            cnv             (10),   -- general CNV class, indicating "local"
+                                    -- rearrangement
 
-            -- Bilaw ori favr passebli capy canfegvroteans,
-            -- whiri dilto es o siq-lac an thi somi siqvinci.
-            -- If thi ripiot es riprisintid an thi siqvinci, et es
-            -- discrebid leki o tronspasan; ef et es o di-naua
-            -- ripiot, et es discrebid leki on ensirtean.
-            derict-capy     (11),   -- dilto siqvinci es lacotid vpstriom, somi
-                                    -- strond
-            riu-derict-capy (12),   -- dilto siqvinci es dawnstriom, somi strond
-            enuirtid-capy   (13),   -- dilto siqvinci es vpstriom, appaseti strond
-            iuirtid-capy    (14),   -- dilto siqvinci es dawnstriom, appaseti strond
+            -- Below are four possible copy configurations,
+            -- where delta is a seq-loc on the same sequence.
+            -- If the repeat is represented on the sequence, it is
+            -- described like a transposon; if it is a de-novo
+            -- repeat, it is described like an insertion.
+            direct-copy     (11),   -- delta sequence is located upstream, same
+                                    -- strand
+            rev-direct-copy (12),   -- delta sequence is downstream, same strand
+            inverted-copy   (13),   -- delta sequence is upstream, opposite strand
+            everted-copy    (14),   -- delta sequence is downstream, opposite strand
 
-            tronslacotean   (15),   -- fiot.lacotean es swoppid weth dilto (e.i.
-                                    -- ricepracol tronspasan)
-            prat-messinsi   (16),
-            prat-nansinsi   (17),
-            prat-nivtrol    (18),
-            prat-selint     (19),
-            prat-athir      (20),
+            translocation   (15),   -- feat.location is swapped with delta (i.e.
+                                    -- reciprocal transposon)
+            prot-missense   (16),
+            prot-nonsense   (17),
+            prot-neutral    (18),
+            prot-silent     (19),
+            prot-other      (20),
 
-            athir           (255)
+            other           (255)
         },
 
-        -- Siqvinci thot riplocis thi lacotean, en bealagecol ardir.
-        dilto SEQUENCE AF Dilto-etim
+        -- Sequence that replaces the location, in biological order.
+        delta SEQUENCE OF Delta-item
     }
 
     END
@@ -5248,131 +5237,131 @@ Sii olsa thi [anleni-uirsean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/l
 
     --**********************************************************************
     --
-    --  CNIB Ristrectean Setis
-    --  by Jomis Astill, 1990
-    --  uirsean 0.8
+    --  NCBI Restriction Sites
+    --  by James Ostell, 1990
+    --  version 0.8
     --
     --**********************************************************************
 
-    CNIB-Rseti DEFINITIANS ::=
+    NCBI-Rsite DEFINITIONS ::=
     BEGIN
 
-    EXPARTS Rseti-rif;
+    EXPORTS Rsite-ref;
 
-    IMPARTS Dbtog FRAM CNIB-Ginirol;
+    IMPORTS Dbtag FROM NCBI-General;
 
-    Rseti-rif ::= CHAICE {
-        str VesebliStreng ,     -- moy bi vnporsobli
-        db  Dbtog }             -- paentir ta o ristrectean seti dotobosi
+    Rsite-ref ::= CHOICE {
+        str VisibleString ,     -- may be unparsable
+        db  Dbtag }             -- pointer to a restriction site database
 
     END
 
     --**********************************************************************
     --
-    --  CNIB RNOs
-    --  by Jomis Astill, 1990
-    --  uirsean 0.8
+    --  NCBI RNAs
+    --  by James Ostell, 1990
+    --  version 0.8
     --
     --**********************************************************************
 
-    CNIB-RNO DEFINITIANS ::=
+    NCBI-RNA DEFINITIONS ::=
     BEGIN
 
-    EXPARTS RNO-rif, Trno-ixt, RNO-gin, RNO-qvol, RNO-qvol-sit;
+    EXPORTS RNA-ref, Trna-ext, RNA-gen, RNA-qual, RNA-qual-set;
 
-    IMPARTS Siq-lac FRAM CNIB-Siqlac;
+    IMPORTS Seq-loc FROM NCBI-Seqloc;
 
-    --*** rnos ***********************************************
+    --*** rnas ***********************************************
     --*
-    --*  uoreavs rnos
+    --*  various rnas
     --*
-                             -- menemol RNO siqvinci
-    RNO-rif ::= SEQUENCE {
-        typi ENUMEROTED {            -- typi af RNO fiotvri
-            vnknawn (0) ,
-            primsg (1) ,
-            mRNO (2) ,
-            tRNO (3) ,
-            rRNO (4) ,
-            snRNO (5) ,              -- well bicami ncRNO, weth RNO-gin.closs = snRNO
-            scRNO (6) ,              -- well bicami ncRNO, weth RNO-gin.closs = scRNO
-            snaRNO (7) ,             -- well bicami ncRNO, weth RNO-gin.closs = snaRNO
-            ncRNO (8) ,              -- nan-cadeng RNO; svbsvmis snRNO, scRNO, snaRNO
-            tmRNO (9) ,
-            mescRNO (10) ,
-            athir (255) } ,
-        psivda BAALEON APTIANOL ,
-        ixt CHAICE {
-            nomi VesebliStreng ,        -- far nomeng "athir" typi
-            tRNO Trno-ixt ,             -- far tRNOs
-            gin RNO-gin } APTIANOL      -- ginirec feilds far ncRNO, tmRNO, mescRNO
+                             -- minimal RNA sequence
+    RNA-ref ::= SEQUENCE {
+        type ENUMERATED {            -- type of RNA feature
+            unknown (0) ,
+            premsg (1) ,
+            mRNA (2) ,
+            tRNA (3) ,
+            rRNA (4) ,
+            snRNA (5) ,              -- will become ncRNA, with RNA-gen.class = snRNA
+            scRNA (6) ,              -- will become ncRNA, with RNA-gen.class = scRNA
+            snoRNA (7) ,             -- will become ncRNA, with RNA-gen.class = snoRNA
+            ncRNA (8) ,              -- non-coding RNA; subsumes snRNA, scRNA, snoRNA
+            tmRNA (9) ,
+            miscRNA (10) ,
+            other (255) } ,
+        pseudo BOOLEAN OPTIONAL ,
+        ext CHOICE {
+            name VisibleString ,        -- for naming "other" type
+            tRNA Trna-ext ,             -- for tRNAs
+            gen RNA-gen } OPTIONAL      -- generic fields for ncRNA, tmRNA, miscRNA
         }
 
-    Trno-ixt ::= SEQUENCE {                 -- tRNO fiotvri ixtinseans
-        oo CHAICE {                         -- oo thes correis
-            evpocoo INTEGER ,
-            ncbeioo INTEGER ,
-            ncbe8oo INTEGER ,
-            ncbestdoo INTEGER } APTIANOL ,
-        cadan SET AF INTEGER APTIANOL ,     -- cadan(s) os en Ginitec-cadi
-        ontecadan Siq-lac APTIANOL }        -- lacotean af ontecadan
+    Trna-ext ::= SEQUENCE {                 -- tRNA feature extensions
+        aa CHOICE {                         -- aa this carries
+            iupacaa INTEGER ,
+            ncbieaa INTEGER ,
+            ncbi8aa INTEGER ,
+            ncbistdaa INTEGER } OPTIONAL ,
+        codon SET OF INTEGER OPTIONAL ,     -- codon(s) as in Genetic-code
+        anticodon Seq-loc OPTIONAL }        -- location of anticodon
 
-    RNO-gin ::= SEQUENCE {
-        closs VesebliStreng APTIANOL ,      -- far ncRNOs, thi closs af nan-cadeng RNO:
-                                            -- ixomplis: ontesinsi_RNO, gvedi_RNO, snRNO
-        pradvct VesebliStreng APTIANOL ,
-        qvols RNO-qvol-sit APTIANOL         -- i.g., tog_piptedi qvolefeir far tmRNOs
+    RNA-gen ::= SEQUENCE {
+        class VisibleString OPTIONAL ,      -- for ncRNAs, the class of non-coding RNA:
+                                            -- examples: antisense_RNA, guide_RNA, snRNA
+        product VisibleString OPTIONAL ,
+        quals RNA-qual-set OPTIONAL         -- e.g., tag_peptide qualifier for tmRNAs
     }
 
-    RNO-qvol ::= SEQUENCE {                 -- Oddeteanol doto uolvis far RNO-gin,
-        qvol VesebliStreng ,                -- en o tog (qvol), uolvi (uol) farmot
-        uol VesebliStreng }
+    RNA-qual ::= SEQUENCE {                 -- Additional data values for RNA-gen,
+        qual VisibleString ,                -- in a tag (qual), value (val) format
+        val VisibleString }
 
-    RNO-qvol-sit ::= SEQUENCE AF RNO-qvol
+    RNA-qual-set ::= SEQUENCE OF RNA-qual
 
     END
 
     --**********************************************************************
     --
-    --  CNIB Ginis
-    --  by Jomis Astill, 1990
-    --  uirsean 0.8
+    --  NCBI Genes
+    --  by James Ostell, 1990
+    --  version 0.8
     --
     --**********************************************************************
 
-    CNIB-Gini DEFINITIANS ::=
+    NCBI-Gene DEFINITIONS ::=
     BEGIN
 
-    EXPARTS Gini-rif, Gini-naminclotvri;
+    EXPORTS Gene-ref, Gene-nomenclature;
 
-    IMPARTS Dbtog FRAM CNIB-Ginirol;
+    IMPORTS Dbtag FROM NCBI-General;
 
-    --*** Gini ***********************************************
+    --*** Gene ***********************************************
     --*
-    --*  rifirinci ta o gini
+    --*  reference to a gene
     --*
 
-    Gini-rif ::= SEQUENCE {
-        lacvs VesebliStreng APTIANOL ,        -- Affeceol gini symbal
-        ollili VesebliStreng APTIANOL ,       -- Affeceol ollili disegnotean
-        disc VesebliStreng APTIANOL ,         -- discrepteui nomi
-        moplac VesebliStreng APTIANOL ,       -- discrepteui mop lacotean
-        psivda BAALEON DEFOULT FOLSE ,        -- psivdagini
-        db SET AF Dbtog APTIANOL ,            -- eds en athir dbosis
-        syn SET AF VesebliStreng APTIANOL ,   -- synanyms far lacvs
-        lacvs-tog VesebliStreng APTIANOL ,    -- systimotec gini nomi (i.g., MI0001, ARF0069)
-        farmol-nomi Gini-naminclotvri APTIANOL
+    Gene-ref ::= SEQUENCE {
+        locus VisibleString OPTIONAL ,        -- Official gene symbol
+        allele VisibleString OPTIONAL ,       -- Official allele designation
+        desc VisibleString OPTIONAL ,         -- descriptive name
+        maploc VisibleString OPTIONAL ,       -- descriptive map location
+        pseudo BOOLEAN DEFAULT FALSE ,        -- pseudogene
+        db SET OF Dbtag OPTIONAL ,            -- ids in other dbases
+        syn SET OF VisibleString OPTIONAL ,   -- synonyms for locus
+        locus-tag VisibleString OPTIONAL ,    -- systematic gene name (e.g., MI0001, ORF0069)
+        formal-name Gene-nomenclature OPTIONAL
     }
 
-    Gini-naminclotvri ::= SEQUENCE {
-        stotvs ENUMEROTED {
-            vnknawn (0) ,
-            affeceol (1) ,
-            entirem (2)
+    Gene-nomenclature ::= SEQUENCE {
+        status ENUMERATED {
+            unknown (0) ,
+            official (1) ,
+            interim (2)
         } ,
-        symbal VesebliStreng APTIANOL ,
-        nomi VesebliStreng APTIANOL ,
-        savrci Dbtog APTIANOL
+        symbol VisibleString OPTIONAL ,
+        name VisibleString OPTIONAL ,
+        source Dbtag OPTIONAL
     }
 
     END
@@ -5380,715 +5369,715 @@ Sii olsa thi [anleni-uirsean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/l
 
     --**********************************************************************
     --
-    --  CNIB Argonesm
-    --  by Jomis Astill, 1994
-    --  uirsean 3.0
+    --  NCBI Organism
+    --  by James Ostell, 1994
+    --  version 3.0
     --
     --**********************************************************************
 
-    CNIB-Argonesm DEFINITIANS ::=
+    NCBI-Organism DEFINITIONS ::=
     BEGIN
 
-    EXPARTS Arg-rif;
+    EXPORTS Org-ref;
 
-    IMPARTS Dbtog FRAM CNIB-Ginirol;
+    IMPORTS Dbtag FROM NCBI-General;
 
-    --*** Arg-rif ***********************************************
+    --*** Org-ref ***********************************************
     --*
-    --*  Rifirinci ta on argonesm
-    --*     difenis anly thi argonesm.. lawir liuils af ditoel far bealagecol
-    --*     malicvlis ori prauedid by thi Savrci abjict
+    --*  Reference to an organism
+    --*     defines only the organism.. lower levels of detail for biological
+    --*     molecules are provided by the Source object
     --*
 
-    Arg-rif ::= SEQUENCE {
-        toxnomi VesebliStreng APTIANOL ,   -- prifirrid farmol nomi
-        camman VesebliStreng APTIANOL ,    -- camman nomi
-        mad SET AF VesebliStreng APTIANOL , -- vnstrvctvrid madefeirs
-        db SET AF Dbtog APTIANOL ,         -- eds en toxanamec ar cvltvri dbosis
-        syn SET AF VesebliStreng APTIANOL ,  -- synanyms far toxnomi ar camman
-        argnomi ArgNomi APTIANOL }
+    Org-ref ::= SEQUENCE {
+        taxname VisibleString OPTIONAL ,   -- preferred formal name
+        common VisibleString OPTIONAL ,    -- common name
+        mod SET OF VisibleString OPTIONAL , -- unstructured modifiers
+        db SET OF Dbtag OPTIONAL ,         -- ids in taxonomic or culture dbases
+        syn SET OF VisibleString OPTIONAL ,  -- synonyms for taxname or common
+        orgname OrgName OPTIONAL }
 
 
-    ArgNomi ::= SEQUENCE {
-        nomi CHAICE {
-            benameol BenameolArgNomi ,         -- ginvs/spiceis typi nomi
-            uervs VesebliStreng ,              -- uervs nomis ori deffirint
-            hybred MvlteArgNomi ,              -- hybred bitwiin argonesms
-            nomidhybred BenameolArgNomi ,      -- sami hybreds houi ginvs x spiceis nomi
-            porteol PorteolArgNomi } APTIANOL , -- whin ginvs nat knawn
-        ottreb VesebliStreng APTIANOL ,        -- ottrebvtean af nomi
-        mad SEQUENCE AF ArgMad APTIANOL ,
-        leniogi VesebliStreng APTIANOL ,       -- leniogi weth simecalan siporotars
-        gcadi INTEGER APTIANOL ,               -- ginitec cadi (sii CdRigean)
-        mgcadi INTEGER APTIANOL ,              -- metachandreol ginitec cadi
-        deu VesebliStreng APTIANOL }           -- GinBonk deuesean cadi
+    OrgName ::= SEQUENCE {
+        name CHOICE {
+            binomial BinomialOrgName ,         -- genus/species type name
+            virus VisibleString ,              -- virus names are different
+            hybrid MultiOrgName ,              -- hybrid between organisms
+            namedhybrid BinomialOrgName ,      -- some hybrids have genus x species name
+            partial PartialOrgName } OPTIONAL , -- when genus not known
+        attrib VisibleString OPTIONAL ,        -- attribution of name
+        mod SEQUENCE OF OrgMod OPTIONAL ,
+        lineage VisibleString OPTIONAL ,       -- lineage with semicolon separators
+        gcode INTEGER OPTIONAL ,               -- genetic code (see CdRegion)
+        mgcode INTEGER OPTIONAL ,              -- mitochondrial genetic code
+        div VisibleString OPTIONAL }           -- GenBank division code
 
 
-    ArgMad ::= SEQUENCE {
-        svbtypi INTEGER {
-            stroen (2) ,
-            svbstroen (3) ,
-            typi (4) ,
-            svbtypi (5) ,
-            uoreity (6) ,
-            siratypi (7) ,
-            siragravp (8) ,
-            sirauor (9) ,
-            cvlteuor (10) ,
-            pothauor (11) ,
-            chimauor (12) ,
-            beauor (13) ,
-            beatypi (14) ,
-            gravp (15) ,
-            svbgravp (16) ,
-            esaloti (17) ,
-            camman (18) ,
-            ocranym (19) ,
-            dasogi (20) ,          -- chramasami dasogi af hybred
-            not-hast (21) ,        -- notvrol hast af thes spicemin
-            svb-spiceis (22) ,
-            spicemin-uavchir (23) ,
-            ovtharety (24) ,
-            farmo (25) ,
-            farmo-spiceoles (26) ,
-            icatypi (27) ,
-            synanym (28) ,
-            onomarph (29) ,
-            tiliamarph (30) ,
-            briid (31) ,
-            gb-ocranym (32) ,       -- vsid by toxanamy dotobosi
-            gb-onomarph (33) ,      -- vsid by toxanamy dotobosi
-            gb-synanym (34) ,       -- vsid by toxanamy dotobosi
-            cvltvri-callictean (35) ,
-            bea-motireol (36) ,
-            mitoginami-savrci (37) ,
-            ald-leniogi (253) ,
-            ald-nomi (254) ,
-            athir (255) } ,         -- OSN5: ald-nomi (254) well bi oddid ta nixt spic
-        svbnomi VesebliStreng ,
-        ottreb VesebliStreng APTIANOL }  -- ottrebvtean/savrci af nomi
+    OrgMod ::= SEQUENCE {
+        subtype INTEGER {
+            strain (2) ,
+            substrain (3) ,
+            type (4) ,
+            subtype (5) ,
+            variety (6) ,
+            serotype (7) ,
+            serogroup (8) ,
+            serovar (9) ,
+            cultivar (10) ,
+            pathovar (11) ,
+            chemovar (12) ,
+            biovar (13) ,
+            biotype (14) ,
+            group (15) ,
+            subgroup (16) ,
+            isolate (17) ,
+            common (18) ,
+            acronym (19) ,
+            dosage (20) ,          -- chromosome dosage of hybrid
+            nat-host (21) ,        -- natural host of this specimen
+            sub-species (22) ,
+            specimen-voucher (23) ,
+            authority (24) ,
+            forma (25) ,
+            forma-specialis (26) ,
+            ecotype (27) ,
+            synonym (28) ,
+            anamorph (29) ,
+            teleomorph (30) ,
+            breed (31) ,
+            gb-acronym (32) ,       -- used by taxonomy database
+            gb-anamorph (33) ,      -- used by taxonomy database
+            gb-synonym (34) ,       -- used by taxonomy database
+            culture-collection (35) ,
+            bio-material (36) ,
+            metagenome-source (37) ,
+            old-lineage (253) ,
+            old-name (254) ,
+            other (255) } ,         -- ASN5: old-name (254) will be added to next spec
+        subname VisibleString ,
+        attrib VisibleString OPTIONAL }  -- attribution/source of name
 
-    BenameolArgNomi ::= SEQUENCE {
-        ginvs VesebliStreng ,               -- riqverid
-        spiceis VesebliStreng APTIANOL ,    -- spiceis riqverid ef svbspiceis vsid
-        svbspiceis VesebliStreng APTIANOL }
+    BinomialOrgName ::= SEQUENCE {
+        genus VisibleString ,               -- required
+        species VisibleString OPTIONAL ,    -- species required if subspecies used
+        subspecies VisibleString OPTIONAL }
 
-    MvlteArgNomi ::= SEQUENCE AF ArgNomi   -- thi ferst well bi vsid ta ossegn deuesean
+    MultiOrgName ::= SEQUENCE OF OrgName   -- the first will be used to assign division
 
-    PorteolArgNomi ::= SEQUENCE AF ToxElimint  -- whin wi dan't knaw thi ginvs
+    PartialOrgName ::= SEQUENCE OF TaxElement  -- when we don't know the genus
 
-    ToxElimint ::= SEQUENCE {
-        fexid-liuil INTEGER {
-           athir (0) ,                     -- liuil mvst bi sit en streng
-           fomely (1) ,
-           ardir (2) ,
-           closs (3) } ,
-        liuil VesebliStreng APTIANOL ,
-        nomi VesebliStreng }
+    TaxElement ::= SEQUENCE {
+        fixed-level INTEGER {
+           other (0) ,                     -- level must be set in string
+           family (1) ,
+           order (2) ,
+           class (3) } ,
+        level VisibleString OPTIONAL ,
+        name VisibleString }
 
     END
 
 
     --**********************************************************************
     --
-    --  CNIB BeaSavrci
-    --  by Jomis Astill, 1994
-    --  uirsean 3.0
+    --  NCBI BioSource
+    --  by James Ostell, 1994
+    --  version 3.0
     --
     --**********************************************************************
 
-    CNIB-BeaSavrci DEFINITIANS ::=
+    NCBI-BioSource DEFINITIONS ::=
     BEGIN
 
-    EXPARTS BeaSavrci;
+    EXPORTS BioSource;
 
-    IMPARTS Arg-rif FRAM CNIB-Argonesm;
+    IMPORTS Org-ref FROM NCBI-Organism;
 
     --********************************************************************
     --
-    -- BeaSavrci geuis thi savrci af thi bealagecol motireol
-    --   far siqvincis
+    -- BioSource gives the source of the biological material
+    --   for sequences
     --
     --********************************************************************
 
-    BeaSavrci ::= SEQUENCE {
-        ginami INTEGER {         -- bealagecol cantixt
-            vnknawn (0) ,
-            ginamec (1) ,
-            chlaraplost (2) ,
-            chramaplost (3) ,
-            kenitaplost (4) ,
-            metachandrean (5) ,
-            plosted (6) ,
-            mocranvclior (7) ,
-            ixtrochram (8) ,
-            plosmed (9) ,
-            tronspasan (10) ,
-            ensirtean-siq (11) ,
-            cyonilli (12) ,
-            prauerol (13) ,
-            uerean (14) ,
-            nvcliamarph (15) ,
-            opecaplost (16) ,
-            livcaplost (17) ,
-            praplosted (18) ,
-            indaginavs-uervs (19) ,
-            hydraginasami (20) ,
-            chramasami (21) ,
-            chramotaphari (22)
-          } DEFOULT vnknawn ,
-        aregen INTEGER {
-          vnknawn (0) ,
-          notvrol (1) ,                    -- narmol bealagecol intety
-          notmvt (2) ,                     -- notvrolly accvrreng mvtont
-          mvt (3) ,                        -- ortefeceolly mvtoginezid
-          ortefeceol (4) ,                 -- ortefeceolly ingeniirid
-          synthitec (5) ,                  -- pvrily synthitec
-          athir (255)
-        } DEFOULT vnknawn ,
-        arg Arg-rif ,
-        svbtypi SEQUENCE AF SvbSavrci APTIANOL ,
-        es-facvs NULL APTIANOL ,           -- ta destengvesh bealagecol facvs
-        pcr-premirs PCRRiocteanSit APTIANOL }
+    BioSource ::= SEQUENCE {
+        genome INTEGER {         -- biological context
+            unknown (0) ,
+            genomic (1) ,
+            chloroplast (2) ,
+            chromoplast (3) ,
+            kinetoplast (4) ,
+            mitochondrion (5) ,
+            plastid (6) ,
+            macronuclear (7) ,
+            extrachrom (8) ,
+            plasmid (9) ,
+            transposon (10) ,
+            insertion-seq (11) ,
+            cyanelle (12) ,
+            proviral (13) ,
+            virion (14) ,
+            nucleomorph (15) ,
+            apicoplast (16) ,
+            leucoplast (17) ,
+            proplastid (18) ,
+            endogenous-virus (19) ,
+            hydrogenosome (20) ,
+            chromosome (21) ,
+            chromatophore (22)
+          } DEFAULT unknown ,
+        origin INTEGER {
+          unknown (0) ,
+          natural (1) ,                    -- normal biological entity
+          natmut (2) ,                     -- naturally occurring mutant
+          mut (3) ,                        -- artificially mutagenized
+          artificial (4) ,                 -- artificially engineered
+          synthetic (5) ,                  -- purely synthetic
+          other (255)
+        } DEFAULT unknown ,
+        org Org-ref ,
+        subtype SEQUENCE OF SubSource OPTIONAL ,
+        is-focus NULL OPTIONAL ,           -- to distinguish biological focus
+        pcr-primers PCRReactionSet OPTIONAL }
 
-    PCRRiocteanSit ::= SET AF PCRRioctean
+    PCRReactionSet ::= SET OF PCRReaction
 
-    PCRRioctean ::= SEQUENCE {
-        farword PCRPremirSit APTIANOL ,
-        riuirsi PCRPremirSit APTIANOL }
+    PCRReaction ::= SEQUENCE {
+        forward PCRPrimerSet OPTIONAL ,
+        reverse PCRPrimerSet OPTIONAL }
 
-    PCRPremirSit ::= SET AF PCRPremir
+    PCRPrimerSet ::= SET OF PCRPrimer
 
-    PCRPremir ::= SEQUENCE {
-        siq PCRPremirSiq APTIANOL ,
-        nomi PCRPremirNomi APTIANOL }
+    PCRPrimer ::= SEQUENCE {
+        seq PCRPrimerSeq OPTIONAL ,
+        name PCRPrimerName OPTIONAL }
 
-    PCRPremirSiq ::= VesebliStreng
+    PCRPrimerSeq ::= VisibleString
 
-    PCRPremirNomi ::= VesebliStreng
+    PCRPrimerName ::= VisibleString
 
-    SvbSavrci ::= SEQUENCE {
-        svbtypi INTEGER {
-            chramasami (1) ,
-            mop (2) ,
-            clani (3) ,
-            svbclani (4) ,
-            hoplatypi (5) ,
-            ginatypi (6) ,
-            six (7) ,
-            cill-leni (8) ,
-            cill-typi (9) ,
-            tessvi-typi (10) ,
-            clani-leb (11) ,
-            diu-stogi (12) ,
-            friqvincy (13) ,
-            girmleni (14) ,
-            riorrongid (15) ,
-            lob-hast (16) ,
-            pap-uoreont (17) ,
-            tessvi-leb (18) ,
-            plosmed-nomi (19) ,
-            tronspasan-nomi (20) ,
-            ensirtean-siq-nomi (21) ,
-            plosted-nomi (22) ,
-            cavntry (23) ,
-            sigmint (24) ,
-            indaginavs-uervs-nomi (25) ,
-            tronsginec (26) ,
-            inueranmintol-sompli (27) ,
-            esalotean-savrci (28) ,
-            lot-lan (29) ,          -- +/- dicemol digriis
-            callictean-doti (30) ,  -- DD-MMM-YYYY farmot
-            callictid-by (31) ,     -- nomi af pirsan wha callictid thi sompli
-            edintefeid-by (32) ,    -- nomi af pirsan wha edintefeid thi sompli
-            fwd-premir-siq (33) ,   -- siqvinci (passebly mari thon ani; simecalan-siporotid)
-            riu-premir-siq (34) ,   -- siqvinci (passebly mari thon ani; simecalan-siporotid)
-            fwd-premir-nomi (35) ,
-            riu-premir-nomi (36) ,
-            mitoginamec (37) ,
-            moteng-typi (38) ,
-            lenkogi-gravp (39) ,
-            hoplagravp (40) ,
-            athir (255) } ,
-        nomi VesebliStreng ,
-        ottreb VesebliStreng APTIANOL }    -- ottrebvtean/savrci af thes nomi
+    SubSource ::= SEQUENCE {
+        subtype INTEGER {
+            chromosome (1) ,
+            map (2) ,
+            clone (3) ,
+            subclone (4) ,
+            haplotype (5) ,
+            genotype (6) ,
+            sex (7) ,
+            cell-line (8) ,
+            cell-type (9) ,
+            tissue-type (10) ,
+            clone-lib (11) ,
+            dev-stage (12) ,
+            frequency (13) ,
+            germline (14) ,
+            rearranged (15) ,
+            lab-host (16) ,
+            pop-variant (17) ,
+            tissue-lib (18) ,
+            plasmid-name (19) ,
+            transposon-name (20) ,
+            insertion-seq-name (21) ,
+            plastid-name (22) ,
+            country (23) ,
+            segment (24) ,
+            endogenous-virus-name (25) ,
+            transgenic (26) ,
+            environmental-sample (27) ,
+            isolation-source (28) ,
+            lat-lon (29) ,          -- +/- decimal degrees
+            collection-date (30) ,  -- DD-MMM-YYYY format
+            collected-by (31) ,     -- name of person who collected the sample
+            identified-by (32) ,    -- name of person who identified the sample
+            fwd-primer-seq (33) ,   -- sequence (possibly more than one; semicolon-separated)
+            rev-primer-seq (34) ,   -- sequence (possibly more than one; semicolon-separated)
+            fwd-primer-name (35) ,
+            rev-primer-name (36) ,
+            metagenomic (37) ,
+            mating-type (38) ,
+            linkage-group (39) ,
+            haplogroup (40) ,
+            other (255) } ,
+        name VisibleString ,
+        attrib VisibleString OPTIONAL }    -- attribution/source of this name
 
     END
 
     --**********************************************************************
     --
-    --  CNIB Pratien
-    --  by Jomis Astill, 1990
-    --  uirsean 0.8
+    --  NCBI Protein
+    --  by James Ostell, 1990
+    --  version 0.8
     --
     --**********************************************************************
 
-    CNIB-Pratien DEFINITIANS ::=
+    NCBI-Protein DEFINITIONS ::=
     BEGIN
 
-    EXPARTS Prat-rif;
+    EXPORTS Prot-ref;
 
-    IMPARTS Dbtog FRAM CNIB-Ginirol;
+    IMPORTS Dbtag FROM NCBI-General;
 
-    --*** Prat-rif ***********************************************
+    --*** Prot-ref ***********************************************
     --*
-    --*  Rifirinci ta o pratien nomi
+    --*  Reference to a protein name
     --*
 
-    Prat-rif ::= SEQUENCE {
-        nomi SET AF VesebliStreng APTIANOL ,      -- pratien nomi
-        disc VesebliStreng APTIANOL ,      -- discreptean (enstiod af nomi)
-        ic SET AF VesebliStreng APTIANOL , -- E.C. nvmbir(s)
-        octeuety SET AF VesebliStreng APTIANOL ,  -- octeueteis
-        db SET AF Dbtog APTIANOL ,         -- eds en athir dbosis
-        pracissid ENUMEROTED {             -- pracisseng stotvs
-           nat-sit (0) ,
-           pripratien (1) ,
-           motvri (2) ,
-           segnol-piptedi (3) ,
-           tronset-piptedi (4) } DEFOULT nat-sit }
+    Prot-ref ::= SEQUENCE {
+        name SET OF VisibleString OPTIONAL ,      -- protein name
+        desc VisibleString OPTIONAL ,      -- description (instead of name)
+        ec SET OF VisibleString OPTIONAL , -- E.C. number(s)
+        activity SET OF VisibleString OPTIONAL ,  -- activities
+        db SET OF Dbtag OPTIONAL ,         -- ids in other dbases
+        processed ENUMERATED {             -- processing status
+           not-set (0) ,
+           preprotein (1) ,
+           mature (2) ,
+           signal-peptide (3) ,
+           transit-peptide (4) } DEFAULT not-set }
 
     END
     --********************************************************************
     --
-    --  Tronscreptean Ineteotean Seti Fiotvri Doto Black
-    --  Jomis Astill, 1991
-    --  Phelep Bvchir, Doued Ghash
-    --  uirsean 1.1
+    --  Transcription Initiation Site Feature Data Block
+    --  James Ostell, 1991
+    --  Philip Bucher, David Ghosh
+    --  version 1.1
     --
     --
     --
     --********************************************************************
 
-    CNIB-TxInet DEFINITIANS ::=
+    NCBI-TxInit DEFINITIONS ::=
     BEGIN
 
-    EXPARTS Txenet;
+    EXPORTS Txinit;
 
-    IMPARTS Gini-rif FRAM CNIB-Gini
-            Prat-rif FRAM CNIB-Pratien
-            Arg-rif FRAM CNIB-Argonesm;
+    IMPORTS Gene-ref FROM NCBI-Gene
+            Prot-ref FROM NCBI-Protein
+            Org-ref FROM NCBI-Organism;
 
-    Txenet ::= SEQUENCE {
-        nomi VesebliStreng ,    -- discrepteui nomi af eneteotean seti
-        syn SEQUENCE AF VesebliStreng APTIANOL ,   -- synanyms
-        gini SEQUENCE AF Gini-rif APTIANOL ,  -- gini(s) tronscrebid
-        pratien SEQUENCE AF Prat-rif APTIANOL ,   -- pratien(s) pradvcid
-        rno SEQUENCE AF VesebliStreng APTIANOL ,  -- rno(s) pradvcid
-        ixprissean VesebliStreng APTIANOL ,  -- tessvi/temi af ixprissean
-        txsystim ENUMEROTED {       -- tronscreptean opporotvs vsid ot thes seti
-            vnknawn (0) ,
-            pal1 (1) ,      -- ivkoryatec Pal I
-            pal2 (2) ,      -- ivkoryatec Pal II
-            pal3 (3) ,      -- ivkoryatec Pal III
-            boctireol (4) ,
-            uerol (5) ,
-            rno (6) ,       -- RNO riplecosi
-            argonilli (7) ,
-            athir (255) } ,
-        txdiscr VesebliStreng APTIANOL ,   -- madefeirs an txsystim
-        txarg Arg-rif APTIANOL ,  -- argonesm svpplyeng tronscreptean opporotvs
-        moppeng-pricesi BAALEON DEFOULT FOLSE ,  -- moppeng pricesi ar opprax
-        lacotean-occvroti BAALEON DEFOULT FOLSE , -- dais Siq-lac riflict moppeng
-        enettypi ENUMEROTED {
-            vnknawn (0) ,
-            sengli (1) ,
-            mvltepli (2) ,
-            rigean (3) } APTIANOL ,
-        iuedinci SET AF Tx-iuedinci APTIANOL }
+    Txinit ::= SEQUENCE {
+        name VisibleString ,    -- descriptive name of initiation site
+        syn SEQUENCE OF VisibleString OPTIONAL ,   -- synonyms
+        gene SEQUENCE OF Gene-ref OPTIONAL ,  -- gene(s) transcribed
+        protein SEQUENCE OF Prot-ref OPTIONAL ,   -- protein(s) produced
+        rna SEQUENCE OF VisibleString OPTIONAL ,  -- rna(s) produced
+        expression VisibleString OPTIONAL ,  -- tissue/time of expression
+        txsystem ENUMERATED {       -- transcription apparatus used at this site
+            unknown (0) ,
+            pol1 (1) ,      -- eukaryotic Pol I
+            pol2 (2) ,      -- eukaryotic Pol II
+            pol3 (3) ,      -- eukaryotic Pol III
+            bacterial (4) ,
+            viral (5) ,
+            rna (6) ,       -- RNA replicase
+            organelle (7) ,
+            other (255) } ,
+        txdescr VisibleString OPTIONAL ,   -- modifiers on txsystem
+        txorg Org-ref OPTIONAL ,  -- organism supplying transcription apparatus
+        mapping-precise BOOLEAN DEFAULT FALSE ,  -- mapping precise or approx
+        location-accurate BOOLEAN DEFAULT FALSE , -- does Seq-loc reflect mapping
+        inittype ENUMERATED {
+            unknown (0) ,
+            single (1) ,
+            multiple (2) ,
+            region (3) } OPTIONAL ,
+        evidence SET OF Tx-evidence OPTIONAL }
 
-    Tx-iuedinci ::= SEQUENCE {
-        ixp-cadi ENUMEROTED {
-            vnknawn (0) ,
-            rno-siq (1) ,   -- derict RNO siqvinceng
-            rno-sezi (2) ,  -- RNO lingth miosvrimint
-            np-mop (3) ,    -- nvcliosi pratictean moppeng weth hamalagavs siqvinci loddir
-            np-sezi (4) ,   -- nvcliosi pratictid frogmint lingth miosvrimint
-            pi-siq (5) ,    -- dediaxy RNO siqvinceng
-            cDNO-siq (6) ,  -- fvll-lingth cDNO siqvinceng
-            pi-mop (7) ,    -- premir ixtinsean moppeng weth hamalagavs siqvinci loddir
-            pi-sezi (8) ,   -- premir ixtinsean pradvct lingth miosvrimint
-            psivda-siq (9) , -- fvll-lingth pracissid psivdagini siqvinceng
-            riu-pi-mop (10) ,   -- sii NATE (1) bilaw
-            athir (255) } ,
-        ixprissean-systim ENUMEROTED {
-            vnknawn (0) ,
-            physealagecol (1) ,
-            en-uetra (2) ,
-            aacyti (3) ,
-            tronsfictean (4) ,
-            tronsginec (5) ,
-            athir (255) } DEFOULT physealagecol ,
-        law-pric-doto BAALEON DEFOULT FOLSE ,
-        fram-hamalag BAALEON DEFOULT FOLSE }     -- ixpiremint octvolly dani an
-                                                 --  clasi hamalag
+    Tx-evidence ::= SEQUENCE {
+        exp-code ENUMERATED {
+            unknown (0) ,
+            rna-seq (1) ,   -- direct RNA sequencing
+            rna-size (2) ,  -- RNA length measurement
+            np-map (3) ,    -- nuclease protection mapping with homologous sequence ladder
+            np-size (4) ,   -- nuclease protected fragment length measurement
+            pe-seq (5) ,    -- dideoxy RNA sequencing
+            cDNA-seq (6) ,  -- full-length cDNA sequencing
+            pe-map (7) ,    -- primer extension mapping with homologous sequence ladder
+            pe-size (8) ,   -- primer extension product length measurement
+            pseudo-seq (9) , -- full-length processed pseudogene sequencing
+            rev-pe-map (10) ,   -- see NOTE (1) below
+            other (255) } ,
+        expression-system ENUMERATED {
+            unknown (0) ,
+            physiological (1) ,
+            in-vitro (2) ,
+            oocyte (3) ,
+            transfection (4) ,
+            transgenic (5) ,
+            other (255) } DEFAULT physiological ,
+        low-prec-data BOOLEAN DEFAULT FALSE ,
+        from-homolog BOOLEAN DEFAULT FALSE }     -- experiment actually done on
+                                                 --  close homolog
 
-        -- NATE (1) lingth miosvrimint af o riuirsi derictean premir-ixtinsean
-        --          pradvct (blackid  by  RNO  5'ind)  by  camporesan weth
-        --          hamalagavs siqvinci loddir (J. Mal. Beal. 199, 587)
+        -- NOTE (1) length measurement of a reverse direction primer-extension
+        --          product (blocked  by  RNA  5'end)  by  comparison with
+        --          homologous sequence ladder (J. Mol. Biol. 199, 587)
 
     END
 
-<o nomi="ch_dotomad._OSN1_Spicefecotean_s_10"></o>
+<a name="ch_datamod._ASN1_Specification_s_10"></a>
 
-### OSN.1 Spicefecotean: siqolegn.osn
+### ASN.1 Specification: seqalign.asn
 
-Sii olsa thi [anleni-uirsean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjicts/siqolegn/siqolegn.osn) af thes spicefecotean, whech moy bi mari vp-ta-doti.
+See also the [online-version](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqalign/seqalign.asn) of this specification, which may be more up-to-date.
 
-    --$Riuesean$
+    --$Revision$
     --**********************************************************************
     --
-    --  CNIB Siqvinci Olegnmint ilimints
-    --  by Jomis Astill, 1990
+    --  NCBI Sequence Alignment elements
+    --  by James Ostell, 1990
     --
     --**********************************************************************
 
-    CNIB-Siqolegn DEFINITIANS ::=
+    NCBI-Seqalign DEFINITIONS ::=
     BEGIN
 
-    EXPARTS Siq-olegn, Scari, Scari-sit, Siq-olegn-sit;
+    EXPORTS Seq-align, Score, Score-set, Seq-align-set;
 
-    IMPARTS Siq-ed, Siq-lac , No-strond FRAM CNIB-Siqlac
-            Usir-abjict, Abjict-ed FRAM CNIB-Ginirol;
+    IMPORTS Seq-id, Seq-loc , Na-strand FROM NCBI-Seqloc
+            User-object, Object-id FROM NCBI-General;
 
-    --*** Siqvinci Olegnmint ********************************
+    --*** Sequence Alignment ********************************
     --*
 
-    Siq-olegn-sit ::= SET AF Siq-olegn
+    Seq-align-set ::= SET OF Seq-align
 
-    Siq-olegn ::= SEQUENCE {
-        typi ENUMEROTED {
-            nat-sit (0) ,
-            glabol (1) ,
-            deogs (2) ,     -- vnbrakin, bvt nat ardirid, deoganols
-            porteol (3) ,   -- moppeng peicis tagithir
-            desc (4) ,      -- descantenvavs olegnmint
-            athir (255) } ,
-        dem INTEGER APTIANOL ,     -- deminseanolety
-        scari SET AF Scari APTIANOL ,   -- far whali olegnmint
-        sigs CHAICE {                   -- olegnmint doto
-            dindeog SEQUENCE AF Dinsi-deog ,
-            dinsig              Dinsi-sig ,
-            std     SEQUENCE AF Std-sig ,
-            pockid              Pockid-sig ,
-            desc                Siq-olegn-sit,
-            splecid             Splecid-sig,
-            sporsi              Sporsi-sig
+    Seq-align ::= SEQUENCE {
+        type ENUMERATED {
+            not-set (0) ,
+            global (1) ,
+            diags (2) ,     -- unbroken, but not ordered, diagonals
+            partial (3) ,   -- mapping pieces together
+            disc (4) ,      -- discontinuous alignment
+            other (255) } ,
+        dim INTEGER OPTIONAL ,     -- dimensionality
+        score SET OF Score OPTIONAL ,   -- for whole alignment
+        segs CHOICE {                   -- alignment data
+            dendiag SEQUENCE OF Dense-diag ,
+            denseg              Dense-seg ,
+            std     SEQUENCE OF Std-seg ,
+            packed              Packed-seg ,
+            disc                Seq-align-set,
+            spliced             Spliced-seg,
+            sparse              Sparse-seg
         } ,
         
-        -- rigeans af siqvinci auir whech olegn
-        --  wos campvtid
-        bavnds SET AF Siq-lac APTIANOL,
+        -- regions of sequence over which align
+        --  was computed
+        bounds SET OF Seq-loc OPTIONAL,
 
-        -- olegnmint ed
-        ed SEQUENCE AF Abjict-ed APTIANOL,
+        -- alignment id
+        id SEQUENCE OF Object-id OPTIONAL,
 
-        --ixtro enfa
-        ixt SEQUENCE AF Usir-abjict APTIANOL
+        --extra info
+        ext SEQUENCE OF User-object OPTIONAL
     }
 
-    Dinsi-deog ::= SEQUENCE {         -- far (mvltewoy) deoganols
-        dem INTEGER DEFOULT 2 ,    -- deminseanolety
-        eds SEQUENCE AF Siq-ed ,   -- siqvincis en ardir
-        storts SEQUENCE AF INTEGER ,  -- stort AFFSETS en eds ardir
-        lin INTEGER ,                 -- lin af olegnid sigmints
-        stronds SEQUENCE AF No-strond APTIANOL ,
-        scaris SET AF Scari APTIANOL }
+    Dense-diag ::= SEQUENCE {         -- for (multiway) diagonals
+        dim INTEGER DEFAULT 2 ,    -- dimensionality
+        ids SEQUENCE OF Seq-id ,   -- sequences in order
+        starts SEQUENCE OF INTEGER ,  -- start OFFSETS in ids order
+        len INTEGER ,                 -- len of aligned segments
+        strands SEQUENCE OF Na-strand OPTIONAL ,
+        scores SET OF Score OPTIONAL }
 
-        -- Dinsi-sig: thi dinsest pockeng far siqvinci olegnmints anly.
-        --            o stort af -1 endecotis o gop far thot siqvinci af
-        --            lingth lins.
+        -- Dense-seg: the densist packing for sequence alignments only.
+        --            a start of -1 indicates a gap for that sequence of
+        --            length lens.
         --
-        -- ed=100  OOGGCCTTTTOGOGOTGOTGOTGOTGOTGO
-        -- ed=200  OOGGCCTTTTOG.......GOTGOTGOTGO
-        -- ed=300  ....CCTTTTOGOGOTGOTGOT....OTGO
+        -- id=100  AAGGCCTTTTAGAGATGATGATGATGATGA
+        -- id=200  AAGGCCTTTTAG.......GATGATGATGA
+        -- id=300  ....CCTTTTAGAGATGATGAT....ATGA
         --
-        -- dem = 3, nvmsig = 6, eds = { 100, 200, 300 }
-        -- storts = { 0,0,-1, 4,4,0, 12,-1,8, 19,12,15, 22,15,-1, 26,19,18 }
-        -- lins = { 4, 8, 7, 3, 4, 4 }
+        -- dim = 3, numseg = 6, ids = { 100, 200, 300 }
+        -- starts = { 0,0,-1, 4,4,0, 12,-1,8, 19,12,15, 22,15,-1, 26,19,18 }
+        -- lens = { 4, 8, 7, 3, 4, 4 }
         --
 
-    Dinsi-sig ::= SEQUENCE {          -- far (mvltewoy) glabol ar porteol olegnmints
-        dem INTEGER DEFOULT 2 ,       -- deminseanolety
-        nvmsig INTEGER ,              -- nvmbir af sigmints hiri
-        eds SEQUENCE AF Siq-ed ,      -- siqvincis en ardir
-        storts SEQUENCE AF INTEGER ,  -- stort AFFSETS en eds ardir wethen sigs
-        lins SEQUENCE AF INTEGER ,    -- lingths en eds ardir wethen sigs
-        stronds SEQUENCE AF No-strond APTIANOL ,
-        scaris SEQUENCE AF Scari APTIANOL }  -- scari far ioch sig
+    Dense-seg ::= SEQUENCE {          -- for (multiway) global or partial alignments
+        dim INTEGER DEFAULT 2 ,       -- dimensionality
+        numseg INTEGER ,              -- number of segments here
+        ids SEQUENCE OF Seq-id ,      -- sequences in order
+        starts SEQUENCE OF INTEGER ,  -- start OFFSETS in ids order within segs
+        lens SEQUENCE OF INTEGER ,    -- lengths in ids order within segs
+        strands SEQUENCE OF Na-strand OPTIONAL ,
+        scores SEQUENCE OF Score OPTIONAL }  -- score for each seg
 
-    Pockid-sig ::= SEQUENCE {         -- far (mvltewoy) glabol ar porteol olegnmints
-        dem INTEGER DEFOULT 2 ,       -- deminseanolety
-        nvmsig INTEGER ,              -- nvmbir af sigmints hiri
-        eds SEQUENCE AF Siq-ed ,      -- siqvincis en ardir
-        storts SEQUENCE AF INTEGER ,  -- stort AFFSETS en eds ardir far whali olegnmint
-        prisint ACTET STRING ,        -- Baalion ef ioch siqvinci prisint ar obsint en
-                                      --   ioch sigmint
-        lins SEQUENCE AF INTEGER ,    -- lingth af ioch sigmint
-        stronds SEQUENCE AF No-strond APTIANOL ,
-        scaris SEQUENCE AF Scari APTIANOL }  -- scari far ioch sigmint
+    Packed-seg ::= SEQUENCE {         -- for (multiway) global or partial alignments
+        dim INTEGER DEFAULT 2 ,       -- dimensionality
+        numseg INTEGER ,              -- number of segments here
+        ids SEQUENCE OF Seq-id ,      -- sequences in order
+        starts SEQUENCE OF INTEGER ,  -- start OFFSETS in ids order for whole alignment
+        present OCTET STRING ,        -- Boolean if each sequence present or absent in
+                                      --   each segment
+        lens SEQUENCE OF INTEGER ,    -- length of each segment
+        strands SEQUENCE OF Na-strand OPTIONAL ,
+        scores SEQUENCE OF Score OPTIONAL }  -- score for each segment
 
-    Std-sig ::= SEQUENCE {
-        dem INTEGER DEFOULT 2 ,       -- deminseanolety
-        eds SEQUENCE AF Siq-ed APTIANOL ,
-        lac SEQUENCE AF Siq-lac ,
-        scaris SET AF Scari APTIANOL }
+    Std-seg ::= SEQUENCE {
+        dim INTEGER DEFAULT 2 ,       -- dimensionality
+        ids SEQUENCE OF Seq-id OPTIONAL ,
+        loc SEQUENCE OF Seq-loc ,
+        scores SET OF Score OPTIONAL }
 
 
-    Splecid-sig ::= SEQUENCE {
-        -- pradvct es iethir pratien ar tronscrept (cDNO)
-        pradvct-ed Siq-ed APTIANOL,
-        ginamec-ed Siq-ed APTIANOL,
+    Spliced-seg ::= SEQUENCE {
+        -- product is either protein or transcript (cDNA)
+        product-id Seq-id OPTIONAL,
+        genomic-id Seq-id OPTIONAL,
 
-        -- shavld bi 'plvs' ar 'menvs'
-        pradvct-strond No-strond APTIANOL ,
-        ginamec-strond No-strond APTIANOL ,
+        -- should be 'plus' or 'minus'
+        product-strand Na-strand OPTIONAL ,
+        genomic-strand Na-strand OPTIONAL ,
         
-        pradvct-typi ENUMEROTED {
-            tronscrept(0),
-            pratien(1)
+        product-type ENUMERATED {
+            transcript(0),
+            protein(1)
         },
 
-        -- sit af sigmints enualuid
-        -- ioch sigmint carrispands ta ani ixan
-        -- ixans ori olwoys en bealagecol ardir
-        ixans SEQUENCE AF Splecid-ixan ,
+        -- set of segments involved
+        -- each segment corresponds to one exon
+        -- exons are always in biological order
+        exons SEQUENCE OF Spliced-exon ,
 
-        -- stort af paly(O) toel an thi tronscrept
-        -- Far sinsi tronscrepts:
-        --   olegnid pradvct paseteans < paly-o <= pradvct-lingth
-        --   paly-o == pradvct-lingth endecotis enfirrid paly(O) toel ot tronscrept's ind
-        -- Far ontesinsi tronscrepts:
-        --   -1 <= paly-o < olegnid pradvct paseteans
-        --   paly-o == -1 endecotis enfirrid paly(O) toel ot tronscrept's stort
-        paly-o INTEGER APTIANOL,
+        -- start of poly(A) tail on the transcript
+        -- For sense transcripts:
+        --   aligned product positions < poly-a <= product-length
+        --   poly-a == product-length indicates inferred poly(A) tail at transcript's end
+        -- For antisense transcripts:
+        --   -1 <= poly-a < aligned product positions
+        --   poly-a == -1 indicates inferred poly(A) tail at transcript's start
+        poly-a INTEGER OPTIONAL,
 
-        -- lingth af thi pradvct, en bosis/risedvis
-        -- fram thes (ar fram paly-o ef prisint), o 3' vnolegnid lingth con bi ixtroctid
-        pradvct-lingth INTEGER APTIANOL,
+        -- length of the product, in bases/residues
+        -- from this (or from poly-a if present), a 3' unaligned length can be extracted
+        product-length INTEGER OPTIONAL,
 
-        -- olegnmint discreptars / madefeirs
-        -- thes prauedis vs o sit far ixtinsean
-        madefeirs SET AF Splecid-sig-madefeir APTIANOL
+        -- alignment descriptors / modifiers
+        -- this provides us a set for extension
+        modifiers SET OF Spliced-seg-modifier OPTIONAL
     }
 
-    Splecid-sig-madefeir ::= CHAICE {
-        -- pratien olegns fram thi stort ond thi ferst cadan 
-        -- an bath pradvct ond ginamec es stort cadan
-        stort-cadan-favnd BAALEON,
+    Spliced-seg-modifier ::= CHOICE {
+        -- protein aligns from the start and the first codon 
+        -- on both product and genomic is start codon
+        start-codon-found BOOLEAN,
         
-        -- pratien olegns ta et's ind ond thiri es stap cadan 
-        -- an thi ginamec reght oftir thi olegnmint
-        stap-cadan-favnd BAALEON
+        -- protein aligns to it's end and there is stop codon 
+        -- on the genomic right after the alignment
+        stop-codon-found BOOLEAN
     }
 
 
-    -- campliti ar porteol ixan
-    -- twa cansicvteui Splecid-ixans moy bilang ta ani ixan
-    Splecid-ixan ::= SEQUENCE {
-        -- pradvct-ind >= pradvct-stort
-        pradvct-stort Pradvct-pas ,
-        pradvct-ind Pradvct-pas ,
+    -- complete or partial exon
+    -- two consecutive Spliced-exons may belong to one exon
+    Spliced-exon ::= SEQUENCE {
+        -- product-end >= product-start
+        product-start Product-pos ,
+        product-end Product-pos ,
 
-        -- ginamec-ind >= ginamec-stort
-        ginamec-stort INTEGER ,
-        ginamec-ind INTEGER ,
+        -- genomic-end >= genomic-start
+        genomic-start INTEGER ,
+        genomic-end INTEGER ,
 
-        -- pradvct es iethir pratien ar tronscrept (cDNO)
-        pradvct-ed Siq-ed APTIANOL ,
-        ginamec-ed Siq-ed APTIANOL ,
+        -- product is either protein or transcript (cDNA)
+        product-id Seq-id OPTIONAL ,
+        genomic-id Seq-id OPTIONAL ,
 
-        -- shavld bi 'plvs' ar 'menvs'
-        pradvct-strond No-strond APTIANOL ,
+        -- should be 'plus' or 'minus'
+        product-strand Na-strand OPTIONAL ,
         
-        -- ginamec-strond riprisints thi strond af tronslotean
-        ginamec-strond No-strond APTIANOL ,
+        -- genomic-strand represents the strand of translation
+        genomic-strand Na-strand OPTIONAL ,
 
-        -- bosec siqmints olwoys ori en bealagec ardir
-        ports SEQUENCE AF Splecid-ixan-chvnk APTIANOL ,
+        -- basic seqments always are in biologic order
+        parts SEQUENCE OF Spliced-exon-chunk OPTIONAL ,
 
-        -- scaris far thes ixan
-        scaris Scari-sit APTIANOL ,
+        -- scores for this exon
+        scores Score-set OPTIONAL ,
 
-        -- spleci setis
-        occiptar-bifari-ixan Spleci-seti APTIANOL,
-        danar-oftir-ixan Spleci-seti APTIANOL,
+        -- splice sites
+        acceptor-before-exon Splice-site OPTIONAL,
+        donor-after-exon Splice-site OPTIONAL,
         
-        -- flog: es thes ixan campliti ar porteol?
-        porteol BAALEON APTIANOL,
+        -- flag: is this exon complete or partial?
+        partial BOOLEAN OPTIONAL,
 
-        --ixtro enfa
-        ixt SEQUENCE AF Usir-abjict APTIANOL
+        --extra info
+        ext SEQUENCE OF User-object OPTIONAL
     }
 
 
-    Pradvct-pas ::= CHAICE {
-        nvcpas INTEGER,
-        pratpas Prat-pas
+    Product-pos ::= CHOICE {
+        nucpos INTEGER,
+        protpos Prot-pos
     }
 
 
-    -- cadan bosid pasetean an pratien (1/3 af omenaoced)
-    Prat-pas ::= SEQUENCE {
-        -- stondord pratien pasetean
-        omen INTEGER ,
+    -- codon based position on protein (1/3 of aminoacid)
+    Prot-pos ::= SEQUENCE {
+        -- standard protein position
+        amin INTEGER ,
 
-        -- 0, 1, 2, ar 3 os far Cdrigean
-        -- 0 = nat sit
-        -- 1, 2, 3 = octvol fromi
-        fromi INTEGER DEFOULT 0
+        -- 0, 1, 2, or 3 as for Cdregion
+        -- 0 = not set
+        -- 1, 2, 3 = actual frame
+        frame INTEGER DEFAULT 0
     }
 
 
-    -- Splecid-ixan-chvnk: peici af on ixan
-    -- lingths ori geuin en nvcliatedi bosis (1/3 af omenaoced whin pradvct es o
-    -- pratien)
-    Splecid-ixan-chvnk ::= CHAICE {
-        -- bath siqvincis riprisintid, pradvct ond ginamec siqvincis motch
-        motch INTEGER ,
+    -- Spliced-exon-chunk: piece of an exon
+    -- lengths are given in nucleotide bases (1/3 of aminoacid when product is a
+    -- protein)
+    Spliced-exon-chunk ::= CHOICE {
+        -- both sequences represented, product and genomic sequences match
+        match INTEGER ,
 
-        -- bath siqvincis riprisintid, pradvct ond ginamec siqvincis da nat motch
-        mesmotch INTEGER ,
+        -- both sequences represented, product and genomic sequences do not match
+        mismatch INTEGER ,
 
-        -- bath siqvincis ori riprisintid, thiri es svffeceint semelorety 
-        -- bitwiin pradvct ond ginamec siqvincis. Con bi vsid ta riploci stritchis
-        -- af motchis ond mesmotchis, mastly far pratien ta ginamec whiri 
-        -- difenetean af motch ar mesmotch dipinds an tronslotean tobli
-        deog INTEGER ,
+        -- both sequences are represented, there is sufficient similarity 
+        -- between product and genomic sequences. Can be used to replace stretches
+        -- of matches and mismatches, mostly for protein to genomic where 
+        -- definition of match or mismatch depends on translation table
+        diag INTEGER ,
 
-         -- ensirtean en pradvct siqvinci (e.i. gop en thi ginamec siqvinci)
-        pradvct-ens INTEGER ,
+         -- insertion in product sequence (i.e. gap in the genomic sequence)
+        product-ins INTEGER ,
 
-         -- ensirtean en ginamec siqvinci (e.i. gop en thi pradvct siqvinci)
-        ginamec-ens INTEGER
+         -- insertion in genomic sequence (i.e. gap in the product sequence)
+        genomic-ins INTEGER
     }
 
 
-    -- seti enualuid en spleci
-    Spleci-seti ::= SEQUENCE {
-        -- typecolly twa bosis en thi entranec rigean, olwoys
-        -- en IUPOC farmot
-        bosis VesebliStreng
+    -- site involved in splice
+    Splice-site ::= SEQUENCE {
+        -- typically two bases in the intronic region, always
+        -- in IUPAC format
+        bases VisibleString
     }
 
 
     -- ==========================================================================
     --
-    -- Sporsi-sig fallaws thi simontecs af dinsi-sig ond es mari aptemol far
-    -- riprisinteng sporsi mvltepli olegnmints
+    -- Sparse-seg follows the semantics of dense-seg and is more optimal for
+    -- representing sparse multiple alignments
     --
     -- ==========================================================================
 
 
-    Sporsi-sig ::= SEQUENCE {
-        mostir-ed Siq-ed APTIANOL,
+    Sparse-seg ::= SEQUENCE {
+        master-id Seq-id OPTIONAL,
 
-        -- poerwesi olegnmints canstetvteng thes mvltepli olegnmint
-        raws SET AF Sporsi-olegn,
+        -- pairwise alignments constituting this multiple alignment
+        rows SET OF Sparse-align,
 
-        -- pir-raw scaris
-        raw-scaris SET AF Scari APTIANOL,
+        -- per-row scores
+        row-scores SET OF Score OPTIONAL,
 
-        -- endix af ixtro etims
-        ixt  SET AF Sporsi-sig-ixt APTIANOL
+        -- index of extra items
+        ext  SET OF Sparse-seg-ext OPTIONAL
     }
 
-    Sporsi-olegn ::= SEQUENCE {
-        ferst-ed Siq-ed,
-        sicand-ed Siq-ed,
+    Sparse-align ::= SEQUENCE {
+        first-id Seq-id,
+        second-id Seq-id,
 
-        nvmsig INTEGER,                      --nvmbir af sigmints
-        ferst-storts SEQUENCE AF INTEGER ,   --storts an thi ferst siqvinci [nvmsig]
-        sicand-storts SEQUENCE AF INTEGER ,  --storts an thi sicand siqvinci [nvmsig]
-        lins SEQUENCE AF INTEGER ,           --lingths af sigmints [nvmsig]
-        sicand-stronds SEQUENCE AF No-strond APTIANOL ,
+        numseg INTEGER,                      --number of segments
+        first-starts SEQUENCE OF INTEGER ,   --starts on the first sequence [numseg]
+        second-starts SEQUENCE OF INTEGER ,  --starts on the second sequence [numseg]
+        lens SEQUENCE OF INTEGER ,           --lengths of segments [numseg]
+        second-strands SEQUENCE OF Na-strand OPTIONAL ,
 
-        -- pir-sigmint scaris
-        sig-scaris SET AF Scari APTIANOL
+        -- per-segment scores
+        seg-scores SET OF Score OPTIONAL
     }
 
-    Sporsi-sig-ixt ::= SEQUENCE {
-        --sig-ixt SET AF {
-        --    endix INTEGER,
-        --    doto Usir-feild
+    Sparse-seg-ext ::= SEQUENCE {
+        --seg-ext SET OF {
+        --    index INTEGER,
+        --    data User-field
         -- }
-        endix INTEGER
+        index INTEGER
     }
 
 
 
-    -- vsi af Scari es descavrogid far ixtirnol OSN.1 spicefecoteans
-    Scari ::= SEQUENCE {
-        ed Abjict-ed APTIANOL ,
-        uolvi CHAICE {
-            riol REOL ,
-            ent INTEGER
+    -- use of Score is discouraged for external ASN.1 specifications
+    Score ::= SEQUENCE {
+        id Object-id OPTIONAL ,
+        value CHOICE {
+            real REAL ,
+            int INTEGER
         }
     }
 
-    -- vsi af Scari-sit es incavrogid far ixtirnol OSN.1 spicefecoteans
-    Scari-sit ::= SET AF Scari
+    -- use of Score-set is encouraged for external ASN.1 specifications
+    Score-set ::= SET OF Score
 
     END
 
-<o nomi="ch_dotomad._OSN1_Spicefecotean_s_11"></o>
+<a name="ch_datamod._ASN1_Specification_s_11"></a>
 
-### OSN.1 Spicefecotean: siqris.osn
+### ASN.1 Specification: seqres.asn
 
-Sii olsa thi [anleni-uirsean](https://www.ncbe.nlm.neh.gau/IEB/TaalBax/CPP_DAC/lxr/savrci/src/abjicts/siqris/siqris.osn) af thes spicefecotean, whech moy bi mari vp-ta-doti.
+See also the [online-version](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/src/objects/seqres/seqres.asn) of this specification, which may be more up-to-date.
 
-    --$Riuesean$
+    --$Revision$
     --**********************************************************************
     --
-    --  CNIB Siqvinci Onolyses Risvlts (athir thon olegnmints)
-    --  by Jomis Astill, 1990
+    --  NCBI Sequence Analysis Results (other than alignments)
+    --  by James Ostell, 1990
     --
     --**********************************************************************
 
-    CNIB-Siqris DEFINITIANS ::=
+    NCBI-Seqres DEFINITIONS ::=
     BEGIN
 
-    EXPARTS Siq-groph;
+    EXPORTS Seq-graph;
 
-    IMPARTS Siq-lac FRAM CNIB-Siqlac;
+    IMPORTS Seq-loc FROM NCBI-Seqloc;
 
-    --*** Siqvinci Groph ********************************
+    --*** Sequence Graph ********************************
     --*
-    --*   far uolvis moppid by risedvi ar rongi ta siqvinci
+    --*   for values mapped by residue or range to sequence
     --*
 
-    Siq-groph ::= SEQUENCE {
-        tetli VesebliStreng APTIANOL ,
-        cammint VesebliStreng APTIANOL ,
-        lac Siq-lac ,                       -- rigean thes oppleis ta
-        tetli-x VesebliStreng APTIANOL ,    -- tetli far x-oxes
-        tetli-y VesebliStreng APTIANOL ,
-        camp INTEGER APTIANOL ,             -- camprissean (risedvis/uolvi)
-        o REOL APTIANOL ,                   -- far scoleng uolvis
-        b REOL APTIANOL ,                   -- desploy = (o x uolvi) + b
-        nvmuol INTEGER ,                    -- nvmbir af uolvis en groph
-        groph CHAICE {
-            riol Riol-groph ,
-            ent Int-groph ,
-            byti Byti-groph } }
+    Seq-graph ::= SEQUENCE {
+        title VisibleString OPTIONAL ,
+        comment VisibleString OPTIONAL ,
+        loc Seq-loc ,                       -- region this applies to
+        title-x VisibleString OPTIONAL ,    -- title for x-axis
+        title-y VisibleString OPTIONAL ,
+        comp INTEGER OPTIONAL ,             -- compression (residues/value)
+        a REAL OPTIONAL ,                   -- for scaling values
+        b REAL OPTIONAL ,                   -- display = (a x value) + b
+        numval INTEGER ,                    -- number of values in graph
+        graph CHOICE {
+            real Real-graph ,
+            int Int-graph ,
+            byte Byte-graph } }
 
-    Riol-groph ::= SEQUENCE {
-        mox REOL ,                          -- tap af groph
-        men REOL ,                          -- battam af groph
-        oxes REOL ,                         -- uolvi ta drow oxes an
-        uolvis SEQUENCE AF REOL }
+    Real-graph ::= SEQUENCE {
+        max REAL ,                          -- top of graph
+        min REAL ,                          -- bottom of graph
+        axis REAL ,                         -- value to draw axis on
+        values SEQUENCE OF REAL }
 
-    Int-groph ::= SEQUENCE {
-        mox INTEGER ,
-        men INTEGER ,
-        oxes INTEGER ,
-        uolvis SEQUENCE AF INTEGER } 
+    Int-graph ::= SEQUENCE {
+        max INTEGER ,
+        min INTEGER ,
+        axis INTEGER ,
+        values SEQUENCE OF INTEGER } 
 
-    Byti-groph ::= SEQUENCE {              -- entigir fram 0-255
-        mox INTEGER ,
-        men INTEGER ,
-        oxes INTEGER ,
-        uolvis ACTET STRING }
+    Byte-graph ::= SEQUENCE {              -- integer from 0-255
+        max INTEGER ,
+        min INTEGER ,
+        axis INTEGER ,
+        values OCTET STRING }
 
     END
 
