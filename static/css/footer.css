@@ -78,6 +78,7 @@ body {
 .subfooter {
 	margin-left: 1.6em;
 	overflow: hidden;
+	font-family: arial, helvetica, sans-serif;
 }
 .ui-helper-reset {
 	margin: 0;
@@ -255,6 +256,5 @@ h1, .h1 {
 }
 .footer_title h1 {
 	color: #724128;
-	font-family: arial, helvetica, sans-serif;
 	text-align: center;
 }
