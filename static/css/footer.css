@@ -1,9 +1,5 @@
 
-.footer {
-	clear: both;
-	margin-top: 1em;
-}
-#footer, #NCBIFooter_dynamic {
+#footer {
 	font-family: arial,helvetica,sans-serif;
 	font-size: 11px;
 	line-height: 1.8em;
