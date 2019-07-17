@@ -259,7 +259,7 @@ h1, .h1 {
     text-decoration: none;
     color: #14376c;
 }
-#footer, .contact_info {
+.contact_info {
     color: #14376c;
     text-align: left;
 }
