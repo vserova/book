@@ -159,11 +159,10 @@ div#docs-header {
 #left-column {
 	flex-shrink: 1;
 	flex-grow: 0;
-	flex-basis: 280px;
-	min-width: 280px;
+	flex-basis: 250px;
+	min-width: 250px;
 	display: flex;
 	overflow-y: auto;
-	border-right: 1px solid #e0e7e8
 }
 
 .footer {
