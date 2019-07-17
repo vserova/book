@@ -254,3 +254,12 @@ h1, .h1 {
 	color: #724128;
 	text-align: center;
 }
+
+#footer a {
+    text-decoration: none;
+    color: #14376c;
+}
+#footer, .contact_info {
+    color: #14376c;
+}
+
