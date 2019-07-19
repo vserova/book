@@ -180,7 +180,6 @@ p, table, pre, fieldset, dl {
 }
 
 
-/*
 h2, .h2 {
 	font-size: 1.23em;
 	line-height: 1.125;
@@ -225,9 +224,9 @@ ol, ul {
 	float: left;
 	text-align: left;
 	margin-top: 2em;
-	width: 19\0%;
-	*width:19%: ;
+	width: 19%; 
 }
+
 .foot_list li {
 	list-style-type: none;
 }
