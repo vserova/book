@@ -108,6 +108,8 @@ body {
 }
 
 */
+
+
 #footer #external-disclaimer {
 	padding: 0.682em;
 	line-height: 1em;
@@ -132,6 +134,9 @@ p, table, pre, fieldset, dl {
 	text-decoration: none;
 	color: #14376c;
 }
+
+
+
 #footer-contents-left a {
 	font-weight: bold;
 }
@@ -173,6 +178,9 @@ p, table, pre, fieldset, dl {
 #footer #external-disclaimer a {
 	text-decoration: underline;
 }
+
+
+/*
 h2, .h2 {
 	font-size: 1.23em;
 	line-height: 1.125;
@@ -263,8 +271,4 @@ h1, .h1 {
     color: #14376c;
     text-align: left;
 }
-#nlm_thumb_logo a {
-    background: transparent url(/cxx-toolkit/static/img/footer_imgs.png) no-repeat scroll 0 100%;
-    width: 34px;
-    margin-right: 14px;
-}
+
