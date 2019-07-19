@@ -263,4 +263,8 @@ h1, .h1 {
     color: #14376c;
     text-align: left;
 }
-
+#nlm_thumb_logo a {
+    background: transparent url(/cxx-toolkit/static/img/footer_imgs.png) no-repeat scroll 0 100%;
+    width: 34px;
+    margin-right: 14px;
+}
