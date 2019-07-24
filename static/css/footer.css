@@ -154,3 +154,11 @@ color : #14376c;
 color : #14376c;
 text-align : left;
 }
+.foot_list {
+    margin: 0;
+    padding: 0;
+    width: 20%;
+    float: left;
+    text-align: left;
+    margin-top: 2em;
+}
