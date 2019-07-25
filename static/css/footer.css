@@ -177,11 +177,11 @@ text-align : left;
     margin-right: 14px;
 }
 #hhs_thumb_logo a {
-    background: url(/cxx-toolkit/static/img/footer_imgs.png) -75px 100% no-repeat scroll transparent;
+    background: url(/book/static/img/footer_imgs.png) -75px 100% no-repeat scroll transparent;
     width: 39px;
     margin-right: 14px;
 }
 #usagov_thumb_logo a {
-    background: url(/cxx-toolkit/static/img/footer_imgs.png) -114px 100% no-repeat scroll transparent;
+    background: url(/book/static/img/footer_imgs.png) -114px 100% no-repeat scroll transparent;
     width: 89px;
 }
