@@ -162,3 +162,8 @@ text-align : left;
     text-align: left;
     margin-top: 2em;
 }
+#nlm_thumb_logo a {
+    background: transparent url(/book/static/img/footer_imgs.png) no-repeat scroll 0 100%;
+    width: 34px;
+    margin-right: 14px;
+}
