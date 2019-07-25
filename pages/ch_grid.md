@@ -190,7 +190,7 @@ To provide more flexibility, load balancing, and fault-tolerance, it is highly a
 
 The following diagram illustrates this flow of control and data:
 
-[![Image grid-collab.png](/cxx-toolkit/static/img/grid-collab.png)](/cxx-toolkit/static/img/grid-collab.png "Click to see the full-resolution image")
+[![Image grid-collab.png](/book/static/img/grid-collab.png)](/book/static/img/grid-collab.png "Click to see the full-resolution image")
 
 <a name="ch_grid.The_GRID_Farm"></a>
 

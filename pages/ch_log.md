@@ -485,7 +485,7 @@ Application state codes:
 
 The normal state transitions are:
 
-[![Image ch\_core\_log\_fmt\_app\_states.png](/cxx-toolkit/static/img/ch_core_log_fmt_app_states.png)](/cxx-toolkit/static/img/ch_core_log_fmt_app_states.png "Click to see the full-resolution image")
+[![Image ch\_core\_log\_fmt\_app\_states.png](/book/static/img/ch_core_log_fmt_app_states.png)](/book/static/img/ch_core_log_fmt_app_states.png "Click to see the full-resolution image")
 
 <a name="ch_core.Events_and_Messages"></a>
 
@@ -655,13 +655,13 @@ For example:
 
 An example of application events:
 
-[![Image ch\_core\_log\_fmt\_event.png](/cxx-toolkit/static/img/ch_core_log_fmt_event.png)](/cxx-toolkit/static/img/ch_core_log_fmt_event.png "Click to see the full-resolution image")
+[![Image ch\_core\_log\_fmt\_event.png](/book/static/img/ch_core_log_fmt_event.png)](/book/static/img/ch_core_log_fmt_event.png "Click to see the full-resolution image")
 
 (Click to see the full-resolution image.)
 
 An example of diagnostic messages:
 
-[![Image ch\_core\_log\_fmt\_diagnostic.png](/cxx-toolkit/static/img/ch_core_log_fmt_diagnostic.png)](/cxx-toolkit/static/img/ch_core_log_fmt_diagnostic.png "Click to see the full-resolution image")
+[![Image ch\_core\_log\_fmt\_diagnostic.png](/book/static/img/ch_core_log_fmt_diagnostic.png)](/book/static/img/ch_core_log_fmt_diagnostic.png "Click to see the full-resolution image")
 
 (Click to see the full-resolution image.)
 
@@ -871,7 +871,7 @@ The following code fragments show examples of API calls for creating request-spe
 
 Code like the above will result in [AppLog](https://mini.ncbi.nlm.nih.gov/1k2vj) entries that look similar to:
 
-[![Image ch\_grid\_cserver\_applog.png](/cxx-toolkit/static/img/ch_grid_cserver_applog.png)](/cxx-toolkit/static/img/ch_grid_cserver_applog.png "Click to see the full-resolution image")
+[![Image ch\_grid\_cserver\_applog.png](/book/static/img/ch_grid_cserver_applog.png)](/book/static/img/ch_grid_cserver_applog.png "Click to see the full-resolution image")
 
 Each thread has its own request context. Therefore, simultaneous calls to ***GetDiagContext().SetRequestContext()*** in multiple event handlers will not interfere with each other. If ***GetDiagContext().SetRequestContext()*** is not called (or is called with NULL argument), the default request context, also unique to each thread, is used.
 

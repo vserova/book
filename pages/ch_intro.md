@@ -179,7 +179,7 @@ A new application is written by deriving a class from the [CNcbiApplication](htt
 
 <a name="ch_intro.F1"></a>
 
-![Figure 1. The CNcbiApplication class](/cxx-toolkit/static/img/CNcbiApplication.gif)
+![Figure 1. The CNcbiApplication class](/book/static/img/CNcbiApplication.gif)
 
 Figure 1. The [CNcbiApplication](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNcbiApplication) class
 
@@ -436,7 +436,7 @@ The CONNECT module provides a higher level of abstraction to connection programm
 
 <a name="ch_intro.F2"></a>
 
-![Figure 2. Connection stream classes](/cxx-toolkit/static/img/CConn_IOStream.gif)
+![Figure 2. Connection stream classes](/book/static/img/CConn_IOStream.gif)
 
 Figure 2. Connection stream classes
 
@@ -560,7 +560,7 @@ The base class for all nodes in the graph structure for an HTML document is the 
 
 <a name="ch_intro.F3"></a>
 
-![Figure 3. HTML classes derived from CNCBINode](/cxx-toolkit/static/img/CNCBINode.gif)
+![Figure 3. HTML classes derived from CNCBINode](/book/static/img/CNCBINode.gif)
 
 Figure 3. HTML classes derived from [CNCBINode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CNCBINode)
 
@@ -568,7 +568,7 @@ The text node classes [CHTMLText](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_D
 
 <a name="ch_intro.F4"></a>
 
-![Figure 4. The CHTMLNode class and its derived classes](/cxx-toolkit/static/img/CHTMLNode.gif)
+![Figure 4. The CHTMLNode class and its derived classes](/book/static/img/CHTMLNode.gif)
 
 Figure 4. The [CHTMLNode](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTMLNode) class and its derived classes
 
@@ -578,7 +578,7 @@ Important classes of HTML elements used in forms to input data are the input ele
 
 <a name="ch_intro.F5"></a>
 
-![Figure 5. The CHTML\_input class and its derived classes](/cxx-toolkit/static/img/CHTML_input.gif)
+![Figure 5. The CHTML\_input class and its derived classes](/book/static/img/CHTML_input.gif)
 
 Figure 5. The [CHTML\_input](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CHTML_input) class and its derived classes
 
@@ -592,7 +592,7 @@ The HTML classes can be used to dynamically generate pages. In addition to the c
 
 <a name="ch_intro.F6"></a>
 
-![Figure 6. HTML page classes](/cxx-toolkit/static/img/CHTMLPage.gif)
+![Figure 6. HTML page classes](/book/static/img/CHTMLPage.gif)
 
 Figure 6. HTML page classes
 
@@ -910,7 +910,7 @@ The UTIL module defines a number of portable classes that provide additional str
 
 <a name="ch_intro.F7"></a>
 
-![Figure 7. Relationship between CByteSource and its derived classes](/cxx-toolkit/static/img/CByteSource.gif)
+![Figure 7. Relationship between CByteSource and its derived classes](/book/static/img/CByteSource.gif)
 
 Figure 7. Relationship between [CByteSource](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CByteSource) and its derived classes
 

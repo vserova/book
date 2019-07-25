@@ -332,7 +332,7 @@ The traits interface is only to be used by those who are covering new types of d
 The diagram below describes the interactions between CRowReader and traits in the case of looping over data source rows.
 
 
-[![Iterating Over a Data Source](/cxx-toolkit/static/img/ch_tabular_iterating_over_data_source.png)](/cxx-toolkit/static/img/ch_tabular_iterating_over_data_source.png "Click to see the full-resolution image")
+[![Iterating Over a Data Source](/book/static/img/ch_tabular_iterating_over_data_source.png)](/book/static/img/ch_tabular_iterating_over_data_source.png "Click to see the full-resolution image")
 
 The user code corresponding to this diagram may look similar to the following:
 
@@ -375,7 +375,7 @@ At this moment all the row data are populated and an iterator is provided for th
 
 The diagram below describes the interactions between CRowReader and traits in the case of validating a data source.
 
-[![Validating a Data Source](/cxx-toolkit/static/img/ch_tabular_validating_data_source.png)](/cxx-toolkit/static/img/ch_tabular_validating_data_source.png "Click to see the full-resolution image")
+[![Validating a Data Source](/book/static/img/ch_tabular_validating_data_source.png)](/book/static/img/ch_tabular_validating_data_source.png "Click to see the full-resolution image")
 
 
 The user code corresponding to this diagram may look similar to the following:
@@ -431,7 +431,7 @@ If traits generate an exception in any of the methods that CRowReader invokes th
 
 The diagram below shows the hierarchy of some generic base classes available for traits:
 
-[![Base Classes](/cxx-toolkit/static/img/ch_tabular_base_classes.png)](/cxx-toolkit/static/img/ch_tabular_base_classes.png "Click to see the full-resolution image")
+[![Base Classes](/book/static/img/ch_tabular_base_classes.png)](/book/static/img/ch_tabular_base_classes.png "Click to see the full-resolution image")
 
 The only non-templated class on the diagram is the most basic one – CRowReaderStreamBase. The other classes here are implemented as templates and could be specialized for certain purposes. For example, the following standard typedefs are declared in row_reader_char_delimited.hpp:
 

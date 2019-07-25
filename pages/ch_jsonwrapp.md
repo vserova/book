@@ -33,7 +33,7 @@ nav: pages/ch_jsonwrapp
 
 ### Introduction
 
-JavaScript Object Notation - [JSON](http://www.ietf.org/rfc/rfc4627.txt) is a popular lightweight, text-based data interchange format. JSON derives a small set of formatting rules for portable representation of structured data. While handling of JSON data can be done using [SERIAL](/cxx-toolkit/pages/ch_ser) library that could be too difficult. It would require data specification (ASN.1 or XML schema) and generation of special C++ data storage classes. In practice, specification is not always available, and code generation is not always desirable. There is a need for something simpler – simple tool to read, write and analyze any JSON data. 
+JavaScript Object Notation - [JSON](http://www.ietf.org/rfc/rfc4627.txt) is a popular lightweight, text-based data interchange format. JSON derives a small set of formatting rules for portable representation of structured data. While handling of JSON data can be done using [SERIAL](/book/pages/ch_ser) library that could be too difficult. It would require data specification (ASN.1 or XML schema) and generation of special C++ data storage classes. In practice, specification is not always available, and code generation is not always desirable. There is a need for something simpler – simple tool to read, write and analyze any JSON data. 
 
 There are several libraries which do this, NCBI does not endorse any of them in particular. At present, we have chosen [RAPIDJSON](https://github.com/miloyip/rapidjson), but we have made every effort to hide its implementation details and created our own wrapper classes and API. In case we choose to change the underlying implementation in the future, what would be required from developers is recompilation only, the API will not change.
 
@@ -45,7 +45,7 @@ JSON value can represent four primitive types (*string*, *number*, *boolean*, an
 
 The figure below illustrates `JsonWrapp` library class relationship diagram.
 
-[![Image jsonwrapp\_classes.png](/cxx-toolkit/static/img/jsonwrapp_classes.png)](/cxx-toolkit/static/img/jsonwrapp_classes.png "Click to see the full-resolution image")
+[![Image jsonwrapp\_classes.png](/book/static/img/jsonwrapp_classes.png)](/book/static/img/jsonwrapp_classes.png "Click to see the full-resolution image")
 
 First thing to note is that most classes here act like pointers. That is, creating or copying them does not create any data; destroying them does not destroy any data either. There is only one data storage class – *Document*. All others are simply pointers to different parts of the document. Once so, it is impossible to create a standalone JSON value object. To create a value, one should add it into a document and get a proper adapter object.
 
