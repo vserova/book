@@ -4,6 +4,7 @@
 }
 
 .portlet {
+	font-family: arial, helvetica, sans-serif;
 	border-top: .4em solid #97b0c8;
 	padding-top: 0.46em;
 	margin: .769em 0 1.2em 0;
@@ -42,19 +43,27 @@ ol, ul {
 	_clear: left;
 }
 .portlet ul li a {
-	font-weight: normal;
-	color: #14376c;
 	text-decoration: none;
+    	color: #14376c;
+	font-size: 11px;
+    	line-height: 1.8em;
 }
 .sensor_title {
 	margin-right: 2em;
 }
 .portlet_title {
 	margin-right: 0.2em;
-	font-size: 1.4em;
-	color: #985735;
-	font-weight: bold;
-	display: inline;
+	text-transform: uppercase;
+    	margin: 0;
+    	margin-bottom: 0.05em;
+	color: #724128;
+	font-size: 1.07em;
+    	line-height: 1.2857;
+	margin-block-start: 1em;
+    	margin-block-end: 1em;
+    	margin-inline-start: 0px;
+    	margin-inline-end: 0px;
+    	font-weight: bold;
 }
 
 .portlet ul li a:hover, .portlet ul li a:active {
