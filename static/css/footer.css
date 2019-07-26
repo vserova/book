@@ -32,6 +32,7 @@ margin : 1em 1.6em;
 #footer-contents-right {
 float : right;
 text-align : right;
+margin-left: 5em;
 }
 p, table, pre, fieldset, dl {
 margin : 0.6923em 0;
