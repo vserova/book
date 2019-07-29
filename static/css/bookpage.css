@@ -135,12 +135,32 @@ div#docs-header {
 	width: 950px
 }
 
+/* Content formatting begin */
 .content {
-/*	font-size: 16px;  */
-/*	line-height: 24px;  */
 	display: flex;
 	margin: 101px auto 0
-}
+	font: 62.5%/1.3846 arial,helvetica,clean,sans-serif;
+	font-size: 1.09em;
+	line-height: 1.45em;
+	}
+		
+
+* header typography */
+		
+/* all should be used in the context of 13px font-size, try to add to multiple of 18px for consistent vertical rhythm */
+h1,.h1{font-size: 1.3846em; line-height:1.5; margin:1em 0 .5em; } /* font-size of 18px, line-height of 27px */
+h2,.h2{font-size: 1.2307em; line-height:1.125; margin:1.125em 0 .5625em;} /* font-size of 16px, line-height of 18px */
+h3,.h3{font-size: 1.0769em; line-height:1.2857; margin:1.2856em 0 .6428em; } /* font-size of 14px, line-height of 18px */
+
+h4,h5,h6,h3.inline{font-size: 1em; margin:1.3846em 0 .6923em; } /* line-height of 18px */
+h5,.h5{font-style:italic;font-weight:normal;}
+h6, .h6 {font-weight: normal;}
+
+h4,.h4{color:#59331f;}
+h3,.h3{color:#724128;}
+h2,.h2{color:#985735;}
+h1,.h1{color:#000;}
+
 
 .content .main-column {
 	order: 1;
@@ -155,6 +175,7 @@ div#docs-header {
 	display: inline-block;
 	overflow-x: scroll
 }
+/* Content formatting end */
 
 #left-column {
 	flex-shrink: 1;
