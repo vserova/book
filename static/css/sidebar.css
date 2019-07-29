@@ -29,6 +29,8 @@ ol, ul {
 }
 .portlet ul li {
 	list-style-type: none;
+	font-size: 11px;
+	line-height: 1.8em;
 	margin-top: 0.46em;
 	border-bottom: 1px dotted #CCC;
 	padding-bottom: 1px;
@@ -45,8 +47,6 @@ ol, ul {
 .portlet ul li a {
 	text-decoration: none;
     	color: #14376c;
-	font-size: 11px;
-    	line-height: 1.8em;
 }
 .sensor_title {
 	margin-right: 2em;
