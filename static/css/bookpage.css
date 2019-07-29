@@ -175,6 +175,12 @@ h1,.h1{color:#000;}
 	display: inline-block;
 	overflow-x: scroll
 }
+
+/* proposed link colors */
+.content a{color:#2f4a8b}
+.content a:hover,.content a:active{color:#985735}
+.content a:visited{color:#642a8f}
+
 /* Content formatting end */
 
 #left-column {
