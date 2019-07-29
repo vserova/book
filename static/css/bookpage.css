@@ -372,5 +372,11 @@ tr.option {color:white;}
 	width: 100%;
 }
 
+.nvgtn a {
+    font-size: 14px;
+    color: #205081;
+    text-decoration: none;
+}
+
 .right{float:right}
 
