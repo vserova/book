@@ -7,6 +7,7 @@ line-height : 1.8em;
 background : url(//static.pubmed.gov/portal/portal3rc.fcgi/4068278/img/3418709) left top repeat-x scroll #e5e5e5;
 clear : both;
 z-index : 1;
+padding-top: 5px;
 }
 #footer, .contact_info {
 color : #14376c;
