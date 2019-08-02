@@ -237,7 +237,7 @@ div.sphinxsidebar {
 	bottom: 0;
 	position: fixed;
 	overflow-y: auto;
-	background-color: #f9f9f9;
+	/* background-color: #f9f9f9; */
 }
 
 div.sphinxsidebarwrapper {
