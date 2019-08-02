@@ -236,7 +236,8 @@ div.sphinxsidebar {
 	top: 110px;
 	bottom: 0;
 	position: fixed;
-	overflow-y: auto
+	overflow-y: auto;
+	background-color: #f9f9f9;
 }
 
 div.sphinxsidebarwrapper {
@@ -301,7 +302,7 @@ div.sphinxsidebar ul {
 }
 
 .navbar2 {
-	background-color: #f8f8f8;
+	background-color: #f9f9f9;
 	display: flex;
 	height: 30px;
 	position: fixed;
