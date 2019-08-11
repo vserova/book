@@ -6,8 +6,7 @@ nav: pages/ch_intro
 ---
 
 
-{{ page.title }}
-=================================================
+#{{ page.title }}
 
 ## Introduction
 
