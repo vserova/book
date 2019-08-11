@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Introduction to the C++ Toolkit
+my_num : 42
 nav: pages/ch_intro
 ---
 
@@ -9,6 +10,10 @@ nav: pages/ch_intro
 =================================================
 
 ## Introduction
+
+{{ page.title }}
+
+mynum: {{ page.my_num }}
 
 One difficulty in understanding a major piece of software such as the C++ Toolkit is knowing where to begin in understanding the overall framework or getting the 'big picture' of how all the different components relate to each other. One approach is to dive into the details of one component and understand it in sufficient detail to get a roadmap of the rest of the components, and then repeat this process with the other components. Without a formal road map, this approach can be very time consuming and it may take a long time to locate the functionality one needs.
 
