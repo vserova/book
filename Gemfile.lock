@@ -48,7 +48,7 @@ GEM
       activesupport (>= 2)
       nokogiri (>= 1.8.5)
     i18n (0.7.0)
-    jekyll (3.6.3)
+    jekyll (3.8.5)
       classifier-reborn (~> 2.0)
       colorator (~> 1.0)
       jekyll-coffeescript (~> 1.0)
