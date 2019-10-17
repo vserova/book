@@ -192,9 +192,9 @@ This section includes compact code fragments that show the essence of how to ach
 ### Create a Document from an std::string Object
 
 
-    std::string         xmldata( "<TagA>"
-                                     "<TagB>stuff</TagB>"
-                                 "</TagA>" );
+    std::string         xmldata( "&lt;TagA&gt;"
+                                     "&lt;TagB&gt;stuff&lt;/TagB&gt;"
+                                 "&lt;/TagA&gt;" );
     xml::document       doc( xmldata.c_str(), xmldata.size(), NULL );
 
 <a name="ch_xmlwrapp._Create_a_Document_fr_1"></a>
@@ -367,7 +367,7 @@ Other methods and options are available for saving the transformation result - s
 
 -   If the effective output method is "`xml`", an XML declaration will be prepended to the transformation result when serialized (unless suppressed by the **`xml::save_op_no_decl`** save option).
 
--   There are three conditions for which an empty "`<blank/>`" node will be appended to the transformation output:
+-   There are three conditions for which an empty "`&lt;blank/&gt;`" node will be appended to the transformation output:
 
     -   The output method specified in the XSL is not "`xml`" or "`text`".
 
@@ -404,9 +404,9 @@ The **`xpath_expression`** object also supports:
 
 The XPath specification does not support default namespaces, and it considers all nodes without prefixes to be in the null namespace, not the default namespace. This creates a problem when you want to search for nodes to which a default namespace applies, because the default namespace cannot be directly matched. For example, the following code will not find any matches:
 
-    std::string                     xmldata("<A xmlns=\"http://nlm.nih.gov\">"
-                                                "<B><C>stuff</C></B>"
-                                            "</A>" );
+    std::string                     xmldata("&lt;A xmlns=\"http://nlm.nih.gov\"&gt;"
+                                                "&lt;B&gt;&lt;C&gt;stuff&lt;/C&gt;&lt;/B&gt;"
+                                            "&lt;/A&gt;" );
     xml::document                   doc( xmldata.c_str(), xmldata.size(),
                                          NULL );
     xml::node &                     root = doc.get_root_node();
@@ -421,9 +421,9 @@ The XPath specification does not support default namespaces, and it considers al
 
 The solution is to create a special namespace with the sole purpose of associating a made-up prefix with the URI of the default namespace. Use that namespace when creating the XPath expression, and prefix the nodes in your XPath expression with your made-up prefix. This prefix should be distinct from other prefixes in the document. The following code will find the desired node:
 
-    std::string                     xmldata("<A xmlns=\"http://nlm.nih.gov\">"
-                                                "<B><C>stuff</C></B>"
-                                            "</A>" );
+    std::string                     xmldata("&lt;A xmlns=\"http://nlm.nih.gov\"&gt;"
+                                                "&lt;B&gt;&lt;C&gt;stuff&lt;/C&gt;&lt;/B&gt;"
+                                            "&lt;/A&gt;" );
     xml::document                   doc( xmldata.c_str(), xmldata.size(),
                                          NULL );
     xml::node &                     root = doc.get_root_node();
@@ -450,7 +450,7 @@ The solution is to create a special namespace with the sole purpose of associati
     class myExtFunc : public xslt::extension_function
     {
         public:
-            void execute (const std::vector<xslt::xpath_object> &  args,
+            void execute (const std::vector&lt;xslt::xpath_object&gt; &  args,
                           const xml::node &                        node,
                           const xml::document &                    doc)
             {
