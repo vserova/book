@@ -907,12 +907,12 @@ Imagine that an event parser which implements both ***text()*** and [entity\_ref
 
 <table>
 	<tr>
-		<td style="text-align: left; padding: 15px; border="0">
-
+		<td style="text-align: left; padding: 15px; border="0"">
+			<pre>
 			    &lt;?xml version="1.0"?&gt;
 			    &lt;!DOCTYPE EXAMPLE SYSTEM "example.dtd" [ &lt;!ENTITY my "VALUE"&gt;]&gt;
 			    &lt;root&gt;&lt;node&gt;Super &my; oh!&lt;/node&gt;&lt;/root&gt;
-
+			</pre>
 
 		</td>
 	</tr>
