@@ -784,20 +784,6 @@ This implementation detail is related to the limitations of `libxml2` with respe
 </table>
 
 
-```
-
-    &lt;?xml version="1.0"?>
-    <!DOCTYPE root PUBLIC "something" "my.dtd" [
-    <!ATTLIST root defaultAttr CDATA "defaultVal">
-    ]>
-    <root xmlns:some_ns="http://the.com"
-          attr1       = "val1"
-          foo         = "fooVal"
-          some_ns:bar = "barVal">
-    </root>
-
-```
-
 This example introduces a default attribute called defaultAttr for the root node. The `libxml2` library stores default and non-default attributes separately. The library provides very limited access the default attributes - there is no way to iterate over them and the only possible way to get a default attribute is to search for it explicitly. For example:
 
 ```
