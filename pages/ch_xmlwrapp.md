@@ -765,6 +765,25 @@ but this code will generate an exception:
 
 This implementation detail is related to the limitations of `libxml2` with respect to default attributes. Let’s take an example that has a DTD:
 
+<table>
+	<tr>
+		<td style="text-align: left; padding: 15px; border: 0;">
+			<pre>
+&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE root PUBLIC "something" "my.dtd" [
+&lt;!ATTLIST root defaultAttr CDATA "defaultVal"&gt;
+]&gt;
+    &lt;root xmlns:some_ns="http://the.com"
+          attr1       = "val1"
+          foo         = "fooVal"
+          some_ns:bar = "barVal"&gt;
+    &lt;/root&gt;
+			</pre>
+		</td>
+	</tr>
+</table>
+
+
 ```
 
     &lt;?xml version="1.0"?>
