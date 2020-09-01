@@ -145,7 +145,7 @@ div#docs-header {
 	}
 		
 
-* header typography */
+/* header typography */
 		
 /* all should be used in the context of 13px font-size, try to add to multiple of 18px for consistent vertical rhythm */
 h1,.h1{font-size: 1.3846em; line-height:1.5; margin:1em 0 .5em; } /* font-size of 18px, line-height of 27px */
@@ -408,3 +408,62 @@ tr.option {color:white;}
 
 .right{float:right}
 
+
+/* Styles for 'Move to top' button */
+
+.back-to-top.visible {
+    -webkit-transition-delay: 0s;
+    transition-delay: 0s;
+    visibility: visible;
+    opacity: 1;
+    -webkit-transition-delay: 0s,0s,0s;
+    transition-delay: 0s,0s,0s;
+}
+
+.back-to-top:hover {
+    box-shadow: none;
+    background-color: #f1f1f1;
+    color: #323a45;
+}
+
+.back-to-top {
+    display: block;
+    width: auto;
+    position: fixed;
+    top: 0;
+    z-index: 4;
+    white-space: nowrap;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 400;
+    padding: 0.8rem 1rem;
+    margin: 0;
+    line-height: 2rem;
+    color: #323a45;
+    border: 1px solid rgba(0,0,0,0.05);
+        border-bottom-color: rgba(0, 0, 0, 0.05);
+        border-bottom-style: solid;
+        border-bottom-width: 1px;
+    box-shadow: 0 0 1rem rgba(0,0,0,0.15);
+    background-color: #ffffff;
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transition: opacity 0.3s,visibility 0s linear 0.3s;
+    transition: opacity 0.3s,visibility 0s linear 0.3s;
+    z-index: 9;
+    cursor: pointer;
+    -webkit-transition: opacity 0.3s,visibility 0s linear 0.3s,box-shadow 0.3s;
+    transition: opacity 0.3s,visibility 0s linear 0.3s,box-shadow 0.3s;
+        transition-delay: 0s, 0.3s, 0s;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    padding: 1.3rem;
+    position: fixed;
+    width: 10rem;
+    height: 10rem;
+    top: inherit;
+    right: 0;
+	bottom: 6.5rem;}
