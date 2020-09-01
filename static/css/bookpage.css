@@ -477,6 +477,3 @@ tr.option {color:white;}
     background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0OCA0OCIgd2lkdGg9IjQ4cHgiIGhlaWdodD0iNDhweCI+CiAgPHBhdGggZD0ibSAzOCwyNS42NjUwMzkgLTIuODI4MTI2LDIuODMwMDc4IC05LjE2OTkyMSwtOS4xNjc5NjkgMCwxNy4wMDc4MTMgLTQuMDAxOTUzLDAgMCwtMTcuMDA5NzY2IC05LjE2OTkyMiw5LjE2OTkyMiBMIDEwLDI1LjY2NTAzOSBsIDE0LC0xNCAxNCwxNCB6Ii8+Cjwvc3ZnPgo=") no-repeat center/5rem;
 }
 
-*, ::after, ::before {
-    box-sizing: inherit;
-}
