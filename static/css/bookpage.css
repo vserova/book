@@ -478,7 +478,7 @@ tr.option {color:white;}
     background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0OCA0OCIgd2lkdGg9IjQ4cHgiIGhlaWdodD0iNDhweCI+CiAgPHBhdGggZD0ibSAzOCwyNS42NjUwMzkgLTIuODI4MTI2LDIuODMwMDc4IC05LjE2OTkyMSwtOS4xNjc5NjkgMCwxNy4wMDc4MTMgLTQuMDAxOTUzLDAgMCwtMTcuMDA5NzY2IC05LjE2OTkyMiw5LjE2OTkyMiBMIDEwLDI1LjY2NTAzOSBsIDE0LC0xNCAxNCwxNCB6Ii8+Cjwvc3ZnPgo=") no-repeat center/5rem;
 }
 */
-
+/*
 #myBtn {
   display: none; /* Hidden by default */
   position: fixed; /* Fixed/sticky position */
@@ -493,6 +493,21 @@ tr.option {color:white;}
   padding: 15px; /* Some padding */
   border-radius: 10px; /* Rounded corners */
   font-size: 18px; /* Increase font size */
+}
+*/
+
+#myBtn {
+    background: #e9eefd;
+    border: 0;
+    bottom: 0;
+    box-shadow: none;
+    color: #0c2a55;
+    font-family: Overpass,Helvetica,Arial,sans-serif;
+    font-weight: 600;
+    width: 43px;
+    height: 43px;
+    padding: 7px;
+    text-transform: uppercase;
 }
 
 #myBtn:hover {
