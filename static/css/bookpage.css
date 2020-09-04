@@ -486,8 +486,7 @@ display: none; /* Hidden by default */
   right: 30px; /* Place the button 30px from the right */
   z-index: 99; /* Make sure it does not overlap */
   outline: none; /* Remove outline */
-  background-color:  #e9eefd;; /* Set a background color */
-  color: white; /* Text color */
+  background-color:  #f9f9f9; /* Set a background color */
   cursor: pointer; /* Add a mouse pointer on hover */
   border-radius: 10px; /* Rounded corners */
 
