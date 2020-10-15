@@ -411,76 +411,9 @@ tr.option {color:white;}
 
 /* Styles for 'Move to top' button */
 
-/*
-.back-to-top.visible {
-    -webkit-transition-delay: 0s;
-    transition-delay: 0s;
-    visibility: visible;
-    opacity: 1;
-    -webkit-transition-delay: 0s,0s,0s;
-    transition-delay: 0s,0s,0s;
-}
-
-.back-to-top:hover {
-    box-shadow: none;
-    background-color: #f1f1f1;
-    color: #323a45;
-}
-
-.back-to-top {
-    display: block;
-    width: auto;
-    position: fixed;
-    top: 0;
-    z-index: 4;
-    white-space: nowrap;
-    text-align: center;
-    font-size: 1.4rem;
-    font-weight: 400;
-    padding: 0.8rem 1rem;
-    margin: 0;
-    line-height: 2rem;
-    color: #323a45;
-    border: 1px solid rgba(0,0,0,0.05);
-        border-bottom-color: rgba(0, 0, 0, 0.05);
-        border-bottom-style: solid;
-        border-bottom-width: 1px;
-    box-shadow: 0 0 1rem rgba(0,0,0,0.15);
-    background-color: #ffffff;
-    visibility: hidden;
-    opacity: 0;
-    -webkit-transition: opacity 0.3s,visibility 0s linear 0.3s;
-    transition: opacity 0.3s,visibility 0s linear 0.3s;
-    z-index: 9;
-    cursor: pointer;
-    -webkit-transition: opacity 0.3s,visibility 0s linear 0.3s,box-shadow 0.3s;
-    transition: opacity 0.3s,visibility 0s linear 0.3s,box-shadow 0.3s;
-        transition-delay: 0s, 0.3s, 0s;
-    display: -webkit-box;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    flex-direction: column;
-    padding: 1.3rem;
-    position: fixed;
-    width: 10rem;
-    height: 10rem;
-    top: inherit;
-    right: 0;
-	bottom: 6.5rem;}
-
-.back-to-top::before {
-    display: block;
-    content: "";
-    width: 5rem;
-    height: 4rem;
-    margin: 0 auto auto auto;
-    background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0OCA0OCIgd2lkdGg9IjQ4cHgiIGhlaWdodD0iNDhweCI+CiAgPHBhdGggZD0ibSAzOCwyNS42NjUwMzkgLTIuODI4MTI2LDIuODMwMDc4IC05LjE2OTkyMSwtOS4xNjc5NjkgMCwxNy4wMDc4MTMgLTQuMDAxOTUzLDAgMCwtMTcuMDA5NzY2IC05LjE2OTkyMiw5LjE2OTkyMiBMIDEwLDI1LjY2NTAzOSBsIDE0LC0xNCAxNCwxNCB6Ii8+Cjwvc3ZnPgo=") no-repeat center/5rem;
-}
-*/
 
 #myBtn {
-display: none; /* Hidden by default */
+  display: none; /* Hidden by default */
   position: fixed; /* Fixed/sticky position */
   bottom: 20px; /* Place the button at the bottom of the page */
   right: 30px; /* Place the button 30px from the right */
@@ -489,8 +422,19 @@ display: none; /* Hidden by default */
   background-color:  #f9f9f9; /* Set a background color */
   cursor: pointer; /* Add a mouse pointer on hover */
   border-radius: 10px; /* Rounded corners */
+	
+	
+		
+    text-transform: uppercase;
+    background: #f5f2ee;
+    color: #9b9691;
+    border: 1px solid #d9d5d2;
+    border-radius: 3px;
+    position: fixed;
+    bottom: 60px;
+    right: 0;
 
-    border: 0;
+  /*  border: 0;
     bottom: 0;
     box-shadow: none;
     color: #0c2a55;
@@ -499,7 +443,8 @@ display: none; /* Hidden by default */
     width: 43px;
     height: 43px;
     padding: 7px;
-    text-transform: uppercase;
+    text-transform: uppercase;  /*
+
 }
 
 #myBtn:hover {
