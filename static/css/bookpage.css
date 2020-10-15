@@ -424,23 +424,9 @@ tr.option {color:white;}
   border-radius: 10px; /* Rounded corners */
 	
 	
-		
-    text-transform: uppercase;
-    background: #f5f2ee;
-    color: #9b9691;
-    font-family: Overpass,Helvetica,Arial,sans-serif;
-    font-weight: 600;
-    width: 43px;
-    height: 43px;
-    padding: 7px;
+
     border: 1px solid #d9d5d2;
     border-radius: 3px;
-    position: fixed;
-    bottom: 60px;
-    right: 10px;
-
-  /*  border: 0;
-    bottom: 0;
     box-shadow: none;
     color: #0c2a55;
     font-family: Overpass,Helvetica,Arial,sans-serif;
@@ -448,7 +434,7 @@ tr.option {color:white;}
     width: 43px;
     height: 43px;
     padding: 7px;
-    text-transform: uppercase;  /*
+    text-transform: uppercase; 
 
 }
 
