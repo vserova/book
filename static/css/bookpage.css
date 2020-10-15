@@ -428,11 +428,16 @@ tr.option {color:white;}
     text-transform: uppercase;
     background: #f5f2ee;
     color: #9b9691;
+    font-family: Overpass,Helvetica,Arial,sans-serif;
+    font-weight: 600;
+    width: 43px;
+    height: 43px;
+    padding: 7px;
     border: 1px solid #d9d5d2;
     border-radius: 3px;
     position: fixed;
     bottom: 60px;
-    right: 0;
+    right: 10px;
 
   /*  border: 0;
     bottom: 0;
