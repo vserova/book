@@ -28,6 +28,10 @@
     
 	<div style="position: absolute; height: 80px; right: 120px; top: 0; width: 50%" class="search" align="top">
         	<form name="frmSymbolSearch" onsubmit="return SymbolSearch(&#39;toolkit&#39;)" action="https://vserova.github.io/" id="frmSymbolSearch">
+			
+			
+			
+			<!-- Old search box
 		<table style="width: 100%">
       <tbody><tr>
 			<td colspan="5">
@@ -58,6 +62,35 @@
 
 		
 		</tbody></table>
+
+
+-->
+			
+			
+			<!--  New search box -->
+			
+			<fieldset>
+
+            <input id="s" type="text" />
+
+            <input type="submit" value="Submit" id="submitButton" />
+
+            <div id="searchInContainer">
+                <input type="radio" name="check" value="site" id="searchSite" checked />
+                <label for="searchSite" id="siteNameLabel">Search</label>
+
+                <input type="radio" name="check" value="web" id="searchWeb" />
+                <label for="searchWeb">Search The Web</label>
+            </div>
+
+            <ul class="icons">
+                <li class="web" title="Web Search" data-searchType="web">Web</li>
+                <li class="images" title="Image Search" data-searchType="images">Images</li>
+                <li class="news" title="News Search" data-searchType="news">News</li>
+                <li class="videos" title="Video Search" data-searchType="video">Videos</li>
+            </ul>
+
+        </fieldset>
 		</form>
 	</div>
 
