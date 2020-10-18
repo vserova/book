@@ -468,7 +468,7 @@ fieldset{
 
     border:none;
     color:#888888;
-    background:url("img/searchBox.png") no-repeat;
+    background:url("/book/static/img/searchBox.png") no-repeat;
 
     float:left;
     font-family:Arial,Helvetica,sans-serif;
@@ -531,7 +531,7 @@ span.arrow{
 /* The submit button */
 
 #submitButton{
-    background:url('img/buttons.png') no-repeat;
+    background:url('/book/static/img/buttons.png') no-repeat;
     width:83px;
     height:36px;
     text-indent:-9999px;
