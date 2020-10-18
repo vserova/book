@@ -491,7 +491,6 @@ fieldset{
 }
 
 .icons li{
-    background:url("img/icons.png") no-repeat;
     float:left;
     height:19px;
     text-indent:-999px;
