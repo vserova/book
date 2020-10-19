@@ -7,6 +7,9 @@
 	box-sizing: border-box
 }
 
+body
+{margin: 0;}
+
 
 aside,
 footer,
@@ -138,14 +141,14 @@ div#docs-header {
 /* Content formatting begin */
 .content {
 	display: flex;
-	margin: 101px auto 0
+	margin: 110px auto 0;
 	font: 62.5%/1.3846 arial,helvetica,clean,sans-serif;
 	font-size: 1.09em;
 	line-height: 1.45em;
 	}
 		
 
-/* header typography */
+* header typography */
 		
 /* all should be used in the context of 13px font-size, try to add to multiple of 18px for consistent vertical rhythm */
 h1,.h1{font-size: 1.3846em; line-height:1.5; margin:1em 0 .5em; } /* font-size of 18px, line-height of 27px */
@@ -161,6 +164,8 @@ h3,.h3{color:#724128;}
 h2,.h2{color:#985735;}
 h1,.h1{color:#000;}
 
+div.section > h1{color: #985735;}
+
 
 .content .main-column {
 	order: 1;
@@ -168,7 +173,7 @@ h1,.h1{color:#000;}
 	width: 68%;
 	max-width: 800px;
 	flex-grow: 2;
-	margin: 40px 15px;
+	margin: 0px 15px;
 	transition: margin-left .4s cubic-bezier(.02, .01, .47, 1);
 	align-items: center;
 	justify-content: center;
@@ -243,7 +248,7 @@ div.sphinxsidebar {
 div.sphinxsidebarwrapper {
 	padding: 0;
 	min-height: 100%;
-	width: 250px;
+/*	width: 250px;  */
 	right: 0
 }
 
@@ -324,7 +329,7 @@ div.sphinxsidebar ul {
 
 
 .search{
-	width:50%;
+	width: 530px;
 }
 
 .search td {border-style:none;}
@@ -340,8 +345,9 @@ tr.option {color:white;}
 
 .res_logo { 
 	width:25em; 
+	max-height: 30px;
 	left: 10px; 
-	top: 5px; 
+	top: 15px; 
 	position: absolute; 
 }
 	
@@ -391,8 +397,8 @@ tr.option {color:white;}
 .ncbi_logo{
 	position:absolute; 
 	right: 30px;
-	top: 10px;
-	max-height: 24px;
+	top: 25px;
+	max-height: 30px;
 }
 
 .nvgtn {
@@ -408,12 +414,10 @@ tr.option {color:white;}
 
 .right{float:right}
 
-
-/* Styles for 'Move to top' button */
-
+/* Styles for 'Top' button */
 
 #myBtn {
-  display: none; /* Hidden by default */
+display: none; /* Hidden by default */
   position: fixed; /* Fixed/sticky position */
   bottom: 20px; /* Place the button at the bottom of the page */
   right: 30px; /* Place the button 30px from the right */
@@ -421,22 +425,18 @@ tr.option {color:white;}
   outline: none; /* Remove outline */
   background-color:  #f9f9f9; /* Set a background color */
   cursor: pointer; /* Add a mouse pointer on hover */
-  border-radius: 10px; /* Rounded corners */
-	
-	
+  /* border-radius: 10px; Rounded corners */	
 
     border: 1px solid #d9d5d2;
     border-radius: 3px;
     box-shadow: none;
-    color: #0c2a55;
+    color: #205081;
     font-family: Overpass,Helvetica,Arial,sans-serif;
-    font-weight: 500;
-    font-color: #205081;
+    font-weight: 600;
     width: 43px;
     height: 43px;
     padding: 7px;
     text-transform: uppercase; 
-
 }
 
 #myBtn:hover {
@@ -444,58 +444,97 @@ tr.option {color:white;}
 }
 
 
+/* Search Box Styles */
+/*
+*{
+	margin:0;
+	padding:0;
+}
 
-/* Styles for test search box */
+body{
+	font-size:13px;
+	color:#eee;
+	font-family:Arial, Helvetica, sans-serif;
+	background:url('static/img/bg.jpg') repeat-x #718693;
+}
+
+#page{
+	/* The main container div */
+	width:620px;
+	margin:100px auto 0;
+}
+*/
+
+/*
+h1{
+	font-family:Corbel,'Myriad Pro',Arial, Helvetica, sans-serif;
+	background:url('static/img/heading.png') no-repeat center top;
+	text-indent:-9999px;
+	overflow:hidden;
+	height:90px;
+}
+*/
 
 #searchForm{
-    /* The search form. */
-    background-color:#4C5A65;
-    padding:50px 50px 30px;
-    margin:80px 0;
-    position:relative;
+	/* The search form. */
+		/* background-color:#4C5A65;
+	padding:50px 50px 30px;
+	margin:80px 0;  */
+	position:relative;
 
-    -moz-border-radius:16px;
-    -webkit-border-radius:16px;
-    border-radius:16px;
+	-moz-border-radius:16px;
+	-webkit-border-radius:16px;
+	border-radius:16px;
 }
 
 fieldset{
-    border:none;
+	border:none;
+}
+
+#searchInputContainer{
+	/* This div contains the transparent search box */
+	width:420px;
+	height:36px;
+	background:url("static/img/searchBox.png") no-repeat;
+	float:left;
+	margin-right:12px;
 }
 
 #s{
-    /* The search text box. */
-
-    border:none;
-    color:#888888;
-    background:url("/book/static/img/searchBox.png") no-repeat;
-
-    float:left;
-    font-family:Arial,Helvetica,sans-serif;
-    font-size:15px;
-    height:36px;
-    line-height:36px;
-    margin-right:12px;
-    outline:medium none;
-    padding:0 0 0 35px;
-    text-shadow:1px 1px 0 white;
-    width:385px;
+	/* The search text box. */
 	
+	border:none;
+	color:#888888;
+	background:url("static/img/searchBox.png") no-repeat;
 	
-	/*  Part 2 of styles for search box  */
-	.icons{
-    list-style:none;
-    margin:10px 0 0 335px;
-    height:19px;
-    position:relative;
+	float:left;
+	font-family:Arial,Helvetica,sans-serif;
+	font-size:15px;
+	height:36px;
+	line-height:36px;
+	margin-right:12px;
+	outline:medium none;
+	padding:0 0 0 35px;
+	text-shadow:1px 1px 0 white;
+	width:420px;
+}
+
+/* The UL that contains the search type icons */
+
+.icons{
+	list-style:none;
+	margin:10px 0 0 335px;
+	height:19px;
+	position:relative;
 }
 
 .icons li{
-    float:left;
-    height:19px;
-    text-indent:-999px;
-    cursor:pointer;
-    margin-right:5px;
+	background:url("static/img/icons.png") no-repeat;
+	float:left;
+	height:19px;
+	text-indent:-9999px;
+	cursor:pointer;
+	margin-right:5px;
 }
 
 /* Styling each icon */
@@ -517,30 +556,176 @@ li.videos.active,
 li.videos:hover{ background-position:right bottom;}
 
 span.arrow{
-    /* The little arrow that moves below the icons */
-
-    width:11px;
-    height:6px;
-    margin:21px 0 0 5px;
-    position:absolute;
-    background:url('img/arrow.png') no-repeat;
-    left:0;
+	/* The little arrow that moves below the icons */
+	
+	width:11px;
+	height:6px;
+	margin:21px 0 0 5px;
+	position:absolute;
+	background:url('static/img/arrow.png') no-repeat;
+	left:0;
 }
+
 
 /* The submit button */
 
+
 #submitButton{
-    background:url('/book/static/img/buttons.png') no-repeat;
-    width:83px;
-    height:36px;
-    text-indent:-9999px;
-    overflow:hidden;
-    text-transform:uppercase;
-    border:none;
-    cursor:pointer;
+	background:url('static/img/buttons.png') no-repeat;
+	width:83px;
+	height:36px;
+	text-indent:-9999px;
+	overflow:hidden;
+	text-transform:uppercase;
+	border:none;
+	cursor:pointer;
 }
 
 #submitButton:hover{
-    background-position:left bottom;
+	background-position:left bottom;
 }
+
+
+/* The Search tutorialzine.com / Search the Web radio buttons */
+
+
+#searchInContainer{
+	/* float:left; */
+	margin-top:2px;
+	/* width:330px; */
+}
+
+label{
+	color:#DDDDDD;
+	cursor:pointer;
+	font-size:11px;
+	position:relative;
+	right:-2px;
+	top:-2px;
+	margin-right:10px;
+	white-space:nowrap;
+	/*float:left;*/
+}
+
+input[type=radio]{
+	cursor:pointer;
+	/*float:left;*/
+}
+
+
+/* Styling the search results */
+
+
+.pageContainer{
+	/* Holds each page with search results. Has an inset bottom border. */
+	border-bottom:1px solid #5e7481;
+	margin-bottom:50px;
+	
+	/* Adding a dark bottom border with box shadow */
+	
+	-moz-box-shadow:0 1px 0 #798e9c;
+	-webkit-box-shadow:0 1px 0 #798e9c;
+	box-shadow:0 1px 0 #798e9c;
+}
+
+
+p.notFound{
+	text-align:center;
+	padding:0 0 40px;
+}
+
+
+/* Web & news results */
+
+
+.webResult{ text-shadow:1px 1px 0 #586a75;margin-bottom:50px;}
+.webResult h2{ 
+	background-color:#5D6F7B;
+	font-size:18px;
+	font-weight:normal;
+	padding:8px 20px;
+	
+	/* Applying CSS3 rounded corners */
+	-moz-border-radius:18px;
+	-webkit-border-radius:18px;
+	border-radius:18px;
+}
+.webResult h2 b{ color:#fff; }
+.webResult h2 a{ color:#eee;border:none;}
+.webResult p{ line-height:1.5;padding:15px 20px;}
+.webResult p b{ color:white;}
+.webResult > a{ margin-left:20px;}
+
+
+/* Image & video search results */
+
+
+.imageResult{
+	float:left;
+	height:180px;
+	margin:0 0 20px 40px;
+	text-align:center;
+	width:152px;
+	overflow:hidden;
+}
+.imageResult img{ display:block;border:none;}
+.imageResult a.pic{
+	border:1px solid #fff;
+	outline:1px solid #777;
+	display:block;
+	margin:0 auto 15px;
+}
+
+/* The show more button */
+
+#more{
+	width:83px;
+	height:24px;
+	background:url('static/img/more.png') no-repeat;
+	cursor:pointer;
+	margin:40px auto;
+}
+
+#more:hover{
+	background-position:left bottom;
+}
+
+
+
+/* Giving Credit */
+
+p.credit{
+	margin:20px 0;
+	text-align:center;
+}
+
+p.credit a{
+	background-color:#4B5A64;
+	border:1px solid;
+	border-color:#3D4D57 #788E9B #788E9B #3D4D57;
+	color:#c0d0d8;
+	font-size:10px;
+	padding:4px 8px;
+	text-shadow:1px 1px 0 #38464F;
+}
+/*
+p.credit a:hover{
+	background-color:#38464f;
+	border-color:#38464f #788E9B #788E9B #38464f;
+}
+*/
+/*
+a, a:visited {
+	text-decoration:none;
+	outline:none;
+	border-bottom:1px dotted #97cae6;
+	color:#97cae6;
+}
+
+a:hover{
+	border-bottom:1px dashed transparent;
+}
+*/
+.clear{
+	clear:both;
 }
