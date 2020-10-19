@@ -5,7 +5,6 @@ function toggleInHouseCheckbox(visibility){
 
 function SymbolSearch(bookID)
 {
- alert(bookID);
   var f = document.forms['frmSymbolSearch'];
   var url; 
   var sel;
