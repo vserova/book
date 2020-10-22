@@ -397,8 +397,8 @@ tr.option {color:white;}
 .ncbi_logo{
 	position:absolute; 
 	right: 30px;
-	top: 10px;
-	max-height: 24px;
+	top: 25px;		
+	max-height: 30px;
 }
 
 .nvgtn {
