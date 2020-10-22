@@ -448,11 +448,8 @@ display: none; /* Hidden by default */
 
 #frmSymbolSearch{
 	/* The search form. */
-		/* background-color:#4C5A65;
-	padding:50px 50px 30px;
-	margin:80px 0;  */
+	
 	position:relative;
-
 	-moz-border-radius:16px;
 	-webkit-border-radius:16px;
 	border-radius:16px;
@@ -464,6 +461,7 @@ fieldset{
 
 #searchInputContainer{
 	/* This div contains the transparent search box */
+	
 	width:420px;
 	height:36px;
 	background:url("/book/static/img/searchBox.png") no-repeat;
@@ -477,7 +475,6 @@ fieldset{
 	border:none;
 	color:#888888;
 	background:url("/book/static/img/searchBox.png") no-repeat;
-	
 	float:left;
 	font-family:Arial,Helvetica,sans-serif;
 	font-size:15px;
@@ -506,10 +503,6 @@ fieldset{
 #submitButton:hover{
 	background-position:left bottom;
 }
-
-
-/* The Search tutorialzine.com / Search the Web radio buttons */
-
 
 #searchInContainer{
 	/* float:left; */
