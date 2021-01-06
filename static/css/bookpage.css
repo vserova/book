@@ -584,7 +584,7 @@ input[type=radio]{
 
 <!-- new navbar end -->		
 
-.edit {
+.edit a {
 	float:right; 
 	padding-right: 50px;	
 }
