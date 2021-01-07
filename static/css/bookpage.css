@@ -584,7 +584,12 @@ input[type=radio]{
 
 <!-- new navbar end -->		
 
-div.edit a {
-	float:right; 
-	padding-right: 50px;	
+.edit_links {
+	float: right;
+}
+
+.edit_links > * {
+  display:inline-block;
+  vertical-align:middle;
+  padding-right: 50px;	
 }
