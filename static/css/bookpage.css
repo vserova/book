@@ -585,6 +585,7 @@ input[type=radio]{
 <!-- new navbar end -->		
 
 .edit_links {
+	display: flex
 	width:300px;
 	float: right;
 }
@@ -592,5 +593,6 @@ input[type=radio]{
 .edit_links > * {
   display:inline-block;
   vertical-align:middle;
+  padding-top: 4px;
   padding-right: 50px;	
 }
