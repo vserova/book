@@ -585,6 +585,7 @@ input[type=radio]{
 <!-- new navbar end -->		
 
 .edit_links {
+	width:300px;
 	float: right;
 }
 
