@@ -32,7 +32,7 @@
 	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/fixedheader/3.1.8/js/dataTables.fixedHeader.min.js"></script>
 		
-<!-- style type="text/css">
+<style type="text/css">
 
 div.dataTables_wrapper {
  max-width: 2750px;	
@@ -42,23 +42,31 @@ div.dataTables_wrapper {
  border-bottom: 1px solid silver;
 }
 
-</style -->
+</style>
 
 <script type="text/javascript" class="init">	
 $(document).ready(function() {
+    var table = $('div.section > table').DataTable( {
+        fixedHeader: {
+            header: true,
+            footer: true
+        }
+    } );
+} );
+	
+/*	
+$(document).ready(function() {
 	$('div.section > table').DataTable( {
-		 fixedHeader: { header: true },
-		/*
 		scrollY: '50vh',
 		scrollX: false,
 		scrollCollapse: true,
-		*/
 		searching: false,
 		ordering: false,
 		info: false,
         	paging: false	
 	} );
 } );
+*/
 </script>
 
 <!-- new table style end -->
