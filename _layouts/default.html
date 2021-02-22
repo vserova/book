@@ -23,15 +23,13 @@
     
 <!-- new table style begin -->
 
-	<script type="text/javascript" language="javascript" src="/book/static/js/jquery-3.js"></script>
-	<script type="text/javascript" language="javascript" src="/book/static/js/jquery.js"></script>
-	<!--
+	<!-- script type="text/javascript" language="javascript" src="/book/static/js/jquery-3.js"></script>
+	<script type="text/javascript" language="javascript" src="/book/static/js/jquery.js"></script -->
 	<link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
  	<link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.8/css/fixedHeader.dataTables.min.css">
 	<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/fixedheader/3.1.8/js/dataTables.fixedHeader.min.js"></script>
-	-->
 		
 <style type="text/css">
 
@@ -49,9 +47,11 @@ div.dataTables_wrapper {
 
 $(document).ready(function() {
 	$('div.section > table').DataTable( {
+		/*
 		scrollY: '50vh',
 		scrollX: false,
 		scrollCollapse: true,
+		*/
 		searching: false,
 		ordering: false,
 		info: false,
