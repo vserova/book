@@ -1,150 +1,122 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-	<head>
+
+<head>
 	<!-- google site verification -->
-		<!--
+	<!--
 	<meta name="google-site-verification" content="1E2mGo_sqU60SInLwmk-gaLIovV5oVkjJntFEf4gxcg" />
 		-->
+	<link rel="shortcut icon" type="image/x-icon" href="/cxx-toolkit/static/img/favicon.ico">
 	
-        <title>NCBI C++ Toolkit Book / Development</title>
-
-
-        <script type="text/javascript" src="/book/default_files/jig.js"></script>
-        <link rel="stylesheet" type="text/css" href="/book/default_files/jig.css">
-        <script type="text/javascript" src="/book/default_files/jquery.js"></script>
-        <link type="text/css" rel="stylesheet" href="/book/default_files/jquery.css">
-
-
-        <!-- Page headcontent begin -->
+	<title>NCBI C++ Toolkit Book</title>
+	<!-- Page headcontent begin -->
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="description" content="A comprehensive manual on the NCBI C++ toolkit, including its design and development framework, a C++ library reference, software examples and demos, FAQs and release notes.">
 	<meta name="ncbipopper" content="triggerPosition:'bottom left',destPosition:'top left',openEvent:'click',closeEvent:'click'">
+	<!-- PageFixtures resources end -->
+	<!-- new table style begin -->
+	<script type="text/javascript" language="javascript" src="/cxx-toolkit/static/js/jquery-3.js"></script>
+	<script type="text/javascript" language="javascript" src="/cxx-toolkit/static/js/jquery.js"></script>
+	<style type="text/css">
+	div.dataTables_wrapper {
+		max-width: 750px;
+		display: inline-block;
+		margin: 0 auto;
+		align: right;
+		border-bottom: 1px solid silver;
+	}
+	</style>
+	<script type="text/javascript" class="init">
+	$(document).ready(function() {
+		$('div.section > table').DataTable({
+			scrollY: '50vh',
+			scrollX: true,
+			scrollCollapse: true,
+			searching: false,
+			ordering: false,
+			info: false,
+			paging: false
+		});
+	});
+	</script>
+	<!-- new table style end -->
+	<!-- sidebar test begin -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/cxx-toolkit/static/css/bookpage.css" type="text/css">
+	<!-- toggle sidebar functions -->
+	<script type="text/javascript">
+	function doSBClose() {
+		document.getElementById("showNav").style.display = "flex";
+		document.getElementById("left-column").style.display = "none";
+	}
 
-        <!-- PageFixtures resources end -->
-    
-<!-- new table style begin -->
+	function doSBOpen() {
+		document.getElementById("sphinxsidebar").style.display = "block";
+		document.getElementById("left-column").style.display = "flex";
+		document.getElementById("showNav").style.display = "none";
+	}
+	</script>
+	<!-- sidebar test end -->
+	<!-- updated CSS -->
+	<link rel="stylesheet" href="/cxx-toolkit/static/css/footer.css" type="text/css">
+	<link rel="stylesheet" href="/cxx-toolkit/static/css/sidebar.css" type="text/css"> </head>
 
-	<!-- script type="text/javascript" language="javascript" src="/book/static/js/jquery-3.js"></script>
-	<script type="text/javascript" language="javascript" src="/book/static/js/jquery.js"></script -->
-	<link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
- 	<link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.8/css/fixedHeader.dataTables.min.css">
-	<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
-	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/fixedheader/3.1.8/js/dataTables.fixedHeader.min.js"></script>
-		
-<style type="text/css">
+<body> {% include header.html %}
+	<!-- content start -->
+	<div class="content">
+		<!-- sidebar start -->
+		<div id="left-column">
+			<aside id="sidebar" class="sidebar">
+				<div class="sphinxsidebar" id="sphinxsidebar">
+					<div id="sphinxsidebarwrapper" class="sphinxsidebarwrapper">
+						<a href="javascript:doSBClose()" class="closeNav" id="closeNav">
+							<<< Minimize sidebar</a> {% include sidebar.html %} </div>
+				</div>
+			</aside>
+		</div>
+		<div id="main-column" class="main-column"> <a href="javascript:doSBOpen()"><span id="showNav" class="showNav">Sidebar</span></a>
+			<!-- sidebar end -->
+			<div class="document">
+				<div class="documentwrapper">
+					<div class="bodywrapper">
+						<div class="body">
+							<!-- main content start -->
+							<div class="section"> {{ content }}
+								<!-- button 'back to top' start -->
+								<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+								<!-- button 'back to top' end -->
+							</div>
+							<!-- main content end -->
+							<!-- footer start -->
+							<div id="footer"> {% include footer.html %} </div>
+							<!-- footer end -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<script type="text/javascript" src="/cxx-toolkit/default_files/4025445.js"></script>
+		<!-- Script for 'Top' button -->
+		<script type="text/javascript">
+		mybutton = document.getElementById("myBtn");
+		// When the user scrolls down 20px from the top of the document, show the button
+		window.onscroll = function() {
+			scrollFunction()
+		};
 
-div.dataTables_wrapper {
- max-width: 2750px;	
- display: inline-block;
- margin: 0 auto;
- align: right;
- border-bottom: 1px solid silver;
-}
-
-</style>
-
-<script type="text/javascript" class="init">	
-
-$(document).ready(function() {
-	$('div.section > table').DataTable( {
-		/*
-		scrollY: '50vh',
-		scrollX: false,
-		scrollCollapse: true,
-		*/
-		searching: false,
-		ordering: false,
-		info: false,
-        	paging: false,
-		fixedHeader: {
-            		header: true,
-            		footer: true
-        	}
-	} );
-} );
-	
-</script>
-
-<!-- new table style end -->
-		
-<!-- sidebar test begin -->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-      <link rel="stylesheet" href="/book/static/css/bookpage.css" type="text/css">
-
-<!-- toggle sidebar functions -->		
-<script type="text/javascript">	
-  function doSBClose() {
-  	document.getElementById("showNav").style.display = "flex";
-	document.getElementById("left-column").style.display = "none";
-  }
-  function doSBOpen() {
-          document.getElementById("sphinxsidebar").style.display = "block";
-	  document.getElementById("left-column").style.display = "flex"; 
-	  document.getElementById("showNav").style.display = "none";
-  }
-</script>
-	
-		
-<!-- sidebar test end -->
-		
-<!-- updated CSS -->
-
-  <link rel="stylesheet" href="/book/static/css/footer.css" type="text/css">
-  <link rel="stylesheet" href="/book/static/css/sidebar.css" type="text/css">
-		
-</head>
-<body>
-
-{% include header.html %}    
-
-  <!-- content start -->	
-	
-  <div class="content">
-    
-    <!-- sidebar start -->
-    <div id="left-column">
-      <aside id="sidebar" class="sidebar">
-        <div class="sphinxsidebar" id="sphinxsidebar">
-          <div id="sphinxsidebarwrapper" class="sphinxsidebarwrapper"><a href="javascript:doSBClose()" class="closeNav" id="closeNav"><<< Minimize sidebar</a>
-
-{% include sidebar.html %}
-
-          </div>
-        </div>
-      </aside>
-    </div>
-
-    <div id="main-column" class="main-column">
-    <a href="javascript:doSBOpen()"><span id="showNav" class="showNav">Sidebar</span></a>
-    <!-- sidebar end -->
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body">
-		  
-	    <!-- main content start -->    
-            <div class="section">
-{{ content }}
-            </div>
-	    <!-- main content end -->    
-		  
-	    <!-- footer start -->    
-            <div id="footer">
-{% include footer.html %}
-            </div>
-	    <!-- footer end -->    
-		  
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="clearfix"></div>
-  </div>
-	    
-<script type="text/javascript" src="/book/default_files/4025445.js"></script>
-	    
+		function scrollFunction() {
+			if(document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+				mybutton.style.display = "block";
+			} else {
+				mybutton.style.display = "none";
+			}
+		}
+		// When the user clicks on the button, scroll to the top of the document
+		function topFunction() {
+			document.body.scrollTop = 0; // For Safari
+			document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+		}
+		</script>
 </body>
-</html>	
-	
+
+</html>
