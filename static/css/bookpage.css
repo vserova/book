@@ -8,7 +8,10 @@
 }
 
 body
-{margin: 0;}
+{
+  margin: 0;
+  overflow-x: visible;
+}
 
 
 aside,
@@ -197,6 +200,7 @@ div.section > h1{color: #985735;}
 	min-width: 250px;
 	display: flex;
 	overflow-y: auto;
+	z-order: 9998; 
 }
 
 .footer {
