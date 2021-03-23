@@ -617,3 +617,7 @@ div.edit_links {
 tbody tr:nth-child(odd) {
   background: #eee;
 }
+ thead th {
+  padding:20px;
+  border-bottom:1px solid #858d99;
+}
