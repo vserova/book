@@ -610,3 +610,10 @@ div.edit_links {
   padding-top: 4px;
   padding-right: 50px;	
 }
+
+/* New tables styles */
+
+/* Zebra striping  */
+tbody tr:nth-child(odd) {
+  background: #eee;
+}
