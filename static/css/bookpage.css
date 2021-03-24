@@ -615,9 +615,9 @@ div.edit_links {
 
 /* Zebra striping  */
 tbody tr:nth-child(odd) {
-  background: #eee;
+  background: #F8F8F8;
 }
  thead th {
   padding:20px;
-  border-bottom:1px solid #F8F8F8;
+  border-bottom:1px solid #858d99;
 }
