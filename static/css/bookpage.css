@@ -614,10 +614,12 @@ div.edit_links {
 /* New tables styles */
 
 /* Zebra striping  */
-tbody tr:nth-child(odd) {
+
+div.section tbody tr:nth-child(odd) {
   background: #F8F8F8;
 }
- thead th {
+
+div.section thead th {
   padding:20px;
   border-bottom:1px solid #858d99;
 }
