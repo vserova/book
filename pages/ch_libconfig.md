@@ -160,7 +160,7 @@ Log messages have different levels of severity. Setting the logging level is des
 
 [These parameters](#ch_libconfig.T2) tune the usage and behavior of the application log file.
 
-<a name="ch_libconfig.T2"></a>
+<a name="ch_libconfig.T2" class="zebra"></a>
 
 Table 2. Log file configuration parameters
 
