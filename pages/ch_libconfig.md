@@ -195,6 +195,7 @@ Table 2. Log file configuration parameters
 | Specify whether to try creating the log file under `/log` before trying other locations (e.g. a location specified by the registry or by **`NCBI_CONFIG__LOG__FILE`**).              | **`[LOG]`**<br/>**`TryRootLogFirst`**<br/><br/>**`NCBI_CONFIG__LOG__TRYROOTLOGFIRST`**  [<sup>c</sup>](#ch_libconfig.TF.3) | Boolean  [<sup>a</sup>](#ch_libconfig.TF.1)    | false      |
 | If true, default to logging warnings when unsafe static array types are copied.       | **`[NCBI]`**<br/>**`STATIC_ARRAY_COPY_WARNING`**<br/><br/>**`NCBI_STATIC_ARRAY_COPY_WARNING`**    | Boolean  [<sup>b</sup>](#ch_libconfig.TF.2)    | false      |
 | If true, log warnings for unsafe static array types.               | **`[NCBI]`**<br/>**`STATIC_ARRAY_UNSAFE_TYPE_WARNING`**<br/><br/>**`NCBI_STATIC_ARRAY_UNSAFE_TYPE_WARNING`**  | Boolean  [<sup>b</sup>](#ch_libconfig.TF.2)    | true |
+{: .row_hightlight }
 
 <div class="table-scroll"></div>
 
