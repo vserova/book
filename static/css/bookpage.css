@@ -625,6 +625,6 @@ div.section thead th {
 }
 /* New class - test  */
 
-.row_highlight tr:hover {
+table.row_highlight tr:hover {
 	background: #F8F8F8;
 }
