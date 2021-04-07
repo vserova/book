@@ -623,3 +623,8 @@ div.section thead th {
   padding:20px;
   border-bottom:1px solid #858d99;
 }
+/* New class - test  */
+
+.row_highlight tr:hover {
+	background: #F8F8F8;
+}
