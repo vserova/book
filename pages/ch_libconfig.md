@@ -250,6 +250,7 @@ Table 3. Diagnostic trace configuration parameters
 | Specify the maximum number of messages that can be posted to the TraceLog within the TraceLog period.          | **`[Diag]`**<br/>**`TraceLog_Rate_Limit`**<br/><br/>**`DIAG_TRACELOG_RATE_LIMIT`**  | unsigned integer or `OFF`        | 5000     |
 | Specify the TraceLog period in seconds.               | **`[Diag]`**<br/>**`TraceLog_Rate_Period`**<br/><br/>**`DIAG_TRACELOG_RATE_PERIOD`**      | unsigned integer                 | 1  |
 | If true and AppLog severity is not locked, print the current GMT time in diagnostic messages; otherwise print local time.         | **`[Diag]`**<br/>**`UTC_Timestamp`**<br/><br/>**`DIAG_UTC_TIMESTAMP`**  | Boolean  <sup>a</sup>             | false    |
+{: .zebra }
 
 <div class="table-scroll"></div>
 
@@ -350,6 +351,7 @@ Table 6. NCBI C++ Toolkit-wide configuration parameters
 | Specify the directory to use for temporary files.      | **`[NCBI]`**<br/>**`TmpDir`**<br/><br/>**`NCBI_CONFIG__NCBI__TMPDIR`**  [<sup>c</sup>](#ch_libconfig.TF.14)     | a valid path            | ""                |
 | Specify the file name of a Unicode-to-ASCII translation table.            | **`[NCBI]`**<br/>**`UnicodeToAscii`**<br/><br/>**`NCBI_CONFIG__NCBI__UNICODETOASCII`**  [<sup>c</sup>](#ch_libconfig.TF.14) | a valid path            | ""                |
 | Safety switch to turn async write off (making write blocking) for all CAsyncWriteCache instances.  | **`[NCBI]`**<br/>**`cache_async_write`**<br/><br/>**`NCBI_CONFIG__NCBI__CACHEASYNCWRITE`**   | Boolean  [<sup>a</sup>](#ch_libconfig.TF.12)      | false |
+{: .both }
 
 
 <div class="table-scroll"></div>
