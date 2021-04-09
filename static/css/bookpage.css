@@ -614,7 +614,7 @@ div.edit_links {
 /* New tables styles */
 
 /* Zebra striping  */
-
+/*
 div.section tbody tr:nth-child(odd) {
   background: #F8F8F8;
 }
@@ -623,8 +623,35 @@ div.section thead th {
   padding:20px;
   border-bottom:1px solid #858d99;
 }
-/* New class - test  */
+*/
 
+
+/* New classes - test  */
+/* Table with row highlight */
 table.row_highlight tr:hover {
 	background: #F8F8F8;
+}
+
+/* Table with zebra striping */
+table.zebra tbody tr:nth-child(odd) {
+  background: #F8F8F8;
+}
+
+table.zebra thead th {
+  padding:20px;
+  border-bottom:1px solid #858d99;
+}
+
+/* table with both zebra and highlight  */
+table.both tbody tr:nth-child(odd) {
+  background: #F8F8F8;
+}
+
+table.both thead th {
+  padding:20px;
+  border-bottom:1px solid #858d99;
+}
+
+table.both tr:hover {
+	background: blue;
 }
