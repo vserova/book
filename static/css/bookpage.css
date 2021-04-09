@@ -653,5 +653,5 @@ table.both thead th {
 }
 
 table.both tr:hover {
-	background: blue;
+	background: #DCDCDC;
 }
