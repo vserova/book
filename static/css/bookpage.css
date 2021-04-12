@@ -643,7 +643,7 @@ table.zebra thead th {
 }
 
 /* table with both zebra and highlight  */
-table.both tbody tr:nth-child(odd) {
+table.both tr:nth-child(odd) {
   background: #F8F8F8;
 }
 
