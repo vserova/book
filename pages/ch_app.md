@@ -376,7 +376,7 @@ There are two major problems in converting XML schema into ASN.1 specification: 
         </xs:attribute>
       </xs:complexType>
     </xs:element>
-
+{: .preformat }
 translates into this ASN.1:
 
     Author ::= SEQUENCE {
