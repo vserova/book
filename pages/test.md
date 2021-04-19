@@ -963,3 +963,12 @@ The UTIL module provides a number of functions to convert between UTF-8 represen
 The result of a conversion can be success, out of range, or a two character sequence of the skip character (0xFF) followed by another character.
 
 
+
+Test
+----------------
+
+| Column1 | Column2 | Column3 |
+|---------|---------|---------|
+| Cell 1A | Cell 1B | Cell 1C |
+| Cell 2A | Cell 2B | Cell 2C |
+{: .your_table_class }
