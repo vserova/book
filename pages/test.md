@@ -972,3 +972,11 @@ Test
 | Cell 1A | Cell 1B | Cell 1C |
 | Cell 2A | Cell 2B | Cell 2C |
 {: .your_table_class }
+
+
+\| Column1 \| Column2 \| Column3 \|
+\|---------\|---------\|---------\|
+\| Cell 1A \| Cell 1B \| Cell 1C \|
+\| Cell 2A \| Cell 2B \| Cell 2C \|
+{: .your_table_class }
+
