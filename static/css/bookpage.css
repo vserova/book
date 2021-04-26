@@ -647,12 +647,6 @@ table.both tr:nth-child(odd) {
   background: #F8F8F8;
 }
 
-
-/*  Link test */\
-a.margin {
-	scroll-margin-top: 5em;
-}
-
 table.both thead th {
   padding:20px;
   border-bottom:1px solid #858d99;
@@ -660,4 +654,10 @@ table.both thead th {
 
 table.both tr:hover {
 	background: #DCDCDC;
+}
+
+
+/*  Link test */
+a.margin {
+	scroll-margin-top: 5em;
 }
