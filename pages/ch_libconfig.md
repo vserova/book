@@ -70,7 +70,7 @@ The following is an outline of the topics presented in this chapter:
 
     -   [Seqfetch.cgi](#ch_libconfig.Seqfetchcgi)
 
-<a name="ch_libconfig.Defining_and_Using"></a>
+<a class="margin" name="ch_libconfig.Defining_and_Using"></a>
 
 Defining and Using Parameters
 -----------------------------
@@ -83,7 +83,7 @@ The following sections discuss the methods that libraries can use to define conf
 
 -   [Environment](#ch_libconfig.Environment)
 
-<a name="ch_libconfig.CParam"></a>
+<a class="margin" name="ch_libconfig.CParam"></a>
 
 ### CParam
 
@@ -114,7 +114,7 @@ Table 1. Registry configuration parameters
 
 The registry is case-insensitive for section and entry names. More [details on the registry](ch_core.html#ch_core.registry) are presented in an earlier chapter.
 
-<a name="ch_libconfig.Environment"></a>
+<a class="margin" name="ch_libconfig.Environment"></a>
 
 ### Environment
 
@@ -133,7 +133,7 @@ For configuration parameters defined by either [CParam](https://www.ncbi.nlm.nih
 
 Some configuration parameters can only be set with an environment variable - for example, **`DIAG_SILENT_ABORT`**. In such cases, there is no corresponding registry entry.
 
-<a name="ch_libconfig.NonSpecific_Parameters"></a>
+<a class="margin" name="ch_libconfig.NonSpecific_Parameters"></a>
 
 Non-Specific Parameters
 -----------------------
