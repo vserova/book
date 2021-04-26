@@ -89,7 +89,7 @@ The following sections discuss the methods that libraries can use to define conf
 
 ***Note:*** The preferred way for libraries to define their configuration parameters is with the macros in the [CParam](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CParam) class (e.g. **`NCBI_PARAM_DECL`**). More [details on the CParam class and its macros](ch_core.html#ch_core.Configuration_Parame) are presented in an earlier chapter. Libraries that use CParam can get configuration parameters using either the registry or the environment. Also, the CParam value can be stored and accessed on different levels: globally (application wide) and/or per-thread (TLS-like) and/or locally (cached within a CParam instance). Note that the name of an environment variable linked to a [CParam](https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/ident?i=CParam) can be customized or follow the default naming convention, so you have to look up the actual name used in the tables below before setting a configuration parameter using the environment.
 
-<a name="ch_libconfig.libconfig_registry"></a>
+<a class="margin" name="ch_libconfig.libconfig_registry"></a>
 
 ### Registry
 
