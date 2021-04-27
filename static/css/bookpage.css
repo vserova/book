@@ -658,6 +658,6 @@ table.both tr:hover {
 
 
 /*  Link test */
-a.margin {
+div.section a {
 	scroll-margin-top: 5em;
 }
